@@ -42,19 +42,20 @@ public class EmptyNullableValueAccess : SymbolicRuleCheck
     {
         var operationInstance = context.Operation.Instance;
         if (operationInstance.Kind == OperationKindEx.PropertyReference
-            && operationInstance.ToPropertyReference() is { Instance: var instance, Property.Name: nameof(Nullable<int>.Value) }
-            && context.HasConstraint(instance, ObjectConstraint.Null))
+            && operationInstance.ToPropertyReference() is var reference
+            && reference.Property.Name == nameof(Nullable<int>.Value)
+            && context.HasConstraint(reference.Instance, ObjectConstraint.Null))
         {
-            ReportIssue(instance, instance.Syntax.ToString());
+            ReportIssue(reference.Instance, reference.Instance.Syntax.ToString());
         }
         else if (operationInstance.Kind == OperationKindEx.Conversion
-            && operationInstance.ToConversion() is { Operand: var operand } conversion
-            && operand.Type.IsNullableValueType()
+            && operationInstance.ToConversion() is var conversion
+            && conversion.Operand.Type.IsNullableValueType()
             && !conversion.Type.IsNullableValueType()
             && conversion.Type.IsStruct()
-            && context.HasConstraint(operand, ObjectConstraint.Null))
+            && context.HasConstraint(conversion.Operand, ObjectConstraint.Null))
         {
-            ReportIssue(operand, operand.Syntax.ToString());
+            ReportIssue(conversion.Operand, conversion.Operand.Syntax.ToString());
         }
 
         return context.State;
