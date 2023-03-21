@@ -169,8 +169,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             private readonly ConstraintKind first;
             private readonly ConstraintKind? second;
 
-            public CacheKey(ConstraintKind first) : this(first, null) { }
-
             public CacheKey(ConstraintKind first, ConstraintKind? second)
             {
                 if (first == second)
