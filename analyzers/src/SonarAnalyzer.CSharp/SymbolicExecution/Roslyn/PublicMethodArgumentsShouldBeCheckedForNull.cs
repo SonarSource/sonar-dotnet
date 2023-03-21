@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
@@ -29,5 +31,41 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
     protected override DiagnosticDescriptor Rule => S3900;
 
-    public override bool ShouldExecute() => false;
+    public override bool ShouldExecute() => true;
+
+    protected override ProgramState PreProcessSimple(SymbolicContext context)
+    {
+        if (context.Operation.Instance.Kind == OperationKindEx.ParameterReference
+            && context.Operation.Instance.ToParameterReference() is { WrappedOperation: var reference, WrappedOperation.Syntax: var syntax, Parameter: var parameterSymbol }
+            && !parameterSymbol.Type.IsValueType
+            && IsParameterDereferenced(context.Operation)
+            && !IgnoreBecauseOfParameterAttribute(parameterSymbol)
+            && NullableStateIsNotKnownForParameter(parameterSymbol))
+        {
+            var message = SemanticModel.GetDeclaredSymbol(Node).IsConstructor()
+                ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
+                : "Refactor this method to add validation of parameter '{0}' before using it.";
+            ReportIssue(reference, string.Format(message, syntax.ToString()), context);
+        }
+
+        return context.State;
+
+        static bool IsParameterDereferenced(IOperationWrapperSonar operation) =>
+            operation.Parent != null
+            && operation.Parent.IsAnyKind(
+                OperationKindEx.Invocation,
+                OperationKindEx.FieldReference,
+                OperationKindEx.PropertyReference,
+                OperationKindEx.EventReference,
+                OperationKindEx.Await,
+                OperationKindEx.ArrayElementReference);
+
+        bool IgnoreBecauseOfParameterAttribute(IParameterSymbol symbol) =>
+            symbol.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute);
+
+        bool NullableStateIsNotKnownForParameter(IParameterSymbol symbol) =>
+            !context.HasConstraint(symbol, ObjectConstraint.Null)
+            && !context.HasConstraint(symbol, ObjectConstraint.NotNull)
+            && SemanticModel.GetTypeInfo(context.Operation.Instance.Syntax).Nullability().FlowState != NullableFlowState.NotNull;
+    }
 }
