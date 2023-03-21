@@ -75,7 +75,10 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
         static bool MethodDereferencesArguments(BaseMethodDeclarationSyntax method)
         {
-            var argumentNames = method.ParameterList.Parameters.Select(x => x.GetName()).ToArray();
+            var argumentNames = method.ParameterList.Parameters
+                                    .Where(x => !x.Modifiers.AnyOfKind(SyntaxKind.OutKeyword))
+                                    .Select(x => x.GetName())
+                                    .ToArray();
             var walker = new ArgumentDereferenceWalker(argumentNames);
             walker.SafeVisit(method);
             return walker.DereferencesMethodArguments;
@@ -112,11 +115,11 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
         public override void VisitIdentifierName(IdentifierNameSyntax node) =>
             DereferencesMethodArguments |=
                 argumentNames.Contains(node.GetName())
-                && node.Ancestors().Any(x => x.IsAnyKind(
+                && node.Parent.IsAnyKind(
                     SyntaxKind.AwaitExpression,
                     SyntaxKind.ElementAccessExpression,
                     SyntaxKind.ForEachStatement,
                     SyntaxKind.ThrowStatement,
-                    SyntaxKind.SimpleMemberAccessExpression));
+                    SyntaxKind.SimpleMemberAccessExpression);
     }
 }
