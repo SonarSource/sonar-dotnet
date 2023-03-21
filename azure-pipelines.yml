@@ -445,7 +445,7 @@ stages:
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
           sonarQubeRunAnalysis: true
-          sqMavenPluginVersionChoice: 'latest'
+          sqMavenPluginVersionChoice: 'dev'
 
       - task: SonarCloudPublish@1
         displayName: 'Code Analysis - Publish QG'
