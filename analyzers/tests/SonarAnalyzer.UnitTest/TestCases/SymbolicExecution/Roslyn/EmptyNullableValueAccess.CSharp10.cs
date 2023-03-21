@@ -2,14 +2,14 @@
 
 public class Sample
 {
-    public void Examples()
+    public void Destructuring()
     {
         int? nullable;
 
-        (nullable, var a) = (null, 42);
+        (nullable, _) = (null, 42);
         var v = nullable.Value; // FN
 
         nullable = null;
-        v = nullable.Value; // FIXME Non-compliant
+        v = nullable.Value;     // Noncompliant
     }
 }
