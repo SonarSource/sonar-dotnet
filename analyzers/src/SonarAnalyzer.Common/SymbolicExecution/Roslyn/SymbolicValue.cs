@@ -48,21 +48,23 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             if (Constraints.Count == 0)
             {
-                return SingleConstraintValue(constraint);
+                return CachedSymbolicValue(constraint);
             }
             else if (HasConstraint(constraint))
             {
                 return this;
             }
-
-            var containsContraintType = Constraints.ContainsKey(constraint.GetType());
-            return Constraints.Count switch
+            else
             {
-                1 when containsContraintType => SingleConstraintValue(constraint),
-                1 => PairConstraintValue(Constraints.Values.First(), constraint),
-                2 when containsContraintType => PairConstraintValue(OtherSingleConstraint(constraint.GetType()), constraint),
-                _ => this with { Constraints = Constraints.SetItem(constraint.GetType(), constraint) },
-            };
+                var containsContraintType = Constraints.ContainsKey(constraint.GetType());
+                return Constraints.Count switch
+                {
+                    1 when containsContraintType => CachedSymbolicValue(constraint),
+                    1 => CachedSymbolicValue(Constraints.Values.First(), constraint),
+                    2 when containsContraintType => CachedSymbolicValue(OtherSingleConstraint(constraint.GetType()), constraint),
+                    _ => this with { Constraints = Constraints.SetItem(constraint.GetType(), constraint) },
+                };
+            }
         }
 
         public SymbolicValue WithoutConstraint(SymbolicConstraint constraint) =>
@@ -100,28 +102,27 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 _ => this with { Constraints = Constraints.Remove(type) },
             };
 
-        private SymbolicValue OtherSingle(Type except)
-            => SingleConstraintValue(OtherSingleConstraint(except));
+        private SymbolicValue OtherSingle(Type except) =>
+            CachedSymbolicValue(OtherSingleConstraint(except));
 
         private SymbolicConstraint OtherSingleConstraint(Type except)
         {
-            SymbolicConstraint otherConstraint = null;
+            // Performance: Don't use LINQ here as it neglects any gains of the caching
             foreach (var kvp in Constraints)
             {
                 if (kvp.Key != except)
                 {
-                    otherConstraint = kvp.Value;
-                    break;
+                    return kvp.Value;
                 }
             }
 
-            return otherConstraint;
+            throw new InvalidOperationException("Unreachable. This method is called when there is exactly one other value present.");
         }
 
         private SymbolicValue OtherPair(Type except)
         {
+            // Performance: Don't use LINQ here as it neglects any gains of the caching
             SymbolicConstraint first = null;
-            SymbolicConstraint second = null;
             foreach (var kvp in Constraints)
             {
                 if (kvp.Key != except)
@@ -132,31 +133,26 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                     }
                     else
                     {
-                        second = kvp.Value;
-                        break;
+                        return CachedSymbolicValue(first, kvp.Value);
                     }
                 }
             }
 
-            return PairConstraintValue(first, second);
+            throw new InvalidOperationException("Unreachable. This method is called when there are exactly two other value present.");
         }
 
-        private static SymbolicValue SingleConstraintValue(SymbolicConstraint constraint)
+        private static SymbolicValue CachedSymbolicValue(SymbolicConstraint constraint)
         {
+            // Performance: Don't use the factory overload of GetOrAdd
             var cacheKey = new CacheKey(constraint.Kind);
-            if (cache.TryGetValue(cacheKey, out var result))
-            {
-                return result;
-            }
-            else
-            {
-                result = Empty with { Constraints = Empty.Constraints.SetItem(constraint.GetType(), constraint) };
-                return cache.GetOrAdd(cacheKey, result);
-            }
+            return cache.TryGetValue(cacheKey, out var result)
+                ? result
+                : cache.GetOrAdd(cacheKey, Empty with { Constraints = Empty.Constraints.SetItem(constraint.GetType(), constraint) });
         }
 
-        private static SymbolicValue PairConstraintValue(SymbolicConstraint first, SymbolicConstraint second)
+        private static SymbolicValue CachedSymbolicValue(SymbolicConstraint first, SymbolicConstraint second)
         {
+            // Performance: Don't use the factory overload of GetOrAdd
             var cacheKey = new CacheKey(first.Kind, second.Kind);
             if (cache.TryGetValue(cacheKey, out var result))
             {
@@ -164,7 +160,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
             else
             {
-                var single = SingleConstraintValue(first);
+                var single = CachedSymbolicValue(first);
                 result = single with { Constraints = single.Constraints.SetItem(second.GetType(), second) };
                 return cache.GetOrAdd(cacheKey, result);
             }
