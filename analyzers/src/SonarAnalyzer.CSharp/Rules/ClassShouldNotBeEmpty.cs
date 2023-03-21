@@ -30,13 +30,16 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         && !typeDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword))
         && (node is ClassDeclarationSyntax || IsParameterlessRecord(node));
 
-    protected override BaseTypeDeclarationSyntax GetIfHasDeclaredBaseClass(SyntaxNode node) =>
+    protected override BaseTypeDeclarationSyntax GetIfHasDeclaredBaseClassOrInterface(SyntaxNode node) =>
         node is ClassDeclarationSyntax { BaseList: not null } declaration
             ? declaration
             : null;
 
-    protected override bool HasGenericBaseClassOrInterface(BaseTypeDeclarationSyntax declaration) =>
-        declaration.BaseList.Types.Any(x => x.Type is GenericNameSyntax);
+    // Unlike in VB.NET there's no way to know for certain - by only looking at the syntax tree - from the declared types whether they are classes or interfaces.
+    // Unless the class has more than one base type, because then one of them has to be an interface, as there can't be more than one base class.
+    protected override bool HasInterfaceOrGenericBaseClass(BaseTypeDeclarationSyntax declaration) =>
+        declaration.BaseList.Types.Count > 1                                 // implements at least one interface
+        || declaration.BaseList.Types.Any(x => x.Type is GenericNameSyntax); // or a generic class/interface
 
     protected override bool HasAnyAttribute(SyntaxNode node) =>
         node is TypeDeclarationSyntax { AttributeLists.Count: > 0  };

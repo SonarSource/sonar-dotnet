@@ -100,6 +100,7 @@ partial class PartialNotEmpty
 }
 
 interface IMarker { }                        // Compliant - this rule only deals with classes
+class ImplementsMarker: IMarker { }          // Compliant - implements a marker interface
 
 struct EmptyStruct { }                       // Compliant - this rule only deals with classes
 

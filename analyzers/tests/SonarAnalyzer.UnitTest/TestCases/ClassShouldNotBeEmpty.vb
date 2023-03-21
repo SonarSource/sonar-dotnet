@@ -140,6 +140,10 @@ End Class
 Interface IMarker                                   ' Compliant - this rule only deals with classes
 End Interface
 
+Class ImplementsMarker                              ' Compliant - implements a marker interface
+    Implements IMarker
+End Class
+
 Structure EmptyStruct                               ' Compliant - this rule only deals with classes
 End Structure
 

@@ -29,13 +29,14 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         node is ClassBlockSyntax { Members.Count: 0 } classSyntax
         && !classSyntax.ClassStatement.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword));
 
-    protected override TypeBlockSyntax GetIfHasDeclaredBaseClass(SyntaxNode node) =>
-        node is ClassBlockSyntax { Inherits.Count: > 0 } classBlock
-            ? classBlock
+    protected override TypeBlockSyntax GetIfHasDeclaredBaseClassOrInterface(SyntaxNode node) =>
+        node is ClassBlockSyntax { Inherits.Count: > 0 } or ClassBlockSyntax { Implements.Count: > 0 }
+            ? (ClassBlockSyntax)node
             : null;
 
-    protected override bool HasGenericBaseClassOrInterface(TypeBlockSyntax declaration) =>
-        declaration.Inherits.Any(x => x.Types.Any(t => t is GenericNameSyntax));
+    protected override bool HasInterfaceOrGenericBaseClass(TypeBlockSyntax declaration) =>
+        declaration.Implements.Any()
+        || declaration.Inherits.Any(x => x.Types.Any(t => t is GenericNameSyntax));
 
     protected override bool HasAnyAttribute(SyntaxNode node) =>
         node is ClassBlockSyntax { ClassStatement.AttributeLists.Count: > 0 };
