@@ -26,6 +26,10 @@ namespace SonarAnalyzer.UnitTest.Common
     public class UnexpectedLanguageExceptionTest
     {
         [TestMethod]
+        public void Message_String_Ctor() =>
+            new UnexpectedLanguageException("F#").Message.Should().Be("Unexpected language: F#");
+
+        [TestMethod]
         public void Message_CS() =>
             new UnexpectedLanguageException(AnalyzerLanguage.CSharp).Message.Should().Be("Unexpected language: C#");
 

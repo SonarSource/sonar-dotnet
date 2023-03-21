@@ -7,8 +7,7 @@
     "constantCost": "5min"
   },
   "tags": [
-    "serialization",
-    "owasp-a8"
+    "serialization"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-4212",

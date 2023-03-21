@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
@@ -131,7 +132,7 @@ public partial class SonarAnalysisContextBaseTest
         secondConfig.Should().NotBeSameAs(firstConfig);
     }
 
-    [TestMethod]
+    [DataTestMethod]
     [DataRow(null)]
     [DataRow("/foo/bar/does-not-exit")]
     [DataRow("/foo/bar/x.xml")]
@@ -168,6 +169,98 @@ public partial class SonarAnalysisContextBaseTest
            .Should()
            .Throw<InvalidOperationException>()
            .WithMessage("File 'SonarProjectConfig.xml' has been added as an AdditionalFile but could not be read and parsed.");
+    }
+
+    [DataTestMethod]
+    [DataRow("cs")]
+    [DataRow("vbnet")]
+    public void SonarLintFile_LoadsExpectedValues(string language)
+    {
+        var analyzerLanguage = language == "cs" ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
+        var (compilation, _) = CreateDummyCompilation(analyzerLanguage, "ExtraEmptyFile");
+        var options = AnalysisScaffolding.CreateOptions($"ResourceTests\\SonarLintXml\\All_properties_{language}\\SonarLint.xml");
+        var sut = CreateSut(compilation, options).SonarLintXml();
+
+        sut.IgnoreHeaderComments(analyzerLanguage.LanguageName).Should().BeTrue();
+        sut.AnalyzeGeneratedCode(analyzerLanguage.LanguageName).Should().BeFalse();
+        AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
+        AssertArrayContent(sut.Inclusions, nameof(sut.Inclusions));
+        AssertArrayContent(sut.GlobalExclusions, nameof(sut.GlobalExclusions));
+        AssertArrayContent(sut.TestExclusions, nameof(sut.TestExclusions));
+        AssertArrayContent(sut.TestInclusions, nameof(sut.TestInclusions));
+        AssertArrayContent(sut.GlobalTestExclusions, nameof(sut.GlobalTestExclusions));
+
+        static void AssertArrayContent(string[] array, string folder)
+        {
+            array.Should().HaveCount(2);
+            array[0].Should().BeEquivalentTo($"Fake/{folder}/**/*");
+            array[1].Should().BeEquivalentTo($"Fake/{folder}/Second*/**/*");
+        }
+    }
+
+    [TestMethod]
+    public void SonarLintFile_UsesCachedValue()
+    {
+        var options = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
+        var firstSut = CreateSut(options);
+        var secondSut = CreateSut(options);
+        var firstFile = firstSut.SonarLintXml();
+        var secondFile = secondSut.SonarLintXml();
+
+        secondFile.Should().BeSameAs(firstFile);
+    }
+
+    [TestMethod]
+    public void SonarLintFile_WhenFileChanges_RebuildsCache()
+    {
+        var firstOptions = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
+        var secondOptions = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_vbnet\\SonarLint.xml");
+        var firstFile = CreateSut(firstOptions).SonarLintXml();
+        var secondFile = CreateSut(secondOptions).SonarLintXml();
+
+        secondFile.Should().NotBeSameAs(firstFile);
+    }
+
+    [DataTestMethod]
+    [DataRow(null)]
+    [DataRow("\\foo\\bar\\does-not-exit")]
+    [DataRow("\\foo\\bar\\x.xml")]
+    [DataRow("path//aSonarLint.xml")] // different name
+    [DataRow("path//SonarLint.xmla")] // different extension
+    public void SonarLintFile_WhenAdditionalFileNotPresent_ReturnsDefaultValues(string folder)
+    {
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions(folder)).SonarLintXml();
+        CheckSonarLintXmlDefaultValues(sut);
+    }
+
+    [TestMethod]
+    public void SonarLintFile_WhenInvalidXml_ReturnsDefaultValues()
+    {
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\Invalid_Xml\\SonarLint.xml")).SonarLintXml();
+        CheckSonarLintXmlDefaultValues(sut);
+    }
+
+    [TestMethod]
+    public void SonarLintFile_WhenFileIsMissing_ThrowException()
+    {
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions("ThisPathDoesNotExist\\SonarLint.xml"));
+
+        sut.Invoking(x => x.SonarLintXml())
+           .Should()
+           .Throw<InvalidOperationException>()
+           .WithMessage("File 'SonarLint.xml' has been added as an AdditionalFile but could not be read and parsed.");
+    }
+
+    private static void CheckSonarLintXmlDefaultValues(SonarLintXmlReader sut)
+    {
+        sut.AnalyzeGeneratedCode(LanguageNames.CSharp).Should().BeFalse();
+        sut.IgnoreHeaderComments(LanguageNames.CSharp).Should().BeFalse();
+        sut.Exclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.Inclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.TestExclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.TestInclusions.Should().NotBeNull().And.HaveCount(0);
+        sut.GlobalTestExclusions.Should().NotBeNull().And.HaveCount(0);
     }
 
     private SonarCompilationReportingContext CreateSut(ProjectType projectType, bool isScannerRun) =>

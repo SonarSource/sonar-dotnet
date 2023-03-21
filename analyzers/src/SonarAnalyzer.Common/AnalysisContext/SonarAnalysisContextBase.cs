@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
 using System.IO;
 using System.Runtime.CompilerServices;
 using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
@@ -26,18 +27,12 @@ namespace SonarAnalyzer.AnalysisContext;
 
 public class SonarAnalysisContextBase
 {
+    protected static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> FileInclusionCache = new();
     protected static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
     protected static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
-    private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedCS = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.CSharp));
-    private static readonly Lazy<SourceTextValueProvider<bool>> ShouldAnalyzeGeneratedVB = new(() => CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic));
+    protected static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProvider = new(x => new SonarLintXmlReader(x));
 
     protected SonarAnalysisContextBase() { }
-
-    protected static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) =>
-        language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS.Value : ShouldAnalyzeGeneratedVB.Value;
-
-    private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
-        new(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.ParseXmlSettings(x), language));
 }
 
 public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
@@ -58,8 +53,9 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
     public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        (generatedCodeRecognizer is null || ShouldAnalyzeGenerated() || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
-        && (tree is null || !IsUnchanged(tree));
+        SonarLintXml() is var sonarLintXml
+        && (generatedCodeRecognizer is null || sonarLintXml.AnalyzeGeneratedCode(Compilation.Language) || !tree.IsGenerated(generatedCodeRecognizer, Compilation))
+        && (tree is null || (!IsUnchanged(tree) && !IsExcluded(sonarLintXml, tree.FilePath)));
 
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
@@ -77,6 +73,24 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         else
         {
             return ProjectConfigReader.Empty;
+        }
+    }
+
+    /// <summary>
+    /// Reads the properties from the SonarLint.xml file and caches the result for the scope of this analysis.
+    /// </summary>
+    public SonarLintXmlReader SonarLintXml()
+    {
+        if (Options.SonarLintXml() is { } sonarLintXml)
+        {
+            return sonarLintXml.GetText() is { } sourceText
+                && AnalysisContext.TryGetValue(sourceText, SonarLintXmlProvider, out var sonarLintXmlReader)
+                ? sonarLintXmlReader
+                : throw new InvalidOperationException($"File '{Path.GetFileName(sonarLintXml.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
+        }
+        else
+        {
+            return Helpers.SonarLintXmlReader.Empty;
         }
     }
 
@@ -107,11 +121,29 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             descriptor.CustomTags.Contains(tag);
     }
 
+    private bool IsExcluded(SonarLintXmlReader sonarLintXml, string filePath) =>
+        // If ProjectType is not 'Unknown' it means we are in S4NET context and all files are analyzed.
+        // If ProjectType is 'Unknown' then we are in SonarLint or NuGet context and we need to check if the file has been excluded from analysis through SonarLint.xml.
+        ProjectConfiguration().ProjectType == ProjectType.Unknown
+        && FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
+        && !cache.GetOrAdd(filePath, _ => IsFileIncluded(sonarLintXml, filePath));
+
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
-    private bool ShouldAnalyzeGenerated() =>
-        Options.SonarLintXml() is { } sonarLintXml
-        && AnalysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(Compilation.Language), out var shouldAnalyzeGenerated)
-        && shouldAnalyzeGenerated;
+    private bool IsFileIncluded(SonarLintXmlReader sonarLintXml, string filePath) =>
+        IsTestProject()
+        ? IsFileIncluded(sonarLintXml.TestInclusions, sonarLintXml.TestExclusions, sonarLintXml.GlobalTestExclusions, filePath)
+        : IsFileIncluded(sonarLintXml.Inclusions, sonarLintXml.Exclusions, sonarLintXml.GlobalExclusions, filePath);
+
+    private static bool IsFileIncluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
+        IsIncluded(inclusions, filePath)
+        && !IsExcluded(exclusions, filePath)
+        && !IsExcluded(globalExclusions, filePath);
+
+    private static bool IsIncluded(string[] inclusions, string filePath) =>
+        inclusions is { Length: 0 } || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, true));
+
+    private static bool IsExcluded(string[] exclusions, string filePath) =>
+        exclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, false));
 }

@@ -64,7 +64,7 @@
     <maven.compiler.release>${jdk.min.version}</maven.compiler.release>
 
     <!-- Test dependencies -->
-    <logback.classic.version>1.4.5</logback.classic.version>
+    <logback.classic.version>1.4.6</logback.classic.version>
     <junit.version>4.13.2</junit.version>
     <assertj.core.version>3.24.2</assertj.core.version>
   </properties>

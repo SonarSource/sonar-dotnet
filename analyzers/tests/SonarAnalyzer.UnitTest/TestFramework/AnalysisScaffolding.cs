@@ -19,6 +19,8 @@
  */
 
 using System.IO;
+using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
@@ -79,6 +81,72 @@ namespace SonarAnalyzer.UnitTest
 
         public static string CreateSonarProjectConfig(TestContext context, ProjectType projectType, bool isScannerRun = true) =>
             CreateSonarProjectConfig(context, "ProjectType", projectType.ToString(), isScannerRun);
+
+        public static string CreateSonarLintXml(
+            TestContext context,
+            string language = LanguageNames.CSharp,
+            bool analyzeGeneratedCode = false,
+            bool ignoreHeaderComments = false,
+            string[] exclusions = null,
+            string[] inclusions = null,
+            string[] globalExclusions = null,
+            string[] testExclusions = null,
+            string[] testInclusions = null,
+            string[] globalTestExclusions = null,
+            List<SonarLintXmlRule> rulesParameters = null) =>
+            TestHelper.WriteFile(context, "SonarLint.xml", GenerateSonarLintXmlContent(language, analyzeGeneratedCode, ignoreHeaderComments, exclusions, inclusions, globalExclusions, testExclusions, testInclusions, globalTestExclusions, rulesParameters));
+
+        public static string GenerateSonarLintXmlContent(
+            string language = LanguageNames.CSharp,
+            bool analyzeGeneratedCode = false,
+            bool ignoreHeaderComments = false,
+            string[] exclusions = null,
+            string[] inclusions = null,
+            string[] globalExclusions = null,
+            string[] testExclusions = null,
+            string[] testInclusions = null,
+            string[] globalTestExclusions = null,
+            List<SonarLintXmlRule> rulesParameters = null) =>
+            new XDocument(
+                new XDeclaration("1.0", "utf-8", "yes"),
+                new XElement("AnalysisInput",
+                    new XElement("Settings",
+                        CreateSetting($"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.analyzeGeneratedCode", analyzeGeneratedCode.ToString()),
+                        CreateSetting($"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.ignoreHeaderComments", ignoreHeaderComments.ToString()),
+                        CreateSetting("sonar.exclusions", ConcatenateStringArray(exclusions)),
+                        CreateSetting("sonar.inclusions", ConcatenateStringArray(inclusions)),
+                        CreateSetting("sonar.global.exclusions", ConcatenateStringArray(globalExclusions)),
+                        CreateSetting("sonar.test.exclusions", ConcatenateStringArray(testExclusions)),
+                        CreateSetting("sonar.test.inclusions", ConcatenateStringArray(testInclusions)),
+                        CreateSetting("sonar.global.test.exclusions", ConcatenateStringArray(globalTestExclusions))),
+                    new XElement("Rules", CreateRules(rulesParameters)))).ToString();
+
+        private static IEnumerable<XElement> CreateRules(List<SonarLintXmlRule> ruleParameters)
+        {
+            foreach (var rule in ruleParameters ?? new())
+            {
+                yield return CreateRule(rule);
+            }
+        }
+
+        private static XElement CreateRule(SonarLintXmlRule rule)
+        {
+            List<XElement> elements = new();
+            foreach (var param in rule.Parameters)
+            {
+                elements.Add(CreateKeyValuePair("Parameter", param.Key, param.Value));
+            }
+            return new("Rule", new XElement("Key", rule.Key), new XElement("Parameters", elements));
+        }
+
+        private static XElement CreateSetting(string key, string value) =>
+            CreateKeyValuePair("Setting", key, value);
+
+        private static XElement CreateKeyValuePair(string containerName, string key, string value) =>
+            new(containerName, new XElement("Key", key), new XElement("Value", value));
+
+        private static string ConcatenateStringArray(string[] array) =>
+            string.Join(",", array ?? Array.Empty<string>());
 
         private static string CreateSonarProjectConfig(TestContext context, string element, string value, bool isScannerRun, string analysisConfigPath = null)
         {

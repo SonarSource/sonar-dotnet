@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, write its code or make it an "interface".",
+"location":  {
+"uri":  "sources\SonarLintExclusions\SonarLintExclusions\Included\Included.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  18,
+"endLine":  3,
+"endColumn":  26
+}
+}
+}
+]
+}

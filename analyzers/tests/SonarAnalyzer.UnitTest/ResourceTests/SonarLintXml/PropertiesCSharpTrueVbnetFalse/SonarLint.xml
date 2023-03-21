@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisInput>
+  <Settings>
+    <Setting>
+      <Key>sonar.cs.ignoreHeaderComments</Key>
+      <Value>true</Value>
+    </Setting>
+     <Setting>
+      <Key>sonar.vbnet.ignoreHeaderComments</Key>
+      <Value>false</Value>
+    </Setting>
+        <Setting>
+      <Key>sonar.cs.analyzeGeneratedCode</Key>
+      <Value>true</Value>
+    </Setting>
+     <Setting>
+      <Key>sonar.vbnet.analyzeGeneratedCode</Key>
+      <Value>false</Value>
+    </Setting>
+  </Settings>
+</AnalysisInput>

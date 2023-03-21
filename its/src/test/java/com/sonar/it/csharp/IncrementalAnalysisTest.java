@@ -67,8 +67,7 @@ public class IncrementalAnalysisTest {
 
     assertTrue(endStepResults.isSuccess());
     assertThat(beginStepResults.getLogs()).contains("Processing analysis cache");
-    assertThat(beginStepResults.getLogs()).contains("Processing pull request with base branch 'base-branch'.");
-    assertThat(beginStepResults.getLogs()).contains("Cache data is not available. Incremental PR analysis is disabled.");
+    assertThat(beginStepResults.getLogs()).contains("Cache data is empty. A full analysis will be performed.");
     assertAllFilesWereAnalysed(endStepResults, projectDir);
     List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, PULL_REQUEST_KEY);
     assertThat(allIssues).hasSize(1);
@@ -186,7 +185,6 @@ public class IncrementalAnalysisTest {
 
   private static void assertCacheIsUsed(BuildResult beginStepResults, String project) {
     assertThat(beginStepResults.getLogs()).contains("Processing analysis cache");
-    assertThat(beginStepResults.getLogs()).contains("Processing pull request with base branch 'base-branch'.");
     assertThat(beginStepResults.getLogs()).contains("Downloading cache. Project key: " + project + ", branch: base-branch.");
   }
 

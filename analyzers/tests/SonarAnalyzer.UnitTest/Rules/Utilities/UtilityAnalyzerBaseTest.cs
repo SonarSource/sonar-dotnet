@@ -34,6 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
     {
         private const string DefaultSonarProjectConfig = @"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml";
         private const string DefaultProjectOutFolderPath = @"ResourceTests\ProjectOutFolderPath.txt";
+        public TestContext TestContext { get; set; }
 
         [DataTestMethod]
         [DataRow(LanguageNames.CSharp, DefaultProjectOutFolderPath, @"path\output-cs")]
@@ -43,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
         public void ReadConfig_OutPath(string language, string additionalPath, string expectedOutPath)
         {
             // We do not test what is read from the SonarLint file, but we need it
-            var utilityAnalyzer = new TestUtilityAnalyzer(language, @"ResourceTests\SonarLint.xml", additionalPath);
+            var utilityAnalyzer = new TestUtilityAnalyzer(language, @"ResourceTests\SonarLintXml\All_properties_cs\SonarLint.xml", additionalPath);
 
             utilityAnalyzer.TestOutPath.Should().Be(expectedOutPath);
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
@@ -55,35 +56,37 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
         public void ReadConfig_OutPath_FromSonarProjectConfig_HasPriority(string firstFile, string secondFile)
         {
             // We do not test what is read from the SonarLint file, but we need it
-            var utilityAnalyzer = new TestUtilityAnalyzer(LanguageNames.CSharp, @"ResourceTests\SonarLint.xml", firstFile, secondFile);
+            var utilityAnalyzer = new TestUtilityAnalyzer(LanguageNames.CSharp, @"ResourceTests\SonarLintXml\All_properties_cs\SonarLint.xml", firstFile, secondFile);
 
             utilityAnalyzer.TestOutPath.Should().Be(@"C:\foo\bar\.sonarqube\out\0\output-cs");
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
         }
 
         [DataTestMethod]
-        [DataRow(LanguageNames.CSharp, @"ResourceTests\AnalyzeGeneratedTrue\SonarLint.xml", true)]
-        [DataRow(LanguageNames.CSharp, @"ResourceTests\AnalyzeGeneratedFalse\SonarLint.xml", false)]
-        [DataRow(LanguageNames.VisualBasic, @"ResourceTests\AnalyzeGeneratedTrueVbnet\SonarLint.xml", true)]
-        [DataRow(LanguageNames.VisualBasic, @"ResourceTests\AnalyzeGeneratedFalseVbnet\SonarLint.xml", false)]
-        public void ReadsSettings_AnalyzeGenerated(string language, string sonarLintXmlPath, bool expectedAnalyzeGeneratedCodeValue)
+        [DataRow(LanguageNames.CSharp, true)]
+        [DataRow(LanguageNames.CSharp, false)]
+        [DataRow(LanguageNames.VisualBasic, true)]
+        [DataRow(LanguageNames.VisualBasic, false)]
+        public void ReadsSettings_AnalyzeGenerated(string language, bool analyzeGenerated)
         {
+            var sonarLintXmlPath = AnalysisScaffolding.CreateSonarLintXml(TestContext, language: language, analyzeGeneratedCode: analyzeGenerated);
             var utilityAnalyzer = new TestUtilityAnalyzer(language, sonarLintXmlPath, DefaultSonarProjectConfig);
 
-            utilityAnalyzer.TestAnalyzeGeneratedCode.Should().Be(expectedAnalyzeGeneratedCodeValue);
+            utilityAnalyzer.TestAnalyzeGeneratedCode.Should().Be(analyzeGenerated);
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
         }
 
         [DataTestMethod]
-        [DataRow(LanguageNames.CSharp, @"ResourceTests\IgnoreHeaderCommentsTrueCSharp\SonarLint.xml", true)]
-        [DataRow(LanguageNames.CSharp, @"ResourceTests\IgnoreHeaderCommentsFalseCSharp\SonarLint.xml", false)]
-        [DataRow(LanguageNames.VisualBasic, @"ResourceTests\IgnoreHeaderCommentsTrueVbnet\SonarLint.xml", true)]
-        [DataRow(LanguageNames.VisualBasic, @"ResourceTests\IgnoreHeaderCommentsFalseVbnet\SonarLint.xml", false)]
-        public void ReadsSettings_IgnoreHeaderComments(string language, string sonarLintXmlPath, bool expectedIgnoreHeaderComments)
+        [DataRow(LanguageNames.CSharp, true)]
+        [DataRow(LanguageNames.CSharp, false)]
+        [DataRow(LanguageNames.VisualBasic, true)]
+        [DataRow(LanguageNames.VisualBasic, false)]
+        public void ReadsSettings_IgnoreHeaderComments(string language, bool ignoreHeaderComments)
         {
+            var sonarLintXmlPath = AnalysisScaffolding.CreateSonarLintXml(TestContext, language: language, ignoreHeaderComments: ignoreHeaderComments);
             var utilityAnalyzer = new TestUtilityAnalyzer(language, sonarLintXmlPath, DefaultSonarProjectConfig);
 
-            utilityAnalyzer.TestIgnoreHeaderComments.Should().Be(expectedIgnoreHeaderComments);
+            utilityAnalyzer.TestIgnoreHeaderComments.Should().Be(ignoreHeaderComments);
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
         }
 
@@ -96,7 +99,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
 
         [TestMethod]
         public void NoOutputPath_AnalyzerNotEnabled() =>
-            new TestUtilityAnalyzer(LanguageNames.CSharp, @"ResourceTests\AnalyzeGeneratedTrue\SonarLint.xml").TestIsAnalyzerEnabled.Should().BeFalse();
+            new TestUtilityAnalyzer(LanguageNames.CSharp, AnalysisScaffolding.CreateSonarLintXml(TestContext, analyzeGeneratedCode: true)).TestIsAnalyzerEnabled.Should().BeFalse();
 
         [TestMethod]
         public void GetTextRange()

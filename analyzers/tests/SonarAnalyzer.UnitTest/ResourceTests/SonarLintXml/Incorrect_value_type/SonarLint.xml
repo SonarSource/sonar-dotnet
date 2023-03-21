@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisInput>
+  <Settings>
+    <Setting>
+      <Key>sonar.cs.ignoreHeaderComments</Key>
+      <Value>abc</Value>
+    </Setting>
+    <Setting>
+      <Key>sonar.cs.analyzeGeneratedCode</Key>
+      <Value>null</Value>
+    </Setting>
+    <Setting>
+      <Key>sonar.cs.roslyn.ignoreIssues</Key>
+      <Value></Value>
+    </Setting>
+  </Settings>
+  <Rules>
+  </Rules>
+  <Files> 
+  </Files>
+</AnalysisInput>
