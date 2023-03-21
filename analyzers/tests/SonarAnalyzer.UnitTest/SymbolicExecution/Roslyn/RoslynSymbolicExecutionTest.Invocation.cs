@@ -754,6 +754,7 @@ Tag(""Result"", Result)";
         [DataRow("arg is not false", "bool?")]
         [DataRow("arg is not 42", "object")]
         [DataRow("arg is not { Length: 0 }", "string")]
+        [DataRow("arg.GetValueOrDefault()", "bool?")]
         public void Invocation_DebugAssert_DoesNotLearn(string expression, string argType) =>
             DebugAssertValues(expression, argType).Should().SatisfyRespectively(x => x.Should().HaveNoConstraints());
 
