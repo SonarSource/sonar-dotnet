@@ -43,10 +43,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public IEnumerable<SymbolicConstraint> AllConstraints =>
             Constraints.Values;
 
-        public SymbolicValue() : this(null)
-        {
-            hashCode = new(() => HashCode.DictionaryContentHash(Constraints), LazyThreadSafetyMode.ExecutionAndPublication);
-        }
+        public SymbolicValue() : this(null) { }
 
         private SymbolicValue(SymbolicValue other)
         {
