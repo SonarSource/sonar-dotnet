@@ -125,25 +125,8 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         // If ProjectType is not 'Unknown' it means we are in S4NET context and all files are analyzed.
         // If ProjectType is 'Unknown' then we are in SonarLint or NuGet context and we need to check if the file has been excluded from analysis through SonarLint.xml.
         ProjectConfiguration().ProjectType == ProjectType.Unknown
-        && FileInclusionCache.GetValue(Compilation, _ => new()) is var cache
-        && !cache.GetOrAdd(filePath, _ => IsFileIncluded(sonarLintXml, filePath));
+        && !FileInclusionCache.GetValue(Compilation, _ => new()).GetOrAdd(filePath, _ => sonarLintXml.IsFileIncluded(filePath, IsTestProject()));
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
-
-    private bool IsFileIncluded(SonarLintXmlReader sonarLintXml, string filePath) =>
-        IsTestProject()
-        ? IsFileIncluded(sonarLintXml.TestInclusions, sonarLintXml.TestExclusions, sonarLintXml.GlobalTestExclusions, filePath)
-        : IsFileIncluded(sonarLintXml.Inclusions, sonarLintXml.Exclusions, sonarLintXml.GlobalExclusions, filePath);
-
-    private static bool IsFileIncluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
-        IsIncluded(inclusions, filePath)
-        && !IsExcluded(exclusions, filePath)
-        && !IsExcluded(globalExclusions, filePath);
-
-    private static bool IsIncluded(string[] inclusions, string filePath) =>
-        inclusions is { Length: 0 } || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, true));
-
-    private static bool IsExcluded(string[] exclusions, string filePath) =>
-        exclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, false));
 }

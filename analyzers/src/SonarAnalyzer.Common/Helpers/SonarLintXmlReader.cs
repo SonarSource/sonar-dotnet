@@ -19,8 +19,6 @@
  */
 
 using System.IO;
-using System.Text;
-using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.CodeAnalysis.Text;
 
@@ -29,52 +27,78 @@ namespace SonarAnalyzer.Helpers;
 public class SonarLintXmlReader
 {
     public static readonly SonarLintXmlReader Empty = new(null);
+    private readonly bool ignoreHeaderCommentsCS;
+    private readonly bool ignoreHeaderCommentsVB;
+    private readonly bool analyzeGeneratedCodeCS;
+    private readonly bool analyzeGeneratedCodeVB;
 
-    private readonly SonarLintXml sonarLintXml;
+    public string[] Exclusions { get; }
+    public string[] Inclusions { get; }
+    public string[] GlobalExclusions { get; }
+    public string[] TestExclusions { get; }
+    public string[] TestInclusions { get; }
+    public string[] GlobalTestExclusions { get; }
+    public List<SonarLintXmlRule> ParametrizedRules { get; }
 
-    private bool? ignoreHeaderCommentsCS;
-    private bool? ignoreHeaderCommentsVB;
+    public SonarLintXmlReader(SourceText sonarLintXmlText)
+    {
+        var sonarLintXml = ParseContent(sonarLintXmlText);
+        var settings = sonarLintXml.Settings?.GroupBy(x => x.Key).ToDictionary(x => x.Key, x => x.First().Value) ?? new Dictionary<string, string>();
+        Exclusions = ReadArray("sonar.exclusions");
+        Inclusions = ReadArray("sonar.inclusions");
+        GlobalExclusions = ReadArray("sonar.global.exclusions");
+        TestExclusions = ReadArray("sonar.test.exclusions");
+        TestInclusions = ReadArray("sonar.test.inclusions");
+        GlobalTestExclusions = ReadArray("sonar.global.test.exclusions");
+        ParametrizedRules = ReadRuleParameters();
+        ignoreHeaderCommentsCS = ReadBoolean("sonar.cs.ignoreHeaderComments");
+        ignoreHeaderCommentsVB = ReadBoolean("sonar.vbnet.ignoreHeaderComments");
+        analyzeGeneratedCodeCS = ReadBoolean("sonar.cs.analyzeGeneratedCode");
+        analyzeGeneratedCodeVB = ReadBoolean("sonar.vbnet.analyzeGeneratedCode");
+
+        string[] ReadArray(string key) =>
+            settings.GetValueOrDefault(key) is { } value && !string.IsNullOrEmpty(value)
+                ? value.Split(',')
+                : Array.Empty<string>();
+
+        bool ReadBoolean(string key) =>
+            bool.TryParse(settings.GetValueOrDefault(key), out var value) && value;
+
+        List<SonarLintXmlRule> ReadRuleParameters() =>
+            sonarLintXml.Rules?.Where(x => x.Parameters.Any()).ToList() ?? new();
+    }
+
     public bool IgnoreHeaderComments(string language) =>
-        language switch
-        {
-            LanguageNames.CSharp => ignoreHeaderCommentsCS ??= ReadBoolean(ReadSettingsProperty("sonar.cs.ignoreHeaderComments")),
-            LanguageNames.VisualBasic => ignoreHeaderCommentsVB ??= ReadBoolean(ReadSettingsProperty("sonar.vbnet.ignoreHeaderComments")),
-            _ => throw new UnexpectedLanguageException(language)
-        };
+    language switch
+    {
+        LanguageNames.CSharp => ignoreHeaderCommentsCS,
+        LanguageNames.VisualBasic => ignoreHeaderCommentsVB,
+        _ => throw new UnexpectedLanguageException(language)
+    };
 
-    private bool? analyzeGeneratedCodeCS;
-    private bool? analyzeGeneratedCodeVB;
     public bool AnalyzeGeneratedCode(string language) =>
         language switch
         {
-            LanguageNames.CSharp => analyzeGeneratedCodeCS ??= ReadBoolean(ReadSettingsProperty("sonar.cs.analyzeGeneratedCode")),
-            LanguageNames.VisualBasic => analyzeGeneratedCodeVB ??= ReadBoolean(ReadSettingsProperty("sonar.vbnet.analyzeGeneratedCode")),
+            LanguageNames.CSharp => analyzeGeneratedCodeCS,
+            LanguageNames.VisualBasic => analyzeGeneratedCodeVB,
             _ => throw new UnexpectedLanguageException(language)
         };
 
-    private string[] exclusions;
-    public string[] Exclusions => exclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.exclusions"));
+    public bool IsFileIncluded(string filePath, bool isTestProject) =>
+        isTestProject
+            ? IsFileIncluded(TestInclusions, TestExclusions, GlobalTestExclusions, filePath)
+            : IsFileIncluded(Inclusions, Exclusions, GlobalExclusions, filePath);
 
-    private string[] inclusions;
-    public string[] Inclusions => inclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.inclusions"));
+    private static bool IsFileIncluded(string[] inclusions, string[] exclusions, string[] globalExclusions, string filePath) =>
+        IsIncluded(inclusions, filePath)
+        && !IsExcluded(exclusions, filePath)
+        && !IsExcluded(globalExclusions, filePath);
 
-    private string[] globalExclusions;
-    public string[] GlobalExclusions => globalExclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.exclusions"));
+    private static bool IsIncluded(string[] inclusions, string filePath) =>
+        inclusions.Length == 0 || inclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, true));
 
-    private string[] testExclusions;
-    public string[] TestExclusions => testExclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.exclusions"));
-
-    private string[] testInclusions;
-    public string[] TestInclusions => testInclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.test.inclusions"));
-
-    private string[] globalTestExclusions;
-    public string[] GlobalTestExclusions => globalTestExclusions ??= ReadCommaSeparatedArray(ReadSettingsProperty("sonar.global.test.exclusions"));
-
-    private List<SonarLintXmlRule> parametrizedRules;
-    public List<SonarLintXmlRule> ParametrizedRules => parametrizedRules ??= ReadRuleParameters();
-
-    public SonarLintXmlReader(SourceText sonarLintXml) =>
-        this.sonarLintXml = sonarLintXml == null ? SonarLintXml.Empty : ParseContent(sonarLintXml);
+    private static bool IsExcluded(string[] exclusions, string filePath) =>
+        exclusions.Any(x => WildcardPatternMatcher.IsMatch(x, filePath, false));
 
     private static SonarLintXml ParseContent(SourceText sonarLintXml)
     {
@@ -89,20 +113,4 @@ public class SonarLintXmlReader
             return SonarLintXml.Empty;
         }
     }
-
-    private List<SonarLintXmlRule> ReadRuleParameters() =>
-        sonarLintXml is { Rules: { } rules }
-        ? rules.Where(x => x.Parameters.Any()).ToList()
-        : new();
-
-    private string ReadSettingsProperty(string property) =>
-        sonarLintXml is { Settings: { } settings }
-            ? settings.Where(x => x.Key.Equals(property)).Select(x => x.Value).FirstOrDefault()
-            : null;
-
-    private static string[] ReadCommaSeparatedArray(string str) =>
-        string.IsNullOrEmpty(str) ? Array.Empty<string>() : str.Split(',');
-
-    private static bool ReadBoolean(string str, bool defaultValue = false) =>
-        bool.TryParse(str, out var propertyValue) ? propertyValue : defaultValue;
 }
