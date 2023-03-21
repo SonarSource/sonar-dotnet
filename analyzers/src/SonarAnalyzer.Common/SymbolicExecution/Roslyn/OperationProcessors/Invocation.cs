@@ -165,7 +165,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         else
         {
             return operation.TrackedSymbol() is { } symbol
-                ? state.SetSymbolConstraint(symbol, BoolConstraint.From(!isNegated))
+                ? state.SetSymbolConstraint(symbol, BoolConstraint.From(!isNegated)).SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
                 : state;
         }
     }

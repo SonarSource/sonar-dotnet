@@ -750,6 +750,14 @@ Tag(""Result"", Result)";
         }
 
         [DataTestMethod]
+        [DataRow("arg is not true", "bool?")]
+        [DataRow("arg is not false", "bool?")]
+        [DataRow("arg is not 42", "object")]
+        [DataRow("arg is not { Length: 0 }", "string")]
+        public void Invocation_DebugAssert_DoesNotLearn(string expression, string argType) =>
+            DebugAssertValues(expression, argType).Should().SatisfyRespectively(x => x.Should().HaveNoConstraints());
+
+        [DataTestMethod]
         [DataRow("arg != null", "object")]
         [DataRow("arg != null", "int?")]
         [DataRow("arg != null", "bool?")]
@@ -791,6 +799,12 @@ Tag(""Arg2"", arg2);";
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_Binary() =>
             DebugAssertValues("arg == true", "bool").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
+
+        [DataTestMethod]
+        [DataRow("arg is true", true)]
+        [DataRow("arg is false", false)]
+        public void Invocation_DebugAssert_LearnsBoolConstraint_Nullable(string expression, bool expected) =>
+            DebugAssertValues(expression, "bool?").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(BoolConstraint.From(expected)));
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_AlwaysEnds() =>
