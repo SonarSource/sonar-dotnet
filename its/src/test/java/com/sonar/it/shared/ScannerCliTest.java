@@ -63,15 +63,7 @@ public class ScannerCliTest {
 
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(2);
-
-    if (ORCHESTRATOR.getServer().version().isGreaterThanOrEquals(10, 0)) {
-      // The assertion of the warning regarding 'sonar.token' is temporary, until the `sonar.token` parameter will be fully supported.
-      assertThat(result.getLogsLines(l -> l.contains("WARN"))).containsExactlyInAnyOrder(warnings);
-    }
-    else {
-      assertThat(result.getLogsLines(l -> l.contains("WARN"))).containsExactlyInAnyOrder(Arrays.copyOfRange(warnings, 0, 3));
-      TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
-    }
+    assertThat(result.getLogsLines(l -> l.contains("WARN"))).containsExactlyInAnyOrder(warnings);
   }
 
   @Test
