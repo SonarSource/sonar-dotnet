@@ -81,7 +81,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             SetOperationConstraint(operation.Instance, constraint);
 
         public ProgramState SetOperationConstraint(IOperation operation, SymbolicConstraint constraint) =>
-            SetOperationValue(operation, (this[operation] ?? new()).WithConstraint(constraint));
+            SetOperationValue(operation, (this[operation] ?? SymbolicValue.Empty).WithConstraint(constraint));
 
         public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
             value is null
@@ -89,7 +89,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 : this with { SymbolValue = SymbolValue.SetItem(symbol, value) };
 
         public ProgramState SetSymbolConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
-            SetSymbolValue(symbol, (this[symbol] ?? new()).WithConstraint(constraint));
+            SetSymbolValue(symbol, (this[symbol] ?? SymbolicValue.Empty).WithConstraint(constraint));
 
         public ProgramState SetCapture(CaptureId capture, IOperation operation) =>
             this with { CaptureOperation = CaptureOperation.SetItem(capture, operation) };
