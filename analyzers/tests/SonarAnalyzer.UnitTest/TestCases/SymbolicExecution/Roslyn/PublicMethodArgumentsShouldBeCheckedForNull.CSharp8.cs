@@ -9,7 +9,7 @@
     public void NullCoalescenceAssignment_Null(string s1)
     {
         s1 ??= null;
-        s1.ToString(); // FN
+        s1.ToString(); // Covered by S2259
     }
 }
 
@@ -30,12 +30,12 @@ public class LocalStaticFunctions
     {
         string LocalFunction(object o)
         {
-            return o.ToString(); // FN: local functions are not supported by the CFG
+            return o.ToString(); // Compliant - local methods are not accessible from other assemblies
         }
 
         static string LocalStaticFunction(object o)
         {
-            return o.ToString(); // FN: local functions are not supported by the CFG
+            return o.ToString();
         }
     }
 }
@@ -97,8 +97,8 @@ public class SwitchExpressions
     {
         var result = s switch
         {
-            null => s.ToString(),   // FN
-            _ => s.ToString()       // Compliant as null was already handled
+            null => s.ToString(), // Covered by S2259
+            _ => s.ToString()
         };
     }
 

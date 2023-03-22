@@ -13,7 +13,7 @@ public class Program
 //      ^
         Bar(o);         // Compliant, we care about dereference only
 
-        throw e;        // FN
+        throw e;        // FN - the SE engine uses the throw statement as branch rather than an operation
     }
 
     public void Bar(object o) { }
@@ -76,20 +76,20 @@ public class Program
     {
         if (string.IsNullOrEmpty(s1))
         {
-            s1.ToString(); // FN
+            s1.ToString(); // Null check was performed, so this belongs to S2259
         }
         else
         {
-            s1.ToString(); // Compliant
+            s1.ToString();
         }
 
         if (string.IsNullOrWhiteSpace(s2))
         {
-            s2.ToString(); // FN
+            s2.ToString(); // Null check was performed, so this belongs to S2259
         }
         else
         {
-            s2.ToString(); // Compliant
+            s2.ToString();
         }
     }
 
@@ -119,7 +119,7 @@ public class Program
         var c = o?.ToString()?.IsNormalized();
         if (c == null)
         {
-            o.GetType().GetMethods();               // FN
+            o.GetType().GetMethods();               // Null check was performed, so this belongs to S2259
         }
     }
 
@@ -253,7 +253,7 @@ public class ReproIssue2476
             contentType = "";
         }
 
-        var parts = contentType.Split('/', ';');
+        var parts = contentType.Split('/', ';'); // Covered by S2259
     }
 
     public void Method6(string contentType)
@@ -268,7 +268,7 @@ public class ReproIssue2476
             contentType = null;
         }
 
-        var parts = contentType.Split('/', ';'); // Compliant
+        var parts = contentType.Split('/', ';'); // Covered by S2259
     }
 }
 

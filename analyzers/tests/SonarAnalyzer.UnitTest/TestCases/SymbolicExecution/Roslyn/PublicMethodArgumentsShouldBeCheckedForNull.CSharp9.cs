@@ -33,19 +33,19 @@ public class Sample
 
         if (arg is null)
         {
-            arg.ToString();     // FN
+            arg.ToString();     // Covered by S2259
         }
         if (arg is int or bool or null)
         {
-            arg.ToString();     // FN
+            arg.ToString();
         }
         else if (arg is not not null)
         {
-            arg.ToString();     // FN
+            arg.ToString();
         }
         else if (!(arg is not null))
         {
-            arg.ToString();     // FN
+            arg.ToString();
         }
     }
 
