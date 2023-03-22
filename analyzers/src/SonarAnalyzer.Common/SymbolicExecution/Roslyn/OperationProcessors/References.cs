@@ -67,12 +67,14 @@ internal sealed class FieldReference : SimpleProcessor<IFieldReferenceOperationW
     {
         if (fieldReference.WrappedOperation.TrackedSymbol() is IFieldSymbol fieldSymbol)
         {
-            state = state[fieldSymbol] is { } value
-                ? state.SetOperationValue(fieldReference.WrappedOperation, value)
-                : state;
-            state = fieldSymbol.Type is { } symbolType && (symbolType.IsNonNullableValueType() || symbolType.IsEnum())
-                ? state.SetSymbolConstraint(fieldSymbol, ObjectConstraint.NotNull)
-                : state;
+            if (state[fieldSymbol] is { } value)
+            {
+                state = state.SetOperationValue(fieldReference.WrappedOperation, value);
+            }
+            if (fieldSymbol.Type is { } symbolType && (symbolType.IsNonNullableValueType() || symbolType.IsEnum()))
+            {
+                state = state.SetSymbolConstraint(fieldSymbol, ObjectConstraint.NotNull);
+            }
         }
         return state;
     }
