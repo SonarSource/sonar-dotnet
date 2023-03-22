@@ -33,12 +33,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             {
                 state = context.SetOperationConstraint(ObjectConstraint.NotNull);
             }
-            if (context.Operation.Instance.TrackedSymbol() is { } trackedSymbol
-                && trackedSymbol.GetSymbolType() is { } symbolType
-                && (symbolType.IsNonNullableValueType() || symbolType.IsEnum()))
-            {
-                state = state.SetSymbolConstraint(trackedSymbol, ObjectConstraint.NotNull);
-            }
             return state;
         }
     }
