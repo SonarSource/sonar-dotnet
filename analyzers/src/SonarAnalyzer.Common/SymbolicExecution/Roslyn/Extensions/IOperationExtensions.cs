@@ -30,6 +30,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.LocalReference => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                 OperationKindEx.ParameterReference => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
                 OperationKindEx.Argument => IArgumentOperationWrapper.FromOperation(operation).Value.TrackedSymbol(),
+                OperationKindEx.DeclarationExpression => IDeclarationExpressionOperationWrapper.FromOperation(operation).Expression.TrackedSymbol(),
                 _ => null
             };
 

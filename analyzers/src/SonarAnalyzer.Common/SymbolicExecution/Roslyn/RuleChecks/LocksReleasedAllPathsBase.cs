@@ -94,6 +94,27 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                     };
                 }
             }
+            else if (context.Operation.Instance.AsObjectCreation() is { } objectCreation
+                && objectCreation.Type.Is(KnownType.System_Threading_Mutex)
+                && context.Operation.Parent.AsAssignment() is { } assignment
+                && assignment.Target.TrackedSymbol() is { } symbol
+                && objectCreation.Arguments.Length > 0
+                && objectCreation.Arguments.ToDictionary(x => x.ToArgument().Parameter.Name, x => x.ToArgument().Value) is var arguments
+                && arguments.TryGetValue("initiallyOwned", out var initiallyOwned)
+                && context.State[initiallyOwned] is { } initiallyOwnedValue
+                && initiallyOwnedValue.HasConstraint(BoolConstraint.True))
+            {
+                lastSymbolLock[symbol] = objectCreation.ToSonar();
+                return arguments.TryGetValue("createdNew", out var createdNew)
+                    && createdNew.TrackedSymbol() is { } trackedCreatedNew
+                    ? new[]
+                        {
+                            AddLock(context, symbol).SetSymbolConstraint(trackedCreatedNew, BoolConstraint.True),
+                            context.State.SetSymbolConstraint(trackedCreatedNew, BoolConstraint.False),
+                        }
+                    : AddLock(context, objectCreation.WrappedOperation).Preserve(symbol).ToArray();
+            }
+
             return base.PostProcess(context);
         }
 
@@ -131,21 +152,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
-            if (context.Operation.Instance.AsObjectCreation() is { } objectCreation)
-            {
-                if (objectCreation.Type.Is(KnownType.System_Threading_Mutex)
-                    && context.Operation.Parent.AsAssignment() is { } assignment
-                    && objectCreation.Arguments.Length > 0
-                    && objectCreation.Arguments.First().ToArgument().Value is { } firstArgument
-                    && context.State[firstArgument] is { } firstArgumentValue
-                    && firstArgumentValue.HasConstraint(BoolConstraint.True)
-                    && assignment.Target.TrackedSymbol() is { } symbol)
-                {
-                    lastSymbolLock[symbol] = objectCreation.ToSonar();
-                    return AddLock(context, objectCreation.WrappedOperation).Preserve(symbol);
-                }
-            }
-            else if (context.Operation.Instance.AsInvocation() is { } invocation)
+            if (context.Operation.Instance.AsInvocation() is { } invocation)
             {
                 // ToDo: we ignore the number of parameters for now.
                 if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "Enter", "TryEnter"))

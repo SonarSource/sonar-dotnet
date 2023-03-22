@@ -14,7 +14,7 @@ public class MutexTest
     public static void Noncompliant(MutexSecurity mutexSecurity, bool cond)
     {
         // Note that Dispose() closes the underlying WaitHandle, but does not release the mutex
-        var m0 = new Mutex(true, "foo", out var mutexWasCreated, mutexSecurity); // Noncompliant
+        var m0 = new Mutex(true, "foo", out var mutexWasCreated, mutexSecurity);
         if (cond)
         {
             m0.ReleaseMutex();
@@ -61,7 +61,7 @@ public class MutexTest
         if (doesNotExist)
         {
             // The mutex does not exist, so create it.
-            m = new Mutex(true, mutexName, out mutexWasCreated, mutexSecurity); // Noncompliant FP, because the rule is not aware that the mutex didn't exist before and doesn't support out mutexWasCreated. Only awareness of both can fix it.
+            m = new Mutex(true, mutexName, out mutexWasCreated, mutexSecurity);
             if (!mutexWasCreated)
             {
                 // unable to create the mutex
