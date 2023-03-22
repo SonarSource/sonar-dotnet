@@ -28,12 +28,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         {
             var state = context.State;
             var operation = context.Operation.Instance;
-            if (operation.Type is { } type && type.IsNonNullableValueType())
+            if (operation.Type is { } type && (type.IsNonNullableValueType() || type.IsEnum()))
             {
                 state = context.SetOperationConstraint(ObjectConstraint.NotNull);
             }
             if (operation.TrackedSymbol() is { } trackedSymbol
-                && trackedSymbol.GetSymbolType().IsNonNullableValueType())
+                && trackedSymbol.GetSymbolType() is { } symbol
+                && (symbol.IsNonNullableValueType() || symbol.IsEnum())
             {
                 state = state.SetSymbolConstraint(trackedSymbol, ObjectConstraint.NotNull);
             }
