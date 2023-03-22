@@ -31,7 +31,8 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
     protected override DiagnosticDescriptor Rule => S3900;
 
-    public override bool ShouldExecute() => true;
+    public override bool ShouldExecute() =>
+        Node is BaseMethodDeclarationSyntax or AccessorDeclarationSyntax;
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
@@ -40,10 +41,9 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             && parameterSymbol.Type.IsValueType is false
             && IsParameterDereferenced(context.Operation)
             && NullableStateIsNotKnownForParameter(parameterSymbol)
-            && !IgnoreBecauseOfParameterAttribute(parameterSymbol)
-            && SemanticModel.GetDeclaredSymbol(Node) is { } methodSymbol)
+            && !IgnoreBecauseOfParameterAttribute(parameterSymbol))
         {
-            var message = methodSymbol.IsConstructor()
+            var message = SemanticModel.GetDeclaredSymbol(Node).IsConstructor()
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
             ReportIssue(context.Operation.Instance, string.Format(message, context.Operation.Instance.Syntax), context);
