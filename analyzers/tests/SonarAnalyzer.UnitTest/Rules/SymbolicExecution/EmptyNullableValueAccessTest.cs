@@ -20,7 +20,9 @@
 
 using SonarAnalyzer.Common;
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
@@ -36,6 +38,10 @@ public class EmptyNullableValueAccessTest
         .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
         .WithBasePath(@"SymbolicExecution\Roslyn")
         .WithOnlyDiagnostics(ChecksCS.EmptyNullableValueAccess.S3655);
+
+    private readonly VerifierBuilder roslynVB = new VerifierBuilder<VB.SymbolicExecutionRunner>()
+        .WithBasePath(@"SymbolicExecution\Roslyn")
+        .WithOnlyDiagnostics(ChecksVB.EmptyNullableValueAccess.S3655);
 
     [DataTestMethod]
     [DataRow(ProjectType.Product)]
@@ -53,6 +59,14 @@ public class EmptyNullableValueAccessTest
         roslynCS.AddPaths("EmptyNullableValueAccess.cs")
             .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
             .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
+
+    [DataTestMethod]
+    [DataRow(ProjectType.Product)]
+    [DataRow(ProjectType.Test)]
+    public void EmptyNullableValueAccess_Roslyn_VB(ProjectType projectType) =>
+        roslynVB.AddPaths("EmptyNullableValueAccess.vb")
+            .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
             .Verify();
 
 #if NET
