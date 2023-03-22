@@ -37,10 +37,10 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
     {
         if (context.Operation.Instance.Kind == OperationKindEx.ParameterReference
             && context.Operation.Instance.ToParameterReference() is { WrappedOperation: var reference, Parameter: var parameterSymbol }
-            && !parameterSymbol.Type.IsValueType
+            && parameterSymbol.Type.IsValueType is false
             && IsParameterDereferenced(context.Operation)
-            && !IgnoreBecauseOfParameterAttribute(parameterSymbol)
             && NullableStateIsNotKnownForParameter(parameterSymbol)
+            && !IgnoreBecauseOfParameterAttribute(parameterSymbol)
             && SemanticModel.GetDeclaredSymbol(Node) is { } methodSymbol)
         {
             var message = methodSymbol.IsConstructor()
@@ -50,6 +50,10 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
         }
 
         return context.State;
+
+        bool NullableStateIsNotKnownForParameter(IParameterSymbol symbol) =>
+            !context.HasConstraint(symbol, ObjectConstraint.Null)
+            && !context.HasConstraint(symbol, ObjectConstraint.NotNull);
 
         static bool IsParameterDereferenced(IOperationWrapperSonar operation) =>
             operation.Parent != null
@@ -63,10 +67,5 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
         static bool IgnoreBecauseOfParameterAttribute(IParameterSymbol symbol) =>
             symbol.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute);
-
-        bool NullableStateIsNotKnownForParameter(IParameterSymbol symbol) =>
-            !context.HasConstraint(symbol, ObjectConstraint.Null)
-            && !context.HasConstraint(symbol, ObjectConstraint.NotNull)
-            && SemanticModel.GetTypeInfo(context.Operation.Instance.Syntax).Nullability().FlowState != NullableFlowState.NotNull;
     }
 }
