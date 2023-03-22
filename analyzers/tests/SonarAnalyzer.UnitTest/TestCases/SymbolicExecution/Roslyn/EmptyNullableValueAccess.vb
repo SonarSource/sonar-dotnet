@@ -507,7 +507,7 @@ Class Assignments
     Sub Assignment(nullable As Integer?)
         Dim x As Integer = nullable     ' Compliant
         nullable = Nothing
-        Dim y As Integer = nullable     ' FIXME Non-compliant
+        Dim y As Integer = nullable     ' Noncompliant
     End Sub
 End Class
 
