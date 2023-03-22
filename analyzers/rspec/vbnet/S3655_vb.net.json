@@ -1,0 +1,22 @@
+{
+  "title": "Empty nullable value should not be accessed",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "cwe"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3655",
+  "sqKey": "S3655",
+  "scope": "All",
+  "securityStandards": {
+    "CWE": [
+      476
+    ]
+  },
+  "quickfix": "unknown"
+}

@@ -18,11 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
 public class EmptyNullableValueAccess : EmptyNullableValueAccessBase
 {
-    private const string MessageFormat = "'{0}' is null on at least one execution path.";
+    private const string MessageFormat = "'{0}' is Nothing on at least one execution path.";
 
     internal static readonly DiagnosticDescriptor S3655 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -35,7 +35,7 @@ public class EmptyNullableValueAccess : EmptyNullableValueAccessBase
         return finder.HasPotentialNullableValueAccess;
     }
 
-    private sealed class NullableAccessFinder : SafeCSharpSyntaxWalker
+    private sealed class NullableAccessFinder : SafeVisualBasicSyntaxWalker
     {
         public bool HasPotentialNullableValueAccess { get; private set; }
 
@@ -59,7 +59,22 @@ public class EmptyNullableValueAccess : EmptyNullableValueAccessBase
             }
         }
 
-        public override void VisitCastExpression(CastExpressionSyntax node) =>
+        public override void VisitPredefinedCastExpression(PredefinedCastExpressionSyntax node) =>
             HasPotentialNullableValueAccess = true;
+
+        public override void VisitCTypeExpression(CTypeExpressionSyntax node) =>
+            HasPotentialNullableValueAccess = true;
+
+        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+        {
+            if (node.NameIs("CTypeDynamic"))
+            {
+                HasPotentialNullableValueAccess = true;
+            }
+            else
+            {
+                base.VisitInvocationExpression(node);
+            }
+        }
     }
 }
