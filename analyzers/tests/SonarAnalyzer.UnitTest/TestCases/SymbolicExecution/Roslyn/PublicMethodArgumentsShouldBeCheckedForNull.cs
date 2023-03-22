@@ -589,6 +589,6 @@ public class Unsafe
 
     public static unsafe void Method(Coordinate* c)
     {
-        c->x = 42;                                      // FIXME Non-compliant
+        c->x = 42;                                      // Compliant - for now the rule doesn't deal with unsafe methods
     }
 }
