@@ -37,8 +37,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             && (IsRelevantMethod(Node) || IsRelevantPropertyAccessor(Node));
 
         static bool IsRelevantMethod(SyntaxNode node) =>
-            node is BaseMethodDeclarationSyntax { ParameterList.Parameters: var parameters } method
-            && parameters.Any(x => !x.Modifiers.AnyOfKind(SyntaxKind.OutKeyword))
+            node is BaseMethodDeclarationSyntax { } method
             && MethodDereferencesArguments(method);
 
         static bool IsRelevantPropertyAccessor(SyntaxNode node) =>
@@ -79,6 +78,12 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
                                     .Where(x => !x.Modifiers.AnyOfKind(SyntaxKind.OutKeyword))
                                     .Select(x => x.GetName())
                                     .ToArray();
+
+            if (!argumentNames.Any())
+            {
+                return false;
+            }
+
             var walker = new ArgumentDereferenceWalker(argumentNames);
             walker.SafeVisit(method);
             return walker.DereferencesMethodArguments;
