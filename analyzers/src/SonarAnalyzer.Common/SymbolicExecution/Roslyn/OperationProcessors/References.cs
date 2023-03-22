@@ -57,12 +57,24 @@ internal sealed class FieldReference : SimpleProcessor<IFieldReferenceOperationW
 
     protected override ProgramState Process(SymbolicContext context, IFieldReferenceOperationWrapper fieldReference)
     {
-        var state = fieldReference.WrappedOperation.TrackedSymbol() is { } fieldSymbol && context.State[fieldSymbol] is { } value
-            ? context.State.SetOperationValue(context.Operation, value)
-            : context.State;
+        var state = LearnFromFieldReference(context.State, fieldReference);
         return fieldReference.Instance.TrackedSymbol() is { } instanceSymbol
             ? state.SetSymbolConstraint(instanceSymbol, ObjectConstraint.NotNull)
             : state;
+    }
+
+    private static ProgramState LearnFromFieldReference(ProgramState state, IFieldReferenceOperationWrapper fieldReference)
+    {
+        if (fieldReference.WrappedOperation.TrackedSymbol() is IFieldSymbol fieldSymbol)
+        {
+            state = state[fieldSymbol] is { } value
+                ? state.SetOperationValue(fieldReference.WrappedOperation, value)
+                : state;
+            state = fieldSymbol.Type is { } symbolType && (symbolType.IsNonNullableValueType() || symbolType.IsEnum())
+                ? state.SetSymbolConstraint(fieldSymbol, ObjectConstraint.NotNull)
+                : state;
+        }
+        return state;
     }
 }
 
