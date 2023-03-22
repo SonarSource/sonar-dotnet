@@ -360,8 +360,11 @@ End Class
 
 Class WithKeyword
     Function WithKeyword(nullable As Integer?)
-        With nullable
-            Dim x = .Value  ' FIXME Non-compliant
+        If nullable.HasValue Then
+            Console.WriteLine(nullable.Value)
+        End If
+        With nullable   ' Noncompliant
+            Dim x = .Value
         End With
     End Function
 End Class
@@ -431,7 +434,7 @@ Class Repro_4573
                 Console.WriteLine(foo.Value.ToString()) ' Noncompliant
             End If
             If foo Is Nothing Then
-                Console.WriteLine(foo.Value.ToString()) ' Compliant, learned NotNull
+                Console.WriteLine(foo.Value.ToString()) ' Compliant, when reached, foo is not empty
             End If
             If foo IsNot Nothing Then
                 Console.WriteLine(foo.Value.ToString())
@@ -443,7 +446,7 @@ Class Repro_4573
         If foo = value Then                                 ' Relationship is added here
             If value.HasValue Then
                 If Not foo.HasValue Then
-                    Console.WriteLine(foo.Value.ToString()) ' Noncompliant, FP: learned NotNull
+                    Console.WriteLine(foo.Value.ToString()) ' Noncompliant, FP: when reached, foo is not empty
                 End If
             End If
         End If
