@@ -141,7 +141,7 @@ namespace Tests.Diagnostics
 
         public int CSharp8_SwitchExpressions5(int? value, bool flag)
         {
-            return flag switch { true => value.Value, false => 0 }; // FN - switch expressions are not constrained
+            return flag switch { true => value.Value, false => 0 };             // Compliant, constraint on flag doesn't constrain value
         }
 
         public int CSharp8_StaticLocalFunctions(int? param)
