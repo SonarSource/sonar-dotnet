@@ -14,7 +14,7 @@ public class MutexTest
     public static void Noncompliant(MutexSecurity mutexSecurity, bool cond)
     {
         // Note that Dispose() closes the underlying WaitHandle, but does not release the mutex
-        var m0 = new Mutex(true, "foo", out var mutexWasCreated, mutexSecurity); // Noncompliant
+        var m0 = new Mutex(true, "foo", out var mutexWasCreated, mutexSecurity);
         if (cond)
         {
             m0.ReleaseMutex();
