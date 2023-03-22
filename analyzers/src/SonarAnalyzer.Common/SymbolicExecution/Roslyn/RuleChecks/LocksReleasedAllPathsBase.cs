@@ -109,8 +109,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                     && createdNew.TrackedSymbol() is { } trackedCreatedNew
                     ? new[]
                         {
-                            AddLock(context, symbol).SetSymbolConstraint(trackedCreatedNew, BoolConstraint.True),
-                            context.State.SetSymbolConstraint(trackedCreatedNew, BoolConstraint.False),
+                            AddLock(context, objectCreation.WrappedOperation).Preserve(symbol).SetSymbolConstraint(trackedCreatedNew, BoolConstraint.True),
+                            context.SetSymbolConstraint(trackedCreatedNew, BoolConstraint.False),
                         }
                     : AddLock(context, objectCreation.WrappedOperation).Preserve(symbol).ToArray();
             }
@@ -198,7 +198,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             }
 
             lastSymbolLock[symbol] = context.Operation;
-            return context.SetSymbolConstraint(symbol, LockConstraint.Held).Preserve(symbol);
+            return context.SetSymbolConstraint(symbol, LockConstraint.Held).SetSymbolConstraint(symbol, ObjectConstraint.NotNull).Preserve(symbol);
         }
 
         private ProgramState RemoveLock(SymbolicContext context, ISymbol symbol)
