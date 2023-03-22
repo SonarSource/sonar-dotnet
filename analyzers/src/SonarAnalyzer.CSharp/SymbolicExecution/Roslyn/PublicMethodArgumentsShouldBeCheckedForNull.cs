@@ -36,8 +36,9 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        if (context.Operation.Instance.Kind == OperationKindEx.ParameterReference
-            && context.Operation.Instance.ToParameterReference() is { Parameter: var parameterSymbol }
+        var operation = context.Operation.Instance;
+        if (operation.Kind == OperationKindEx.ParameterReference
+            && operation.ToParameterReference() is { Parameter: var parameterSymbol }
             && parameterSymbol.Type.IsValueType is false
             && IsParameterDereferenced(context.Operation)
             && NullableStateIsNotKnownForParameter(parameterSymbol)
@@ -46,7 +47,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             var message = SemanticModel.GetDeclaredSymbol(Node).IsConstructor()
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
-            ReportIssue(context.Operation.Instance, string.Format(message, context.Operation.Instance.Syntax), context);
+            ReportIssue(operation, string.Format(message, operation.Syntax), context);
         }
 
         return context.State;
