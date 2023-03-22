@@ -20,7 +20,7 @@ public interface IWithDefaultMembers
 
     void Reset(string s)
     {
-        s.ToString(); // FIXME Non-compliant
+        s.ToString(); // Noncompliant
     }
 }
 
@@ -66,7 +66,7 @@ public class SwitchExpressions
     {
         var result = b switch
         {
-            _ => s.ToString() // FIXME Non-compliant
+            _ => s.ToString() // Noncompliant
         };
     }
 
@@ -75,7 +75,7 @@ public class SwitchExpressions
         var result = val switch
         {
             1 => "a",
-            2 => s.ToString(), // FIXME Non-compliant
+            2 => s.ToString(), // Noncompliant
             _ => "b"
         };
     }
@@ -87,7 +87,7 @@ public class SwitchExpressions
             1 => "a",
             2 => condition switch
             {
-                _ => s.ToString() // FIXME Non-compliant
+                _ => s.ToString() // Noncompliant
             },
             _ => "b"
         };
@@ -97,7 +97,7 @@ public class SwitchExpressions
     {
         var result = s switch
         {
-            null => s.ToString(),   // FIXME Non-compliant
+            null => s.ToString(),   // FN
             _ => s.ToString()       // Compliant as null was already handled
         };
     }
@@ -116,7 +116,7 @@ public class SwitchExpressions
     {
         return address switch
         {
-            { State: "WA" } addr => s.ToString(), // FIXME Non-compliant
+            { State: "WA" } addr => s.ToString(), // Noncompliant
             _ => string.Empty
         };
     }
@@ -125,7 +125,7 @@ public class SwitchExpressions
     {
         return s switch
         {
-            { Length: 5 } => s.ToString(), // FIXME Non-compliant - FP we know that the length is 5 so the string cannot be null
+            { Length: 5 } => s.ToString(), // Compliant - we know that the length is 5 so the string cannot be null
             _ => string.Empty
         };
     }
@@ -134,7 +134,7 @@ public class SwitchExpressions
     {
         return person switch
         {
-            { Address: { State: "WA" } } pers => s.ToString(), // FIXME Non-compliant
+            { Address: { State: "WA" } } pers => s.ToString(), // Noncompliant
             _ => string.Empty
         };
     }
@@ -143,7 +143,7 @@ public class SwitchExpressions
     {
         return address switch
         {
-            var (name, state) => s.ToString(), // FN
+            var (name, state) => s.ToString(), // Noncompliant
             _ => string.Empty
         };
     }
@@ -152,8 +152,8 @@ public class SwitchExpressions
     {
         return address switch
         {
-            Address addr when addr.Name.Length > 0 => s.ToString(),         // FIXME Non-compliant
-            Address addr when addr.Name.Length == s.Length => string.Empty, // FIXME Non-compliant
+            Address addr when addr.Name.Length > 0 => s.ToString(),         // Noncompliant
+            Address addr when addr.Name.Length == s.Length => string.Empty, // Noncompliant
             _ => string.Empty
         };
     }
@@ -162,7 +162,7 @@ public class SwitchExpressions
     {
         return address switch
         {
-            Address addr => s.ToString(), // FIXME Non-compliant
+            Address addr => s.ToString(), // Noncompliant
             _ => string.Empty
         };
     }
@@ -171,8 +171,8 @@ public class SwitchExpressions
     {
         return condition switch
         {
-            true => s.ToString(), // FIXME Non-compliant
-            false => s.ToString() // FIXME Non-compliant
+            true => s.ToString(), // Noncompliant
+            false => s.ToString() // Noncompliant
         };
     }
 }
@@ -187,7 +187,7 @@ public class SwitchStatement
                 break;
 
             default:
-                s.ToString(); // Compliant - the null is handled by the case null branch.
+                s.ToString(); // Noncompliant - FP
                 break;
         }
     }

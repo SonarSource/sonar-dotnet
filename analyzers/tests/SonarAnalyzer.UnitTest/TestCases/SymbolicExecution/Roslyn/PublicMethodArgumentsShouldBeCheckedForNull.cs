@@ -9,34 +9,33 @@ public class Program
 
     public void NotCompliantCases(object o, Exception e)
     {
-        o.ToString();   // FIXME Non-compliant {{Refactor this method to add validation of parameter 'o' before using it.}}
-//      ~~~~~~~~~~
+        o.ToString();   // Noncompliant {{Refactor this method to add validation of parameter 'o' before using it.}}
+//      ^
         Bar(o);         // Compliant, we care about dereference only
 
-        throw e;        // FIXME Non-compliant - attempting to throw null as an exception will result in a NullReferenceException
-//      ~~~~~~~
+        throw e;        // FN
     }
 
     public void Bar(object o) { }
 
     protected void NotCompliantCases_Protected(object o)
     {
-        o.ToString(); // FIXME Non-compliant
+        o.ToString(); // Noncompliant
     }
 
     private void CompliantCases_Private(object o)
     {
-        o.ToString(); // Compliant, not public
+        o.ToString(); // Noncompliant - FP (method visibility)
     }
 
     protected internal void NotCompliantCases_ProtectedInternal(object o)
     {
-        o.ToString(); // FIXME Non-compliant
+        o.ToString(); // Noncompliant - FP (method visibility)
     }
 
     internal void CompliantCases_Internal(object o)
     {
-        o.ToString(); // Compliant, not public
+        o.ToString(); // Noncompliant - FP (method visibility)
     }
 
     public void CompliantCases(bool b, object o1, object o2, object o3, object o4, Exception e)
@@ -47,7 +46,7 @@ public class Program
         }
 
         o2 = o2 ?? new object();
-        o2.ToString();      // Compliant, we coalesce
+        o2.ToString();      // Noncompliant - FP
 
         if (o3 == null)
         {
@@ -77,7 +76,7 @@ public class Program
     {
         if (string.IsNullOrEmpty(s1))
         {
-            s1.ToString(); // FIXME Non-compliant, could be null
+            s1.ToString(); // FN
         }
         else
         {
@@ -86,7 +85,7 @@ public class Program
 
         if (string.IsNullOrWhiteSpace(s2))
         {
-            s2.ToString(); // FIXME Non-compliant, could be null
+            s2.ToString(); // FN
         }
         else
         {
@@ -101,26 +100,26 @@ public class Program
             await task1;
         }
 
-        await task2;                                // FIXME Non-compliant
+        await task2;                                // Noncompliant
 
         if (task3 != null)
         {
             await task3.ConfigureAwait(false);
         }
 
-        await task4.ConfigureAwait(false);          // FIXME Non-compliant
+        await task4.ConfigureAwait(false);          // Noncompliant
     }
 
     public Program(int i) { }
 
-    public Program(string s) : this(s.Length) { }   // FIXME Non-compliant {{Refactor this constructor to avoid using members of parameter 's' because it could be null.}}
+    public Program(string s) : this(s.Length) { }   // Noncompliant {{Refactor this constructor to avoid using members of parameter 's' because it could be null.}}
 
     public void NonCompliant1(object o)
     {
         var c = o?.ToString()?.IsNormalized();
         if (c == null)
         {
-            o.GetType().GetMethods();               // FIXME Non-compliant
+            o.GetType().GetMethods();               // FN
         }
     }
 
@@ -195,18 +194,19 @@ public class ReproIssue2476
         }
         else
         {
-            Array.Resize(ref infixes, infixes.Length + 1);
+            RefMethod(ref infixes, infixes.Length); // Noncompliant - FP: infixes is not null at this point
         }
-        // more stuff
     }
+
+    private void RefMethod(ref string[] array, int num) { }
 
     public void Method(ref string s, int x) { }
     public void Method1(string infixes)
     {
         if (infixes != null)
         {
-            Method(ref infixes, infixes.Length);
-            var x = infixes.Length;                 // FIXME Non-compliant when passed by ref can be set to null
+            Method(ref infixes, infixes.Length);    // Noncompliant - FP
+            var x = infixes.Length;
         }
 
     }
@@ -215,15 +215,15 @@ public class ReproIssue2476
     {
         if (infixes == null)
         {
-            Method(ref infixes, infixes.Length);    // FIXME Non-compliant
+            Method(ref infixes, infixes.Length);    // Noncompliant
             var x = infixes.Length;
         }
     }
 
     public void Method3(string infixes)
     {
-        Method(ref infixes, infixes.Length);        // FIXME Non-compliant
-        var x = infixes.Length;                     // FIXME Non-compliant
+        Method(ref infixes, infixes.Length);        // Noncompliant
+        var x = infixes.Length;
     }
 
     public void Method4(string contentType)
@@ -268,7 +268,7 @@ public class ReproIssue2476
             contentType = null;
         }
 
-        var parts = contentType.Split('/', ';'); // FIXME Non-compliant
+        var parts = contentType.Split('/', ';'); // Compliant
     }
 }
 
@@ -282,7 +282,7 @@ public class ReproIssue2591
             name = Guid.NewGuid().ToString("N");
         }
 
-        return name.Trim(); // FIXME Non-compliant FP
+        return name.Trim(); // Noncompliant FP
     }
 
     public string FooWithStringJoin(string name)
@@ -292,7 +292,7 @@ public class ReproIssue2591
             name = Guid.NewGuid().ToString("N");
         }
 
-        return string.Join("_", name.Split(System.IO.Path.GetInvalidFileNameChars())); // FIXME Non-compliant FP
+        return string.Join("_", name.Split(System.IO.Path.GetInvalidFileNameChars())); // Noncompliant FP
     }
 
     public string FooWithObject(object name)
@@ -302,7 +302,7 @@ public class ReproIssue2591
             name = Guid.NewGuid().ToString("N");
         }
 
-        return name.ToString(); // FIXME Non-compliant FP
+        return name.ToString(); // Noncompliant FP
     }
 }
 
@@ -317,7 +317,7 @@ public class ReproIssue2670
         }
         if (b)
         {
-            int index = argument.LastIndexOf('c'); // FIXME Non-compliant FP
+            int index = argument.LastIndexOf('c');
         }
     }
 
@@ -329,7 +329,7 @@ public class ReproIssue2670
         }
         if (b)
         {
-            int index = argument.LastIndexOf('c'); // FIXME Non-compliant FP
+            int index = argument.LastIndexOf('c');
         }
     }
 
@@ -351,7 +351,7 @@ public class ReproWithIs
 {
     public override bool Equals(object obj)
     {
-        var equals = (obj is string) && (obj.GetHashCode() == GetHashCode()); // FIXME Non-compliant FP
+        var equals = (obj is string) && (obj.GetHashCode() == GetHashCode());
         if (equals)
         {
             // do stuff
@@ -370,7 +370,7 @@ public class ReproWithIsNullOrEmpty
         if (imdbId.StartsWith(" "))
             imdbId = string.Concat("tt", imdbId);
 
-        if (imdbId.Length != 9) // FIXME Non-compliant - FP
+        if (imdbId.Length != 9) // Noncompliant - FP
             imdbId = string.Empty;
 
         return imdbId;
@@ -383,7 +383,7 @@ public class Repro_3400
     public void ReassignedFromMethod(StringBuilder parameter)
     {
         parameter = Create();
-        parameter.Capacity = 1; // FIXME Non-compliant FP
+        parameter.Capacity = 1; // Noncompliant FP
     }
 
     public void ReassignedFromConstructor(StringBuilder parameter)
@@ -395,7 +395,7 @@ public class Repro_3400
     public void ReassignedFromMethodOut(out StringBuilder parameter)
     {
         parameter = Create();
-        parameter.Capacity = 1; // FIXME Non-compliant FP
+        parameter.Capacity = 1; // Noncompliant FP
     }
 
     public void ReassignedFromConstructorOut(out StringBuilder parameter)
