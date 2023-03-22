@@ -443,7 +443,7 @@ public class ClassAccessibility
 
     void ImplicitlyPrivateWithArgs(object o)
     {
-        o.ToString(); // FIXME Non-compliant
+        o.ToString(); // Compliant
     }
 }
 
