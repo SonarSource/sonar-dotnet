@@ -125,6 +125,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
                     SyntaxKind.AwaitExpression,
                     SyntaxKind.ElementAccessExpression,
                     SyntaxKind.ForEachStatement,
+                    SyntaxKind.PointerMemberAccessExpression,
                     SyntaxKind.ThrowStatement,
                     SyntaxKind.SimpleMemberAccessExpression);
     }
