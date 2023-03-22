@@ -23,8 +23,6 @@ namespace Mutex_Type
             var m3 = Mutex.OpenExisting("x");
             m3.WaitOne(); // Noncompliant
 
-            var m4 = new Mutex();
-
             foo.instanceMutex.WaitOne(); // FN
 
             Foo.staticMutex.WaitOne(); // Noncompliant
@@ -35,7 +33,6 @@ namespace Mutex_Type
                 m1.ReleaseMutex();
                 m2.ReleaseMutex();
                 m3.ReleaseMutex();
-                m4.ReleaseMutex();
                 foo.instanceMutex.ReleaseMutex();
                 Foo.staticMutex.ReleaseMutex();
             }
