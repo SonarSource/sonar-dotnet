@@ -36,7 +36,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         if (context.Operation.Instance.Kind == OperationKindEx.ParameterReference
-            && context.Operation.Instance.ToParameterReference() is { WrappedOperation: var reference, WrappedOperation.Syntax: var syntax, Parameter: var parameterSymbol }
+            && context.Operation.Instance.ToParameterReference() is { WrappedOperation: var reference, Parameter: var parameterSymbol }
             && !parameterSymbol.Type.IsValueType
             && IsParameterDereferenced(context.Operation)
             && !IgnoreBecauseOfParameterAttribute(parameterSymbol)
@@ -46,7 +46,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             var message = methodSymbol.IsConstructor()
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
-            ReportIssue(reference, string.Format(message, syntax.ToString()), context);
+            ReportIssue(reference, string.Format(message, context.Operation.Instance.Syntax), context);
         }
 
         return context.State;
@@ -61,7 +61,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
                 OperationKindEx.Await,
                 OperationKindEx.ArrayElementReference);
 
-        bool IgnoreBecauseOfParameterAttribute(IParameterSymbol symbol) =>
+        static bool IgnoreBecauseOfParameterAttribute(IParameterSymbol symbol) =>
             symbol.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute);
 
         bool NullableStateIsNotKnownForParameter(IParameterSymbol symbol) =>
