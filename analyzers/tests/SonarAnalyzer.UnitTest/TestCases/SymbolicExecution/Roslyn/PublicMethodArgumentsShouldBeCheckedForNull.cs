@@ -282,7 +282,7 @@ public class ReproIssue2591
             name = Guid.NewGuid().ToString("N");
         }
 
-        return name.Trim(); // Noncompliant FP
+        return name.Trim(); // Noncompliant - FP
     }
 
     public string FooWithStringJoin(string name)
@@ -292,7 +292,7 @@ public class ReproIssue2591
             name = Guid.NewGuid().ToString("N");
         }
 
-        return string.Join("_", name.Split(System.IO.Path.GetInvalidFileNameChars())); // Noncompliant FP
+        return string.Join("_", name.Split(System.IO.Path.GetInvalidFileNameChars())); // Noncompliant - FP
     }
 
     public string FooWithObject(object name)
@@ -302,7 +302,7 @@ public class ReproIssue2591
             name = Guid.NewGuid().ToString("N");
         }
 
-        return name.ToString(); // Noncompliant FP
+        return name.ToString(); // Noncompliant - FP
     }
 }
 
@@ -383,7 +383,7 @@ public class Repro_3400
     public void ReassignedFromMethod(StringBuilder parameter)
     {
         parameter = Create();
-        parameter.Capacity = 1; // Noncompliant FP
+        parameter.Capacity = 1; // Noncompliant - FP
     }
 
     public void ReassignedFromConstructor(StringBuilder parameter)
@@ -395,7 +395,7 @@ public class Repro_3400
     public void ReassignedFromMethodOut(out StringBuilder parameter)
     {
         parameter = Create();
-        parameter.Capacity = 1; // Noncompliant FP
+        parameter.Capacity = 1; // Noncompliant - FP
     }
 
     public void ReassignedFromConstructorOut(out StringBuilder parameter)
