@@ -170,21 +170,13 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         }
     }
 
-    private static ProgramState[] ProcessEquals(SymbolicContext context, IInvocationOperationWrapper invocation)
-    {
-        if (invocation.Arguments.Length == 2 && invocation.TargetMethod.IsStatic)
+    private static ProgramState[] ProcessEquals(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+        invocation switch
         {
-            return ProcessEquals(context, invocation.Arguments[0].ToArgument().Value, invocation.Arguments[1].ToArgument().Value);
-        }
-        else if (invocation.Arguments.Length == 1 && invocation.TargetMethod.ContainingType.IsNullableValueType())
-        {
-            return ProcessEquals(context, invocation.Instance, invocation.Arguments[0].ToArgument().Value);
-        }
-        else
-        {
-            return context.State.ToArray();
-        }
-    }
+            { Arguments.Length: 2, TargetMethod.IsStatic: true } => ProcessEquals(context, invocation.Arguments[0].ToArgument().Value, invocation.Arguments[1].ToArgument().Value),
+            { Arguments.Length: 1 } when invocation.TargetMethod.ContainingType.IsNullableValueType() => ProcessEquals(context, invocation.Instance, invocation.Arguments[0].ToArgument().Value),
+            _ => context.State.ToArray()
+        };
 
     private static ProgramState[] ProcessEquals(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
     {
