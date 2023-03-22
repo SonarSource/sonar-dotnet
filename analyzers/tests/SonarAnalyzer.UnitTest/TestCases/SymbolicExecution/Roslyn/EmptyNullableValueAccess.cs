@@ -12,8 +12,16 @@ class Basics
             Console.WriteLine(i.Value);
         }
 
-        Console.WriteLine(i.Value); // Noncompliant {{'i' is null on at least one execution path.}}
+        Console.WriteLine(i.Value);    // Noncompliant {{'i' is null on at least one execution path.}}
         //                ^
+    }
+
+    void DereferenceOnValueResult(int? i)
+    {
+        _ = i.Value.ToString();        // Compliant, unknown
+        i = null;
+        _ = i.Value.ToString();        // Noncompliant
+        //  ^
     }
 
     void NonEmpty()
@@ -64,7 +72,7 @@ class Basics
         if (!b1) { }                                         // Error[CS0266]
     }
 
-    void Assignment2(object o)
+    void AssignmentAndNullComparison(object o)
     {
         if (o != null)
         {
@@ -75,6 +83,19 @@ class Basics
         {
             _ = b.Value;                                     // Compliant
         }
+    }
+
+    void AssignmentTransitivity()
+    {
+        bool? b1 = null;
+        bool? b2 = b1;
+        _ = b1.Value;                                        // Noncompliant
+    }
+
+    void AssignmentAndDeconstruction()
+    {
+        var (b, _) = (null as bool?, null as bool?);
+        _ = b.Value;                                         // FN, b is empty
     }
 
     void SwitchExpressions(bool zero)
@@ -101,23 +122,24 @@ class Basics
 
     int SwitchExpressions5(int? value, bool flag)
     {
-        return flag switch { true => value.Value, false => 0 };           // FN - switch expressions are not constrained
+        return flag switch { true => value.Value, false => 0 };           // Compliant, constraint on flag doesn't constrain value
     }
 
     int StaticLocalFunctions(int? param)
     {
+        return ExtractValue(param);
+
         static int ExtractValue(int? intOrNull)
         {
-            return intOrNull.Value; // FN - content of static local function is not inspected by SE
+            intOrNull = null;
+            return intOrNull.Value;                                       // FN - content of static local function is not inspected by SE
         }
-
-        return ExtractValue(param);
     }
 
     int NullCoalescingAssignment(int? param)
     {
         param ??= 42;
-        return param.Value; // OK, value is always set
+        return param.Value;                                               // Compliant, value is always set
     }
 }
 
@@ -189,7 +211,7 @@ class NullableOfCustomTypes
     void ForeachCast()
     {
         foreach (AStruct x in new AStruct?[] { null }) ;                 // FN
-        foreach (AStruct x in new AStruct?[] { new AStruct() }) ;        // Compliant, all items not null
+        foreach (AStruct x in new AStruct?[] { new AStruct() }) ;        // Compliant, all items are not empty
         foreach (AStruct x in new AStruct?[] { new AStruct(), null }) ;  // FN
         foreach (AStruct? x in new AStruct?[] { new AStruct(), null }) ; // Compliant, no value access
         foreach (var x in new AStruct?[] { new AStruct(), null }) ;      // Compliant, no value access
@@ -246,15 +268,33 @@ class ComplexConditionsSingleNullable
 
     bool XorWithTrue(bool? b) => (true ^ b.HasValue) && b.Value;            // Noncompliant
     bool XorWithFalse(bool? b) => (false ^ b.HasValue) && b.Value;          // Compliant
+
+    void ReachabilityIsTakenIntoAccount()
+    {
+        bool? b = null;
+        _ = true || b.Value; // Compliant, "||" is short-circuited
+        _ = b.Value;         // Noncompliant
+        _ = b.Value;         // Compliant, when reached previous b.Value implies b is not null
+    }
+
+    void ReachabilityStateIsPreserved()
+    {
+        bool? b = null;
+        _ = true | b.Value;  // Noncompliant, "|" evaluates both sides
+        _ = b.Value;         // Compliant, when reached previous b.Value implies b is not null
+        _ = b.Value;         // Compliant, same as above
+    }
+
+    bool LiftedNot(bool? b) => !b == b && b.Value; // FN, b.Value reached only when b is empty
 }
 
 class ComplexConditionMultipleNullables
 {
-    bool IndependentConditions1(double? d, float? f) => f == null && d.Value == 42.0;  // Compliant, f imposes no constraints on d
-    bool IndependentConditions2(double? d, float? f) => f != null && d.Value == 42.0;  // Compliant
-    bool IndependentConditions3(double? d, float? f) => f.HasValue && d.Value == 42.0; // Compliant
-    bool IndependentConditions4(double? d, float? f) => null == f && d.Value == 42.0;  // Compliant
-    bool IndependentConditions5(double? d, float? f) => null == f && d.Value == 42.0;  // Compliant
+    bool IndependentConditions1(double? d, float? f) => f == null && d.Value == 42.0;       // Compliant, f imposes no constraints on d
+    bool IndependentConditions2(double? d, float? f) => f != null && d.Value == 42.0;       // Compliant
+    bool IndependentConditions3(double? d, float? f) => f.HasValue && d.Value == 42.0;      // Compliant
+    bool IndependentConditions4(double? d, float? f) => null == f && d.Value == 42.0;       // Compliant
+    bool IndependentConditions5(double? d, float? f) => null == f && d.Value == 42.0;       // Compliant
 
     bool DependentConditions1(double? d, float? f) =>
         !d.HasValue && d.Value == 42.0;                                 // Noncompliant, f presence doesn't affect d
@@ -262,6 +302,34 @@ class ComplexConditionMultipleNullables
         d.Value == 42.0 && d.HasValue == f.HasValue && f.Value == 42.0; // Compliant, d is non-null, as well as f
     bool DependentConditions3(double? d, float? f) =>
         d.Value == 42.0 && d.HasValue != f.HasValue && f.Value == 42.0; // Noncompliant, d is non-null, unlike f
+
+    void ThirdExcluded(bool? b1, bool? b2)
+    {
+        if (b1 == b2 && b1 != b2) { _ = (null as int?).Value; }                             // Noncompliant, FP: logically unreachable
+    }
+
+    void Transitivity(bool? b1, bool? b2, bool? b3)
+    {
+        if (b1 == b2 && b1 != b3 && b2 == b3) { _ = (null as int?).Value; }                 // Noncompliant, FP: logically unreachable
+        if (b1 != b2 && b1 != b3 && b2 != b3 && b1 != null && b2 != null) { _ = b3.Value; } // FN: b3 is empty
+    }
+
+    void RelationsEquality(bool? b1)
+    {
+        bool? b2 = null;
+        if (b1 == b2)
+        {
+            _ = b1.Value;     // Noncompliant
+            _ = b2.Value;     // Noncompliant, FP: when reached previous b1.Value should imply b1 is not null, hence b2
+        }
+    }
+
+    void RelationsBitOr(bool? b1, bool? b2)
+    {
+        _ = b1.Value | b2.Value;
+        _ = b1.Value;         // Compliant, "|" evaluates both sides
+        _ = b2.Value;         // Compliant, "|" evaluates both sides
+    }
 }
 
 class TernaryOperator
@@ -307,6 +375,17 @@ interface IWithDefaultImplementation
     }
 }
 
+class MemberAccessSequence
+{
+    void Basics(DateTime? dt)
+    {
+        _ = dt.Value.ToString(); // Compliant, unknown
+        dt = null;
+        _ = dt.Value.ToString(); // Noncompliant, empty
+        _ = dt.Value.ToString(); // Compliant, when reached previous dt.Value implies dt is empty
+    }
+}
+
 // https://github.com/SonarSource/sonar-dotnet/issues/4573
 class Repro_4573
 {
@@ -319,7 +398,7 @@ class Repro_4573
         {
             if (value.HasValue)
             {
-                //HasValue and NoValue constraints are set here
+                // HasValue and NoValue constraints are set here
             }
             if (foo != value || foo.HasValue)
             {
@@ -342,11 +421,11 @@ class Repro_4573
             }
             if (!foo.HasValue)
             {
-                Console.WriteLine(foo.Value.ToString());    // FN
+                Console.WriteLine(foo.Value.ToString());    // Noncompliant, foo is empty
             }
             if (foo == null)
             {
-                Console.WriteLine(foo.Value.ToString());    // FN
+                Console.WriteLine(foo.Value.ToString());    // Compliant, logically unreachable
             }
             if (foo != null)
             {
@@ -363,7 +442,7 @@ class Repro_4573
             {
                 if (!foo.HasValue)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // Compliant
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant, FP: logically unreachable
                 }
             }
         }
@@ -377,13 +456,13 @@ class Repro_4573
             {
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FN
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant
                 }
             }
         }
     }
 
-    public void NestedCombined(DateTime? value)
+    public void NestedConditionsWithHasValue(DateTime? value)
     {
         if (foo == value)   // Relationship should be created here
         {
@@ -395,11 +474,32 @@ class Repro_4573
                 }
                 if (!foo.HasValue)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant, FP: logically unreachable
                 }
+            }
+            else
+            {
+                if (foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, logically unreachable
+                }
+                if (!foo.HasValue)
+                {
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant, foo is empty
+                }
+            }
+        }
+    }
+
+    public void NestedConditionsUsingNullComparisons(DateTime? value)
+    {
+        if (foo == value)   // Relationship should be created here
+        {
+            if (value.HasValue)
+            {
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant, FP: logically unreachable
                 }
                 if (foo != null)
                 {
@@ -408,23 +508,134 @@ class Repro_4573
             }
             else
             {
-                if (foo.HasValue)
+                if (foo != null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
-                }
-                if (!foo.HasValue)
-                {
-                    Console.WriteLine(foo.Value.ToString());    // FN, empty
+                    Console.WriteLine(foo.Value.ToString());    // Compliant, logically unreachable
                 }
                 if (foo == null)
                 {
-                    Console.WriteLine(foo.Value.ToString());    // FN, empty
-                }
-                if (foo != null)
-                {
-                    Console.WriteLine(foo.Value.ToString());    // Compliant, unreachable
+                    Console.WriteLine(foo.Value.ToString());    // Noncompliant, empty
                 }
             }
         }
+    }
+}
+
+class Casts
+{
+    void DowncastWithReassignment(int? i)
+    {
+        _ = (int)i;                   // Compliant, same as i.Value with i unknown
+        i = null;
+        _ = (int)i;                   // Noncompliant, empty
+        i = 42;
+        _ = (int)i;                   // Compliant
+    }
+
+    void DowncastAfterLearnedNotNullViaLiteral(int? i)
+    {
+        i = 42;
+        _ = (int)i;                   // Compliant
+    }
+
+    void DowncastAfterLearnedNotNullViaValue()
+    {
+        int? i = null;
+        _ = i.Value;                  // Noncompliant, empty
+        _ = (int)i;                   // Compliant, when reached i.Value above implies i is not null
+    }
+
+    void UpcastWithNull()
+    {
+        _ = ((int?)null).Value;       // Noncompliant
+    }
+
+    void UpcastWithReassignment(int? i)
+    {
+        _ = ((int?)null).Value;       // Noncompliant
+        i = null;
+        _ = ((int?)i).Value;          // Noncompliant, when reached i.Value above implies i is not null
+    }
+
+    void UpcastWithNonNullLiteral(int? i)
+    {
+        _ = ((int?)42).Value;         // Compliant
+    }
+
+    void AsOperatorAndUnreachability(int? i)
+    {
+        _ = (null as int?).Value;     // Noncompliant
+        i = null;
+        _ = (i as int?).Value;        // Noncompliant, when reached assignment above implies i is null
+    }
+
+    void AsOperatorWithUnknownAndReassignment(int? i)
+    {
+        _ = (i as int?).Value;        // Compliant
+        i = null;
+        _ = (i as int?).Value;        // Noncompliant, empty
+    }
+
+    void AsOperatorWithNonNullLiteral(int? i)
+    {
+        _ = (42 as int?).Value;       // Compliant
+    }
+}
+
+namespace WithAliases
+{
+    using MaybeInt = Nullable<System.Int32>;
+
+    class Test
+    {
+        void Basics(MaybeInt i)
+        {
+            _ = i.Value;              // Compliant, value unknown
+            i = null;
+            _ = (i as int?).Value;    // Noncompliant
+        }
+    }
+}
+
+namespace TypeWithValueProperty
+{
+    class Test
+    {
+        void Basics1()
+        {
+            ClassWithValueProperty i = null;
+            _ = i.Value;                                                       // Compliant, ClassWithValueProperty not a nullable type
+        }
+
+        void Basics2()
+        {
+            ClassWithValueProperty i = null;
+            _ = i.APropertyNotCalledValue;                                     // Compliant, ClassWithValuePropertyAndImplicitCast not a nullable type
+        }
+
+        void ImplicitCast()
+        {
+            StructWithValuePropertyAndCastOperators i = null as int?;          // Noncompliant, FP
+            _ = i.Value;                                                       // Compliant, ClassWithValuePropertyAndImplicitCast not a nullable type
+        }
+
+        int ExplicitCast1 => ((StructWithValuePropertyAndCastOperators)(null as long?)).Value;                              // Noncompliant, FP, just gives 42
+        StructWithValuePropertyAndCastOperators ExplicitCast2 => (null as StructWithValuePropertyAndCastOperators?).Value;  // Noncompliant, FP, just gives a struct
+        int ExplicitCast3 => (null as StructWithValuePropertyAndCastOperators?).Value.Value;                                // Noncompliant, FP, just gives 42
+    }
+
+    class ClassWithValueProperty
+    {
+        public int Value => 42;
+        public int APropertyNotCalledValue => 42;
+    }
+
+    struct StructWithValuePropertyAndCastOperators
+    {
+        public int Value => 42;
+        public int APropertyNotCalledValue => 42;
+
+        public static implicit operator StructWithValuePropertyAndCastOperators(int? value) => new StructWithValuePropertyAndCastOperators();
+        public static explicit operator StructWithValuePropertyAndCastOperators(long? value) => new StructWithValuePropertyAndCastOperators();
     }
 }
