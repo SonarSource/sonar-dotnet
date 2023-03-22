@@ -68,6 +68,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
         static bool HasNoDeclaredAccessibilityModifier(SyntaxTokenList modifiers) =>
             !modifiers.Any(x => x.IsAnyKind(
                 SyntaxKind.PrivateKeyword,
+                SyntaxKindEx.FileKeyword,
                 SyntaxKind.ProtectedKeyword,
                 SyntaxKind.InternalKeyword,
                 SyntaxKind.PublicKeyword));

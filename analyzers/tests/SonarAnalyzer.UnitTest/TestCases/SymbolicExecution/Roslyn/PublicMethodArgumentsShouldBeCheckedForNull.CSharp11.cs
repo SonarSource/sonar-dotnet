@@ -32,3 +32,11 @@ public interface ISomeInterface
         o.ToString(); // Noncompliant {{Refactor this method to add validation of parameter 'o' before using it.}}
     }
 }
+
+file class ClassWithFileAccessibility
+{
+    public void PublicWithArgs(object o)
+    {
+        o.ToString(); // Compliant - method is not accessible from other assemblies
+    }
+}
