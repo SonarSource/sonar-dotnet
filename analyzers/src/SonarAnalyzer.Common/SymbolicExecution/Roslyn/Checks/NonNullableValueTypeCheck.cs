@@ -18,22 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 {
     internal sealed class NonNullableValueTypeCheck : SymbolicCheck
     {
-        protected override ProgramState PostProcessSimple(SymbolicContext context)
-        {
-            var state = context.State;
-            if (context.Operation.Instance.Type is { } type
-                && (type.IsNonNullableValueType() || type.IsEnum()))
-            {
-                state = context.SetOperationConstraint(ObjectConstraint.NotNull);
-            }
-            return state;
-        }
+        protected override ProgramState PostProcessSimple(SymbolicContext context) =>
+            context.Operation.Instance.Type is { } type
+            && (type.IsNonNullableValueType() || type.IsEnum())
+                ? context.SetOperationConstraint(ObjectConstraint.NotNull)
+                : context.State;
     }
 }
