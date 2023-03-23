@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void PropertiesArePersisted()
         {
             var operation = CreateOperation();
-            var state = ProgramState.Empty.SetOperationValue(operation, new());
+            var state = ProgramState.Empty.SetOperationValue(operation, SymbolicValue.Empty);
 
             var sut = new SymbolicContext(operation, state);
             sut.Operation.Should().Be(operation);
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void SetOperationConstraint_WithExistingValue()
         {
             var operation = CreateOperation();
-            var state = ProgramState.Empty.SetOperationValue(operation, new());
+            var state = ProgramState.Empty.SetOperationValue(operation, SymbolicValue.Empty);
 
             var sut = new SymbolicContext(operation, state);
             var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var operation = CreateOperation();
             var symbol = operation.Children.First().TrackedSymbol();
-            var state = ProgramState.Empty.SetSymbolValue(symbol, new());
+            var state = ProgramState.Empty.SetSymbolValue(symbol, SymbolicValue.Empty);
 
             var sut = new SymbolicContext(operation, state);
             var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var state = ProgramState.Empty;
             var sut = new SymbolicContext(null, state);
-            var newState = state.SetOperationValue(CreateOperation(), new());
+            var newState = state.SetOperationValue(CreateOperation(), SymbolicValue.Empty);
             sut.WithState(newState).Should().NotBe(sut);
         }
 
