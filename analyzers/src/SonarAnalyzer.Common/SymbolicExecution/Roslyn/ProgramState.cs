@@ -25,15 +25,37 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     public sealed record ProgramState : IEquatable<ProgramState>
     {
         public static readonly ProgramState Empty = new();
+        private readonly ImmutableDictionary<IOperation, SymbolicValue> operationValue;
+        private readonly ImmutableDictionary<ISymbol, SymbolicValue> symbolValue;
+        private readonly ImmutableDictionary<CaptureId, IOperation> captureOperation;
+        private readonly ImmutableHashSet<ISymbol> preservedSymbols;
+        private readonly ImmutableStack<ExceptionState> exceptions;
+
         private ProgramState[] toArray;
+        private int? operationValueHashCode;
+        private int? symbolValueHashCode;
+        private int? captureOperationHashCode;
+        private int? preservedSymbolsHashCode;
+        private int? exceptionsHashCode;
+        private int? hashCode;
 
-        private ImmutableDictionary<IOperation, SymbolicValue> OperationValue { get; init; }     // Current SymbolicValue result of a given operation
-        private ImmutableDictionary<ISymbol, SymbolicValue> SymbolValue { get; init; }
+        // Current SymbolicValue result of a given operation
+        private ImmutableDictionary<IOperation, SymbolicValue> OperationValue { get => operationValue; init => SetCachedHashCodeField(value, ref operationValue, ref operationValueHashCode); }
+        private ImmutableDictionary<ISymbol, SymbolicValue> SymbolValue { get => symbolValue; init => SetCachedHashCodeField(value, ref symbolValue, ref symbolValueHashCode); }
         private ImmutableDictionary<int, int> VisitCount { get; init; }
-        private ImmutableDictionary<CaptureId, IOperation> CaptureOperation { get; init; }
-        private ImmutableHashSet<ISymbol> PreservedSymbols { get; init; }
-        private ImmutableStack<ExceptionState> Exceptions { get; init; }
+        private ImmutableDictionary<CaptureId, IOperation> CaptureOperation { get => captureOperation; init => SetCachedHashCodeField(value, ref captureOperation, ref captureOperationHashCode); }
+        private ImmutableHashSet<ISymbol> PreservedSymbols { get => preservedSymbols; init => SetCachedHashCodeField(value, ref preservedSymbols, ref preservedSymbolsHashCode); }
+        private ImmutableStack<ExceptionState> Exceptions { get => exceptions; init => SetCachedHashCodeField(value, ref exceptions, ref exceptionsHashCode); }
 
+        private void SetCachedHashCodeField<T>(T value, ref T backingField, ref int? backingFieldHashCode) where T : class
+        {
+            if (backingField != value)
+            {
+                backingField = value;
+                backingFieldHashCode = null;
+                hashCode = null;
+            }
+        }
         public ExceptionState Exception => Exceptions.IsEmpty ? null : Exceptions.Peek();
         public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
         public SymbolicValue this[IOperationWrapper operation] => this[operation.WrappedOperation];
@@ -141,12 +163,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public override int GetHashCode() =>
             // VisitCount is not included, it's not part of Equals
-            HashCode.Combine(
-                HashCode.DictionaryContentHash(OperationValue),
-                HashCode.DictionaryContentHash(SymbolValue),
-                HashCode.DictionaryContentHash(CaptureOperation),
-                HashCode.EnumerableUnorderedContentHash(PreservedSymbols),
-                HashCode.EnumerableOrderedContentHash(Exceptions));
+            hashCode ??= HashCode.Combine(
+                operationValueHashCode ??= HashCode.DictionaryContentHash(OperationValue),
+                symbolValueHashCode ??= HashCode.DictionaryContentHash(SymbolValue),
+                captureOperationHashCode ??= HashCode.DictionaryContentHash(CaptureOperation),
+                preservedSymbolsHashCode ??= HashCode.EnumerableUnorderedContentHash(PreservedSymbols),
+                exceptionsHashCode ??= HashCode.EnumerableOrderedContentHash(Exceptions));
 
         public bool Equals(ProgramState other) =>
             // VisitCount is not compared, two ProgramState are equal if their current state is equal. No matter what historical path led to it.
