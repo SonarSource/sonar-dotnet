@@ -335,5 +335,44 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var sut = SymbolicValue.Null.WithConstraint(TestConstraint.First);
             sut.WithoutConstraint<DummyConstraint>().Should().BeSameAs(sut).And.HaveOnlyConstraints(ObjectConstraint.Null, TestConstraint.First);
         }
+
+        [TestMethod]
+        public void GetHashCode_ReturnsDifferentValuesForPredefinedValues()
+        {
+            SymbolicValue.Empty.GetHashCode().Should().Be(SymbolicValue.Empty.GetHashCode());
+            SymbolicValue.Empty.GetHashCode().Should()
+                .NotBe(SymbolicValue.Null.GetHashCode()).And
+                .NotBe(SymbolicValue.NotNull.GetHashCode()).And
+                .NotBe(SymbolicValue.True.GetHashCode()).And
+                .NotBe(SymbolicValue.False.GetHashCode());
+        }
+
+        [TestMethod]
+        public void GetHashCode_PredefinedValuesAreUnique()
+        {
+            new[]
+            {
+                SymbolicValue.Empty.GetHashCode(),
+                SymbolicValue.NotNull.GetHashCode(),
+                SymbolicValue.Null.GetHashCode(),
+                SymbolicValue.True.GetHashCode(),
+                SymbolicValue.False.GetHashCode()
+            }.Should().OnlyHaveUniqueItems();
+        }
+
+        [TestMethod]
+        public void GetHashCode_UncachedValues()
+        {
+            var baseConstraint = SymbolicValue.Empty
+                .WithConstraint(DummyConstraint.Dummy)
+                .WithConstraint(TestConstraint.First)
+                .WithConstraint(ObjectConstraint.Null)
+                .WithConstraint(BoolConstraint.True);
+            baseConstraint.GetHashCode().Should().Be(baseConstraint.GetHashCode());
+            var similar = baseConstraint.WithoutConstraint(DummyConstraint.Dummy).WithConstraint(DummyConstraint.Dummy);
+            similar.Should().NotBeSameAs(baseConstraint);
+            similar.GetHashCode().Should().Be(baseConstraint.GetHashCode());
+            similar.Equals(baseConstraint).Should().BeTrue();
+        }
     }
 }
