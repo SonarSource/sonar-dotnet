@@ -35,15 +35,15 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
     public override bool ShouldExecute()
     {
-        return (IsRelevantMethod(Node) || IsRelevantPropertyAccessor(Node))
+        return (IsRelevantMethod() || IsRelevantPropertyAccessor())
             && IsAccessibleFromOtherAssemblies();
 
-        static bool IsRelevantMethod(SyntaxNode node) =>
-            node is BaseMethodDeclarationSyntax { } method
+        bool IsRelevantMethod() =>
+            Node is BaseMethodDeclarationSyntax { } method
             && MethodDereferencesArguments(method);
 
-        static bool IsRelevantPropertyAccessor(SyntaxNode node) =>
-            node is AccessorDeclarationSyntax { } accessor
+        bool IsRelevantPropertyAccessor() =>
+            Node is AccessorDeclarationSyntax { } accessor
             && (!accessor.Keyword.IsKind(SyntaxKind.GetKeyword) || accessor.Parent.Parent is IndexerDeclarationSyntax);
 
         bool IsAccessibleFromOtherAssemblies() =>
