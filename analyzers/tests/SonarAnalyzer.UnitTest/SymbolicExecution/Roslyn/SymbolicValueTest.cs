@@ -340,11 +340,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void GetHashCode_ReturnsDifferentValuesForPredefinedValues()
         {
             SymbolicValue.Empty.GetHashCode().Should().Be(SymbolicValue.Empty.GetHashCode());
-            SymbolicValue.Empty.GetHashCode().Should()
-                .NotBe(SymbolicValue.Null.GetHashCode()).And
-                .NotBe(SymbolicValue.NotNull.GetHashCode()).And
-                .NotBe(SymbolicValue.True.GetHashCode()).And
-                .NotBe(SymbolicValue.False.GetHashCode());
+            SymbolicValue.Empty.GetHashCode().Should().NotBe(SymbolicValue.Null.GetHashCode())
+                .And.NotBe(SymbolicValue.NotNull.GetHashCode())
+                .And.NotBe(SymbolicValue.True.GetHashCode())
+                .And.NotBe(SymbolicValue.False.GetHashCode());
         }
 
         [TestMethod]
