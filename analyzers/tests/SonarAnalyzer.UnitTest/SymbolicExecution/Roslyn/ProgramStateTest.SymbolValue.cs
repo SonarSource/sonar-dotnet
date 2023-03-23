@@ -29,8 +29,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetSymbolValue_ReturnsValues()
         {
-            var value1 = new SymbolicValue();
-            var value2 = new SymbolicValue();
+            var value1 = SymbolicValue.Empty;
+            var value2 = SymbolicValue.Empty;
             var symbols = CreateSymbols();
             var sut = ProgramState.Empty;
 
@@ -53,15 +53,15 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var sut = ProgramState.Empty;
 
             sut[symbol].Should().BeNull();
-            sut.SetSymbolValue(symbol, new());
+            sut.SetSymbolValue(symbol, SymbolicValue.Empty);
             sut[symbol].Should().BeNull(nameof(sut.SetSymbolValue) + " returned new ProgramState instance.");
         }
 
         [TestMethod]
         public void SetSymbolValue_Overwrites()
         {
-            var value1 = new SymbolicValue();
-            var value2 = new SymbolicValue();
+            var value1 = SymbolicValue.Empty;
+            var value2 = SymbolicValue.Empty;
             var symbol = CreateSymbols().First();
             var sut = ProgramState.Empty;
 
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetSymbolValue_NullValue_RemovesSymbol()
         {
-            var value = new SymbolicValue();
+            var value = SymbolicValue.Empty;
             var symbol = CreateSymbols().First();
             var sut = ProgramState.Empty;
 
@@ -86,14 +86,14 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
         [TestMethod]
         public void SetSymbolValue_NullSymbol_Throws() =>
-            ProgramState.Empty.Invoking(x => x.SetSymbolValue(null, new())).Should().Throw<ArgumentNullException>();
+            ProgramState.Empty.Invoking(x => x.SetSymbolValue(null, SymbolicValue.Empty)).Should().Throw<ArgumentNullException>();
 
         [TestMethod]
         public void SymbolsWith_ReturnCorrectSymbols()
         {
-            var value0 = new SymbolicValue().WithConstraint(DummyConstraint.Dummy);
-            var value1 = new SymbolicValue().WithConstraint(TestConstraint.First);
-            var value2 = new SymbolicValue().WithConstraint(TestConstraint.First);
+            var value0 = SymbolicValue.Empty.WithConstraint(DummyConstraint.Dummy);
+            var value1 = SymbolicValue.Empty.WithConstraint(TestConstraint.First);
+            var value2 = SymbolicValue.Empty.WithConstraint(TestConstraint.First);
             var symbols = CreateSymbols();
             var sut = ProgramState.Empty
                 .SetSymbolValue(symbols[0], value0)
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Preserve_PreservedSymbolCannotBeRemoved()
         {
-            var symbolicValue = new SymbolicValue().WithConstraint(DummyConstraint.Dummy);
+            var symbolicValue = SymbolicValue.Empty.WithConstraint(DummyConstraint.Dummy);
             var symbol = CreateSymbols().First();
             var sut = ProgramState.Empty.SetSymbolValue(symbol, symbolicValue)
                 .Preserve(symbol)
@@ -127,7 +127,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void RemoveSymbols_RemovesSymbolsMatchingThePredicate()
         {
-            var symbolicValue = new SymbolicValue().WithConstraint(DummyConstraint.Dummy);
+            var symbolicValue = SymbolicValue.Empty.WithConstraint(DummyConstraint.Dummy);
             var symbols = CreateSymbols().ToArray();
             var sut = ProgramState.Empty.SetSymbolValue(symbols[0], symbolicValue)
                 .SetSymbolValue(symbols[1], symbolicValue)
@@ -149,7 +149,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var symbol = CreateSymbols().First();
             var sut = ProgramState.Empty
-                .SetSymbolValue(symbol, new SymbolicValue().WithConstraint(TestConstraint.First))
+                .SetSymbolValue(symbol, SymbolicValue.Empty.WithConstraint(TestConstraint.First))
                 .SetSymbolConstraint(symbol, DummyConstraint.Dummy);
             sut[symbol].Should().HaveOnlyConstraints(new SymbolicConstraint[] { TestConstraint.First, DummyConstraint.Dummy }, "original constraints of different type should be preserved");
         }
