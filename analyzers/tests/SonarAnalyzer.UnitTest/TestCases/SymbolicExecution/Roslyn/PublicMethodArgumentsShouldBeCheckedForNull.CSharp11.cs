@@ -40,3 +40,19 @@ file class ClassWithFileAccessibility
         o.ToString(); // Compliant - method is not accessible from other assemblies
     }
 }
+
+file interface IInterfaceWithFileAccessibility
+{
+    void PublicWithArgs(object o)
+    {
+        o.ToString();
+    }
+}
+
+file struct StructWithFileAccessibility
+{
+    public void PublicWithArgs(object o)
+    {
+        o.ToString();
+    }
+}
