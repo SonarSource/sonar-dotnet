@@ -26,6 +26,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     public sealed record SymbolicValue
     {
         private static ConcurrentDictionary<CacheKey, SymbolicValue> cache = new();
+
         // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
         public static readonly SymbolicValue Empty = new();
         public static readonly SymbolicValue This = Empty.WithConstraint(ObjectConstraint.NotNull);
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public static readonly SymbolicValue True = NotNull.WithConstraint(BoolConstraint.True);
         public static readonly SymbolicValue False = NotNull.WithConstraint(BoolConstraint.False);
 
-        private ImmutableDictionary<Type, SymbolicConstraint> constraints;
+        private readonly ImmutableDictionary<Type, SymbolicConstraint> constraints = ImmutableDictionary<Type, SymbolicConstraint>.Empty;
         private int? constraintsHashCode;
 
         // SymbolicValue can have only one constraint instance of specific type at a time
@@ -53,8 +54,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public IEnumerable<SymbolicConstraint> AllConstraints =>
             Constraints.Values;
-
-        public SymbolicValue() : this(null) { }
 
         public override string ToString() =>
             SerializeConstraints();
