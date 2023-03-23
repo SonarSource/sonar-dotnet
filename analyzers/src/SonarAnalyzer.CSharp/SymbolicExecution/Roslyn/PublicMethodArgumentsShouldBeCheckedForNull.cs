@@ -20,6 +20,8 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
+using static Microsoft.CodeAnalysis.Accessibility;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
@@ -33,45 +35,19 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
     public override bool ShouldExecute()
     {
-        return IsAccessibleFromOtherAssemblies(Node)
-            && (IsRelevantMethod(Node) || IsRelevantPropertyAccessor(Node));
+        return (IsRelevantMethod(Node) || IsRelevantPropertyAccessor(Node))
+            && IsAccessibleFromOtherAssemblies();
 
         static bool IsRelevantMethod(SyntaxNode node) =>
             node is BaseMethodDeclarationSyntax { } method
             && MethodDereferencesArguments(method);
 
         static bool IsRelevantPropertyAccessor(SyntaxNode node) =>
-            node is AccessorDeclarationSyntax accessor
-            && IsPropertyAccessorAccessibleFromOtherAssemblies(accessor.Modifiers);
+            node is AccessorDeclarationSyntax { } accessor
+            && (!accessor.Keyword.IsKind(SyntaxKind.GetKeyword) || accessor?.Parent?.Parent is IndexerDeclarationSyntax);
 
-        static bool IsAccessibleFromOtherAssemblies(SyntaxNode node) =>
-            node.AncestorsAndSelf().OfType<MemberDeclarationSyntax>().FirstOrDefault() is { } containingMember
-            && node.Ancestors().OfType<BaseTypeDeclarationSyntax>().FirstOrDefault() is { } containingType
-            && IsMemberAccessibleFromOtherAssemblies(containingMember.Modifiers(), containingType)
-            && IsTypeAccessibleFromOtherAssemblies(containingType.Modifiers);
-
-        static bool IsMemberAccessibleFromOtherAssemblies(SyntaxTokenList modifiers, BaseTypeDeclarationSyntax containingType) =>
-            IsPublicOrProtectedOrProtectedInternal(modifiers)
-            || (containingType is InterfaceDeclarationSyntax && HasNoDeclaredAccessibilityModifier(modifiers));
-
-        static bool IsPropertyAccessorAccessibleFromOtherAssemblies(SyntaxTokenList modifiers) =>
-            IsPublicOrProtectedOrProtectedInternal(modifiers)
-            || HasNoDeclaredAccessibilityModifier(modifiers);
-
-        static bool IsTypeAccessibleFromOtherAssemblies(SyntaxTokenList modifiers) =>
-            IsPublicOrProtectedOrProtectedInternal(modifiers);
-
-        static bool IsPublicOrProtectedOrProtectedInternal(SyntaxTokenList modifiers) =>
-            modifiers.AnyOfKind(SyntaxKind.PublicKeyword)
-            || (modifiers.AnyOfKind(SyntaxKind.ProtectedKeyword) && !modifiers.AnyOfKind(SyntaxKind.PrivateKeyword));
-
-        static bool HasNoDeclaredAccessibilityModifier(SyntaxTokenList modifiers) =>
-            !modifiers.Any(x => x.IsAnyKind(
-                SyntaxKind.PrivateKeyword,
-                SyntaxKindEx.FileKeyword,
-                SyntaxKind.ProtectedKeyword,
-                SyntaxKind.InternalKeyword,
-                SyntaxKind.PublicKeyword));
+        bool IsAccessibleFromOtherAssemblies() =>
+            SemanticModel.GetDeclaredSymbol(Node)?.GetEffectiveAccessibility() is Public or Protected or ProtectedAndInternal;
 
         static bool MethodDereferencesArguments(BaseMethodDeclarationSyntax method)
         {
