@@ -60,24 +60,31 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         }
 
         public SymbolicContext[] PreProcess(SymbolicContext context) =>
-            InvokeChecks(context, (check, context) => check.PreProcess(context));
+            InvokeChecks(context, preProcess: true);
 
         public SymbolicContext[] PostProcess(SymbolicContext context) =>
-            InvokeChecks(context, (check, context) => check.PostProcess(context));
+            InvokeChecks(context, preProcess: false);
 
-        private SymbolicContext[] InvokeChecks(SymbolicContext context, Func<SymbolicCheck, SymbolicContext, ProgramState[]> process)
+        private SymbolicContext[] InvokeChecks(SymbolicContext context, bool preProcess)
         {
-            var contexts = new List<SymbolicContext>();
+            var before = new List<SymbolicContext>() { context };
+            var after = new List<SymbolicContext>();
             foreach (var check in checks)
             {
-                var newStates = process(check, context);
-                foreach (var newState in newStates)
+                foreach (var beforeContext in before)
                 {
-                    context = context.WithState(newState);
-                    contexts.Add(context);
+                    var newStates = preProcess ? check.PreProcess(beforeContext) : check.PostProcess(beforeContext);
+                    foreach (var newState in newStates)
+                    {
+                        after.Add(beforeContext.WithState(newState));
+                    }
                 }
+                var temp = before;
+                before = after;
+                after = temp;
+                after.Clear();
             }
-            return contexts.ToArray();
+            return before.ToArray();
         }
     }
 }
