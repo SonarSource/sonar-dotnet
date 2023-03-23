@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#pragma warning disable CA1825 // Avoid zero-length array allocations
+
 using HashCode = SonarAnalyzer.Helpers.HashCode;
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -66,14 +68,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void EnumerableUnorderedContentHash_Empty()
         {
-#pragma warning disable CA1825 // Avoid zero-length array allocations
             var ints = new int[0];
             var strings = new string[0];
 
             HashCode.EnumerableUnorderedContentHash(ints).Should().Be(HashCode.EnumerableUnorderedContentHash(new int[0]));
             HashCode.EnumerableUnorderedContentHash(strings).Should().Be(HashCode.EnumerableUnorderedContentHash(strings));
             HashCode.EnumerableUnorderedContentHash(ints).Should().Be(HashCode.EnumerableUnorderedContentHash(strings));
-#pragma warning restore CA1825
         }
 
         [TestMethod]
@@ -99,14 +99,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void EnumerableOrderedContentHash_Empty()
         {
-#pragma warning disable CA1825 // Avoid zero-length array allocations
             var ints = new int[0];
             var strings = new string[0];
 
             HashCode.EnumerableOrderedContentHash(ints).Should().Be(HashCode.EnumerableOrderedContentHash(new int[0]));
             HashCode.EnumerableOrderedContentHash(strings).Should().Be(HashCode.EnumerableOrderedContentHash(strings));
             HashCode.EnumerableOrderedContentHash(ints).Should().Be(HashCode.EnumerableOrderedContentHash(strings));
-#pragma warning restore CA1825
         }
 
         [TestMethod]
