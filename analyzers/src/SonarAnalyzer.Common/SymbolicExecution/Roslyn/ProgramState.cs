@@ -54,7 +54,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 backingField = value;
                 backingFieldHashCode = null;
                 hashCode = null;
-                toArray = null;
             }
         }
         public ExceptionState Exception => Exceptions.IsEmpty ? null : Exceptions.Peek();
