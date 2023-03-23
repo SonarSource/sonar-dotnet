@@ -26,7 +26,6 @@ namespace Issue_6491
     }
 }
 
-
 namespace NullableAnotated
 {
     class MyClass

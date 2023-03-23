@@ -73,7 +73,7 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
         && !method.ReturnType.Is(KnownType.System_String)
         && !method.ReturnType.DerivesFrom(KnownType.System_Xml_XmlNode)
         && method.ReturnType.DerivesOrImplementsAny(CollectionTypes)
-        && method.ReturnType.NullableAnnotation() != 2;
+        && method.ReturnType.NullableAnnotation() != NullableAnnotation.Annotated;
 
     private static IMethodSymbol GetReturnMethod(SonarSyntaxNodeReportingContext context)
     {
