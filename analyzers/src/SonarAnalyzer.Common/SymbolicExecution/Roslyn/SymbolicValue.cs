@@ -29,7 +29,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
         public static readonly SymbolicValue Empty = new();
-        public static readonly SymbolicValue This = Empty.WithConstraint(ObjectConstraint.NotNull);
         public static readonly SymbolicValue Null = Empty.WithConstraint(ObjectConstraint.Null);
         public static readonly SymbolicValue NotNull = Empty.WithConstraint(ObjectConstraint.NotNull);
         public static readonly SymbolicValue True = NotNull.WithConstraint(BoolConstraint.True);
