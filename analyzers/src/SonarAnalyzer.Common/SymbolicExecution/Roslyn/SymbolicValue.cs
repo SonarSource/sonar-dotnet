@@ -97,7 +97,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             Constraints.TryGetValue(typeof(T), out var value) ? (T)value : null;
 
         public override int GetHashCode() =>
+#pragma warning disable S2328 // GetHashCode should not reference mutable fields
             constraintsHashCode ??= HashCode.DictionaryContentHash(constraints);
+#pragma warning restore S2328
 
         public bool Equals(SymbolicValue other) =>
             other is not null && other.Constraints.DictionaryEquals(Constraints);
