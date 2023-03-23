@@ -26,9 +26,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     public sealed record SymbolicValue
     {
         private static ConcurrentDictionary<CacheKey, SymbolicValue> cache = new();
-
-        private readonly Lazy<int> hashCode;
-
         // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
         public static readonly SymbolicValue Empty = new();
         public static readonly SymbolicValue This = Empty.WithConstraint(ObjectConstraint.NotNull);
@@ -37,19 +34,27 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public static readonly SymbolicValue True = NotNull.WithConstraint(BoolConstraint.True);
         public static readonly SymbolicValue False = NotNull.WithConstraint(BoolConstraint.False);
 
+        private ImmutableDictionary<Type, SymbolicConstraint> constraints;
+        private int? constraintsHashCode;
+
         // SymbolicValue can have only one constraint instance of specific type at a time
-        private ImmutableDictionary<Type, SymbolicConstraint> Constraints { get; init; }
+        private ImmutableDictionary<Type, SymbolicConstraint> Constraints
+        {
+            get => constraints;
+            init
+            {
+                if (constraints != value)
+                {
+                    constraints = value;
+                    constraintsHashCode = null;
+                }
+            }
+        }
 
         public IEnumerable<SymbolicConstraint> AllConstraints =>
             Constraints.Values;
 
         public SymbolicValue() : this(null) { }
-
-        private SymbolicValue(SymbolicValue other)
-        {
-            Constraints = other?.Constraints ?? ImmutableDictionary<Type, SymbolicConstraint>.Empty;
-            hashCode = new(() => HashCode.DictionaryContentHash(Constraints), LazyThreadSafetyMode.ExecutionAndPublication);
-        }
 
         public override string ToString() =>
             SerializeConstraints();
@@ -93,7 +98,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             Constraints.TryGetValue(typeof(T), out var value) ? (T)value : null;
 
         public override int GetHashCode() =>
-            hashCode.Value;
+            constraintsHashCode ??= HashCode.DictionaryContentHash(constraints);
 
         public bool Equals(SymbolicValue other) =>
             other is not null && other.Constraints.DictionaryEquals(Constraints);
