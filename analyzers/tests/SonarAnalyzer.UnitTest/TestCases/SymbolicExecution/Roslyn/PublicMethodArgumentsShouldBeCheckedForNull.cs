@@ -578,17 +578,3 @@ public class NestedClasses
         }
     }
 }
-
-public class Unsafe
-{
-    public struct Coordinate
-    {
-        public int x;
-        public int y;
-    }
-
-    public static unsafe void Method(Coordinate* c)
-    {
-        c->x = 42;                                      // FIXME Non-compliant
-    }
-}
