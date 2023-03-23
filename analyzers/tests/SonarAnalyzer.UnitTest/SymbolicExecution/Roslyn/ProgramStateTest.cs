@@ -35,8 +35,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void Equals_ReturnsTrueForEquivalent()
         {
-            var reusedValue = new SymbolicValue().WithConstraint(TestConstraint.First);
-            var anotherValue = new SymbolicValue().WithConstraint(TestConstraint.Second);
+            var reusedValue = SymbolicValue.Empty.WithConstraint(TestConstraint.First);
+            var anotherValue = SymbolicValue.Empty.WithConstraint(TestConstraint.Second);
             var cfg = TestHelper.CompileCfgBodyCS("var x = 42; var y = 42;");
             var operations = cfg.Blocks[1].Operations.ToExecutionOrder().ToArray();
             var symbols = operations.Select(x => x.Instance.TrackedSymbol()).Where(x => x is not null).ToArray();
@@ -122,8 +122,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void GetHashCode_ReturnsSameForEquivalent()
         {
-            var reusedValue = new SymbolicValue().WithConstraint(TestConstraint.First);
-            var anotherValue = new SymbolicValue().WithConstraint(TestConstraint.Second);
+            var reusedValue = SymbolicValue.Empty.WithConstraint(TestConstraint.First);
+            var anotherValue = SymbolicValue.Empty.WithConstraint(TestConstraint.Second);
             var cfg = TestHelper.CompileCfgBodyCS("var x = 42; var y = 42;");
             var operations = cfg.Blocks[1].Operations.ToExecutionOrder().ToArray();
             var symbols = operations.Select(x => x.Instance.TrackedSymbol()).Where(x => x is not null).ToArray();
@@ -194,13 +194,13 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 @"Empty
 ");
 
-            sut = ProgramState.Empty.SetSymbolValue(variableSymbol, new());
+            sut = ProgramState.Empty.SetSymbolValue(variableSymbol, SymbolicValue.Empty);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Symbols:
 a: No constraints
 ");
 
-            var valueWithConstraint = new SymbolicValue().WithConstraint(TestConstraint.Second);
+            var valueWithConstraint = SymbolicValue.Empty.WithConstraint(TestConstraint.Second);
             sut = sut.SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint).SetSymbolValue(parameterSymbol, valueWithConstraint);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Symbols:
@@ -219,12 +219,12 @@ Main: Second
 @"Empty
 ");
 
-            sut = ProgramState.Empty.SetOperationValue(assignment, new());
+            sut = ProgramState.Empty.SetOperationValue(assignment, SymbolicValue.Empty);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Operations:
 SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
 ");
-            var valueWithConstraint = new SymbolicValue().WithConstraint(TestConstraint.Second);
+            var valueWithConstraint = SymbolicValue.Empty.WithConstraint(TestConstraint.Second);
             sut = sut.SetOperationValue(assignment.ChildOperations.First(), valueWithConstraint);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Operations:
@@ -269,11 +269,11 @@ Exception: Unknown
         {
             var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
             var variableSymbol = assignment.ChildOperations.First().TrackedSymbol();
-            var valueWithConstraint = new SymbolicValue().WithConstraint(TestConstraint.First);
+            var valueWithConstraint = SymbolicValue.Empty.WithConstraint(TestConstraint.First);
             var sut = ProgramState.Empty
-                .SetSymbolValue(variableSymbol, new())
+                .SetSymbolValue(variableSymbol, SymbolicValue.Empty)
                 .SetSymbolValue(variableSymbol.ContainingSymbol, valueWithConstraint)
-                .SetOperationValue(assignment, new())
+                .SetOperationValue(assignment, SymbolicValue.Empty)
                 .SetOperationValue(assignment.ChildOperations.First(), valueWithConstraint).Preserve(variableSymbol)
                 .SetCapture(new CaptureId(0), assignment)
                 .SetCapture(new CaptureId(1), assignment.ChildOperations.First())
@@ -311,8 +311,8 @@ Captures:
             var preserveNone = ObjectConstraint.Null;
 
             var sut = ProgramState.Empty;
-            sut = sut.SetSymbolValue(instanceField, new SymbolicValue().WithConstraint(preserveAll).WithConstraint(preserveNone))
-                     .SetSymbolValue(staticField, new SymbolicValue().WithConstraint(preserveAll).WithConstraint(preserveNone));
+            sut = sut.SetSymbolValue(instanceField, SymbolicValue.Empty.WithConstraint(preserveAll).WithConstraint(preserveNone))
+                     .SetSymbolValue(staticField, SymbolicValue.Empty.WithConstraint(preserveAll).WithConstraint(preserveNone));
             sut = sut.ResetFieldConstraints();
             var instanceFieldSymbolValue = sut[instanceField];
             var staticFieldSymbolValue = sut[staticField];
@@ -355,7 +355,7 @@ Captures:
         {
             var field = CreateFieldSymbol("object field;");
             var sut = ProgramState.Empty;
-            sut = sut.SetSymbolValue(field, new SymbolicValue().WithConstraint(constraint));
+            sut = sut.SetSymbolValue(field, SymbolicValue.Empty.WithConstraint(constraint));
             var symbolValue = sut[field];
             symbolValue.HasConstraint(constraint).Should().BeTrue();
             sut = sut.ResetFieldConstraints();

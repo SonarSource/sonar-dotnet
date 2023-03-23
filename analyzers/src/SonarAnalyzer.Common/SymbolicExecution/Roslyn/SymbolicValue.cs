@@ -40,6 +40,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public IEnumerable<SymbolicConstraint> AllConstraints =>
             Constraints.Values;
+        private SymbolicValue() { }
 
         public override string ToString() =>
             SerializeConstraints();
