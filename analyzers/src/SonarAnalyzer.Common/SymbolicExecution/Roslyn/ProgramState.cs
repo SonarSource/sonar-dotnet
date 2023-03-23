@@ -47,15 +47,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private ImmutableHashSet<ISymbol> PreservedSymbols { get => preservedSymbols; init => SetCachedHashCodeField(value, ref preservedSymbols, ref preservedSymbolsHashCode); }
         private ImmutableStack<ExceptionState> Exceptions { get => exceptions; init => SetCachedHashCodeField(value, ref exceptions, ref exceptionsHashCode); }
 
-        private void SetCachedHashCodeField<T>(T value, ref T backingField, ref int? backingFieldHashCode) where T : class
-        {
-            if (backingField != value)
-            {
-                backingField = value;
-                backingFieldHashCode = null;
-                hashCode = null;
-            }
-        }
         public ExceptionState Exception => Exceptions.IsEmpty ? null : Exceptions.Peek();
         public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
         public SymbolicValue this[IOperationWrapper operation] => this[operation.WrappedOperation];
@@ -237,6 +228,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 }
             }
             return state;
+        }
+
+        private void SetCachedHashCodeField<T>(T value, ref T backingField, ref int? backingFieldHashCode) where T : class
+        {
+            if (backingField != value)
+            {
+                backingField = value;
+                backingFieldHashCode = null;
+                hashCode = null;
+            }
         }
     }
 }
