@@ -54,6 +54,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 backingField = value;
                 backingFieldHashCode = null;
                 hashCode = null;
+                toArray = null;
             }
         }
         public ExceptionState Exception => Exceptions.IsEmpty ? null : Exceptions.Peek();
@@ -73,14 +74,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             Exceptions = ImmutableStack<ExceptionState>.Empty;
         }
 
-        protected ProgramState(ProgramState original)   // Custom record override constructor to reset "toArray"
+        private ProgramState(ProgramState original)   // Custom record override constructor to reset "toArray"
         {
-            OperationValue = original.OperationValue;
-            SymbolValue = original.SymbolValue;
+            operationValue = original.operationValue;
+            symbolValue = original.symbolValue;
             VisitCount = original.VisitCount;
-            CaptureOperation = original.CaptureOperation;
-            PreservedSymbols = original.PreservedSymbols;
-            Exceptions = original.Exceptions;
+            captureOperation = original.captureOperation;
+            preservedSymbols = original.preservedSymbols;
+            exceptions = original.exceptions;
+            operationValueHashCode = original.operationValueHashCode;
+            symbolValueHashCode = original.symbolValueHashCode;
+            captureOperationHashCode = original.captureOperationHashCode;
+            preservedSymbolsHashCode = original.preservedSymbolsHashCode;
+            exceptionsHashCode = original.exceptionsHashCode;
+            hashCode = original.hashCode;
         }
 
         public ProgramState SetOperationValue(IOperationWrapper operation, SymbolicValue value) =>
