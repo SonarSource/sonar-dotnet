@@ -38,11 +38,11 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
     {
         var operation = context.Operation.Instance;
         if (operation.Kind == OperationKindEx.ParameterReference
-            && operation.ToParameterReference() is var parameter
-            && parameter.Parameter.Type.IsValueType is false
+            && operation.ToParameterReference().Parameter is var parameter
+            && parameter.Type.IsValueType is false
             && IsParameterDereferenced(context.Operation)
-            && NullableStateIsNotKnownForParameter(parameter.Parameter)
-            && !IgnoreBecauseOfParameterAttribute(parameter.Parameter))
+            && NullableStateIsNotKnownForParameter(parameter)
+            && !IgnoreBecauseOfParameterAttribute(parameter))
         {
             var message = SemanticModel.GetDeclaredSymbol(Node).IsConstructor()
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
