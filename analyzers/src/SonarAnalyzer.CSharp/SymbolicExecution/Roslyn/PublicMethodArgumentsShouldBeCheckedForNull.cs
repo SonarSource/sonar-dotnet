@@ -44,10 +44,11 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
         static bool IsRelevantPropertyAccessor(SyntaxNode node) =>
             node is AccessorDeclarationSyntax { } accessor
-            && (!accessor.Keyword.IsKind(SyntaxKind.GetKeyword) || accessor?.Parent?.Parent is IndexerDeclarationSyntax);
+            && (!accessor.Keyword.IsKind(SyntaxKind.GetKeyword) || accessor.Parent.Parent is IndexerDeclarationSyntax);
 
         bool IsAccessibleFromOtherAssemblies() =>
-            SemanticModel.GetDeclaredSymbol(Node)?.GetEffectiveAccessibility() is Public or Protected or ProtectedAndInternal;
+            SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is
+                Public or Protected or ProtectedOrInternal;
 
         static bool MethodDereferencesArguments(BaseMethodDeclarationSyntax method)
         {
