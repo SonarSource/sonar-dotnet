@@ -29,8 +29,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetOperationValue_WithWrapperSonar_ReturnsValues()
         {
-            var value1 = new SymbolicValue();
-            var value2 = new SymbolicValue();
+            var value1 = SymbolicValue.Empty;
+            var value2 = SymbolicValue.Empty;
             var operations = TestHelper.CompileCfgBodyCS("var x = 0; x = 1; x = 42;").Blocks[1].Operations;
             var op1 = new IOperationWrapperSonar(operations[0]);
             var op2 = new IOperationWrapperSonar(operations[1]);
@@ -52,8 +52,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetOperationValue_WithWrapper_ReturnsValues()
         {
-            var value1 = new SymbolicValue();
-            var value2 = new SymbolicValue();
+            var value1 = SymbolicValue.Empty;
+            var value2 = SymbolicValue.Empty;
             var operations = TestHelper.CompileCfgBodyCS("var x = 0; x = 1; x = 42;").Blocks[1].Operations;
             var op1 = ISimpleAssignmentOperationWrapper.FromOperation(operations[0]);
             var op2 = IExpressionStatementOperationWrapper.FromOperation(operations[1]);
@@ -75,8 +75,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetOperationValue_ReturnsValues()
         {
-            var value1 = new SymbolicValue();
-            var value2 = new SymbolicValue();
+            var value1 = SymbolicValue.Empty;
+            var value2 = SymbolicValue.Empty;
             var operations = TestHelper.CompileCfgBodyCS("var x = 0; x = 1; x = 42;").Blocks[1].Operations;
             var sut = ProgramState.Empty;
 
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var sut = ProgramState.Empty;
 
             sut[operation].Should().BeNull();
-            sut.SetOperationValue(operation, new());
+            sut.SetOperationValue(operation, SymbolicValue.Empty);
             sut[operation].Should().BeNull(nameof(sut.SetOperationValue) + " returned new ProgramState instance.");
         }
 
@@ -110,7 +110,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var sut = ProgramState.Empty;
 
             sut[operation].Should().BeNull();
-            sut.SetOperationValue(operation, new());
+            sut.SetOperationValue(operation, SymbolicValue.Empty);
             sut[operation].Should().BeNull(nameof(sut.SetOperationValue) + " returned new ProgramState instance.");
         }
 
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var operation = new IOperationWrapperSonar(CreateOperation());
             var another = new IOperationWrapperSonar(operation.Instance);
-            var value = new SymbolicValue();
+            var value = SymbolicValue.Empty;
             var sut = ProgramState.Empty;
 
             sut[operation].Should().BeNull();
@@ -131,8 +131,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetOperationValue_WithWrapper_Overwrites()
         {
-            var value1 = new SymbolicValue();
-            var value2 = new SymbolicValue();
+            var value1 = SymbolicValue.Empty;
+            var value2 = SymbolicValue.Empty;
             var operation = new IOperationWrapperSonar(CreateOperation());
             var sut = ProgramState.Empty;
 
@@ -145,7 +145,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetOperationValue_NullValue_RemovesSymbol()
         {
-            var value = new SymbolicValue();
+            var value = SymbolicValue.Empty;
             var operation = new IOperationWrapperSonar(CreateOperation());
             var sut = ProgramState.Empty;
 
@@ -158,8 +158,8 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void SetOperationValue_Overwrites()
         {
-            var value1 = new SymbolicValue();
-            var value2 = new SymbolicValue();
+            var value1 = SymbolicValue.Empty;
+            var value2 = SymbolicValue.Empty;
             var operation = CreateOperation();
             var sut = ProgramState.Empty;
 
@@ -182,20 +182,20 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
         [TestMethod]
         public void SetOperationValue_NullOperation_Throws() =>
-            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperation)null, new())).Should().Throw<ArgumentNullException>();
+            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperation)null, SymbolicValue.Empty)).Should().Throw<ArgumentNullException>();
 
         [TestMethod]
         public void SetOperationValue_WithWrapper_NullOperation_Throws() =>
-            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapper)null, new())).Should().Throw<ArgumentNullException>();
+            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapper)null, SymbolicValue.Empty)).Should().Throw<ArgumentNullException>();
 
         [TestMethod]
         public void SetOperationValue_WithWrapperSonar_NullOperation_Throws() =>
-            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapperSonar)null, new())).Should().Throw<ArgumentNullException>();
+            ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapperSonar)null, SymbolicValue.Empty)).Should().Throw<ArgumentNullException>();
 
         [TestMethod]
         public void SetOperationValue_OnCaptureReference_SetsValueToCapturedOperation()
         {
-            var value = new SymbolicValue();
+            var value = SymbolicValue.Empty;
             var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
             var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
             var captureReference = IFlowCaptureReferenceOperationWrapper.FromOperation(cfg.Blocks[3].Operations[0].Children.First());
@@ -210,7 +210,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void ResetOperations_IsImmutable()
         {
             var operation = CreateOperation();
-            var beforeReset = ProgramState.Empty.SetOperationValue(operation, new());
+            var beforeReset = ProgramState.Empty.SetOperationValue(operation, SymbolicValue.Empty);
             beforeReset[operation].Should().NotBeNull();
 
             var afterReset = beforeReset.ResetOperations();
@@ -223,10 +223,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var operations = TestHelper.CompileCfgBodyCS("var x = 0; x = 1; x = 42; x = 100;").Blocks[1].Operations;
             var beforeReset = ProgramState.Empty
-                .SetOperationValue(operations[0], new())
-                .SetOperationValue(operations[1], new())
-                .SetOperationValue(operations[2], new())
-                .SetOperationValue(operations[3], new())
+                .SetOperationValue(operations[0], SymbolicValue.Empty)
+                .SetOperationValue(operations[1], SymbolicValue.Empty)
+                .SetOperationValue(operations[2], SymbolicValue.Empty)
+                .SetOperationValue(operations[3], SymbolicValue.Empty)
                 .SetCapture(new CaptureId(1), operations[1])
                 .SetCapture(new CaptureId(2), operations[2]);
             beforeReset[operations[0]].Should().NotBeNull();
@@ -254,7 +254,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var operation = new IOperationWrapperSonar(CreateOperation());
             var sut = ProgramState.Empty
-                .SetOperationValue(operation, new SymbolicValue().WithConstraint(TestConstraint.First))
+                .SetOperationValue(operation, SymbolicValue.Empty.WithConstraint(TestConstraint.First))
                 .SetOperationConstraint(operation, DummyConstraint.Dummy);
             sut[operation].HasConstraint(TestConstraint.First).Should().BeTrue("original constraints of different type should be preserved");
             sut[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();

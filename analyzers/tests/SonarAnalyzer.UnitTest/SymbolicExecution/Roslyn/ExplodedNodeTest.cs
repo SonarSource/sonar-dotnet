@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var basic = new ExplodedNode(block, ProgramState.Empty, null);
             var same = new ExplodedNode(block, ProgramState.Empty, null);
             var differentLocation = basic.CreateNext(ProgramState.Empty);
-            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], new()), null);
+            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], SymbolicValue.Empty), null);
 
             basic.Equals(same).Should().BeTrue();
             basic.Equals(differentLocation).Should().BeFalse();
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var basic = new ExplodedNode(block, ProgramState.Empty, null);
             var same = new ExplodedNode(block, ProgramState.Empty, null);
             var differentLocation = basic.CreateNext(ProgramState.Empty);
-            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], new()), null);
+            var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], SymbolicValue.Empty), null);
 
             basic.GetHashCode().Should().Be(basic.GetHashCode(), "value should be deterministic");
             basic.GetHashCode().Should().Be(same.GetHashCode());
@@ -132,7 +132,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void ToString_SerializeOperationAndState()
         {
             var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
-            var state = ProgramState.Empty.SetSymbolValue(cfg.Blocks[1].Operations[0].Children.First().TrackedSymbol(), new());
+            var state = ProgramState.Empty.SetSymbolValue(cfg.Blocks[1].Operations[0].Children.First().TrackedSymbol(), SymbolicValue.Empty);
 
             new ExplodedNode(cfg.Blocks[0], ProgramState.Empty, null).ToString().Should().BeIgnoringLineEndings(
 @"Block #0, Branching

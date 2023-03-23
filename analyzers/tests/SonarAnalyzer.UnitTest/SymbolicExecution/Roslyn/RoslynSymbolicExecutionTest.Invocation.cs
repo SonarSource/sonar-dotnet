@@ -372,7 +372,7 @@ Tag(""AfterIfElse"", ObjectField);";
             });
             validator.TagValues("AfterIfElse").Should().Equal(new[]
             {
-                new SymbolicValue().WithConstraint(dontInvalidateConstraint),
+                SymbolicValue.Empty.WithConstraint(dontInvalidateConstraint),
             });
         }
 
@@ -387,8 +387,8 @@ if (this.ObjectField == null)
 Tag(""After"", this.ObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
             validator.TagValues("After").Should().Equal(
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),
-                new SymbolicValue());
+                SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull),
+                SymbolicValue.Empty);
         }
 
         [TestMethod]
@@ -540,9 +540,9 @@ Tag(""Arg"", arg);";
                 SymbolicValue.NotNull.WithConstraint(BoolConstraint.True),       // True/Null
                 SymbolicValue.NotNull.WithConstraint(BoolConstraint.True));      // True/NotNull
             validator.TagValues("Arg").Should().Equal(
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),  // False/NotNull
-                new SymbolicValue().WithConstraint(ObjectConstraint.Null),     // True/Null
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)); // True/NotNull
+                SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull),  // False/NotNull
+                SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null),     // True/Null
+                SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull)); // True/NotNull
         }
 
         [TestMethod]
@@ -558,8 +558,8 @@ Tag(""ExceptionAfterCheck"", exception);";
             validator.ValidateTag("ExceptionChecked", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.TagValues("ExceptionAfterCheck").Should().Equal(new[]
             {
-                new SymbolicValue().WithConstraint(ObjectConstraint.Null),
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull)
+                SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null),
+                SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull)
             });
         }
 
@@ -579,8 +579,8 @@ finally
             validator.TagValues("ArgInFinally").Should().Equal(new[]
             {
                 null,
-                new SymbolicValue().WithConstraint(ObjectConstraint.NotNull),
-                new SymbolicValue().WithConstraint(ObjectConstraint.Null)   // Wrong. IsNullOrEmpty does not throw and "arg" is known to be not null.
+                SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull),
+                SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null)   // Wrong. IsNullOrEmpty does not throw and "arg" is known to be not null.
             });
         }
 
