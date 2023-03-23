@@ -477,7 +477,7 @@ public struct StructAccessibility
     }
 }
 
-class PropertyAccessibility
+public class PropertyAccessibility
 {
     public object PublicProperty
     {
@@ -560,8 +560,40 @@ public class ClassWithEvent
     }
 }
 
+internal class InternalClass
+{
+    public void PublicWithArgs(object o)
+    {
+        o.ToString();                                   // Compliant - method is not accessible from other assemblies
+    }
+}
+
+class ImplicitlyInternalClass
+{
+    public void PublicWithArgs(object o)
+    {
+        o.ToString();
+    }
+}
+
 public class NestedClasses
 {
+    public class PublicNestedClass
+    {
+        public void Method(object o)
+        {
+            o.ToString();                               // FIXME Non-compliant
+        }
+
+        private class DeeperNestedPrivateClass
+        {
+            public void Method(object o)
+            {
+                o.ToString();                           // Compliant - method is not accessible from other assemblies
+            }
+        }
+    }
+
     protected class ProtectedNestedClass
     {
         public void Method(object o)
