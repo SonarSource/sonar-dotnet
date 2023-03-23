@@ -56,6 +56,11 @@ public class ObsoleteAttributesTest
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_CSharp10() =>
         explanationNeededCS.AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+    [TestMethod]
+    public void ObsoleteAttributesNeedExplanation_VB14() =>
+        explanationNeededVB.AddPaths("ObsoleteAttributesNeedExplanation.VB14.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+
 #endif
 
     [TestMethod]

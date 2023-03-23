@@ -12,6 +12,18 @@ class Noncompliant
     [global::System.Obsolete] // Noncompliant
     void GloballyDeclaredNamespace() { }
 
+    [Obsolete(null)] // Noncompliant
+    void WithNull() { }
+
+    [Obsolete("")] // Noncompliant
+    void WithEmptyString() { }
+
+    [Obsolete("  ")] // Noncompliant
+    void WithWhiteSpace() { }
+
+    [Obsolete("", true)] // Noncompliant
+    void WithTwoArguments() { }
+
     [Obsolete] // Noncompliant
     [CLSCompliant(false)]
     uint Multiple() { return 0; }
@@ -69,6 +81,9 @@ class Compliant
     [Obsolete("explanation")]
     void Method() { }
 
+    [Obsolete("explanation", true)]
+    void WithTwoArguments() { }
+
     [Obsolete("explanation")]
     string Property { get; set; }
 
@@ -94,6 +109,16 @@ struct ComplaintStruct
 {
     [Obsolete("explanation")]
     void Method() { }
+}
+
+class Ignore
+{
+    // FP the value of error is taken.
+    [Obsolete(error: true, message: "explanation")] // Noncompliant
+    public void NamedParmetersDifferentOrderFP() { }
+
+    [Obsolete(error: true, message: "")] // Noncompliant for wrong reason 
+    public void NamedParmetersDifferentOrder() { }
 }
 
 class NotApplicable
