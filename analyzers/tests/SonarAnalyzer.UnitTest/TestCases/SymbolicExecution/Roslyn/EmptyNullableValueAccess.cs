@@ -691,7 +691,7 @@ class OutAndRefParams
         _ = iLocal.Value;                                // Compliant
 
         iLocal = null;
-        ModifyOutParamAndRead(out iLocal, iLocal.Value); // Compliant, FN
+        ModifyOutParamAndRead(out iLocal, iLocal.Value); // FN
 
         iLocal = null;
         ReadAndModifyOutParam(iLocal.Value, out iLocal); // Noncompliant
@@ -715,7 +715,19 @@ class OutAndRefParams
         ModifyRefParam(ref iLocal);
         _ = iLocal.Value;                                // Compliant
 
+        iLocal = null;
+        ModifyRefParamAndRead(ref iLocal, iLocal.Value); // FN
+
+        iLocal = null;
+        ReadAndModifyRefParam(iLocal.Value, ref iLocal); // Noncompliant
+
+        nullableField = null;
+        ModifyRefParam(ref nullableField);
+        _ = nullableField.Value;                         // Compliant
+
         static void ModifyRefParam(ref int? i) => i = null;
+        static void ModifyRefParamAndRead(ref int? i1, int? i2) => i1 = i2;
+        static void ReadAndModifyRefParam(int? i1, ref int? i2) => i2 = i1;
     }
 }
 
