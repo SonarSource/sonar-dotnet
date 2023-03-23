@@ -348,7 +348,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
-        public void GetHashCode_PredefinedValuesAreUnique()
+        public void GetHashCode_DifferentValuesAreUnique()
         {
             new[]
             {
@@ -356,7 +356,10 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
                 SymbolicValue.NotNull.GetHashCode(),
                 SymbolicValue.Null.GetHashCode(),
                 SymbolicValue.True.GetHashCode(),
-                SymbolicValue.False.GetHashCode()
+                SymbolicValue.False.GetHashCode(),
+                SymbolicValue.Empty.WithConstraint(DummyConstraint.Dummy).GetHashCode(),
+                SymbolicValue.Empty.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First).WithConstraint(ObjectConstraint.Null).GetHashCode(),
+                SymbolicValue.Empty.WithConstraint(DummyConstraint.Dummy).WithConstraint(TestConstraint.First).WithConstraint(ObjectConstraint.NotNull).GetHashCode(),
             }.Should().OnlyHaveUniqueItems();
         }
 
