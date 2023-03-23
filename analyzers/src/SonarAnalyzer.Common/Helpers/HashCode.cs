@@ -33,9 +33,15 @@ namespace SonarAnalyzer.Helpers
         public static int DictionaryContentHash<TKey, TValue>(IDictionary<TKey, TValue> dictionary) =>
             dictionary.Aggregate(0, (seed, kvp) => seed ^ Combine(kvp.Key, kvp.Value));
 
+        /// <summary>
+        /// Calculates a hash for the enumerable based on the content. The same values in a different order produce the same hash-code.
+        /// </summary>
         public static int EnumerableUnorderedContentHash<TValue>(IEnumerable<TValue> enumerable) =>
             enumerable.Aggregate(IntSeed, (seed, x) => seed ^ (x?.GetHashCode() ?? 0));
 
+        /// <summary>
+        /// Calculates a hash for the enumerable based on the content. The same values in a different order produce different hash-codes.
+        /// </summary>
         public static int EnumerableOrderedContentHash<TValue>(IEnumerable<TValue> enumerable) =>
             enumerable.Aggregate(IntSeed, Combine);
 
