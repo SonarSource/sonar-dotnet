@@ -25,7 +25,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 internal sealed class InstanceReference : ISimpleProcessor
 {
     public ProgramState Process(SymbolicContext context) =>
-        context.State.SetOperationValue(context.Operation, SymbolicValue.This);     // Implicit and Explicit
+        context.State.SetOperationValue(context.Operation, SymbolicValue.NotNull);     // Implicit and Explicit
 }
 
 internal sealed class LocalReference : SimpleProcessor<ILocalReferenceOperationWrapper>
