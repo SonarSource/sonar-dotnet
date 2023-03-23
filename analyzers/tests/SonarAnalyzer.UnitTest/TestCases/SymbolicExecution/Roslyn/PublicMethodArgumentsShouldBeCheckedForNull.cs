@@ -556,7 +556,7 @@ public class ClassWithEvent
     public void Method(ClassWithEvent c)
     {
         c.CustomEvent += (sender, args)                 // FIXME Non-compliant
-            => Console.WriteLine(); 
+            => Console.WriteLine();
     }
 }
 
@@ -604,7 +604,7 @@ public class NestedClasses
 
     private class PrivateNestedClass
     {
-        public void Method(object o)                    
+        public void Method(object o)
         {
             o.ToString();                               // Compliant - method is not accessible from other assemblies
         }
