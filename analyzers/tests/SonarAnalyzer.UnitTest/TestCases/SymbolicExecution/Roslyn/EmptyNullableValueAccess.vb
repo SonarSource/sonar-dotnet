@@ -511,7 +511,7 @@ Class Assignments
     End Sub
     Sub Assignment2()
         Dim nullable As Integer? = Nothing
-        Dim x As Integer = nullable     ' FN Non-compliant
+        Dim x As Integer = nullable     ' FN
     End Sub
 End Class
 
