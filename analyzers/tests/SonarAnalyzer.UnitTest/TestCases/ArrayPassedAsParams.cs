@@ -82,20 +82,20 @@ public class Repro6894
 
     public void CallMethod()
     {
-        Method(new String[] { "1", "2" }); // Noncompliant, TP. Elements in args: {"1", "2"}
+        Method(new String[] { "1", "2" }); // Noncompliant, TP. Elements in args: ["1", "2"]
                                            // The argument given for a parameter array can be a single expression that is implicitly convertible (§10.2) to the parameter array type.
                                            // In this case, the parameter array acts precisely like a value parameter.
                                            // see: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/classes#14625-parameter-arrays
-        Method(new object[] { new int[] { 1, 2} }); // Noncompliant. TP Elements in args: {System.Int32[]}
-        Method(new int[] { 1, 2, 3, }); // Noncompliant, FP. Elements in args: {System.Int32[]}
-        Method(new String[] { "1", "2" }, new String[] { "1", "2"}); // Noncompliant, FP. Elements in args: {System.String[], System.String[]}
+        Method(new object[] { new int[] { 1, 2} }); // Noncompliant. TP Elements in args: [System.Int32[]]
+        Method(new int[] { 1, 2, 3, }); // Noncompliant, FP. Elements in args: [System.Int32[]]
+        Method(new String[] { "1", "2" }, new String[] { "1", "2"}); // Noncompliant, FP. Elements in args: [System.String[], System.String[]]
         //                                ^^^^^^^^^^^^^^^^^^^^^^^^
-        Method(new String[] { "1", "2"}, new int[] { 1, 2}); // Noncompliant, FP. Elements in args: {System.String[], System.Int32[]}
+        Method(new String[] { "1", "2"}, new int[] { 1, 2}); // Noncompliant, FP. Elements in args: pSystem.String[], System.Int32[]]
         //                               ^^^^^^^^^^^^^^^^^
-        MethodArray(new String[] { "1", "2" }, new String[] { "1", "2" }); // Noncompliant, FP. Elements in args: {System.String[], System.String[]}
-        MethodArray(new int[] { 1, 2 }, new int[] { 1, 2 }); // Noncompliant, FP. Elements in args: {System.Int32[], System.Int32[]}
+        MethodArray(new String[] { "1", "2" }, new String[] { "1", "2" }); // Noncompliant, FP. Elements in args: [System.String[], System.String[]]
+        MethodArray(new int[] { 1, 2 }, new int[] { 1, 2 }); // Noncompliant, FP. Elements in args: [System.Int32[], System.Int32[]]
 
-        MethodJuggedArray(new int[] { 1, 2 }); // Noncompliant, FP. Elements in args: {System.Object[]}
+        MethodJuggedArray(new int[] { 1, 2 }); // Noncompliant, FP. Elements in args: [System.Object[]]
     }
 }
 
