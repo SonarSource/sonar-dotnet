@@ -49,14 +49,15 @@ public class Sample
         }
     }
 
-    public void StaticLambda()
+    public void StaticLambda(object o)
     {
-        Func<object, string> a = static (arg) =>
-        {
-            return arg.ToString();      // Compliant, it's not a public method argument
-        };
-        a(null);
+        Func<object, string> lambda = static (object obj) => obj.ToString(); // Compliant - not accessible from other assemblies
+        lambda(o);
+
+        MethodAcceptsFunction(static obj => obj.ToString());
     }
+
+    private string MethodAcceptsFunction(Func<object, string> func) => func(null);
 
     public object PropertySet
     {

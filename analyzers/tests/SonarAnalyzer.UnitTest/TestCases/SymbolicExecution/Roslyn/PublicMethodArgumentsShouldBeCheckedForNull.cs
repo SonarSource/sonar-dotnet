@@ -622,5 +622,13 @@ public class NestedClasses
         {
             o.ToString();                               // Compliant - method is not accessible from other assemblies
         }
+
+        public class DeeperNestedPublicClass
+        {
+            public void Method(object o)
+            {
+                o.ToString();                           // Compliant - method is not accessible from other assemblies
+            }
+        }
     }
 }
