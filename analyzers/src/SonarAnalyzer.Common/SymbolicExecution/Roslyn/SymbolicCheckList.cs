@@ -79,9 +79,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                         after.Add(beforeContext.WithState(newState));
                     }
                 }
-                var temp = before;
-                before = after;
-                after = temp;
+                after = Interlocked.Exchange(ref before, after);
                 after.Clear();
             }
             return before.ToArray();
