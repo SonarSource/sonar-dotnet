@@ -136,11 +136,11 @@ Class NullableOfCustomTypes
         nullable = New Nullable(Of AStruct)()
         x = nullable.Value                                                  ' Noncompliant
 
-        x = (New Nullable(Of AStruct)()).Value                              ' FIXME Non-compliant
-        x = (CTypeDynamic(Of AStruct?)(Nothing)).Value                      ' FIXME Non-compliant
+        x = (New Nullable(Of AStruct)()).Value                              ' FN
+        x = (CTypeDynamic(Of AStruct?)(Nothing)).Value                      ' FN
 
         nullable = Nothing
-        x = (CType(nullable, AStruct?)).Value                               ' FIXME Non-compliant
+        x = (CType(nullable, AStruct?)).Value                               ' FN
         x = (CTypeDynamic(Of AStruct?)(nullable)).Value                     ' Compliant, when reached .Value above implies nullable is not null
         x = (CType((CTypeDynamic(Of AStruct?)(nullable)), AStruct?)).Value  ' Compliant, same as above
     End Sub
@@ -507,7 +507,11 @@ Class Assignments
     Sub Assignment(nullable As Integer?)
         Dim x As Integer = nullable     ' Compliant
         nullable = Nothing
-        Dim y As Integer = nullable     ' FIXME Non-compliant
+        Dim y As Integer = nullable     ' Noncompliant
+    End Sub
+    Sub Assignment2()
+        Dim nullable As Integer? = Nothing
+        Dim x As Integer = nullable     ' FN
     End Sub
 End Class
 
@@ -542,13 +546,13 @@ Class Casts
     End Sub
 
     Sub UpcastWithNull()
-        Dim x = (CType(Nothing, Integer?)).Value    ' FIXME Non-compliant
+        Dim x = (CType(Nothing, Integer?)).Value    ' FN
     End Sub
 
     Sub UpcastWithReassignment(i As Integer?)
-        Dim x = (CType(Nothing, Integer?)).Value    ' FIXME Non-compliant
+        Dim x = (CType(Nothing, Integer?)).Value    ' FN
         i = Nothing
-        x = (CType(i, Integer?)).Value              ' FIXME Non-compliant
+        x = (CType(i, Integer?)).Value              ' FN
     End Sub
 
     Sub UpcastWithNonNullLiteral(i As Integer?)
@@ -556,15 +560,15 @@ Class Casts
     End Sub
 
     Sub CTypeDynamicAndUnreachability(i As Integer?)
-        Dim x = (CTypeDynamic(Of Integer?)(Nothing)).Value  ' FIXME Non-compliant
+        Dim x = (CTypeDynamic(Of Integer?)(Nothing)).Value  ' FN
         i = Nothing
-        x = (CTypeDynamic(Of Integer?)(i)).Value            ' FIXME Non-compliant
+        x = (CTypeDynamic(Of Integer?)(i)).Value            ' FN
     End Sub
 
     Sub CTypeDynamicWithUnknownAndReassignment(i As Integer?)
         Dim x = (CTypeDynamic(Of Integer?)(i)).Value   ' Compliant
         i = Nothing
-        x = (CTypeDynamic(Of Integer?)(i)).Value       ' FIXME Non-compliant
+        x = (CTypeDynamic(Of Integer?)(i)).Value       ' FN
     End Sub
 
     Sub CTypeDynamicWithNonNullLiteral(i As Integer?)
@@ -576,7 +580,7 @@ Class WithAliases
     Private Sub Basics(ByVal i As MaybeInt)
         Dim x = i.Value
         i = Nothing
-        x = (CTypeDynamic(Of Integer?)(i)).Value    ' FIXME Non-compliant
+        x = (CTypeDynamic(Of Integer?)(i)).Value    ' FN
     End Sub
 End Class
 

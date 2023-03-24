@@ -76,5 +76,8 @@ public class EmptyNullableValueAccess : EmptyNullableValueAccessBase
                 base.VisitInvocationExpression(node);
             }
         }
+
+        public override void VisitAssignmentStatement(AssignmentStatementSyntax node) =>
+            HasPotentialNullableValueAccess = true;
     }
 }
