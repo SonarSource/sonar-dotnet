@@ -184,7 +184,7 @@ namespace Tests.Diagnostics
         void NonCompliant1()
         {
             Exception exception = null;
-            if (exception.Data is IDictionary data) // FN Suppressed #6117
+            if (exception.Data is IDictionary data) // Noncompliant
             {
                 if (exception.InnerException?.Data is IDictionary innerexceptiondata)
                 {
@@ -208,7 +208,7 @@ namespace Tests.Diagnostics
         {
             if (exception?.Data is null)
             {
-                if (exception.InnerException?.Data is IDictionary innerexceptiondata) // FN Suppressed #6117
+                if (exception.InnerException?.Data is IDictionary innerexceptiondata) // Noncompliant
                 {
 
                 }
@@ -273,7 +273,7 @@ namespace Tests.Diagnostics
                 return -1;
             }
 
-            return dict.Count; // Compliant Suppressed #6117
+            return dict.Count; // Noncompliant FP, we don't track integer constraints (yet, see MMF-3077)
         }
     }
 }
