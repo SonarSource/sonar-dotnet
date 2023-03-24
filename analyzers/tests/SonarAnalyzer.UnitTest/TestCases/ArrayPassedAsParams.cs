@@ -99,3 +99,16 @@ public class Repro6894
     }
 }
 
+public class Repro6893
+{
+    //Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6893
+
+    public void Method(int a, params object[] argumentArray) { }
+    
+
+    public void CallMethod()
+    {
+        Method(a: 1, argumentArray: new int[] { 1, 2 }); // Noncompliant FP
+    }
+}
+
