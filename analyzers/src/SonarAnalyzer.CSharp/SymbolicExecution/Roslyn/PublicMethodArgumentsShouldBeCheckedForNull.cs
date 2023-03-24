@@ -39,10 +39,10 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
         var operation = context.Operation.Instance;
         if (operation.Kind == OperationKindEx.ParameterReference
             && operation.ToParameterReference().Parameter is var parameter
-            && parameter.Type.IsValueType is false
+            && !parameter.Type.IsValueType
             && IsParameterDereferenced(context.Operation)
             && NullableStateIsNotKnownForParameter(parameter)
-            && !IgnoreBecauseOfParameterAttribute(parameter))
+            && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
             var message = SemanticModel.GetDeclaredSymbol(Node).IsConstructor()
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
@@ -53,20 +53,16 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
         return context.State;
 
         bool NullableStateIsNotKnownForParameter(IParameterSymbol symbol) =>
-            !context.HasConstraint(symbol, ObjectConstraint.Null)
-            && !context.HasConstraint(symbol, ObjectConstraint.NotNull);
-
-        static bool IsParameterDereferenced(IOperationWrapperSonar operation) =>
-            operation.Parent != null
-            && operation.Parent.IsAnyKind(
-                OperationKindEx.Invocation,
-                OperationKindEx.FieldReference,
-                OperationKindEx.PropertyReference,
-                OperationKindEx.EventReference,
-                OperationKindEx.Await,
-                OperationKindEx.ArrayElementReference);
-
-        static bool IgnoreBecauseOfParameterAttribute(IParameterSymbol symbol) =>
-            symbol.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute);
+            context.State[symbol] is null || !context.State[symbol].HasConstraint<ObjectConstraint>();
     }
+
+    private static bool IsParameterDereferenced(IOperationWrapperSonar operation) =>
+        operation.Parent != null
+        && operation.Parent.IsAnyKind(
+            OperationKindEx.Invocation,
+            OperationKindEx.FieldReference,
+            OperationKindEx.PropertyReference,
+            OperationKindEx.EventReference,
+            OperationKindEx.Await,
+            OperationKindEx.ArrayElementReference);
 }
