@@ -34,6 +34,11 @@ namespace Tests.Diagnostics.CSharp8
             var value = arg as AggregateException ?? new AggregateException(arg.Message);     // Noncompliant, arg can be null or another Exception type on the right side
         }
 
+        public void NullCoalesce_WithAs(IProperty arg)
+        {
+            ISomethingElse value = arg as ISomethingElse ?? new SomethingElse(arg.Property);    // Noncompliant FP
+        }
+
         public void NullCoalescenceAssignment_Null()
         {
             string name = null;
@@ -68,6 +73,14 @@ namespace Tests.Diagnostics.CSharp8
         }
 
         public object ArrowProperty => default;
+
+        public interface IProperty { object Property { get; } }
+        public interface ISomethingElse { }
+
+        public class SomethingElse : ISomethingElse
+        {
+            public SomethingElse(object property) { }
+        }
     }
 
     public class Nullables

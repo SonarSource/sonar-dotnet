@@ -1266,6 +1266,53 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public class Nancy_Repro
+    {
+        public void WithDynamic(string first, dynamic second)
+        {
+            if(first == null && second == null)
+            {
+                throw new Exception("Both first and second are null");
+            }
+            if(second == null && first.Length == 0)     // Noncompliant FP, if both first and second were null, an exception was already thrown
+            {
+                // Do something
+            }
+        }
+
+        public void WithObject(string first, object second)
+        {
+            if (first == null && second == null)
+            {
+                throw new Exception("Both first and second are null");
+            }
+            if (second == null && first.Length == 0)     // Compliant
+            {
+                // Do something
+            }
+        }
+    }
+
+    public class Akka_Repro
+    {
+        public void IsType(object message)
+        {
+            var first = message as IFirst;
+            var second = message as ISecond;
+            if(first != null)
+            {
+                // Do something
+            }
+            else if(second?.Property is string)
+            {
+                var str = second.Property; // Noncompliant FP
+            }
+        }
+
+        private interface IFirst { }
+        private interface ISecond { object Property { get; } }
+    }
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/3395

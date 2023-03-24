@@ -170,7 +170,7 @@ namespace Tests.Diagnostics
             switch (obj?.Color)
             {
                 case ConsoleColor.Red:
-                    Console.ForegroundColor = obj.Color;  // Compliant, was compliant in the old engine. Should be fixed by MMF-2401
+                    Console.ForegroundColor = obj.Color;  // Noncompliant FP, was compliant in the old engine. Should be fixed by MMF-2401
                     break;
                 default:
                     Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant
@@ -273,12 +273,12 @@ namespace Tests.Diagnostics
             switch (valueHolder?.MyEnum)
             {
                 case MyEnum.ONE:
-                    return valueHolder.Value;   // Compliant, nullability is inferred from result relation
+                    return valueHolder.Value;   // Noncompliant FP, nullability is inferred from result relation
                 case MyEnum.TWO:
                 case MyEnum.THREE:
-                    return valueHolder.Value;   // Compliant, nullability is inferred from result relation
+                    return valueHolder.Value;   // Noncompliant FP, nullability is inferred from result relation
                 case MyEnum.FOUR:
-                    return valueHolder.Value;   // Compliant, nullability is inferred from result relation
+                    return valueHolder.Value;   // Noncompliant FP, nullability is inferred from result relation
                 case MyEnum.FIVE:
                 case null:
                     return valueHolder.Value;   // Noncompliant
