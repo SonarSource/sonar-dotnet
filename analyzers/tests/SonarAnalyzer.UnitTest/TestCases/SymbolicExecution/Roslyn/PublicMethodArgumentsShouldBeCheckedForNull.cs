@@ -475,6 +475,20 @@ public struct StructAccessibility
     {
         o.ToString();
     }
+
+    public void LambdasAndAnonymousDelegates(object o)
+    {
+        Func<object, string> lambda = (object obj) => obj.ToString(); // Compliant - not accessible from other assemblies
+        lambda(o);
+
+        MethodAcceptsFunction(obj => obj.ToString());
+
+        CustomDelegate del = delegate (object obj) { return obj.ToString(); };
+        del(o);
+    }
+
+    delegate string CustomDelegate(object obj);
+    private string MethodAcceptsFunction(Func<object, string> func) => func(null);
 }
 
 public class PropertyAccessibility
