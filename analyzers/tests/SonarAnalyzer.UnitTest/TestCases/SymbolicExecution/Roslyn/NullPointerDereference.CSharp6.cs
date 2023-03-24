@@ -57,7 +57,7 @@ namespace Tests.Diagnostics
             }
             catch (ApplicationException) when (o == null)
             {
-                var b = o.ToString(); // FN Suppressed #6117
+                var b = o.ToString(); // Noncompliant
             }
         }
 
@@ -71,7 +71,7 @@ namespace Tests.Diagnostics
             }
             catch (Exception e) when (e.Message != null)
             {
-                var b = o.ToString(); // FN Suppressed #6117
+                var b = o.ToString(); // Noncompliant
             }
         }
 
@@ -80,7 +80,7 @@ namespace Tests.Diagnostics
             var row = list?.Count;
             if (row != null)
             {
-                var type = list.ToArray();  // Compliant Suppressed #6117, nullability is inferred from result relation
+                var type = list.ToArray();  // Compliant, nullability is inferred from result relation
             }
         }
 
@@ -96,7 +96,7 @@ namespace Tests.Diagnostics
             var row = list?.Count;
             if (a.booleanVal = (row != null))
             {
-                var type = list.ToArray();  // Compliant Suppressed #6117, nullability is inferred from result relation
+                var type = list.ToArray();  // Compliant, nullability is inferred from result relation
             }
         }
 
@@ -105,7 +105,7 @@ namespace Tests.Diagnostics
             var row = list?.Count;
             if (row == null)
             {
-                var type = list.ToArray(); // FN Suppressed #6117
+                var type = list.ToArray(); // Noncompliant
             }
         }
 
@@ -114,7 +114,7 @@ namespace Tests.Diagnostics
             var row = list?.Count;
             if (a.booleanVal = (row == null))
             {
-                var type = list.ToArray(); // FN Suppressed #6117
+                var type = list.ToArray(); // Noncompliant
             }
         }
 
@@ -123,7 +123,7 @@ namespace Tests.Diagnostics
             switch (o?.GetHashCode())
             {
                 case 1:
-                    o.ToString(); // Compliant Suppressed #6117, nullability is inferred from result relation
+                    o.ToString(); // Compliant, nullability is inferred from result relation
                     break;
                 default:
                     break;
@@ -136,7 +136,7 @@ namespace Tests.Diagnostics
             switch (o?.GetHashCode())
             {
                 case null:
-                    o.ToString(); // FN Suppressed #6117
+                    o.ToString(); // Noncompliant
                     break;
                 default:
                     break;
@@ -153,7 +153,7 @@ namespace Tests.Diagnostics
             switch (obj?.Color)
             {
                 case null:
-                    Console.ForegroundColor = obj.Color; // FN Suppressed #6117
+                    Console.ForegroundColor = obj.Color; // Noncompliant
                     break;
                 case ConsoleColor.Red:
                     Console.ForegroundColor = obj.Color;
@@ -170,10 +170,10 @@ namespace Tests.Diagnostics
             switch (obj?.Color)
             {
                 case ConsoleColor.Red:
-                    Console.ForegroundColor = obj.Color;  // Compliant Suppressed #6117, was compliant in the old engine. Should be fixed by MMF-2401
+                    Console.ForegroundColor = obj.Color;  // Compliant, was compliant in the old engine. Should be fixed by MMF-2401
                     break;
                 default:
-                    Console.WriteLine($"Color {obj.Color} is not supported."); // FN Suppressed #6117
+                    Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant
                     break;
             }
         }
@@ -273,15 +273,15 @@ namespace Tests.Diagnostics
             switch (valueHolder?.MyEnum)
             {
                 case MyEnum.ONE:
-                    return valueHolder.Value;   // Compliant Suppressed #6117, nullability is inferred from result relation
+                    return valueHolder.Value;   // Compliant, nullability is inferred from result relation
                 case MyEnum.TWO:
                 case MyEnum.THREE:
-                    return valueHolder.Value;   // Compliant Suppressed #6117, nullability is inferred from result relation
+                    return valueHolder.Value;   // Compliant, nullability is inferred from result relation
                 case MyEnum.FOUR:
-                    return valueHolder.Value;   // Compliant Suppressed #6117, nullability is inferred from result relation
+                    return valueHolder.Value;   // Compliant, nullability is inferred from result relation
                 case MyEnum.FIVE:
                 case null:
-                    return valueHolder.Value;   // FN Suppressed #6117
+                    return valueHolder.Value;   // Noncompliant
                 default:
                     return string.Empty;
             }
