@@ -483,12 +483,12 @@ public struct StructAccessibility
 
         MethodAcceptsFunction(obj => obj.ToString());
 
-        CustomDelegate del = delegate (object obj) { return obj.ToString(); };
+        CustomDelegate del = delegate (object obj) { obj.ToString(); };
         del(o);
     }
 
-    delegate string CustomDelegate(object obj);
-    private string MethodAcceptsFunction(Func<object, string> func) => func(null);
+    delegate void CustomDelegate(object obj);
+    private void MethodAcceptsFunction(Action<object> action) { }
 }
 
 public class PropertyAccessibility

@@ -54,10 +54,10 @@ public class Sample
         Func<object, string> lambda = static (object obj) => obj.ToString(); // Compliant - not accessible from other assemblies
         lambda(o);
 
-        MethodAcceptsFunction(static obj => obj.ToString());
+        MethodAcceptsFunction(static obj => { obj.ToString(); });
     }
 
-    private string MethodAcceptsFunction(Func<object, string> func) => func(null);
+    private void MethodAcceptsFunction(Action<object> action) { }
 
     public object PropertySet
     {
