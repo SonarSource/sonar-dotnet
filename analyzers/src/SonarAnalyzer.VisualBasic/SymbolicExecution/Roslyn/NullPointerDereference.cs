@@ -41,16 +41,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic
 
             public override void Visit(SyntaxNode node)
             {
-                if (node.IsAnyKind(
-                    SyntaxKind.AwaitExpression,
-                    SyntaxKind.ForEachStatement,
-                    SyntaxKind.InvocationExpression,    // For array access arr(42)
-                    SyntaxKind.SimpleMemberAccessExpression))
+                if (!Result)
                 {
-                    Result = true;
-                }
-                else if (!Result)   // We can stop visiting once we know the answer
-                {
+                    Result = node.IsAnyKind(
+                        SyntaxKind.AwaitExpression,
+                        SyntaxKind.ForEachStatement,
+                        SyntaxKind.InvocationExpression,    // For array access arr(42)
+                        SyntaxKind.SimpleMemberAccessExpression);
                     base.Visit(node);
                 }
             }

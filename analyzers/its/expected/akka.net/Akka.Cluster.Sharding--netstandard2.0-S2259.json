@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'mostShards' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardAllocationStrategy.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  38,
+"endLine":  177,
+"endColumn":  48
+}
+}
+}
+]
+}

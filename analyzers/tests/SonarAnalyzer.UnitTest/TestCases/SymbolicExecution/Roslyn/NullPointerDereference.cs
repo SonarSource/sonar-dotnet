@@ -1222,7 +1222,7 @@ namespace Tests.Diagnostics
             string someString = null;
 
             if (!someString?.Contains("a") ?? true)
-                someString.ToString();  // FN Suppressed #6117, it's null or doesn't contain 'a'
+                someString.ToString();  // Noncompliant, it's null or doesn't contain 'a'
             else
                 someString.ToString();  // Compliant, someString is not null and contains 'a'
         }
@@ -1234,7 +1234,7 @@ namespace Tests.Diagnostics
         {
             if (string.IsNullOrEmpty(arg?.ToString()))
             {
-                arg.ToString(); // FN Suppressed #6117
+                arg.ToString(); // Noncompliant
             }
             else
             {
@@ -1246,7 +1246,7 @@ namespace Tests.Diagnostics
         {
             if (string.IsNullOrEmpty(arg?.Message))
             {
-                arg.ToString(); // FN Suppressed #6117
+                arg.ToString(); // Noncompliant
             }
             else
             {
@@ -1258,13 +1258,60 @@ namespace Tests.Diagnostics
         {
             if (arg?.Length == 0)
             {
-                arg.ToString(); // Compliant Suppressed #6117 related to nullable binary equals
+                arg.ToString(); // Compliant
             }
             else
             {
-                arg.ToString(); // FN Suppressed #6117
+                arg.ToString(); // Noncompliant
             }
         }
+    }
+
+    public class Nancy_Repro
+    {
+        public void WithDynamic(string first, dynamic second)
+        {
+            if(first == null && second == null)
+            {
+                throw new Exception("Both first and second are null");
+            }
+            if(second == null && first.Length == 0)     // Noncompliant FP, if both first and second were null, an exception was already thrown
+            {
+                // Do something
+            }
+        }
+
+        public void WithObject(string first, object second)
+        {
+            if (first == null && second == null)
+            {
+                throw new Exception("Both first and second are null");
+            }
+            if (second == null && first.Length == 0)     // Compliant
+            {
+                // Do something
+            }
+        }
+    }
+
+    public class Akka_Repro
+    {
+        public void IsType(object message)
+        {
+            var first = message as IFirst;
+            var second = message as ISecond;
+            if(first != null)
+            {
+                // Do something
+            }
+            else if(second?.Property is string)
+            {
+                var str = second.Property; // Noncompliant FP
+            }
+        }
+
+        private interface IFirst { }
+        private interface ISecond { object Property { get; } }
     }
 }
 
@@ -1414,7 +1461,7 @@ namespace Repro_3395
                 // Do something
             }
 
-            return something.SomeProperty; // FN Suppressed #6117
+            return something.SomeProperty; // Noncompliant
         }
 
         public static Something GetSomething()
