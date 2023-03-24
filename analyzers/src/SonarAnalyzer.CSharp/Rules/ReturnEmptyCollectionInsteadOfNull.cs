@@ -69,17 +69,19 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
     }
 
     private static bool IsReturningCollection(SonarSyntaxNodeReportingContext context) =>
-        GetReturnMethod(context) is { ReturnType: { } returnType }
-        && !method.ReturnType.Is(KnownType.System_String)
-        && !method.ReturnType.DerivesFrom(KnownType.System_Xml_XmlNode)
-        && method.ReturnType.DerivesOrImplementsAny(CollectionTypes)
-        && method.ReturnType.NullableAnnotation() != NullableAnnotation.Annotated;
+        GetReturnType(context) is { } returnType
+        && !returnType.Is(KnownType.System_String)
+        && !returnType.DerivesFrom(KnownType.System_Xml_XmlNode)
+        && returnType.DerivesOrImplementsAny(CollectionTypes)
+        && returnType.NullableAnnotation() != NullableAnnotation.Annotated;
 
-    private static IMethodSymbol GetReturnMethod(SonarSyntaxNodeReportingContext context)
-    {
-        var symbol = context.SemanticModel.GetDeclaredSymbol(context.Node);
-        return symbol is IPropertySymbol property ? property.GetMethod : symbol as IMethodSymbol;
-    }
+    private static ITypeSymbol GetReturnType(SonarSyntaxNodeReportingContext context) =>
+        context.SemanticModel.GetDeclaredSymbol(context.Node) switch
+        {
+            IPropertySymbol property => property.Type,
+            IMethodSymbol method => method.ReturnType,
+            _ => null,
+        };
 
     private static ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode node) =>
             node switch
