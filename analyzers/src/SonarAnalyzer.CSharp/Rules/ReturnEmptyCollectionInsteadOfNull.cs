@@ -69,13 +69,13 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
     }
 
     private static bool IsReturningCollection(SonarSyntaxNodeReportingContext context) =>
-        GetReturnType(context) is { } returnType
-        && !returnType.Is(KnownType.System_String)
-        && !returnType.DerivesFrom(KnownType.System_Xml_XmlNode)
-        && returnType.DerivesOrImplementsAny(CollectionTypes)
-        && returnType.NullableAnnotation() != NullableAnnotation.Annotated;
+        GetType(context) is { } type
+        && !type.Is(KnownType.System_String)
+        && !type.DerivesFrom(KnownType.System_Xml_XmlNode)
+        && type.DerivesOrImplementsAny(CollectionTypes)
+        && type.NullableAnnotation() != NullableAnnotation.Annotated;
 
-    private static ITypeSymbol GetReturnType(SonarSyntaxNodeReportingContext context) =>
+    private static ITypeSymbol GetType(SonarSyntaxNodeReportingContext context) =>
         context.SemanticModel.GetDeclaredSymbol(context.Node) switch
         {
             IPropertySymbol property => property.Type,
