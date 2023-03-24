@@ -15,15 +15,15 @@ Class Noncompliant
     End Sub
 
     <Obsolete(Nothing)> ' Noncompliant
-    Sub WithNothing() { }
+    Sub WithNothing()
     End Sub
 
     <Obsolete("")> ' Noncompliant
-    Sub WithEmptyString() { }
+    Sub WithEmptyString()
     End Sub
 
     <Obsolete("  ")> ' Noncompliant
-    Sub WithWhiteSpace() { }
+    Sub WithWhiteSpace()
     End Sub
 
     <Obsolete("", True)> ' Noncompliant
