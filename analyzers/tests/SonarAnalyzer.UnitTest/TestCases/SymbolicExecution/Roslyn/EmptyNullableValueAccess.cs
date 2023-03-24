@@ -92,18 +92,6 @@ class Basics
         _ = b1.Value;                                        // Noncompliant
     }
 
-    void AssignmentAndDeconstructionUpcasting()
-    {
-        var (b, _) = (null as bool?, null as bool?);
-        _ = b.Value;                                         // FN: b is empty
-    }
-
-    void AssignmentAndDeconstructionTypeInference()
-    {
-        (int? discard, int? b) = (null, null);
-        _ = b.Value;                                         // FN: b is empty
-    }
-
     void TwoWaySwappingViaTemporaryVar()
     {
         bool? b1 = null;
@@ -113,26 +101,6 @@ class Basics
         b2 = t;
         _ = b1.Value;           // Compliant, after swapping is non-empty
         _ = b2.Value;           // Noncompliant, after swapping is empty
-    }
-
-    void TwoWaySwappingViaDeconstruction()
-    {
-        bool? b1 = null;
-        bool? b2 = true;
-        (b1, b2) = (b2, b1);
-        _ = b1.Value;           // Noncompliant, FP: after swapping is non-empty
-        _ = b2.Value;           // FN: after swapping is empty
-    }
-
-    void ThreeWaySwappingViaDeconstruction()
-    {
-        bool? b1 = null;
-        bool? b2 = true;
-        bool? b3 = null;
-        (b1, b2, b3) = (b2, b3, b2);
-        _ = b1.Value;           // Noncompliant, FP: after swapping is non-empty
-        _ = b2.Value;           // FN: after swapping is empty
-        _ = b3.Value;           // Noncompliant, FP: after swapping is non-empty
     }
 
     void SwitchExpressions(bool zero)
@@ -177,6 +145,61 @@ class Basics
     {
         param ??= 42;
         return param.Value;                                               // Compliant, value is always set
+    }
+}
+
+class AssignmentAndDeconstruction
+{
+    void TypeInference()
+    {
+        (int? discard, int? b) = (null, null);
+        _ = b.Value;                                         // FN: b is empty
+    }
+
+    void FirstLevel()
+    {
+        var (b, _) = (null as bool?, null as bool?);
+        _ = b.Value;                                         // FN: b is empty
+    }
+
+    void SecondLevel()
+    {
+        (int? b1, (int? b2, (int? b3, int? b4), int? b5)) = (42, (42, (42, null), null));
+        _ = b5.Value; // Compliant, FN
+    }
+
+    void ThirdLevel()
+    {
+        (int? b1, (int? b2, (int? b3, int? b4), int? b5)) = (42, (42, (42, null), null));
+        _ = b2.Value; // Compliant
+        _ = b3.Value; // Compliant
+        _ = b4.Value; // Compliant, FN
+    }
+
+    void WithDiscard()
+    {
+        (_, (int? b1, (int?, int?) _, int? b2)) = (42, (42, (42, null), null));
+        _ = b2.Value; // Compliant, FN
+    }
+
+    void TwoWaySwapping()
+    {
+        bool? b1 = null;
+        bool? b2 = true;
+        (b1, b2) = (b2, b1);
+        _ = b1.Value;           // Noncompliant, FP: after swapping is non-empty
+        _ = b2.Value;           // FN: after swapping is empty
+    }
+
+    void ThreeWaySwapping()
+    {
+        bool? b1 = null;
+        bool? b2 = true;
+        bool? b3 = null;
+        (b1, b2, b3) = (b2, b3, b2);
+        _ = b1.Value;           // Noncompliant, FP: after swapping is non-empty
+        _ = b2.Value;           // FN: after swapping is empty
+        _ = b3.Value;           // Noncompliant, FP: after swapping is non-empty
     }
 }
 
@@ -676,3 +699,4 @@ namespace TypeWithValueProperty
         public static explicit operator StructWithValuePropertyAndCastOperators(long? value) => new StructWithValuePropertyAndCastOperators();
     }
 }
+
