@@ -40,8 +40,7 @@ public abstract class EmptyNullableValueAccessBase : SymbolicRuleCheck
         else if (operationInstance.Kind == OperationKindEx.Conversion
             && operationInstance.ToConversion() is var conversion
             && conversion.Operand.Type.IsNullableValueType()
-            && !conversion.Type.IsNullableValueType()
-            && conversion.Type.IsStruct()
+            && conversion.Type.IsNonNullableValueType()
             && context.HasConstraint(conversion.Operand, ObjectConstraint.Null))
         {
             ReportIssue(conversion.Operand, conversion.Operand.Syntax.ToString());
