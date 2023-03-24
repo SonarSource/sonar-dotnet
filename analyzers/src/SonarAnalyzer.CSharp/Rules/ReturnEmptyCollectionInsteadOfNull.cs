@@ -69,7 +69,7 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
     }
 
     private static bool IsReturningCollection(SonarSyntaxNodeReportingContext context) =>
-        GetReturnMethod(context) is { } method
+        GetReturnMethod(context) is { ReturnType: { } returnType }
         && !method.ReturnType.Is(KnownType.System_String)
         && !method.ReturnType.DerivesFrom(KnownType.System_Xml_XmlNode)
         && method.ReturnType.DerivesOrImplementsAny(CollectionTypes)
