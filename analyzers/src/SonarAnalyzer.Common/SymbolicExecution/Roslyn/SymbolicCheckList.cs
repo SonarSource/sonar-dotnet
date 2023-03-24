@@ -67,6 +67,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private SymbolicContext[] InvokeChecks(SymbolicContext context, bool preProcess)
         {
+            // Performance: Hotpath. Don't do changes here without profiling allocation impact.
             var before = new List<SymbolicContext>() { context };
             var after = new List<SymbolicContext>();
             foreach (var check in checks)
