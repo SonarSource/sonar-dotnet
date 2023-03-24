@@ -30,7 +30,7 @@ public class Program
 
     protected internal void NotCompliantCases_ProtectedInternal(object o)
     {
-        o.ToString(); // Noncompliant - FP (method visibility)
+        o.ToString(); // Noncompliant
     }
 
     internal void CompliantCases_Internal(object o)
