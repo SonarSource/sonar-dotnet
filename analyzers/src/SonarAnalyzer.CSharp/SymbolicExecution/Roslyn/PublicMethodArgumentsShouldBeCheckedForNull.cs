@@ -39,8 +39,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             && IsAccessibleFromOtherAssemblies();
 
         bool IsRelevantMethod() =>
-            Node is BaseMethodDeclarationSyntax { } method
-            && MethodDereferencesArguments(method);
+            Node is BaseMethodDeclarationSyntax { } method && MethodDereferencesArguments(method);
 
         bool IsRelevantPropertyAccessor() =>
             Node is AccessorDeclarationSyntax { } accessor
@@ -87,12 +86,12 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             }
 
             static bool IsStaticLocalFunction(SyntaxNode node) =>
-                LocalFunctionStatementSyntaxWrapper.IsInstance(node)
+                node.Kind() == SyntaxKindEx.LocalFunctionStatement
                 && ((LocalFunctionStatementSyntaxWrapper)node).Modifiers.AnyOfKind(SyntaxKind.StaticKeyword);
 
             static bool IsStaticLambda(SyntaxNode node) =>
-                SimpleLambdaExpressionSyntaxWrapper.IsInstance(node)
-                && ((SimpleLambdaExpressionSyntaxWrapper)node).Modifiers.AnyOfKind(SyntaxKind.StaticKeyword);
+                (node.Kind() == SyntaxKind.SimpleLambdaExpression && ((SimpleLambdaExpressionSyntaxWrapper)node).Modifiers.AnyOfKind(SyntaxKind.StaticKeyword))
+                || (node.Kind() == SyntaxKind.ParenthesizedLambdaExpression && ((ParenthesizedLambdaExpressionSyntaxWrapper)node).Modifiers.AnyOfKind(SyntaxKind.StaticKeyword));
         }
 
         public override void VisitIdentifierName(IdentifierNameSyntax node) =>
