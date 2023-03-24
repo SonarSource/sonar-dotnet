@@ -8,12 +8,19 @@
         o[1].ToString(); // Noncompliant {{Refactor this method to add validation of parameter 'o' before using it.}}
     }
 
-    public void Compliant(object[] o)
+    public void ListPattern1(object[] o)
     {
         if (o is [not null, not null])
         {
             o.ToString();       // Noncompliant - FP
-            o[1].ToString();    // Compliant
+        }
+    }
+
+    public void ListPattern2(object[] o)
+    {
+        if (o is [not null, not null])
+        {
+            o[1].ToString();    // Noncompliant - FP
         }
     }
 }
