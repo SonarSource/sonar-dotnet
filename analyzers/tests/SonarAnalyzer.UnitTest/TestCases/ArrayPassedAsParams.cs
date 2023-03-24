@@ -71,3 +71,44 @@ public class IndexerClass
 {
     public int this[params int[] i] => 1;
 }
+
+public class Repro6894
+{
+    //Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6894
+
+    public void Method(params object[] args) { }
+    public void MethodArray(params Array[] args) { }
+    public void MethodJuggedArray(params int[][] args) { }
+
+    public void CallMethod()
+    {
+        Method(new String[] { "1", "2" }); // Noncompliant, TP. Elements in args: ["1", "2"]
+                                           // The argument given for a parameter array can be a single expression that is implicitly convertible (§10.2) to the parameter array type.
+                                           // In this case, the parameter array acts precisely like a value parameter.
+                                           // see: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/classes#14625-parameter-arrays
+        Method(new object[] { new int[] { 1, 2} }); // Noncompliant. TP Elements in args: [System.Int32[]]
+        Method(new int[] { 1, 2, 3, }); // Noncompliant, FP. Elements in args: [System.Int32[]]
+        Method(new String[] { "1", "2" }, new String[] { "1", "2"}); // Noncompliant, FP. Elements in args: [System.String[], System.String[]]
+        //                                ^^^^^^^^^^^^^^^^^^^^^^^^
+        Method(new String[] { "1", "2"}, new int[] { 1, 2}); // Noncompliant, FP. Elements in args: pSystem.String[], System.Int32[]]
+        //                               ^^^^^^^^^^^^^^^^^
+        MethodArray(new String[] { "1", "2" }, new String[] { "1", "2" }); // Noncompliant, FP. Elements in args: [System.String[], System.String[]]
+        MethodArray(new int[] { 1, 2 }, new int[] { 1, 2 }); // Noncompliant, FP. Elements in args: [System.Int32[], System.Int32[]]
+
+        MethodJuggedArray(new int[] { 1, 2 }); // Noncompliant, FP. Elements in args: [System.Object[]]
+    }
+}
+
+public class Repro6893
+{
+    //Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6893
+
+    public void Method(int a, params object[] argumentArray) { }
+    
+
+    public void CallMethod()
+    {
+        Method(a: 1, argumentArray: new int[] { 1, 2 }); // Noncompliant FP
+    }
+}
+
