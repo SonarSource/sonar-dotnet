@@ -773,7 +773,7 @@ Tag(""Result"", Result)";
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsNotNull_AndAlso() =>
-            DebugAssertValues("arg != null && condition").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+            DebugAssertValues("arg != null && condition").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsNotNullForAll_AndAlso()
@@ -783,19 +783,19 @@ Debug.Assert(arg1 != null && arg2 != null);
 Tag(""Arg1"", arg1);
 Tag(""Arg2"", arg2);";
             var validator = SETestContext.CreateCS(code, $", object arg1, object arg2").Validator;
-            validator.ValidateTag("Arg1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Arg2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Arg1", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Arg2", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsNotNull_OrElse() =>
-            DebugAssertValues("arg != null || condition").Should().HaveCount(2)
-                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null))
-                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+            DebugAssertValues("arg != null || condition").Should().SatisfyRespectively(
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_Simple() =>
-            DebugAssertValues("arg", "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.True));
+            DebugAssertValues("arg", "bool").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull));
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_Binary() =>
@@ -815,7 +815,7 @@ Tag(""Arg2"", arg2);";
         [DataRow("!arg")]
         [DataRow("!!!arg")]
         public void Invocation_DebugAssert_LearnsBoolConstraint_Negated(string expression) =>
-            DebugAssertValues(expression, "bool").Should().HaveCount(1).And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
+            DebugAssertValues(expression, "bool").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull));
 
         [TestMethod]
         public void Invocation_DebugAssert_CustomNoParameters_DoesNotFail()
