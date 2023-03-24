@@ -60,19 +60,30 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         }
 
         public SymbolicContext[] PreProcess(SymbolicContext context) =>
-            InvokeChecks(context, (check, context) => check.PreProcess(context));
+            InvokeChecks(context, preProcess: true);
 
         public SymbolicContext[] PostProcess(SymbolicContext context) =>
-            InvokeChecks(context, (check, context) => check.PostProcess(context));
+            InvokeChecks(context, preProcess: false);
 
-        private SymbolicContext[] InvokeChecks(SymbolicContext context, Func<SymbolicCheck, SymbolicContext, ProgramState[]> process)
+        private SymbolicContext[] InvokeChecks(SymbolicContext context, bool preProcess)
         {
-            var contexts = new[] { context };
+            // Performance: Hotpath. Don't do changes here without profiling allocation impact.
+            var before = new List<SymbolicContext> { context };
+            var after = new List<SymbolicContext>();
             foreach (var check in checks)
             {
-                contexts = contexts.SelectMany(x => process(check, x).Select(newState => x.WithState(newState))).ToArray();
+                foreach (var beforeContext in before)
+                {
+                    var newStates = preProcess ? check.PreProcess(beforeContext) : check.PostProcess(beforeContext);
+                    foreach (var newState in newStates)
+                    {
+                        after.Add(beforeContext.WithState(newState));
+                    }
+                }
+                after = Interlocked.Exchange(ref before, after);
+                after.Clear();
             }
-            return contexts;
+            return before.ToArray();
         }
     }
 }
