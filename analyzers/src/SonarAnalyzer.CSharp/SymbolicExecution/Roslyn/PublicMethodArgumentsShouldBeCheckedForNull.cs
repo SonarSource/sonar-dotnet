@@ -21,6 +21,8 @@
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 using static Microsoft.CodeAnalysis.Accessibility;
+using static Microsoft.CodeAnalysis.CSharp.SyntaxKind;
+using static StyleCop.Analyzers.Lightup.SyntaxKindEx;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
@@ -43,7 +45,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
         bool IsRelevantPropertyAccessor() =>
             Node is AccessorDeclarationSyntax { } accessor
-            && (!accessor.Keyword.IsKind(SyntaxKind.GetKeyword) || accessor.Parent.Parent is IndexerDeclarationSyntax);
+            && (!accessor.Keyword.IsKind(GetKeyword) || accessor.Parent.Parent is IndexerDeclarationSyntax);
 
         bool IsAccessibleFromOtherAssemblies() =>
             SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is Public or Protected or ProtectedOrInternal;
@@ -51,7 +53,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
         static bool MethodDereferencesArguments(BaseMethodDeclarationSyntax method)
         {
             var argumentNames = method.ParameterList.Parameters
-                                    .Where(x => !x.Modifiers.AnyOfKind(SyntaxKind.OutKeyword))
+                                    .Where(x => !x.Modifiers.AnyOfKind(OutKeyword))
                                     .Select(x => x.GetName())
                                     .ToArray();
 
@@ -79,7 +81,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
         public override void Visit(SyntaxNode node)
         {
-            if (!DereferencesMethodArguments && node.IsAnyKind(SyntaxKindEx.LocalFunctionStatement, SyntaxKind.SimpleLambdaExpression, SyntaxKind.ParenthesizedLambdaExpression))
+            if (!DereferencesMethodArguments && !node.IsAnyKind(LocalFunctionStatement, SimpleLambdaExpression, ParenthesizedLambdaExpression))
             {
                 base.Visit(node);
             }
@@ -89,10 +91,10 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             DereferencesMethodArguments |=
                 argumentNames.Contains(node.GetName())
                 && node.Parent.IsAnyKind(
-                    SyntaxKind.AwaitExpression,
-                    SyntaxKind.ElementAccessExpression,
-                    SyntaxKind.ForEachStatement,
-                    SyntaxKind.ThrowStatement,
-                    SyntaxKind.SimpleMemberAccessExpression);
+                    AwaitExpression,
+                    ElementAccessExpression,
+                    ForEachStatement,
+                    ThrowStatement,
+                    SimpleMemberAccessExpression);
     }
 }
