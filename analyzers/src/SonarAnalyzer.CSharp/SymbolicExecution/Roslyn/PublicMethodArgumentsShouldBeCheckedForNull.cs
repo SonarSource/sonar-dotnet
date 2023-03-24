@@ -55,14 +55,16 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
                                     .Select(x => x.GetName())
                                     .ToArray();
 
-            if (!argumentNames.Any())
+            if (argumentNames.Any())
+            {
+                var walker = new ArgumentDereferenceWalker(argumentNames);
+                walker.SafeVisit(method);
+                return walker.DereferencesMethodArguments;
+            }
+            else
             {
                 return false;
             }
-
-            var walker = new ArgumentDereferenceWalker(argumentNames);
-            walker.SafeVisit(method);
-            return walker.DereferencesMethodArguments;
         }
     }
 
