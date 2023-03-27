@@ -44,11 +44,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             get => constraints;
             init
             {
-                if (constraints != value)
-                {
-                    constraints = value;
-                    hashCode = null;
-                }
+                constraints = value;
+                hashCode = null;
             }
         }
 
