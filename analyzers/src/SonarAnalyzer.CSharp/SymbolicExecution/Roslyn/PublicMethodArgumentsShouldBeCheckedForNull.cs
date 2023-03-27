@@ -70,6 +70,16 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
         }
     }
 
+    private static bool IsParameterDereferenced(IOperationWrapperSonar operation) =>
+        operation.Parent != null
+        && operation.Parent.IsAnyKind(
+            OperationKindEx.Invocation,
+            OperationKindEx.FieldReference,
+            OperationKindEx.PropertyReference,
+            OperationKindEx.EventReference,
+            OperationKindEx.Await,
+            OperationKindEx.ArrayElementReference);
+
     private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker
     {
         private readonly ISet<string> argumentNames;

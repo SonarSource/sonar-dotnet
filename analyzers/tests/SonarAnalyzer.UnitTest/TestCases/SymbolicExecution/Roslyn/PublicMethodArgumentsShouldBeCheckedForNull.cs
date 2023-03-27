@@ -25,7 +25,7 @@ public class Program
 
     private void CompliantCases_Private(object o)
     {
-        o.ToString(); // Noncompliant - FP (method visibility)
+        o.ToString(); // Compliant - not accessible from other assemblies
     }
 
     protected internal void NotCompliantCases_ProtectedInternal(object o)
@@ -35,7 +35,7 @@ public class Program
 
     internal void CompliantCases_Internal(object o)
     {
-        o.ToString(); // Noncompliant - FP (method visibility)
+        o.ToString(); // Compliant - not accessible from other assemblies
     }
 
     public void CompliantCases(bool b, object o1, object o2, object o3, object o4, Exception e)
@@ -395,7 +395,7 @@ public class Repro_3400
     public void ReassignedFromMethodOut(out StringBuilder parameter)
     {
         parameter = Create();
-        parameter.Capacity = 1; // Noncompliant - FP
+        parameter.Capacity = 1;
     }
 
     public void ReassignedFromConstructorOut(out StringBuilder parameter)
@@ -418,17 +418,17 @@ public class ClassAccessibility
 
     public void PublicWithArgs(object o)
     {
-        o.ToString(); // FIXME Non-compliant
+        o.ToString(); // Noncompliant
     }
 
     protected void ProtectedWithArgs(object o)
     {
-        o.ToString(); // FIXME Non-compliant
+        o.ToString(); // Noncompliant
     }
 
     protected internal void ProtectedInternalWithArgs(object o)
     {
-        o.ToString(); // FIXME Non-compliant
+        o.ToString(); // Noncompliant
     }
 
     internal void InternalWithArgs(object o)
@@ -458,7 +458,7 @@ public struct StructAccessibility
 
     public void PublicWithArgs(object o)
     {
-        o.ToString(); // FIXME Non-compliant
+        o.ToString(); // Noncompliant
     }
 
     internal void InternalWithArgs(object o)
@@ -476,18 +476,13 @@ public struct StructAccessibility
         o.ToString();
     }
 
-    public void LambdasAndAnonymousDelegates(object o)
+    public void LambdasAndAnonymousDelegates()
     {
-        Func<object, string> lambda = (object obj) => obj.ToString(); // Compliant - not accessible from other assemblies
-        lambda(o);
-
         MethodAcceptsFunction(obj => obj.ToString());
-
-        CustomDelegate del = delegate (object obj) { obj.ToString(); };
-        del(o);
+        MethodAcceptsFunction((obj) => obj.ToString());
+        MethodAcceptsFunction(delegate (object obj) { obj.ToString(); });
     }
 
-    delegate void CustomDelegate(object obj);
     private void MethodAcceptsFunction(Action<object> action) { }
 }
 
@@ -496,19 +491,19 @@ public class PropertyAccessibility
     public object PublicProperty
     {
         get => null;
-        set => _ = value.ToString();                    // FIXME Non-compliant
+        set => _ = value.ToString();                    // Noncompliant
     }
 
     protected object ProtectedProperty
     {
         get => null;
-        set => _ = value.ToString();                    // FIXME Non-compliant
+        set => _ = value.ToString();                    // Noncompliant
     }
 
     protected internal object ProtectedInternalProperty
     {
         get => null;
-        set => _ = value.ToString();                    // FIXME Non-compliant
+        set => _ = value.ToString();                    // Noncompliant
     }
 
     internal object InternalProperty
@@ -532,13 +527,13 @@ public class PropertyAccessibility
     public object ProtectedSetter
     {
         get => null;
-        protected set => _ = value.ToString();          // FIXME Non-compliant
+        protected set => _ = value.ToString();          // Noncompliant
     }
 
     public object ProtectedInternalSetter
     {
         get => null;
-        protected internal set => _ = value.ToString(); // FIXME Non-compliant
+        protected internal set => _ = value.ToString(); // Noncompliant
     }
 
     public object InternalSetter
@@ -558,8 +553,8 @@ public class ClassWithIndexer
 {
     public string this[object index]
     {
-        get { return index.ToString(); }                // FIXME Non-compliant
-        set { _ = value.ToString(); }                   // FIXME Non-compliant
+        get { return index.ToString(); }                // Noncompliant
+        set { _ = value.ToString(); }                   // Noncompliant
     }
 }
 
@@ -569,7 +564,7 @@ public class ClassWithEvent
 
     public void Method(ClassWithEvent c)
     {
-        c.CustomEvent += (sender, args)                 // FIXME Non-compliant
+        c.CustomEvent += (sender, args)                 // Noncompliant
             => Console.WriteLine();
     }
 }
@@ -596,7 +591,7 @@ public class NestedClasses
     {
         public void Method(object o)
         {
-            o.ToString();                               // FIXME Non-compliant
+            o.ToString();                               // Noncompliant
         }
 
         private class DeeperNestedPrivateClass
@@ -612,7 +607,7 @@ public class NestedClasses
     {
         public void Method(object o)
         {
-            o.ToString();                               // FIXME Non-compliant
+            o.ToString();                               // Noncompliant
         }
     }
 

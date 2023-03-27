@@ -49,12 +49,10 @@ public class Sample
         }
     }
 
-    public void StaticLambda(object o)
+    public void StaticLambdas()
     {
-        Func<object, string> lambda = static (object obj) => obj.ToString(); // Compliant - not accessible from other assemblies
-        lambda(o);
-
-        MethodAcceptsFunction(static obj => { obj.ToString(); });
+        MethodAcceptsFunction(static obj => obj.ToString());
+        MethodAcceptsFunction(static (obj) => obj.ToString());
     }
 
     private void MethodAcceptsFunction(Action<object> action) { }
