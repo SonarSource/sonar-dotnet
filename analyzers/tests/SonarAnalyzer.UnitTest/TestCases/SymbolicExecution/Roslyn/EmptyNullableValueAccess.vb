@@ -503,24 +503,6 @@ Class Repro_4573
     End Sub
 End Class
 
-Class NothingLiteral
-    Sub Assignment()
-        Dim x As Integer = Nothing                  ' FN
-    End Sub
-
-    Sub CIntExpression()
-        Dim x = CInt(Nothing)                       ' FN
-    End Sub
-
-    Sub CTypeExpression()
-        Dim x = CType(Nothing, Integer)             ' FN
-    End Sub
-
-    Sub CTypeDynamicExpression()
-        Dim x = CTypeDynamic(Of Integer)(Nothing)   ' FN
-    End Sub
-End Class
-
 Class Assignments
     Sub Assignment(nullable As Integer?)
         Dim x As Integer = nullable     ' Compliant
