@@ -503,15 +503,34 @@ Class Repro_4573
     End Sub
 End Class
 
+Class NothingLiteral
+    Sub Assignment()
+        Dim x As Integer = Nothing                  ' FN
+    End Sub
+
+    Sub CIntExpression()
+        Dim x = CInt(Nothing)                       ' FN
+    End Sub
+
+    Sub CTypeExpression()
+        Dim x = CType(Nothing, Integer)             ' FN
+    End Sub
+
+    Sub CTypeDynamicExpression()
+        Dim x = CTypeDynamic(Of Integer)(Nothing)   ' FN
+    End Sub
+End Class
+
 Class Assignments
     Sub Assignment(nullable As Integer?)
         Dim x As Integer = nullable     ' Compliant
         nullable = Nothing
         Dim y As Integer = nullable     ' Noncompliant
     End Sub
-    Sub Assignment2()
-        Dim nullable As Integer? = Nothing
-        Dim x As Integer = nullable     ' FN
+    Sub Assignment2(nullable As Integer?)
+        If nullable = Nothing Then
+            Dim x As Integer = nullable     ' Noncompliant
+        End If
     End Sub
 End Class
 
@@ -574,6 +593,33 @@ Class Casts
     Sub CTypeDynamicWithNonNullLiteral(i As Integer?)
         Dim x = (CTypeDynamic(Of Integer?)(42)).Value
     End Sub
+
+    Function ReturnStatement(nullable As Integer?) As Integer
+        If nullable = Nothing Then
+            Return nullable ' Noncompliant
+        End If
+    End Function
+
+    Function ReturnAssignment(nullable As Integer?) As Integer
+        If nullable = Nothing Then
+            ReturnAssignment = nullable   ' Noncompliant
+        End If
+    End Function
+
+    Sub Method(nullable As Integer?)
+        If nullable Is Nothing Then
+            Method2(nullable)   ' Noncompliant
+        End If
+    End Sub
+
+    Sub Method2(i As Integer)
+    End Sub
+
+    Sub IfExpression(nullable As Integer?)
+        If nullable Is Nothing Then
+            Dim x As Integer = If(True, nullable, nullable)    ' Noncompliant
+        End If
+    End Sub
 End Class
 
 Class WithAliases
@@ -597,7 +643,7 @@ Namespace TypeWithValueProperty
         End Sub
 
         Private Sub ImplicitCast()
-            Dim i As StructWithValuePropertyAndCastOperators = CTypeDynamic(Of Integer?)(Nothing)
+            Dim i As StructWithValuePropertyAndCastOperators = Nothing
             Dim x = i.Value
         End Sub
 
