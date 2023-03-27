@@ -26,17 +26,17 @@ namespace Tests.Diagnostics.CSharp8
 
         public void NullCoalesce_Conversion_DownCast(AggregateException arg)
         {
-            var value = arg as Exception ?? new Exception(arg.Message);     // Noncompliant, arg must be null on the right side
+            var value = arg as Exception ?? new Exception(arg.Message);     // Noncompliant, arg must be null on the right side because the conversion is always possible
         }
 
         public void NullCoalesce_Conversion_UpCast(Exception arg)
         {
-            var value = arg as AggregateException ?? new AggregateException(arg.Message);     // Noncompliant, arg can be null or another Exception type on the right side
+            var value = arg as AggregateException ?? new AggregateException(arg.Message);     // Compliant, caused a lot of FPs. While arg could be in theory be null, we don't infer that.
         }
 
         public void NullCoalesce_WithAs(IProperty arg)
         {
-            ISomethingElse value = arg as ISomethingElse ?? new SomethingElse(arg.Property);    // Noncompliant FP
+            ISomethingElse value = arg as ISomethingElse ?? new SomethingElse(arg.Property);    // Compliant, caused a lot of FPs. While arg could be in theory be null, we don't infer that.
         }
 
         public void NullCoalescenceAssignment_Null()

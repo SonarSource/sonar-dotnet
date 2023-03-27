@@ -22,16 +22,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     internal static class IOperationExtensions
     {
-        internal static ISymbol TrackedSymbol(this IOperation operation) =>
-            operation?.Kind switch
+        internal static ISymbol TrackedSymbol(this IOperation operation)
+        {
+            return operation?.Kind switch
             {
-                OperationKindEx.Conversion => TrackedSymbol(operation.ToConversion().Operand),
+                OperationKindEx.Conversion when !IsTryDownCast(operation.ToConversion()) => TrackedSymbol(operation.ToConversion().Operand),
                 OperationKindEx.FieldReference when IFieldReferenceOperationWrapper.FromOperation(operation) is var fieldReference && IsStaticOrThis(fieldReference) => fieldReference.Field,
                 OperationKindEx.LocalReference => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
                 OperationKindEx.ParameterReference => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
                 OperationKindEx.Argument => IArgumentOperationWrapper.FromOperation(operation).Value.TrackedSymbol(),
                 _ => null
             };
+
+            static bool IsTryDownCast(IConversionOperationWrapper conversion) =>
+                conversion.IsTryCast && !conversion.Operand.Type.DerivesOrImplements(conversion.Type);
+        }
 
         internal static IInvocationOperationWrapper? AsInvocation(this IOperation operation) =>
             operation.As(OperationKindEx.Invocation, IInvocationOperationWrapper.FromOperation);
