@@ -4,6 +4,19 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\EventEnvelope.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  30,
+"endLine":  59,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Query\Offset.cs",
 "region":  {
 "startLine":  62,

@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'info' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'info' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
 "region":  {
@@ -84,6 +84,45 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
 "region":  {
+"startLine":  67,
+"startColumn":  94,
+"endLine":  67,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  35,
+"endLine":  113,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  37,
+"endLine":  176,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
 "startLine":  409,
 "startColumn":  18,
 "endLine":  409,
@@ -101,6 +140,19 @@
 "startColumn":  19,
 "endLine":  523,
 "endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  563,
+"startColumn":  37,
+"endLine":  563,
+"endColumn":  42
 }
 }
 },
@@ -322,19 +374,6 @@
 "startColumn":  24,
 "endLine":  361,
 "endColumn":  28
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'graph' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
-"region":  {
-"startLine":  477,
-"startColumn":  76,
-"endLine":  477,
-"endColumn":  81
 }
 }
 },
@@ -1068,19 +1107,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'g' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\RunnableGraph.cs",
-"region":  {
-"startLine":  163,
-"startColumn":  68,
-"endLine":  163,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'graph' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
@@ -1133,19 +1159,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'source' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
-"region":  {
-"startLine":  518,
-"startColumn":  65,
-"endLine":  518,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'props' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
@@ -1172,7 +1185,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'registered' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'registered' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
 "region":  {
@@ -1198,32 +1211,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'outlets' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
-"region":  {
-"startLine":  194,
-"startColumn":  17,
-"endLine":  194,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'inlets' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
-"region":  {
-"startLine":  195,
-"startColumn":  17,
-"endLine":  195,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'inlets' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
@@ -1237,7 +1224,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'registered' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'registered' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
 "region":  {
@@ -1258,32 +1245,6 @@
 "startColumn":  50,
 "endLine":  137,
 "endColumn":  54
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'inlets' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
-"region":  {
-"startLine":  189,
-"startColumn":  17,
-"endLine":  189,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'outlets' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
-"region":  {
-"startLine":  191,
-"startColumn":  17,
-"endLine":  191,
-"endColumn":  24
 }
 }
 },
@@ -1367,7 +1328,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'settings' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'settings' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
 "region":  {
@@ -1393,7 +1354,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'settings' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'settings' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
 "region":  {
@@ -1432,7 +1393,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'shape' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'shape' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
 "region":  {
@@ -1445,7 +1406,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'settings' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'settings' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
 "region":  {
@@ -1458,7 +1419,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'assembly' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'assembly' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
 "region":  {
@@ -1471,7 +1432,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'shell' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'shell' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
 "region":  {
@@ -1510,7 +1471,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'inlets' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'inlets' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
 "region":  {
@@ -1523,7 +1484,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'inletOwners' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'inletOwners' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
 "region":  {
@@ -1536,7 +1497,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'outlets' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'outlets' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
 "region":  {
@@ -1549,7 +1510,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'outletOwners' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'outletOwners' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
 "region":  {
@@ -1557,6 +1518,19 @@
 "startColumn":  35,
 "endLine":  138,
 "endColumn":  47
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'register' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  21,
+"endLine":  208,
+"endColumn":  29
 }
 }
 },
@@ -1596,6 +1570,19 @@
 "startColumn":  36,
 "endLine":  213,
 "endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'assembly' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  459,
+"startColumn":  40,
+"endLine":  459,
+"endColumn":  48
 }
 }
 },
@@ -1674,6 +1661,19 @@
 "startColumn":  13,
 "endLine":  556,
 "endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'handler' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"region":  {
+"startLine":  805,
+"startColumn":  25,
+"endLine":  805,
+"endColumn":  32
 }
 }
 },
@@ -1931,9 +1931,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Stages\Stages.cs",
 "region":  {
 "startLine":  448,
-"startColumn":  83,
+"startColumn":  105,
 "endLine":  448,
-"endColumn":  96
+"endColumn":  118
 }
 }
 },
@@ -2134,7 +2134,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\StreamRefSerializer.cs",
 "region":  {
@@ -2173,32 +2173,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'inlet' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  57,
-"startColumn":  92,
-"endLine":  57,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'outlet' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  122,
-"startColumn":  98,
-"endLine":  122,
-"endColumn":  104
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'shape' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
@@ -2220,84 +2194,6 @@
 "startColumn":  74,
 "endLine":  223,
 "endColumn":  79
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'inlets' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  381,
-"startColumn":  17,
-"endLine":  381,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'outlets' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  383,
-"startColumn":  17,
-"endLine":  383,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'inlets' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  489,
-"startColumn":  17,
-"endLine":  489,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'outlets' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  491,
-"startColumn":  17,
-"endLine":  491,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'outlets' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  550,
-"startColumn":  17,
-"endLine":  550,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'inlets' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  552,
-"startColumn":  17,
-"endLine":  552,
-"endColumn":  23
 }
 }
 },
@@ -2329,32 +2225,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'inlets' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  668,
-"startColumn":  17,
-"endLine":  668,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'outlets' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
-"region":  {
-"startLine":  669,
-"startColumn":  17,
-"endLine":  669,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'top' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
@@ -2381,7 +2251,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'stageAttributes' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'stageAttributes' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
 "region":  {
@@ -2498,7 +2368,33 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'logic' before using it.",
+"message":  "Refactor this method to add validation of parameter 'andThen' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1468,
+"startColumn":  25,
+"endLine":  1468,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'andThen' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  1475,
+"startColumn":  17,
+"endLine":  1475,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'logic' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
 "region":  {
@@ -2511,7 +2407,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'logic' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'logic' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
 "region":  {
@@ -2519,6 +2415,45 @@
 "startColumn":  50,
 "endLine":  1841,
 "endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'getAsyncCallback' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  2385,
+"startColumn":  25,
+"endLine":  2385,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'materializer' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  2388,
+"startColumn":  21,
+"endLine":  2388,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'materializer' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"region":  {
+"startLine":  2392,
+"startColumn":  107,
+"endLine":  2392,
+"endColumn":  119
 }
 }
 },
@@ -2714,19 +2649,6 @@
 "startColumn":  20,
 "endLine":  403,
 "endColumn":  27
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'cause' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Transformer.cs",
-"region":  {
-"startLine":  103,
-"startColumn":  19,
-"endLine":  103,
-"endColumn":  24
 }
 }
 },

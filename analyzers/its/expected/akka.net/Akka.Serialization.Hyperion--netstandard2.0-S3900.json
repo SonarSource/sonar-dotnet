@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'settings' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'settings' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
 "region":  {
@@ -10,6 +10,19 @@
 "startColumn":  61,
 "endLine":  71,
 "endColumn":  69
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  37,
+"endLine":  75,
+"endColumn":  43
 }
 }
 },
