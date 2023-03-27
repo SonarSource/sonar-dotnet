@@ -90,7 +90,7 @@ public void Main(bool arg = true)
 {
     Tag(""Arg"", arg);
 }";
-            SETestContext.CreateCSMethod(code).Validator.ValidateTag("Arg", x => x.Should().BeNull());
+            SETestContext.CreateCSMethod(code).Validator.ValidateTag("Arg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         private static BoolConstraint GetConstraint(bool value) =>
