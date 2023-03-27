@@ -9,7 +9,7 @@ public class Sample
 
     public void TargetTypedNew(object arg)
     {
-        arg.ToString();         // FN, can't build CFG for this method
+        arg.ToString();         // Noncompliant
 
         StringBuilder sb = new();
     }
@@ -23,29 +23,29 @@ public class Sample
 
         if (arg is int and > 0 and > 1)
         {
-            arg.ToString();     // Compliant
+            arg.ToString();     // Noncompliant - FP
         }
 
         if (arg is int or bool or long)
         {
-            arg.ToString();     // Compliant
+            arg.ToString();     // Noncompliant - FP
         }
 
         if (arg is null)
         {
-            arg.ToString();     // FN
+            arg.ToString();     // Covered by S2259
         }
         if (arg is int or bool or null)
         {
-            arg.ToString();     // FN
+            arg.ToString();
         }
         else if (arg is not not null)
         {
-            arg.ToString();     // FN
+            arg.ToString();
         }
         else if (!(arg is not null))
         {
-            arg.ToString();     // FN
+            arg.ToString();
         }
     }
 
@@ -63,7 +63,7 @@ public class Sample
         get => null;
         set
         {
-            field = value.ToString();   // FIXME Non-compliant
+            field = value.ToString();   // Noncompliant
         }
     }
 
@@ -72,7 +72,7 @@ public class Sample
         get => null;
         init
         {
-            field = value.ToString();   // FIXME Non-compliant
+            field = value.ToString();   // Noncompliant
         }
     }
 }
@@ -81,7 +81,7 @@ public record Record
 {
     public void Method(object arg)
     {
-        arg.ToString();                 // FIXME Non-compliant
+        arg.ToString();                 // Noncompliant
     }
 }
 
@@ -94,7 +94,7 @@ public partial class Partial
 {
     public partial void Method(object arg)
     {
-        arg.ToString();                 // FIXME Non-compliant
+        arg.ToString();                 // Noncompliant
     }
 }
 
@@ -107,7 +107,7 @@ public class UsingFromServicesAttribute
         service.GetValue();             // Compliant, it's attributed with FromServices attribute
 
     public int GetPrice(IService service) =>
-        service.GetValue();             // FIXME Non-compliant
+        service.GetValue();             // Noncompliant
 
     public interface IService
     {
