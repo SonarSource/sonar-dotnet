@@ -28,12 +28,22 @@ namespace SonarAnalyzer.Helpers
         private const uint PreMultiplier = 3266489917U;
         private const uint PostMultiplier = 668265263U;
         private const int RotateOffset = 17;
+        private const int IntSeed = 393241;
 
         public static int DictionaryContentHash<TKey, TValue>(IDictionary<TKey, TValue> dictionary) =>
             dictionary.Aggregate(0, (seed, kvp) => seed ^ Combine(kvp.Key, kvp.Value));
 
-        public static int EnumerableContentHash<TValue>(IEnumerable<TValue> enumerable) =>
-            enumerable.Aggregate(0, (seed, x) => Combine(seed, x));
+        /// <summary>
+        /// Calculates a hash for the enumerable based on the content. The same values in a different order produce the same hash-code.
+        /// </summary>
+        public static int EnumerableUnorderedContentHash<TValue>(IEnumerable<TValue> enumerable) =>
+            enumerable.Aggregate(IntSeed, (seed, x) => seed ^ (x?.GetHashCode() ?? 0));
+
+        /// <summary>
+        /// Calculates a hash for the enumerable based on the content. The same values in a different order produce different hash-codes.
+        /// </summary>
+        public static int EnumerableOrderedContentHash<TValue>(IEnumerable<TValue> enumerable) =>
+            enumerable.Aggregate(IntSeed, Combine);
 
         public static int Combine<T1, T2>(T1 a, T2 b) =>
             (int)Seed.AddHash(a?.GetHashCode()).AddHash(b?.GetHashCode());
