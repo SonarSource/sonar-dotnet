@@ -55,7 +55,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             var argumentNames = method.ParameterList.Parameters
                                     .Where(x => !x.Modifiers.AnyOfKind(OutKeyword))
                                     .Select(x => x.GetName())
-                                    .ToArray();
+                                    .ToHashSet();
 
             if (argumentNames.Any())
             {
@@ -72,11 +72,11 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
     private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker
     {
-        private readonly string[] argumentNames;
+        private readonly ISet<string> argumentNames;
 
         public bool DereferencesMethodArguments { get; private set; }
 
-        public ArgumentDereferenceWalker(string[] argumentNames) =>
+        public ArgumentDereferenceWalker(ISet<string> argumentNames) =>
             this.argumentNames = argumentNames;
 
         public override void Visit(SyntaxNode node)
