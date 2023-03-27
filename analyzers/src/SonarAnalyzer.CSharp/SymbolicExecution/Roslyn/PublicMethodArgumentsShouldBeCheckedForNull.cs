@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
-
 using static Microsoft.CodeAnalysis.Accessibility;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxKind;
 using static StyleCop.Analyzers.Lightup.SyntaxKindEx;
@@ -68,6 +67,28 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
                 return false;
             }
         }
+    }
+
+    protected override ProgramState PreProcessSimple(SymbolicContext context)
+    {
+        var operation = context.Operation.Instance;
+        if (operation.Kind == OperationKindEx.ParameterReference
+            && operation.ToParameterReference().Parameter is var parameter
+            && !parameter.Type.IsValueType
+            && IsParameterDereferenced(context.Operation)
+            && NullableStateIsNotKnownForParameter(parameter)
+            && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
+        {
+            var message = SemanticModel.GetDeclaredSymbol(Node).IsConstructor()
+                ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
+                : "Refactor this method to add validation of parameter '{0}' before using it.";
+            ReportIssue(operation, string.Format(message, operation.Syntax), context);
+        }
+
+        return context.State;
+
+        bool NullableStateIsNotKnownForParameter(IParameterSymbol symbol) =>
+            context.State[symbol] is null || !context.State[symbol].HasConstraint<ObjectConstraint>();
     }
 
     private static bool IsParameterDereferenced(IOperationWrapperSonar operation) =>
