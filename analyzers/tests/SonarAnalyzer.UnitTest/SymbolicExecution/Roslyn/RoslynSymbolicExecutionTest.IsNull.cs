@@ -205,5 +205,27 @@ Tag(""End"", arg);";
                 "WasNotNull",
                 "End");
         }
+
+        [TestMethod]
+        public void IsNull_TryCast_UpCast()
+        {
+            var validator = SETestContext.CreateCS("""
+                (arg as Exception)?.ToString();
+                Tag("Arg", arg);
+                """, ", object arg").Validator;
+            validator.ValidateTag("Arg", x => x.Should().HaveNoConstraints());
+        }
+
+        [TestMethod]
+        public void IsNull_TryCast_DownCast()
+        {
+            var validator = SETestContext.CreateCS("""
+                (arg as Exception)?.ToString();
+                Tag("Arg", arg);
+                """, ", ArgumentException arg").Validator;
+            validator.TagValues("Arg").Should().SatisfyRespectively(
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null),
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        }
     }
 }
