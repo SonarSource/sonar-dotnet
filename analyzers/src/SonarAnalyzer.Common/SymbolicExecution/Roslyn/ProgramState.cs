@@ -54,24 +54,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public SymbolicValue this[ISymbol symbol] => SymbolValue.TryGetValue(symbol, out var value) ? value : null;
         public IOperation this[CaptureId capture] => CaptureOperation.TryGetValue(capture, out var value) ? value : null;
 
-        private ProgramState()
-        {
-            OperationValue = ImmutableDictionary<IOperation, SymbolicValue>.Empty;
-            SymbolValue = ImmutableDictionary<ISymbol, SymbolicValue>.Empty;
-            VisitCount = ImmutableDictionary<int, int>.Empty;
-            CaptureOperation = ImmutableDictionary<CaptureId, IOperation>.Empty;
-            PreservedSymbols = ImmutableHashSet<ISymbol>.Empty;
-            Exceptions = ImmutableStack<ExceptionState>.Empty;
-        }
+        private ProgramState() : this(null) { }
 
         private ProgramState(ProgramState original)   // Custom record override constructor to reset "toArray"
         {
-            operationValue = original.operationValue;
-            symbolValue = original.symbolValue;
-            VisitCount = original.VisitCount;
-            captureOperation = original.captureOperation;
-            preservedSymbols = original.preservedSymbols;
-            exceptions = original.exceptions;
+            operationValue = original?.operationValue ?? ImmutableDictionary<IOperation, SymbolicValue>.Empty;
+            symbolValue = original?.symbolValue ?? ImmutableDictionary<ISymbol, SymbolicValue>.Empty;
+            VisitCount = original?.VisitCount ?? ImmutableDictionary<int, int>.Empty;
+            captureOperation = original?.captureOperation ?? ImmutableDictionary<CaptureId, IOperation>.Empty;
+            preservedSymbols = original?.preservedSymbols ?? ImmutableHashSet<ISymbol>.Empty;
+            exceptions = original?.exceptions ?? ImmutableStack<ExceptionState>.Empty;
             operationValueHashCode = original.operationValueHashCode;
             symbolValueHashCode = original.symbolValueHashCode;
             captureOperationHashCode = original.captureOperationHashCode;
