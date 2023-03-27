@@ -230,22 +230,5 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 hashCode = null;
             }
         }
-
-        private struct ContentImmutableDictionary<TKey, TValue> : IEquatable<ContentImmutableDictionary<TKey, TValue>>
-        {
-            private readonly ImmutableDictionary<TKey, TValue> dictionary;
-            private int? hashCode;
-
-            public ContentImmutableDictionary(ImmutableDictionary<TKey, TValue> dictionary)
-            {
-                this.dictionary = dictionary;
-            }
-
-            public bool Equals(ContentImmutableDictionary<TKey, TValue> other) =>
-                dictionary.DictionaryEquals(other.dictionary);
-
-            public override int GetHashCode() =>
-                hashCode ??= HashCode.DictionaryContentHash(dictionary);
-        }
     }
 }
