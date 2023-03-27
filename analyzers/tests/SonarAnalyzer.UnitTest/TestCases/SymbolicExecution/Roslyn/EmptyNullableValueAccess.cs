@@ -747,7 +747,7 @@ class MutableField
 
         theField = null;
         _ = theField.Value;          // Noncompliant, empty
-        _ = theField.Value;          // Compliant, when reached the ".Value" above implies aField is not null
+        _ = theField.Value;          // Compliant, when reached the ".Value" above implies theField is not null
     }
 
     void LocalFunctions()
@@ -831,10 +831,22 @@ class MutableField
 
         theField = null;
         await AnAsyncOperation();
-        _ = theField.Value;                          // Compliant, yield break above stops execution
+        _ = theField.Value;                          // Compliant, unknown
 
-        async Task<int> AnAsyncOperation() => await Task.FromResult(42);
-        async Task<int> AnotherAsyncOperation(int i) => await Task.FromResult(42);
+        var task = AnAsyncOperation();
+        theField = null;
+        await task;
+        _ = theField.Value;                          // Compliant, unknown
+
+        theField = await AnAsyncOperation();
+        _ = theField.Value;                          // Compliant, unknown
+
+        theField = null;
+        theField = await AnotherAsyncOperation(theField.Value); // Noncompliant, empty
+        _ = theField.Value;                                     // Compliant, unknown
+
+        async Task<int?> AnAsyncOperation() => await Task.FromResult(42);
+        async Task<int?> AnotherAsyncOperation(int i) => await Task.FromResult(42);
     }
 }
 
