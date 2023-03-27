@@ -27,10 +27,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             return operation?.Kind switch
             {
                 OperationKindEx.Conversion when !IsTryDownCast(operation.ToConversion()) => TrackedSymbol(operation.ToConversion().Operand),
-                OperationKindEx.FieldReference when IFieldReferenceOperationWrapper.FromOperation(operation) is var fieldReference && IsStaticOrThis(fieldReference) => fieldReference.Field,
-                OperationKindEx.LocalReference => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
-                OperationKindEx.ParameterReference => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-                OperationKindEx.Argument => IArgumentOperationWrapper.FromOperation(operation).Value.TrackedSymbol(),
+                OperationKindEx.FieldReference when operation.ToFieldReference() is var fieldReference && IsStaticOrThis(fieldReference) => fieldReference.Field,
+                OperationKindEx.LocalReference => operation.ToLocalReference().Local,
+                OperationKindEx.ParameterReference => operation.ToParameterReference().Parameter,
+                OperationKindEx.Argument => operation.ToArgument().Value.TrackedSymbol(),
                 _ => null
             };
 
@@ -70,6 +70,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         internal static IFieldReferenceOperationWrapper ToFieldReference(this IOperation operation) =>
             IFieldReferenceOperationWrapper.FromOperation(operation);
+
+        internal static ILocalReferenceOperationWrapper ToLocalReference(this IOperation operation) =>
+            ILocalReferenceOperationWrapper.FromOperation(operation);
 
         internal static IPropertyReferenceOperationWrapper ToPropertyReference(this IOperation operation) =>
             IPropertyReferenceOperationWrapper.FromOperation(operation);
