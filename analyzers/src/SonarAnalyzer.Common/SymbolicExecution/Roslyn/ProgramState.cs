@@ -63,12 +63,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             captureOperation = original?.captureOperation ?? ImmutableDictionary<CaptureId, IOperation>.Empty;
             preservedSymbols = original?.preservedSymbols ?? ImmutableHashSet<ISymbol>.Empty;
             exceptions = original?.exceptions ?? ImmutableStack<ExceptionState>.Empty;
-            operationValueHashCode = original.operationValueHashCode;
-            symbolValueHashCode = original.symbolValueHashCode;
-            captureOperationHashCode = original.captureOperationHashCode;
-            preservedSymbolsHashCode = original.preservedSymbolsHashCode;
-            exceptionsHashCode = original.exceptionsHashCode;
-            hashCode = original.hashCode;
+            operationValueHashCode = original?.operationValueHashCode;
+            symbolValueHashCode = original?.symbolValueHashCode;
+            captureOperationHashCode = original?.captureOperationHashCode;
+            preservedSymbolsHashCode = original?.preservedSymbolsHashCode;
+            exceptionsHashCode = original?.exceptionsHashCode;
+            hashCode = original?.hashCode;
         }
 
         public ProgramState SetOperationValue(IOperationWrapper operation, SymbolicValue value) =>
