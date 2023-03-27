@@ -700,6 +700,11 @@ class OutAndRefParams
         ModifyOutParam(out nullableField);
         _ = nullableField.Value;                         // Compliant
 
+        ModifyOutParam(out var newLocal);
+        _ = newLocal.Value;                             // Unknown
+        newLocal = null;
+        _ = newLocal.Value;                             // Noncompliant
+
         static void ModifyOutParam(out int? i) => i = null;
         static void ModifyOutParamAndRead(out int? i1, int? i2) => i1 = i2;
         static void ReadAndModifyOutParam(int? i1, out int? i2) => i2 = i1;
