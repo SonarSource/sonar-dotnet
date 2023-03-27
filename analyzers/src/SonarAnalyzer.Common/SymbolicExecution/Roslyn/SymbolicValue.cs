@@ -34,8 +34,19 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public static readonly SymbolicValue True = NotNull.WithConstraint(BoolConstraint.True);
         public static readonly SymbolicValue False = NotNull.WithConstraint(BoolConstraint.False);
 
+        private readonly ImmutableDictionary<Type, SymbolicConstraint> constraints = ImmutableDictionary<Type, SymbolicConstraint>.Empty;
+        private int? hashCode;
+
         // SymbolicValue can have only one constraint instance of specific type at a time
-        private ImmutableDictionary<Type, SymbolicConstraint> Constraints { get; init; } = ImmutableDictionary<Type, SymbolicConstraint>.Empty;
+        private ImmutableDictionary<Type, SymbolicConstraint> Constraints
+        {
+            get => constraints;
+            init
+            {
+                constraints = value;
+                hashCode = null;
+            }
+        }
 
         public IEnumerable<SymbolicConstraint> AllConstraints =>
             Constraints.Values;
@@ -84,7 +95,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             Constraints.TryGetValue(typeof(T), out var value) ? (T)value : null;
 
         public override int GetHashCode() =>
-            HashCode.DictionaryContentHash(Constraints);
+            hashCode ??= HashCode.DictionaryContentHash(constraints);
 
         public bool Equals(SymbolicValue other) =>
             other is not null && other.Constraints.DictionaryEquals(Constraints);
