@@ -145,8 +145,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 HashCode.DictionaryContentHash(OperationValue),
                 HashCode.DictionaryContentHash(SymbolValue),
                 HashCode.DictionaryContentHash(CaptureOperation),
-                HashCode.EnumerableContentHash(PreservedSymbols),
-                HashCode.EnumerableContentHash(Exceptions));
+                HashCode.EnumerableUnorderedContentHash(PreservedSymbols),
+                HashCode.EnumerableOrderedContentHash(Exceptions));
 
         public bool Equals(ProgramState other) =>
             // VisitCount is not compared, two ProgramState are equal if their current state is equal. No matter what historical path led to it.
