@@ -906,7 +906,7 @@ class Boxing
         {
             _ = (int)boxed;                 // Compliant
         }
-        foreach (var (boxed1, boxed2) in new Dictionary<object, object> { { null as int?, null as int? } })
+        foreach (var (boxed1, boxed2) in new Dictionary<object, object> { { 42 as int?, null as int? } })
         {
             _ = (int)boxed1;                // Compliant
             _ = (int)boxed2;                // Compliant
