@@ -859,6 +859,7 @@ class Boxing
         _ = (int)implicitBoxed;             // Compliant, true null-dereference -> no nullable value access
         var explicitBoxed = (object)nullable;
         _ = (int)explicitBoxed;             // Compliant
+        _ = (int)(object)(int?)(null);      // Compliant
         _ = (int)(object)(null as int?);    // Compliant
     }
 
@@ -877,8 +878,6 @@ class Boxing
         _ = (int)implicitBoxed;             // Compliant
         var explicitBoxed = (object)nullable;
         _ = (int)explicitBoxed;             // Compliant
-        _ = (int)(object)(int?)(null);      // Compliant
-        _ = (int)(object)(null as int?);    // Compliant
     }
 
     void ImplicitAndExplicitConversion()
