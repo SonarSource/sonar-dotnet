@@ -949,7 +949,7 @@ namespace WithAliases
     }
 }
 
-namespace TypeWithValueProperty
+namespace TypeWithValueInstanceProperty
 {
     class Test
     {
@@ -992,3 +992,56 @@ namespace TypeWithValueProperty
     }
 }
 
+namespace TypeWithValueStaticProperty
+{
+    class Test
+    {
+        void Basics()
+        {
+            _ = AClassWithStaticValueProperty.Value;                                // Compliant, not on nullable value type
+            _ = AClassWithStaticValueProperty.Value.Value;                          // Compliant
+            _ = AClassWithStaticValueProperty.Value.Value.InstanceProperty;         // Compliant
+            _ = AClassWithStaticValueProperty.Value.Value.InstanceProperty.Value;   // Compliant
+            _ = new AClassWithInstanceValueProperty().Value;                        // Compliant
+        }
+    }
+
+    class AClassWithStaticValueProperty
+    {
+        public AClassWithInstanceValueProperty InstanceProperty => new AClassWithInstanceValueProperty();
+
+        public static AClassWithInstanceValueProperty Value => new AClassWithInstanceValueProperty();
+    }
+
+    class AClassWithInstanceValueProperty
+    {
+        public AClassWithStaticValueProperty Value => new AClassWithStaticValueProperty();
+    }
+}
+
+namespace TypeWithValueStaticField
+{
+    class Test
+    {
+        void Basics()
+        {
+            _ = AClassWithStaticValueField.Value;                                // Compliant, not on nullable value type
+            _ = AClassWithStaticValueField.Value.Value;                          // Compliant
+            _ = AClassWithStaticValueField.Value.Value.InstanceField;            // Compliant
+            _ = AClassWithStaticValueField.Value.Value.InstanceField.Value;      // Compliant
+            _ = new AClassWithInstanceValueField().Value;                        // Compliant
+        }
+    }
+
+    class AClassWithStaticValueField
+    {
+        public AClassWithInstanceValueField InstanceField = new AClassWithInstanceValueField();
+
+        public static AClassWithInstanceValueField Value = new AClassWithInstanceValueField();
+    }
+
+    class AClassWithInstanceValueField
+    {
+        public AClassWithStaticValueField Value = new AClassWithStaticValueField();
+    }
+}

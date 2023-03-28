@@ -32,10 +32,11 @@ public abstract class EmptyNullableValueAccessBase : SymbolicRuleCheck
         if (operationInstance.Kind == OperationKindEx.PropertyReference
             && operationInstance.ToPropertyReference() is var reference
             && reference.Property.Name == nameof(Nullable<int>.Value)
-            && reference.Instance.Type.IsNullableValueType()
-            && context.HasConstraint(reference.Instance, ObjectConstraint.Null))
+            && reference.Instance is { } referenceInstance
+            && referenceInstance.Type.IsNullableValueType()
+            && context.HasConstraint(referenceInstance, ObjectConstraint.Null))
         {
-            ReportIssue(reference.Instance, reference.Instance.Syntax.ToString());
+            ReportIssue(referenceInstance, referenceInstance.Syntax.ToString());
         }
         else if (operationInstance.Kind == OperationKindEx.Conversion
             && operationInstance.ToConversion() is var conversion
