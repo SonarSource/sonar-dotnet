@@ -65,19 +65,16 @@ public class EmptyNullableValueAccess : EmptyNullableValueAccessBase
         public override void VisitCTypeExpression(CTypeExpressionSyntax node) =>
             HasPotentialNullableValueAccess = true;
 
-        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
-        {
-            if (node.NameIs("CTypeDynamic"))
-            {
-                HasPotentialNullableValueAccess = true;
-            }
-            else
-            {
-                base.VisitInvocationExpression(node);
-            }
-        }
+        public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
+            HasPotentialNullableValueAccess = true;
 
         public override void VisitAssignmentStatement(AssignmentStatementSyntax node) =>
+            HasPotentialNullableValueAccess = true;
+
+        public override void VisitEqualsValue(EqualsValueSyntax node) =>
+            HasPotentialNullableValueAccess = true;
+
+        public override void VisitReturnStatement(ReturnStatementSyntax node) =>
             HasPotentialNullableValueAccess = true;
     }
 }
