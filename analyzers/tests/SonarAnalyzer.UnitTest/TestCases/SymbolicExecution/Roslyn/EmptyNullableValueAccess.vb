@@ -620,7 +620,7 @@ Class EqualsOperator
     End Sub
 
     Sub UnequalsNothing(nullable As Integer?)
-        If nullable <> Nothing Then
+        If nullable <> Nothing Then     ' Always evaluates to Nothing (=> false) due to null propagation
             Dim x As Integer = nullable ' Compliant
         End If
     End Sub
