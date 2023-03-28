@@ -809,7 +809,7 @@ class MutableField
 
         theField = null;
         yield break;
-        _ = theField.Value;          // Compliant, yield break above stops execution
+        _ = theField.Value;          // Compliant, unreachable
     }
 
     async Task WithAsyncAwait()
