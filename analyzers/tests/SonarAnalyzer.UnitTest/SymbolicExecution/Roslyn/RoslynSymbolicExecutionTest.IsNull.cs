@@ -207,7 +207,7 @@ Tag(""End"", arg);";
         }
 
         [TestMethod]
-        public void IsNull_TryCast_UpCast()
+        public void IsNull_TryCast_DownCast()
         {
             var validator = SETestContext.CreateCS("""
                 (arg as Exception)?.ToString();
@@ -217,7 +217,7 @@ Tag(""End"", arg);";
         }
 
         [TestMethod]
-        public void IsNull_TryCast_DownCast()
+        public void IsNull_TryCast_UpCast()
         {
             var validator = SETestContext.CreateCS("""
                 (arg as Exception)?.ToString();

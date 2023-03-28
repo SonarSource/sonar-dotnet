@@ -26,7 +26,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             return operation?.Kind switch
             {
-                OperationKindEx.Conversion when !IsTryDownCast(operation.ToConversion()) => TrackedSymbol(operation.ToConversion().Operand),
+                OperationKindEx.Conversion when operation.ToConversion() is var conversion && !IsTryDownCast(conversion) => TrackedSymbol(conversion.Operand),
                 OperationKindEx.FieldReference when operation.ToFieldReference() is var fieldReference && IsStaticOrThis(fieldReference) => fieldReference.Field,
                 OperationKindEx.LocalReference => operation.ToLocalReference().Local,
                 OperationKindEx.ParameterReference => operation.ToParameterReference().Parameter,
