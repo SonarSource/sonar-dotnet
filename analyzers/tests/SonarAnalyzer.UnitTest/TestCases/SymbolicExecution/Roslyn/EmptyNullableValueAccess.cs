@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 class Basics
 {
@@ -733,6 +734,119 @@ class OutAndRefParams
         static void ModifyRefParam(ref int? i) => i = null;
         static void ModifyRefParamAndRead(ref int? i1, int? i2) => i1 = i2;
         static void ReadAndModifyRefParam(int? i1, ref int? i2) => i2 = i1;
+    }
+}
+
+class MutableField
+{
+    int? theField;
+
+    void Basics()
+    {
+        _ = theField.Value;          // Compliant, unknown
+
+        theField = null;
+        _ = theField.Value;          // Noncompliant, empty
+        _ = theField.Value;          // Compliant, when reached the ".Value" above implies theField is not null
+    }
+
+    void LocalFunctions()
+    {
+        theField = 42;
+        LocalFunctionChangingTheField();
+        _ = theField.Value;          // Compliant, unknown
+
+        theField = null;
+        LocalFunctionChangingTheField();
+        _ = theField.Value;          // Noncompliant, FP, local functions don't reset the state
+
+        theField = 42;
+        LocalFunctionNotChangingTheField();
+        _ = theField.Value;          // Compliant, unknown
+
+        void LocalFunctionChangingTheField() => theField = null;
+        void LocalFunctionNotChangingTheField() { }
+    }
+
+    void Methods()
+    {
+        theField = 42;
+        MethodChangingTheField();
+        _ = theField.Value;          // Compliant, unknown
+
+        theField = null;
+        MethodChangingTheField();
+        _ = theField.Value;          // Compliant, instance methods reset the state
+
+        theField = 42;
+        MethodNotChangingTheField();
+        _ = theField.Value;          // Compliant, unknown
+
+        void LocalFunctionChangingTheField() => theField = null;
+        void LocalFunctionNotChangingTheField() { }
+    }
+
+    void MethodChangingTheField() => theField = null;
+
+    void MethodNotChangingTheField() { }
+
+    IEnumerable<int> WithYield()
+    {
+        _ = theField.Value;          // Compliant, unknown
+        yield return 42;
+
+        theField = null;
+        yield return 42;
+        _ = theField.Value;          // Noncompliant, FP, should be unknown
+
+        theField = 42;
+        yield return 42;
+        _ = theField.Value;          // Compliant, unknown
+
+        theField = null;
+        yield return theField.Value; // Noncompliant, empty
+        _ = theField.Value;          // Compliant, unknown
+
+        theField = null;
+        yield break;
+        _ = theField.Value;          // Compliant, unreachable
+    }
+
+    async Task WithAsyncAwait()
+    {
+        _ = theField.Value;                          // Compliant, unknown
+        await AnAsyncOperation();
+
+        theField = null;
+        await AnAsyncOperation();
+        _ = theField.Value;                          // Compliant, unknown
+
+        theField = 42;
+        await AnAsyncOperation();
+        _ = theField.Value;                          // Compliant, unknown
+
+        theField = null;
+        await AnotherAsyncOperation(theField.Value); // Noncompliant, empty
+        _ = theField.Value;                          // Compliant, unknown
+
+        theField = null;
+        await AnAsyncOperation();
+        _ = theField.Value;                          // Compliant, unknown
+
+        var task = AnAsyncOperation();
+        theField = null;
+        await task;
+        _ = theField.Value;                          // Compliant, unknown
+
+        theField = await AnAsyncOperation();
+        _ = theField.Value;                          // Compliant, unknown
+
+        theField = null;
+        theField = await AnotherAsyncOperation(theField.Value); // Noncompliant, empty
+        _ = theField.Value;                                     // Compliant, unknown
+
+        async Task<int?> AnAsyncOperation() => await Task.FromResult(42);
+        async Task<int?> AnotherAsyncOperation(int i) => await Task.FromResult(42);
     }
 }
 
