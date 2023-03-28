@@ -19,6 +19,9 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using static Microsoft.CodeAnalysis.Accessibility;
+using static Microsoft.CodeAnalysis.CSharp.SyntaxKind;
+using static StyleCop.Analyzers.Lightup.SyntaxKindEx;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
@@ -31,8 +34,40 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
     protected override DiagnosticDescriptor Rule => S3900;
 
-    public override bool ShouldExecute() =>
-        Node is BaseMethodDeclarationSyntax or AccessorDeclarationSyntax;
+    public override bool ShouldExecute()
+    {
+        return (IsRelevantMethod() || IsRelevantPropertyAccessor())
+            && IsAccessibleFromOtherAssemblies();
+
+        bool IsRelevantMethod() =>
+            Node is BaseMethodDeclarationSyntax { } method && MethodDereferencesArguments(method);
+
+        bool IsRelevantPropertyAccessor() =>
+            Node is AccessorDeclarationSyntax { } accessor
+            && (!accessor.Keyword.IsKind(GetKeyword) || accessor.Parent.Parent is IndexerDeclarationSyntax);
+
+        bool IsAccessibleFromOtherAssemblies() =>
+            SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is Public or Protected or ProtectedOrInternal;
+
+        static bool MethodDereferencesArguments(BaseMethodDeclarationSyntax method)
+        {
+            var argumentNames = method.ParameterList.Parameters
+                                    .Where(x => !x.Modifiers.AnyOfKind(OutKeyword))
+                                    .Select(x => x.GetName())
+                                    .ToHashSet();
+
+            if (argumentNames.Any())
+            {
+                var walker = new ArgumentDereferenceWalker(argumentNames);
+                walker.SafeVisit(method);
+                return walker.DereferencesMethodArguments;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
@@ -65,4 +100,32 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             OperationKindEx.EventReference,
             OperationKindEx.Await,
             OperationKindEx.ArrayElementReference);
+
+    private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker
+    {
+        private readonly ISet<string> argumentNames;
+
+        public bool DereferencesMethodArguments { get; private set; }
+
+        public ArgumentDereferenceWalker(ISet<string> argumentNames) =>
+            this.argumentNames = argumentNames;
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!DereferencesMethodArguments && !node.IsAnyKind(LocalFunctionStatement, SimpleLambdaExpression, ParenthesizedLambdaExpression))
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitIdentifierName(IdentifierNameSyntax node) =>
+            DereferencesMethodArguments |=
+                argumentNames.Contains(node.GetName())
+                && node.Parent.IsAnyKind(
+                    AwaitExpression,
+                    ElementAccessExpression,
+                    ForEachStatement,
+                    ThrowStatement,
+                    SimpleMemberAccessExpression);
+    }
 }

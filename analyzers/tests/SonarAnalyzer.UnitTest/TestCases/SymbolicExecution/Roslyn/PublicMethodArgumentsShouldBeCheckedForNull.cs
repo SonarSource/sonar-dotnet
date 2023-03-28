@@ -25,7 +25,7 @@ public class Program
 
     private void CompliantCases_Private(object o)
     {
-        o.ToString(); // Noncompliant - FP (method visibility)
+        o.ToString(); // Compliant - not accessible from other assemblies
     }
 
     protected internal void NotCompliantCases_ProtectedInternal(object o)
@@ -35,7 +35,7 @@ public class Program
 
     internal void CompliantCases_Internal(object o)
     {
-        o.ToString(); // Noncompliant - FP (method visibility)
+        o.ToString(); // Compliant - not accessible from other assemblies
     }
 
     public void CompliantCases(bool b, object o1, object o2, object o3, object o4, Exception e)
@@ -395,7 +395,7 @@ public class Repro_3400
     public void ReassignedFromMethodOut(out StringBuilder parameter)
     {
         parameter = Create();
-        parameter.Capacity = 1; // Noncompliant - FP
+        parameter.Capacity = 1;
     }
 
     public void ReassignedFromConstructorOut(out StringBuilder parameter)
@@ -405,4 +405,225 @@ public class Repro_3400
     }
 
     private StringBuilder Create() => null;
+}
+
+public class ClassAccessibility
+{
+    private object field = null;
+
+    public void PublicWithoutArgs()
+    {
+        field.ToString(); // Compliant - not a method argument
+    }
+
+    public void PublicWithArgs(object o)
+    {
+        o.ToString(); // Noncompliant
+    }
+
+    protected void ProtectedWithArgs(object o)
+    {
+        o.ToString(); // Noncompliant
+    }
+
+    protected internal void ProtectedInternalWithArgs(object o)
+    {
+        o.ToString(); // Noncompliant
+    }
+
+    internal void InternalWithArgs(object o)
+    {
+        o.ToString(); // Compliant - method is not accessible from other assemblies
+    }
+
+    private void PrivateWithArgs(object o)
+    {
+        o.ToString();
+    }
+
+    void ImplicitlyPrivateWithArgs(object o)
+    {
+        o.ToString(); // Compliant
+    }
+}
+
+public struct StructAccessibility
+{
+    private object field;
+
+    public void PublicWithoutArgs()
+    {
+        field.ToString(); // Compliant - not a method argument
+    }
+
+    public void PublicWithArgs(object o)
+    {
+        o.ToString(); // Noncompliant
+    }
+
+    internal void InternalWithArgs(object o)
+    {
+        o.ToString(); // Compliant - method is not accessible from other assemblies
+    }
+
+    void ImplicitlyInternalWithArgs(object o)
+    {
+        o.ToString();
+    }
+
+    private void PrivateWithArgs(object o)
+    {
+        o.ToString();
+    }
+
+    public void LambdasAndAnonymousDelegates()
+    {
+        MethodAcceptsFunction(obj => obj.ToString());
+        MethodAcceptsFunction((obj) => obj.ToString());
+        MethodAcceptsFunction(delegate (object obj) { obj.ToString(); });
+    }
+
+    private void MethodAcceptsFunction(Action<object> action) { }
+}
+
+public class PropertyAccessibility
+{
+    public object PublicProperty
+    {
+        get => null;
+        set => _ = value.ToString();                    // Noncompliant
+    }
+
+    protected object ProtectedProperty
+    {
+        get => null;
+        set => _ = value.ToString();                    // Noncompliant
+    }
+
+    protected internal object ProtectedInternalProperty
+    {
+        get => null;
+        set => _ = value.ToString();                    // Noncompliant
+    }
+
+    internal object InternalProperty
+    {
+        get => null;
+        set => _ = value.ToString();
+    }
+
+    private object PrivateProperty
+    {
+        get => null;
+        set => _ = value.ToString();
+    }
+
+    object ImplicitlyPrivateProperty
+    {
+        get => null;
+        set => _ = value.ToString();
+    }
+
+    public object ProtectedSetter
+    {
+        get => null;
+        protected set => _ = value.ToString();          // Noncompliant
+    }
+
+    public object ProtectedInternalSetter
+    {
+        get => null;
+        protected internal set => _ = value.ToString(); // Noncompliant
+    }
+
+    public object InternalSetter
+    {
+        get => null;
+        internal set => _ = value.ToString();           // Compliant - setter is not accessible from other assemblies
+    }
+
+    public object PrivateSetter
+    {
+        get => null;
+        private set => _ = value.ToString();
+    }
+}
+
+public class ClassWithIndexer
+{
+    public string this[object index]
+    {
+        get { return index.ToString(); }                // Noncompliant
+        set { _ = value.ToString(); }                   // Noncompliant
+    }
+}
+
+public class ClassWithEvent
+{
+    public event EventHandler CustomEvent;
+
+    public void Method(ClassWithEvent c)
+    {
+        c.CustomEvent += (sender, args)                 // Noncompliant
+            => Console.WriteLine();
+    }
+}
+
+internal class InternalClass
+{
+    public void PublicWithArgs(object o)
+    {
+        o.ToString();                                   // Compliant - method is not accessible from other assemblies
+    }
+}
+
+class ImplicitlyInternalClass
+{
+    public void PublicWithArgs(object o)
+    {
+        o.ToString();
+    }
+}
+
+public class NestedClasses
+{
+    public class PublicNestedClass
+    {
+        public void Method(object o)
+        {
+            o.ToString();                               // Noncompliant
+        }
+
+        private class DeeperNestedPrivateClass
+        {
+            public void Method(object o)
+            {
+                o.ToString();                           // Compliant - method is not accessible from other assemblies
+            }
+        }
+    }
+
+    protected class ProtectedNestedClass
+    {
+        public void Method(object o)
+        {
+            o.ToString();                               // Noncompliant
+        }
+    }
+
+    private class PrivateNestedClass
+    {
+        public void Method(object o)
+        {
+            o.ToString();                               // Compliant - method is not accessible from other assemblies
+        }
+
+        public class DeeperNestedPublicClass
+        {
+            public void Method(object o)
+            {
+                o.ToString();                           // Compliant - method is not accessible from other assemblies
+            }
+        }
+    }
 }

@@ -49,14 +49,13 @@ public class Sample
         }
     }
 
-    public void StaticLambda()
+    public void StaticLambdas()
     {
-        Func<object, string> a = static (arg) =>
-        {
-            return arg.ToString();      // Compliant, it's not a public method argument
-        };
-        a(null);
+        MethodAcceptsFunction(static obj => obj.ToString());
+        MethodAcceptsFunction(static (obj) => obj.ToString());
     }
+
+    private void MethodAcceptsFunction(Action<object> action) { }
 
     public object PropertySet
     {

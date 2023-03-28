@@ -67,19 +67,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'typeRegistrations' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
-"region":  {
-"startLine":  178,
-"startColumn":  46,
-"endLine":  178,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'container' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
@@ -114,19 +101,6 @@
 "startColumn":  25,
 "endLine":  189,
 "endColumn":  34
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'collectionTypeRegistrations' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
-"region":  {
-"startLine":  205,
-"startColumn":  56,
-"endLine":  205,
-"endColumn":  83
 }
 }
 },
@@ -171,19 +145,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'moduleRegistrationTypes' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
-"region":  {
-"startLine":  231,
-"startColumn":  46,
-"endLine":  231,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'container' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
@@ -192,19 +153,6 @@
 "startColumn":  17,
 "endLine":  233,
 "endColumn":  26
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'instanceRegistrations' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
-"region":  {
-"startLine":  244,
-"startColumn":  50,
-"endLine":  244,
-"endColumn":  71
 }
 }
 },
