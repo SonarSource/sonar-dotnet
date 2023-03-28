@@ -2,6 +2,45 @@
 "issues":  [
 {
 "id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  44,
+"endLine":  116,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  133,
+"endLine":  120,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  31,
+"endLine":  138,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'to' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
@@ -28,7 +67,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'settings' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'settings' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
 "region":  {
@@ -54,7 +93,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'member' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'member' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
 "region":  {
@@ -67,7 +106,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'member' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'member' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
 "region":  {
@@ -80,7 +119,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
 "region":  {
@@ -132,6 +171,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  501,
+"startColumn":  27,
+"endLine":  501,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
@@ -153,6 +205,19 @@
 "startColumn":  17,
 "endLine":  172,
 "endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  17,
+"endLine":  189,
+"endColumn":  20
 }
 }
 },
@@ -210,7 +275,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverProvider.cs",
 "region":  {
@@ -223,7 +288,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
 "region":  {
@@ -262,7 +327,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
 "region":  {
@@ -270,19 +335,6 @@
 "startColumn":  26,
 "endLine":  25,
 "endColumn":  32
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'value' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
-"region":  {
-"startLine":  90,
-"startColumn":  39,
-"endLine":  90,
-"endColumn":  44
 }
 }
 },
@@ -321,6 +373,32 @@
 "startLine":  314,
 "startColumn":  20,
 "endLine":  314,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'left' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  328,
+"startColumn":  20,
+"endLine":  328,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'left' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  342,
+"startColumn":  20,
+"endLine":  342,
 "endColumn":  24
 }
 }

@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'env' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'env' because it could be null.",
 "location":  {
 "uri":  "sources\Nancy\samples\Nancy.Demo.Hosting.Kestrel\Startup.cs",
 "region":  {
