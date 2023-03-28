@@ -28,6 +28,32 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'func' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  30,
+"endLine":  289,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'matchedEventHandler' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  48,
+"endLine":  293,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
@@ -36,6 +62,58 @@
 "startColumn":  26,
 "endLine":  339,
 "endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'func' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  36,
+"endLine":  352,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'matchedEventHandler' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  48,
+"endLine":  356,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'matchedEventHandler' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  28,
+"endLine":  404,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'matchedEventHandler' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  427,
+"startColumn":  28,
+"endLine":  427,
+"endColumn":  47
 }
 }
 },
@@ -145,6 +223,110 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'testActorRef' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  20,
+"endLine":  42,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'testActorRef' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  21,
+"endLine":  54,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'testActorRef' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  20,
+"endLine":  66,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'testActorRef' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  21,
+"endLine":  78,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'testActorRef' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  20,
+"endLine":  181,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'testActorRef' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  21,
+"endLine":  193,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'testActorRef' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  20,
+"endLine":  205,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'testActorRef' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  21,
+"endLine":  217,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actorRef' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
@@ -158,7 +340,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'testKit' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'testKit' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestBarrier.cs",
 "region":  {
@@ -223,6 +405,149 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'assertion' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  21,
+"endLine":  46,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'assertion' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  21,
+"endLine":  85,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'assertion' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  27,
+"endLine":  124,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'conditionIsFulfilled' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  21,
+"endLine":  358,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'fail' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  21,
+"endLine":  366,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'conditionIsFulfilled' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"region":  {
+"startLine":  386,
+"startColumn":  21,
+"endLine":  386,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'fail' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"region":  {
+"startLine":  394,
+"startColumn":  21,
+"endLine":  394,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'filter' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  30,
+"endLine":  249,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'shouldIgnore' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  310,
+"startColumn":  25,
+"endLine":  310,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'function' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  23,
+"endLine":  134,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'function' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  29,
+"endLine":  196,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitExtension.cs",
@@ -249,7 +574,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
 "region":  {

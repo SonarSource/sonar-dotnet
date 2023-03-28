@@ -192,3 +192,23 @@ public class SwitchStatement
         }
     }
 }
+
+public class ClassAccessibility
+{
+    private protected void PrivateProtectedWithArgs(object o)
+    {
+        o.ToString();                                   // Compliant - method is not accessible from other assemblies
+    }
+
+    private protected object PrivateProtectedProperty
+    {
+        get => null;
+        set => _ = value.ToString();                    // Compliant - property is not accessible from other assemblies
+    }
+
+    public object PrivateProtectedSetter
+    {
+        get => null;
+        private protected set => _ = value.ToString();  // Compliant - setter is not accessible from other assemblies
+    }
+}
