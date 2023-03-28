@@ -42,7 +42,7 @@ public class SonarLintXmlReader
 
     public SonarLintXmlReader(SourceText sonarLintXmlText)
     {
-        var sonarLintXml = ParseContent(sonarLintXmlText);
+        var sonarLintXml = sonarLintXmlText is null ? SonarLintXml.Empty : ParseContent(sonarLintXmlText);
         var settings = sonarLintXml.Settings?.GroupBy(x => x.Key).ToDictionary(x => x.Key, x => x.First().Value) ?? new Dictionary<string, string>();
         Exclusions = ReadArray("sonar.exclusions");
         Inclusions = ReadArray("sonar.inclusions");
