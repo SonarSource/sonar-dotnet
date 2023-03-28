@@ -509,9 +509,10 @@ Class Assignments
         nullable = Nothing
         Dim y As Integer = nullable     ' Noncompliant
     End Sub
-    Sub Assignment2()
-        Dim nullable As Integer? = Nothing
-        Dim x As Integer = nullable     ' FN
+    Sub Assignment2(nullable As Integer?)
+        If nullable Is Nothing Then
+            Dim x As Integer = nullable     ' Noncompliant
+        End If
     End Sub
 End Class
 
@@ -574,6 +575,33 @@ Class Casts
     Sub CTypeDynamicWithNonNullLiteral(i As Integer?)
         Dim x = (CTypeDynamic(Of Integer?)(42)).Value
     End Sub
+
+    Function ReturnStatement(nullable As Integer?) As Integer
+        If nullable Is Nothing Then
+            Return nullable ' Noncompliant
+        End If
+    End Function
+
+    Function ReturnAssignment(nullable As Integer?) As Integer
+        If nullable Is Nothing Then
+            ReturnAssignment = nullable   ' Noncompliant
+        End If
+    End Function
+
+    Sub Method(nullable As Integer?)
+        If nullable Is Nothing Then
+            Method2(nullable)   ' Noncompliant
+        End If
+    End Sub
+
+    Sub Method2(i As Integer)
+    End Sub
+
+    Sub IfExpression(nullable As Integer?)
+        If nullable Is Nothing Then
+            Dim x As Integer = If(True, nullable, nullable)    ' Noncompliant
+        End If
+    End Sub
 End Class
 
 Class WithAliases
@@ -581,6 +609,26 @@ Class WithAliases
         Dim x = i.Value
         i = Nothing
         x = (CTypeDynamic(Of Integer?)(i)).Value    ' FN
+    End Sub
+End Class
+
+Class EqualsOperator
+    Sub EqualsNothing(nullable As Integer?)
+        If nullable = Nothing Then      ' Always evaluates to Nothing (=> false) due to null propagation
+            Dim x As Integer = nullable ' Noncompliant FP, nullable was not actually checked for null
+        End If
+    End Sub
+
+    Sub UnequalsNothing(nullable As Integer?)
+        If nullable <> Nothing Then     ' Always evaluates to Nothing (=> false) due to null propagation
+            Dim x As Integer = nullable ' Compliant
+        End If
+    End Sub
+
+    Sub UqualsOrUnequals(nullable As Integer?)
+        If (nullable <> Nothing) OrElse (nullable = Nothing) Then
+            Dim x As Integer = nullable ' Noncompliant FP
+        End If
     End Sub
 End Class
 
@@ -597,7 +645,7 @@ Namespace TypeWithValueProperty
         End Sub
 
         Private Sub ImplicitCast()
-            Dim i As StructWithValuePropertyAndCastOperators = CTypeDynamic(Of Integer?)(Nothing)
+            Dim i As StructWithValuePropertyAndCastOperators = Nothing
             Dim x = i.Value
         End Sub
 
