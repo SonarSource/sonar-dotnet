@@ -850,6 +850,70 @@ class MutableField
     }
 }
 
+class Boxing
+{
+    void EmptyNullable()
+    {
+        int? nullable = null;
+        object implicitBoxed = nullable;
+        _ = (int)implicitBoxed;             // Compliant, true null-dereference -> no nullable value access
+        var explicitBoxed = (object)nullable;
+        _ = (int)explicitBoxed;             // Compliant
+        _ = (int)(object)(null as int?);    // Compliant
+    }
+
+    void NullableRoundTrip()
+    {
+        int? nullable = null;
+        object implicitBoxed = nullable;
+        int? unboxedNullable = (int?)implicitBoxed;
+        _ = unboxedNullable.Value;          // Noncompliant, empty
+    }
+
+    void NonEmptyNullable()
+    {
+        int? nullable = 42;
+        object implicitBoxed = nullable;
+        _ = (int)implicitBoxed;             // Compliant
+        var explicitBoxed = (object)nullable;
+        _ = (int)explicitBoxed;             // Compliant
+        _ = (int)(object)(int?)(null);      // Compliant
+        _ = (int)(object)(null as int?);    // Compliant
+    }
+
+    void ImplicitAndExplicitConversion()
+    {
+        int? intNullable = 42;
+        object boxedInt = intNullable;
+        _ = (short)intNullable;             // Compliant, cast exception from int unboxing -> no nullable value access
+    }
+
+    void ForeachImplictConversion()
+    {
+        foreach (object boxed in new int?[] { null })
+        {
+            _ = (int)boxed;                 // Compliant
+        }
+    }
+
+    void CollectionImplicitBoxing()
+    {
+        foreach (var boxed in new object[] { null as int? })
+        {
+            _ = (int)boxed;                 // Compliant
+        }
+        foreach (var boxed in new List<object> { null as int? })
+        {
+            _ = (int)boxed;                 // Compliant
+        }
+        foreach (var (boxed1, boxed2) in new Dictionary<object, object> { { null as int?, null as int? } })
+        {
+            _ = (int)boxed1;                // Compliant
+            _ = (int)boxed2;                // Compliant
+        }
+    }
+}
+
 namespace WithAliases
 {
     using MaybeInt = Nullable<System.Int32>;
