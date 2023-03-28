@@ -27,12 +27,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
         protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
             var state = context.State;
-            if (context.Operation.Instance.Type is { } type
-                && type.IsNonNullableValueType())
+            var operation = context.Operation.Instance;
+            if (operation.Type is { } type && type.IsNonNullableValueType())
             {
                 state = context.SetOperationConstraint(ObjectConstraint.NotNull);
             }
-            if (context.Operation.Instance.TrackedSymbol() is { } trackedSymbol
+            if (operation.TrackedSymbol() is { } trackedSymbol
                 && trackedSymbol.GetSymbolType() is { } symbolType
                 && symbolType.IsNonNullableValueType())
             {
