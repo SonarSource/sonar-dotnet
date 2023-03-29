@@ -93,6 +93,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'thunkAsync' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  514,
+"startColumn":  38,
+"endLine":  514,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
@@ -106,6 +119,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'messageClasses' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  552,
+"startColumn":  44,
+"endLine":  552,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tc' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
@@ -114,6 +140,19 @@
 "startColumn":  27,
 "endLine":  565,
 "endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'names' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  34,
+"endLine":  127,
+"endColumn":  39
 }
 }
 }

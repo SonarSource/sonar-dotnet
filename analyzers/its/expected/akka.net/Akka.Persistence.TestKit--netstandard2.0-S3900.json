@@ -2,6 +2,32 @@
 "issues":  [
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'messages' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\TestJournal.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  31,
+"endLine":  48,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'recoveryCallback' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\TestJournal.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  25,
+"endLine":  86,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'metadata' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\TestSnapshotStore.cs",

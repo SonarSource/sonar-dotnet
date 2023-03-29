@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'source' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\EnumerableExtensions.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  33,
+"endLine":  16,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'assemblyName' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\FileNameGenerator.cs",
@@ -153,6 +166,19 @@
 "startColumn":  17,
 "endLine":  110,
 "endColumn":  20
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'nodeDatum' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  33,
+"endLine":  212,
+"endColumn":  42
 }
 }
 },
