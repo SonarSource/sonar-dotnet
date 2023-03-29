@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void TrackedSymbol_LocalReference_IsVariableSymbol()
         {
             var localReference = ((ISimpleAssignmentOperation)TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0]).Target;
-            var symbol = ILocalReferenceOperationWrapper.FromOperation(localReference).Local;
+            var symbol = localReference.ToLocalReference().Local;
             localReference.TrackedSymbol().Should().Be(symbol);
         }
 

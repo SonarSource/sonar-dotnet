@@ -22,16 +22,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     internal static class IOperationExtensions
     {
-        internal static ISymbol TrackedSymbol(this IOperation operation) =>
-            operation?.Kind switch
+        internal static ISymbol TrackedSymbol(this IOperation operation)
+        {
+            return operation?.Kind switch
             {
-                OperationKindEx.Conversion => TrackedSymbol(operation.ToConversion().Operand),
-                OperationKindEx.FieldReference when IFieldReferenceOperationWrapper.FromOperation(operation) is var fieldReference && IsStaticOrThis(fieldReference) => fieldReference.Field,
-                OperationKindEx.LocalReference => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
-                OperationKindEx.ParameterReference => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-                OperationKindEx.Argument => IArgumentOperationWrapper.FromOperation(operation).Value.TrackedSymbol(),
+                OperationKindEx.Conversion when operation.ToConversion() is var conversion && !IsTryDownCast(conversion) => TrackedSymbol(conversion.Operand),
+                OperationKindEx.FieldReference when operation.ToFieldReference() is var fieldReference && IsStaticOrThis(fieldReference) => fieldReference.Field,
+                OperationKindEx.LocalReference => operation.ToLocalReference().Local,
+                OperationKindEx.ParameterReference => operation.ToParameterReference().Parameter,
+                OperationKindEx.Argument => operation.ToArgument().Value.TrackedSymbol(),
                 _ => null
             };
+
+            static bool IsTryDownCast(IConversionOperationWrapper conversion) =>
+                conversion.IsTryCast && !conversion.Operand.Type.DerivesOrImplements(conversion.Type);
+        }
 
         internal static IInvocationOperationWrapper? AsInvocation(this IOperation operation) =>
             operation.As(OperationKindEx.Invocation, IInvocationOperationWrapper.FromOperation);
@@ -65,6 +70,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         internal static IFieldReferenceOperationWrapper ToFieldReference(this IOperation operation) =>
             IFieldReferenceOperationWrapper.FromOperation(operation);
+
+        internal static ILocalReferenceOperationWrapper ToLocalReference(this IOperation operation) =>
+            ILocalReferenceOperationWrapper.FromOperation(operation);
 
         internal static IPropertyReferenceOperationWrapper ToPropertyReference(this IOperation operation) =>
             IPropertyReferenceOperationWrapper.FromOperation(operation);
