@@ -55,6 +55,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ when IsNullableGetValueOrDefault(invocation) => ProcessNullableGetValueOrDefault(context, invocation).ToArray(),
             _ when invocation.TargetMethod.Is(KnownType.Microsoft_VisualBasic_Information, "IsNothing") => ProcessInformationIsNothing(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
+            _ when invocation.TargetMethod.Is(KnownType.System_Object, nameof(ReferenceEquals)) => ProcessReferenceEquals(context, invocation),
             _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(context, invocation),
             _ when invocation.TargetMethod.Name == nameof(object.Equals) => ProcessEquals(context, invocation),
             _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) =>
@@ -169,6 +170,11 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
                 : state;
         }
     }
+
+    private static ProgramState[] ProcessReferenceEquals(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+        invocation.Arguments.Length == 2
+            ? ProcessEquals(context, invocation.Arguments[0].ToArgument().Value, invocation.Arguments[1].ToArgument().Value)
+            : context.State.ToArray();
 
     private static ProgramState[] ProcessEquals(SymbolicContext context, IInvocationOperationWrapper invocation) =>
         invocation switch

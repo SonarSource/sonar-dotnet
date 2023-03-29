@@ -746,7 +746,7 @@ End Sub";
 Dim Result As Boolean = IsNothing("""" & Arg.ToString())
 Tag(""Result"", Result)";
             var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
-            validator.ValidateTag("Result", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
+            validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
@@ -972,7 +972,7 @@ object right = {right};
 var result = object.Equals(left, right);
 Tag(""Result"", result);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Result", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
+            validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
@@ -1082,10 +1082,110 @@ private bool Equals(object a, object b) => false;
 private static bool Equals() => false;
 private static bool Equals(object a, object b, object c) => false;";
             var validator = SETestContext.CreateCSMethod(code).Validator;
-            validator.ValidateTag("InstanceOne", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
-            validator.ValidateTag("InstanceTwo", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
-            validator.ValidateTag("NoArgs", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
-            validator.ValidateTag("MoreArgs", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
+            validator.ValidateTag("InstanceOne", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("InstanceTwo", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("NoArgs", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("MoreArgs", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("null", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
+        [DataRow("null", "new object()", false, ConstraintKind.ObjectNull, ConstraintKind.ObjectNotNull)]
+        [DataRow("new object()", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]
+        [DataRow("new int?()", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
+        [DataRow("(int?)null", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
+        [DataRow("new int?(42)", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]
+        [DataRow("new int?()", "42", false, ConstraintKind.ObjectNull, ConstraintKind.ObjectNotNull)]
+        public void Invocation_ReferenceEquals_LearnResult(string left, string right, bool expectedResult, ConstraintKind expectedConstraintLeft, ConstraintKind expectedConstraintRight)
+        {
+            var code = $"""
+                object left = {left};
+                object right = {right};
+                var result = ReferenceEquals(left, right);
+                Tag("Result", result);
+                Tag("Left", left);
+                Tag("Right", right);
+                """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("Result", x => x.HasConstraint(BoolConstraint.From(expectedResult)).Should().BeTrue());
+            validator.ValidateTag("Left", x => x.AllConstraints.Select(x => x.Kind).Should().ContainSingle().Which.Should().Be(expectedConstraintLeft));
+            validator.ValidateTag("Right", x => x.AllConstraints.Select(x => x.Kind).Should().ContainSingle().Which.Should().Be(expectedConstraintRight));
+        }
+
+        [DataTestMethod]
+        [DataRow("new object()", "new object()")]
+        [DataRow("new object()", "Unknown<object>()")]
+        [DataRow("Unknown<object>()", "new object()")]
+        [DataRow("Unknown<object>()", "Unknown<object>()")]
+        [DataRow("new int?(42)", "Unknown<int?>()")]
+        [DataRow("(int?)42", "(int?)42")]
+        [DataRow("(int?)42", "(int?)0")]
+        public void Invocation_ReferenceEquals_DoesNotLearnResult(string left, string right)
+        {
+            var code = $"""
+                object left = {left};
+                object right = {right};
+                var result = ReferenceEquals(left, right);
+                Tag("Result", result);
+                """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("null", "arg", "object")]
+        [DataRow("null", "arg", "int?")]
+        [DataRow("arg", "null", "object")]
+        [DataRow("arg", "null", "int?")]
+        public void Invocation_ReferenceEquals_SplitsToBothResults(string left, string right, string argType)
+        {
+            var code = $"""
+                var result = ReferenceEquals({left}, {right});
+                Tag("End");
+                """;
+            var validator = SETestContext.CreateCS(code, $", {argType} arg").Validator;
+            var result = validator.Symbol("result");
+            var arg = validator.Symbol("arg");
+            validator.TagStates("End").Should().SatisfyRespectively(
+                x =>
+                {
+                    x[result].HasConstraint(BoolConstraint.True).Should().BeTrue();
+                    x[arg].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
+                },
+                x =>
+                {
+                    x[result].HasConstraint(BoolConstraint.False).Should().BeTrue();
+                    x[arg].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
+                });
+        }
+
+        [TestMethod]
+        public void Invocation_ReferenceEquals_CustomSignatures_NotSupported()
+        {
+            const string code = """
+                public void Main()
+                {
+                    var args0 = ReferenceEquals();
+                    var args1 = ReferenceEquals(null);
+                    var args2 = ReferenceEquals(null, null);
+                    var args3 = ReferenceEquals(null, null, null);
+
+                    Tag("Args0", args0);
+                    Tag("Args1", args1);
+                    Tag("Args2", args2);
+                    Tag("Args3", args3);
+                }
+
+                private bool ReferenceEquals() => false;
+                private bool ReferenceEquals(object a) => false;
+                private bool ReferenceEquals(object a, object b) => false;
+                private bool ReferenceEquals(object a, object b, object c) => false;
+                """;
+            var validator = SETestContext.CreateCSMethod(code).Validator;
+            validator.ValidateTag("Args0", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Args1", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Args2", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Args3", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
     }
 }
