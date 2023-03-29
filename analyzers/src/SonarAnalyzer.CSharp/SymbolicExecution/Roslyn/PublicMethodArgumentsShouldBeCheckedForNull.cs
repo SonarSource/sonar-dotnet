@@ -122,11 +122,11 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
         public override void VisitIdentifierName(IdentifierNameSyntax node) =>
             DereferencesMethodArguments |=
                 argumentNames.Contains(node.GetName())
-                && node.Parent.IsAnyKind(
+                && node.Ancestors().Any(x => x.IsAnyKind(
                     AwaitExpression,
                     ElementAccessExpression,
                     ForEachStatement,
                     ThrowStatement,
-                    SimpleMemberAccessExpression);
+                    SimpleMemberAccessExpression));
     }
 }
