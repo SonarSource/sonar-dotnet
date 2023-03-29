@@ -456,7 +456,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("", "AttributeTargets")]
         [DataRow("where T: Enum", "T")]
         [DataRow("where T: struct, Enum", "T")]
-        [DataRow("where T: Enum", "T?")] // Here ? means either nullable value type or nullable reference type (unbound generic) and T? is an Enum
+        [DataRow("where T: Enum", "T?")] // #nullable enable: Here ? means either nullable value type or nullable reference type (unbound generic) and T? is an Enum
         public void IsEnum_True(string typeConstraint, string fieldType)
         {
             var fieldSymbol = FirstFieldSymbolFromCode($$"""
