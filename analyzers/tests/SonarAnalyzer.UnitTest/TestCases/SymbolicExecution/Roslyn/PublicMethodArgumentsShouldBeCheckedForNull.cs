@@ -652,7 +652,7 @@ public class Conversion
         ((CustomClass)o2).CustomEvent +=                    // Noncompliant
                 (sender, args) => { };
         _ = ((CustomClass)o3).field;                        // Noncompliant
-        _ = ((CustomClass)o3).MethodReference;              // FN
+        Func<string> method = ((CustomClass)o3).ToString;   // FN
     }
 
     public void CastWithRedundantParentheses(object o)
@@ -711,7 +711,6 @@ public class Conversion
     {
         public int field;
         public int Property { get; set; }
-        public Action MethodReference { get; set; }
         public event EventHandler CustomEvent;
     }
 }
