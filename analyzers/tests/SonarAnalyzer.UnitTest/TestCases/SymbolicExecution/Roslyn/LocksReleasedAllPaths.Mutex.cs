@@ -65,7 +65,7 @@ namespace Mutex_Type
 
         public void MutexWasCreatedWithoutOwnership(bool arg)
         {
-            var m = new Mutex(initiallyOwned: false, "bar", out var wasCreated); // Compliant. The lock must still be held by requesting it.
+            var m = new Mutex(initiallyOwned: false, "bar", out var wasCreated); // Compliant. The lock must still be acquired by requesting it.
             if (wasCreated && arg)
             {
                 m.ReleaseMutex();

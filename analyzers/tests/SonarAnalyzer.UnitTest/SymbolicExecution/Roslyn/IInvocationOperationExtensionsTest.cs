@@ -29,7 +29,7 @@ public class IInvocationOperationExtensionsTest
     [TestMethod]
     public void ArgumentValue()
     {
-        var testClass = $$"""
+        const string testClass = """
             class Test
             {
                 static void M(string stringParam)
