@@ -44,6 +44,34 @@ namespace Mutex_Type
             m3.Dispose();
         }
 
+        public void MutexWasCreatedAndReleased(bool arg)
+        {
+            var m = new Mutex(initiallyOwned: true, "bar", out var wasCreated); // Noncompliant
+            if (wasCreated && arg)
+            {
+                m.ReleaseMutex();
+            }
+        }
+
+        public void MutexWasCreatedAndNotReleased(bool arg)
+        {
+            var m = new Mutex(initiallyOwned: true, "bar", out var wasCreated); // Compliant
+            if (!wasCreated && arg)
+            {
+                // wasCreated is false here, indicating that the lock is NOT (yet) held
+                m.ReleaseMutex(); // This is a release without a previous lock. This is not covered by this rule.
+            }
+        }
+
+        public void MutexWasCreatedWithoutOwnership(bool arg)
+        {
+            var m = new Mutex(initiallyOwned: false, "bar", out var wasCreated); // Compliant. The lock must still be held by requesting it.
+            if (wasCreated && arg)
+            {
+                m.ReleaseMutex();
+            }
+        }
+
         public void Noncompliant2(Mutex paramMutex, Mutex paramMutex2)
         {
             // 'true' means it owns the mutex if no exception gets thrown
@@ -336,11 +364,11 @@ namespace Mutex_Type
         public void MutextAquireByConstructor_SwitchExpression(int x)
         {
             var m = x switch
-                    {
-                        1 => new Mutex(),
-                        2 => new Mutex(new bool()),
-                        3 => new Mutex(true, "bar", out var mutextCreated), // FN
-                    };
+            {
+                1 => new Mutex(),
+                2 => new Mutex(new bool()),
+                3 => new Mutex(true, "bar", out var mutextCreated), // FN
+            };
 
             if (cond)
             {
