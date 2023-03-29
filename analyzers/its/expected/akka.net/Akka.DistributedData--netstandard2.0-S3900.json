@@ -15,19 +15,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
-"region":  {
-"startLine":  121,
-"startColumn":  32,
-"endLine":  121,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'newData' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\FastMerge.cs",
@@ -49,19 +36,6 @@
 "startColumn":  67,
 "endLine":  56,
 "endColumn":  74
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Flag.cs",
-"region":  {
-"startLine":  64,
-"startColumn":  31,
-"endLine":  64,
-"endColumn":  36
 }
 }
 },
@@ -119,19 +93,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GCounter.cs",
-"region":  {
-"startLine":  195,
-"startColumn":  40,
-"endLine":  195,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'counter' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GCounter.cs",
@@ -153,71 +114,6 @@
 "startColumn":  49,
 "endLine":  109,
 "endColumn":  54
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GSet.cs",
-"region":  {
-"startLine":  158,
-"startColumn":  39,
-"endLine":  158,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  565,
-"startColumn":  30,
-"endLine":  565,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  841,
-"startColumn":  41,
-"endLine":  841,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
-"region":  {
-"startLine":  906,
-"startColumn":  35,
-"endLine":  906,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'key' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Key.cs",
-"region":  {
-"startLine":  60,
-"startColumn":  26,
-"endLine":  60,
-"endColumn":  29
 }
 }
 },
@@ -277,38 +173,12 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
-"region":  {
-"startLine":  315,
-"startColumn":  38,
-"endLine":  315,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
 "region":  {
 "startLine":  178,
 "startColumn":  17,
 "endLine":  178,
 "endColumn":  22
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
-"region":  {
-"startLine":  197,
-"startColumn":  33,
-"endLine":  197,
-"endColumn":  38
 }
 }
 },
@@ -361,19 +231,6 @@
 "startColumn":  43,
 "endLine":  320,
 "endColumn":  48
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
-"region":  {
-"startLine":  410,
-"startColumn":  35,
-"endLine":  410,
-"endColumn":  40
 }
 }
 },
@@ -457,19 +314,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
-"region":  {
-"startLine":  278,
-"startColumn":  39,
-"endLine":  278,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cluster' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
@@ -522,19 +366,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
-"region":  {
-"startLine":  441,
-"startColumn":  37,
-"endLine":  441,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'node' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounter.cs",
@@ -569,19 +400,6 @@
 "startColumn":  44,
 "endLine":  86,
 "endColumn":  49
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounter.cs",
-"region":  {
-"startLine":  109,
-"startColumn":  20,
-"endLine":  109,
-"endColumn":  25
 }
 }
 },
@@ -634,253 +452,6 @@
 "startColumn":  60,
 "endLine":  162,
 "endColumn":  65
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounterDictionary.cs",
-"region":  {
-"startLine":  188,
-"startColumn":  39,
-"endLine":  188,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
-"region":  {
-"startLine":  168,
-"startColumn":  25,
-"endLine":  168,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
-"region":  {
-"startLine":  209,
-"startColumn":  35,
-"endLine":  209,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
-"region":  {
-"startLine":  245,
-"startColumn":  35,
-"endLine":  245,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  51,
-"startColumn":  35,
-"endLine":  51,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  94,
-"startColumn":  32,
-"endLine":  94,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  190,
-"startColumn":  32,
-"endLine":  190,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  241,
-"startColumn":  32,
-"endLine":  241,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  291,
-"startColumn":  32,
-"endLine":  291,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  351,
-"startColumn":  32,
-"endLine":  351,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  392,
-"startColumn":  32,
-"endLine":  392,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  441,
-"startColumn":  32,
-"endLine":  441,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  571,
-"startColumn":  32,
-"endLine":  571,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  630,
-"startColumn":  32,
-"endLine":  630,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  733,
-"startColumn":  33,
-"endLine":  733,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  778,
-"startColumn":  32,
-"endLine":  778,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  852,
-"startColumn":  32,
-"endLine":  852,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  883,
-"startColumn":  32,
-"endLine":  883,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
-"region":  {
-"startLine":  919,
-"startColumn":  32,
-"endLine":  919,
-"endColumn":  37
 }
 }
 },
@@ -1011,45 +582,6 @@
 "startColumn":  16,
 "endLine":  132,
 "endColumn":  17
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
-"region":  {
-"startLine":  211,
-"startColumn":  29,
-"endLine":  211,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
-"region":  {
-"startLine":  243,
-"startColumn":  35,
-"endLine":  243,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
-"region":  {
-"startLine":  273,
-"startColumn":  35,
-"endLine":  273,
-"endColumn":  40
 }
 }
 }

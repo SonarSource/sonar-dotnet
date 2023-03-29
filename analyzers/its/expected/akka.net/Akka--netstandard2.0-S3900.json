@@ -145,19 +145,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
-"region":  {
-"startLine":  77,
-"startColumn":  44,
-"endLine":  77,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'parentPath' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
@@ -418,19 +405,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
-"region":  {
-"startLine":  300,
-"startColumn":  17,
-"endLine":  300,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
@@ -457,19 +431,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
-"region":  {
-"startLine":  422,
-"startColumn":  17,
-"endLine":  422,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
@@ -483,19 +444,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
-"region":  {
-"startLine":  460,
-"startColumn":  17,
-"endLine":  460,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'setup' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
@@ -504,19 +452,6 @@
 "startColumn":  34,
 "endLine":  261,
 "endColumn":  39
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
-"region":  {
-"startLine":  150,
-"startColumn":  28,
-"endLine":  150,
-"endColumn":  33
 }
 }
 },
@@ -873,32 +808,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
-"region":  {
-"startLine":  556,
-"startColumn":  71,
-"endLine":  556,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
-"region":  {
-"startLine":  564,
-"startColumn":  21,
-"endLine":  564,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'stopMessage' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\GracefulStopSupport.cs",
@@ -920,19 +829,6 @@
 "startColumn":  13,
 "endLine":  65,
 "endColumn":  19
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\IAutoReceivedMessage.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  37,
-"endLine":  70,
-"endColumn":  42
 }
 }
 },
@@ -1068,19 +964,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
-"region":  {
-"startLine":  327,
-"startColumn":  17,
-"endLine":  327,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'factory' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
@@ -1102,32 +985,6 @@
 "startColumn":  27,
 "endLine":  488,
 "endColumn":  33
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RemoteScope.cs",
-"region":  {
-"startLine":  44,
-"startColumn":  36,
-"endLine":  44,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RemoteScope.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  17,
-"endLine":  52,
-"endColumn":  20
 }
 }
 },
@@ -1341,19 +1198,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
-"region":  {
-"startLine":  458,
-"startColumn":  46,
-"endLine":  458,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'children' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
@@ -1388,32 +1232,6 @@
 "startColumn":  25,
 "endLine":  644,
 "endColumn":  32
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
-"region":  {
-"startLine":  724,
-"startColumn":  46,
-"endLine":  724,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
-"region":  {
-"startLine":  984,
-"startColumn":  44,
-"endLine":  984,
-"endColumn":  49
 }
 }
 },
@@ -1830,19 +1648,6 @@
 "startColumn":  36,
 "endLine":  481,
 "endColumn":  41
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
-"region":  {
-"startLine":  488,
-"startColumn":  17,
-"endLine":  488,
-"endColumn":  20
 }
 }
 },
@@ -2654,32 +2459,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
-"region":  {
-"startLine":  352,
-"startColumn":  41,
-"endLine":  352,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
-"region":  {
-"startLine":  360,
-"startColumn":  17,
-"endLine":  360,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'routees' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
@@ -2719,19 +2498,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
-"region":  {
-"startLine":  125,
-"startColumn":  17,
-"endLine":  125,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
@@ -2740,19 +2506,6 @@
 "startColumn":  70,
 "endLine":  130,
 "endColumn":  75
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
-"region":  {
-"startLine":  183,
-"startColumn":  17,
-"endLine":  183,
-"endColumn":  20
 }
 }
 },
@@ -2784,45 +2537,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
-"region":  {
-"startLine":  126,
-"startColumn":  33,
-"endLine":  126,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
-"region":  {
-"startLine":  204,
-"startColumn":  48,
-"endLine":  204,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
-"region":  {
-"startLine":  212,
-"startColumn":  17,
-"endLine":  212,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'routeeProps' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
@@ -2831,32 +2545,6 @@
 "startColumn":  20,
 "endLine":  321,
 "endColumn":  31
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
-"region":  {
-"startLine":  363,
-"startColumn":  36,
-"endLine":  363,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
-"region":  {
-"startLine":  372,
-"startColumn":  17,
-"endLine":  372,
-"endColumn":  20
 }
 }
 },
@@ -3000,32 +2688,6 @@
 "startColumn":  37,
 "endLine":  162,
 "endColumn":  43
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  35,
-"endLine":  47,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
-"region":  {
-"startLine":  54,
-"startColumn":  17,
-"endLine":  54,
-"endColumn":  20
 }
 }
 },
@@ -3265,19 +2927,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'first' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
-"region":  {
-"startLine":  258,
-"startColumn":  20,
-"endLine":  258,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'atomicBoolean' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Util\AtomicBoolean.cs",
@@ -3390,19 +3039,6 @@
 "startColumn":  17,
 "endLine":  406,
 "endColumn":  22
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
-"region":  {
-"startLine":  551,
-"startColumn":  27,
-"endLine":  551,
-"endColumn":  32
 }
 }
 },
