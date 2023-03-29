@@ -12,6 +12,162 @@
 "endColumn":  30
 }
 }
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'validator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\EmailAdapter.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  35,
+"endLine":  34,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'validator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\EqualAdapter.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  34,
+"endLine":  35,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'validator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\ExactLengthAdapater.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  40,
+"endLine":  34,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'validator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\ExclusiveBetweenAdapter.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  45,
+"endLine":  35,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'validator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\GreaterThanAdapter.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  40,
+"endLine":  35,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'validator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\GreaterThanOrEqualAdapter.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  47,
+"endLine":  35,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'validator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\InclusiveBetweenAdapter.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  45,
+"endLine":  35,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'validator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\LengthAdapter.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  36,
+"endLine":  34,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'validator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\LessThanAdapter.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  37,
+"endLine":  35,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'validator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\LessThanOrEqualAdapter.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  44,
+"endLine":  35,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'validator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\NotEqualAdapter.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  37,
+"endLine":  35,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'validator' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\RegularExpressionAdapter.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  47,
+"endLine":  34,
+"endColumn":  56
+}
+}
 }
 ]
 }

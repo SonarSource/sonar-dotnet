@@ -340,6 +340,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'value' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  39,
+"endLine":  90,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
