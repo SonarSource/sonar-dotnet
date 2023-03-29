@@ -98,14 +98,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
                 && objectCreation.Type.Is(KnownType.System_Threading_Mutex)
                 && context.Operation.Parent.AsAssignment() is { } assignment
                 && assignment.Target.TrackedSymbol() is { } symbol
-                && objectCreation.Arguments.Length > 0
-                && objectCreation.Arguments.ToDictionary(x => x.ToArgument().Parameter.Name, x => x.ToArgument().Value) is var arguments
-                && arguments.TryGetValue("initiallyOwned", out var initiallyOwned)
+                && objectCreation.ArgumentValue("initiallyOwned") is { } initiallyOwned
                 && context.State[initiallyOwned] is { } initiallyOwnedValue
                 && initiallyOwnedValue.HasConstraint(BoolConstraint.True))
             {
                 lastSymbolLock[symbol] = objectCreation.ToSonar();
-                return arguments.TryGetValue("createdNew", out var createdNew)
+                return objectCreation.ArgumentValue("createdNew") is { } createdNew
                     && createdNew.TrackedSymbol() is { } trackedCreatedNew
                     ? new[]
                         {
