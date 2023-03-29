@@ -863,12 +863,27 @@ class Boxing
         _ = (int)(object)(null as int?);    // Compliant
     }
 
-    void NullableRoundTrip()
+    void EmptyNullableRoundTrip()
     {
         int? nullable = null;
         object implicitBoxed = nullable;
         int? unboxedNullable = (int?)implicitBoxed;
         _ = unboxedNullable.Value;          // Noncompliant, empty
+    }
+
+    void NonEmptyNullableRoundTrip()
+    {
+        int? nullable = 42;
+        object implicitBoxed = nullable;
+        int? unboxedNullable = (int?)implicitBoxed;
+        _ = unboxedNullable.Value;          // Compliant, non-empty
+    }
+
+    void UnknownNullableRoundTrip(int? nullable)
+    {
+        object implicitBoxed = nullable;
+        int? unboxedNullable = (int?)implicitBoxed;
+        _ = unboxedNullable.Value;          // Compliant, unknown
     }
 
     void NonEmptyNullable()
