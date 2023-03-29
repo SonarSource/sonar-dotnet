@@ -133,10 +133,10 @@ Tag(""Success"", success);
 Tag(""Result"", result);
 Tag(""ObjectField"", ObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("ByteString", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("Success", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.ValidateTag("Result", x => x.Should().BeNull());
-            validator.ValidateTag("ObjectField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("ByteString", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("Success", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
+            validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("ObjectField", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
         [TestMethod]
@@ -151,10 +151,10 @@ Tag(""Success"", success);
 Tag(""Result"", result);
 Tag(""ObjectField"", ObjectField);";
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("ByteString", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("Success", x => x.HasConstraint<BoolConstraint>().Should().BeFalse());
-            validator.ValidateTag("Result", x => x.Should().BeNull());
-            validator.ValidateTag("ObjectField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("ByteString", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Success", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("ObjectField", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
         [TestMethod]
@@ -169,17 +169,17 @@ Tag(""End"", null);";
             validator.TagStates("End").Should().SatisfyRespectively(
                 x =>
                 {
-                    x[validator.Symbol("ObjectField")].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
-                    x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
-                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.True).Should().BeTrue();
-                    x[validator.Symbol("result")].Should().BeNull();
+                    x[validator.Symbol("ObjectField")].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+                    x[validator.Symbol("byteString")].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+                    x[validator.Symbol("success")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+                    x[validator.Symbol("result")].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
                 },
                 x =>
                 {
-                    x[validator.Symbol("ObjectField")].HasConstraint(ObjectConstraint.Null).Should().BeTrue();
-                    x[validator.Symbol("byteString")].Should().BeNull();
-                    x[validator.Symbol("success")].HasConstraint(BoolConstraint.False).Should().BeTrue();
-                    x[validator.Symbol("result")].Should().BeNull();
+                    x[validator.Symbol("ObjectField")].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+                    x[validator.Symbol("byteString")].Should().HaveNoConstraints();
+                    x[validator.Symbol("success")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+                    x[validator.Symbol("result")].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
                 });
         }
 
