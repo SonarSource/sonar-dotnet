@@ -82,18 +82,18 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        var operation = context.Operation.Instance;
-        if (operation.Kind == OperationKindEx.ParameterReference
-            && operation.ToParameterReference().Parameter is var parameter
+        if (NullDereferenceCandidate(context.Operation.Instance) is { } candidate
+            && candidate.Kind == OperationKindEx.ParameterReference
+            && candidate.ToParameterReference() is var dereferencedParameter
+            && dereferencedParameter.Parameter is var parameter
             && !parameter.Type.IsValueType
-            && IsParameterDereferenced(context.Operation)
             && NullableStateIsNotKnownForParameter(parameter)
             && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
             var message = SemanticModel.GetDeclaredSymbol(Node).IsConstructor()
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
-            ReportIssue(operation, string.Format(message, operation.Syntax), context);
+            ReportIssue(dereferencedParameter.WrappedOperation, string.Format(message, dereferencedParameter.WrappedOperation.Syntax), context);
         }
 
         return context.State;
@@ -102,10 +102,17 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             context.State[symbol] is null || !context.State[symbol].HasConstraint<ObjectConstraint>();
     }
 
-    private static bool IsParameterDereferenced(IOperationWrapperSonar operation) =>
-        operation.Parent is { } parent
-        && (parent.IsAnyKind(DereferenceOperations)
-            || (parent.Kind == OperationKindEx.Conversion && IsParameterDereferenced(parent.ToSonar())));
+    private static IOperation NullDereferenceCandidate(IOperation operation) =>
+        operation.Kind switch
+        {
+            OperationKindEx.Invocation => operation.ToInvocation().Instance,
+            OperationKindEx.FieldReference => operation.ToFieldReference().Instance,
+            OperationKindEx.PropertyReference => operation.ToPropertyReference().Instance,
+            OperationKindEx.EventReference => operation.ToEventReference().Instance,
+            OperationKindEx.Await => operation.ToAwait().Operation,
+            OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
+            _ => null,
+        };
 
     private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker
     {
