@@ -24,9 +24,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
 {
     internal sealed class NonNullableValueTypeCheck : SymbolicCheck
     {
-        protected override ProgramState PostProcessSimple(SymbolicContext context) =>
-            context.Operation.Instance.Type.IsNonNullableValueType()
-                ? context.SetOperationConstraint(ObjectConstraint.NotNull)
-                : context.State;
+        protected override ProgramState PostProcessSimple(SymbolicContext context)
+        {
+            var state = context.State;
+            var operation = context.Operation.Instance;
+            if (operation.Type is { } type && type.IsNonNullableValueType())
+            {
+                state = context.SetOperationConstraint(ObjectConstraint.NotNull);
+            }
+            if (operation.TrackedSymbol() is { } trackedSymbol
+                && trackedSymbol.GetSymbolType().IsNonNullableValueType())
+            {
+                state = state.SetSymbolConstraint(trackedSymbol, ObjectConstraint.NotNull);
+            }
+            return state;
+        }
     }
 }

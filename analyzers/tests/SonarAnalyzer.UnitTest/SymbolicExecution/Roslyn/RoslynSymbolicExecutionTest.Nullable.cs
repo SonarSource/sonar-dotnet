@@ -278,12 +278,12 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagStates("End").Should().SatisfyRespectively(
             x =>
             {
-                x[boolParameter].Should().HaveOnlyConstraints(BoolConstraint.True);                     // NotNull is missing
+                x[boolParameter].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
                 x[nullable].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
                 x[value].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
             }, x =>
             {
-                x[boolParameter].Should().HaveOnlyConstraints(BoolConstraint.False);                    // NotNull is missing
+                x[boolParameter].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
                 x[nullable].Should().HaveOnlyConstraint(ObjectConstraint.Null);
                 x[value].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
             });

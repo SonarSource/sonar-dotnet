@@ -311,15 +311,15 @@ public void Method()
 
         [TestMethod]
         public void Argument_Ref_ResetsConstraints_CS() =>
-            SETestContext.CreateCS(@"var b = true; Main(boolParameter, ref b); Tag(""B"", b);", ", ref bool outParam").Validator.ValidateTag("B", x => x.Should().BeNull());
+            SETestContext.CreateCS(@"var b = true; Main(boolParameter, ref b); Tag(""B"", b);", ", ref bool outParam").Validator.ValidateTag("B", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
 
         [TestMethod]
         public void Argument_Out_ResetsConstraints_CS() =>
-            SETestContext.CreateCS(@"var b = true; Main(boolParameter, out b); Tag(""B"", b); outParam = false;", ", out bool outParam").Validator.ValidateTag("B", x => x.Should().BeNull());
+            SETestContext.CreateCS(@"var b = true; Main(boolParameter, out b); Tag(""B"", b); outParam = false;", ", out bool outParam").Validator.ValidateTag("B", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
 
         [TestMethod]
         public void Argument_ByRef_ResetConstraints_VB() =>
-            SETestContext.CreateVB(@"Dim B As Boolean = True : Main(BoolParameter, B) : Tag(""B"", B)", ", ByRef ByRefParam As Boolean").Validator.ValidateTag("B", x => x.Should().BeNull());
+            SETestContext.CreateVB(@"Dim B As Boolean = True : Main(BoolParameter, B) : Tag(""B"", B)", ", ByRef ByRefParam As Boolean").Validator.ValidateTag("B", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
 
         [TestMethod]
         public void Argument_ArgList_DoesNotThrow()
@@ -495,14 +495,14 @@ Tag(""AfterInt"", argInt);
 Tag(""AfterNullableInt"", argNullableInt);";
             var validator = SETestContext.CreateCS(code, ", object argObjNull, object argObjDefault, int argInt, int? argNullableInt").Validator;
             validator.ValidateContainsOperation(OperationKind.Literal);
-            validator.ValidateTag("BeforeObjNull", x => x.Should().BeNull());
-            validator.ValidateTag("BeforeObjDefault", x => x.Should().BeNull());
-            validator.ValidateTag("BeforeInt", x => x.Should().BeNull());
-            validator.ValidateTag("BeforeNullableInt", x => x.Should().BeNull());
-            validator.ValidateTag("AfterObjNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterObjDefault", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterInt", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("AfterNullableInt", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeObjNull", x => x.Should().HaveNoConstraints());
+            validator.ValidateTag("BeforeObjDefault", x => x.Should().HaveNoConstraints());
+            validator.ValidateTag("BeforeInt", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("BeforeNullableInt", x => x.Should().HaveNoConstraints());
+            validator.ValidateTag("AfterObjNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("AfterObjDefault", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("AfterInt", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterNullableInt", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
         [TestMethod]
@@ -517,10 +517,10 @@ Tag(""AfterObj"", ArgObj)
 Tag(""AfterInt"", ArgInt)";
             var validator = SETestContext.CreateVB(code, ", ArgObj As Object, ArgInt As Integer").Validator;
             validator.ValidateContainsOperation(OperationKind.Literal);
-            validator.ValidateTag("BeforeObj", x => x.Should().BeNull());
-            validator.ValidateTag("BeforeInt", x => x.Should().BeNull());
-            validator.ValidateTag("AfterObj", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterInt", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("BeforeObj", x => x.Should().HaveNoConstraints());
+            validator.ValidateTag("BeforeInt", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterObj", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("AfterInt", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
