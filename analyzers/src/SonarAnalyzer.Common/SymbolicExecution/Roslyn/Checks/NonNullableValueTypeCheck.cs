@@ -34,7 +34,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             }
             if (operation.TrackedSymbol() is { } trackedSymbol
                 && trackedSymbol.GetSymbolType() is { } symbol
-                && (symbol.IsNonNullableValueType() || symbol.IsEnum())
+                && (symbol.IsNonNullableValueType() || symbol.IsEnum()))
             {
                 state = state.SetSymbolConstraint(trackedSymbol, ObjectConstraint.NotNull);
             }
