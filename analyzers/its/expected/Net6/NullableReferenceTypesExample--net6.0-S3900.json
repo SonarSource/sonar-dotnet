@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'someString' before using it.",
+"location":  {
+"uri":  "sources\Net6\NullableReferenceTypesExample\NullableReferenceTypesExample.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  31,
+"endLine":  20,
+"endColumn":  41
+}
+}
+}
+]
+}

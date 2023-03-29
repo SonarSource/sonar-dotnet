@@ -67,6 +67,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RegexValidatorAdapter.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  46,
+"endLine":  42,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'descriptor' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RequiredValidatorAdapter.cs",
@@ -88,6 +101,19 @@
 "startColumn":  25,
 "endLine":  41,
 "endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\StringLengthValidatorAdapter.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  41,
+"endLine":  42,
+"endColumn":  50
 }
 }
 }

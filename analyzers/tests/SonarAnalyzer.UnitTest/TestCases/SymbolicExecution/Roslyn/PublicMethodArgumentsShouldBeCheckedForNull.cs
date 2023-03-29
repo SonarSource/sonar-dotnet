@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -91,6 +92,11 @@ public class Program
         {
             s2.ToString();
         }
+    }
+
+    public void ForEachLoop(object[] array)
+    {
+        foreach (object o in array) { } // Noncompliant
     }
 
     public async void AsyncTest(Task task1, Task task2, Task task3, Task task4)
@@ -625,5 +631,86 @@ public class NestedClasses
                 o.ToString();                           // Compliant - method is not accessible from other assemblies
             }
         }
+    }
+}
+
+public class Conversion
+{
+    public void DownCast(object o)
+    {
+        ((string)o).ToString();                             // Noncompliant
+    }
+
+    public void UpCast(string s)
+    {
+        ((object)s).ToString();                             // Noncompliant
+    }
+
+    public void CastWithMemberAccess(object o1, object o2, object o3, object o4)
+    {
+        _ = ((CustomClass)o1).Property;                     // Noncompliant
+        ((CustomClass)o2).CustomEvent +=                    // Noncompliant
+                (sender, args) => { };
+        _ = ((CustomClass)o3).field;                        // Noncompliant
+        Func<string> method = ((CustomClass)o3).ToString;   // FN
+    }
+
+    public void CastWithRedundantParentheses(object o)
+    {
+        (((string)o)).ToString();                           // Noncompliant
+    }
+
+    public void MultipleCasts(object o)
+    {
+        ((string)((object)((string)o))).ToString();         // Noncompliant
+    }
+
+    public void AsOperatorDownCast(object o)
+    {
+        (o as string).ToString();                           // Noncompliant
+    }
+
+    public void AsOperatorUpCast(string s)
+    {
+        (s as object).ToString();                           // Noncompliant
+    }
+
+    public void ForEachLoop(object[] arr, IEnumerable<object> enumerable)
+    {
+        foreach (object o in arr)                           // Noncompliant - the array is first cast to an IEnumerable, then the GetEnumerator method is invoked on it
+        {
+        }
+
+        foreach (object o in enumerable)                    // Noncompliant
+        {
+        }
+    }
+
+    public void ForEachLoopWithCast(object[] arr)
+    {
+        foreach (object o in (IEnumerable<object>)arr)      // Noncompliant
+        {
+        }
+    }
+
+    public void ForEachLoopWithParentheses(object[] arr)
+    {
+        foreach (object o in ((arr)))                       // Noncompliant
+        {
+        }
+    }
+
+    public void ForEachLoopWithCastAndParentheses(object[] arr)
+    {
+        foreach (object o in ((object[])(object)((arr))))   // Noncompliant
+        {
+        }
+    }
+
+    private class CustomClass
+    {
+        public int field;
+        public int Property { get; set; }
+        public event EventHandler CustomEvent;
     }
 }

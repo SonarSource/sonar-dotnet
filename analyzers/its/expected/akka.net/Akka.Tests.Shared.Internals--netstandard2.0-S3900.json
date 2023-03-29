@@ -41,6 +41,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'asyncActionThatThrows' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  23,
+"endLine":  162,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'messageClasses' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
@@ -153,6 +166,19 @@
 "startColumn":  60,
 "endLine":  188,
 "endColumn":  65
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'func' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  23,
+"endLine":  224,
+"endColumn":  27
 }
 }
 }
