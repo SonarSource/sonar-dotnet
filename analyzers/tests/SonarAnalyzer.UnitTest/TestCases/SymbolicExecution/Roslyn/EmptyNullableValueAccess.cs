@@ -737,6 +737,39 @@ class OutAndRefParams
     }
 }
 
+class InParams
+{
+    void InParamOfALocalFunction(int? iParam)
+    {
+        iParam = null;
+        LocalFunctionWithReadInParam(iParam);
+        _ = iParam.Value;       // Noncompliant, empty
+
+        iParam = 42;
+        LocalFunctionWithReadInParam(iParam);
+        _ = iParam.Value;       // Compliant, non-empty
+
+        static void LocalFunctionWithReadInParam(in int? i) { }
+    }
+
+    void InParamOfTheMethodItself(in int? iParam)
+    {
+        _ = iParam.Value;       // Compliant, unknown
+        iParam = null;          // Error, CS8331
+        _ = iParam.Value;       // Compliant, iParam is "in" and its value can't be modified
+    }
+
+    void InParamOfAnotherMethod(in int? iParam)
+    {
+        _ = iParam.Value;       // Compliant, unknown
+
+        MethodWithReadInParam(iParam);
+        _ = iParam.Value;       // Compliant, iParam is "in" and its value can't be modified
+    }
+
+    static void MethodWithReadInParam(in int? i) { }
+}
+
 class MutableField
 {
     int? theField;
@@ -781,9 +814,6 @@ class MutableField
         theField = 42;
         MethodNotChangingTheField();
         _ = theField.Value;          // Compliant, unknown
-
-        void LocalFunctionChangingTheField() => theField = null;
-        void LocalFunctionNotChangingTheField() { }
     }
 
     void MethodChangingTheField() => theField = null;
