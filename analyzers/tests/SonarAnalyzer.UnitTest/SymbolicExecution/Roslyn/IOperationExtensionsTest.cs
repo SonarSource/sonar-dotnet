@@ -59,6 +59,23 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             assignmentTarget.TrackedSymbol().Should().Be(fieldReferenceSymbol);
         }
 
+        [DataTestMethod]
+        [DataRow(@"(int i, int j) = (1, 1)")]
+        [DataRow(@"(var i, var j) = (1, 1)")]
+        [DataRow(@"int.TryParse(string.Empty, out int value)")]
+        [DataRow(@"int.TryParse(string.Empty, out var value)")]
+        public void TrackedSymbol_DeclarationExpression(string assignment)
+        {
+            var code = $"public class C {{ void Method() {{ {assignment}; }} }}";
+            var graph = TestHelper.CompileCfgCS(code);
+            var allDeclarations = graph.Blocks[1].Operations.SelectMany(x => x.DescendantsAndSelf()).Where(x => x.Kind == OperationKindEx.DeclarationExpression).Select(IDeclarationExpressionOperationWrapper.FromOperation).ToArray();
+            allDeclarations.Should().NotBeEmpty();
+            allDeclarations.Should().AllSatisfy(x =>
+                x.WrappedOperation.TrackedSymbol().Should().NotBeNull().And.BeAssignableTo<ISymbol>()
+                .Which.GetSymbolType().Should().NotBeNull().And.BeAssignableTo<ITypeSymbol>()
+                .Which.SpecialType.Should().Be(SpecialType.System_Int32));
+        }
+
         [TestMethod]
         public void TrackedSymbol_SimpleAssignment_IsNull()
         {
