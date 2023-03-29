@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Google.Protobuf.WellKnownTypes;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -544,7 +543,9 @@ if (value = boolParameter)
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
             validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().HaveNoConstraints());
-            validator.TagValues("End").Should().BeEquivalentTo(new SymbolicValue[] { SymbolicValue.NotNull, null });
+            validator.TagValues("End").Should().SatisfyRespectively(
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                x => x.Should().HaveNoConstraints());
         }
 
         [DataTestMethod]
@@ -555,7 +556,7 @@ if (value = boolParameter)
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
             validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-            validator.TagValues("End").Should().BeEquivalentTo(new[] { SymbolicValue.NotNull });
+            validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
@@ -714,11 +715,10 @@ if (value = boolParameter)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
-        [DataTestMethod]
-        [DataRow("arg is object o", "TStruct")]
-        public void Branching_LearnsObjectConstraint_DeclarationPattern_ValueType(string expression, string argType = "object")
+        [TestMethod]
+        public void Branching_LearnsObjectConstraint_DeclarationPattern_ValueType()
         {
-            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, argType);
+            var validator = CreateIfElseEndValidatorCS("arg is object o", OperationKind.DeclarationPattern, "TStruct");
             validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
