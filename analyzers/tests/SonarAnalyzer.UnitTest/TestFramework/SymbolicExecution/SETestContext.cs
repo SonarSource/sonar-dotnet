@@ -78,7 +78,12 @@ public class Deconstructable
             var code = $@"
 Public Class Sample
 
-    Private Readonly Property Condition As Boolean = Environment.ProcessorCount = 42    ' Something that cannot have constraint
+    Private Readonly Property Condition As Boolean
+        Get
+            Return Environment.ProcessorCount = 42  ' Something that cannot have constraint
+        End Get
+    End Property
+
     Private FieldArray() As Integer
 
     Public Sub Main(BoolParameter As Boolean{additionalParameters})
