@@ -111,10 +111,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             foreach (var argument in arguments)
             {
-                var argumenentOperation = IArgumentOperationWrapper.FromOperation(argument);
-                if (argumenentOperation.Parameter.Name == parameterName)
+                var argumentOperation = IArgumentOperationWrapper.FromOperation(argument);
+                if (argumentOperation.Parameter.Name == parameterName)
                 {
-                    return argumenentOperation.Value;
+                    return argumentOperation.Value;
                 }
             }
             return null;
