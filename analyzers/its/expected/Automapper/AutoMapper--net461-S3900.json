@@ -392,6 +392,32 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'enumerableOfProfiles' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  37,
+"endLine":  161,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'memberNames' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  39,
+"endLine":  37,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'memberOptions' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
@@ -613,6 +639,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'members' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  36,
+"endLine":  170,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lambda' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
@@ -647,6 +686,19 @@
 "startColumn":  23,
 "endLine":  231,
 "endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'members' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  36,
+"endLine":  232,
+"endColumn":  43
 }
 }
 },
@@ -964,6 +1016,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'member' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  131,
+"endLine":  17,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'parameter' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
@@ -1024,6 +1089,19 @@
 "startColumn":  50,
 "endLine":  29,
 "endColumn":  60
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'prefixes' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  36,
+"endLine":  75,
+"endColumn":  44
 }
 }
 },
