@@ -646,9 +646,19 @@ public class Conversion
         ((object)s).ToString();                         // Noncompliant
     }
 
+    public void CastWithPropertyAccess(object o)
+    {
+        _ = ((Exception)o).Message;                     // Noncompliant
+    }
+
     public void CastWithRedundantParentheses(object o)
     {
         (((string)o)).ToString();                       // Noncompliant
+    }
+
+    public void MultipleCasts(object o)
+    {
+        ((string)((object)((string)o))).ToString();     // Noncompliant
     }
 
     public void AsOperatorDownCast(object o)
