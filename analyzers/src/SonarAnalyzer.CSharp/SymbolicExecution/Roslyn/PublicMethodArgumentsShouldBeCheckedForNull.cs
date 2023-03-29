@@ -30,17 +30,6 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
     private const string DiagnosticId = "S3900";
     private const string MessageFormat = "{0}";
 
-    private static readonly OperationKind[] DereferenceOperations = new[]
-    {
-        OperationKindEx.Invocation,
-        OperationKindEx.FieldReference,
-        OperationKindEx.PropertyReference,
-        OperationKindEx.EventReference,
-        OperationKindEx.Await,
-        OperationKindEx.ArrayElementReference,
-        OperationKindEx.MethodReference
-    };
-
     internal static readonly DiagnosticDescriptor S3900 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     protected override DiagnosticDescriptor Rule => S3900;
@@ -102,8 +91,9 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             context.State[symbol] is null || !context.State[symbol].HasConstraint<ObjectConstraint>();
     }
 
-    private static IOperation NullDereferenceCandidate(IOperation operation) =>
-        operation.Kind switch
+    private static IOperation NullDereferenceCandidate(IOperation operation)
+    {
+        var candidate = operation.Kind switch
         {
             OperationKindEx.Invocation => operation.ToInvocation().Instance,
             OperationKindEx.FieldReference => operation.ToFieldReference().Instance,
