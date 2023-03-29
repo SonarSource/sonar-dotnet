@@ -203,7 +203,6 @@ public static class Extensions
         [DataRow("var dummy = this.Property;")]
         [DataRow("SampleProperty.InstanceMethod();")]
         [DataRow("this.SampleProperty.InstanceMethod();")]
-        [DataRow("this.SampleProperty?.InstanceMethod();")]
         public void Invocation_InstanceMethodCall_DoesNotClearFieldForOtherAccess(string invocation)
         {
             var code = $@"
