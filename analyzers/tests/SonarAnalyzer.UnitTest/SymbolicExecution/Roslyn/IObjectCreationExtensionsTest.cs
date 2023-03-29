@@ -32,17 +32,15 @@ public class IObjectCreationExtensionsTest
     [DataRow("""1, "Test" """, "stringParam", "Test")]
     [DataRow("""1, "Test" """, "optionalBoolParam", true)]
     [DataRow("""1, "Test" """, "optionalIntParam", 1)]
-    [DataRow("""1, "Test" """, "stringParams", null)]
     [DataRow("""1, "Test", true """, "optionalBoolParam", true)]
     [DataRow("""stringParam: "Test", intParam: 1 """, "stringParam", "Test")]
     [DataRow("""stringParam: "Test", intParam: 1, optionalIntParam: 2 """, "optionalIntParam", 2)]
-    [DataRow("""1, "Test", true, 0, "param1", "param2" """, "stringParams", null)]
     public void ArgumentValue(string objectCreationArguments, string parameterName, object expected)
     {
         var testClass = $$"""
             class Test
             {
-                Test(int intParam, string stringParam, bool optionalBoolParam = true, int optionalIntParam = 1, params string[] stringParams)
+                Test(int intParam, string stringParam, bool optionalBoolParam = true, int optionalIntParam = 1)
                 {
                 }
 
@@ -58,8 +56,11 @@ public class IObjectCreationExtensionsTest
         operation.ArgumentValue(parameterName).Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.ConstantValue.Value.Should().Be(expected);
     }
 
-    [TestMethod]
-    public void ArgumentValue_Params()
+    [DataTestMethod]
+    [DataRow("""  """)]
+    [DataRow(""" "param1", "param2" """, "param1", "param2")]
+    [DataRow(""" null, null """, null, null)]
+    public void ArgumentValue_Params(string arguments, params string[] expected)
     {
         var testClass = $$"""
             class Test
@@ -70,7 +71,7 @@ public class IObjectCreationExtensionsTest
 
                 static void Create()
                 {
-                    new Test("param1", "param2");
+                    new Test({{arguments}});
                 }
             }
             """;
@@ -79,8 +80,7 @@ public class IObjectCreationExtensionsTest
         var operation = IObjectCreationOperationWrapper.FromOperation(model.GetOperation(objectCreation));
         var argument = operation.ArgumentValue("stringParams").Should().NotBeNull().And.BeAssignableTo<IOperation>().Subject;
         var argumentArray = IArrayCreationOperationWrapper.FromOperation(argument);
-        argumentArray.Initializer.ElementValues.Should().SatisfyRespectively(
-            x => x.ConstantValue.Value.Should().Be("param1"),
-            x => x.ConstantValue.Value.Should().Be("param2"));
+        var result = argumentArray.Initializer.ElementValues.Select(x => x.ConstantValue.Value).ToArray();
+        result.Should().BeEquivalentTo(expected);
     }
 }
