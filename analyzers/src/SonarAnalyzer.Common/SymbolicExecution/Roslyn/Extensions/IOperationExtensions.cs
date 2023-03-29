@@ -103,6 +103,19 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             return operation;
         }
 
+        public static IOperation ArgumentValue(this ImmutableArray<IOperation> arguments, string parameterName)
+        {
+            foreach (var argument in arguments)
+            {
+                var argumenentOperation = IArgumentOperationWrapper.FromOperation(argument);
+                if (argumenentOperation.Parameter.Name == parameterName)
+                {
+                    return argumenentOperation.Value;
+                }
+            }
+            return null;
+        }
+
         private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> fromOperation) where T : struct =>
             operation.Kind == kind ? fromOperation(operation) : null;
     }
