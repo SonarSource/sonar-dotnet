@@ -638,49 +638,63 @@ public class Conversion
 {
     public void DownCast(object o)
     {
-        ((string)o).ToString();                         // Noncompliant
+        ((string)o).ToString();                             // Noncompliant
     }
 
     public void UpCast(string s)
     {
-        ((object)s).ToString();                         // Noncompliant
+        ((object)s).ToString();                             // Noncompliant
     }
 
     public void CastWithPropertyAccess(object o)
     {
-        _ = ((Exception)o).Message;                     // Noncompliant
+        _ = ((Exception)o).Message;                         // Noncompliant
     }
 
     public void CastWithRedundantParentheses(object o)
     {
-        (((string)o)).ToString();                       // Noncompliant
+        (((string)o)).ToString();                           // Noncompliant
     }
 
     public void MultipleCasts(object o)
     {
-        ((string)((object)((string)o))).ToString();     // Noncompliant
+        ((string)((object)((string)o))).ToString();         // Noncompliant
     }
 
     public void AsOperatorDownCast(object o)
     {
-        (o as string).ToString();                       // Noncompliant
+        (o as string).ToString();                           // Noncompliant
     }
 
     public void AsOperatorUpCast(string s)
     {
-        (s as object).ToString();                       // Noncompliant
+        (s as object).ToString();                           // Noncompliant
     }
 
     public void ForEachLoop(object[] arr)
     {
-        foreach (object o in arr)                       // Noncompliant - the array is first cast to an IEnumerable, then the GetEnumerator method is invoked on it
+        foreach (object o in arr)                           // Noncompliant - the array is first cast to an IEnumerable, then the GetEnumerator method is invoked on it
         {
         }
     }
 
     public void ForEachLoopWithCast(object[] arr)
     {
-        foreach (object o in (IEnumerable<object>)arr)  // Noncompliant
+        foreach (object o in (IEnumerable<object>)arr)      // Noncompliant
+        {
+        }
+    }
+
+    public void ForEachLoopWithParentheses(object[] arr)
+    {
+        foreach (object o in ((arr)))                       // Noncompliant
+        {
+        }
+    }
+
+    public void ForEachLoopWithCastAndParentheses(object[] arr)
+    {
+        foreach (object o in ((object[])(object)((arr))))   // Noncompliant
         {
         }
     }
