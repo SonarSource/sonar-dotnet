@@ -719,10 +719,9 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_DeclarationPattern_ValueType(string expression, string argType = "object")
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, argType);
-
             validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-            validator.TagValues("End").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+            validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [DataTestMethod]
