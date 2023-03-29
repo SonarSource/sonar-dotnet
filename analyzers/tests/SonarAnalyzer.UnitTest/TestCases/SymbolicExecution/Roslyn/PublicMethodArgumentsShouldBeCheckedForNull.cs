@@ -646,9 +646,13 @@ public class Conversion
         ((object)s).ToString();                             // Noncompliant
     }
 
-    public void CastWithPropertyAccess(object o)
+    public void CastWithMemberAccess(object o1, object o2, object o3, object o4)
     {
-        _ = ((Exception)o).Message;                         // Noncompliant
+        _ = ((CustomClass)o1).Property;                     // Noncompliant
+        ((CustomClass)o2).CustomEvent +=                    // Noncompliant
+                (sender, args) => { };
+        _ = ((CustomClass)o3).field;                        // Noncompliant
+        _ = ((CustomClass)o3).MethodReference;              // FN
     }
 
     public void CastWithRedundantParentheses(object o)
@@ -671,9 +675,13 @@ public class Conversion
         (s as object).ToString();                           // Noncompliant
     }
 
-    public void ForEachLoop(object[] arr)
+    public void ForEachLoop(object[] arr, IEnumerable<object> enumerable)
     {
         foreach (object o in arr)                           // Noncompliant - the array is first cast to an IEnumerable, then the GetEnumerator method is invoked on it
+        {
+        }
+
+        foreach (object o in enumerable)                    // Noncompliant
         {
         }
     }
@@ -697,5 +705,13 @@ public class Conversion
         foreach (object o in ((object[])(object)((arr))))   // Noncompliant
         {
         }
+    }
+
+    private class CustomClass
+    {
+        public int field;
+        public int Property { get; set; }
+        public Action MethodReference { get; set; }
+        public event EventHandler CustomEvent;
     }
 }
