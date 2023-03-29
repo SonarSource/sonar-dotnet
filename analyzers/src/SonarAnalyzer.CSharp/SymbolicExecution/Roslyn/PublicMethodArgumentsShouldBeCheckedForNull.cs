@@ -30,6 +30,16 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
     private const string DiagnosticId = "S3900";
     private const string MessageFormat = "{0}";
 
+    private static readonly OperationKind[] DereferenceOperations = new[]
+    {
+        OperationKindEx.Invocation,
+        OperationKindEx.FieldReference,
+        OperationKindEx.PropertyReference,
+        OperationKindEx.EventReference,
+        OperationKindEx.Await,
+        OperationKindEx.ArrayElementReference
+    };
+
     internal static readonly DiagnosticDescriptor S3900 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     protected override DiagnosticDescriptor Rule => S3900;
@@ -92,15 +102,9 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
     }
 
     private static bool IsParameterDereferenced(IOperationWrapperSonar operation) =>
-        operation.Parent != null
-        && (operation.Parent.IsAnyKind(
-            OperationKindEx.Invocation,
-            OperationKindEx.FieldReference,
-            OperationKindEx.PropertyReference,
-            OperationKindEx.EventReference,
-            OperationKindEx.Await,
-            OperationKindEx.ArrayElementReference)
-         || (operation.Parent.Kind == OperationKindEx.Conversion && IsParameterDereferenced(operation.Parent.ToSonar())));
+        operation.Parent is { } parent
+        && (parent.IsAnyKind(DereferenceOperations)
+            || (parent.Kind == OperationKindEx.Conversion && IsParameterDereferenced(parent.ToSonar())));
 
     private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker
     {
