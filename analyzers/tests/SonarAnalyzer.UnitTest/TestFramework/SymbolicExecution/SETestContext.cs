@@ -124,6 +124,8 @@ public unsafe class Sample
     public Sample SampleProperty {{ get; set; }}
     public object AutoProperty {{ get; set; }}
     public object FullProperty {{ get => ObjectField; set => ObjectField = value; }}
+    public static object StaticAutoProperty {{ get; set; }}
+    public static object StaticFullProperty {{ get => StaticObjectField; set => StaticObjectField = value; }}
     public NotImplementedException PropertyException {{ get; set; }}
     public int this[int index] {{get => 42; set {{ }} }}
     private int field;
