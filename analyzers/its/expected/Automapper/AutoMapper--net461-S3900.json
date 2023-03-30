@@ -223,7 +223,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'expression' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'expression' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\ConfigurationValidator.cs",
 "region":  {
@@ -860,7 +860,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'property' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'property' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
 "region":  {
@@ -873,7 +873,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'typeMap' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
 "region":  {
@@ -1133,7 +1133,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'constructor' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'constructor' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
 "region":  {
@@ -1315,7 +1315,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'destination' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'destination' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
 "region":  {
@@ -1653,7 +1653,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'includedMember' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'includedMember' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\PathMap.cs",
 "region":  {
@@ -1666,7 +1666,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'profile' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'profile' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
 "region":  {
@@ -1744,7 +1744,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'includedMember' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'includedMember' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
 "region":  {
@@ -1757,7 +1757,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'includedMemberMap' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'includedMemberMap' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
 "region":  {
@@ -2264,7 +2264,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'profile' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'profile' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
 "region":  {

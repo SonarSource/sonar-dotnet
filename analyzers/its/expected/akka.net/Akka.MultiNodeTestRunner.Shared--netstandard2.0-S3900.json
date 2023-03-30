@@ -366,7 +366,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'msg' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'msg' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
 "region":  {
