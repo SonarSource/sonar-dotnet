@@ -656,6 +656,23 @@ namespace Tests.Diagnostics
             type = typeof(object);
             type.ToString(); // Compliant
         }
+
+        public void WithDelegate(object asParameter, object asVariable)
+        {
+            if(asParameter == null)
+            {
+            }
+
+            if (asVariable == null)
+            {
+            }
+
+            SomeAction(asParameter.ToString);       // Noncompliant
+            Func<string> f = asVariable.ToString;   // Noncompliant
+
+            void SomeAction(Func<string> a)
+            { }
+        }
     }
 
     class A
