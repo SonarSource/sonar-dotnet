@@ -75,7 +75,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             && candidate.Kind == OperationKindEx.ParameterReference
             && candidate.ToParameterReference() is { Parameter: var parameterSymbol, WrappedOperation: var parameterReference }
             && !parameterSymbol.Type.IsValueType
-            && NullableStateIsNotKnownForParameter(parameterSymbol)
+            && !HasObjectConstraint(parameterSymbol)
             && !parameterSymbol.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
             var message = SemanticModel.GetDeclaredSymbol(Node).IsConstructor()
@@ -86,8 +86,8 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
         return context.State;
 
-        bool NullableStateIsNotKnownForParameter(IParameterSymbol symbol) =>
-            context.State[symbol] is null || !context.State[symbol].HasConstraint<ObjectConstraint>();
+        bool HasObjectConstraint(IParameterSymbol symbol) =>
+            context.State[symbol]?.HasConstraint<ObjectConstraint>() is true;
     }
 
     private static IOperation NullDereferenceCandidate(IOperation operation)
@@ -102,6 +102,9 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
             _ => null,
         };
+
+        return candidate?.UnwrapConversion();
+    }
 
     private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker
     {
