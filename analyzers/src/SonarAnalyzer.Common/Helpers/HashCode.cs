@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (dictionary.IsEmpty)
             {
-                return IntSeed;
+                return 0;
             }
 
             var seed = IntSeed;
