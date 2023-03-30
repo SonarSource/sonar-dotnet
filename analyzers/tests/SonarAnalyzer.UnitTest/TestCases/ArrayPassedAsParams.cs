@@ -99,10 +99,9 @@ public class Repro6894
     }
 }
 
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6893
 public class Repro6893
 {
-    // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6893
-
     public void Method(int a, params object[] argumentArray) { }
     
 
@@ -112,10 +111,9 @@ public class Repro6893
     }
 }
 
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6977
 public class Repro6977
 {
-    // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6977
-
     class ParamsAttribute : Attribute
     {
         public ParamsAttribute(params string[] values) { }
@@ -130,4 +128,3 @@ public class Repro6977
         FooBar
     }
 }
-
