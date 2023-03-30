@@ -30,8 +30,20 @@ namespace SonarAnalyzer.Helpers
         private const int RotateOffset = 17;
         private const int IntSeed = 393241;
 
-        public static int DictionaryContentHash<TKey, TValue>(IDictionary<TKey, TValue> dictionary) =>
-            dictionary.Aggregate(0, (seed, kvp) => seed ^ Combine(kvp.Key, kvp.Value));
+        public static int DictionaryContentHash<TKey, TValue>(ImmutableDictionary<TKey, TValue> dictionary)
+        {
+            if (dictionary.IsEmpty)
+            {
+                return IntSeed;
+            }
+
+            var seed = IntSeed;
+            foreach (var kvp in dictionary)
+            {
+                seed ^= Combine(kvp.Key, kvp.Value);
+            }
+            return seed;
+        }
 
         /// <summary>
         /// Calculates a hash for the enumerable based on the content. The same values in a different order produce the same hash-code.
