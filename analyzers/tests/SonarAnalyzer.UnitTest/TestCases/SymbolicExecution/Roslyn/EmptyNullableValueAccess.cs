@@ -949,99 +949,99 @@ namespace WithAliases
     }
 }
 
-namespace TypeWithValueInstanceProperty
+namespace TypeWithInstancePropertyCalledValue
 {
     class Test
     {
         void Basics1()
         {
-            ClassWithValueProperty i = null;
-            _ = i.Value;                                                       // Compliant, ClassWithValueProperty not a nullable type
+            ClassWithPropertyCalledValue i = null;
+            _ = i.Value;                                                     // Compliant, not a nullable type
         }
 
         void Basics2()
         {
-            ClassWithValueProperty i = null;
-            _ = i.APropertyNotCalledValue;                                     // Compliant, ClassWithValuePropertyAndImplicitCast not a nullable type
+            ClassWithPropertyCalledValue i = null;
+            _ = i.APropertyNotCalledValue;                                   // Compliant, not a nullable type
         }
 
         void ImplicitCast()
         {
-            StructWithValuePropertyAndCastOperators i = null as int?;          // Noncompliant, FP
-            _ = i.Value;                                                       // Compliant, ClassWithValuePropertyAndImplicitCast not a nullable type
+            StructWithPropertyCalledValueAndCastOperators i = null as int?;  // Noncompliant, FP
+            _ = i.Value;                                                     // Compliant, not a nullable type
         }
 
-        int ExplicitCast1 => ((StructWithValuePropertyAndCastOperators)(null as long?)).Value;                              // Noncompliant, FP, just gives 42
-        StructWithValuePropertyAndCastOperators ExplicitCast2 => (null as StructWithValuePropertyAndCastOperators?).Value;  // Noncompliant, FP, just gives a struct
-        int ExplicitCast3 => (null as StructWithValuePropertyAndCastOperators?).Value.Value;                                // Noncompliant, FP, just gives 42
+        int ExplicitCast1 => ((StructWithPropertyCalledValueAndCastOperators)(null as long?)).Value;                                    // Noncompliant, FP, just gives 42
+        StructWithPropertyCalledValueAndCastOperators ExplicitCast2 => (null as StructWithPropertyCalledValueAndCastOperators?).Value;  // Noncompliant, FP, just gives a struct
+        int ExplicitCast3 => (null as StructWithPropertyCalledValueAndCastOperators?).Value.Value;                                      // Noncompliant, FP, just gives 42
     }
 
-    class ClassWithValueProperty
+    class ClassWithPropertyCalledValue
     {
         public int Value => 42;
         public int APropertyNotCalledValue => 42;
     }
 
-    struct StructWithValuePropertyAndCastOperators
+    struct StructWithPropertyCalledValueAndCastOperators
     {
         public int Value => 42;
         public int APropertyNotCalledValue => 42;
 
-        public static implicit operator StructWithValuePropertyAndCastOperators(int? value) => new StructWithValuePropertyAndCastOperators();
-        public static explicit operator StructWithValuePropertyAndCastOperators(long? value) => new StructWithValuePropertyAndCastOperators();
+        public static implicit operator StructWithPropertyCalledValueAndCastOperators(int? value) => new StructWithPropertyCalledValueAndCastOperators();
+        public static explicit operator StructWithPropertyCalledValueAndCastOperators(long? value) => new StructWithPropertyCalledValueAndCastOperators();
     }
 }
 
-namespace TypeWithValueStaticProperty
+namespace TypeWithStaticPropertyCalledValue
 {
     class Test
     {
         void Basics()
         {
-            _ = AClassWithStaticValueProperty.Value;                                // Compliant, not on nullable value type
-            _ = AClassWithStaticValueProperty.Value.Value;                          // Compliant
-            _ = AClassWithStaticValueProperty.Value.Value.InstanceProperty;         // Compliant
-            _ = AClassWithStaticValueProperty.Value.Value.InstanceProperty.Value;   // Compliant
-            _ = new AClassWithInstanceValueProperty().Value;                        // Compliant
+            _ = ClassWithStaticPropertyCalledValue.Value;                                // Compliant, not on nullable value type
+            _ = ClassWithStaticPropertyCalledValue.Value.Value;                          // Compliant
+            _ = ClassWithStaticPropertyCalledValue.Value.Value.InstanceProperty;         // Compliant
+            _ = ClassWithStaticPropertyCalledValue.Value.Value.InstanceProperty.Value;   // Compliant
+            _ = new AClassWithInstancePropertyCalledValue().Value;                       // Compliant
         }
     }
 
-    class AClassWithStaticValueProperty
+    class ClassWithStaticPropertyCalledValue
     {
-        public AClassWithInstanceValueProperty InstanceProperty => new AClassWithInstanceValueProperty();
+        public AClassWithInstancePropertyCalledValue InstanceProperty => new AClassWithInstancePropertyCalledValue();
 
-        public static AClassWithInstanceValueProperty Value => new AClassWithInstanceValueProperty();
+        public static AClassWithInstancePropertyCalledValue Value => new AClassWithInstancePropertyCalledValue();
     }
 
-    class AClassWithInstanceValueProperty
+    class AClassWithInstancePropertyCalledValue
     {
-        public AClassWithStaticValueProperty Value => new AClassWithStaticValueProperty();
+        public ClassWithStaticPropertyCalledValue Value => new ClassWithStaticPropertyCalledValue();
     }
 }
 
-namespace TypeWithValueStaticField
+namespace TypeWithStaticFieldCalledValue
 {
     class Test
     {
         void Basics()
         {
-            _ = AClassWithStaticValueField.Value;                                // Compliant, not on nullable value type
-            _ = AClassWithStaticValueField.Value.Value;                          // Compliant
-            _ = AClassWithStaticValueField.Value.Value.InstanceField;            // Compliant
-            _ = AClassWithStaticValueField.Value.Value.InstanceField.Value;      // Compliant
-            _ = new AClassWithInstanceValueField().Value;                        // Compliant
+            _ = AClassWithStaticFieldCalledValue.Value;                            // Compliant, not on nullable value type
+            _ = AClassWithStaticFieldCalledValue.Value.Value;                      // Compliant
+            _ = AClassWithStaticFieldCalledValue.Value.Value.InstanceField;        // Compliant
+            _ = AClassWithStaticFieldCalledValue.Value.Value.InstanceField.Value;  // Compliant
+            _ = new AClassWithInstanceFieldCalledValue().Value;                    // Compliant
         }
     }
 
-    class AClassWithStaticValueField
+    class AClassWithStaticFieldCalledValue
     {
-        public AClassWithInstanceValueField InstanceField = new AClassWithInstanceValueField();
+        public AClassWithInstanceFieldCalledValue InstanceField = new AClassWithInstanceFieldCalledValue();
 
-        public static AClassWithInstanceValueField Value = new AClassWithInstanceValueField();
+        public static AClassWithInstanceFieldCalledValue Value = new AClassWithInstanceFieldCalledValue();
     }
 
-    class AClassWithInstanceValueField
+    class AClassWithInstanceFieldCalledValue
     {
-        public AClassWithStaticValueField Value = new AClassWithStaticValueField();
+        public AClassWithStaticFieldCalledValue Value = new AClassWithStaticFieldCalledValue();
     }
 }
