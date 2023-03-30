@@ -902,13 +902,15 @@ class Boxing
         _ = (short)intNullable;             // Compliant, cast exception from int unboxing -> no nullable value access
     }
 
+    void ForeachExplicitConversion()
+    {
+        foreach (int i in new int?[] { null, 42 }) { }          // FN
+        foreach (int i in new long?[] { null, 42, 42L }) { }    // FN
+    }
+
     void ForeachImplictConversion()
     {
-        foreach (object boxed in new int?[] { null })
-        {
-            _ = (int)boxed;                 // Compliant
-        }
-        foreach (object boxed in stackalloc int?[] { null as int?, 42, 43 })
+        foreach (object boxed in new int?[] { null, 42 })
         {
             _ = (int)boxed;                 // Compliant
         }
