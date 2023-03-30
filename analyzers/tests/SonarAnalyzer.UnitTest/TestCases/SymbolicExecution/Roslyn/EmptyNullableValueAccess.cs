@@ -908,6 +908,10 @@ class Boxing
         {
             _ = (int)boxed;                 // Compliant
         }
+        foreach (object boxed in stackalloc int?[] { null as int?, 42, 43 })
+        {
+            _ = (int)boxed;                 // Compliant
+        }
     }
 
     void CollectionImplicitBoxing()
