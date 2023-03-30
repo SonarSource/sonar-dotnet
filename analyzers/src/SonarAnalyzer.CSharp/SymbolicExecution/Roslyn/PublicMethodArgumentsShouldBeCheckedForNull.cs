@@ -78,7 +78,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             && !HasObjectConstraint(parameterReference.Parameter)
             && !parameterReference.Parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
-            var message = SemanticModel.GetDeclaredSymbol(Node).IsConstructor()
+            var message = IsUsedInBaseConstructorCall(operation.Syntax)
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
             ReportIssue(parameterReference.WrappedOperation, string.Format(message, parameterReference.WrappedOperation.Syntax), context);
