@@ -1002,18 +1002,18 @@ namespace TypeWithStaticPropertyCalledValue
             _ = ClassWithStaticPropertyCalledValue.Value.Value;                          // Compliant
             _ = ClassWithStaticPropertyCalledValue.Value.Value.InstanceProperty;         // Compliant
             _ = ClassWithStaticPropertyCalledValue.Value.Value.InstanceProperty.Value;   // Compliant
-            _ = new AClassWithInstancePropertyCalledValue().Value;                       // Compliant
+            _ = new ClassWithInstancePropertyCalledValue().Value;                        // Compliant
         }
     }
 
     class ClassWithStaticPropertyCalledValue
     {
-        public AClassWithInstancePropertyCalledValue InstanceProperty => new AClassWithInstancePropertyCalledValue();
+        public ClassWithInstancePropertyCalledValue InstanceProperty => new ClassWithInstancePropertyCalledValue();
 
-        public static AClassWithInstancePropertyCalledValue Value => new AClassWithInstancePropertyCalledValue();
+        public static ClassWithInstancePropertyCalledValue Value => new ClassWithInstancePropertyCalledValue();
     }
 
-    class AClassWithInstancePropertyCalledValue
+    class ClassWithInstancePropertyCalledValue
     {
         public ClassWithStaticPropertyCalledValue Value => new ClassWithStaticPropertyCalledValue();
     }
@@ -1025,23 +1025,23 @@ namespace TypeWithStaticFieldCalledValue
     {
         void Basics()
         {
-            _ = AClassWithStaticFieldCalledValue.Value;                            // Compliant, not on nullable value type
-            _ = AClassWithStaticFieldCalledValue.Value.Value;                      // Compliant
-            _ = AClassWithStaticFieldCalledValue.Value.Value.InstanceField;        // Compliant
-            _ = AClassWithStaticFieldCalledValue.Value.Value.InstanceField.Value;  // Compliant
-            _ = new AClassWithInstanceFieldCalledValue().Value;                    // Compliant
+            _ = ClassWithStaticFieldCalledValue.Value;                            // Compliant, not on nullable value type
+            _ = ClassWithStaticFieldCalledValue.Value.Value;                      // Compliant
+            _ = ClassWithStaticFieldCalledValue.Value.Value.InstanceField;        // Compliant
+            _ = ClassWithStaticFieldCalledValue.Value.Value.InstanceField.Value;  // Compliant
+            _ = new ClassWithInstanceFieldCalledValue().Value;                    // Compliant
         }
     }
 
-    class AClassWithStaticFieldCalledValue
+    class ClassWithStaticFieldCalledValue
     {
-        public AClassWithInstanceFieldCalledValue InstanceField = new AClassWithInstanceFieldCalledValue();
+        public ClassWithInstanceFieldCalledValue InstanceField = new ClassWithInstanceFieldCalledValue();
 
-        public static AClassWithInstanceFieldCalledValue Value = new AClassWithInstanceFieldCalledValue();
+        public static ClassWithInstanceFieldCalledValue Value = new ClassWithInstanceFieldCalledValue();
     }
 
-    class AClassWithInstanceFieldCalledValue
+    class ClassWithInstanceFieldCalledValue
     {
-        public AClassWithStaticFieldCalledValue Value = new AClassWithStaticFieldCalledValue();
+        public ClassWithStaticFieldCalledValue Value = new ClassWithStaticFieldCalledValue();
     }
 }
