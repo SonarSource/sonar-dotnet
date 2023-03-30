@@ -86,24 +86,25 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
         return context.State;
 
+        IOperation NullDereferenceCandidate(IOperation operation)
+        {
+            var candidate = operation.Kind switch
+            {
+                OperationKindEx.Invocation => operation.ToInvocation().Instance,
+                OperationKindEx.FieldReference => operation.ToFieldReference().Instance,
+                OperationKindEx.PropertyReference => operation.ToPropertyReference().Instance,
+                OperationKindEx.EventReference => operation.ToEventReference().Instance,
+                OperationKindEx.Await => operation.ToAwait().Operation,
+                OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
+                OperationKindEx.MethodReference => operation.ToMethodReference().Instance,
+            _ => null,
+            };
+
+            return candidate.UnwrapOperation(context.State);
+        }
+
         bool HasObjectConstraint(IParameterSymbol symbol) =>
             context.State[symbol]?.HasConstraint<ObjectConstraint>() is true;
-    }
-
-    private static IOperation NullDereferenceCandidate(IOperation operation)
-    {
-        var candidate = operation.Kind switch
-        {
-            OperationKindEx.Invocation => operation.ToInvocation().Instance,
-            OperationKindEx.FieldReference => operation.ToFieldReference().Instance,
-            OperationKindEx.PropertyReference => operation.ToPropertyReference().Instance,
-            OperationKindEx.EventReference => operation.ToEventReference().Instance,
-            OperationKindEx.Await => operation.ToAwait().Operation,
-            OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
-            OperationKindEx.MethodReference => operation.ToMethodReference().Instance,
-            _ => null,
-        };
-        return candidate?.UnwrapConversion();
     }
 
     private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker

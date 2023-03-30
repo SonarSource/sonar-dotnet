@@ -98,6 +98,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             reference.Instance == null // static fields
             || reference.Instance.Kind == OperationKindEx.InstanceReference;
 
+        public static IOperation UnwrapOperation(this IOperation operation, ProgramState state) =>
+            operation?.Kind switch
+            {
+                OperationKindEx.Conversion => UnwrapOperation(operation.UnwrapConversion(), state),
+                OperationKindEx.FlowCapture or OperationKindEx.FlowCaptureReference => UnwrapOperation(operation.UnwrapFlowCapture(state), state),
+                _ => operation
+            };
+
         public static IOperation UnwrapConversion(this IOperation operation)
         {
             while (operation?.Kind == OperationKindEx.Conversion)
@@ -137,6 +145,15 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 }
             }
             return null;
+        }
+
+        public static IOperation UnwrapFlowCapture(this IOperation operation, ProgramState state)
+        {
+            while (operation?.Kind is OperationKindEx.FlowCapture or OperationKindEx.FlowCaptureReference)
+            {
+                operation = state.ResolveCapture(operation);
+            }
+            return operation;
         }
 
         private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> fromOperation) where T : struct =>
