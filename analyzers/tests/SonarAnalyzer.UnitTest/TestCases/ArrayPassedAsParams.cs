@@ -101,7 +101,7 @@ public class Repro6894
 
 public class Repro6893
 {
-    //Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6893
+    // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6893
 
     public void Method(int a, params object[] argumentArray) { }
     
@@ -109,6 +109,25 @@ public class Repro6893
     public void CallMethod()
     {
         Method(a: 1, argumentArray: new int[] { 1, 2 }); // Noncompliant FP
+    }
+}
+
+public class Repro6977
+{
+    // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6977
+
+    class ParamsAttribute : Attribute
+    {
+        public ParamsAttribute(params string[] values) { }
+    }
+
+    internal enum Foo
+    {
+        [Params(new[] { "1", "2" })] // FN
+        Bar,
+
+        [Params("1", "2")]
+        FooBar
     }
 }
 
