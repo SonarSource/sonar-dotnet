@@ -32,19 +32,6 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown\MarkdownViewengineRender.cs",
 "region":  {
-"startLine":  31,
-"startColumn":  16,
-"endLine":  31,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'templateContent' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown\MarkdownViewengineRender.cs",
-"region":  {
 "startLine":  32,
 "startColumn":  20,
 "endLine":  32,
