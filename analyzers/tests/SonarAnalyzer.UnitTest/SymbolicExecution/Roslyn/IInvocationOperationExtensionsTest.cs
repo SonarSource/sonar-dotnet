@@ -23,6 +23,8 @@ using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest;
 using StyleCop.Analyzers.Lightup;
 
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
+
 [TestClass]
 public class IInvocationOperationExtensionsTest
 {
@@ -39,7 +41,6 @@ public class IInvocationOperationExtensionsTest
         var (tree, model) = TestHelper.CompileCS(testClass);
         var invocation = tree.GetRoot().DescendantNodesAndSelf().OfType<InvocationExpressionSyntax>().Single();
         var operation = IInvocationOperationWrapper.FromOperation(model.GetOperation(invocation));
-        var argument = operation.ArgumentValue("stringParam").Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.ConstantValue.Value.Should().Be("param");
+        operation.ArgumentValue("stringParam").Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.ConstantValue.Value.Should().Be("param");
     }
-
 }
