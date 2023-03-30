@@ -1970,6 +1970,19 @@
 "uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Stages\Stages.cs",
 "region":  {
 "startLine":  448,
+"startColumn":  83,
+"endLine":  448,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'symbolicStage' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Stages\Stages.cs",
+"region":  {
+"startLine":  448,
 "startColumn":  105,
 "endLine":  448,
 "endColumn":  118

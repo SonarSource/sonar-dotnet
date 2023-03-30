@@ -28,6 +28,32 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'messageExtractor' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  514,
+"startColumn":  45,
+"endLine":  514,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'messageExtractor' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  546,
+"startColumn":  45,
+"endLine":  546,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
@@ -49,6 +75,58 @@
 "startColumn":  17,
 "endLine":  718,
 "endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'messageExtractor' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  841,
+"startColumn":  45,
+"endLine":  841,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'messageExtractor' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  873,
+"startColumn":  45,
+"endLine":  873,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'messageExtractor' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  1042,
+"startColumn":  64,
+"endLine":  1042,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'messageExtractor' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  1069,
+"startColumn":  69,
+"endLine":  1069,
+"endColumn":  85
 }
 }
 },

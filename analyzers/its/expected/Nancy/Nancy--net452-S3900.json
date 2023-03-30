@@ -6,6 +6,19 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
 "region":  {
+"startLine":  40,
+"startColumn":  20,
+"endLine":  40,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"region":  {
 "startLine":  67,
 "startColumn":  13,
 "endLine":  67,
@@ -88,6 +101,19 @@
 "startColumn":  51,
 "endLine":  180,
 "endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  20,
+"endLine":  42,
+"endColumn":  28
 }
 }
 },
@@ -743,6 +769,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'strategy' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultTypeCatalog.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  90,
+"endLine":  36,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTracing.cs",
@@ -1284,6 +1323,19 @@
 "startColumn":  17,
 "endLine":  69,
 "endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pipeline' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  20,
+"endLine":  45,
+"endColumn":  28
 }
 }
 },
