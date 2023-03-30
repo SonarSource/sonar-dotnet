@@ -73,15 +73,15 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
     {
         if (NullDereferenceCandidate(context.Operation.Instance) is { } candidate
             && candidate.Kind == OperationKindEx.ParameterReference
-            && candidate.ToParameterReference() is { Parameter: var parameterSymbol, WrappedOperation: var parameterReference }
-            && !parameterSymbol.Type.IsValueType
-            && !HasObjectConstraint(parameterSymbol)
-            && !parameterSymbol.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
+            && candidate.ToParameterReference() is var parameterReference
+            && !parameterReference.Parameter.Type.IsValueType
+            && !HasObjectConstraint(parameterReference.Parameter)
+            && !parameterReference.Parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
             var message = SemanticModel.GetDeclaredSymbol(Node).IsConstructor()
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
-            ReportIssue(parameterReference, string.Format(message, parameterReference.Syntax), context);
+            ReportIssue(parameterReference.WrappedOperation, string.Format(message, parameterReference.WrappedOperation.Syntax), context);
         }
 
         return context.State;
