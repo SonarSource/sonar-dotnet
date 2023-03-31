@@ -1008,14 +1008,14 @@ namespace TypeWithStaticPropertyCalledValue
 
     class ClassWithStaticPropertyCalledValue
     {
-        public ClassWithInstancePropertyCalledValue InstanceProperty => new ClassWithInstancePropertyCalledValue();
+        public ClassWithInstancePropertyCalledValue InstanceProperty => null;
 
-        public static ClassWithInstancePropertyCalledValue Value => new ClassWithInstancePropertyCalledValue();
+        public static ClassWithInstancePropertyCalledValue Value => null;
     }
 
     class ClassWithInstancePropertyCalledValue
     {
-        public ClassWithStaticPropertyCalledValue Value => new ClassWithStaticPropertyCalledValue();
+        public ClassWithStaticPropertyCalledValue Value => null;
     }
 }
 
@@ -1035,13 +1035,13 @@ namespace TypeWithStaticFieldCalledValue
 
     class ClassWithStaticFieldCalledValue
     {
-        public ClassWithInstanceFieldCalledValue InstanceField = new ClassWithInstanceFieldCalledValue();
+        public ClassWithInstanceFieldCalledValue InstanceField = null;
 
-        public static ClassWithInstanceFieldCalledValue Value = new ClassWithInstanceFieldCalledValue();
+        public static ClassWithInstanceFieldCalledValue Value = null;
     }
 
     class ClassWithInstanceFieldCalledValue
     {
-        public ClassWithStaticFieldCalledValue Value = new ClassWithStaticFieldCalledValue();
+        public ClassWithStaticFieldCalledValue Value = null;
     }
 }
