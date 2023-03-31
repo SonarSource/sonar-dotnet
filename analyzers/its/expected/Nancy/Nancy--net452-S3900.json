@@ -925,71 +925,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
-"region":  {
-"startLine":  157,
-"startColumn":  59,
-"endLine":  157,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
-"region":  {
-"startLine":  177,
-"startColumn":  20,
-"endLine":  177,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'dynamicValue' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  161,
-"startColumn":  17,
-"endLine":  161,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'compareValue' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  193,
-"startColumn":  66,
-"endLine":  193,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'compareValue' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  213,
-"startColumn":  20,
-"endLine":  213,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'binder' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
@@ -1791,32 +1726,6 @@
 "startColumn":  20,
 "endLine":  16,
 "endColumn":  28
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpLink.cs",
-"region":  {
-"startLine":  152,
-"startColumn":  41,
-"endLine":  152,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
-"region":  {
-"startLine":  85,
-"startColumn":  77,
-"endLine":  85,
-"endColumn":  82
 }
 }
 },
@@ -3304,32 +3213,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
-"region":  {
-"startLine":  46,
-"startColumn":  51,
-"endLine":  46,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
-"region":  {
-"startLine":  62,
-"startColumn":  17,
-"endLine":  62,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'token' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
@@ -3832,32 +3715,6 @@
 "startColumn":  29,
 "endLine":  35,
 "endColumn":  45
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
-"region":  {
-"startLine":  79,
-"startColumn":  27,
-"endLine":  79,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
-"region":  {
-"startLine":  91,
-"startColumn":  20,
-"endLine":  91,
-"endColumn":  23
 }
 }
 }

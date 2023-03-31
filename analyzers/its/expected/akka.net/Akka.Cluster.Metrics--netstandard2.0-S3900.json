@@ -223,19 +223,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
-"region":  {
-"startLine":  178,
-"startColumn":  36,
-"endLine":  178,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'otherGossip' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\MetricsGossip.cs",
@@ -309,19 +296,6 @@
 "startColumn":  64,
 "endLine":  88,
 "endColumn":  68
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\NodeMetrics.cs",
-"region":  {
-"startLine":  102,
-"startColumn":  36,
-"endLine":  102,
-"endColumn":  41
 }
 }
 },

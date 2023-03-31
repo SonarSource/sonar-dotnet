@@ -132,45 +132,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  17,
-"endLine":  93,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
-"region":  {
-"startLine":  99,
-"startColumn":  38,
-"endLine":  99,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
-"region":  {
-"startLine":  110,
-"startColumn":  17,
-"endLine":  110,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nodeDatum' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
@@ -192,58 +153,6 @@
 "startColumn":  20,
 "endLine":  218,
 "endColumn":  28
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
-"region":  {
-"startLine":  251,
-"startColumn":  41,
-"endLine":  251,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
-"region":  {
-"startLine":  264,
-"startColumn":  17,
-"endLine":  264,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
-"region":  {
-"startLine":  396,
-"startColumn":  45,
-"endLine":  396,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
-"region":  {
-"startLine":  409,
-"startColumn":  17,
-"endLine":  409,
-"endColumn":  20
 }
 }
 },
@@ -465,32 +374,6 @@
 "startColumn":  35,
 "endLine":  98,
 "endColumn":  38
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
-"region":  {
-"startLine":  159,
-"startColumn":  33,
-"endLine":  159,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
-"region":  {
-"startLine":  167,
-"startColumn":  21,
-"endLine":  167,
-"endColumn":  24
 }
 }
 },
