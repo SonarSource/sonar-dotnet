@@ -317,6 +317,24 @@ if (value = boolParameter)
             validator.TagValues("End").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedPath)));
         }
 
+        [TestMethod]
+        public void Branching_LearnsObjectConstraint_NullableBool_UnknownVB()
+        {
+            var validator = SETestContext.CreateVB($$"""
+                Dim b As Boolean? = Unknown(Of Boolean?)
+                if b Then
+                    Tag("True", b)
+                else
+                    Tag("False", b)
+                End if
+                Tag("End", b)
+                """).Validator;
+            validator.ValidateTagOrder("True", "False", "End");
+            validator.ValidateTag("True", x => x.Should().HaveNoConstraints("b.GetValueOrDefault() is called in 'if b' and b is not found in RoslynSymbolicExecution.SetBranchingConstraints"));
+            validator.ValidateTag("False", x => x.Should().HaveNoConstraints());
+            validator.TagValues("End").Should().SatisfyRespectively(x => x.Should().HaveNoConstraints());
+        }
+
         [DataTestMethod]
         [DataRow("arg == isObject", "object")]
         [DataRow("isObject == arg", "object")]
