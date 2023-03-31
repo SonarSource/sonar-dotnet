@@ -31,6 +31,11 @@ internal static class IOperationExtensions
             OperationKindEx.LocalReference => operation.ToLocalReference().Local,
             OperationKindEx.ParameterReference => operation.ToParameterReference().Parameter,
             OperationKindEx.Argument => operation.ToArgument().Value.TrackedSymbol(),
+            OperationKindEx.PropertyReference when operation.ToPropertyReference() is var propertyReference
+                && IsStaticOrThis(propertyReference)
+                && !propertyReference.Property.IsVirtual
+                && propertyReference.Property.IsAutoProperty()
+                => propertyReference.Property,
             _ => null
         };
 
