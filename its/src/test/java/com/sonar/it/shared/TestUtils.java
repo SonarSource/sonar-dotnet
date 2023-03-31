@@ -20,9 +20,11 @@
 package com.sonar.it.shared;
 
 import com.sonar.orchestrator.Orchestrator;
+import com.sonar.orchestrator.OrchestratorBuilder;
 import com.sonar.orchestrator.build.Build;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
+import com.sonar.orchestrator.container.Edition;
 import com.sonar.orchestrator.http.HttpMethod;
 import com.sonar.orchestrator.locator.FileLocation;
 import com.sonar.orchestrator.locator.Location;
@@ -49,6 +51,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonarqube.ws.Ce;
 import org.sonarqube.ws.Components;
+import org.sonarqube.ws.Duplications.ShowResponse;
 import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.Measures;
 import org.sonarqube.ws.Measures.Measure;
@@ -58,7 +61,6 @@ import org.sonarqube.ws.client.WsClientFactories;
 import org.sonarqube.ws.client.ce.TaskRequest;
 import org.sonarqube.ws.client.components.ShowRequest;
 import org.sonarqube.ws.client.measures.ComponentRequest;
-import org.sonarqube.ws.Duplications.ShowResponse;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -69,6 +71,14 @@ public class TestUtils {
   final private static Logger LOG = LoggerFactory.getLogger(TestUtils.class);
   private static final String MSBUILD_PATH = "MSBUILD_PATH";
   private static final String MSBUILD_PATH_DEFAULT = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\MSBuild\\Current\\Bin\\msbuild.exe";
+
+  public static OrchestratorBuilder prepareOrchestrator() {
+    return Orchestrator.builderEnv()
+      .useDefaultAdminCredentialsForBuilds(true)
+      .setSonarVersion(replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "DEV")))
+      .setEdition(Edition.DEVELOPER)
+      .activateLicense();
+  }
 
   // Ensure no AnalysisWarning is raised inside the SQ GUI
   public static void verifyNoGuiWarnings(Orchestrator orchestrator, BuildResult buildResult) {
@@ -215,7 +225,8 @@ public class TestUtils {
   }
 
   public static List<Issues.Issue> getIssues(Orchestrator orch, String componentKey, String pullRequestKey) {
-    return newWsClient(orch).issues().search(new org.sonarqube.ws.client.issues.SearchRequest().setComponentKeys(Collections.singletonList(componentKey)).setPullRequest(pullRequestKey)).getIssuesList();
+    return newWsClient(orch).issues()
+      .search(new org.sonarqube.ws.client.issues.SearchRequest().setComponentKeys(Collections.singletonList(componentKey)).setPullRequest(pullRequestKey)).getIssuesList();
   }
 
   public static List<Hotspot> getHotspots(Orchestrator orch, String projectKey) {
@@ -231,7 +242,7 @@ public class TestUtils {
   // The term "latest" refers to the highest version number, not the most recently published version.
   public static String replaceLtsVersion(String version) {
     if (version != null && version.equals("LTS")) {
-      return "LATEST_RELEASE[8.9]";
+      return "LATEST_RELEASE[9.9]";
     }
     return version;
   }

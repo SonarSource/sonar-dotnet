@@ -23,7 +23,6 @@ import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
-import com.sonar.orchestrator.container.Edition;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.io.IOException;
@@ -75,17 +74,13 @@ import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
 public class Tests {
 
   @ClassRule
-  public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .useDefaultAdminCredentialsForBuilds(true)
-    .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE[9.9]")))
+  public static final Orchestrator ORCHESTRATOR = TestUtils.prepareOrchestrator()
     .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin")) // Do not add VB.NET here, use shared project instead
-    .setEdition(Edition.DEVELOPER)
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/class_name.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/template_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/custom_parameters.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/custom_complexity.xml"))
-    .activateLicense()
     .build();
 
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {

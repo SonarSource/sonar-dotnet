@@ -22,7 +22,6 @@ package com.sonar.it.shared;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
-import com.sonar.orchestrator.container.Edition;
 import com.sonar.orchestrator.locator.MavenLocation;
 import java.io.File;
 import java.io.IOException;
@@ -48,15 +47,11 @@ import org.junit.runners.Suite.SuiteClasses;
 public class Tests {
 
   @ClassRule
-  public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .useDefaultAdminCredentialsForBuilds(true)
-    .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE[9.9]")))
+  public static final Orchestrator ORCHESTRATOR = TestUtils.prepareOrchestrator()
     .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
     .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin"))
     // ScannerCliTest: Fixed version for the HTML plugin as we don't want to have failures in case of changes there.
     .addPlugin(MavenLocation.of("org.sonarsource.html", "sonar-html-plugin", "3.2.0.2082"))
-    .setEdition(Edition.DEVELOPER)
-    .activateLicense()
     .build();
 
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {

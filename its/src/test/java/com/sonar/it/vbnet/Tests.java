@@ -58,9 +58,7 @@ import org.sonarqube.ws.Measures;
 public class Tests {
 
   @ClassRule
-  public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .useDefaultAdminCredentialsForBuilds(true)
-    .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE[9.9]")))
+  public static final Orchestrator ORCHESTRATOR = TestUtils.prepareOrchestrator()
     .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin")) // Do not add C# here, use shared project instead
     .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_class_name.xml"))
