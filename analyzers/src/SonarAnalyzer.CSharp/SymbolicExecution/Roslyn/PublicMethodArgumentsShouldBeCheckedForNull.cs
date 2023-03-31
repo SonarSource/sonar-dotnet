@@ -102,7 +102,6 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
             _ => null,
         };
-
         return candidate?.UnwrapConversion();
     }
 
