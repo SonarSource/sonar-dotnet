@@ -949,46 +949,99 @@ namespace WithAliases
     }
 }
 
-namespace TypeWithValueProperty
+namespace TypeWithInstancePropertyCalledValue
 {
     class Test
     {
         void Basics1()
         {
-            ClassWithValueProperty i = null;
-            _ = i.Value;                                                       // Compliant, ClassWithValueProperty not a nullable type
+            ClassWithPropertyCalledValue i = null;
+            _ = i.Value;                                                     // Compliant, not a nullable type
         }
 
         void Basics2()
         {
-            ClassWithValueProperty i = null;
-            _ = i.APropertyNotCalledValue;                                     // Compliant, ClassWithValuePropertyAndImplicitCast not a nullable type
+            ClassWithPropertyCalledValue i = null;
+            _ = i.APropertyNotCalledValue;                                   // Compliant, not a nullable type
         }
 
         void ImplicitCast()
         {
-            StructWithValuePropertyAndCastOperators i = null as int?;          // Noncompliant, FP
-            _ = i.Value;                                                       // Compliant, ClassWithValuePropertyAndImplicitCast not a nullable type
+            StructWithPropertyCalledValueAndCastOperators i = null as int?;  // Noncompliant, FP
+            _ = i.Value;                                                     // Compliant, not a nullable type
         }
 
-        int ExplicitCast1 => ((StructWithValuePropertyAndCastOperators)(null as long?)).Value;                              // Noncompliant, FP, just gives 42
-        StructWithValuePropertyAndCastOperators ExplicitCast2 => (null as StructWithValuePropertyAndCastOperators?).Value;  // Noncompliant, FP, just gives a struct
-        int ExplicitCast3 => (null as StructWithValuePropertyAndCastOperators?).Value.Value;                                // Noncompliant, FP, just gives 42
+        int ExplicitCast1 => ((StructWithPropertyCalledValueAndCastOperators)(null as long?)).Value;                                    // Noncompliant, FP, just gives 42
+        StructWithPropertyCalledValueAndCastOperators ExplicitCast2 => (null as StructWithPropertyCalledValueAndCastOperators?).Value;  // Noncompliant, FP, just gives a struct
+        int ExplicitCast3 => (null as StructWithPropertyCalledValueAndCastOperators?).Value.Value;                                      // Noncompliant, FP, just gives 42
     }
 
-    class ClassWithValueProperty
+    class ClassWithPropertyCalledValue
     {
         public int Value => 42;
         public int APropertyNotCalledValue => 42;
     }
 
-    struct StructWithValuePropertyAndCastOperators
+    struct StructWithPropertyCalledValueAndCastOperators
     {
         public int Value => 42;
         public int APropertyNotCalledValue => 42;
 
-        public static implicit operator StructWithValuePropertyAndCastOperators(int? value) => new StructWithValuePropertyAndCastOperators();
-        public static explicit operator StructWithValuePropertyAndCastOperators(long? value) => new StructWithValuePropertyAndCastOperators();
+        public static implicit operator StructWithPropertyCalledValueAndCastOperators(int? value) => new StructWithPropertyCalledValueAndCastOperators();
+        public static explicit operator StructWithPropertyCalledValueAndCastOperators(long? value) => new StructWithPropertyCalledValueAndCastOperators();
     }
 }
 
+namespace TypeWithStaticPropertyCalledValue
+{
+    class Test
+    {
+        void Basics()
+        {
+            _ = ClassWithStaticPropertyCalledValue.Value;                                // Compliant, not on nullable value type
+            _ = ClassWithStaticPropertyCalledValue.Value.Value;                          // Compliant
+            _ = ClassWithStaticPropertyCalledValue.Value.Value.InstanceProperty;         // Compliant
+            _ = ClassWithStaticPropertyCalledValue.Value.Value.InstanceProperty.Value;   // Compliant
+            _ = new ClassWithInstancePropertyCalledValue().Value;                        // Compliant
+        }
+    }
+
+    class ClassWithStaticPropertyCalledValue
+    {
+        public ClassWithInstancePropertyCalledValue InstanceProperty => null;
+
+        public static ClassWithInstancePropertyCalledValue Value => null;
+    }
+
+    class ClassWithInstancePropertyCalledValue
+    {
+        public ClassWithStaticPropertyCalledValue Value => null;
+    }
+}
+
+namespace TypeWithStaticFieldCalledValue
+{
+    class Test
+    {
+        void Basics()
+        {
+            _ = ClassWithStaticFieldCalledValue.Value;                            // Compliant, not on nullable value type
+            _ = ClassWithStaticFieldCalledValue.Value.Value;                      // Compliant
+            _ = ClassWithStaticFieldCalledValue.Value.Value.InstanceField;        // Compliant
+            _ = ClassWithStaticFieldCalledValue.Value.Value.InstanceField.Value;  // Compliant
+            _ = new ClassWithInstanceFieldCalledValue().Value;                    // Compliant
+        }
+    }
+
+    class ClassWithStaticFieldCalledValue
+    {
+        public ClassWithInstanceFieldCalledValue InstanceField = null;
+
+        public static ClassWithInstanceFieldCalledValue Value = null;
+    }
+
+    class ClassWithInstanceFieldCalledValue
+    {
+        public ClassWithStaticFieldCalledValue Value = null;
+    }
+}
