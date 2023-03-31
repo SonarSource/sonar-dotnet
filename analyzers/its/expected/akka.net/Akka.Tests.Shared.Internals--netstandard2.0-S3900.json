@@ -137,19 +137,6 @@
 "uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
 "region":  {
 "startLine":  188,
-"startColumn":  26,
-"endLine":  188,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 's' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
-"region":  {
-"startLine":  188,
 "startColumn":  50,
 "endLine":  188,
 "endColumn":  51
