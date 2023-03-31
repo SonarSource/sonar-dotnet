@@ -12,32 +12,6 @@
 "endColumn":  38
 }
 }
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'offset' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
-"region":  {
-"startLine":  211,
-"startColumn":  84,
-"endLine":  211,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'offset' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
-"region":  {
-"startLine":  232,
-"startColumn":  84,
-"endLine":  232,
-"endColumn":  90
-}
-}
 }
 ]
 }
