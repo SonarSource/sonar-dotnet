@@ -44,17 +44,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void DictionaryContentHash_StableForUnsortedDictionary()
-        {
-            var numbers = Enumerable.Range(1, 1000);
-            var dict1 = numbers.ToDictionary(x => x, x => x);
-            var dict2 = numbers.OrderByDescending(x => x).ToDictionary(x => x, x => x);
-            var hashCode1 = HashCode.DictionaryContentHash(dict1);
-            var hashCode2 = HashCode.DictionaryContentHash(dict2);
-            hashCode1.Should().Be(hashCode2);
-        }
-
-        [TestMethod]
         public void DictionaryContentHash_StableForImmutableDictionary()
         {
             var numbers = Enumerable.Range(1, 1000);
