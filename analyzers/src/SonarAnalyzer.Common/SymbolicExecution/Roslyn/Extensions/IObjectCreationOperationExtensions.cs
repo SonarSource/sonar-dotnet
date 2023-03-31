@@ -23,6 +23,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 public static class IObjectCreationOperationExtensions
 {
     /// <inheritdoc cref="IOperationExtensions.ArgumentValue(ImmutableArray{IOperation}, string)"/>
-    public static IOperation ArgumentValue(this IObjectCreationOperationWrapper objectCreation, string parameterName)
-        => objectCreation.Arguments.ArgumentValue(parameterName);
+    public static IOperation ArgumentValue(this IObjectCreationOperationWrapper objectCreation, string parameterName) =>
+        objectCreation.Arguments.ArgumentValue(parameterName);
 }

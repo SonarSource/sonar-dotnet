@@ -44,7 +44,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 && state.ResolveCapture(invocation.Arguments[0].ToArgument().Value.UnwrapConversion()).Kind == OperationKindEx.InstanceReference);
 
         /// <inheritdoc cref="IOperationExtensions.ArgumentValue(ImmutableArray{IOperation}, string)"/>
-        public static IOperation ArgumentValue(this IInvocationOperationWrapper invocation, string parameterName)
-            => invocation.Arguments.ArgumentValue(parameterName);
+        public static IOperation ArgumentValue(this IInvocationOperationWrapper invocation, string parameterName) =>
+            invocation.Arguments.ArgumentValue(parameterName);
     }
 }

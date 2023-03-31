@@ -77,6 +77,19 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        public void TrackedSymbol_DeclarationExpression_Tuple()
+        {
+            var code = $"public class C {{ void Method() {{ var (i, j) = (1, 1); }} }}";
+            var graph = TestHelper.CompileCfgCS(code);
+            var allDeclarations = graph.Blocks[1].Operations.SelectMany(x => x.DescendantsAndSelf()).Where(x => x.Kind == OperationKindEx.DeclarationExpression).Select(IDeclarationExpressionOperationWrapper.FromOperation).ToArray();
+            var declaration = allDeclarations.Should().ContainSingle().Which.WrappedOperation;
+            declaration.Kind.Should().Be(OperationKindEx.DeclarationExpression);
+            var declarationExpression = IDeclarationExpressionOperationWrapper.FromOperation(declaration).Expression;
+            declarationExpression.Kind.Should().Be(OperationKindEx.Tuple);
+            declaration.TrackedSymbol().Should().BeNull();
+        }
+
+        [TestMethod]
         public void TrackedSymbol_SimpleAssignment_IsNull()
         {
             var simpleAssignment = TestHelper.CompileCfgBodyCS("var a = true; bool b; b = a;").Blocks[1].Operations[0];

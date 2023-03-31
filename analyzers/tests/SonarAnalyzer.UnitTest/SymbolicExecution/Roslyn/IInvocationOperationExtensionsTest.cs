@@ -34,8 +34,7 @@ public class IInvocationOperationExtensionsTest
         const string testClass = """
             class Test
             {
-                static void M(string stringParam)
-                    => M("param");
+                static void M(string stringParam) => M("param");
             }
             """;
         var (tree, model) = TestHelper.CompileCS(testClass);

@@ -104,17 +104,16 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         }
 
         /// <summary>
-        /// Returns the argument value corresponding to <paramref name="parameterName"/>. For <see langword="params"/> parameter an
-        /// IArrayCreationOperation is returned.
+        /// Returns the argument value corresponding to <paramref name="parameterName"/>. For <see langword="params"/> parameter an IArrayCreationOperation is returned.
         /// </summary>
         public static IOperation ArgumentValue(this ImmutableArray<IOperation> arguments, string parameterName)
         {
-            foreach (var argument in arguments)
+            foreach (var operation in arguments)
             {
-                var argumentOperation = IArgumentOperationWrapper.FromOperation(argument);
-                if (argumentOperation.Parameter.Name == parameterName)
+                var argument = operation.ToArgument();
+                if (argument.Parameter.Name == parameterName)
                 {
-                    return argumentOperation.Value;
+                    return argument.Value;
                 }
             }
             return null;

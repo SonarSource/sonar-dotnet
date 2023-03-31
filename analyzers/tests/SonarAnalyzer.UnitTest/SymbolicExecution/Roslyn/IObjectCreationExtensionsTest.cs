@@ -40,14 +40,10 @@ public class IObjectCreationExtensionsTest
         var testClass = $$"""
             class Test
             {
-                Test(int intParam, string stringParam, bool optionalBoolParam = true, int optionalIntParam = 1)
-                {
-                }
+                Test(int intParam, string stringParam, bool optionalBoolParam = true, int optionalIntParam = 1) { }
 
-                static void Create()
-                {
+                static void Create() =>
                     new Test({{objectCreationArguments}});
-                }
             }
             """;
         var (tree, model) = TestHelper.CompileCS(testClass);
@@ -60,19 +56,16 @@ public class IObjectCreationExtensionsTest
     [DataRow("""  """)]
     [DataRow(""" "param1", "param2" """, "param1", "param2")]
     [DataRow(""" null, null """, null, null)]
+    [DataRow(""" new[] {"param1", "param2"} """, "param1", "param2")]
     public void ArgumentValue_Params(string arguments, params string[] expected)
     {
         var testClass = $$"""
             class Test
             {
-                Test(params string[] stringParams)
-                {
-                }
+                Test(params string[] stringParams) { }
 
-                static void Create()
-                {
+                static void Create() =>
                     new Test({{arguments}});
-                }
             }
             """;
         var (tree, model) = TestHelper.CompileCS(testClass);
