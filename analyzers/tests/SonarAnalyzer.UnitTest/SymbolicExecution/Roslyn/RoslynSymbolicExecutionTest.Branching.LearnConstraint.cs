@@ -557,7 +557,7 @@ if (value = boolParameter)
         public void Branching_LearnsObjectConstraint_ConstantPattern_True(string expression, string argType = "object")
         {
             var validator = CreateIfElseEndValidatorCS(expression, OperationKind.ConstantPattern, argType);
-            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True)); // Should be NotNull, True
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
             validator.ValidateTag("Else", x => x.Should().HaveNoConstraints("it could be False, null or any other type"));
             validator.TagValues("End").Should().SatisfyRespectively(
                 x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True),
