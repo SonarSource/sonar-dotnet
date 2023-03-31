@@ -27,7 +27,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     protected override IBinaryOperationWrapper Convert(IOperation operation) =>
         IBinaryOperationWrapper.FromOperation(operation);
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation) =>
+    protected override BoolConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation) =>
         BinaryConstraint(operation.OperatorKind, state[operation.LeftOperand], state[operation.RightOperand]);
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch)
@@ -84,7 +84,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             ? symbol
             : null;
 
-    private static SymbolicConstraint BinaryConstraint(BinaryOperatorKind kind, SymbolicValue left, SymbolicValue right)
+    private static BoolConstraint BinaryConstraint(BinaryOperatorKind kind, SymbolicValue left, SymbolicValue right)
     {
         var leftBool = left?.Constraint<BoolConstraint>();
         var rightBool = right?.Constraint<BoolConstraint>();
@@ -115,7 +115,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         }
     }
 
-    private static SymbolicConstraint BinaryBoolConstraint(BinaryOperatorKind kind, bool left, bool right) =>
+    private static BoolConstraint BinaryBoolConstraint(BinaryOperatorKind kind, bool left, bool right) =>
         kind switch
         {
             BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals => BoolConstraint.From(left == right),
@@ -126,7 +126,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             _ => null
         };
 
-    private static SymbolicConstraint BinaryNullConstraint(BinaryOperatorKind kind, bool isNullLeft, bool isNullRight) =>
+    private static BoolConstraint BinaryNullConstraint(BinaryOperatorKind kind, bool isNullLeft, bool isNullRight) =>
         isNullLeft || isNullRight
             ? kind switch
             {
