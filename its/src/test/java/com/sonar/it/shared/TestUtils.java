@@ -75,13 +75,7 @@ public class TestUtils {
   public static OrchestratorBuilder prepareOrchestrator() {
     return Orchestrator.builderEnv()
       .useDefaultAdminCredentialsForBuilds(true)
-      // Versions of SonarQube and plugins support aliases:
-      // - "DEV" for the latest build of master that passed QA
-      // - "DEV[1.0]" for the latest build that passed QA of series 1.0.x
-      // - "LATEST_RELEASE" for the latest release
-      // - "LATEST_RELEASE[1.0]" for latest release of series 1.0.x
-      // The SonarQube alias "LTS" has been dropped. An alternative is "LATEST_RELEASE[9.9]".
-      // The term "latest" refers to the highest version number, not the most recently published version.
+      // See https://github.com/SonarSource/orchestrator#version-aliases
       .setSonarVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE[9.9]"))
       .setEdition(Edition.DEVELOPER)
       .activateLicense();
