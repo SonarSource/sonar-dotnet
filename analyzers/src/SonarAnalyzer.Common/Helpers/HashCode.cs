@@ -32,6 +32,9 @@ namespace SonarAnalyzer.Helpers
 
         public static int DictionaryContentHash<TKey, TValue>(ImmutableDictionary<TKey, TValue> dictionary)
         {
+            // Performance: Make sure this method is allocation free:
+            // * Don't use IDictionary<TKey, TValue> as parameter, because we will not get the struct ImmutableDictionary.Enumerator but the boxed version of it
+            // * Don't use Linq for the same reason.
             if (dictionary.IsEmpty)
             {
                 return 0;
