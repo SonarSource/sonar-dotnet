@@ -315,7 +315,7 @@ else
 }}
 Tag(""AfterIfElse"", ObjectField);";
             var invalidateConstraint = DummyConstraint.Dummy;
-            var dontInvalidateConstraint = LockConstraint.Held;
+            var dontInvalidateConstraint = PreserveOnFieldResetConstraint.Instance;
             var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
                 && IFieldReferenceOperationWrapper.FromOperation(ISimpleAssignmentOperationWrapper.FromOperation(x.Operation.Instance).Target).Member is var field
                 ? x.SetSymbolConstraint(field, invalidateConstraint).SetSymbolConstraint(field, dontInvalidateConstraint)
@@ -805,7 +805,7 @@ Tag(""Arg2"", arg2);";
         [DataRow("arg is true", true)]
         [DataRow("arg is false", false)]
         public void Invocation_DebugAssert_LearnsBoolConstraint_Nullable(string expression, bool expected) =>
-            DebugAssertValues(expression, "bool?").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(BoolConstraint.From(expected)));
+            DebugAssertValues(expression, "bool?").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected)));
 
         [TestMethod]
         public void Invocation_DebugAssert_LearnsBoolConstraint_AlwaysEnds() =>

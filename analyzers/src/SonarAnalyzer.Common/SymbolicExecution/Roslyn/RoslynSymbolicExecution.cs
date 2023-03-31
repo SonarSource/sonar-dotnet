@@ -256,6 +256,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
                 {
+                    if (constraint is BoolConstraint)
+                    {
+                        state = state.SetSymbolConstraint(local, ObjectConstraint.NotNull);
+                    }
                     state = state.SetSymbolConstraint(local, constraint);
                 }
             }

@@ -234,7 +234,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 !value.HasConstraint<T>() || value.HasConstraint(ObjectConstraint.NotNull);
 
             static bool CheckOnlyConstraint(SymbolicValue value, SymbolicConstraint single) =>
-                !value.HasConstraint(single) || value.AllConstraints.Count() == 1;
+                !value.HasConstraint(single) || value.AllConstraints.Count(x => (int)x.Kind >= 0) == 1; // Ignore test constraints
         }
     }
 }
