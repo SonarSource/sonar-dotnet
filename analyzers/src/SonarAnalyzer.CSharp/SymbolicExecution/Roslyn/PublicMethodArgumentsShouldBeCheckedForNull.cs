@@ -30,17 +30,6 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
     private const string DiagnosticId = "S3900";
     private const string MessageFormat = "{0}";
 
-    private static readonly OperationKind[] DereferenceOperations = new[]
-    {
-        OperationKindEx.Invocation,
-        OperationKindEx.FieldReference,
-        OperationKindEx.PropertyReference,
-        OperationKindEx.EventReference,
-        OperationKindEx.Await,
-        OperationKindEx.ArrayElementReference,
-        OperationKindEx.MethodReference
-    };
-
     internal static readonly DiagnosticDescriptor S3900 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     protected override DiagnosticDescriptor Rule => S3900;
@@ -82,30 +71,40 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        var operation = context.Operation.Instance;
-        if (operation.Kind == OperationKindEx.ParameterReference
-            && operation.ToParameterReference().Parameter is var parameter
-            && !parameter.Type.IsValueType
-            && IsParameterDereferenced(context.Operation)
-            && NullableStateIsNotKnownForParameter(parameter)
-            && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
+        if (NullDereferenceCandidate(context.Operation.Instance) is { } candidate
+            && candidate.Kind == OperationKindEx.ParameterReference
+            && candidate.ToParameterReference() is var parameterReference
+            && !parameterReference.Parameter.Type.IsValueType
+            && !HasObjectConstraint(parameterReference.Parameter)
+            && !parameterReference.Parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
             var message = SemanticModel.GetDeclaredSymbol(Node).IsConstructor()
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
-            ReportIssue(operation, string.Format(message, operation.Syntax), context);
+            ReportIssue(parameterReference.WrappedOperation, string.Format(message, parameterReference.WrappedOperation.Syntax), context);
         }
 
         return context.State;
 
-        bool NullableStateIsNotKnownForParameter(IParameterSymbol symbol) =>
-            context.State[symbol] is null || !context.State[symbol].HasConstraint<ObjectConstraint>();
+        bool HasObjectConstraint(IParameterSymbol symbol) =>
+            context.State[symbol]?.HasConstraint<ObjectConstraint>() is true;
     }
 
-    private static bool IsParameterDereferenced(IOperationWrapperSonar operation) =>
-        operation.Parent is { } parent
-        && (parent.IsAnyKind(DereferenceOperations)
-            || (parent.Kind == OperationKindEx.Conversion && IsParameterDereferenced(parent.ToSonar())));
+    private static IOperation NullDereferenceCandidate(IOperation operation)
+    {
+        var candidate = operation.Kind switch
+        {
+            OperationKindEx.Invocation => operation.ToInvocation().Instance,
+            OperationKindEx.FieldReference => operation.ToFieldReference().Instance,
+            OperationKindEx.PropertyReference => operation.ToPropertyReference().Instance,
+            OperationKindEx.EventReference => operation.ToEventReference().Instance,
+            OperationKindEx.Await => operation.ToAwait().Operation,
+            OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
+            OperationKindEx.MethodReference => operation.ToMethodReference().Instance,
+            _ => null,
+        };
+        return candidate?.UnwrapConversion();
+    }
 
     private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker
     {

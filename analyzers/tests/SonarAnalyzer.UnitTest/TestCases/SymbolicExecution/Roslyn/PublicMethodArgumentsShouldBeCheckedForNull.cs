@@ -722,3 +722,26 @@ public class Conversion
         public event EventHandler CustomEvent;
     }
 }
+
+public class DereferencedMultipleTimesOnTheSameExecutionPath
+{
+    public void Used(string s)
+    {
+        s.ToLower();            // Noncompliant
+        s.ToLower();            // Compliant - s was dereferenced in the previous line, so it's not null here
+    }
+
+    public void UsedOnMultipleLevels(string s)
+    {
+        s.Replace(              // Compliant - SubString was already called on s when we call Replace, so s is not null
+            "a",
+            s.Substring(1));    // Noncompliant
+    }
+
+    public void UsedTwiceOnSameLevel(string s)
+    {
+        _ = s.Substring(        // Compliant
+            s.IndexOf("a"),     // Noncompliant
+            s.IndexOf("b"));    // Compliant - IndexOf("a") was called before this method call, so s is not null here
+    }
+}

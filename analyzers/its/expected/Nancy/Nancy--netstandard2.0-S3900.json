@@ -2828,35 +2828,9 @@
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
 "region":  {
 "startLine":  21,
-"startColumn":  89,
-"endLine":  21,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'constraint' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
-"region":  {
-"startLine":  21,
 "startColumn":  113,
 "endLine":  21,
 "endColumn":  123
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'constraint' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
-"region":  {
-"startLine":  35,
-"startColumn":  30,
-"endLine":  35,
-"endColumn":  40
 }
 }
 },
