@@ -769,3 +769,14 @@ public class DereferencedMultipleTimesOnTheSameExecutionPath
             s.IndexOf("b"));    // Compliant - IndexOf("a") was called before this method call, so s is not null here
     }
 }
+
+public class Nancy_Repro
+{
+    public void NullCoalesce(Sample arg = null)
+    {
+        arg = arg ?? new Sample();
+        arg.ToString(); // Noncompliant - FP
+    }
+
+    public class Sample { }
+}
