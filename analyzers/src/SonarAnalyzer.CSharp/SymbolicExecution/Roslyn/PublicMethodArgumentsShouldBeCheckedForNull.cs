@@ -37,7 +37,8 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
         OperationKindEx.PropertyReference,
         OperationKindEx.EventReference,
         OperationKindEx.Await,
-        OperationKindEx.ArrayElementReference
+        OperationKindEx.ArrayElementReference,
+        OperationKindEx.MethodReference
     };
 
     internal static readonly DiagnosticDescriptor S3900 = DescriptorFactory.Create(DiagnosticId, MessageFormat);

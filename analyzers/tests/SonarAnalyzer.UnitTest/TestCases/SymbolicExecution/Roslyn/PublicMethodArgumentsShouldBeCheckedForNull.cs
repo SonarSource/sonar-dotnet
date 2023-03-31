@@ -137,6 +137,14 @@ public class Program
             o.GetType().GetMethods();
         }
     }
+
+    public void WithDelegate(object asParameter, object asVariable)
+    {
+        SomeAction(asParameter.ToString);       // Noncompliant
+        Func<string> f = asVariable.ToString;   // Noncompliant
+
+        void SomeAction(Func<string> a) { }
+    }
 }
 
 [AttributeUsage(AttributeTargets.Parameter)]
