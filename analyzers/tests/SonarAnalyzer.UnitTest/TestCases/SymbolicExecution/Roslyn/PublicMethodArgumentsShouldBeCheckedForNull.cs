@@ -749,7 +749,7 @@ public class Base
 
 public class DereferencedMultipleTimesOnTheSameExecutionPath
 {
-    public void Used(string s)
+    public void UsedOnSameExecutionPath(string s)
     {
         s.ToLower();            // Noncompliant
         s.ToLower();            // Compliant - s was dereferenced in the previous line, so it's not null here
