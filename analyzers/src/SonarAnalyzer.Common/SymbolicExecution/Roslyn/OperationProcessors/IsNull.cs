@@ -32,9 +32,13 @@ internal sealed class IsNull : BranchingProcessor<IIsNullOperationWrapper>
             ? BoolConstraint.From(value.HasConstraint(ObjectConstraint.Null))
             : null;
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsNullOperationWrapper operation, bool falseBranch) =>
-        state.ResolveCapture(operation.Operand).TrackedSymbol() is { } testedSymbol
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsNullOperationWrapper operation, bool falseBranch)
+    {
+        var constraint = falseBranch ? ObjectConstraint.NotNull : ObjectConstraint.Null;
+        state = state.SetOperationConstraint(operation.Operand, constraint);
+        return state.ResolveCapture(operation.Operand).TrackedSymbol() is { } testedSymbol
             // Can't use ObjectConstraint.ApplyOpposite() because here, we are sure that it is either Null or NotNull
-            ? state.SetSymbolConstraint(testedSymbol, falseBranch ? ObjectConstraint.NotNull : ObjectConstraint.Null)
+            ? state.SetSymbolConstraint(testedSymbol, constraint)
             : state;
+    }
 }

@@ -94,6 +94,29 @@ Tag(""UnknownToUnknown"", unknownToUnknown);";
         }
 
         [TestMethod]
+        public void IsNull_Coalesce_AssignedToVariable()
+        {
+            const string code = """
+                var value = arg ?? "N/A";
+                Tag("Value", value);
+                """;
+            var validator = SETestContext.CreateCS(code, ", string arg").Validator;
+            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+
+        }
+
+        [TestMethod]
+        public void IsNull_Coalesce_AssignedToSelf()
+        {
+            const string code = """
+                arg = arg ?? "N/A";
+                Tag("Arg", arg);
+                """;
+            var validator = SETestContext.CreateCS(code, ", string arg").Validator;
+            validator.ValidateTag("Arg", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [TestMethod]
         public void IsNull_CoalesceAssignment_SetsObjectConstraint()
         {
             const string code = @"

@@ -47,7 +47,7 @@ public class Program
         }
 
         o2 = o2 ?? new object();
-        o2.ToString();      // Noncompliant - FP
+        o2.ToString();      // Compliant
 
         if (o3 == null)
         {
@@ -775,7 +775,7 @@ public class Nancy_Repro
     public void NullCoalesce(Sample arg = null)
     {
         arg = arg ?? new Sample();
-        arg.ToString(); // Noncompliant - FP
+        arg.ToString(); // Compliant
     }
 
     public class Sample { }
