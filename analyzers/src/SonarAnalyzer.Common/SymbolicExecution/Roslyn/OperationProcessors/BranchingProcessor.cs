@@ -52,8 +52,8 @@ internal abstract class BranchingProcessor<T> : MultiProcessor<T>
                 ? beforeLearningState.ToArray()   // We can't learn anything, just move on
                 : new[]
                 {
-                    positive.SetOperationConstraint(context.Operation, BoolConstraint.True),
-                    negative.SetOperationConstraint(context.Operation, BoolConstraint.False)
+                    positive.SetOperationConstraint(context.Operation, ObjectConstraint.NotNull).SetOperationConstraint(context.Operation, BoolConstraint.True),
+                    negative.SetOperationConstraint(context.Operation, ObjectConstraint.NotNull).SetOperationConstraint(context.Operation, BoolConstraint.False)
                 };
         }
     }
