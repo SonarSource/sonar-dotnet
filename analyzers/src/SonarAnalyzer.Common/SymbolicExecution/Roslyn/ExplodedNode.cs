@@ -46,8 +46,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             programPointHash = ProgramPoint.Hash(block, index);
         }
 
-        public ExplodedNode CreateNext(ProgramState state) =>
-            new(Block, operations, index + 1, state, FinallyPoint);
+        public ExplodedNode CreateNext(ProgramState state)
+        {
+            state?.CheckStateConsistency();
+            return new(Block, operations, index + 1, state, FinallyPoint);
+        }
 
         public int AddVisit()
         {
