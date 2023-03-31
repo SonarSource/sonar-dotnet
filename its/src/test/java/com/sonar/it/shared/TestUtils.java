@@ -82,7 +82,7 @@ public class TestUtils {
       // - "LATEST_RELEASE[1.0]" for latest release of series 1.0.x
       // The SonarQube alias "LTS" has been dropped. An alternative is "LATEST_RELEASE[9.9]".
       // The term "latest" refers to the highest version number, not the most recently published version.
-      .setSonarVersion(System.getProperty("sonar.runtimeVersion", "DEV"))
+      .setSonarVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE[9.9]"))
       .setEdition(Edition.DEVELOPER)
       .activateLicense();
   }
