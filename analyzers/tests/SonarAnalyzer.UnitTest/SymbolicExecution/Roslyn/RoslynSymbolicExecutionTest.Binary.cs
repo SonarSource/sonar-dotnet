@@ -291,6 +291,32 @@ else
             SETestContext.CreateCS(code).Validator.ValidateTagOrder("True ^ True", "False ^ True", "True ^ False", "False ^ False");
         }
 
+        [TestMethod]
+        public void Binary_NoConstraint_VisitsBothBranches()
+        {
+            var code = """
+                if (boolParameter)
+                {
+                    Tag("If");
+                }
+                else
+                {
+                    Tag("Else");
+                }
+                Tag("End");
+
+                """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateTagOrder(
+                "If",
+                "Else",
+                "End"); // FIXME, additional End missing
+            var symbol = validator.Symbol("boolParameter");
+            validator.TagStates("If").Should().ContainSingle().Which[symbol].Should().HaveNoConstraints();          // FIXME, True and NotNull are missing
+            validator.TagStates("Else").Should().ContainSingle().Which[symbol].Should().HaveNoConstraints();        // FIXME, False and NotNull are missing
+            validator.TagStates("End").Should().SatisfyRespectively(x => x[symbol].Should().HaveNoConstraints());   // FIXME, second branch and Bool- and NotNull constraints are missing
+        }
+
         [DataTestMethod]
         [DataRow("boolParameter & isTrue")]
         [DataRow("isTrue & boolParameter")]
