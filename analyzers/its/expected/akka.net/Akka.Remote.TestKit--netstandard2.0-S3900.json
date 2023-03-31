@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
-"region":  {
-"startLine":  27,
-"startColumn":  40,
-"endLine":  27,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Extension.cs",

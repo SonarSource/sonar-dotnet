@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
-"region":  {
-"startLine":  343,
-"startColumn":  49,
-"endLine":  343,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'section' before using it.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",

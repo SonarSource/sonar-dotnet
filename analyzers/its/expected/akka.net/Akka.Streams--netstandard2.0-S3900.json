@@ -84,45 +84,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
 "region":  {
-"startLine":  67,
-"startColumn":  94,
-"endLine":  67,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
-"region":  {
-"startLine":  113,
-"startColumn":  35,
-"endLine":  113,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
-"region":  {
-"startLine":  176,
-"startColumn":  37,
-"endLine":  176,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
-"region":  {
 "startLine":  409,
 "startColumn":  18,
 "endLine":  409,
@@ -140,19 +101,6 @@
 "startColumn":  19,
 "endLine":  523,
 "endColumn":  25
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'other' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
-"region":  {
-"startLine":  563,
-"startColumn":  37,
-"endLine":  563,
-"endColumn":  42
 }
 }
 },
