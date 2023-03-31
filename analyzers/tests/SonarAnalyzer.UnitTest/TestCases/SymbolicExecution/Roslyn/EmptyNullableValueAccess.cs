@@ -767,6 +767,13 @@ class InParams
         _ = iParam.Value;       // Compliant, iParam is "in" and its value can't be modified
     }
 
+    void LocalAsInParamToAnotherMethod()
+    {
+        int? iLocal = null;
+        MethodWithReadInParam(in iLocal);
+        _ = iLocal.Value;       // Noncompliant, arg is "in" and its value must still be null here
+    }
+
     static void MethodWithReadInParam(in int? i) { }
 }
 
@@ -1028,24 +1035,27 @@ namespace TypeWithStaticPropertyCalledValue
     {
         void Basics()
         {
-            _ = ClassWithStaticPropertyCalledValue.Value;                                // Compliant, not on nullable value type
-            _ = ClassWithStaticPropertyCalledValue.Value.Value;                          // Compliant
-            _ = ClassWithStaticPropertyCalledValue.Value.Value.InstanceProperty;         // Compliant
-            _ = ClassWithStaticPropertyCalledValue.Value.Value.InstanceProperty.Value;   // Compliant
-            _ = new ClassWithInstancePropertyCalledValue().Value;                        // Compliant
+            // Ensures rule doesn't raise NRE on custom property called Value having no instance (static)
+            _ = StaticValue.Value;                                // Compliant, not on nullable value type
+
+            // Ensures rule doesn't raise NRE on nested Value property
+            _ = StaticValue.Value.Value;                          // Compliant
+            _ = StaticValue.Value.Value.InstanceProperty;         // Compliant
+            _ = StaticValue.Value.Value.InstanceProperty.Value;   // Compliant
+            _ = new InstanceValue().Value;                        // Compliant
         }
     }
 
-    class ClassWithStaticPropertyCalledValue
+    class StaticValue
     {
-        public ClassWithInstancePropertyCalledValue InstanceProperty => null;
+        public InstanceValue InstanceProperty => null;
 
-        public static ClassWithInstancePropertyCalledValue Value => null;
+        public static InstanceValue Value => null;
     }
 
-    class ClassWithInstancePropertyCalledValue
+    class InstanceValue
     {
-        public ClassWithStaticPropertyCalledValue Value => null;
+        public StaticValue Value => null;
     }
 }
 
@@ -1055,23 +1065,26 @@ namespace TypeWithStaticFieldCalledValue
     {
         void Basics()
         {
-            _ = ClassWithStaticFieldCalledValue.Value;                            // Compliant, not on nullable value type
-            _ = ClassWithStaticFieldCalledValue.Value.Value;                      // Compliant
-            _ = ClassWithStaticFieldCalledValue.Value.Value.InstanceField;        // Compliant
-            _ = ClassWithStaticFieldCalledValue.Value.Value.InstanceField.Value;  // Compliant
-            _ = new ClassWithInstanceFieldCalledValue().Value;                    // Compliant
+            // Ensures rule doesn't raise NRE on custom field called Value having no instance (static)
+            _ = StaticValue.Value;                            // Compliant, not on nullable value type
+
+            // Ensures rule doesn't raise NRE on nested Value field
+            _ = StaticValue.Value.Value;                      // Compliant
+            _ = StaticValue.Value.Value.InstanceField;        // Compliant
+            _ = StaticValue.Value.Value.InstanceField.Value;  // Compliant
+            _ = new InstanceValue().Value;                    // Compliant
         }
     }
 
-    class ClassWithStaticFieldCalledValue
+    class StaticValue
     {
-        public ClassWithInstanceFieldCalledValue InstanceField = null;
+        public InstanceValue InstanceField = null;
 
-        public static ClassWithInstanceFieldCalledValue Value = null;
+        public static InstanceValue Value = null;
     }
 
-    class ClassWithInstanceFieldCalledValue
+    class InstanceValue
     {
-        public ClassWithStaticFieldCalledValue Value = null;
+        public StaticValue Value = null;
     }
 }
