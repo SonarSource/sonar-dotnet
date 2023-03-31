@@ -394,6 +394,15 @@ if (value = boolParameter)
         }
 
         [TestMethod]
+        public void Branching_LearnsObjectConstraint_IsType_NullValue()
+        {
+            var validator = CreateIfElseEndValidatorCS("(object)null is Exception", OperationKind.IsType);  // Check something that is known to be null
+            validator.ValidateTagOrder("Else", "End");                  // Always true, else branch is not visited
+            validator.ValidateTag("Else", x => x.Should().BeNull());
+            validator.ValidateTag("End", x => x.Should().BeNull());
+        }
+
+        [TestMethod]
         public void Branching_LearnsObjectConstraint_IsType_NoSymbol_DoesNotChangeState()
         {
             var validator = CreateIfElseEndValidatorCS("(object)(40 + 2) is Exception", OperationKind.IsType); // Check something that doesn't have a tracked symbol
