@@ -483,6 +483,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'converter' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  477,
+"startColumn":  26,
+"endLine":  477,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",

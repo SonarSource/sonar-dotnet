@@ -49,6 +49,7 @@ public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
             OperationKindEx.EventReference => operation.ToEventReference().Instance,
             OperationKindEx.Await => operation.ToAwait().Operation,
             OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
+            OperationKindEx.MethodReference => operation.ToMethodReference().Instance,
             _ => null,
         };
 
