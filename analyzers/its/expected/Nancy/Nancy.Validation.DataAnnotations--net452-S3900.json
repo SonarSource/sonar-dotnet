@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'factory' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'factory' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidator.cs",
 "region":  {

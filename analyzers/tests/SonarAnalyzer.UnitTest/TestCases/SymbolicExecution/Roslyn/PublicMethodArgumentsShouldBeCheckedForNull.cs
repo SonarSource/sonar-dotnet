@@ -723,9 +723,33 @@ public class Conversion
     }
 }
 
+public class Constructor : Base
+{
+    public Constructor(string s)
+    {
+        _ = s.Length;       // Noncompliant {{Refactor this method to add validation of parameter 's' before using it.}}
+    }
+
+    public Constructor(object o) :
+        this(o.ToString())  // Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be null.}}
+    {
+    }
+
+    public Constructor(object[] o) :
+        base(o.ToString())  // Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be null.}}
+    {
+    }
+}
+
+public class Base
+{
+    public Base() { }
+    public Base(string s) { }
+}
+
 public class DereferencedMultipleTimesOnTheSameExecutionPath
 {
-    public void Used(string s)
+    public void UsedOnSameExecutionPath(string s)
     {
         s.ToLower();            // Noncompliant
         s.ToLower();            // Compliant - s was dereferenced in the previous line, so it's not null here

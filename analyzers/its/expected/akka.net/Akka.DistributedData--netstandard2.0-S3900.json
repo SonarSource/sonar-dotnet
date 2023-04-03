@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
 "region":  {
@@ -509,7 +509,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
 "region":  {
