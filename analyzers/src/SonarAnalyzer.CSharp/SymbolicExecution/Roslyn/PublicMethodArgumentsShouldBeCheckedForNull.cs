@@ -78,7 +78,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             && !HasObjectConstraint(parameterReference.Parameter)
             && !parameterReference.Parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
-            var message = IsUsedInBaseConstructorCall(context.Operation.Instance.Syntax)
+            var message = context.Operation.Instance.Syntax.FirstAncestorOrSelf<ConstructorInitializerSyntax>() is not null
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
             ReportIssue(parameterReference.WrappedOperation, string.Format(message, parameterReference.WrappedOperation.Syntax), context);
@@ -88,9 +88,6 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
 
         bool HasObjectConstraint(IParameterSymbol symbol) =>
             context.State[symbol]?.HasConstraint<ObjectConstraint>() is true;
-
-        static bool IsUsedInBaseConstructorCall(SyntaxNode node) =>
-            node.FirstAncestorOrSelf<ConstructorInitializerSyntax>() != null;
     }
 
     private static IOperation NullDereferenceCandidate(IOperation operation)
