@@ -31,6 +31,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.LocalReference => operation.ToLocalReference().Local,
                 OperationKindEx.ParameterReference => operation.ToParameterReference().Parameter,
                 OperationKindEx.Argument => operation.ToArgument().Value.TrackedSymbol(),
+                OperationKindEx.DeclarationExpression => IDeclarationExpressionOperationWrapper.FromOperation(operation).Expression.TrackedSymbol(),
                 _ => null
             };
 
@@ -100,6 +101,38 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 operation = operation.ToConversion().Operand;
             }
             return operation;
+        }
+
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public static IOperation ArgumentValue(this IInvocationOperationWrapper invocation, string parameterName) =>
+            ArgumentValue(invocation.Arguments, parameterName);
+
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public static IOperation ArgumentValue(this IObjectCreationOperationWrapper objectCreation, string parameterName) =>
+            ArgumentValue(objectCreation.Arguments, parameterName);
+
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public static IOperation ArgumentValue(this IPropertyReferenceOperationWrapper propertyReference, string parameterName) =>
+            ArgumentValue(propertyReference.Arguments, parameterName);
+
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public static IOperation ArgumentValue(this IRaiseEventOperationWrapper raiseEvent, string parameterName) =>
+            ArgumentValue(raiseEvent.Arguments, parameterName);
+
+        /// <summary>
+        /// Returns the argument value corresponding to <paramref name="parameterName"/>. For <see langword="params"/> parameter an IArrayCreationOperation is returned.
+        /// </summary>
+        private static IOperation ArgumentValue(ImmutableArray<IOperation> arguments, string parameterName)
+        {
+            foreach (var operation in arguments)
+            {
+                var argument = operation.ToArgument();
+                if (argument.Parameter.Name == parameterName)
+                {
+                    return argument.Value;
+                }
+            }
+            return null;
         }
 
         private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> fromOperation) where T : struct =>

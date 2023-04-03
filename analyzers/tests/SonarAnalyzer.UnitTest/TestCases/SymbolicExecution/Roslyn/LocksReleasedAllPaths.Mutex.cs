@@ -23,8 +23,6 @@ namespace Mutex_Type
             var m3 = Mutex.OpenExisting("x");
             m3.WaitOne(); // Noncompliant
 
-            var m4 = new Mutex();
-
             foo.instanceMutex.WaitOne(); // FN
 
             Foo.staticMutex.WaitOne(); // Noncompliant
@@ -35,7 +33,6 @@ namespace Mutex_Type
                 m1.ReleaseMutex();
                 m2.ReleaseMutex();
                 m3.ReleaseMutex();
-                m4.ReleaseMutex();
                 foo.instanceMutex.ReleaseMutex();
                 Foo.staticMutex.ReleaseMutex();
             }
@@ -45,6 +42,34 @@ namespace Mutex_Type
             m1.Dispose();
             m2.Dispose();
             m3.Dispose();
+        }
+
+        public void MutexWasCreatedAndReleased(bool arg)
+        {
+            var m = new Mutex(initiallyOwned: true, "bar", out var wasCreated); // Noncompliant
+            if (wasCreated && arg)
+            {
+                m.ReleaseMutex();
+            }
+        }
+
+        public void MutexWasCreatedAndNotReleased(bool arg)
+        {
+            var m = new Mutex(initiallyOwned: true, "bar", out var wasCreated); // Compliant
+            if (!wasCreated && arg)
+            {
+                // wasCreated is false here, indicating that the lock is NOT (yet) held
+                m.ReleaseMutex(); // This is a release without a previous lock. This is not covered by this rule.
+            }
+        }
+
+        public void MutexWasCreatedWithoutOwnership(bool arg)
+        {
+            var m = new Mutex(initiallyOwned: false, "bar", out var wasCreated); // Compliant. The lock must still be acquired by requesting it.
+            if (wasCreated && arg)
+            {
+                m.ReleaseMutex();
+            }
         }
 
         public void Noncompliant2(Mutex paramMutex, Mutex paramMutex2)
@@ -339,11 +364,11 @@ namespace Mutex_Type
         public void MutextAquireByConstructor_SwitchExpression(int x)
         {
             var m = x switch
-                    {
-                        1 => new Mutex(),
-                        2 => new Mutex(new bool()),
-                        3 => new Mutex(true, "bar", out var mutextCreated), // FN
-                    };
+            {
+                1 => new Mutex(),
+                2 => new Mutex(new bool()),
+                3 => new Mutex(true, "bar", out var mutextCreated), // FN
+            };
 
             if (cond)
             {
