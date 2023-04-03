@@ -393,10 +393,14 @@ if (value = boolParameter)
                 .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
         }
 
-        [TestMethod]
-        public void Branching_LearnsObjectConstraint_IsType_NullValue()
+        [DataTestMethod]
+        [DataRow("(object)null is Exception")]
+        [DataRow("(int?)null is object")]
+        [DataRow("(int?)null is int")]
+        [DataRow("(int?)null is int?")]
+        public void Branching_LearnsObjectConstraint_IsType_NullValue(string expression)
         {
-            var validator = CreateIfElseEndValidatorCS("(object)null is Exception", OperationKind.IsType);  // Check something that is known to be null
+            var validator = CreateIfElseEndValidatorCS(expression, OperationKind.IsType);  // Check something that is known to be null
             validator.ValidateTagOrder("Else", "End");                  // Always true, else branch is not visited
             validator.ValidateTag("Else", x => x.Should().BeNull());
             validator.ValidateTag("End", x => x.Should().BeNull());
