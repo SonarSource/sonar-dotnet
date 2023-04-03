@@ -304,7 +304,6 @@ else
                     Tag("Else");
                 }
                 Tag("End");
-
                 """;
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateTagOrder(

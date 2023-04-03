@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -132,14 +133,13 @@ public void Method()
         public void SimpleAssignment_FromLiteral(string snippet)
         {
             var validator = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
-            validator.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
-            validator.ValidateTag("Target", x => (x?.HasConstraint(DummyConstraint.Dummy) ?? false).Should().BeTrue());
+            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, DummyConstraint.Dummy }, "it's scaffolded"));
+            validator.ValidateTag("Target", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
         }
 
         [DataTestMethod]
         [DataRow(@"Sample.StaticFullProperty = 42; Tag(""Target"", Sample.StaticFullProperty);")]
         [DataRow(@"StaticFullProperty = 42; Tag(""Target"", StaticFullProperty);")]
-        [DataRow(@"var arr = new byte[] { 13 }; arr[0] = 42; Tag(""Target"", arr[0]);")]
         [DataRow(@"var dict = new Dictionary<string, int>(); dict[""key""] = 42; Tag(""Target"", dict[""key""]);")]
         [DataRow(@"var other = new Sample(); other.AutoProperty = 42; Tag(""Target"", other.AutoProperty);")]
         [DataRow(@"var other = new Sample(); other.FullProperty = 42; Tag(""Target"", other.FullProperty);")]
@@ -149,8 +149,17 @@ public void Method()
         public void SimpleAssignment_ToUnsupported_FromLiteral(string snippet)
         {
             var validator = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
-            validator.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
-            validator.ValidateTag("Target", x => (x?.HasConstraint(DummyConstraint.Dummy) ?? false).Should().BeFalse());
+            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, DummyConstraint.Dummy }, "it's scaffolded"));
+            validator.ValidateTag("Target", x => x.Should().HaveNoConstraints());
+        }
+
+        [TestMethod]
+        public void ElelmentAccess_ToUnsupported_FromLiteral()
+        {
+            var validator = SETestContext.CreateCS("""var arr = new object[] { 13 }; arr[0] = 42;""", new LiteralDummyTestCheck()).Validator;
+            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, DummyConstraint.Dummy }, "it's scaffolded"));
+            validator.Validate("ArrayElementReference: arr[0]", x => x.State[c.Operation].Should().HaveNoConstraints());
+
         }
 
         [TestMethod]
