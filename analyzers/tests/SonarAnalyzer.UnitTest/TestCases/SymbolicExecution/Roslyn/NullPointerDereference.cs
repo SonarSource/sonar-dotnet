@@ -1323,7 +1323,7 @@ namespace Tests.Diagnostics
             }
             else if(second?.Property is string)
             {
-                var str = second.Property; // Noncompliant FP
+                var str = second.Property; // Compliant
             }
         }
 
