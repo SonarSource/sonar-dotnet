@@ -245,6 +245,19 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void ValidationDoneByLocalMethod(string methodArg)
+        {
+            ValidateLocal();
+
+            void ValidateLocal()
+            {
+                if (methodArg == null)
+                {
+                    throw new ArgumentNullException(nameof(methodArg)); // Noncompliant FP, we should add this specific pattern as an exception (see: https://community.sonarsource.com/t/s3928-with-local-function-false-positive-or-expected-behavior/56003)
+                }
+            }
+        }
+
         public void LocalMethodValidatingMethodArgument(string methodArg)
         {
             ValidateLocal();
