@@ -158,7 +158,7 @@ public void Method()
         {
             var validator = SETestContext.CreateCS("""var arr = new object[] { 13 }; arr[0] = 42;""", new LiteralDummyTestCheck()).Validator;
             validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, DummyConstraint.Dummy }, "it's scaffolded"));
-            validator.Validate("ArrayElementReference: arr[0]", x => x.State[c.Operation].Should().HaveNoConstraints());
+            validator.Validate("ArrayElementReference: arr[0]", x => x.State[x.Operation].Should().HaveNoConstraints());
 
         }
 
