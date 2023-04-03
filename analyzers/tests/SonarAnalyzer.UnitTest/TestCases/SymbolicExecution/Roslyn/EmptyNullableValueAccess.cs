@@ -444,6 +444,50 @@ class TernaryOperator
         true || ((b = null) == null) ? b.Value : false;                     // FN
 }
 
+class NullConditionalOperator
+{
+    void Basics(int? i)
+    {
+        _ = (i?.GetHashCode()).Value;                  // Noncompliant, ?. branches the state of i
+        i = Unknown();
+        _ = ((i?.GetHashCode())?.GetHashCode()).Value; // Noncompliant
+        i = Unknown();
+        _ = (i?.GetHashCode().GetHashCode()).Value;    // Noncompliant
+
+        int? Unknown() => null;
+    }
+
+    void WithFuncOfNullable(Func<int?> f)
+    {
+        _ = f().Value;                // Compliant, f unknown
+        f = Unknown();
+        _ = f.Invoke().Value;         // Compliant, f unknown
+        f = Unknown();
+        _ = f?.Invoke().Value;        // Compliant, Value never called when f is null
+        f = Unknown();
+        _ = (f?.Invoke()).Value;      // Noncompliant, ?. branches the state of f, and Value called on a null path
+        f = Unknown();
+        _ = (f?.Invoke()).ToString(); // Compliant, ?. branches the state of f, but Value never called anyway
+        f = Unknown();
+        _ = f?.Invoke()?.ToString();  // Compliant, ?. branches the state of f, but Value never called anyway
+
+        Func<int?> Unknown() => null;
+    }
+
+    void WithFuncOfFuncOfNullable(Func<Func<int?>> f)
+    {
+        _ = f()().Value;               // Compliant, f unknown
+        f = Unknown();
+        _ = f?.Invoke()().Value;       // Compliant, Value never called when f is null
+        f = Unknown();
+        _ = (f?.Invoke()()).Value;     // Noncompliant, ?. branches the state of f
+        f = Unknown();
+        _ = (f?.Invoke())().Value;     // Noncompliant, ?. branches the state of f
+
+        Func<Func<int?>> Unknown() => null;
+    }
+}
+
 class Linq
 {
     private IEnumerable<TestClass> Numbers = new[]
