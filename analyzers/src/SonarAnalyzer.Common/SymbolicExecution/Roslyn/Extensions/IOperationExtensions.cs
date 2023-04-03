@@ -103,10 +103,26 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             return operation;
         }
 
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public static IOperation ArgumentValue(this IInvocationOperationWrapper invocation, string parameterName) =>
+            invocation.Arguments.ArgumentValue(parameterName);
+
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public static IOperation ArgumentValue(this IObjectCreationOperationWrapper objectCreation, string parameterName) =>
+            objectCreation.Arguments.ArgumentValue(parameterName);
+
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public static IOperation ArgumentValue(this IPropertyReferenceOperationWrapper propertyReference, string parameterName) =>
+            propertyReference.Arguments.ArgumentValue(parameterName);
+
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public static IOperation ArgumentValue(this IRaiseEventOperationWrapper raiseEvent, string parameterName) =>
+            raiseEvent.Arguments.ArgumentValue(parameterName);
+
         /// <summary>
         /// Returns the argument value corresponding to <paramref name="parameterName"/>. For <see langword="params"/> parameter an IArrayCreationOperation is returned.
         /// </summary>
-        public static IOperation ArgumentValue(this ImmutableArray<IOperation> arguments, string parameterName)
+        private static IOperation ArgumentValue(this ImmutableArray<IOperation> arguments, string parameterName)
         {
             foreach (var operation in arguments)
             {

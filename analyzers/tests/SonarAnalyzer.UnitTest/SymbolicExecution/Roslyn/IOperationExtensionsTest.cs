@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using StyleCop.Analyzers.Lightup;
@@ -94,6 +95,105 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var simpleAssignment = TestHelper.CompileCfgBodyCS("var a = true; bool b; b = a;").Blocks[1].Operations[0];
             simpleAssignment.TrackedSymbol().Should().BeNull();
+        }
+
+        [DataTestMethod]
+        [DataRow("""1, "Test" """, "intParam", 1)]
+        [DataRow("""1, "Test" """, "stringParam", "Test")]
+        [DataRow("""1, "Test" """, "optionalBoolParam", true)]
+        [DataRow("""1, "Test" """, "optionalIntParam", 1)]
+        [DataRow("""1, "Test", true """, "optionalBoolParam", true)]
+        [DataRow("""stringParam: "Test", intParam: 1 """, "stringParam", "Test")]
+        [DataRow("""stringParam: "Test", intParam: 1, optionalIntParam: 2 """, "optionalIntParam", 2)]
+        public void ArgumentValue_ObjectCreation(string objectCreationArguments, string parameterName, object expected)
+        {
+            var testClass = $$"""
+            class Test
+            {
+                Test(int intParam, string stringParam, bool optionalBoolParam = true, int optionalIntParam = 1) { }
+
+                static void Create() =>
+                    new Test({{objectCreationArguments}});
+            }
+            """;
+            var (tree, model) = TestHelper.CompileCS(testClass);
+            var objectCreation = tree.GetRoot().DescendantNodesAndSelf().OfType<ObjectCreationExpressionSyntax>().Single();
+            var operation = IObjectCreationOperationWrapper.FromOperation(model.GetOperation(objectCreation));
+            operation.ArgumentValue(parameterName).Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.ConstantValue.Value.Should().Be(expected);
+        }
+
+        [DataTestMethod]
+        [DataRow("""  """)]
+        [DataRow(""" "param1", "param2" """, "param1", "param2")]
+        [DataRow(""" null, null """, null, null)]
+        [DataRow(""" new[] {"param1", "param2"} """, "param1", "param2")]
+        public void ArgumentValue_ObjectCreation_Params(string arguments, params string[] expected)
+        {
+            var testClass = $$"""
+            class Test
+            {
+                Test(params string[] stringParams) { }
+
+                static void Create() =>
+                    new Test({{arguments}});
+            }
+            """;
+            var (tree, model) = TestHelper.CompileCS(testClass);
+            var objectCreation = tree.GetRoot().DescendantNodesAndSelf().OfType<ObjectCreationExpressionSyntax>().Single();
+            var operation = IObjectCreationOperationWrapper.FromOperation(model.GetOperation(objectCreation));
+            var argument = operation.ArgumentValue("stringParams").Should().NotBeNull().And.BeAssignableTo<IOperation>().Subject;
+            var argumentArray = IArrayCreationOperationWrapper.FromOperation(argument);
+            var result = argumentArray.Initializer.ElementValues.Select(x => x.ConstantValue.Value).ToArray();
+            result.Should().BeEquivalentTo(expected);
+        }
+
+        [TestMethod]
+        public void ArgumentValue_Invocation()
+        {
+            const string testClass = """
+            class Test
+            {
+                static void M(string stringParam) => M("param");
+            }
+            """;
+            var (tree, model) = TestHelper.CompileCS(testClass);
+            var invocation = tree.GetRoot().DescendantNodesAndSelf().OfType<InvocationExpressionSyntax>().Single();
+            var operation = IInvocationOperationWrapper.FromOperation(model.GetOperation(invocation));
+            operation.ArgumentValue("stringParam").Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.ConstantValue.Value.Should().Be("param");
+        }
+
+        [TestMethod]
+        public void ArgumentValue_PropertyReference()
+        {
+            const string testClass = """
+            class Test
+            {
+                int this[int index] => this[1];
+            }
+            """;
+            var (tree, model) = TestHelper.CompileCS(testClass);
+            var elementAccess = tree.GetRoot().DescendantNodesAndSelf().OfType<ElementAccessExpressionSyntax>().Single();
+            var operation = IPropertyReferenceOperationWrapper.FromOperation(model.GetOperation(elementAccess));
+            operation.ArgumentValue("index").Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.ConstantValue.Value.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void ArgumentValue_RaiseEvent()
+        {
+            const string testClass = """
+            Imports System
+            Public Class C
+                Event SomeEvent As EventHandler
+                Public Sub M()
+                    RaiseEvent SomeEvent(Nothing, EventArgs.Empty)
+                End Sub
+            End Class
+            """;
+            var (tree, model) = TestHelper.CompileVB(testClass);
+            var raiseEvent = tree.GetRoot().DescendantNodesAndSelf().OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.RaiseEventStatementSyntax>().Single();
+            var operation = IRaiseEventOperationWrapper.FromOperation(model.GetOperation(raiseEvent));
+            operation.ArgumentValue("sender").Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.ConstantValue.Value.Should().BeNull();
+            operation.ArgumentValue("e").Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.Kind.Should().Be(OperationKindEx.FieldReference);
         }
     }
 }
