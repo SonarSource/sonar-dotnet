@@ -62,9 +62,9 @@ var unknownToNull = arg ?? nullValue;
 Tag(""UnknownToNull"", unknownToNull);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
-            validator.TagValues("UnknownToNull").Should().HaveCount(2)
-                .And.ContainSingle(x => x == null)
-                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.Null));
+            validator.TagValues("UnknownToNull").Should().SatisfyRespectively(
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null),      // arg was null, and got coalesce value of nullValue
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));  // arg was not null, no coalescing
         }
 
         [TestMethod]
@@ -76,9 +76,7 @@ var unknownToNotNull = arg ?? notNullValue;
 Tag(""UnknownToNotNull"", unknownToNotNull);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
-            validator.TagValues("UnknownToNotNull").Should().HaveCount(2)
-                .And.ContainSingle(x => x == null)
-                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("UnknownToNotNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -89,8 +87,9 @@ var unknownToUnknown = arg1 ?? arg2;
 Tag(""UnknownToUnknown"", unknownToUnknown);";
             var validator = SETestContext.CreateCS(code, ", object arg1, object arg2").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
-            validator.TagValues("UnknownToUnknown").Should().HaveCount(1)
-                .And.ContainSingle(x => x == null);
+            validator.TagValues("UnknownToUnknown").Should().SatisfyRespectively(
+                x => x.Should().HaveNoConstraints(),
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
