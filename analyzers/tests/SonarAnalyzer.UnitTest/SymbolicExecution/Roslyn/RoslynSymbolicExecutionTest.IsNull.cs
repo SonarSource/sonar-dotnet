@@ -101,7 +101,6 @@ Tag(""UnknownToUnknown"", unknownToUnknown);";
                 """;
             var validator = SETestContext.CreateCS(code, ", string arg").Validator;
             validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-
         }
 
         [TestMethod]
