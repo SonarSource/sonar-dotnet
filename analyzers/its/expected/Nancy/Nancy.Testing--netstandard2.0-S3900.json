@@ -106,7 +106,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'bootstrapper' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'bootstrapper' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
@@ -249,7 +249,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'configuration' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextMultipartFormData.cs",
 "region":  {
@@ -262,7 +262,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'response' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapper.cs",
 "region":  {
@@ -600,7 +600,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'closure' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'closure' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
 "region":  {
@@ -613,7 +613,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'closure' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'closure' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\StaticConfigurationContext.cs",
 "region":  {

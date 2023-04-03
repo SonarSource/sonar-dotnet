@@ -41,7 +41,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'viewEngineStartupContext' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'viewEngineStartupContext' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'searchedLocations' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'searchedLocations' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngineResult.cs",
 "region":  {

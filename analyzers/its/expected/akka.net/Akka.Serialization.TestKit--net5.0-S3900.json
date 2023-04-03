@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'nonConventionalArg' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'nonConventionalArg' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'nonConventionalArg' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'nonConventionalArg' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
 "region":  {

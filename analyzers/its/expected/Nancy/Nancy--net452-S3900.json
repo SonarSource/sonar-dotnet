@@ -197,7 +197,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'pipelines' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Bootstrapper\Pipelines.cs",
 "region":  {
@@ -483,7 +483,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'keyGenerator' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'keyGenerator' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Cryptography\AesEncryptionProvider.cs",
 "region":  {
@@ -496,7 +496,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'keyGenerator' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'keyGenerator' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Cryptography\DefaultHmacProvider.cs",
 "region":  {
@@ -561,7 +561,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'salt' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'salt' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Cryptography\PassphraseKeyGenerator.cs",
 "region":  {
@@ -1718,7 +1718,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'response' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\HeadResponse.cs",
 "region":  {
@@ -1809,7 +1809,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'jsonConfiguration' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'jsonConfiguration' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
@@ -1822,7 +1822,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'jsonConfiguration' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'jsonConfiguration' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
@@ -2537,7 +2537,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'context' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
 "region":  {
@@ -2550,7 +2550,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'sourceResponse' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'sourceResponse' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\MaterialisingResponse.cs",
 "region":  {
@@ -2953,7 +2953,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'contextFactory' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'contextFactory' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
 "region":  {
@@ -2966,7 +2966,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'moduleCatalog' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'moduleCatalog' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
 "region":  {
@@ -3291,7 +3291,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'cryptoConfig' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'cryptoConfig' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\DefaultCsrfTokenValidator.cs",
 "region":  {
@@ -3694,7 +3694,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'viewLocationContext' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'viewLocationContext' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultRenderContext.cs",
 "region":  {
@@ -3733,7 +3733,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'rootPathProvider' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'rootPathProvider' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\FileSystemViewLocationProvider.cs",
 "region":  {

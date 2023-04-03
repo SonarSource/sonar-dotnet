@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'bootstrapper' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'bootstrapper' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
 "region":  {

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'settings' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientReceptionist.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'settings' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'settings' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
 "region":  {
@@ -236,7 +236,7 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'settings' because it could be null.",
+"message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxy.cs",
 "region":  {
