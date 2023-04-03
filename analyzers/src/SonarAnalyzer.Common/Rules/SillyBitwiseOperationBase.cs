@@ -59,13 +59,10 @@ namespace SonarAnalyzer.Rules
         protected int? FindIntConstant(SemanticModel semanticModel, SyntaxNode node) =>
             semanticModel.GetSymbolInfo(node).Symbol is var symbol
             && !IsFieldOrPropertyOutsideSystemNamespace(symbol)
-            && !IsEnum(symbol)
+            && !symbol.GetSymbolType().IsEnum()
             && Language.FindConstantValue(semanticModel, node) is { } value
                 ? ConversionHelper.TryConvertToInt(value)
                 : null;
-
-        private static bool IsEnum(ISymbol symbol) =>
-            symbol.GetSymbolType() is INamedTypeSymbol { EnumUnderlyingType: { } };
 
         private static bool IsFieldOrPropertyOutsideSystemNamespace(ISymbol symbol) =>
             symbol is { Kind: SymbolKind.Field or SymbolKind.Property }
