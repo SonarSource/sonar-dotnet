@@ -28,19 +28,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'matchedEventHandler' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
-"region":  {
-"startLine":  287,
-"startColumn":  44,
-"endLine":  287,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'func' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
@@ -62,19 +49,6 @@
 "startColumn":  26,
 "endLine":  339,
 "endColumn":  32
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'matchedEventHandler' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
-"region":  {
-"startLine":  350,
-"startColumn":  44,
-"endLine":  350,
-"endColumn":  63
 }
 }
 },
