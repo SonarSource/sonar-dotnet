@@ -32,7 +32,7 @@ import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;

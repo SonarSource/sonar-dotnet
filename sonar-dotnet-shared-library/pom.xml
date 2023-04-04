@@ -73,6 +73,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.sonarsource.api.plugin</groupId>
+      <artifactId>sonar-plugin-api-test-fixtures</artifactId>
+      <version>${sonar.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
@@ -141,15 +147,15 @@
               <target>
                 <property name="proto.path" location="${project.basedir}/../analyzers/src/SonarAnalyzer.Common/Protobuf"/>
                 <fileset id="fileset" dir="${proto.path}">
-                  <include name="*.proto" />
+                  <include name="*.proto"/>
                 </fileset>
-                <pathconvert refid="fileset" property="protos" pathsep=" " />
-                <mkdir dir="${project.build.directory}/generated-sources/protobuf" />
-                <chmod file="${protobuf.compiler}" perm="u+x" />
+                <pathconvert refid="fileset" property="protos" pathsep=" "/>
+                <mkdir dir="${project.build.directory}/generated-sources/protobuf"/>
+                <chmod file="${protobuf.compiler}" perm="u+x"/>
                 <exec failonerror="true" executable="${protobuf.compiler}">
-                  <arg value="--proto_path=${proto.path}" />
-                  <arg value="--java_out=${project.build.directory}/generated-sources/protobuf" />
-                  <arg line="${protos}" />
+                  <arg value="--proto_path=${proto.path}"/>
+                  <arg value="--java_out=${project.build.directory}/generated-sources/protobuf"/>
+                  <arg line="${protos}"/>
                 </exec>
               </target>
             </configuration>

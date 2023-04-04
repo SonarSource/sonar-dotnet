@@ -32,7 +32,7 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.notifications.AnalysisWarnings;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;

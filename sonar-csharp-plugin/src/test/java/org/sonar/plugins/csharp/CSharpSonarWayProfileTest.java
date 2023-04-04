@@ -32,7 +32,7 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInQualityProfile;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.Context;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.NewBuiltInQualityProfile;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -28,7 +28,7 @@ import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;

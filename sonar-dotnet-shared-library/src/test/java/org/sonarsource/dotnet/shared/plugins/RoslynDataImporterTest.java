@@ -48,7 +48,7 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;

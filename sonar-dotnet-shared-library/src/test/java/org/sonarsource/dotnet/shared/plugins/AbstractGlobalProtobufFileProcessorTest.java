@@ -40,7 +40,7 @@ import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.bootstrap.ProjectReactor;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
 

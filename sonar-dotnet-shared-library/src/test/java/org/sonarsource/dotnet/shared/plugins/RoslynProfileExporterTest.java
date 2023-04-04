@@ -40,7 +40,7 @@ import org.sonar.api.rules.ActiveRuleParam;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleParam;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;

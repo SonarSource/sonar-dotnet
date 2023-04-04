@@ -32,7 +32,7 @@ import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.sensor.ProjectSensor;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 

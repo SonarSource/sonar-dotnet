@@ -27,7 +27,7 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.notifications.AnalysisWarnings;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 
 import java.io.File;
 import java.io.IOException;
