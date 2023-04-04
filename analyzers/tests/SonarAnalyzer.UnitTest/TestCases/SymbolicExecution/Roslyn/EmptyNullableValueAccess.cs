@@ -739,19 +739,6 @@ class OutAndRefParams
 
 class InParams
 {
-    void InParamOfALocalFunction(int? iParam)
-    {
-        iParam = null;
-        LocalFunctionWithReadInParam(iParam);
-        _ = iParam.Value;       // Noncompliant, empty
-
-        iParam = 42;
-        LocalFunctionWithReadInParam(iParam);
-        _ = iParam.Value;       // Compliant, non-empty
-
-        static void LocalFunctionWithReadInParam(in int? i) { }
-    }
-
     void InParamOfTheMethodItself(in int? iParam)
     {
         _ = iParam.Value;       // Compliant, unknown
@@ -762,19 +749,26 @@ class InParams
     void InParamOfAnotherMethod(in int? iParam)
     {
         _ = iParam.Value;       // Compliant, unknown
-
-        MethodWithReadInParam(iParam);
+        InParam(in iParam);
         _ = iParam.Value;       // Compliant, iParam is "in" and its value can't be modified
     }
 
-    void LocalAsInParamToAnotherMethod()
+    void InParamToAnotherMethod(int? iParam)
     {
         int? iLocal = null;
-        MethodWithReadInParam(in iLocal);
+        InParam(in iLocal);
         _ = iLocal.Value;       // Noncompliant, arg is "in" and its value must still be null here
+
+        iParam = null;
+        InParam(in iParam);
+        _ = iParam.Value;       // Noncompliant, empty
+
+        iParam = 42;
+        InParam(in iParam);
+        _ = iParam.Value;       // Compliant, non-empty
     }
 
-    static void MethodWithReadInParam(in int? i) { }
+    static void InParam(in int? i) { }
 }
 
 class MutableField
