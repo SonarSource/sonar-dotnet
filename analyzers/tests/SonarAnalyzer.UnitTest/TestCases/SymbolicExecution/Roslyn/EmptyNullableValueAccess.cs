@@ -321,6 +321,41 @@ class Arithmetic
     int? MultiplicationAndAssignments2(int? i) => (i = null) * (i = 42) * i.Value; // Compliant
 }
 
+class Comparisons
+{
+    void NullIsNeitherSmallerNorBiggerThanANumber(int? i)
+    {
+        i = null;
+        if (i > 0) _ = i.Value;           // Noncompliant, FP: positive, therefore non-empty
+
+        i = null;
+        if (i < 0) _ = i.Value;           // Noncompliant, FP: negative, therefore non-empty
+
+        i = null;
+        if (i == 42) _ = i.Value;         // Compliant, 42, therefore non-empty
+
+        i = Unknown();
+        if (i >= 0 || i < 0)
+            _ = i.Value;                  // Compliant, non-empty
+        else
+            _ = i.Value;                  // FN, empty
+
+        i = Unknown();
+        if (i <= 0 || i > 0)
+            _ = i.Value;                  // Compliant, non-empty
+        else
+            _ = i.Value;                  // FN, empty
+
+        i = Unknown();
+        if (i < 0 || i == 0 || i > 0)
+            _ = i.Value;                  // Compliant, non-empty
+        else
+            _ = i.Value;                  // FN, empty
+    }
+
+    static int? Unknown() => null;
+}
+
 class ComplexConditionsSingleNullable
 {
     bool LogicalAndLearningNonNull1(bool? b) => b.HasValue && b.Value;
