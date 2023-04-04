@@ -49,7 +49,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public ExplodedNode CreateNext(ProgramState state)
         {
-            //state?.CheckStateConsistency();
+            state?.CheckStateConsistency();
             return new(Block, operations, index + 1, state, FinallyPoint);
         }
 
