@@ -112,6 +112,5 @@ public class ISymbolNullableExtensionsTest
         var expected = nullable ? NullableAnnotation.Annotated : NullableAnnotation.NotAnnotated;
         symbol.NullableAnnotation().Should().Be(expected);
         symbol.ReferenceTypeConstraintNullableAnnotation().Should().Be(NullableAnnotation.NotAnnotated);
-
     }
 }
