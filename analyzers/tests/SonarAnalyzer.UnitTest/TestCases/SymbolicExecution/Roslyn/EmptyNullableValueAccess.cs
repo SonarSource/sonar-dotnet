@@ -141,12 +141,6 @@ class Basics
             return intOrNull.Value;                                       // FN - content of static local function is not inspected by SE
         }
     }
-
-    int NullCoalescingAssignment(int? param)
-    {
-        param ??= 42;
-        return param.Value;                                               // Compliant, value is always set
-    }
 }
 
 class AssignmentAndDeconstruction
@@ -454,7 +448,7 @@ class NullConditionalOperator
         i = Unknown();
         _ = (i?.GetHashCode().GetHashCode()).Value;    // Noncompliant
 
-        int? Unknown() => null;
+        static int? Unknown() => null;
     }
 
     void WithFuncOfNullable(Func<int?> f)
@@ -471,7 +465,7 @@ class NullConditionalOperator
         f = Unknown();
         _ = f?.Invoke()?.ToString();  // Compliant, ?. branches the state of f, but Value never called anyway
 
-        Func<int?> Unknown() => null;
+        static Func<int?> Unknown() => null;
     }
 
     void WithFuncOfFuncOfNullable(Func<Func<int?>> f)
@@ -482,9 +476,68 @@ class NullConditionalOperator
         f = Unknown();
         _ = (f?.Invoke()()).Value;     // Noncompliant, ?. branches the state of f
         f = Unknown();
-        _ = (f?.Invoke())().Value;     // Noncompliant, ?. branches the state of f
+        _ = (f?.Invoke())().Value;     // Compliant, ?. branches the state of f, but f.Invoke() is unknown
 
-        Func<Func<int?>> Unknown() => null;
+        static Func<Func<int?>> Unknown() => null;
+    }
+}
+
+class ValueTuple
+{
+    void MembersAccess((int? first, int? second)? tuple, int? i)
+    {
+        _ = tuple.Value;              // Compliant, unknown
+        tuple = Unknown();
+        _ = tuple.Value.first.Value;  // Compliant, tuple unknown, then first unknown
+        _ = tuple.Value.second.Value; // Compliant, tuple unknown, then second unknown
+        tuple = (null, i);
+        _ = tuple.Value;              // Compliant, non-empty
+        _ = tuple.Value.first.Value;  // FN, empty
+        _ = tuple.Value.second.Value; // Compliant, second still unknown
+        tuple = (i, null);
+        _ = tuple.Value;              // Compliant, non-empty
+        _ = tuple.Value.first.Value;  // Compliant, first still unknown
+        _ = tuple.Value.second.Value; // FN, empty
+
+        static (int? first, int? second)? Unknown() => null;
+    }
+}
+
+class NullCoaleascingAssignment
+{
+    void WithNullableOfInt(int? i1, int? i2, int? i3)
+    {
+        i1 ??= 42;
+        _ = i1.Value;  // Compliant, always non-empty
+        i1 = null;
+        i1 ??= null;
+        _ = i1.Value;  // Noncompliant, always empty
+        i1 = 42;
+        i1 ??= null;
+        _ = i1.Value;  // Compliant, always non-empty
+
+        i2 ??= i3;
+        _ = i2.Value;  // Compliant, both i2 and i3 are unknown
+    }
+
+    void WithNullableOfValueTuple()
+    {
+        (int? first, int? second)? tuple = null;
+        tuple ??= (42, 42);
+        _ = tuple.Value.first.Value;  // Noncompliant, FP: non-empty
+        _ = tuple.Value.second.Value; // Compliant, non-empty
+        tuple = null;
+        tuple ??= (42, 42);
+        _ = tuple.Value.second.Value; // Noncompliant, FP: non-empty
+        _ = tuple.Value.first.Value;  // Compliant, non-empty
+        tuple = null;
+        tuple ??= (null, 42);
+        _ = tuple.Value.first.Value;  // Noncompliant, empty
+        _ = tuple.Value.second.Value; // Compliant, non-empty
+        tuple = null;
+        tuple ??= (null, 42);
+        _ = tuple.Value.second.Value; // Noncompliant, FP: non-empty
+        _ = tuple.Value.first.Value;  // FN: empty
     }
 }
 
