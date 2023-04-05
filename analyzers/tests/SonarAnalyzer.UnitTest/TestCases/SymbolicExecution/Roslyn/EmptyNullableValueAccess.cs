@@ -442,6 +442,7 @@ class NullConditionalOperator
 {
     void Basics(int? i)
     {
+        i = Unknown();
         _ = (i?.GetHashCode()).Value;                  // Noncompliant, ?. branches the state of i
         i = Unknown();
         _ = ((i?.GetHashCode())?.GetHashCode()).Value; // Noncompliant
@@ -453,6 +454,7 @@ class NullConditionalOperator
 
     void WithFuncOfNullable(Func<int?> f)
     {
+        f = Unknown();
         _ = f().Value;                // Compliant, f unknown
         f = Unknown();
         _ = f.Invoke().Value;         // Compliant, f unknown
@@ -470,6 +472,7 @@ class NullConditionalOperator
 
     void WithFuncOfFuncOfNullable(Func<Func<int?>> f)
     {
+        f = Unknown();
         _ = f()().Value;               // Compliant, f unknown
         f = Unknown();
         _ = f?.Invoke()().Value;       // Compliant, Value never called when f is null
@@ -486,6 +489,7 @@ class ValueTuple
 {
     void MembersAccess((int? first, int? second)? tuple, int? i)
     {
+        tuple = Unknown();
         _ = tuple.Value;              // Compliant, unknown
         tuple = Unknown();
         _ = tuple.Value.first.Value;  // Compliant, tuple unknown, then first unknown
