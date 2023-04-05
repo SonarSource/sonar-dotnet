@@ -21,7 +21,7 @@ The [Roslyn Analyzer Runner](https://github.com/dotnet/roslyn/tree/main/src/Tool
 
 1. Make sure, you build the correct version of the sonar-dotnet analyzer in Release mode. The release dlls will be placed in the `C:\Projects\sonar-dotnet\analyzers\packaging\binaries` folder.
 1. Specify the project you want to run the analyzer against in the "Sonar" launch profile (see above). Also, specify the class name of the analyzer to run (you can specify more than one analyzer or run all analyzers).
-1. Open the *Performance profiler*"*: Debug → "Performance profiler.." or press Alt+F2
+1. Open the *Performance profiler*: Debug → "Performance profiler.." or press Alt+F2
 1. Check the tools you want to use during profiling.
 1. Press start
 
