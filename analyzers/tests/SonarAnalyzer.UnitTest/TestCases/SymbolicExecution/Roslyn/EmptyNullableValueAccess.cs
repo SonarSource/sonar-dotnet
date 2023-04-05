@@ -737,6 +737,40 @@ class OutAndRefParams
     }
 }
 
+class InParams
+{
+    void InParamOfTheMethodItself(in int? iParam)
+    {
+        _ = iParam.Value;       // Compliant, unknown
+        iParam = null;          // Error, CS8331
+        _ = iParam.Value;       // Compliant, iParam is "in" and its value can't be modified
+    }
+
+    void InParamOfAnotherMethod(in int? iParam)
+    {
+        _ = iParam.Value;       // Compliant, unknown
+        InParam(in iParam);
+        _ = iParam.Value;       // Compliant, iParam is "in" and its value can't be modified
+    }
+
+    void InParamToAnotherMethod(int? iParam)
+    {
+        int? iLocal = null;
+        InParam(in iLocal);
+        _ = iLocal.Value;       // Noncompliant, arg is "in" and its value must still be null here
+
+        iParam = null;
+        InParam(in iParam);
+        _ = iParam.Value;       // Noncompliant, empty
+
+        iParam = 42;
+        InParam(in iParam);
+        _ = iParam.Value;       // Compliant, non-empty
+    }
+
+    static void InParam(in int? i) { }
+}
+
 class MutableField
 {
     int? theField;
@@ -781,9 +815,6 @@ class MutableField
         theField = 42;
         MethodNotChangingTheField();
         _ = theField.Value;          // Compliant, unknown
-
-        void LocalFunctionChangingTheField() => theField = null;
-        void LocalFunctionNotChangingTheField() { }
     }
 
     void MethodChangingTheField() => theField = null;
@@ -998,24 +1029,27 @@ namespace TypeWithStaticPropertyCalledValue
     {
         void Basics()
         {
-            _ = ClassWithStaticPropertyCalledValue.Value;                                // Compliant, not on nullable value type
-            _ = ClassWithStaticPropertyCalledValue.Value.Value;                          // Compliant
-            _ = ClassWithStaticPropertyCalledValue.Value.Value.InstanceProperty;         // Compliant
-            _ = ClassWithStaticPropertyCalledValue.Value.Value.InstanceProperty.Value;   // Compliant
-            _ = new ClassWithInstancePropertyCalledValue().Value;                        // Compliant
+            // Ensures rule doesn't raise NRE on custom property called Value having no instance (static)
+            _ = StaticValue.Value;                                // Compliant, not on nullable value type
+
+            // Ensures rule doesn't raise NRE on nested Value property
+            _ = StaticValue.Value.Value;                          // Compliant
+            _ = StaticValue.Value.Value.InstanceProperty;         // Compliant
+            _ = StaticValue.Value.Value.InstanceProperty.Value;   // Compliant
+            _ = new InstanceValue().Value;                        // Compliant
         }
     }
 
-    class ClassWithStaticPropertyCalledValue
+    class StaticValue
     {
-        public ClassWithInstancePropertyCalledValue InstanceProperty => null;
+        public InstanceValue InstanceProperty => null;
 
-        public static ClassWithInstancePropertyCalledValue Value => null;
+        public static InstanceValue Value => null;
     }
 
-    class ClassWithInstancePropertyCalledValue
+    class InstanceValue
     {
-        public ClassWithStaticPropertyCalledValue Value => null;
+        public StaticValue Value => null;
     }
 }
 
@@ -1025,23 +1059,26 @@ namespace TypeWithStaticFieldCalledValue
     {
         void Basics()
         {
-            _ = ClassWithStaticFieldCalledValue.Value;                            // Compliant, not on nullable value type
-            _ = ClassWithStaticFieldCalledValue.Value.Value;                      // Compliant
-            _ = ClassWithStaticFieldCalledValue.Value.Value.InstanceField;        // Compliant
-            _ = ClassWithStaticFieldCalledValue.Value.Value.InstanceField.Value;  // Compliant
-            _ = new ClassWithInstanceFieldCalledValue().Value;                    // Compliant
+            // Ensures rule doesn't raise NRE on custom field called Value having no instance (static)
+            _ = StaticValue.Value;                            // Compliant, not on nullable value type
+
+            // Ensures rule doesn't raise NRE on nested Value field
+            _ = StaticValue.Value.Value;                      // Compliant
+            _ = StaticValue.Value.Value.InstanceField;        // Compliant
+            _ = StaticValue.Value.Value.InstanceField.Value;  // Compliant
+            _ = new InstanceValue().Value;                    // Compliant
         }
     }
 
-    class ClassWithStaticFieldCalledValue
+    class StaticValue
     {
-        public ClassWithInstanceFieldCalledValue InstanceField = null;
+        public InstanceValue InstanceField = null;
 
-        public static ClassWithInstanceFieldCalledValue Value = null;
+        public static InstanceValue Value = null;
     }
 
-    class ClassWithInstanceFieldCalledValue
+    class InstanceValue
     {
-        public ClassWithStaticFieldCalledValue Value = null;
+        public StaticValue Value = null;
     }
 }
