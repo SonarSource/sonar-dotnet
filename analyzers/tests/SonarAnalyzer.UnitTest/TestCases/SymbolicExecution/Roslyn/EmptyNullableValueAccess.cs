@@ -341,12 +341,6 @@ class Comparisons
             _ = i.Value;                  // FN, empty
 
         i = Unknown();
-        if (i <= 0 || i > 0)
-            _ = i.Value;                  // Compliant, non-empty
-        else
-            _ = i.Value;                  // FN, empty
-
-        i = Unknown();
         if (i < 0 || i == 0 || i > 0)
             _ = i.Value;                  // Compliant, non-empty
         else
