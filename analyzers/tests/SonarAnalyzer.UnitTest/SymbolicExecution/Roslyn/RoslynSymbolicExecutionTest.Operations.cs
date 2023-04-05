@@ -162,6 +162,27 @@ public void Method()
         }
 
         [TestMethod]
+        public void SimpleAssignment_ResetsObjectConstraint()
+        {
+            var validator = SETestContext.CreateCS("""
+                if (arg == null)
+                {
+                    Tag("BeforeReassignment");
+                    arg = Guid.NewGuid().ToString("N");
+                    Tag("AfterReassignment");
+                }
+                Tag("End");
+                arg.ToString();
+                """, ", string arg").Validator;
+            var arg = validator.Symbol("arg");
+            validator.TagStates("BeforeReassignment").Should().ContainSingle().Which[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+            validator.TagStates("AfterReassignment").Should().ContainSingle().Which[arg].Should().HaveNoConstraints();
+            validator.TagStates("End").Should().SatisfyRespectively(
+                x => x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                x => x[arg].Should().HaveNoConstraints());
+        }
+
+        [TestMethod]
         public void Conversion_ToLocalVariable_FromTrackedSymbol_ExplicitCast()
         {
             var validator = SETestContext.CreateCS(@"int a = 42; byte b = (byte)a; var c = (byte)field; Tag(""b"", b); Tag(""c"", c);", new LiteralDummyTestCheck()).Validator;
