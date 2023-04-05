@@ -45,38 +45,87 @@ Tag(""NotNullToNotNull"", notNullToNotNull);
 Tag(""NotNullToUnknown"", notNullToUnknown);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
-            validator.ValidateTag("NullToNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("NullToNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("NullToNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("NullToNotNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("NullToUnknown", x => x.Should().BeNull());
-            validator.ValidateTag("NotNullToNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("NotNullToNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("NotNullToUnknown", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("NotNullToNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("NotNullToNotNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("NotNullToUnknown", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
         public void IsNull_Coalesce_UnknownToNull()
         {
-            const string code = @"
-object nullValue = null;
-var unknownToNull = arg ?? nullValue;
-Tag(""UnknownToNull"", unknownToNull);";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            const string code = """
+                object nullValue = null;
+                var result = arg ?? nullValue;
+                Tag("End");
+                """;
+            var validator = SETestContext.CreateCS(code, ", object arg", new PreserveTestCheck("arg", "result")).Validator;
+            var arg = validator.Symbol("arg");
+            var result = validator.Symbol("result");
             validator.ValidateContainsOperation(OperationKind.IsNull);
-            validator.TagValues("UnknownToNull").Should().SatisfyRespectively(
-                x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null),      // arg was null, and got coalesce value of nullValue
-                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));  // arg was not null, no coalescing
+            validator.TagStates("End").Should().SatisfyRespectively(
+                x =>
+                {
+                    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+                    x[result].Should().HaveOnlyConstraint(ObjectConstraint.Null);   // It's from nullValue
+                },
+                x =>
+                {
+                    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+                    x[result].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+                });
         }
 
         [TestMethod]
         public void IsNull_Coalesce_UnknownToNotNull()
         {
-            const string code = @"
-object notNullValue = new object();
-var unknownToNotNull = arg ?? notNullValue;
-Tag(""UnknownToNotNull"", unknownToNotNull);";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            const string code = """
+                object notNullValue = new object();
+                var result = arg ?? notNullValue;
+                Tag("End");
+                """;
+            var validator = SETestContext.CreateCS(code, ", object arg", new PreserveTestCheck("arg", "result")).Validator;
+            var arg = validator.Symbol("arg");
+            var result = validator.Symbol("result");
             validator.ValidateContainsOperation(OperationKind.IsNull);
-            validator.ValidateTag("UnknownToNotNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.TagStates("End").Should().SatisfyRespectively(
+                x =>
+                {
+                    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+                    x[result].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+                },
+                x =>
+                {
+                    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+                    x[result].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+                });
+        }
+
+        [TestMethod]
+        public void IsNull_Coalesce_UnknownToNotNull_WithConversion()
+        {
+            const string code = """
+                var notNullValue = new ArgumentException();
+                var result = arg ?? notNullValue;
+                Tag("End");
+                """;
+            var validator = SETestContext.CreateCS(code, ", Exception arg", new PreserveTestCheck("arg", "result")).Validator;
+            var arg = validator.Symbol("arg");
+            var result = validator.Symbol("result");
+            validator.ValidateContainsOperation(OperationKind.IsNull);
+            validator.TagStates("End").Should().SatisfyRespectively(
+                x =>
+                {
+                    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+                    x[result].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+                },
+                x =>
+                {
+                    x[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+                    x[result].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+                });
         }
 
         [TestMethod]
@@ -100,7 +149,7 @@ Tag(""UnknownToUnknown"", unknownToUnknown);";
                 Tag("Value", value);
                 """;
             var validator = SETestContext.CreateCS(code, ", string arg").Validator;
-            validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -111,7 +160,7 @@ Tag(""UnknownToUnknown"", unknownToUnknown);";
                 Tag("Arg", arg);
                 """;
             var validator = SETestContext.CreateCS(code, ", string arg").Validator;
-            validator.ValidateTag("Arg", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("Arg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -141,12 +190,12 @@ Tag(""NotNullToUnknown"", notNullToUnknown);
 ";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
-            validator.ValidateTag("NullToNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("NullToNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("NullToNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("NullToNotNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("NullToUnknown", x => x.Should().BeNull());
-            validator.ValidateTag("NotNullToNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("NotNullToNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("NotNullToUnknown", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+            validator.ValidateTag("NotNullToNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("NotNullToNotNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("NotNullToUnknown", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -158,9 +207,9 @@ arg ??= nullValue;
 Tag(""Arg"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
-            validator.TagValues("Arg").Should().HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull))
-                .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null));
+            validator.TagValues("Arg").Should().SatisfyRespectively(
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
         [TestMethod]
@@ -172,8 +221,9 @@ arg ??= notNullValue;
 Tag(""Arg"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
-            validator.TagValues("Arg").Should().HaveCount(2)
-                .And.OnlyContain(x => x.HasConstraint(ObjectConstraint.NotNull));
+            validator.TagValues("Arg").Should().SatisfyRespectively(
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
@@ -184,9 +234,9 @@ arg1 ??= arg2;
 Tag(""Arg"", arg1);";
             var validator = SETestContext.CreateCS(code, ", object arg1, object arg2").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
-            validator.TagValues("Arg").Should().HaveCount(2)
-                .And.ContainSingle(x => x == null)
-                .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
+            validator.TagValues("Arg").Should().SatisfyRespectively(
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                x => x.Should().HaveNoConstraints());
         }
 
         [TestMethod]
