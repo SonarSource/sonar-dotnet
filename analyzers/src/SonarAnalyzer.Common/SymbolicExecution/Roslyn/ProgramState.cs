@@ -217,15 +217,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         [ExcludeFromCodeCoverage]
         public void CheckConsistency()
         {
-            Debug.Assert(SymbolValue.Values.All(CheckConstraintAlsoHasNotNull<BoolConstraint>), "If a BoolConstraint is set for a symbol, NotNull should also be set.");
-            Debug.Assert(SymbolValue.Values.All(CheckConstraintAlsoHasNotNull<LockConstraint>), "If a LockConstraint is set for a symbol, NotNull should also be set.");
-            Debug.Assert(SymbolValue.Values.All(x => CheckOnlyConstraint(x, ObjectConstraint.Null)), "If Null is set for a symbol, no other constraint should be set.");
-            Debug.Assert(OperationValue.Values.All(CheckConstraintAlsoHasNotNull<BoolConstraint>), "If a BoolConstraint is set for a operation, NotNull should also be set.");
-            Debug.Assert(OperationValue.Values.All(CheckConstraintAlsoHasNotNull<LockConstraint>), "If a LockConstraint is set for a operation, NotNull should also be set.");
-            Debug.Assert(OperationValue.Values.All(x => CheckOnlyConstraint(x, ObjectConstraint.Null)), "If Null is set for a operation, no other constraint should be set.");
+            AssertCommonConditions(SymbolValue.Values);
+            AssertCommonConditions(OperationValue.Values);
 
-            static bool CheckConstraintAlsoHasNotNull<T>(SymbolicValue value) where T : SymbolicConstraint =>
-                !value.HasConstraint<T>() || value.HasConstraint(ObjectConstraint.NotNull);
+            static void AssertCommonConditions(IEnumerable<SymbolicValue> values)
+            {
+                foreach (var value in values)
+                {
+                    Debug.Assert(CheckConstraintAlsoHasNotNull<BoolConstraint>(value), "If a BoolConstraint is set, NotNull should also be set.");
+                    Debug.Assert(CheckConstraintAlsoHasNotNull<LockConstraint>(value), "If a LockConstraint is set, NotNull should also be set.");
+                    Debug.Assert(CheckOnlyConstraint(value, ObjectConstraint.Null), "If Null is set, no other constraint should be set.");
+                }
+            }
+
+            static bool CheckConstraintAlsoHasNotNull<T>(SymbolicValue value) where T : SymbolicConstraint
+                => !value.HasConstraint<T>() || value.HasConstraint(ObjectConstraint.NotNull);
 
             static bool CheckOnlyConstraint(SymbolicValue value, SymbolicConstraint single)
                 => !value.HasConstraint(single) || value.AllConstraints.Count() == 1;
