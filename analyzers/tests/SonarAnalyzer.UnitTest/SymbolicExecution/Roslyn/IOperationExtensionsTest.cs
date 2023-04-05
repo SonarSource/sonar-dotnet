@@ -61,55 +61,55 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [DataTestMethod]
-        [DataRow("FullProperty", false)]
-        [DataRow("AutoProperty", true)]
-        [DataRow("StaticFullProperty", false)]
-        [DataRow("StaticAutoProperty", true)]
-        [DataRow("this.FullProperty", false)]
-        [DataRow("this.AutoProperty", true)]
-        [DataRow("Test.StaticFullProperty", false)]
-        [DataRow("Test.StaticAutoProperty", true)]
-        [DataRow("(new TestImpl()).FullProperty", false)]
-        [DataRow("(new TestImpl()).AutoProperty", false)]
-        [DataRow("OverridenAutoProperty", true)]
-        [DataRow("ShadowedAutoProperty", true)]
-        [DataRow("OverridenFullProperty", false)]
-        [DataRow("ShadowedFullProperty", false)]
-        [DataRow("AbstractAutoProperty", false)]
-        [DataRow("VirtualAutoProperty", false)]
+        [DataRow("Full", false)]
+        [DataRow("Auto", true)]
+        [DataRow("StaticFull", false)]
+        [DataRow("StaticAuto", true)]
+        [DataRow("this.Full", false)]
+        [DataRow("this.Auto", true)]
+        [DataRow("Test.StaticFull", false)]
+        [DataRow("Test.StaticAuto", true)]
+        [DataRow("(new TestImpl()).Full", false)]
+        [DataRow("(new TestImpl()).Auto", false)]
+        [DataRow("OverridenAuto", true)]
+        [DataRow("ShadowedAuto", true)]
+        [DataRow("OverridenFull", false)]
+        [DataRow("ShadowedFull", false)]
+        [DataRow("AbstractAuto", false)]
+        [DataRow("VirtualAuto", false)]
         public void TrackedSymbol_AutoProperty_IsPropertySymbol(string property, bool tracked)
         {
             var code = $$"""
+                class BaseClass
+                {
+                    public virtual object OverridenAuto { get => null; set => _ = value; }
+                    public object ShadowedAuto { get => null; set => _ = value; }
+                    public virtual object OverridenFull { get; set; }
+                    public object ShadowedFull { get; set; }
+                }
+
                 abstract class Test : BaseClass
                 {
-                    object FullProperty { get => null; set => _ = value; }
-                    object AutoProperty { get; set; }
-                    static object StaticFullProperty { get => null; set => _ = value; }
-                    static object StaticAutoProperty { get; set; }
-                    public override object OverridenAutoProperty { get; set; }
-                    public new object ShadowedAutoProperty { get; set; }
-                    public override object OverridenFullProperty { get => null; set => _ = value; }
-                    public new object ShadowedFullProperty { get => null; set => _ = value; }
-                    public abstract object AbstractAutoProperty { get; set; }
-                    public virtual object VirtualAutoProperty { get; set; }
+                    object Full { get => null; set => _ = value; }
+                    object Auto { get; set; }
+                    static object StaticFull { get => null; set => _ = value; }
+                    static object StaticAuto { get; set; }
+                    public override object OverridenAuto { get; set; }
+                    public new object ShadowedAuto { get; set; }
+                    public override object OverridenFull { get => null; set => _ = value; }
+                    public new object ShadowedFull { get => null; set => _ = value; }
+                    public abstract object AbstractAuto { get; set; }
+                    public virtual object VirtualAuto { get; set; }
 
                     public void Method()
                     {
                         {{property}} = null;
                     }
                 }
-        
-                class BaseClass
-                {
-                    public virtual object OverridenAutoProperty { get => null; set => _ = value; }
-                    public object ShadowedAutoProperty { get => null; set => _ = value; }
-                    public virtual object OverridenFullProperty { get; set; }
-                    public object ShadowedFullProperty { get; set; }
-                }
 
                 class TestImpl : Test
                 {
-                    public override object AbstractAutoProperty { get; set; }
+                    public override object AbstractAuto { get; set; }
                 }
             """;
             var graph = TestHelper.CompileCfgCS(code);

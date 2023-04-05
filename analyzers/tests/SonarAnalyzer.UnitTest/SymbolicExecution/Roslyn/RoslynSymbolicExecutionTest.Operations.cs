@@ -126,10 +126,10 @@ public void Method()
         }
 
         [DataTestMethod]
-        [DataRow(@"this.AutoProperty = 42; Tag(""Target"", this.AutoProperty);")]
-        [DataRow(@"AutoProperty = 42; Tag(""Target"", AutoProperty);")]
-        [DataRow(@"Sample.StaticAutoProperty = 42; Tag(""Target"", Sample.StaticAutoProperty);")]
-        [DataRow(@"StaticAutoProperty = 42; Tag(""Target"", StaticAutoProperty);")]
+        [DataRow("""this.AutoProperty = 42; Tag("Target", this.AutoProperty);""")]
+        [DataRow("""AutoProperty = 42; Tag("Target", AutoProperty);""")]
+        [DataRow("""Sample.StaticAutoProperty = 42; Tag("Target", Sample.StaticAutoProperty);""")]
+        [DataRow("""StaticAutoProperty = 42; Tag("Target", StaticAutoProperty);""")]
         public void SimpleAssignment_FromLiteral(string snippet)
         {
             var validator = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
@@ -138,15 +138,15 @@ public void Method()
         }
 
         [DataTestMethod]
-        [DataRow(@"Sample.StaticFullProperty = 42; Tag(""Target"", Sample.StaticFullProperty);")]
-        [DataRow(@"StaticFullProperty = 42; Tag(""Target"", StaticFullProperty);")]
-        [DataRow(@"var dict = new Dictionary<string, int>(); dict[""key""] = 42; Tag(""Target"", dict[""key""]);")]
-        [DataRow(@"var other = new Sample(); other.AutoProperty = 42; Tag(""Target"", other.AutoProperty);")]
-        [DataRow(@"var other = new Sample(); other.FullProperty = 42; Tag(""Target"", other.FullProperty);")]
-        [DataRow(@"this.FullProperty = 42; Tag(""Target"", this.FullProperty);")]
-        [DataRow(@"FullProperty = 42; Tag(""Target"", FullProperty);")]
-        [DataRow(@"var other = new Sample(); other.field = 42; Tag(""Target"", other.field);")]
-        public void SimpleAssignment_ToUnsupported_FromLiteral(string snippet)
+        [DataRow("""Sample.StaticFullProperty = 42; Tag("Target", Sample.StaticFullProperty);""")]
+        [DataRow("""StaticFullProperty = 42; Tag("Target", StaticFullProperty);""")]
+        [DataRow("""var dict = new Dictionary<string, int>(); dict["key"] = 42; Tag("Target", dict["key"]);""")]
+        [DataRow("""var other = new Sample(); other.AutoProperty = 42; Tag("Target", other.AutoProperty);""")]
+        [DataRow("""var other = new Sample(); other.FullProperty = 42; Tag("Target", other.FullProperty);""")]
+        [DataRow("""this.FullProperty = 42; Tag("Target", this.FullProperty);""")]
+        [DataRow("""FullProperty = 42; Tag("Target", FullProperty);""")]
+        [DataRow("""var other = new Sample(); other.field = 42; Tag("Target", other.field);""")]
+        public void SimpleAssignment_FromLiteral_ToUntracked(string snippet)
         {
             var validator = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
             validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, DummyConstraint.Dummy }, "it's scaffolded"));
