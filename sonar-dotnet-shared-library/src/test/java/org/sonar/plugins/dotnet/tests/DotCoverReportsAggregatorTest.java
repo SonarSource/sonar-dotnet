@@ -19,13 +19,13 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.io.File;
 import java.util.List;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
-
-import java.io.File;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
@@ -40,6 +40,11 @@ public class DotCoverReportsAggregatorTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
+
+  @Before
+  public void before() {
+    logTester.setLevel(LoggerLevel.DEBUG);
+  }
 
   @Test
   public void no_sources() {

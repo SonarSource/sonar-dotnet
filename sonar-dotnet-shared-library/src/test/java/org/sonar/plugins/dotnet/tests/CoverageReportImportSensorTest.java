@@ -64,6 +64,7 @@ public class CoverageReportImportSensorTest {
 
   @Before
   public void setUp() throws IOException {
+    logTester.setLevel(LoggerLevel.TRACE);
     baseDir = temp.newFolder();
     context = SensorContextTester.create(baseDir);
   }

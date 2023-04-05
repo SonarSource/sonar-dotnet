@@ -53,7 +53,8 @@ public class ProtobufDataImporterTest {
 
   private FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
   private NoSonarFilter noSonarFilter = mock(NoSonarFilter.class);
-  private FileLinesContext fileLinesContext = mock(FileLinesContext.class);;
+  private FileLinesContext fileLinesContext = mock(FileLinesContext.class);
+  ;
 
   private SensorContextTester tester;
   private ProtobufDataImporter dataImporter = new ProtobufDataImporter(fileLinesContextFactory, noSonarFilter);
@@ -63,6 +64,7 @@ public class ProtobufDataImporterTest {
 
   @Before
   public void prepare() throws Exception {
+    logTester.setLevel(LoggerLevel.DEBUG);
     workDir = temp.newFolder().toPath();
     Path csFile = Paths.get("src/test/resources/Program.cs").toAbsolutePath();
 

@@ -22,6 +22,7 @@ package org.sonarsource.dotnet.shared.plugins;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -57,6 +58,11 @@ public class AbstractFileCacheSensorTest {
 
   @Rule
   public LogTester logTester = new LogTester();
+
+  @Before
+  public void before() {
+    logTester.setLevel(LoggerLevel.DEBUG);
+  }
 
   @Test
   public void should_describe() {

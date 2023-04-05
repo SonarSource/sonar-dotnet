@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.function.Predicate;
 import org.assertj.core.api.Condition;
 import org.assertj.core.groups.Tuple;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -50,6 +51,11 @@ public class UnitTestResultsImportSensorTest {
 
   @Rule
   public LogTester logTester = new LogTester();
+
+  @Before
+  public void before() {
+    logTester.setLevel(LoggerLevel.DEBUG);
+  }
 
   @Test
   public void should_not_save_metrics_with_empty_results() throws Exception {

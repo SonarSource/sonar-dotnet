@@ -44,6 +44,7 @@ public class CSharpSonarWayProfileTest {
 
   @Before
   public void reset() {
+    logTester.setLevel(LoggerLevel.DEBUG);
     CsRules.returnRepository = false;
     CsRules.ruleKeys = Collections.emptySet();
     CsRules.exceptionToThrow = null;
@@ -94,7 +95,7 @@ public class CSharpSonarWayProfileTest {
     assertThat(profile.rule(RuleKey.of("roslyn.TEST", "S3649"))).isNotNull();
   }
 
-  @Test(expected=java.lang.IllegalArgumentException.class)
+  @Test(expected = java.lang.IllegalArgumentException.class)
   public void sonar_security_with_duplicated_quality_profile_name() {
     Context context = new Context();
     NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", CSharpPlugin.LANGUAGE_KEY);

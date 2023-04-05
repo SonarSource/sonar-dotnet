@@ -61,6 +61,7 @@ public class SarifParserCallbackImplTest {
 
   @Before
   public void setUp() {
+    logTester.setLevel(LoggerLevel.DEBUG);
     ctx = SensorContextTester.create(temp.getRoot().toPath());
     repositoryKeyByRoslynRuleKey.put("rule1", "rule1");
     repositoryKeyByRoslynRuleKey.put("rule2", "rule2");

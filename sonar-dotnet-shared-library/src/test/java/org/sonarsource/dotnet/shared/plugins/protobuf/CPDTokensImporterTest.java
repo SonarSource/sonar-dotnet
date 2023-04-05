@@ -55,6 +55,7 @@ public class CPDTokensImporterTest {
 
   @Before
   public void before() {
+    logs.setLevel(LoggerLevel.DEBUG);
     assertThat(protobuf).withFailMessage("no such file: " + protobuf).isFile();
   }
 

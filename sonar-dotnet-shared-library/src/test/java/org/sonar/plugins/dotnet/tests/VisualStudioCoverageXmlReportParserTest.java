@@ -46,6 +46,7 @@ public class VisualStudioCoverageXmlReportParserTest {
 
   @Before
   public void prepare() {
+    logTester.setLevel(LoggerLevel.TRACE);
     alwaysTrue = mock(FileService.class);
     when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
     when(alwaysTrue.getAbsolutePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));

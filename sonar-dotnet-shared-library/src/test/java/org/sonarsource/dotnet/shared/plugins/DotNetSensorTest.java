@@ -82,6 +82,7 @@ public class DotNetSensorTest {
 
   @Before
   public void prepare() throws Exception {
+    logTester.setLevel(LoggerLevel.DEBUG);
     workDir = temp.newFolder().toPath();
     reportPaths = Collections.singletonList(workDir.getRoot());
     tester = SensorContextTester.create(new File("src/test/resources"));

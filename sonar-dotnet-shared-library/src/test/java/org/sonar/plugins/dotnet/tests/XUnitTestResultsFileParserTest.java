@@ -21,6 +21,7 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
 import java.util.List;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -37,6 +38,11 @@ public class XUnitTestResultsFileParserTest {
 
   @Rule
   public LogTester logTester = new LogTester();
+
+  @Before
+  public void before() {
+    logTester.setLevel(LoggerLevel.DEBUG);
+  }
 
   @Test
   public void no_counters() {

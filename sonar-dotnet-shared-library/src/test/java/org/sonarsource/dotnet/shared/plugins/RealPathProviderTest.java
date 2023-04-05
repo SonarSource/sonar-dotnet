@@ -22,6 +22,7 @@ package org.sonarsource.dotnet.shared.plugins;
 import java.io.File;
 import java.io.IOException;
 import org.junit.Assume;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -36,6 +37,11 @@ public class RealPathProviderTest {
 
   @Rule
   public LogTester logger = new LogTester();
+
+  @Before
+  public void before() {
+    logger.setLevel(LoggerLevel.DEBUG);
+  }
 
   @Test
   public void when_relative_path_and_file_does_not_exist_returns_same_path() {
@@ -60,7 +66,7 @@ public class RealPathProviderTest {
     Assume.assumeTrue(System.getProperty("os.name").toLowerCase().startsWith("win"));
     File expectedFile = temp.newFile("FILE.CS");
     expectedFile.createNewFile();
-    assertThat(new RealPathProvider().getRealPath(new File(temp.getRoot(),"file.cs").getPath())).isEqualTo(expectedFile.getCanonicalPath());
+    assertThat(new RealPathProvider().getRealPath(new File(temp.getRoot(), "file.cs").getPath())).isEqualTo(expectedFile.getCanonicalPath());
     assertThat(logger.logs(LoggerLevel.DEBUG)).isEmpty();
   }
 

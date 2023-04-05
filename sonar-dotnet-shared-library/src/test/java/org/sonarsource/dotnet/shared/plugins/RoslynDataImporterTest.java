@@ -47,8 +47,8 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.utils.Version;
 import org.sonar.api.testfixtures.log.LogTester;
+import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -68,6 +68,7 @@ public class RoslynDataImporterTest {
 
   @Before
   public void setUp() throws IOException {
+    logTester.setLevel(LoggerLevel.DEBUG);
     workDir = temp.getRoot().toPath().resolve("reports");
     Path csFile = Paths.get("src/test/resources/Program.cs").toAbsolutePath();
 

@@ -59,6 +59,7 @@ public class FileTypeSensorTest {
 
   @Before
   public void prepare() throws Exception {
+    logTester.setLevel(LoggerLevel.DEBUG);
     settingsMock = mock(MapSettings.class);
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(temp.newFolder().toPath());
