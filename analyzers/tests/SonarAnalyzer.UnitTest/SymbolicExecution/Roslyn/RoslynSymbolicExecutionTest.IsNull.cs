@@ -47,7 +47,7 @@ Tag(""NotNullToUnknown"", notNullToUnknown);";
             validator.ValidateContainsOperation(OperationKind.IsNull);
             validator.ValidateTag("NullToNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.ValidateTag("NullToNotNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-            validator.ValidateTag("NullToUnknown", x => x.Should().BeNull());
+            validator.ValidateTag("NullToUnknown", x => x.Should().HaveNoConstraints());
             validator.ValidateTag("NotNullToNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("NotNullToNotNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("NotNullToUnknown", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
@@ -192,7 +192,7 @@ Tag(""NotNullToUnknown"", notNullToUnknown);
             validator.ValidateContainsOperation(OperationKind.IsNull);
             validator.ValidateTag("NullToNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.ValidateTag("NullToNotNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-            validator.ValidateTag("NullToUnknown", x => x.Should().BeNull());
+            validator.ValidateTag("NullToUnknown", x => x.Should().HaveNoConstraints());
             validator.ValidateTag("NotNullToNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("NotNullToNotNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("NotNullToUnknown", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
@@ -222,7 +222,7 @@ Tag(""Arg"", arg);";
             var validator = SETestContext.CreateCS(code, ", object arg").Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
             validator.TagValues("Arg").Should().SatisfyRespectively(
-                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),   // This should be here just once, one state persists notNullValue without LVA removing it
                 x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
