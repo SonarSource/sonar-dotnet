@@ -61,8 +61,8 @@ namespace StyleCop.Analyzers.CodeGeneration
             methodName = methodName.Substring(0, methodName.Length - "Operation".Length);
             var publicStatic = TokenList(Token(SyntaxKind.PublicKeyword), Token(SyntaxKind.StaticKeyword));
 
-            // public static ILoopOperationWrapper AsLoop(this IOperation operation) => ILoopOperationWrapper.FromOperation(operation);
-            var asMethod = MethodDeclaration(wrapperName, Identifier($"As{methodName}"))
+            // public static ILoopOperationWrapper CastLoop(this IOperation operation) => ILoopOperationWrapper.FromOperation(operation);
+            var asMethod = MethodDeclaration(wrapperName, Identifier($"Cast{methodName}"))
                 .WithModifiers(publicStatic)
                 .WithParameterList(ParameterList(SingletonSeparatedList(
                     Parameter(Identifier("operation")).WithModifiers(TokenList(Token(SyntaxKind.ThisKeyword))).WithType(IdentifierName("IOperation")))))
@@ -72,7 +72,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                 .WithSemicolonToken(Token(SyntaxKind.SemicolonToken))
                 .WithLeadingTrivia(value.Summary);
 
-            // public static bool TryAsLoop(this IOperation operation, out ILoopOperationWrapper wrapper)
+            // public static bool TryCastLoop(this IOperation operation, out ILoopOperationWrapper wrapper)
             // {
             //     if (ILoopOperationWrapper.IsInstance(operation))
             //     {
@@ -85,7 +85,7 @@ namespace StyleCop.Analyzers.CodeGeneration
             //         return false;
             //     }
             // }
-            var tryAsMethod = MethodDeclaration(PredefinedType(Token(SyntaxKind.BoolKeyword)), Identifier($"TryAs{methodName}"))
+            var tryAsMethod = MethodDeclaration(PredefinedType(Token(SyntaxKind.BoolKeyword)), Identifier($"TryCast{methodName}"))
                 .WithModifiers(publicStatic)
                 .WithParameterList(ParameterList(SeparatedList(new[]
                     {
