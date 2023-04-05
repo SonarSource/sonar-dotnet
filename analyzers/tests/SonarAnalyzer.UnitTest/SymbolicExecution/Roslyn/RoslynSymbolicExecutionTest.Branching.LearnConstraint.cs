@@ -284,16 +284,18 @@ if (value = boolParameter)
             var validator = CreateIfElseEndValidatorVB("arg", OperationKind.Binary, "Integer");
             validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
             validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-            validator.TagValues("End").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+            validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
         }
 
-        [TestMethod]
-        public void Branching_LearnsObjectConstraint_NullableInteger_VB()
+        [DataTestMethod]
+        [DataRow("Integer?")]
+        [DataRow("Boolean?")]
+        public void Branching_LearnsObjectConstraint_Nullable_VB(string parameterType)
         {
-            var validator = CreateIfElseEndValidatorVB("arg", OperationKind.Binary, "Integer?");
+            var validator = CreateIfElseEndValidatorVB("arg", OperationKind.Binary, parameterType);
             validator.ValidateTag("If", x => x.Should().HaveNoConstraints("arg.GetValueOrDefault() is called in 'if arg' and arg is not found in RoslynSymbolicExecution.SetBranchingConstraints"));
             validator.ValidateTag("Else", x => x.Should().HaveNoConstraints());
-            validator.TagValues("End").Should().SatisfyRespectively(x => x.Should().HaveNoConstraints());
+            validator.ValidateTag("End", x => x.Should().HaveNoConstraints());
         }
 
         [DataTestMethod]
@@ -313,24 +315,6 @@ if (value = boolParameter)
             validator.ValidateTagOrder(branchValue, "End");
             validator.ValidateTag(branchValue, x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedPath)));
             validator.TagValues("End").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedPath)));
-        }
-
-        [TestMethod]
-        public void Branching_LearnsObjectConstraint_NullableBool_UnknownVB()
-        {
-            var validator = SETestContext.CreateVB($$"""
-                Dim b As Boolean? = Unknown(Of Boolean?)
-                if b Then
-                    Tag("True", b)
-                else
-                    Tag("False", b)
-                End if
-                Tag("End", b)
-                """).Validator;
-            validator.ValidateTagOrder("True", "False", "End");
-            validator.ValidateTag("True", x => x.Should().HaveNoConstraints("b.GetValueOrDefault() is called in 'if b' and b is not found in RoslynSymbolicExecution.SetBranchingConstraints"));
-            validator.ValidateTag("False", x => x.Should().HaveNoConstraints());
-            validator.TagValues("End").Should().SatisfyRespectively(x => x.Should().HaveNoConstraints());
         }
 
         [DataTestMethod]
