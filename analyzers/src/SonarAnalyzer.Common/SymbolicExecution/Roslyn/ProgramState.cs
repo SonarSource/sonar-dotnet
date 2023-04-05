@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
@@ -213,7 +214,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         }
 
         [Conditional("DEBUG")]
-        public void CheckStateConsistency()
+        [ExcludeFromCodeCoverage]
+        public void CheckConsistency()
         {
             Debug.Assert(SymbolValue.Values.All(CheckConstraintAlsoHasNotNull<BoolConstraint>), "If a BoolConstraint is set for a symbol, NotNull should also be set.");
             Debug.Assert(SymbolValue.Values.All(CheckConstraintAlsoHasNotNull<LockConstraint>), "If a LockConstraint is set for a symbol, NotNull should also be set.");
