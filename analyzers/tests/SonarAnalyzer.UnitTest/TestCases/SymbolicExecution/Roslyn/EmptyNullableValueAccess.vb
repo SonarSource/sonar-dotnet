@@ -10,7 +10,7 @@ Class Basics
             Console.WriteLine(i.Value)
         End If
         Console.WriteLine(i.Value)  ' Noncompliant {{'i' is Nothing on at least one execution path.}}
-        '                 ~
+        '                 ^
     End Sub
 
     Sub DereferenceOnValueResult(i As Integer?)

@@ -159,16 +159,20 @@ class AssignmentAndDeconstruction
 
     void SecondLevel()
     {
-        (_, (int? i1, int? i2)) = (42, (42, null));
+        (int? i1, (int? i2, int? i3)) = (42, (42, null));
         _ = i1.Value;       // Compliant
-        _ = i2.Value;       // FN
+        _ = i2.Value;       // Compliant
+        _ = i3.Value;       // FN
     }
 
     void ThirdLevel()
     {
-        (_, (_, (int? i1, int? i2), _)) = (42, (42, (42, null), 42));
+        (int? i1, (int? i2, (int? i3, int? i4), int? i5)) = (42, (42, (42, null), 42));
         _ = i1.Value;       // Compliant
-        _ = i2.Value;       // FN
+        _ = i2.Value;       // Compliant
+        _ = i3.Value;       // Compliant
+        _ = i4.Value;       // FN
+        _ = i5.Value;       // Compliant
     }
 
     void WithDiscard()
