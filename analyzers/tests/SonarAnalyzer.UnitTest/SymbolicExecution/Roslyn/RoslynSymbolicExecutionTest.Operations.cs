@@ -183,6 +183,20 @@ public void Method()
         }
 
         [TestMethod]
+        public void NullCoalescingAssignment_TakesObjectConstraintFromRightHandSide()
+        {
+            var validator = SETestContext.CreateCS("""
+                arg ??= Guid.NewGuid().ToString("N");
+                Tag("End");
+                arg.ToString();
+                """, ", string arg").Validator;
+            var arg = validator.Symbol("arg");
+            validator.TagStates("End").Should().SatisfyRespectively(
+                x => x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+                x => x[arg].Should().HaveNoConstraints());
+        }
+
+        [TestMethod]
         public void Conversion_ToLocalVariable_FromTrackedSymbol_ExplicitCast()
         {
             var validator = SETestContext.CreateCS(@"int a = 42; byte b = (byte)a; var c = (byte)field; Tag(""b"", b); Tag(""c"", c);", new LiteralDummyTestCheck()).Validator;
