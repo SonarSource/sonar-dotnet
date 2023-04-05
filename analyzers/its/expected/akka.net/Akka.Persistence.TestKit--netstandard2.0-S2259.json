@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'(IEnumerable<IPersistentRepresentation>)w.Payload' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\TestJournal.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  39,
+"endLine":  52,
+"endColumn":  88
+}
+}
+}
+]
+}

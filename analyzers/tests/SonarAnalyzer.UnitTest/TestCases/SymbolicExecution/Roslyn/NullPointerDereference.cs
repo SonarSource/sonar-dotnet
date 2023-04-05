@@ -1313,6 +1313,24 @@ namespace Tests.Diagnostics
 
     public class Akka_Repro
     {
+        public void NestedForEachTryForEach(IEnumerable<Exception> exceptions)
+        {
+            foreach (var ex in exceptions)
+            {
+                try
+                {
+                    foreach (var ch in ex.Message)  // Noncompliant FP
+                    {
+                        // Do something
+                    }
+                }
+                catch
+                {
+                    // Do something
+                }
+            }
+        }
+
         public void IsType(object message)
         {
             var first = message as IFirst;
