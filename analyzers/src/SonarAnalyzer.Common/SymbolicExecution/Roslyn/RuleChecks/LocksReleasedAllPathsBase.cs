@@ -150,7 +150,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
-            if (context.Operation.Instance.AsObjectCreation() is { } objectCreation)
+            if (context.Operation.Instance.AsInvocation() is { } invocation)
             {
                 // ToDo: we ignore the number of parameters for now.
                 if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "Enter", "TryEnter"))
