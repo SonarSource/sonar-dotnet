@@ -89,7 +89,6 @@ Public Class Sample
     End Sub
 
     Private Shared Function Unknown(Of T)() As T
-        Return Nothing
     End Function
 
 End Class";
