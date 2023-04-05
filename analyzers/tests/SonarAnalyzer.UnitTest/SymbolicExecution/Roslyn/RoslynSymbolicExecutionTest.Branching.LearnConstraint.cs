@@ -21,7 +21,6 @@
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 {
@@ -114,7 +113,7 @@ if (collection.IsReadOnly)
 }
 Tag(""End"", collection);";
             var check = new ConditionEvaluatedTestCheck(x => x.State[x.Operation].HasConstraint(BoolConstraint.True)
-                                                                 ? x.SetSymbolConstraint(x.Operation.Instance.ToPropertyReference().Instance.TrackedSymbol(), DummyConstraint.Dummy)
+                                                                 ? x.SetSymbolConstraint(x.Operation.Instance.AsPropertyReference().Value.Instance.TrackedSymbol(), DummyConstraint.Dummy)
                                                                  : x.State);
             var validator = SETestContext.CreateCS(code, ", ICollection<object> collection", check).Validator;
             validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(DummyConstraint.Dummy, ObjectConstraint.NotNull));
