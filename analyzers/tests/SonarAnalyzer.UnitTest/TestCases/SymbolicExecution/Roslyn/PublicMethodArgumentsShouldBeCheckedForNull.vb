@@ -312,7 +312,7 @@ Public Class PropertyAccessibility
         Get
         End Get
         Set(Value As Object)
-            Dim V As String = Value.ToString
+            Dim V As String = Value.ToString    ' Noncompliant
         End Set
     End Property
 

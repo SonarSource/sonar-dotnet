@@ -38,10 +38,8 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
             Node is MethodBlockSyntax { SubOrFunctionStatement: { } } method && MethodDereferencesArguments(method);
 
         bool IsRelevantPropertyAccessor() =>
-            false;
-        //FIXME: Doresit
-        //Node is AccessorDeclarationSyntax { } accessor
-        //&& (!accessor.Keyword.IsKind(GetKeyword) || accessor.Parent.Parent is IndexerDeclarationSyntax);
+            Node is AccessorBlockSyntax { } accessor
+            && (accessor.Kind() != GetAccessorBlock || accessor.Parent is PropertyBlockSyntax { PropertyStatement.ParameterList: not null });
 
         bool IsAccessibleFromOtherAssemblies() =>
             SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is Public or Protected or ProtectedOrInternal;
