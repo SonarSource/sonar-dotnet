@@ -140,12 +140,12 @@ End Class
 Public Module GuardExtensions
 
     <Extension>
-    Public Sub GuardExtension(Of T As Class)(<ValidatedNotNull> Value As T, <CallerArgumentExpression("Value")> Optional Name As String = "")
+    Public Sub GuardExtension(Of T As Class)(<ValidatedNotNull> Value As T, Optional Name As String = "")
         If Value Is Nothing Then Throw New ArgumentNullException(Name)
     End Sub
 
     <Extension>
-    Public Sub GuardExtensionMoreAttributes(Of T As Class)(<Foo, ValidatedNotNull, Bar> Value As T, <CallerArgumentExpression("Value")> Optional Name As String = "")
+    Public Sub GuardExtensionMoreAttributes(Of T As Class)(<Foo, ValidatedNotNull, Bar> Value As T, Optional Name As String = "")
         If Value Is Nothing Then Throw New ArgumentNullException(Name)
     End Sub
 
