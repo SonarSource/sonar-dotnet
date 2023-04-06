@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_params' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"region":  {
+"startLine":  88,
+"startColumn":  49,
+"endLine":  88,
+"endColumn":  56
+}
+}
+}
+]
+}

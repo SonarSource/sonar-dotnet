@@ -1,0 +1,264 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sFormula' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  164,
+"startColumn":  20,
+"endLine":  164,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sFormula' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  169,
+"startColumn":  36,
+"endLine":  169,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  231,
+"startColumn":  74,
+"endLine":  231,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  232,
+"startColumn":  74,
+"endLine":  232,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  83,
+"endLine":  242,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  243,
+"startColumn":  83,
+"endLine":  243,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  244,
+"startColumn":  83,
+"endLine":  244,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  245,
+"startColumn":  82,
+"endLine":  245,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  246,
+"startColumn":  81,
+"endLine":  246,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  247,
+"startColumn":  82,
+"endLine":  247,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  257,
+"startColumn":  72,
+"endLine":  257,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  258,
+"startColumn":  67,
+"endLine":  258,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  259,
+"startColumn":  68,
+"endLine":  259,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  262,
+"startColumn":  13,
+"endLine":  262,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_params' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  608,
+"startColumn":  42,
+"endLine":  608,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'x' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4597,
+"startColumn":  43,
+"endLine":  4597,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'y' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4597,
+"startColumn":  86,
+"endLine":  4597,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'drow' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4196,
+"startColumn":  9,
+"endLine":  4196,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'args' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6607,
+"startColumn":  30,
+"endLine":  6607,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dlg' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7918,
+"startColumn":  20,
+"endLine":  7918,
+"endColumn":  23
+}
+}
+}
+]
+}

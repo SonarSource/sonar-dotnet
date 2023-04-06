@@ -1,0 +1,433 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  548,
+"startColumn":  77,
+"endLine":  548,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  548,
+"startColumn":  153,
+"endLine":  548,
+"endColumn":  162
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'id' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  550,
+"startColumn":  40,
+"endLine":  550,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  554,
+"startColumn":  64,
+"endLine":  554,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  560,
+"startColumn":  52,
+"endLine":  560,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  562,
+"startColumn":  52,
+"endLine":  562,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  564,
+"startColumn":  52,
+"endLine":  564,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  581,
+"startColumn":  76,
+"endLine":  581,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  581,
+"startColumn":  116,
+"endLine":  581,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  582,
+"startColumn":  45,
+"endLine":  582,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  583,
+"startColumn":  37,
+"endLine":  583,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  586,
+"startColumn":  45,
+"endLine":  586,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  587,
+"startColumn":  37,
+"endLine":  587,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  590,
+"startColumn":  53,
+"endLine":  590,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  592,
+"startColumn":  31,
+"endLine":  592,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  593,
+"startColumn":  87,
+"endLine":  593,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  600,
+"startColumn":  98,
+"endLine":  600,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curMovie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  627,
+"startColumn":  42,
+"endLine":  627,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curShow' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  643,
+"startColumn":  77,
+"endLine":  643,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curShow' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  643,
+"startColumn":  152,
+"endLine":  643,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'id' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  645,
+"startColumn":  44,
+"endLine":  645,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curShow' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  647,
+"startColumn":  47,
+"endLine":  647,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curShow' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  656,
+"startColumn":  112,
+"endLine":  656,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curShow' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  660,
+"startColumn":  37,
+"endLine":  660,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curShow' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  696,
+"startColumn":  77,
+"endLine":  696,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curShow' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  696,
+"startColumn":  152,
+"endLine":  696,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curSeason' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  701,
+"startColumn":  72,
+"endLine":  701,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curEpisode' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  728,
+"startColumn":  77,
+"endLine":  728,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curEpisode' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  728,
+"startColumn":  202,
+"endLine":  728,
+"endColumn":  213
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curEpisode' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  728,
+"startColumn":  257,
+"endLine":  728,
+"endColumn":  268
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'epid' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  730,
+"startColumn":  47,
+"endLine":  730,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curEpisode' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  732,
+"startColumn":  73,
+"endLine":  732,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '_curEpisode' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  735,
+"startColumn":  93,
+"endLine":  735,
+"endColumn":  104
+}
+}
+}
+]
+}
