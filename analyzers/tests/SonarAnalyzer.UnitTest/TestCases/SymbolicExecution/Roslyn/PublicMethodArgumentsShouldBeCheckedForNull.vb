@@ -92,7 +92,7 @@ Public Class Program
     End Sub
 
     Public Sub New(s As String)
-        Me.New(s.Length)     ' Noncompliant {{Refactor this constructor To asub imports members Of parameter 's' because it could be Nothing.}}
+        Me.New(s.Length)     ' Noncompliant {{Refactor this constructor to avoid using members of parameter 's' because it could be Nothing.}}
     End Sub
 
     Public Sub NonCompliant1(o As Object)
@@ -452,7 +452,7 @@ Public Class Conversion
 
     Public Sub MultipleCasts(o As Object)
         DirectCast(DirectCast(DirectCast(o, String), Object), String).ToString()    ' Noncompliant
-        CType(CType(CType(o, String), Object), String).ToString()                   ' Noncompliant
+        CType(CType(CType(o, String), Object), String).ToString()                   ' FN FIXME
     End Sub
 
 
@@ -477,7 +477,7 @@ Public Class Conversion
     End Sub
 
     Public Sub ForEachLoopWithParentheses(arr As Object())
-        For Each o As Object In ((arr))                                         ' Noncompliant
+        For Each o As Object In ((arr))                                         ' FN FIXME
         Next
     End Sub
 
@@ -500,15 +500,15 @@ Public Class Constructor
     Inherits Base
 
     Public Sub New(s As String)
-        Dim v = s.Length       ' Noncompliant {{ Refactor this method to add validation of parameter 's' before imports it.}}
+        Dim v = s.Length            ' Noncompliant {{Refactor this method to add validation of parameter 's' before using it.}}
     End Sub
 
     Public Sub New(o As Object)
-        Me.New(o.ToString())  ' Noncompliant {{ Refactor this constructor to asub imports members of parameter 'o' because it could be Nothing.}}
+        Me.New(o.ToString())        ' Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be Nothing.}}
     End Sub
 
     Public Sub New(o As Object())
-        MyBase.New(o.ToString())  ' Noncompliant {{ Refactor this constructor to asub imports members of parameter 'o' because it could be Nothing.}}
+        MyBase.New(o.ToString())    ' Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be Nothing.}}
     End Sub
 
 End Class

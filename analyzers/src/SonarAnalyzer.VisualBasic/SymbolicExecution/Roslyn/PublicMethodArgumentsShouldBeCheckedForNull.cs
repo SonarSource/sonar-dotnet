@@ -28,6 +28,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
     internal static readonly DiagnosticDescriptor S3900 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     protected override DiagnosticDescriptor Rule => S3900;
+    protected override string NullName => "Nothing";
 
     public override bool ShouldExecute()
     {
@@ -62,7 +63,11 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
     }
 
     protected override bool IsInConstructorInitializer(SyntaxNode node) =>
-        false;  // FIXME: Doresit
+        node.Ancestors().OfType<InvocationExpressionSyntax>().Any(x => IsInConstructorInitializer(x.Expression.ToString()));
+
+    private static bool IsInConstructorInitializer(string invokedExpression) =>
+        invokedExpression.Equals("Me.New", StringComparison.OrdinalIgnoreCase)
+        || invokedExpression.Equals("MyBase.New", StringComparison.OrdinalIgnoreCase);
 
     private sealed class ArgumentDereferenceWalker : SafeVisualBasicSyntaxWalker
     {

@@ -29,6 +29,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
     internal static readonly DiagnosticDescriptor S3900 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     protected override DiagnosticDescriptor Rule => S3900;
+    protected override string NullName => "null";
 
     public override bool ShouldExecute()
     {

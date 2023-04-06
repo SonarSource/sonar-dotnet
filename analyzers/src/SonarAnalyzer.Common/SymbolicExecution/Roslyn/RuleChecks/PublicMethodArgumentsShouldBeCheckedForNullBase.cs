@@ -28,6 +28,7 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
     protected const string MessageFormat = "{0}";
 
     protected abstract bool IsInConstructorInitializer(SyntaxNode node);
+    protected abstract string NullName { get; }
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
@@ -39,9 +40,9 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
             && !parameterReference.Parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
             var message = IsInConstructorInitializer(context.Operation.Instance.Syntax)
-                ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
+                ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be {1}."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
-            ReportIssue(parameterReference.WrappedOperation, string.Format(message, parameterReference.WrappedOperation.Syntax), context);
+            ReportIssue(parameterReference.WrappedOperation, string.Format(message, parameterReference.WrappedOperation.Syntax, NullName), context);
         }
 
         return context.State;
