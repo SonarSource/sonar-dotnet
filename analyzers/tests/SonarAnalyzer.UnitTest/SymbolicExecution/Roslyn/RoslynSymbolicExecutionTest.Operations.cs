@@ -228,6 +228,18 @@ public void Method()
         }
 
         [DataTestMethod]
+        [DataRow("ThrowIfNull")]
+        [DataRow("ThrowIfNullOrEmpty")]
+        public void ArgumentNullException_ThrowIfNull(string throwIfNullMethod)
+        {
+            var validator = SETestContext.CreateCS($$"""
+                ArgumentNullException.{{throwIfNullMethod}}(arg);
+                Tag("End", arg);
+                """, ", string arg").Validator;
+            validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
         [DataRow("+=")]
         [DataRow("-=")]
         [DataRow("*=")]
