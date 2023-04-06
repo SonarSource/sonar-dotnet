@@ -113,3 +113,14 @@ public class UsingFromServicesAttribute
         int GetValue();
     }
 }
+
+public class CoalesceAssignment
+{
+    public void Method(object o)
+    {
+        o ??= Unknown();
+        o.ToString(); // Noncompliant - FP
+    }
+
+    private object Unknown() => null;
+}
