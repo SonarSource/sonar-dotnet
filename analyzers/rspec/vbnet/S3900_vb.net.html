@@ -1,0 +1,79 @@
+<p>Methods declared as <code>Public</code>, <code>Protected</code>, or <code>Protected Friend</code> can be accessed from other assemblies, which
+means you should validate parameters to be within the expected constraints. In general, checking against <code>Nothing</code> is recommended in
+defensive programming.</p>
+<p>This rule raises an issue when a parameter of a publicly accessible method is not validated against <code>Nothing</code> before being
+dereferenced.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Class Sample
+
+    Public Property Message As String
+
+    Public Sub PublicMethod(Arg As Exception)
+        Message = Arg.Message   ' Noncompliant
+    End Sub
+
+    Protected Sub ProtectedMethod(Arg As Exception)
+        Message = Arg.Message   ' Noncompliant
+    End Sub
+
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Class Sample
+
+    Public Property Message As String
+
+    Public Sub PublicMethod(Arg As Exception)
+        If Arg IsNot Nothing Then Message = Arg.Message   ' Noncompliant
+    End Sub
+
+    Protected Sub ProtectedMethod(Arg As Exception)
+        ArgumentNullException.ThrowIfNull(Arg)
+        Message = Arg.Message   ' Noncompliant
+    End Sub
+
+    Private Sub PrivateMethod(Arg As Exception)
+        Message = Arg.Message   ' Compliant: method is not publicly accessible
+    End Sub
+
+End Class
+</pre>
+<h2>Exceptions</h2>
+<ul>
+  <li> Arguments validated for <code>Nothing</code> via helper methods should be annotated with the <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull"><code>[NotNull</code></a>] attribute. </li>
+  <li> Method parameters marked with the <code>[NotNull]</code> <a
+  href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#ItemNotNullAttribute">Resharper code annotation
+  attribute</a> are supported as well. </li>
+  <li> To create a custom null validation method declare an attribute with name <code>ValidatedNotNullAttribute</code> and mark the parameter that is
+  validated for null in your method declaration with it: </li>
+</ul>
+<pre>
+Imports System.Runtime.CompilerServices
+
+&lt;AttributeUsage(AttributeTargets.Parameter, Inherited:=False)&gt;
+Public NotInheritable Class ValidatedNotNullAttribute
+    Inherits Attribute
+
+End Class
+
+Public Module Guard
+
+    Public Sub NotNull(Of T As Class)(&lt;ValidatedNotNullAttribute&gt; Value As T, &lt;CallerArgumentExpression("Value")&gt; Optional Name As String = "")
+        If Value Is Nothing Then Throw New ArgumentNullException(Name)
+    End Sub
+
+End Module
+
+Public Module SampleUsage
+
+    Public Function CustomToUpper(Value As String) As String
+        Guard.NotNull(Value)
+        Return Value.ToUpper
+    End Function
+
+End Module
+</pre>
+
