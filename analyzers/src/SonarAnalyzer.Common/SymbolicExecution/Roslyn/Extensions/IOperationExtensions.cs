@@ -102,7 +102,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             operation?.Kind switch
             {
                 OperationKindEx.Conversion => UnwrapOperation(operation.UnwrapConversion(), state),
-                OperationKindEx.FlowCapture or OperationKindEx.FlowCaptureReference => UnwrapOperation(operation.UnwrapFlowCapture(state), state),
+                OperationKindEx.FlowCaptureReference => UnwrapOperation(operation.UnwrapFlowCapture(state), state),
                 _ => operation
             };
 
@@ -149,9 +149,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         public static IOperation UnwrapFlowCapture(this IOperation operation, ProgramState state)
         {
-            while (operation?.Kind is OperationKindEx.FlowCapture or OperationKindEx.FlowCaptureReference)
+            while (operation?.Kind is OperationKindEx.FlowCaptureReference)
             {
-                operation = state.ResolveCapture(operation);
+                var capturedOperation = state.ResolveCapture(operation);
+                if (capturedOperation == operation) // this is a workaround for lost captures
+                {
+                    return null;
+                }
+                operation = capturedOperation;
             }
             return operation;
         }
