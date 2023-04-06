@@ -51,14 +51,26 @@ namespace SonarAnalyzer.UnitTest.Extensions.VisualBasic
             ISymbolExtensions_VB.GetDescendantNodes(tree.GetRoot().GetLocation(), tree.GetRoot()).Should().BeEmpty();
         }
 
-        [TestMethod]
-        public void IsAutoProperty_AutoProperty_CS()
+        [DataTestMethod]
+        [DataRow("{ get; set; }")]
+        [DataRow("{ get; }")]
+        [DataRow("{ get; } = string.Empty;")]
+        [DataRow("{ get; set; } = string.Empty;")]
+
+#if NET
+
+        [DataRow("{ get; init; }")]
+
+#endif
+
+        public void IsAutoProperty_AutoProperty_CS(string getterSetter)
         {
-            const string code = @"
-public class Sample
-{
-    public string SymbolMember {get; set;}
-}";
+            var code = $$"""
+                public class Sample
+                {
+                    public string SymbolMember {{getterSetter}}
+                }
+                """;
             ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeTrue();
         }
 

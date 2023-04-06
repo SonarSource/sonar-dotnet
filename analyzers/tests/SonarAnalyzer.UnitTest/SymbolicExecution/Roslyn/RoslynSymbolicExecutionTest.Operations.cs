@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -125,19 +126,39 @@ public void Method()
         }
 
         [DataTestMethod]
-        [DataRow(@"Sample.StaticProperty = 42; Tag(""Target"", Sample.StaticProperty);")]
-        [DataRow(@"StaticProperty = 42; Tag(""Target"", StaticProperty);")]
-        [DataRow(@"var arr = new byte[] { 13 }; arr[0] = 42; Tag(""Target"", arr[0]);")]
-        [DataRow(@"var dict = new Dictionary<string, int>(); dict[""key""] = 42; Tag(""Target"", dict[""key""]);")]
-        [DataRow(@"var other = new Sample(); other.Property = 42; Tag(""Target"", other.Property);")]
-        [DataRow(@"this.Property = 42; Tag(""Target"", this.Property);")]
-        [DataRow(@"Property = 42; Tag(""Target"", Property);")]
-        [DataRow(@"var other = new Sample(); other.field = 42; Tag(""Target"", other.field);")]
-        public void SimpleAssignment_ToUnsupported_FromLiteral(string snippet)
+        [DataRow("""this.AutoProperty = 42; Tag("Target", this.AutoProperty);""")]
+        [DataRow("""AutoProperty = 42; Tag("Target", AutoProperty);""")]
+        [DataRow("""Sample.StaticAutoProperty = 42; Tag("Target", Sample.StaticAutoProperty);""")]
+        [DataRow("""StaticAutoProperty = 42; Tag("Target", StaticAutoProperty);""")]
+        public void SimpleAssignment_FromLiteral(string snippet)
         {
             var validator = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
-            validator.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
-            validator.ValidateTag("Target", x => (x?.HasConstraint(DummyConstraint.Dummy) ?? false).Should().BeFalse());
+            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, DummyConstraint.Dummy }, "it's scaffolded"));
+            validator.ValidateTag("Target", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+        }
+
+        [DataTestMethod]
+        [DataRow("""Sample.StaticFullProperty = 42; Tag("Target", Sample.StaticFullProperty);""")]
+        [DataRow("""StaticFullProperty = 42; Tag("Target", StaticFullProperty);""")]
+        [DataRow("""var dict = new Dictionary<string, int>(); dict["key"] = 42; Tag("Target", dict["key"]);""")]
+        [DataRow("""var other = new Sample(); other.AutoProperty = 42; Tag("Target", other.AutoProperty);""")]
+        [DataRow("""var other = new Sample(); other.FullProperty = 42; Tag("Target", other.FullProperty);""")]
+        [DataRow("""this.FullProperty = 42; Tag("Target", this.FullProperty);""")]
+        [DataRow("""FullProperty = 42; Tag("Target", FullProperty);""")]
+        [DataRow("""var other = new Sample(); other.field = 42; Tag("Target", other.field);""")]
+        public void SimpleAssignment_FromLiteral_ToUntracked(string snippet)
+        {
+            var validator = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
+            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, DummyConstraint.Dummy }, "it's scaffolded"));
+            validator.ValidateTag("Target", x => x.Should().HaveNoConstraints());
+        }
+
+        [TestMethod]
+        public void ElelmentAccess_FromLiteral_ToUntracked()
+        {
+            var validator = SETestContext.CreateCS("""var arr = new object[] { 13 }; arr[0] = 42;""", new LiteralDummyTestCheck()).Validator;
+            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, DummyConstraint.Dummy }, "it's scaffolded"));
+            validator.Validate("ArrayElementReference: arr[0]", x => x.State[x.Operation].Should().HaveNoConstraints());
         }
 
         [TestMethod]
@@ -848,8 +869,8 @@ Sample UntrackedSymbol() => this;";
                 """;
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.PropertyReference);
-            validator.ValidateTag("AfterSetNull", x => x.Should().HaveNoConstraints()); // FIXME Auto-properties should behave the same as fields. Expected: HaveOnlyConstraint(ObjectConstraint.Null)
-            validator.ValidateTag("AfterReadReference", x => x.Should().HaveNoConstraints()); // FIXME Expected: HaveOnlyConstraint(ObjectConstraint.NotNull)
+            validator.ValidateTag("AfterSetNull", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null));
+            validator.ValidateTag("AfterReadReference", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
         }
 
         [TestMethod]

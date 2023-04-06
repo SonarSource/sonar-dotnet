@@ -32,6 +32,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.ParameterReference => operation.ToParameterReference().Parameter,
                 OperationKindEx.Argument => operation.ToArgument().Value.TrackedSymbol(),
                 OperationKindEx.DeclarationExpression => IDeclarationExpressionOperationWrapper.FromOperation(operation).Expression.TrackedSymbol(),
+                OperationKindEx.PropertyReference when operation.ToPropertyReference() is { Property: { IsVirtual: false } property } propertyReference
+                    && IsStaticOrThis(propertyReference)
+                    && property.IsAutoProperty()
+                    => property,
                 _ => null
             };
 

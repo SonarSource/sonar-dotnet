@@ -203,23 +203,23 @@ public static class Extensions
         [DataRow("var dummy = this.Property;")]
         [DataRow("SampleProperty.InstanceMethod();")]
         [DataRow("this.SampleProperty.InstanceMethod();")]
-        [DataRow("this.SampleProperty?.InstanceMethod();")]
         public void Invocation_InstanceMethodCall_DoesNotClearFieldForOtherAccess(string invocation)
         {
-            var code = $@"
-ObjectField = null;
-StaticObjectField = null;
-Tag(""BeforeField"", ObjectField);
-Tag(""BeforeStaticField"", StaticObjectField);
-{invocation}
-Tag(""AfterField"", ObjectField);
-Tag(""AfterStaticField"", StaticObjectField);";
+            var code = $$"""
+            ObjectField = null;
+            StaticObjectField = null;
+            Tag("BeforeField", ObjectField);
+            Tag("BeforeStaticField", StaticObjectField);
+            {{invocation}}
+            Tag("AfterField", ObjectField);
+            Tag("AfterStaticField", StaticObjectField);
+            """;
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Invocation);
-            validator.ValidateTag("BeforeField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("BeforeStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-            validator.ValidateTag("AfterStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+            validator.ValidateTag("BeforeField", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("BeforeStaticField", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("AfterField", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("AfterStaticField", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
         [DataTestMethod]

@@ -78,7 +78,12 @@ public class Deconstructable
             var code = $@"
 Public Class Sample
 
-    Private Readonly Property Condition As Boolean = Environment.ProcessorCount = 42    ' Something that cannot have constraint
+    Private Readonly Property Condition As Boolean
+        Get
+            Return Environment.ProcessorCount = 42  ' Something that cannot have constraint
+        End Get
+    End Property
+
     Private FieldArray() As Integer
 
     Public Sub Main(BoolParameter As Boolean{additionalParameters})
@@ -124,6 +129,8 @@ public unsafe class Sample
     public Sample SampleProperty {{ get; set; }}
     public object AutoProperty {{ get; set; }}
     public object FullProperty {{ get => ObjectField; set => ObjectField = value; }}
+    public static object StaticAutoProperty {{ get; set; }}
+    public static object StaticFullProperty {{ get => StaticObjectField; set => StaticObjectField = value; }}
     public NotImplementedException PropertyException {{ get; set; }}
     public int this[int index] {{get => 42; set {{ }} }}
     private int field;

@@ -61,6 +61,65 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [DataTestMethod]
+        [DataRow("Full", false)]
+        [DataRow("Auto", true)]
+        [DataRow("StaticFull", false)]
+        [DataRow("StaticAuto", true)]
+        [DataRow("this.Full", false)]
+        [DataRow("this.Auto", true)]
+        [DataRow("Test.StaticFull", false)]
+        [DataRow("Test.StaticAuto", true)]
+        [DataRow("(new TestImpl()).Full", false)]
+        [DataRow("(new TestImpl()).Auto", false)]
+        [DataRow("OverridenAuto", true)]
+        [DataRow("ShadowedAuto", true)]
+        [DataRow("OverridenFull", false)]
+        [DataRow("ShadowedFull", false)]
+        [DataRow("AbstractAuto", false)]
+        [DataRow("VirtualAuto", false)]
+        public void TrackedSymbol_AutoProperty_IsPropertySymbol(string property, bool tracked)
+        {
+            var code = $$"""
+                class BaseClass
+                {
+                    public virtual object OverridenAuto { get => null; set => _ = value; }
+                    public object ShadowedAuto { get => null; set => _ = value; }
+                    public virtual object OverridenFull { get; set; }
+                    public object ShadowedFull { get; set; }
+                }
+
+                abstract class Test : BaseClass
+                {
+                    object Full { get => null; set => _ = value; }
+                    object Auto { get; set; }
+                    static object StaticFull { get => null; set => _ = value; }
+                    static object StaticAuto { get; set; }
+                    public override object OverridenAuto { get; set; }
+                    public new object ShadowedAuto { get; set; }
+                    public override object OverridenFull { get => null; set => _ = value; }
+                    public new object ShadowedFull { get => null; set => _ = value; }
+                    public abstract object AbstractAuto { get; set; }
+                    public virtual object VirtualAuto { get; set; }
+
+                    public void Method()
+                    {
+                        {{property}} = null;
+                    }
+                }
+
+                class TestImpl : Test
+                {
+                    public override object AbstractAuto { get; set; }
+                }
+            """;
+            var graph = TestHelper.CompileCfgCS(code);
+            var expressionStatement = (IExpressionStatementOperation)graph.Blocks[1].Operations[0];
+            var assignmentTarget = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
+            var propertyReferenceSymbol = IPropertyReferenceOperationWrapper.FromOperation(assignmentTarget).Property;
+            assignmentTarget.TrackedSymbol().Should().Be(tracked ? propertyReferenceSymbol : null);
+        }
+
+        [DataTestMethod]
         [DataRow(@"(int i, int j) = (1, 1)")]
         [DataRow(@"(var i, var j) = (1, 1)")]
         [DataRow(@"int.TryParse(string.Empty, out int value)")]
