@@ -227,6 +227,18 @@ public void Method()
             validator.ValidateTag("End", x => x.Should().HaveNoConstraints()); // Should have NotNull constraint
         }
 
+        [TestMethod]
+        public void NullConditional_ThrowOnNull()
+        {
+            var validator = SETestContext.CreateCS("""
+                arg = arg == null
+                    ? throw new ArgumentNullException()
+                    : arg;
+                Tag("End", arg);
+                """, ", string arg").Validator;
+            validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        }
+
         [DataTestMethod]
         [DataRow("ThrowIfNull")]
         [DataRow("ThrowIfNullOrEmpty")]
