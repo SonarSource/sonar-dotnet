@@ -688,7 +688,7 @@ Tag(""This"", fromThis);";
         [DataRow("[ValidatedNotNullAttribute]")]
         [DataRow("[NotNull]")]
         [DataRow("[NotNullAttribute]")]
-        public void Invocation_NotNullAttribute_SetsNotNullOnArgumentsMarkedWithAttribute(string notNullAttribute)
+        public void Invocation_NotNullAttribute_SetsNotNullOnArgumentsMarkedWithAttribute_CS(string notNullAttribute)
         {
             var code = $@"
 using System;
@@ -747,6 +747,82 @@ public static class Guard
             validator.ValidateTag("AfterGuard_o8", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterGuard_s1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterGuard_s2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        }
+
+        [DataTestMethod]
+        [DataRow("<ValidatedNotNull>")]
+        [DataRow("<ValidatedNotNullAttribute>")]
+        [DataRow("<NotNull>")]
+        [DataRow("<NotNullAttribute>")]
+        public void Invocation_NotNullAttribute_SetsNotNullOnArgumentsMarkedWithAttribute_VB(string notNullAttribute)
+        {
+            var code = $"""
+                Imports System.Runtime.CompilerServices
+
+                Public Class Sample
+
+                    Public Sub Main(o1 As Object, o2 As Object, o3 As Object, o4 As Object, o5 As Object, o6 As Object, o7 As Object, o8 As Object, s1 As String)
+                        Guard.NotNullExt(o1)
+                        o2.NotNullExt()
+                        NotNullInst(o3)
+                        NotNullInst(o4, o5)
+                        NotNullInst(value2:=o6, value1:=o7, value3:=o8)  ' value2 is not annotated
+                        NotNullRef(s1)
+                        Tag("AfterGuard_o1", o1)
+                        Tag("AfterGuard_o2", o2)
+                        Tag("AfterGuard_o3", o3)
+                        Tag("AfterGuard_o4", o4)
+                        Tag("AfterGuard_o5", o5)
+                        Tag("AfterGuard_o6", o6)
+                        Tag("AfterGuard_o7", o7)
+                        Tag("AfterGuard_o8", o8)
+                        Tag("AfterGuard_s1", s1)
+                    End Sub
+
+                    Private Sub NotNullInst({notNullAttribute} value As Object)
+                        ' Skip implementation to make sure, the attribute Is driving the constraint
+                    End Sub
+
+                    Private Sub NotNullInst({notNullAttribute} value1 As Object, {notNullAttribute} value2 As Object)
+                    End Sub
+
+                    Private Sub NotNullInst(Of T1, T2, T3)({notNullAttribute} value1 As T1, value2 As T2, {notNullAttribute} value3 As T3)
+                    End Sub
+
+                    Private Sub NotNullRef(Of T)({notNullAttribute} ByRef value As T)
+                    End Sub
+
+                    Private Shared Sub Tag(name As String, arg As Object)
+                    End Sub
+
+                End Class
+
+                Public NotInheritable Class ValidatedNotNullAttribute
+                    Inherits Attribute
+                End Class
+
+                Public NotInheritable Class NotNullAttribute
+                    Inherits Attribute
+                End Class
+
+                Public Module Guard
+
+                    <Extension>
+                    Public Sub NotNullExt(Of T As Class)({notNullAttribute} Value As T)
+                    End Sub
+
+                End Module
+                """;
+            var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, Array.Empty<SymbolicCheck>()).Validator;
+            validator.ValidateTag("AfterGuard_o1", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterGuard_o2", x => x.Should().HaveNoConstraints());                            // FIXME: Should have NotNull instead
+            validator.ValidateTag("AfterGuard_o3", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterGuard_o4", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterGuard_o5", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterGuard_o6", x => x.Should().HaveNoConstraints()); // parameter is not annotated
+            validator.ValidateTag("AfterGuard_o7", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterGuard_o8", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterGuard_s1", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]

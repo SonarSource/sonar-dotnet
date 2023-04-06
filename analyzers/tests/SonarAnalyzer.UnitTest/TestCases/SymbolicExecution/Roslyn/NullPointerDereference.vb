@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Runtime.CompilerServices
 Imports System.Threading.Tasks
 
 Public Class Program
@@ -151,14 +152,26 @@ Public Module Guard
         If Value Is Nothing Then Throw New ArgumentNullException(Name)
     End Sub
 
+    <Extension>
+    Public Sub CheckNotNullExtension(Of T)(<ValidatedNotNull> Value As T, Name As String)
+        If Value Is Nothing Then Throw New ArgumentNullException(Name)
+    End Sub
+
 End Module
 
 Public Class Sample
 
     Public Sub Log(Value As Object)
-        CheckNotNull(Value, NameOf(Value))
+        CheckNotNull(Value, "Value")
         If Value Is Nothing Then
             Console.WriteLine(Value.ToString)  ' Compliant, this code is not reachable
+        End If
+    End Sub
+
+    Public Sub LogExtension(Value As String)
+        Value.CheckNotNullExtension("Value")
+        If Value Is Nothing Then
+            Console.WriteLine(Value.ToString)  ' Noncompliant FP, this code is not reachable
         End If
     End Sub
 
