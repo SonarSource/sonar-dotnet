@@ -76,7 +76,7 @@ public class TestUtils {
     return Orchestrator.builderEnv()
       .useDefaultAdminCredentialsForBuilds(true)
       // See https://github.com/SonarSource/orchestrator#version-aliases
-      .setSonarVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE[9.9]"))
+      .setSonarVersion(System.getProperty("sonar.runtimeVersion", "DEV"))
       .setEdition(Edition.DEVELOPER)
       .activateLicense();
   }
