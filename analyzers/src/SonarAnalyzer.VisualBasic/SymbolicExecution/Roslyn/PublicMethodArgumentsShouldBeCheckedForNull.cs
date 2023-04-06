@@ -35,7 +35,8 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
             && IsAccessibleFromOtherAssemblies();
 
         bool IsRelevantMethod() =>
-            Node is MethodBlockSyntax { SubOrFunctionStatement: { } } method && MethodDereferencesArguments(method);
+            (Node is MethodBlockSyntax { SubOrFunctionStatement: not null } method && MethodDereferencesArguments(method, method.SubOrFunctionStatement.ParameterList))
+            || (Node is ConstructorBlockSyntax { SubNewStatement: not null } ctor && MethodDereferencesArguments(ctor, ctor.SubNewStatement.ParameterList));
 
         bool IsRelevantPropertyAccessor() =>
             Node is AccessorBlockSyntax { } accessor
@@ -44,9 +45,9 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
         bool IsAccessibleFromOtherAssemblies() =>
             SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is Public or Protected or ProtectedOrInternal;
 
-        static bool MethodDereferencesArguments(MethodBlockSyntax method)
+        static bool MethodDereferencesArguments(SyntaxNode method, ParameterListSyntax parameters)
         {
-            var argumentNames = method.SubOrFunctionStatement.ParameterList.Parameters.Select(x => x.GetName()).ToHashSet(StringComparer.OrdinalIgnoreCase);
+            var argumentNames = parameters.Parameters.Select(x => x.GetName()).ToHashSet(StringComparer.OrdinalIgnoreCase);
             if (argumentNames.Any())
             {
                 var walker = new ArgumentDereferenceWalker(argumentNames);
