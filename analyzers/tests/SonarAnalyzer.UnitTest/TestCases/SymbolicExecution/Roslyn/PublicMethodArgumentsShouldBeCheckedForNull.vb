@@ -167,13 +167,13 @@ Public Class GuardedTests
         GuardShared(s4)
         s4.ToUpper()
 
-        s5.GuardExtension() ' Noncompliant FP FIXME
+        s5.GuardExtension()
         s5.ToUpper()
 
-        s6.GuardExtensionMoreAttributes()   ' Noncompliant FP FIXME
+        s6.GuardExtensionMoreAttributes()
         s6.ToUpper()
 
-        s7.GuardExtensionMoreArguments(Nothing, Nothing)    ' Noncompliant FP FIXME
+        s7.GuardExtensionMoreArguments(Nothing, Nothing)
         s7.ToUpper()
     End Sub
 

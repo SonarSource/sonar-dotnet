@@ -55,7 +55,8 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
     {
         var candidate = operation.Kind switch
         {
-            OperationKindEx.Invocation => operation.ToInvocation().Instance,
+            // C# extensions have Instance=Null, while VB extensions have it set.
+            OperationKindEx.Invocation when operation.ToInvocation() is var invocation && !invocation.TargetMethod.IsExtensionMethod => invocation.Instance,
             OperationKindEx.FieldReference => operation.ToFieldReference().Instance,
             OperationKindEx.PropertyReference => operation.ToPropertyReference().Instance,
             OperationKindEx.EventReference => operation.ToEventReference().Instance,
