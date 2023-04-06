@@ -197,6 +197,63 @@ public void Method()
         }
 
         [TestMethod]
+        public void NullCoalescingAssignment_ThrowOnNull()
+        {
+            var validator = SETestContext.CreateCS("""
+                arg = arg ?? throw new ArgumentNullException();
+                Tag("End", arg);
+                """, ", string arg").Validator;
+            validator.ValidateOrder(
+                "ParameterReference: arg",
+                "FlowCapture: arg (Implicit)",
+                "ParameterReference: arg",
+                "FlowCapture: arg (Implicit)",
+                "FlowCaptureReference: arg (Implicit)",
+                "IsNull: arg (Implicit)",
+                "IsNull: arg (Implicit)",
+                "ObjectCreation: new ArgumentNullException()",
+                "FlowCaptureReference: arg (Implicit)",
+                "Conversion: new ArgumentNullException() (Implicit)",
+                "FlowCaptureReference: arg (Implicit)",
+                "SimpleAssignment: arg = arg ?? throw new ArgumentNullException()",
+                "ExpressionStatement: arg = arg ?? throw new ArgumentNullException();",
+                @"Literal: ""End""",
+                @"Argument: ""End""",
+                "ParameterReference: arg",
+                "Conversion: arg (Implicit)",
+                "Argument: arg",
+                @"Invocation: Tag(""End"", arg)",
+                @"ExpressionStatement: Tag(""End"", arg);");
+            validator.ValidateTag("End", x => x.Should().HaveNoConstraints()); // Should have NotNull constraint
+        }
+
+        [DataTestMethod]
+        [DataRow("+=")]
+        [DataRow("-=")]
+        [DataRow("*=")]
+        [DataRow("/=")]
+        [DataRow("|=")]
+        [DataRow("&=")]
+        [DataRow("^=")]
+        public void CompoundAssignment_KeepsNullConstraintForNullableValueTypes(string compoundAssigment)
+        {
+            var validator = SETestContext.CreateCS($$"""
+                int? local = null;
+                local {{compoundAssigment}} 1;
+                Tag("AfterNull", local);
+                local = 42;
+                local {{compoundAssigment}} 1;
+                Tag("AfterValue", local);
+                local = Unknown<int?>();
+                local {{compoundAssigment}} 1;
+                Tag("AfterUnknown", local);
+                """).Validator;
+            validator.ValidateTag("AfterNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+            validator.ValidateTag("AfterValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterUnknown", x => x.Should().HaveNoConstraints());
+        }
+
+        [TestMethod]
         public void Conversion_ToLocalVariable_FromTrackedSymbol_ExplicitCast()
         {
             var validator = SETestContext.CreateCS(@"int a = 42; byte b = (byte)a; var c = (byte)field; Tag(""b"", b); Tag(""c"", c);", new LiteralDummyTestCheck()).Validator;
