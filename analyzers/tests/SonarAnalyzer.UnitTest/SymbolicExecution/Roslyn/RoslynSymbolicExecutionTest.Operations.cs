@@ -761,7 +761,7 @@ public static class Guard
 
                 Public Class Sample
 
-                    Public Sub Main(o1 As Object, o2 As Object, o3 As Object, o4 As Object, o5 As Object, o6 As Object, o7 As Object, o8 As Object, s1 As String, s2 As String)
+                    Public Sub Main(o1 As Object, o2 As Object, o3 As Object, o4 As Object, o5 As Object, o6 As Object, o7 As Object, o8 As Object, s1 As String, s2 As String, ex as Exception)
                         Dim SomeString As String = "Lorem"
                         Guard.NotNullExt(o1)
                         o2.NotNullExt()
@@ -770,6 +770,7 @@ public static class Guard
                         NotNullInst(value2:=o6, value1:=o7, value3:=o8)  ' value2 is not annotated
                         NotNullRef(s1)
                         SomeString.NotNullExtOtherArgument(s2)
+                        ex.NotNullExt()
                         Tag("AfterGuard_o1", o1)
                         Tag("AfterGuard_o2", o2)
                         Tag("AfterGuard_o3", o3)
@@ -780,6 +781,7 @@ public static class Guard
                         Tag("AfterGuard_o8", o8)
                         Tag("AfterGuard_s1", s1)
                         Tag("AfterGuard_s2", s2)
+                        Tag("AfterGuard_ex", ex)
                     End Sub
 
                     Private Sub NotNullInst({notNullAttribute} value As Object)
@@ -822,15 +824,16 @@ public static class Guard
                 """;
             var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateTag("AfterGuard_o1", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-            validator.ValidateTag("AfterGuard_o2", x => x.Should().HaveNoConstraints());                            // FIXME: Should have NotNull instead
+            validator.ValidateTag("AfterGuard_o2", x => x.Should().HaveNoConstraints());    // Extension method invoked on Object type is DynamicInvocationOperation that we don't support
             validator.ValidateTag("AfterGuard_o3", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("AfterGuard_o4", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("AfterGuard_o5", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-            validator.ValidateTag("AfterGuard_o6", x => x.Should().HaveNoConstraints()); // parameter is not annotated
+            validator.ValidateTag("AfterGuard_o6", x => x.Should().HaveNoConstraints());    // parameter is not annotated
             validator.ValidateTag("AfterGuard_o7", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("AfterGuard_o8", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("AfterGuard_s1", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("AfterGuard_s2", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterGuard_ex", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]

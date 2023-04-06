@@ -49,6 +49,13 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         {
             state = state.ResetFieldConstraints();
         }
+        if (invocation.TargetMethod.IsExtensionMethod
+            && invocation.TargetMethod.ReducedFrom is { } reducedFrom   // VB reduces method symbol to 'instance.Extension()' without annotated ArgumentOperation
+            && Argument.HasNotNullAttribute(reducedFrom.Parameters.First())
+            && invocation.Instance.TrackedSymbol() is { } instanceSymbol)
+        {
+            state = state.SetSymbolConstraint(instanceSymbol, ObjectConstraint.NotNull);
+        }
         return invocation switch
         {
             _ when IsNullableGetValueOrDefault(invocation) => ProcessNullableGetValueOrDefault(context, invocation).ToArray(),

@@ -24,6 +24,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal sealed class Argument : SimpleProcessor<IArgumentOperationWrapper>
 {
+    public static bool HasNotNullAttribute(IParameterSymbol parameter) =>
+        parameter.GetAttributes() is { Length: > 0 } attributes && attributes.Any(IsNotNullAttribute);
+
     protected override IArgumentOperationWrapper Convert(IOperation operation) =>
         IArgumentOperationWrapper.FromOperation(operation);
 
@@ -36,25 +39,21 @@ internal sealed class Argument : SimpleProcessor<IArgumentOperationWrapper>
         {
             return null; // __arglist is not assigned to a parameter
         }
-        if (argument is { Parameter.RefKind: RefKind.Out or RefKind.Ref } && argument.Value.TrackedSymbol() is { } symbol)
+        if (argument is { Parameter.RefKind: RefKind.Out or RefKind.Ref } && argument.Value.TrackedSymbol() is { } refOutSymbol)
         {
-            state = state.SetSymbolValue(symbol, null); // Forget state for "out" or "ref" arguments
+            state = state.SetSymbolValue(refOutSymbol, null); // Forget state for "out" or "ref" arguments
         }
-        if (argument.Parameter.GetAttributes() is { Length: > 0 } attributes)
+        if (HasNotNullAttribute(argument.Parameter)
+            && argument.Value.TrackedSymbol() is { } notNullSymbol)
         {
-            state = ProcessArgumentAttributes(state, argument, attributes);
+            state = state.SetSymbolConstraint(notNullSymbol, ObjectConstraint.NotNull);
         }
         return state;
     }
 
-    private static ProgramState ProcessArgumentAttributes(ProgramState state, IArgumentOperationWrapper argument, ImmutableArray<AttributeData> attributes) =>
-        attributes.Any(IsNotNullAttribute) && argument.Value.TrackedSymbol() is { } symbol
-            ? state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
-            : state;
-
     // https://docs.microsoft.com/dotnet/api/microsoft.validatednotnullattribute
     // https://docs.microsoft.com/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
     // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute
-    private static bool IsNotNullAttribute(AttributeData attribute) =>
+    public static bool IsNotNullAttribute(AttributeData attribute) =>
         attribute.HasAnyName("ValidatedNotNullAttribute", "NotNullAttribute");
 }

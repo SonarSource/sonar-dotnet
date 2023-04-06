@@ -99,7 +99,7 @@ Public Class Program
         Dim i As Integer? = Nothing
         i.GetType()             ' Noncompliant
         i = Nothing
-        i.gettype()             ' Noncompliant
+        i.GetType()             ' Noncompliant
         i = 42
         i.GetType()             ' Compliant
         i = Nothing
@@ -171,7 +171,14 @@ Public Class Sample
     Public Sub LogExtension(Value As String)
         Value.CheckNotNullExtension("Value")
         If Value Is Nothing Then
-            Console.WriteLine(Value.ToString)  ' Noncompliant FP, this code is not reachable
+            Console.WriteLine(Value.ToString)  ' Compliant, this code is not reachable
+        End If
+    End Sub
+
+    Public Sub LogExtension(Value As Object)
+        Value.CheckNotNullExtension("Value")    ' Extension invocation on Object type is DynamicInvocationOperation
+        If Value Is Nothing Then
+            Console.WriteLine(Value.ToString)   ' Noncompliant FP, this code is not reachable
         End If
     End Sub
 
