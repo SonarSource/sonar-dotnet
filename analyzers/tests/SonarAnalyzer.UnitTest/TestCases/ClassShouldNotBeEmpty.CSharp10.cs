@@ -9,11 +9,12 @@
 namespace NonCompliant
 {
 
-    record class EmptyRecordClass();                  // Noncompliant {{Remove this empty record, write its code or make it an "interface".}}
+    record class EmptyRecordClass();                    // Noncompliant {{Remove this empty record, write its code or make it an "interface".}}
     //           ^^^^^^^^^^^^^^^^
-    record class EmptyRecordClassWithEmptyBody() { }; // Noncompliant
+    record class EmptyRecordClassWithEmptyBody() { };   // Noncompliant
 }
-namespace Ignore
+namespace Ignored
 {
-    record struct EmptyRecordStruct();                // Compliant - this rule only deals with classes
+    record struct EmptyRecordStruct();                  // Compliant - this rule only deals with classes
+    record struct EmptyRecordStructWithEmptyBody() { }; // Compliant - this rule only deals with classes
 }

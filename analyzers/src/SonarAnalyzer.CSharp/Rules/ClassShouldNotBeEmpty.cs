@@ -60,12 +60,12 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
 
     private static RecordDeclarationSyntaxWrapper? RecordDeclarationSyntax(SyntaxNode node) =>
         RecordDeclarationSyntaxWrapper.IsInstance(node)
-        ? (RecordDeclarationSyntaxWrapper)node
-        : null;
+            ? (RecordDeclarationSyntaxWrapper)node
+            : null;
 
     private static PrimaryConstructorBaseTypeSyntaxWrapper? BaseTypeSyntax(RecordDeclarationSyntaxWrapper node) =>
         node.BaseList?.Types.FirstOrDefault() is { } type
         && PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
-        ? (PrimaryConstructorBaseTypeSyntaxWrapper)type
-        : null;
+            ? (PrimaryConstructorBaseTypeSyntaxWrapper)type
+            : null;
 }
