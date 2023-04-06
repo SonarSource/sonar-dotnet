@@ -12,7 +12,7 @@ Public Class Program
     Private Shared StaticField As Object = Nothing
 
     Public Sub NotCompliantCases(o As Object, e As Exception)
-        Bar(o.ToString())   ' Noncompliant {{Refactor this method To add validation Of parameter 'o' before imports it.}}
+        Bar(o.ToString())   ' Noncompliant {{Refactor this method to add validation of parameter 'o' before using it.}}
         '   ^
         Bar(o)         ' Compliant, we care about dereference only
 
@@ -171,14 +171,14 @@ Public Class GuardedTests
         GuardShared(s4)
         s4.ToUpper()
 
-        s5.GuardExtension()
-        s5.ToUpper()
+        s5.GuardExtension() ' Noncompliant FP FIXME
+        s5.ToUpper()        ' Noncompliant FP FIXME
 
-        s6.GuardExtensionMoreAttributes()
-        s6.ToUpper()
+        s6.GuardExtensionMoreAttributes()   ' Noncompliant FP FIXME
+        s6.ToUpper()                        ' Noncompliant FP FIXME
 
-        s7.GuardExtensionMoreArguments(Nothing, Nothing)
-        s7.ToUpper()
+        s7.GuardExtensionMoreArguments(Nothing, Nothing)    ' Noncompliant FP FIXME
+        s7.ToUpper()                                        ' Noncompliant FP FIXME
     End Sub
 
     Public Sub Guard1(Of T As Class)(<ValidatedNotNull> Value As T)
@@ -224,7 +224,7 @@ Public Class ClassAccessibility
     End Sub
 
     Sub ImplicitlyPrivateWithArgs(o As Object)
-        o.ToString() ' Compliant
+        o.ToString() ' Noncompliant, implicit means Public in VB
     End Sub
 
 End Class
@@ -238,15 +238,15 @@ Public Structure StructAccessibility
     End Sub
 
     Public Sub PublicWithArgs(o As Object)
-        o.ToString() ' Noncompliant
+        o.ToString()    ' Noncompliant
     End Sub
 
     Friend Sub FriendWithArgs(o As Object)
-        o.ToString() ' Compliant - method Is Not accessible from other assemblies
+        o.ToString()    ' Compliant - method Is Not accessible from other assemblies
     End Sub
 
     Sub ImplicitlyFriendWithArgs(o As Object)
-        o.ToString()
+        o.ToString()    ' Noncompliant, implicit is Public in VB
     End Sub
 
     Private Sub PrivateWithArgs(o As Object)
@@ -447,7 +447,7 @@ Public Class Conversion
         AddHandler DirectCast(o2, CustomClass).CustomEvent, Function(sender, args)  ' Noncompliant
                                                             End Function
         V = DirectCast(o3, CustomClass).Field                                       ' Noncompliant
-        Dim M As Func(Of String) = AddressOf DirectCast(o4, CustomClass).ToString   ' FN
+        Dim M As Func(Of String) = AddressOf DirectCast(o4, CustomClass).ToString   ' Noncompliant
     End Sub
 
     Public Sub MultipleCasts(o As Object)

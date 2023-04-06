@@ -18,7 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using static Microsoft.CodeAnalysis.Accessibility;
+using static Microsoft.CodeAnalysis.VisualBasic.SyntaxKind;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
@@ -30,9 +31,66 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
 
     public override bool ShouldExecute()
     {
-        return true; // ToDo: Implement
+        return (IsRelevantMethod() || IsRelevantPropertyAccessor())
+            && IsAccessibleFromOtherAssemblies();
+
+        bool IsRelevantMethod() =>
+            Node is MethodBlockSyntax { SubOrFunctionStatement: { } } method && MethodDereferencesArguments(method);
+
+        bool IsRelevantPropertyAccessor() =>
+            false;
+        //FIXME: Doresit
+        //Node is AccessorDeclarationSyntax { } accessor
+        //&& (!accessor.Keyword.IsKind(GetKeyword) || accessor.Parent.Parent is IndexerDeclarationSyntax);
+
+        bool IsAccessibleFromOtherAssemblies() =>
+            SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is Public or Protected or ProtectedOrInternal;
+
+        static bool MethodDereferencesArguments(MethodBlockSyntax method)
+        {
+            var argumentNames = method.SubOrFunctionStatement.ParameterList.Parameters.Select(x => x.GetName()).ToHashSet(StringComparer.OrdinalIgnoreCase);
+            if (argumentNames.Any())
+            {
+                var walker = new ArgumentDereferenceWalker(argumentNames);
+                walker.SafeVisit(method);
+                return walker.DereferencesMethodArguments;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
     protected override bool IsInConstructorInitializer(SyntaxNode node) =>
         false;  // FIXME: Doresit
+
+    private sealed class ArgumentDereferenceWalker : SafeVisualBasicSyntaxWalker
+    {
+        private readonly ISet<string> argumentNames;
+
+        public bool DereferencesMethodArguments { get; private set; }
+
+        public ArgumentDereferenceWalker(ISet<string> argumentNames) =>
+            this.argumentNames = argumentNames;
+
+        public override void Visit(SyntaxNode node)
+        {
+            // FIXME: UTs
+            if (!DereferencesMethodArguments && !node.IsAnyKind(SingleLineSubLambdaExpression, MultiLineSubLambdaExpression, SingleLineFunctionLambdaExpression, MultiLineFunctionLambdaExpression))
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitIdentifierName(IdentifierNameSyntax node) =>
+            DereferencesMethodArguments |=
+                argumentNames.Contains(node.GetName())
+                && node.Ancestors().Any(x => x.IsAnyKind(
+                    AwaitExpression,
+                    InvocationExpression,   // For array access
+                    ForEachStatement,
+                    ThrowStatement,
+                    SimpleMemberAccessExpression));
+    }
 }

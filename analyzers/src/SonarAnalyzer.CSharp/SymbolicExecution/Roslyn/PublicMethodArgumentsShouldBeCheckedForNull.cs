@@ -51,7 +51,6 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
                                     .Where(x => !x.Modifiers.AnyOfKind(OutKeyword))
                                     .Select(x => x.GetName())
                                     .ToHashSet();
-
             if (argumentNames.Any())
             {
                 var walker = new ArgumentDereferenceWalker(argumentNames);
