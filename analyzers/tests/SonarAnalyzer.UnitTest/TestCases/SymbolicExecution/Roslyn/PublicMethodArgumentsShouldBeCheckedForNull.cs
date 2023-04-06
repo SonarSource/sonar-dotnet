@@ -780,3 +780,18 @@ public class Nancy_Repro
 
     public class Sample { }
 }
+
+public class ParameterCaptures
+{
+    public string InsideLambda(string s)
+    {
+        if (s == null)
+        {
+            return null;
+        }
+
+        Func<string> someFunc = () => s.ToString();
+
+        return s.ToString(); // Noncompliant FP
+    }
+}
