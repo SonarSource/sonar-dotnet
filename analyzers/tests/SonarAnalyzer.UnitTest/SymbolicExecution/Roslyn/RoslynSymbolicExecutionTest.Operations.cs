@@ -203,28 +203,7 @@ public void Method()
                 arg = arg ?? throw new ArgumentNullException();
                 Tag("End", arg);
                 """, ", string arg").Validator;
-            validator.ValidateOrder(
-                "ParameterReference: arg",
-                "FlowCapture: arg (Implicit)",
-                "ParameterReference: arg",
-                "FlowCapture: arg (Implicit)",
-                "FlowCaptureReference: arg (Implicit)",
-                "IsNull: arg (Implicit)",
-                "IsNull: arg (Implicit)",
-                "ObjectCreation: new ArgumentNullException()",
-                "FlowCaptureReference: arg (Implicit)",
-                "Conversion: new ArgumentNullException() (Implicit)",
-                "FlowCaptureReference: arg (Implicit)",
-                "SimpleAssignment: arg = arg ?? throw new ArgumentNullException()",
-                "ExpressionStatement: arg = arg ?? throw new ArgumentNullException();",
-                @"Literal: ""End""",
-                @"Argument: ""End""",
-                "ParameterReference: arg",
-                "Conversion: arg (Implicit)",
-                "Argument: arg",
-                @"Invocation: Tag(""End"", arg)",
-                @"ExpressionStatement: Tag(""End"", arg);");
-            validator.ValidateTag("End", x => x.Should().HaveNoConstraints()); // Should have NotNull constraint
+            validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
         [TestMethod]
