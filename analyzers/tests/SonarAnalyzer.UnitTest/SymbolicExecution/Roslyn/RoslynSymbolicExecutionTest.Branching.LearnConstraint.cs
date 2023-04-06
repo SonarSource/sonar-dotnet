@@ -888,7 +888,7 @@ Tag(""End"", arg);";
         }
 
         [TestMethod]
-        public void Branching_LearnIsNullAfterLambdaCapture()
+        public void Branching_LearnIsNullSurvivesLambdaCapture()
         {
             var validator = SETestContext.CreateCS("""
                 if (s == null)
