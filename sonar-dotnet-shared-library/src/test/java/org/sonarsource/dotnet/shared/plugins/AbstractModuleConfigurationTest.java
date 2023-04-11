@@ -28,7 +28,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,6 +45,7 @@ public class AbstractModuleConfigurationTest {
 
   @Before
   public void setUp() {
+    logTester.setLevel(LoggerLevel.TRACE);
     workDir = temp.getRoot().toPath();
   }
 
@@ -61,7 +62,7 @@ public class AbstractModuleConfigurationTest {
     Path path2 = temp.newFile("roslyn-report2.json").toPath();
 
     Configuration configuration = createEmptyMockConfiguration();
-    when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[] {path.toString(), path2.toString()});
+    when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[]{path.toString(), path2.toString()});
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
@@ -103,14 +104,14 @@ public class AbstractModuleConfigurationTest {
     Path path1 = createProtobufOut("report");
 
     Configuration configuration = createEmptyMockConfiguration();
-    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[] {path1.toString(), "non-existing"});
+    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[]{path1.toString(), "non-existing"});
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).containsOnly(path1.resolve("output-cs"));
     assertThat(logTester.logs(LoggerLevel.DEBUG))
-        .containsExactly(
-          "Project 'Test Project': Analyzer working directory '" + workDir.toString() + "\\report\\output-cs' contains 1 .pb file(s)",
-          "Project 'Test Project': Analyzer working directory does not exist: 'non-existing\\output-cs'. Analyzer results won't be loaded from this directory.");
+      .containsExactly(
+        "Project 'Test Project': Analyzer working directory '" + workDir.toString() + "\\report\\output-cs' contains 1 .pb file(s)",
+        "Project 'Test Project': Analyzer working directory does not exist: 'non-existing\\output-cs'. Analyzer results won't be loaded from this directory.");
   }
 
   @Test
@@ -167,7 +168,7 @@ public class AbstractModuleConfigurationTest {
     Files.createDirectories(outputCs);
 
     Configuration configuration = createEmptyMockConfiguration();
-    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[] {path.toString()});
+    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[]{path.toString()});
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
@@ -185,7 +186,7 @@ public class AbstractModuleConfigurationTest {
   private void mockProtobufOutPaths(Configuration configuration) throws IOException {
     Path path1 = createProtobufOut("report1");
     Path path2 = createProtobufOut("report2");
-    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[] {path1.toString(), path2.toString()});
+    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[]{path1.toString(), path2.toString()});
   }
 
   private Configuration createEmptyMockConfiguration() {

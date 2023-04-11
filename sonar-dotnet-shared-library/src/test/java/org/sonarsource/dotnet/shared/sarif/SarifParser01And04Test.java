@@ -34,7 +34,7 @@ import org.junit.rules.ExpectedException;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 import org.sonar.api.scanner.fs.InputProject;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 
 import static java.util.Collections.emptyList;
 import static org.mockito.ArgumentMatchers.eq;

@@ -37,7 +37,7 @@ import org.sonar.api.batch.sensor.issue.Issue.Flow;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.batch.sensor.rule.AdHocRule;
 import org.sonar.api.rules.RuleType;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.shared.plugins.SarifParserCallbackImpl;
 
@@ -61,6 +61,7 @@ public class SarifParserCallbackImplTest {
 
   @Before
   public void setUp() {
+    logTester.setLevel(LoggerLevel.DEBUG);
     ctx = SensorContextTester.create(temp.getRoot().toPath());
     repositoryKeyByRoslynRuleKey.put("rule1", "rule1");
     repositoryKeyByRoslynRuleKey.put("rule2", "rule2");

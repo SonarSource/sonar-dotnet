@@ -19,6 +19,13 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,15 +34,8 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.notifications.AnalysisWarnings;
-import org.sonar.api.utils.log.LogTester;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.Optional;
+import org.sonar.api.testfixtures.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.anyString;
@@ -62,6 +62,7 @@ public class AnalysisWarningsSensorTest {
 
   @Before
   public void before() throws IOException {
+    logTester.setLevel(LoggerLevel.DEBUG);
     basePath = temp.newFolder();
     absoluteBasePath = basePath.toPath().toAbsolutePath().toString();
     sonarFolder = new File(basePath, ".sonar");

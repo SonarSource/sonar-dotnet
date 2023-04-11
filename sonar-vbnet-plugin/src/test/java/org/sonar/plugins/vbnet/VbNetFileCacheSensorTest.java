@@ -19,6 +19,10 @@
  */
 package org.sonar.plugins.vbnet;
 
+import java.io.File;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -31,14 +35,10 @@ import org.sonar.api.batch.sensor.cache.WriteCache;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
-
-import java.io.File;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -54,6 +54,11 @@ public class VbNetFileCacheSensorTest {
   @Rule
   public LogTester logTester = new LogTester();
 
+  @Before
+  public void before() {
+    logTester.setLevel(LoggerLevel.DEBUG);
+  }
+
   @Test
   public void execute_whenCacheIsEnabled_itAddsOnlyTheLanguageFiles() throws IOException, NoSuchAlgorithmException {
     var basePath = temp.newFolder();
@@ -61,7 +66,7 @@ public class VbNetFileCacheSensorTest {
     settings.setProperty(VbNetPlugin.FILE_SUFFIXES_KEY, ".vb");
     settings.setProperty("sonar.pullrequest.cache.basepath", basePath.getCanonicalPath());
     var hashProvider = mock(HashProvider.class);
-    when(hashProvider.computeHash(any())).thenReturn(new byte[] {42} );
+    when(hashProvider.computeHash(any())).thenReturn(new byte[]{42});
     var context = SensorContextTester.create(basePath);
     context.setCacheEnabled(true);
     context.setSettings(settings);

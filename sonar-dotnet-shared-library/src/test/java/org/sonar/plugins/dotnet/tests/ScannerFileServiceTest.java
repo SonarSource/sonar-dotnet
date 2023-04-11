@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -32,7 +33,7 @@ import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,6 +47,11 @@ import static org.mockito.Mockito.when;
 public class ScannerFileServiceTest {
   @Rule
   public LogTester logTester = new LogTester();
+
+  @Before
+  public void before() {
+    logTester.setLevel(LoggerLevel.TRACE);
+  }
 
   @Test
   public void isSupportedAbsolute_passes_correct_argument() {
@@ -111,7 +117,7 @@ public class ScannerFileServiceTest {
     assertThat(andArg1.getValue()).isEqualTo(languageKeyMock);
     Object argument = andArg2.getValue();
     assertThat(andArg2.getValue()).isExactlyInstanceOf(PathSuffixPredicate.class);
-    PathSuffixPredicate pathPredicate = (PathSuffixPredicate)argument;
+    PathSuffixPredicate pathPredicate = (PathSuffixPredicate) argument;
     assertThat(pathPredicate.getPathSuffix()).isEqualTo("foo");
     verify(fs).inputFiles(any());
   }

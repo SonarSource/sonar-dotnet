@@ -27,7 +27,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,6 +47,7 @@ public class OpenCoverReportParserTest {
 
   @Before
   public void prepare() {
+    logTester.setLevel(LoggerLevel.TRACE);
     alwaysTrue = mock(FileService.class);
     when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
     when(alwaysTrue.getAbsolutePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
@@ -178,10 +179,10 @@ public class OpenCoverReportParserTest {
     assertThat(debugLogs)
       .hasSize(13)
       .contains(
-      "CoveredFile created: (ID '3', path 'MyLibrary\\Adder.cs', indexed as '/test/file/Calc.cs').",
-      "CoveredFile created: (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH).",
-      "CoveredFile created: (ID '4', path 'MyLibrary\\Multiplier.cs', NO INDEXED PATH)."
-    );
+        "CoveredFile created: (ID '3', path 'MyLibrary\\Adder.cs', indexed as '/test/file/Calc.cs').",
+        "CoveredFile created: (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH).",
+        "CoveredFile created: (ID '4', path 'MyLibrary\\Multiplier.cs', NO INDEXED PATH)."
+      );
 
     // FIXME the test case may be wrong https://github.com/SonarSource/sonar-dotnet/issues/4038
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(6);
@@ -255,10 +256,10 @@ public class OpenCoverReportParserTest {
       .hasSize(5)
       .contains(
         //  if (x == 0 || y < 0)
-        new BranchCoverage(9, 4 , 2),
+        new BranchCoverage(9, 4, 2),
 
         // _ = y == 0 || z == 0;
-        new BranchCoverage(12, 2 , 1),
+        new BranchCoverage(12, 2, 1),
 
         // _ = x == y || y == z;
         new BranchCoverage(13, 2, 1),
@@ -305,7 +306,7 @@ public class OpenCoverReportParserTest {
     assertThat(coverage.getBranchCoverage(filePath))
       .hasSize(1)
       // the switch expression gets transformed to a more complex IL representation, hence 8 conditions
-      .contains(new BranchCoverage(8, 8 , 6));
+      .contains(new BranchCoverage(8, 8, 6));
   }
 
   @Test
@@ -379,12 +380,12 @@ public class OpenCoverReportParserTest {
         Assertions.entry(28, 1),
         Assertions.entry(29, 1));
 
-      assertThat(coverage.getBranchCoverage(barFilePath))
-        .hasSize(1)
-        .containsOnly(new BranchCoverage(17, 2, 1)); // line 17: ArrowMethod
+    assertThat(coverage.getBranchCoverage(barFilePath))
+      .hasSize(1)
+      .containsOnly(new BranchCoverage(17, 2, 1)); // line 17: ArrowMethod
 
-      List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
-      assertThat(traceLogs).hasSize(34);
+    List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
+    assertThat(traceLogs).hasSize(34);
   }
 
   @Test

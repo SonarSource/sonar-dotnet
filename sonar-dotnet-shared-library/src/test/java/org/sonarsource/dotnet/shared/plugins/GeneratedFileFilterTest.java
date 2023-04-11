@@ -29,9 +29,9 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.System2;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,6 +47,7 @@ public class GeneratedFileFilterTest {
 
   @Before
   public void setUp() {
+    logs.setLevel(LoggerLevel.DEBUG);
     // by default, analyzeGeneratedCode is set to false
     AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions(
       "cs",

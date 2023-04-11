@@ -19,6 +19,10 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.io.File;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -34,13 +38,9 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.resources.AbstractLanguage;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
-
-import java.io.File;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -58,6 +58,11 @@ public class AbstractFileCacheSensorTest {
 
   @Rule
   public LogTester logTester = new LogTester();
+
+  @Before
+  public void before() {
+    logTester.setLevel(LoggerLevel.DEBUG);
+  }
 
   @Test
   public void should_describe() {
@@ -120,7 +125,7 @@ public class AbstractFileCacheSensorTest {
   @Test
   public void execute_whenCacheIsEnabled_itAddsTheFiles() throws IOException, NoSuchAlgorithmException {
     var hashProvider = mock(HashProvider.class);
-    when(hashProvider.computeHash(any())).thenReturn(new byte[] {42} );
+    when(hashProvider.computeHash(any())).thenReturn(new byte[]{42});
     var context = CreateContextForCaching();
     var sut = new FileCacheSensor(hashProvider, RUNTIME_WITH_ANALYSIS_CACHE);
 
@@ -184,7 +189,7 @@ public class AbstractFileCacheSensorTest {
 
     @Override
     public String[] getFileSuffixes() {
-      return new String[] {".cs", ".vb" };
+      return new String[]{".cs", ".vb"};
     }
   }
 }

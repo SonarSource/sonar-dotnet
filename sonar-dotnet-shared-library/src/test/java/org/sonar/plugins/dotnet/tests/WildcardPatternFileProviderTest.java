@@ -28,7 +28,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,6 +46,7 @@ public class WildcardPatternFileProviderTest {
 
   @Before
   public void init() throws Exception {
+    logTester.setLevel(LoggerLevel.TRACE);
     tmp.newFile("foo.txt");
     tmp.newFile("bar.txt");
     tmp.newFolder("a");
@@ -237,7 +238,7 @@ public class WildcardPatternFileProviderTest {
   }
 
   @Test
-  public void given_pattern_with_mixed_folder_separator_listFiles_supports_pattern(){
+  public void given_pattern_with_mixed_folder_separator_listFiles_supports_pattern() {
     File tmpRoot = tmp.getRoot();
     String givenPattern = tmpRoot + File.separator + "agent_work9" + File.separator + "_temp/**/*.trx";
 

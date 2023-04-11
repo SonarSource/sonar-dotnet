@@ -42,7 +42,7 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.sensor.ProjectSensor;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -82,6 +82,7 @@ public class DotNetSensorTest {
 
   @Before
   public void prepare() throws Exception {
+    logTester.setLevel(LoggerLevel.DEBUG);
     workDir = temp.newFolder().toPath();
     reportPaths = Collections.singletonList(workDir.getRoot());
     tester = SensorContextTester.create(new File("src/test/resources"));

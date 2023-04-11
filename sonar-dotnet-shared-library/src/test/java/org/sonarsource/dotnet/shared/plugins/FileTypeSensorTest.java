@@ -31,7 +31,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -59,6 +59,7 @@ public class FileTypeSensorTest {
 
   @Before
   public void prepare() throws Exception {
+    logTester.setLevel(LoggerLevel.DEBUG);
     settingsMock = mock(MapSettings.class);
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(temp.newFolder().toPath());
