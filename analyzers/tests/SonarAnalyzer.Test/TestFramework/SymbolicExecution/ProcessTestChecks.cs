@@ -19,7 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using ProcessFunc = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState[]>;
+using ProcessFunc = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramStates>;
 using ProcessFuncSimple = System.Func<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext, SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
 
 namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
         protected override ProgramState PreProcessSimple(SymbolicContext context) =>
             ProcessSimple(context);
 
-        public override ProgramState[] PreProcess(SymbolicContext context) =>
+        public override ProgramStates PreProcess(SymbolicContext context) =>
             Process(context);
     }
 
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
         protected override ProgramState PostProcessSimple(SymbolicContext context) =>
             ProcessSimple(context);
 
-        public override ProgramState[] PostProcess(SymbolicContext context) =>
+        public override ProgramStates PostProcess(SymbolicContext context) =>
             Process(context);
     }
 
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
         protected ProgramState ProcessSimple(SymbolicContext context) =>
             processSimple is not null && MatchesKind(context) ? processSimple(context) : context.State;
 
-        protected ProgramState[] Process(SymbolicContext context)
+        protected ProgramStates Process(SymbolicContext context)
         {
             if (process is not null && MatchesKind(context))
             {
@@ -80,11 +80,11 @@ namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
             }
             else if (ProcessSimple(context) is { } newState)
             {
-                return new[] { newState };
+                return new(newState);
             }
             else
             {
-                return Array.Empty<ProgramState>();
+                return new();
             }
         }
 
