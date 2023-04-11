@@ -1692,19 +1692,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'e' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
-"region":  {
-"startLine":  192,
-"startColumn":  20,
-"endLine":  192,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'Enc' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
@@ -1804,32 +1791,6 @@
 "startColumn":  13,
 "endLine":  170,
 "endColumn":  19
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'contentType' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
-"region":  {
-"startLine":  64,
-"startColumn":  27,
-"endLine":  64,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'contentType' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  20,
-"endLine":  66,
-"endColumn":  31
 }
 }
 },
