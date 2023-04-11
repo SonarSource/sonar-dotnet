@@ -215,15 +215,20 @@ Tag(""Arg"", arg);";
         [TestMethod]
         public void IsNull_CoalesceAssignment_UnknownToNotNull()
         {
-            const string code = @"
-object notNullValue = new object();
-arg ??= notNullValue;
-Tag(""Arg"", arg);";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+            const string code = """
+                object notNullValue = new object();
+                arg ??= notNullValue;
+                Tag("End");
+                """;
+            var validator = SETestContext.CreateCS(code, ", object arg", new PreserveTestCheck("arg", "notNullValue")).Validator;
             validator.ValidateContainsOperation(OperationKind.IsNull);
-            validator.TagValues("Arg").Should().SatisfyRespectively(
-                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),   // This should be here just once, one state persists notNullValue without LVA removing it
-                x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            var arg = validator.Symbol("arg");
+            var notNullValue = validator.Symbol("notNullValue");
+            validator.TagStates("End").Should().SatisfyRespectively(x =>
+            {
+                x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+                x[notNullValue].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+            });
         }
 
         [TestMethod]
