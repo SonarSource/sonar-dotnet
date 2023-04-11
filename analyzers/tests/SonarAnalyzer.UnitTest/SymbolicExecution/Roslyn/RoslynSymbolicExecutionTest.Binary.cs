@@ -552,5 +552,43 @@ Tag(""End"")";
                 .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "Arg"))
                 .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "Arg"));
         }
+
+        [DataRow("arg >= null")]
+        [DataRow("arg > null")]
+        [DataRow("arg < null")]
+        [DataRow("arg <= null")]
+        [DataRow("null >= arg")]
+        [DataRow("null > arg")]
+        [DataRow("null < arg")]
+        [DataRow("null <= arg")]
+        [DataRow("arg > (int?)null")]
+        [DataRow("arg > new Nullable<int>()")]
+        [DataRow("arg > (null as int?)")]
+        [DataRow("arg > nullValue")]
+        [DataRow("nullValue > arg")]
+        [DataRow("nullValue > 42")]
+        [DataRow("nullValue > notNullValue")]
+        [DataRow("notNullValue > nullValue")]
+        [TestMethod]
+        public void Binary_NullableRelationalNull_SetsBoolConstraint_CS(string expression)
+        {
+            var code = $$"""
+            int? notNullValue = 42;
+            int? nullValue = null;
+            if ({{expression}})
+            {
+                Tag("If_Unreachable");
+            }
+            else
+            {
+                Tag("Else");
+            }
+            Tag("End");
+            """;
+
+            var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTagOrder("Else", "End");
+        }
     }
 }

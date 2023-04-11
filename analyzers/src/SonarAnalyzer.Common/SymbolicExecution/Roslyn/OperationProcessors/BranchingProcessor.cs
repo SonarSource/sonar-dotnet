@@ -25,7 +25,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 /// <summary>
 /// Base class for operation processors - used when operation takes a branching decision.
 /// See <see cref="SimpleProcessor{T}"/> if you need to return a single ProgramStates.
-/// See <see cref="BranchingProcessor{T}"/> if you just need to return multiple ProgramStates.
+/// See <see cref="MultiProcessor{T}"/> if you just need to return multiple ProgramStates.
 /// </summary>
 internal abstract class BranchingProcessor<T> : MultiProcessor<T>
     where T : IOperationWrapper
