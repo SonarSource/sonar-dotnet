@@ -24,15 +24,9 @@ internal sealed class AssignmentOrReferenceParameterConstraint : SymbolicConstra
 {
     public static readonly AssignmentOrReferenceParameterConstraint AssignedOrPassedAsReference = new(ConstraintKind.AssignedOrPassedAsReference);
 
-    public override SymbolicConstraint Opposite =>
-        throw new NotImplementedException();
+    public override SymbolicConstraint Opposite => throw new NotSupportedException();
 
     private AssignmentOrReferenceParameterConstraint(ConstraintKind kind) : base(kind) { }
 
-    public override string ToString() =>
-        Kind switch
-        {
-            ConstraintKind.AssignedOrPassedAsReference => nameof(AssignedOrPassedAsReference),
-            _ => base.ToString(),
-        };
+    public override string ToString() => nameof(AssignedOrPassedAsReference);
 }
