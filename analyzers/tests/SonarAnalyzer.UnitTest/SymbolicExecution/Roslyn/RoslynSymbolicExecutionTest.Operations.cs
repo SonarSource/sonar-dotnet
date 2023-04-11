@@ -742,7 +742,7 @@ public static class Guard
             validator.ValidateTag("AfterGuard_o3", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterGuard_o4", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterGuard_o5", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-            validator.ValidateTag("AfterGuard_o6", x => x.Should().BeNull()); // parameter is not annotated
+            validator.ValidateTag("AfterGuard_o6", x => x.Should().BeNull("parameter is not annotated"));
             validator.ValidateTag("AfterGuard_o7", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterGuard_o8", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
             validator.ValidateTag("AfterGuard_s1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
@@ -824,11 +824,11 @@ public static class Guard
                 """;
             var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, Array.Empty<SymbolicCheck>()).Validator;
             validator.ValidateTag("AfterGuard_o1", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-            validator.ValidateTag("AfterGuard_o2", x => x.Should().HaveNoConstraints());    // Extension method invoked on Object type is DynamicInvocationOperation that we don't support
+            validator.ValidateTag("AfterGuard_o2", x => x.Should().HaveNoConstraints("extension method invoked on Object type is DynamicInvocationOperation that we don't support."));
             validator.ValidateTag("AfterGuard_o3", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("AfterGuard_o4", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("AfterGuard_o5", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-            validator.ValidateTag("AfterGuard_o6", x => x.Should().HaveNoConstraints());    // parameter is not annotated
+            validator.ValidateTag("AfterGuard_o6", x => x.Should().HaveNoConstraints("parameter is not annotated"));
             validator.ValidateTag("AfterGuard_o7", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("AfterGuard_o8", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("AfterGuard_s1", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));

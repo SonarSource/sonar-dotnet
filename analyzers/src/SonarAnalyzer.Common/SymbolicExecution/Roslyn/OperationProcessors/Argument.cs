@@ -24,9 +24,6 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal sealed class Argument : SimpleProcessor<IArgumentOperationWrapper>
 {
-    public static bool HasNotNullAttribute(IParameterSymbol parameter) =>
-        parameter.GetAttributes() is { Length: > 0 } attributes && attributes.Any(IsNotNullAttribute);
-
     protected override IArgumentOperationWrapper Convert(IOperation operation) =>
         IArgumentOperationWrapper.FromOperation(operation);
 
@@ -43,17 +40,10 @@ internal sealed class Argument : SimpleProcessor<IArgumentOperationWrapper>
         {
             state = state.SetSymbolValue(refOutSymbol, null); // Forget state for "out" or "ref" arguments
         }
-        if (HasNotNullAttribute(argument.Parameter)
-            && argument.Value.TrackedSymbol() is { } notNullSymbol)
+        if (argument.Parameter.HasNotNullAttribute() && argument.Value.TrackedSymbol() is { } notNullSymbol)
         {
             state = state.SetSymbolConstraint(notNullSymbol, ObjectConstraint.NotNull);
         }
         return state;
     }
-
-    // https://docs.microsoft.com/dotnet/api/microsoft.validatednotnullattribute
-    // https://docs.microsoft.com/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
-    // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute
-    public static bool IsNotNullAttribute(AttributeData attribute) =>
-        attribute.HasAnyName("ValidatedNotNullAttribute", "NotNullAttribute");
 }
