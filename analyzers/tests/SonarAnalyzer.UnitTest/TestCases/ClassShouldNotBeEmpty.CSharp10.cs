@@ -9,9 +9,11 @@
 namespace NonCompliant
 {
 
-    record class EmptyRecordClass();                    // Noncompliant {{Remove this empty record, write its code or make it an "interface".}}
+    record class EmptyRecordClass();                           // Noncompliant {{Remove this empty record, write its code or make it an "interface".}}
     //           ^^^^^^^^^^^^^^^^
-    record class EmptyRecordClassWithEmptyBody() { };   // Noncompliant
+    record class EmptyRecordClassWithEmptyBody() { };          // Noncompliant
+
+    record class EmptyChildWithoutBrackets : EmptyRecordClass; // Noncompliant
 }
 namespace Ignored
 {

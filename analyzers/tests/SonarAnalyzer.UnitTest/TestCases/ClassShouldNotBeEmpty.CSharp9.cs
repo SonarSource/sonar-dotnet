@@ -43,11 +43,13 @@ namespace Compliant
 
 namespace Noncompliant
 {
-    record EmptyRecord();                      // Noncompliant {{Remove this empty record, write its code or make it an "interface".}}
+    record EmptyRecord();                                        // Noncompliant {{Remove this empty record, write its code or make it an "interface".}}
     //     ^^^^^^^^^^^
-    record EmptyRecordWithEmptyBody() { };     // Noncompliant
+    record EmptyRecordWithEmptyBody() { };                       // Noncompliant
 
-    record EmptyChildRecord() : EmptyRecord(); // Noncompliant
+    record EmptyChildWithoutBrackets : EmptyRecord;              // Noncompliant
+
+    record EmptyChildRecord() : EmptyRecord();                   // Noncompliant
 
     record EmptyGenericRecord<T>();                              // Noncompliant
     //     ^^^^^^^^^^^^^^^^^^

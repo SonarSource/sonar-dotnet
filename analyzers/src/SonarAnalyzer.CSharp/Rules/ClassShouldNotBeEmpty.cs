@@ -55,7 +55,8 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
             SyntaxKind.EndIfDirectiveTrivia));
 
     private static bool IsParameterlessRecord(SyntaxNode node) =>
-        RecordDeclarationSyntax(node) is { ParameterList.Parameters.Count: 0 } declaration
+        RecordDeclarationSyntax(node) is { } declaration
+        && (declaration.ParameterList is null || declaration.ParameterList.Parameters.Count == 0)
         && BaseTypeSyntax(declaration) is not { ArgumentList.Arguments.Count: >= 1 };
 
     private static RecordDeclarationSyntaxWrapper? RecordDeclarationSyntax(SyntaxNode node) =>
