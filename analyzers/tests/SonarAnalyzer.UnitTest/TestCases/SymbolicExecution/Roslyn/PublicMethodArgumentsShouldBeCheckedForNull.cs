@@ -782,7 +782,7 @@ public class ParameterAssignment
     public void PassedAsRefToMethod(object o)
     {
         RefMethod(ref o);
-        o.ToString();           // Compliant - o was passed by reference to a method, so it may have been assigned a new value
+        o.ToString();           // Noncompliant - FP: o was passed by reference to a method, so it may have been assigned a new value
     }
 
     public void ConditionalAssignment(object o)
