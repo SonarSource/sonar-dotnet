@@ -59,17 +59,18 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             }
         }
 
-        public SymbolicContext[] PreProcess(SymbolicContext context) =>
+        public IReadOnlyCollection<SymbolicContext> PreProcess(SymbolicContext context) =>
             InvokeChecks(context, preProcess: true);
 
-        public SymbolicContext[] PostProcess(SymbolicContext context) =>
+        public IReadOnlyCollection<SymbolicContext> PostProcess(SymbolicContext context) =>
             InvokeChecks(context, preProcess: false);
 
-        private SymbolicContext[] InvokeChecks(SymbolicContext context, bool preProcess)
+        private IReadOnlyCollection<SymbolicContext> InvokeChecks(SymbolicContext context, bool preProcess)
         {
             // Performance: Hotpath. Don't do changes here without profiling allocation impact.
-            var before = new List<SymbolicContext> { context };
-            var after = new List<SymbolicContext>();
+            const int listcapacity = 2;
+            var before = new List<SymbolicContext>(listcapacity) { context };
+            var after = new List<SymbolicContext>(listcapacity);
             foreach (var check in checks)
             {
                 foreach (var beforeContext in before)
@@ -83,7 +84,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 after = Interlocked.Exchange(ref before, after);
                 after.Clear();
             }
-            return before.ToArray();
+            return before;
         }
     }
 }
