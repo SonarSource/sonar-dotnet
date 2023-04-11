@@ -224,11 +224,9 @@ Tag(""Arg"", arg);";
             validator.ValidateContainsOperation(OperationKind.IsNull);
             var arg = validator.Symbol("arg");
             var notNullValue = validator.Symbol("notNullValue");
-            validator.TagStates("End").Should().SatisfyRespectively(x =>
-            {
-                x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-                x[notNullValue].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-            });
+            var state = validator.TagStates("End").Should().ContainSingle().Which;
+            state[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+            state[notNullValue].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         }
 
         [TestMethod]
