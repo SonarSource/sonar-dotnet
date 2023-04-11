@@ -218,6 +218,8 @@ public void Method()
             validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
 
+#if NET
+
         [DataTestMethod]
         [DataRow("ThrowIfNull")]
         [DataRow("ThrowIfNullOrEmpty")]
@@ -229,6 +231,8 @@ public void Method()
                 """, ", string arg").Validator;
             validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         }
+
+#endif
 
         [DataTestMethod]
         [DataRow("+=")]
