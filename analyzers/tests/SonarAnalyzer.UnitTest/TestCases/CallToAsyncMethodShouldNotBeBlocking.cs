@@ -193,6 +193,12 @@ namespace Tests.Diagnostics
             return tasks.Select(t => t.Result).ToArray(); // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/7053
         }
 
+        static async Task<int> AccessResultInElementAccessor(Task<int>[] tasks)
+        {
+            await Task.WhenAll(tasks);
+            return tasks[0].Result; // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/7053
+        }
+
         static async Task SubsequentChecksAreNotDisabledByAwait(string[] args)
         {
             var getValue1Task = GetValueTask(1);
