@@ -528,20 +528,20 @@ class NullCoaleascingAssignment
     {
         (int? first, int? second)? tuple = null;
         tuple ??= (42, 42);
-        _ = tuple.Value.first.Value;  // Noncompliant, FP: non-empty
-        _ = tuple.Value.second.Value; // Compliant, non-empty
+        _ = tuple.Value.first.Value;  // Noncompliant {{'tuple' is null on at least one execution path.}}, FP: tuple non-empty
+        _ = tuple.Value.second.Value; // Compliant, both tuple and tuple.Value.second non-empty
         tuple = null;
         tuple ??= (42, 42);
-        _ = tuple.Value.second.Value; // Noncompliant, FP: non-empty
-        _ = tuple.Value.first.Value;  // Compliant, non-empty
+        _ = tuple.Value.second.Value; // Noncompliant {{'tuple' is null on at least one execution path.}}, FP: tuple non-empty
+        _ = tuple.Value.first.Value;  // Compliant, both tuple and tuple.Value.first non-empty
         tuple = null;
         tuple ??= (null, 42);
-        _ = tuple.Value.first.Value;  // Noncompliant, empty
-        _ = tuple.Value.second.Value; // Compliant, non-empty
+        _ = tuple.Value.first.Value;  // Noncompliant {{'tuple' is null on at least one execution path.}}, FP: tuple non-empty, FN: should report about first instead
+        _ = tuple.Value.second.Value; // Compliant, both tuple and tuple.Value.second non-empty
         tuple = null;
         tuple ??= (null, 42);
-        _ = tuple.Value.second.Value; // Noncompliant, FP: non-empty
-        _ = tuple.Value.first.Value;  // FN: empty
+        _ = tuple.Value.second.Value; // Noncompliant {{'tuple' is null on at least one execution path.}}, FP: tuple non-empty
+        _ = tuple.Value.first.Value;  // FN: tuple non-empty but tuple.Value.first empty
     }
 }
 
