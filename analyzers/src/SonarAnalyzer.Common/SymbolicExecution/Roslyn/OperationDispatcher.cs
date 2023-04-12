@@ -70,26 +70,25 @@ internal static class OperationDispatcher
         { OperationKindEx.Unary, new Unary() }
     };
 
-    public static IEnumerable<SymbolicContext> Process(SymbolicContext context)
+    public static SymbolicContexts Process(SymbolicContext context)
     {
         if (Simple.TryGetValue(context.Operation.Instance.Kind, out var simple))            // Operations that return single state
         {
-            return new[] { context.WithState(simple.Process(context)) };
+            return new(context.WithState(simple.Process(context)));
         }
         else if (Branching.TryGetValue(context.Operation.Instance.Kind, out var processor)) // Operations that can return multiple states
         {
             var states = processor.Process(context);
-            var result = new SymbolicContext[states.Length];
-            var i = 0;
+            var result = new SymbolicContexts();
             foreach (var state in states)
             {
-                result[i++] = context.WithState(state);
+                result += new SymbolicContexts(context.WithState(state));
             }
             return result;
         }
         else
         {
-            return new[] { context };
+            return new(context);
         }
     }
 }
