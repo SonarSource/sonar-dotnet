@@ -61,7 +61,7 @@ public class Program
             throw e;                    // Compliant
         }
 
-        o4?.ToString();                 // Compliant, conditional operator
+        o4?.ToString();                 // Noncompliant - FP: NotNull constraint is not in the state
 
         b.ToString();                   // Compliant, bool cannot be null
 
@@ -779,4 +779,21 @@ public class Nancy_Repro
     }
 
     public class Sample { }
+}
+
+public class ConditionalAccess
+{
+    public void Method1(object o1, object o2)
+    {
+        if (o1 != null)
+        {
+            o1.ToString();
+        }
+        o2?.ToString(); // Noncompliant - FP: NotNull constraint is not in the state
+    }
+
+    public void Method2(object o1)
+    {
+        o1?.ToString(); // Compliant - the same FP doesn't appear here
+    }
 }
