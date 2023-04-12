@@ -20,13 +20,13 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints;
 
-internal sealed class AssignmentOrReferenceParameterConstraint : SymbolicConstraint
+internal sealed class ParameterReassignedConstraint : SymbolicConstraint
 {
-    public static readonly AssignmentOrReferenceParameterConstraint AssignedOrPassedAsReference = new(ConstraintKind.AssignedOrPassedAsReference);
+    public static readonly ParameterReassignedConstraint Instance = new(ConstraintKind.ParameterReassigned);
 
     public override SymbolicConstraint Opposite => throw new NotSupportedException();
 
-    private AssignmentOrReferenceParameterConstraint(ConstraintKind kind) : base(kind) { }
+    private ParameterReassignedConstraint(ConstraintKind kind) : base(kind) { }
 
-    public override string ToString() => nameof(AssignedOrPassedAsReference);
+    public override string ToString() => nameof(ConstraintKind.ParameterReassigned);
 }
