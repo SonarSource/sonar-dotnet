@@ -887,6 +887,22 @@ Tag(""End"", arg);";
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
+        [TestMethod]
+        public void Branching_LearnIsNullSurvivesLambdaCapture()
+        {
+            var validator = SETestContext.CreateCS("""
+                if (s == null)
+                {
+                    return;
+                }
+
+                Func<string> someFunc = () => s.ToString();
+
+                Tag("End", s);
+                """, ", string s").Validator;
+            validator.ValidateTag("End", x => x.Should().HaveNoConstraints()); // Should have NotNull constraint
+        }
+
         private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation, string argType = "object")
         {
             var code = @$"
