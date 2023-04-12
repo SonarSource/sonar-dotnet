@@ -119,7 +119,7 @@ public class CoalesceAssignment
     public void Method(object o)
     {
         o ??= Unknown();
-        o.ToString(); // Noncompliant - FP
+        o.ToString(); // Noncompliant - FP: not supported by the SE engine
     }
 
     private object Unknown() => null;
