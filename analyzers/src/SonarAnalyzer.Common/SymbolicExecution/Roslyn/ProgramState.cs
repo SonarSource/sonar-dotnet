@@ -126,11 +126,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ProgramState RemoveSymbols(Func<ISymbol, bool> remove) =>
             this with { SymbolValue = SymbolValue.Where(kv => PreservedSymbols.Contains(kv.Key) || !remove(kv.Key)).ToImmutableDictionary() };
 
-        public ProgramState ResetFieldConstraints()
-            => ResetFieldConstraints(field => true);
+        public ProgramState ResetFieldConstraints() =>
+            ResetFieldConstraints(field => true);
 
-        public ProgramState ResetStaticFieldConstraints(INamedTypeSymbol containingType)
-            => ResetFieldConstraints(field => field.IsStatic && containingType.DerivesFrom(field.ContainingType));
+        public ProgramState ResetStaticFieldConstraints(INamedTypeSymbol containingType) =>
+            ResetFieldConstraints(field => field.IsStatic && containingType.DerivesFrom(field.ContainingType));
 
         public ProgramState AddVisit(int programPointHash) =>
             this with { VisitCount = VisitCount.SetItem(programPointHash, GetVisitCount(programPointHash) + 1) };
@@ -230,11 +230,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 }
             }
 
-            static bool CheckConstraintAlsoHasNotNull<T>(SymbolicValue value) where T : SymbolicConstraint
-                => !value.HasConstraint<T>() || value.HasConstraint(ObjectConstraint.NotNull);
+            static bool CheckConstraintAlsoHasNotNull<T>(SymbolicValue value) where T : SymbolicConstraint =>
+                !value.HasConstraint<T>() || value.HasConstraint(ObjectConstraint.NotNull);
 
-            static bool CheckOnlyConstraint(SymbolicValue value, SymbolicConstraint single)
-                => !value.HasConstraint(single) || value.AllConstraints.Count() == 1;
+            static bool CheckOnlyConstraint(SymbolicValue value, SymbolicConstraint single) =>
+                !value.HasConstraint(single) || value.AllConstraints.Count() == 1;
         }
     }
 }
