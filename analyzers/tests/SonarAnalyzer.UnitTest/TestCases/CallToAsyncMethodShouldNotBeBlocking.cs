@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
@@ -184,6 +185,12 @@ namespace Tests.Diagnostics
             var result2 = getValue2Task.Result;  // Compliant, task is already completed at this point.
             var result3 = getValue3Task.Result;  // Compliant, task is already completed at this point.
             var result4 = getValue4Task.Result;  // Compliant, task is already completed at this point.
+        }
+
+        static async Task<int[]> AccessResultInLinq(Task<int>[] tasks)
+        {
+            await Task.WhenAll(tasks);
+            return tasks.Select(t => t.Result).ToArray(); // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/7053
         }
 
         static async Task SubsequentChecksAreNotDisabledByAwait(string[] args)
