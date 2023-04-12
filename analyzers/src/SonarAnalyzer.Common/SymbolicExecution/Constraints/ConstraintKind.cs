@@ -42,6 +42,9 @@ public enum ConstraintKind
     NullableHasValue,
     [Obsolete("Old SE engine only")]
     NullableNoValue,
+    ObjectNull,
+    ObjectNotNull,
+    ParameterReassigned,
     SaltSizeSafe,
     SaltSizeShort,
     SerializationSafe,
@@ -57,6 +60,5 @@ public enum ConstraintKind
     [Obsolete("Old SE engine only")]
     StringNotWhiteSpace,
     [Obsolete("Old SE engine only")]
-    StringWhiteSpace,
-    ParameterReassigned
+    StringWhiteSpace
 }
