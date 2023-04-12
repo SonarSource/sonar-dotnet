@@ -71,23 +71,23 @@ internal sealed partial class Invocation
         nameof(Enumerable.Zip),
     };
 
-    private static ProgramState[] ProcessLinqEnumerableAndQueryable(ProgramState state, IInvocationOperationWrapper invocation)
+    private static ProgramStates ProcessLinqEnumerableAndQueryable(ProgramState state, IInvocationOperationWrapper invocation)
     {
         var name = invocation.TargetMethod.Name;
         if (ReturningNotNull.Contains(name))
         {
-            return state.SetOperationConstraint(invocation, ObjectConstraint.NotNull).ToArray();
+            return new(state.SetOperationConstraint(invocation, ObjectConstraint.NotNull));
         }
         // ElementAtOrDefault is intentionally not supported. It's causing many FPs
         else if (name is nameof(Enumerable.FirstOrDefault) or nameof(Enumerable.LastOrDefault) or nameof(Enumerable.SingleOrDefault))
         {
             return invocation.TargetMethod.ReturnType.IsReferenceType
-                ? [state.SetOperationConstraint(invocation, ObjectConstraint.Null), state.SetOperationConstraint(invocation, ObjectConstraint.NotNull)]
-                : state.ToArray();
+                ? new(state.SetOperationConstraint(invocation, ObjectConstraint.Null), state.SetOperationConstraint(invocation, ObjectConstraint.NotNull))
+                : new(state);
         }
         else
         {
-            return state.ToArray();
+            return new(state);
         }
     }
 }

@@ -78,7 +78,14 @@ internal static class OperationDispatcher
         }
         else if (Branching.TryGetValue(context.Operation.Instance.Kind, out var processor)) // Operations that can return multiple states
         {
-            return processor.Process(context).Select(context.WithState);
+            var states = processor.Process(context);
+            var result = new SymbolicContext[states.Length];
+            var i = 0;
+            foreach (var state in states)
+            {
+                result[i++] = context.WithState(state);
+            }
+            return result;
         }
         else
         {

@@ -321,34 +321,12 @@ Captures:
         staticFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse();
     }
 
-    [TestMethod]
-    public void ToArray_ReturnsArrayWithSingleItem()
-    {
-        var nonEmpty = ProgramState.Empty.PushException(ExceptionState.UnknownException);
-        nonEmpty.ToArray().Should().HaveCount(1).And.Contain(nonEmpty);
-
-        ProgramState.Empty.ToArray().Should().HaveCount(1).And.Contain(ProgramState.Empty);
-    }
-
-    [TestMethod]
-    public void ToArray_ReusesInstance() =>
-        ProgramState.Empty.ToArray().Should().BeSameAs(ProgramState.Empty.ToArray());
-
-    [TestMethod]
-    public void ToArray_NotPreservedAfterUpdates()
-    {
-        var sut = ProgramState.Empty;
-        var before = sut.ToArray();
-        var updated = sut.PushException(ExceptionState.UnknownException);    // Any modification that will use Record "with"
-        updated.ToArray().Should().NotBeSameAs(before);
-    }
-
-    private static IFieldSymbol CreateFieldSymbol(string fieldDefinition)
-    {
-        var compiler = new SnippetCompiler($@"class C {{ {fieldDefinition} }}");
-        var fieldSymbol = compiler.SemanticModel.GetDeclaredSymbol(compiler.GetNodes<VariableDeclaratorSyntax>().Single());
-        return (IFieldSymbol)fieldSymbol;
-    }
+        private static IFieldSymbol CreateFieldSymbol(string fieldDefinition)
+        {
+            var compiler = new SnippetCompiler($@"class C {{ {fieldDefinition} }}");
+            var fieldSymbol = compiler.SemanticModel.GetDeclaredSymbol(compiler.GetNodes<VariableDeclaratorSyntax>().Single());
+            return (IFieldSymbol)fieldSymbol;
+        }
 
     private static void ResetFieldConstraintTests(SymbolicConstraint constraint, bool expectIsPreserved)
     {

@@ -42,6 +42,66 @@ public readonly record struct ProgramStates
         this.others = others;
     }
 
+    public int Length =>
+        this switch
+        {
+            { first: null } => 0,
+            { second: null } => 1,
+            { others.Length: var otherLength } => otherLength + 2,
+        };
+
+    public static ProgramStates operator +(ProgramStates left, ProgramStates right)
+    {
+        if (left.Length == 0)
+        {
+            return right;
+        }
+        else if (right.Length == 0)
+        {
+            return left;
+        }
+        else
+        {
+            return CopyStates(left, right);
+        }
+
+        static ProgramStates CopyStates(ProgramStates left, ProgramStates right)
+        {
+            var newLength = left.Length + right.Length;
+            ProgramState[] array = newLength > 2
+                ? new ProgramState[newLength - 2]
+                : null;
+            ProgramState newFirst = null;
+            ProgramState newSecond = null;
+            var i = 0;
+            foreach (var state in left)
+            {
+                Append(array, ref newFirst, ref newSecond, ref i, state);
+            }
+            foreach (var state in right)
+            {
+                Append(array, ref newFirst, ref newSecond, ref i, state);
+            }
+            return new(newFirst, newSecond, array ?? Array.Empty<ProgramState>());
+        }
+
+        static void Append(ProgramState[] array, ref ProgramState newFirst, ref ProgramState newSecond, ref int i, ProgramState state)
+        {
+            if (newFirst == null)
+            {
+                newFirst = state;
+            }
+            else if (newSecond == null)
+            {
+                newSecond = state;
+            }
+            else
+            {
+                array[i++] = state;
+            }
+        }
+    }
+
     public Enumerator GetEnumerator()
         => new(this);
 

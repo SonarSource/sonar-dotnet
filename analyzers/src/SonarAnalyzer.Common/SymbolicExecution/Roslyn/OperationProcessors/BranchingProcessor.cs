@@ -36,12 +36,12 @@ internal abstract class BranchingProcessor<T> : MultiProcessor<T>
     protected virtual ProgramState PreProcess(ProgramState state, T operation, bool isInLoop) =>
         state;
 
-    protected override ProgramState[] Process(SymbolicContext context, T operation)
+    protected override ProgramStates Process(SymbolicContext context, T operation)
     {
         var state = PreProcess(context.State, operation, context.IsInLoop);
         if (BoolConstraintFromOperation(state, operation) is { } constraint)
         {
-            return state.SetOperationConstraint(context.Operation, constraint).ToArray();    // We already know the answer from existing constraints
+            return new(state.SetOperationConstraint(context.Operation, constraint));    // We already know the answer from existing constraints
         }
         else
         {
@@ -49,12 +49,10 @@ internal abstract class BranchingProcessor<T> : MultiProcessor<T>
             var positive = LearnBranchingConstraint(state, operation, false);
             var negative = LearnBranchingConstraint(state, operation, true);
             return positive == beforeLearningState && negative == beforeLearningState
-                ? beforeLearningState.ToArray()   // We can't learn anything, just move on
-                : new[]
-                {
+                ? new(beforeLearningState)   // We can't learn anything, just move on
+                : new(
                     positive.SetOperationConstraint(context.Operation, BoolConstraint.True),
-                    negative.SetOperationConstraint(context.Operation, BoolConstraint.False)
-                };
+                    negative.SetOperationConstraint(context.Operation, BoolConstraint.False));
         }
     }
 }
