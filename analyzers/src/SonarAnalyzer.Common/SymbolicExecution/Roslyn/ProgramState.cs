@@ -52,16 +52,6 @@ public sealed record ProgramState : IEquatable<ProgramState>
         Exceptions = ImmutableStack<ExceptionState>.Empty;
     }
 
-    protected ProgramState(ProgramState original)   // Custom record override constructor to reset "toArray"
-    {
-        OperationValue = original.OperationValue;
-        SymbolValue = original.SymbolValue;
-        VisitCount = original.VisitCount;
-        CaptureOperation = original.CaptureOperation;
-        PreservedSymbols = original.PreservedSymbols;
-        Exceptions = original.Exceptions;
-    }
-
     public ProgramState SetOperationAndSymbolValue(IOperation operation, SymbolicValue value)
     {
         var newState = SetOperationValue(operation, value);
