@@ -18,24 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+global using ProgramStates = SonarAnalyzer.SymbolicExecution.Roslyn.States<SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
+global using SymbolicContexts = SonarAnalyzer.SymbolicExecution.Roslyn.States<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext>;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
-public readonly record struct ProgramStates
+public readonly record struct States<T> where T : class
 {
-    private readonly ProgramState first;
-    private readonly ProgramState second;
-    private readonly ProgramState[] others;
+    private readonly T first;
+    private readonly T second;
+    private readonly T[] others;
 
-    public ProgramStates() : this(null, null) { }
+    public States() : this(null, null) { }
 
-    public ProgramStates(ProgramState first) : this(first, null)
+    public States(T first) : this(first, null)
         => this.first = first;
 
-    public ProgramStates(ProgramState first, ProgramState second) : this(first, second, Array.Empty<ProgramState>())
+    public States(T first, T second) : this(first, second, Array.Empty<T>())
     {
     }
 
-    public ProgramStates(ProgramState first, ProgramState second, params ProgramState[] others)
+    public States(T first, T second, params T[] others)
     {
         this.first = first;
         this.second = second;
@@ -50,7 +53,7 @@ public readonly record struct ProgramStates
             { others.Length: var otherLength } => otherLength + 2,
         };
 
-    public static ProgramStates operator +(ProgramStates left, ProgramStates right)
+    public static States<T> operator +(States<T> left, States<T> right)
     {
         if (left.Length == 0)
         {
@@ -65,14 +68,14 @@ public readonly record struct ProgramStates
             return CopyStates(left, right);
         }
 
-        static ProgramStates CopyStates(ProgramStates left, ProgramStates right)
+        static States<T> CopyStates(States<T> left, States<T> right)
         {
             var newLength = left.Length + right.Length;
-            ProgramState[] array = newLength > 2
-                ? new ProgramState[newLength - 2]
+            T[] array = newLength > 2
+                ? new T[newLength - 2]
                 : null;
-            ProgramState newFirst = null;
-            ProgramState newSecond = null;
+            T newFirst = null;
+            T newSecond = null;
             var i = 0;
             foreach (var state in left)
             {
@@ -82,10 +85,10 @@ public readonly record struct ProgramStates
             {
                 Append(array, ref newFirst, ref newSecond, ref i, state);
             }
-            return new(newFirst, newSecond, array ?? Array.Empty<ProgramState>());
+            return new(newFirst, newSecond, array ?? Array.Empty<T>());
         }
 
-        static void Append(ProgramState[] array, ref ProgramState newFirst, ref ProgramState newSecond, ref int i, ProgramState state)
+        static void Append(T[] array, ref T newFirst, ref T newSecond, ref int i, T state)
         {
             if (newFirst == null)
             {
@@ -107,24 +110,24 @@ public readonly record struct ProgramStates
 
     public struct Enumerator
     {
-        private readonly ProgramStates programStates;
+        private readonly States<T> states;
         private int index = 0;
 
-        public Enumerator(ProgramStates programStates) => this.programStates = programStates;
+        public Enumerator(States<T> states) => this.states = states;
 
-        public ProgramState Current
+        public T Current
             => index switch
             {
-                1 => programStates.first,
-                2 => programStates.second,
-                _ => programStates.others[index - 3],
+                1 => states.first,
+                2 => states.second,
+                _ => states.others[index - 3],
             };
         public bool MoveNext()
            => ++index switch
            {
-               1 => programStates.first != null,
-               2 => programStates.second != null,
-               _ => programStates.others.Length > index - 3,
+               1 => states.first != null,
+               2 => states.second != null,
+               _ => states.others.Length > index - 3,
            };
     }
 }

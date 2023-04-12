@@ -61,18 +61,18 @@ public class SymbolicCheckList
         }
     }
 
-    public SymbolicContext[] PreProcess(SymbolicContext context) =>
+    public SymbolicContexts PreProcess(SymbolicContext context) =>
         InvokeChecks(context, preProcess: true);
 
-    public SymbolicContext[] PostProcess(SymbolicContext context) =>
+    public SymbolicContexts PostProcess(SymbolicContext context) =>
         InvokeChecks(context, preProcess: false);
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/pull/6982", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
-    private SymbolicContext[] InvokeChecks(SymbolicContext context, bool preProcess)
+    private SymbolicContexts InvokeChecks(SymbolicContext context, bool preProcess)
     {
         // Performance: Hotpath. Don't do changes here without profiling allocation impact.
-        var before = new List<SymbolicContext> { context };
-        var after = new List<SymbolicContext>();
+        var before = new SymbolicContexts(context);
+        var after = new SymbolicContexts();
         foreach (var check in checks)
         {
             foreach (var beforeContext in before)
@@ -80,12 +80,12 @@ public class SymbolicCheckList
                 var newStates = preProcess ? check.PreProcess(beforeContext) : check.PostProcess(beforeContext);
                 foreach (var newState in newStates)
                 {
-                    after.Add(beforeContext.WithState(newState));
+                    after += new SymbolicContexts(beforeContext.WithState(newState));
                 }
             }
-            after = Interlocked.Exchange(ref before, after);
-            after.Clear();
+            before = after;
+            after = new();
         }
-        return before.ToArray();
+        return before;
     }
 }

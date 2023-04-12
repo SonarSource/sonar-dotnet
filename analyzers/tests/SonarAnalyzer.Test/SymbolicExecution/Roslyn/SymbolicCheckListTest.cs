@@ -22,6 +22,9 @@ using Moq;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 
+using ProgramStates = SonarAnalyzer.SymbolicExecution.Roslyn.States<SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
+
+
 namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 
 [TestClass]
@@ -69,7 +72,7 @@ public class SymbolicCheckListTest
     [TestMethod]
     public void PostProcess_CanReturnMultipleStates()
     {
-        var triple = new PostProcessTestCheck(x => new[] { x.State, x.State, x.State });
+        var triple = new PostProcessTestCheck(x => new ProgramStates(x.State, x.State, x.State));
         var sut = new SymbolicCheckList(new[] { triple, triple });
         sut.PostProcess(new(null, default, ProgramState.Empty, false, Array.Empty<ISymbol>())).Should().HaveCount(9);
     }
@@ -77,7 +80,7 @@ public class SymbolicCheckListTest
     [TestMethod]
     public void PostProcess_CanReturnNoStates()
     {
-        var empty = new PostProcessTestCheck(x => Array.Empty<ProgramState>());
+        var empty = new PostProcessTestCheck(x => new ProgramStates());
         var sut = new SymbolicCheckList(new[] { empty });
         sut.PostProcess(new(null, default, ProgramState.Empty, false, Array.Empty<ISymbol>())).Should().HaveCount(0);
     }

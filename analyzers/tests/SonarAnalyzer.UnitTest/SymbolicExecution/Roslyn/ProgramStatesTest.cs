@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using ProgramStates = SonarAnalyzer.SymbolicExecution.Roslyn.States<SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
 
@@ -29,6 +30,7 @@ public class ProgramStatesTest
     public void IterateEmtpyStates()
     {
         var sut = new ProgramStates();
+        sut.Length.Should().Be(0);
         foreach (var _ in sut)
         {
             Assert.Fail("Empty states");
@@ -39,6 +41,7 @@ public class ProgramStatesTest
     public void IterateOneState()
     {
         var sut = new ProgramStates(ProgramState.Empty);
+        sut.Length.Should().Be(1);
         var i = 0;
         foreach (var s in sut)
         {
@@ -54,6 +57,7 @@ public class ProgramStatesTest
         var s1 = ProgramState.Empty;
         var s2 = s1.AddVisit(1);
         var sut = new ProgramStates(s1, s2);
+        sut.Length.Should().Be(2);
         var i = 0;
         foreach (var s in sut)
         {
@@ -72,5 +76,51 @@ public class ProgramStatesTest
             i++;
         }
         i.Should().Be(2);
+    }
+
+    [TestMethod]
+    public void IterateThreeStates()
+    {
+        var s1 = ProgramState.Empty;
+        var s2 = s1.AddVisit(1);
+        var s3 = s2.AddVisit(2);
+        var sut = new ProgramStates(s1, s2, s3);
+        sut.Length.Should().Be(3);
+        var i = 0;
+        foreach (var s in sut)
+        {
+            switch (i)
+            {
+                case 0:
+                    s.Should().Be(s1);
+                    break;
+                case 1:
+                    s.Should().Be(s2);
+                    break;
+                case 2:
+                    s.Should().Be(s3);
+                    break;
+                default:
+                    Assert.Fail("Unreachable");
+                    break;
+            }
+            i++;
+        }
+        i.Should().Be(3);
+    }
+
+    [TestMethod]
+    public void IterateTenStates()
+    {
+        var states = Enumerable.Range(1, 10).Select(i => ProgramState.Empty.AddVisit(i)).ToList();
+        var sut = new ProgramStates(states[0], states[1], states.Skip(2).ToArray());
+        sut.Length.Should().Be(10);
+        var i = 0;
+        foreach (var s in sut)
+        {
+            s.Should().BeSameAs(states[i]);
+            i++;
+        }
+        i.Should().Be(10);
     }
 }
