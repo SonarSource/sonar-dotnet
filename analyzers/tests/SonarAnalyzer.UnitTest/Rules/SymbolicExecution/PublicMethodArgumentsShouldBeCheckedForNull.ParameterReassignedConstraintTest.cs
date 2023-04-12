@@ -36,7 +36,6 @@ public class ParameterReassignedConstraintTest
     [DataRow(@"arg = Unknown<object>();", "out object")]
     [DataRow(@"arg = Unknown<object[]>();", "params object[]")]
     [DataRow(@"arg = Unknown<object>(); arg.ToString();", "object")]
-    [DataRow(@"arg = Unknown<object>(); arg.ToString();", "object")]
     [DataRow(@"arg = Unknown<object>(); arg = Unknown<object>();", "object")]
     public void ParameterReassignedConstraint_AfterAssignment(string methodSnippet, string argumentType)
     {

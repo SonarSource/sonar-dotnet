@@ -27,6 +27,4 @@ internal sealed class ParameterReassignedConstraint : SymbolicConstraint
     public override SymbolicConstraint Opposite => throw new NotSupportedException();
 
     private ParameterReassignedConstraint(ConstraintKind kind) : base(kind) { }
-
-    public override string ToString() => nameof(ConstraintKind.ParameterReassigned);
 }
