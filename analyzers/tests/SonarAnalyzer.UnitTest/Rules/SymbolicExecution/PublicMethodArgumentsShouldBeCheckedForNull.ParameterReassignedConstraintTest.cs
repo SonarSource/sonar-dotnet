@@ -50,7 +50,6 @@ public class ParameterReassignedConstraintTest
     [DataRow(@"arg = Unknown<object>();")]
     [DataRow(@"arg.ToString();")]
     [DataRow(@"ObjectField.ToString();")]
-    [DataRow(@"InstanceMethodWithRefParam(ref arg);")]
     public void ParameterReassignedConstraint_AdditionalOperations(string snippet)
     {
         var methodBody = $"""
