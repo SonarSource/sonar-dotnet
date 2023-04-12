@@ -21,6 +21,8 @@
 global using ProgramStates = SonarAnalyzer.SymbolicExecution.Roslyn.States<SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
 global using SymbolicContexts = SonarAnalyzer.SymbolicExecution.Roslyn.States<SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicContext>;
 
+using System.Runtime.CompilerServices;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
 public readonly record struct States<T> where T : class
@@ -31,12 +33,9 @@ public readonly record struct States<T> where T : class
 
     public States() : this(null, null) { }
 
-    public States(T first) : this(first, null)
-        => this.first = first;
+    public States(T first) : this(first, null) { }
 
-    public States(T first, T second) : this(first, second, Array.Empty<T>())
-    {
-    }
+    public States(T first, T second) : this(first, second, Array.Empty<T>()) { }
 
     public States(T first, T second, params T[] others)
     {
@@ -65,13 +64,8 @@ public readonly record struct States<T> where T : class
         }
         else
         {
-            return CopyStates(left, right);
-        }
-
-        static States<T> CopyStates(States<T> left, States<T> right)
-        {
             var newLength = left.Length + right.Length;
-            T[] array = newLength > 2
+            var array = newLength > 2
                 ? new T[newLength - 2]
                 : null;
             T newFirst = null;
@@ -88,6 +82,7 @@ public readonly record struct States<T> where T : class
             return new(newFirst, newSecond, array ?? Array.Empty<T>());
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static void Append(T[] array, ref T newFirst, ref T newSecond, ref int i, T state)
         {
             if (newFirst == null)
@@ -105,8 +100,8 @@ public readonly record struct States<T> where T : class
         }
     }
 
-    public Enumerator GetEnumerator()
-        => new(this);
+    public Enumerator GetEnumerator() =>
+        new(this);
 
     public struct Enumerator
     {
@@ -115,15 +110,15 @@ public readonly record struct States<T> where T : class
 
         public Enumerator(States<T> states) => this.states = states;
 
-        public T Current
-            => index switch
+        public T Current =>
+            index switch
             {
                 1 => states.first,
                 2 => states.second,
                 _ => states.others[index - 3],
             };
-        public bool MoveNext()
-           => ++index switch
+        public bool MoveNext() =>
+           ++index switch
            {
                1 => states.first != null,
                2 => states.second != null,
