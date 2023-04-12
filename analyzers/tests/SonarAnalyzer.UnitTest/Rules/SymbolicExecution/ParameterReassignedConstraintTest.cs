@@ -49,15 +49,17 @@ public class ParameterReassignedConstraintTest
     [TestMethod]
     public void ParameterReassignedConstraint_InsideCondition()
     {
-        var snippet = @"if (arg == null)
-                            {
-                                arg = Unknown<object>();
-                                Tag(""AfterAssignment"", arg);
-                            }
-                            else
-                            {
-                                Tag(""NoAssignment"", arg);
-                            }";
+        var snippet = """
+            if (arg == null)
+            {
+                arg = Unknown<object>();
+                Tag("AfterAssignment", arg);
+            }
+            else
+            {
+                Tag("NoAssignment", arg);
+            }
+            """;
         var validator = SETestContext.CreateCS(snippet, ", object arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
         validator.ValidateTag("AfterAssignment", x => x.HasConstraint<ParameterReassignedConstraint>().Should().BeTrue());
         validator.ValidateTag("NoAssignment", x => x.HasConstraint<ParameterReassignedConstraint>().Should().BeFalse());
