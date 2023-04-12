@@ -35,14 +35,31 @@ public class ParameterReassignedConstraintTest
     [DataRow(@"arg = Unknown<object>();", "ref object")]
     [DataRow(@"arg = Unknown<object>();", "out object")]
     [DataRow(@"arg = Unknown<object[]>();", "params object[]")]
-    [DataRow(@"arg = Unknown<object>(); arg.ToString();", "object")]
-    [DataRow(@"arg = Unknown<object>(); arg = Unknown<object>();", "object")]
     public void ParameterReassignedConstraint_AfterAssignment(string methodSnippet, string argumentType)
     {
         var methodBody = $@"{methodSnippet} Tag(""AfterAssignment"", arg);";
         var argumentSnippet = $", {argumentType} arg";
         var validator = SETestContext.CreateCS(methodBody, argumentSnippet, new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
         validator.ValidateTag("AfterAssignment", x => x.HasConstraint<ParameterReassignedConstraint>().Should().BeTrue());
+    }
+
+    [DataTestMethod]
+    [DataRow(@"ObjectField = null;")]
+    [DataRow(@"FullProperty = null;")]
+    [DataRow(@"AutoProperty = null;")]
+    [DataRow(@"arg = Unknown<object>();")]
+    [DataRow(@"arg.ToString();")]
+    [DataRow(@"ObjectField.ToString();")]
+    [DataRow(@"InstanceMethodWithRefParam(ref arg);")]
+    public void ParameterReassignedConstraint_AdditionalOperations(string snippet)
+    {
+        var methodBody = $"""
+            arg = Unknown<object>();
+            {snippet}
+            Tag("End", arg);
+            """;
+        var validator = SETestContext.CreateCS(methodBody, ", object arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
+        validator.ValidateTag("End", x => x.HasConstraint<ParameterReassignedConstraint>().Should().BeTrue());
     }
 
     [TestMethod]
