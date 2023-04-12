@@ -48,9 +48,9 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         where T : SymbolicConstraint
     {
         var useOpposite = falseBranch ^ binary.OperatorKind.IsNotEquals();
-        // We can fall through ?? because "constraint" and "testedSymbol" are exclusive. Symbols with the constraint will be recognized as "constraint" side.
-        if ((OperandConstraint<T>(state, binary.LeftOperand) ?? OperandConstraint<T>(state, binary.RightOperand)) is { } constraint
-            && (OperandSymbolWithoutConstraint<T>(state, binary.LeftOperand) ?? OperandSymbolWithoutConstraint<T>(state, binary.RightOperand)) is { } testedSymbol
+        // We can take the 1st constraint and "testedSymbol" because they are exclusive. Symbols with T constraint will be recognized as the constraining side.
+        if (FirstBinaryOperandConstraint<T>(state, binary) is { } constraint
+            && FirstBinaryOperandSymbolWithoutConstraint<T>(state, binary) is { } testedSymbol
             && !(useOpposite && constraint is BoolConstraint && testedSymbol.GetSymbolType().IsNullableBoolean()))  // Don't learn False for "nullableBool != true", because it could also be <null>.
         {
             constraint = constraint.ApplyOpposite(useOpposite);     // Beware that opposite of ObjectConstraint.NotNull doesn't exist and returns <null>
@@ -62,22 +62,21 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         }
     }
 
-    private static ProgramState LearnBranchingRelationalConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
-    {
-        // We can fall through ?? because "constraint" and "testedSymbol" are exclusive. Symbols with the constraint will be recognized as "constraint" side.
-        // We only learn in the true branch because not being >, >=, <, <= than a non-empty nullable means either being null or non-null with non-matching value.
-        if (!falseBranch &&
-            (OperandConstraint<ObjectConstraint>(state, binary.LeftOperand) ?? OperandConstraint<ObjectConstraint>(state, binary.RightOperand)) == ObjectConstraint.NotNull
-            && (OperandSymbolWithoutConstraint<ObjectConstraint>(state, binary.LeftOperand) ?? OperandSymbolWithoutConstraint<ObjectConstraint>(state, binary.RightOperand)) is { } testedSymbol
-            && testedSymbol.GetSymbolType().IsNullableValueType())
-        {
-            return state.SetSymbolConstraint(testedSymbol, ObjectConstraint.NotNull);
-        }
-        else
-        {
-            return null;
-        }
-    }
+    // We can take the 1st constraint and "testedSymbol" because they are exclusive. Symbols with NotNull constraint will be recognized as the constraining side.
+    // We only learn in the true branch because not being >, >=, <, <= than a non-empty nullable means either being null or non-null with non-matching value.
+    private static ProgramState LearnBranchingRelationalConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch) =>
+        !falseBranch
+        && FirstBinaryOperandConstraint<ObjectConstraint>(state, binary) == ObjectConstraint.NotNull
+        && FirstBinaryOperandSymbolWithoutConstraint<ObjectConstraint>(state, binary) is { } testedSymbol
+        && testedSymbol.GetSymbolType().IsNullableValueType()
+            ? state.SetSymbolConstraint(testedSymbol, ObjectConstraint.NotNull)
+            : null;
+
+    private static SymbolicConstraint FirstBinaryOperandConstraint<T>(ProgramState state, IBinaryOperationWrapper binary) where T : SymbolicConstraint =>
+        OperandConstraint<T>(state, binary.LeftOperand) ?? OperandConstraint<T>(state, binary.RightOperand);
+
+    private static ISymbol FirstBinaryOperandSymbolWithoutConstraint<T>(ProgramState state, IBinaryOperationWrapper binary) where T : SymbolicConstraint =>
+        OperandSymbolWithoutConstraint<T>(state, binary.LeftOperand) ?? OperandSymbolWithoutConstraint<T>(state, binary.RightOperand);
 
     private static ISymbol OperandSymbolWithoutConstraint<T>(ProgramState state, IOperation candidate) where T : SymbolicConstraint =>
         candidate.TrackedSymbol() is { } symbol && (state[symbol] is null || !state[symbol].HasConstraint<T>()) ? symbol : null;
