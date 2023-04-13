@@ -22,8 +22,12 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints;
 
 public enum ConstraintKind
 {
-    BoolFalse,
-    BoolTrue,
+    // Well-known kinds with irregular names for simplicity
+    False,
+    True,
+    Null,
+    NotNull,
+    // Everything else
     ByteArrayConstant,
     ByteArrayModified,
     CollectionEmpty,
@@ -38,8 +42,6 @@ public enum ConstraintKind
     NullableHasValue,
     [Obsolete("Old SE engine only")]
     NullableNoValue,
-    ObjectNull,
-    ObjectNotNull,
     SaltSizeSafe,
     SaltSizeShort,
     SerializationSafe,
