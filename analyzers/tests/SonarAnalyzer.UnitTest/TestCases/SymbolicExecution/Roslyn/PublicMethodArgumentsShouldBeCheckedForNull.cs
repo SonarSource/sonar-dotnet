@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -792,7 +793,7 @@ public class ParameterCaptures
 
         Func<string> someFunc = () => s.ToString();
 
-        return s.ToString();
+        return s.ToString(); // Compliant
     }
 
     public string InsideLambda_CaptureBeforeDereference(string s)
@@ -800,5 +801,23 @@ public class ParameterCaptures
         Func<string> someFunc = () => s.ToString();
 
         return s.ToString(); // FN: s is not checked here
+    }
+
+    public void CapturedInLinq_WithCheckBefore(string s, List<string> list)
+    {
+        if (s == null)
+        {
+            return;
+        }
+        s.ToString(); // Compliant
+
+        list.Where(x => x == s);
+    }
+
+    public void CapturedInLinq_WithNoCheck(string s, List<string> list)
+    {
+        s.ToString(); // FN
+
+        list.Where(x => x == s);
     }
 }
