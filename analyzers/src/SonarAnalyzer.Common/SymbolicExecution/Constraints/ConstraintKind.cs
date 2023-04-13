@@ -60,5 +60,5 @@ public enum ConstraintKind
     [Obsolete("Old SE engine only")]
     StringNotWhiteSpace,
     [Obsolete("Old SE engine only")]
-    StringWhiteSpace
+    StringWhiteSpace,
 }

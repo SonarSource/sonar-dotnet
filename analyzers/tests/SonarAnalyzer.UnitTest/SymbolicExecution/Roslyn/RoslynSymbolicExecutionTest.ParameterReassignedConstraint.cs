@@ -96,7 +96,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow(@"var local = Unknown<object>(); Tag(""AfterAssignment"", local);")]
     [DataRow(@"ObjectField = Unknown<object>(); Tag(""AfterAssignment"", ObjectField);")]
     [DataRow(@"FullProperty = Unknown<object>(); Tag(""AfterAssignment"", FullProperty);")]
-    public void PublicMethodArgumentsShouldBeCheckedForNull_IgnoredAssignments_State_Roslyn_CS(string snippet)
+    public void ParameterReassignedConstraint_IgnoreNonParameters(string snippet)
     {
         var validator = SETestContext.CreateCS(snippet, new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
         validator.ValidateTag("AfterAssignment", x => x.Should().Match(c => c == null || !c.HasConstraint<ParameterReassignedConstraint>()));
