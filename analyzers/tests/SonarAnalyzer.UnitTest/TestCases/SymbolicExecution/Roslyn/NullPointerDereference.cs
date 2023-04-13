@@ -1904,7 +1904,7 @@ public class PeachReproducers
     {
         if (value?.Length > 0)
         {
-            value.ToString();   // Noncompliant
+            value.ToString();   // Noncompliant FP
         }
     }
 
@@ -1912,7 +1912,7 @@ public class PeachReproducers
     {
         if (t?.IsCompleted == true)
         {
-            t.ToString();       // Noncompliant
+            t.ToString();       // Noncompliant FP
         }
     }
 
@@ -1921,7 +1921,7 @@ public class PeachReproducers
         var list = condition ? null : new List<string>();
         if (list?.Contains("key") == true)
         {
-            list.ToString();    // Noncompliant
+            list.ToString();    // Noncompliant FP
         }
     }
 
@@ -1931,7 +1931,7 @@ public class PeachReproducers
         {
             return;
         }
-        arr.ToString();         // Noncompliant
+        arr.ToString();         // Noncompliant FP
     }
 
     public void ConditionalIntTrackingMinusOne(string value)
@@ -1939,7 +1939,7 @@ public class PeachReproducers
         var index = value?.IndexOf("x") ?? -1;
         if (index != -1)
         {
-            value.ToString();   // Noncompliant
+            value.ToString();   // Noncompliant FP
         }
     }
 
@@ -1947,9 +1947,9 @@ public class PeachReproducers
     {
         {
             var ex = list.FirstOrDefault();
-            if (ex != null && !string.IsNullOrEmpty(message) && ex.Message != message) // Noncompliant
+            if (ex != null && !string.IsNullOrEmpty(message) && ex.Message != message) // Noncompliant FP
             {
-                ex.ToString();  // Noncompliant
+                ex.ToString();  // Noncompliant FP
             }
         }
     }
@@ -1961,14 +1961,14 @@ public class PeachReproducers
         {
             try
             {
-                foreach (var msg in from ex in list select ex.Message)              // Noncompliant {{'from ex in list select ex.Message' is null on at least one execution path.}}
+                foreach (var msg in from ex in list select ex.Message)              // Noncompliant {{'from ex in list select ex.Message' is null on at least one execution path.}} FP
                 {
                 }
-                foreach (var msg in (from ex in list select ex.Message).Distinct()) // Noncompliant {{'(from ex in list select ex.Message).Distinct()' is null on at least one execution path.}}
+                foreach (var msg in (from ex in list select ex.Message).Distinct()) // Noncompliant {{'(from ex in list select ex.Message).Distinct()' is null on at least one execution path.}} FP
                 {
                 }
                 var subList = SubList();
-                foreach (var subItem in subList)    // Noncompliant
+                foreach (var subItem in subList)    // Noncompliant FP
                 {
                 }
                 run = false;
