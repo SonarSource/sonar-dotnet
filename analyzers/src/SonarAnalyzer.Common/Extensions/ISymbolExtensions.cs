@@ -48,6 +48,5 @@ namespace SonarAnalyzer.Helpers
         // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute
         private static bool IsNotNullAttribute(AttributeData attribute) =>
             attribute.HasAnyName("ValidatedNotNullAttribute", "NotNullAttribute");
-
     }
 }
