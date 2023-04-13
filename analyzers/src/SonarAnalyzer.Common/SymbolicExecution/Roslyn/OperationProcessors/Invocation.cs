@@ -35,20 +35,26 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             return EmptyStates;
         }
         var state = context.State;
-        if (!invocation.TargetMethod.IsStatic             // Also applies to C# extensions
-            && !invocation.TargetMethod.IsExtensionMethod // VB extensions in modules are not marked as static
-            && invocation.Instance.TrackedSymbol() is { } symbol
-            && !IsNullableGetValueOrDefault(invocation))
+        if (invocation.TargetMethod.IsStatic                // Also applies to C# extensions
+            || invocation.TargetMethod.IsExtensionMethod)   // VB extensions in modules are not marked as static
+        {
+            state = state.ResetStaticFieldConstraints(invocation.TargetMethod.ContainingType);
+        }
+        else if (invocation.Instance.TrackedSymbol() is { } symbol && !IsNullableGetValueOrDefault(invocation))
         {
             state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
         }
+
         if (invocation.HasThisReceiver(state))
         {
             state = state.ResetFieldConstraints();
         }
-        if (invocation.TargetMethod.IsStatic)
+        if (invocation.TargetMethod.IsExtensionMethod
+            && invocation.TargetMethod.ReducedFrom is { } reducedFrom   // VB reduces method symbol to 'instance.Extension()' without annotated ArgumentOperation
+            && reducedFrom.Parameters.First().HasNotNullAttribute()
+            && invocation.Instance.TrackedSymbol() is { } instanceSymbol)
         {
-            state = state.ResetStaticFieldConstraints(invocation.TargetMethod.ContainingType);
+            state = state.SetSymbolConstraint(instanceSymbol, ObjectConstraint.NotNull);
         }
         return invocation switch
         {

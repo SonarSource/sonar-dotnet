@@ -168,13 +168,13 @@ Public Class GuardedTests
         s4.ToUpper()
 
         s5.GuardExtension() ' Noncompliant FP FIXME
-        s5.ToUpper()        ' Noncompliant FP FIXME
+        s5.ToUpper()
 
         s6.GuardExtensionMoreAttributes()   ' Noncompliant FP FIXME
-        s6.ToUpper()                        ' Noncompliant FP FIXME
+        s6.ToUpper()
 
         s7.GuardExtensionMoreArguments(Nothing, Nothing)    ' Noncompliant FP FIXME
-        s7.ToUpper()                                        ' Noncompliant FP FIXME
+        s7.ToUpper()
     End Sub
 
     Public Sub Guard1(Of T As Class)(<ValidatedNotNullAttribute> Value As T)
