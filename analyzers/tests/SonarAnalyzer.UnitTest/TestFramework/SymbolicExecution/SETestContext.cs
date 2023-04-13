@@ -152,6 +152,7 @@ public unsafe class Sample
     public NotImplementedException CreateException() => new NotImplementedException();
     public void InstanceMethod(object parameter = null) {{ }}
     public void InstanceMethodWithRefParam(ref object parameter) {{ }}
+    public void InstanceMethodWithOutParam(out object parameter) {{ parameter = null; }}
     public static void StaticMethod() {{ }}
 }}
 

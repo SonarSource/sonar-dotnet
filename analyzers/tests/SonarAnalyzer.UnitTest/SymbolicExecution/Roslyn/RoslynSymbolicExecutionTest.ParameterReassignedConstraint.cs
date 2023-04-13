@@ -27,37 +27,55 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
 public partial class RoslynSymbolicExecutionTest
 {
     [DataTestMethod]
-    [DataRow(@"arg = Unknown<object>();", "object")]
-    [DataRow(@"arg = Unknown<List<object>>();", "List<object>")]
-    [DataRow(@"arg = Unknown<int>();", "int")]
-    [DataRow(@"arg = Unknown<int?>();", "int?")]
-    [DataRow(@"arg = Unknown<object>();", "ref object")]
-    [DataRow(@"arg = Unknown<object>();", "out object")]
-    [DataRow(@"arg = Unknown<object[]>();", "params object[]")]
+    [DataRow("""arg = Unknown<object>();""", "object")]
+    [DataRow("""arg = Unknown<List<object>>();""", "List<object>")]
+    [DataRow("""arg = Unknown<int>();""", "int")]
+    [DataRow("""arg = Unknown<int?>();""", "int?")]
+    [DataRow("""arg = Unknown<object>();""", "ref object")]
+    [DataRow("""arg = Unknown<object>();""", "out object")]
+    [DataRow("""arg = Unknown<object[]>();""", "params object[]")]
     public void ParameterReassignedConstraint_AfterAssignment(string methodSnippet, string argumentType)
     {
-        var methodBody = $@"{methodSnippet} Tag(""AfterAssignment"", arg);";
+        var methodBody = $$"""
+            {{methodSnippet}}
+            Tag("AfterAssignment", arg);
+            """;
         var argumentSnippet = $", {argumentType} arg";
         var validator = SETestContext.CreateCS(methodBody, argumentSnippet, new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
         validator.ValidateTag("AfterAssignment", x => x.HasConstraint<ParameterReassignedConstraint>().Should().BeTrue());
     }
 
     [DataTestMethod]
-    [DataRow(@"ObjectField = null;")]
-    [DataRow(@"FullProperty = null;")]
-    [DataRow(@"AutoProperty = null;")]
-    [DataRow(@"arg = Unknown<object>();")]
-    [DataRow(@"arg.ToString();")]
-    [DataRow(@"ObjectField.ToString();")]
+    [DataRow("""ObjectField = null;""")]
+    [DataRow("""FullProperty = null;""")]
+    [DataRow("""AutoProperty = null;""")]
+    [DataRow("""arg = Unknown<object>();""")]
+    [DataRow("""arg.ToString();""")]
+    [DataRow("""InstanceMethod(arg);""")]
+    [DataRow("""ObjectField.ToString();""")]
     public void ParameterReassignedConstraint_AdditionalOperations(string snippet)
     {
-        var methodBody = $"""
+        var methodBody = $$"""
             arg = Unknown<object>();
-            {snippet}
+            {{snippet}}
             Tag("End", arg);
             """;
         var validator = SETestContext.CreateCS(methodBody, ", object arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
         validator.ValidateTag("End", x => x.HasConstraint<ParameterReassignedConstraint>().Should().BeTrue());
+    }
+
+    [DataTestMethod]
+    [DataRow("""InstanceMethodWithRefParam(ref arg);""")]
+    [DataRow("""InstanceMethodWithOutParam(out arg);""")]
+    public void ParameterReassignedConstraint_PreservedAfterPassedAsRefOrOutParameter(string snippet)
+    {
+        var methodBody = $$"""
+            arg = Unknown<object>();
+            {{snippet}}
+            Tag("End", arg);
+            """;
+        var validator = SETestContext.CreateCS(methodBody, ", object arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
+        validator.ValidateTag("End", x => x.Should().BeNull()); // FIXME: arg should have the ParameterReassignedConstraint
     }
 
     [TestMethod]
@@ -93,9 +111,9 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [DataTestMethod]
-    [DataRow(@"var local = Unknown<object>(); Tag(""AfterAssignment"", local);")]
-    [DataRow(@"ObjectField = Unknown<object>(); Tag(""AfterAssignment"", ObjectField);")]
-    [DataRow(@"FullProperty = Unknown<object>(); Tag(""AfterAssignment"", FullProperty);")]
+    [DataRow("""var local = Unknown<object>(); Tag("AfterAssignment", local);""")]
+    [DataRow("""ObjectField = Unknown<object>(); Tag("AfterAssignment", ObjectField);""")]
+    [DataRow("""FullProperty = Unknown<object>(); Tag("AfterAssignment", FullProperty);""")]
     public void ParameterReassignedConstraint_IgnoreNonParameters(string snippet)
     {
         var validator = SETestContext.CreateCS(snippet, new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
