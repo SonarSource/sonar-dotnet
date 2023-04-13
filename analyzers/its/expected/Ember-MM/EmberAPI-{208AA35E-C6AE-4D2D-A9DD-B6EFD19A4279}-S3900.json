@@ -1,0 +1,1122 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'cDGV' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  804,
+"startColumn":  31,
+"endLine":  804,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'cPNL' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  942,
+"startColumn":  31,
+"endLine":  942,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'rStream' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  961,
+"startColumn":  29,
+"endLine":  961,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dTable' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  508,
+"startColumn":  13,
+"endLine":  508,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'Addon' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1968,
+"startColumn":  36,
+"endLine":  1968,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'BytConvert' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  177,
+"startColumn":  26,
+"endLine":  177,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sPath' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  34,
+"startColumn":  83,
+"endLine":  34,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sPath' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  35,
+"startColumn":  20,
+"endLine":  35,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sPath' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  37,
+"startColumn":  20,
+"endLine":  37,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sPath' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  38,
+"startColumn":  20,
+"endLine":  38,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'filename' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  112,
+"startColumn":  24,
+"endLine":  112,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'filename' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  113,
+"startColumn":  24,
+"endLine":  113,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'filename' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  115,
+"startColumn":  24,
+"endLine":  115,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'filename' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  116,
+"startColumn":  24,
+"endLine":  116,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'filename' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  117,
+"startColumn":  24,
+"endLine":  117,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'filename' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  118,
+"startColumn":  24,
+"endLine":  118,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'filename' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  119,
+"startColumn":  24,
+"endLine":  119,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'filename' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  120,
+"startColumn":  24,
+"endLine":  120,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'input' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHashing.vb",
+"region":  {
+"startLine":  42,
+"startColumn":  22,
+"endLine":  42,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'bytes' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHashing.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  33,
+"endLine":  108,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'postDataList' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  150,
+"startColumn":  39,
+"endLine":  150,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imgImage' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  78,
+"startColumn":  28,
+"endLine":  78,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imgImage' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  28,
+"endLine":  100,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sUrl' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  463,
+"startColumn":  13,
+"endLine":  463,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'actor' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  962,
+"startColumn":  76,
+"endLine":  962,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'oImage' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"region":  {
+"startLine":  55,
+"startColumn":  49,
+"endLine":  55,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'graphics' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"region":  {
+"startLine":  74,
+"startColumn":  13,
+"endLine":  74,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pbCache' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  30,
+"endLine":  136,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pbResize' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"region":  {
+"startLine":  137,
+"startColumn":  17,
+"endLine":  137,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pbResize' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"region":  {
+"startLine":  179,
+"startColumn":  17,
+"endLine":  179,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pbUnderlay' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"region":  {
+"startLine":  193,
+"startColumn":  41,
+"endLine":  193,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imgOverlay' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"region":  {
+"startLine":  230,
+"startColumn":  47,
+"endLine":  230,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imgOverlay' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"region":  {
+"startLine":  234,
+"startColumn":  47,
+"endLine":  234,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imgOverlay' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"region":  {
+"startLine":  236,
+"startColumn":  47,
+"endLine":  236,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imgOverlay' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"region":  {
+"startLine":  245,
+"startColumn":  58,
+"endLine":  245,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  115,
+"startColumn":  30,
+"endLine":  115,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  610,
+"startColumn":  30,
+"endLine":  610,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1086,
+"startColumn":  65,
+"endLine":  1086,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1158,
+"startColumn":  36,
+"endLine":  1158,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1177,
+"startColumn":  34,
+"endLine":  1177,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1196,
+"startColumn":  36,
+"endLine":  1196,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'other' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1238,
+"startColumn":  56,
+"endLine":  1238,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1518,
+"startColumn":  30,
+"endLine":  1518,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'fiInfo' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  287,
+"startColumn":  30,
+"endLine":  287,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'miFIA' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  120,
+"startColumn":  52,
+"endLine":  120,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'miFIV' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  163,
+"startColumn":  52,
+"endLine":  163,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'fiRes' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  192,
+"startColumn":  41,
+"endLine":  192,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'fiRes' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  359,
+"startColumn":  41,
+"endLine":  359,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'fiRes' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  413,
+"startColumn":  37,
+"endLine":  413,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'Episode' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  169,
+"startColumn":  71,
+"endLine":  169,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'Episode' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  173,
+"startColumn":  56,
+"endLine":  173,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'Movie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  223,
+"startColumn":  82,
+"endLine":  223,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'Movie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  238,
+"startColumn":  84,
+"endLine":  238,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'Movie' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  254,
+"startColumn":  20,
+"endLine":  254,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tShow' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  523,
+"startColumn":  33,
+"endLine":  523,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dInfo' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  640,
+"startColumn":  34,
+"endLine":  640,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dInfo' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  641,
+"startColumn":  16,
+"endLine":  641,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'mContainer' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  664,
+"startColumn":  41,
+"endLine":  664,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tShow' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  885,
+"startColumn":  17,
+"endLine":  885,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'inDir' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  951,
+"startColumn":  16,
+"endLine":  951,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'MovieDir' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  1053,
+"startColumn":  33,
+"endLine":  1053,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sURL' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  52,
+"startColumn":  12,
+"endLine":  52,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sURL' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  65,
+"startColumn":  16,
+"endLine":  65,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 's' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  28,
+"endLine":  69,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 't' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  28,
+"endLine":  70,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'decText' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  116,
+"startColumn":  21,
+"endLine":  116,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'movieName' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  150,
+"startColumn":  50,
+"endLine":  150,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'movieName' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  161,
+"startColumn":  55,
+"endLine":  161,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'movieName' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  162,
+"startColumn":  60,
+"endLine":  162,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'movieName' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  164,
+"startColumn":  20,
+"endLine":  164,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'movieName' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  169,
+"startColumn":  20,
+"endLine":  169,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'TVEpName' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  221,
+"startColumn":  80,
+"endLine":  221,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'TVEpName' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  223,
+"startColumn":  20,
+"endLine":  223,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'TVEpName' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  227,
+"startColumn":  20,
+"endLine":  227,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'TVShowName' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  262,
+"startColumn":  82,
+"endLine":  262,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'TVShowName' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  264,
+"startColumn":  20,
+"endLine":  264,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'TVShowName' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  269,
+"startColumn":  20,
+"endLine":  269,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'stext' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  289,
+"startColumn":  57,
+"endLine":  289,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sString' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  367,
+"startColumn":  47,
+"endLine":  367,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sCert' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  386,
+"startColumn":  21,
+"endLine":  386,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'FilterExpression' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  410,
+"startColumn":  16,
+"endLine":  410,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'ExpressionToMatch' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  415,
+"startColumn":  29,
+"endLine":  415,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'ExpressionToMatch' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  422,
+"startColumn":  28,
+"endLine":  422,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'ExpressionToMatch' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  424,
+"startColumn":  28,
+"endLine":  424,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'strStudio' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  385,
+"startColumn":  33,
+"endLine":  385,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sXML' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  455,
+"startColumn":  20,
+"endLine":  455,
+"endColumn":  24
+}
+}
+}
+]
+}

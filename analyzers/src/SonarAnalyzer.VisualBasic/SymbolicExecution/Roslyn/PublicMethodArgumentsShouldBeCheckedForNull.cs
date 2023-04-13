@@ -19,17 +19,16 @@
  */
 
 using static Microsoft.CodeAnalysis.Accessibility;
-using static Microsoft.CodeAnalysis.CSharp.SyntaxKind;
-using static StyleCop.Analyzers.Lightup.SyntaxKindEx;
+using static Microsoft.CodeAnalysis.VisualBasic.SyntaxKind;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
 public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArgumentsShouldBeCheckedForNullBase
 {
     internal static readonly DiagnosticDescriptor S3900 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     protected override DiagnosticDescriptor Rule => S3900;
-    protected override string NullName => "null";
+    protected override string NullName => "Nothing";
 
     public override bool ShouldExecute()
     {
@@ -37,21 +36,19 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
             && IsAccessibleFromOtherAssemblies();
 
         bool IsRelevantMethod() =>
-            Node is BaseMethodDeclarationSyntax { } method && MethodDereferencesArguments(method);
+            (Node is MethodBlockSyntax { SubOrFunctionStatement: not null } method && MethodDereferencesArguments(method, method.SubOrFunctionStatement.ParameterList))
+            || (Node is ConstructorBlockSyntax { SubNewStatement: not null } ctor && MethodDereferencesArguments(ctor, ctor.SubNewStatement.ParameterList));
 
         bool IsRelevantPropertyAccessor() =>
-            Node is AccessorDeclarationSyntax { } accessor
-            && (!accessor.Keyword.IsKind(GetKeyword) || accessor.Parent.Parent is IndexerDeclarationSyntax);
+            Node is AccessorBlockSyntax { } accessor
+            && (accessor.Kind() != GetAccessorBlock || accessor.Parent is PropertyBlockSyntax { PropertyStatement.ParameterList: not null });
 
         bool IsAccessibleFromOtherAssemblies() =>
             SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is Public or Protected or ProtectedOrInternal;
 
-        static bool MethodDereferencesArguments(BaseMethodDeclarationSyntax method)
+        static bool MethodDereferencesArguments(SyntaxNode method, ParameterListSyntax parameters)
         {
-            var argumentNames = method.ParameterList.Parameters
-                                    .Where(x => !x.Modifiers.AnyOfKind(OutKeyword))
-                                    .Select(x => x.GetName())
-                                    .ToHashSet();
+            var argumentNames = parameters.Parameters.Select(x => x.GetName()).ToHashSet(StringComparer.OrdinalIgnoreCase);
             if (argumentNames.Any())
             {
                 var walker = new ArgumentDereferenceWalker(argumentNames);
@@ -66,9 +63,13 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
     }
 
     protected override bool IsInConstructorInitializer(SyntaxNode node) =>
-        node.FirstAncestorOrSelf<ConstructorInitializerSyntax>() is not null;
+        node.Ancestors().OfType<InvocationExpressionSyntax>().Any(x => IsInConstructorInitializer(x.Expression.ToString()));
 
-    private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker
+    private static bool IsInConstructorInitializer(string invokedExpression) =>
+        invokedExpression.Equals("Me.New", StringComparison.OrdinalIgnoreCase)
+        || invokedExpression.Equals("MyBase.New", StringComparison.OrdinalIgnoreCase);
+
+    private sealed class ArgumentDereferenceWalker : SafeVisualBasicSyntaxWalker
     {
         private readonly ISet<string> argumentNames;
 
@@ -79,7 +80,8 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
 
         public override void Visit(SyntaxNode node)
         {
-            if (!DereferencesMethodArguments && !node.IsAnyKind(LocalFunctionStatement, SimpleLambdaExpression, ParenthesizedLambdaExpression))
+            // FIXME: UTs
+            if (!DereferencesMethodArguments && !node.IsAnyKind(SingleLineSubLambdaExpression, MultiLineSubLambdaExpression, SingleLineFunctionLambdaExpression, MultiLineFunctionLambdaExpression))
             {
                 base.Visit(node);
             }
@@ -90,7 +92,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
                 argumentNames.Contains(node.GetName())
                 && node.Ancestors().Any(x => x.IsAnyKind(
                     AwaitExpression,
-                    ElementAccessExpression,
+                    InvocationExpression,   // For array access
                     ForEachStatement,
                     ThrowStatement,
                     SimpleMemberAccessExpression));

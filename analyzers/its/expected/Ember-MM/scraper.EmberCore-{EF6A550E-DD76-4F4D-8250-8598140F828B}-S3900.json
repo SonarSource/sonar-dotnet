@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imgResult' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  151,
+"startColumn":  10,
+"endLine":  151,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'Image' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  185,
+"startColumn":  20,
+"endLine":  185,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'Image' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  233,
+"startColumn":  20,
+"endLine":  233,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'Image' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  280,
+"startColumn":  19,
+"endLine":  280,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imgResult' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  514,
+"startColumn":  9,
+"endLine":  514,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sUrl' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  882,
+"startColumn":  13,
+"endLine":  882,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'NewTrailer' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  74,
+"startColumn":  127,
+"endLine":  74,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'NewTrailer' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  76,
+"startColumn":  133,
+"endLine":  76,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'NewTrailer' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  78,
+"startColumn":  145,
+"endLine":  78,
+"endColumn":  155
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'NewTrailer' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  147,
+"endLine":  80,
+"endColumn":  157
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'Link' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"region":  {
+"startLine":  329,
+"startColumn":  39,
+"endLine":  329,
+"endColumn":  43
+}
+}
+}
+]
+}
