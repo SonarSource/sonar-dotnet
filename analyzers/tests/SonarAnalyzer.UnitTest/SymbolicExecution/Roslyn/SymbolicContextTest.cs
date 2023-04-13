@@ -32,12 +32,12 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void NullArgument_Throws()
         {
             var operation = CreateOperation();
-            ((Func<SymbolicContext>)(() => new SymbolicContext(operation, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
+            ((Func<SymbolicContext>)(() => new SymbolicContext(operation, null, Array.Empty<ISymbol>()))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
         }
 
         [TestMethod]
         public void NullOperation_SetsOperationToNull() =>
-            new SymbolicContext(null, ProgramState.Empty).Operation.Should().Be(null);
+            new SymbolicContext(null, ProgramState.Empty, Array.Empty<ISymbol>()).Operation.Should().Be(null);
 
         [TestMethod]
         public void PropertiesArePersisted()
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var operation = CreateOperation();
             var state = ProgramState.Empty.SetOperationValue(operation, SymbolicValue.Empty);
 
-            var sut = new SymbolicContext(operation, state);
+            var sut = new SymbolicContext(operation, state, Array.Empty<ISymbol>());
             sut.Operation.Should().Be(operation);
             sut.State.Should().Be(state);
         }
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var operation = CreateOperation();
             var state = ProgramState.Empty.SetOperationValue(operation, SymbolicValue.Empty);
 
-            var sut = new SymbolicContext(operation, state);
+            var sut = new SymbolicContext(operation, state, Array.Empty<ISymbol>());
             var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
             result.Should().NotBe(state, "new ProgramState instance should be created");
             result[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var operation = CreateOperation();
             var state = ProgramState.Empty;
 
-            var sut = new SymbolicContext(operation, state);
+            var sut = new SymbolicContext(operation, state, Array.Empty<ISymbol>());
             var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
             result.Should().NotBe(state, "new ProgramState instance should be created");
             result[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var symbol = operation.Children.First().TrackedSymbol();
             var state = ProgramState.Empty.SetSymbolValue(symbol, SymbolicValue.Empty);
 
-            var sut = new SymbolicContext(operation, state);
+            var sut = new SymbolicContext(operation, state, Array.Empty<ISymbol>());
             var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
             result.Should().NotBe(state, "new ProgramState instance should be created");
             result[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
             var symbol = operation.Children.First().TrackedSymbol();
             var state = ProgramState.Empty;
 
-            var sut = new SymbolicContext(operation, state);
+            var sut = new SymbolicContext(operation, state, Array.Empty<ISymbol>());
             var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
             result.Should().NotBe(state, "new ProgramState instance should be created");
             result[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void WithState_SameState_ReturnsThis()
         {
             var state = ProgramState.Empty;
-            var sut = new SymbolicContext(null, state);
+            var sut = new SymbolicContext(null, state, Array.Empty<ISymbol>());
             sut.WithState(state).Should().Be(sut);
         }
 
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         public void WithState_DifferentState_ReturnsNew()
         {
             var state = ProgramState.Empty;
-            var sut = new SymbolicContext(null, state);
+            var sut = new SymbolicContext(null, state, Array.Empty<ISymbol>());
             var newState = state.SetOperationValue(CreateOperation(), SymbolicValue.Empty);
             sut.WithState(newState).Should().NotBe(sut);
         }

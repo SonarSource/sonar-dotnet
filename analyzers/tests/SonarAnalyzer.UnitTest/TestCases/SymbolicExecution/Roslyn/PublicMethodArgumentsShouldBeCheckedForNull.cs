@@ -792,6 +792,6 @@ public class ParameterCaptures
 
         Func<string> someFunc = () => s.ToString();
 
-        return s.ToString(); // Noncompliant FP
+        return s.ToString();
     }
 }
