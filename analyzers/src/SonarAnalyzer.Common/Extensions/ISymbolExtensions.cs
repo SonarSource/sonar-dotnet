@@ -39,5 +39,15 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsInSameAssembly(this ISymbol symbol, ISymbol anotherSymbol) =>
             symbol.ContainingAssembly.Equals(anotherSymbol.ContainingAssembly);
+
+        public static bool HasNotNullAttribute(this ISymbol parameter) =>
+            parameter.GetAttributes() is { Length: > 0 } attributes && attributes.Any(IsNotNullAttribute);
+
+        // https://docs.microsoft.com/dotnet/api/microsoft.validatednotnullattribute
+        // https://docs.microsoft.com/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
+        // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute
+        private static bool IsNotNullAttribute(AttributeData attribute) =>
+            attribute.HasAnyName("ValidatedNotNullAttribute", "NotNullAttribute");
+
     }
 }
