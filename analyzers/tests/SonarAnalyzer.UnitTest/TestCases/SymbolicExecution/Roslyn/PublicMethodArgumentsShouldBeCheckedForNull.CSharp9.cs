@@ -119,7 +119,7 @@ public class CoalesceAssignment
     public void Method(object o)
     {
         o ??= Unknown();
-        o.ToString(); // Noncompliant - FP: not supported by the SE engine
+        o.ToString(); // Noncompliant - FP: parameter reassignment via a null coalesce assignment is not supported
     }
 
     private object Unknown() => null;
