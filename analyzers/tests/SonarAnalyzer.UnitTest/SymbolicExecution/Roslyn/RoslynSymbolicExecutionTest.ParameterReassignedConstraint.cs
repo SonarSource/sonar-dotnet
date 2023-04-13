@@ -46,6 +46,23 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [DataTestMethod]
+    [DataRow("")]
+    [DataRow("where T: class")]
+    [DataRow("where T: struct")]
+    public void ParameterReassignedConstraint_GenericParameters(string constraint)
+    {
+        var methodCode = $$"""
+            public void Main<T>(T arg) {{constraint}}
+            {
+                arg = default;
+                Tag("End", arg);
+            }
+            """;
+        var validator = SETestContext.CreateCSMethod(methodCode, new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
+        validator.ValidateTag("End", x => x.HasConstraint<ParameterReassignedConstraint>().Should().BeTrue());
+    }
+
+    [DataTestMethod]
     [DataRow("""ObjectField = null;""")]
     [DataRow("""FullProperty = null;""")]
     [DataRow("""AutoProperty = null;""")]
