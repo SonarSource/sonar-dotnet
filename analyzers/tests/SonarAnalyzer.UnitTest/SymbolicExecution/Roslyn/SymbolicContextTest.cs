@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
 
         [TestMethod]
         public void NullOperation_SetsOperationToNull() =>
-            new SymbolicContext(null, ProgramState.Empty, Array.Empty<ISymbol>()).Operation.Should().Be(null);
+            new SymbolicContext(operation: null, ProgramState.Empty, Array.Empty<ISymbol>()).Operation.Should().Be(null);
 
         [TestMethod]
         public void PropertiesArePersisted()
