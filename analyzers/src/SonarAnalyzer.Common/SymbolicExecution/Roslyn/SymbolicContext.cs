@@ -30,7 +30,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             Operation = operation; // Operation can be null for the branch nodes.
             State = state ?? throw new ArgumentNullException(nameof(state));
-            CapturedVariables = capturedVariables;
+            CapturedVariables = capturedVariables ?? throw new ArgumentNullException(nameof(capturedVariables));
         }
 
         public ProgramState SetOperationConstraint(SymbolicConstraint constraint) =>
