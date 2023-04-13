@@ -26,6 +26,6 @@ internal sealed class DefaultValue : ISimpleProcessor
 {
     public ProgramState Process(SymbolicContext context) =>
         context.Operation.Instance.Type.IsNullableValueType()
-            ? context.SetOperationConstraint(ObjectConstraint.Null) // ToDo: MMF-2401, this will need to be reviewed
+            ? context.SetOperationConstraint(ObjectConstraint.Null)
             : context.State;
 }

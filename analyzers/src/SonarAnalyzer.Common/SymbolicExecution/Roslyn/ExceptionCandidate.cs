@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     internal class ExceptionCandidate
@@ -27,7 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ExceptionCandidate(Compilation compilation) =>
             typeCatalog = new TypeCatalog(compilation);
 
-        public ExceptionState FromOperation(IOperationWrapperSonar operation) =>
+        public ExceptionState FromOperation(ProgramState state, IOperationWrapperSonar operation) =>
             operation.Instance.Kind switch
             {
                 OperationKindEx.ArrayElementReference => FromOperation(IArrayElementReferenceOperationWrapper.FromOperation(operation.Instance)),
@@ -36,12 +38,12 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 OperationKindEx.DynamicInvocation => ExceptionState.UnknownException,      // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
                 OperationKindEx.DynamicMemberReference => ExceptionState.UnknownException, // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
                 OperationKindEx.DynamicObjectCreation => ExceptionState.UnknownException,  // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
-                OperationKindEx.EventReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
-                OperationKindEx.FieldReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
+                OperationKindEx.EventReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
+                OperationKindEx.FieldReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
                 OperationKindEx.Invocation => FromOperation(IInvocationOperationWrapper.FromOperation(operation.Instance)),
-                OperationKindEx.MethodReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
+                OperationKindEx.MethodReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
                 OperationKindEx.ObjectCreation => operation.Instance.Type.DerivesFrom(KnownType.System_Exception) ? null : ExceptionState.UnknownException,
-                OperationKindEx.PropertyReference => FromOperation(IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
+                OperationKindEx.PropertyReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
                 _ => null
             };
 
@@ -63,8 +65,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 ? new ExceptionState(typeCatalog.SystemArgumentOutOfRangeException)
                 : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException);
 
-        private ExceptionState FromOperation(IMemberReferenceOperationWrapper reference) =>
+        private ExceptionState FromOperation(ProgramState state, IMemberReferenceOperationWrapper reference) =>
             reference.IsStaticOrThis()
+            || state[reference.Instance]?.HasConstraint(ObjectConstraint.NotNull) is true
             || reference.IsOnReaderWriterLockOrSlim()   // Needed by S2222
                 ? null
                 : new ExceptionState(typeCatalog.SystemNullReferenceException);
