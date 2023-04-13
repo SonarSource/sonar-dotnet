@@ -22,10 +22,9 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
 
-[TestClass]
-public class ParameterReassignedConstraintTest
+public partial class RoslynSymbolicExecutionTest
 {
     [DataTestMethod]
     [DataRow(@"arg = Unknown<object>();", "object")]
