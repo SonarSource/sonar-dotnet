@@ -573,18 +573,18 @@ Tag(""End"")";
         public void Binary_NullableRelationalNull_SetsBoolConstraint_CS(string expression)
         {
             var code = $$"""
-            int? notNullValue = 42;
-            int? nullValue = null;
-            if ({{expression}})
-            {
-                Tag("If_Unreachable");
-            }
-            else
-            {
-                Tag("Else");
-            }
-            Tag("End");
-            """;
+                int? notNullValue = 42;
+                int? nullValue = null;
+                if ({{expression}})
+                {
+                    Tag("If_Unreachable");
+                }
+                else
+                {
+                    Tag("Else");
+                }
+                Tag("End");
+                """;
 
             var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
             validator.ValidateContainsOperation(OperationKind.Binary);
