@@ -184,7 +184,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 }
             }
 
-            if (exceptionCandidate.FromOperation(node.Operation) is { } exception && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
+            if (exceptionCandidate.FromOperation(node.State, node.Operation) is { } exception && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
             {
                 foreach (var successor in ExceptionSuccessors(node, exception, tryRegion))
                 {
