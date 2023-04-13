@@ -528,10 +528,10 @@ Public Class Nancy_Repros
     Sub WithCapture(Ex As Exception, Condition As Boolean)
         Dim F As Func(Of Object) = Function() Ex    ' LVA tracks capturing of this parameter
         Dim Value As Object
-        Value = Ex.Message   ' Noncompliant
+        Value = Ex.Message   ' FN
         Value = Ex.Message
-        Value = If(Condition, Ex.Message, "")       ' Noncompliant FP
-        Value = Ex.Message                          ' Noncompliant FP
+        Value = If(Condition, Ex.Message, "")
+        Value = Ex.Message
     End Sub
 
 End Class

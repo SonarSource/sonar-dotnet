@@ -783,7 +783,7 @@ public class Nancy_Repro
 
 public class ParameterCaptures
 {
-    public string InsideLambda(string s)
+    public string InsideLambda_CaptureAfterCheck(string s)
     {
         if (s == null)
         {
@@ -793,5 +793,12 @@ public class ParameterCaptures
         Func<string> someFunc = () => s.ToString();
 
         return s.ToString();
+    }
+
+    public string InsideLambda_CaptureBeforeDereference(string s)
+    {
+        Func<string> someFunc = () => s.ToString();
+
+        return s.ToString(); // FN: s is not checked here
     }
 }
