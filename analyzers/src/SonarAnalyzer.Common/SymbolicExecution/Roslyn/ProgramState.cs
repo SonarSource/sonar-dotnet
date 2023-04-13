@@ -213,7 +213,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             return state;
         }
 
-        [Conditional("DEBUG")]
+        [Conditional("DEBUG1")]
         [ExcludeFromCodeCoverage]
         public void CheckConsistency()
         {
