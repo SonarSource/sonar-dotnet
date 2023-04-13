@@ -65,42 +65,8 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
         }
     }
 
-    protected override ProgramState PreProcessSimple(SymbolicContext context)
-    {
-        if (NullDereferenceCandidate(context.Operation.Instance) is { } candidate
-            && candidate.Kind == OperationKindEx.ParameterReference
-            && candidate.ToParameterReference() is var parameterReference
-            && !parameterReference.Parameter.Type.IsValueType
-            && !HasObjectConstraint(parameterReference.Parameter)
-            && !parameterReference.Parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
-        {
-            var message = context.Operation.Instance.Syntax.FirstAncestorOrSelf<ConstructorInitializerSyntax>() is not null
-                ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
-                : "Refactor this method to add validation of parameter '{0}' before using it.";
-            ReportIssue(parameterReference.WrappedOperation, string.Format(message, parameterReference.WrappedOperation.Syntax), context);
-        }
-
-        return context.State;
-
-        bool HasObjectConstraint(IParameterSymbol symbol) =>
-            context.State[symbol]?.HasConstraint<ObjectConstraint>() is true;
-    }
-
-    private static IOperation NullDereferenceCandidate(IOperation operation)
-    {
-        var candidate = operation.Kind switch
-        {
-            OperationKindEx.Invocation => operation.ToInvocation().Instance,
-            OperationKindEx.FieldReference => operation.ToFieldReference().Instance,
-            OperationKindEx.PropertyReference => operation.ToPropertyReference().Instance,
-            OperationKindEx.EventReference => operation.ToEventReference().Instance,
-            OperationKindEx.Await => operation.ToAwait().Operation,
-            OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
-            OperationKindEx.MethodReference => operation.ToMethodReference().Instance,
-            _ => null,
-        };
-        return candidate?.UnwrapConversion();
-    }
+    protected override bool IsInConstructorInitializer(SyntaxNode node) =>
+        node.FirstAncestorOrSelf<ConstructorInitializerSyntax>() is not null;
 
     private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker
     {
