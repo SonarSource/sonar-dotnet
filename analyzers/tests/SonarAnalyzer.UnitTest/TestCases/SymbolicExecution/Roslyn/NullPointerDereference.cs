@@ -1897,3 +1897,88 @@ public class Repro_6241<T>
         }
     }
 }
+
+public class PeachReproducers
+{
+    public void ConditionalPropertyInt(string value)
+    {
+        if (value?.Length > 0)
+        {
+            value.ToString();   // Noncompliant FP
+        }
+    }
+
+    public void ConditionalPropertyBool(Task t)
+    {
+        if (t?.IsCompleted == true)
+        {
+            t.ToString();       // Noncompliant FP
+        }
+    }
+
+    public void ConditionalPropertyInvocation(bool condition)
+    {
+        var list = condition ? null : new List<string>();
+        if (list?.Contains("key") == true)
+        {
+            list.ToString();    // Noncompliant FP
+        }
+    }
+
+    public void ConditionalIntTrackingZero(string[] arr)
+    {
+        if ((arr?.Length ?? 0) == 0)
+        {
+            return;
+        }
+        arr.ToString();         // Noncompliant FP
+    }
+
+    public void ConditionalIntTrackingMinusOne(string value)
+    {
+        var index = value?.IndexOf("x") ?? -1;
+        if (index != -1)
+        {
+            value.ToString();   // Noncompliant FP
+        }
+    }
+
+    public void WithDynamic(IEnumerable<Exception> list, dynamic message, dynamic displayName)
+    {
+        {
+            var ex = list.FirstOrDefault();
+            if (ex != null && !string.IsNullOrEmpty(message) && ex.Message != message) // Noncompliant FP
+            {
+                ex.ToString();  // Noncompliant FP
+            }
+        }
+    }
+
+    public void WhileTryForEachQuery(IList<Exception> list)
+    {
+        var run = true;
+        while (run)
+        {
+            try
+            {
+                foreach (var msg in from ex in list select ex.Message)              // Noncompliant {{'from ex in list select ex.Message' is null on at least one execution path.}} FP
+                {
+                }
+                foreach (var msg in (from ex in list select ex.Message).Distinct()) // Noncompliant {{'(from ex in list select ex.Message).Distinct()' is null on at least one execution path.}} FP
+                {
+                }
+                var subList = SubList();
+                foreach (var subItem in subList)    // Noncompliant FP
+                {
+                }
+                run = false;
+            }
+            catch
+            {
+            }
+        }
+
+        IEnumerable<string> SubList() =>
+            Array.Empty<string>();
+    }
+}
