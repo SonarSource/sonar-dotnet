@@ -85,7 +85,7 @@ class Sample
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_1"" {
 label = ""LocalLifetime region, Locals: c""
-cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: A();|1# InvocationOperation: A / InvocationExpressionSyntax: A()|2# InstanceReferenceOperation / IdentifierNameSyntax: A|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: B();|1# InvocationOperation: B / InvocationExpressionSyntax: B()|2# InstanceReferenceOperation / IdentifierNameSyntax: B|##########|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: c = C()|1# LocalReferenceOperation / VariableDeclaratorSyntax: c = C()|1# InvocationOperation: C / InvocationExpressionSyntax: C()|2# InstanceReferenceOperation / IdentifierNameSyntax: C|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation: A();|1# InvocationOperation: A: A()|2# InstanceReferenceOperation: A|##########|0# ExpressionStatementOperation: B();|1# InvocationOperation: B: B()|2# InstanceReferenceOperation: B|##########|0# SimpleAssignmentOperation: c = C()|1# LocalReferenceOperation: c = C()|1# InvocationOperation: C: C()|2# InstanceReferenceOperation: C|##########}""]
 }
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block2 [shape=record label=""{EXIT #2}""]
@@ -123,10 +123,10 @@ class Sample
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_1"" {
 label = ""LocalLifetime region, Captures: #Capture-0""
-cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation: #Capture-0 / IdentifierNameSyntax: a|1# ParameterReferenceOperation / IdentifierNameSyntax: a|##########|## BranchValue ##|0# BinaryOperation / LiteralExpressionSyntax: 1|1# FlowCaptureReferenceOperation: #Capture-0 / IdentifierNameSyntax: a|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
-cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: c1();|1# InvocationOperation: c1 / InvocationExpressionSyntax: c1()|2# InstanceReferenceOperation / IdentifierNameSyntax: c1|##########}""]
-cfg0_block3 [shape=record label=""{BLOCK #3|## BranchValue ##|0# BinaryOperation / LiteralExpressionSyntax: 2|1# FlowCaptureReferenceOperation: #Capture-0 / IdentifierNameSyntax: a|1# LiteralOperation / LiteralExpressionSyntax: 2|##########}""]
-cfg0_block4 [shape=record label=""{BLOCK #4|0# ExpressionStatementOperation / ExpressionStatementSyntax: c2();|1# InvocationOperation: c2 / InvocationExpressionSyntax: c2()|2# InstanceReferenceOperation / IdentifierNameSyntax: c2|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation: #Capture-0: a|1# ParameterReferenceOperation: a|##########|## BranchValue ##|0# BinaryOperation: 1|1# FlowCaptureReferenceOperation: #Capture-0: a|1# LiteralOperation: 1|##########}""]
+cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation: c1();|1# InvocationOperation: c1: c1()|2# InstanceReferenceOperation: c1|##########}""]
+cfg0_block3 [shape=record label=""{BLOCK #3|## BranchValue ##|0# BinaryOperation: 2|1# FlowCaptureReferenceOperation: #Capture-0: a|1# LiteralOperation: 2|##########}""]
+cfg0_block4 [shape=record label=""{BLOCK #4|0# ExpressionStatementOperation: c2();|1# InvocationOperation: c2: c2()|2# InstanceReferenceOperation: c2|##########}""]
 }
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block5 [shape=record label=""{EXIT #5}""]
@@ -162,8 +162,8 @@ class Sample
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
-cfg0_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: true|##########}""]
-cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar();|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar()|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# LiteralOperation: true|##########}""]
+cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation: Bar();|1# InvocationOperation: Bar: Bar()|2# InstanceReferenceOperation: Bar|##########}""]
 cfg0_block3 [shape=record label=""{EXIT #3}""]
 cfg0_block0 -> cfg0_block1
 cfg0_block1 -> cfg0_block2 [label=""Else""]
@@ -199,18 +199,18 @@ subgraph ""cluster_3"" {
 label = ""Try region""
 subgraph ""cluster_4"" {
 label = ""LocalLifetime region, Locals: i""
-cfg0_block3 [shape=record label=""{BLOCK #3|0# SimpleAssignmentOperation / IdentifierNameSyntax: var|1# LocalReferenceOperation / IdentifierNameSyntax: var|1# ConversionOperation / IdentifierNameSyntax: var|2# PropertyReferenceOperation / IdentifierNameSyntax: var|3# FlowCaptureReferenceOperation: #Capture-0 / IdentifierNameSyntax: items|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar(i);|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar(i)|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|2# ArgumentOperation / ArgumentSyntax: i|3# LocalReferenceOperation / IdentifierNameSyntax: i|##########}""]
+cfg0_block3 [shape=record label=""{BLOCK #3|0# SimpleAssignmentOperation: var|1# LocalReferenceOperation: var|1# ConversionOperation: var|2# PropertyReferenceOperation: var|3# FlowCaptureReferenceOperation: #Capture-0: items|##########|0# ExpressionStatementOperation: Bar(i);|1# InvocationOperation: Bar: Bar(i)|2# InstanceReferenceOperation: Bar|2# ArgumentOperation: i|3# LocalReferenceOperation: i|##########}""]
 }
-cfg0_block2 [shape=record label=""{BLOCK #2|## BranchValue ##|0# InvocationOperation: MoveNext / IdentifierNameSyntax: items|1# FlowCaptureReferenceOperation: #Capture-0 / IdentifierNameSyntax: items|##########}""]
+cfg0_block2 [shape=record label=""{BLOCK #2|## BranchValue ##|0# InvocationOperation: MoveNext: items|1# FlowCaptureReferenceOperation: #Capture-0: items|##########}""]
 }
 subgraph ""cluster_5"" {
 label = ""Finally region, Captures: #Capture-1""
-cfg0_block4 [shape=record label=""{BLOCK #4|0# FlowCaptureOperation: #Capture-1 / IdentifierNameSyntax: items|1# ConversionOperation / IdentifierNameSyntax: items|2# FlowCaptureReferenceOperation: #Capture-0 / IdentifierNameSyntax: items|##########|## BranchValue ##|0# IsNullOperation / IdentifierNameSyntax: items|1# FlowCaptureReferenceOperation: #Capture-1 / IdentifierNameSyntax: items|##########}""]
-cfg0_block5 [shape=record label=""{BLOCK #5|0# InvocationOperation: Dispose / IdentifierNameSyntax: items|1# FlowCaptureReferenceOperation: #Capture-1 / IdentifierNameSyntax: items|##########}""]
+cfg0_block4 [shape=record label=""{BLOCK #4|0# FlowCaptureOperation: #Capture-1: items|1# ConversionOperation: items|2# FlowCaptureReferenceOperation: #Capture-0: items|##########|## BranchValue ##|0# IsNullOperation: items|1# FlowCaptureReferenceOperation: #Capture-1: items|##########}""]
+cfg0_block5 [shape=record label=""{BLOCK #5|0# InvocationOperation: Dispose: items|1# FlowCaptureReferenceOperation: #Capture-1: items|##########}""]
 cfg0_block6 [shape=record label=""{BLOCK #6}""]
 }
 }
-cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation: #Capture-0 / IdentifierNameSyntax: items|1# InvocationOperation: GetEnumerator / IdentifierNameSyntax: items|2# ConversionOperation / IdentifierNameSyntax: items|3# ParameterReferenceOperation / IdentifierNameSyntax: items|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation: #Capture-0: items|1# InvocationOperation: GetEnumerator: items|2# ConversionOperation: items|3# ParameterReferenceOperation: items|##########}""]
 }
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block7 [shape=record label=""{EXIT #7}""]
@@ -255,20 +255,20 @@ subgraph ""cluster_4"" {
 label = ""LocalLifetime region, Locals: key, value""
 subgraph ""cluster_5"" {
 label = ""LocalLifetime region, Locals: i, j""
-cfg0_block4 [shape=record label=""{BLOCK #4|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: i = key|1# LocalReferenceOperation / VariableDeclaratorSyntax: i = key|1# LocalReferenceOperation / IdentifierNameSyntax: key|##########|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: j = value|1# LocalReferenceOperation / VariableDeclaratorSyntax: j = value|1# LocalReferenceOperation / IdentifierNameSyntax: value|##########}""]
+cfg0_block4 [shape=record label=""{BLOCK #4|0# SimpleAssignmentOperation: i = key|1# LocalReferenceOperation: i = key|1# LocalReferenceOperation: key|##########|0# SimpleAssignmentOperation: j = value|1# LocalReferenceOperation: j = value|1# LocalReferenceOperation: value|##########}""]
 }
-cfg0_block3 [shape=record label=""{BLOCK #3|0# DeconstructionAssignmentOperation / DeclarationExpressionSyntax: var (key, value)|1# DeclarationExpressionOperation / DeclarationExpressionSyntax: var (key, value)|2# TupleOperation / ParenthesizedVariableDesignationSyntax: (key, value)|3# LocalReferenceOperation / SingleVariableDesignationSyntax: key|3# LocalReferenceOperation / SingleVariableDesignationSyntax: value|1# ConversionOperation / DeclarationExpressionSyntax: var (key, value)|2# PropertyReferenceOperation / DeclarationExpressionSyntax: var (key, value)|3# FlowCaptureReferenceOperation: #Capture-0 / IdentifierNameSyntax: values|##########}""]
+cfg0_block3 [shape=record label=""{BLOCK #3|0# DeconstructionAssignmentOperation: var (key, value)|1# DeclarationExpressionOperation: var (key, value)|2# TupleOperation: (key, value)|3# LocalReferenceOperation: key|3# LocalReferenceOperation: value|1# ConversionOperation: var (key, value)|2# PropertyReferenceOperation: var (key, value)|3# FlowCaptureReferenceOperation: #Capture-0: values|##########}""]
 }
-cfg0_block2 [shape=record label=""{BLOCK #2|## BranchValue ##|0# InvocationOperation: MoveNext / IdentifierNameSyntax: values|1# FlowCaptureReferenceOperation: #Capture-0 / IdentifierNameSyntax: values|##########}""]
+cfg0_block2 [shape=record label=""{BLOCK #2|## BranchValue ##|0# InvocationOperation: MoveNext: values|1# FlowCaptureReferenceOperation: #Capture-0: values|##########}""]
 }
 subgraph ""cluster_6"" {
 label = ""Finally region, Captures: #Capture-1""
-cfg0_block5 [shape=record label=""{BLOCK #5|0# FlowCaptureOperation: #Capture-1 / IdentifierNameSyntax: values|1# ConversionOperation / IdentifierNameSyntax: values|2# FlowCaptureReferenceOperation: #Capture-0 / IdentifierNameSyntax: values|##########|## BranchValue ##|0# IsNullOperation / IdentifierNameSyntax: values|1# FlowCaptureReferenceOperation: #Capture-1 / IdentifierNameSyntax: values|##########}""]
-cfg0_block6 [shape=record label=""{BLOCK #6|0# InvocationOperation: Dispose / IdentifierNameSyntax: values|1# FlowCaptureReferenceOperation: #Capture-1 / IdentifierNameSyntax: values|##########}""]
+cfg0_block5 [shape=record label=""{BLOCK #5|0# FlowCaptureOperation: #Capture-1: values|1# ConversionOperation: values|2# FlowCaptureReferenceOperation: #Capture-0: values|##########|## BranchValue ##|0# IsNullOperation: values|1# FlowCaptureReferenceOperation: #Capture-1: values|##########}""]
+cfg0_block6 [shape=record label=""{BLOCK #6|0# InvocationOperation: Dispose: values|1# FlowCaptureReferenceOperation: #Capture-1: values|##########}""]
 cfg0_block7 [shape=record label=""{BLOCK #7}""]
 }
 }
-cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation: #Capture-0 / IdentifierNameSyntax: values|1# InvocationOperation: GetEnumerator / IdentifierNameSyntax: values|2# ConversionOperation / IdentifierNameSyntax: values|3# ParameterReferenceOperation / IdentifierNameSyntax: values|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation: #Capture-0: values|1# InvocationOperation: GetEnumerator: values|2# ConversionOperation: values|3# ParameterReferenceOperation: values|##########}""]
 }
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block8 [shape=record label=""{EXIT #8}""]
@@ -307,9 +307,9 @@ class Sample
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_1"" {
 label = ""LocalLifetime region, Locals: i""
-cfg0_block1 [shape=record label=""{BLOCK #1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: i = 0|1# LocalReferenceOperation / VariableDeclaratorSyntax: i = 0|1# LiteralOperation / LiteralExpressionSyntax: 0|##########}""]
-cfg0_block2 [shape=record label=""{BLOCK #2|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: i \< 10|1# LocalReferenceOperation / IdentifierNameSyntax: i|1# LiteralOperation / LiteralExpressionSyntax: 10|##########}""]
-cfg0_block3 [shape=record label=""{BLOCK #3|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar(i);|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar(i)|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|2# ArgumentOperation / ArgumentSyntax: i|3# LocalReferenceOperation / IdentifierNameSyntax: i|##########|0# ExpressionStatementOperation / PostfixUnaryExpressionSyntax: i++|1# IncrementOrDecrementOperation / PostfixUnaryExpressionSyntax: i++|2# LocalReferenceOperation / IdentifierNameSyntax: i|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# SimpleAssignmentOperation: i = 0|1# LocalReferenceOperation: i = 0|1# LiteralOperation: 0|##########}""]
+cfg0_block2 [shape=record label=""{BLOCK #2|## BranchValue ##|0# BinaryOperation: i \< 10|1# LocalReferenceOperation: i|1# LiteralOperation: 10|##########}""]
+cfg0_block3 [shape=record label=""{BLOCK #3|0# ExpressionStatementOperation: Bar(i);|1# InvocationOperation: Bar: Bar(i)|2# InstanceReferenceOperation: Bar|2# ArgumentOperation: i|3# LocalReferenceOperation: i|##########|0# ExpressionStatementOperation: i++|1# IncrementOrDecrementOperation: i++|2# LocalReferenceOperation: i|##########}""]
 }
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block4 [shape=record label=""{EXIT #4}""]
@@ -346,16 +346,16 @@ subgraph ""cluster_2"" {
 label = ""TryAndFinally region""
 subgraph ""cluster_3"" {
 label = ""Try region""
-cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar();|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar()|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|##########}""]
+cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation: Bar();|1# InvocationOperation: Bar: Bar()|2# InstanceReferenceOperation: Bar|##########}""]
 }
 subgraph ""cluster_4"" {
 label = ""Finally region""
-cfg0_block3 [shape=record label=""{BLOCK #3|## BranchValue ##|0# IsNullOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# LocalReferenceOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|##########}""]
-cfg0_block4 [shape=record label=""{BLOCK #4|0# InvocationOperation: Dispose / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# ConversionOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|2# LocalReferenceOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|##########}""]
+cfg0_block3 [shape=record label=""{BLOCK #3|## BranchValue ##|0# IsNullOperation: x = new System.IO.MemoryStream()|1# LocalReferenceOperation: x = new System.IO.MemoryStream()|##########}""]
+cfg0_block4 [shape=record label=""{BLOCK #4|0# InvocationOperation: Dispose: x = new System.IO.MemoryStream()|1# ConversionOperation: x = new System.IO.MemoryStream()|2# LocalReferenceOperation: x = new System.IO.MemoryStream()|##########}""]
 cfg0_block5 [shape=record label=""{BLOCK #5}""]
 }
 }
-cfg0_block1 [shape=record label=""{BLOCK #1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# LocalReferenceOperation / VariableDeclaratorSyntax: x = new System.IO.MemoryStream()|1# ObjectCreationOperation / ObjectCreationExpressionSyntax: new System.IO.MemoryStream()|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# SimpleAssignmentOperation: x = new System.IO.MemoryStream()|1# LocalReferenceOperation: x = new System.IO.MemoryStream()|1# ObjectCreationOperation: new System.IO.MemoryStream()|##########}""]
 }
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block6 [shape=record label=""{EXIT #6}""]
@@ -396,16 +396,16 @@ subgraph ""cluster_2"" {
 label = ""TryAndFinally region""
 subgraph ""cluster_3"" {
 label = ""Try region""
-cfg0_block2 [shape=record label=""{BLOCK #2|0# InvocationOperation: Enter / IdentifierNameSyntax: x|1# ArgumentOperation / IdentifierNameSyntax: x|2# FlowCaptureReferenceOperation: #Capture-0 / IdentifierNameSyntax: x|1# ArgumentOperation / IdentifierNameSyntax: x|2# LocalReferenceOperation / IdentifierNameSyntax: x|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar();|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar()|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|##########}""]
+cfg0_block2 [shape=record label=""{BLOCK #2|0# InvocationOperation: Enter: x|1# ArgumentOperation: x|2# FlowCaptureReferenceOperation: #Capture-0: x|1# ArgumentOperation: x|2# LocalReferenceOperation: x|##########|0# ExpressionStatementOperation: Bar();|1# InvocationOperation: Bar: Bar()|2# InstanceReferenceOperation: Bar|##########}""]
 }
 subgraph ""cluster_4"" {
 label = ""Finally region""
-cfg0_block3 [shape=record label=""{BLOCK #3|## BranchValue ##|0# LocalReferenceOperation / IdentifierNameSyntax: x|##########}""]
-cfg0_block4 [shape=record label=""{BLOCK #4|0# InvocationOperation: Exit / IdentifierNameSyntax: x|1# ArgumentOperation / IdentifierNameSyntax: x|2# FlowCaptureReferenceOperation: #Capture-0 / IdentifierNameSyntax: x|##########}""]
+cfg0_block3 [shape=record label=""{BLOCK #3|## BranchValue ##|0# LocalReferenceOperation: x|##########}""]
+cfg0_block4 [shape=record label=""{BLOCK #4|0# InvocationOperation: Exit: x|1# ArgumentOperation: x|2# FlowCaptureReferenceOperation: #Capture-0: x|##########}""]
 cfg0_block5 [shape=record label=""{BLOCK #5}""]
 }
 }
-cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation: #Capture-0 / IdentifierNameSyntax: x|1# FieldReferenceOperation / IdentifierNameSyntax: x|2# InstanceReferenceOperation / IdentifierNameSyntax: x|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# FlowCaptureOperation: #Capture-0: x|1# FieldReferenceOperation: x|2# InstanceReferenceOperation: x|##########}""]
 }
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block6 [shape=record label=""{EXIT #6}""]
@@ -451,16 +451,16 @@ subgraph ""cluster_1"" {
 label = ""TryAndFinally region""
 subgraph ""cluster_2"" {
 label = ""Try region""
-cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation / ExpressionStatementSyntax: InTry();|1# InvocationOperation: InTry / InvocationExpressionSyntax: InTry()|2# InstanceReferenceOperation / IdentifierNameSyntax: InTry|##########}""]
+cfg0_block2 [shape=record label=""{BLOCK #2|0# ExpressionStatementOperation: InTry();|1# InvocationOperation: InTry: InTry()|2# InstanceReferenceOperation: InTry|##########}""]
 }
 subgraph ""cluster_3"" {
 label = ""Finally region""
-cfg0_block3 [shape=record label=""{BLOCK #3|0# ExpressionStatementOperation / ExpressionStatementSyntax: InFinally();|1# InvocationOperation: InFinally / InvocationExpressionSyntax: InFinally()|2# InstanceReferenceOperation / IdentifierNameSyntax: InFinally|##########}""]
+cfg0_block3 [shape=record label=""{BLOCK #3|0# ExpressionStatementOperation: InFinally();|1# InvocationOperation: InFinally: InFinally()|2# InstanceReferenceOperation: InFinally|##########}""]
 }
 }
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
-cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: Before();|1# InvocationOperation: Before / InvocationExpressionSyntax: Before()|2# InstanceReferenceOperation / IdentifierNameSyntax: Before|##########}""]
-cfg0_block4 [shape=record label=""{BLOCK #4|0# ExpressionStatementOperation / ExpressionStatementSyntax: After();|1# InvocationOperation: After / InvocationExpressionSyntax: After()|2# InstanceReferenceOperation / IdentifierNameSyntax: After|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation: Before();|1# InvocationOperation: Before: Before()|2# InstanceReferenceOperation: Before|##########}""]
+cfg0_block4 [shape=record label=""{BLOCK #4|0# ExpressionStatementOperation: After();|1# InvocationOperation: After: After()|2# InstanceReferenceOperation: After|##########}""]
 cfg0_block5 [shape=record label=""{EXIT #5}""]
 cfg0_block1 -> cfg0_block2
 cfg0_block3 -> NoDestination_cfg0_block3 [label=""StructuredExceptionHandling""]
@@ -494,7 +494,7 @@ cfg0_block1 [shape=record label=""{BLOCK #1}""]
 }
 subgraph ""cluster_3"" {
 label = ""Catch region: System.InvalidOperationException, Locals: ex""
-cfg0_block2 [shape=record label=""{BLOCK #2|0# SimpleAssignmentOperation / CatchDeclarationSyntax: (System.InvalidOperationException ex)|1# LocalReferenceOperation / CatchDeclarationSyntax: (System.InvalidOperationException ex)|1# CaughtExceptionOperation / CatchDeclarationSyntax: (System.InvalidOperationException ex)|##########}""]
+cfg0_block2 [shape=record label=""{BLOCK #2|0# SimpleAssignmentOperation: (System.InvalidOperationException ex)|1# LocalReferenceOperation: (System.InvalidOperationException ex)|1# CaughtExceptionOperation: (System.InvalidOperationException ex)|##########}""]
 }
 }
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
@@ -528,26 +528,26 @@ class Sample
 @"digraph ""RoslynCfg"" {
 subgraph ""cluster_1"" {
 label = ""LocalLifetime region, Locals: fourty""
-cfg0_block1 [shape=record label=""{BLOCK #1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: fourty = 40|1# LocalReferenceOperation / VariableDeclaratorSyntax: fourty = 40|1# LiteralOperation / LiteralExpressionSyntax: 40|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: Local();|1# InvocationOperation: Local / InvocationExpressionSyntax: Local()|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# SimpleAssignmentOperation: fourty = 40|1# LocalReferenceOperation: fourty = 40|1# LiteralOperation: 40|##########|0# ExpressionStatementOperation: Local();|1# InvocationOperation: Local: Local()|##########}""]
 }
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
 cfg0_block2 [shape=record label=""{EXIT #2}""]
 subgraph ""cluster_3"" {
 label = ""RoslynCfg.Local""
 cfg2_block0 [shape=record label=""{ENTRY #0}""]
-cfg2_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: fourty + LocalStatic()|1# LocalReferenceOperation / IdentifierNameSyntax: fourty|1# InvocationOperation: LocalStatic / InvocationExpressionSyntax: LocalStatic()|##########}""]
+cfg2_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation: fourty + LocalStatic()|1# LocalReferenceOperation: fourty|1# InvocationOperation: LocalStatic: LocalStatic()|##########}""]
 cfg2_block2 [shape=record label=""{EXIT #2}""]
 }
 subgraph ""cluster_5"" {
 label = ""RoslynCfg.LocalStatic""
 cfg4_block0 [shape=record label=""{ENTRY #0}""]
-cfg4_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# InvocationOperation: LocalStaticArg / InvocationExpressionSyntax: LocalStaticArg(1)|1# ArgumentOperation / ArgumentSyntax: 1|2# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
+cfg4_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# InvocationOperation: LocalStaticArg: LocalStaticArg(1)|1# ArgumentOperation: 1|2# LiteralOperation: 1|##########}""]
 cfg4_block2 [shape=record label=""{EXIT #2}""]
 }
 subgraph ""cluster_7"" {
 label = ""RoslynCfg.LocalStaticArg""
 cfg6_block0 [shape=record label=""{ENTRY #0}""]
-cfg6_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: one + 1|1# ParameterReferenceOperation / IdentifierNameSyntax: one|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
+cfg6_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation: one + 1|1# ParameterReferenceOperation: one|1# LiteralOperation: 1|##########}""]
 cfg6_block2 [shape=record label=""{EXIT #2}""]
 }
 cfg0_block0 -> cfg0_block1
@@ -579,18 +579,18 @@ class Sample
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
-cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar(x =\> \{ return arg + 1; \});|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar(x =\> \{ return arg + 1; \})|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|2# ArgumentOperation / ArgumentSyntax: x =\> \{ return arg + 1; \}|3# DelegateCreationOperation / SimpleLambdaExpressionSyntax: x =\> \{ return arg + 1; \}|4# FlowAnonymousFunctionOperation / SimpleLambdaExpressionSyntax: x =\> \{ return arg + 1; \}|##########|0# ExpressionStatementOperation / ExpressionStatementSyntax: Bar(x =\> arg - 1);|1# InvocationOperation: Bar / InvocationExpressionSyntax: Bar(x =\> arg - 1)|2# InstanceReferenceOperation / IdentifierNameSyntax: Bar|2# ArgumentOperation / ArgumentSyntax: x =\> arg - 1|3# DelegateCreationOperation / SimpleLambdaExpressionSyntax: x =\> arg - 1|4# FlowAnonymousFunctionOperation / SimpleLambdaExpressionSyntax: x =\> arg - 1|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation: Bar(x =\> \{ return arg + 1; \});|1# InvocationOperation: Bar: Bar(x =\> \{ return arg + 1; \})|2# InstanceReferenceOperation: Bar|2# ArgumentOperation: x =\> \{ return arg + 1; \}|3# DelegateCreationOperation: x =\> \{ return arg + 1; \}|4# FlowAnonymousFunctionOperation: x =\> \{ return arg + 1; \}|##########|0# ExpressionStatementOperation: Bar(x =\> arg - 1);|1# InvocationOperation: Bar: Bar(x =\> arg - 1)|2# InstanceReferenceOperation: Bar|2# ArgumentOperation: x =\> arg - 1|3# DelegateCreationOperation: x =\> arg - 1|4# FlowAnonymousFunctionOperation: x =\> arg - 1|##########}""]
 cfg0_block2 [shape=record label=""{EXIT #2}""]
 subgraph ""cluster_2"" {
 label = ""RoslynCfg.anonymous""
 cfg1_block0 [shape=record label=""{ENTRY #0}""]
-cfg1_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: arg + 1|1# ParameterReferenceOperation / IdentifierNameSyntax: arg|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
+cfg1_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation: arg + 1|1# ParameterReferenceOperation: arg|1# LiteralOperation: 1|##########}""]
 cfg1_block2 [shape=record label=""{EXIT #2}""]
 }
 subgraph ""cluster_4"" {
 label = ""RoslynCfg.anonymous""
 cfg3_block0 [shape=record label=""{ENTRY #0}""]
-cfg3_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation / BinaryExpressionSyntax: arg - 1|1# ParameterReferenceOperation / IdentifierNameSyntax: arg|1# LiteralOperation / LiteralExpressionSyntax: 1|##########}""]
+cfg3_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# BinaryOperation: arg - 1|1# ParameterReferenceOperation: arg|1# LiteralOperation: 1|##########}""]
 cfg3_block2 [shape=record label=""{EXIT #2}""]
 }
 cfg0_block0 -> cfg0_block1
@@ -622,17 +622,17 @@ subgraph ""cluster_1"" {
 label = ""LocalLifetime region, Locals: b""
 subgraph ""cluster_2"" {
 label = ""LocalLifetime region, Captures: #Capture-0""
-cfg0_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: arg|##########}""]
-cfg0_block2 [shape=record label=""{BLOCK #2|0# FlowCaptureOperation: #Capture-0 / LiteralExpressionSyntax: false|1# LiteralOperation / LiteralExpressionSyntax: false|##########}""]
-cfg0_block3 [shape=record label=""{BLOCK #3|0# FlowCaptureOperation: #Capture-0 / IdentifierNameSyntax: arg|1# LiteralOperation / IdentifierNameSyntax: arg|##########}""]
-cfg0_block4 [shape=record label=""{BLOCK #4|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: b = arg && false|1# LocalReferenceOperation / VariableDeclaratorSyntax: b = arg && false|1# FlowCaptureReferenceOperation: #Capture-0 / BinaryExpressionSyntax: arg && false|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|## BranchValue ##|0# ParameterReferenceOperation: arg|##########}""]
+cfg0_block2 [shape=record label=""{BLOCK #2|0# FlowCaptureOperation: #Capture-0: false|1# LiteralOperation: false|##########}""]
+cfg0_block3 [shape=record label=""{BLOCK #3|0# FlowCaptureOperation: #Capture-0: arg|1# LiteralOperation: arg|##########}""]
+cfg0_block4 [shape=record label=""{BLOCK #4|0# SimpleAssignmentOperation: b = arg && false|1# LocalReferenceOperation: b = arg && false|1# FlowCaptureReferenceOperation: #Capture-0: arg && false|##########}""]
 }
 subgraph ""cluster_3"" {
 label = ""LocalLifetime region, Captures: #Capture-1, #Capture-2""
-cfg0_block5 [shape=record label=""{BLOCK #5|0# FlowCaptureOperation: #Capture-1 / IdentifierNameSyntax: b|1# LocalReferenceOperation / IdentifierNameSyntax: b|##########|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: arg|##########}""]
-cfg0_block6 [shape=record label=""{BLOCK #6|0# FlowCaptureOperation: #Capture-2 / LiteralExpressionSyntax: true|1# LiteralOperation / LiteralExpressionSyntax: true|##########}""]
-cfg0_block7 [shape=record label=""{BLOCK #7|0# FlowCaptureOperation: #Capture-2 / IdentifierNameSyntax: arg|1# LiteralOperation / IdentifierNameSyntax: arg|##########}""]
-cfg0_block8 [shape=record label=""{BLOCK #8|0# ExpressionStatementOperation / ExpressionStatementSyntax: b = arg \|\| true;|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: b = arg \|\| true|2# FlowCaptureReferenceOperation: #Capture-1 / IdentifierNameSyntax: b|2# FlowCaptureReferenceOperation: #Capture-2 / BinaryExpressionSyntax: arg \|\| true|##########}""]
+cfg0_block5 [shape=record label=""{BLOCK #5|0# FlowCaptureOperation: #Capture-1: b|1# LocalReferenceOperation: b|##########|## BranchValue ##|0# ParameterReferenceOperation: arg|##########}""]
+cfg0_block6 [shape=record label=""{BLOCK #6|0# FlowCaptureOperation: #Capture-2: true|1# LiteralOperation: true|##########}""]
+cfg0_block7 [shape=record label=""{BLOCK #7|0# FlowCaptureOperation: #Capture-2: arg|1# LiteralOperation: arg|##########}""]
+cfg0_block8 [shape=record label=""{BLOCK #8|0# ExpressionStatementOperation: b = arg \|\| true;|1# SimpleAssignmentOperation: b = arg \|\| true|2# FlowCaptureReferenceOperation: #Capture-1: b|2# FlowCaptureReferenceOperation: #Capture-2: arg \|\| true|##########}""]
 }
 }
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
@@ -667,7 +667,7 @@ class Sample
             dot.Should().BeIgnoringLineEndings(
 @"digraph ""RoslynCfg"" {
 cfg0_block0 [shape=record label=""{ENTRY #0}""]
-cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation / ExpressionStatementSyntax: undefined();|1# INVALID / InvocationExpressionSyntax: undefined()|2# INVALID / IdentifierNameSyntax: undefined|##########}""]
+cfg0_block1 [shape=record label=""{BLOCK #1|0# ExpressionStatementOperation: undefined();|1# INVALID: undefined()|2# INVALID: undefined|##########}""]
 cfg0_block2 [shape=record label=""{EXIT #2}""]
 cfg0_block0 -> cfg0_block1
 cfg0_block1 -> cfg0_block2
