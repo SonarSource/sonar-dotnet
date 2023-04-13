@@ -167,13 +167,13 @@ Public Class GuardedTests
         GuardShared(s4)
         s4.ToUpper()
 
-        s5.GuardExtension() ' Noncompliant FP FIXME
+        s5.GuardExtension()
         s5.ToUpper()
 
-        s6.GuardExtensionMoreAttributes()   ' Noncompliant FP FIXME
+        s6.GuardExtensionMoreAttributes()
         s6.ToUpper()
 
-        s7.GuardExtensionMoreArguments(Nothing, Nothing)    ' Noncompliant FP FIXME
+        s7.GuardExtensionMoreArguments(Nothing, Nothing)
         s7.ToUpper()
     End Sub
 
@@ -532,6 +532,21 @@ Public Class Nancy_Repros
         Value = Ex.Message
         Value = If(Condition, Ex.Message, "")       ' Noncompliant FP
         Value = Ex.Message                          ' Noncompliant FP
+    End Sub
+
+End Class
+
+Public Class ShouldExecuteLambdas
+
+    Public Sub Lambdas(Arg As Object)
+        Dim SingleLineFunction As Func(Of String) = Function() Arg.ToString
+        Dim MultiLineFunction As Func(Of String) = Function()
+                                                       Return Arg.ToString
+                                                   End Function
+        Dim SingleLineAction As Action = Sub() Arg.ToString()
+        Dim MultiLineAction As Action = Sub()
+                                            Arg.ToString()
+                                        End Sub
     End Sub
 
 End Class
