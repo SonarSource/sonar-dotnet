@@ -106,11 +106,25 @@ namespace SonarAnalyzer.CFG
                 operation == null ? Enumerable.Empty<string>() : new[] { "## BranchValue ##" }.Concat(SerializeOperation(operation));
 
             private static IEnumerable<string> SerializeOperation(IOperation operation) =>
-                SerializeOperation(0, operation).Concat(new[] { "##########" });
+                SerializeOperation(0, null, operation).Concat(new[] { "##########" });
 
-            private static IEnumerable<string> SerializeOperation(int level, IOperation operation) =>
-                new[] { $"{level}# {operation.Serialize()}" }
-                .Concat(operation.ToSonar().Children.SelectMany(x => SerializeOperation(level + 1, x)));
+            private static IEnumerable<string> SerializeOperation(int level, string prefix, IOperation operation)
+            {
+                var ret = new List<string> { $"{level}#: {prefix}{operation.Serialize()}" };
+                var map = new Dictionary<IOperation, string>();
+                foreach (var pi in operation.GetType().GetProperties())
+                {
+                    if (pi.GetValue(operation) is IOperation value)
+                    {
+                        map[value] = map.TryGetValue(value, out var old) ? $"{old}, {pi.Name}" : pi.Name;
+                    }
+                }
+                foreach (var child in operation.ToSonar().Children)
+                {
+                    ret.AddRange(SerializeOperation(level + 1, map.TryGetValue(child, out var childPrefix) ? $"{level}#.{childPrefix}: " : null, child));
+                }
+                return ret;
+            }
 
             private static string SerializeRegion(ControlFlowRegion region)
             {
