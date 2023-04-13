@@ -1,9 +1,5 @@
-﻿Imports System.Net.Mime
-
-Imports System
-Imports System.Collections.Generic
+﻿Imports System.Data
 Imports System.Text
-Imports System.Threading.Tasks
 Imports System.Runtime.CompilerServices
 
 Public Class Program
@@ -140,17 +136,17 @@ End Class
 Public Module GuardExtensions
 
     <Extension>
-    Public Sub GuardExtension(Of T As Class)(<ValidatedNotNull> Value As T, Optional Name As String = "")
+    Public Sub GuardExtension(Of T As Class)(<ValidatedNotNullAttribute> Value As T, Optional Name As String = "")
         If Value Is Nothing Then Throw New ArgumentNullException(Name)
     End Sub
 
     <Extension>
-    Public Sub GuardExtensionMoreAttributes(Of T As Class)(<Foo, ValidatedNotNull, Bar> Value As T, Optional Name As String = "")
+    Public Sub GuardExtensionMoreAttributes(Of T As Class)(<FooAttribute, ValidatedNotNullAttribute, BarAttribute> Value As T, Optional Name As String = "")
         If Value Is Nothing Then Throw New ArgumentNullException(Name)
     End Sub
 
     <Extension>
-    Public Sub GuardExtensionMoreArguments(Of T As Class)(<ValidatedNotNull> Value As T, Foo As String, Bar As String)
+    Public Sub GuardExtensionMoreArguments(Of T As Class)(<ValidatedNotNullAttribute> Value As T, Foo As String, Bar As String)
         If Value Is Nothing Then Throw New ArgumentNullException()
     End Sub
 
@@ -181,18 +177,17 @@ Public Class GuardedTests
         s7.ToUpper()                                        ' Noncompliant FP FIXME
     End Sub
 
-    Public Sub Guard1(Of T As Class)(<ValidatedNotNull> Value As T)
+    Public Sub Guard1(Of T As Class)(<ValidatedNotNullAttribute> Value As T)
     End Sub
 
-    Public Sub Guard2(Of T As Class)(<ValidatedNotNull> Value As T, Name As String)
+    Public Sub Guard2(Of T As Class)(<ValidatedNotNullAttribute> Value As T, Name As String)
     End Sub
 
-    Public Sub Guard3(Of T As Class)(Name As String, <ValidatedNotNull> Value As T)
+    Public Sub Guard3(Of T As Class)(Name As String, <ValidatedNotNullAttribute> Value As T)
     End Sub
 
-    Public Shared Sub GuardShared(Of T As Class)(<ValidatedNotNull> Value As T)
+    Public Shared Sub GuardShared(Of T As Class)(<ValidatedNotNullAttribute> Value As T)
     End Sub
-
 End Class
 
 Public Class ClassAccessibility
@@ -519,6 +514,24 @@ Public Class Base
     End Sub
 
     Public Sub New(s As String)
+    End Sub
+
+End Class
+
+Public Class Nancy_Repros
+
+    Public Function IfStartsWith(Arg As String) As String
+        If Arg.StartsWith("Value") Then Arg = Arg.Substring(5)  ' Noncompliant
+        Return Arg.ToString     ' Noncompliant FP, should have learned NotNull from the previous .StartsWith()
+    End Function
+
+    Sub WithCapture(Ex As Exception, Condition As Boolean)
+        Dim F As Func(Of Object) = Function() Ex    ' LVA tracks capturing of this parameter
+        Dim Value As Object
+        Value = Ex.Message   ' Noncompliant
+        Value = Ex.Message
+        Value = If(Condition, Ex.Message, "")       ' Noncompliant FP
+        Value = Ex.Message                          ' Noncompliant FP
     End Sub
 
 End Class
