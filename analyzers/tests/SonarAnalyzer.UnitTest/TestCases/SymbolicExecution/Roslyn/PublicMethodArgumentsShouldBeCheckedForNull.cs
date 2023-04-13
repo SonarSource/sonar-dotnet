@@ -728,16 +728,21 @@ public class Constructor : Base
 {
     public Constructor(string s)
     {
-        _ = s.Length;       // Noncompliant {{Refactor this method to add validation of parameter 's' before using it.}}
+        _ = s.Length;           // Noncompliant {{Refactor this method to add validation of parameter 's' before using it.}}
     }
 
     public Constructor(object o) :
-        this(o.ToString())  // Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be null.}}
+        this(o.ToString())      // Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be null.}}
     {
     }
 
+    public Constructor(Exception e)
+    {
+        new Base(e.ToString()); // Noncompliant {{Refactor this method to add validation of parameter 'e' before using it.}}
+    }
+
     public Constructor(object[] o) :
-        base(o.ToString())  // Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be null.}}
+        base(o.ToString())      // Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be null.}}
     {
     }
 }
