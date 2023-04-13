@@ -535,3 +535,18 @@ Public Class Nancy_Repros
     End Sub
 
 End Class
+
+Public Class ShouldExecuteLambdas
+
+    Public Sub Lambdas(Arg As Object)
+        Dim SingleLineFunction As Func(Of String) = Function() Arg.ToString
+        Dim MultiLineFunction As Func(Of String) = Function()
+                                                       Return Arg.ToString
+                                                   End Function
+        Dim SingleLineAction As Action = Sub() Arg.ToString()
+        Dim MultiLineAction As Action = Sub()
+                                            Arg.ToString()
+                                        End Sub
+    End Sub
+
+End Class

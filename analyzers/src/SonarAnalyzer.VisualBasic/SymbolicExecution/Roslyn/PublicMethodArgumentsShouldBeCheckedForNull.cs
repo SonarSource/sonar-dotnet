@@ -80,7 +80,6 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
 
         public override void Visit(SyntaxNode node)
         {
-            // FIXME: UTs
             if (!DereferencesMethodArguments && !node.IsAnyKind(SingleLineSubLambdaExpression, MultiLineSubLambdaExpression, SingleLineFunctionLambdaExpression, MultiLineFunctionLambdaExpression))
             {
                 base.Visit(node);
