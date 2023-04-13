@@ -31,15 +31,14 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         [TestMethod]
         public void NullArgument_State_Throws()
         {
-            var operation = CreateOperation();
-            ((Func<SymbolicContext>)(() => new SymbolicContext(operation, state: null, Array.Empty<ISymbol>()))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
+            var create = () => new SymbolicContext(CreateOperation(), state: null, Array.Empty<ISymbol>());
+            create.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
         }
 
         [TestMethod]
         public void NullArgument_CapturedVariables_Throws()
         {
-            var operation = CreateOperation();
-            var create = () => new SymbolicContext(operation, ProgramState.Empty, capturedVariables: null);
+            var create = () => new SymbolicContext(CreateOperation(), ProgramState.Empty, capturedVariables: null);
             create.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("capturedVariables");
         }
 
