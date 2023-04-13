@@ -92,7 +92,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             if (node.Block.Kind == BasicBlockKind.Exit)
             {
                 logger.Log(node.State, "Exit Reached");
-                checks.ExitReached(new(null, node.State, lva.CapturedVariables));
+                checks.ExitReached(new(null, node.State, lva));
             }
             else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is { } exception)
             {
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
             {
                 state = SetBranchingConstraints(branch, state, branchValue);
-                state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state, lva.CapturedVariables));
+                state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state, lva));
                 if (state is null)
                 {
                     return null;
@@ -169,7 +169,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
-            foreach (var preProcessed in checks.PreProcess(new(node.Operation, node.State, lva.CapturedVariables)))
+            foreach (var preProcessed in checks.PreProcess(new(node.Operation, node.State, lva)))
             {
                 foreach (var processed in OperationDispatcher.Process(preProcessed))
                 {

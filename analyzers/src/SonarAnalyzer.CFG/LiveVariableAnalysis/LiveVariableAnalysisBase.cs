@@ -22,7 +22,7 @@ using SonarAnalyzer.CFG.Helpers;
 
 namespace SonarAnalyzer.CFG.LiveVariableAnalysis
 {
-    public abstract class LiveVariableAnalysisBase<TCfg, TBlock>
+    public abstract class LiveVariableAnalysisBase<TCfg, TBlock> : ILiveVariableAnalysis
     {
         protected readonly ISymbol originalDeclaration;
         protected readonly CancellationToken Cancel;
