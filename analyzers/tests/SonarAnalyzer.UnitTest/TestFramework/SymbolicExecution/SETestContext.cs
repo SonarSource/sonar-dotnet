@@ -93,6 +93,9 @@ Public Class Sample
     Private Shared Sub Tag(Name As String, Optional Arg As Object = Nothing)
     End Sub
 
+    Private Shared Function Unknown(Of T)() As T
+    End Function
+
 End Class";
             return new(code, AnalyzerLanguage.VisualBasic, additionalChecks);
         }

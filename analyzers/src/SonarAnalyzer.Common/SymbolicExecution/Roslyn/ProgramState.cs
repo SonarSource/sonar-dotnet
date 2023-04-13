@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
@@ -124,11 +126,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public ProgramState RemoveSymbols(Func<ISymbol, bool> remove) =>
             this with { SymbolValue = SymbolValue.Where(kv => PreservedSymbols.Contains(kv.Key) || !remove(kv.Key)).ToImmutableDictionary() };
 
-        public ProgramState ResetFieldConstraints()
-            => ResetFieldConstraints(field => true);
+        public ProgramState ResetFieldConstraints() =>
+            ResetFieldConstraints(field => true);
 
-        public ProgramState ResetStaticFieldConstraints(INamedTypeSymbol containingType)
-            => ResetFieldConstraints(field => field.IsStatic && containingType.DerivesFrom(field.ContainingType));
+        public ProgramState ResetStaticFieldConstraints(INamedTypeSymbol containingType) =>
+            ResetFieldConstraints(field => field.IsStatic && containingType.DerivesFrom(field.ContainingType));
 
         public ProgramState AddVisit(int programPointHash) =>
             this with { VisitCount = VisitCount.SetItem(programPointHash, GetVisitCount(programPointHash) + 1) };
@@ -209,6 +211,30 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 }
             }
             return state;
+        }
+
+        [Conditional("DEBUG")]
+        [ExcludeFromCodeCoverage]
+        public void CheckConsistency()
+        {
+            AssertCommonConditions(SymbolValue.Values);
+            AssertCommonConditions(OperationValue.Values);
+
+            static void AssertCommonConditions(IEnumerable<SymbolicValue> values)
+            {
+                foreach (var value in values)
+                {
+                    Debug.Assert(CheckConstraintAlsoHasNotNull<BoolConstraint>(value), "If a BoolConstraint is set, NotNull should also be set.");
+                    Debug.Assert(CheckConstraintAlsoHasNotNull<LockConstraint>(value), "If a LockConstraint is set, NotNull should also be set.");
+                    Debug.Assert(CheckOnlyConstraint(value, ObjectConstraint.Null), "If Null is set, no other constraint should be set.");
+                }
+            }
+
+            static bool CheckConstraintAlsoHasNotNull<T>(SymbolicValue value) where T : SymbolicConstraint =>
+                !value.HasConstraint<T>() || value.HasConstraint(ObjectConstraint.NotNull);
+
+            static bool CheckOnlyConstraint(SymbolicValue value, SymbolicConstraint single) =>
+                !value.HasConstraint(single) || value.AllConstraints.Count() == 1;
         }
     }
 }

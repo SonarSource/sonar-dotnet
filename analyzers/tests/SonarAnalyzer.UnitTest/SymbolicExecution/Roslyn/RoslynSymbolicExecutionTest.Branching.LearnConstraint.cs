@@ -267,6 +267,56 @@ if (value = boolParameter)
                 .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
         }
 
+        [TestMethod]
+        public void Branching_LearnsObjectConstraint_NullableBool()
+        {
+            var validator = CreateIfElseEndValidatorCS("(bool)arg", OperationKind.Conversion, "bool?");
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
+            validator.TagValues("End").Should().SatisfyRespectively(
+                x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True),
+                x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
+        }
+
+        [TestMethod]
+        public void Branching_LearnsObjectConstraint_Integer_VB()
+        {
+            var validator = CreateIfElseEndValidatorVB("arg", OperationKind.Binary, "Integer");
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+            validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+            validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        }
+
+        [DataTestMethod]
+        [DataRow("Integer?")]
+        [DataRow("Boolean?")]
+        public void Branching_LearnsObjectConstraint_Nullable_VB(string parameterType)
+        {
+            var validator = CreateIfElseEndValidatorVB("arg", OperationKind.Binary, parameterType);
+            validator.ValidateTag("If", x => x.Should().HaveNoConstraints("arg.GetValueOrDefault() is called in 'if arg' and arg is not found in RoslynSymbolicExecution.SetBranchingConstraints"));
+            validator.ValidateTag("Else", x => x.Should().HaveNoConstraints());
+            validator.ValidateTag("End", x => x.Should().HaveNoConstraints());
+        }
+
+        [DataTestMethod]
+        [DataRow("True", true)]
+        [DataRow("False", false)]
+        public void Branching_LearnsObjectConstraint_NullableBool_VB(string branchValue, bool expectedPath)
+        {
+            var validator = SETestContext.CreateVB($$"""
+                Dim b As Boolean? = {{branchValue}}
+                if b Then
+                    Tag("True", b)
+                else
+                    Tag("False", b)
+                End if
+                Tag("End", b)
+                """).Validator;
+            validator.ValidateTagOrder(branchValue, "End");
+            validator.ValidateTag(branchValue, x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedPath)));
+            validator.TagValues("End").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedPath)));
+        }
+
         [DataTestMethod]
         [DataRow("arg == isObject", "object")]
         [DataRow("isObject == arg", "object")]
@@ -927,7 +977,7 @@ public void Main<T, TClass, TStruct>({argType} arg)
             return validator;
         }
 
-        private static ValidatorTestCheck CreateIfElseEndValidatorVB(string expression, OperationKind expectedOperation)
+        private static ValidatorTestCheck CreateIfElseEndValidatorVB(string expression, OperationKind expectedOperation, string argType = "Object")
         {
             var code = @$"
 If {expression} Then
@@ -936,7 +986,7 @@ Else
     Tag(""Else"", Arg)
 End If
 Tag(""End"", Arg)";
-            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+            var validator = SETestContext.CreateVB(code, $", Arg As {argType}").Validator;
             validator.ValidateContainsOperation(expectedOperation);
             return validator;
         }
