@@ -673,7 +673,7 @@ Tag(""Value"", value);";
 var value = arg.{expression};
 Tag(""Value"", value);";
             var validator = SETestContext.CreateCS(code, $", IEnumerable<int> arg").Validator;
-            validator.ValidateTag("Value", x => x.AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(ConstraintKind.ObjectNotNull));
+            validator.ValidateTag("Value", x => x.AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(ConstraintKind.NotNull));
         }
 
         [DataTestMethod]    // Just a few examples to demonstrate that we don't set ObjectContraint for all
@@ -934,13 +934,13 @@ f()();";
         }
 
         [DataTestMethod]
-        [DataRow("null", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
-        [DataRow("null", "new object()", false, ConstraintKind.ObjectNull, ConstraintKind.ObjectNotNull)]
-        [DataRow("new object()", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]
-        [DataRow("new int?()", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
-        [DataRow("(int?)null", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
-        [DataRow("new int?(42)", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]
-        [DataRow("new int?()", "42", false, ConstraintKind.ObjectNull, ConstraintKind.ObjectNotNull)]
+        [DataRow("null", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
+        [DataRow("null", "new object()", false, ConstraintKind.Null, ConstraintKind.NotNull)]
+        [DataRow("new object()", "null", false, ConstraintKind.NotNull, ConstraintKind.Null)]
+        [DataRow("new int?()", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
+        [DataRow("(int?)null", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
+        [DataRow("new int?(42)", "null", false, ConstraintKind.NotNull, ConstraintKind.Null)]
+        [DataRow("new int?()", "42", false, ConstraintKind.Null, ConstraintKind.NotNull)]
         public void Invocation_ObjectEquals_LearnResult(string left, string right, bool expectedResult, ConstraintKind expectedConstraintLeft, ConstraintKind expectedConstraintRight)
         {
             var code = $@"
@@ -1089,13 +1089,13 @@ private static bool Equals(object a, object b, object c) => false;";
         }
 
         [DataTestMethod]
-        [DataRow("null", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
-        [DataRow("null", "new object()", false, ConstraintKind.ObjectNull, ConstraintKind.ObjectNotNull)]
-        [DataRow("new object()", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]
-        [DataRow("new int?()", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
-        [DataRow("(int?)null", "null", true, ConstraintKind.ObjectNull, ConstraintKind.ObjectNull)]
-        [DataRow("new int?(42)", "null", false, ConstraintKind.ObjectNotNull, ConstraintKind.ObjectNull)]
-        [DataRow("new int?()", "42", false, ConstraintKind.ObjectNull, ConstraintKind.ObjectNotNull)]
+        [DataRow("null", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
+        [DataRow("null", "new object()", false, ConstraintKind.Null, ConstraintKind.NotNull)]
+        [DataRow("new object()", "null", false, ConstraintKind.NotNull, ConstraintKind.Null)]
+        [DataRow("new int?()", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
+        [DataRow("(int?)null", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
+        [DataRow("new int?(42)", "null", false, ConstraintKind.NotNull, ConstraintKind.Null)]
+        [DataRow("new int?()", "42", false, ConstraintKind.Null, ConstraintKind.NotNull)]
         public void Invocation_ReferenceEquals_LearnResult(string left, string right, bool expectedResult, ConstraintKind expectedConstraintLeft, ConstraintKind expectedConstraintRight)
         {
             var code = $"""

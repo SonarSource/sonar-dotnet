@@ -1102,10 +1102,10 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
         }
 
         [DataTestMethod]
-        [DataRow("bool", "true", ConstraintKind.ObjectNotNull, ConstraintKind.BoolFalse)]
-        [DataRow("bool", "false", ConstraintKind.ObjectNotNull, ConstraintKind.BoolTrue)]
-        [DataRow("bool?", "default", ConstraintKind.ObjectNull)]
-        [DataRow("bool?", "null", ConstraintKind.ObjectNull)]
+        [DataRow("bool", "true", ConstraintKind.NotNull, ConstraintKind.False)]
+        [DataRow("bool", "false", ConstraintKind.NotNull, ConstraintKind.True)]
+        [DataRow("bool?", "default", ConstraintKind.Null)]
+        [DataRow("bool?", "null", ConstraintKind.Null)]
         public void Unary_Not_SupportsBoolAndNull(string type, string defaultValue, params ConstraintKind[] expectedConstraints)
         {
             var code = $@"

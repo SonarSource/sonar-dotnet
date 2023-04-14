@@ -314,21 +314,21 @@ Tag(""End"", arg);";
             ValidateSetBoolConstraint(isPattern, OperationKindEx.ConstantPattern, expectedBoolConstraint);
 
         [DataTestMethod]
-        [DataRow("objectNotNull", "is true", new[] { ConstraintKind.BoolTrue, ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNotNull })]
-        [DataRow("objectNotNull", "is false", new[] { ConstraintKind.BoolFalse, ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNotNull })]
-        [DataRow("objectNull", "is 1", new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull })]          // Should recognize that objectNull doesn't match instead
-        [DataRow("objectNull", @"is """"", new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull })]      // Should recognize that objectNull doesn't match instead
-        [DataRow("objectNull", "is true", new[] { ConstraintKind.BoolTrue, ConstraintKind.ObjectNull }, new[] { ConstraintKind.ObjectNull })]    // Should recognize that objectNull doesn't match instead, should not have BoolConstraint and Null at the same time
-        [DataRow("objectNull", "is false", new[] { ConstraintKind.BoolFalse, ConstraintKind.ObjectNull }, new[] { ConstraintKind.ObjectNull })]  // Should recognize that objectNull doesn't match instead, should not have BoolConstraint and Null at the same time
-        [DataRow("objectUnknown", "is null", new[] { ConstraintKind.ObjectNull }, new[] { ConstraintKind.ObjectNotNull })]
-        [DataRow("objectUnknown", "is 1", new[] { ConstraintKind.ObjectNotNull }, null)]
-        [DataRow("objectUnknown", @"is """"", new[] { ConstraintKind.ObjectNotNull }, null)]
-        [DataRow("objectUnknown", "is true", new[] { ConstraintKind.BoolTrue }, null)]
-        [DataRow("objectUnknown", "is false", new[] { ConstraintKind.BoolFalse }, null)]
-        [DataRow("nullableBoolNull", "is true", new[] { ConstraintKind.BoolTrue, ConstraintKind.ObjectNull }, new[] { ConstraintKind.ObjectNull })]    // Should recognize that nullableBoolNull doesn't match instead, should not have BoolConstraint and Null at the same time
-        [DataRow("nullableBoolNull", "is false", new[] { ConstraintKind.BoolFalse, ConstraintKind.ObjectNull }, new[] { ConstraintKind.ObjectNull })]  // Should recognize that nullableBoolNull doesn't match instead, should not have BoolConstraint and Null at the same time
-        [DataRow("nullableBoolUnknown", "is true", new[] { ConstraintKind.BoolTrue }, null)]
-        [DataRow("nullableBoolUnknown", "is false", new[] { ConstraintKind.BoolFalse }, null)]
+        [DataRow("objectNotNull", "is true", new[] { ConstraintKind.True, ConstraintKind.NotNull }, new[] { ConstraintKind.NotNull })]
+        [DataRow("objectNotNull", "is false", new[] { ConstraintKind.False, ConstraintKind.NotNull }, new[] { ConstraintKind.NotNull })]
+        [DataRow("objectNull", "is 1", new[] { ConstraintKind.NotNull }, new[] { ConstraintKind.Null })]          // Should recognize that objectNull doesn't match instead
+        [DataRow("objectNull", @"is """"", new[] { ConstraintKind.NotNull }, new[] { ConstraintKind.Null })]      // Should recognize that objectNull doesn't match instead
+        [DataRow("objectNull", "is true", new[] { ConstraintKind.True, ConstraintKind.Null }, new[] { ConstraintKind.Null })]    // Should recognize that objectNull doesn't match instead, should not have BoolConstraint and Null at the same time
+        [DataRow("objectNull", "is false", new[] { ConstraintKind.False, ConstraintKind.Null }, new[] { ConstraintKind.Null })]  // Should recognize that objectNull doesn't match instead, should not have BoolConstraint and Null at the same time
+        [DataRow("objectUnknown", "is null", new[] { ConstraintKind.Null }, new[] { ConstraintKind.NotNull })]
+        [DataRow("objectUnknown", "is 1", new[] { ConstraintKind.NotNull }, null)]
+        [DataRow("objectUnknown", @"is """"", new[] { ConstraintKind.NotNull }, null)]
+        [DataRow("objectUnknown", "is true", new[] { ConstraintKind.True }, null)]
+        [DataRow("objectUnknown", "is false", new[] { ConstraintKind.False }, null)]
+        [DataRow("nullableBoolNull", "is true", new[] { ConstraintKind.True, ConstraintKind.Null }, new[] { ConstraintKind.Null })]    // Should recognize that nullableBoolNull doesn't match instead, should not have BoolConstraint and Null at the same time
+        [DataRow("nullableBoolNull", "is false", new[] { ConstraintKind.False, ConstraintKind.Null }, new[] { ConstraintKind.Null })]  // Should recognize that nullableBoolNull doesn't match instead, should not have BoolConstraint and Null at the same time
+        [DataRow("nullableBoolUnknown", "is true", new[] { ConstraintKind.True }, null)]
+        [DataRow("nullableBoolUnknown", "is false", new[] { ConstraintKind.False }, null)]
         public void ConstantPatternSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, ConstraintKind[] expectedForTrue, ConstraintKind[] expectedForFalse) =>
             ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.ConstantPattern, expectedForTrue, expectedForFalse);
 
@@ -347,11 +347,11 @@ Tag(""End"", arg);";
             ValidateSetBoolConstraint(isPattern, OperationKindEx.RecursivePattern, expectedBoolConstraint);
 
         [DataTestMethod]
-        [DataRow("objectUnknown", "is { }", new[] { ConstraintKind.ObjectNull })]
-        [DataRow("objectUnknown", "is object { }", new[] { ConstraintKind.ObjectNull })]
+        [DataRow("objectUnknown", "is { }", new[] { ConstraintKind.Null })]
+        [DataRow("objectUnknown", "is object { }", new[] { ConstraintKind.Null })]
         [DataRow("objectUnknown", "is string { }", null)]
         public void RecursivePatternPropertySubPatternSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, ConstraintKind[] expectedForFalse) =>
-            ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.RecursivePattern, new[] { ConstraintKind.ObjectNotNull }, expectedForFalse);
+            ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.RecursivePattern, new[] { ConstraintKind.NotNull }, expectedForFalse);
 
         [DataTestMethod]
         [DataRow("deconstructableNotNull is (A: 1, B: 2)", null)]
@@ -363,7 +363,7 @@ Tag(""End"", arg);";
 
         [TestMethod]
         public void RecursivePatternDeconstructionSubpatternSetBoolConstraint_TwoStates() =>
-            ValidateSetBoolConstraint_TwoStates("deconstructableUnknown", "is (A: var a, B: _)", OperationKindEx.RecursivePattern, new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull });
+            ValidateSetBoolConstraint_TwoStates("deconstructableUnknown", "is (A: var a, B: _)", OperationKindEx.RecursivePattern, new[] { ConstraintKind.NotNull }, new[] { ConstraintKind.Null });
 
         [DataTestMethod]
         [DataRow("objectNull is var a", true)]
@@ -384,12 +384,12 @@ Tag(""End"", arg);";
             ValidateSetBoolConstraint(isPattern, OperationKindEx.DeclarationPattern, expectedBoolConstraint);
 
         [DataTestMethod]
-        [DataRow("objectUnknown", "is object o", new[] { ConstraintKind.ObjectNull })]
-        [DataRow("exceptionUnknown", "is object { }", new[] { ConstraintKind.ObjectNull })]
-        [DataRow("exceptionUnknown", "is Exception { }", new[] { ConstraintKind.ObjectNull })]
+        [DataRow("objectUnknown", "is object o", new[] { ConstraintKind.Null })]
+        [DataRow("exceptionUnknown", "is object { }", new[] { ConstraintKind.Null })]
+        [DataRow("exceptionUnknown", "is Exception { }", new[] { ConstraintKind.Null })]
         [DataRow("exceptionUnknown", "is FormatException { }", null)]
         public void DeclarationPatternSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, ConstraintKind[] expectedForFalse) =>
-            ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.DeclarationPattern, new[] { ConstraintKind.ObjectNotNull }, expectedForFalse);
+            ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.DeclarationPattern, new[] { ConstraintKind.NotNull }, expectedForFalse);
 
         [DataTestMethod]
         [DataRow("objectNull is not null", OperationKindEx.NegatedPattern, false)]
@@ -421,25 +421,25 @@ Tag(""End"", arg);";
             ValidateSetBoolConstraint(isPattern, expectedOperation, expectedBoolConstraint);
 
         [DataTestMethod]
-        [DataRow("objectUnknown", "is not null", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull })]
-        [DataRow("objectUnknown", "is not { }", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNull }, new[] { ConstraintKind.ObjectNotNull })]
-        [DataRow("objectUnknown", "is not string { }", OperationKindEx.NegatedPattern, null, new[] { ConstraintKind.ObjectNotNull })]
-        [DataRow("objectUnknown", "is not object { }", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNull }, new[] { ConstraintKind.ObjectNotNull })]
-        [DataRow("objectUnknown", "is not not null", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNull }, new[] { ConstraintKind.ObjectNotNull })]
-        [DataRow("nullableBoolTrue", "is not false", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolTrue }, new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolFalse })]          // Should generate only single state with "true" result instead
-        [DataRow("nullableBoolFalse", "is not true", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolFalse }, new[] { ConstraintKind.BoolTrue, ConstraintKind.ObjectNotNull })]          // Should generate only single state with "true" result instead
-        [DataRow("nullableBoolNull", "is not true", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNull }, new[] { ConstraintKind.BoolTrue, ConstraintKind.ObjectNull })]      // Should generate only single state with "true" result instead
-        [DataRow("nullableBoolNull", "is not false", OperationKindEx.NegatedPattern, new[] { ConstraintKind.ObjectNull }, new[] { ConstraintKind.BoolFalse, ConstraintKind.ObjectNull })]    // Should generate only single state with "true" result instead
-        [DataRow("nullableBoolUnknown", "is not true", OperationKindEx.NegatedPattern, null, new[] { ConstraintKind.BoolTrue })]
-        [DataRow("nullableBoolUnknown", "is not false", OperationKindEx.NegatedPattern, null, new[] { ConstraintKind.BoolFalse })]
-        [DataRow("objectUnknown", "is not object", OperationKindEx.TypePattern, null, new[] { ConstraintKind.ObjectNotNull })]
-        [DataRow("objectUnknown", "is not not object", OperationKindEx.TypePattern, new[] { ConstraintKind.ObjectNotNull }, null)]
-        [DataRow("exceptionUnknown", "is not object", OperationKindEx.TypePattern, null, new[] { ConstraintKind.ObjectNotNull })]
-        [DataRow("exceptionUnknown", "is not not object", OperationKindEx.TypePattern, new[] { ConstraintKind.ObjectNotNull }, null)]
-        [DataRow("objectNull", "is not Exception", OperationKindEx.TypePattern, new[] { ConstraintKind.ObjectNull }, new[] { ConstraintKind.ObjectNotNull })]
-        [DataRow("objectNull", "is not not Exception", OperationKindEx.TypePattern, new[] { ConstraintKind.ObjectNotNull }, new[] { ConstraintKind.ObjectNull })]
-        [DataRow("objectUnknown", "is not Exception", OperationKindEx.TypePattern, null, new[] { ConstraintKind.ObjectNotNull })]
-        [DataRow("objectUnknown", "is not not Exception", OperationKindEx.TypePattern, new[] { ConstraintKind.ObjectNotNull }, null)]
+        [DataRow("objectUnknown", "is not null", OperationKindEx.NegatedPattern, new[] { ConstraintKind.NotNull }, new[] { ConstraintKind.Null })]
+        [DataRow("objectUnknown", "is not { }", OperationKindEx.NegatedPattern, new[] { ConstraintKind.Null }, new[] { ConstraintKind.NotNull })]
+        [DataRow("objectUnknown", "is not string { }", OperationKindEx.NegatedPattern, null, new[] { ConstraintKind.NotNull })]
+        [DataRow("objectUnknown", "is not object { }", OperationKindEx.NegatedPattern, new[] { ConstraintKind.Null }, new[] { ConstraintKind.NotNull })]
+        [DataRow("objectUnknown", "is not not null", OperationKindEx.NegatedPattern, new[] { ConstraintKind.Null }, new[] { ConstraintKind.NotNull })]
+        [DataRow("nullableBoolTrue", "is not false", OperationKindEx.NegatedPattern, new[] { ConstraintKind.NotNull, ConstraintKind.True }, new[] { ConstraintKind.NotNull, ConstraintKind.False })]          // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolFalse", "is not true", OperationKindEx.NegatedPattern, new[] { ConstraintKind.NotNull, ConstraintKind.False }, new[] { ConstraintKind.True, ConstraintKind.NotNull })]          // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolNull", "is not true", OperationKindEx.NegatedPattern, new[] { ConstraintKind.Null }, new[] { ConstraintKind.True, ConstraintKind.Null })]      // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolNull", "is not false", OperationKindEx.NegatedPattern, new[] { ConstraintKind.Null }, new[] { ConstraintKind.False, ConstraintKind.Null })]    // Should generate only single state with "true" result instead
+        [DataRow("nullableBoolUnknown", "is not true", OperationKindEx.NegatedPattern, null, new[] { ConstraintKind.True })]
+        [DataRow("nullableBoolUnknown", "is not false", OperationKindEx.NegatedPattern, null, new[] { ConstraintKind.False })]
+        [DataRow("objectUnknown", "is not object", OperationKindEx.TypePattern, null, new[] { ConstraintKind.NotNull })]
+        [DataRow("objectUnknown", "is not not object", OperationKindEx.TypePattern, new[] { ConstraintKind.NotNull }, null)]
+        [DataRow("exceptionUnknown", "is not object", OperationKindEx.TypePattern, null, new[] { ConstraintKind.NotNull })]
+        [DataRow("exceptionUnknown", "is not not object", OperationKindEx.TypePattern, new[] { ConstraintKind.NotNull }, null)]
+        [DataRow("objectNull", "is not Exception", OperationKindEx.TypePattern, new[] { ConstraintKind.Null }, new[] { ConstraintKind.NotNull })]
+        [DataRow("objectNull", "is not not Exception", OperationKindEx.TypePattern, new[] { ConstraintKind.NotNull }, new[] { ConstraintKind.Null })]
+        [DataRow("objectUnknown", "is not Exception", OperationKindEx.TypePattern, null, new[] { ConstraintKind.NotNull })]
+        [DataRow("objectUnknown", "is not not Exception", OperationKindEx.TypePattern, new[] { ConstraintKind.NotNull }, null)]
         public void NegateTypeDiscardPatternsSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, OperationKind expectedOperation, ConstraintKind[] expectedForTrue, ConstraintKind[] expectedForFalse) =>
             ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, expectedOperation, expectedForTrue, expectedForFalse);
 
