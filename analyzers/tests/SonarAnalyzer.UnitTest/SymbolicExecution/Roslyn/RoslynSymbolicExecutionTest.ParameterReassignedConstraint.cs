@@ -144,7 +144,7 @@ public partial class RoslynSymbolicExecutionTest
 
     [TestMethod]
     public void ParameterReassignedConstraint_UnrestrictedGenericParameters() =>
-    ValidateAssignmentConstraintForGenericParameter(string.Empty, ParameterReassignedConstraint.Instance);
+        ValidateAssignmentConstraintForGenericParameter(string.Empty, ParameterReassignedConstraint.Instance);
 
     [TestMethod]
     public void ParameterReassignedConstraint_ReferenceTypeGenericParameters() =>
