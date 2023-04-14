@@ -97,7 +97,9 @@ public class Program
 
     public void ForEachLoop(object[] array)
     {
-        foreach (object o in array) { } // Noncompliant
+        foreach (object o in array) // Noncompliant
+        {
+        }
     }
 
     public async void AsyncTest(Task task1, Task task2, Task task3, Task task4)
@@ -144,7 +146,8 @@ public class Program
         SomeAction(asParameter.ToString);       // Noncompliant
         Func<string> f = asVariable.ToString;   // Noncompliant
 
-        void SomeAction(Func<string> a) { }
+        void SomeAction(Func<string> a)
+        { }
     }
 }
 
@@ -833,14 +836,14 @@ public class ParameterCaptures
 
         Func<string> someFunc = () => s.ToString();
 
-        return s.ToString(); // Noncompliant - FP
+        return s.ToString(); // Compliant
     }
 
     public string InsideLambda_CaptureBeforeDereference(string s)
     {
         Func<string> someFunc = () => s.ToString();
 
-        return s.ToString(); // Noncompliant
+        return s.ToString(); // FN: s is not checked here
     }
 
     public void CapturedInLinq_WithCheckBefore(string s, List<string> list)
@@ -849,14 +852,14 @@ public class ParameterCaptures
         {
             return;
         }
-        s.ToString(); // Noncompliant - FP
+        s.ToString(); // Compliant
 
         list.Where(x => x == s);
     }
 
     public void CapturedInLinq_WithNoCheck(string s, List<string> list)
     {
-        s.ToString(); // Noncompliant
+        s.ToString(); // FN
 
         list.Where(x => x == s);
     }

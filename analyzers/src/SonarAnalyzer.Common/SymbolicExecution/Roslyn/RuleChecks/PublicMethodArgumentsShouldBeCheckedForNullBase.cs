@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Reflection.Metadata;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using static Microsoft.CodeAnalysis.Accessibility;
 
@@ -38,6 +39,7 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
             && candidate.ToParameterReference() is var reference
             && !reference.Parameter.Type.IsValueType
             && MissesObjectConstraint(context.State[reference.Parameter])
+            && !context.CapturedVariables.Contains(reference.Parameter) // Workaround to avoid FPs. Can be removed once captures are properly handled by lva.LiveOut()
             && !reference.Parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
             var message = IsInConstructorInitializer(context.Operation.Instance.Syntax)

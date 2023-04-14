@@ -526,16 +526,16 @@ Public Class Nancy_Repros
 
     Public Function IfStartsWith(Arg As String) As String
         If Arg.StartsWith("Value") Then Arg = Arg.Substring(5)  ' Noncompliant
-        Return Arg.ToString                                     ' Compliant - learned NotNull from previous method invocation on Arg
+        Return Arg.ToString     ' Compliant - learned NotNull from previous method invocation on Arg
     End Function
 
     Sub WithCapture(Ex As Exception, Condition As Boolean)
-        Dim F As Func(Of Object) = Function() Ex                ' LVA tracks capturing of this parameter
+        Dim F As Func(Of Object) = Function() Ex    ' LVA tracks capturing of this parameter
         Dim Value As Object
-        Value = Ex.Message                                      ' Noncompliant
+        Value = Ex.Message   ' FN
         Value = Ex.Message
-        Value = If(Condition, Ex.Message, "")                   ' Noncompliant - FP
-        Value = Ex.Message                                      ' Noncompliant - FP
+        Value = If(Condition, Ex.Message, "")
+        Value = Ex.Message
     End Sub
 
 End Class
