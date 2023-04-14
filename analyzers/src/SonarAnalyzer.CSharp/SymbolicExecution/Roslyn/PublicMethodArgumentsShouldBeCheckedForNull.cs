@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using static Microsoft.CodeAnalysis.Accessibility;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxKind;
 using static StyleCop.Analyzers.Lightup.SyntaxKindEx;
 
@@ -42,9 +41,6 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
         bool IsRelevantPropertyAccessor() =>
             Node is AccessorDeclarationSyntax { } accessor
             && (!accessor.Keyword.IsKind(GetKeyword) || accessor.Parent.Parent is IndexerDeclarationSyntax);
-
-        bool IsAccessibleFromOtherAssemblies() =>
-            SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is Public or Protected or ProtectedOrInternal;
 
         static bool MethodDereferencesArguments(BaseMethodDeclarationSyntax method)
         {

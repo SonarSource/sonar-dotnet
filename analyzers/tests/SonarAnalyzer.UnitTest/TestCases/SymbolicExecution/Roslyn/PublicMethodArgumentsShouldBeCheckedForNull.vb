@@ -522,7 +522,7 @@ Public Class Nancy_Repros
 
     Public Function IfStartsWith(Arg As String) As String
         If Arg.StartsWith("Value") Then Arg = Arg.Substring(5)  ' Noncompliant
-        Return Arg.ToString     ' Noncompliant FP, should have learned NotNull from the previous .StartsWith()
+        Return Arg.ToString     ' Compliant - learned NotNull from previous method invocation on Arg
     End Function
 
     Sub WithCapture(Ex As Exception, Condition As Boolean)

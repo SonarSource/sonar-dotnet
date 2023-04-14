@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using static Microsoft.CodeAnalysis.Accessibility;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
@@ -34,22 +35,39 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
     {
         if (NullDereferenceCandidate(context.Operation.Instance) is { } candidate
             && candidate.Kind == OperationKindEx.ParameterReference
-            && candidate.ToParameterReference() is { Parameter: { Type.IsValueType: false } parameter } parameterReference
-            && !HasObjectConstraint(parameter)
-            && !context.CapturedVariables.Contains(parameter) // Workaround to avoid FPs. Can be removed once captures are properly handled by lva.LiveOut()
-            && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
+            && candidate.ToParameterReference() is var reference
+            && !reference.Parameter.Type.IsValueType
+            && MissesObjectConstraint(context.State[reference.Parameter])
+            && !reference.Parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
-            var message = IsInConstructorInitializer(context.Operation.Instance.Syntax)
+            var message = reference.Parameter.ContainingSymbol is IMethodSymbol { MethodKind: MethodKind.Constructor }
+                          && context.Operation.Instance.HasAncestor(x => x.Kind == OperationKindEx.Invocation && x.ToInvocation().TargetMethod.IsConstructor())
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be {1}."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
-            ReportIssue(parameterReference.WrappedOperation, string.Format(message, parameterReference.WrappedOperation.Syntax, NullName), context);
+            ReportIssue(reference.WrappedOperation, string.Format(message, reference.WrappedOperation.Syntax, NullName), context);
         }
 
         return context.State;
 
-        bool HasObjectConstraint(IParameterSymbol symbol) =>
-            context.State[symbol]?.HasConstraint<ObjectConstraint>() is true;
+        // Checks whether the null state of the parameter symbol is determined or if was assigned a new value after it was passed to the method.
+        // In either of those cases the rule will not raise an issue for the parameter.
+        static bool MissesObjectConstraint(SymbolicValue symbolState) =>
+            symbolState is null
+            || (!symbolState.HasConstraint<ObjectConstraint>() && !symbolState.HasConstraint<ParameterReassignedConstraint>());
     }
+
+    protected override ProgramState PostProcessSimple(SymbolicContext context)
+    {
+        if (AssignmentTarget(context.Operation.Instance) is { Kind: OperationKindEx.ParameterReference } assignedParameter)
+        {
+            return context.SetSymbolConstraint(assignedParameter.ToParameterReference().Parameter, ParameterReassignedConstraint.Instance);
+        }
+
+        return context.State;
+    }
+
+    protected bool IsAccessibleFromOtherAssemblies() =>
+        SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is Public or Protected or ProtectedOrInternal;
 
     private static IOperation NullDereferenceCandidate(IOperation operation)
     {
@@ -67,4 +85,10 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
         };
         return candidate?.UnwrapConversion();
     }
+
+    private static IOperation AssignmentTarget(IOperation operation) =>
+        // Missing operation types: DeconstructionAssignment, CoalesceAssignment, CompoundAssignment, ThrowExpression
+        operation.Kind == OperationKindEx.SimpleAssignment
+            ? operation.ToAssignment().Target
+            : null;
 }
