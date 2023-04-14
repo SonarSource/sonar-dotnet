@@ -40,8 +40,7 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
             && MissesObjectConstraint(context.State[reference.Parameter])
             && !reference.Parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
-            var message = reference.Parameter.ContainingSymbol is IMethodSymbol { MethodKind: MethodKind.Constructor }
-                          && context.Operation.Instance.HasAncestor(x => x.Kind == OperationKindEx.Invocation && x.ToInvocation().TargetMethod.IsConstructor())
+            var message = IsInConstructorInitializer(context.Operation.Instance.Syntax)
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be {1}."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
             ReportIssue(reference.WrappedOperation, string.Format(message, reference.WrappedOperation.Syntax, NullName), context);

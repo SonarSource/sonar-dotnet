@@ -1,7 +1,6 @@
 ﻿Imports System.Data
 Imports System.Text
 Imports System.Runtime.CompilerServices
-
 Public Class Program
 
     Private Field As Object = Nothing
@@ -495,15 +494,19 @@ Public Class Constructor
     Inherits Base
 
     Public Sub New(s As String)
-        Dim v = s.Length            ' Noncompliant {{Refactor this method to add validation of parameter 's' before using it.}}
+        Dim v = s.Length                                    ' Noncompliant {{Refactor this method to add validation of parameter 's' before using it.}}
     End Sub
 
     Public Sub New(o As Object)
-        Me.New(o.ToString())        ' Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be Nothing.}}
+        Me.New(o.ToString())                                ' Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be Nothing.}}
     End Sub
 
     Public Sub New(o As Object())
-        MyBase.New(o.ToString())    ' Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be Nothing.}}
+        MyBase.New(o.ToString())                            ' Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be Nothing.}}
+    End Sub
+
+    Public Sub New(ByVal l As List(Of Object))
+        MyBase.New(If(l.Count > 0, "not empty", "empty"))   ' Noncompliant {{Refactor this constructor to avoid using members of parameter 'l' because it could be Nothing.}}
     End Sub
 
 End Class

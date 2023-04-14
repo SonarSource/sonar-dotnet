@@ -745,6 +745,11 @@ public class Constructor : Base
         base(o.ToString())      // Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be null.}}
     {
     }
+
+    public Constructor(List<object> l) :
+        base(l.Count > 0 ? "not empty" : "empty")      // Noncompliant {{Refactor this constructor to avoid using members of parameter 'l' because it could be null.}}
+    {
+    }
 }
 
 public class Base
