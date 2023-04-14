@@ -833,14 +833,14 @@ public class ParameterCaptures
 
         Func<string> someFunc = () => s.ToString();
 
-        return s.ToString(); // Compliant
+        return s.ToString(); // Noncompliant - FP
     }
 
     public string InsideLambda_CaptureBeforeDereference(string s)
     {
         Func<string> someFunc = () => s.ToString();
 
-        return s.ToString(); // FN: s is not checked here
+        return s.ToString(); // Noncompliant
     }
 
     public void CapturedInLinq_WithCheckBefore(string s, List<string> list)
@@ -849,14 +849,14 @@ public class ParameterCaptures
         {
             return;
         }
-        s.ToString(); // Compliant
+        s.ToString(); // Noncompliant - FP
 
         list.Where(x => x == s);
     }
 
     public void CapturedInLinq_WithNoCheck(string s, List<string> list)
     {
-        s.ToString(); // FN
+        s.ToString(); // Noncompliant
 
         list.Where(x => x == s);
     }
