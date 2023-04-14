@@ -28,7 +28,7 @@ internal interface IMultiProcessor
 /// <summary>
 /// Base class for operation processors - used when operation returns multiple ProgramStates.
 /// See <see cref="SimpleProcessor{T}"/> if you need to return a single ProgramStates.
-/// See <see cref="MultiProcessor{T}"/> if you need to take a branching decision.
+/// See <see cref="BranchingProcessor{T}"/> if you need to take a branching decision.
 /// </summary>
 internal abstract class MultiProcessor<T> : Processor<T>, IMultiProcessor
     where T : IOperationWrapper
