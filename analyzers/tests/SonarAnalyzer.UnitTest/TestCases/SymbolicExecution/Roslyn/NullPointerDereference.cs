@@ -1904,7 +1904,7 @@ public class PeachReproducers
     {
         if (value?.Length > 0)
         {
-            value.ToString();   // Noncompliant FP
+            value.ToString();   // Compliant, positive, hence non-null
         }
     }
 
