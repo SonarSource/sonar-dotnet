@@ -18,21 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.CFG.LiveVariableAnalysis;
-
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
     public class SymbolicContext
     {
         public IOperationWrapperSonar Operation { get; }
         public ProgramState State { get; }
-        public ILiveVariableAnalysis LiveVariableAnalysis { get; }
+        public IReadOnlyCollection<ISymbol> CapturedVariables { get; }
 
-        public SymbolicContext(IOperationWrapperSonar operation, ProgramState state, ILiveVariableAnalysis liveVariableAnalysis)
+        public SymbolicContext(IOperationWrapperSonar operation, ProgramState state, IReadOnlyCollection<ISymbol> capturedVariables)
         {
             Operation = operation; // Operation can be null for the branch nodes.
             State = state ?? throw new ArgumentNullException(nameof(state));
-            LiveVariableAnalysis = liveVariableAnalysis ?? throw new ArgumentNullException(nameof(liveVariableAnalysis));
+            CapturedVariables = capturedVariables ?? throw new ArgumentNullException(nameof(capturedVariables));
         }
 
         public ProgramState SetOperationConstraint(SymbolicConstraint constraint) =>
@@ -42,7 +40,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             State.SetSymbolConstraint(symbol, constraint);
 
         public SymbolicContext WithState(ProgramState newState) =>
-            State == newState ? this : new(Operation, newState, LiveVariableAnalysis);
+            State == newState ? this : new(Operation, newState, CapturedVariables);
 
         public bool HasConstraint(IOperation operation, SymbolicConstraint constraint) =>
             State[operation]?.HasConstraint(constraint) is true;

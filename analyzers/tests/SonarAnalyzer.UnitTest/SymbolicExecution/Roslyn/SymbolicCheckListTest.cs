@@ -19,7 +19,6 @@
  */
 
 using Moq;
-using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -37,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var a = new Mock<SymbolicCheck>();
             var b = new Mock<SymbolicCheck>();
-            var context = new SymbolicContext(null, ProgramState.Empty, Mock.Of<ILiveVariableAnalysis>());
+            var context = new SymbolicContext(null, ProgramState.Empty, Array.Empty<ISymbol>());
             a.Setup(x => x.PreProcess(context)).Returns(new[] { context.State });
             a.Setup(x => x.PostProcess(context)).Returns(new[] { context.State });
             var sut = new SymbolicCheckList(new[] { a.Object, b.Object });
@@ -72,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var triple = new PostProcessTestCheck(x => new[] { x.State, x.State, x.State });
             var sut = new SymbolicCheckList(new[] { triple, triple });
-            sut.PostProcess(new(null, ProgramState.Empty, Mock.Of<ILiveVariableAnalysis>())).Should().HaveCount(9);
+            sut.PostProcess(new(null, ProgramState.Empty, Array.Empty<ISymbol>())).Should().HaveCount(9);
         }
 
         [TestMethod]
@@ -80,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         {
             var empty = new PostProcessTestCheck(x => Array.Empty<ProgramState>());
             var sut = new SymbolicCheckList(new[] { empty });
-            sut.PostProcess(new(null, ProgramState.Empty, Mock.Of<ILiveVariableAnalysis>())).Should().HaveCount(0);
+            sut.PostProcess(new(null, ProgramState.Empty, Array.Empty<ISymbol>())).Should().HaveCount(0);
         }
     }
 }

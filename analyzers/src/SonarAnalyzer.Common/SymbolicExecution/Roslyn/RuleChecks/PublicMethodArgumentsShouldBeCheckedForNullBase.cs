@@ -36,7 +36,7 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
             && candidate.Kind == OperationKindEx.ParameterReference
             && candidate.ToParameterReference() is { Parameter: { Type.IsValueType: false } parameter } parameterReference
             && !HasObjectConstraint(parameter)
-            && !context.LiveVariableAnalysis.CapturedVariables.Contains(parameter) // Workaround to avoid FPs. Can be removed once captures are properly handled by lva.LiveOut()
+            && !context.CapturedVariables.Contains(parameter) // Workaround to avoid FPs. Can be removed once captures are properly handled by lva.LiveOut()
             && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
             var message = IsInConstructorInitializer(context.Operation.Instance.Syntax)
