@@ -15,19 +15,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'sFormula' before using it.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
-"region":  {
-"startLine":  169,
-"startColumn":  36,
-"endLine":  169,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
