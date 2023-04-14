@@ -553,24 +553,29 @@ Tag(""End"")";
                 .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "Arg"));
         }
 
-        [DataRow("arg >= null")]
-        [DataRow("arg > null")]
-        [DataRow("arg < null")]
-        [DataRow("arg <= null")]
-        [DataRow("null >= arg")]
-        [DataRow("null > arg")]
-        [DataRow("null < arg")]
-        [DataRow("null <= arg")]
-        [DataRow("arg > (int?)null")]
-        [DataRow("arg > new Nullable<int>()")]
-        [DataRow("arg > (null as int?)")]
-        [DataRow("arg > nullValue")]
-        [DataRow("nullValue > arg")]
-        [DataRow("nullValue > 42")]
-        [DataRow("nullValue > notNullValue")]
-        [DataRow("notNullValue > nullValue")]
-        [TestMethod]
-        public void Binary_NullableRelationalNull_SetsBoolConstraint_CS(string expression)
+        private static IEnumerable<object[]> NullableRelationalNullExpressions => new object[][]
+        {
+            new string[] { "arg >= null" },
+            new string[] { "arg > null" },
+            new string[] { "arg < null" },
+            new string[] { "arg <= null" },
+            new string[] { "null >= arg" },
+            new string[] { "null > arg" },
+            new string[] { "null < arg" },
+            new string[] { "null <= arg" },
+            new string[] { "arg > (int?)null" },
+            new string[] { "arg > new Nullable<int>()" },
+            new string[] { "arg > (null as int?)" },
+            new string[] { "arg > nullValue" },
+            new string[] { "nullValue > arg" },
+            new string[] { "nullValue > 42" },
+            new string[] { "nullValue > notNullValue" },
+            new string[] { "notNullValue > nullValue"},
+        };
+
+        [DataTestMethod]
+        [DynamicData(nameof(NullableRelationalNullExpressions))]
+        public void Binary_NullableRelationalNull_IfUnreachable_CS(string expression)
         {
             var code = $$"""
                 int? notNullValue = 42;
@@ -589,6 +594,22 @@ Tag(""End"")";
             var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
             validator.ValidateContainsOperation(OperationKind.Binary);
             validator.ValidateTagOrder("Else", "End");
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(NullableRelationalNullExpressions))]
+        public void Binary_NullableRelationalNull_SetsBoolConstraint_CS(string expression)
+        {
+            var code = $$"""
+                int? notNullValue = 42;
+                int? nullValue = null;
+                var value = {{expression}};
+                Tag("Value", value);
+                """;
+
+            var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
         }
     }
 }
