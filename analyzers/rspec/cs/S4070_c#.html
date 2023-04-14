@@ -6,7 +6,7 @@ using System;
 
 namespace MyLibrary
 {
-    [FlagsAttribute]
+    [Flags]
     public enum Color // Noncompliant, Orange is neither a power of two, nor a combination of any of the defined values
     {
         None    = 0,
@@ -22,7 +22,7 @@ using System;
 
 namespace MyLibrary
 {
-    public enum Color // Compliant - no FlagsAttribute attribute
+    public enum Color // Compliant - no FlagsAttribute
     {
         None = 0,
         Red = 1,
@@ -30,7 +30,7 @@ namespace MyLibrary
         Yellow = 4
     }
 
-    [FlagsAttribute]
+    [Flags]
     public enum Days
     {
         None = 0,
