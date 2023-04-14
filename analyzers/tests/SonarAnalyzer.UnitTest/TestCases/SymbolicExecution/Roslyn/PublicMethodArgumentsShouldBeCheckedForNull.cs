@@ -856,3 +856,11 @@ public class ParameterCaptures
         list.Where(x => x == s);
     }
 }
+
+public class Keywords
+{
+    public void Method(object @event)
+    {
+        @event.ToString(); // Noncompliant {{Refactor this method to add validation of parameter '@event' before using it.}}
+    }
+}

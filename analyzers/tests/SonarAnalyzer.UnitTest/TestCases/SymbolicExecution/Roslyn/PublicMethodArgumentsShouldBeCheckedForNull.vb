@@ -550,3 +550,9 @@ Public Class ShouldExecuteLambdas
     End Sub
 
 End Class
+
+Public Class Keywords
+    Public Sub Method(ByVal [event] As Object)
+        [event].ToString() ' Noncompliant {{Refactor this method to add validation of parameter '[event]' before using it.}}
+    End Sub
+End Class
