@@ -28,21 +28,6 @@ namespace SonarAnalyzer.Extensions
         public static IOperationWrapperSonar ToSonar(this IOperationWrapper operation) =>
             new(operation.WrappedOperation);
 
-        public static bool HasAncestor(this IOperation operation, Func<IOperation, bool> predicate)
-        {
-            var wrapper = operation.ToSonar();
-            while (wrapper.Parent != null)
-            {
-                wrapper = wrapper.Parent.ToSonar();
-                if (predicate(wrapper.Instance))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         public static bool IsOutArgumentReference(this IOperation operation) =>
             operation.ToSonar() is var wrapped
             && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
