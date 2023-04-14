@@ -46,9 +46,29 @@ namespace SonarAnalyzer.Rules
             where TSonarFallback : new() =>
             new RuleFactory<TRuleCheck, TSonarFallback>();
 
-        // We need to rewrite this https://github.com/SonarSource/sonar-dotnet/issues/4824
-        protected static bool IsEnabled(SonarSyntaxNodeReportingContext context, DiagnosticDescriptor descriptor) =>
-            context.HasMatchingScope(descriptor) && descriptor.GetEffectiveSeverity(context.Compilation.Options) != ReportDiagnostic.Suppress;
+        protected static bool IsEnabled(SonarSyntaxNodeReportingContext context, DiagnosticDescriptor descriptor)
+        {
+            if (context.HasMatchingScope(descriptor))
+            {
+                // This is a reproduction of Roslyn activation logic
+                // https://github.com/dotnet/roslyn/blob/0368609e1467563247e9b5e4e3fe8bff533d59b6/src/Compilers/Core/Portable/DiagnosticAnalyzer/AnalyzerDriver.cs#L1316-L1327
+                var options = CompilationOptionsWrapper.FromObject(context.Compilation.Options).SyntaxTreeOptionsProvider;
+                var severity = options.TryGetDiagnosticValue(context.Tree, descriptor.Id, default, out var severityFromOptions)
+                    || options.TryGetGlobalDiagnosticValue(descriptor.Id, default, out severityFromOptions)
+                    ? severityFromOptions                                               // .editorconfig for a specific tree
+                    : descriptor.GetEffectiveSeverity(context.Compilation.Options);     // RuleSet file or .globalconfig;
+                return severity switch
+                {
+                    ReportDiagnostic.Default => descriptor.IsEnabledByDefault,
+                    ReportDiagnostic.Suppress => false,
+                    _ => true
+                };
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         protected void Analyze<TNode>(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext context, Func<TNode, SyntaxNode> getBody) where TNode : SyntaxNode
         {
@@ -88,7 +108,7 @@ namespace SonarAnalyzer.Rules
                         engine.Execute();
                     }
                 }
-                catch (Exception ex)
+                catch (Exception ex) when (ex is not OperationCanceledException)
                 {
                     throw new SymbolicExecutionException(ex, symbol, body.GetLocation());
                 }

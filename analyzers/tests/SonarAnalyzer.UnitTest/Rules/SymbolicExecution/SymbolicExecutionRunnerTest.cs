@@ -437,6 +437,51 @@ public class Sample
             .StartWith("Analyzer 'SonarAnalyzer.UnitTest.Rules.SymbolicExecutionRunnerTest+ConfigurableSERunnerCS' threw an exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' with message 'Error processing method: Method ## Method file: snippet1.cs ## Method line: 4,4 ## Inner exception: System.InvalidOperationException: This check is not useful. ##    at SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution.ThrowAssignmentRuleCheck.PostProcessSimple(SymbolicContext context)");
     }
 
+    [TestMethod]
+    public void IsActive_EditorConfig_Global() =>
+        VerifyActivation(new TestSyntaxTreeOptionProvider("S3900"));
+
+    [TestMethod]
+    public void IsActive_EditorConfig_AllTrees() =>
+        VerifyActivation(new TestSyntaxTreeOptionProvider("S3900", x => ReportDiagnostic.Warn));
+
+    [DataTestMethod]
+    [DataRow(ReportDiagnostic.Suppress)]    // Suppressed explicitly and directly
+    [DataRow(ReportDiagnostic.Default)]     // Explicit Default will fall back to IsActivatedByDefault that should be False for that tree
+    public void IsActive_EditorConfig_OneOfTwoTrees(ReportDiagnostic defaultSeverity)
+    {
+        const string additionalSnippet = """
+            public class BetterSample
+            {
+                public string Method(string arg) =>
+                    arg.ToString();     // S3900 only here, the default class Sample has S3900 suppressed
+            }
+            """;
+        VerifyActivation(new TestSyntaxTreeOptionProvider("S3900", x => x.ToString().Contains("BetterSample") ? ReportDiagnostic.Warn : defaultSeverity), additionalSnippet);
+    }
+
+    private static void VerifyActivation(TestSyntaxTreeOptionProvider provider, string additionalSnippet = null)
+    {
+        var builder = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, false);
+        builder = builder.AddSnippet("""
+            public class Sample
+            {
+                public string Method(string arg) =>
+                    arg.ToString();     // S3900 here
+            }
+            """);
+        if (additionalSnippet is not null)
+        {
+            builder = builder.AddSnippet(additionalSnippet);
+        }
+        var compilation = builder.GetCompilation();
+        compilation = compilation.WithOptions(compilation.Options.WithSyntaxTreeOptionsProvider(provider));
+        var allDiagnostics = DiagnosticVerifier.GetAnalyzerDiagnostics(compilation, new DiagnosticAnalyzer[] { new CS.SymbolicExecutionRunner() }, CompilationErrorBehavior.Default);
+        var diagnostic = allDiagnostics.Should().ContainSingle().Subject;
+        diagnostic.Id.Should().Be("S3900");
+        diagnostic.Descriptor.IsEnabledByDefault.Should().BeFalse("we're explicitly activating non-SonarWay rule that is not active by default");
+    }
+
     private static void Verify(string body, params DiagnosticDescriptor[] onlyRules) =>
         Verify(body, ProjectType.Product, null, onlyRules);
 
@@ -517,5 +562,40 @@ End Class";
 
         public void RegisterRule<TRuleCheck>(DiagnosticDescriptor descriptor) where TRuleCheck : SymbolicRuleCheck, new() =>
             allRules = allRules.Add(descriptor, CreateFactory<TRuleCheck>());
+    }
+
+    private class TestSyntaxTreeOptionProvider : SyntaxTreeOptionsProvider
+    {
+        private readonly string id;
+        private readonly Func<SyntaxTree, ReportDiagnostic?> treeFilter;
+
+        public TestSyntaxTreeOptionProvider(string id, Func<SyntaxTree, ReportDiagnostic?> treeFilter = null)
+        {
+            this.id = id;
+            this.treeFilter = treeFilter;
+        }
+
+        public override GeneratedKind IsGenerated(SyntaxTree tree, CancellationToken cancellationToken) =>
+            GeneratedKind.NotGenerated;
+
+        public override bool TryGetDiagnosticValue(SyntaxTree tree, string diagnosticId, CancellationToken cancellationToken, out ReportDiagnostic severity)
+        {
+            if (diagnosticId == id && treeFilter is not null && treeFilter(tree) is { } treeSeverity)
+            {
+                severity = treeSeverity;
+                return true;
+            }
+            else
+            {
+                severity = ReportDiagnostic.Default;
+                return false;
+            }
+        }
+
+        public override bool TryGetGlobalDiagnosticValue(string diagnosticId, CancellationToken cancellationToken, out ReportDiagnostic severity)
+        {
+            severity = ReportDiagnostic.Warn;
+            return diagnosticId == id && treeFilter is null;
+        }
     }
 }
