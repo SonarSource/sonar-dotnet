@@ -154,6 +154,13 @@ public partial class RoslynSymbolicExecutionTest
     public void ParameterReassignedConstraint_ValueTypeGenericParameters() =>
         ValidateAssignmentConstraintForGenericParameter("where T: struct", ParameterReassignedConstraint.Instance, ObjectConstraint.NotNull);
 
+    [TestMethod]
+    public void ParameterReassignedConstraint_HasNoOpposite()
+    {
+        var propertyAccess = () => _ = ParameterReassignedConstraint.Instance.Opposite;
+        propertyAccess.Should().Throw<NotSupportedException>();
+    }
+
     private static void ValidateAssignmentConstraintForGenericParameter(string typeConstraint, params SymbolicConstraint[] expectedConstraints)
     {
         var methodCode = $$"""
