@@ -34,10 +34,10 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
     {
         if (NullDereferenceCandidate(context.Operation.Instance) is { } candidate
             && candidate.Kind == OperationKindEx.ParameterReference
-            && candidate.ToParameterReference() is var parameterReference
-            && !parameterReference.Parameter.Type.IsValueType
-            && !HasObjectConstraint(parameterReference.Parameter)
-            && !parameterReference.Parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
+            && candidate.ToParameterReference() is { Parameter: { Type.IsValueType: false } parameter } parameterReference
+            && !HasObjectConstraint(parameter)
+            && !context.CapturedVariables.Contains(parameter) // Workaround to avoid FPs. Can be removed once captures are properly handled by lva.LiveOut()
+            && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
             var message = IsInConstructorInitializer(context.Operation.Instance.Syntax)
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be {1}."
