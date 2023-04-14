@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Reflection.Metadata;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using static Microsoft.CodeAnalysis.Accessibility;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
@@ -36,11 +34,10 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
     {
         if (NullDereferenceCandidate(context.Operation.Instance) is { } candidate
             && candidate.Kind == OperationKindEx.ParameterReference
-            && candidate.ToParameterReference() is var reference
-            && !reference.Parameter.Type.IsValueType
-            && MissesObjectConstraint(context.State[reference.Parameter])
-            && !context.CapturedVariables.Contains(reference.Parameter) // Workaround to avoid FPs. Can be removed once captures are properly handled by lva.LiveOut()
-            && !reference.Parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
+            && candidate.ToParameterReference() is { Parameter: { Type.IsValueType: false } parameter } reference
+            && MissesObjectConstraint(context.State[parameter])
+            && !context.CapturedVariables.Contains(parameter) // Workaround to avoid FPs. Can be removed once captures are properly handled by lva.LiveOut()
+            && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
             var message = IsInConstructorInitializer(context.Operation.Instance.Syntax)
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be {1}."
@@ -68,7 +65,7 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
     }
 
     protected bool IsAccessibleFromOtherAssemblies() =>
-        SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is Public or Protected or ProtectedOrInternal;
+        SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is Accessibility.Public or Accessibility.Protected or Accessibility.ProtectedOrInternal;
 
     private static IOperation NullDereferenceCandidate(IOperation operation)
     {
