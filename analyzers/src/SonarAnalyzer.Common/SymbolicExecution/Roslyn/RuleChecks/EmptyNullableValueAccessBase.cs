@@ -35,7 +35,7 @@ public abstract class EmptyNullableValueAccessBase : SymbolicRuleCheck
             && reference.Instance is { } instance
             && instance.Type.IsNullableValueType()
             && context.HasConstraint(instance, ObjectConstraint.Null)
-            && NoNullForgiving(reference.Instance))
+            && NotNullFlowState(reference.Instance))
         {
             ReportIssue(instance, instance.Syntax.ToString());
         }
@@ -44,14 +44,14 @@ public abstract class EmptyNullableValueAccessBase : SymbolicRuleCheck
             && conversion.Operand.Type.IsNullableValueType()
             && conversion.Type.IsNonNullableValueType()
             && context.HasConstraint(conversion.Operand, ObjectConstraint.Null)
-            && NoNullForgiving(conversion.Operand))
+            && NotNullFlowState(conversion.Operand))
         {
             ReportIssue(conversion.Operand, conversion.Operand.Syntax.ToString());
         }
 
         return context.State;
 
-        bool NoNullForgiving(IOperation reference) =>
+        bool NotNullFlowState(IOperation reference) =>
             SemanticModel.GetTypeInfo(reference.Syntax).Nullability().FlowState != NullableFlowState.NotNull;
     }
 }
