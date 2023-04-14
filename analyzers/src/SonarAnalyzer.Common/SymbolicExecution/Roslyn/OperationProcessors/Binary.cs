@@ -90,6 +90,10 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             return BinaryNullConstraint(kind, left.HasConstraint(ObjectConstraint.Null), right.HasConstraint(ObjectConstraint.Null));
         }
+        else if (left?.HasConstraint(ObjectConstraint.Null) is true || right?.HasConstraint(ObjectConstraint.Null) is true)
+        {
+            return kind.IsAnyRelational() ? BoolConstraint.False : null;
+        }
         else
         {
             return null;
@@ -113,6 +117,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             {
                 BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals => BoolConstraint.From(isNullLeft && isNullRight),
                 BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals => BoolConstraint.From(isNullLeft != isNullRight),
+                _ when kind.IsAnyRelational() => BoolConstraint.False,
                 _ => null
             }
             : null;

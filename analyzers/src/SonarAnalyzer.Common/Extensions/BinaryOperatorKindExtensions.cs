@@ -30,4 +30,7 @@ public static class BinaryOperatorKindExtensions
 
     public static bool IsNotEquals(this BinaryOperatorKind kind) =>
         kind is BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals;
+
+    public static bool IsAnyRelational(this BinaryOperatorKind kind) =>
+        kind is BinaryOperatorKind.GreaterThan or BinaryOperatorKind.GreaterThanOrEqual or BinaryOperatorKind.LessThan or BinaryOperatorKind.LessThanOrEqual;
 }

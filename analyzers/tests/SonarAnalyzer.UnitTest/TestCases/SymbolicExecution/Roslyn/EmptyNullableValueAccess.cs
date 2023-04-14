@@ -331,10 +331,18 @@ class Comparisons
     void NullIsNeitherSmallerNorBiggerThanANumber(int? i)
     {
         i = null;
-        if (i > 0) _ = i.Value;        // Noncompliant, FP: positive, therefore non-empty
+        if (i > 0) _ = i.Value;                 // Compliant, positive, therefore non-empty
 
         i = null;
-        if (i < 0) _ = i.Value;        // Noncompliant, FP: negative, therefore non-empty
+        if (i < 0) _ = i.Value;                 // Compliant, negative, therefore non-empty
+
+        i = Unknown();
+        if (i > null) _ = (null as int?).Value; // Compliant, relational against null is always false, so unreachable
+
+        i = Unknown();
+        if (i < null) _ = (null as int?).Value; // Compliant, relational against null is always false, so unreachable
+
+        static int? Unknown() => null;
     }
 }
 
