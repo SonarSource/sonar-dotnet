@@ -106,6 +106,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'watcher' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  31,
+"endLine":  230,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'watchee' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
@@ -113,6 +126,19 @@
 "startLine":  258,
 "startColumn":  31,
 "endLine":  258,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'watcher' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  31,
+"endLine":  259,
 "endColumn":  38
 }
 }
@@ -795,6 +821,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'target' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\GracefulStopSupport.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  13,
+"endLine":  65,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
@@ -816,6 +855,19 @@
 "startColumn":  13,
 "endLine":  479,
 "endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'extension' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  34,
+"endLine":  338,
+"endColumn":  43
 }
 }
 },
@@ -2173,6 +2225,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\FutureTimeoutSupport.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  28,
+"endLine":  39,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'scheduler' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Pattern\FutureTimeoutSupport.cs",
@@ -2225,6 +2290,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'node' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  51,
+"endLine":  176,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'hash' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
@@ -2233,6 +2311,19 @@
 "startColumn":  42,
 "endLine":  177,
 "endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'node' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  51,
+"endLine":  192,
+"endColumn":  55
 }
 }
 },
@@ -2576,6 +2667,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  37,
+"endLine":  162,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'msg' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
@@ -2584,6 +2688,58 @@
 "startColumn":  28,
 "endLine":  99,
 "endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  37,
+"endLine":  162,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  21,
+"endLine":  175,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  21,
+"endLine":  204,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  21,
+"endLine":  210,
+"endColumn":  27
 }
 }
 },
