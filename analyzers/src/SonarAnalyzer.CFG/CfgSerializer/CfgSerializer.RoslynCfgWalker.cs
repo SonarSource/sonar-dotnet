@@ -110,18 +110,14 @@ namespace SonarAnalyzer.CFG
 
             private static IEnumerable<string> SerializeOperation(int level, string prefix, IOperation operation)
             {
+                var prefixes = operation.GetType().GetProperties()
+                    .GroupBy(x => x.GetValue(operation) as IOperation, pi => pi.Name)
+                    .Where(x => x.Key is not null)
+                    .ToDictionary(x => x.Key, x => string.Join(", ", x));
                 var ret = new List<string> { $"{level}#: {prefix}{operation.Serialize()}" };
-                var map = new Dictionary<IOperation, string>();
-                foreach (var pi in operation.GetType().GetProperties())
-                {
-                    if (pi.GetValue(operation) is IOperation value)
-                    {
-                        map[value] = map.TryGetValue(value, out var old) ? $"{old}, {pi.Name}" : pi.Name;
-                    }
-                }
                 foreach (var child in operation.ToSonar().Children)
                 {
-                    ret.AddRange(SerializeOperation(level + 1, map.TryGetValue(child, out var childPrefix) ? $"{level}#.{childPrefix}: " : null, child));
+                    ret.AddRange(SerializeOperation(level + 1, prefixes.TryGetValue(child, out var childPrefix) ? $"{level}#.{childPrefix}: " : null, child));
                 }
                 return ret;
             }
