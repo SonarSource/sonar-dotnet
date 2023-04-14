@@ -117,7 +117,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             {
                 BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals => BoolConstraint.From(isNullLeft && isNullRight),
                 BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals => BoolConstraint.From(isNullLeft != isNullRight),
-                BinaryOperatorKind.GreaterThan or BinaryOperatorKind.GreaterThanOrEqual or BinaryOperatorKind.LessThan or BinaryOperatorKind.LessThanOrEqual => BoolConstraint.False,
+                _ when kind.IsAnyRelational() => BoolConstraint.False,
                 _ => null
             }
             : null;
