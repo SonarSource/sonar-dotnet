@@ -592,5 +592,38 @@ Tag(""End"")";
             validator.ValidateContainsOperation(OperationKind.Binary);
             validator.ValidateTagOrder("Value", "Else", "End");
         }
+
+        [DataRow("arg >= 42")]
+        [DataRow("arg > 42")]
+        [DataRow("arg < 42")]
+        [DataRow("arg <= 42")]
+        [DataRow("42 >= arg")]
+        [DataRow("42 > arg")]
+        [DataRow("42 < arg")]
+        [DataRow("42 <= arg")]
+        [DataRow("arg > (int?)42")]
+        [DataRow("arg > new Nullable<int>(42)")]
+        [DataRow("arg > (42 as int?)")]
+        [DataRow("arg > notNullValue")]
+        [TestMethod]
+        public void Binary_NullableRelationalNonNull_SetsObjectConstraint_CS(string expression)
+        {
+            var code = $$"""
+                int? notNullValue = 42;
+                if ({{expression}})
+                {
+                    Tag("If", arg);
+                }
+                else
+                {
+                    Tag("Else", arg);
+                }
+                """;
+
+            var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "arg comparison true, hence non-null"));
+            validator.ValidateTag("Else", x => x.Should().HaveNoConstraints("arg either null or comparison false"));
+        }
     }
 }
