@@ -34,7 +34,7 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
     {
         if (NullDereferenceCandidate(context.Operation.Instance) is { } candidate
             && candidate.Kind == OperationKindEx.ParameterReference
-            && candidate.ToParameterReference() is { Parameter: { Type.IsValueType: false } parameter } reference
+            && candidate.ToParameterReference() is { Parameter: { Type.IsValueType: false } parameter }
             && MissesObjectConstraint(context.State[parameter])
             && !context.CapturedVariables.Contains(parameter) // Workaround to avoid FPs. Can be removed once captures are properly handled by lva.LiveOut()
             && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
