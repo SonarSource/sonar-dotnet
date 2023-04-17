@@ -157,8 +157,7 @@ public partial class RoslynSymbolicExecutionTest
     [TestMethod]
     public void ParameterReassignedConstraint_HasNoOpposite()
     {
-        var propertyAccess = () => _ = ParameterReassignedConstraint.Instance.Opposite;
-        propertyAccess.Should().Throw<NotSupportedException>();
+        ParameterReassignedConstraint.Instance.Opposite.Should().BeNull();
     }
 
     private static void ValidateAssignmentConstraintForGenericParameter(string typeConstraint, params SymbolicConstraint[] expectedConstraints)

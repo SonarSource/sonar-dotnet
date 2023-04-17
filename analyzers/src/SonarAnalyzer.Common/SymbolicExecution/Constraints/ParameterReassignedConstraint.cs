@@ -24,7 +24,7 @@ internal sealed class ParameterReassignedConstraint : SymbolicConstraint
 {
     public static readonly ParameterReassignedConstraint Instance = new(ConstraintKind.ParameterReassigned);
 
-    public override SymbolicConstraint Opposite => throw new NotSupportedException();
+    public override SymbolicConstraint Opposite => null;
 
     private ParameterReassignedConstraint(ConstraintKind kind) : base(kind) { }
 }
