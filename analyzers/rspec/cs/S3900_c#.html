@@ -56,7 +56,7 @@ public class MyClass
 
     private void Xyzzy(MyOtherClass other)
     {
-        this.other = other; // Compliant: method is not publicly accessible
+        this.other = other.Clone(); // Compliant: method is not publicly accessible
     }
 }
 </pre>
