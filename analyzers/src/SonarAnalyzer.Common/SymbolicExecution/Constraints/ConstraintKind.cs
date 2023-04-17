@@ -42,8 +42,6 @@ public enum ConstraintKind
     NullableHasValue,
     [Obsolete("Old SE engine only")]
     NullableNoValue,
-    ObjectNull,
-    ObjectNotNull,
     ParameterReassigned,
     SaltSizeSafe,
     SaltSizeShort,
