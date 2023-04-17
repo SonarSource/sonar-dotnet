@@ -39,10 +39,10 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
             && !context.CapturedVariables.Contains(parameter) // Workaround to avoid FPs. Can be removed once captures are properly handled by lva.LiveOut()
             && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
         {
-            var message = IsInConstructorInitializer(context.Operation.Instance.Syntax)
+            var message = IsInConstructorInitializer(candidate.Syntax)
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be {1}."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
-            ReportIssue(reference.WrappedOperation, string.Format(message, reference.WrappedOperation.Syntax, NullName), context);
+            ReportIssue(candidate, string.Format(message, candidate.Syntax, NullName), context);
         }
 
         return context.State;
