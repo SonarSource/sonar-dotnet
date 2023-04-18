@@ -1,6 +1,6 @@
 <p>Nullable value types can hold either a value or <code>null</code>. The value held in the nullable type can be accessed with the <code>Value</code>
-property or by casting it to the underlying type, but both operations throw an <code>InvalidOperationException</code> when the value is
-<code>null</code>. To avoid the exception, a nullable type should always be tested before the value is accessed.</p>
+property or by casting it to the underlying type. Still, both operations throw an <code>InvalidOperationException</code> when the value is
+<code>null</code>. A nullable type should always be tested before the value is accessed to avoid the exception.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public void Sample(bool condition)
