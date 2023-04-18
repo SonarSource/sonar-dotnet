@@ -85,7 +85,7 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
     }
 
     private static IOperation AssignmentTarget(IOperation operation) =>
-        // Missing operation types: DeconstructionAssignment, CoalesceAssignment, CompoundAssignment, ThrowExpression
+        // Missing operation types: DeconstructionAssignment, CoalesceAssignment, ThrowExpression
         operation.Kind == OperationKindEx.SimpleAssignment
             ? operation.ToAssignment().Target
             : null;
