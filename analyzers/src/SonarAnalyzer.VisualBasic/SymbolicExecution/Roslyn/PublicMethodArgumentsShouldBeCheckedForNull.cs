@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using static Microsoft.CodeAnalysis.Accessibility;
 using static Microsoft.CodeAnalysis.VisualBasic.SyntaxKind;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
@@ -42,9 +41,6 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
         bool IsRelevantPropertyAccessor() =>
             Node is AccessorBlockSyntax { } accessor
             && (accessor.Kind() != GetAccessorBlock || accessor.Parent is PropertyBlockSyntax { PropertyStatement.ParameterList: not null });
-
-        bool IsAccessibleFromOtherAssemblies() =>
-            SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is Public or Protected or ProtectedOrInternal;
 
         static bool MethodDereferencesArguments(SyntaxNode method, ParameterListSyntax parameters)
         {

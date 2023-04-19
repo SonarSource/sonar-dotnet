@@ -691,19 +691,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'members' before using it.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
-"region":  {
-"startLine":  232,
-"startColumn":  36,
-"endLine":  232,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'collection' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",

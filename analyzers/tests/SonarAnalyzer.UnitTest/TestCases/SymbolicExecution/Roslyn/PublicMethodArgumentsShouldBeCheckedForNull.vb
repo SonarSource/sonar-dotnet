@@ -495,15 +495,19 @@ Public Class Constructor
     Inherits Base
 
     Public Sub New(s As String)
-        Dim v = s.Length            ' Noncompliant {{Refactor this method to add validation of parameter 's' before using it.}}
+        Dim v = s.Length                                    ' Noncompliant {{Refactor this method to add validation of parameter 's' before using it.}}
     End Sub
 
     Public Sub New(o As Object)
-        Me.New(o.ToString())        ' Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be Nothing.}}
+        Me.New(o.ToString())                                ' Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be Nothing.}}
     End Sub
 
     Public Sub New(o As Object())
-        MyBase.New(o.ToString())    ' Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be Nothing.}}
+        MyBase.New(o.ToString())                            ' Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be Nothing.}}
+    End Sub
+
+    Public Sub New(ByVal l As List(Of Object))
+        MyBase.New(If(l.Count > 0, "not empty", "empty"))   ' Noncompliant {{Refactor this constructor to avoid using members of parameter 'l' because it could be Nothing.}}
     End Sub
 
 End Class
@@ -522,7 +526,7 @@ Public Class Nancy_Repros
 
     Public Function IfStartsWith(Arg As String) As String
         If Arg.StartsWith("Value") Then Arg = Arg.Substring(5)  ' Noncompliant
-        Return Arg.ToString     ' Noncompliant FP, should have learned NotNull from the previous .StartsWith()
+        Return Arg.ToString     ' Compliant - learned NotNull from previous method invocation on Arg
     End Function
 
     Sub WithCapture(Ex As Exception, Condition As Boolean)
@@ -549,4 +553,10 @@ Public Class ShouldExecuteLambdas
                                         End Sub
     End Sub
 
+End Class
+
+Public Class Keywords
+    Public Sub Method(ByVal [event] As Object)
+        [event].ToString() ' Noncompliant {{Refactor this method to add validation of parameter '[event]' before using it.}}
+    End Sub
 End Class

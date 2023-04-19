@@ -41,19 +41,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'mypath' before using it.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
-"region":  {
-"startLine":  310,
-"startColumn":  12,
-"endLine":  310,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'str' before using it.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
@@ -88,19 +75,6 @@
 "startColumn":  14,
 "endLine":  413,
 "endColumn":  16
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'sr' before using it.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
-"region":  {
-"startLine":  414,
-"startColumn":  16,
-"endLine":  414,
-"endColumn":  18
 }
 }
 },

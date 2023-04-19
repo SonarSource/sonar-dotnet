@@ -1497,19 +1497,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'dispatcherConfig' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
-"region":  {
-"startLine":  265,
-"startColumn":  22,
-"endLine":  265,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'props' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",

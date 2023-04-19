@@ -97,7 +97,9 @@ public class Program
 
     public void ForEachLoop(object[] array)
     {
-        foreach (object o in array) { } // Noncompliant
+        foreach (object o in array) // Noncompliant
+        {
+        }
     }
 
     public async void AsyncTest(Task task1, Task task2, Task task3, Task task4)
@@ -144,7 +146,8 @@ public class Program
         SomeAction(asParameter.ToString);       // Noncompliant
         Func<string> f = asVariable.ToString;   // Noncompliant
 
-        void SomeAction(Func<string> a) { }
+        void SomeAction(Func<string> a)
+        { }
     }
 }
 
@@ -209,7 +212,7 @@ public class ReproIssue2476
         }
         else
         {
-            RefMethod(ref infixes, infixes.Length); // Noncompliant - FP: infixes is not null at this point
+            RefMethod(ref infixes, infixes.Length); // Noncompliant - FP
         }
     }
 
@@ -297,7 +300,7 @@ public class ReproIssue2591
             name = Guid.NewGuid().ToString("N");
         }
 
-        return name.Trim(); // Noncompliant - FP
+        return name.Trim();
     }
 
     public string FooWithStringJoin(string name)
@@ -307,7 +310,7 @@ public class ReproIssue2591
             name = Guid.NewGuid().ToString("N");
         }
 
-        return string.Join("_", name.Split(System.IO.Path.GetInvalidFileNameChars())); // Noncompliant - FP
+        return string.Join("_", name.Split(System.IO.Path.GetInvalidFileNameChars()));
     }
 
     public string FooWithObject(object name)
@@ -317,7 +320,7 @@ public class ReproIssue2591
             name = Guid.NewGuid().ToString("N");
         }
 
-        return name.ToString(); // Noncompliant - FP
+        return name.ToString();
     }
 }
 
@@ -385,7 +388,7 @@ public class ReproWithIsNullOrEmpty
         if (imdbId.StartsWith(" "))
             imdbId = string.Concat("tt", imdbId);
 
-        if (imdbId.Length != 9) // Noncompliant - FP
+        if (imdbId.Length != 9)
             imdbId = string.Empty;
 
         return imdbId;
@@ -398,7 +401,7 @@ public class Repro_3400
     public void ReassignedFromMethod(StringBuilder parameter)
     {
         parameter = Create();
-        parameter.Capacity = 1; // Noncompliant - FP
+        parameter.Capacity = 1;
     }
 
     public void ReassignedFromConstructor(StringBuilder parameter)
@@ -728,16 +731,26 @@ public class Constructor : Base
 {
     public Constructor(string s)
     {
-        _ = s.Length;       // Noncompliant {{Refactor this method to add validation of parameter 's' before using it.}}
+        _ = s.Length;           // Noncompliant {{Refactor this method to add validation of parameter 's' before using it.}}
     }
 
     public Constructor(object o) :
-        this(o.ToString())  // Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be null.}}
+        this(o.ToString())      // Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be null.}}
     {
     }
 
+    public Constructor(Exception e)
+    {
+        new Base(e.ToString()); // Noncompliant {{Refactor this method to add validation of parameter 'e' before using it.}}
+    }
+
     public Constructor(object[] o) :
-        base(o.ToString())  // Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be null.}}
+        base(o.ToString())      // Noncompliant {{Refactor this constructor to avoid using members of parameter 'o' because it could be null.}}
+    {
+    }
+
+    public Constructor(List<object> l) :
+        base(l.Count > 0 ? "not empty" : "empty")      // Noncompliant {{Refactor this constructor to avoid using members of parameter 'l' because it could be null.}}
     {
     }
 }
@@ -769,6 +782,36 @@ public class DereferencedMultipleTimesOnTheSameExecutionPath
             s.IndexOf("a"),     // Noncompliant
             s.IndexOf("b"));    // Compliant - IndexOf("a") was called before this method call, so s is not null here
     }
+}
+
+public class ParameterAssignment
+{
+    public void ParameterIsAssignedNewValue(object o)
+    {
+        o = Unknown();
+        o.ToString();           // Compliant - we're no longer validating the original value of the parameter
+    }
+
+    public void PassedAsRefToMethod(object o)
+    {
+        RefMethod(ref o);
+        o.ToString();           // Noncompliant - FP: o was passed by reference to a method, so it may have been assigned a new value
+    }
+
+    public void ConditionalAssignment(object o)
+    {
+        o = o == null ? Unknown() : o;
+        o.ToString();           // Noncompliant - FP: Flow Capture is not handled
+    }
+
+    public void TupleDeconstruction(object o)
+    {
+        (o, _) = (Unknown(), new object());
+        o.ToString();           // Noncompliant - FP
+    }
+
+    private object Unknown() => null;
+    private void RefMethod(ref object objectRef) { }
 }
 
 public class Nancy_Repro
@@ -819,5 +862,13 @@ public class ParameterCaptures
         s.ToString(); // FN
 
         list.Where(x => x == s);
+    }
+}
+
+public class Keywords
+{
+    public void Method(object @event)
+    {
+        @event.ToString(); // Noncompliant {{Refactor this method to add validation of parameter '@event' before using it.}}
     }
 }

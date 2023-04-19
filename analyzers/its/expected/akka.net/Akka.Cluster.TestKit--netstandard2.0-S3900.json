@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'sys' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
-"region":  {
-"startLine":  181,
-"startColumn":  18,
-"endLine":  181,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'roles' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
@@ -49,19 +36,6 @@
 "startColumn":  18,
 "endLine":  339,
 "endColumn":  32
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'nodesInCluster' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
-"region":  {
-"startLine":  397,
-"startColumn":  37,
-"endLine":  397,
-"endColumn":  51
 }
 }
 }
