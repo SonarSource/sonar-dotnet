@@ -21,12 +21,9 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class TestsShouldNotUseThreadSleep : TestsShouldNotUseThreadSleepBase<SyntaxKind>
+public sealed class TestsShouldNotUseThreadSleep : TestsShouldNotUseThreadSleepBase<MethodDeclarationSyntax, SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override bool IsInTestMethod(SyntaxNode node, SemanticModel model) =>
-        node.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault() is { } method
-        && model.GetDeclaredSymbol(method) is IMethodSymbol symbol
-        && symbol.IsTestMethod();
+    protected override SyntaxNode MethodBody(MethodDeclarationSyntax method) => method;
 }

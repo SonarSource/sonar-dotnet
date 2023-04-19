@@ -21,12 +21,9 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class TestsShouldNotUseThreadSleep : TestsShouldNotUseThreadSleepBase<SyntaxKind>
+public sealed class TestsShouldNotUseThreadSleep : TestsShouldNotUseThreadSleepBase<MethodBlockSyntax, SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override bool IsInTestMethod(SyntaxNode node, SemanticModel model) =>
-        node.Ancestors().OfType<MethodBlockSyntax>().FirstOrDefault() is { } block
-        && model.GetDeclaredSymbol(block.SubOrFunctionStatement) is IMethodSymbol symbol
-        && symbol.IsTestMethod();
+    protected override SyntaxNode MethodBody(MethodBlockSyntax method) => method.SubOrFunctionStatement;
 }

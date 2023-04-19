@@ -20,14 +20,15 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class TestsShouldNotUseThreadSleepBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-     where TSyntaxKind : struct
+public abstract class TestsShouldNotUseThreadSleepBase<TMethodSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TMethodSyntax : SyntaxNode
+    where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S2925";
 
     protected override string MessageFormat => "Do not use Thread.Sleep() in a test.";
 
-    protected abstract bool IsInTestMethod(SyntaxNode node, SemanticModel model);
+    protected abstract SyntaxNode MethodBody(TMethodSyntax method);
 
     protected TestsShouldNotUseThreadSleepBase() : base(DiagnosticId) { }
 
@@ -46,4 +47,9 @@ public abstract class TestsShouldNotUseThreadSleepBase<TSyntaxKind> : SonarDiagn
 
     private bool IsThreadSleepMethod(string name) =>
         nameof(Thread.Sleep).Equals(name, Language.NameComparison);
+
+    private bool IsInTestMethod(SyntaxNode node, SemanticModel model) =>
+        node.Ancestors().OfType<TMethodSyntax>().FirstOrDefault() is { } method
+        && model.GetDeclaredSymbol(MethodBody(method)) is IMethodSymbol symbol
+        && symbol.IsTestMethod();
 }
