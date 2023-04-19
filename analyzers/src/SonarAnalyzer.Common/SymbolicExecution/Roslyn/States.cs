@@ -54,33 +54,32 @@ public readonly record struct States<T> where T : class
 
     public static States<T> operator +(States<T> left, States<T> right)
     {
-        if (left.Length == 0)
+        var leftLength = left.Length;
+        if (leftLength == 0)
         {
             return right;
         }
-        else if (right.Length == 0)
+        var rightLength = right.Length;
+        if (rightLength == 0)
         {
             return left;
         }
-        else
+        var newLength = leftLength + rightLength;
+        var array = newLength > 2
+            ? new T[newLength - 2]
+            : null;
+        T newFirst = null;
+        T newSecond = null;
+        var i = 0;
+        foreach (var state in left)
         {
-            var newLength = left.Length + right.Length;
-            var array = newLength > 2
-                ? new T[newLength - 2]
-                : null;
-            T newFirst = null;
-            T newSecond = null;
-            var i = 0;
-            foreach (var state in left)
-            {
-                Append(array, ref newFirst, ref newSecond, ref i, state);
-            }
-            foreach (var state in right)
-            {
-                Append(array, ref newFirst, ref newSecond, ref i, state);
-            }
-            return new(newFirst, newSecond, array ?? Array.Empty<T>());
+            Append(array, ref newFirst, ref newSecond, ref i, state);
         }
+        foreach (var state in right)
+        {
+            Append(array, ref newFirst, ref newSecond, ref i, state);
+        }
+        return new(newFirst, newSecond, array ?? Array.Empty<T>());
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static void Append(T[] array, ref T newFirst, ref T newSecond, ref int i, T state)
