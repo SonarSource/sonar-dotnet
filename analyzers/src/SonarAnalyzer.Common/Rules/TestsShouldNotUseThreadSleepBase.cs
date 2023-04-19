@@ -32,7 +32,7 @@ public abstract class TestsShouldNotUseThreadSleepBase<TSyntaxKind> : SonarDiagn
 
     protected override string MessageFormat => "Do not use Thread.Sleep() in a test.";
 
-    protected abstract bool IsWithinTest(SyntaxNode node, SemanticModel model);
+    protected abstract bool IsInTestMethod(SyntaxNode node, SemanticModel model);
 
     protected TestsShouldNotUseThreadSleepBase() : base(DiagnosticId) { }
 
@@ -41,7 +41,7 @@ public abstract class TestsShouldNotUseThreadSleepBase<TSyntaxKind> : SonarDiagn
         {
             if (IsThreadSleepMethod(Language.Syntax.NodeIdentifier(c.Node)?.Text)
                 && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol method
-                && method.ContainingType.Is(KnownType.System_Threading_Thread)
+                && method.Is(KnownType.System_Threading_Thread, nameof(Thread.Sleep))
                 && IsWithinTest(c.Node, c.SemanticModel))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, c.Node.Parent.Parent.GetLocation()));

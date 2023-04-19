@@ -30,7 +30,7 @@ class NonCompliant
     [Test]
     public void ThreadSleepInNUnitTest()
     {
-        Thread.Sleep(42); // {{Do not use Thread.Sleep() in a test.}}
+        Thread.Sleep(42); // {{Do not use 'Thread.Sleep()' in a test.}}
 //      ^^^^^^^^^^^^^^^^
     }
 
