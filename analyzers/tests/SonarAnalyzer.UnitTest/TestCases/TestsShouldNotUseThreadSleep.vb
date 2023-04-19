@@ -2,6 +2,7 @@
 Imports NUnit.Framework
 Imports System.Threading
 Imports Xunit
+Imports _Alias = System.Threading.Thread
 
 Class Compliant
     <Test>
@@ -18,7 +19,7 @@ Class Compliant
         Thread.Sleep(42)
     End Sub
 
-    Private Sub Sleep(ByVal durartion As Integer)
+    Private Sub Sleep(durartion As Integer)
     End Sub
 End Class
 
@@ -37,5 +38,10 @@ Class NonCompliant
     <TestMethod>
     Public Sub ThreadSleepInMSTest()
         Thread.Sleep(42) ' Noncompliant
+    End Sub
+
+    <Test>
+    Public Sub ThreadSleepViaAlias()
+        _Alias.Sleep(42) ' Noncompliant
     End Sub
 End Class
