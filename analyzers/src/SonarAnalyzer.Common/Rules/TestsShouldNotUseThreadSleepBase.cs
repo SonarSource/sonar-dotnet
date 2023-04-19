@@ -18,11 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Threading;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules;
 
 public abstract class TestsShouldNotUseThreadSleepBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -37,12 +32,12 @@ public abstract class TestsShouldNotUseThreadSleepBase<TSyntaxKind> : SonarDiagn
     protected TestsShouldNotUseThreadSleepBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
             if (IsThreadSleepMethod(Language.Syntax.NodeIdentifier(c.Node)?.Text)
                 && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol method
                 && method.Is(KnownType.System_Threading_Thread, nameof(Thread.Sleep))
-                && IsWithinTest(c.Node, c.SemanticModel))
+                && IsInTestMethod(c.Node, c.SemanticModel))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, c.Node.Parent.Parent.GetLocation()));
             }

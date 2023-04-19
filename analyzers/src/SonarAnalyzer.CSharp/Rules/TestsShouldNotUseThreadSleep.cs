@@ -18,13 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -32,7 +25,7 @@ public sealed class TestsShouldNotUseThreadSleep : TestsShouldNotUseThreadSleepB
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override bool IsWithinTest(SyntaxNode node, SemanticModel model) =>
+    protected override bool IsInTestMethod(SyntaxNode node, SemanticModel model) =>
         node.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault() is { } method
         && model.GetDeclaredSymbol(method) is IMethodSymbol symbol
         && symbol.IsTestMethod();

@@ -18,13 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -32,7 +25,7 @@ public sealed class TestsShouldNotUseThreadSleep : TestsShouldNotUseThreadSleepB
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override bool IsWithinTest(SyntaxNode node, SemanticModel model) =>
+    protected override bool IsInTestMethod(SyntaxNode node, SemanticModel model) =>
         node.Ancestors().OfType<MethodBlockSyntax>().FirstOrDefault() is { } block
         && model.GetDeclaredSymbol(block.SubOrFunctionStatement) is IMethodSymbol symbol
         && symbol.IsTestMethod();
