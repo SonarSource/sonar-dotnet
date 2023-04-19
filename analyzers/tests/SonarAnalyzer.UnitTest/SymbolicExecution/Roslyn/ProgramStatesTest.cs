@@ -18,7 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Moq;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using ProgramStates = SonarAnalyzer.SymbolicExecution.Roslyn.States<SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
@@ -31,7 +34,7 @@ public class ProgramStatesTest
     {
         var sut = new ProgramStates();
         sut.Length.Should().Be(0);
-        foreach (var _ in sut)
+        foreach (var s in sut)
         {
             Assert.Fail("Empty states");
         }
@@ -55,72 +58,120 @@ public class ProgramStatesTest
     public void IterateTwoStates()
     {
         var s1 = ProgramState.Empty;
-        var s2 = s1.AddVisit(1);
+        var s2 = s1.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.Null);
         var sut = new ProgramStates(s1, s2);
-        sut.Length.Should().Be(2);
-        var i = 0;
-        foreach (var s in sut)
-        {
-            switch (i)
-            {
-                case 0:
-                    s.Should().Be(s1);
-                    break;
-                case 1:
-                    s.Should().Be(s2);
-                    break;
-                default:
-                    Assert.Fail("Unreachable");
-                    break;
-            }
-            i++;
-        }
-        i.Should().Be(2);
+        AssertStates(sut, s1, s2);
     }
 
     [TestMethod]
     public void IterateThreeStates()
     {
         var s1 = ProgramState.Empty;
-        var s2 = s1.AddVisit(1);
-        var s3 = s2.AddVisit(2);
+        var s2 = s1.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.Null);
+        var s3 = s2.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.NotNull);
         var sut = new ProgramStates(s1, s2, s3);
-        sut.Length.Should().Be(3);
-        var i = 0;
-        foreach (var s in sut)
-        {
-            switch (i)
-            {
-                case 0:
-                    s.Should().Be(s1);
-                    break;
-                case 1:
-                    s.Should().Be(s2);
-                    break;
-                case 2:
-                    s.Should().Be(s3);
-                    break;
-                default:
-                    Assert.Fail("Unreachable");
-                    break;
-            }
-            i++;
-        }
-        i.Should().Be(3);
+        AssertStates(sut, s1, s2, s3);
     }
 
     [TestMethod]
     public void IterateTenStates()
     {
-        var states = Enumerable.Range(1, 10).Select(i => ProgramState.Empty.AddVisit(i)).ToList();
+        var states = Enumerable.Range(1, 10).Select(i => ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.Null)).ToArray();
         var sut = new ProgramStates(states[0], states[1], states.Skip(2).ToArray());
-        sut.Length.Should().Be(10);
+        AssertStates(sut, states);
+    }
+
+    [TestMethod]
+    public void AddEmptyStates()
+    {
+        var s1 = new ProgramStates();
+        var s2 = new ProgramStates();
+        var sut = s1 + s2;
+        sut.Should().Be(new ProgramStates());
+    }
+
+    [TestMethod]
+    public void AddLeftEmpty()
+    {
+        var s1 = new ProgramStates();
+        var s2 = new ProgramStates(ProgramState.Empty);
+        var sut = s1 + s2;
+        sut.Should().Be(s2);
+    }
+
+    [TestMethod]
+    public void AddRightEmpty()
+    {
+        var s1 = new ProgramStates(ProgramState.Empty);
+        var s2 = new ProgramStates();
+        var sut = s1 + s2;
+        sut.Should().Be(s1);
+    }
+
+    [TestMethod]
+    public void AddLeftAndRightOneElement()
+    {
+        var s1 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.Null);
+        var s2 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.NotNull);
+        var sut = new ProgramStates(s1) + new ProgramStates(s2);
+        AssertStates(sut, s1, s2);
+    }
+
+    [TestMethod]
+    public void AddLeftOneAndRightTwoElements()
+    {
+        var s1 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.Null);
+        var s2 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.NotNull);
+        var s3 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), BoolConstraint.True);
+        var sut = new ProgramStates(s1) + new ProgramStates(s2, s3);
+        AssertStates(sut, s1, s2, s3);
+    }
+
+    [TestMethod]
+    public void AddLeftTwoAndRightOneElements()
+    {
+        var s1 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.Null);
+        var s2 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.NotNull);
+        var s3 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), BoolConstraint.True);
+        var sut = new ProgramStates(s1, s2) + new ProgramStates(s3);
+        AssertStates(sut, s1, s2, s3);
+    }
+
+    [TestMethod]
+    public void AddLeftTwoAndRightTwoElements()
+    {
+        var s1 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.Null);
+        var s2 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.NotNull);
+        var s3 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), BoolConstraint.True);
+        var s4 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), BoolConstraint.False);
+        var sut = new ProgramStates(s1, s2) + new ProgramStates(s3, s4);
+        AssertStates(sut, s1, s2, s3, s4);
+    }
+
+    [TestMethod]
+    public void AddLeftThreeAndRightThreeElements()
+    {
+        var s1 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.Null);
+        var s2 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), ObjectConstraint.NotNull);
+        var s3 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), BoolConstraint.True);
+        var s4 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), BoolConstraint.False);
+        var s5 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), TestConstraint.First);
+        var s6 = ProgramState.Empty.SetSymbolConstraint(Mock.Of<ISymbol>(), TestConstraint.Second);
+        var sut = new ProgramStates(s1, s2, s3) + new ProgramStates(s4, s5, s6);
+        AssertStates(sut, s1, s2, s3, s4, s5, s6);
+    }
+
+    private static void AssertStates(ProgramStates sut, params ProgramState[] expectedStates)
+    {
+        var actualEnum = sut.GetEnumerator();
+        var expectedEnum = expectedStates.GetEnumerator();
         var i = 0;
-        foreach (var s in sut)
+        while (actualEnum.MoveNext() && expectedEnum.MoveNext())
         {
-            s.Should().BeSameAs(states[i]);
+            actualEnum.Current.Should().Be(expectedEnum.Current, $"exectedStates[{i}] says so.");
             i++;
         }
-        i.Should().Be(10);
+        sut.Length.Should().Be(i, "sut should have as many elements as expectedStates");
+        expectedStates.Length.Should().Be(i, "expectedStates should have as many elements as sut");
     }
 }

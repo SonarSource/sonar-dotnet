@@ -25,7 +25,7 @@ using System.Runtime.CompilerServices;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
-public readonly record struct States<T> where T : class
+public readonly struct States<T> where T : class
 {
     private readonly T first;
     private readonly T second;
@@ -41,7 +41,7 @@ public readonly record struct States<T> where T : class
     {
         this.first = first;
         this.second = second;
-        this.others = others;
+        this.others = others ?? Array.Empty<T>();
     }
 
     public int Length =>
