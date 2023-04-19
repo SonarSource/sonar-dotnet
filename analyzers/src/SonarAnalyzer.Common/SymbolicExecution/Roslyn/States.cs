@@ -59,11 +59,13 @@ public readonly record struct States<T> where T : class
         {
             return right;
         }
+
         var rightLength = right.Length;
         if (rightLength == 0)
         {
             return left;
         }
+
         var newLength = leftLength + rightLength;
         var array = newLength > 2
             ? new T[newLength - 2]
@@ -116,6 +118,7 @@ public readonly record struct States<T> where T : class
                 2 => states.second,
                 _ => states.others[index - 3],
             };
+
         public bool MoveNext() =>
            ++index switch
            {
