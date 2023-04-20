@@ -21,54 +21,53 @@
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
+    public SymbolicExecutionRunner() : base(AnalyzerConfiguration.AlwaysEnabled) { }
+
+    protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+        .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
+        .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference>())
+        .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess>())
+        .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull>());
+
+    protected override void Initialize(SonarAnalysisContext context)
     {
-        public SymbolicExecutionRunner() : base(AnalyzerConfiguration.AlwaysEnabled) { }
+        context.RegisterNodeAction(
+            c => Analyze<MethodBlockBaseSyntax>(context, c, x => x),
+            SyntaxKind.ConstructorBlock,
+            SyntaxKind.OperatorBlock,
+            SyntaxKind.SubBlock,
+            SyntaxKind.FunctionBlock,
+            SyntaxKind.GetAccessorBlock,
+            SyntaxKind.SetAccessorBlock,
+            SyntaxKind.AddHandlerAccessorBlock,
+            SyntaxKind.RemoveHandlerAccessorBlock,
+            SyntaxKind.RaiseEventAccessorBlock);
 
-        protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
-            .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
-            .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference>())
-            .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess>())
-            .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull>());
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c => Analyze<MethodBlockBaseSyntax>(context, c, x => x),
-                SyntaxKind.ConstructorBlock,
-                SyntaxKind.OperatorBlock,
-                SyntaxKind.SubBlock,
-                SyntaxKind.FunctionBlock,
-                SyntaxKind.GetAccessorBlock,
-                SyntaxKind.SetAccessorBlock,
-                SyntaxKind.AddHandlerAccessorBlock,
-                SyntaxKind.RemoveHandlerAccessorBlock,
-                SyntaxKind.RaiseEventAccessorBlock);
-
-            context.RegisterNodeAction(
-                c =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var declaration = (LambdaExpressionSyntax)c.Node;
+                if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !c.IsInExpressionTree())
                 {
-                    var declaration = (LambdaExpressionSyntax)c.Node;
-                    if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !c.IsInExpressionTree())
-                    {
-                        Analyze(context, c, declaration, symbol);
-                    }
-                },
-                SyntaxKind.SingleLineFunctionLambdaExpression,
-                SyntaxKind.SingleLineSubLambdaExpression,
-                SyntaxKind.MultiLineFunctionLambdaExpression,
-                SyntaxKind.MultiLineSubLambdaExpression);
-        }
+                    Analyze(context, c, declaration, symbol);
+                }
+            },
+            SyntaxKind.SingleLineFunctionLambdaExpression,
+            SyntaxKind.SingleLineSubLambdaExpression,
+            SyntaxKind.MultiLineFunctionLambdaExpression,
+            SyntaxKind.MultiLineSubLambdaExpression);
+    }
 
-        protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
-            node.CreateCfg(model, cancel);
+    protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
+        node.CreateCfg(model, cancel);
 
-        protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol)
-        {
-            // There are no old Sonar rules in VB.NET
-        }
+    protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol)
+    {
+        // There are no old Sonar rules in VB.NET
     }
 }
