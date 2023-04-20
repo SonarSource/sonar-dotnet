@@ -50,7 +50,8 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
     {
         if (context.HasMatchingScope(descriptor))
         {
-            // This is a reproduction of Roslyn activation logic
+            // Roslyn calls this analyzer if any of the SE rules is active. We need to remove deactivated rules from execution to improve overall SE performance.
+            // This is a reproduction of Roslyn activation logic:
             // https://github.com/dotnet/roslyn/blob/0368609e1467563247e9b5e4e3fe8bff533d59b6/src/Compilers/Core/Portable/DiagnosticAnalyzer/AnalyzerDriver.cs#L1316-L1327
             var options = CompilationOptionsWrapper.FromObject(context.Compilation.Options).SyntaxTreeOptionsProvider;
             var severity = options.TryGetDiagnosticValue(context.Tree, descriptor.Id, default, out var severityFromOptions)
