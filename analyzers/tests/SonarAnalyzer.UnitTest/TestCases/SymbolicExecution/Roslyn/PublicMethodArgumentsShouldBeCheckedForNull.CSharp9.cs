@@ -173,7 +173,7 @@ public class Assignments
     public void CompundAssignment_NullabaleInt(int? i)
     {
         i *= 2;
-        i.GetType(); // Compliant - FN: lifted operators return null if one operand is null
+        i.GetType(); // FN: lifted operators return null if one operand is null
     }
 
     private object Unknown() => null;
