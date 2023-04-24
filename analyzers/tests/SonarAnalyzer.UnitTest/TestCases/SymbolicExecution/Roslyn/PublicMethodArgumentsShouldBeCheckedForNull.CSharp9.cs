@@ -114,12 +114,66 @@ public class UsingFromServicesAttribute
     }
 }
 
-public class CoalesceAssignment
+public class Assignments
 {
-    public void Method(object o)
+    public void CoalesceAssignment(object o)
     {
         o ??= Unknown();
         o.ToString(); // Noncompliant - FP: parameter reassignment via a null coalesce assignment is not supported
+    }
+
+    public void NullCoalesce(object o)
+    {
+        o = o ?? Unknown();
+        o.ToString(); // Noncompliant - FP
+    }
+
+    public void NullCoalesceThrow(object o)
+    {
+        o = o ?? throw new ArgumentNullException("");
+        o.ToString(); // Compliant
+    }
+
+    public void NullConditional(object o)
+    {
+        o = o?.ToString() ?? "";
+        o.ToString(); // Compliant
+    }
+
+    public void TernaryAssignment(object o)
+    {
+        o = o == null ? Unknown() : o;
+        o.ToString(); // Noncompliant - FP
+    }
+
+    public void TernaryThrow1(object o)
+    {
+        o = o == null ? throw new ArgumentNullException("") : Unknown();
+        o.ToString(); // Noncompliant - FP
+    }
+
+    public void TernaryThrow2(object o)
+    {
+        o = o == null ? throw new ArgumentNullException("") : o;
+        o.ToString(); // Compliant
+    }
+
+    public void StringConcatenation(string s)
+    {
+        s = s + "Test";
+        s.ToString(); // Compliant
+    }
+
+    public void CompundAssignment_String(string s)
+    {
+        s += "Test";
+        s.ToString(); // Noncompliant - FP: string concatenation supports null for its arguments
+    }
+
+    public void CompundAssignment_NullabaleInt(int? i)
+    {
+        i *= 2;
+        i.GetType(); // Compliant - FN: lifted operators return null if one operand is null
     }
 
     private object Unknown() => null;

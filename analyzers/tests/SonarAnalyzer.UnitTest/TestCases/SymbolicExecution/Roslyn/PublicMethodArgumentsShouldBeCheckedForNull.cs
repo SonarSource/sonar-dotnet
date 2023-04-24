@@ -815,17 +815,6 @@ public class ParameterAssignment
     private void RefMethod(ref object objectRef) { }
 }
 
-public class Nancy_Repro
-{
-    public void NullCoalesce(Sample arg = null)
-    {
-        arg = arg ?? new Sample();
-        arg.ToString(); // Compliant
-    }
-
-    public class Sample { }
-}
-
 public class ParameterCaptures
 {
     public string InsideLambda_CaptureAfterCheck(string s)
