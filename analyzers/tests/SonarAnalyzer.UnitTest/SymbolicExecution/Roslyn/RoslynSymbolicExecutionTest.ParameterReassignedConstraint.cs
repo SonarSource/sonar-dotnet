@@ -97,7 +97,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("End", arg);
             """;
         var validator = SETestContext.CreateCS(methodBody, ", object arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("End", x => x.Should().BeNull()); // FIXME: arg should have the ParameterReassignedConstraint
+        validator.ValidateTag("End", x => x.Should().HaveNoConstraints()); // FIXME: arg should have the ParameterReassignedConstraint
     }
 
     [TestMethod]
