@@ -873,16 +873,3 @@ public class Keywords
         @event.ToString(); // Noncompliant {{Refactor this method to add validation of parameter '@event' before using it.}}
     }
 }
-
-public class Repo_2591
-{
-    public string Foo(string name)
-    {
-        if (name == null)
-        {
-            name = Guid.NewGuid().ToString("N");
-        }
-
-        return string.Join("_", name.Split(Path.GetInvalidFileNameChars())); // Noncompliant FP
-    }
-}
