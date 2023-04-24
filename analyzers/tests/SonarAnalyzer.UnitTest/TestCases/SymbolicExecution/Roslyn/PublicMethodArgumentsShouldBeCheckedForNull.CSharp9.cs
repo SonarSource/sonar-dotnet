@@ -124,3 +124,18 @@ public class CoalesceAssignment
 
     private object Unknown() => null;
 }
+
+public class ThrowIfNull
+{
+    public void ThrowIfNullString(string s)
+    {
+        ArgumentNullException.ThrowIfNull(s, nameof(s));
+        s.ToString(); // Compliant
+    }
+
+    public void ThrowIfNullOrEmptyString(string s)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(s, nameof(s));
+        s.ToString(); // Compliant
+    }
+}
