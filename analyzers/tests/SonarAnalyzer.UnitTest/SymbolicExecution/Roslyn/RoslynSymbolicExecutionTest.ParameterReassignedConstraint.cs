@@ -101,22 +101,29 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void ParameterReassignedConstraint_InsideCondition()
+    public void ParameterReassignedConstraint_ReassignedAfterNullCheck()
     {
-        const string snippet = """
+        var validator = SETestContext.CreateCS("""
             if (arg == null)
             {
-                arg = Unknown<object>();
-                Tag("AfterAssignment", arg);
+                Tag("BeforeReassignment");
+                arg = Guid.NewGuid().ToString("N");
+                Tag("AfterReassignment");
             }
             else
             {
-                Tag("NoAssignment", arg);
+                Tag("Else");
             }
-            """;
-        var validator = SETestContext.CreateCS(snippet, ", object arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("AfterAssignment", x => x.Should().HaveOnlyConstraints(ParameterReassignedConstraint.Instance));
-        validator.ValidateTag("NoAssignment", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+            Tag("End");
+            arg.ToString();
+            """, ", string arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
+        var arg = validator.Symbol("arg");
+        validator.TagStates("BeforeReassignment").Should().ContainSingle().Which[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagStates("AfterReassignment").Should().ContainSingle().Which[arg].Should().HaveOnlyConstraint(ParameterReassignedConstraint.Instance);
+        validator.TagStates("Else").Should().ContainSingle().Which[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagStates("End").Should().SatisfyRespectively(
+            x => x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+            x => x[arg].Should().HaveOnlyConstraint(ParameterReassignedConstraint.Instance));
     }
 
     [TestMethod]
