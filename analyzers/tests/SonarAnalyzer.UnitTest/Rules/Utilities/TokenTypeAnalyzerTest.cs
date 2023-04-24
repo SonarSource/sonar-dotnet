@@ -27,7 +27,7 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class TokenTypeAnalyzerTest
+    public partial class TokenTypeAnalyzerTest
     {
         private const string BasePath = @"Utilities\TokenTypeAnalyzer\";
 

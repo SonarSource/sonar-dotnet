@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override TriviaClassifierBase GetTriviaClassifier() =>
             new TriviaClassifier();
 
-        private sealed class TokenClassifier : TokenClassifierBase
+        internal sealed class TokenClassifier : TokenClassifierBase
         {
             private static readonly SyntaxKind[] StringLiteralTokens = new[]
             {

@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected abstract class TokenClassifierBase
+        protected internal abstract class TokenClassifierBase
         {
             private readonly SemanticModel semanticModel;
             private readonly bool skipIdentifiers;
