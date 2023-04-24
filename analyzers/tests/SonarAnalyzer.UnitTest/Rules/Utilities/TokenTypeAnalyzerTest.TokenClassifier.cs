@@ -77,7 +77,6 @@ public partial class TokenTypeAnalyzerTest
                 }, because);
             }
         }
-
     }
 
     private static (SyntaxTree Tree, SemanticModel Model, IReadOnlyCollection<ExpectedToken> ExpectedTokens) ParseTokens(string code)
