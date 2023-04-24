@@ -221,9 +221,14 @@ class Repro_7058
     void Test(int[] a)
     {
         var local = new object();
-        Action action = () =>
+        Action action1 = () =>
         {
             lock (local) { } // Noncompliant, FP: local is in the captured scope
         };
+        Action action2 = () =>
+        {
+            var localCaptured = local;
+        };
+        lock (local) { }     // Noncompliant, locking captured variable in its declaration scope
     }
 }
