@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxKindEx.InterpolatedRawStringEndToken);
         }
 
-        private sealed class TriviaClassifier : TriviaClassifierBase
+        internal sealed class TriviaClassifier : TriviaClassifierBase
         {
             protected override bool IsRegularComment(SyntaxTrivia trivia) =>
                 trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia);

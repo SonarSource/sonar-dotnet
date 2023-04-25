@@ -166,7 +166,7 @@ namespace SonarAnalyzer.Rules
                 };
         }
 
-        protected abstract class TriviaClassifierBase
+        protected internal abstract class TriviaClassifierBase
         {
             protected abstract bool IsDocComment(SyntaxTrivia trivia);
             protected abstract bool IsRegularComment(SyntaxTrivia trivia);
