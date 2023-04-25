@@ -639,7 +639,7 @@ Tag(""End"")";
                 """;
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.ValidateTag("S", x => x.Should().HaveNoConstraints()); // FIXME: s is not null here
+            validator.ValidateTag("S", x => x.Should().HaveNoConstraints()); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
         }
 
         [DataTestMethod]
@@ -655,7 +655,7 @@ Tag(""End"")";
                 """;
             var validator = SETestContext.CreateCS(code).Validator;
             validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.ValidateTag("S", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null)); // FIXME: s is not null here
+            validator.ValidateTag("S", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null)); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
         }
     }
 }
