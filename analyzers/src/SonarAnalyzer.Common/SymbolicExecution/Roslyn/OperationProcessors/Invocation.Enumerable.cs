@@ -26,7 +26,7 @@ internal sealed partial class Invocation
 {
     private static readonly HashSet<string> EnumerableAndQueryableReturningNotNull = new()
     {
-        "Append",
+        nameof(Enumerable.Append),
         nameof(Enumerable.AsEnumerable),
         nameof(Queryable.AsQueryable),
         nameof(Enumerable.Cast),
@@ -46,7 +46,7 @@ internal sealed partial class Invocation
         nameof(Enumerable.OfType),
         nameof(Enumerable.OrderBy),
         nameof(Enumerable.OrderByDescending),
-        "Prepend",
+        nameof(Enumerable.Prepend),
         nameof(Enumerable.Range),
         nameof(Enumerable.Repeat),
         nameof(Enumerable.Reverse),
