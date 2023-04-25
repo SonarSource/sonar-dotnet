@@ -593,6 +593,7 @@ Tag(""End"")";
             validator.ValidateTagOrder("Value", "Else", "End");
         }
 
+        [DataTestMethod]
         [DataRow("arg >= 42")]
         [DataRow("arg > 42")]
         [DataRow("arg < 42")]
@@ -605,7 +606,6 @@ Tag(""End"")";
         [DataRow("arg > new Nullable<int>(42)")]
         [DataRow("arg > (42 as int?)")]
         [DataRow("arg > notNullValue")]
-        [DataTestMethod]
         public void Binary_NullableRelationalNonNull_SetsObjectConstraint_CS(string expression)
         {
             var code = $$"""
@@ -626,9 +626,9 @@ Tag(""End"")";
             validator.ValidateTag("Else", x => x.Should().HaveNoConstraints("arg either null or comparison false"));
         }
 
+        [DataTestMethod]
         [DataRow("s = s + s;")]
         [DataRow("s = s + null;")]
-        [DataTestMethod]
         public void Binary_StringConcatenation_Binary_CS(string expression)
         {
             // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12105-addition-operator
@@ -642,9 +642,9 @@ Tag(""End"")";
             validator.ValidateTag("S", x => x.Should().HaveNoConstraints()); // FIXME: s is not null here
         }
 
+        [DataTestMethod]
         [DataRow("s += s;")]
         [DataRow("s += null;")]
-        [DataTestMethod]
         public void Binary_StringConcatenation_Compund_CS(string expression)
         {
             // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12105-addition-operator
