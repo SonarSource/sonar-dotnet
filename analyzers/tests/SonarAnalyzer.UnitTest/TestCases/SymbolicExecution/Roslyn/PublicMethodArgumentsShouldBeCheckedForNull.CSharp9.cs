@@ -116,10 +116,22 @@ public class UsingFromServicesAttribute
 
 public class Assignments
 {
-    public void CoalesceAssignment(object o)
+    public void CoalesceAssignment_NotNull(object o)
+    {
+        o ??= new object();
+        o.ToString(); // Compliant
+    }
+
+    public void CoalesceAssignment_Unknown(object o)
     {
         o ??= Unknown();
         o.ToString(); // Noncompliant - FP: parameter reassignment via a null coalesce assignment is not supported
+    }
+
+    public void CoalesceAssignment_Null(object o)
+    {
+        o ??= null;
+        o.ToString(); // Compliant
     }
 
     public void NullCoalesce_NotNull(object o)
@@ -140,7 +152,7 @@ public class Assignments
         o.ToString(); // Compliant
     }
 
-    public void NullCoalesceThrow(object o)
+    public void NullCoalesce_Throw(object o)
     {
         o = o ?? throw new ArgumentNullException("");
         o.ToString(); // Compliant
