@@ -27,9 +27,13 @@ namespace SonarAnalyzer.UnitTest.Rules;
 
 public partial class TokenTypeAnalyzerTest
 {
-    private static Regex tokenTypeRegEx = new(
-        """(?'Keyword'\[k\:[^\]]+\])|(?'NumericLiteral'\[n\:[^\]]+\])|(?'StringLiteral'\[s\:[^\]]+\])|(?'TypeName'\[t\:[^\]]+\])|(?'Comment'\[c\:[^\]]+\])|(?'UnknownTokentype'\[u\:[^\]]+\])""",
-        RegexOptions.Compiled);
+    private static readonly Regex TokenTypeRegEx = new(TokenGroups(
+        TokenGroup(TokenType.Keyword, "k"),
+        TokenGroup(TokenType.NumericLiteral, "n"),
+        TokenGroup(TokenType.StringLiteral, "s"),
+        TokenGroup(TokenType.TypeName, "t"),
+        TokenGroup(TokenType.Comment, "c"),
+        TokenGroup(TokenType.UnknownTokentype, "u")));
 
     [TestMethod]
     public void ClassClassifications()
@@ -99,7 +103,7 @@ public partial class TokenTypeAnalyzerTest
 
     private static (SyntaxTree Tree, SemanticModel Model, IReadOnlyCollection<ExpectedToken> ExpectedTokens) ParseTokens(string code)
     {
-        var matches = tokenTypeRegEx.Matches(code);
+        var matches = TokenTypeRegEx.Matches(code);
         var sb = new StringBuilder(code.Length);
         var expectedTokens = new List<ExpectedToken>(matches.Count);
         var lastMatchEnd = 0;
@@ -121,6 +125,12 @@ public partial class TokenTypeAnalyzerTest
         var (tree, model) = TestHelper.CompileCS(sb.ToString());
         return (tree, model, expectedTokens);
     }
+
+    private static string TokenGroups(params string[] groups)
+        => string.Join("|", groups);
+
+    private static string TokenGroup(TokenType tokenType, string shortName)
+        => $$"""(?'{{tokenType}}'\[{{shortName}}\:[^\]]+\])""";
 
     private readonly record struct ExpectedToken(TokenType TokenType, string TokenText, TextSpan Postion);
 }
