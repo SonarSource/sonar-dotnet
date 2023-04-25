@@ -122,10 +122,22 @@ public class Assignments
         o.ToString(); // Noncompliant - FP: parameter reassignment via a null coalesce assignment is not supported
     }
 
-    public void NullCoalesce(object o)
+    public void NullCoalesce_NotNull(object o)
+    {
+        o = o ?? new object();
+        o.ToString(); // Compliant
+    }
+
+    public void NullCoalesce_Unknown(object o)
     {
         o = o ?? Unknown();
         o.ToString(); // Noncompliant - FP
+    }
+
+    public void NullCoalesce_Null(object o)
+    {
+        o = o ?? null;
+        o.ToString(); // Compliant
     }
 
     public void NullCoalesceThrow(object o)
