@@ -114,13 +114,106 @@ public class UsingFromServicesAttribute
     }
 }
 
-public class CoalesceAssignment
+public class Assignments
 {
-    public void Method(object o)
+    public void CoalesceAssignment_NotNull(object o)
+    {
+        o ??= new object();
+        o.ToString(); // Compliant
+    }
+
+    public void CoalesceAssignment_Unknown(object o)
     {
         o ??= Unknown();
         o.ToString(); // Noncompliant - FP: parameter reassignment via a null coalesce assignment is not supported
     }
 
+    public void CoalesceAssignment_Null(object o)
+    {
+        o ??= null;
+        o.ToString(); // Compliant
+    }
+
+    public void NullCoalesce_NotNull(object o)
+    {
+        o = o ?? new object();
+        o.ToString(); // Compliant
+    }
+
+    public void NullCoalesce_Unknown(object o)
+    {
+        o = o ?? Unknown();
+        o.ToString(); // Noncompliant - FP
+    }
+
+    public void NullCoalesce_Null(object o)
+    {
+        o = o ?? null;
+        o.ToString(); // Compliant
+    }
+
+    public void NullCoalesce_Throw(object o)
+    {
+        o = o ?? throw new ArgumentNullException("");
+        o.ToString(); // Compliant
+    }
+
+    public void NullConditional(object o)
+    {
+        o = o?.ToString() ?? "";
+        o.ToString(); // Compliant
+    }
+
+    public void TernaryAssignment(object o)
+    {
+        o = o == null ? Unknown() : o;
+        o.ToString(); // Noncompliant - FP
+    }
+
+    public void TernaryThrow1(object o)
+    {
+        o = o == null ? throw new ArgumentNullException("") : Unknown();
+        o.ToString(); // Noncompliant - FP
+    }
+
+    public void TernaryThrow2(object o)
+    {
+        o = o == null ? throw new ArgumentNullException("") : o;
+        o.ToString(); // Compliant
+    }
+
+    public void StringConcatenation(string s)
+    {
+        s = s + "Test";
+        s.ToString(); // Compliant
+    }
+
+    public void CompundAssignment_String(string s)
+    {
+        s += "Test";
+        s.ToString(); // Noncompliant - FP: string concatenation supports null for its arguments
+    }
+
+    public void CompundAssignment_NullabaleInt(int? i)
+    {
+        i *= 2;
+        i.GetType(); // Compliant: don't raise for nullable value types
+    }
+
     private object Unknown() => null;
+}
+
+public class ThrowIfNull
+{
+    public void ThrowIfNullString(string s)
+    {
+        ArgumentNullException.ThrowIfNull(s, nameof(s));
+        s.ToString(); // Compliant
+    }
+
+    public void ThrowIfNullOrEmptyString(string s)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(s, nameof(s));
+        s.ToString(); // Compliant
+    }
 }

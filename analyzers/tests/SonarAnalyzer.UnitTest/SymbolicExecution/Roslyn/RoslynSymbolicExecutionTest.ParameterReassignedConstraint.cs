@@ -97,26 +97,134 @@ public partial class RoslynSymbolicExecutionTest
             Tag("End", arg);
             """;
         var validator = SETestContext.CreateCS(methodBody, ", object arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("End", x => x.Should().BeNull()); // FIXME: arg should have the ParameterReassignedConstraint
+        validator.ValidateTag("End", x => x.Should().HaveNoConstraints()); // FIXME: arg should have the ParameterReassignedConstraint
     }
 
     [TestMethod]
-    public void ParameterReassignedConstraint_InsideCondition()
+    public void ParameterReassignedConstraint_ReassignedAfterNullCheck()
     {
-        const string snippet = """
+        var validator = SETestContext.CreateCS("""
             if (arg == null)
             {
-                arg = Unknown<object>();
-                Tag("AfterAssignment", arg);
+                Tag("BeforeReassignment");
+                arg = Guid.NewGuid().ToString("N");
+                Tag("AfterReassignment");
             }
             else
             {
-                Tag("NoAssignment", arg);
+                Tag("Else");
             }
-            """;
-        var validator = SETestContext.CreateCS(snippet, ", object arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("AfterAssignment", x => x.Should().HaveOnlyConstraints(ParameterReassignedConstraint.Instance));
-        validator.ValidateTag("NoAssignment", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+            Tag("End");
+            """, ", string arg", new PublicMethodArgumentsShouldBeCheckedForNull(), new PreserveTestCheck("arg")).Validator;
+        var arg = validator.Symbol("arg");
+        validator.TagStates("BeforeReassignment").Should().ContainSingle().Which[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagStates("AfterReassignment").Should().ContainSingle().Which[arg].Should().HaveOnlyConstraint(ParameterReassignedConstraint.Instance);
+        validator.TagStates("Else").Should().ContainSingle().Which[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagStates("End").Should().SatisfyRespectively(
+            x => x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+            x => x[arg].Should().HaveOnlyConstraint(ParameterReassignedConstraint.Instance));
+    }
+
+    [TestMethod]
+    public void ParameterReassignedConstraint_NullCoalescingAssignment_TakesObjectConstraintFromRightHandSide()
+    {
+        var validator = SETestContext.CreateCS("""
+            arg ??= Guid.NewGuid().ToString("N");
+            Tag("End");
+            """, ", string arg", new PublicMethodArgumentsShouldBeCheckedForNull(), new PreserveTestCheck("arg")).Validator;
+        var arg = validator.Symbol("arg");
+        validator.TagStates("End").Should().SatisfyRespectively(
+            x => x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
+            x => x[arg].Should().HaveNoConstraints()); // FIXME: Misses ParameterReassignedConstraint
+    }
+
+    [TestMethod]
+    public void ParameterReassignedConstraint_NullCoalescingAssignment_ThrowOnNull()
+    {
+        var validator = SETestContext.CreateCS("""
+            arg = arg ?? throw new ArgumentNullException();
+            Tag("End", arg);
+            """, ", string arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
+        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+    }
+
+    [TestMethod]
+    public void ParameterReassignedConstraint_NullCoalescingAssignment_Unknown()
+    {
+        var validator = SETestContext.CreateCS("""
+            arg = arg ?? Unknown<string>();
+            Tag("End");
+            """, ", string arg", new PublicMethodArgumentsShouldBeCheckedForNull(), new PreserveTestCheck("arg")).Validator;
+        var arg = validator.Symbol("arg");
+        validator.TagStates("End").Should().SatisfyRespectively(
+            x => x[arg].Should().HaveNoConstraints(), // FIXME: Misses ParameterReassignedConstraint
+            x => x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+    }
+
+    [TestMethod]
+    public void ParameterReassignedConstraint_NullConditional_ThrowOnNull()
+    {
+        var validator = SETestContext.CreateCS("""
+            arg = arg == null
+                ? throw new ArgumentNullException()
+                : arg;
+            Tag("End", arg);
+            """, ", string arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
+        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+    }
+
+    [TestMethod]
+    public void ParameterReassignedConstraint_NullConditional_ThrowOnNull_Unknown()
+    {
+        var validator = SETestContext.CreateCS("""
+            arg = arg == null
+                ? throw new ArgumentNullException()
+                : Unknown<string>();
+            Tag("End", arg);
+            """, ", string arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
+        validator.ValidateTag("End", x => x.Should().HaveNoConstraints()); // FIXME: Misses ParameterReassignedConstraint
+    }
+
+#if NET
+
+    [DataTestMethod]
+    [DataRow("ThrowIfNull")]
+    [DataRow("ThrowIfNullOrEmpty")]
+    public void ParameterReassignedConstraint_ArgumentNullException_ThrowIfNull(string throwIfNullMethod)
+    {
+        var validator = SETestContext.CreateCS($$"""
+                ArgumentNullException.{{throwIfNullMethod}}(arg);
+                Tag("End", arg);
+                """, ", string arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
+        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+    }
+
+#endif
+
+    [DataTestMethod]
+    [DataRow("+=")]
+    [DataRow("-=")]
+    [DataRow("*=")]
+    [DataRow("/=")]
+    [DataRow("|=")]
+    [DataRow("&=")]
+    [DataRow("^=")]
+    public void ParameterReassignedConstraint_CompoundAssignment_KeepsNullConstraintForNullableValueTypes(string compoundAssigment)
+    {
+        var validator = SETestContext.CreateCS($$"""
+                int? local = null;
+                local {{compoundAssigment}} 1;
+                Tag("AfterNull", local);
+                local = 42;
+                local {{compoundAssigment}} 1;
+                Tag("AfterValue", local);
+                local = Unknown<int?>();
+                local {{compoundAssigment}} 1;
+                Tag("AfterUnknown", local);
+                """, new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
+        validator.ValidateTag("AfterNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null)); // FIXME: Misses ParameterReassignedConstraint in all cases
+        validator.ValidateTag("AfterValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.ValidateTag("AfterUnknown", x => x.Should().HaveNoConstraints());
     }
 
     [TestMethod]
