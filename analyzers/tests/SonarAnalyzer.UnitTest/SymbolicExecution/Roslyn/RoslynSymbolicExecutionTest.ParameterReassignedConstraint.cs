@@ -115,8 +115,7 @@ public partial class RoslynSymbolicExecutionTest
                 Tag("Else");
             }
             Tag("End");
-            arg.ToString();
-            """, ", string arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
+            """, ", string arg", new PublicMethodArgumentsShouldBeCheckedForNull(), new PreserveTestCheck("arg")).Validator;
         var arg = validator.Symbol("arg");
         validator.TagStates("BeforeReassignment").Should().ContainSingle().Which[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.TagStates("AfterReassignment").Should().ContainSingle().Which[arg].Should().HaveOnlyConstraint(ParameterReassignedConstraint.Instance);
