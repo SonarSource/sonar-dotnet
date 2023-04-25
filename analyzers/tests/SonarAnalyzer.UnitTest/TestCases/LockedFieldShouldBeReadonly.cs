@@ -218,14 +218,19 @@ namespace ANamespace
 // https://github.com/SonarSource/sonar-dotnet/issues/7058
 class Repro_7058
 {
-    void Test(int[] a)
+    void LockInsideCapture()
     {
         var local = new object();
-        Action action1 = () =>
+        Action action = () =>
         {
             lock (local) { } // Noncompliant, FP: local is in the captured scope
         };
-        Action action2 = () =>
+    }
+
+    void LockOutsideCapture()
+    {
+        var local = new object();
+        Action action = () =>
         {
             var localCaptured = local;
         };
