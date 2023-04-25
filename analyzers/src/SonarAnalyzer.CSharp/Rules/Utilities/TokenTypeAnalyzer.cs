@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 token.IsAnyKind(StringLiteralTokens);
         }
 
-        private sealed class TriviaClassifier : TriviaClassifierBase
+        internal sealed class TriviaClassifier : TriviaClassifierBase
         {
             private static readonly SyntaxKind[] RegularCommentToken = new[]
             {

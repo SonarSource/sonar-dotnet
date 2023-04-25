@@ -37,8 +37,12 @@ public partial class TokenTypeAnalyzerTest
             [k:using] [u:System];
             [k:public] [k:class] [t:Test]
             {
+                [c:// SomeComment]
                 [k:public] [t:Test]() { }
 
+                [c:/// <summary>
+                /// A Prop
+                /// </summary>]
                 [k:int] [u:Prop] { [k:get]; }
                 [k:void] [u:Method]<[t:T]>([t:T] [u:t]) [k:where] [t:T]: [k:class], [t:IComparable], [u:System].[u:Collections].[t:IComparer]
                 {
@@ -53,28 +57,42 @@ public partial class TokenTypeAnalyzerTest
     {
         var (tree, model, expected) = ParseTokens(code);
         var root = tree.GetRoot();
-        var classifier = new SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer.TokenClassifier(model, false);
+        var tokenClassifier = new SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer.TokenClassifier(model, false);
+        var triviaClassifier = new SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer.TriviaClassifier();
         foreach (var e in expected)
         {
             var because = $$"""expected token {{e.TokenType}} with text {{e.TokenText}} at position {{e.Postion}}""";
-            var treeToken = root.FindToken(e.Postion.Start);
-            var actual = classifier.ClassifyToken(treeToken);
-            if (actual == null)
+            var (location, classification) = FindActual();
+            if (classification == null)
             {
                 e.TokenType.Should().Be(TokenType.UnknownTokentype, because);
-                treeToken.GetLocation().SourceSpan.Should().Be(e.Postion, because);
+                location.SourceSpan.Should().Be(e.Postion, because);
             }
             else
             {
-                actual.TokenType.Should().Be(e.TokenType, because);
-                var treeTokenRange = treeToken.GetLocation().GetLineSpan();
-                actual.TextRange.Should().Be(new TextRange
+                classification.TokenType.Should().Be(e.TokenType, because);
+                var lineSpan = location.GetLineSpan();
+                classification.TextRange.Should().Be(new TextRange
                 {
-                    StartLine = treeTokenRange.StartLinePosition.Line + 1,
-                    StartOffset = treeTokenRange.StartLinePosition.Character,
-                    EndLine = treeTokenRange.EndLinePosition.Line + 1,
-                    EndOffset = treeTokenRange.EndLinePosition.Character,
+                    StartLine = lineSpan.StartLinePosition.Line + 1,
+                    StartOffset = lineSpan.StartLinePosition.Character,
+                    EndLine = lineSpan.EndLinePosition.Line + 1,
+                    EndOffset = lineSpan.EndLinePosition.Character,
                 }, because);
+            }
+
+            (Location, TokenTypeInfo.Types.TokenInfo TokenInfo) FindActual()
+            {
+                if (e.TokenType == TokenType.Comment)
+                {
+                    var trivia = root.FindTrivia(e.Postion.Start);
+                    return (tree.GetLocation(trivia.FullSpan), triviaClassifier.ClassifyTrivia(trivia));
+                }
+                else
+                {
+                    var token = root.FindToken(e.Postion.Start);
+                    return (token.GetLocation(), tokenClassifier.ClassifyToken(token));
+                }
             }
         }
     }
@@ -104,5 +122,5 @@ public partial class TokenTypeAnalyzerTest
         return (tree, model, expectedTokens);
     }
 
-    private readonly record struct ExpectedToken(TokenType TokenType, string TokenText,  TextSpan Postion);
+    private readonly record struct ExpectedToken(TokenType TokenType, string TokenText, TextSpan Postion);
 }
