@@ -605,7 +605,7 @@ Tag(""End"")";
         [DataRow("arg > new Nullable<int>(42)")]
         [DataRow("arg > (42 as int?)")]
         [DataRow("arg > notNullValue")]
-        [TestMethod]
+        [DataTestMethod]
         public void Binary_NullableRelationalNonNull_SetsObjectConstraint_CS(string expression)
         {
             var code = $$"""
@@ -624,6 +624,38 @@ Tag(""End"")";
             validator.ValidateContainsOperation(OperationKind.Binary);
             validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "arg comparison true, hence non-null"));
             validator.ValidateTag("Else", x => x.Should().HaveNoConstraints("arg either null or comparison false"));
+        }
+
+        [DataRow("s = s + s;")]
+        [DataRow("s = s + null;")]
+        [DataTestMethod]
+        public void Binary_StringConcatenation_Binary_CS(string expression)
+        {
+            // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12105-addition-operator
+            var code = $$"""
+                string s = null;
+                {{expression}}
+                Tag("S", s);
+                """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTag("S", x => x.Should().HaveNoConstraints()); // FIXME: s is not null here
+        }
+
+        [DataRow("s += s;")]
+        [DataRow("s += null;")]
+        [DataTestMethod]
+        public void Binary_StringConcatenation_Compund_CS(string expression)
+        {
+            // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12105-addition-operator
+            var code = $$"""
+                string s = null;
+                {{expression}}
+                Tag("S", s);
+                """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTag("S", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null)); // FIXME: s is not null here
         }
     }
 }
