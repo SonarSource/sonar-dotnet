@@ -22,7 +22,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Protobuf;
-using Match = System.Text.RegularExpressions.Match;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
