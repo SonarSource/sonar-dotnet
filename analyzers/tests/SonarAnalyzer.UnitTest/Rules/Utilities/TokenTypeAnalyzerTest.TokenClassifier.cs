@@ -46,8 +46,8 @@ public partial class TokenTypeAnalyzerTest
 
                 [c:/// <summary>
                 /// A Prop
-                /// </summary>]
-                [k:int] [u:Prop] { [k:get]; }
+                /// </summary>
+            ]   [k:int] [u:Prop] { [k:get]; }
                 [k:void] [u:Method]<[t:T]>([t:T] [u:t]) [k:where] [t:T]: [k:class], [t:IComparable], [u:System].[u:Collections].[t:IComparer]
                 {
                     [k:var] [u:i] = [n:1];
@@ -59,46 +59,47 @@ public partial class TokenTypeAnalyzerTest
 
     private static void AssertTokenTypes(string code)
     {
-        var (tree, model, expected) = ParseTokens(code);
+        var (tree, model, expectedTokens) = ParseTokens(code);
         var root = tree.GetRoot();
         var tokenClassifier = new SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer.TokenClassifier(model, false);
         var triviaClassifier = new SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer.TriviaClassifier();
-        foreach (var e in expected)
+        expectedTokens.Should().SatisfyRespectively(expectedTokens.Select<ExpectedToken, Action<ExpectedToken>>(e => expected =>
         {
-            var because = $$"""expected token {{e.TokenType}} with text {{e.TokenText}} at position {{e.Postion}}""";
-            var (location, classification) = FindActual();
+            var (actualLocation, classification) = FindActual();
+            var expectedLineSpan = tree.GetLocation(expected.Postion).GetLineSpan();
             if (classification == null)
             {
-                e.TokenType.Should().Be(TokenType.UnknownTokentype, because);
-                location.SourceSpan.Should().Be(e.Postion, because);
+                var because = $$"""classification for token with text "{{expected.TokenText}}" at position {{expectedLineSpan}} is null""";
+                expected.TokenType.Should().Be(TokenType.UnknownTokentype, because);
+                actualLocation.SourceSpan.Should().Be(expected.Postion, because);
             }
             else
             {
-                classification.TokenType.Should().Be(e.TokenType, because);
-                var lineSpan = location.GetLineSpan();
+                var because = $$"""token with text "{{expected.TokenText}}" at position {{expectedLineSpan}} was marked as {{expected.TokenType}}""";
+                classification.TokenType.Should().Be(expected.TokenType, because);
                 classification.TextRange.Should().Be(new TextRange
                 {
-                    StartLine = lineSpan.StartLinePosition.Line + 1,
-                    StartOffset = lineSpan.StartLinePosition.Character,
-                    EndLine = lineSpan.EndLinePosition.Line + 1,
-                    EndOffset = lineSpan.EndLinePosition.Character,
+                    StartLine = expectedLineSpan.StartLinePosition.Line + 1,
+                    StartOffset = expectedLineSpan.StartLinePosition.Character,
+                    EndLine = expectedLineSpan.EndLinePosition.Line + 1,
+                    EndOffset = expectedLineSpan.EndLinePosition.Character,
                 }, because);
             }
 
             (Location, TokenTypeInfo.Types.TokenInfo TokenInfo) FindActual()
             {
-                if (e.TokenType == TokenType.Comment)
+                if (expected.TokenType == TokenType.Comment)
                 {
-                    var trivia = root.FindTrivia(e.Postion.Start);
+                    var trivia = root.FindTrivia(expected.Postion.Start);
                     return (tree.GetLocation(trivia.FullSpan), triviaClassifier.ClassifyTrivia(trivia));
                 }
                 else
                 {
-                    var token = root.FindToken(e.Postion.Start);
+                    var token = root.FindToken(expected.Postion.Start);
                     return (token.GetLocation(), tokenClassifier.ClassifyToken(token));
                 }
             }
-        }
+        }));
     }
 
     private static (SyntaxTree Tree, SemanticModel Model, IReadOnlyCollection<ExpectedToken> ExpectedTokens) ParseTokens(string code)
