@@ -22,22 +22,15 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Protobuf;
+using Match = System.Text.RegularExpressions.Match;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
 public partial class TokenTypeAnalyzerTest
 {
-    private static readonly Regex TokenTypeRegEx = new(TokenGroups(
-        TokenGroup(TokenType.Keyword, "k"),
-        TokenGroup(TokenType.NumericLiteral, "n"),
-        TokenGroup(TokenType.StringLiteral, "s"),
-        TokenGroup(TokenType.TypeName, "t"),
-        TokenGroup(TokenType.Comment, "c"),
-        TokenGroup(TokenType.UnknownTokentype, "u")));
-
     [TestMethod]
-    public void ClassClassifications()
-        => AssertTokenTypes("""
+    public void ClassClassifications() =>
+        ClassifierTestHarness.AssertTokenTypes("""
             [k:using] [u:System];
             [k:public] [k:class] [t:Test]
             {
@@ -56,8 +49,19 @@ public partial class TokenTypeAnalyzerTest
                 }
             [u:}]
             """);
+}
 
-    private static void AssertTokenTypes(string code)
+public class ClassifierTestHarness
+{
+    private static readonly Regex TokenTypeRegEx = new(TokenGroups(
+        TokenGroup(TokenType.Keyword, "k"),
+        TokenGroup(TokenType.NumericLiteral, "n"),
+        TokenGroup(TokenType.StringLiteral, "s"),
+        TokenGroup(TokenType.TypeName, "t"),
+        TokenGroup(TokenType.Comment, "c"),
+        TokenGroup(TokenType.UnknownTokentype, "u")));
+
+    public static void AssertTokenTypes(string code)
     {
         var (tree, model, expectedTokens) = ParseTokens(code);
         var root = tree.GetRoot();
@@ -75,15 +79,17 @@ public partial class TokenTypeAnalyzerTest
             }
             else
             {
-                var because = $$"""token with text "{{expected.TokenText}}" at position {{expectedLineSpan}} was marked as {{expected.TokenType}}""";
-                classification.TokenType.Should().Be(expected.TokenType, because);
-                classification.TextRange.Should().Be(new TextRange
+                classification.Should().Be(new TokenTypeInfo.Types.TokenInfo
                 {
-                    StartLine = expectedLineSpan.StartLinePosition.Line + 1,
-                    StartOffset = expectedLineSpan.StartLinePosition.Character,
-                    EndLine = expectedLineSpan.EndLinePosition.Line + 1,
-                    EndOffset = expectedLineSpan.EndLinePosition.Character,
-                }, because);
+                    TokenType = expected.TokenType,
+                    TextRange = new TextRange
+                    {
+                        StartLine = expectedLineSpan.StartLinePosition.Line + 1,
+                        StartOffset = expectedLineSpan.StartLinePosition.Character,
+                        EndLine = expectedLineSpan.EndLinePosition.Line + 1,
+                        EndOffset = expectedLineSpan.EndLinePosition.Character,
+                    },
+                }, $$"""token with text "{{expected.TokenText}}" at position {{expectedLineSpan}} was marked as {{expected.TokenType}}""");
             }
 
             (Location, TokenTypeInfo.Types.TokenInfo TokenInfo) FindActual()
