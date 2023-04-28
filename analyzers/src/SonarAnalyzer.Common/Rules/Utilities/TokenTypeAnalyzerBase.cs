@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules
                     _ => null,
                 };
 
-            private static TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
+            protected static TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
                 string.IsNullOrWhiteSpace(token.ValueText)
                     ? null
                     : new()
@@ -137,7 +137,7 @@ namespace SonarAnalyzer.Rules
                         TextRange = GetTextRange(token.GetLocation().GetLineSpan()),
                     };
 
-            private TokenInfo ClassifyIdentifier(SyntaxToken token)
+            protected virtual TokenInfo ClassifyIdentifier(SyntaxToken token)
             {
                 if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaration)
                 {
