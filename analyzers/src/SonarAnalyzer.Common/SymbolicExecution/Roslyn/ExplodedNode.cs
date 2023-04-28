@@ -47,8 +47,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             state.CheckConsistency();
         }
 
-        public ExplodedNode CreateNext(ProgramState state) =>
-            new(Block, operations, index + 1, state, FinallyPoint);
+        public ExplodedNode CreateNext(ProgramState state)
+        {
+            state?.CheckStateConsistency();
+            return new(Block, operations, index + 1, state, FinallyPoint);
+        }
 
         public int AddVisit()
         {

@@ -7,7 +7,7 @@
     "constantCost": "2min"
   },
   "tags": [
-    "clumsy"
+    "performance"
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-1155",

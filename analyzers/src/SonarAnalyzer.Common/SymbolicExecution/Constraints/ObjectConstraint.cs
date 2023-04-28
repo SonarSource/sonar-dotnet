@@ -22,8 +22,8 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
     internal sealed class ObjectConstraint : SymbolicConstraint
     {
-        public static readonly ObjectConstraint Null = new(ConstraintKind.ObjectNull);
-        public static readonly ObjectConstraint NotNull = new(ConstraintKind.ObjectNotNull);
+        public static readonly ObjectConstraint Null = new(ConstraintKind.Null);
+        public static readonly ObjectConstraint NotNull = new(ConstraintKind.NotNull);
 
         public override SymbolicConstraint Opposite =>
             // x == null ? <Null> : <NotNull>
@@ -31,13 +31,5 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
             this == Null ? NotNull : null;
 
         private ObjectConstraint(ConstraintKind kind) : base(kind) { }
-
-        public override string ToString() =>
-            Kind switch
-            {
-                ConstraintKind.ObjectNull => nameof(Null),
-                ConstraintKind.ObjectNotNull => nameof(NotNull),
-                _ => base.ToString(),
-            };
     }
 }

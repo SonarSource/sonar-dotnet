@@ -3,13 +3,13 @@
   <PropertyGroup>
     <AssemblyName>SonarAnalyzer.CSharp</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
-    <!-- See SonarAnalyzer.Common.csproj for more details-->
-    <TargetFrameworks Condition="$(BuildOnlyNet46) != 'true'">net46;netstandard2.0</TargetFrameworks>
-    <TargetFrameworks Condition="$(BuildOnlyNet46) == 'true'">net46</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <!-- .NET Standard target does not copy referenced DLLs into bin folder, so we need to enable it explicitly. -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <DefineConstants>TRACE;CS</DefineConstants>
   </PropertyGroup>
 
-  <!-- Warning: when adding a package reference, we must make sure this package is available on oldest supported .NET version (currently net46) or packaged with the analyzer.
+  <!-- Warning: when adding a package reference, we must make sure this package is available on oldest supported .NET version (currently netstandard2.0) or packaged with the analyzer.
        For instance, System.ValueTuple is not available in 4.6.1 and must be added to the final packaging if we add it here -->
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="1.3.2" />
@@ -54,17 +54,17 @@
     </Content>
   </ItemGroup>
 
-  <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true' And '$(TargetFramework)' == 'NET46' ">
+  <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true'">
     <Message Importance="high" Text="Signing analyzer assemblies from $(OutputPath)" />
     <Exec WorkingDirectory="$(OutputPath)" Command="&quot;$(SIGNTOOL_PATH)&quot; sign /fd SHA256 /f $(PFX_PATH) /p $(PFX_PASSWORD) /du https://www.sonarsource.com/ /d &quot;Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code.&quot; /tr http://sha256timestamp.ws.symantec.com/sha256/timestamp SonarAnalyzer*.dll" />
   </Target>
 
-  <Target Name="CopyBinaries" AfterTargets="Build" DependsOnTargets="SignDlls" Condition=" '$(TargetFramework)' == 'NET46' ">
+  <Target Name="CopyBinaries" AfterTargets="Build" DependsOnTargets="SignDlls">
     <ItemGroup>
-      <BinariesToCopy Include="$(OutputPath)\Google.Protobuf.dll" />
-      <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.dll" />
-      <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.CFG.dll" />
-      <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.CSharp.dll" />
+      <BinariesToCopy Include="$(OutputPath)Google.Protobuf.dll" />
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.dll" />
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CSharp.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>

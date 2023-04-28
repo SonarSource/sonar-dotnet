@@ -2873,6 +2873,38 @@ public class Tuples
     public (MemoryStream, string) GetData() => (null, null);
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/7057
+public class Repro_7057
+{
+    private (string, int) SomeTuple() => ("hello", 1);
+    private string SomeString() => "hello";
+
+    public void WithTuple()
+    {
+        string current = null;
+        string last;
+        do
+        {
+            last = current;
+            (current, _) = SomeTuple();
+        }
+        while (last == null);   // Noncompliant FP
+    }
+
+    public void WithString()
+    {
+        string current = null;
+        string last;
+
+        do
+        {
+            last = current;
+            current = SomeString();
+        }
+        while (last == null);
+    }
+}
+
 // https://github.com/SonarSource/sonar-dotnet/issues/5221
 public class ReproWithNullableValueTypes
 {

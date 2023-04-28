@@ -28,7 +28,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         protected readonly CancellationToken Cancel;
         private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveOut = new Dictionary<TBlock, HashSet<ISymbol>>();
         private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveIn = new Dictionary<TBlock, HashSet<ISymbol>>();
-        private readonly ISet<ISymbol> captured = new HashSet<ISymbol>();
+        private readonly HashSet<ISymbol> captured = new();
 
         public abstract bool IsLocal(ISymbol symbol);
         protected abstract TBlock ExitBlock { get; }
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis
         protected abstract IEnumerable<TBlock> Predecessors(TBlock block);
 
         public TCfg Cfg { get; }
-        public IReadOnlyCollection<ISymbol> CapturedVariables => captured.ToImmutableArray();
+        public IReadOnlyCollection<ISymbol> CapturedVariables => captured;
 
         protected LiveVariableAnalysisBase(TCfg cfg, ISymbol originalDeclaration, CancellationToken cancel)
         {

@@ -88,3 +88,22 @@ interface SomeInterface
         Console.WriteLine("Result: {0}", s);
     }
 }
+
+public static class TypeConstraints
+{
+    public static int Use<T>(T? value) where T : struct => 1;
+
+    public static int Use<T>(T? value) where T : class => 2;
+
+    public static void First<T>(T? value) where T : struct // Secondary
+    {
+        var x = Use(value);
+        Console.WriteLine(x);
+    }
+
+    public static void Second<T>(T? value) where T : class  // Noncompliant - FP, method looks the same but different overloads are called due to the type constraints used. See: https://github.com/SonarSource/sonar-dotnet/issues/7068
+    {
+        var x = Use(value);
+        Console.WriteLine(x);
+    }
+}

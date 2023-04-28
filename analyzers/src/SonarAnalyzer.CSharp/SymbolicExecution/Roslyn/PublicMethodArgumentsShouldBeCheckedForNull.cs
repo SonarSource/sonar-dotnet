@@ -18,21 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.SymbolicExecution.Constraints;
-using static Microsoft.CodeAnalysis.Accessibility;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxKind;
 using static StyleCop.Analyzers.Lightup.SyntaxKindEx;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
-public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
+public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArgumentsShouldBeCheckedForNullBase
 {
-    private const string DiagnosticId = "S3900";
-    private const string MessageFormat = "{0}";
-
     internal static readonly DiagnosticDescriptor S3900 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     protected override DiagnosticDescriptor Rule => S3900;
+    protected override string NullName => "null";
 
     public override bool ShouldExecute()
     {
@@ -46,16 +42,12 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
             Node is AccessorDeclarationSyntax { } accessor
             && (!accessor.Keyword.IsKind(GetKeyword) || accessor.Parent.Parent is IndexerDeclarationSyntax);
 
-        bool IsAccessibleFromOtherAssemblies() =>
-            SemanticModel.GetDeclaredSymbol(Node).GetEffectiveAccessibility() is Public or Protected or ProtectedOrInternal;
-
         static bool MethodDereferencesArguments(BaseMethodDeclarationSyntax method)
         {
             var argumentNames = method.ParameterList.Parameters
                                     .Where(x => !x.Modifiers.AnyOfKind(OutKeyword))
                                     .Select(x => x.GetName())
                                     .ToHashSet();
-
             if (argumentNames.Any())
             {
                 var walker = new ArgumentDereferenceWalker(argumentNames);
@@ -69,42 +61,8 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : SymbolicRuleCheck
         }
     }
 
-    protected override ProgramState PreProcessSimple(SymbolicContext context)
-    {
-        if (NullDereferenceCandidate(context.Operation.Instance) is { } candidate
-            && candidate.Kind == OperationKindEx.ParameterReference
-            && candidate.ToParameterReference() is var parameterReference
-            && !parameterReference.Parameter.Type.IsValueType
-            && !HasObjectConstraint(parameterReference.Parameter)
-            && !parameterReference.Parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
-        {
-            var message = context.Operation.Instance.Syntax.FirstAncestorOrSelf<ConstructorInitializerSyntax>() is not null
-                ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be null."
-                : "Refactor this method to add validation of parameter '{0}' before using it.";
-            ReportIssue(parameterReference.WrappedOperation, string.Format(message, parameterReference.WrappedOperation.Syntax), context);
-        }
-
-        return context.State;
-
-        bool HasObjectConstraint(IParameterSymbol symbol) =>
-            context.State[symbol]?.HasConstraint<ObjectConstraint>() is true;
-    }
-
-    private static IOperation NullDereferenceCandidate(IOperation operation)
-    {
-        var candidate = operation.Kind switch
-        {
-            OperationKindEx.Invocation => operation.ToInvocation().Instance,
-            OperationKindEx.FieldReference => operation.ToFieldReference().Instance,
-            OperationKindEx.PropertyReference => operation.ToPropertyReference().Instance,
-            OperationKindEx.EventReference => operation.ToEventReference().Instance,
-            OperationKindEx.Await => operation.ToAwait().Operation,
-            OperationKindEx.ArrayElementReference => operation.ToArrayElementReference().ArrayReference,
-            OperationKindEx.MethodReference => operation.ToMethodReference().Instance,
-            _ => null,
-        };
-        return candidate?.UnwrapConversion();
-    }
+    protected override bool IsInConstructorInitializer(SyntaxNode node) =>
+        node.FirstAncestorOrSelf<ConstructorInitializerSyntax>() is not null;
 
     private sealed class ArgumentDereferenceWalker : SafeCSharpSyntaxWalker
     {

@@ -9,7 +9,8 @@
   "tags": [
     "multi-threading",
     "async-await",
-    "suspicious"
+    "suspicious",
+    "performance"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-3216",

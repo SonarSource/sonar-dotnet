@@ -28,6 +28,58 @@
 },
 {
 "id":  "S2094",
+"message":  "Remove this empty record, write its code or make it an "interface".",
+"location":  {
+"uri":  "sources\Net5\Net5\Records.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  19,
+"endLine":  109,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty record, write its code or make it an "interface".",
+"location":  {
+"uri":  "sources\Net5\Net5\Records.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  19,
+"endLine":  130,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty record, write its code or make it an "interface".",
+"location":  {
+"uri":  "sources\Net5\Net5\S2219.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  16,
+"endLine":  5,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty record, write its code or make it an "interface".",
+"location":  {
+"uri":  "sources\Net5\Net5\S2219.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  23,
+"endLine":  6,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
 "uri":  "sources\Net5\Net5\S2330.cs",

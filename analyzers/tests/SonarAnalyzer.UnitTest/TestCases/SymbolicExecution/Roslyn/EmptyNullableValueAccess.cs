@@ -159,16 +159,20 @@ class AssignmentAndDeconstruction
 
     void SecondLevel()
     {
-        (_, (int? i1, int? i2)) = (42, (42, null));
+        (int? i1, (int? i2, int? i3)) = (42, (42, null));
         _ = i1.Value;       // Compliant
-        _ = i2.Value;       // FN
+        _ = i2.Value;       // Compliant
+        _ = i3.Value;       // FN
     }
 
     void ThirdLevel()
     {
-        (_, (_, (int? i1, int? i2), _)) = (42, (42, (42, null), 42));
+        (int? i1, (int? i2, (int? i3, int? i4), int? i5)) = (42, (42, (42, null), 42));
         _ = i1.Value;       // Compliant
-        _ = i2.Value;       // FN
+        _ = i2.Value;       // Compliant
+        _ = i3.Value;       // Compliant
+        _ = i4.Value;       // FN
+        _ = i5.Value;       // Compliant
     }
 
     void WithDiscard()
@@ -327,10 +331,18 @@ class Comparisons
     void NullIsNeitherSmallerNorBiggerThanANumber(int? i)
     {
         i = null;
-        if (i > 0) _ = i.Value;        // Noncompliant, FP: positive, therefore non-empty
+        if (i > 0) _ = i.Value;                 // Compliant, positive, therefore non-empty
 
         i = null;
-        if (i < 0) _ = i.Value;        // Noncompliant, FP: negative, therefore non-empty
+        if (i < 0) _ = i.Value;                 // Compliant, negative, therefore non-empty
+
+        i = Unknown();
+        if (i > null) _ = (null as int?).Value; // Compliant, relational against null is always false, so unreachable
+
+        i = Unknown();
+        if (i < null) _ = (null as int?).Value; // Compliant, relational against null is always false, so unreachable
+
+        static int? Unknown() => null;
     }
 }
 

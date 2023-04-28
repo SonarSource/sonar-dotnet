@@ -849,7 +849,6 @@ tag = ""End"";";
                 "InFinally",
                 "InCatchArgument",
                 "InCatchAll",
-                "InFinally", // ex.ParamName cannot throw in this case, will be solved by https://jira.sonarsource.com/browse/MMF-2401
                 "InCatchAllWhen",
                 "End",
                 "InCatchArgumentWhen");
@@ -858,9 +857,7 @@ tag = ""End"";";
             validator.TagStates("InCatchArgument").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("InCatchAllWhen").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
             validator.TagStates("InCatchAll").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
-            validator.TagStates("InFinally").Should().HaveCount(2)
-                .And.ContainSingle(x => HasNoException(x))
-                .And.ContainSingle(x => HasExceptionOfType(x, "NullReferenceException"));
+            validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
             validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         }
 

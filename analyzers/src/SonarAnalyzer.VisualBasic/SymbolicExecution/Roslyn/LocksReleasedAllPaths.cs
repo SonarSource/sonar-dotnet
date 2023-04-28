@@ -18,40 +18,39 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
+
+public class LocksReleasedAllPaths : LocksReleasedAllPathsBase
 {
-    public class LocksReleasedAllPaths : LocksReleasedAllPathsBase
+    public static readonly DiagnosticDescriptor S2222 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    protected override DiagnosticDescriptor Rule => S2222;
+
+    protected override ISafeSyntaxWalker CreateSyntaxWalker(LockAcquireReleaseCollector collector) =>
+        new LockAcquireReleaseWalker(collector);
+
+    private sealed class LockAcquireReleaseWalker : SafeVisualBasicSyntaxWalker
     {
-        public static readonly DiagnosticDescriptor S2222 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private readonly LockAcquireReleaseCollector collector;
 
-        protected override DiagnosticDescriptor Rule => S2222;
+        public LockAcquireReleaseWalker(LockAcquireReleaseCollector collector) =>
+            this.collector = collector;
 
-        protected override ISafeSyntaxWalker CreateSyntaxWalker(LockAcquireReleaseCollector collector) =>
-            new LockAcquireReleaseWalker(collector);
-
-        private sealed class LockAcquireReleaseWalker : SafeVisualBasicSyntaxWalker
+        public override void Visit(SyntaxNode node)
         {
-            private readonly LockAcquireReleaseCollector collector;
-
-            public LockAcquireReleaseWalker(LockAcquireReleaseCollector collector) =>
-                this.collector = collector;
-
-            public override void Visit(SyntaxNode node)
+            if (collector.LockAcquiredAndReleased
+                || node is LambdaExpressionSyntax)
             {
-                if (collector.LockAcquiredAndReleased
-                    || node is LambdaExpressionSyntax)
-                {
-                    return;
-                }
-
-                base.Visit(node);
+                return;
             }
 
-            public override void VisitIdentifierName(IdentifierNameSyntax node)
-            {
-                collector.RegisterIdentifier(node.Identifier.ValueText);
-                base.VisitIdentifierName(node);
-            }
+            base.Visit(node);
+        }
+
+        public override void VisitIdentifierName(IdentifierNameSyntax node)
+        {
+            collector.RegisterIdentifier(node.Identifier.ValueText);
+            base.VisitIdentifierName(node);
         }
     }
 }

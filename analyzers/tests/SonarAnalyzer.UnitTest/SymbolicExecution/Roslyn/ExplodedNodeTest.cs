@@ -140,7 +140,7 @@ Empty
 ");
 
             new ExplodedNode(cfg.Blocks[1], state, null).ToString().Should().BeIgnoringLineEndings(
-@"Block #1, Operation #0, LocalReferenceOperation / VariableDeclaratorSyntax: a = true
+@"Block #1, Operation #0, LocalReferenceOperation: a = true
 Symbols:
 a: No constraints
 ");

@@ -416,7 +416,7 @@ var tag = ""BeforeTry"";
 try
 {
     tag = ""InTry"";
-    var x = tag.Length;
+    var x = arg.Length;
 }
 catch
 {
@@ -424,7 +424,7 @@ catch
 }
 tag = ""AfterCatch"";";
 
-            var validator = SETestContext.CreateCS(code).Validator;
+            var validator = SETestContext.CreateCS(code, ", string arg").Validator;
             validator.ValidateContainsOperation(OperationKindEx.PropertyReference);
             validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
             validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "NullReferenceException"));

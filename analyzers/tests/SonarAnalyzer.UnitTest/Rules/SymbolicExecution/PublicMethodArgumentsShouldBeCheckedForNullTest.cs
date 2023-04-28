@@ -20,7 +20,9 @@
 
 using SonarAnalyzer.Common;
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,6 +39,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             .WithBasePath(@"SymbolicExecution\Roslyn")
             .WithOnlyDiagnostics(ChecksCS.PublicMethodArgumentsShouldBeCheckedForNull.S3900);
 
+        private readonly VerifierBuilder roslynVB = new VerifierBuilder()
+            .AddAnalyzer(() => new VB.SymbolicExecutionRunner())
+            .WithBasePath(@"SymbolicExecution\Roslyn")
+            .WithOnlyDiagnostics(ChecksVB.PublicMethodArgumentsShouldBeCheckedForNull.S3900);
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
@@ -51,6 +58,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PublicMethodArgumentsShouldBeCheckedForNull_Roslyn_CS(ProjectType projectType) =>
             roslynCS.AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.cs")
+                .Verify();
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void PublicMethodArgumentsShouldBeCheckedForNull_Roslyn_VB(ProjectType projectType) =>
+            roslynVB.AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.vb")
                 .Verify();
 
 #if NET

@@ -7,8 +7,7 @@
     "constantCost": "30min"
   },
   "tags": [
-    "cwe",
-    "sans-top25-porous"
+    "cwe"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-2053",

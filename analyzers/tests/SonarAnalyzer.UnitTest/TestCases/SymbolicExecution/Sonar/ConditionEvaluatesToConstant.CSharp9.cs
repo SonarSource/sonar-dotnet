@@ -182,3 +182,23 @@ namespace Repros
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/7096
+namespace Repro_7096
+{
+    public interface I { }
+    public class A : I { }
+    public class B : I { }
+
+    class C
+    {
+        public bool OrElsePattern(I obj) =>
+            obj is A { } || obj is B { }; // Noncompliant FP
+
+        public bool OrElse(I obj) =>
+            obj is A || obj is B;
+
+        public bool Or(I obj) =>
+            obj is A { } or B { };
+    }
+}

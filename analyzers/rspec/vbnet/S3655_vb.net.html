@@ -1,31 +1,29 @@
 <p>Nullable value types can hold either a value or <code>Nothing</code>. The value stored in the nullable type can be accessed with the
 <code>Value</code> property or by casting it to the underlying type. Still, both operations throw an <code>InvalidOperationException</code> when the
-value is <code>Nothing</code>. A nullable type should always be tested before <code>Value</code> is accessed to avoid the exception.</p>
+value is <code>Nothing</code>. A nullable type should always be tested before the value is accessed to avoid the exception.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Dim nullable As Integer? = Nothing
-Console.WriteLine(nullable.Value)
-</pre>
-<p>or</p>
-<pre>
-Dim nullable As Integer? = Nothing
-Console.WriteLine(CType(nullable, Integer))
+Sub Sample(condition As Boolean)
+    Dim nullableValue As Integer? = If(condition, 42, Nothing)
+    Console.WriteLine(nullableValue.Value)             ' Noncompliant
+
+    Dim nullableCast As Integer? = If(condition, 42, Nothing)
+    Console.WriteLine(CType(nullableCast, Integer))    ' Noncompliant
+End Sub
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Dim nullable As Integer? = Nothing
-If nullable.HasValue Then
-  Console.WriteLine(nullable.Value)
-  Console.WriteLine(CType(nullable, Integer))
-End If
-</pre>
-<p>or</p>
-<pre>
-Dim nullable As Integer? = Nothing
-If nullable &lt;&gt; Nothing Then
-  Console.WriteLine(nullable.Value)
-  Console.WriteLine(CType(nullable, Integer))
-End If
+Sub Sample(condition As Boolean)
+    Dim nullableValue As Integer? = If(condition, 42, Nothing)
+    If nullableValue.HasValue Then
+        Console.WriteLine(nullableValue.Value)
+    End If
+
+    Dim nullableCast As Integer? = If(condition, 42, Nothing)
+    If nullableCast.HasValue Then
+        Console.WriteLine(CType(nullableCast, Integer))
+    End If
+End Sub
 </pre>
 <h2>See</h2>
 <ul>

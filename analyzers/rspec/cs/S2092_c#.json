@@ -8,8 +8,7 @@
   },
   "tags": [
     "cwe",
-    "privacy",
-    "sans-top25-porous"
+    "privacy"
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2092",

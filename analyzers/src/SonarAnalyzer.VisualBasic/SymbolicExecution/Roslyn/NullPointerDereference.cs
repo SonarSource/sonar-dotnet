@@ -18,38 +18,37 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
+
+public class NullPointerDereference : NullPointerDereferenceBase
 {
-    public class NullPointerDereference : NullPointerDereferenceBase
+    private const string MessageFormat = "'{0}' is Nothing on at least one execution path.";
+
+    internal static readonly DiagnosticDescriptor S2259 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    protected override DiagnosticDescriptor Rule => S2259;
+
+    public override bool ShouldExecute()
     {
-        private const string MessageFormat = "'{0}' is Nothing on at least one execution path.";
+        var walker = new SyntaxKindWalker();
+        walker.SafeVisit(Node);
+        return walker.Result;
+    }
 
-        internal static readonly DiagnosticDescriptor S2259 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private sealed class SyntaxKindWalker : SafeVisualBasicSyntaxWalker
+    {
+        public bool Result { get; private set; }
 
-        protected override DiagnosticDescriptor Rule => S2259;
-
-        public override bool ShouldExecute()
+        public override void Visit(SyntaxNode node)
         {
-            var walker = new SyntaxKindWalker();
-            walker.SafeVisit(Node);
-            return walker.Result;
-        }
-
-        private sealed class SyntaxKindWalker : SafeVisualBasicSyntaxWalker
-        {
-            public bool Result { get; private set; }
-
-            public override void Visit(SyntaxNode node)
+            if (!Result)
             {
-                if (!Result)
-                {
-                    Result = node.IsAnyKind(
-                        SyntaxKind.AwaitExpression,
-                        SyntaxKind.ForEachStatement,
-                        SyntaxKind.InvocationExpression,    // For array access arr(42)
-                        SyntaxKind.SimpleMemberAccessExpression);
-                    base.Visit(node);
-                }
+                Result = node.IsAnyKind(
+                    SyntaxKind.AwaitExpression,
+                    SyntaxKind.ForEachStatement,
+                    SyntaxKind.InvocationExpression,    // For array access arr(42)
+                    SyntaxKind.SimpleMemberAccessExpression);
+                base.Visit(node);
             }
         }
     }

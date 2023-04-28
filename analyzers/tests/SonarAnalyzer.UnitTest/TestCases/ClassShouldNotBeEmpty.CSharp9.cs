@@ -1,44 +1,63 @@
 ﻿using System;
 
-record EmptyRecord1();                                      // Noncompliant {{Remove this empty record, write its code or make it an "interface".}}
-//     ^^^^^^^^^^^^
-record EmptyRecord2() { };                                  // Noncompliant
+namespace Compliant
+{
+    record RecordWithParameters(int Parameter);
 
-record RecordWithParameters(int RecordMember);
+    record RecordWithProperty
+    {
+        int SomeProperty => 42;
+    }
 
-record RecordWithProperty
-{
-    int SomeProperty => 42;
-}
-record RecordWithField
-{
-    int SomeField = 42;
-}
-record RecordWithMethod
-{
-    void Method() { }
-}
-record RecordWithMethodOverride
-{
-    public override string ToString() => "";
-}
-record RecordWithIndexer
-{
-    int this[int index] => 42;
-}
-record RecordWithDelegate
-{
-    delegate void MethodDelegate();
-}
-record RecordWithEvent
-{
-    event EventHandler CustomEvent;
+    record RecordWithField
+    {
+        int SomeField = 42;
+    }
+    record RecordWithMethod
+    {
+        void Method() { }
+    }
+    record RecordWithMethodOverride
+    {
+        public override string ToString() => "";
+    }
+    record RecordWithIndexer
+    {
+        int this[int index] => 42;
+    }
+    record RecordWithDelegate
+    {
+        delegate void MethodDelegate();
+    }
+    record RecordWithEvent
+    {
+        event EventHandler CustomEvent;
+    }
+
+    record NotEmptyGenericRecord<T>(T RecordMember);
+
+    record NotEmptyGenericRecordWithContraint<T>(T RecordMember) where T : class;
+
+    record EmptyRecordProvidingParameterToBase() : RecordWithParameters(42);
 }
 
-partial record EmptyPartialRecord();                            // Compliant - partial classes are ignored, so partial record classes are ignored as well
+namespace Noncompliant
+{
+    record EmptyRecord();                                        // Noncompliant {{Remove this empty record, write its code or make it an "interface".}}
+    //     ^^^^^^^^^^^
+    record EmptyRecordWithEmptyBody() { };                       // Noncompliant
 
-record EmptyGenericRecord<T>();                                 // Noncompliant
-//     ^^^^^^^^^^^^^^^^^^
-record EmptyGenericRecordWithContraint<T>() where T : class;    // Noncompliant
-record NotEmptyGenericRecord<T>(T RecordMember);
-record NotEmptyGenericRecordWithContraint<T>(T RecordMember) where T : class;
+    record EmptyChildWithoutBrackets : EmptyRecord;              // Noncompliant
+
+    record EmptyChildRecord() : EmptyRecord();                   // Noncompliant
+
+    record EmptyGenericRecord<T>();                              // Noncompliant
+    //     ^^^^^^^^^^^^^^^^^^
+    record EmptyGenericRecordWithContraint<T>() where T : class; // Noncompliant
+}
+
+namespace Ignore
+{
+    partial record EmptyPartialRecord(); // Compliant - partial classes are ignored, so partial record classes are ignored as well
+}
+

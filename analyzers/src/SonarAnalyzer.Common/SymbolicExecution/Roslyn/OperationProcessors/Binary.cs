@@ -27,26 +27,30 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     protected override IBinaryOperationWrapper Convert(IOperation operation) =>
         IBinaryOperationWrapper.FromOperation(operation);
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation) =>
+    protected override BoolConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation) =>
         BinaryConstraint(operation.OperatorKind, state[operation.LeftOperand], state[operation.RightOperand]);
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch)
     {
         if (operation.OperatorKind.IsAnyEquality())
         {
-            state = LearnBranchingConstraint<ObjectConstraint>(state, operation, falseBranch) ?? state;
-            state = LearnBranchingConstraint<BoolConstraint>(state, operation, falseBranch) ?? state;
+            state = LearnBranchingEqualityConstraint<ObjectConstraint>(state, operation, falseBranch) ?? state;
+            state = LearnBranchingEqualityConstraint<BoolConstraint>(state, operation, falseBranch) ?? state;
+        }
+        else if (operation.OperatorKind.IsAnyRelational())
+        {
+            state = LearnBranchingRelationalConstraint(state, operation, falseBranch) ?? state;
         }
         return state;
     }
 
-    private static ProgramState LearnBranchingConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
+    private static ProgramState LearnBranchingEqualityConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
         where T : SymbolicConstraint
     {
         var useOpposite = falseBranch ^ binary.OperatorKind.IsNotEquals();
-        // We can fall through ?? because "constraint" and "testedSymbol" are exclusive. Symbols with the constraint will be recognized as "constraint" side.
-        if ((OperandConstraint(binary.LeftOperand) ?? OperandConstraint(binary.RightOperand)) is { } constraint
-            && (OperandSymbolWithoutConstraint(binary.LeftOperand) ?? OperandSymbolWithoutConstraint(binary.RightOperand)) is { } testedSymbol
+        // We can take left or right constraint and "testedSymbol" because they are exclusive. Symbols with T constraint will be recognized as the constraining side.
+        if (BinaryOperandConstraint<T>(state, binary) is { } constraint
+            && BinaryOperandSymbolWithoutConstraint<T>(state, binary) is { } testedSymbol
             && !(useOpposite && constraint is BoolConstraint && testedSymbol.GetSymbolType().IsNullableBoolean()))  // Don't learn False for "nullableBool != true", because it could also be <null>.
         {
             constraint = constraint.ApplyOpposite(useOpposite);     // Beware that opposite of ObjectConstraint.NotNull doesn't exist and returns <null>
@@ -56,20 +60,31 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             return null;
         }
-
-        ISymbol OperandSymbolWithoutConstraint(IOperation candidate) =>
-            candidate.TrackedSymbol() is { } symbol
-            && (state[symbol] is null || !state[symbol].HasConstraint<T>())
-                ? symbol
-                : null;
-
-        SymbolicConstraint OperandConstraint(IOperation candidate) =>
-            state[candidate] is { } value && value.HasConstraint<T>()
-                ? value.Constraint<T>()
-                : null;
     }
 
-    private static SymbolicConstraint BinaryConstraint(BinaryOperatorKind kind, SymbolicValue left, SymbolicValue right)
+    // We can take the left or right constraint and "testedSymbol" because they are exclusive. Symbols with NotNull constraint will be recognized as the constraining side.
+    // We only learn in the true branch because not being >, >=, <, <= than a non-empty nullable means either being null or non-null with non-matching value.
+    private static ProgramState LearnBranchingRelationalConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch) =>
+        !falseBranch
+        && BinaryOperandConstraint<ObjectConstraint>(state, binary) == ObjectConstraint.NotNull
+        && BinaryOperandSymbolWithoutConstraint<ObjectConstraint>(state, binary) is { } testedSymbol
+        && testedSymbol.GetSymbolType().IsNullableValueType()
+            ? state.SetSymbolConstraint(testedSymbol, ObjectConstraint.NotNull)
+            : null;
+
+    private static SymbolicConstraint BinaryOperandConstraint<T>(ProgramState state, IBinaryOperationWrapper binary) where T : SymbolicConstraint =>
+        state[binary.LeftOperand]?.Constraint<T>() ?? state[binary.RightOperand]?.Constraint<T>();
+
+    private static ISymbol BinaryOperandSymbolWithoutConstraint<T>(ProgramState state, IBinaryOperationWrapper binary) where T : SymbolicConstraint =>
+        OperandSymbolWithoutConstraint<T>(state, binary.LeftOperand) ?? OperandSymbolWithoutConstraint<T>(state, binary.RightOperand);
+
+    private static ISymbol OperandSymbolWithoutConstraint<T>(ProgramState state, IOperation candidate) where T : SymbolicConstraint =>
+        candidate.TrackedSymbol() is { } symbol
+        && (state[symbol] is null || !state[symbol].HasConstraint<T>())
+            ? symbol
+            : null;
+
+    private static BoolConstraint BinaryConstraint(BinaryOperatorKind kind, SymbolicValue left, SymbolicValue right)
     {
         var leftBool = left?.Constraint<BoolConstraint>();
         var rightBool = right?.Constraint<BoolConstraint>();
@@ -90,13 +105,17 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             return BinaryNullConstraint(kind, left.HasConstraint(ObjectConstraint.Null), right.HasConstraint(ObjectConstraint.Null));
         }
+        else if (left?.HasConstraint(ObjectConstraint.Null) is true || right?.HasConstraint(ObjectConstraint.Null) is true)
+        {
+            return kind.IsAnyRelational() ? BoolConstraint.False : null;
+        }
         else
         {
             return null;
         }
     }
 
-    private static SymbolicConstraint BinaryBoolConstraint(BinaryOperatorKind kind, bool left, bool right) =>
+    private static BoolConstraint BinaryBoolConstraint(BinaryOperatorKind kind, bool left, bool right) =>
         kind switch
         {
             BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals => BoolConstraint.From(left == right),
@@ -107,12 +126,13 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             _ => null
         };
 
-    private static SymbolicConstraint BinaryNullConstraint(BinaryOperatorKind kind, bool isNullLeft, bool isNullRight) =>
+    private static BoolConstraint BinaryNullConstraint(BinaryOperatorKind kind, bool isNullLeft, bool isNullRight) =>
         isNullLeft || isNullRight
             ? kind switch
             {
                 BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals => BoolConstraint.From(isNullLeft && isNullRight),
                 BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals => BoolConstraint.From(isNullLeft != isNullRight),
+                _ when kind.IsAnyRelational() => BoolConstraint.False,
                 _ => null
             }
             : null;

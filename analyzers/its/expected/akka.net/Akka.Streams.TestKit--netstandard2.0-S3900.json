@@ -51,32 +51,6 @@
 "endColumn":  26
 }
 }
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'all' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
-"region":  {
-"startLine":  262,
-"startColumn":  35,
-"endLine":  262,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'cause' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
-"region":  {
-"startLine":  368,
-"startColumn":  51,
-"endLine":  368,
-"endColumn":  56
-}
-}
 }
 ]
 }

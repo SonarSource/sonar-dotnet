@@ -6,7 +6,9 @@
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
-  "tags": [],
+  "tags": [
+    "performance"
+  ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-3260",
   "sqKey": "S3260",

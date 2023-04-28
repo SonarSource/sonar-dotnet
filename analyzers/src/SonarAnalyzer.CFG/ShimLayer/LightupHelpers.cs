@@ -478,6 +478,200 @@ public static class LightupHelpers
         return expression.Compile();
     }
 
+    internal static TryGetValueAccessor<TSender, TFirst, TSecond, TValue> CreateTryGetValueAccessor<TSender, TFirst, TSecond, TValue>(Type type, Type firstType, Type secondType, string methodName)
+    {
+        static bool FallbackAccessor(TSender sender, TFirst first, TSecond second, out TValue value)
+        {
+            if (sender == null)
+            {
+                // Unlike an extension method which would throw ArgumentNullException here, the light-up
+                // behavior needs to match behavior of the underlying property.
+                throw new NullReferenceException();
+            }
+
+            value = default;
+            return false;
+        }
+
+        if (type == null)
+        {
+            return FallbackAccessor;
+        }
+
+        if (!typeof(TSender).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (!typeof(TFirst).GetTypeInfo().IsAssignableFrom(firstType.GetTypeInfo()))
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (!typeof(TSecond).GetTypeInfo().IsAssignableFrom(secondType.GetTypeInfo()))
+        {
+            throw new InvalidOperationException();
+        }
+
+        var methods = type.GetTypeInfo().GetDeclaredMethods(methodName);
+        MethodInfo method = null;
+        foreach (var candidate in methods)
+        {
+            var parameters = candidate.GetParameters();
+            if (parameters.Length != 4)
+            {
+                continue;
+            }
+
+            if (Equals(firstType, parameters[0].ParameterType)
+                && Equals(secondType, parameters[1].ParameterType)
+                && Equals(typeof(TValue).MakeByRefType(), parameters[2].ParameterType))
+            {
+                method = candidate;
+                break;
+            }
+        }
+
+        if (method == null)
+        {
+            return FallbackAccessor;
+        }
+
+        if (method.ReturnType != typeof(bool))
+        {
+            throw new InvalidOperationException();
+        }
+
+        var senderParameter = Expression.Parameter(typeof(TSender), "sender");
+        var firstParameter = Expression.Parameter(typeof(TFirst), "first");
+        var secondParameter = Expression.Parameter(typeof(TSecond), "second");
+        var valueParameter = Expression.Parameter(typeof(TValue).MakeByRefType(), "value");
+        Expression instance =
+            type.GetTypeInfo().IsAssignableFrom(typeof(TSender).GetTypeInfo())
+            ? (Expression)senderParameter
+            : Expression.Convert(senderParameter, type);
+        Expression first =
+            firstType.GetTypeInfo().IsAssignableFrom(typeof(TFirst).GetTypeInfo())
+            ? (Expression)firstParameter
+            : Expression.Convert(firstParameter, firstType);
+        Expression second =
+            secondType.GetTypeInfo().IsAssignableFrom(typeof(TSecond).GetTypeInfo())
+            ? (Expression)secondParameter
+            : Expression.Convert(secondParameter, secondType);
+
+        Expression<TryGetValueAccessor<TSender, TFirst, TSecond, TValue>> expression =
+            Expression.Lambda<TryGetValueAccessor<TSender, TFirst, TSecond, TValue>>(
+                Expression.Call(instance, method, first, second, valueParameter),
+                senderParameter,
+                firstParameter,
+                secondParameter,
+                valueParameter);
+        return expression.Compile();
+    }
+
+    internal static TryGetValueAccessor<TSender, TFirst, TSecond, TThird, TValue> CreateTryGetValueAccessor<TSender, TFirst, TSecond, TThird, TValue>(Type type, Type firstType, Type secondType, Type thirdType, string methodName)
+    {
+        static bool FallbackAccessor(TSender sender, TFirst first, TSecond second, TThird third, out TValue value)
+        {
+            if (sender == null)
+            {
+                // Unlike an extension method which would throw ArgumentNullException here, the light-up
+                // behavior needs to match behavior of the underlying property.
+                throw new NullReferenceException();
+            }
+
+            value = default;
+            return false;
+        }
+
+        if (type == null)
+        {
+            return FallbackAccessor;
+        }
+
+        if (!typeof(TSender).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (!typeof(TFirst).GetTypeInfo().IsAssignableFrom(firstType.GetTypeInfo()))
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (!typeof(TSecond).GetTypeInfo().IsAssignableFrom(secondType.GetTypeInfo()))
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (!typeof(TThird).GetTypeInfo().IsAssignableFrom(thirdType.GetTypeInfo()))
+        {
+            throw new InvalidOperationException();
+        }
+
+        var methods = type.GetTypeInfo().GetDeclaredMethods(methodName);
+        MethodInfo method = null;
+        foreach (var candidate in methods)
+        {
+            var parameters = candidate.GetParameters();
+            if (parameters.Length != 4)
+            {
+                continue;
+            }
+
+            if (Equals(firstType, parameters[0].ParameterType)
+                && Equals(secondType, parameters[1].ParameterType)
+                && Equals(thirdType, parameters[2].ParameterType)
+                && Equals(typeof(TValue).MakeByRefType(), parameters[3].ParameterType))
+            {
+                method = candidate;
+                break;
+            }
+        }
+
+        if (method == null)
+        {
+            return FallbackAccessor;
+        }
+
+        if (method.ReturnType != typeof(bool))
+        {
+            throw new InvalidOperationException();
+        }
+
+        var senderParameter = Expression.Parameter(typeof(TSender), "sender");
+        var firstParameter = Expression.Parameter(typeof(TFirst), "first");
+        var secondParameter = Expression.Parameter(typeof(TSecond), "second");
+        var thirdParameter = Expression.Parameter(typeof(TThird), "third");
+        var valueParameter = Expression.Parameter(typeof(TValue).MakeByRefType(), "value");
+        Expression instance =
+            type.GetTypeInfo().IsAssignableFrom(typeof(TSender).GetTypeInfo())
+            ? (Expression)senderParameter
+            : Expression.Convert(senderParameter, type);
+        Expression first =
+            firstType.GetTypeInfo().IsAssignableFrom(typeof(TFirst).GetTypeInfo())
+            ? (Expression)firstParameter
+            : Expression.Convert(firstParameter, firstType);
+        Expression second =
+            secondType.GetTypeInfo().IsAssignableFrom(typeof(TSecond).GetTypeInfo())
+            ? (Expression)secondParameter
+            : Expression.Convert(secondParameter, secondType);
+        Expression third =
+            thirdType.GetTypeInfo().IsAssignableFrom(typeof(TThird).GetTypeInfo())
+            ? (Expression)thirdParameter
+            : Expression.Convert(thirdParameter, thirdType);
+
+        Expression<TryGetValueAccessor<TSender, TFirst, TSecond, TThird, TValue>> expression =
+            Expression.Lambda<TryGetValueAccessor<TSender, TFirst, TSecond, TThird, TValue>>(
+                Expression.Call(instance, method, first, second, third, valueParameter),
+                senderParameter,
+                firstParameter,
+                secondParameter,
+                thirdParameter,
+                valueParameter);
+        return expression.Compile();
+    }
+
     internal static Func<TSyntax, SeparatedSyntaxListWrapper<TProperty>> CreateSeparatedSyntaxListPropertyAccessor<TSyntax, TProperty>(Type type, string propertyName)
     {
         SeparatedSyntaxListWrapper<TProperty> FallbackAccessor(TSyntax syntax)

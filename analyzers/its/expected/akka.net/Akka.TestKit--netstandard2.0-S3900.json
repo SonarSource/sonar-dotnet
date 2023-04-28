@@ -67,32 +67,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'matchedEventHandler' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
-"region":  {
-"startLine":  404,
-"startColumn":  28,
-"endLine":  404,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'matchedEventHandler' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
-"region":  {
-"startLine":  427,
-"startColumn":  28,
-"endLine":  427,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 's' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\ContainsString.cs",
@@ -140,32 +114,6 @@
 "startColumn":  30,
 "endLine":  173,
 "endColumn":  36
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'props' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
-"region":  {
-"startLine":  173,
-"startColumn":  56,
-"endLine":  173,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'supervisor' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
-"region":  {
-"startLine":  201,
-"startColumn":  141,
-"endLine":  201,
-"endColumn":  151
 }
 }
 },
@@ -257,19 +205,6 @@
 "startColumn":  13,
 "endLine":  153,
 "endColumn":  19
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'system' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
-"region":  {
-"startLine":  486,
-"startColumn":  41,
-"endLine":  486,
-"endColumn":  47
 }
 }
 },

@@ -167,9 +167,9 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.Operation.Instance.ConstantValue.Value is false ? x.SetOperationConstraint(TestConstraint.First) : x.State);
         var validator = SETestContext.CreateCS(code, setter).Validator;
-        validator.ValidateTag("IsTrue", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolTrue }));
-        validator.ValidateTag("IsFalse", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull, ConstraintKind.BoolFalse, (ConstraintKind)ConstraintKindTest.First }));
-        validator.ValidateTag("IsInt", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.ObjectNotNull }));
+        validator.ValidateTag("IsTrue", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.NotNull, ConstraintKind.True }));
+        validator.ValidateTag("IsFalse", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.NotNull, ConstraintKind.False, (ConstraintKind)ConstraintKindTest.First }));
+        validator.ValidateTag("IsInt", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.NotNull }));
     }
 
     [TestMethod]

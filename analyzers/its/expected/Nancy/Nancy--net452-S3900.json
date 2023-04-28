@@ -67,19 +67,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'pipelineItem' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
-"region":  {
-"startLine":  123,
-"startColumn":  82,
-"endLine":  123,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'item' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
@@ -166,19 +153,6 @@
 "startColumn":  17,
 "endLine":  102,
 "endColumn":  32
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'pipelineItem' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
-"region":  {
-"startLine":  138,
-"startColumn":  92,
-"endLine":  138,
-"endColumn":  104
 }
 }
 },
@@ -439,19 +413,6 @@
 "startColumn":  17,
 "endLine":  29,
 "endColumn":  28
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'requestedPath' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
-"region":  {
-"startLine":  36,
-"startColumn":  18,
-"endLine":  36,
-"endColumn":  31
 }
 }
 },
@@ -1731,19 +1692,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'e' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
-"region":  {
-"startLine":  192,
-"startColumn":  20,
-"endLine":  192,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'Enc' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
@@ -1843,32 +1791,6 @@
 "startColumn":  13,
 "endLine":  170,
 "endColumn":  19
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'contentType' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
-"region":  {
-"startLine":  64,
-"startColumn":  27,
-"endLine":  64,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'contentType' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  20,
-"endLine":  66,
-"endColumn":  31
 }
 }
 },
@@ -2389,19 +2311,6 @@
 "startColumn":  17,
 "endLine":  18,
 "endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'options' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Owin\NancyMiddleware.cs",
-"region":  {
-"startLine":  54,
-"startColumn":  13,
-"endLine":  54,
-"endColumn":  20
 }
 }
 },
@@ -3026,19 +2935,6 @@
 "startColumn":  40,
 "endLine":  56,
 "endColumn":  48
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'capturedParameters' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyRegExCaptureNode.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  21,
-"endLine":  66,
-"endColumn":  39
 }
 }
 },
@@ -3702,19 +3598,6 @@
 "startColumn":  76,
 "endLine":  38,
 "endColumn":  95
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'assembly' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultResourceReader.cs",
-"region":  {
-"startLine":  23,
-"startColumn":  38,
-"endLine":  23,
-"endColumn":  46
 }
 }
 },

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 internal abstract class BranchingProcessor<T> : MultiProcessor<T>
     where T : IOperationWrapper
 {
-    protected abstract SymbolicConstraint BoolConstraintFromOperation(ProgramState state, T operation);
+    protected abstract BoolConstraint BoolConstraintFromOperation(ProgramState state, T operation);
     protected abstract ProgramState LearnBranchingConstraint(ProgramState state, T operation, bool falseBranch);
 
     protected virtual ProgramState PreProcess(ProgramState state, T operation) =>
@@ -41,7 +41,7 @@ internal abstract class BranchingProcessor<T> : MultiProcessor<T>
         var state = PreProcess(context.State, operation);
         if (BoolConstraintFromOperation(state, operation) is { } constraint)
         {
-            return state.SetOperationConstraint(context.Operation, constraint).ToArray();    // We already know the answer from existing constraints
+            return state.SetOperationConstraint(context.Operation, ObjectConstraint.NotNull).SetOperationConstraint(context.Operation, constraint).ToArray();    // We already know the answer from existing constraints
         }
         else
         {

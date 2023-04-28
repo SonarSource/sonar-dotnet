@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.sonarsource.dotnet</groupId>
     <artifactId>sonar-dotnet</artifactId>
-    <version>8.56-SNAPSHOT</version>
+    <version>9.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>sonar-dotnet-shared-library</artifactId>
@@ -15,7 +15,7 @@
   <description>Share code between C# and VB.NET plugins</description>
 
   <properties>
-    <protobuf.version>3.22.2</protobuf.version>
+    <protobuf.version>3.22.3</protobuf.version>
     <protobuf.compiler>${settings.localRepository}/com/google/protobuf/protoc/${protobuf.version}/protoc-${protobuf.version}-${os.detected.classifier}.exe</protobuf.compiler>
     <!-- used for deployment to SonarSource Artifactory -->
     <gitRepositoryName>sonar-dotnet-shared-library</gitRepositoryName>
@@ -93,7 +93,7 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>5.2.0</version>
+      <version>5.3.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>

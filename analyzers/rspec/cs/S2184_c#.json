@@ -8,8 +8,7 @@
   },
   "tags": [
     "cwe",
-    "overflow",
-    "sans-top25-risky"
+    "overflow"
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2184",

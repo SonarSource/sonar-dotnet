@@ -30,6 +30,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         Second = -2,
         Dummy = -3,
         Fake = -4,
+        PreserveOnFieldReset = -5,
     }
 
     internal abstract class TestConstraintBase : SymbolicConstraint
@@ -58,5 +59,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public override SymbolicConstraint Opposite => throw new NotImplementedException();
 
         private DummyConstraint() : base(ConstraintKindTest.Dummy) { }
+    }
+
+    internal sealed class PreserveOnFieldResetConstraint : TestConstraintBase
+    {
+        public static readonly PreserveOnFieldResetConstraint Instance = new();
+
+        public override SymbolicConstraint Opposite => throw new NotImplementedException();
+
+        public override bool PreserveOnFieldReset => true;
+
+        private PreserveOnFieldResetConstraint() : base(ConstraintKindTest.PreserveOnFieldReset) { }
     }
 }

@@ -93,19 +93,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'system' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
-"region":  {
-"startLine":  549,
-"startColumn":  18,
-"endLine":  549,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'messageClasses' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",

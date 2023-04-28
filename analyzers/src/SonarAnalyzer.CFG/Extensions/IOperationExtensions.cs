@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Extensions
             new(operations, true);
 
         public static string Serialize(this IOperation operation) =>
-            $"{OperationPrefix(operation)}{OperationSuffix(operation)} / {operation.Syntax.GetType().Name}: {operation.Syntax}";
+            $"{OperationPrefix(operation)}{OperationSuffix(operation)}: {operation.Syntax}";
 
         // This method is taken from Roslyn implementation
         public static IEnumerable<IOperation> DescendantsAndSelf(this IOperation operation) =>

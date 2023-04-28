@@ -7,9 +7,13 @@
   "ProjectKey": "sonaranalyzer-dotnet",
   "ProjectName": "SonarAnalyzer for .NET",
   "Profiles": {
+    "Secrets": {
+      "ProfileKey": "AYXoTKmr9Ao2yLWbNKZv",
+      "ProfileTimestamp": "2023-01-25T09:40:14Z"
+    },
     "CSharp": {
       "ProfileKey": "AYS9H5b7szY8h8f_RKYR",
-      "ProfileTimestamp": "2023-02-22T15:28:30Z"
+      "ProfileTimestamp": "2023-04-20T10:52:55Z"
     }
   }
 }

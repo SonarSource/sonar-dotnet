@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Tests.Diagnostics
 {
@@ -345,5 +346,38 @@ namespace Tests.Diagnostics
 
             static int? GetNullableInt() => 42;
         }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/7088
+class Repro_7088
+{
+    void Method()
+    {
+        int? previous = null;
+        StringBuilder? sb = null;
+
+        for (var i = 0; i < 5; i++)
+        {
+            if (previous == null)
+            {
+                previous = 667;
+                continue;
+            }
+
+            if (sb is null) // Noncompliant
+            {
+                sb = new StringBuilder();
+            }
+
+            sb.Append(i);
+        }
+
+        if (sb is null) // Noncompliant
+        {
+            Console.WriteLine("NULL");
+        }
+
+        Console.WriteLine(sb);
     }
 }

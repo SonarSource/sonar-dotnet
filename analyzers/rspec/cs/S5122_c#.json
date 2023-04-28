@@ -3,8 +3,7 @@
   "type": "SECURITY_HOTSPOT",
   "status": "ready",
   "tags": [
-    "cwe",
-    "sans-top25-porous"
+    "cwe"
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-5122",

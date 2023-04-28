@@ -36,7 +36,7 @@ internal sealed class Unary : SimpleProcessor<IUnaryOperationWrapper>
     {
         if (operandValue.Constraint<BoolConstraint>() is { } boolConstraint)
         {
-            return state.SetOperationConstraint(unary.WrappedOperation, boolConstraint.Opposite);
+            return state.SetOperationConstraint(unary.WrappedOperation, ObjectConstraint.NotNull).SetOperationConstraint(unary.WrappedOperation, boolConstraint.Opposite);
         }
         else if (operandValue.HasConstraint(ObjectConstraint.Null))
         {

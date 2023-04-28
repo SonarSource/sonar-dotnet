@@ -26,130 +26,129 @@ using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarRules = SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
+    // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
+    private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
+        new SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce(),
+        new SonarRules.EmptyCollectionsShouldNotBeEnumerated(),
+        new SonarRules.ConditionEvaluatesToConstant(),
+        new SonarRules.InvalidCastToInterfaceSymbolicExecution(),
+        new SonarRules.RestrictDeserializedTypes(),
+        new SonarRules.InitializationVectorShouldBeRandom(),
+        new SonarRules.HashesShouldHaveUnpredictableSalt());
+
+    public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled) { }
+
+    internal /* for testing */ SymbolicExecutionRunner(IAnalyzerConfiguration configuration) : base(configuration) { }
+
+    protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+        .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
+        .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
+        .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess, SonarRules.EmptyNullableValueAccess>())
+        .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull, SonarRules.PublicMethodArgumentsShouldBeCheckedForNull>());
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
+
+    protected override void Initialize(SonarAnalysisContext context)
     {
-        // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
-        private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
-            new SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce(),
-            new SonarRules.EmptyCollectionsShouldNotBeEnumerated(),
-            new SonarRules.ConditionEvaluatesToConstant(),
-            new SonarRules.InvalidCastToInterfaceSymbolicExecution(),
-            new SonarRules.RestrictDeserializedTypes(),
-            new SonarRules.InitializationVectorShouldBeRandom(),
-            new SonarRules.HashesShouldHaveUnpredictableSalt());
+        context.RegisterNodeAction(
+            c => Analyze<BaseMethodDeclarationSyntax>(context, c, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
+            SyntaxKind.ConstructorDeclaration,
+            SyntaxKind.DestructorDeclaration,
+            SyntaxKind.ConversionOperatorDeclaration,
+            SyntaxKind.OperatorDeclaration,
+            SyntaxKind.MethodDeclaration);
 
-        public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled) { }
+        context.RegisterNodeAction(
+            c => Analyze<PropertyDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),
+            SyntaxKind.PropertyDeclaration);
 
-        internal /* for testing */ SymbolicExecutionRunner(IAnalyzerConfiguration configuration) : base(configuration) { }
+        context.RegisterNodeAction(
+            c => Analyze<IndexerDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),
+            SyntaxKind.IndexerDeclaration);
 
-        protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
-            .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
-            .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
-            .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess, SonarRules.EmptyNullableValueAccess>())
-            .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull, SonarRules.PublicMethodArgumentsShouldBeCheckedForNull>());
+        context.RegisterNodeAction(
+            c => Analyze<AccessorDeclarationSyntax>(context, c, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
+            SyntaxKind.GetAccessorDeclaration,
+            SyntaxKind.SetAccessorDeclaration,
+            SyntaxKindEx.InitAccessorDeclaration,
+            SyntaxKind.AddAccessorDeclaration,
+            SyntaxKind.RemoveAccessorDeclaration);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c => Analyze<BaseMethodDeclarationSyntax>(context, c, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
-                SyntaxKind.ConstructorDeclaration,
-                SyntaxKind.DestructorDeclaration,
-                SyntaxKind.ConversionOperatorDeclaration,
-                SyntaxKind.OperatorDeclaration,
-                SyntaxKind.MethodDeclaration);
-
-            context.RegisterNodeAction(
-                c => Analyze<PropertyDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),
-                SyntaxKind.PropertyDeclaration);
-
-            context.RegisterNodeAction(
-                c => Analyze<IndexerDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),
-                SyntaxKind.IndexerDeclaration);
-
-            context.RegisterNodeAction(
-                c => Analyze<AccessorDeclarationSyntax>(context, c, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
-                SyntaxKind.GetAccessorDeclaration,
-                SyntaxKind.SetAccessorDeclaration,
-                SyntaxKindEx.InitAccessorDeclaration,
-                SyntaxKind.AddAccessorDeclaration,
-                SyntaxKind.RemoveAccessorDeclaration);
-
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
-                    if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !c.IsInExpressionTree())
-                    {
-                        Analyze(context, c, declaration.Body, symbol);
-                    }
-                },
-                SyntaxKind.AnonymousMethodExpression,
-                SyntaxKind.SimpleLambdaExpression,
-                SyntaxKind.ParenthesizedLambdaExpression);
-        }
-
-        protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
-            node.CreateCfg(model, cancel);
-
-        protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol)
-        {
-            var enabledAnalyzers = AllRules.Select(x => x.Value.CreateSonarFallback(Configuration))
-                                           .WhereNotNull()
-                                           .Cast<ISymbolicExecutionAnalyzer>() // ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
-                                           .Union(SonarRules)
-                                           .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, descriptor)))
-                                           .ToList();
-            if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
+        context.RegisterNodeAction(
+            c =>
             {
-                var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.Cancel);
+                var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
+                if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !c.IsInExpressionTree())
+                {
+                    Analyze(context, c, declaration.Body, symbol);
+                }
+            },
+            SyntaxKind.AnonymousMethodExpression,
+            SyntaxKind.SimpleLambdaExpression,
+            SyntaxKind.ParenthesizedLambdaExpression);
+    }
+
+    protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
+        node.CreateCfg(model, cancel);
+
+    protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol)
+    {
+        var enabledAnalyzers = AllRules.Select(x => x.Value.CreateSonarFallback(Configuration))
+                                       .WhereNotNull()
+                                       .Cast<ISymbolicExecutionAnalyzer>() // ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
+                                       .Union(SonarRules)
+                                       .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, descriptor)))
+                                       .ToList();
+        if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
+        {
+            var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.Cancel);
+            try
+            {
+                var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);
+                var analyzerContexts = enabledAnalyzers.Select(x => x.CreateContext(context, explodedGraph)).ToList();
                 try
                 {
-                    var explodedGraph = new SonarExplodedGraph(cfg, symbol, context.SemanticModel, lva);
-                    var analyzerContexts = enabledAnalyzers.Select(x => x.CreateContext(context, explodedGraph)).ToList();
-                    try
-                    {
-                        explodedGraph.ExplorationEnded += ExplorationEndedHandlerSonar;
-                        explodedGraph.Walk();
-                    }
-                    finally
-                    {
-                        explodedGraph.ExplorationEnded -= ExplorationEndedHandlerSonar;
-                    }
-
-                    // Some of the rules can return good results if the tree was only partially visited; others need to completely
-                    // walk the tree in order to avoid false positives.
-                    //
-                    // Due to this we split the rules in two sets and report the diagnostics in steps:
-                    // - When the tree is successfully visited and ExplorationEnded event is raised.
-                    // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
-                    // reached or if an exception was thrown during analysis.
-                    ReportDiagnosticsSonar(context, analyzerContexts, true);
-
-                    void ExplorationEndedHandlerSonar(object sender, EventArgs args) =>
-                        ReportDiagnosticsSonar(context, analyzerContexts, false);
+                    explodedGraph.ExplorationEnded += ExplorationEndedHandlerSonar;
+                    explodedGraph.Walk();
                 }
-                catch (Exception ex)
+                finally
                 {
-                    throw new SymbolicExecutionException(ex, symbol, body.GetLocation());
+                    explodedGraph.ExplorationEnded -= ExplorationEndedHandlerSonar;
                 }
+
+                // Some of the rules can return good results if the tree was only partially visited; others need to completely
+                // walk the tree in order to avoid false positives.
+                //
+                // Due to this we split the rules in two sets and report the diagnostics in steps:
+                // - When the tree is successfully visited and ExplorationEnded event is raised.
+                // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
+                // reached or if an exception was thrown during analysis.
+                ReportDiagnosticsSonar(context, analyzerContexts, true);
+
+                void ExplorationEndedHandlerSonar(object sender, EventArgs args) =>
+                    ReportDiagnosticsSonar(context, analyzerContexts, false);
+            }
+            catch (Exception ex)
+            {
+                throw new SymbolicExecutionException(ex, symbol, body.GetLocation());
             }
         }
+    }
 
-        private static void ReportDiagnosticsSonar(SonarSyntaxNodeReportingContext context, IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, bool supportsPartialResults)
+    private static void ReportDiagnosticsSonar(SonarSyntaxNodeReportingContext context, IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, bool supportsPartialResults)
+    {
+        foreach (var analyzerContext in analyzerContexts.Where(x => x.SupportsPartialResults == supportsPartialResults))
         {
-            foreach (var analyzerContext in analyzerContexts.Where(x => x.SupportsPartialResults == supportsPartialResults))
+            foreach (var diagnostic in analyzerContext.GetDiagnostics(context.Compilation))
             {
-                foreach (var diagnostic in analyzerContext.GetDiagnostics(context.Compilation))
-                {
-                    context.ReportIssue(diagnostic);
-                }
-                analyzerContext.Dispose();
+                context.ReportIssue(diagnostic);
             }
+            analyzerContext.Dispose();
         }
     }
 }

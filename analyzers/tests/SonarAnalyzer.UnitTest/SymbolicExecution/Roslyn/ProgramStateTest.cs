@@ -222,14 +222,14 @@ Main: Second
             sut = ProgramState.Empty.SetOperationValue(assignment, SymbolicValue.Empty);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Operations:
-SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
+SimpleAssignmentOperation: a = true: No constraints
 ");
             var valueWithConstraint = SymbolicValue.Empty.WithConstraint(TestConstraint.Second);
             sut = sut.SetOperationValue(assignment.ChildOperations.First(), valueWithConstraint);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Operations:
-LocalReferenceOperation / VariableDeclaratorSyntax: a = true: Second
-SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
+LocalReferenceOperation: a = true: Second
+SimpleAssignmentOperation: a = true: No constraints
 ");
         }
 
@@ -240,12 +240,12 @@ SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
             var sut = ProgramState.Empty.SetCapture(new CaptureId(42), assignment);
             sut.ToString().Should().BeIgnoringLineEndings(
 @"Captures:
-#42: SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true
+#42: SimpleAssignmentOperation: a = true
 ");
             sut.SetCapture(new CaptureId(24), assignment).ToString().Should().BeIgnoringLineEndings(
 @"Captures:
-#24: SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true
-#42: SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true
+#24: SimpleAssignmentOperation: a = true
+#42: SimpleAssignmentOperation: a = true
 ");
         }
 
@@ -285,11 +285,11 @@ Symbols:
 a: No constraints
 Main: First
 Operations:
-LocalReferenceOperation / VariableDeclaratorSyntax: a = true: First
-SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true: No constraints
+LocalReferenceOperation: a = true: First
+SimpleAssignmentOperation: a = true: No constraints
 Captures:
-#0: SimpleAssignmentOperation / VariableDeclaratorSyntax: a = true
-#1: LocalReferenceOperation / VariableDeclaratorSyntax: a = true
+#0: SimpleAssignmentOperation: a = true
+#1: LocalReferenceOperation: a = true
 ");
         }
 

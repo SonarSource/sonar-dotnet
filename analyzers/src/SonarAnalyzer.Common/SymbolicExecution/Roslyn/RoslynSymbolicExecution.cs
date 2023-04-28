@@ -92,7 +92,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             if (node.Block.Kind == BasicBlockKind.Exit)
             {
                 logger.Log(node.State, "Exit Reached");
-                checks.ExitReached(new(null, node.State));
+                checks.ExitReached(new(null, node.State, lva.CapturedVariables));
             }
             else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is { } exception)
             {
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
             {
                 state = SetBranchingConstraints(branch, state, branchValue);
-                state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state));
+                state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state, lva.CapturedVariables));
                 if (state is null)
                 {
                     return null;
@@ -169,7 +169,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
-            foreach (var preProcessed in checks.PreProcess(new(node.Operation, node.State)))
+            foreach (var preProcessed in checks.PreProcess(new(node.Operation, node.State, lva.CapturedVariables)))
             {
                 foreach (var processed in OperationDispatcher.Process(preProcessed))
                 {
@@ -184,7 +184,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 }
             }
 
-            if (exceptionCandidate.FromOperation(node.Operation) is { } exception && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
+            if (exceptionCandidate.FromOperation(node.State, node.Operation) is { } exception && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
             {
                 foreach (var successor in ExceptionSuccessors(node, exception, tryRegion))
                 {
@@ -256,6 +256,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             {
                 if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
                 {
+                    if (constraint is BoolConstraint)
+                    {
+                        state = state.SetSymbolConstraint(local, ObjectConstraint.NotNull);
+                    }
                     state = state.SetSymbolConstraint(local, constraint);
                 }
             }

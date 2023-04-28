@@ -552,5 +552,110 @@ Tag(""End"")";
                 .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "Arg"))
                 .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "Arg"));
         }
+
+        [DataTestMethod]
+        [DataRow("arg >= null")]
+        [DataRow("arg > null")]
+        [DataRow("arg < null")]
+        [DataRow("arg <= null")]
+        [DataRow("null >= arg")]
+        [DataRow("null > arg")]
+        [DataRow("null < arg")]
+        [DataRow("null <= arg")]
+        [DataRow("arg > (int?)null")]
+        [DataRow("arg > new Nullable<int>()")]
+        [DataRow("arg > (null as int?)")]
+        [DataRow("arg > nullValue")]
+        [DataRow("nullValue > arg")]
+        [DataRow("nullValue > 42")]
+        [DataRow("nullValue > notNullValue")]
+        [DataRow("notNullValue > nullValue")]
+        public void Binary_NullableRelationalNull_SetsBoolConstraint_CS(string expression)
+        {
+            var code = $$"""
+                int? notNullValue = 42;
+                int? nullValue = null;
+                var value = {{expression}};
+                Tag("Value", value);
+                if (value)
+                {
+                    Tag("If_Unreachable");
+                }
+                else
+                {
+                    Tag("Else");
+                }
+                Tag("End");
+                """;
+
+            var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTagOrder("Value", "Else", "End");
+        }
+
+        [DataTestMethod]
+        [DataRow("arg >= 42")]
+        [DataRow("arg > 42")]
+        [DataRow("arg < 42")]
+        [DataRow("arg <= 42")]
+        [DataRow("42 >= arg")]
+        [DataRow("42 > arg")]
+        [DataRow("42 < arg")]
+        [DataRow("42 <= arg")]
+        [DataRow("arg > (int?)42")]
+        [DataRow("arg > new Nullable<int>(42)")]
+        [DataRow("arg > (42 as int?)")]
+        [DataRow("arg > notNullValue")]
+        public void Binary_NullableRelationalNonNull_SetsObjectConstraint_CS(string expression)
+        {
+            var code = $$"""
+                int? notNullValue = 42;
+                if ({{expression}})
+                {
+                    Tag("If", arg);
+                }
+                else
+                {
+                    Tag("Else", arg);
+                }
+                """;
+
+            var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "arg comparison true, hence non-null"));
+            validator.ValidateTag("Else", x => x.Should().HaveNoConstraints("arg either null or comparison false"));
+        }
+
+        [DataTestMethod]
+        [DataRow("s = s + s;")]
+        [DataRow("s = s + null;")]
+        public void Binary_StringConcatenation_Binary_CS(string expression)
+        {
+            // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12105-addition-operator
+            var code = $$"""
+                string s = null;
+                {{expression}}
+                Tag("S", s);
+                """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTag("S", x => x.Should().HaveNoConstraints()); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
+        }
+
+        [DataTestMethod]
+        [DataRow("s += s;")]
+        [DataRow("s += null;")]
+        public void Binary_StringConcatenation_Compund_CS(string expression)
+        {
+            // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12105-addition-operator
+            var code = $$"""
+                string s = null;
+                {{expression}}
+                Tag("S", s);
+                """;
+            var validator = SETestContext.CreateCS(code).Validator;
+            validator.ValidateContainsOperation(OperationKind.Binary);
+            validator.ValidateTag("S", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null)); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
+        }
     }
 }
