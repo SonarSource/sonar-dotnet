@@ -18,11 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Text;
-using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Protobuf;
-
 namespace SonarAnalyzer.UnitTest.Rules;
 
 public partial class TokenTypeAnalyzerTest
@@ -48,95 +43,119 @@ public partial class TokenTypeAnalyzerTest
                 }
             [u:}]
             """);
-}
 
-public class ClassifierTestHarness
-{
-    private static readonly Regex TokenTypeRegEx = new(TokenGroups(
-        TokenGroup(TokenType.Keyword, "k"),
-        TokenGroup(TokenType.NumericLiteral, "n"),
-        TokenGroup(TokenType.StringLiteral, "s"),
-        TokenGroup(TokenType.TypeName, "t"),
-        TokenGroup(TokenType.Comment, "c"),
-        TokenGroup(TokenType.UnknownTokentype, "u")));
-
-    public static void AssertTokenTypes(string code)
-    {
-        var (tree, model, expectedTokens) = ParseTokens(code);
-        var root = tree.GetRoot();
-        var tokenClassifier = new SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer.TokenClassifier(model, false);
-        var triviaClassifier = new SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer.TriviaClassifier();
-        expectedTokens.Should().SatisfyRespectively(expectedTokens.Select<ExpectedToken, Action<ExpectedToken>>(e => expected =>
-        {
-            var (actualLocation, classification) = FindActual();
-            var expectedLineSpan = tree.GetLocation(expected.Postion).GetLineSpan();
-            if (classification == null)
-            {
-                var because = $$"""classification for token with text "{{expected.TokenText}}" at position {{expectedLineSpan}} is null""";
-                expected.TokenType.Should().Be(TokenType.UnknownTokentype, because);
-                actualLocation.SourceSpan.Should().Be(expected.Postion, because);
-            }
-            else
-            {
-                classification.Should().Be(new TokenTypeInfo.Types.TokenInfo
+    [TestMethod]
+    public void IndentifierToken_QueryComprehensions() =>
+        ClassifierTestHarness.AssertTokenTypes("""
+            using System.Linq;
+            public class Test {
+                public void M()
                 {
-                    TokenType = expected.TokenType,
-                    TextRange = new TextRange
+                    _ = from [u:i] in new int[0]
+                        let [u:j] = i
+                        join [u:k] in new int[0] on i equals k into [u:l]
+                        select l into [u:m]
+                        select m;
+                }
+            }
+            """, false);
+
+    [TestMethod]
+    public void IndentifierToken_VariableDeclarator() =>
+        ClassifierTestHarness.AssertTokenTypes("""
+            public class Test {
+                int [u:i] = 0, [u:j] = 0;
+                public void M()
+                {
+                    int [u:k], [u:l];
+                }
+            }
+            """, false);
+
+    [TestMethod]
+    public void IndentifierToken_LabeledStatement() =>
+        ClassifierTestHarness.AssertTokenTypes("""
+            public class Test {
+                public void M()
+                {
+                    goto Label;
+            [u:Label]:
+                    ;
+                }
+            }
+            """, false);
+
+    [TestMethod]
+    public void IndentifierToken_Catch() =>
+        ClassifierTestHarness.AssertTokenTypes("""
+            public class Test {
+                public void M()
+                {
+                    try { }
+                    catch(System.Exception [u:ex]) { }
+                }
+            }
+            """, false);
+
+    [TestMethod]
+    public void IndentifierToken_ForEach() =>
+        ClassifierTestHarness.AssertTokenTypes("""
+            public class Test {
+                public void M()
+                {
+                    foreach(var [u:i] in new int[0])
                     {
-                        StartLine = expectedLineSpan.StartLinePosition.Line + 1,
-                        StartOffset = expectedLineSpan.StartLinePosition.Character,
-                        EndLine = expectedLineSpan.EndLinePosition.Line + 1,
-                        EndOffset = expectedLineSpan.EndLinePosition.Character,
-                    },
-                }, $$"""token with text "{{expected.TokenText}}" at position {{expectedLineSpan}} was marked as {{expected.TokenType}}""");
+                    }
+                }
             }
+            """, false);
 
-            (Location, TokenTypeInfo.Types.TokenInfo TokenInfo) FindActual()
+    [TestMethod]
+    public void IndentifierToken_MethodParameterConstructorDestructorLocalFunctionPropertyEvent() =>
+        ClassifierTestHarness.AssertTokenTypes("""
+            public class Test {
+                public int [u:Prop] { get; set; }
+                public event System.EventHandler [u:TestEventField];
+                public event System.EventHandler [u:TestEventDeclaration] { add { } remove { } }
+                public [t:Test]() { }
+                public void [u:Method]<[t:T]>(int [u:parameter]) { }
+                ~[t:Test]()
+                {
+                    void [u:LocalFunction]() { }
+                }
+            }
+            """, false);
+
+    [TestMethod]
+    public void IndentifierToken_BaseTypeDelegateEnumMember() =>
+        ClassifierTestHarness.AssertTokenTypes("""
+            public class [t:TestClass] { }
+            public struct [t:TestStruct] { }
+            public record [t:TestRecord] { }
+            public record struct [t:TestRecordStruct] { }
+            public delegate void [t:TestDelegate]();
+            public enum [t:TestEnum] { [u:EnumMember] }
+            """, false);
+
+    [TestMethod]
+    public void IndentifierToken_TupleDesignation() =>
+        ClassifierTestHarness.AssertTokenTypes("""
+            class Test
             {
-                if (expected.TokenType == TokenType.Comment)
+                void M()
                 {
-                    var trivia = root.FindTrivia(expected.Postion.Start);
-                    return (tree.GetLocation(trivia.FullSpan), triviaClassifier.ClassifyTrivia(trivia));
-                }
-                else
-                {
-                    var token = root.FindToken(expected.Postion.Start);
-                    return (token.GetLocation(), tokenClassifier.ClassifyToken(token));
+                    var ([u:i], [u:j]) = (1, 2);
+                    (int [u:i], int [u:j]) [u:t];
                 }
             }
-        }));
-    }
+            """, false);
 
-    private static (SyntaxTree Tree, SemanticModel Model, IReadOnlyCollection<ExpectedToken> ExpectedTokens) ParseTokens(string code)
-    {
-        var matches = TokenTypeRegEx.Matches(code);
-        var sb = new StringBuilder(code.Length);
-        var expectedTokens = new List<ExpectedToken>(matches.Count);
-        var lastMatchEnd = 0;
-        var match = 0;
-        foreach (var group in matches.Cast<Match>().Select(m => m.Groups.Cast<Group>().First(g => g.Success && g.Name != "0")))
-        {
-            var expectedTokenType = (TokenType)Enum.Parse(typeof(TokenType), group.Name);
-            var position = group.Index - (match * 4);
-            var length = group.Length - 4;
-            var tokenText = group.Value.Substring(3, group.Value.Length - 4);
-            expectedTokens.Add(new ExpectedToken(expectedTokenType, tokenText, new TextSpan(position, length)));
-
-            sb.Append(code.Substring(lastMatchEnd, group.Index - lastMatchEnd));
-            sb.Append(tokenText);
-            lastMatchEnd = group.Index + group.Length;
-            match++;
-        }
-        sb.Append(code.Substring(lastMatchEnd));
-        var (tree, model) = TestHelper.CompileCS(sb.ToString());
-        return (tree, model, expectedTokens);
-    }
-
-    private static string TokenGroups(params string[] groups)
-        => string.Join("|", groups);
-
-    private static string TokenGroup(TokenType tokenType, string shortName)
-        => $$"""(?'{{tokenType}}'\[{{shortName}}\:[^\]]+\])""";
-
-    private readonly record struct ExpectedToken(TokenType TokenType, string TokenText, TextSpan Postion);
+    [TestMethod]
+    public void IndentifierToken_FunctionPointerUnmanagedCallingConvention() =>
+        ClassifierTestHarness.AssertTokenTypes("""
+            unsafe class Test
+            {
+                void M(delegate* unmanaged[[u:Cdecl]]<int, int> m) { }
+            }
+            """, false);
 }
