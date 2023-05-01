@@ -21,7 +21,7 @@
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
+namespace SonarAnalyzer.UnitTest.SymbolicExecution
 {
     [TestClass]
     public class SymbolicConstraintTest
