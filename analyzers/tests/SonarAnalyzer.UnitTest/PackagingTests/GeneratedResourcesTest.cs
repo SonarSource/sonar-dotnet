@@ -83,7 +83,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
 
         private static string RuleFromFileName(string fileName)
         {
-            var match = Regex.Match(fileName, @"(S\d+)_.*");    // S1234_c# or S1234_vb.net
+            var match = Regex.Match(fileName, @"(S\d+)");    // S1234
             return match.Success ? match.Groups[1].Value : null;
         }
 
