@@ -72,7 +72,7 @@
     <Content Include="CBDEMocks\CBDEWaitAndSucceeds.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ResourceTests\**\*">
+    <Content Include="TestResources\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
