@@ -30,9 +30,8 @@ import static org.sonar.plugins.csharp.CSharpPlugin.REPOSITORY_KEY;
 public class CSharpSonarRulesDefinition extends AbstractRulesDefinition {
 
   private static final String RESOURCES_DIRECTORY = "/org/sonar/plugins/csharp/";
-  private static final String METADATA_SUFFIX = "_c#";
 
   public CSharpSonarRulesDefinition(SonarRuntime sonarRuntime) {
-    super(REPOSITORY_KEY, LANGUAGE_KEY, sonarRuntime, RESOURCES_DIRECTORY, METADATA_SUFFIX);
+    super(REPOSITORY_KEY, LANGUAGE_KEY, sonarRuntime, RESOURCES_DIRECTORY);
   }
 }

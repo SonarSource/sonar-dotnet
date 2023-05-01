@@ -97,8 +97,7 @@ public class AbstractRulesDefinitionTest {
   @Test
   public void test_missing_resource_throws() {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
-    AbstractRulesDefinition sut = new AbstractRulesDefinition("test", "test", sonarRuntime, "/Nonexistent/", "") {
-    };
+    AbstractRulesDefinition sut = new AbstractRulesDefinition("test", "test", sonarRuntime, "/Nonexistent/") { };
     RulesDefinition.Context context = new RulesDefinition.Context();
 
     assertThatExceptionOfType(IllegalStateException.class)
@@ -122,7 +121,7 @@ public class AbstractRulesDefinitionTest {
 
   private static class TestRulesDefinition extends AbstractRulesDefinition {
     TestRulesDefinition(SonarRuntime runtime) {
-      super("test", "test", runtime, "/AbstractRulesDefinitionTest/", "");
+      super("test", "test", runtime, "/AbstractRulesDefinitionTest/");
     }
 
     @Override

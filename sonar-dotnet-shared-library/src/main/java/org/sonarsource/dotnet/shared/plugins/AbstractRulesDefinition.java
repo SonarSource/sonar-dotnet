@@ -48,16 +48,14 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   private final String repositoryKey;
   private final String languageKey;
   private final String resourcesDirectory;
-  private final String metadataSuffix;
   private final boolean isOwaspByVersionSupported;
   private final boolean isAddPciDssSupported;
   private final boolean isASVSSupported;
 
-  protected AbstractRulesDefinition(String repositoryKey, String languageKey, SonarRuntime sonarRuntime, String resourcesDirectory, String metadataSuffix) {
+  protected AbstractRulesDefinition(String repositoryKey, String languageKey, SonarRuntime sonarRuntime, String resourcesDirectory) {
     this.repositoryKey = repositoryKey;
     this.languageKey = languageKey;
     this.resourcesDirectory = resourcesDirectory;
-    this.metadataSuffix = metadataSuffix;
     this.isOwaspByVersionSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 3));
     this.isAddPciDssSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 5));
     this.isASVSSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 9));
@@ -74,7 +72,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     for (Rule rule : rules) {
       NewRule newRule = repository.createRule(rule.id);
       configureRule(newRule, loadMetadata(rule.id), rule.parameters);
-      newRule.setHtmlDescription(readResource(rule.id + metadataSuffix + ".html"));
+      newRule.setHtmlDescription(readResource(rule.id + ".html"));
     }
     repository.done();
   }
@@ -149,7 +147,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   }
 
   private RuleMetadata loadMetadata(String id) {
-    return GSON.fromJson(readResource(id + metadataSuffix + ".json"), RuleMetadata.class);
+    return GSON.fromJson(readResource(id + ".json"), RuleMetadata.class);
   }
 
   private String readResource(String name) {
