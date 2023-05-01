@@ -55,19 +55,13 @@ $RulesFolderVB     = "${AnalyzersPath}\\src\\SonarAnalyzer.VisualBasic\\Rules"
 $RulesFolderTests  = "${AnalyzersPath}\\tests\\SonarAnalyzer.UnitTest\\Rules"
 $TestCasesFolder   = "${AnalyzersPath}\\tests\\SonarAnalyzer.UnitTest\\TestCases"
 
-$RspecSuffixMap = @{
-    "cs" = "c#";
-    "vbnet" = "vb.net";
-}
-
 $SonarpediaMap = @{
     "cs" = ".\analyzers\src\SonarAnalyzer.CSharp";
     "vbnet" = ".\analyzers\src\SonarAnalyzer.VisualBasic";
 }
 
 function UpdateRuleTypeMapping() {
-    $Suffix = $RspecSuffixMap.Get_Item($Language)
-    $Rule = Get-Content -Raw "${AnalyzersPath}\\rspec\\${Language}\\${RuleKey}_${suffix}.json" | ConvertFrom-Json
+    $Rule = Get-Content -Raw "${AnalyzersPath}\\rspec\\${Language}\\${RuleKey}.json" | ConvertFrom-Json
     $RuleType = $Rule.Type
     if (!$RuleType) {
         return
