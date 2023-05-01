@@ -18,18 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Constraints
+namespace SonarAnalyzer.SymbolicExecution.Constraints;
+
+public sealed class LockConstraint : SymbolicConstraint
 {
-    public sealed class LockConstraint : SymbolicConstraint
-    {
-        public static readonly LockConstraint Held = new(ConstraintKind.LockHeld);
-        public static readonly LockConstraint Released = new(ConstraintKind.LockReleased);
+    public static readonly LockConstraint Held = new(ConstraintKind.LockHeld);
+    public static readonly LockConstraint Released = new(ConstraintKind.LockReleased);
 
-        public override SymbolicConstraint Opposite =>
-            this == Held ? Released : Held;
+    public override SymbolicConstraint Opposite =>
+        this == Held ? Released : Held;
 
-        public override bool PreserveOnFieldReset => true;
+    public override bool PreserveOnFieldReset => true;
 
-        private LockConstraint(ConstraintKind kind) : base(kind) { }
-    }
+    private LockConstraint(ConstraintKind kind) : base(kind) { }
 }
