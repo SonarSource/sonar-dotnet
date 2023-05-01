@@ -32,7 +32,7 @@ public class SonarLintXmlReaderTest
     [DataRow(LanguageNames.VisualBasic, "vbnet")]
     public void SonarLintXmlReader_WhenAllValuesAreSet_ExpectedValues(string language, string xmlLanguageName)
     {
-        var sut = CreateSonarLintXmlReader(@$"ResourceTests\SonarLintXml\All_Properties_{xmlLanguageName}\SonarLint.xml");
+        var sut = CreateSonarLintXmlReader(@$"TestResources\SonarLintXml\All_Properties_{xmlLanguageName}\SonarLint.xml");
         sut.IgnoreHeaderComments(language).Should().BeTrue();
         sut.AnalyzeGeneratedCode(language).Should().BeFalse();
         AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
@@ -60,7 +60,7 @@ public class SonarLintXmlReaderTest
     [TestMethod]
     public void SonarLintXmlReader_PartiallyMissingProperties_ExpectedAndDefaultValues()
     {
-        var sut = CreateSonarLintXmlReader(@"ResourceTests\SonarLintXml\Partially_missing_properties\SonarLint.xml");
+        var sut = CreateSonarLintXmlReader(@"TestResources\SonarLintXml\Partially_missing_properties\SonarLint.xml");
         sut.IgnoreHeaderComments(LanguageNames.CSharp).Should().BeFalse();
         sut.AnalyzeGeneratedCode(LanguageNames.CSharp).Should().BeTrue();
         AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
@@ -75,7 +75,7 @@ public class SonarLintXmlReaderTest
     [TestMethod]
     public void SonarLintXmlReader_PropertiesCSharpTrueVBNetFalse_ExpectedValues()
     {
-        var sut = CreateSonarLintXmlReader(@"ResourceTests\SonarLintXml\PropertiesCSharpTrueVbnetFalse\SonarLint.xml");
+        var sut = CreateSonarLintXmlReader(@"TestResources\SonarLintXml\PropertiesCSharpTrueVbnetFalse\SonarLint.xml");
         sut.IgnoreHeaderComments(LanguageNames.CSharp).Should().BeTrue();
         sut.IgnoreHeaderComments(LanguageNames.VisualBasic).Should().BeFalse();
         sut.AnalyzeGeneratedCode(LanguageNames.CSharp).Should().BeTrue();
@@ -84,7 +84,7 @@ public class SonarLintXmlReaderTest
 
     [TestMethod]
     public void SonarLintXmlReader_DuplicatedProperties_DoesNotFail() =>
-        ((Action)(() => CreateSonarLintXmlReader(@"ResourceTests\SonarLintXml\Duplicated_Properties\SonarLint.xml"))).Should().NotThrow();
+        ((Action)(() => CreateSonarLintXmlReader(@"TestResources\SonarLintXml\Duplicated_Properties\SonarLint.xml"))).Should().NotThrow();
 
     [DataTestMethod]
     [DataRow("")]
@@ -95,11 +95,11 @@ public class SonarLintXmlReaderTest
 
     [TestMethod]
     public void SonarLintXmlReader_MissingProperties_DefaultBehaviour() =>
-        CheckSonarLintXmlReaderDefaultValues(CreateSonarLintXmlReader(@"ResourceTests\SonarLintXml\Missing_properties\SonarLint.xml"));
+        CheckSonarLintXmlReaderDefaultValues(CreateSonarLintXmlReader(@"TestResources\SonarLintXml\Missing_properties\SonarLint.xml"));
 
     [TestMethod]
     public void SonarLintXmlReader_WithIncorrectValueType_DefaultBehaviour() =>
-        CheckSonarLintXmlReaderDefaultValues(CreateSonarLintXmlReader(@"ResourceTests\SonarLintXml\Incorrect_value_type\SonarLint.xml"));
+        CheckSonarLintXmlReaderDefaultValues(CreateSonarLintXmlReader(@"TestResources\SonarLintXml\Incorrect_value_type\SonarLint.xml"));
 
     [TestMethod]
     public void SonarLintXmlReader_CheckEmpty_DefaultBehaviour() =>
@@ -108,7 +108,7 @@ public class SonarLintXmlReaderTest
     [TestMethod]
     public void SonarLintXmlReader_LanguageDoesNotExist_Throws()
     {
-        var sut = CreateSonarLintXmlReader(@$"ResourceTests\SonarLintXml\All_Properties_cs\SonarLint.xml");
+        var sut = CreateSonarLintXmlReader(@$"TestResources\SonarLintXml\All_Properties_cs\SonarLint.xml");
         sut.Invoking(x => x.IgnoreHeaderComments(LanguageNames.FSharp)).Should().Throw<UnexpectedLanguageException>().WithMessage("Unexpected language: F#");
         sut.Invoking(x => x.AnalyzeGeneratedCode(LanguageNames.FSharp)).Should().Throw<UnexpectedLanguageException>().WithMessage("Unexpected language: F#");
     }

@@ -28,8 +28,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
     {
         private const string MixedSlashesWebConfigPath1 = @"C:\Projects/DummyProj/wEB.config";
         private const string MixedSlashesWebConfigPath2 = @"C:\Projects/DummyProj/Views\Web.confiG";
-        private const string FilesToAnalyzePath = @"ResourceTests\FilesToAnalyze\FilesToAnalyze.txt";
-        private const string InvalidFilesToAnalyzePath = @"ResourceTests\FilesToAnalyze\FilesToAnalyzeWithInvalidValues.txt";
+        private const string FilesToAnalyzePath = @"TestResources\FilesToAnalyze\FilesToAnalyze.txt";
+        private const string InvalidFilesToAnalyzePath = @"TestResources\FilesToAnalyze\FilesToAnalyzeWithInvalidValues.txt";
 
         [TestMethod]
         public void FileNameWithMixedCapitalizationAndMixedSlashes_FindFilesWithFileName_ReturnsAllWebConfigFiles()
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void EmptyFile_FindFiles_ReturnsEmptyEnumerable()
         {
-            var sut = new FilesToAnalyzeProvider(@"ResourceTests\FilesToAnalyze\EmptyFilesToAnalyze.txt");
+            var sut = new FilesToAnalyzeProvider(@"TestResources\FilesToAnalyze\EmptyFilesToAnalyze.txt");
 
             var results = sut.FindFiles(new Regex(".*"), false);
             results.Should().BeEmpty();
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("")]
         [DataRow(null)]
         [DataRow("invalidPath")]
-        [DataRow(@"ResourceTests\FilesToAnalyze\NonExistingFile.txt")]
+        [DataRow(@"TestResources\FilesToAnalyze\NonExistingFile.txt")]
         public void InvalidPath_FindFiles_ReturnsEmptyEnumerable(string filePath)
         {
             var sut = new FilesToAnalyzeProvider(filePath);

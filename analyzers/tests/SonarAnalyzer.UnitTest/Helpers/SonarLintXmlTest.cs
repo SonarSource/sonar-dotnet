@@ -30,7 +30,7 @@ public class SonarLintXmlTest
     public void SonarLintXml_DeserializeFile_ExpectedValues()
     {
         var deserializer = new XmlSerializer(typeof(SonarLintXml));
-        using TextReader textReader = new StreamReader("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
+        using TextReader textReader = new StreamReader("TestResources\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
         var sonarLintXml = (SonarLintXml)deserializer.Deserialize(textReader);
 
         AssertSettings(sonarLintXml.Settings);
