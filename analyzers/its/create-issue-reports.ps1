@@ -104,7 +104,7 @@ function GetActualIssues([string]$sarifReportPath){
         $allIssues = $allIssues | Foreach-Object { Get-IssueV3($_) }
     }
     else {
-        # Some json are not populated with issues. e.g.: CBDE
+        # Some json are not populated with issues.
         return
     }
 
