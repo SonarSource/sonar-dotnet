@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
+using System;
 using System.Threading;
 using Xunit;
 using Alias = System.Threading.Thread;
@@ -69,5 +70,11 @@ class NonCompliant
         {
             Thread.Sleep(42); // Noncompliant
         }
+    }
+
+    [Test]
+    public void ThreadSleepInLambdaFunction()
+    {
+        Action sleep = () => Thread.Sleep(42); // Noncompliant
     }
 }

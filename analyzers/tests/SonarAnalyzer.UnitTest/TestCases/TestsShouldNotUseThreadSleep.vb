@@ -51,4 +51,8 @@ Class NonCompliant
         Sleep(42) ' Noncompliant
     End Sub
 	
+	<Test>
+    Public Sub ThreadSleepInLambdaFunction()
+        Dim sleep As Action = Sub() Thread.Sleep(42) ' Noncompliant
+    End Sub
 End Class
