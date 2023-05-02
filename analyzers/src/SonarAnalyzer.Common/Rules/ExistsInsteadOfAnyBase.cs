@@ -34,7 +34,7 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression,
 
     protected override string MessageFormat => """Collection-specific "Exists" method should be used instead of the "Any" extension.""";
 
-    protected abstract bool ContainsAnyExpression(TInvocationExpression invocation, out Location location);
+    protected abstract bool TryGetAnyExpression(TInvocationExpression invocation, out Location location);
 
     protected ExistsInsteadOfAnyBase() : base(DiagnosticId) { }
 
@@ -43,7 +43,7 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression,
         {
             var invocationExpression = (TInvocationExpression)c.Node;
 
-            if (ContainsAnyExpression(invocationExpression, out var location) && IsListType(invocationExpression, c.SemanticModel))
+            if (TryGetAnyExpression(invocationExpression, out var location) && IsListType(invocationExpression, c.SemanticModel))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, location));
             }

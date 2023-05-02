@@ -25,9 +25,9 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override bool ContainsAnyExpression(InvocationExpressionSyntax invocation, out Location location)
+    protected override bool TryGetAnyExpression(InvocationExpressionSyntax invocation, out Location location)
     {
-        if (invocation.Expression.NameIs("Any") && invocation.ArgumentList.Arguments is { Count: > 0 })
+        if (invocation.Expression.NameIs(nameof(Enumerable.Any)) && invocation.ArgumentList.Arguments is { Count: > 0 })
         {
             location = invocation.Expression.GetLocation();
             return true;
