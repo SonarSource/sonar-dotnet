@@ -30,23 +30,29 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
+        protected override bool EnableConcurrentExecution => false;
+
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(c =>
+            context.RegisterTreeAction(c =>
             {
-                var typeDeclarationSyntax = (TypeDeclarationSyntax)c.Node;
-                if (!c.IsRedundantPositionalRecordContext()
-                    && IsPrivateButNotSealedType(typeDeclarationSyntax)
-                    && !HasVirtualMembers(typeDeclarationSyntax))
+                var root = c.Tree.GetCompilationUnitRoot();
+                var declarations = root.DescendantNodes(x => x is CompilationUnitSyntax)
+                    .Where(x => x.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration))
+                    .Select(x => (TypeDeclarationSyntax)x);
+
+                var model = new Lazy<SemanticModel>(() => c.Compilation.GetSemanticModel(c.Tree));
+                var symbols = new Lazy<List<INamedTypeSymbol>>(() => declarations.Select(x => model.Value.GetDeclaredSymbol(x)).ToList());
+
+                foreach (var declaration in declarations)
                 {
-                    var nestedPrivateTypeInfo = (INamedTypeSymbol)c.SemanticModel.GetDeclaredSymbol(c.Node);
-                    if (!IsPrivateTypeInherited(nestedPrivateTypeInfo))
+                    if (IsNotSealed(declaration)
+                        && !HasVirtualMembers(declaration)
+                        && !IsPrivateOrFileTypeAndInherited(declaration, model, symbols))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, typeDeclarationSyntax.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, declaration.Identifier.GetLocation()));
                     }
                 }
-            },
-            SyntaxKind.ClassDeclaration,
-            SyntaxKindEx.RecordClassDeclaration);
+            });
 
         private static bool HasVirtualMembers(TypeDeclarationSyntax typeDeclaration)
         {
@@ -57,15 +63,31 @@ namespace SonarAnalyzer.Rules.CSharp
                    || classMembers.OfType<EventDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword));
         }
 
-        private static bool IsPrivateButNotSealedType(TypeDeclarationSyntax typeDeclaration) =>
-            typeDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword)
-            && !typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
+        private static bool IsNotSealed(TypeDeclarationSyntax typeDeclaration) =>
+            !typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
             && !typeDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword)
             && !typeDeclaration.Modifiers.Any(SyntaxKind.AbstractKeyword);
 
-        private static bool IsPrivateTypeInherited(INamedTypeSymbol privateTypeInfo) =>
-            privateTypeInfo.ContainingType.GetAllNamedTypes()
-                                          .Any(symbol => !symbol.MetadataName.Equals(privateTypeInfo.MetadataName)
-                                                         && symbol.DerivesFrom(privateTypeInfo));
+        private static bool IsPrivateOrFileTypeAndInherited(
+            TypeDeclarationSyntax declaration,
+            Lazy<SemanticModel> model,
+            Lazy<List<INamedTypeSymbol>> otherSymbols)
+        {
+            if (declaration.Modifiers.Any(SyntaxKind.PrivateKeyword))
+            {
+                var symbol = model.Value.GetDeclaredSymbol(declaration);
+                return symbol.ContainingType.GetAllNamedTypes()
+                    .Any(x => !x.MetadataName.Equals(symbol.MetadataName)
+                                   && x.DerivesFrom(symbol));
+            }
+            if (declaration.Modifiers.Any(SyntaxKindEx.FileKeyword))
+            {
+                var symbol = model.Value.GetDeclaredSymbol(declaration);
+                return otherSymbols.Value.Any(x =>
+                    !x.MetadataName.Equals(symbol.MetadataName) && x.DerivesFrom(symbol));
+            }
+
+            return true;
+        }
     }
 }
