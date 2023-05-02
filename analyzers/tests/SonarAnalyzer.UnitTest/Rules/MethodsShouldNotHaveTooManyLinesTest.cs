@@ -40,6 +40,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             CreateCSBuilder(5).AddPaths("MethodsShouldNotHaveTooManyLines.LocalFunctions.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
+        public void MethodsShouldNotHaveTooManyLines_LocalFunctions_CSharp9() =>
+            CreateCSBuilder(5).AddPaths("MethodsShouldNotHaveTooManyLines.LocalFunctions.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+        [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_CSharp9() =>
             CreateCSBuilder(2).AddPaths("MethodsShouldNotHaveTooManyLines_CustomValues.CSharp9.cs").WithTopLevelStatements().Verify();
 
