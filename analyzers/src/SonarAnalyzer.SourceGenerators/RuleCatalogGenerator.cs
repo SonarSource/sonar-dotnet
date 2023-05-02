@@ -60,7 +60,7 @@ namespace SonarAnalyzer.SourceGenerators
             foreach (var jsonPath in Directory.GetFiles(rspecDirectory, "*.json").Where(x => Path.GetFileName(x) != SonarWayFileName))
             {
                 var json = JObject.Parse(File.ReadAllText(jsonPath));
-                var id = Path.GetFileName(jsonPath).Split('_').First();
+                var id = Path.GetFileNameWithoutExtension(jsonPath);
                 var html = File.ReadAllText(Path.ChangeExtension(jsonPath, ".html"));
                 yield return new[]
                 {
