@@ -1,0 +1,17 @@
+{
+  "title": "The collection-specific \"TrueForAll\" method should be used instead of the \"All\" extension",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "perfomance"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6603",
+  "sqKey": "S6603",
+  "scope": "All",
+  "quickfix": "targeted"
+}

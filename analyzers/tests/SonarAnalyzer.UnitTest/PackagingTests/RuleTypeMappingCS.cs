@@ -6527,7 +6527,7 @@ internal static class RuleTypeMappingCS
         // ["S6600"],
         // ["S6601"],
         // ["S6602"],
-        // ["S6603"],
+        ["S6603"] = "CODE_SMELL",
         // ["S6604"],
         // ["S6605"],
         // ["S6606"],
