@@ -24,21 +24,33 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class NonDerivedPrivateClassesShouldBeSealed : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3260";
-        private const string MessageFormat = "Private classes or records which are not derived in the current assembly should be marked as 'sealed'.";
+        private const string MessageFormat = "Private or File classes or records which are not derived in the current assembly should be marked as 'sealed'.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected override bool EnableConcurrentExecution => false;
+        private static readonly ImmutableHashSet<SyntaxKind> KindsToBeDescended = ImmutableHashSet.Create(
+            SyntaxKind.CompilationUnit,
+            SyntaxKind.NamespaceDeclaration,
+            SyntaxKindEx.FileScopedNamespaceDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration);
+
+        private static readonly ImmutableHashSet<SyntaxKind> PossiblyVirtualKinds = ImmutableHashSet.Create(
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.PropertyDeclaration,
+            SyntaxKind.EventDeclaration,
+            SyntaxKind.IndexerDeclaration);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterTreeAction(c =>
             {
-                var root = c.Tree.GetCompilationUnitRoot();
-                var declarations = root.DescendantNodes(x => x is CompilationUnitSyntax)
-                    .Where(x => x.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration))
-                    .Select(x => (TypeDeclarationSyntax)x);
+                var declarations = c.Tree.GetCompilationUnitRoot().DescendantNodes(x => x.IsAnyKind(KindsToBeDescended))
+                     .Where(x => x.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration))
+                     .Select(x => (TypeDeclarationSyntax)x);
 
                 var model = new Lazy<SemanticModel>(() => c.Compilation.GetSemanticModel(c.Tree));
                 var symbols = new Lazy<List<INamedTypeSymbol>>(() => declarations.Select(x => model.Value.GetDeclaredSymbol(x)).ToList());
@@ -54,37 +66,26 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             });
 
-        private static bool HasVirtualMembers(TypeDeclarationSyntax typeDeclaration)
-        {
-            var classMembers = typeDeclaration.Members;
-            return classMembers.OfType<MethodDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
-                   || classMembers.OfType<PropertyDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
-                   || classMembers.OfType<IndexerDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword))
-                   || classMembers.OfType<EventDeclarationSyntax>().Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword));
-        }
+        private static bool HasVirtualMembers(TypeDeclarationSyntax typeDeclaration) =>
+            typeDeclaration.Members.Where(member => member.IsAnyKind(PossiblyVirtualKinds))
+                .Any(member => member.Modifiers().Any(SyntaxKind.VirtualKeyword));
 
         private static bool IsNotSealed(TypeDeclarationSyntax typeDeclaration) =>
             !typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
             && !typeDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword)
             && !typeDeclaration.Modifiers.Any(SyntaxKind.AbstractKeyword);
 
-        private static bool IsPrivateOrFileTypeAndInherited(
-            TypeDeclarationSyntax declaration,
-            Lazy<SemanticModel> model,
-            Lazy<List<INamedTypeSymbol>> otherSymbols)
+        private static bool IsPrivateOrFileTypeAndInherited(TypeDeclarationSyntax declaration, Lazy<SemanticModel> model, Lazy<List<INamedTypeSymbol>> otherSymbols)
         {
             if (declaration.Modifiers.Any(SyntaxKind.PrivateKeyword))
             {
                 var symbol = model.Value.GetDeclaredSymbol(declaration);
-                return symbol.ContainingType.GetAllNamedTypes()
-                    .Any(x => !x.MetadataName.Equals(symbol.MetadataName)
-                                   && x.DerivesFrom(symbol));
+                return symbol.ContainingType.GetAllNamedTypes().Any(x => !x.MetadataName.Equals(symbol.MetadataName) && x.DerivesFrom(symbol));
             }
             if (declaration.Modifiers.Any(SyntaxKindEx.FileKeyword))
             {
                 var symbol = model.Value.GetDeclaredSymbol(declaration);
-                return otherSymbols.Value.Any(x =>
-                    !x.MetadataName.Equals(symbol.MetadataName) && x.DerivesFrom(symbol));
+                return otherSymbols.Value.Exists(x => !x.MetadataName.Equals(symbol.MetadataName) && x.DerivesFrom(symbol));
             }
 
             return true;
