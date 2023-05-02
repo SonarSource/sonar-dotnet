@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.Threading;
 using Xunit;
 using Alias = System.Threading.Thread;
+using static System.Threading.Thread;
 
 class Compliant
 {
@@ -51,6 +52,12 @@ class NonCompliant
     public void ThreadSleepViaAlias()
     {
         Alias.Sleep(42); // Noncompliant
+    }
+
+    [Test]
+    public void ThreadSleepViaStaticImport()
+    {
+        Sleep(42); // Noncompliant
     }
 
     [Test]

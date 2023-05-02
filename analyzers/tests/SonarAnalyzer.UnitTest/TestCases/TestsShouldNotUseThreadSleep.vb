@@ -2,6 +2,7 @@
 Imports NUnit.Framework
 Imports System.Threading
 Imports Xunit
+Imports System.Threading.Thread
 Imports _Alias = System.Threading.Thread
 
 Class Compliant
@@ -44,4 +45,10 @@ Class NonCompliant
     Public Sub ThreadSleepViaAlias()
         _Alias.Sleep(42) ' Noncompliant
     End Sub
+	
+	<Test>
+    Public Sub ThreadSleepViaStaticImport()
+        Sleep(42) ' Noncompliant
+    End Sub
+	
 End Class
