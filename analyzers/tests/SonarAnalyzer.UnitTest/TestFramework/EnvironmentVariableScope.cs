@@ -34,11 +34,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             set => SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value.ToString());
         }
-
-        public bool InternalLogCBDE
-        {
-            set => SetVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", value.ToString());
-        }
 #pragma warning restore S2376
 
         public EnvironmentVariableScope(bool setVariablesOnlyInAzureDevOpsContext = true) =>

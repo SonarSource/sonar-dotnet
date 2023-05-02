@@ -1,3 +1,0 @@
-Includes following third-party libraries:
-LLVM (http://releases.llvm.org/8.0.0/LICENSE.TXT)
-MLIR (https://raw.githubusercontent.com/tensorflow/mlir/master/LICENSE.TXT)

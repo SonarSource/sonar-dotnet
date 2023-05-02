@@ -21,12 +21,6 @@
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
       },
-      "SonarSource.CBDE": {
-        "type": "Direct",
-        "requested": "[1.0.0.32967, )",
-        "resolved": "1.0.0.32967",
-        "contentHash": "kO2PQzMlEsqoPXNhalHWtfHfJuOF8Kq6JOiEkzjZFpr95O0pAjudAO7Yf4TOnTQf4GzDMTvy+44J2bliKZ3Dww=="
-      },
       "StyleCop.Analyzers": {
         "type": "Direct",
         "requested": "[1.2.0-beta.435, )",
