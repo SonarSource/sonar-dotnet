@@ -1,6 +1,6 @@
 ﻿using System;
 
-file class ClassWontBeExtended { } // Noncompliant {{Private or File classes or records which are not derived in the current assembly should be marked as 'sealed'.}}
+file class ClassWontBeExtended { } // Noncompliant {{Private or file classes or records which are not derived in the current assembly should be marked as 'sealed'.}}
 //         ^^^^^^^^^^^^^^^^^^^
 
 file class FileClassVirtualMethod // Compliant, the class has a virtual member.

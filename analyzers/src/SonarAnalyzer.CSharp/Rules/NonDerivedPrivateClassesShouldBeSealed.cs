@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class NonDerivedPrivateClassesShouldBeSealed : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3260";
-        private const string MessageFormat = "Private or File classes or records which are not derived in the current assembly should be marked as 'sealed'.";
+        private const string MessageFormat = "Private or file classes or records which are not derived in the current assembly should be marked as 'sealed'.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
