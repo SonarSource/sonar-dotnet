@@ -28,9 +28,12 @@ import static org.sonar.plugins.vbnet.VbNetPlugin.REPOSITORY_KEY;
 
 @ScannerSide
 public class VbNetSonarRulesDefinition extends AbstractRulesDefinition {
-  private static final String RESOURCES_DIRECTORY = "/org/sonar/plugins/vbnet/";
-
   public VbNetSonarRulesDefinition(SonarRuntime sonarRuntime) {
-    super(REPOSITORY_KEY, LANGUAGE_KEY, sonarRuntime, RESOURCES_DIRECTORY);
+    super(REPOSITORY_KEY, LANGUAGE_KEY, sonarRuntime);
+  }
+
+  @Override
+  protected String getResourcesDirectory() {
+    return "/org/sonar/plugins/vbnet";
   }
 }

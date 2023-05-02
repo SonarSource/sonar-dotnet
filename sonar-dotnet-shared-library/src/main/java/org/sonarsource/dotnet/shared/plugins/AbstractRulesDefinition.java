@@ -20,7 +20,6 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,16 +28,13 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
+
 import org.sonar.api.SonarRuntime;
-import org.sonar.api.rule.RuleStatus;
-import org.sonar.api.rules.RuleType;
 import org.sonar.api.scanner.ScannerSide;
-import org.sonar.api.server.debt.DebtRemediationFunction;
 import org.sonar.api.server.rule.RuleParamType;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.api.utils.Version;
+import org.sonarsource.analyzer.commons.RuleMetadataLoader;
 
 @ScannerSide
 public abstract class AbstractRulesDefinition implements RulesDefinition {
@@ -47,111 +43,42 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
 
   private final String repositoryKey;
   private final String languageKey;
-  private final String resourcesDirectory;
-  private final boolean isOwaspByVersionSupported;
-  private final boolean isAddPciDssSupported;
-  private final boolean isASVSSupported;
+  private final SonarRuntime sonarRuntime;
 
-  protected AbstractRulesDefinition(String repositoryKey, String languageKey, SonarRuntime sonarRuntime, String resourcesDirectory) {
+  protected AbstractRulesDefinition(String repositoryKey, String languageKey, SonarRuntime sonarRuntime) {
     this.repositoryKey = repositoryKey;
     this.languageKey = languageKey;
-    this.resourcesDirectory = resourcesDirectory;
-    this.isOwaspByVersionSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 3));
-    this.isAddPciDssSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 5));
-    this.isASVSSupported = sonarRuntime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 9));
+    this.sonarRuntime = sonarRuntime;
   }
+
+  protected abstract String getResourcesDirectory();
 
   @Override
   public void define(Context context) {
-    NewRepository repository = context
-      .createRepository(repositoryKey, languageKey)
-      .setName(REPOSITORY_NAME);
-    Type ruleListType = new TypeToken<List<Rule>>() {
-    }.getType();
+    Type ruleListType = new TypeToken<List<Rule>>() { }.getType();
     List<Rule> rules = GSON.fromJson(readResource("Rules.json"), ruleListType);
+
+    NewRepository repository = context.createRepository(repositoryKey, languageKey).setName(REPOSITORY_NAME);
+    RuleMetadataLoader ruleMetadataLoader = new RuleMetadataLoader(getResourcesDirectory(), sonarRuntime);
+    ruleMetadataLoader.addRulesByRuleKey(repository, rules.stream().map(Rule::getId).collect(Collectors.toList()));
+
     for (Rule rule : rules) {
-      NewRule newRule = repository.createRule(rule.id);
-      configureRule(newRule, loadMetadata(rule.id), rule.parameters);
-      newRule.setHtmlDescription(readResource(rule.id + ".html"));
+      var currentRule = repository.rule(rule.id);
+      if (currentRule != null) {
+        for (RuleParameter param : rule.parameters) {
+          currentRule.createParam(param.key)
+            .setType(RuleParamType.parse(param.type))
+            .setDescription(param.description)
+            .setDefaultValue(param.defaultValue);
+        }
+      }
     }
+
     repository.done();
   }
 
-  private void configureRule(NewRule rule, RuleMetadata metadata, RuleParameter[] parameters) {
-    rule
-      .setName(metadata.title)
-      .setType(RuleType.valueOf(metadata.type))
-      .setStatus(RuleStatus.valueOf(metadata.status.toUpperCase(Locale.ROOT)))
-      .setSeverity(metadata.defaultSeverity.toUpperCase(Locale.ROOT))
-      .setTags(metadata.tags);
-    if (metadata.remediation != null) { // Hotspots do not have remediation
-      rule.setDebtRemediationFunction(metadata.remediation.remediationFunction(rule));
-      rule.setGapDescription(metadata.remediation.linearDesc);
-    }
-
-    for (RuleParameter param : parameters) {
-      rule.createParam(param.key)
-        .setType(RuleParamType.parse(param.type))
-        .setDescription(param.description)
-        .setDefaultValue(param.defaultValue);
-    }
-
-    addSecurityStandards(rule, metadata.securityStandards);
-  }
-
-  private void addSecurityStandards(NewRule rule, SecurityStandards securityStandards) {
-    addASVS(rule, securityStandards);
-    addCwe(rule, securityStandards);
-    addOwasp(rule, securityStandards);
-    addPciDss(rule, securityStandards);
-  }
-
-  private void addASVS(NewRule rule, SecurityStandards securityStandards){
-    if (!isASVSSupported) {
-      return;
-    }
-
-    if (securityStandards.asvs4_0.length > 0){
-      rule.addOwaspAsvs(OwaspAsvsVersion.V4_0, securityStandards.asvs4_0);
-    }
-  }
-
-  private void addCwe(NewRule rule, SecurityStandards securityStandards) {
-    rule.addCwe(securityStandards.cwe);
-  }
-
-  private void addOwasp(NewRule rule, SecurityStandards securityStandards) {
-    for (String s : securityStandards.owasp2017) {
-      rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
-    }
-
-    if (isOwaspByVersionSupported) {
-      for (String s : securityStandards.owasp2021) {
-        rule.addOwaspTop10(RulesDefinition.OwaspTop10Version.Y2021, RulesDefinition.OwaspTop10.valueOf(s));
-      }
-    }
-  }
-
-  private void addPciDss(NewRule rule, SecurityStandards securityStandards) {
-    if (!isAddPciDssSupported) {
-      return;
-    }
-
-    if (securityStandards.pciDss3_2.length > 0){
-      rule.addPciDss(PciDssVersion.V3_2, securityStandards.pciDss3_2);
-    }
-
-    if (securityStandards.pciDss4_0.length > 0){
-      rule.addPciDss(PciDssVersion.V4_0, securityStandards.pciDss4_0);
-    }
-  }
-
-  private RuleMetadata loadMetadata(String id) {
-    return GSON.fromJson(readResource(id + ".json"), RuleMetadata.class);
-  }
-
   private String readResource(String name) {
-    InputStream stream = getResourceAsStream(resourcesDirectory + name);
+    InputStream stream = getResourceAsStream(getResourcesDirectory() + "/" + name);
     if (stream == null) {
       throw new IllegalStateException("Resource does not exist: " + name);
     }
@@ -170,6 +97,10 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   private static class Rule {
     String id;
     RuleParameter[] parameters;
+
+    public String getId () {
+      return id;
+    }
   }
 
   private static class RuleParameter {
@@ -177,53 +108,5 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     String description;
     String type;
     String defaultValue;
-  }
-
-  static class RuleMetadata {
-    String title;
-    String status;
-    String type;
-    String[] tags;
-    String defaultSeverity;
-    Remediation remediation;
-    SecurityStandards securityStandards = new SecurityStandards();
-  }
-
-  private static class Remediation {
-    String func;
-    String constantCost;
-    String linearDesc;
-    String linearOffset;
-    String linearFactor;
-
-    public DebtRemediationFunction remediationFunction(NewRule rule) {
-      if (func.startsWith("Constant")) {
-        return rule.debtRemediationFunctions().constantPerIssue(constantCost);
-      } else if ("Linear".equals(func)) {
-        return rule.debtRemediationFunctions().linear(linearFactor);
-      } else {
-        return rule.debtRemediationFunctions().linearWithOffset(linearFactor, linearOffset);
-      }
-    }
-  }
-
-  private static class SecurityStandards {
-    @SerializedName("CWE")
-    int[] cwe = {};
-
-    @SerializedName("OWASP Top 10 2021")
-    String[] owasp2021 = {};
-
-    @SerializedName("OWASP")
-    String[] owasp2017 = {};
-
-    @SerializedName("PCI DSS 3.2")
-    String[] pciDss3_2 = {};
-
-    @SerializedName("PCI DSS 4.0")
-    String[] pciDss4_0 = {};
-
-    @SerializedName("ASVS 4.0")
-    String[] asvs4_0 = {};
   }
 }
