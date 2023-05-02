@@ -67,7 +67,8 @@ namespace SonarAnalyzer.Rules.CSharp
             });
 
         private static bool HasVirtualMembers(TypeDeclarationSyntax typeDeclaration) =>
-            typeDeclaration.Members.Where(member => member.IsAnyKind(PossiblyVirtualKinds))
+            typeDeclaration.Members
+                .Where(member => member.IsAnyKind(PossiblyVirtualKinds))
                 .Any(member => member.Modifiers().Any(SyntaxKind.VirtualKeyword));
 
         private static bool IsNotSealed(TypeDeclarationSyntax typeDeclaration) =>
@@ -80,12 +81,14 @@ namespace SonarAnalyzer.Rules.CSharp
             if (declaration.Modifiers.Any(SyntaxKind.PrivateKeyword))
             {
                 var symbol = model.Value.GetDeclaredSymbol(declaration);
-                return symbol.ContainingType.GetAllNamedTypes().Any(x => !x.MetadataName.Equals(symbol.MetadataName) && x.DerivesFrom(symbol));
+                return symbol.ContainingType.GetAllNamedTypes()
+                    .Any(other => !other.MetadataName.Equals(symbol.MetadataName) && other.DerivesFrom(symbol));
             }
             if (declaration.Modifiers.Any(SyntaxKindEx.FileKeyword))
             {
                 var symbol = model.Value.GetDeclaredSymbol(declaration);
-                return otherSymbols.Value.Exists(x => !x.MetadataName.Equals(symbol.MetadataName) && x.DerivesFrom(symbol));
+                return otherSymbols.Value
+                    .Exists(other => !other.MetadataName.Equals(symbol.MetadataName) && other.DerivesFrom(symbol));
             }
 
             return true;
