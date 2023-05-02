@@ -1,0 +1,17 @@
+{
+  "title": "\"Find\" method should be used instead of the \"FirstOrDefault\" extension",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6602",
+  "sqKey": "S6602",
+  "scope": "All",
+  "quickfix": "targeted"
+}
