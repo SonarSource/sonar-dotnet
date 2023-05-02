@@ -1,0 +1,17 @@
+{
+  "title": "Collection-specific \"Exists\" method should be used instead of the \"Any\" extension",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6605",
+  "sqKey": "S6605",
+  "scope": "All",
+  "quickfix": "targeted"
+}
