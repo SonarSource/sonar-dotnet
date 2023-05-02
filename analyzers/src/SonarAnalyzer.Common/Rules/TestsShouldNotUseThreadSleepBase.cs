@@ -35,7 +35,7 @@ public abstract class TestsShouldNotUseThreadSleepBase<TMethodSyntax, TSyntaxKin
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            if (IsThreadSleepMethod(Language.Syntax.InvocationIdentifier(c.Node)?.Text)
+            if (c.Node.ToStringContains(nameof(Thread.Sleep), Language.NameComparison)
                 && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol method
                 && method.Is(KnownType.System_Threading_Thread, nameof(Thread.Sleep))
                 && IsInTestMethod(c.Node, c.SemanticModel))
@@ -44,9 +44,6 @@ public abstract class TestsShouldNotUseThreadSleepBase<TMethodSyntax, TSyntaxKin
             }
         },
         Language.SyntaxKind.InvocationExpression);
-
-    private bool IsThreadSleepMethod(string name) =>
-        nameof(Thread.Sleep).Equals(name, Language.NameComparison);
 
     private bool IsInTestMethod(SyntaxNode node, SemanticModel model) =>
         node.Ancestors().OfType<TMethodSyntax>().FirstOrDefault() is { } method

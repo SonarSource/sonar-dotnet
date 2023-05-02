@@ -18,25 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal static class SyntaxNodeExtensions
 {
-    internal static class SyntaxNodeExtensions
+    public static SemanticModel EnsureCorrectSemanticModelOrDefault(this SyntaxNode node, SemanticModel semanticModel) =>
+        node.SyntaxTree.GetSemanticModelOrDefault(semanticModel);
+
+    public static bool ToStringContains(this SyntaxNode node, string s) =>
+        node.ToString().Contains(s);
+
+    public static bool ToStringContains(this SyntaxNode node, string s, StringComparison comparison) =>
+        node.ToString().IndexOf(s, comparison) != -1;
+
+    public static bool ToStringContainsEitherOr(this SyntaxNode node, string a, string b)
     {
-        public static SemanticModel EnsureCorrectSemanticModelOrDefault(this SyntaxNode node, SemanticModel semanticModel) =>
-            node.SyntaxTree.GetSemanticModelOrDefault(semanticModel);
-
-        public static bool ToStringContains(this SyntaxNode node, string s) =>
-            node.ToString().Contains(s);
-
-        public static bool ToStringContainsEitherOr(this SyntaxNode node, string a, string b)
-        {
-            var toString = node.ToString();
-            return toString.Contains(a) || toString.Contains(b);
-        }
-
-        internal static TSyntaxKind Kind<TSyntaxKind>(this SyntaxNode node) where TSyntaxKind : struct, Enum // internal to not be confused with e.g. CSharp.SyntaxNode.Kind()
-            => node == null
-                ? default
-                : (TSyntaxKind)Enum.ToObject(typeof(TSyntaxKind), node.RawKind);
+        var toString = node.ToString();
+        return toString.Contains(a) || toString.Contains(b);
     }
+
+    internal static TSyntaxKind Kind<TSyntaxKind>(this SyntaxNode node) where TSyntaxKind : struct, Enum // internal to not be confused with e.g. CSharp.SyntaxNode.Kind()
+        => node == null
+            ? default
+            : (TSyntaxKind)Enum.ToObject(typeof(TSyntaxKind), node.RawKind);
 }
