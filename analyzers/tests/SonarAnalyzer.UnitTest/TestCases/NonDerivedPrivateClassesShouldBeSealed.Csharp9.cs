@@ -4,7 +4,8 @@ namespace Tests.Diagnostics
 {
     public class ClassWithRecord
     {
-        private record RecordNotExtended { } // Noncompliant
+        private record RecordNotExtended { } // Noncompliant {{Private records which are not derived in the current assembly should be marked as 'sealed'.}}
+            //         ^^^^^^^^^^^^^^^^^
 
         private record PrivateRecord { }
 
