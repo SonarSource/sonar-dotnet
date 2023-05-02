@@ -255,14 +255,14 @@ namespace SonarAnalyzer.Helpers
 
         internal static bool IsKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
         {
-            var symbolType = syntaxNode.GetSymbol(semanticModel);
+            var symbolType = syntaxNode.GetSymbolType(semanticModel);
 
             return symbolType.Is(knownType) || symbolType?.OriginalDefinition?.Is(knownType) == true;
         }
 
         internal static bool IsKnownType(this SyntaxNode syntaxNode, KnownType[] knownTypes, SemanticModel semanticModel)
         {
-            var symbolType = syntaxNode.GetSymbol(semanticModel);
+            var symbolType = syntaxNode.GetSymbolType(semanticModel);
 
             return symbolType.IsAny(knownTypes) || symbolType?.OriginalDefinition?.IsAny(knownTypes) == true;
         }
@@ -364,7 +364,7 @@ namespace SonarAnalyzer.Helpers
         public static bool IsRecord(this ITypeSymbol typeSymbol)
             => ITypeSymbolIsRecord?.GetValue(typeSymbol) is true;
 
-        public static ITypeSymbol GetSymbol(this SyntaxNode syntaxNode, SemanticModel semanticModel) =>
+        public static ITypeSymbol GetSymbolType(this SyntaxNode syntaxNode, SemanticModel semanticModel) =>
             semanticModel.GetSymbolInfo(syntaxNode).Symbol.GetSymbolType();
     }
 }
