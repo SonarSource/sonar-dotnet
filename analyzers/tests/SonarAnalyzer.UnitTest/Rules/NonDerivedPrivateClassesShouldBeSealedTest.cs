@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void NonDerivedPrivateClassesShouldBeSealed_CSharp9() =>
              builder.AddPaths("NonDerivedPrivateClassesShouldBeSealed.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-        
+
         [TestMethod]
         public void NonDerivedPrivateClassesShouldBeSealed_CSharp11() =>
              builder.AddPaths("NonDerivedPrivateClassesShouldBeSealed.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
