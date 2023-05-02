@@ -18,18 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Constraints
+namespace SonarAnalyzer.SymbolicExecution.Constraints;
+
+internal sealed class ObjectConstraint : SymbolicConstraint
 {
-    internal sealed class ObjectConstraint : SymbolicConstraint
-    {
-        public static readonly ObjectConstraint Null = new(ConstraintKind.Null);
-        public static readonly ObjectConstraint NotNull = new(ConstraintKind.NotNull);
+    public static readonly ObjectConstraint Null = new(ConstraintKind.Null);
+    public static readonly ObjectConstraint NotNull = new(ConstraintKind.NotNull);
 
-        public override SymbolicConstraint Opposite =>
-            // x == null ? <Null> : <NotNull>
-            // x == "" ? <NotNull> : <unknown, could be Null or NotNull here>
-            this == Null ? NotNull : null;
+    public override SymbolicConstraint Opposite =>
+        // x == null ? <Null> : <NotNull>
+        // x == "" ? <NotNull> : <unknown, could be Null or NotNull here>
+        this == Null ? NotNull : null;
 
-        private ObjectConstraint(ConstraintKind kind) : base(kind) { }
-    }
+    private ObjectConstraint(ConstraintKind kind) : base(kind) { }
 }

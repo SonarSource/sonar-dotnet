@@ -18,22 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Constraints
+namespace SonarAnalyzer.SymbolicExecution.Constraints;
+
+public sealed class BoolConstraint : SymbolicConstraint
 {
-    public sealed class BoolConstraint : SymbolicConstraint
-    {
-        public static readonly BoolConstraint True = new(ConstraintKind.True);
-        public static readonly BoolConstraint False = new(ConstraintKind.False);
+    public static readonly BoolConstraint True = new(ConstraintKind.True);
+    public static readonly BoolConstraint False = new(ConstraintKind.False);
 
-        public override SymbolicConstraint Opposite =>
-            this == True ? False : True;
+    public override SymbolicConstraint Opposite =>
+        this == True ? False : True;
 
-        private BoolConstraint(ConstraintKind kind) : base(kind) { }
+    private BoolConstraint(ConstraintKind kind) : base(kind) { }
 
-        public static BoolConstraint From(bool value) =>
-            value ? True : False;
+    public static BoolConstraint From(bool value) =>
+        value ? True : False;
 
-        public bool Equals(bool value) =>
-            this == From(value);
-    }
+    public bool Equals(bool value) =>
+        this == From(value);
 }
