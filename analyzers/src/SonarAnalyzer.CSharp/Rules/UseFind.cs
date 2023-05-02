@@ -30,33 +30,40 @@ public sealed class UseFind : UseFindBase<SyntaxKind>
             KnownType.System_Collections_Generic_List_T,
             KnownType.System_Array,
             KnownType.System_Collections_Immutable_ImmutableList_T);
+
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var invocation = c.Node as InvocationExpressionSyntax;
-
-                if (IsInvocationNamedFirstOrDefault(invocation) && IsInvokedOnAppliedTypes(c, invocation) && IsEnumerableFirstOrDefault(c, invocation))
+                var (syntaxNode, leftExpression, rightExpression) = c.Node switch
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, invocation.GetIdentifier()?.GetLocation()));
+                    ConditionalAccessExpressionSyntax { WhenNotNull: InvocationExpressionSyntax inv } condAccess => ((SyntaxNode)inv, condAccess.Expression, inv.Expression),
+                    MemberAccessExpressionSyntax memberAccess => (memberAccess, memberAccess.Expression, memberAccess.Name),
+                    _ => (null, null, null)
+                };
+
+                if (syntaxNode is null)
+                {
+                    return;
+                }
+
+                if (IsInvocationNamedFirstOrDefault(syntaxNode) && IsInvokedOnAppliedTypes(c, leftExpression) && IsEnumerableFirstOrDefault(c, rightExpression))
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, syntaxNode.GetIdentifier()?.GetLocation()));
                 }
             },
-            SyntaxKind.InvocationExpression);
+            SyntaxKind.SimpleMemberAccessExpression,
+            SyntaxKind.ConditionalAccessExpression);
 
-    private static bool IsInvocationNamedFirstOrDefault(InvocationExpressionSyntax invocation) => invocation.NameIs(nameof(Enumerable.FirstOrDefault));
+    private static bool IsInvocationNamedFirstOrDefault(SyntaxNode node) => node.NameIs(nameof(Enumerable.FirstOrDefault));
 
-    private bool IsInvokedOnAppliedTypes(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation)
+    private bool IsInvokedOnAppliedTypes(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression)
     {
-        if (invocation?.Expression is not MemberAccessExpressionSyntax memberAccess)
-        {
-            return false;
-        }
-
-        var memberTypeSymbol = context.SemanticModel.GetTypeInfo(memberAccess.Expression).Type;
+        var memberTypeSymbol = context.SemanticModel.GetTypeInfo(expression).Type;
 
         return memberTypeSymbol.IsAny(appliedToTypes) || memberTypeSymbol.DerivesFromAny(appliedToTypes);
     }
 
-    private bool IsEnumerableFirstOrDefault(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation) =>
-        context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol { Name: nameof(Enumerable.FirstOrDefault) } method
+    private bool IsEnumerableFirstOrDefault(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression) =>
+        context.SemanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol { Name: nameof(Enumerable.FirstOrDefault) } method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 }

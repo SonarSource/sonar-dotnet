@@ -33,11 +33,11 @@ public class UseFindTest
 
     [TestMethod]
     public void UseFind_CS() =>
-        builderCS.WithConcurrentAnalysis(false).WithLanguageVersion(LanguageVersion.CSharp11).AddPaths("UseFind.cs").Verify();
+        builderCS.AddPaths("UseFind.cs").Verify();
 
     [TestMethod]
     public void UseFind_Array_CS() =>
-        builderCS.WithConcurrentAnalysis(false).WithLanguageVersion(LanguageVersion.CSharp11).AddPaths("UseFind.Array.cs").Verify();
+        builderCS.AddPaths("UseFind.Array.cs").Verify();
 
     [TestMethod]
     public void UseFind_VB() =>

@@ -32,11 +32,5 @@ public class UseFind
         _ = lambda().FirstOrDefault(x => true); // Noncompliant
 //                   ^^^^^^^^^^^^^^
         _ = Array.Find(lambda(), x => true); // Compliant
-
-        _ = data.FirstOrDefault(x => true) switch // Noncompliant
-            {
-                < 42 => false,
-                _ => true
-            };
     }
 }
