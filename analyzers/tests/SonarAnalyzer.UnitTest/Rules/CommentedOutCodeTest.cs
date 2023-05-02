@@ -45,7 +45,7 @@ public class CommentedOutCodeTest
 
     [TestMethod]
     public void CommentedOutCode_CodeFix() =>
-        builder.AddPaths("CommentedOutCode.cs")
+        builder.AddPaths("CommentedOutCode.ToFix.cs")
             .WithCodeFix<CommentedOutCodeCodeFix>()
             .WithCodeFixedPaths("CommentedOutCode.Fixed.cs")
             .VerifyCodeFix();

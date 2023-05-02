@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
@@ -37,17 +37,14 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
             CommentedOutCode.MessageFormat,
             c =>
             {
-                var comment = diagnostic.Location.SourceSpan;
-                var node = root.FindNode(comment);
-                var trivia = node.GetLeadingTrivia();
-                var newNode = node.WithLeadingTrivia(Remaining(trivia, comment));
+                var node = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+                var trailing = node.GetTrailingTrivia();
+                var remaining = trailing.Where(t => t.Span.Start != diagnostic.Location.SourceSpan.Start);
+                var newNode = node.WithTrailingTrivia(remaining);
                 return Task.FromResult(context.Document.WithSyntaxRoot(root.ReplaceNode(node, newNode)));
             }),
             diagnostic);
 
         return Task.CompletedTask;
     }
-
-    private IEnumerable<SyntaxTrivia> Remaining(SyntaxTriviaList trivia, TextSpan remove) =>
-        trivia.Where(t => t.FullSpan.Start < remove.Start || t.FullSpan.End > remove.End);
 }

@@ -6,6 +6,6 @@
 
 class Noncompliant
 {
-    // Fixed
-    int SingleLine() { return 42; }
+    // Noncompliant@+1
+    int SingleLine() { return 42; }// return 17;
 }
