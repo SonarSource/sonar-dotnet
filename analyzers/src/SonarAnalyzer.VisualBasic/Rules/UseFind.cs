@@ -25,6 +25,27 @@ public sealed class UseFind : UseFindBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
+    protected override bool TryGetAccessInfo(SyntaxNode node, out AccessInfo accessInfo)
+    {
+        var (syntaxNode, left, right) = node switch
+        {
+            ConditionalAccessExpressionSyntax { WhenNotNull: InvocationExpressionSyntax inv } condAccess => ((SyntaxNode)inv, condAccess.Expression, inv.Expression),
+            MemberAccessExpressionSyntax memberAccess => (memberAccess, memberAccess.Expression, memberAccess.Name),
+            _ => (null, null, null)
+        };
+
+        if (syntaxNode is null)
+        {
+            return false;
+        }
+
+        accessInfo.Node = syntaxNode;
+        accessInfo.LeftExpression = left;
+        accessInfo.RightExpression = right;
+
+        return true;
+    }
+
     protected override bool IsInvocationNamedFirstOrDefault(SyntaxNode syntaxNode) => syntaxNode.GetName().Equals(nameof(Enumerable.FirstOrDefault), StringComparison.InvariantCultureIgnoreCase);
     protected override Location GetIssueLocation(SyntaxNode syntaxNode) => syntaxNode.GetIdentifier()?.GetLocation();
 }

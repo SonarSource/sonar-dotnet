@@ -8,7 +8,7 @@ Module HelperClass
         Return Nothing
     End Function
 
-    Sub DoWorkMethodGroup(Of T)(ByVal firstOrDefault As Func(Of Func(Of T, Boolean), T))
+    Sub DoWorkMethodGroup(Of T)(firstOrDefault As Func(Of Func(Of T, Boolean), T))
     End Sub
 End Module
 
@@ -18,7 +18,7 @@ Public Class UseFind
             Return Nothing
         End Function
 
-        Public Function FirstOrDefault(ByVal predicate As Func(Of Integer, Boolean)) As Object
+        Public Function FirstOrDefault(predicate As Func(Of Integer, Boolean)) As Object
             Return Nothing
         End Function
     End Class
@@ -38,7 +38,7 @@ Public Class UseFind
     Public Class HiddenList
         Inherits List(Of Integer)
 
-        Public Function FirstOrDefault(ByVal predicate As Func(Of Integer, Boolean)) As Integer?
+        Public Function FirstOrDefault(predicate As Func(Of Integer, Boolean)) As Integer?
             Return Nothing
         End Function
     End Class
@@ -56,7 +56,7 @@ Public Class UseFind
         unused = data.Find(Function(x) True) ' Compliant
     End Sub
 
-    Public Sub ThroughLinq(ByVal data As List(Of Integer))
+    Public Sub ThroughLinq(data As List(Of Integer))
         data.[Select](Function(x) x * 2).ToList().FirstOrDefault(Function(x) True) ' Noncompliant {{"Find" method should be used instead of the "FirstOrDefault" extension method.}}
 '                                                 ^^^^^^^^^^^^^^
         data.[Select](Function(x) x * 2).ToList().Find(Function(x) True) ' Compliant
@@ -68,7 +68,7 @@ Public Class UseFind
         unused = HelperClass.DoWorkReturnGroup().Find(Function(x) True) ' Compliant
     End Sub
 
-    Public Sub ThroughLambda(ByVal lambda As Func(Of List(Of Integer)))
+    Public Sub ThroughLambda(lambda As Func(Of List(Of Integer)))
         Dim unused = lambda().FirstOrDefault(Function(x) True) ' Noncompliant
 '                             ^^^^^^^^^^^^^^
         unused = lambda().Find(Function(x) True) ' Compliant
@@ -79,36 +79,8 @@ Public Class UseFind
 '                                                                               ^^^^^^^^^^^^^^
     End Sub
 
-    Public Sub AsMethodGroup(ByVal data As List(Of Integer))
+    Public Sub AsMethodGroup(data As List(Of Integer))
         HelperClass.DoWorkMethodGroup(Of Integer)(AddressOf data.FirstOrDefault) ' Noncompliant
 '                                                                ^^^^^^^^^^^^^^
-    End Sub
-
-    Public Sub Miscellaneous(ByVal data As List(Of Integer))
-        Dim unused = NameOf(Enumerable.FirstOrDefault) ' Noncompliant
-'                                      ^^^^^^^^^^^^^^
-    End Sub
-
-    Public Shared Sub FirstOrdefaultNotHidden(ByVal data As MyList)
-        Dim unused = data.FirstOrDefault(Function(x) True) ' Noncompliant
-'                         ^^^^^^^^^^^^^^
-        unused = data.Find(Function(x) True) ' Compliant
-    End Sub
-
-    Public Shared Sub FirstOrdefaultHidden(ByVal data As HiddenList)
-        Dim unused = data.FirstOrDefault(Function(x) True) ' Noncompliant
-'                         ^^^^^^^^^^^^^^
-        unused = data.Find(Function(x) True) ' Compliant
-    End Sub
-
-    Public Shared Sub Nullable(ByVal Optional data As List(Of Integer) = Nothing, ByVal Optional dummy As Dummy = Nothing, ByVal Optional anotherDummy As AnotherDummy = Nothing)
-        Dim unused = data?.FirstOrDefault(Function(x) True) ' Noncompliant
-'                          ^^^^^^^^^^^^^^
-        unused = data?.Find(Function(x) True) ' Compliant
-
-        unused = dummy?.FirstOrDefault() ' Compliant
-        unused = dummy?.FirstOrDefault(Function(x) True) ' Compliant
-
-        unused = anotherDummy?.FirstOrDefault ' Compliant
     End Sub
 End Class

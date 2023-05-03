@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-
 namespace SonarAnalyzer.Rules;
 
 public abstract class UseFindBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -34,6 +31,13 @@ public abstract class UseFindBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntax
             KnownType.System_Array,
             KnownType.System_Collections_Immutable_ImmutableList_T);
 
+    protected struct AccessInfo
+    {
+        public SyntaxNode Node { get; set; }
+        public SyntaxNode LeftExpression { get; set; }
+        public SyntaxNode RightExpression { get; set; }
+    }
+
     protected override string MessageFormat => $"\"{nameof(Array.Find)}\" method should be used instead of the \"{nameof(Enumerable.FirstOrDefault)}\" extension method.";
 
     protected UseFindBase() : base(DiagnosticId) { }
@@ -41,32 +45,30 @@ public abstract class UseFindBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntax
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
             {
-                var (syntaxNode, leftExpression, rightExpression) = c.Node switch
+                if (TryGetAccessInfo(c.Node, out var accessInfo)
+                    && IsInvocationNamedFirstOrDefault(accessInfo.Node)
+                    && IsInvokedOnAppliedTypes(c, accessInfo.LeftExpression)
+                    && IsEnumerableFirstOrDefault(c, accessInfo.RightExpression))
                 {
-                    ConditionalAccessExpressionSyntax { WhenNotNull: InvocationExpressionSyntax inv } condAccess => ((SyntaxNode)inv, condAccess.Expression, inv.Expression),
-                    MemberAccessExpressionSyntax memberAccess => (memberAccess, memberAccess.Expression, memberAccess.Name),
-                    _ => (null, null, null)
-                };
-
-                if (syntaxNode is not null && IsInvocationNamedFirstOrDefault(syntaxNode) && IsInvokedOnAppliedTypes(c, leftExpression) && IsEnumerableFirstOrDefault(c, rightExpression))
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, GetIssueLocation(syntaxNode)));
+                    c.ReportIssue(Diagnostic.Create(Rule, GetIssueLocation(accessInfo.Node)));
                 }
             },
-            SyntaxKind.SimpleMemberAccessExpression,
-            SyntaxKind.ConditionalAccessExpression);
+            Language.SyntaxKind.SimpleMemberAccessExpression,
+            Language.SyntaxKind.ConditionalAccessExpression);
+
+    protected abstract bool TryGetAccessInfo(SyntaxNode node, out AccessInfo accessInfo);
 
     protected abstract bool IsInvocationNamedFirstOrDefault(SyntaxNode syntaxNode);
     protected abstract Location GetIssueLocation(SyntaxNode syntaxNode);
 
-    private bool IsInvokedOnAppliedTypes(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression)
+    private bool IsInvokedOnAppliedTypes(SonarSyntaxNodeReportingContext context, SyntaxNode expression)
     {
         var memberTypeSymbol = context.SemanticModel.GetTypeInfo(expression).Type;
 
         return memberTypeSymbol.IsAny(appliedToTypes) || memberTypeSymbol.DerivesFromAny(appliedToTypes);
     }
 
-    private bool IsEnumerableFirstOrDefault(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression) =>
+    private bool IsEnumerableFirstOrDefault(SonarSyntaxNodeReportingContext context, SyntaxNode expression) =>
         context.SemanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol { Name: nameof(Enumerable.FirstOrDefault) } method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 }
