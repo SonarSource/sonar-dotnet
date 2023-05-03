@@ -80,6 +80,12 @@ public sealed class NumberConstraint : SymbolicConstraint
         }
     }
 
+    public override bool Equals(object obj) =>
+        obj is NumberConstraint other && other.Min == Min && other.Max == Max;
+
+    public override int GetHashCode() =>
+        HashCode.Combine(Min?.GetHashCode() ?? 0, Max?.GetHashCode() ?? 0);
+
     public override string ToString() =>
         Min.HasValue && Min == Max ? $"{Kind} {Min}" : $"{Kind} from {Serialize(Min)} to {Serialize(Max)}";
 
