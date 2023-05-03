@@ -27,6 +27,7 @@ namespace SonarAnalyzer.SymbolicExecution
         public ConstraintKind Kind { get; }
         public abstract SymbolicConstraint Opposite { get; }
         public virtual bool PreserveOnFieldReset => false;
+        public virtual bool CacheEnabled => true;
 
         protected SymbolicConstraint(ConstraintKind kind) =>
             Kind = kind;

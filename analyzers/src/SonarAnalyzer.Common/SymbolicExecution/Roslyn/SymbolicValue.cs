@@ -155,24 +155,30 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private static SymbolicValue CachedSymbolicValue(SymbolicConstraint first, SymbolicConstraint second = null)
         {
-            // Performance: Don't use the factory overload of GetOrAdd
-            var cacheKey = new CacheKey(first.Kind, second?.Kind);
-            if (cache.TryGetValue(cacheKey, out var result))
+            if (first.CacheEnabled && (second is null || second.CacheEnabled))
             {
-                return result;
+                // Performance: Don't use the factory overload of GetOrAdd
+                var cacheKey = new CacheKey(first.Kind, second?.Kind);
+                return cache.TryGetValue(cacheKey, out var result)
+                    ? result
+                    : cache.GetOrAdd(cacheKey, CreateSymbolicValue(first, second));
             }
             else
             {
-                if (second is null)
-                {
-                    result = Empty with { Constraints = Empty.Constraints.SetItem(first.GetType(), first) };
-                }
-                else
-                {
-                    result = CachedSymbolicValue(first);
-                    result = result with { Constraints = result.Constraints.SetItem(second.GetType(), second) };
-                }
-                return cache.GetOrAdd(cacheKey, result);
+                return CreateSymbolicValue(first, second);
+            }
+        }
+
+        private static SymbolicValue CreateSymbolicValue(SymbolicConstraint first, SymbolicConstraint second = null)
+        {
+            if (second is null)
+            {
+                return Empty with { Constraints = Empty.Constraints.SetItem(first.GetType(), first) };
+            }
+            else
+            {
+                var firstValue = CachedSymbolicValue(first);
+                return firstValue with { Constraints = firstValue.Constraints.SetItem(second.GetType(), second) };
             }
         }
 
