@@ -20,12 +20,12 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UseTrueForAllBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UseMethodAInsteadOfMethodB<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6603";
 
     protected override string MessageFormat => "FIXME";
 
-    protected UseTrueForAllBase() : base(DiagnosticId) { }
+    protected UseMethodAInsteadOfMethodB() : base(DiagnosticId) { }
 }

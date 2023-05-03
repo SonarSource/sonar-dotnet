@@ -28,12 +28,12 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class UseTrueForAllTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseTrueForAll>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseTrueForAll>();
 
     [TestMethod]
     public void UseTrueForAll_CS() =>
-        builderCS.AddPaths("UseTrueForAll.cs").Verify();
+        builderCS.AddPaths("UseTrueForAll.cs").WithConcurrentAnalysis(false).WithTopLevelStatements().Verify();
 
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseTrueForAll>();    // FIXME: Move this up
 
     [TestMethod]
     public void UseTrueForAll_VB() =>

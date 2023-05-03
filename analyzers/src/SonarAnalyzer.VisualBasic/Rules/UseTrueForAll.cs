@@ -21,9 +21,8 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class UseTrueForAll : UseTrueForAllBase<SyntaxKind>
+public sealed class UseTrueForAll : UseMethodAInsteadOfMethodB<SyntaxKind>
 {
-
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -36,4 +35,24 @@ public sealed class UseTrueForAll : UseTrueForAllBase<SyntaxKind>
                 }
             },
             SyntaxKind.InvocationExpression);
+
+    protected static bool GetOperands(SyntaxNode node, out ExpressionSyntax left, out ExpressionSyntax right)
+    {
+        if (node is MemberAccessExpressionSyntax access)
+        {
+            left = access.Expression;
+            right = access.Name;
+            return true;
+        }
+        else if (node is ConditionalAccessExpressionSyntax { WhenNotNull: InvocationExpressionSyntax } conditional)
+        {
+            left = conditional.Expression;
+            right = conditional.WhenNotNull;
+            return true;
+        }
+
+        left = right = null;
+        return false;
+    }
+
 }
