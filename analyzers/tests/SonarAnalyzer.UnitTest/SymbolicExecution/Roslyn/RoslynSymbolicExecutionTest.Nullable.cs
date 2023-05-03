@@ -90,7 +90,7 @@ public partial class RoslynSymbolicExecutionTest
                 x[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
             });
         validator.ValidateTag("HasValueAfter42", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
-        validator.ValidateTag("SymbolAfter42", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.ValidateTag("SymbolAfter42", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42)));
         validator.ValidateTag("HasValueAfterNull", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
         validator.ValidateTag("SymbolAfterNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
     }
@@ -167,9 +167,9 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.Operation.Instance.ConstantValue.Value is false ? x.SetOperationConstraint(TestConstraint.First) : x.State);
         var validator = SETestContext.CreateCS(code, setter).Validator;
-        validator.ValidateTag("IsTrue", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.NotNull, ConstraintKind.True }));
-        validator.ValidateTag("IsFalse", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.NotNull, ConstraintKind.False, (ConstraintKind)ConstraintKindTest.First }));
-        validator.ValidateTag("IsInt", x => x.AllConstraints.Select(x => x.Kind).Should().BeEquivalentTo(new[] { ConstraintKind.NotNull }));
+        validator.ValidateTag("IsTrue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
+        validator.ValidateTag("IsFalse", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False, TestConstraint.First));
+        validator.ValidateTag("IsInt", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42)));
     }
 
     [TestMethod]
@@ -216,8 +216,8 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTag("UnknownValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         validator.ValidateTag("NullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
         validator.ValidateTag("NullValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("NotNullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
-        validator.ValidateTag("NotNullValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+        validator.ValidateTag("NotNullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy, NumberConstraint.From(42)));
+        validator.ValidateTag("NotNullValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy, NumberConstraint.From(42)));
     }
 
     [TestMethod]
