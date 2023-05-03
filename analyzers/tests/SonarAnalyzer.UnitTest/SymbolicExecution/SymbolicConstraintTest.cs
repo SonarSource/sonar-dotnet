@@ -21,7 +21,7 @@
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
+namespace SonarAnalyzer.UnitTest.SymbolicExecution
 {
     [TestClass]
     public class SymbolicConstraintTest
@@ -87,6 +87,43 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
         {
             NullableConstraint.HasValue.ToString().Should().Be("NullableHasValue");
             NullableConstraint.NoValue.ToString().Should().Be("NullableNoValue");
+        }
+
+        [TestMethod]
+        public void NumberConstraint_Min_Max()
+        {
+            var sut = NumberConstraint.From(1, 10);
+            sut.Min.Value.Should().Be(1);
+            sut.Max.Value.Should().Be(10);
+            sut.Opposite.Should().BeNull();
+
+            sut = NumberConstraint.From(10, 1); // Swapped
+            sut.Min.Value.Should().Be(1);
+            sut.Max.Value.Should().Be(10);
+            sut.Opposite.Should().BeNull();
+
+            sut = NumberConstraint.From(1, null);
+            sut.Min.Value.Should().Be(1);
+            sut.Max.Should().BeNull();
+            sut.Opposite.Should().BeNull();
+
+            sut = NumberConstraint.From(null, 100);
+            sut.Min.Should().BeNull();
+            sut.Max.Value.Should().Be(100);
+            sut.Opposite.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void NumberConstraint_ToString()
+        {
+            NumberConstraint.From(0).ToString().Should().Be("Number 0");
+            NumberConstraint.From(42).ToString().Should().Be("Number 42");
+            NumberConstraint.From(1, 1).ToString().Should().Be("Number 1");
+            NumberConstraint.From(null, null).ToString().Should().Be("Number from * to *");
+            NumberConstraint.From(null, 42).ToString().Should().Be("Number from * to 42");
+            NumberConstraint.From(42, null).ToString().Should().Be("Number from 42 to *");
+            NumberConstraint.From(-1, null).ToString().Should().Be("Number from -1 to *");
+            NumberConstraint.From(-4321, -42).ToString().Should().Be("Number from -4321 to -42");
         }
 
         [TestMethod]
