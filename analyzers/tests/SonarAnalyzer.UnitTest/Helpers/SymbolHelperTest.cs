@@ -223,6 +223,18 @@ namespace NS
                 .Type
                 .IsKnownType(KnownType.System_Collections_Generic_List_T, testCode.SemanticModel)
                 .Should().BeFalse();
+
+            method4.ParameterList
+                .Parameters[0]
+                .Type
+                .IsKnownType(ImmutableArray.Create<KnownType>(KnownType.System_Collections_Generic_List_T, KnownType.System_Collections_Generic_HashSet_T), testCode.SemanticModel)
+                .Should().BeTrue();
+
+            method4.ParameterList
+                .Parameters[3]
+                .Type
+                .IsKnownType(ImmutableArray.Create<KnownType>(KnownType.System_Collections_Generic_List_T, KnownType.System_Collections_Generic_HashSet_T), testCode.SemanticModel)
+                .Should().BeFalse();
         }
 
         [TestMethod]
