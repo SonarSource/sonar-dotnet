@@ -157,7 +157,7 @@ public void Method()
         public void ElementAccess_FromLiteral_ToUntracked()
         {
             var validator = SETestContext.CreateCS("""var arr = new object[] { 13 }; arr[0] = 42;""", new LiteralDummyTestCheck()).Validator;
-            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, DummyConstraint.Dummy }, "it's scaffolded"));
+            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, NumberConstraint.From(42), DummyConstraint.Dummy }, "it's scaffolded"));
             validator.Validate("ArrayElementReference: arr[0]", x => x.State[x.Operation].Should().HaveNoConstraints());
         }
 
