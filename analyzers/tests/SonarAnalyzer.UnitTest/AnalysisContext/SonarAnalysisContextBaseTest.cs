@@ -103,7 +103,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ProjectConfiguration_LoadsExpectedValues()
     {
-        var options = AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
+        var options = AnalysisScaffolding.CreateOptions(@"TestResources\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
         var config = CreateSut(options).ProjectConfiguration();
 
         config.AnalysisConfigPath.Should().Be(@"c:\foo\bar\.sonarqube\conf\SonarQubeAnalysisConfig.xml");
@@ -112,7 +112,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ProjectConfiguration_UsesCachedValue()
     {
-        var options = AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
+        var options = AnalysisScaffolding.CreateOptions(@"TestResources\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
         var firstSut = CreateSut(options);
         var secondSut = CreateSut(options);
         var firstConfig = firstSut.ProjectConfiguration();
@@ -124,8 +124,8 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ProjectConfiguration_WhenFileChanges_RebuildsCache()
     {
-        var firstOptions = AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
-        var secondOptions = AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Unix\SonarProjectConfig.xml");
+        var firstOptions = AnalysisScaffolding.CreateOptions(@"TestResources\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
+        var secondOptions = AnalysisScaffolding.CreateOptions(@"TestResources\SonarProjectConfig\Path_Unix\SonarProjectConfig.xml");
         var firstConfig = CreateSut(firstOptions).ProjectConfiguration();
         var secondConfig = CreateSut(secondOptions).ProjectConfiguration();
 
@@ -152,7 +152,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ProjectConfiguration_WhenFileIsMissing_ThrowException()
     {
-        var sut = CreateSut(AnalysisScaffolding.CreateOptions("ThisPathDoesNotExist\\SonarProjectConfig.xml"));
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions(@"ThisPathDoesNotExist\SonarProjectConfig.xml"));
 
         sut.Invoking(x => x.ProjectConfiguration())
            .Should()
@@ -163,7 +163,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ProjectConfiguration_WhenInvalidXml_ThrowException()
     {
-        var sut = CreateSut(AnalysisScaffolding.CreateOptions($@"ResourceTests\SonarProjectConfig\Invalid_Xml\SonarProjectConfig.xml"));
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions(@"TestResources\SonarProjectConfig\Invalid_Xml\SonarProjectConfig.xml"));
 
         sut.Invoking(x => x.ProjectConfiguration())
            .Should()
@@ -178,7 +178,7 @@ public partial class SonarAnalysisContextBaseTest
     {
         var analyzerLanguage = language == "cs" ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
         var (compilation, _) = CreateDummyCompilation(analyzerLanguage, "ExtraEmptyFile");
-        var options = AnalysisScaffolding.CreateOptions($"ResourceTests\\SonarLintXml\\All_properties_{language}\\SonarLint.xml");
+        var options = AnalysisScaffolding.CreateOptions($@"TestResources\SonarLintXml\All_properties_{language}\SonarLint.xml");
         var sut = CreateSut(compilation, options).SonarLintXml();
 
         sut.IgnoreHeaderComments(analyzerLanguage.LanguageName).Should().BeTrue();
@@ -201,7 +201,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void SonarLintFile_UsesCachedValue()
     {
-        var options = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
+        var options = AnalysisScaffolding.CreateOptions(@"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml");
         var firstSut = CreateSut(options);
         var secondSut = CreateSut(options);
         var firstFile = firstSut.SonarLintXml();
@@ -213,8 +213,8 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void SonarLintFile_WhenFileChanges_RebuildsCache()
     {
-        var firstOptions = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
-        var secondOptions = AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\All_properties_vbnet\\SonarLint.xml");
+        var firstOptions = AnalysisScaffolding.CreateOptions(@"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml");
+        var secondOptions = AnalysisScaffolding.CreateOptions(@"TestResources\SonarLintXml\All_properties_vbnet\SonarLint.xml");
         var firstFile = CreateSut(firstOptions).SonarLintXml();
         var secondFile = CreateSut(secondOptions).SonarLintXml();
 
@@ -223,8 +223,8 @@ public partial class SonarAnalysisContextBaseTest
 
     [DataTestMethod]
     [DataRow(null)]
-    [DataRow("\\foo\\bar\\does-not-exit")]
-    [DataRow("\\foo\\bar\\x.xml")]
+    [DataRow(@"\foo\bar\does-not-exit")]
+    [DataRow(@"\foo\bar\x.xml")]
     [DataRow("path//aSonarLint.xml")] // different name
     [DataRow("path//SonarLint.xmla")] // different extension
     public void SonarLintFile_WhenAdditionalFileNotPresent_ReturnsDefaultValues(string folder)
@@ -236,14 +236,14 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void SonarLintFile_WhenInvalidXml_ReturnsDefaultValues()
     {
-        var sut = CreateSut(AnalysisScaffolding.CreateOptions("ResourceTests\\SonarLintXml\\Invalid_Xml\\SonarLint.xml")).SonarLintXml();
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions(@"TestResources\SonarLintXml\Invalid_Xml\SonarLint.xml")).SonarLintXml();
         CheckSonarLintXmlDefaultValues(sut);
     }
 
     [TestMethod]
     public void SonarLintFile_WhenFileIsMissing_ThrowException()
     {
-        var sut = CreateSut(AnalysisScaffolding.CreateOptions("ThisPathDoesNotExist\\SonarLint.xml"));
+        var sut = CreateSut(AnalysisScaffolding.CreateOptions(@"ThisPathDoesNotExist\SonarLint.xml"));
 
         sut.Invoking(x => x.SonarLintXml())
            .Should()

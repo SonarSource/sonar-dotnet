@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AnalyzerAdditionalFile_GetText()
         {
-            var additionalFile = new AnalyzerAdditionalFile(@"ResourceTests\AdditionalFile.txt");
+            var additionalFile = new AnalyzerAdditionalFile(@"TestResources\AdditionalFile.txt");
             var content = additionalFile.GetText();
             content.ToString().Should().Be("some sample content");
         }

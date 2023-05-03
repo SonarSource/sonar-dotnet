@@ -32,8 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
     [TestClass]
     public class UtilityAnalyzerBaseTest
     {
-        private const string DefaultSonarProjectConfig = @"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml";
-        private const string DefaultProjectOutFolderPath = @"ResourceTests\ProjectOutFolderPath.txt";
+        private const string DefaultSonarProjectConfig = @"TestResources\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml";
+        private const string DefaultProjectOutFolderPath = @"TestResources\ProjectOutFolderPath.txt";
         public TestContext TestContext { get; set; }
 
         [DataTestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
         public void ReadConfig_OutPath(string language, string additionalPath, string expectedOutPath)
         {
             // We do not test what is read from the SonarLint file, but we need it
-            var utilityAnalyzer = new TestUtilityAnalyzer(language, @"ResourceTests\SonarLintXml\All_properties_cs\SonarLint.xml", additionalPath);
+            var utilityAnalyzer = new TestUtilityAnalyzer(language, @"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml", additionalPath);
 
             utilityAnalyzer.TestOutPath.Should().Be(expectedOutPath);
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
         public void ReadConfig_OutPath_FromSonarProjectConfig_HasPriority(string firstFile, string secondFile)
         {
             // We do not test what is read from the SonarLint file, but we need it
-            var utilityAnalyzer = new TestUtilityAnalyzer(LanguageNames.CSharp, @"ResourceTests\SonarLintXml\All_properties_cs\SonarLint.xml", firstFile, secondFile);
+            var utilityAnalyzer = new TestUtilityAnalyzer(LanguageNames.CSharp, @"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml", firstFile, secondFile);
 
             utilityAnalyzer.TestOutPath.Should().Be(@"C:\foo\bar\.sonarqube\out\0\output-cs");
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();

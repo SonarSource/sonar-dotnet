@@ -79,7 +79,7 @@ public partial class SonarAnalysisContextBaseTest
     {
         var sonarLintXml = new DummySourceText(AnalysisScaffolding.GenerateSonarLintXmlContent(analyzeGeneratedCode: true));
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
-        var sut = CreateSut(compilation, CreateOptions(sonarLintXml, @"ResourceTests\Foo.xml"));
+        var sut = CreateSut(compilation, CreateOptions(sonarLintXml, @"TestResources\Foo.xml"));
 
         sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(0, "this file doesn't have 'SonarLint.xml' name");
@@ -431,7 +431,7 @@ public partial class SonarAnalysisContextBaseTest
     private AnalyzerOptions CreateOptions(string[] unchangedFiles) =>
         AnalysisScaffolding.CreateOptions(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, unchangedFiles));
 
-    private static AnalyzerOptions CreateOptions(SourceText sourceText, string path = @"ResourceTests\SonarLint.xml") =>
+    private static AnalyzerOptions CreateOptions(SourceText sourceText, string path = @"TestResources\SonarLint.xml") =>
         AnalysisScaffolding.CreateOptions(path, sourceText);
 
     private static (Compilation Compilation, SyntaxTree Tree) CreateDummyCompilation(AnalyzerLanguage language, string treeFileName)
