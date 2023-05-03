@@ -42,6 +42,21 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
         }
 
         [TestMethod]
+        [DataRow(-100)]
+        [DataRow(-1)]
+        [DataRow(0)]
+        [DataRow(1)]
+        [DataRow(100)]
+        public void PreProcess_IntLiteral_NumberConstraint(int value)
+        {
+            var validator = SETestContext.CreateCS($"""
+                var v = {value};
+                Tag("Value", v);
+                """).Validator;
+            validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(value)));
+        }
+
+        [TestMethod]
         [DataRow("1", true)]
         [DataRow("2", false)]
         public void PreProcess_EqualityCheck_BooleanConstraint(string constant, bool value)
