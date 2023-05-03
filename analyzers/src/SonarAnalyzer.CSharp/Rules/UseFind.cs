@@ -25,45 +25,6 @@ public sealed class UseFind : UseFindBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    private readonly ImmutableArray<KnownType> appliedToTypes =
-        ImmutableArray.Create(
-            KnownType.System_Collections_Generic_List_T,
-            KnownType.System_Array,
-            KnownType.System_Collections_Immutable_ImmutableList_T);
-
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var (syntaxNode, leftExpression, rightExpression) = c.Node switch
-                {
-                    ConditionalAccessExpressionSyntax { WhenNotNull: InvocationExpressionSyntax inv } condAccess => ((SyntaxNode)inv, condAccess.Expression, inv.Expression),
-                    MemberAccessExpressionSyntax memberAccess => (memberAccess, memberAccess.Expression, memberAccess.Name),
-                    _ => (null, null, null)
-                };
-
-                if (syntaxNode is null)
-                {
-                    return;
-                }
-
-                if (IsInvocationNamedFirstOrDefault(syntaxNode) && IsInvokedOnAppliedTypes(c, leftExpression) && IsEnumerableFirstOrDefault(c, rightExpression))
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, syntaxNode.GetIdentifier()?.GetLocation()));
-                }
-            },
-            SyntaxKind.SimpleMemberAccessExpression,
-            SyntaxKind.ConditionalAccessExpression);
-
-    private static bool IsInvocationNamedFirstOrDefault(SyntaxNode node) => node.NameIs(nameof(Enumerable.FirstOrDefault));
-
-    private bool IsInvokedOnAppliedTypes(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression)
-    {
-        var memberTypeSymbol = context.SemanticModel.GetTypeInfo(expression).Type;
-
-        return memberTypeSymbol.IsAny(appliedToTypes) || memberTypeSymbol.DerivesFromAny(appliedToTypes);
-    }
-
-    private bool IsEnumerableFirstOrDefault(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression) =>
-        context.SemanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol { Name: nameof(Enumerable.FirstOrDefault) } method
-        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+    protected override bool IsInvocationNamedFirstOrDefault(SyntaxNode syntaxNode) => syntaxNode.NameIs(nameof(Enumerable.FirstOrDefault));
+    protected override Location GetIssueLocation(SyntaxNode syntaxNode) => syntaxNode.GetIdentifier()?.GetLocation();
 }

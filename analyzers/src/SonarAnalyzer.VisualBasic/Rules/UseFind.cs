@@ -23,17 +23,8 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class UseFind : UseFindBase<SyntaxKind>
 {
-
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+    protected override bool IsInvocationNamedFirstOrDefault(SyntaxNode syntaxNode) => syntaxNode.GetName().Equals(nameof(Enumerable.FirstOrDefault), StringComparison.InvariantCultureIgnoreCase);
+    protected override Location GetIssueLocation(SyntaxNode syntaxNode) => syntaxNode.GetIdentifier()?.GetLocation();
 }

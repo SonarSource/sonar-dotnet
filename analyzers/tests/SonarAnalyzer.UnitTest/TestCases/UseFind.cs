@@ -3,7 +3,6 @@ using System.Linq;
 using System;
 using System.ComponentModel;
 
-
 public class UseFind
 {
     public class Dummy
@@ -26,6 +25,12 @@ public class UseFind
         public int? FirstOrDefault(Func<int, bool> predicate) => null;
     }
 
+    public static class HelperClass
+    {
+        public static List<int> DoWorkReturnGroup() => null;
+        public static void DoWorkMethodGroup<T>(Func<Func<T, bool>, T> firstOrDefault) { }
+    }
+
     public void UnrelatedType(Dummy dummy, AnotherDummy anotherDummy)
     {
         _ = dummy.FirstOrDefault(); // Compliant
@@ -36,7 +41,7 @@ public class UseFind
 
     public void ListBasic(List<int> data)
     {
-        _ = data.FirstOrDefault(x => true); // Noncompliant
+        _ = data.FirstOrDefault(x => true); // Noncompliant {{"Find" method should be used instead of the "FirstOrDefault" extension method.}}
         //       ^^^^^^^^^^^^^^
         _ = data.Find(x => true); // Compliant
     }
@@ -50,23 +55,12 @@ public class UseFind
 
     public void ThroughFunction()
     {
-        List<int> DoWork() => null;
-
-        _ = DoWork().FirstOrDefault(x => true); // Noncompliant
-        //           ^^^^^^^^^^^^^^
-        _ = DoWork().Find(x => true); // Compliant
+        _ = HelperClass.DoWorkReturnGroup().FirstOrDefault(x => true); // Noncompliant
+        //                                  ^^^^^^^^^^^^^^
+        _ = HelperClass.DoWorkReturnGroup().Find(x => true); // Compliant
     }
 
-    public void ThroughLambda()
-    {
-        List<int> DoWork() => null;
-
-        _ = DoWork().FirstOrDefault(x => true); // Noncompliant
-        //           ^^^^^^^^^^^^^^
-        _ = DoWork().Find(x => true); // Compliant
-    }
-
-    public void WithinALambda(Func<List<int>> lambda)
+    public void ThroughLambda(Func<List<int>> lambda)
     {
         _ = lambda().FirstOrDefault(x => true); // Noncompliant
         //           ^^^^^^^^^^^^^^
@@ -81,10 +75,8 @@ public class UseFind
 
     public void AsMethodGroup(List<int> data)
     {
-        void DoWork<T>(Func<Func<T, bool>, T> firstOrDefault) { }
-
-        DoWork<int>(data.FirstOrDefault); // Noncompliant
-        //               ^^^^^^^^^^^^^^
+        HelperClass.DoWorkMethodGroup<int>(data.FirstOrDefault); // Noncompliant
+        //                                      ^^^^^^^^^^^^^^
     }
 
     public void Miscellaneous(List<int> data)

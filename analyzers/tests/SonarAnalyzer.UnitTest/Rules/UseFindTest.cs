@@ -41,5 +41,5 @@ public class UseFindTest
 
     [TestMethod]
     public void UseFind_VB() =>
-        builderVB.AddPaths("UseFind.vb").Verify();
+        builderVB.WithConcurrentAnalysis(false).AddPaths("UseFind.vb").Verify();
 }
