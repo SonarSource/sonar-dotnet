@@ -33,6 +33,35 @@ public class ExistsInsteadOfAnyTest
     public void ExistsInsteadOfAny_CS() =>
         builderCS.AddPaths("ExistsInsteadOfAny.cs").Verify();
 
+#if NET
+
+    [DataTestMethod]
+    [DataRow("data.Any(x => x > 0);", false)]
+    [DataRow("data.Append(1).Any(x => x > 0);", false)]
+    [DataRow("data.Any();", true)]
+    [DataRow("data.Exists(x => x > 0);", true)]
+    public void ExistsInsteadOfAny_TopLevelStatements(string expression, bool compliant)
+    {
+        var code = $$"""
+            using System.Collections.Generic;
+            using System.Linq;
+
+            var data =  new List<int>();
+            {{expression}} // {{(compliant ? "Compliant" : "Noncompliant")}}
+            """;
+        var builder = builderCS.AddSnippet(code).WithTopLevelStatements();
+        if (compliant)
+        {
+            builder.VerifyNoIssueReported();
+        }
+        else
+        {
+            builder.Verify();
+        }
+    }
+
+#endif
+
     [TestMethod]
     public void ExistsInsteadOfAny_VB() =>
         builderVB.AddPaths("ExistsInsteadOfAny.vb").Verify();
