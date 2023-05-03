@@ -4,16 +4,16 @@ using System.Linq;
 
 public class TestClass
 {
-    bool MyMethod(List<int> data)
+    bool MyMethod(List<int> list)
     {
-        data.Any(x => x > 0); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
+        list.Any(x => x > 0); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
 //      ^^^^^^^^
-        data.Append(1).Any(x => x > 0); // Noncompliant
-        data.Append(1).Append(2).Any(x => x > 0); // Noncompliant
-        data.Append(1).Append(2).Any(x => x > 0).ToString(); // Noncompliant
+        list.Append(1).Any(x => x > 0); // Noncompliant
+        list.Append(1).Append(2).Any(x => x > 0); // Noncompliant
+        list.Append(1).Append(2).Any(x => x > 0).ToString(); // Noncompliant
 
-        data.Any(); // Compliant (you can't use Exists with no arguments, CS7036)
-        data.Exists(x => x > 0); // Compliant
+        list.Any(); // Compliant (you can't use Exists with no arguments, CS7036)
+        list.Exists(x => x > 0); // Compliant
 
         var classA = new ClassA();
         classA.myListField.Any(x => x > 0); // Noncompliant
@@ -26,11 +26,11 @@ public class TestClass
         var boolList = new List<bool>();
         boolList.Append(boolList.Exists(x => x)).Any(x => x); // Noncompliant
 
-        data?.Any(x => x > 0); // FN
-        data?.Any(x => x > 0).ToString(); // FN
+        list?.Any(x => x > 0); // FN
+        list?.Any(x => x > 0).ToString(); // FN
         classB?.Any(x => x); // Compliant
 
-        return data.Any(x => x % 2 == 0); // Noncompliant
+        return list.Any(x => x % 2 == 0); // Noncompliant
     }
 
     bool ContainsEvenExpression(List<int> data) =>

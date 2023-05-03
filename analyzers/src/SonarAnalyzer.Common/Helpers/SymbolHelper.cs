@@ -19,7 +19,6 @@
  */
 
 using System.Reflection;
-using static System.Net.WebRequestMethods;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -260,7 +259,7 @@ namespace SonarAnalyzer.Helpers
             return symbolType.Is(knownType) || symbolType?.OriginalDefinition?.Is(knownType) == true;
         }
 
-        internal static bool IsKnownType(this SyntaxNode syntaxNode, KnownType[] knownTypes, SemanticModel semanticModel)
+        internal static bool IsKnownType(this SyntaxNode syntaxNode, ImmutableArray<KnownType> knownTypes, SemanticModel semanticModel)
         {
             var symbolType = syntaxNode.GetSymbolType(semanticModel);
 

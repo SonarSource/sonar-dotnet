@@ -27,7 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class ExistsInsteadOfAnyTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ExistsInsteadOfAny>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ExistsInsteadOfAny>();
 
     [TestMethod]
     public void ExistsInsteadOfAny_CS() =>
@@ -36,20 +35,45 @@ public class ExistsInsteadOfAnyTest
 #if NET
 
     [DataTestMethod]
-    [DataRow("data.Any(x => x > 0);", false)]
-    [DataRow("data.Append(1).Any(x => x > 0);", false)]
-    [DataRow("data.Any();", true)]
-    [DataRow("data.Exists(x => x > 0);", true)]
-    public void ExistsInsteadOfAny_TopLevelStatements(string expression, bool compliant)
+    [DataRow("list.Any(x => x > 0);", false)]
+    [DataRow("list.Append(1).Any(x => x > 0);", false)]
+    [DataRow("list.Any();", true)]
+    [DataRow("list.Exists(x => x > 0);", true)]
+    public void ExistsInsteadOfAny_TopLevelStatements_ImmutableList(string expression, bool compliant)
     {
         var code = $$"""
-            using System.Collections.Generic;
             using System.Linq;
+            using System.Collections.Generic;
 
-            var data =  new List<int>();
+            var list =  new List<int>();
             {{expression}} // {{(compliant ? "Compliant" : "Noncompliant")}}
             """;
         var builder = builderCS.AddSnippet(code).WithTopLevelStatements();
+        if (compliant)
+        {
+            builder.VerifyNoIssueReported();
+        }
+        else
+        {
+            builder.Verify();
+        }
+    }
+
+    [DataTestMethod]
+    [DataRow("immutableList.Any(x => x > 0);", false)]
+    [DataRow("immutableList.Append(1).Any(x => x > 0);", false)]
+    [DataRow("immutableList.Any();", true)]
+    [DataRow("immutableList.Exists(x => x > 0);", true)]
+    public void ExistsInsteadOfAny_TopLevelStatements_List(string expression, bool compliant)
+    {
+        var code = $$"""
+            using System.Linq;
+            using System.Collections.Immutable;
+
+            var immutableList = ImmutableList.Create<int>();
+            {{expression}} // {{(compliant ? "Compliant" : "Noncompliant")}}
+            """;
+        var builder = builderCS.AddSnippet(code).WithTopLevelStatements().AddReferences(MetadataReferenceFacade.SystemCollections);
         if (compliant)
         {
             builder.VerifyNoIssueReported();
@@ -64,5 +88,5 @@ public class ExistsInsteadOfAnyTest
 
     [TestMethod]
     public void ExistsInsteadOfAny_VB() =>
-        builderVB.AddPaths("ExistsInsteadOfAny.vb").Verify();
+        new VerifierBuilder<VB.ExistsInsteadOfAny>().AddPaths("ExistsInsteadOfAny.vb").Verify();
 }

@@ -27,10 +27,9 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression,
 {
     private const string DiagnosticId = "S6605";
 
-    private readonly KnownType[] baseTypes =
-    {
-        KnownType.System_Collections_Generic_List_T
-    };
+    private readonly ImmutableArray<KnownType> baseTypes = ImmutableArray.Create(
+        KnownType.System_Collections_Generic_List_T,
+        KnownType.System_Collections_Immutable_ImmutableList_T);
 
     protected override string MessageFormat => """Collection-specific "Exists" method should be used instead of the "Any" extension.""";
 
