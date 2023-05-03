@@ -30,6 +30,7 @@ public sealed class NumberConstraint : SymbolicConstraint
 
     public BigInteger? Min { get; }
     public BigInteger? Max { get; }
+    public override bool CacheEnabled => false;
 
     public override SymbolicConstraint Opposite =>
         null;
