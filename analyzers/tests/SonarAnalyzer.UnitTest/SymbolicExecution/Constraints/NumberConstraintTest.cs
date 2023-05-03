@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution
@@ -26,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
     public class NumberConstraintTest
     {
         [TestMethod]
-        public void NumberConstraint_Min_Max()
+        public void Min_Max_Opposite()
         {
             var sut = NumberConstraint.From(1, 10);
             sut.Min.Value.Should().Be(1);
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [TestMethod]
-        public void NumberConstraint_ToString()
+        public void ToString_Serialization()
         {
             NumberConstraint.From(0).ToString().Should().Be("Number 0");
             NumberConstraint.From(42).ToString().Should().Be("Number 42");
@@ -61,5 +62,33 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
             NumberConstraint.From(-1, null).ToString().Should().Be("Number from -1 to *");
             NumberConstraint.From(-4321, -42).ToString().Should().Be("Number from -4321 to -42");
         }
+
+        [DataTestMethod]
+        [DataRow(null, null)]
+        [DataRow(42, null)]
+        [DataRow(null, 42)]
+        [DataRow(42, 42)]
+        public void Equals_ReturnsTrueForEquivalent(int? min, int? max)
+        {
+            var sut = NumberConstraint.From(min, max);
+            sut.Equals(NumberConstraint.From(min, max)).Should().BeTrue();
+            sut.Equals(NumberConstraint.From(-10, 100)).Should().BeFalse();
+            sut.Equals(NumberConstraint.From(min, 100)).Should().BeFalse();
+            sut.Equals(NumberConstraint.From(-10, max)).Should().BeFalse();
+            sut.Equals("Lorem ipsum").Should().BeFalse();
+        }
+
+        [DataTestMethod]
+        [DataRow(null, null)]
+        [DataRow(42, null)]
+        [DataRow(null, 42)]
+        [DataRow(42, 42)]
+        public void GetHashCode_ReturnsSameForEquivalent(int? min, int? max) =>
+            NumberConstraint.From(min, max).GetHashCode().Should()
+                .Be(NumberConstraint.From(min, max).GetHashCode())
+                .And.NotBe(0)
+                .And.NotBe(NumberConstraint.From(-10, 100).GetHashCode())
+                .And.NotBe(NumberConstraint.From(min, 100).GetHashCode())
+                .And.NotBe(NumberConstraint.From(-10, max).GetHashCode());
     }
 }
