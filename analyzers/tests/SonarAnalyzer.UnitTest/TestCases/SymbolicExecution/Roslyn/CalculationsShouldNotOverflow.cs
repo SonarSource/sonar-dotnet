@@ -43,4 +43,50 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    class DotnetOverflow    // https://github.com/SonarSource/dotnet-overflow/blob/master/ApplicationWithOverflow/Program.cs
+    {
+        class A
+        {
+            public int ovflw1()
+            {
+                unchecked
+                {
+                    int i = 1834567890 + 1834567890;    // FIXME Non-compliant
+                    return i;
+                }
+            }
+
+            public int ovflw2()
+            {
+                int i = 1834567890;
+                i += i;                                 // FIXME Non-compliant
+                return i;
+            }
+
+            public int ovflw3()
+            {
+                int i = 1834567890;
+                var j = i + i;                          // FIXME Non-compliant
+                return j;
+            }
+
+            public int ovflw4()
+            {
+                int i = -1834567890;
+                int j = 1834567890;
+                var k = i - j;                          // FIXME Non-compliant
+                return k;
+            }
+
+            public int ovflw5(int i)
+            {
+                if (i > 1834567890)
+                {
+                    return i + i;                       // FIXME Non-compliant
+                }
+                return 0;
+            }
+        }
+    }
 }
