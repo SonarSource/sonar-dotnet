@@ -108,7 +108,7 @@ public class SonarLintXmlReaderTest
     [TestMethod]
     public void SonarLintXmlReader_LanguageDoesNotExist_Throws()
     {
-        var sut = CreateSonarLintXmlReader(@$"TestResources\SonarLintXml\All_Properties_cs\SonarLint.xml");
+        var sut = CreateSonarLintXmlReader(@"TestResources\SonarLintXml\All_Properties_cs\SonarLint.xml");
         sut.Invoking(x => x.IgnoreHeaderComments(LanguageNames.FSharp)).Should().Throw<UnexpectedLanguageException>().WithMessage("Unexpected language: F#");
         sut.Invoking(x => x.AnalyzeGeneratedCode(LanguageNames.FSharp)).Should().Throw<UnexpectedLanguageException>().WithMessage("Unexpected language: F#");
     }

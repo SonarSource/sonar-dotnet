@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WithInvalidSonarLintPath_DoesNotPopulateParameters(string filePath)
         {
             // Arrange
-            var compilation = CreateCompilationWithOption(filePath, SourceText.From(File.ReadAllText("TestResources\\SonarLintXml\\All_properties_cs\\SonarLint.xml")));
+            var compilation = CreateCompilationWithOption(filePath, SourceText.From(File.ReadAllText(@"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml")));
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -49,11 +49,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         [TestMethod]
         [DataRow("a/SonarLint.xml")] // unix path
-        [DataRow("a\\SonarLint.xml")]
+        [DataRow(@"a\SonarLint.xml")]
         public void SetParameterValues_WithValidSonarLintPath_PopulatesProperties(string filePath)
         {
             // Arrange
-            var compilation = CreateCompilationWithOption(filePath, SourceText.From(File.ReadAllText("TestResources\\SonarLintXml\\All_properties_cs\\SonarLint.xml")));
+            var compilation = CreateCompilationWithOption(filePath, SourceText.From(File.ReadAllText(@"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml")));
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_SonarLintFileWithIntParameterType_PopulatesProperties()
         {
             // Arrange
-            var compilation = CreateCompilationWithOption("TestResources\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
+            var compilation = CreateCompilationWithOption(@"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml");
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_SonarLintFileWithoutRuleParameters_DoesNotPopulateProperties()
         {
             // Arrange
-            var compilation = CreateCompilationWithOption("TestResources\\SonarLintXml\\All_properties_cs\\SonarLint.xml");
+            var compilation = CreateCompilationWithOption(@"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml");
             var analyzer = new LineLength(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -170,7 +170,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WithMalformedXml_DoesNotPopulateProperties(string sonarLintXmlContent)
         {
             // Arrange
-            var compilation = CreateCompilationWithOption("fakePath\\SonarLint.xml", SourceText.From(sonarLintXmlContent));
+            var compilation = CreateCompilationWithOption(@"fakePath\SonarLint.xml", SourceText.From(sonarLintXmlContent));
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
