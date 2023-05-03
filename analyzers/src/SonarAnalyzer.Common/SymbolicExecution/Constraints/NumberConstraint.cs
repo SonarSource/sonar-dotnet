@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Numerics;
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints;
@@ -64,6 +65,20 @@ public sealed class NumberConstraint : SymbolicConstraint
             return new(value, value);
         }
     }
+
+    public static NumberConstraint From(object value) =>
+        value switch
+        {
+            sbyte v => From(new BigInteger(v)),
+            byte v => From(new BigInteger(v)),
+            short v => From(new BigInteger(v)),
+            ushort v => From(new BigInteger(v)),
+            int v => From(new BigInteger(v)),
+            uint v => From(new BigInteger(v)),
+            long v => From(new BigInteger(v)),
+            ulong v => From(new BigInteger(v)),
+            _ => null
+        };
 
     public static NumberConstraint From(BigInteger? min, BigInteger? max)
     {

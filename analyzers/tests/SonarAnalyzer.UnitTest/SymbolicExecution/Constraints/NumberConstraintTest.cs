@@ -50,6 +50,38 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
             sut.Opposite.Should().BeNull();
         }
 
+        [DataTestMethod]
+        [DataRow((sbyte)42)]
+        [DataRow((byte)42)]
+        [DataRow((short)42)]
+        [DataRow((ushort)42)]
+        [DataRow((int)42)]
+        [DataRow((uint)42)]
+        [DataRow((long)42)]
+        [DataRow((ulong)42)]
+        public void From_Object_IntegralTypes(object value)
+        {
+            var sut = NumberConstraint.From(value);
+            sut.Should().NotBeNull();
+            sut.Min.Should().Be(new BigInteger(42));
+            sut.Max.Should().Be(new BigInteger(42));
+        }
+
+        [TestMethod]
+        public void From_Object_NativeInt()
+        {
+            NumberConstraint.From((nint)42).Should().NotBeNull();
+            NumberConstraint.From((nuint)42).Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void From_Object_OtherTypes()
+        {
+            NumberConstraint.From(new Exception()).Should().BeNull();
+            NumberConstraint.From("Lorem ipsum").Should().BeNull();
+            NumberConstraint.From((object)'*').Should().BeNull();
+        }
+
         [TestMethod]
         public void ToString_Serialization()
         {
