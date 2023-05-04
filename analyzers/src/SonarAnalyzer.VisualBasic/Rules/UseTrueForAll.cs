@@ -31,7 +31,7 @@ public sealed class UseTrueForAll : UseTrueForAllBase<SyntaxKind>
             var invocation = c.Node as InvocationExpressionSyntax;
 
             if (invocation.NameIs(nameof(Enumerable.All))
-                && invocation.TryGetOperands(out var left, out var right)
+                && TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectType(left, c.SemanticModel)
                 && IsCorrectCall(right, c.SemanticModel))
             {

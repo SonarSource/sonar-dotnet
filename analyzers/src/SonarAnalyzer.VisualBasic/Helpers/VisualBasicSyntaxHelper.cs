@@ -131,32 +131,6 @@ internal static class VisualBasicSyntaxHelper
         // vbnet is case insensitive
         methodName.Equals(methodSymbol.Name, System.StringComparison.InvariantCultureIgnoreCase);
 
-    public static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
-    {
-        if (invocation.Expression is MemberAccessExpressionSyntax access)
-        {
-            left = access.Expression ?? GetLeft(invocation);
-            right = access.Name;
-            return true;
-        }
-        left = right = null;
-        return false;
-
-        static SyntaxNode GetLeft(SyntaxNode current, int iteration = 0)
-        {
-            const int recursionThreshold = 42;
-            if (iteration > recursionThreshold || current.Parent is CompilationUnitSyntax)
-            {
-                return null;
-            }
-            if (current.Parent is ConditionalAccessExpressionSyntax conditional && conditional.WhenNotNull == current)
-            {
-                return conditional.Expression;
-            }
-            return GetLeft(current.Parent, iteration + 1);
-        }
-    }
-
     public static bool IsOnBase(this ExpressionSyntax expression) =>
         IsOn(expression, SyntaxKind.MyBaseExpression);
 
