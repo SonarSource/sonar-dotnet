@@ -21,39 +21,39 @@
 using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
+namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+
+internal class SETestContext
 {
-    internal class SETestContext
+    public readonly ValidatorTestCheck Validator;
+
+    public SETestContext(string code,
+                         AnalyzerLanguage language,
+                         SymbolicCheck[] additionalChecks,
+                         string localFunctionName = null,
+                         string anonymousFunctionFragment = null,
+                         OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
     {
-        public readonly ValidatorTestCheck Validator;
+        var cfg = TestHelper.CompileCfg(code, language, false, localFunctionName, anonymousFunctionFragment, outputKind);
+        Validator = new ValidatorTestCheck(cfg);
+        var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray(), default);
+        se.Execute();
+    }
 
-        public SETestContext(string code,
-                             AnalyzerLanguage language,
-                             SymbolicCheck[] additionalChecks,
-                             string localFunctionName = null,
-                             string anonymousFunctionFragment = null,
-                             OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
-        {
-            var cfg = TestHelper.CompileCfg(code, language, false, localFunctionName, anonymousFunctionFragment, outputKind);
-            Validator = new ValidatorTestCheck(cfg);
-            var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray(), default);
-            se.Execute();
-        }
+    public static SETestContext CreateCS(string methodBody, params SymbolicCheck[] additionalChecks) =>
+        CreateCS(methodBody, null, null, additionalChecks);
 
-        public static SETestContext CreateCS(string methodBody, params SymbolicCheck[] additionalChecks) =>
-            CreateCS(methodBody, null, null, additionalChecks);
+    public static SETestContext CreateCS(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks) =>
+        CreateCS(methodBody, additionalParameters, null, additionalChecks);
 
-        public static SETestContext CreateCS(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks) =>
-            CreateCS(methodBody, additionalParameters, null, additionalChecks);
+    public static SETestContext CreateCS(string methodBody, string additionalParameters, string localFunctionName, params SymbolicCheck[] additionalChecks) =>
+        new(ClassCodeCS(methodBody, additionalParameters), AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
 
-        public static SETestContext CreateCS(string methodBody, string additionalParameters, string localFunctionName, params SymbolicCheck[] additionalChecks) =>
-            new(ClassCodeCS(methodBody, additionalParameters), AnalyzerLanguage.CSharp, additionalChecks, localFunctionName);
+    public static SETestContext CreateCSLambda(string methodBody, string lambdaFragment, params SymbolicCheck[] additionalChecks) =>
+        new(ClassCodeCS(methodBody, null), AnalyzerLanguage.CSharp, additionalChecks, null, lambdaFragment);
 
-        public static SETestContext CreateCSLambda(string methodBody, string lambdaFragment, params SymbolicCheck[] additionalChecks) =>
-            new(ClassCodeCS(methodBody, null), AnalyzerLanguage.CSharp, additionalChecks, null, lambdaFragment);
-
-        public static SETestContext CreateCSMethod(string method, params SymbolicCheck[] additionalChecks) =>
-            new($@"
+    public static SETestContext CreateCSMethod(string method, params SymbolicCheck[] additionalChecks) =>
+        new($@"
 using System;
 
 public class Sample
@@ -70,12 +70,12 @@ public class Deconstructable
     public void Deconstruct(out int A, out int B) {{ A = 1; B = 2; }}
 }}", AnalyzerLanguage.CSharp, additionalChecks);
 
-        public static SETestContext CreateVB(string methodBody, params SymbolicCheck[] additionalChecks) =>
-            CreateVB(methodBody, null, additionalChecks);
+    public static SETestContext CreateVB(string methodBody, params SymbolicCheck[] additionalChecks) =>
+        CreateVB(methodBody, null, additionalChecks);
 
-        public static SETestContext CreateVB(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks)
-        {
-            var code = $@"
+    public static SETestContext CreateVB(string methodBody, string additionalParameters, params SymbolicCheck[] additionalChecks)
+    {
+        var code = $@"
 Public Class Sample
 
     Private Readonly Property Condition As Boolean
@@ -97,11 +97,11 @@ Public Class Sample
     End Function
 
 End Class";
-            return new(code, AnalyzerLanguage.VisualBasic, additionalChecks);
-        }
+        return new(code, AnalyzerLanguage.VisualBasic, additionalChecks);
+    }
 
-        public static SETestContext CreateVBMethod(string method, params SymbolicCheck[] additionalChecks) =>
-            new($@"
+    public static SETestContext CreateVBMethod(string method, params SymbolicCheck[] additionalChecks) =>
+        new($@"
 Public Class Sample
 
     {method}
@@ -111,8 +111,8 @@ Public Class Sample
 
 End Class", AnalyzerLanguage.VisualBasic, additionalChecks);
 
-        private static string ClassCodeCS(string methodBody, string additionalParameters) =>
-            $@"
+    private static string ClassCodeCS(string methodBody, string additionalParameters) =>
+        $@"
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -176,5 +176,4 @@ public static class Tagger
     public static T Unknown<T>() => default;
 }}
 ";
-    }
 }
