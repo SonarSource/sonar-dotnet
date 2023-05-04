@@ -21,14 +21,14 @@
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
+
+public partial class RoslynSymbolicExecutionTest
 {
-    public partial class RoslynSymbolicExecutionTest
+    [TestMethod]
+    public void Binary_BoolOperands_Equals_CS()
     {
-        [TestMethod]
-        public void Binary_BoolOperands_Equals_CS()
-        {
-            const string code = @"
+        const string code = @"
 var isTrue = true;
 var isFalse = false;
 
@@ -46,13 +46,13 @@ if (isTrue == isFalse)
     Tag(""Variables Unreachable"");
 else
     Tag(""Variables"");";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder("True", "False", "Variables");
-        }
+        SETestContext.CreateCS(code).Validator.ValidateTagOrder("True", "False", "Variables");
+    }
 
-        [TestMethod]
-        public void Binary_BoolOperands_Equals_VB()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Binary_BoolOperands_Equals_VB()
+    {
+        const string code = @"
 Dim IsTrue = True
 Dim IsFalse = False
 
@@ -73,13 +73,13 @@ If IsTrue = IsFalse Then
 Else
     Tag(""Variables"")
 End If";
-            SETestContext.CreateVB(code).Validator.ValidateTagOrder("True", "False", "Variables");
-        }
+        SETestContext.CreateVB(code).Validator.ValidateTagOrder("True", "False", "Variables");
+    }
 
-        [TestMethod]
-        public void Binary_BoolOperands_NotEquals_CS()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Binary_BoolOperands_NotEquals_CS()
+    {
+        const string code = @"
 var isTrue = true;
 var isFalse = false;
 
@@ -97,13 +97,13 @@ if (isTrue != isFalse)
     Tag(""Variables"");
 else
     Tag(""Variables Unreachable"");";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder("True", "False", "Variables");
-        }
+        SETestContext.CreateCS(code).Validator.ValidateTagOrder("True", "False", "Variables");
+    }
 
-        [TestMethod]
-        public void Binary_BoolOperands_NotEquals_VB()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Binary_BoolOperands_NotEquals_VB()
+    {
+        const string code = @"
 Dim IsTrue = True
 Dim IsFalse = False
 
@@ -124,16 +124,16 @@ If IsTrue <> IsFalse Then
 Else
     Tag(""Variables Unreachable"")
 End If";
-            SETestContext.CreateVB(code).Validator.ValidateTagOrder(
-                "True",
-                "False",
-                "Variables");
-        }
+        SETestContext.CreateVB(code).Validator.ValidateTagOrder(
+            "True",
+            "False",
+            "Variables");
+    }
 
-        [TestMethod]
-        public void Binary_BoolOperands_And()
-        {
-            const string code = """
+    [TestMethod]
+    public void Binary_BoolOperands_And()
+    {
+        const string code = """
                 var isTrue = true;
                 var isFalse = false;
 
@@ -182,24 +182,24 @@ End If";
                 else
                     Tag("False && True");
                 """;
-            SETestContext.CreateCS(code, ", bool arg").Validator.ValidateTagOrder(
-                "True & True",
-                "False & True",
-                "False & False",
-                "isFalse & arg False",
-                "arg & isFalse False",
-                "isTrue & arg True",
-                "isTrue & arg False",
-                "arg & isTrue True",
-                "arg & isTrue False",
-                "True && True",
-                "False && True");
-        }
+        SETestContext.CreateCS(code, ", bool arg").Validator.ValidateTagOrder(
+            "True & True",
+            "False & True",
+            "False & False",
+            "isFalse & arg False",
+            "arg & isFalse False",
+            "isTrue & arg True",
+            "isTrue & arg False",
+            "arg & isTrue True",
+            "arg & isTrue False",
+            "True && True",
+            "False && True");
+    }
 
-        [TestMethod]
-        public void Binary_BoolOperands_Or()
-        {
-            const string code = """
+    [TestMethod]
+    public void Binary_BoolOperands_Or()
+    {
+        const string code = """
                 var isTrue = true;
                 var isFalse = false;
 
@@ -248,24 +248,24 @@ End If";
                 else
                     Tag("False || True Unreachable");
                 """;
-            SETestContext.CreateCS(code, ", bool arg").Validator.ValidateTagOrder(
-                "True | True",
-                "False | True",
-                "False | False",
-                "isTrue | arg True",
-                "arg | isTrue True",
-                "isFalse | arg True",
-                "isFalse | arg False",
-                "arg | isFalse True",
-                "arg | isFalse False",
-                "True || True",
-                "False || True");
-        }
+        SETestContext.CreateCS(code, ", bool arg").Validator.ValidateTagOrder(
+            "True | True",
+            "False | True",
+            "False | False",
+            "isTrue | arg True",
+            "arg | isTrue True",
+            "isFalse | arg True",
+            "isFalse | arg False",
+            "arg | isFalse True",
+            "arg | isFalse False",
+            "True || True",
+            "False || True");
+    }
 
-        [TestMethod]
-        public void Binary_BoolOperands_Xor()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Binary_BoolOperands_Xor()
+    {
+        const string code = @"
 var isTrue = true;
 var isFalse = false;
 
@@ -288,15 +288,15 @@ if (false ^ isFalse)
     Tag(""False ^ False Unreachable"");
 else
     Tag(""False ^ False"");";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder("True ^ True", "False ^ True", "True ^ False", "False ^ False");
-        }
+        SETestContext.CreateCS(code).Validator.ValidateTagOrder("True ^ True", "False ^ True", "True ^ False", "False ^ False");
+    }
 
-        [DataTestMethod]
-        [DataRow("boolParameter & isTrue")]
-        [DataRow("isTrue & boolParameter")]
-        public void Binary_NoConstraint_VisitsBothBranches(string condition)
-        {
-            var code = $@"
+    [DataTestMethod]
+    [DataRow("boolParameter & isTrue")]
+    [DataRow("isTrue & boolParameter")]
+    public void Binary_NoConstraint_VisitsBothBranches(string condition)
+    {
+        var code = $@"
 bool isTrue = true;
 if ({condition})
 {{
@@ -307,18 +307,18 @@ else
     Tag(""Else"");
 }}
 Tag(""End"");";
-            SETestContext.CreateCS(code).Validator.ValidateTagOrder(
-                "If",
-                "Else",
-                "End");
-        }
+        SETestContext.CreateCS(code).Validator.ValidateTagOrder(
+            "If",
+            "Else",
+            "End");
+    }
 
-        [DataTestMethod]
-        [DataRow("boolParameter & isTrue")]
-        [DataRow("isTrue & boolParameter")]
-        public void Binary_OtherConstraint_VisitsBothBranches(string condition)
-        {
-            var code = $@"
+    [DataTestMethod]
+    [DataRow("boolParameter & isTrue")]
+    [DataRow("isTrue & boolParameter")]
+    public void Binary_OtherConstraint_VisitsBothBranches(string condition)
+    {
+        var code = $@"
 bool isTrue = true;
 if ({condition})
 {{
@@ -329,17 +329,17 @@ else
     Tag(""Else"");
 }}
 Tag(""End"");";
-            var check = new PostProcessTestCheck(OperationKind.ParameterReference, x => x.SetOperationConstraint(DummyConstraint.Dummy));
-            SETestContext.CreateCS(code, check).Validator.ValidateTagOrder(
-                "If",
-                "Else",
-                "End");
-        }
+        var check = new PostProcessTestCheck(OperationKind.ParameterReference, x => x.SetOperationConstraint(DummyConstraint.Dummy));
+        SETestContext.CreateCS(code, check).Validator.ValidateTagOrder(
+            "If",
+            "Else",
+            "End");
+    }
 
-        [TestMethod]
-        public void Binary_UnexpectedOperator_VisitsBothBranches()
-        {
-            var code = $@"
+    [TestMethod]
+    public void Binary_UnexpectedOperator_VisitsBothBranches()
+    {
+        var code = $@"
 if (a > b)      // Both, 'a' and 'b' have bool constraint (weird) and we do not produce bool constraint for '>' binary operator, because it doesn't make sense.
 {{
     Tag(""If"");
@@ -349,17 +349,17 @@ else
     Tag(""Else"");
 }}
 Tag(""End"");";
-            var check = new PostProcessTestCheck(OperationKind.ParameterReference, x => x.SetOperationConstraint(BoolConstraint.True));
-            SETestContext.CreateCS(code, ", int a, int b", check).Validator.ValidateTagOrder(
-                "If",
-                "Else",
-                "End");
-        }
+        var check = new PostProcessTestCheck(OperationKind.ParameterReference, x => x.SetOperationConstraint(BoolConstraint.True));
+        SETestContext.CreateCS(code, ", int a, int b", check).Validator.ValidateTagOrder(
+            "If",
+            "Else",
+            "End");
+    }
 
-        [TestMethod]
-        public void BinaryEqualsNull_SetsBoolConstraint_KnownResult_CS()
-        {
-            const string code = @"
+    [TestMethod]
+    public void BinaryEqualsNull_SetsBoolConstraint_KnownResult_CS()
+    {
+        const string code = @"
 object nullValue = null;
 object notNullValue = new object();
 var isTrue = nullValue == null;
@@ -376,51 +376,51 @@ Tag(""ForNullSymbol"", forNullSymbol);
 Tag(""ForSymbolSymbolTrue"", forSymbolSymbolTrue);
 Tag(""ForSymbolSymbolFalse"", forSymbolSymbolFalse);
 Tag(""ForSymbolSymbolNone"", forSymbolSymbolNone);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.ValidateTag("ForNullNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());  // null == null is Literal with constant value 'true'
-            validator.ValidateTag("ForNullSymbol", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("ForSymbolSymbolTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("ForSymbolSymbolFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.ValidateTag("ForSymbolSymbolNone", x => x.HasConstraint<BoolConstraint>().Should().BeFalse("We can't tell if two instances are equivalent."));
-        }
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.ValidateTag("ForNullNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());  // null == null is Literal with constant value 'true'
+        validator.ValidateTag("ForNullSymbol", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("ForSymbolSymbolTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("ForSymbolSymbolFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.ValidateTag("ForSymbolSymbolNone", x => x.HasConstraint<BoolConstraint>().Should().BeFalse("We can't tell if two instances are equivalent."));
+    }
 
-        [DataTestMethod]
-        [DataRow("arg == null")]
-        [DataRow("arg == nullValue")]
-        public void BinaryEqualsNull_SetsBoolConstraint_Unknown_ComparedToNull_CS(string expression)
-        {
-            var code = @$"
+    [DataTestMethod]
+    [DataRow("arg == null")]
+    [DataRow("arg == nullValue")]
+    public void BinaryEqualsNull_SetsBoolConstraint_Unknown_ComparedToNull_CS(string expression)
+    {
+        var code = @$"
 object nullValue = null;
 var value = {expression};
 Tag(""End"");";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.TagStates("End").Should().HaveCount(2)
-                .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "arg"))
-                .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "arg"));
-        }
+        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.TagStates("End").Should().HaveCount(2)
+            .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "arg"))
+            .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "arg"));
+    }
 
-        [TestMethod]
-        public void BinaryEqualsNull_SetsBoolConstraint_Unknown_ComparedToNotNull_CS()
-        {
-            const string code = @"
+    [TestMethod]
+    public void BinaryEqualsNull_SetsBoolConstraint_Unknown_ComparedToNotNull_CS()
+    {
+        const string code = @"
 object notNullValue = new object();
 var value = arg == notNullValue;
 Tag(""End"");";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.TagStates("End").Should().HaveCount(2)    // When False, we can't tell what constraints "args" have
-                .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "arg"))
-                .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).All(x => x.Name != "arg"));
-        }
+        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.TagStates("End").Should().HaveCount(2)    // When False, we can't tell what constraints "args" have
+            .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "arg"))
+            .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).All(x => x.Name != "arg"));
+    }
 
-        [TestMethod]
-        public void BinaryEqualsNull_SetsBoolConstraint_KnownResult_VB()
-        {
-            const string code = @"
+    [TestMethod]
+    public void BinaryEqualsNull_SetsBoolConstraint_KnownResult_VB()
+    {
+        const string code = @"
 Dim NullValue As Object = Nothing
 Dim NotNullValue As New Object()
 Dim IsTrue As Boolean = NullValue Is Nothing
@@ -431,33 +431,33 @@ Tag(""IsTrue"", IsTrue)
 Tag(""IsFalse"", IsFalse)
 Tag(""EqualsTrue"", EqualsTrue)
 Tag(""EqualsFalse"", EqualsFalse)";
-            var validator = SETestContext.CreateVB(code).Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.ValidateTag("EqualsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("EqualsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        }
+        var validator = SETestContext.CreateVB(code).Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.ValidateTag("EqualsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("EqualsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+    }
 
-        [DataTestMethod]
-        [DataRow("Arg Is Nothing")]
-        [DataRow("Arg = Nothing")]
-        public void BinaryEqualsNull_SetsBoolConstraint_Unknown_ComparedToNull_VB(string expression)
-        {
-            var code = @$"
+    [DataTestMethod]
+    [DataRow("Arg Is Nothing")]
+    [DataRow("Arg = Nothing")]
+    public void BinaryEqualsNull_SetsBoolConstraint_Unknown_ComparedToNull_VB(string expression)
+    {
+        var code = @$"
 Dim Value = {expression}
 Tag(""End"")";
-            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.TagStates("End").Should().HaveCount(2)
-                .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "Arg"))
-                .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "Arg"));
-        }
+        var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.TagStates("End").Should().HaveCount(2)
+            .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "Arg"))
+            .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "Arg"));
+    }
 
-        [TestMethod]
-        public void BinaryNotEqualsNull_SetsBoolConstraint_KnownResult_CS()
-        {
-            const string code = @"
+    [TestMethod]
+    public void BinaryNotEqualsNull_SetsBoolConstraint_KnownResult_CS()
+    {
+        const string code = @"
 object nullValue = null;
 object notNullValue = new object();
 var isTrue = notNullValue != null;
@@ -474,52 +474,52 @@ Tag(""ForNullSymbol"", forNullSymbol);
 Tag(""ForSymbolSymbolTrue"", forSymbolSymbolTrue);
 Tag(""ForSymbolSymbolFalse"", forSymbolSymbolFalse);
 Tag(""ForSymbolSymbolNone"", forSymbolSymbolNone);";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.ValidateTag("ForNullNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());  // null != null is Literal with constant value 'false'
-            validator.ValidateTag("ForNullSymbol", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.ValidateTag("ForSymbolSymbolTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("ForSymbolSymbolFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.ValidateTag("ForSymbolSymbolNone", x => x.HasConstraint<BoolConstraint>().Should().BeFalse("We can't tell if two instances are equivalent."));
-        }
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.ValidateTag("ForNullNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());  // null != null is Literal with constant value 'false'
+        validator.ValidateTag("ForNullSymbol", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.ValidateTag("ForSymbolSymbolTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("ForSymbolSymbolFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.ValidateTag("ForSymbolSymbolNone", x => x.HasConstraint<BoolConstraint>().Should().BeFalse("We can't tell if two instances are equivalent."));
+    }
 
-        [DataTestMethod]
-        [DataRow("arg != null")]
-        [DataRow("arg != nullValue")]
+    [DataTestMethod]
+    [DataRow("arg != null")]
+    [DataRow("arg != nullValue")]
 
-        public void BinaryNotEqualsNull_SetsBoolConstraint_ComparedToNull_CS(string expression)
-        {
-            var code = @$"
+    public void BinaryNotEqualsNull_SetsBoolConstraint_ComparedToNull_CS(string expression)
+    {
+        var code = @$"
 object nullValue = null;
 var value = {expression};
 Tag(""End"");";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.TagStates("End").Should().HaveCount(2)
-                .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "arg"))
-                .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "arg"));
-        }
+        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.TagStates("End").Should().HaveCount(2)
+            .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "arg"))
+            .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "arg"));
+    }
 
-        [TestMethod]
-        public void BinaryNotEqualsNull_SetsBoolConstraint_ComparedToNotNull_CS()
-        {
-            const string code = @"
+    [TestMethod]
+    public void BinaryNotEqualsNull_SetsBoolConstraint_ComparedToNotNull_CS()
+    {
+        const string code = @"
 object notNullValue = new object();
 var value = arg != notNullValue;
 Tag(""End"");";
-            var validator = SETestContext.CreateCS(code, ", object arg").Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.TagStates("End").Should().HaveCount(2)    // When True, we can't tell what constraints "args" have
-                .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).All(x => x.Name != "arg"))
-                .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "arg"));
-        }
+        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.TagStates("End").Should().HaveCount(2)    // When True, we can't tell what constraints "args" have
+            .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).All(x => x.Name != "arg"))
+            .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "arg"));
+    }
 
-        [TestMethod]
-        public void BinaryNotEqualsNull_SetsBoolConstraint_KnownResult_VB()
-        {
-            const string code = @"
+    [TestMethod]
+    public void BinaryNotEqualsNull_SetsBoolConstraint_KnownResult_VB()
+    {
+        const string code = @"
 Dim NullValue As Object = Nothing
 Dim NotNullValue As New Object()
 Dim IsTrue = NotNullValue IsNot Nothing
@@ -530,132 +530,131 @@ Tag(""IsTrue"", IsTrue)
 Tag(""IsFalse"", IsFalse)
 Tag(""EqualsTrue"", EqualsTrue)
 Tag(""EqualsFalse"", EqualsFalse)";
-            var validator = SETestContext.CreateVB(code).Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-            validator.ValidateTag("EqualsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.ValidateTag("EqualsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        }
+        var validator = SETestContext.CreateVB(code).Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.ValidateTag("EqualsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.ValidateTag("EqualsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+    }
 
-        [DataTestMethod]
-        [DataRow("Arg IsNot Nothing")]
-        [DataRow("Arg <> Nothing")]
-        public void BinaryNotEqualsNull_SetsBoolConstraint_Unknown_ComparedToNull_VB(string expression)
-        {
-            var code = @$"
+    [DataTestMethod]
+    [DataRow("Arg IsNot Nothing")]
+    [DataRow("Arg <> Nothing")]
+    public void BinaryNotEqualsNull_SetsBoolConstraint_Unknown_ComparedToNull_VB(string expression)
+    {
+        var code = @$"
 Dim Value = {expression}
 Tag(""End"")";
-            var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.TagStates("End").Should().HaveCount(2)
-                .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "Arg"))
-                .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "Arg"));
-        }
+        var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.TagStates("End").Should().HaveCount(2)
+            .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "Arg"))
+            .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.False).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "Arg"));
+    }
 
-        [DataTestMethod]
-        [DataRow("arg >= null")]
-        [DataRow("arg > null")]
-        [DataRow("arg < null")]
-        [DataRow("arg <= null")]
-        [DataRow("null >= arg")]
-        [DataRow("null > arg")]
-        [DataRow("null < arg")]
-        [DataRow("null <= arg")]
-        [DataRow("arg > (int?)null")]
-        [DataRow("arg > new Nullable<int>()")]
-        [DataRow("arg > (null as int?)")]
-        [DataRow("arg > nullValue")]
-        [DataRow("nullValue > arg")]
-        [DataRow("nullValue > 42")]
-        [DataRow("nullValue > notNullValue")]
-        [DataRow("notNullValue > nullValue")]
-        public void Binary_NullableRelationalNull_SetsBoolConstraint_CS(string expression)
-        {
-            var code = $$"""
-                int? notNullValue = 42;
-                int? nullValue = null;
-                var value = {{expression}};
-                Tag("Value", value);
-                if (value)
-                {
-                    Tag("If_Unreachable");
-                }
-                else
-                {
-                    Tag("Else");
-                }
-                Tag("End");
-                """;
+    [DataTestMethod]
+    [DataRow("arg >= null")]
+    [DataRow("arg > null")]
+    [DataRow("arg < null")]
+    [DataRow("arg <= null")]
+    [DataRow("null >= arg")]
+    [DataRow("null > arg")]
+    [DataRow("null < arg")]
+    [DataRow("null <= arg")]
+    [DataRow("arg > (int?)null")]
+    [DataRow("arg > new Nullable<int>()")]
+    [DataRow("arg > (null as int?)")]
+    [DataRow("arg > nullValue")]
+    [DataRow("nullValue > arg")]
+    [DataRow("nullValue > 42")]
+    [DataRow("nullValue > notNullValue")]
+    [DataRow("notNullValue > nullValue")]
+    public void Binary_NullableRelationalNull_SetsBoolConstraint_CS(string expression)
+    {
+        var code = $$"""
+            int? notNullValue = 42;
+            int? nullValue = null;
+            var value = {{expression}};
+            Tag("Value", value);
+            if (value)
+            {
+                Tag("If_Unreachable");
+            }
+            else
+            {
+                Tag("Else");
+            }
+            Tag("End");
+            """;
 
-            var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.ValidateTagOrder("Value", "Else", "End");
-        }
+        var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.ValidateTagOrder("Value", "Else", "End");
+    }
 
-        [DataTestMethod]
-        [DataRow("arg >= 42")]
-        [DataRow("arg > 42")]
-        [DataRow("arg < 42")]
-        [DataRow("arg <= 42")]
-        [DataRow("42 >= arg")]
-        [DataRow("42 > arg")]
-        [DataRow("42 < arg")]
-        [DataRow("42 <= arg")]
-        [DataRow("arg > (int?)42")]
-        [DataRow("arg > new Nullable<int>(42)")]
-        [DataRow("arg > (42 as int?)")]
-        [DataRow("arg > notNullValue")]
-        public void Binary_NullableRelationalNonNull_SetsObjectConstraint_CS(string expression)
-        {
-            var code = $$"""
-                int? notNullValue = 42;
-                if ({{expression}})
-                {
-                    Tag("If", arg);
-                }
-                else
-                {
-                    Tag("Else", arg);
-                }
-                """;
+    [DataTestMethod]
+    [DataRow("arg >= 42")]
+    [DataRow("arg > 42")]
+    [DataRow("arg < 42")]
+    [DataRow("arg <= 42")]
+    [DataRow("42 >= arg")]
+    [DataRow("42 > arg")]
+    [DataRow("42 < arg")]
+    [DataRow("42 <= arg")]
+    [DataRow("arg > (int?)42")]
+    [DataRow("arg > new Nullable<int>(42)")]
+    [DataRow("arg > (42 as int?)")]
+    [DataRow("arg > notNullValue")]
+    public void Binary_NullableRelationalNonNull_SetsObjectConstraint_CS(string expression)
+    {
+        var code = $$"""
+            int? notNullValue = 42;
+            if ({{expression}})
+            {
+                Tag("If", arg);
+            }
+            else
+            {
+                Tag("Else", arg);
+            }
+            """;
 
-            var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "arg comparison true, hence non-null"));
-            validator.ValidateTag("Else", x => x.Should().HaveNoConstraints("arg either null or comparison false"));
-        }
+        var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "arg comparison true, hence non-null"));
+        validator.ValidateTag("Else", x => x.Should().HaveNoConstraints("arg either null or comparison false"));
+    }
 
-        [DataTestMethod]
-        [DataRow("s = s + s;")]
-        [DataRow("s = s + null;")]
-        public void Binary_StringConcatenation_Binary_CS(string expression)
-        {
-            // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12105-addition-operator
-            var code = $$"""
-                string s = null;
-                {{expression}}
-                Tag("S", s);
-                """;
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.ValidateTag("S", x => x.Should().HaveNoConstraints()); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
-        }
+    [DataTestMethod]
+    [DataRow("s = s + s;")]
+    [DataRow("s = s + null;")]
+    public void Binary_StringConcatenation_Binary_CS(string expression)
+    {
+        // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12105-addition-operator
+        var code = $$"""
+            string s = null;
+            {{expression}}
+            Tag("S", s);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.ValidateTag("S", x => x.Should().HaveNoConstraints()); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
+    }
 
-        [DataTestMethod]
-        [DataRow("s += s;")]
-        [DataRow("s += null;")]
-        public void Binary_StringConcatenation_Compund_CS(string expression)
-        {
-            // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12105-addition-operator
-            var code = $$"""
-                string s = null;
-                {{expression}}
-                Tag("S", s);
-                """;
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateContainsOperation(OperationKind.Binary);
-            validator.ValidateTag("S", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null)); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
-        }
+    [DataTestMethod]
+    [DataRow("s += s;")]
+    [DataRow("s += null;")]
+    public void Binary_StringConcatenation_Compund_CS(string expression)
+    {
+        // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12105-addition-operator
+        var code = $$"""
+            string s = null;
+            {{expression}}
+            Tag("S", s);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.ValidateTag("S", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null)); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
     }
 }

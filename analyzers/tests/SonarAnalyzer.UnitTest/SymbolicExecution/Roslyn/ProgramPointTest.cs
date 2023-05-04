@@ -20,52 +20,51 @@
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
+
+[TestClass]
+public class ProgramPointTest
 {
-    [TestClass]
-    public class ProgramPointTest
+    [TestMethod]
+    public void HasSupportedSize_Supported()
     {
-        [TestMethod]
-        public void HasSupportedSize_Supported()
-        {
-            var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
-            cfg.Blocks.Should().HaveCount(3);
-            ProgramPoint.HasSupportedSize(cfg).Should().BeTrue();
+        var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
+        cfg.Blocks.Should().HaveCount(3);
+        ProgramPoint.HasSupportedSize(cfg).Should().BeTrue();
 
-            cfg = TestHelper.CompileCfgBodyCS($"var a = true{Enumerable.Repeat(" && true", 1019).JoinStr(null)};");
-            cfg.Blocks.Should().HaveCount(1024);
-            ProgramPoint.HasSupportedSize(cfg).Should().BeTrue();
-        }
+        cfg = TestHelper.CompileCfgBodyCS($"var a = true{Enumerable.Repeat(" && true", 1019).JoinStr(null)};");
+        cfg.Blocks.Should().HaveCount(1024);
+        ProgramPoint.HasSupportedSize(cfg).Should().BeTrue();
+    }
 
-        [TestMethod]
-        public void HasSupportedSize_Unsupported()
-        {
-            var cfg = TestHelper.CompileCfgBodyCS($"var a = true{Enumerable.Repeat(" && true", 1020).JoinStr(null)};");
-            cfg.Blocks.Should().HaveCount(1025);
-            ProgramPoint.HasSupportedSize(cfg).Should().BeFalse();
-        }
+    [TestMethod]
+    public void HasSupportedSize_Unsupported()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS($"var a = true{Enumerable.Repeat(" && true", 1020).JoinStr(null)};");
+        cfg.Blocks.Should().HaveCount(1025);
+        ProgramPoint.HasSupportedSize(cfg).Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void Hash()
-        {
-            var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
-            cfg.Blocks.Should().HaveCount(3);
+    [TestMethod]
+    public void Hash()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
+        cfg.Blocks.Should().HaveCount(3);
 
-            ProgramPoint.Hash(cfg.Blocks[0], 0).Should().Be(0);
-            ProgramPoint.Hash(cfg.Blocks[0], 1).Should().Be(1);
-            ProgramPoint.Hash(cfg.Blocks[0], 2).Should().Be(2);
-            ProgramPoint.Hash(cfg.Blocks[0], 4).Should().Be(4);
-            ProgramPoint.Hash(cfg.Blocks[0], 42).Should().Be(42);
-            ProgramPoint.Hash(cfg.Blocks[0], 65535).Should().Be(65535);
-            ProgramPoint.Hash(cfg.Blocks[0], 0b1111111111111111111111).Should().Be(4194303);
+        ProgramPoint.Hash(cfg.Blocks[0], 0).Should().Be(0);
+        ProgramPoint.Hash(cfg.Blocks[0], 1).Should().Be(1);
+        ProgramPoint.Hash(cfg.Blocks[0], 2).Should().Be(2);
+        ProgramPoint.Hash(cfg.Blocks[0], 4).Should().Be(4);
+        ProgramPoint.Hash(cfg.Blocks[0], 42).Should().Be(42);
+        ProgramPoint.Hash(cfg.Blocks[0], 65535).Should().Be(65535);
+        ProgramPoint.Hash(cfg.Blocks[0], 0b1111111111111111111111).Should().Be(4194303);
 
-            ProgramPoint.Hash(cfg.Blocks[1], 0).Should().Be(4194304 + 0);
-            ProgramPoint.Hash(cfg.Blocks[1], 1).Should().Be(4194304 + 1);
-            ProgramPoint.Hash(cfg.Blocks[1], 2).Should().Be(4194304 + 2);
+        ProgramPoint.Hash(cfg.Blocks[1], 0).Should().Be(4194304 + 0);
+        ProgramPoint.Hash(cfg.Blocks[1], 1).Should().Be(4194304 + 1);
+        ProgramPoint.Hash(cfg.Blocks[1], 2).Should().Be(4194304 + 2);
 
-            ProgramPoint.Hash(cfg.Blocks[2], 0).Should().Be(4194304 * 2 + 0);
-            ProgramPoint.Hash(cfg.Blocks[2], 1).Should().Be(4194304 * 2 + 1);
-            ProgramPoint.Hash(cfg.Blocks[2], 2).Should().Be(4194304 * 2 + 2);
-        }
+        ProgramPoint.Hash(cfg.Blocks[2], 0).Should().Be(4194304 * 2 + 0);
+        ProgramPoint.Hash(cfg.Blocks[2], 1).Should().Be(4194304 * 2 + 1);
+        ProgramPoint.Hash(cfg.Blocks[2], 2).Should().Be(4194304 * 2 + 2);
     }
 }

@@ -20,37 +20,36 @@
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
+
+public partial class ProgramStateTest
 {
-    public partial class ProgramStateTest
+    [TestMethod]
+    public void AddVisit_IncreasesCounter_IsImmutable()
     {
-        [TestMethod]
-        public void AddVisit_IncreasesCounter_IsImmutable()
-        {
-            var sut = ProgramState.Empty;
-            sut.GetVisitCount(0).Should().Be(0);
-            sut.GetVisitCount(42).Should().Be(0);
+        var sut = ProgramState.Empty;
+        sut.GetVisitCount(0).Should().Be(0);
+        sut.GetVisitCount(42).Should().Be(0);
 
-            sut = sut.AddVisit(0);
-            sut.GetVisitCount(0).Should().Be(1);
-            sut = sut.AddVisit(0);
-            sut.GetVisitCount(0).Should().Be(2);
-            sut = sut.AddVisit(0);
-            sut.GetVisitCount(0).Should().Be(3);
+        sut = sut.AddVisit(0);
+        sut.GetVisitCount(0).Should().Be(1);
+        sut = sut.AddVisit(0);
+        sut.GetVisitCount(0).Should().Be(2);
+        sut = sut.AddVisit(0);
+        sut.GetVisitCount(0).Should().Be(3);
 
-            sut = sut.AddVisit(42);
-            sut.GetVisitCount(0).Should().Be(3);
-            sut.GetVisitCount(42).Should().Be(1);
-            ProgramState.Empty.GetVisitCount(0).Should().Be(0);
-            ProgramState.Empty.GetVisitCount(42).Should().Be(0);
-        }
-
-        [TestMethod]
-        public void AddVisit_DoesNotChangeGetHashCode() =>
-            ProgramState.Empty.GetHashCode().Should().Be(ProgramState.Empty.AddVisit(0).GetHashCode());
-
-        [TestMethod]
-        public void AddVisit_DoesNotChangeEquals() =>
-            ProgramState.Empty.Equals(ProgramState.Empty.AddVisit(0)).Should().BeTrue();
+        sut = sut.AddVisit(42);
+        sut.GetVisitCount(0).Should().Be(3);
+        sut.GetVisitCount(42).Should().Be(1);
+        ProgramState.Empty.GetVisitCount(0).Should().Be(0);
+        ProgramState.Empty.GetVisitCount(42).Should().Be(0);
     }
+
+    [TestMethod]
+    public void AddVisit_DoesNotChangeGetHashCode() =>
+        ProgramState.Empty.GetHashCode().Should().Be(ProgramState.Empty.AddVisit(0).GetHashCode());
+
+    [TestMethod]
+    public void AddVisit_DoesNotChangeEquals() =>
+        ProgramState.Empty.Equals(ProgramState.Empty.AddVisit(0)).Should().BeTrue();
 }

@@ -20,23 +20,23 @@
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
-{
-    [TestClass]
-    public class FinallyPointTest
-    {
-        [TestMethod]
-        public void Constructor_Null_Throws()
-        {
-            var cfg = TestHelper.CompileCfgBodyCS();
-            var previous = new FinallyPoint(null, cfg.EntryBlock.FallThroughSuccessor);
-            ((Func<FinallyPoint>)(() => new FinallyPoint(previous, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("branch");
-        }
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
 
-        [TestMethod]
-        public void CreateNext_ReturnsAllFinally_AndThenDestination()
-        {
-            const string code = @"
+[TestClass]
+public class FinallyPointTest
+{
+    [TestMethod]
+    public void Constructor_Null_Throws()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS();
+        var previous = new FinallyPoint(null, cfg.EntryBlock.FallThroughSuccessor);
+        ((Func<FinallyPoint>)(() => new FinallyPoint(previous, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("branch");
+    }
+
+    [TestMethod]
+    public void CreateNext_ReturnsAllFinally_AndThenDestination()
+    {
+        const string code = @"
 try
 {
     try
@@ -52,15 +52,14 @@ finally
 {
     true.ToString();
 }";
-            var cfg = TestHelper.CompileCfgBodyCS(code);
-            var sut = new FinallyPoint(null, cfg.Blocks[1].FallThroughSuccessor);
-            sut.BlockIndex.Should().Be(2);   // Inner finally
+        var cfg = TestHelper.CompileCfgBodyCS(code);
+        var sut = new FinallyPoint(null, cfg.Blocks[1].FallThroughSuccessor);
+        sut.BlockIndex.Should().Be(2);   // Inner finally
 
-            sut = sut.CreateNext();
-            sut.BlockIndex.Should().Be(3);   // Outer finally
+        sut = sut.CreateNext();
+        sut.BlockIndex.Should().Be(3);   // Outer finally
 
-            sut = sut.CreateNext();
-            sut.BlockIndex.Should().Be(4);   // Exit block (destination of the original successor)
-        }
+        sut = sut.CreateNext();
+        sut.BlockIndex.Should().Be(4);   // Exit block (destination of the original successor)
     }
 }
