@@ -565,7 +565,7 @@ catch (System.IO.IOException)
     tag = ""InCatchBase"";
 }
 tag = ""End"";";
-        var validator = SETestContext.CreateCS(code, ", bool condition").Validator;
+        var validator = SETestContext.CreateCS(code, "bool condition").Validator;
         validator.ValidateTagOrder(
             "BeforeTry",
             "InTry",
@@ -642,7 +642,7 @@ catch when (arg)
     tag = ""InCatch"";
 }
 tag = ""End"";";
-        var validator = SETestContext.CreateCS(code, ", bool arg").Validator;
+        var validator = SETestContext.CreateCS(code, "bool arg").Validator;
         validator.ValidateTagOrder(
             "BeforeTry",
             "InTry",
@@ -666,7 +666,7 @@ catch (FormatException)
     tag = ""UnreachableInCatch"";
 }
 tag = ""UnreachableEnd"";";
-        var validator = SETestContext.CreateCS(code, ", Exception couldBeAnything").Validator;
+        var validator = SETestContext.CreateCS(code, "Exception couldBeAnything").Validator;
         validator.ValidateTagOrder(
             "BeforeTry",
             "InTry");   // Signature returns Exception => we do not know that it is FormatException

@@ -42,7 +42,7 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", char[] c").Validator;
+        var validator = SETestContext.CreateCS(code, "char[] c").Validator;
         validator.ValidateContainsOperation(OperationKindEx.ArrayElementReference);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "IndexOutOfRangeException"));
@@ -64,7 +64,7 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", char[] c").Validator;
+        var validator = SETestContext.CreateCS(code, "char[] c").Validator;
         validator.ValidateContainsOperation(OperationKindEx.ObjectCreation);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
@@ -86,7 +86,7 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", long p").Validator;
+        var validator = SETestContext.CreateCS(code, "long p").Validator;
         validator.ValidateContainsOperation(OperationKindEx.Conversion);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "InvalidCastException"));
@@ -108,7 +108,7 @@ catch
     tag = ""UnreachableCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", Person p").Validator;
+        var validator = SETestContext.CreateCS(code, "Person p").Validator;
         validator.ValidateContainsOperation(OperationKindEx.Conversion);
         validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
         validator.ValidateHasSingleExitStateAndNoException();
@@ -129,7 +129,7 @@ catch
     tag = ""UnreachableCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", int p").Validator;
+        var validator = SETestContext.CreateCS(code, "int p").Validator;
         validator.ValidateContainsOperation(OperationKindEx.Conversion);
         validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
         validator.TagStates("AfterCatch").Should().ContainSingle(x => HasNoException(x));
@@ -150,7 +150,7 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", dynamic arg").Validator;
+        var validator = SETestContext.CreateCS(code, "dynamic arg").Validator;
         validator.ValidateContainsOperation(OperationKindEx.DynamicIndexerAccess);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "IndexOutOfRangeException"));
@@ -172,7 +172,7 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", dynamic arg").Validator;
+        var validator = SETestContext.CreateCS(code, "dynamic arg").Validator;
         validator.ValidateContainsOperation(OperationKindEx.DynamicInvocation);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
@@ -194,7 +194,7 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", dynamic arg").Validator;
+        var validator = SETestContext.CreateCS(code, "dynamic arg").Validator;
         validator.ValidateContainsOperation(OperationKindEx.DynamicMemberReference);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
@@ -216,7 +216,7 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", dynamic d").Validator;
+        var validator = SETestContext.CreateCS(code, "dynamic d").Validator;
         validator.ValidateContainsOperation(OperationKindEx.DynamicObjectCreation);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().ContainSingle(x => HasUnknownException(x));
@@ -238,7 +238,7 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", Person p").Validator;
+        var validator = SETestContext.CreateCS(code, "Person p").Validator;
         validator.ValidateContainsOperation(OperationKindEx.EventReference);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "NullReferenceException"));
@@ -283,7 +283,7 @@ catch
     tag = ""UnreachableCatch"";
 }}
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", Person p").Validator;
+        var validator = SETestContext.CreateCS(code, "Person p").Validator;
         validator.ValidateContainsOperation(OperationKindEx.EventReference);
         validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
         validator.ValidateHasSingleExitStateAndNoException();
@@ -304,7 +304,7 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", Person p").Validator;
+        var validator = SETestContext.CreateCS(code, "Person p").Validator;
         validator.ValidateContainsOperation(OperationKindEx.FieldReference);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "NullReferenceException"));
@@ -372,7 +372,7 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", IEnumerable<string> collection").Validator;
+        var validator = SETestContext.CreateCS(code, "IEnumerable<string> collection").Validator;
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch", "InCatch", "InCatch", "InCatch", "AfterCatch", "AfterCatch", "InCatch");
         // IForEachLoopOperation is not generated. It doesn't seem to be used.
         // In the case of foreach, there are implicit method calls that in the current implementation can throw:
@@ -402,7 +402,7 @@ catch
 tag = ""AfterCatch"";";
 
         // IFunctionPointerInvocationOperation is not generated. It doesn't seem used.
-        var validator = SETestContext.CreateCS(code, ", delegate*<string, void> ptr").Validator;
+        var validator = SETestContext.CreateCS(code, "delegate*<string, void> ptr").Validator;
 
         validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
         validator.ValidateHasSingleExitStateAndNoException();
@@ -424,7 +424,7 @@ catch
 }
 tag = ""AfterCatch"";";
 
-        var validator = SETestContext.CreateCS(code, ", string arg").Validator;
+        var validator = SETestContext.CreateCS(code, "string arg").Validator;
         validator.ValidateContainsOperation(OperationKindEx.PropertyReference);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "NullReferenceException"));
@@ -493,7 +493,7 @@ catch
 }
 tag = ""AfterCatch"";";
 
-        var validator = SETestContext.CreateCS(code, ", Person p").Validator;
+        var validator = SETestContext.CreateCS(code, "Person p").Validator;
         validator.ValidateContainsOperation(OperationKindEx.MethodReference);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "NullReferenceException"));
@@ -588,7 +588,7 @@ tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
 
-        var validator = SETestContext.CreateCS(code, ", int[] array").Validator;
+        var validator = SETestContext.CreateCS(code, "int[] array").Validator;
         validator.ValidateContainsOperation(OperationKindEx.MethodReference);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "IndexOutOfRangeException"));
@@ -643,7 +643,7 @@ tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
 
-        var validator = SETestContext.CreateCS(code, ", int[] array").Validator;
+        var validator = SETestContext.CreateCS(code, "int[] array").Validator;
         validator.ValidateContainsOperation(OperationKindEx.MethodReference);
         validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
         validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "ArgumentOutOfRangeException"));

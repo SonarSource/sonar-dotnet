@@ -332,15 +332,15 @@ public void Method()
 
     [TestMethod]
     public void Argument_Ref_ResetsConstraints_CS() =>
-        SETestContext.CreateCS(@"var b = true; Main(boolParameter, ref b); Tag(""B"", b);", ", ref bool outParam").Validator.ValidateTag("B", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        SETestContext.CreateCS(@"var b = true; Main(boolParameter, ref b); Tag(""B"", b);", "ref bool outParam").Validator.ValidateTag("B", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
 
     [TestMethod]
     public void Argument_Out_ResetsConstraints_CS() =>
-        SETestContext.CreateCS(@"var b = true; Main(boolParameter, out b); Tag(""B"", b); outParam = false;", ", out bool outParam").Validator.ValidateTag("B", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        SETestContext.CreateCS(@"var b = true; Main(boolParameter, out b); Tag(""B"", b); outParam = false;", "out bool outParam").Validator.ValidateTag("B", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
 
     [TestMethod]
     public void Argument_ByRef_ResetConstraints_VB() =>
-        SETestContext.CreateVB(@"Dim B As Boolean = True : Main(BoolParameter, B) : Tag(""B"", B)", ", ByRef ByRefParam As Boolean").Validator.ValidateTag("B", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        SETestContext.CreateVB(@"Dim B As Boolean = True : Main(BoolParameter, B) : Tag(""B"", B)", "ByRef ByRefParam As Boolean").Validator.ValidateTag("B", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
 
     [TestMethod]
     public void Argument_ArgList_DoesNotThrow()
@@ -367,7 +367,7 @@ public void ArgListMethod(__arglist)
             }
             return x.State;
         });
-        SETestContext.CreateCS("string a = null; a ??= arg;", ", string arg", collector);
+        SETestContext.CreateCS("string a = null; a ??= arg;", "string arg", collector);
         assertions.Should().Be(3);  // Block #3 transitive capture, Block #3 BranchValue, Block #4
     }
 
@@ -429,7 +429,7 @@ Tag(""Delegate"", del);";
         const string code = @"
 var s = new Sample(dynamicArg);
 Tag(""S"", s);";
-        var validator = SETestContext.CreateCS(code, ", dynamic dynamicArg").Validator;
+        var validator = SETestContext.CreateCS(code, "dynamic dynamicArg").Validator;
         validator.ValidateContainsOperation(OperationKind.DynamicObjectCreation);
         validator.ValidateTag("S", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
     }
@@ -514,7 +514,7 @@ Tag(""AfterObjNull"", argObjNull);
 Tag(""AfterObjDefault"", argObjDefault);
 Tag(""AfterInt"", argInt);
 Tag(""AfterNullableInt"", argNullableInt);";
-        var validator = SETestContext.CreateCS(code, ", object argObjNull, object argObjDefault, int argInt, int? argNullableInt").Validator;
+        var validator = SETestContext.CreateCS(code, "object argObjNull, object argObjDefault, int argInt, int? argNullableInt").Validator;
         validator.ValidateContainsOperation(OperationKind.Literal);
         validator.ValidateTag("BeforeObjNull", x => x.Should().HaveNoConstraints());
         validator.ValidateTag("BeforeObjDefault", x => x.Should().HaveNoConstraints());
@@ -536,7 +536,7 @@ ArgObj = Nothing
 ArgInt = Nothing
 Tag(""AfterObj"", ArgObj)
 Tag(""AfterInt"", ArgInt)";
-        var validator = SETestContext.CreateVB(code, ", ArgObj As Object, ArgInt As Integer").Validator;
+        var validator = SETestContext.CreateVB(code, "ArgObj As Object, ArgInt As Integer").Validator;
         validator.ValidateContainsOperation(OperationKind.Literal);
         validator.ValidateTag("BeforeObj", x => x.Should().HaveNoConstraints());
         validator.ValidateTag("BeforeInt", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
@@ -849,7 +849,7 @@ _ = arg.field;
 Tag(""After"", arg);
 
 Sample UntrackedSymbol() => this;";
-        var validator = SETestContext.CreateCS(code, ", Sample arg").Validator;
+        var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
         validator.ValidateContainsOperation(OperationKind.FieldReference);
         validator.ValidateTag("Before", x => x.Should().BeNull());
         validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
@@ -868,7 +868,7 @@ arg.field = 42;
 Tag(""After"", arg);
 
 Sample UntrackedSymbol() => this;";
-        var validator = SETestContext.CreateCS(code, ", Sample arg").Validator;
+        var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
         validator.ValidateContainsOperation(OperationKind.FieldReference);
         validator.ValidateTag("Before", x => x.Should().BeNull());
         validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
@@ -882,7 +882,7 @@ this.fieldException = new NotImplementedException();
 var argException = arg.fieldException;  // Should not propagate constraint from this.fieldException
 Tag(""This"", fieldException);
 Tag(""Arg"", argException);";
-        var validator = SETestContext.CreateCS(code, ", Sample arg").Validator;
+        var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
         validator.ValidateTag("This", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         validator.ValidateTag("Arg", x => x.Should().BeNull());
     }
@@ -906,7 +906,7 @@ Tag(""AfterDictionary"", dictionary);
 Tag(""AfterIndexer"", indexer);
 
 Sample UntrackedSymbol() => this;";
-        var validator = SETestContext.CreateCS(code, ", Sample arg, Dictionary<int, int> dictionary, Sample indexer").Validator;
+        var validator = SETestContext.CreateCS(code, "Sample arg, Dictionary<int, int> dictionary, Sample indexer").Validator;
         validator.ValidateContainsOperation(OperationKind.PropertyReference);
         validator.ValidateTag("BeforeProperty", x => x.Should().BeNull());
         validator.ValidateTag("BeforeDictionary", x => x.Should().BeNull());
@@ -935,7 +935,7 @@ Tag(""AfterDictionary"", dictionary);
 Tag(""AfterIndexer"", indexer);
 
 Sample UntrackedSymbol() => this;";
-        var validator = SETestContext.CreateCS(code, ", Sample arg, Dictionary<int, int> dictionary, Sample indexer").Validator;
+        var validator = SETestContext.CreateCS(code, "Sample arg, Dictionary<int, int> dictionary, Sample indexer").Validator;
         validator.ValidateContainsOperation(OperationKind.PropertyReference);
         validator.ValidateTag("BeforeProperty", x => x.Should().BeNull());
         validator.ValidateTag("BeforeDictionary", x => x.Should().BeNull());
@@ -985,7 +985,7 @@ _ = array[42];
 Tag(""After"", array);
 
 int[] UntrackedSymbol() => new[] { 42 };";
-        var validator = SETestContext.CreateCS(code, ", int[] array").Validator;
+        var validator = SETestContext.CreateCS(code, "int[] array").Validator;
         validator.ValidateContainsOperation(OperationKind.ArrayElementReference);
         validator.ValidateTag("Before", x => x.Should().BeNull());
         validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
@@ -1001,7 +1001,7 @@ array[42] = 42;
 Tag(""After"", array);
 
 int[] UntrackedSymbol() => new[] { 42 };";
-        var validator = SETestContext.CreateCS(code, ", int[] array").Validator;
+        var validator = SETestContext.CreateCS(code, "int[] array").Validator;
         validator.ValidateContainsOperation(OperationKind.ArrayElementReference);
         validator.ValidateTag("Before", x => x.Should().BeNull());
         validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
@@ -1017,7 +1017,7 @@ add.Event += (sender, e) => { };
 remove.Event -= (sender, e) => { };
 Tag(""AfterAdd"", add);
 Tag(""AfterRemove"", remove);";
-        var validator = SETestContext.CreateCS(code, ", Sample add, Sample remove").Validator;
+        var validator = SETestContext.CreateCS(code, "Sample add, Sample remove").Validator;
         validator.ValidateContainsOperation(OperationKind.ArrayElementReference);
         validator.ValidateTag("BeforeAdd", x => x.Should().BeNull());
         validator.ValidateTag("BeforeRemove", x => x.Should().BeNull());
@@ -1041,7 +1041,7 @@ Tag(""AfterSecond"", Second)
 Tag(""AfterThird"", Third)
 Tag(""AfterFourth"", Fourth)
 Tag(""AfterNotTracked"", Arg.FieldArray)";
-        var validator = SETestContext.CreateVB(code, ", Arg As Sample").Validator;
+        var validator = SETestContext.CreateVB(code, "Arg As Sample").Validator;
         validator.ValidateContainsOperation(OperationKind.ReDim);
         validator.ValidateTag("BeforeFirst", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         validator.ValidateTag("BeforeSecond", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
@@ -1064,7 +1064,7 @@ Tag(""BeforeSecond"", Second)
 ReDim Preserve First(42), Second(42)
 Tag(""AfterFirst"", First)
 Tag(""AfterSecond"", Second)";
-        var validator = SETestContext.CreateVB(code, ", Arg As Sample").Validator;
+        var validator = SETestContext.CreateVB(code, "Arg As Sample").Validator;
         validator.ValidateContainsOperation(OperationKind.ReDim);
         validator.ValidateTag("BeforeFirst", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         validator.ValidateTag("BeforeSecond", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("has size in declaration"));

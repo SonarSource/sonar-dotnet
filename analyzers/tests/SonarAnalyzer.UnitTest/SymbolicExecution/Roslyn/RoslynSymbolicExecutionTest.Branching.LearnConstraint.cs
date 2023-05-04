@@ -98,7 +98,7 @@ if ((bool)(object)({unary}arg))
 {{
     Tag(""Arg"", arg);
 }}";
-        var validator = SETestContext.CreateCS(code, ", int arg").Validator;
+        var validator = SETestContext.CreateCS(code, "int arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Unary);
         validator.ValidateTag("Arg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
     }
@@ -115,7 +115,7 @@ Tag(""End"", collection);";
         var check = new ConditionEvaluatedTestCheck(x => x.State[x.Operation].HasConstraint(BoolConstraint.True)
                                                              ? x.SetSymbolConstraint(x.Operation.Instance.AsPropertyReference().Value.Instance.TrackedSymbol(), DummyConstraint.Dummy)
                                                              : x.State);
-        var validator = SETestContext.CreateCS(code, ", ICollection<object> collection", check).Validator;
+        var validator = SETestContext.CreateCS(code, "ICollection<object> collection", check).Validator;
         validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(DummyConstraint.Dummy, ObjectConstraint.NotNull));
         validator.TagStates("End").Should().HaveCount(2);
     }
@@ -854,7 +854,7 @@ switch (arg)
         break;
 }
 Tag(""End"", arg);";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.FlowCaptureReference);
         validator.ValidateTag("Null", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         validator.ValidateTag("Default", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
@@ -869,7 +869,7 @@ Tag(""End"", arg);";
         var code = @"
 arg?.ToString();
 Tag(""End"", arg);";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.IsNull);
         validator.Validate("Invocation: .ToString()", x => x.State.SymbolsWith(ObjectConstraint.NotNull).Should().ContainSingle());
         validator.TagValues("End").Should().HaveCount(2)
@@ -949,7 +949,7 @@ Tag(""End"", arg);";
                 Func<string> someFunc = () => s.ToString();
 
                 Tag("End", s);
-                """, ", string s").Validator;
+                """, "string s").Validator;
         validator.ValidateTag("End", x => x.Should().HaveNoConstraints()); // Should have NotNull constraint
     }
 
@@ -986,7 +986,7 @@ Else
     Tag(""Else"", Arg)
 End If
 Tag(""End"", Arg)";
-        var validator = SETestContext.CreateVB(code, $", Arg As {argType}").Validator;
+        var validator = SETestContext.CreateVB(code, $"Arg As {argType}").Validator;
         validator.ValidateContainsOperation(expectedOperation);
         return validator;
     }
