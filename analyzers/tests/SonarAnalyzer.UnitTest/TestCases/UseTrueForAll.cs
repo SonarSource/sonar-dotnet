@@ -1,49 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.ComponentModel;
+using System.Text;
 
-var list = new List<int>();
+StringBuilder sb = new();
 
-var bad = list.All(x => true); // Noncompliant
-var nullableBad = list?.All(x => true); // Noncompliant
+sb.ToString();//Noncompliant
 
-var good = list.TrueForAll(x => true); // Compliant
+sb.Append("").ToString();//Noncompliant
+sb.Append("").Append("").ToString();//Noncompliant
+sb.Append("").Append("").Append("").ToString();//Noncompliant
 
-var bad2 = GetList().All(x => true); // Noncompliant
-var good2 = GetList().TrueForAll(x => true); // Compliant
+sb.ToString().ToLower();//Noncompliant
+sb.ToString().ToLower().ToLower();//Noncompliant
+sb.ToString().ToLower().ToLower().ToLower();//Noncompliant
 
-Func<List<int>, bool> func = l => l.All(x => true); // Noncompliant
+sb.Append("").Append("").Append("").ToString().ToLower();//Noncompliant
+sb.Append("").Append("").ToString().ToLower().ToLower();//Noncompliant
+sb.Append("").ToString().ToLower().ToLower().ToLower();//Noncompliant
 
-var t = new ImplementsAll();
-t.All(); // Compliant
+sb?.Append("").ToString();//Noncompliant
+sb?.Append("").Append("").ToString();//Noncompliant
+sb?.Append("").Append("").Append("").ToString();//Noncompliant
 
-var fl = new FakeList<int>();
-fl.All(x => true); // Compliant
+sb?.ToString().ToLower();//Noncompliant
+sb?.ToString().ToLower().ToLower();//Noncompliant
+sb?.ToString().ToLower().ToLower().ToLower();//Noncompliant
 
-var tl = new GoodList<int>();
-tl.All(x => true); // Noncompliant
+sb?.Append("").Append("").Append("").ToString().ToLower();//Noncompliant
+sb?.Append("").Append("").ToString().ToLower().ToLower();//Noncompliant
+sb?.Append("").ToString().ToLower().ToLower().ToLower();//Noncompliant
 
-GetListWrapper().listThing.All(x => true); // Noncompliant
-GetListWrapper()?.listThing.All(x => true); // Noncompliant
-GetListWrapper().listThing?.All(x => true); // Noncompliant
-GetListWrapper()?.listThing?.All(x => true); // Noncompliant
+sb.Append("")?.ToString();//Noncompliant
+sb.Append("")?.Append("").ToString();//Noncompliant
+sb.Append("")?.Append("").Append("").ToString();//Noncompliant
 
-List<int> GetList() => null;
-ListWrapper? GetListWrapper() => new();
+sb.ToString()?.ToLower();//Noncompliant
+sb.ToString()?.ToLower().ToLower();//Noncompliant
+sb.ToString()?.ToLower().ToLower().ToLower();//Noncompliant
 
-class FakeList<T> : List<T>
-{
-    public bool All(Predicate<T> match) => true;
-}
+sb.Append("")?.Append("").Append("").ToString().ToLower();//Noncompliant
+sb.Append("").Append("")?.ToString().ToLower().ToLower();//Noncompliant
+sb.Append("").ToString().ToLower().ToLower()?.ToLower();//Noncompliant
 
-class GoodList<T> : List<T> { }
+sb.Append("")?.Append("").Append("").ToString().ToLower();//Noncompliant
+sb.Append("").Append("")?.ToString().ToLower().ToLower();//Noncompliant
+sb.Append("").ToString().ToLower().ToLower()?.ToLower();//Noncompliant
 
-class ImplementsAll
-{
-    public void All() { }
-}
 
-public class ListWrapper
-{
-    public List<int>? listThing = new();
-}
+_ = sb.Append("").Append("").ToString().ToLower().ToUpperInvariant(); // Noncompliant
+_ = sb.Append("").Append("").ToString().ToLower()?.ToUpperInvariant(); // Noncompliant
+_ = sb.Append("").Append("").ToString()?.ToLower().ToUpperInvariant(); // Noncompliant
+_ = sb.Append("").Append("").ToString()?.ToLower()?.ToUpperInvariant(); // Noncompliant
+_ = sb.Append("").Append("")?.ToString().ToLower().ToUpperInvariant(); // Noncompliant
+_ = sb.Append("").Append("")?.ToString().ToLower()?.ToUpperInvariant(); // Noncompliant
+_ = sb.Append("").Append("")?.ToString()?.ToLower().ToUpperInvariant(); // Noncompliant
+_ = sb.Append("").Append("")?.ToString()?.ToLower()?.ToUpperInvariant(); // Noncompliant
+_ = sb.Append("")?.Append("").ToString().ToLower().ToUpperInvariant(); // Noncompliant
+_ = sb.Append("")?.Append("").ToString().ToLower()?.ToUpperInvariant(); // Noncompliant
+_ = sb.Append("")?.Append("").ToString()?.ToLower().ToUpperInvariant(); // Noncompliant
+_ = sb.Append("")?.Append("").ToString()?.ToLower()?.ToUpperInvariant(); // Noncompliant
+_ = sb.Append("")?.Append("")?.ToString().ToLower().ToUpperInvariant(); // Noncompliant
+_ = sb.Append("")?.Append("")?.ToString().ToLower()?.ToUpperInvariant(); // Noncompliant
+_ = sb.Append("")?.Append("")?.ToString()?.ToLower().ToUpperInvariant(); // Noncompliant
+_ = sb.Append("")?.Append("")?.ToString()?.ToLower()?.ToUpperInvariant(); // Noncompliant
