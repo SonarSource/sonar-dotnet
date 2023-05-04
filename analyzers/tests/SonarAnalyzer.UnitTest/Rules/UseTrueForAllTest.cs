@@ -34,6 +34,16 @@ public class UseTrueForAllTest
     public void UseTrueForAll_CS() =>
         builderCS.AddPaths("UseTrueForAll.cs").WithOutputKind(OutputKind.DynamicallyLinkedLibrary).Verify();
 
+#if NET
+
+    [TestMethod]
+    public void UseTrueForAll_CS_Immutable() =>
+        builderCS.AddPaths("UseTrueForAll.Immutable.cs")
+            .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .WithOutputKind(OutputKind.DynamicallyLinkedLibrary)
+            .Verify();
+
+#endif
 
     [TestMethod]
     public void UseTrueForAll_VB() =>

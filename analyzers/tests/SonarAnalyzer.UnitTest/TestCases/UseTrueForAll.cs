@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 class ListTestcases
 {
@@ -109,4 +108,3 @@ class ArrayTestcases
         _ = array.ToArray()?.ToArray()?.ToArray()?.ToArray()?.All(x => true); //Noncompliant
     }
 }
-

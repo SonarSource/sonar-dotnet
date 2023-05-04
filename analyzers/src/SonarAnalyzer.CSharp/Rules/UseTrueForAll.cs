@@ -50,7 +50,7 @@ public class UseTrueForAll : UseTrueForAllBase<SyntaxKind>
         }
         else if (invocation.Expression is MemberBindingExpressionSyntax binding)
         {
-            left = invocation.GetParentConditionalAccessExpression();
+            left = invocation.GetParentConditionalAccessExpression().Expression;
             right = binding.Name;
             return true;
         }

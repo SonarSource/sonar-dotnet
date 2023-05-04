@@ -32,7 +32,7 @@ public abstract class UseTrueForAllBase<TSyntaxKind> : SonarDiagnosticAnalyzer<T
     private static readonly ImmutableArray<KnownType> TargetTypes = ImmutableArray.Create(
         KnownType.System_Array,
         KnownType.System_Collections_Generic_List_T,
-        KnownType.System_Collections_Immutable_ImmutableList);
+        KnownType.System_Collections_Immutable_ImmutableList_T);
 
     protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
         model.GetTypeInfo(left).Type is { } type && type.DerivesFromAny(TargetTypes);
