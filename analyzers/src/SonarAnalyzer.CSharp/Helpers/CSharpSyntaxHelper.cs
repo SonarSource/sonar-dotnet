@@ -114,6 +114,39 @@ namespace SonarAnalyzer.Helpers
             identifierNameSyntax.Identifier.ValueText == NameOfKeywordText &&
             semanticModel.GetSymbolInfo(expression).Symbol?.Kind != SymbolKind.Method;
 
+        public static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
+        {
+            if (invocation.Expression is MemberAccessExpressionSyntax access)
+            {
+                left = access.Expression;
+                right = access.Name;
+                return true;
+            }
+            else if (invocation.Expression is MemberBindingExpressionSyntax binding)
+            {
+                left = GetLeft(invocation);
+                right = binding.Name;
+                return true;
+            }
+
+            left = right = null;
+            return false;
+
+            static SyntaxNode GetLeft(SyntaxNode current, int iteration = 0)
+            {
+                const int recursionThreshold = 42;
+                if (iteration > recursionThreshold || current.Parent is CompilationUnitSyntax)
+                {
+                    return null;
+                }
+                if (current.Parent is ConditionalAccessExpressionSyntax conditional && conditional.WhenNotNull == current)
+                {
+                    return conditional.Expression;
+                }
+                return GetLeft(current.Parent, iteration + 1);
+            }
+        }
+
         public static bool IsStringEmpty(this ExpressionSyntax expression, SemanticModel semanticModel)
         {
             if (!expression.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&

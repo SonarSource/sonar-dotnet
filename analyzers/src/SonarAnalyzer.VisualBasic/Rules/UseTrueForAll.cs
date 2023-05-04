@@ -28,31 +28,27 @@ public sealed class UseTrueForAll : UseMethodAInsteadOfMethodB<SyntaxKind>
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var node = c.Node;
-                if (true)
+                var invocation = c.Node as InvocationExpressionSyntax;
+
+                if (invocation.NameIs(GetMethodName)
+                    && invocation.TryGetOperands(out var left, out var right)
+                    && IsCorrectCall(right, c.SemanticModel)
+                    && IsCorrectType(left, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                 }
             },
             SyntaxKind.InvocationExpression);
 
-    protected static bool GetOperands(SyntaxNode node, out ExpressionSyntax left, out ExpressionSyntax right)
-    {
-        if (node is MemberAccessExpressionSyntax access)
-        {
-            left = access.Expression;
-            right = access.Name;
-            return true;
-        }
-        else if (node is ConditionalAccessExpressionSyntax { WhenNotNull: InvocationExpressionSyntax } conditional)
-        {
-            left = conditional.Expression;
-            right = conditional.WhenNotNull;
-            return true;
-        }
+    private bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
+        model.GetTypeInfo(left).Type is { } type
+        && TypeCondition(type);
 
-        left = right = null;
-        return false;
-    }
+    private bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
+        && MethodCondition(method);
 
+    protected string GetMethodName => "ToString";
+    protected bool MethodCondition(IMethodSymbol method) => method.Is(KnownType.System_Text_StringBuilder, "ToString");
+    protected bool TypeCondition(ITypeSymbol type) => type.DerivesFrom(KnownType.System_Text_StringBuilder);
 }

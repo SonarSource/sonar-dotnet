@@ -51,7 +51,7 @@ public abstract class UseThisInsteadOfThat : UseMethodAInsteadOfMethodB<SyntaxKi
         },
         SyntaxKind.InvocationExpression);
 
-    protected static bool TryGetOperands(InvocationExpressionSyntax invocation, out ExpressionSyntax left, out ExpressionSyntax right)
+    protected static bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
     {
         if (invocation.Expression is MemberAccessExpressionSyntax access)
         {
@@ -70,7 +70,7 @@ public abstract class UseThisInsteadOfThat : UseMethodAInsteadOfMethodB<SyntaxKi
         return false;
     }
 
-    protected static ExpressionSyntax GetLeft(SyntaxNode current, int iteration = 0)
+    protected static SyntaxNode GetLeft(SyntaxNode current, int iteration = 0)
     {
         const int magicNumber = 42;
         if (iteration > magicNumber || current.Parent is CompilationUnitSyntax)
@@ -86,11 +86,11 @@ public abstract class UseThisInsteadOfThat : UseMethodAInsteadOfMethodB<SyntaxKi
         return GetLeft(current.Parent, iteration + 1);
     }
 
-    private bool IsCorrectType(ExpressionSyntax left, SemanticModel model) =>
+    private bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
         model.GetTypeInfo(left).Type is { } type
         && TypeCondition(type);
 
-    private bool IsCorrectCall(ExpressionSyntax right, SemanticModel model) =>
+    private bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && MethodCondition(method);
 
