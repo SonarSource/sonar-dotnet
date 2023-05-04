@@ -20,14 +20,14 @@
 
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
+
+public partial class RoslynSymbolicExecutionTest
 {
-    public partial class RoslynSymbolicExecutionTest
+    [TestMethod]
+    public void Exception_FieldReference()
     {
-        [TestMethod]
-        public void Exception_FieldReference()
-        {
-            const string code = @"
+        const string code = @"
 var tag = ""BeforeTry"";
 try
 {
@@ -39,21 +39,21 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTagOrder(
-                "BeforeTry",
-                "InTry",
-                "InCatch",
-                "AfterCatch");
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTagOrder(
+            "BeforeTry",
+            "InTry",
+            "InCatch",
+            "AfterCatch");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"));
-            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
-        }
+        validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"));
+        validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+    }
 
-        [TestMethod]
-        public void Exception_LocalReference()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Exception_LocalReference()
+    {
+        const string code = @"
 NotImplementedException exception = null;
 var tag = ""BeforeTry"";
 try
@@ -66,21 +66,21 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTagOrder(
-                "BeforeTry",
-                "InTry",
-                "InCatch",
-                "AfterCatch");
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTagOrder(
+            "BeforeTry",
+            "InTry",
+            "InCatch",
+            "AfterCatch");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"));
-            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
-        }
+        validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"));
+        validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+    }
 
-        [TestMethod]
-        public void Exception_PropertyReference()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Exception_PropertyReference()
+    {
+        const string code = @"
 var tag = ""BeforeTry"";
 try
 {
@@ -92,21 +92,21 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTagOrder(
-                "BeforeTry",
-                "InTry",
-                "InCatch",
-                "AfterCatch");
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTagOrder(
+            "BeforeTry",
+            "InTry",
+            "InCatch",
+            "AfterCatch");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"));
-            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
-        }
+        validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"));
+        validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+    }
 
-        [TestMethod]
-        public void Exception_ParameterReference()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Exception_ParameterReference()
+    {
+        const string code = @"
 var tag = ""BeforeTry"";
 try
 {
@@ -118,21 +118,21 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-            var validator = SETestContext.CreateCS(code, ", NotImplementedException ex").Validator;
-            validator.ValidateTagOrder(
-                "BeforeTry",
-                "InTry",
-                "InCatch",
-                "AfterCatch");
+        var validator = SETestContext.CreateCS(code, ", NotImplementedException ex").Validator;
+        validator.ValidateTagOrder(
+            "BeforeTry",
+            "InTry",
+            "InCatch",
+            "AfterCatch");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"));
-            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
-        }
+        validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"));
+        validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+    }
 
-        [TestMethod]
-        public void Exception_ArrayElementReference()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Exception_ArrayElementReference()
+    {
+        const string code = @"
 NotImplementedException[] exceptions = null;
 var tag = ""BeforeTry"";
 try
@@ -145,24 +145,24 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTagOrder(
-                "BeforeTry",
-                "InTry",
-                "InCatch",
-                "InCatch",
-                "AfterCatch");
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTagOrder(
+            "BeforeTry",
+            "InTry",
+            "InCatch",
+            "InCatch",
+            "AfterCatch");
 
-            validator.TagStates("InCatch").Should().HaveCount(2)
-                     .And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"))
-                     .And.ContainSingle(x => HasExceptionOfType(x, "IndexOutOfRangeException"));
-            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
-        }
+        validator.TagStates("InCatch").Should().HaveCount(2)
+                 .And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"))
+                 .And.ContainSingle(x => HasExceptionOfType(x, "IndexOutOfRangeException"));
+        validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+    }
 
-        [TestMethod]
-        public void Exception_MethodInvocation()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Exception_MethodInvocation()
+    {
+        const string code = @"
 var tag = ""BeforeTry"";
 try
 {
@@ -174,24 +174,24 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTagOrder(
-                "BeforeTry",
-                "InTry",
-                "InCatch", // In case CreateException throws
-                "InCatch", // throw
-                "AfterCatch");
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTagOrder(
+            "BeforeTry",
+            "InTry",
+            "InCatch", // In case CreateException throws
+            "InCatch", // throw
+            "AfterCatch");
 
-            validator.TagStates("InCatch").Should().HaveCount(2)
-                     .And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"))
-                     .And.ContainSingle(x => HasUnknownException(x));
-            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
-        }
+        validator.TagStates("InCatch").Should().HaveCount(2)
+                 .And.ContainSingle(x => HasExceptionOfType(x, "NotImplementedException"))
+                 .And.ContainSingle(x => HasUnknownException(x));
+        validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+    }
 
-        [TestMethod]
-        public void Exception_Conversion()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Exception_Conversion()
+    {
+        const string code = @"
 var tag = ""BeforeTry"";
 var obj = new ArgumentNullException();
 try
@@ -204,21 +204,21 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTagOrder(
-                "BeforeTry",
-                "InTry",
-                "InCatch",
-                "AfterCatch");
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTagOrder(
+            "BeforeTry",
+            "InTry",
+            "InCatch",
+            "AfterCatch");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "ArgumentNullException"));
-            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
-        }
+        validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "ArgumentNullException"));
+        validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+    }
 
-        [TestMethod]
-        public void Exception_MultipleConversion()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Exception_MultipleConversion()
+    {
+        const string code = @"
 var tag = ""BeforeTry"";
 try
 {
@@ -230,15 +230,14 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-            var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTagOrder(
-                "BeforeTry",
-                "InTry",
-                "InCatch",
-                "AfterCatch");
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTagOrder(
+            "BeforeTry",
+            "InTry",
+            "InCatch",
+            "AfterCatch");
 
-            validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
-            validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
-        }
+        validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
+        validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
     }
 }

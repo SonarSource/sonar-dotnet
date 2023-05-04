@@ -27,169 +27,169 @@ using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
+
+[TestClass]
+public partial class RoslynSymbolicExecutionTest
 {
-    [TestClass]
-    public partial class RoslynSymbolicExecutionTest
+    [TestMethod]
+    public void Constructor_Throws()
     {
-        [TestMethod]
-        public void Constructor_Throws()
-        {
-            var cfg = TestHelper.CompileCfgCS("public class Sample { public void Main() { } }");
-            var check = new Mock<SymbolicCheck>().Object;
-            ((Action)(() => new RoslynSymbolicExecution(null, new[] { check }, default))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
-            ((Action)(() => new RoslynSymbolicExecution(cfg, null, default))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
-            ((Action)(() => new RoslynSymbolicExecution(cfg, Array.Empty<SymbolicCheck>(), default))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
-        }
+        var cfg = TestHelper.CompileCfgCS("public class Sample { public void Main() { } }");
+        var check = new Mock<SymbolicCheck>().Object;
+        ((Action)(() => new RoslynSymbolicExecution(null, new[] { check }, default))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
+        ((Action)(() => new RoslynSymbolicExecution(cfg, null, default))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
+        ((Action)(() => new RoslynSymbolicExecution(cfg, Array.Empty<SymbolicCheck>(), default))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");
+    }
 
-        [TestMethod]
-        public void Execute_SecondRun_Throws()
-        {
-            var cfg = TestHelper.CompileCfgBodyCS();
-            var se = new RoslynSymbolicExecution(cfg, new[] { new ValidatorTestCheck(cfg) }, default);
-            se.Execute();
-            se.Invoking(x => x.Execute()).Should().Throw<InvalidOperationException>().WithMessage("Engine can be executed only once.");
-        }
+    [TestMethod]
+    public void Execute_SecondRun_Throws()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS();
+        var se = new RoslynSymbolicExecution(cfg, new[] { new ValidatorTestCheck(cfg) }, default);
+        se.Execute();
+        se.Invoking(x => x.Execute()).Should().Throw<InvalidOperationException>().WithMessage("Engine can be executed only once.");
+    }
 
-        [TestMethod]
-        public void SequentialInput_CS()
-        {
-            var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);");
-            context.Validator.ValidateOrder(
-                "LocalReference: a = true (Implicit)",
-                "Literal: true",
-                "SimpleAssignment: a = true (Implicit)",
-                "LocalReference: b = false (Implicit)",
-                "Literal: false",
-                "SimpleAssignment: b = false (Implicit)",
-                "LocalReference: b",
-                "LocalReference: b",
-                "UnaryOperator: !b",
-                "SimpleAssignment: b = !b",
-                "ExpressionStatement: b = !b;",
-                "LocalReference: a",
-                "LocalReference: b",
-                "SimpleAssignment: a = (b)",
-                "ExpressionStatement: a = (b);");
-        }
+    [TestMethod]
+    public void SequentialInput_CS()
+    {
+        var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);");
+        context.Validator.ValidateOrder(
+            "LocalReference: a = true (Implicit)",
+            "Literal: true",
+            "SimpleAssignment: a = true (Implicit)",
+            "LocalReference: b = false (Implicit)",
+            "Literal: false",
+            "SimpleAssignment: b = false (Implicit)",
+            "LocalReference: b",
+            "LocalReference: b",
+            "UnaryOperator: !b",
+            "SimpleAssignment: b = !b",
+            "ExpressionStatement: b = !b;",
+            "LocalReference: a",
+            "LocalReference: b",
+            "SimpleAssignment: a = (b)",
+            "ExpressionStatement: a = (b);");
+    }
 
-        [TestMethod]
-        public void SequentialInput_VB()
-        {
-            var context = SETestContext.CreateVB("Dim A As Boolean = True, B As Boolean = False : B = Not B : A = (B)");
-            context.Validator.ValidateOrder(
-                "LocalReference: A (Implicit)",
-                "Literal: True",
-                "SimpleAssignment: A As Boolean = True (Implicit)",
-                "LocalReference: B (Implicit)",
-                "Literal: False",
-                "SimpleAssignment: B As Boolean = False (Implicit)",
-                "LocalReference: B",
-                "LocalReference: B",
-                "UnaryOperator: Not B",
-                "SimpleAssignment: B = Not B (Implicit)",
-                "ExpressionStatement: B = Not B",
-                "LocalReference: A",
-                "LocalReference: B",
-                "Parenthesized: (B)",
-                "SimpleAssignment: A = (B) (Implicit)",
-                "ExpressionStatement: A = (B)");
-        }
+    [TestMethod]
+    public void SequentialInput_VB()
+    {
+        var context = SETestContext.CreateVB("Dim A As Boolean = True, B As Boolean = False : B = Not B : A = (B)");
+        context.Validator.ValidateOrder(
+            "LocalReference: A (Implicit)",
+            "Literal: True",
+            "SimpleAssignment: A As Boolean = True (Implicit)",
+            "LocalReference: B (Implicit)",
+            "Literal: False",
+            "SimpleAssignment: B As Boolean = False (Implicit)",
+            "LocalReference: B",
+            "LocalReference: B",
+            "UnaryOperator: Not B",
+            "SimpleAssignment: B = Not B (Implicit)",
+            "ExpressionStatement: B = Not B",
+            "LocalReference: A",
+            "LocalReference: B",
+            "Parenthesized: (B)",
+            "SimpleAssignment: A = (B) (Implicit)",
+            "ExpressionStatement: A = (B)");
+    }
 
-        [TestMethod]
-        public void PreProcess_Null_StopsExecution()
-        {
-            var stopper = new PreProcessTestCheck(OperationKind.Unary, x => null);
-            var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
-            context.Validator.ValidateOrder(
-                "LocalReference: a = true (Implicit)",
-                "Literal: true",
-                "SimpleAssignment: a = true (Implicit)",
-                "LocalReference: b = false (Implicit)",
-                "Literal: false",
-                "SimpleAssignment: b = false (Implicit)",
-                "LocalReference: b",
-                "LocalReference: b");
-        }
+    [TestMethod]
+    public void PreProcess_Null_StopsExecution()
+    {
+        var stopper = new PreProcessTestCheck(OperationKind.Unary, x => null);
+        var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
+        context.Validator.ValidateOrder(
+            "LocalReference: a = true (Implicit)",
+            "Literal: true",
+            "SimpleAssignment: a = true (Implicit)",
+            "LocalReference: b = false (Implicit)",
+            "Literal: false",
+            "SimpleAssignment: b = false (Implicit)",
+            "LocalReference: b",
+            "LocalReference: b");
+    }
 
-        [TestMethod]
-        public void PostProcess_Null_StopsExecution()
-        {
-            var stopper = new PostProcessTestCheck(OperationKind.Unary, x => null);
-            var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
-            context.Validator.ValidateOrder(
-                "LocalReference: a = true (Implicit)",
-                "Literal: true",
-                "SimpleAssignment: a = true (Implicit)",
-                "LocalReference: b = false (Implicit)",
-                "Literal: false",
-                "SimpleAssignment: b = false (Implicit)",
-                "LocalReference: b",
-                "LocalReference: b");
-        }
+    [TestMethod]
+    public void PostProcess_Null_StopsExecution()
+    {
+        var stopper = new PostProcessTestCheck(OperationKind.Unary, x => null);
+        var context = SETestContext.CreateCS("var a = true; var b = false; b = !b; a = (b);", stopper);
+        context.Validator.ValidateOrder(
+            "LocalReference: a = true (Implicit)",
+            "Literal: true",
+            "SimpleAssignment: a = true (Implicit)",
+            "LocalReference: b = false (Implicit)",
+            "Literal: false",
+            "SimpleAssignment: b = false (Implicit)",
+            "LocalReference: b",
+            "LocalReference: b");
+    }
 
-        [TestMethod]
-        public void PostProcess_OperationDoesNotHaveValuesByDefault()
-        {
-            var validator = SETestContext.CreateCS("string x = Environment.CommandLine;").Validator;
-            validator.ValidatePostProcessCount(3);
-            validator.ValidateOperationValuesAreNull();
-        }
+    [TestMethod]
+    public void PostProcess_OperationDoesNotHaveValuesByDefault()
+    {
+        var validator = SETestContext.CreateCS("string x = Environment.CommandLine;").Validator;
+        validator.ValidatePostProcessCount(3);
+        validator.ValidateOperationValuesAreNull();
+    }
 
-        [TestMethod]
-        public void Execute_PersistConstraints()
-        {
-            var validator = SETestContext.CreateCS("var a = true;").Validator;
-            validator.ValidateOrder(    // Visualize operations
-                "LocalReference: a = true (Implicit)",
-                "Literal: true",
-                "SimpleAssignment: a = true (Implicit)");
-            validator.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
-        }
+    [TestMethod]
+    public void Execute_PersistConstraints()
+    {
+        var validator = SETestContext.CreateCS("var a = true;").Validator;
+        validator.ValidateOrder(    // Visualize operations
+            "LocalReference: a = true (Implicit)",
+            "Literal: true",
+            "SimpleAssignment: a = true (Implicit)");
+        validator.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[x.Operation].HasConstraint(BoolConstraint.True).Should().BeTrue());
+    }
 
-        [TestMethod]
-        public void Execute_PersistSymbols_InsideBlock()
-        {
-            var validator = SETestContext.CreateCS("var first = true; var second = false; first = second;").Validator;
-            validator.ValidateOrder(    // Visualize operations
-                   "LocalReference: first = true (Implicit)",
-                   "Literal: true",
-                   "SimpleAssignment: first = true (Implicit)",
-                   "LocalReference: second = false (Implicit)",
-                   "Literal: false",
-                   "SimpleAssignment: second = false (Implicit)",
-                   "LocalReference: first",
-                   "LocalReference: second",
-                   "SimpleAssignment: first = second",
-                   "ExpressionStatement: first = second;");
-            validator.Validate("LocalReference: first", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(BoolConstraint.True).Should().BeTrue());
-            validator.Validate("LocalReference: second", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(BoolConstraint.False).Should().BeTrue());
+    [TestMethod]
+    public void Execute_PersistSymbols_InsideBlock()
+    {
+        var validator = SETestContext.CreateCS("var first = true; var second = false; first = second;").Validator;
+        validator.ValidateOrder(    // Visualize operations
+               "LocalReference: first = true (Implicit)",
+               "Literal: true",
+               "SimpleAssignment: first = true (Implicit)",
+               "LocalReference: second = false (Implicit)",
+               "Literal: false",
+               "SimpleAssignment: second = false (Implicit)",
+               "LocalReference: first",
+               "LocalReference: second",
+               "SimpleAssignment: first = second",
+               "ExpressionStatement: first = second;");
+        validator.Validate("LocalReference: first", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.Validate("LocalReference: second", x => x.State[LocalReferenceOperationSymbol(x.Operation)].HasConstraint(BoolConstraint.False).Should().BeTrue());
 
-            static ISymbol LocalReferenceOperationSymbol(IOperationWrapperSonar operation) =>
-                ((ILocalReferenceOperation)operation.Instance).Local;
-        }
+        static ISymbol LocalReferenceOperationSymbol(IOperationWrapperSonar operation) =>
+            ((ILocalReferenceOperation)operation.Instance).Local;
+    }
 
-        [TestMethod]
-        public void Execute_UnusedVariable_ClearedAfterBlock()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Execute_UnusedVariable_ClearedAfterBlock()
+    {
+        const string code = @"
 var first = boolParameter ? true : false;
 Tag(""BeforeLastUse"");
 bool second = first;
 if(boolParameter)
     boolParameter.ToString();
 Tag(""AfterLastUse"");";
-            var validator = SETestContext.CreateCS(code).Validator;
-            var firstSymbol = validator.Symbol("first");
-            validator.TagStates("BeforeLastUse").Should().HaveCount(2).And.OnlyContain(x => x[firstSymbol] != null);
-            validator.TagStates("AfterLastUse").Should().HaveCount(2).And.OnlyContain(x => x[firstSymbol] == null); // Once emtpy and once with the learned boolParameter true
-        }
+        var validator = SETestContext.CreateCS(code).Validator;
+        var firstSymbol = validator.Symbol("first");
+        validator.TagStates("BeforeLastUse").Should().HaveCount(2).And.OnlyContain(x => x[firstSymbol] != null);
+        validator.TagStates("AfterLastUse").Should().HaveCount(2).And.OnlyContain(x => x[firstSymbol] == null); // Once emtpy and once with the learned boolParameter true
+    }
 
-        [TestMethod]
-        public void Execute_OuterMethodParameter_NotCleared()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Execute_OuterMethodParameter_NotCleared()
+    {
+        const string code = @"
 void LocalFunction()
 {
     boolParameter = false;
@@ -198,142 +198,141 @@ void LocalFunction()
         misc.ToString();
     Tag(""LocalFunctionEnd"");
 }";
-            SETestContext.CreateCS(code, null, "LocalFunction").Validator.TagStates("LocalFunctionEnd").Should().HaveCount(1)
-                .And.OnlyContain(x => x.SymbolsWith(BoolConstraint.False).Count() == 1);
-        }
+        SETestContext.CreateCS(code, null, "LocalFunction").Validator.TagStates("LocalFunctionEnd").Should().HaveCount(1)
+            .And.OnlyContain(x => x.SymbolsWith(BoolConstraint.False).Count() == 1);
+    }
 
-        [TestMethod]
-        public void Execute_TooManyBlocks_NotSupported()
-        {
-            var validator = SETestContext.CreateCS($"var a = true{Enumerable.Repeat(" && true", 1020).JoinStr(null)};").Validator;
-            validator.ValidateExitReachCount(0);
-            validator.ValidateExecutionNotCompleted();
-        }
+    [TestMethod]
+    public void Execute_TooManyBlocks_NotSupported()
+    {
+        var validator = SETestContext.CreateCS($"var a = true{Enumerable.Repeat(" && true", 1020).JoinStr(null)};").Validator;
+        validator.ValidateExitReachCount(0);
+        validator.ValidateExecutionNotCompleted();
+    }
 
-        [TestMethod]
-        public void Execute_CheckProducesMoreStates_PreProcess()
-        {
-            var check = new PreProcessTestCheck(x => DecorateIntLiteral(x, TestConstraint.First, TestConstraint.Second));
-            SETestContext.CreateCS(@"var i = 42; Tag(""I"", i);", check).Validator.TagValues("I").Should()
-                .HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second));
-        }
+    [TestMethod]
+    public void Execute_CheckProducesMoreStates_PreProcess()
+    {
+        var check = new PreProcessTestCheck(x => DecorateIntLiteral(x, TestConstraint.First, TestConstraint.Second));
+        SETestContext.CreateCS(@"var i = 42; Tag(""I"", i);", check).Validator.TagValues("I").Should()
+            .HaveCount(2)
+            .And.ContainSingle(x => x.HasConstraint(TestConstraint.First))
+            .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second));
+    }
 
-        [TestMethod]
-        public void Execute_CheckProducesMoreStates_PostProcess()
-        {
-            var check = new PostProcessTestCheck(x => DecorateIntLiteral(x, TestConstraint.First, TestConstraint.Second));
-            SETestContext.CreateCS(@"var i = 42; Tag(""I"", i);", check).Validator.TagValues("I").Should()
-                .HaveCount(2)
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second));
-        }
+    [TestMethod]
+    public void Execute_CheckProducesMoreStates_PostProcess()
+    {
+        var check = new PostProcessTestCheck(x => DecorateIntLiteral(x, TestConstraint.First, TestConstraint.Second));
+        SETestContext.CreateCS(@"var i = 42; Tag(""I"", i);", check).Validator.TagValues("I").Should()
+            .HaveCount(2)
+            .And.ContainSingle(x => x.HasConstraint(TestConstraint.First))
+            .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second));
+    }
 
-        [TestMethod]
-        public void Execute_CheckProducesMoreStates_Both()
-        {
-            var preProcess = new PreProcessTestCheck(x => DecorateIntLiteral(x, TestConstraint.First, TestConstraint.Second));
-            var postProcess = new PostProcessTestCheck(x => DecorateIntLiteral(x, BoolConstraint.True, BoolConstraint.False));
-            SETestContext.CreateCS(@"var i = 42; Tag(""I"", i);", preProcess, postProcess).Validator.TagValues("I").Should()
-                .HaveCount(4)
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.False))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second) && x.HasConstraint(BoolConstraint.True))
-                .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second) && x.HasConstraint(BoolConstraint.False));
-        }
+    [TestMethod]
+    public void Execute_CheckProducesMoreStates_Both()
+    {
+        var preProcess = new PreProcessTestCheck(x => DecorateIntLiteral(x, TestConstraint.First, TestConstraint.Second));
+        var postProcess = new PostProcessTestCheck(x => DecorateIntLiteral(x, BoolConstraint.True, BoolConstraint.False));
+        SETestContext.CreateCS(@"var i = 42; Tag(""I"", i);", preProcess, postProcess).Validator.TagValues("I").Should()
+            .HaveCount(4)
+            .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True))
+            .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.False))
+            .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second) && x.HasConstraint(BoolConstraint.True))
+            .And.ContainSingle(x => x.HasConstraint(TestConstraint.Second) && x.HasConstraint(BoolConstraint.False));
+    }
 
-        [TestMethod]
-        public void Execute_ClearsCapturesAfterBranching()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Execute_ClearsCapturesAfterBranching()
+    {
+        const string code = @"
 string a = null;
 a ??= arg;
 Tag(""End"");";
-            var allReferences = new List<IOperation>();
-            var collector = new PostProcessTestCheck(x =>
-            {
-                if (x.Operation.Instance.Kind == OperationKind.FlowCaptureReference)
-                {
-                    allReferences.Add(x.Operation.Instance);
-                }
-                return x.State;
-            });
-            var validator = SETestContext.CreateCS(code, ", string arg", collector).Validator;
-            allReferences.Should().HaveCount(3);
-            var state = validator.TagStates("End").Single();
-            foreach (var reference in allReferences)
-            {
-                state.ResolveCapture(reference).Should().Be(reference); // Not resolved, because the captures were cleared before entering the block with Tag("End")
-            }
-        }
-
-        [TestMethod]
-        public void Execute_LocalScopeRegion_Boolean_AssignDefaultBoolConstraint() =>
-            SETestContext.CreateVB(@"Dim Value As Boolean : Tag(""Value"", Value)").Validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-
-        [TestMethod]
-        public void Execute_LocalScopeRegion_ReferenceType_AssignDefaultNullConstraint() =>
-            SETestContext.CreateVB(@"Dim Value As Exception : Tag(""Value"", Value)").Validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-
-        [TestMethod]
-        public void Execute_LocalScopeRegion_Struct_NoAction() =>
-            SETestContext.CreateVB(@"Dim Value As Integer : Tag(""Value"", Value)").Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-
-        [TestMethod]
-        public void Execute_FieldSymbolsAreNotRemovedByLva()
+        var allReferences = new List<IOperation>();
+        var collector = new PostProcessTestCheck(x =>
         {
-            const string code = @"
+            if (x.Operation.Instance.Kind == OperationKind.FlowCaptureReference)
+            {
+                allReferences.Add(x.Operation.Instance);
+            }
+            return x.State;
+        });
+        var validator = SETestContext.CreateCS(code, ", string arg", collector).Validator;
+        allReferences.Should().HaveCount(3);
+        var state = validator.TagStates("End").Single();
+        foreach (var reference in allReferences)
+        {
+            state.ResolveCapture(reference).Should().Be(reference); // Not resolved, because the captures were cleared before entering the block with Tag("End")
+        }
+    }
+
+    [TestMethod]
+    public void Execute_LocalScopeRegion_Boolean_AssignDefaultBoolConstraint() =>
+        SETestContext.CreateVB(@"Dim Value As Boolean : Tag(""Value"", Value)").Validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+
+    [TestMethod]
+    public void Execute_LocalScopeRegion_ReferenceType_AssignDefaultNullConstraint() =>
+        SETestContext.CreateVB(@"Dim Value As Exception : Tag(""Value"", Value)").Validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+
+    [TestMethod]
+    public void Execute_LocalScopeRegion_Struct_NoAction() =>
+        SETestContext.CreateVB(@"Dim Value As Integer : Tag(""Value"", Value)").Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+
+    [TestMethod]
+    public void Execute_FieldSymbolsAreNotRemovedByLva()
+    {
+        const string code = @"
 if (boolParameter)
 {
     field = 42;
 }";
 
-            var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
-            var validator = SETestContext.CreateCS(code, postProcess).Validator;
-            validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
-        }
+        var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
+        var validator = SETestContext.CreateCS(code, postProcess).Validator;
+        validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
+    }
 
-        [DataTestMethod]
-        [DataRow("out", "outParam")]
-        [DataRow("ref", "refParam")]
-        public void Execute_RefAndOutParameters_NotRemovedByLva(string refKind, string paramName)
-        {
-            var code = $@"
+    [DataTestMethod]
+    [DataRow("out", "outParam")]
+    [DataRow("ref", "refParam")]
+    public void Execute_RefAndOutParameters_NotRemovedByLva(string refKind, string paramName)
+    {
+        var code = $@"
 {paramName} = int.MinValue;
 if (boolParameter)
 {{
     {paramName} = 42;
 }}";
 
-            var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
-            var validator = SETestContext.CreateCS(code, $", {refKind} int {paramName}", postProcess).Validator;
-            validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
-        }
-
-        [DataTestMethod]
-        [DataRow(true, 0)]
-        [DataRow(false, 1)]
-        public void Execute_StopsEarly_IfCancellationTokenIsCancelled(bool shouldCancel, int expectedExitPoints)
-        {
-            var cancellationSource = new CancellationTokenSource();
-            var cancel = cancellationSource.Token;
-            var cfg = TestHelper.CompileCfgBodyCS("var a = 1;");
-            var validator = new ValidatorTestCheck(cfg);
-            var se = new RoslynSymbolicExecution(cfg, new SymbolicCheck[] { validator }, cancel);
-
-            if (shouldCancel)
-            {
-                cancellationSource.Cancel();
-            }
-
-            se.Execute();
-            validator.ValidateExitReachCount(expectedExitPoints);
-        }
-
-        private static ProgramState[] DecorateIntLiteral(SymbolicContext context, SymbolicConstraint first, SymbolicConstraint second) =>
-            context.Operation.Instance.Kind == OperationKind.Literal && context.Operation.Instance.ConstantValue.Value is int
-                ? new[] { context.SetOperationConstraint(first), context.SetOperationConstraint(second) }
-                : new[] { context.State };
+        var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
+        var validator = SETestContext.CreateCS(code, $", {refKind} int {paramName}", postProcess).Validator;
+        validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
     }
+
+    [DataTestMethod]
+    [DataRow(true, 0)]
+    [DataRow(false, 1)]
+    public void Execute_StopsEarly_IfCancellationTokenIsCancelled(bool shouldCancel, int expectedExitPoints)
+    {
+        var cancellationSource = new CancellationTokenSource();
+        var cancel = cancellationSource.Token;
+        var cfg = TestHelper.CompileCfgBodyCS("var a = 1;");
+        var validator = new ValidatorTestCheck(cfg);
+        var se = new RoslynSymbolicExecution(cfg, new SymbolicCheck[] { validator }, cancel);
+
+        if (shouldCancel)
+        {
+            cancellationSource.Cancel();
+        }
+
+        se.Execute();
+        validator.ValidateExitReachCount(expectedExitPoints);
+    }
+
+    private static ProgramState[] DecorateIntLiteral(SymbolicContext context, SymbolicConstraint first, SymbolicConstraint second) =>
+        context.Operation.Instance.Kind == OperationKind.Literal && context.Operation.Instance.ConstantValue.Value is int
+            ? new[] { context.SetOperationConstraint(first), context.SetOperationConstraint(second) }
+            : new[] { context.State };
 }

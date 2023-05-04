@@ -20,55 +20,54 @@
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
+
+[TestClass]
+public class ExceptionStateTest
 {
-    [TestClass]
-    public class ExceptionStateTest
+    [TestMethod]
+    public void Constructor_Null_Throws() =>
+        ((Func<ExceptionState>)(() => new ExceptionState(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("type");
+
+    [TestMethod]
+    public void ToString_Unknown() =>
+        ExceptionState.UnknownException.ToString().Should().Be("Unknown");
+
+    [DataTestMethod]
+    [DataRow("System.Exception", "Exception")]
+    [DataRow("System.ArgumentNullException", "ArgumentNullException")]
+    [DataRow("System.IO.IOException", "IOException")]
+    public void ToString_Known(string typeName, string expected) =>
+        new ExceptionState(TestHelper.CompileCS(string.Empty).Model.Compilation.GetTypeByMetadataName(typeName)).ToString().Should().Be(expected);
+
+    [TestMethod]
+    public void Equals_ReturnsTrueForEquivalent()
     {
-        [TestMethod]
-        public void Constructor_Null_Throws() =>
-            ((Func<ExceptionState>)(() => new ExceptionState(null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("type");
+        var compilation = TestHelper.CompileCS(string.Empty).Model.Compilation;
+        var first = new ExceptionState(compilation.GetTypeByMetadataName("System.Exception"));
+        var same = new ExceptionState(compilation.GetTypeByMetadataName("System.Exception"));
+        var second = new ExceptionState(compilation.GetTypeByMetadataName("System.ArgumentNullException"));
 
-        [TestMethod]
-        public void ToString_Unknown() =>
-            ExceptionState.UnknownException.ToString().Should().Be("Unknown");
+        first.Equals(first).Should().BeTrue();
+        first.Equals(same).Should().BeTrue();
+        first.Equals(null).Should().BeFalse();
+        first.Equals(second).Should().BeFalse();
+        first.Equals(ExceptionState.UnknownException).Should().BeFalse();
 
-        [DataTestMethod]
-        [DataRow("System.Exception", "Exception")]
-        [DataRow("System.ArgumentNullException", "ArgumentNullException")]
-        [DataRow("System.IO.IOException", "IOException")]
-        public void ToString_Known(string typeName, string expected) =>
-            new ExceptionState(TestHelper.CompileCS(string.Empty).Model.Compilation.GetTypeByMetadataName(typeName)).ToString().Should().Be(expected);
+        ExceptionState.UnknownException.Equals(ExceptionState.UnknownException).Should().BeTrue();
+        ExceptionState.UnknownException.Equals(first).Should().BeFalse();
+        ExceptionState.UnknownException.Equals(null).Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void Equals_ReturnsTrueForEquivalent()
-        {
-            var compilation = TestHelper.CompileCS(string.Empty).Model.Compilation;
-            var first = new ExceptionState(compilation.GetTypeByMetadataName("System.Exception"));
-            var same = new ExceptionState(compilation.GetTypeByMetadataName("System.Exception"));
-            var second = new ExceptionState(compilation.GetTypeByMetadataName("System.ArgumentNullException"));
+    [TestMethod]
+    public void GetHashCode_ReturnsSameForEquivalent()
+    {
+        var compilation = TestHelper.CompileCS(string.Empty).Model.Compilation;
+        var first = new ExceptionState(compilation.GetTypeByMetadataName("System.Exception"));
+        var same = new ExceptionState(compilation.GetTypeByMetadataName("System.Exception"));
+        var second = new ExceptionState(compilation.GetTypeByMetadataName("System.ArgumentNullException"));
 
-            first.Equals(first).Should().BeTrue();
-            first.Equals(same).Should().BeTrue();
-            first.Equals(null).Should().BeFalse();
-            first.Equals(second).Should().BeFalse();
-            first.Equals(ExceptionState.UnknownException).Should().BeFalse();
-
-            ExceptionState.UnknownException.Equals(ExceptionState.UnknownException).Should().BeTrue();
-            ExceptionState.UnknownException.Equals(first).Should().BeFalse();
-            ExceptionState.UnknownException.Equals(null).Should().BeFalse();
-        }
-
-        [TestMethod]
-        public void GetHashCode_ReturnsSameForEquivalent()
-        {
-            var compilation = TestHelper.CompileCS(string.Empty).Model.Compilation;
-            var first = new ExceptionState(compilation.GetTypeByMetadataName("System.Exception"));
-            var same = new ExceptionState(compilation.GetTypeByMetadataName("System.Exception"));
-            var second = new ExceptionState(compilation.GetTypeByMetadataName("System.ArgumentNullException"));
-
-            first.GetHashCode().Should().Be(same.GetHashCode()).And.NotBe(second.GetHashCode());
-            ExceptionState.UnknownException.GetHashCode().Should().NotBe(first.GetHashCode());
-        }
+        first.GetHashCode().Should().Be(same.GetHashCode()).And.NotBe(second.GetHashCode());
+        ExceptionState.UnknownException.GetHashCode().Should().NotBe(first.GetHashCode());
     }
 }

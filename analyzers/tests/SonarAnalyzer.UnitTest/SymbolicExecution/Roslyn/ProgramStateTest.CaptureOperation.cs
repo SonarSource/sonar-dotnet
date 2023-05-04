@@ -22,89 +22,88 @@ using Moq;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
+
+public partial class ProgramStateTest
 {
-    public partial class ProgramStateTest
+    [TestMethod]
+    public void SetCapture_ReturnsValues()
     {
-        [TestMethod]
-        public void SetCapture_ReturnsValues()
-        {
-            var operation1 = new Mock<IOperation>().Object;
-            var operation2 = new Mock<IOperation>().Object;
-            var captures = new[] { new CaptureId(0), new CaptureId(1), new CaptureId(2) };
-            var sut = ProgramState.Empty;
+        var operation1 = new Mock<IOperation>().Object;
+        var operation2 = new Mock<IOperation>().Object;
+        var captures = new[] { new CaptureId(0), new CaptureId(1), new CaptureId(2) };
+        var sut = ProgramState.Empty;
 
-            sut[captures[0]].Should().BeNull();
-            sut[captures[1]].Should().BeNull();
-            sut[captures[2]].Should().BeNull();
+        sut[captures[0]].Should().BeNull();
+        sut[captures[1]].Should().BeNull();
+        sut[captures[2]].Should().BeNull();
 
-            sut = sut.SetCapture(captures[0], operation1);
-            sut = sut.SetCapture(captures[1], operation2);
+        sut = sut.SetCapture(captures[0], operation1);
+        sut = sut.SetCapture(captures[1], operation2);
 
-            sut[captures[0]].Should().Be(operation1);
-            sut[captures[1]].Should().Be(operation2);
-            sut[captures[2]].Should().BeNull();     // Value was not set
-        }
+        sut[captures[0]].Should().Be(operation1);
+        sut[captures[1]].Should().Be(operation2);
+        sut[captures[2]].Should().BeNull();     // Value was not set
+    }
 
-        [TestMethod]
-        public void SetCapture_IsImmutable()
-        {
-            var capture = new CaptureId(42);
-            var sut = ProgramState.Empty;
+    [TestMethod]
+    public void SetCapture_IsImmutable()
+    {
+        var capture = new CaptureId(42);
+        var sut = ProgramState.Empty;
 
-            sut[capture].Should().BeNull();
-            sut.SetCapture(capture, new Mock<IOperation>().Object);
-            sut[capture].Should().BeNull(nameof(sut.SetCapture) + " returned new ProgramState instance.");
-        }
+        sut[capture].Should().BeNull();
+        sut.SetCapture(capture, new Mock<IOperation>().Object);
+        sut[capture].Should().BeNull(nameof(sut.SetCapture) + " returned new ProgramState instance.");
+    }
 
-        [TestMethod]
-        public void SetCapture_Overwrites()
-        {
-            var operation1 = new Mock<IOperation>().Object;
-            var operation2 = new Mock<IOperation>().Object;
-            var capture = new CaptureId(42);
-            var sut = ProgramState.Empty;
+    [TestMethod]
+    public void SetCapture_Overwrites()
+    {
+        var operation1 = new Mock<IOperation>().Object;
+        var operation2 = new Mock<IOperation>().Object;
+        var capture = new CaptureId(42);
+        var sut = ProgramState.Empty;
 
-            sut[capture].Should().BeNull();
-            sut = sut.SetCapture(capture, operation1);
-            sut = sut.SetCapture(capture, operation2);
-            sut[capture].Should().Be(operation2);
-        }
+        sut[capture].Should().BeNull();
+        sut = sut.SetCapture(capture, operation1);
+        sut = sut.SetCapture(capture, operation2);
+        sut[capture].Should().Be(operation2);
+    }
 
-        [TestMethod]
-        public void RemoveCapture_RemovesOnlyRequested()
-        {
-            var operation = new Mock<IOperation>().Object;
-            var captures = new[] { new CaptureId(0), new CaptureId(1), new CaptureId(2) };
-            var sut = ProgramState.Empty
-                .SetCapture(captures[0], operation)
-                .SetCapture(captures[1], operation)
-                .SetCapture(captures[2], operation)
-                .RemoveCapture(captures[1]);
+    [TestMethod]
+    public void RemoveCapture_RemovesOnlyRequested()
+    {
+        var operation = new Mock<IOperation>().Object;
+        var captures = new[] { new CaptureId(0), new CaptureId(1), new CaptureId(2) };
+        var sut = ProgramState.Empty
+            .SetCapture(captures[0], operation)
+            .SetCapture(captures[1], operation)
+            .SetCapture(captures[2], operation)
+            .RemoveCapture(captures[1]);
 
-            sut[captures[0]].Should().Be(operation);
-            sut[captures[1]].Should().BeNull();
-            sut[captures[2]].Should().Be(operation);
-        }
+        sut[captures[0]].Should().Be(operation);
+        sut[captures[1]].Should().BeNull();
+        sut[captures[2]].Should().Be(operation);
+    }
 
-        [TestMethod]
-        public void ResolveCapture_CaptureReference_ReturnsCapturedOperation()
-        {
-            var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
-            var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
-            var captureReference = IFlowCaptureReferenceOperationWrapper.FromOperation(cfg.Blocks[3].Operations[0].Children.First());
-            captureReference.Id.Should().Be(capture.Id);
-            var sut = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
-            sut.ResolveCapture(captureReference.WrappedOperation).Should().Be(capture.Value);
-        }
+    [TestMethod]
+    public void ResolveCapture_CaptureReference_ReturnsCapturedOperation()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
+        var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
+        var captureReference = IFlowCaptureReferenceOperationWrapper.FromOperation(cfg.Blocks[3].Operations[0].Children.First());
+        captureReference.Id.Should().Be(capture.Id);
+        var sut = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
+        sut.ResolveCapture(captureReference.WrappedOperation).Should().Be(capture.Value);
+    }
 
-        [TestMethod]
-        public void ResolveCapture_OtherOperation_ReturnsArgument()
-        {
-            var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
-            var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
-            var sut = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
-            sut.ResolveCapture(capture.Value).Should().Be(capture.Value);   // Any other operation
-        }
+    [TestMethod]
+    public void ResolveCapture_OtherOperation_ReturnsArgument()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
+        var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
+        var sut = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
+        sut.ResolveCapture(capture.Value).Should().Be(capture.Value);   // Any other operation
     }
 }
