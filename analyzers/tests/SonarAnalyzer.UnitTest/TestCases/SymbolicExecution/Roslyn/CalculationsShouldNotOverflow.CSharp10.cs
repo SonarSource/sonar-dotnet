@@ -15,6 +15,12 @@ namespace Tests.Diagnostics
             int i = -2147483600;
             (i, int j) = (i - 100, 100); // FN
         }
+
+        public void ExtendedPropertyPattern(Type t)
+        {
+            if (t is { Name.Length: > 2147483600 })
+                _ = t.Name.Length + 100;    // FIXME Non-compliant
+        }
     }
 
     public struct ParameterlessConstructorAndFieldInitializer

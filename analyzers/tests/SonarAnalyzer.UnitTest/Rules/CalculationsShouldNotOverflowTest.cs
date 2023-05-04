@@ -35,6 +35,10 @@ public class CalculationsShouldNotOverflowTest
     public void CalculationsShouldNotOverflow_CS() =>
         builder.AddPaths("CalculationsShouldNotOverflow.cs").Verify();
 
+    [TestMethod]
+    public void CalculationsShouldNotOverflow_CS_CSharp8() =>
+        builder.AddPaths("CalculationsShouldNotOverflow.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
 #if NET
 
     [TestMethod]
@@ -44,6 +48,10 @@ public class CalculationsShouldNotOverflowTest
     [TestMethod]
     public void CalculationsShouldNotOverflow_CS_CSharp10() =>
         builder.AddPaths("CalculationsShouldNotOverflow.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+    [TestMethod]
+    public void CalculationsShouldNotOverflow_CS_CSharp11() =>
+        builder.AddPaths("CalculationsShouldNotOverflow.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 }
