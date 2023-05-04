@@ -259,7 +259,7 @@ Tag(""End"");";
             }
             return x.State;
         });
-        var validator = SETestContext.CreateCS(code, ", string arg", collector).Validator;
+        var validator = SETestContext.CreateCS(code, "string arg", collector).Validator;
         allReferences.Should().HaveCount(3);
         var state = validator.TagStates("End").Single();
         foreach (var reference in allReferences)
@@ -307,7 +307,7 @@ if (boolParameter)
 }}";
 
         var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
-        var validator = SETestContext.CreateCS(code, $", {refKind} int {paramName}", postProcess).Validator;
+        var validator = SETestContext.CreateCS(code, $"{refKind} int {paramName}", postProcess).Validator;
         validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
     }
 

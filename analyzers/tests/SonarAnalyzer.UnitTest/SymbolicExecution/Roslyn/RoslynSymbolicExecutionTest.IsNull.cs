@@ -43,7 +43,7 @@ Tag(""NullToUnknown"", nullToUnknown);
 Tag(""NotNullToNull"", notNullToNull);
 Tag(""NotNullToNotNull"", notNullToNotNull);
 Tag(""NotNullToUnknown"", notNullToUnknown);";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.IsNull);
         validator.ValidateTag("NullToNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         validator.ValidateTag("NullToNotNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
@@ -61,7 +61,7 @@ Tag(""NotNullToUnknown"", notNullToUnknown);";
                 var result = arg ?? nullValue;
                 Tag("End");
                 """;
-        var validator = SETestContext.CreateCS(code, ", object arg", new PreserveTestCheck("arg", "result")).Validator;
+        var validator = SETestContext.CreateCS(code, "object arg", new PreserveTestCheck("arg", "result")).Validator;
         var arg = validator.Symbol("arg");
         var result = validator.Symbol("result");
         validator.ValidateContainsOperation(OperationKind.IsNull);
@@ -86,7 +86,7 @@ Tag(""NotNullToUnknown"", notNullToUnknown);";
                 var result = arg ?? notNullValue;
                 Tag("End");
                 """;
-        var validator = SETestContext.CreateCS(code, ", object arg", new PreserveTestCheck("arg", "result")).Validator;
+        var validator = SETestContext.CreateCS(code, "object arg", new PreserveTestCheck("arg", "result")).Validator;
         var arg = validator.Symbol("arg");
         var result = validator.Symbol("result");
         validator.ValidateContainsOperation(OperationKind.IsNull);
@@ -111,7 +111,7 @@ Tag(""NotNullToUnknown"", notNullToUnknown);";
                 var result = arg ?? notNullValue;
                 Tag("End");
                 """;
-        var validator = SETestContext.CreateCS(code, ", Exception arg", new PreserveTestCheck("arg", "result")).Validator;
+        var validator = SETestContext.CreateCS(code, "Exception arg", new PreserveTestCheck("arg", "result")).Validator;
         var arg = validator.Symbol("arg");
         var result = validator.Symbol("result");
         validator.ValidateContainsOperation(OperationKind.IsNull);
@@ -134,7 +134,7 @@ Tag(""NotNullToUnknown"", notNullToUnknown);";
         const string code = @"
 var unknownToUnknown = arg1 ?? arg2;
 Tag(""UnknownToUnknown"", unknownToUnknown);";
-        var validator = SETestContext.CreateCS(code, ", object arg1, object arg2").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg1, object arg2").Validator;
         validator.ValidateContainsOperation(OperationKind.IsNull);
         validator.TagValues("UnknownToUnknown").Should().SatisfyRespectively(
             x => x.Should().HaveNoConstraints(),
@@ -148,7 +148,7 @@ Tag(""UnknownToUnknown"", unknownToUnknown);";
                 var value = arg ?? "N/A";
                 Tag("Value", value);
                 """;
-        var validator = SETestContext.CreateCS(code, ", string arg").Validator;
+        var validator = SETestContext.CreateCS(code, "string arg").Validator;
         validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
     }
 
@@ -159,7 +159,7 @@ Tag(""UnknownToUnknown"", unknownToUnknown);";
                 arg = arg ?? "N/A";
                 Tag("Arg", arg);
                 """;
-        var validator = SETestContext.CreateCS(code, ", string arg").Validator;
+        var validator = SETestContext.CreateCS(code, "string arg").Validator;
         validator.ValidateTag("Arg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
     }
 
@@ -188,7 +188,7 @@ Tag(""NotNullToNull"", notNullToNull);
 Tag(""NotNullToNotNull"", notNullToNotNull);
 Tag(""NotNullToUnknown"", notNullToUnknown);
 ";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.IsNull);
         validator.ValidateTag("NullToNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         validator.ValidateTag("NullToNotNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
@@ -205,7 +205,7 @@ Tag(""NotNullToUnknown"", notNullToUnknown);
 object nullValue = null;
 arg ??= nullValue;
 Tag(""Arg"", arg);";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.IsNull);
         validator.TagValues("Arg").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
@@ -220,7 +220,7 @@ Tag(""Arg"", arg);";
                 arg ??= notNullValue;
                 Tag("End");
                 """;
-        var validator = SETestContext.CreateCS(code, ", object arg", new PreserveTestCheck("arg", "notNullValue")).Validator;
+        var validator = SETestContext.CreateCS(code, "object arg", new PreserveTestCheck("arg", "notNullValue")).Validator;
         validator.ValidateContainsOperation(OperationKind.IsNull);
         var arg = validator.Symbol("arg");
         var notNullValue = validator.Symbol("notNullValue");
@@ -235,7 +235,7 @@ Tag(""Arg"", arg);";
         const string code = @"
 arg1 ??= arg2;
 Tag(""Arg"", arg1);";
-        var validator = SETestContext.CreateCS(code, ", object arg1, object arg2").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg1, object arg2").Validator;
         validator.ValidateContainsOperation(OperationKind.IsNull);
         validator.TagValues("Arg").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull),
@@ -272,7 +272,7 @@ Tag(""End"");";
         const string code = @"
 arg?.Tag(""WasNotNull"");
 Tag(""End"", arg);";
-        var validator = SETestContext.CreateCS(code, ", Sample arg").Validator;
+        var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
         validator.ValidateContainsOperation(OperationKind.IsNull);
         validator.ValidateTagOrder(
             "End",
@@ -286,7 +286,7 @@ Tag(""End"", arg);";
         var validator = SETestContext.CreateCS("""
                 (arg as Exception)?.ToString();
                 Tag("Arg", arg);
-                """, ", object arg").Validator;
+                """, "object arg").Validator;
         validator.ValidateTag("Arg", x => x.Should().HaveNoConstraints());
     }
 
@@ -296,7 +296,7 @@ Tag(""End"", arg);";
         var validator = SETestContext.CreateCS("""
                 (arg as Exception)?.ToString();
                 Tag("Arg", arg);
-                """, ", ArgumentException arg").Validator;
+                """, "ArgumentException arg").Validator;
         validator.TagValues("Arg").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null),
             x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));

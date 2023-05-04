@@ -514,7 +514,7 @@ Tag(""AfterStaticField"", StaticObjectField);";
     [TestMethod]
     public void Invocation_IsNullOrEmpty_ValidateOrder()
     {
-        var validator = SETestContext.CreateCS(@"var isNullOrEmpy = string.IsNullOrEmpty(arg);", ", string arg").Validator;
+        var validator = SETestContext.CreateCS(@"var isNullOrEmpy = string.IsNullOrEmpty(arg);", "string arg").Validator;
         validator.ValidateOrder(
 "LocalReference: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",
 "ParameterReference: arg",
@@ -534,7 +534,7 @@ Tag(""AfterStaticField"", StaticObjectField);";
 var isNullOrEmpy = string.IsNullOrEmpty(arg);
 Tag(""IsNullOrEmpy"", isNullOrEmpy);
 Tag(""Arg"", arg);";
-        var validator = SETestContext.CreateCS(code, ", string arg").Validator;
+        var validator = SETestContext.CreateCS(code, "string arg").Validator;
         validator.TagValues("IsNullOrEmpy").Should().Equal(
             SymbolicValue.NotNull.WithConstraint(BoolConstraint.False),      // False/NotNull
             SymbolicValue.NotNull.WithConstraint(BoolConstraint.True),       // True/Null
@@ -554,7 +554,7 @@ if (!string.IsNullOrEmpty(exception?.Message))
     Tag(""ExceptionChecked"", exception);
 }
 Tag(""ExceptionAfterCheck"", exception);";
-        var validator = SETestContext.CreateCS(code, ", InvalidOperationException exception").Validator;
+        var validator = SETestContext.CreateCS(code, "InvalidOperationException exception").Validator;
         validator.ValidateTag("ExceptionChecked", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         validator.TagValues("ExceptionAfterCheck").Should().Equal(new[]
         {
@@ -575,7 +575,7 @@ finally
 {
     Tag(""ArgInFinally"", arg);
 }";
-        var validator = SETestContext.CreateCS(code, ", string arg").Validator;
+        var validator = SETestContext.CreateCS(code, "string arg").Validator;
         validator.TagValues("ArgInFinally").Should().Equal(new[]
         {
             null,
@@ -634,10 +634,10 @@ finally
         var code = $@"
 var value = {expression};
 Tag(""Value"", value);";
-        var enumerableValidator = SETestContext.CreateCS(code, ", IEnumerable<object> arg").Validator;
+        var enumerableValidator = SETestContext.CreateCS(code, "IEnumerable<object> arg").Validator;
         enumerableValidator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
 
-        var queryableValidator = SETestContext.CreateCS(code, ", IQueryable<object> arg").Validator;
+        var queryableValidator = SETestContext.CreateCS(code, "IQueryable<object> arg").Validator;
         queryableValidator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
     }
 
@@ -650,12 +650,12 @@ Tag(""Value"", value);";
         var code = $@"
 var value = arg.{expression};
 Tag(""Value"", value);";
-        var enumerableValidator = SETestContext.CreateCS(code, $", IEnumerable<object> arg").Validator;
+        var enumerableValidator = SETestContext.CreateCS(code, $"IEnumerable<object> arg").Validator;
         enumerableValidator.TagValues("Value").Should().HaveCount(2)
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
 
-        var queryableValidator = SETestContext.CreateCS(code, $", IQueryable<object> arg").Validator;
+        var queryableValidator = SETestContext.CreateCS(code, $"IQueryable<object> arg").Validator;
         queryableValidator.TagValues("Value").Should().HaveCount(2)
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -672,7 +672,7 @@ Tag(""Value"", value);";
         var code = $@"
 var value = arg.{expression};
 Tag(""Value"", value);";
-        var validator = SETestContext.CreateCS(code, $", IEnumerable<int> arg").Validator;
+        var validator = SETestContext.CreateCS(code, $"IEnumerable<int> arg").Validator;
         validator.ValidateTag("Value", x => x.AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(ConstraintKind.NotNull));
     }
 
@@ -684,7 +684,7 @@ Tag(""Value"", value);";
         var code = $@"
 var value = arg.{expression};
 Tag(""Value"", value);";
-        var validator = SETestContext.CreateCS(code, $", IEnumerable<object> arg").Validator;
+        var validator = SETestContext.CreateCS(code, $"IEnumerable<object> arg").Validator;
         validator.ValidateTag("Value", x => x.Should().BeNull());
     }
 
@@ -697,7 +697,7 @@ If Query.Count <> 0 Then
     Dim Value = Query(0)
     Tag(""Value"", Value)
 End If";
-        var validator = SETestContext.CreateVB(code, ", Items() As Object").Validator;
+        var validator = SETestContext.CreateVB(code, "Items() As Object").Validator;
         validator.ValidateTag("Value", x => x.Should().BeNull());
     }
 
@@ -745,7 +745,7 @@ End Sub";
         var code = $@"
 Dim Result As Boolean = IsNothing("""" & Arg.ToString())
 Tag(""Result"", Result)";
-        var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+        var validator = SETestContext.CreateVB(code, "Arg As Object").Validator;
         validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
     }
 
@@ -782,7 +782,7 @@ Tag(""Result"", Result)";
 Debug.Assert(arg1 != null && arg2 != null);
 Tag(""Arg1"", arg1);
 Tag(""Arg2"", arg2);";
-        var validator = SETestContext.CreateCS(code, $", object arg1, object arg2").Validator;
+        var validator = SETestContext.CreateCS(code, $"object arg1, object arg2").Validator;
         validator.ValidateTag("Arg1", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         validator.ValidateTag("Arg2", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
     }
@@ -861,7 +861,7 @@ namespace System.Diagnostics
         var code = $@"
 Debug.Assert({expression});
 Tag(""Arg"", arg);";
-        return SETestContext.CreateCS(code, $", {argType} arg, bool condition").Validator.TagValues("Arg");
+        return SETestContext.CreateCS(code, $"{argType} arg, bool condition").Validator.TagValues("Arg");
     }
 
     [DataTestMethod]
@@ -890,7 +890,7 @@ if (condition)
     Tag(""Unreachable"");
 }}
 Tag(""End"");";
-        var validator = SETestContext.CreateCS(code, ", bool condition").Validator;
+        var validator = SETestContext.CreateCS(code, "bool condition").Validator;
         validator.ValidateTagOrder("Before", "End");
         validator.ValidateExitReachCount(1);
         validator.ValidateExecutionCompleted();
@@ -915,7 +915,7 @@ finally
     Tag(""Finally"");
 }}
 Tag(""End"");";
-        var validator = SETestContext.CreateCS(code, ", bool condition").Validator;
+        var validator = SETestContext.CreateCS(code, "bool condition").Validator;
         validator.ValidateTagOrder("Catch", "Finally", "Finally", "End");
         validator.ValidateExitReachCount(2);
         validator.ValidateExecutionCompleted();
@@ -985,7 +985,7 @@ Tag(""Result"", result);";
         var code = $@"
 var result = object.Equals({left}, {right});
 Tag(""End"");";
-        var validator = SETestContext.CreateCS(code, $", {argType} arg").Validator;
+        var validator = SETestContext.CreateCS(code, $"{argType} arg").Validator;
         var result = validator.Symbol("result");
         var arg = validator.Symbol("arg");
         validator.TagStates("End").Should().SatisfyRespectively(
@@ -1044,7 +1044,7 @@ Tag(""End"");";
             var result = {left}.Equals({right});
             Tag("End");
             """;
-        var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+        var validator = SETestContext.CreateCS(code, "int? arg").Validator;
         var result = validator.Symbol("result");
         var arg = validator.Symbol("arg");
         validator.TagStates("End").Should().SatisfyRespectively(
@@ -1143,7 +1143,7 @@ private static bool Equals(object a, object b, object c) => false;";
             var result = ReferenceEquals({left}, {right});
             Tag("End");
             """;
-        var validator = SETestContext.CreateCS(code, $", {argType} arg").Validator;
+        var validator = SETestContext.CreateCS(code, $"{argType} arg").Validator;
         var result = validator.Symbol("result");
         var arg = validator.Symbol("arg");
         validator.TagStates("End").Should().SatisfyRespectively(

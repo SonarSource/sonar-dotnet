@@ -114,7 +114,7 @@ var value = arg switch
 };
 Tag(""Value"", value);";
         var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKind.ParameterReference ? x.SetOperationConstraint(DummyConstraint.Dummy) : x.State);
-        SETestContext.CreateCS(code, ", object arg", check).Validator.TagValues("Value").Should()
+        SETestContext.CreateCS(code, "object arg", check).Validator.TagValues("Value").Should()
             .HaveCount(2)
             .And.ContainSingle(x => x.HasConstraint(BoolConstraint.True))
             .And.ContainSingle(x => x.HasConstraint(BoolConstraint.False));
@@ -129,7 +129,7 @@ if (arg is { })
     Tag(""ArgNotNull"", arg);
 }
 Tag(""End"", arg);";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.RecursivePattern);
         validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         validator.TagValues("End").Should().HaveCount(2)
@@ -147,7 +147,7 @@ if (arg is { } value)
     Tag(""ArgNotNull"", arg);
 }
 Tag(""End"", arg);";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.RecursivePattern);
         validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
@@ -167,7 +167,7 @@ if (arg is { } value)
 }
 Tag(""End"", arg);";
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
-        var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
+        var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.RecursivePattern);
         validator.ValidateTag("Value", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
         validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
@@ -189,7 +189,7 @@ if (arg is Exception { Message: { } msg } ex)
 }
 Tag(""End"", arg);";
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
-        var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
+        var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.RecursivePattern);
         validator.ValidateTag("Msg", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         validator.ValidateTag("Msg", x => x.HasConstraint(TestConstraint.First).Should().BeFalse("Constraint from source value should not be propagated to child property"));
@@ -208,7 +208,7 @@ if (arg is Exception value)
     Tag(""ArgNotNull"", arg);
 }
 Tag(""End"", arg);";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
         validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         validator.ValidateTag("ArgNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
@@ -228,7 +228,7 @@ if (arg is Exception value)
 }
 Tag(""End"", arg);";
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
-        var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
+        var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
         validator.ValidateTag("Value", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
         validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
@@ -246,7 +246,7 @@ if (arg is Exception _)
     Tag(""Arg"", arg);
 }
 Tag(""End"", arg);";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
         validator.ValidateTag("Arg", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
         validator.TagValues("End").Should().HaveCount(2)
@@ -265,7 +265,7 @@ if (arg is var value)
 }
 Tag(""End"", arg);";
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
-        var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
+        var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
         validator.ValidateTag("Value", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
         validator.ValidateTag("Value", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints"));
@@ -290,7 +290,7 @@ if (arg is (var c, var d))
 }
 Tag(""End"", arg);";
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
-        var validator = SETestContext.CreateCS(code, ", object arg", setter).Validator;
+        var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
         validator.ValidateTag("A", x => x.Should().BeNull());
         validator.ValidateTag("B", x => x.Should().BeNull());
@@ -494,7 +494,7 @@ object value = arg switch
 }};
 
 static object Tag(string name, object value) => null;";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(expectedOperation);
         validator.ValidateTag("Arg", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // Should not have Null in any case
     }

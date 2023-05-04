@@ -53,7 +53,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("FalseFirst", value);
             """;
         var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.Operation.Instance.ConstantValue.Value is false ? x.SetOperationConstraint(TestConstraint.First) : x.State);
-        var validator = SETestContext.CreateCS(code, ", bool? arg", setter).Validator;
+        var validator = SETestContext.CreateCS(code, "bool? arg", setter).Validator;
         validator.ValidateTag("Unknown", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Accessing .Value would already throw, so it is NotNull by now"));
         validator.ValidateTag("True", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         validator.ValidateTag("FalseFirst", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
@@ -75,7 +75,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("HasValueAfterNull", hasValue);
             Tag("SymbolAfterNull", arg);
             """;
-        var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+        var validator = SETestContext.CreateCS(code, "int? arg").Validator;
         var arg = validator.Symbol("arg");
         var hasValue = validator.Symbol("hasValue");
         validator.TagStates("AfterUnknown").Should().SatisfyRespectively(
@@ -110,7 +110,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("HasValueAfterNull", hasValue);
             Tag("SymbolAfterNull", arg);
             """;
-        var validator = SETestContext.CreateCS(code, ", bool? arg").Validator;
+        var validator = SETestContext.CreateCS(code, "bool? arg").Validator;
         var arg = validator.Symbol("arg");
         var hasValue = validator.Symbol("hasValue");
         validator.TagStates("AfterUnknown").Should().SatisfyRespectively(
@@ -211,7 +211,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("NotNullArg", arg);
             Tag("NotNullValue", value);
             """;
-        var validator = SETestContext.CreateCS(code, ", int? arg", new LiteralDummyTestCheck()).Validator;
+        var validator = SETestContext.CreateCS(code, "int? arg", new LiteralDummyTestCheck()).Validator;
         validator.ValidateTag("UnknownArg", x => x.Should().HaveNoConstraints());
         validator.ValidateTag("UnknownValue", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         validator.ValidateTag("NullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));
@@ -238,7 +238,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("NotNullArg", arg);
             Tag("NotNullValue", value);
             """;
-        var validator = SETestContext.CreateCS(code, ", bool? arg", new LiteralDummyTestCheck()).Validator;
+        var validator = SETestContext.CreateCS(code, "bool? arg", new LiteralDummyTestCheck()).Validator;
         validator.ValidateTag("UnknownArg", x => x.Should().HaveNoConstraints());
         validator.ValidateTag("UnknownValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
         validator.ValidateTag("NullArg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy));

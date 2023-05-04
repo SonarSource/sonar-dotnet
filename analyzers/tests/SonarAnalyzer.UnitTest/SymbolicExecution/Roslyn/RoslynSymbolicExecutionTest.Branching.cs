@@ -559,7 +559,7 @@ else
     Tag(""Else"", arg);
 }}
 Tag(""End"", arg);";
-        var validator = SETestContext.CreateCS(code, ", string arg").Validator;
+        var validator = SETestContext.CreateCS(code, "string arg").Validator;
         validator.TagValues("If").Should().HaveCount(2)
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));

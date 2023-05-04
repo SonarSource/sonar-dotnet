@@ -182,7 +182,7 @@ End If";
                 else
                     Tag("False && True");
                 """;
-        SETestContext.CreateCS(code, ", bool arg").Validator.ValidateTagOrder(
+        SETestContext.CreateCS(code, "bool arg").Validator.ValidateTagOrder(
             "True & True",
             "False & True",
             "False & False",
@@ -248,7 +248,7 @@ End If";
                 else
                     Tag("False || True Unreachable");
                 """;
-        SETestContext.CreateCS(code, ", bool arg").Validator.ValidateTagOrder(
+        SETestContext.CreateCS(code, "bool arg").Validator.ValidateTagOrder(
             "True | True",
             "False | True",
             "False | False",
@@ -350,7 +350,7 @@ else
 }}
 Tag(""End"");";
         var check = new PostProcessTestCheck(OperationKind.ParameterReference, x => x.SetOperationConstraint(BoolConstraint.True));
-        SETestContext.CreateCS(code, ", int a, int b", check).Validator.ValidateTagOrder(
+        SETestContext.CreateCS(code, "int a, int b", check).Validator.ValidateTagOrder(
             "If",
             "Else",
             "End");
@@ -396,7 +396,7 @@ Tag(""ForSymbolSymbolNone"", forSymbolSymbolNone);";
 object nullValue = null;
 var value = {expression};
 Tag(""End"");";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.TagStates("End").Should().HaveCount(2)
             .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "arg"))
@@ -410,7 +410,7 @@ Tag(""End"");";
 object notNullValue = new object();
 var value = arg == notNullValue;
 Tag(""End"");";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.TagStates("End").Should().HaveCount(2)    // When False, we can't tell what constraints "args" have
             .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "arg"))
@@ -447,7 +447,7 @@ Tag(""EqualsFalse"", EqualsFalse)";
         var code = @$"
 Dim Value = {expression}
 Tag(""End"")";
-        var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+        var validator = SETestContext.CreateVB(code, "Arg As Object").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.TagStates("End").Should().HaveCount(2)
             .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "Arg"))
@@ -495,7 +495,7 @@ Tag(""ForSymbolSymbolNone"", forSymbolSymbolNone);";
 object nullValue = null;
 var value = {expression};
 Tag(""End"");";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.TagStates("End").Should().HaveCount(2)
             .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "arg"))
@@ -509,7 +509,7 @@ Tag(""End"");";
 object notNullValue = new object();
 var value = arg != notNullValue;
 Tag(""End"");";
-        var validator = SETestContext.CreateCS(code, ", object arg").Validator;
+        var validator = SETestContext.CreateCS(code, "object arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.TagStates("End").Should().HaveCount(2)    // When True, we can't tell what constraints "args" have
             .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "value") && state.SymbolsWith(ObjectConstraint.NotNull).All(x => x.Name != "arg"))
@@ -546,7 +546,7 @@ Tag(""EqualsFalse"", EqualsFalse)";
         var code = @$"
 Dim Value = {expression}
 Tag(""End"")";
-        var validator = SETestContext.CreateVB(code, ", Arg As Object").Validator;
+        var validator = SETestContext.CreateVB(code, "Arg As Object").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.TagStates("End").Should().HaveCount(2)
             .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.NotNull).Any(x => x.Name == "Arg"))
@@ -588,7 +588,7 @@ Tag(""End"")";
             Tag("End");
             """;
 
-        var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+        var validator = SETestContext.CreateCS(code, "int? arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.ValidateTagOrder("Value", "Else", "End");
     }
@@ -620,7 +620,7 @@ Tag(""End"")";
             }
             """;
 
-        var validator = SETestContext.CreateCS(code, ", int? arg").Validator;
+        var validator = SETestContext.CreateCS(code, "int? arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "arg comparison true, hence non-null"));
         validator.ValidateTag("Else", x => x.Should().HaveNoConstraints("arg either null or comparison false"));

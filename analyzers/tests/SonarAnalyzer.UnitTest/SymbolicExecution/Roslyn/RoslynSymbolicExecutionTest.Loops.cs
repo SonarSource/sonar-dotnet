@@ -40,7 +40,7 @@ var value = 42;
     value--;
 }}
 Tag(""End"", value);";
-        var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("value")).Validator;
+        var validator = SETestContext.CreateCS(code, "int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("value")).Validator;
         validator.ValidateExitReachCount(2);
         validator.TagValues("End").Should().HaveCount(2)
             .And.SatisfyRespectively(
@@ -59,7 +59,7 @@ foreach (var i in items)
     value--;
 }}
 Tag(""End"", value);";
-        var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("value")).Validator;
+        var validator = SETestContext.CreateCS(code, "int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("value")).Validator;
         // In the case of foreach, there are implicit method calls that in the current implementation can throw:
         // - IEnumerable<>.GetEnumerator()
         // - System.Collections.IEnumerator.MoveNext()
@@ -87,7 +87,7 @@ do
     value.ToString(); // Add another constraint to 'value'
 } while (Condition);
 Tag(""End"", value);";
-        var validator = SETestContext.CreateCS(code, ", int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("condition"), new PreserveTestCheck("value")).Validator;
+        var validator = SETestContext.CreateCS(code, "int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("condition"), new PreserveTestCheck("value")).Validator;
         validator.ValidateExitReachCount(4);
         var states = validator.TagStates("End");
         var condition = validator.Symbol("condition");

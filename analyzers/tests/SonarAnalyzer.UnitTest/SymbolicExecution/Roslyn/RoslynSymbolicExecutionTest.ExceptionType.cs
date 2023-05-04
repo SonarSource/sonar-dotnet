@@ -118,7 +118,7 @@ catch
     tag = ""InCatch"";
 }
 tag = ""AfterCatch"";";
-        var validator = SETestContext.CreateCS(code, ", NotImplementedException ex").Validator;
+        var validator = SETestContext.CreateCS(code, "NotImplementedException ex").Validator;
         validator.ValidateTagOrder(
             "BeforeTry",
             "InTry",
