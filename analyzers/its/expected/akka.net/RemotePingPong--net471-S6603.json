@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  65,
+"endLine":  247,
+"endColumn":  106
+}
+}
+}
+]
+}

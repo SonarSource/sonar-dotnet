@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  36,
+"endLine":  31,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  61,
+"endLine":  68,
+"endColumn":  93
+}
+}
+}
+]
+}

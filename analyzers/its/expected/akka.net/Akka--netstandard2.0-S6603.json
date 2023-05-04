@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  40,
+"endLine":  157,
+"endColumn":  69
+}
+}
+}
+]
+}

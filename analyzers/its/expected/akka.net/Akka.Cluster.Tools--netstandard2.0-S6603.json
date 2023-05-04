@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  914,
+"startColumn":  29,
+"endLine":  914,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1031,
+"startColumn":  96,
+"endLine":  1031,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  1085,
+"startColumn":  71,
+"endLine":  1085,
+"endColumn":  134
+}
+}
+}
+]
+}
