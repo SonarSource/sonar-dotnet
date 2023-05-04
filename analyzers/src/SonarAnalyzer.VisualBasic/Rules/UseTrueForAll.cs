@@ -21,34 +21,48 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class UseTrueForAll : UseMethodAInsteadOfMethodB<SyntaxKind>
+public sealed class UseTrueForAll : UseTrueForAllBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
+        {
+            var invocation = c.Node as InvocationExpressionSyntax;
+
+            if (invocation.NameIs(nameof(Enumerable.All))
+                && invocation.TryGetOperands(out var left, out var right)
+                && IsCorrectType(left, c.SemanticModel)
+                && IsCorrectCall(right, c.SemanticModel))
             {
-                var invocation = c.Node as InvocationExpressionSyntax;
+                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+            }
+        },
+        SyntaxKind.InvocationExpression);
 
-                if (invocation.NameIs(GetMethodName)
-                    && invocation.TryGetOperands(out var left, out var right)
-                    && IsCorrectCall(right, c.SemanticModel)
-                    && IsCorrectType(left, c.SemanticModel))
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+    public static bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
+    {
+        if (invocation.Expression is MemberAccessExpressionSyntax access)
+        {
+            left = access.Expression ?? GetLeft(invocation);
+            right = access.Name;
+            return true;
+        }
+        left = right = null;
+        return false;
 
-    private bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
-        model.GetTypeInfo(left).Type is { } type
-        && TypeCondition(type);
-
-    private bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
-        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
-        && MethodCondition(method);
-
-    protected string GetMethodName => "ToString";
-    protected bool MethodCondition(IMethodSymbol method) => method.Is(KnownType.System_Text_StringBuilder, "ToString");
-    protected bool TypeCondition(ITypeSymbol type) => type.DerivesFrom(KnownType.System_Text_StringBuilder);
+        static SyntaxNode GetLeft(SyntaxNode current, int iteration = 0)
+        {
+            const int recursionThreshold = 42;
+            if (iteration > recursionThreshold || current.Parent is CompilationUnitSyntax)
+            {
+                return null;
+            }
+            if (current.Parent is ConditionalAccessExpressionSyntax conditional && conditional.WhenNotNull == current)
+            {
+                return conditional.Expression;
+            }
+            return GetLeft(current.Parent, iteration + 1);
+        }
+    }
 }

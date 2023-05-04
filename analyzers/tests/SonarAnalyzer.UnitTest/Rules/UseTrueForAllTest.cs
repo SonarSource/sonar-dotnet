@@ -32,10 +32,10 @@ public class UseTrueForAllTest
 
     [TestMethod]
     public void UseTrueForAll_CS() =>
-        builderCS.AddPaths("UseTrueForAll.cs").WithConcurrentAnalysis(false).WithTopLevelStatements().Verify();
+        builderCS.AddPaths("UseTrueForAll.cs").WithOutputKind(OutputKind.DynamicallyLinkedLibrary).Verify();
 
 
     [TestMethod]
     public void UseTrueForAll_VB() =>
-        builderVB.AddPaths("UseTrueForAll.vb").Verify();
+        builderVB.AddPaths("UseTrueForAll.vb").WithOutputKind(OutputKind.DynamicallyLinkedLibrary).Verify();
 }

@@ -20,12 +20,24 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UseMethodAInsteadOfMethodB<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UseTrueForAllBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6603";
 
-    protected override string MessageFormat => "FIXME";
+    protected override string MessageFormat => "The collection-specific \"TrueForAll\" method should be used instead of the \"All\" extension";
 
-    protected UseMethodAInsteadOfMethodB() : base(DiagnosticId) { }
+    protected UseTrueForAllBase() : base(DiagnosticId) { }
+
+    private static readonly ImmutableArray<KnownType> TargetTypes = ImmutableArray.Create(
+        KnownType.System_Array,
+        KnownType.System_Collections_Generic_List_T,
+        KnownType.System_Collections_Immutable_ImmutableList);
+
+    protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
+        model.GetTypeInfo(left).Type is { } type && type.DerivesFromAny(TargetTypes);
+
+    protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
+        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 }

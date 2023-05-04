@@ -1,64 +1,112 @@
-﻿using System.ComponentModel;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
-StringBuilder sb = new();
+class ListTestcases
+{
+    void Playground()
+    {
+        var list = new List<int>();
 
-sb.ToString(); //Noncompliant
+        var bad = list.All(x => true); // Noncompliant
+        var nullableBad = list?.All(x => true); // Noncompliant
 
-sb.Append("").ToString(); //Noncompliant
-sb.Append("").Append("").ToString(); //Noncompliant
-sb.Append("").Append("").Append("").ToString(); //Noncompliant
+        var good = list.TrueForAll(x => true); // Compliant
 
-sb.ToString().ToLower(); //Noncompliant
-sb.ToString().ToLower().ToLower(); //Noncompliant
-sb.ToString().ToLower().ToLower().ToLower(); //Noncompliant
+        List<int> DoWork() => null;
+        Func<List<int>, bool> func = l => l.All(x => true); // Noncompliant
 
-sb.Append("").Append("").Append("").ToString().ToLower(); //Noncompliant
-sb.Append("").Append("").ToString().ToLower().ToLower(); //Noncompliant
-sb.Append("").ToString().ToLower().ToLower().ToLower(); //Noncompliant
+        var methodBad = DoWork().All(x => true); // Noncompliant
+        var methodGood = DoWork().TrueForAll(x => true); // Compliant
 
-sb?.Append("").ToString(); //Noncompliant
-sb?.Append("").Append("").ToString(); //Noncompliant
-sb?.Append("").Append("").Append("").ToString(); //Noncompliant
+        var nullableMethodBad = DoWork()?.All(x => true); // Noncompliant
+        var nullableMethodGood = DoWork()?.TrueForAll(x => true); // Compliant
 
-sb?.ToString().ToLower(); //Noncompliant
-sb?.ToString().ToLower().ToLower(); //Noncompliant
-sb?.ToString().ToLower().ToLower().ToLower(); //Noncompliant
+        var inlineInitialization = new List<int> { 42 }.All(x => true); // Noncompliant
 
-sb?.Append("").Append("").Append("").ToString().ToLower(); //Noncompliant
-sb?.Append("").Append("").ToString().ToLower().ToLower(); //Noncompliant
-sb?.Append("").ToString().ToLower().ToLower().ToLower(); //Noncompliant
+        var imposter = new ContainsAllMethod<int>();
+        imposter.All(x => true); // Compliant
 
-sb.Append("")?.ToString(); //Noncompliant
-sb.Append("")?.Append("").ToString(); //Noncompliant
-sb.Append("")?.Append("").Append("").ToString(); //Noncompliant
+        var badList = new BadList<int>();
+        badList.All(x => true); // Compliant
 
-sb.ToString()?.ToLower(); //Noncompliant
-sb.ToString()?.ToLower().ToLower(); //Noncompliant
-sb.ToString()?.ToLower().ToLower().ToLower(); //Noncompliant
+        var goodList = new GoodList<int>();
+        goodList.All(x => true); // Noncompliant
 
-sb.Append("")?.Append("").Append("").ToString().ToLower(); //Noncompliant
-sb.Append("").Append("")?.ToString().ToLower().ToLower(); //Noncompliant
-sb.Append("").ToString().ToLower().ToLower()?.ToLower(); //Noncompliant
+        var ternary = (true ? list : goodList).All(x => true); // Noncompliant
+        var nullCoalesce = (list ?? goodList).All(x => true); // Noncompliant
+        var ternaryNullCoalesce = (list ?? (true ? list : goodList)).All(x => true); // Noncompliant
 
-sb.Append("")?.Append("").Append("").ToString().ToLower(); //Noncompliant
-sb.Append("").Append("")?.ToString().ToLower().ToLower(); //Noncompliant
-sb.Append("").ToString().ToLower().ToLower()?.ToLower(); //Noncompliant
+        _ = goodList.Fluent().Fluent().Fluent().Fluent().All(x => true); //Noncompliant
+        _ = goodList.Fluent().Fluent().Fluent().Fluent()?.All(x => true); //Noncompliant
+        _ = goodList.Fluent().Fluent().Fluent()?.Fluent().All(x => true); //Noncompliant
+        _ = goodList.Fluent().Fluent().Fluent()?.Fluent()?.All(x => true); //Noncompliant
+        _ = goodList.Fluent().Fluent()?.Fluent().Fluent().All(x => true); //Noncompliant
+        _ = goodList.Fluent().Fluent()?.Fluent().Fluent()?.All(x => true); //Noncompliant
+        _ = goodList.Fluent().Fluent()?.Fluent()?.Fluent().All(x => true); //Noncompliant
+        _ = goodList.Fluent().Fluent()?.Fluent()?.Fluent()?.All(x => true); //Noncompliant
+        _ = goodList.Fluent()?.Fluent().Fluent().Fluent().All(x => true); //Noncompliant
+        _ = goodList.Fluent()?.Fluent().Fluent().Fluent()?.All(x => true); //Noncompliant
+        _ = goodList.Fluent()?.Fluent().Fluent()?.Fluent().All(x => true); //Noncompliant
+        _ = goodList.Fluent()?.Fluent().Fluent()?.Fluent()?.All(x => true); //Noncompliant
+        _ = goodList.Fluent()?.Fluent()?.Fluent().Fluent().All(x => true); //Noncompliant
+        _ = goodList.Fluent()?.Fluent()?.Fluent().Fluent()?.All(x => true); //Noncompliant
+        _ = goodList.Fluent()?.Fluent()?.Fluent()?.Fluent().All(x => true); //Noncompliant
+        _ = goodList.Fluent()?.Fluent()?.Fluent()?.Fluent()?.All(x => true); //Noncompliant
+    }
+    class GoodList<T> : List<T>
+    {
+        public GoodList<T> Fluent() => this;
+    }
 
+    class BadList<T> : List<T>
+    {
+        public bool All(Func<T, bool> predicate) => true;
+    }
 
-_ = sb.Append("").Append("").ToString().ToLower().ToUpperInvariant(); // Noncompliant
-_ = sb.Append("").Append("").ToString().ToLower()?.ToUpperInvariant(); // Noncompliant
-_ = sb.Append("").Append("").ToString()?.ToLower().ToUpperInvariant(); // Noncompliant
-_ = sb.Append("").Append("").ToString()?.ToLower()?.ToUpperInvariant(); // Noncompliant
-_ = sb.Append("").Append("")?.ToString().ToLower().ToUpperInvariant(); // Noncompliant
-_ = sb.Append("").Append("")?.ToString().ToLower()?.ToUpperInvariant(); // Noncompliant
-_ = sb.Append("").Append("")?.ToString()?.ToLower().ToUpperInvariant(); // Noncompliant
-_ = sb.Append("").Append("")?.ToString()?.ToLower()?.ToUpperInvariant(); // Noncompliant
-_ = sb.Append("")?.Append("").ToString().ToLower().ToUpperInvariant(); // Noncompliant
-_ = sb.Append("")?.Append("").ToString().ToLower()?.ToUpperInvariant(); // Noncompliant
-_ = sb.Append("")?.Append("").ToString()?.ToLower().ToUpperInvariant(); // Noncompliant
-_ = sb.Append("")?.Append("").ToString()?.ToLower()?.ToUpperInvariant(); // Noncompliant
-_ = sb.Append("")?.Append("")?.ToString().ToLower().ToUpperInvariant(); // Noncompliant
-_ = sb.Append("")?.Append("")?.ToString().ToLower()?.ToUpperInvariant(); // Noncompliant
-_ = sb.Append("")?.Append("")?.ToString()?.ToLower().ToUpperInvariant(); // Noncompliant
-_ = sb.Append("")?.Append("")?.ToString()?.ToLower()?.ToUpperInvariant(); // Noncompliant
+    class ContainsAllMethod<T>
+    {
+        public bool All(Func<T, bool> predicate) => true;
+    }
+}
+
+class ArrayTestcases
+{
+    void Playground()
+    {
+        var array = new int[42];
+
+        var bad = array.All(x => true); // Noncompliant
+        var nullableBad = array?.All(x => true); // Noncompliant
+
+        var good = Array.TrueForAll(array, x => true); // Compliant
+
+        int[] DoWork() => null;
+        Func<int[], bool> func = l => l.All(x => true); // Noncompliant
+
+        var methodBad = DoWork().All(x => true); // Noncompliant
+        var methodGood = Array.TrueForAll(DoWork(), x => true); // Compliant
+
+        var nullableMethodBad = DoWork()?.All(x => true); // Noncompliant
+        var inlineInitialization = new int[] { 42 }.All(x => true); // Noncompliant
+
+        _ = array.ToArray().ToArray().ToArray().ToArray().All(x => true); //Noncompliant
+        _ = array.ToArray().ToArray().ToArray().ToArray()?.All(x => true); //Noncompliant
+        _ = array.ToArray().ToArray().ToArray()?.ToArray().All(x => true); //Noncompliant
+        _ = array.ToArray().ToArray().ToArray()?.ToArray()?.All(x => true); //Noncompliant
+        _ = array.ToArray().ToArray()?.ToArray().ToArray().All(x => true); //Noncompliant
+        _ = array.ToArray().ToArray()?.ToArray().ToArray()?.All(x => true); //Noncompliant
+        _ = array.ToArray().ToArray()?.ToArray()?.ToArray().All(x => true); //Noncompliant
+        _ = array.ToArray().ToArray()?.ToArray()?.ToArray()?.All(x => true); //Noncompliant
+        _ = array.ToArray()?.ToArray().ToArray().ToArray().All(x => true); //Noncompliant
+        _ = array.ToArray()?.ToArray().ToArray().ToArray()?.All(x => true); //Noncompliant
+        _ = array.ToArray()?.ToArray().ToArray()?.ToArray().All(x => true); //Noncompliant
+        _ = array.ToArray()?.ToArray().ToArray()?.ToArray()?.All(x => true); //Noncompliant
+        _ = array.ToArray()?.ToArray()?.ToArray().ToArray().All(x => true); //Noncompliant
+        _ = array.ToArray()?.ToArray()?.ToArray().ToArray()?.All(x => true); //Noncompliant
+        _ = array.ToArray()?.ToArray()?.ToArray()?.ToArray().All(x => true); //Noncompliant
+        _ = array.ToArray()?.ToArray()?.ToArray()?.ToArray()?.All(x => true); //Noncompliant
+    }
+}
+

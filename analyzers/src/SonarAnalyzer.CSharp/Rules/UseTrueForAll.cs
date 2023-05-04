@@ -20,31 +20,20 @@
 
 namespace SonarAnalyzer.Rules.CSharp;
 
-public class UseTrueForAll : UseThisInsteadOfThat
-{
-    protected override string GetMethodName => "ToString";
-    protected override bool MethodCondition(IMethodSymbol method) => method.Is(KnownType.System_Text_StringBuilder, "ToString");
-    protected override bool TypeCondition(ITypeSymbol type) => type.DerivesFrom(KnownType.System_Text_StringBuilder);
-}
-
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public abstract class UseThisInsteadOfThat : UseMethodAInsteadOfMethodB<SyntaxKind>
+public class UseTrueForAll : UseTrueForAllBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-    protected override bool EnableConcurrentExecution => false;
-
-    protected abstract string GetMethodName { get; }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
         {
             var invocation = c.Node as InvocationExpressionSyntax;
 
-            if (invocation.NameIs(GetMethodName)
+            if (invocation.NameIs(nameof(Enumerable.All))
                 && TryGetOperands(invocation, out var left, out var right)
-                && IsCorrectCall(right, c.SemanticModel)
-                && IsCorrectType(left, c.SemanticModel))
+                && IsCorrectType(left, c.SemanticModel)
+                && IsCorrectCall(right, c.SemanticModel))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
             }
@@ -61,7 +50,7 @@ public abstract class UseThisInsteadOfThat : UseMethodAInsteadOfMethodB<SyntaxKi
         }
         else if (invocation.Expression is MemberBindingExpressionSyntax binding)
         {
-            left = GetLeft(invocation);
+            left = invocation.GetParentConditionalAccessExpression();
             right = binding.Name;
             return true;
         }
@@ -69,37 +58,4 @@ public abstract class UseThisInsteadOfThat : UseMethodAInsteadOfMethodB<SyntaxKi
         left = right = null;
         return false;
     }
-
-    protected static SyntaxNode GetLeft(SyntaxNode current, int iteration = 0)
-    {
-        const int magicNumber = 42;
-        if (iteration > magicNumber || current.Parent is CompilationUnitSyntax)
-        {
-            return null;
-        }
-
-        if (current.Parent is ConditionalAccessExpressionSyntax conditional && conditional.WhenNotNull == current)
-        {
-            return conditional.Expression;
-        }
-
-        return GetLeft(current.Parent, iteration + 1);
-    }
-
-    private bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
-        model.GetTypeInfo(left).Type is { } type
-        && TypeCondition(type);
-
-    private bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
-        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
-        && MethodCondition(method);
-
-    protected abstract bool TypeCondition(ITypeSymbol type);
-    //    type.Is(KnownType.System_Collections_Generic_List_T); // T is TargetT
-    //    type.DerivesFrom(KnownType.System_Collections_Generic_List_T); // T is/derives TargetT
-    //    type.Implements(KnownType.System_Collections_Generic_IEnumerable_T);  // T implements TargetInterface
-
-    protected abstract bool MethodCondition(IMethodSymbol method);
-    // method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T); // extension method on IEnumerable, e.g. All(this IEnumerable...)
-    // method.Is(KnownType.System_Collections_Generic_HashSet_T, "MethodName"); // method is _exactly_ T.Method(..)
 }
