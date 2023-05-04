@@ -133,8 +133,8 @@ public void Method()
         public void SimpleAssignment_FromLiteral(string snippet)
         {
             var validator = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
-            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, DummyConstraint.Dummy }, "it's scaffolded"));
-            validator.ValidateTag("Target", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy));
+            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, NumberConstraint.From(42), DummyConstraint.Dummy }, "it's scaffolded"));
+            validator.ValidateTag("Target", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42), DummyConstraint.Dummy));
         }
 
         [DataTestMethod]
@@ -149,15 +149,15 @@ public void Method()
         public void SimpleAssignment_FromLiteral_ToUntracked(string snippet)
         {
             var validator = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
-            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, DummyConstraint.Dummy }, "it's scaffolded"));
+            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, NumberConstraint.From(42), DummyConstraint.Dummy }, "it's scaffolded"));
             validator.ValidateTag("Target", x => x.Should().HaveNoConstraints());
         }
 
         [TestMethod]
-        public void ElelmentAccess_FromLiteral_ToUntracked()
+        public void ElementAccess_FromLiteral_ToUntracked()
         {
             var validator = SETestContext.CreateCS("""var arr = new object[] { 13 }; arr[0] = 42;""", new LiteralDummyTestCheck()).Validator;
-            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, DummyConstraint.Dummy }, "it's scaffolded"));
+            validator.Validate("Literal: 42", x => x.State[x.Operation].Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, NumberConstraint.From(42), DummyConstraint.Dummy }, "it's scaffolded"));
             validator.Validate("ArrayElementReference: arr[0]", x => x.State[x.Operation].Should().HaveNoConstraints());
         }
 
@@ -522,7 +522,7 @@ Tag(""AfterNullableInt"", argNullableInt);";
             validator.ValidateTag("BeforeNullableInt", x => x.Should().HaveNoConstraints());
             validator.ValidateTag("AfterObjNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
             validator.ValidateTag("AfterObjDefault", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
-            validator.ValidateTag("AfterInt", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterInt", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.Zero));
             validator.ValidateTag("AfterNullableInt", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
         }
 
@@ -541,7 +541,7 @@ Tag(""AfterInt"", ArgInt)";
             validator.ValidateTag("BeforeObj", x => x.Should().HaveNoConstraints());
             validator.ValidateTag("BeforeInt", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
             validator.ValidateTag("AfterObj", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
-            validator.ValidateTag("AfterInt", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("AfterInt", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.Zero));
         }
 
         [TestMethod]
@@ -673,14 +673,14 @@ Tag(""This"", fromThis);";
         }
 
         [TestMethod]
-        public void SizeOf_SetNotNullconstraint()
+        public void SizeOf_SetNotNullAndNumberConstraint()
         {
             var code = """
                 var size = sizeof(int);
                 Tag("Size", size);
                 """;
             var validator = SETestContext.CreateCS(code).Validator;
-            validator.ValidateTag("Size", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            validator.ValidateTag("Size", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(4)));
         }
 
         [DataTestMethod]

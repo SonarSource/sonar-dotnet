@@ -54,6 +54,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
                 false => SymbolicValue.False,
                 null when CanBeNull(operation) => SymbolicValue.Null,
                 string => SymbolicValue.NotNull,
+                _ when NumberConstraint.From(operation.Instance.ConstantValue.Value) is { } number => SymbolicValue.NotNull.WithConstraint(number),
                 _ => null
             };
 
