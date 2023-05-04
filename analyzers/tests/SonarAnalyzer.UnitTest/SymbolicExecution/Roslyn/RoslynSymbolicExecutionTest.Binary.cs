@@ -657,4 +657,50 @@ Tag(""End"")";
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.ValidateTag("S", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null)); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
     }
+
+    [DataTestMethod]
+    [DataRow("(byte)42", "== 42")]
+    [DataRow("(short)42", "== 42")]
+    [DataRow("(long)42", "== 42")]
+    [DataRow("42", "== 42")]
+    public void Binary_NumberLiteral_SetsBoolConstraint_IsTrue(string value, string expressionSuffix)
+    {
+        var code = $"""
+            var value = {value};
+            var result = value {expressionSuffix};
+            Tag("Result", result);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
+    }
+
+    [DataTestMethod]
+    [DataRow("42", "== 0")]
+    public void Binary_NumberLiteral_SetsBoolConstraint_IsFalse(string value, string expressionSuffix)
+    {
+        var code = $"""
+            var value = {value};
+            var result = value {expressionSuffix};
+            Tag("Result", result);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg").Validator;
+        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
+    }
+
+    [DataTestMethod]
+    [DataRow("arg == 42")]
+    [DataRow("arg != 42")]
+    [DataRow("arg > 42")]
+    [DataRow("arg >= 42")]
+    [DataRow("arg < 42")]
+    [DataRow("arg <= 42")]
+    public void Binary_NumberLiteral_Unknown(string expression)
+    {
+        var code = $"""
+            var result = {expression};
+            Tag("Result", result);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg").Validator;
+        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+    }
 }

@@ -101,6 +101,10 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             return BinaryBoolConstraint(kind, leftBool == BoolConstraint.True, rightBool == BoolConstraint.True);
         }
+        else if (left?.HasConstraint<NumberConstraint>() is true && right?.HasConstraint<NumberConstraint>() is true)
+        {
+            return BinaryNumberConstraint(kind, left.Constraint<NumberConstraint>(), right.Constraint<NumberConstraint>());
+        }
         else if (left?.HasConstraint<ObjectConstraint>() is true && right?.HasConstraint<ObjectConstraint>() is true)
         {
             return BinaryNullConstraint(kind, left.HasConstraint(ObjectConstraint.Null), right.HasConstraint(ObjectConstraint.Null));
@@ -123,6 +127,18 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd => BoolConstraint.From(left && right),
             BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr => BoolConstraint.From(left || right),
             BinaryOperatorKind.ExclusiveOr => BoolConstraint.From(left ^ right),
+            _ => null
+        };
+
+    private static SymbolicConstraint BinaryNumberConstraint(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) =>
+        kind switch
+        {
+            BinaryOperatorKind.Equals when left.Min.HasValue && left.Min == left.Max && right.Min.HasValue && right.Min == right.Max => BoolConstraint.From(left.Equals(right)),
+        // FIXME: !=
+        // FIXME: >
+        // FIXME: >=
+        // FIXME: <
+        // FIXME: <=
             _ => null
         };
 
