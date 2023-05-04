@@ -86,7 +86,7 @@ Public Class Sample
 
     Private FieldArray() As Integer
 
-    Public Sub Main(BoolParameter As Boolean{additionalParameters})
+    Public Sub Main(BoolParameter As Boolean{PrependComma(additionalParameters)})
         {methodBody}
     End Sub
 
@@ -144,7 +144,7 @@ public unsafe class Sample
     public Sample(){{ }}
     public Sample(int i){{ }}
 
-    public void Main(bool boolParameter{additionalParameters})
+    public void Main(bool boolParameter{PrependComma(additionalParameters)})
     {{
         {methodBody}
     }}
@@ -176,4 +176,7 @@ public static class Tagger
     public static T Unknown<T>() => default;
 }}
 ";
+
+    private static string PrependComma(string additionalParameters) =>
+        additionalParameters is null ? null : ", " + additionalParameters;
 }
