@@ -135,10 +135,12 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             BinaryOperatorKind.Equals when left.IsSingleValue && right.IsSingleValue => BoolConstraint.From(left.Equals(right)),
             BinaryOperatorKind.NotEquals when left.IsSingleValue && right.IsSingleValue => BoolConstraint.From(!left.Equals(right)),
-        // FIXME: >
-        // FIXME: >=
-        // FIXME: <
-        // FIXME: <=
+            BinaryOperatorKind.GreaterThan when left.Min > right.Max => BoolConstraint.True,
+            BinaryOperatorKind.GreaterThan when left.Max <= right.Min => BoolConstraint.False,
+            BinaryOperatorKind.GreaterThanOrEqual when left.Min >= right.Max => BoolConstraint.True,
+            BinaryOperatorKind.GreaterThanOrEqual when left.Max < right.Min => BoolConstraint.False,
+            // FIXME: <
+            // FIXME: <=
             _ => null
         };
 
