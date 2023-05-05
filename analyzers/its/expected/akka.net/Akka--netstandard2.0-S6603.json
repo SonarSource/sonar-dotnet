@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
 "region":  {
 "startLine":  157,
-"startColumn":  40,
+"startColumn":  47,
 "endLine":  157,
-"endColumn":  69
+"endColumn":  50
 }
 }
 }

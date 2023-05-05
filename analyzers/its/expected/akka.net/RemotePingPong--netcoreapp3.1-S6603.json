@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
 "region":  {
 "startLine":  247,
-"startColumn":  65,
+"startColumn":  75,
 "endLine":  247,
-"endColumn":  106
+"endColumn":  78
 }
 }
 }

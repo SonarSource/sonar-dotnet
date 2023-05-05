@@ -7,9 +7,9 @@
 "uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
 "region":  {
 "startLine":  473,
-"startColumn":  17,
+"startColumn":  26,
 "endLine":  473,
-"endColumn":  57
+"endColumn":  29
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\Automapper\src\AutoMapper\Execution\ObjectFactory.cs",
 "region":  {
 "startLine":  36,
-"startColumn":  91,
+"startColumn":  109,
 "endLine":  36,
-"endColumn":  131
+"endColumn":  112
 }
 }
 },
@@ -33,9 +33,9 @@
 "uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
 "region":  {
 "startLine":  183,
-"startColumn":  48,
+"startColumn":  59,
 "endLine":  183,
-"endColumn":  81
+"endColumn":  62
 }
 }
 }

@@ -7,9 +7,9 @@
 "uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
 "region":  {
 "startLine":  31,
-"startColumn":  36,
+"startColumn":  51,
 "endLine":  31,
-"endColumn":  69
+"endColumn":  54
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
 "region":  {
 "startLine":  68,
-"startColumn":  61,
+"startColumn":  75,
 "endLine":  68,
-"endColumn":  93
+"endColumn":  78
 }
 }
 }

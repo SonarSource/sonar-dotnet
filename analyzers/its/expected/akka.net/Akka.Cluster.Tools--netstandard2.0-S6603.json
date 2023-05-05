@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
 "region":  {
 "startLine":  914,
-"startColumn":  29,
+"startColumn":  48,
 "endLine":  914,
-"endColumn":  81
+"endColumn":  51
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
 "region":  {
 "startLine":  1031,
-"startColumn":  96,
+"startColumn":  120,
 "endLine":  1031,
-"endColumn":  153
+"endColumn":  123
 }
 }
 },
@@ -33,9 +33,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
 "region":  {
 "startLine":  1085,
-"startColumn":  71,
+"startColumn":  101,
 "endLine":  1085,
-"endColumn":  134
+"endColumn":  104
 }
 }
 }

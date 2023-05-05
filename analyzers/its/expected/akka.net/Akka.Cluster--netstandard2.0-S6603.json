@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
 "region":  {
 "startLine":  197,
-"startColumn":  18,
+"startColumn":  21,
 "endLine":  197,
-"endColumn":  91
+"endColumn":  24
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  2241,
-"startColumn":  77,
+"startColumn":  84,
 "endLine":  2241,
-"endColumn":  156
+"endColumn":  87
 }
 }
 }

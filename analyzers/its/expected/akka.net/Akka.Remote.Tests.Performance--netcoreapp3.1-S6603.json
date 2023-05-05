@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
 "region":  {
 "startLine":  64,
-"startColumn":  65,
+"startColumn":  75,
 "endLine":  64,
-"endColumn":  106
+"endColumn":  78
 }
 }
 }
