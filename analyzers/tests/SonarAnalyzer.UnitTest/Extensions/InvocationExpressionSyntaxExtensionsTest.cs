@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     }
                 }
                 """;
-            var node = NodeBetweenMarkers_CS(code) as CS.InvocationExpressionSyntax;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as CS.InvocationExpressionSyntax;
 
             var result = SyntaxNodeExtensionsCS.TryGetOperands(node, out var left, out var right);
 
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     End Function
                 End Class
                 """;
-            var node = NodeBetweenMarkers_VB(code) as VB.InvocationExpressionSyntax;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as VB.InvocationExpressionSyntax;
 
             var result = SyntaxNodeExtensionsVB.TryGetOperands(node, out var left, out var right);
 
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     End Function
                 End Class
                 """;
-            var node = NodeBetweenMarkers_VB(code) as VB.InvocationExpressionSyntax;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as VB.InvocationExpressionSyntax;
 
             var result = SyntaxNodeExtensionsVB.TryGetOperands(node, out var left, out var right);
 
@@ -123,7 +123,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     }
                 }
                 """;
-            var node = NodeBetweenMarkers_CS(code) as CS.InvocationExpressionSyntax;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as CS.InvocationExpressionSyntax;
 
             var result = SyntaxNodeExtensionsCS.TryGetOperands(node, out var left, out var right);
 
@@ -132,24 +132,15 @@ namespace SonarAnalyzer.UnitTest.Extensions
             right.Should().BeNull();
         }
 
-        private static SyntaxNode NodeBetweenMarkers_CS(string code)
+        private static SyntaxNode NodeBetweenMarkers(string code, string language)
         {
             var position = code.IndexOf("$$");
             var length = code.LastIndexOf("$$") - position - 2;
             code = code.Replace("$$", string.Empty);
-            var (tree, _) = TestHelper.CompileCS(code);
+            var (tree, _) = IsCSharp() ? TestHelper.CompileCS(code) : TestHelper.CompileVB(code);
             var node = tree.GetRoot().FindNode(new TextSpan(position, length));
             return node;
-        }
-
-        private static SyntaxNode NodeBetweenMarkers_VB(string code)
-        {
-            var position = code.IndexOf("$$");
-            var length = code.LastIndexOf("$$") - position - 2;
-            code = code.Replace("$$", string.Empty);
-            var (tree, _) = TestHelper.CompileVB(code);
-            var node = tree.GetRoot().FindNode(new TextSpan(position, length));
-            return node;
+            bool IsCSharp() => language == LanguageNames.CSharp;
         }
     }
 }

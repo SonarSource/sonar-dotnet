@@ -20,7 +20,6 @@
 
 extern alias csharp;
 extern alias vbnet;
-
 using FluentAssertions.Extensions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Operations;
@@ -645,7 +644,7 @@ End Class";
                     }
                 }
                 """;
-            var node = NodeAtMarker_CS(code);
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
             var parentConditional = SyntaxNodeExtensionsCS.GetParentConditionalAccessExpression(node);
             parentConditional.ToString().Should().Be(parent);
             parentConditional.Expression.ToString().Should().Be(parentExpression);
@@ -681,7 +680,7 @@ End Class";
                     End Function
                 End Class
                 """;
-            var node = NodeAtMarker_VB(code);
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic);
             var parentConditional = SyntaxNodeExtensionsVB.GetParentConditionalAccessExpression(node);
             parentConditional.ToString().Should().Be(parent);
             parentConditional.Expression.ToString().Should().Be(parentExpression);
@@ -713,27 +712,20 @@ public class X
     }}
 }}
 ";
-            var node = NodeAtMarker_CS(code);
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
             var parentConditional = SyntaxNodeExtensionsCS.GetRootConditionalAccessExpression(node);
             parentConditional.ToString().Should().Be(expression.Replace("$$", string.Empty));
         }
 
-        private static SyntaxNode NodeAtMarker_CS(string code)
+        private static SyntaxNode NodeBetweenMarkers(string code, string language)
         {
             var position = code.IndexOf("$$");
+            var length = code.LastIndexOf("$$") - position - 2;
             code = code.Replace("$$", string.Empty);
-            var (tree, _) = TestHelper.CompileCS(code);
-            var node = tree.GetRoot().FindNode(new TextSpan(position, 0));
+            var (tree, _) = IsCSharp() ? TestHelper.CompileCS(code) : TestHelper.CompileVB(code);
+            var node = tree.GetRoot().FindNode(new TextSpan(position, length));
             return node;
-        }
-
-        private static SyntaxNode NodeAtMarker_VB(string code)
-        {
-            var position = code.IndexOf("$$");
-            code = code.Replace("$$", string.Empty);
-            var (tree, _) = TestHelper.CompileVB(code);
-            var node = tree.GetRoot().FindNode(new TextSpan(position, 0));
-            return node;
+            bool IsCSharp() => language == LanguageNames.CSharp;
         }
 
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
