@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("System.Array.$$Empty<int>()$$", "System.Array", "Empty<int>")]
         [DataRow("this.$$M()$$", "this", "M")]
         [DataRow("A?.$$M()$$", "A", "M")]
-        public void TryGetOperands_CS(string expression, string expectedLeft, string expectedRight)
+        public void TryGetOperands_InvocationNode_ShouldReturnsTrue_CS(string expression, string expectedLeft, string expectedRight)
         {
             var code = $$"""
                 public class X
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("System.Array.$$Empty(Of Integer)()$$", "System.Array", "Empty(Of Integer)")]
         [DataRow("Me.$$M()$$", "Me", "M")]
         [DataRow("A?.$$M()$$", "A", "M")]
-        public void TryGetOperands_VB(string expression, string expectedLeft, string expectedRight)
+        public void TryGetOperands_InvocationNode_ShouldReturnsTrue_VB(string expression, string expectedLeft, string expectedRight)
         {
             var code = $$"""
                 Public Class X
@@ -84,6 +84,52 @@ namespace SonarAnalyzer.UnitTest.Extensions
             left.ToString().Should().Be(expectedLeft);
             right.Should().NotBeNull();
             right.ToString().Should().Be(expectedRight);
+        }
+
+        [DataTestMethod]
+        [DataRow("$$M()$$")]
+        public void TryGetOperands_InvocationNodeDoesNotContainMemberAccess_ShouldReturnsFalse_VB(string expression)
+        {
+            var code = $$"""
+                Public Class X
+                    Public Property A As X
+                    Public Function M() As Integer
+                        Dim unused = {{expression}}
+                        Return 42
+                    End Function
+                End Class
+                """;
+            var node = NodeBetweenMarkers_VB(code) as VB.InvocationExpressionSyntax;
+
+            var result = SyntaxNodeExtensionsVB.TryGetOperands(node, out var left, out var right);
+
+            result.Should().BeFalse();
+            left.Should().BeNull();
+            right.Should().BeNull();
+        }
+
+        [DataTestMethod]
+        [DataRow("$$M()$$")]
+        public void TryGetOperands_InvocationNodeDoesNotContainMemberAccess_ShouldReturnsFalse_CS(string expression)
+        {
+            var code =  $$"""
+                public class X
+                {
+                    public X A { get; }
+                    public int M()
+                    {
+                        var _ = {{expression}};
+                        return 42;
+                    }
+                }
+                """;
+            var node = NodeBetweenMarkers_CS(code) as CS.InvocationExpressionSyntax;
+
+            var result = SyntaxNodeExtensionsCS.TryGetOperands(node, out var left, out var right);
+
+            result.Should().BeFalse();
+            left.Should().BeNull();
+            right.Should().BeNull();
         }
 
         private static SyntaxNode NodeBetweenMarkers_CS(string code)
