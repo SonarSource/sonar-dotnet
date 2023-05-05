@@ -1,0 +1,17 @@
+{
+  "title": "\"First\" and \"Last\" properties of \"LinkedList\" should be used instead of the \"First()\" and \"Last()\" extension methods",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6613",
+  "sqKey": "S6613",
+  "scope": "All",
+  "quickfix": "unknown"
+}
