@@ -8,7 +8,9 @@ class ListTestcases
     {
         var list = new List<int>();
 
-        var bad = list.All(x => true); // Noncompliant
+        var bad = list.All(x => true); // Noncompliant {{The collection-specific "TrueForAll" method should be used instead of the "All" extension}}
+        //             ^^^
+
         var nullableBad = list?.All(x => true); // Noncompliant
 
         var good = list.TrueForAll(x => true); // Compliant
@@ -53,6 +55,7 @@ class ListTestcases
         _ = goodList.Fluent()?.Fluent()?.Fluent().Fluent()?.All(x => true); //Noncompliant
         _ = goodList.Fluent()?.Fluent()?.Fluent()?.Fluent().All(x => true); //Noncompliant
         _ = goodList.Fluent()?.Fluent()?.Fluent()?.Fluent()?.All(x => true); //Noncompliant
+        //                                                   ^^^
 
         AcceptMethod<int>(goodList.All); //FP this is not an invocation, just a member access
     }

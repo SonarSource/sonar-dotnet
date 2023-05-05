@@ -35,7 +35,7 @@ public class UseTrueForAll : UseTrueForAllBase<SyntaxKind>
                 && IsCorrectType(left, c.SemanticModel)
                 && IsCorrectCall(right, c.SemanticModel))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetIdentifier()?.GetLocation()));
             }
         },
         SyntaxKind.InvocationExpression);
