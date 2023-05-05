@@ -135,11 +135,13 @@ namespace SonarAnalyzer.UnitTest.Extensions
         private static SyntaxNode NodeBetweenMarkers(string code, string language)
         {
             var position = code.IndexOf("$$");
-            var length = code.LastIndexOf("$$") - position - 2;
+            var lastPosition = code.LastIndexOf("$$");
+            var length = lastPosition == position ? 0 : lastPosition - position - "$$".Length;
             code = code.Replace("$$", string.Empty);
             var (tree, _) = IsCSharp() ? TestHelper.CompileCS(code) : TestHelper.CompileVB(code);
             var node = tree.GetRoot().FindNode(new TextSpan(position, length));
             return node;
+
             bool IsCSharp() => language == LanguageNames.CSharp;
         }
     }
