@@ -1,0 +1,17 @@
+{
+  "title": "Prefer indexing instead of \"Enumerable\" methods on types implementing \"IList\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6608",
+  "sqKey": "S6608",
+  "scope": "All",
+  "quickfix": "targeted"
+}
