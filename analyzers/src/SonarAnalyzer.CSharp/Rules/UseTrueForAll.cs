@@ -21,26 +21,15 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class UseTrueForAll : UseTrueForAllBase<SyntaxKind>
+public class UseTrueForAll : UseTrueForAllBase<SyntaxKind, InvocationExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-        {
-            var invocation = c.Node as InvocationExpressionSyntax;
+    protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
+        invocation.GetIdentifier();
 
-            if (invocation.NameIs(nameof(Enumerable.All))
-                && TryGetOperands(invocation, out var left, out var right)
-                && IsCorrectType(left, c.SemanticModel)
-                && IsCorrectCall(right, c.SemanticModel))
-            {
-                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetIdentifier()?.GetLocation()));
-            }
-        },
-        SyntaxKind.InvocationExpression);
-
-    protected static bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
+    // TO BE DELETED
+    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
     {
         if (invocation.Expression is MemberAccessExpressionSyntax access)
         {

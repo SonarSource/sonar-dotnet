@@ -20,8 +20,9 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UseTrueForAllBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UseTrueForAllBase<TSyntaxKind, TInvocation> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
+    where TInvocation : SyntaxNode
 {
     private const string DiagnosticId = "S6603";
 
@@ -33,6 +34,24 @@ public abstract class UseTrueForAllBase<TSyntaxKind> : SonarDiagnosticAnalyzer<T
         KnownType.System_Array,
         KnownType.System_Collections_Generic_List_T,
         KnownType.System_Collections_Immutable_ImmutableList_T);
+
+    protected abstract bool TryGetOperands(TInvocation invocation, out SyntaxNode left, out SyntaxNode right);
+    protected abstract SyntaxToken? GetIdentifier(TInvocation invocation);
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+        {
+            var invocation = c.Node as TInvocation;
+
+            if (Language.GetName(invocation).Equals(nameof(Enumerable.All), Language.NameComparison)
+                && TryGetOperands(invocation, out var left, out var right)
+                && IsCorrectType(left, c.SemanticModel)
+                && IsCorrectCall(right, c.SemanticModel))
+            {
+                c.ReportIssue(Diagnostic.Create(Rule, GetIdentifier(invocation)?.GetLocation()));
+            }
+        },
+        Language.SyntaxKind.InvocationExpression);
 
     protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
         model.GetTypeInfo(left).Type is { } type && type.DerivesFromAny(TargetTypes);
