@@ -28,12 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class UseIndexingInsteadOfLinqMethodsTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseIndexingInsteadOfLinqMethods>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseIndexingInsteadOfLinqMethods>();
 
     [TestMethod]
     public void UseIndexingInsteadOfLinqMethods_CS() =>
         builderCS.AddPaths("UseIndexingInsteadOfLinqMethods.cs").Verify();
-
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseIndexingInsteadOfLinqMethods>();    // FIXME: Move this up
 
     [TestMethod]
     public void UseIndexingInsteadOfLinqMethods_VB() =>

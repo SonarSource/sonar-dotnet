@@ -20,12 +20,51 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocation> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
+    where TInvocation : SyntaxNode
 {
-    private const string DiagnosticId = "S6608";
+    private static readonly ImmutableArray<KnownType> TargetTypes = ImmutableArray.Create(
+        KnownType.System_Collections_IList,
+        KnownType.System_Collections_Generic_IList_T);
 
-    protected override string MessageFormat => "FIXME";
+    private const string DiagnosticId = "S6608";
+    protected override string MessageFormat => "Indexing {0} should be used instead of the \"Enumerable\" extension method \"{1}\"";
 
     protected UseIndexingInsteadOfLinqMethodsBase() : base(DiagnosticId) { }
+
+    protected abstract void CheckInvocations(SonarAnalysisContext context);
+    protected abstract int GetArgumentCount(TInvocation invocation);
+    protected abstract bool TryGetOperands(TInvocation invocation, out SyntaxNode left, out SyntaxNode right);
+    protected abstract SyntaxToken? GetIdentifier(TInvocation invocation);
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        CheckInvocations(context);
+
+    protected void CheckInvocation(SonarSyntaxNodeReportingContext c, string methodName, int methodArity, string indexLocation = null)
+    {
+        var invocation = c.Node as TInvocation;
+
+        if (Language.GetName(invocation).Equals(methodName, Language.NameComparison)
+            && GetArgumentCount(invocation) == methodArity
+            && TryGetOperands(invocation, out var left, out var right)
+            && IsCorrectType(left, c.SemanticModel)
+            && IsCorrectCall(right, c.SemanticModel))
+        {
+            var diagnostic = Diagnostic.Create(
+                Rule,
+                GetIdentifier(invocation)?.GetLocation(),
+                indexLocation == null ? string.Empty : $"at {indexLocation}",
+                methodName);
+            c.ReportIssue(diagnostic);
+        }
+    }
+
+    protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
+        model.GetTypeInfo(left).Type is { } type && type.ImplementsAny(TargetTypes);
+
+    protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
+        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+
 }

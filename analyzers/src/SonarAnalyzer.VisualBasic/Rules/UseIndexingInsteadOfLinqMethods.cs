@@ -21,19 +21,54 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class UseIndexingInsteadOfLinqMethods : UseIndexingInsteadOfLinqMethodsBase<SyntaxKind>
+public sealed class UseIndexingInsteadOfLinqMethods : UseIndexingInsteadOfLinqMethodsBase<SyntaxKind, InvocationExpressionSyntax>
 {
-
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+    protected override void CheckInvocations(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+        {
+            CheckInvocation(c, nameof(Enumerable.First), 0, "0");
+            CheckInvocation(c, nameof(Enumerable.Last), 0, "Count-1");
+            CheckInvocation(c, nameof(Enumerable.ElementAt), 1);
+        },
+        SyntaxKind.InvocationExpression);
+
+    protected override int GetArgumentCount(InvocationExpressionSyntax invocation) =>
+        invocation.ArgumentList.Arguments.Count;
+
+    protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
+        invocation.GetIdentifier();
+
+    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
+        invocation.TryGetOperands(out left, out right);
+}
+
+public static class InvocationExtensions // TO BE DELETED
+{
+    public static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
+    {
+        if (invocation.Expression is MemberAccessExpressionSyntax access)
+        {
+            left = access.Expression ?? GetLeft(invocation);
+            right = access.Name;
+            return true;
+        }
+        left = right = null;
+        return false;
+
+        static SyntaxNode GetLeft(SyntaxNode current, int iteration = 0)
+        {
+            const int recursionThreshold = 42;
+            if (iteration > recursionThreshold || current.Parent is CompilationUnitSyntax)
             {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+                return null;
+            }
+            if (current.Parent is ConditionalAccessExpressionSyntax conditional && conditional.WhenNotNull == current)
+            {
+                return conditional.Expression;
+            }
+            return GetLeft(current.Parent, iteration + 1);
+        }
+    }
 }

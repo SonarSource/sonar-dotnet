@@ -18,22 +18,52 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UseIndexingInsteadOfLinqMethods : UseIndexingInsteadOfLinqMethodsBase<SyntaxKind>
+public sealed class UseIndexingInsteadOfLinqMethods : UseIndexingInsteadOfLinqMethodsBase<SyntaxKind, InvocationExpressionSyntax>
 {
-
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+    protected override void CheckInvocations(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+        {
+            CheckInvocation(c, nameof(Enumerable.First), 0, "0");
+            CheckInvocation(c, nameof(Enumerable.Last), 0, "Count-1");
+            CheckInvocation(c, nameof(Enumerable.ElementAt), 1);
+        },
+        SyntaxKind.InvocationExpression);
+
+    protected override int GetArgumentCount(InvocationExpressionSyntax invocation) =>
+        invocation.ArgumentList.Arguments.Count;
+
+    protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
+        invocation.GetIdentifier();
+
+    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
+        invocation.TryGetOperands(out left, out right);
+}
+
+public static class InvocationExtensions // TO BE DELETED
+{
+    public static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
+    {
+        if (invocation.Expression is MemberAccessExpressionSyntax access)
+        {
+            left = access.Expression;
+            right = access.Name;
+            return true;
+        }
+        else if (invocation.Expression is MemberBindingExpressionSyntax binding)
+        {
+            left = invocation.GetParentConditionalAccessExpression().Expression;
+            right = binding.Name;
+            return true;
+        }
+
+        left = right = null;
+        return false;
+    }
 }
