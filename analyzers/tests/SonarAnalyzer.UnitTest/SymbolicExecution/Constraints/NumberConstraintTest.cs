@@ -83,6 +83,16 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [TestMethod]
+        public void IsSingleValue()
+        {
+            NumberConstraint.From(42).IsSingleValue.Should().BeTrue();
+            NumberConstraint.From(1, 1).IsSingleValue.Should().BeTrue();
+            NumberConstraint.From(null, null).IsSingleValue.Should().BeFalse();
+            NumberConstraint.From(null, 42).IsSingleValue.Should().BeFalse();
+            NumberConstraint.From(42, null).IsSingleValue.Should().BeFalse();
+        }
+
+        [TestMethod]
         public void ToString_Serialization()
         {
             NumberConstraint.From(0).ToString().Should().Be("Number 0");

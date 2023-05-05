@@ -31,6 +31,7 @@ public sealed class NumberConstraint : SymbolicConstraint
 
     public BigInteger? Min { get; }
     public BigInteger? Max { get; }
+    public bool IsSingleValue => Min.HasValue && Min == Max;
     public override bool CacheEnabled => false;
 
     public override SymbolicConstraint Opposite =>

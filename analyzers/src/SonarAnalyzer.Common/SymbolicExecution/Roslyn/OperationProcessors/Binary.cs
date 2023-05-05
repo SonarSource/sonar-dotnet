@@ -133,8 +133,8 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     private static SymbolicConstraint BinaryNumberConstraint(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) =>
         kind switch
         {
-            BinaryOperatorKind.Equals when left.Min.HasValue && left.Min == left.Max && right.Min.HasValue && right.Min == right.Max => BoolConstraint.From(left.Equals(right)),
-        // FIXME: !=
+            BinaryOperatorKind.Equals when left.IsSingleValue && right.IsSingleValue => BoolConstraint.From(left.Equals(right)),
+            BinaryOperatorKind.NotEquals when left.IsSingleValue && right.IsSingleValue => BoolConstraint.From(!left.Equals(right)),
         // FIXME: >
         // FIXME: >=
         // FIXME: <

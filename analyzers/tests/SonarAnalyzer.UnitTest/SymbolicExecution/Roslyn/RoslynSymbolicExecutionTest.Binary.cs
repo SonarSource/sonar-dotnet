@@ -663,6 +663,7 @@ Tag(""End"")";
     [DataRow("(short)42", "== 42")]
     [DataRow("(long)42", "== 42")]
     [DataRow("42", "== 42")]
+    [DataRow("42", "!= 0")]
     public void Binary_NumberLiteral_SetsBoolConstraint_IsTrue(string value, string expressionSuffix)
     {
         var code = $"""
@@ -676,6 +677,7 @@ Tag(""End"")";
 
     [DataTestMethod]
     [DataRow("42", "== 0")]
+    [DataRow("42", "!= 42")]
     public void Binary_NumberLiteral_SetsBoolConstraint_IsFalse(string value, string expressionSuffix)
     {
         var code = $"""
