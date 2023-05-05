@@ -18,16 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflowBase
 {
-    private const string MessageFormat = "This calculation is likely to overflow the maximum value of '{0}'.";
-    private const string MessageFormatAlt = "This calculation is guaranteed to overflow the maximum value of '{0}'.";
-
     internal static readonly DiagnosticDescriptor S3949 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     protected override DiagnosticDescriptor Rule => S3949;

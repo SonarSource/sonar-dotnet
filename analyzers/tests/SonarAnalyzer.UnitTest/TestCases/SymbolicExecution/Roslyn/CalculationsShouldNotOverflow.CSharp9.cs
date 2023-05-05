@@ -107,22 +107,3 @@ public partial class Partial
         i += 100; // FIXME Non-compliant
     }
 }
-
-public class TargetTypedNew
-{
-    public void Go()
-    {
-        TargetTypedNew s = new(); // This was throwing CbdeException: Top level error in CBDE handling
-    }
-}
-
-public unsafe class FunctionPointers
-{
-    public static void Log() { }
-
-    public void Method()
-    {
-        delegate*<void> ptr1 = &Log;
-        delegate*<void> ptr2 = &FunctionPointers.Log;
-    }
-}

@@ -9,13 +9,14 @@ public class NativeInt
         _ = i switch
         {
             2147483547 => i + 100,  // Compliant
-            _ => i + 100,           // FIXME Non-compliant
+            2147483599 => i + 100,  // FIXME: Non-compliant
+            _ => i + 100,           // Compliant
         };
     }
 
     public void PropertyPattern(string s)
     {
         if (s is { Length: 2147483600 })
-            _ = s.Length + 100; // FIXME Non-compliant
+            _ = s.Length + 100; // FN due to the lack of property sensitivity
     }
 }

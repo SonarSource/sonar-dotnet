@@ -1,48 +1,39 @@
 ﻿using System;
 
-namespace Tests.Diagnostics
+public class Sample
 {
-    public class Sample
+    public void TupleDeconstruction()
     {
-        public void PositiveOverflow()
-        {
-            int i = 2147483600;
-            (i, int j) = (i + 100, 100); // FN
-        }
-
-        public void NegativeOverflow()
-        {
-            int i = -2147483600;
-            (i, int j) = (i - 100, 100); // FN
-        }
-
-        public void ExtendedPropertyPattern(Type t)
-        {
-            if (t is { Name.Length: > 2147483600 })
-                _ = t.Name.Length + 100;    // FIXME Non-compliant
-        }
+        int i = 2147483600;
+        (i, int j) = (i + 100, 100);    // FN
     }
 
-    public struct ParameterlessConstructorAndFieldInitializer
+    public void ExtendedPropertyPattern(Type t)
     {
-        int i;
-        int f = 2147483600;
-        public int Id { get; set; } = -2147483600;
+        if (t is { Name.Length: > 2147483600 })
+            _ = t.Name.Length + 100;    // FIXME Non-compliant
+    }
+}
 
-        public ParameterlessConstructorAndFieldInitializer()
-        {
-            i = 2147483600;
-        }
+public struct ParameterlessConstructorAndFieldInitializer
+{
+    int i;
+    int f = 2147483600;
+    public int Id { get; set; } = -2147483600;
 
-        public void PositiveOverflow()
-        {
-            i += 100; // FN
-            f += 100; // FN
-        }
+    public ParameterlessConstructorAndFieldInitializer()
+    {
+        i = 2147483600;
+    }
 
-        public void NegativeOverflow()
-        {
-            Id -= 100; // FN
-        }
+    public void PositiveOverflow()
+    {
+        i += 100; // FN
+        f += 100; // FN
+    }
+
+    public void NegativeOverflow()
+    {
+        Id -= 100; // FN
     }
 }

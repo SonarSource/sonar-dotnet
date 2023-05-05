@@ -22,5 +22,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
 public abstract class CalculationsShouldNotOverflowBase : SymbolicRuleCheck
 {
-    internal const string DiagnosticId = "S3949";
+    protected const string DiagnosticId = "S3949";
+    protected const string MessageFormat = "This calculation is {0} to overflow the maximum value of '{1}'.";
+    protected const string MessageFormatLikely = "likely";
+    protected const string MessageFormatGuaranteed = "guaranteed";
 }

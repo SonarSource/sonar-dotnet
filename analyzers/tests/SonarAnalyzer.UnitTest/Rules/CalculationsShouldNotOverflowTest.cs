@@ -19,39 +19,40 @@
  */
 
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Rules.CSharp;
+using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
 public class CalculationsShouldNotOverflowTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder()
-        .AddAnalyzer(() => new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
+    private readonly VerifierBuilder builderCS = new VerifierBuilder()
+        .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
         .WithBasePath(@"SymbolicExecution\Roslyn")
-        .WithOnlyDiagnostics(CalculationsShouldNotOverflow.S3949);
+        .WithOnlyDiagnostics(ChecksCS.CalculationsShouldNotOverflow.S3949);
 
     [TestMethod]
     public void CalculationsShouldNotOverflow_CS() =>
-        builder.AddPaths("CalculationsShouldNotOverflow.cs").Verify();
+        builderCS.AddPaths("CalculationsShouldNotOverflow.cs").Verify();
 
     [TestMethod]
-    public void CalculationsShouldNotOverflow_CS_CSharp8() =>
-        builder.AddPaths("CalculationsShouldNotOverflow.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+    public void CalculationsShouldNotOverflow_CSharp8() =>
+        builderCS.AddPaths("CalculationsShouldNotOverflow.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
     [TestMethod]
-    public void CalculationsShouldNotOverflow_CS_CSharp9() =>
-        builder.AddPaths("CalculationsShouldNotOverflow.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).WithTopLevelStatements().Verify();
+    public void CalculationsShouldNotOverflow_CSharp9() =>
+        builderCS.AddPaths("CalculationsShouldNotOverflow.CSharp9.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
-    public void CalculationsShouldNotOverflow_CS_CSharp10() =>
-        builder.AddPaths("CalculationsShouldNotOverflow.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    public void CalculationsShouldNotOverflow_CSharp10() =>
+        builderCS.AddPaths("CalculationsShouldNotOverflow.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
     [TestMethod]
-    public void CalculationsShouldNotOverflow_CS_CSharp11() =>
-        builder.AddPaths("CalculationsShouldNotOverflow.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+    public void CalculationsShouldNotOverflow_CSharp11() =>
+        builderCS.AddPaths("CalculationsShouldNotOverflow.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 }
