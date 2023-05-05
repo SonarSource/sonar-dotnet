@@ -7,10 +7,15 @@ namespace Monitor_Loops
     class Program
     {
         private object obj = new object();
+        private bool condition;
 
         public void Method1()
         {
             Monitor.Enter(obj);     // Noncompliant tricky FP, as the execution should always reach number 9, but we don't track that
+            if (condition)
+            {
+                Monitor.Exit(obj);  // To release it on at least one path to activate the rule
+            }
             for (int i = 0; i < 10; i++)
             {
                 if (i == 9)
@@ -22,7 +27,7 @@ namespace Monitor_Loops
 
         public void Method2()
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Compliant, because the lock is not released on any path
             for (int i = 0; i < 10; i++)
             {
                 break;
@@ -36,6 +41,10 @@ namespace Monitor_Loops
         public void Method3()
         {
             Monitor.Enter(obj); // Noncompliant
+            if (condition)
+            {
+                Monitor.Exit(obj);  // To release it on at least one path to activate the rule
+            }
             for (int i = 0; i < 10; i++)
             {
                 if (i == 5)
@@ -53,6 +62,10 @@ namespace Monitor_Loops
         public void Method4()
         {
             Monitor.Enter(obj); // Noncompliant tricky FP, as the execution should always reach number 9, but we don't track that
+            if (condition)
+            {
+                Monitor.Exit(obj);  // To release it on at least one path to activate the rule
+            }
             for (int i = 0; i < 10; i++)
             {
                 if (i == 10)
@@ -70,6 +83,10 @@ namespace Monitor_Loops
         public void Method5()
         {
             Monitor.Enter(obj); // Noncompliant
+            if (condition)
+            {
+                Monitor.Exit(obj);  // To release it on at least one path to activate the rule
+            }
             for (int i = 0; i < 10; i++)
             {
                 if (i == 9)
@@ -151,6 +168,62 @@ namespace Monitor_Loops
                 array.RemoveAt(0);
             }
             while (array.Count < 42);
+        }
+
+        public void For_CanExit_PreIncrement()
+        {
+            for (var i = 0; i < 10; ++i)
+            {
+                Console.WriteLine();
+            }
+
+            Monitor.Enter(obj); // Noncompliant
+            if (condition)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void For_CanExit_PostIncrement()
+        {
+            for (var i = 0; i < 10; i++)
+            {
+                Console.WriteLine();
+            }
+
+            Monitor.Enter(obj); // Noncompliant
+            if (condition)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void For_CanExit_PreDecrement()
+        {
+            for (var i = 10; i > 0; --i)
+            {
+                Console.WriteLine();
+            }
+
+            Monitor.Enter(obj); // Noncompliant
+            if (condition)
+            {
+                Monitor.Exit(obj);
+            }
+        }
+
+        public void For_CanExit_PostDecrement()
+        {
+            for (var i = 10; i > 0; i--)
+            {
+                Console.WriteLine();
+            }
+
+            Monitor.Enter(obj); // Noncompliant
+            if (condition)
+            {
+                Monitor.Exit(obj);
+            }
         }
     }
 }

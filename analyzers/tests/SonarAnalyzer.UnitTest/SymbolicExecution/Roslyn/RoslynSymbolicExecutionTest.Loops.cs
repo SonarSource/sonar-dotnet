@@ -35,7 +35,7 @@ public partial class RoslynSymbolicExecutionTest
 {loop}
 {{
     arg.ToString(); // Add another constraint to 'arg'
-    arg--;
+    arg -= 1;
 }}
 Tag(""End"", arg);";
         var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("arg")).Validator;
@@ -46,6 +46,25 @@ Tag(""End"", arg);";
                 x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));
     }
 
+    [DataTestMethod]
+    [DataRow("for (var i = 0; i < 10; i++)")]
+    [DataRow("for (var i = 0; i < 10; ++i)")]
+    [DataRow("for (var i = 10; i > 0; i--)")]
+    [DataRow("for (var i = 10; i > 0; --i)")]
+    public void Loops_InstructionVisitedMaxTwice_For_FixedCount(string loop)
+    {
+        var code = $@"
+{loop}
+{{
+    arg.ToString(); // Add another constraint to 'arg'
+    arg -= 1;
+}}
+Tag(""End"", arg);";
+        var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(1);
+        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));  // arg has only it's final constraints after looping
+    }
+
     [TestMethod]
     public void Loops_InstructionVisitedMaxTwice_ForEach()
     {
@@ -53,7 +72,7 @@ Tag(""End"", arg);";
 foreach (var i in items)
 {{
     arg.ToString(); // Add another constraint to 'arg'
-    arg--;
+    arg -= 1;
 }}
 Tag(""End"", arg);";
         var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck()).Validator;
@@ -102,7 +121,7 @@ Tag(""End"", arg);";
 do
 {{
     arg.ToString(); // Add another constraint to 'arg'
-    arg--;
+    arg -= 1;
 }} while (arg > 0);
 Tag(""End"", arg);";
         var validator = SETestContext.CreateCS(code, "int arg" , new AddConstraintOnInvocationCheck()).Validator;
@@ -151,7 +170,7 @@ goto Start;";
         const string code = @"
 Start:
 arg.ToString(); // Add another constraint to 'arg'
-arg--;
+arg -= 1;
 if (arg > 0)
 {
     goto Start;
