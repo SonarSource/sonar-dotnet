@@ -156,21 +156,6 @@ internal static class TypeHelper
         return false;
     }
 
-    public static bool DerivesFrom(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> type)
-    {
-        var currentType = typeSymbol;
-        while (currentType != null)
-        {
-            if (currentType.IsAny(type))
-            {
-                return true;
-            }
-            currentType = currentType.BaseType?.ConstructedFrom;
-        }
-
-        return false;
-    }
-
     public static bool DerivesFrom(this ITypeSymbol typeSymbol, ITypeSymbol type)
     {
         var currentType = typeSymbol;

@@ -34,6 +34,7 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
 
     protected abstract bool HasAnyArguments(TInvocationExpression node);
     protected abstract bool TryGetOperands(TInvocationExpression node, out SyntaxNode left, out SyntaxNode right);
+    protected abstract SyntaxToken? GetIdentifier(TInvocationExpression invocation);
 
     protected ExistsInsteadOfAnyBase() : base(DiagnosticId) { }
 
@@ -48,12 +49,12 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
                 && IsCorrectCall(right, c.SemanticModel)
                 && IsCorrectType(left, c.SemanticModel))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation()));
+                c.ReportIssue(Diagnostic.Create(Rule, GetIdentifier(invocation)?.GetLocation()));
             }
         }, Language.SyntaxKind.InvocationExpression);
 
     private bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
-        model.GetTypeInfo(left).Type is { } type && type.DerivesFrom(targetTypes);
+        model.GetTypeInfo(left).Type is { } type && type.DerivesFromAny(targetTypes);
 
     private bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method

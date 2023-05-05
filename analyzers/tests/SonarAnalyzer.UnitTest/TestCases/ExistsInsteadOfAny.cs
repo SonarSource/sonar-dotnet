@@ -7,7 +7,7 @@ public class TestClass
     bool MyMethod(List<int> list)
     {
         list.Any(x => x > 0); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
-//      ^^^^^^^^^^^^^^^^^^^^
+//           ^^^
 
         list.Append(1).Any(x => x > 1); // Compliant (Appended list becomes an IEnumerable)
         list.Append(1).Append(2).Any(x => x > 1); // Compliant

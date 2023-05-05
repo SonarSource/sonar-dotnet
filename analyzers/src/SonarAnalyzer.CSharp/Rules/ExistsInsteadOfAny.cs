@@ -46,4 +46,7 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
 
     protected override bool HasAnyArguments(InvocationExpressionSyntax node) =>
         node.ArgumentList.Arguments is { Count: > 0 };
+
+    protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
+        invocation.GetIdentifier();
 }
