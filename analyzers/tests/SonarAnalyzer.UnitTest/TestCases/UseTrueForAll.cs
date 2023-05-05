@@ -57,14 +57,19 @@ class ListTestcases
         _ = goodList.Fluent()?.Fluent()?.Fluent()?.Fluent()?.All(x => true); //Noncompliant
         //                                                   ^^^
 
+        All<int>(x => true); // Compliant
         AcceptMethod<int>(goodList.All); //FP this is not an invocation, just a member access
     }
 
+    bool All<T>(Func<T, bool> predicate) => true;
     void AcceptMethod<T>(Func<Func<T, bool>, bool> methodThatLooksLikeAll) { }
 
     class GoodList<T> : List<T>
     {
         public GoodList<T> Fluent() => this;
+
+        void CallAll() =>
+            this.All(x => true); // Noncompliant
     }
 
     class BadList<T> : List<T>
