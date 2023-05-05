@@ -19,6 +19,7 @@
  */
 
 using System.Reflection;
+using static System.Net.WebRequestMethods;
 
 namespace SonarAnalyzer.Helpers
 {
