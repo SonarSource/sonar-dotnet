@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.Semantics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -139,8 +140,10 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             BinaryOperatorKind.GreaterThan when left.Max <= right.Min => BoolConstraint.False,
             BinaryOperatorKind.GreaterThanOrEqual when left.Min >= right.Max => BoolConstraint.True,
             BinaryOperatorKind.GreaterThanOrEqual when left.Max < right.Min => BoolConstraint.False,
-            // FIXME: <
-            // FIXME: <=
+            BinaryOperatorKind.LessThan when left.Max < right.Min => BoolConstraint.True,
+            BinaryOperatorKind.LessThan when left.Min >= right.Max => BoolConstraint.False,
+            BinaryOperatorKind.LessThanOrEqual when left.Max <= right.Min => BoolConstraint.True,
+            BinaryOperatorKind.LessThanOrEqual when left.Min > right.Max => BoolConstraint.False,
             _ => null
         };
 
