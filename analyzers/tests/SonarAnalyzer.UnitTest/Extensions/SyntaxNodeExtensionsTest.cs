@@ -696,7 +696,7 @@ End Class";
         [DataRow("A[0]?.M().B?.$$C")]
         [DataRow("A?.$$B.C")]
         [DataRow("A?.$$B?.C")]
-        public void GetRootConditionalAccessExpression_CB(string expression)
+        public void GetRootConditionalAccessExpression_CS(string expression)
         {
             var code = @$"
 public class X
