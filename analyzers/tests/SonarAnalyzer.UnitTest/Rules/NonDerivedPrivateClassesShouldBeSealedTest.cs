@@ -41,5 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
              builder.AddPaths("NonDerivedPrivateClassesShouldBeSealed.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
+
     }
 }

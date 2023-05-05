@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterTreeAction(c =>
             {
-                var declarations = c.Tree.GetCompilationUnitRoot().DescendantNodes(x => x.IsAnyKind(KindsToBeDescended))
+                var declarations = c.Tree.GetRoot().DescendantNodes(x => x.IsAnyKind(KindsToBeDescended))
                      .Where(x => x.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration))
                      .Select(x => (TypeDeclarationSyntax)x);
 
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var declaration in declarations)
                 {
-                    if (IsNotSealed(declaration)
+                    if (!IsSealed(declaration)
                         && !HasVirtualMembers(declaration)
                         && !IsPossiblyDerived(declaration, model, symbols, out var modifierDescription))
                     {
@@ -72,10 +72,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(member => member.IsAnyKind(PossiblyVirtualKinds))
                 .Any(member => member.Modifiers().Any(SyntaxKind.VirtualKeyword));
 
-        private static bool IsNotSealed(TypeDeclarationSyntax typeDeclaration) =>
-            !typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
-            && !typeDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword)
-            && !typeDeclaration.Modifiers.Any(SyntaxKind.AbstractKeyword);
+        private static bool IsSealed(TypeDeclarationSyntax typeDeclaration) =>
+            typeDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword)
+            || typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
+            || typeDeclaration.Modifiers.Any(SyntaxKind.AbstractKeyword);
 
         private static bool IsPossiblyDerived(TypeDeclarationSyntax declaration, Lazy<SemanticModel> model, Lazy<List<INamedTypeSymbol>> otherSymbols, out string modifierDescription)
         {
@@ -84,15 +84,17 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 modifierDescription = "Private";
                 var symbol = model.Value.GetDeclaredSymbol(declaration);
-                return symbol.ContainingType.GetAllNamedTypes()
-                    .Any(other => !other.MetadataName.Equals(symbol.MetadataName) && other.DerivesFrom(symbol));
+                return symbol.ContainingType.GetAllNamedTypes().Any(other =>
+                    !other.MetadataName.Equals(symbol.MetadataName)
+                    && other.DerivesFrom(symbol));
             }
             if (declaration.Modifiers.Any(SyntaxKindEx.FileKeyword))
             {
                 modifierDescription = "File-scoped";
                 var symbol = model.Value.GetDeclaredSymbol(declaration);
-                return otherSymbols.Value
-                    .Exists(other => !other.MetadataName.Equals(symbol.MetadataName) && other.DerivesFrom(symbol));
+                return otherSymbols.Value.Exists(other =>
+                    !other.MetadataName.Equals(symbol.MetadataName)
+                    && other.DerivesFrom(symbol));
             }
 
             return true;
