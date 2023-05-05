@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Extensions
 {
-    public static class InvocationExpressionSyntaxExtensions
+    internal static class InvocationExpressionSyntaxExtensions
     {
         internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel semanticModel) =>
             invocation.Expression is MemberAccessExpressionSyntax memberAccess
@@ -28,5 +28,18 @@ namespace SonarAnalyzer.Extensions
 
         internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
             invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
+
+        internal static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode leftOperand, out SyntaxNode rightOperand)
+        {
+            leftOperand = rightOperand = null;
+
+            if (invocation is { Expression: MemberAccessExpressionSyntax access })
+            {
+                leftOperand = access.Expression ?? invocation.GetParentConditionalAccessExpression()?.Expression;
+                rightOperand = access.Name;
+            }
+
+            return leftOperand is not null && rightOperand is not null;
+        }
     }
 }

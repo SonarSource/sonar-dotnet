@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.CFG.Roslyn;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -73,6 +74,78 @@ namespace SonarAnalyzer.Extensions
                 return symbols.Any(x => x is IMethodSymbol method && method.Parameters.Length > 0 && method.Parameters[0].Type.DerivesFrom(KnownType.System_Linq_Expressions_Expression));
             }
         }
+
+        /// <summary>
+        /// Returns the left hand side of a conditional access expression. Returns c in case like a?.b?[0].c?.d.e?.f if d is passed.
+        /// </summary>
+        /// <remarks>Adapted from <seealso href="https://github.com/dotnet/roslyn/blob/adaa56d/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/VisualBasic/Extensions/SyntaxNodeExtensions.vb#L1003">
+        /// Roslyn SyntaxNodeExtensions VB.NET version</seealso></remarks>
+        public static ConditionalAccessExpressionSyntax GetParentConditionalAccessExpression(this SyntaxNode node)
+        {
+            // Walk upwards based on the grammar/parser rules around ?. expressions (can be seen in
+            // LanguageParser.ParseConsequenceSyntax).
+
+            // These are the parts of the expression that the ?... expression can end with.  Specifically:
+            //
+            //  1.      x?.y.M()            // invocation
+            //  2.      x?.y[...];          // element access
+            //  3.      x?.y.z              // member access
+            //  4.      x?.y                // member binding
+            //  5.      x?[y]               // element binding
+            if (node.IsAnyMemberAccessExpressionName())
+            {
+                node = node.Parent;
+            }
+
+            // Effectively, if we're on the RHS of the ? we have to walk up the RHS spine first until we hit the first
+            // conditional access.
+            while (node is InvocationExpressionSyntax or MemberAccessExpressionSyntax or XmlMemberAccessExpressionSyntax
+                   && node.Parent is not ConditionalAccessExpressionSyntax)
+            {
+                node = node.Parent;
+            }
+
+            // Two cases we have to care about:
+            //
+            //      1. a?.b.$$c.d        and
+            //      2. a?.b.$$c.d?.e...
+            //
+            // Note that `a?.b.$$c.d?.e.f?.g.h.i` falls into the same bucket as two.  i.e. the parts after `.e` are
+            // lower in the tree and are not seen as we walk upwards.
+            //
+            //
+            // To get the root ?. (the one after the `a`) we have to potentially consume the first ?. on the RHS of the
+            // right spine (i.e. the one after `d`).  Once we do this, we then see if that itself is on the RHS of a
+            // another conditional, and if so we hten return the one on the left.  i.e. for '2' this goes in this direction:
+            //
+            //      a?.b.$$c.d?.e           // it will do:
+            //           ----->
+            //       <---------
+            //
+            // Note that this only one CAE consumption on both sides.  GetRootConditionalAccessExpression can be used to
+            // get the root parent in a case like:
+            //
+            //      x?.y?.z?.a?.b.$$c.d?.e.f?.g.h.i         // it will do:
+            //                    ----->
+            //                <---------
+            //             <---
+            //          <---
+            //       <---
+            if (node.Parent is ConditionalAccessExpressionSyntax conditional1 && conditional1.Expression == node)
+            {
+                node = node.Parent;
+            }
+
+            if (node.Parent is ConditionalAccessExpressionSyntax conditional2 && conditional2.WhenNotNull == node)
+            {
+                node = node.Parent;
+            }
+
+            return node as ConditionalAccessExpressionSyntax;
+        }
+
+        internal static bool IsAnyMemberAccessExpressionName(this SyntaxNode node) =>
+            node.Parent is MemberAccessExpressionSyntax memberAccess && memberAccess.Name == node;
 
         private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
         {

@@ -629,7 +629,7 @@ End Class";
         [DataRow("A[0]?.$$M().B?.C", "A[0]?.M().B?.C", "A[0]")]
         [DataRow("A?.$$B.C", "A?.B.C", "A")]
         [DataRow("A?.$$B?.C", "A?.B?.C", "A")]
-        public void GetParentConditionalAccessExpression(string expression, string parent, string parentExpression)
+        public void GetParentConditionalAccessExpression_CS(string expression, string parent, string parentExpression)
         {
             var code = $$"""
                 public class X
@@ -645,8 +645,44 @@ End Class";
                     }
                 }
                 """;
-            var node = NodeAtMarker(code);
+            var node = NodeAtMarker_CS(code);
             var parentConditional = SyntaxNodeExtensionsCS.GetParentConditionalAccessExpression(node);
+            parentConditional.ToString().Should().Be(parent);
+            parentConditional.Expression.ToString().Should().Be(parentExpression);
+        }
+
+        [DataTestMethod]
+        [DataRow("A?.$$M()", "A?.M()", "A")]
+        [DataRow("A?.B?.$$M()", ".B?.M()", ".B")]
+        [DataRow("A?.M()?.$$B", ".M()?.B", ".M()")]
+        [DataRow("A?.$$M()?.B", "A?.M()?.B", "A")]
+        [DataRow("A(0)?.M()?.$$B", ".M()?.B", ".M()")]
+        [DataRow("A(0)?.M().B?.$$C", ".M().B?.C", ".M().B")]
+        [DataRow("A(0)?.$$M().B?.C", "A(0)?.M().B?.C", "A(0)")]
+        [DataRow("A?.$$B.C", "A?.B.C", "A")]
+        [DataRow("A?.$$B?.C", "A?.B?.C", "A")]
+        public void GetParentConditionalAccessExpression_VB(string expression, string parent, string parentExpression)
+        {
+            var code = $$"""
+                Public Class X
+                    Public ReadOnly Property A As X
+                    Public ReadOnly Property B As X
+                    Public ReadOnly Property C As X
+
+                    Default Public ReadOnly Property Item(i As Integer) As X
+                        Get
+                            Return Nothing
+                        End Get
+                    End Property
+
+                    Public Function M() As X
+                        Dim __ = {{expression}}
+                        Return Nothing
+                    End Function
+                End Class
+                """;
+            var node = NodeAtMarker_VB(code);
+            var parentConditional = SyntaxNodeExtensionsVB.GetParentConditionalAccessExpression(node);
             parentConditional.ToString().Should().Be(parent);
             parentConditional.Expression.ToString().Should().Be(parentExpression);
         }
@@ -660,7 +696,7 @@ End Class";
         [DataRow("A[0]?.M().B?.$$C")]
         [DataRow("A?.$$B.C")]
         [DataRow("A?.$$B?.C")]
-        public void GetRootConditionalAccessExpression(string expression)
+        public void GetRootConditionalAccessExpression_CB(string expression)
         {
             var code = @$"
 public class X
@@ -677,16 +713,25 @@ public class X
     }}
 }}
 ";
-            var node = NodeAtMarker(code);
+            var node = NodeAtMarker_CS(code);
             var parentConditional = SyntaxNodeExtensionsCS.GetRootConditionalAccessExpression(node);
             parentConditional.ToString().Should().Be(expression.Replace("$$", string.Empty));
         }
 
-        private static SyntaxNode NodeAtMarker(string code)
+        private static SyntaxNode NodeAtMarker_CS(string code)
         {
             var position = code.IndexOf("$$");
             code = code.Replace("$$", string.Empty);
             var (tree, _) = TestHelper.CompileCS(code);
+            var node = tree.GetRoot().FindNode(new TextSpan(position, 0));
+            return node;
+        }
+
+        private static SyntaxNode NodeAtMarker_VB(string code)
+        {
+            var position = code.IndexOf("$$");
+            code = code.Replace("$$", string.Empty);
+            var (tree, _) = TestHelper.CompileVB(code);
             var node = tree.GetRoot().FindNode(new TextSpan(position, 0));
             return node;
         }
