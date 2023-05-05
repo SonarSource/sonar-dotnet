@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -42,6 +43,37 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             state = LearnBranchingRelationalConstraint(state, operation, falseBranch) ?? state;
         }
         return state;
+    }
+
+    protected override ProgramState PreProcess(ProgramState state, IBinaryOperationWrapper operation)
+    {
+        if (Calculation(operation.OperatorKind) is { } calculation
+            && operation.LeftOperand?.TrackedSymbol() is { } leftSymbol
+            && operation.RightOperand?.TrackedSymbol() is { } rightSymbol
+            && state[leftSymbol]?.Constraint<NumberConstraint>() is { } leftNumber
+            && state[rightSymbol]?.Constraint<NumberConstraint>() is { } rightNumber)
+        {
+            state = state.SetOperationConstraint(operation.WrappedOperation, Calculate(leftNumber, rightNumber, calculation));
+        }
+        return state;
+    }
+
+    private static Func<BigInteger?, BigInteger?, BigInteger?> Calculation(BinaryOperatorKind kind) => kind switch
+    {
+        BinaryOperatorKind.Add => (a, b) => a + b,
+        BinaryOperatorKind.Subtract => (a, b) => a - b,
+        _ => null
+    };
+
+    private static NumberConstraint Calculate(NumberConstraint left, NumberConstraint right, Func<BigInteger?, BigInteger?, BigInteger?> calculation)
+    {
+        var min = left.Min is not null && right.Min is not null
+            ? calculation(left.Min, right.Min)
+            : null;
+        var max = left.Max is not null && right.Max is not null
+            ? calculation(left.Max, right.Max)
+            : null;
+        return NumberConstraint.From(min, max);
     }
 
     private static ProgramState LearnBranchingEqualityConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)

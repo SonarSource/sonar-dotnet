@@ -717,4 +717,30 @@ Tag(""End"")";
         var validator = SETestContext.CreateCS(code, "int arg").Validator;
         validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
     }
+
+    [TestMethod]
+    public void Binary_Add_UpdatesNumberConstraint_CS()
+    {
+        var code = """
+            var i = 42;
+            var j = 5;
+            var x = i + j;
+            Tag("X", x);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTag("X", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(47)));
+    }
+
+    [TestMethod]
+    public void Binary_Substract_UpdatesNumberConstraint_CS()
+    {
+        var code = """
+            var i = 42;
+            var j = 5;
+            var x = i - j;
+            Tag("X", x);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTag("X", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(37)));
+    }
 }
