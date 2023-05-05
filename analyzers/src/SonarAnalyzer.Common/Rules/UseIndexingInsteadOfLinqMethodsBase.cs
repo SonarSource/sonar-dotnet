@@ -24,7 +24,7 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
     where TSyntaxKind : struct
     where TInvocation : SyntaxNode
 {
-    private static readonly ImmutableArray<KnownType> TargetTypes = ImmutableArray.Create(
+    private static readonly ImmutableArray<KnownType> TargetInterfaces = ImmutableArray.Create(
         KnownType.System_Collections_IList,
         KnownType.System_Collections_Generic_IList_T);
 
@@ -33,13 +33,18 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
 
     protected UseIndexingInsteadOfLinqMethodsBase() : base(DiagnosticId) { }
 
-    protected abstract void CheckInvocations(SonarAnalysisContext context);
     protected abstract int GetArgumentCount(TInvocation invocation);
     protected abstract bool TryGetOperands(TInvocation invocation, out SyntaxNode left, out SyntaxNode right);
     protected abstract SyntaxToken? GetIdentifier(TInvocation invocation);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        CheckInvocations(context);
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+        {
+            CheckInvocation(c, nameof(Enumerable.First), 0, "0");
+            CheckInvocation(c, nameof(Enumerable.Last), 0, "Count-1");
+            CheckInvocation(c, nameof(Enumerable.ElementAt), 1);
+        },
+        Language.SyntaxKind.InvocationExpression);
 
     protected void CheckInvocation(SonarSyntaxNodeReportingContext c, string methodName, int methodArity, string indexLocation = null)
     {
@@ -61,7 +66,7 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
     }
 
     protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
-        model.GetTypeInfo(left).Type is { } type && type.ImplementsAny(TargetTypes);
+        model.GetTypeInfo(left).Type is { } type && type.ImplementsAny(TargetInterfaces);
 
     protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method

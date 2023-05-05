@@ -25,15 +25,6 @@ public sealed class UseIndexingInsteadOfLinqMethods : UseIndexingInsteadOfLinqMe
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override void CheckInvocations(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
-        {
-            CheckInvocation(c, nameof(Enumerable.First), 0, "0");
-            CheckInvocation(c, nameof(Enumerable.Last), 0, "Count-1");
-            CheckInvocation(c, nameof(Enumerable.ElementAt), 1);
-        },
-        SyntaxKind.InvocationExpression);
-
     protected override int GetArgumentCount(InvocationExpressionSyntax invocation) =>
         invocation.ArgumentList.Arguments.Count;
 
