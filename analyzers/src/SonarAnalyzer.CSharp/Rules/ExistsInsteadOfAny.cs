@@ -21,21 +21,29 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax, IdentifierNameSyntax>
+public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override bool TryGetAnyExpression(InvocationExpressionSyntax invocation, out Location location)
+    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
     {
-        if (invocation.Expression.NameIs(nameof(Enumerable.Any)) && invocation.ArgumentList.Arguments is { Count: > 0 })
+        if (invocation.Expression is MemberAccessExpressionSyntax access)
         {
-            location = invocation.Expression.GetLocation();
+            left = access.Expression;
+            right = access.Name;
             return true;
         }
-        else
+        else if (invocation.Expression is MemberBindingExpressionSyntax binding)
         {
-            location = null;
-            return false;
+            left = invocation.GetParentConditionalAccessExpression().Expression;
+            right = binding.Name;
+            return true;
         }
+
+        left = right = null;
+        return false;
     }
+
+    protected override bool HasAnyArguments(InvocationExpressionSyntax node) =>
+        node.ArgumentList.Arguments is { Count: > 0 };
 }

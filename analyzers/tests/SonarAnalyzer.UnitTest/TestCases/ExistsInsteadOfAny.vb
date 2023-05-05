@@ -5,10 +5,10 @@ Imports System.Linq
 Public Class TestClass
     Private Function MyMethod(ByVal data As List(Of Integer)) As Boolean
         data.Any(Function(x) x > 0) ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
-'       ^^^^^^^^
-        data.Append(1).Any(Function(x) x > 0) ' Noncompliant
-        data.Append(1).Append(2).Any(Function(x) x > 0) ' Noncompliant
-        data.Append(1).Append(2).Any(Function(x) x > 0).ToString() ' Noncompliant
+        '       ^^^^^^^^
+        data.Append(1).Any(Function(x) x > 0) ' Compliant
+        data.Append(1).Append(2).Any(Function(x) x > 0) ' Compliant
+        data.Append(1).Append(2).Any(Function(x) x > 0).ToString() ' Compliant
 
         data.Any() ' Compliant (you can't use Exists with no arguments, BC30455)
         data.Exists(Function(x) x > 0) ' Compliant
@@ -22,10 +22,9 @@ Public Class TestClass
         classB.Any(Function(x) x) ' Compliant
 
         Dim boolList = New List(Of Boolean)()
-        boolList.Append(boolList.Exists(Function(x) x)).Any(Function(x) x) ' Noncompliant
 
-        data?.Any(Function(x) x > 0) ' FN
-        data?.Any(Function(x) x > 0).ToString() ' FN
+        data?.Any(Function(x) x > 0) ' Noncompliant
+        data?.Any(Function(x) x > 0).ToString() ' Noncompliant
         classB?.Any(Function(x) x) ' Compliant
 
         Return data.Any(Function(x) x Mod 2 = 0) ' Noncompliant

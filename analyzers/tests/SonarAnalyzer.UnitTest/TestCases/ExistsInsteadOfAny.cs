@@ -7,10 +7,11 @@ public class TestClass
     bool MyMethod(List<int> list)
     {
         list.Any(x => x > 0); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
-//      ^^^^^^^^
-        list.Append(1).Any(x => x > 0); // Noncompliant
-        list.Append(1).Append(2).Any(x => x > 0); // Noncompliant
-        list.Append(1).Append(2).Any(x => x > 0).ToString(); // Noncompliant
+//      ^^^^^^^^^^^^^^^^^^^^
+
+        list.Append(1).Any(x => x > 1); // Compliant (Appended list becomes an IEnumerable)
+        list.Append(1).Append(2).Any(x => x > 1); // Compliant
+        list.Append(1).Append(2).Any(x => x > 1).ToString(); // Compliant 
 
         list.Any(); // Compliant (you can't use Exists with no arguments, CS7036)
         list.Exists(x => x > 0); // Compliant
@@ -24,10 +25,9 @@ public class TestClass
         classB.Any(x => x); // Compliant
 
         var boolList = new List<bool>();
-        boolList.Append(boolList.Exists(x => x)).Any(x => x); // Noncompliant
 
-        list?.Any(x => x > 0); // FN
-        list?.Any(x => x > 0).ToString(); // FN
+        list?.Any(x => x > 0); // Noncompliant
+        list?.Any(x => x > 0).ToString(); // Noncompliant
         classB?.Any(x => x); // Compliant
 
         return list.Any(x => x % 2 == 0); // Noncompliant

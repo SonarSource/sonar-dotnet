@@ -36,7 +36,8 @@ public class ExistsInsteadOfAnyTest
 
     [DataTestMethod]
     [DataRow("list.Any(x => x > 0);", false)]
-    [DataRow("list.Append(1).Any(x => x > 0);", false)]
+    [DataRow("list?.Any(x => x > 0);", false)]
+    [DataRow("list.Append(1).Any(x => x > 0);", true)]
     [DataRow("list.Any();", true)]
     [DataRow("list.Exists(x => x > 0);", true)]
     public void ExistsInsteadOfAny_TopLevelStatements_ImmutableList(string expression, bool compliant)
@@ -61,7 +62,8 @@ public class ExistsInsteadOfAnyTest
 
     [DataTestMethod]
     [DataRow("immutableList.Any(x => x > 0);", false)]
-    [DataRow("immutableList.Append(1).Any(x => x > 0);", false)]
+    [DataRow("immutableList?.Any(x => x > 0);", false)]
+    [DataRow("immutableList.Append(1).Any(x => x > 0);", true)]
     [DataRow("immutableList.Any();", true)]
     [DataRow("immutableList.Exists(x => x > 0);", true)]
     public void ExistsInsteadOfAny_TopLevelStatements_List(string expression, bool compliant)

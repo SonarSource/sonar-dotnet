@@ -21,21 +21,17 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax, IdentifierNameSyntax>
+public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override bool TryGetAnyExpression(InvocationExpressionSyntax invocation, out Location location)
+    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
     {
-        if (invocation.Expression.NameIs(nameof(Enumerable.Any)) && invocation.ArgumentList.Arguments is { Count: > 0 })
-        {
-            location = invocation.Expression.GetLocation();
-            return true;
-        }
-        else
-        {
-            location = null;
-            return false;
-        }
+        left = null;
+        right = null;
+        return false;
     }
+
+    protected override bool HasAnyArguments(InvocationExpressionSyntax node) =>
+        node.ArgumentList.Arguments is { Count: > 0 };
 }

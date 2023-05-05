@@ -20,38 +20,42 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression, TIdentifierName> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
     where TInvocationExpression : SyntaxNode
-    where TIdentifierName : SyntaxNode
 {
     private const string DiagnosticId = "S6605";
 
-    private readonly ImmutableArray<KnownType> baseTypes = ImmutableArray.Create(
+    private readonly ImmutableArray<KnownType> targetTypes = ImmutableArray.Create(
         KnownType.System_Collections_Generic_List_T,
         KnownType.System_Collections_Immutable_ImmutableList_T);
 
     protected override string MessageFormat => """Collection-specific "Exists" method should be used instead of the "Any" extension.""";
 
-    protected abstract bool TryGetAnyExpression(TInvocationExpression invocation, out Location location);
+    protected abstract bool HasAnyArguments(TInvocationExpression node);
+    protected abstract bool TryGetOperands(TInvocationExpression node, out SyntaxNode left, out SyntaxNode right);
 
     protected ExistsInsteadOfAnyBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            var invocationExpression = (TInvocationExpression)c.Node;
+            var invocation = c.Node as TInvocationExpression;
 
-            if (TryGetAnyExpression(invocationExpression, out var location) && IsListType(invocationExpression, c.SemanticModel))
+            if (Language.GetName(invocation).Equals(nameof(Enumerable.Any), Language.NameComparison)
+                && HasAnyArguments(invocation)
+                && TryGetOperands(invocation, out var left, out var right)
+                && IsCorrectCall(right, c.SemanticModel)
+                && IsCorrectType(left, c.SemanticModel))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, location));
+                c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation()));
             }
         }, Language.SyntaxKind.InvocationExpression);
 
-    private bool IsListType(TInvocationExpression invocation, SemanticModel semanticModel) =>
-        GetLocalReferences(invocation) is { } identifiers
-        && identifiers.Any(x => x.IsKnownType(baseTypes, semanticModel));
+    private bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
+        model.GetTypeInfo(left).Type is { } type && type.DerivesFrom(targetTypes);
 
-    private static IEnumerable<TIdentifierName> GetLocalReferences(SyntaxNode node) =>
-        node.DescendantNodesAndSelf().OfType<TIdentifierName>();
+    private bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
+        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 }
