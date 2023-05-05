@@ -42,16 +42,16 @@ namespace SonarAnalyzer.Extensions
         internal static bool IsEqualTo(this InvocationExpressionSyntax first, InvocationExpressionSyntax second, SemanticModel model) =>
             model.GetSymbolInfo(first).Symbol.Equals(model.GetSymbolInfo(second).Symbol);
 
-        internal static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode leftOperand, out SyntaxNode rightOperand)
+        internal static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
         {
-            (leftOperand, rightOperand) = invocation switch
+            (left, right) = invocation switch
             {
                 { Expression: MemberAccessExpressionSyntax access } => (access.Expression, access.Name),
                 { Expression: MemberBindingExpressionSyntax binding } => (invocation.GetParentConditionalAccessExpression()?.Expression, binding.Name),
                 _ => (null, null)
             };
 
-            return leftOperand is not null && rightOperand is not null;
+            return left is not null && right is not null;
         }
     }
 }

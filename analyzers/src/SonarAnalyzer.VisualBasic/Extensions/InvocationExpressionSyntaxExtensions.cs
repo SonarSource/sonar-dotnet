@@ -29,17 +29,17 @@ namespace SonarAnalyzer.Extensions
         internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
             invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
 
-        internal static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode leftOperand, out SyntaxNode rightOperand)
+        internal static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
         {
-            leftOperand = rightOperand = null;
+            left = right = null;
 
             if (invocation is { Expression: MemberAccessExpressionSyntax access })
             {
-                leftOperand = access.Expression ?? invocation.GetParentConditionalAccessExpression()?.Expression;
-                rightOperand = access.Name;
+                left = access.Expression ?? invocation.GetParentConditionalAccessExpression()?.Expression;
+                right = access.Name;
             }
 
-            return leftOperand is not null && rightOperand is not null;
+            return left is not null && right is not null;
         }
     }
 }

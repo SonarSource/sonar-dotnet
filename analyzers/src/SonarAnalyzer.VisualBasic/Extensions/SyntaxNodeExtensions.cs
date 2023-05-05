@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.CFG.Roslyn;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
