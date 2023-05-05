@@ -58,7 +58,7 @@ class ListTestcases
         //                                                   ^^^
 
         All<int>(x => true); // Compliant
-        AcceptMethod<int>(goodList.All); //FP this is not an invocation, just a member access
+        AcceptMethod<int>(goodList.All); //FN this is not an invocation, just a member access
     }
 
     bool All<T>(Func<T, bool> predicate) => true;
