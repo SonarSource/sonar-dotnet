@@ -124,7 +124,7 @@ do
     arg -= 1;
 }} while (arg > 0);
 Tag(""End"", arg);";
-        var validator = SETestContext.CreateCS(code, "int arg" , new AddConstraintOnInvocationCheck()).Validator;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
         validator.ValidateExitReachCount(1);
         validator.TagValues("End").Should().HaveCount(2)
             .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
