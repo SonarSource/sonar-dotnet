@@ -28,23 +28,6 @@ public class UseTrueForAll : UseTrueForAllBase<SyntaxKind, InvocationExpressionS
     protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
         invocation.GetIdentifier();
 
-    // TO BE DELETED
-    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
-    {
-        if (invocation.Expression is MemberAccessExpressionSyntax access)
-        {
-            left = access.Expression;
-            right = access.Name;
-            return true;
-        }
-        else if (invocation.Expression is MemberBindingExpressionSyntax binding)
-        {
-            left = invocation.GetParentConditionalAccessExpression().Expression;
-            right = binding.Name;
-            return true;
-        }
-
-        left = right = null;
-        return false;
-    }
+    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
+        invocation.TryGetOperands(out left, out right);
 }
