@@ -34,57 +34,12 @@ public class ExistsInsteadOfAnyTest
 
 #if NET
 
-    [DataTestMethod]
-    [DataRow("list.Any(x => x > 0);", false)]
-    [DataRow("list?.Any(x => x > 0);", false)]
-    [DataRow("list.Append(1).Any(x => x > 0);", true)]
-    [DataRow("list.Any();", true)]
-    [DataRow("list.Exists(x => x > 0);", true)]
-    public void ExistsInsteadOfAny_TopLevelStatements_ImmutableList(string expression, bool compliant)
-    {
-        var code = $$"""
-            using System.Linq;
-            using System.Collections.Generic;
-
-            var list =  new List<int>();
-            {{expression}} // {{(compliant ? "Compliant" : "Noncompliant")}}
-            """;
-        var builder = builderCS.AddSnippet(code).WithTopLevelStatements();
-        if (compliant)
-        {
-            builder.VerifyNoIssueReported();
-        }
-        else
-        {
-            builder.Verify();
-        }
-    }
-
-    [DataTestMethod]
-    [DataRow("immutableList.Any(x => x > 0);", false)]
-    [DataRow("immutableList?.Any(x => x > 0);", false)]
-    [DataRow("immutableList.Append(1).Any(x => x > 0);", true)]
-    [DataRow("immutableList.Any();", true)]
-    [DataRow("immutableList.Exists(x => x > 0);", true)]
-    public void ExistsInsteadOfAny_TopLevelStatements_List(string expression, bool compliant)
-    {
-        var code = $$"""
-            using System.Linq;
-            using System.Collections.Immutable;
-
-            var immutableList = ImmutableList.Create<int>();
-            {{expression}} // {{(compliant ? "Compliant" : "Noncompliant")}}
-            """;
-        var builder = builderCS.AddSnippet(code).WithTopLevelStatements().AddReferences(MetadataReferenceFacade.SystemCollections);
-        if (compliant)
-        {
-            builder.VerifyNoIssueReported();
-        }
-        else
-        {
-            builder.Verify();
-        }
-    }
+    [TestMethod]
+    public void ExistsInsteadOfAny_TopLevelStatements() =>
+        builderCS.AddPaths("ExistsInsteadOfAny.CSharp9.cs")
+            .WithTopLevelStatements()
+            .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .Verify();
 
 #endif
 
