@@ -262,7 +262,7 @@
         [TestCase]
         public void TestCase21()
         {
-            Check.ThatCode(() => 42).WhichResult().IsPositive();
+            Check.ThatCode(() => 42).WhichResult().IsStrictlyPositive();
         }
 
         [TestCase]

@@ -100,7 +100,7 @@
         [Fact]
         public void Fact18()
         {
-            Check.ThatCode(() => 42).WhichResult().IsPositive();
+            Check.ThatCode(() => 42).WhichResult().IsStrictlyPositive();
         }
 
         [Fact]
