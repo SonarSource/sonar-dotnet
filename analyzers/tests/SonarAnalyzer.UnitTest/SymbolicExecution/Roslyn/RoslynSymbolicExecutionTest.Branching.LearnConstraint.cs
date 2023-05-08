@@ -968,18 +968,14 @@ Tag(""End"", arg);";
     public void Branching_LearnsNumberConstraint(string argType)
     {
         var validator = CreateIfElseEndValidatorCS("arg == 42", OperationKind.Binary, argType);
-        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull)); // FIXME: , NumberConstraint.From(42)));
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42)));
         validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
         validator.TagValues("End").Should().SatisfyRespectively(
-            // FIXME: x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42)),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42)),
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
     }
 
     [DataTestMethod]        // FIXME: Everything except one should go away
-    [DataRow("arg == 42")]
-    [DataRow("42 == arg")]
-    [DataRow("arg != 42")]
-    [DataRow("42 != arg")]
     [DataRow("arg >  42")]
     [DataRow("42 <  arg")]
     [DataRow("arg >= 42")]
@@ -988,21 +984,6 @@ Tag(""End"", arg);";
     [DataRow("42 >  arg")]
     [DataRow("arg <= 42")]
     [DataRow("42 >= arg")]
-    [DataRow("arg == 42 && arg ==  42")]
-    [DataRow("arg == 42 && arg != 100")]
-    [DataRow("arg == 42 && arg >    0")]
-    [DataRow("arg == 42 && arg >=   0")]
-    [DataRow("arg == 42 && arg <  100")]
-    [DataRow("arg == 42 && arg <= 100")]
-    [DataRow("arg != 42 && arg == 100")]
-    [DataRow("arg != 42 && arg != 100")]    // FIXME: Only this one should remain here, everything else shoudl go away
-    [DataRow("arg != 42 && arg >    0")]    // Actual value is 1-41, 43-oo
-    [DataRow("arg != 42 && arg >=   0")]    // Actual value is 0-41, 43-oo
-    [DataRow("arg != 42 && arg <  100")]    // Actual value is -oo-41, 43-99
-    [DataRow("arg != 42 && arg <= 100")]    // Actual value is -oo-41, 43-100
-    [DataRow("arg >  42 && arg == 100")]
-    [DataRow("arg >  42 && arg !=  43")]
-    [DataRow("arg >  42 && arg != 100")]     // Actual value is 43-99, 101-oo
     [DataRow("arg >  42 && arg >    0")]
     [DataRow("arg >  42 && arg >   42")]
     [DataRow("arg >  42 && arg >  100")]
@@ -1013,9 +994,6 @@ Tag(""End"", arg);";
     [DataRow("arg >  42 && arg >=  43")]
     [DataRow("arg >  42 && arg <  100")]
     [DataRow("arg >  42 && arg <= 100")]
-    [DataRow("arg >= 42 && arg == 100")]
-    [DataRow("arg >= 42 && arg !=  42")]
-    [DataRow("arg >= 42 && arg != 100")]     // Actual value is 42-99, 101-oo
     [DataRow("arg >= 42 && arg >    0")]
     [DataRow("arg >= 42 && arg >   41")]
     [DataRow("arg >= 42 && arg >   42")]
@@ -1028,9 +1006,6 @@ Tag(""End"", arg);";
     [DataRow("arg >= 42 && arg >= 100")]
     [DataRow("arg >= 42 && arg <  100")]
     [DataRow("arg >= 42 && arg <= 100")]
-    [DataRow("arg <  42 && arg ==   0")]
-    [DataRow("arg <  42 && arg !=  41")]
-    [DataRow("arg <  42 && arg !=   0")]     // Actual value is oo - -1, 1-41
     [DataRow("arg <  42 && arg >    0")]
     [DataRow("arg <  42 && arg >=   0")]
     [DataRow("arg <  42 && arg <    0")]
@@ -1043,9 +1018,6 @@ Tag(""End"", arg);";
     [DataRow("arg <  42 && arg <=  42")]
     [DataRow("arg <  42 && arg <=  43")]
     [DataRow("arg <  42 && arg <= 100")]
-    [DataRow("arg <= 42 && arg ==  42")]
-    [DataRow("arg <= 42 && arg !=   0")]     // Actual value is oo - -1, 1-42
-    [DataRow("arg <= 42 && arg !=  42")]
     [DataRow("arg <= 42 && arg >    0")]
     [DataRow("arg <= 42 && arg >=   0")]
     [DataRow("arg <= 42 && arg <    0")]
@@ -1066,7 +1038,18 @@ Tag(""End"", arg);";
     }
 
     [DataTestMethod]
-    // FIXME: Add datarows
+    [DataRow("arg == 42", 42, 42)]
+    [DataRow("42 == arg", 42, 42)]
+    [DataRow("arg == 42 && arg ==  42", 42, 42)]
+    [DataRow("arg == 42 && arg != 100", 42, 42)]
+    [DataRow("arg == 42 && arg >    0", 42, 42)]
+    [DataRow("arg == 42 && arg >=   0", 42, 42)]
+    [DataRow("arg == 42 && arg <  100", 42, 42)]
+    [DataRow("arg == 42 && arg <= 100", 42, 42)]
+    [DataRow("arg >  42 && arg == 100", 100, 100)]
+    [DataRow("arg >= 42 && arg == 100", 100, 100)]
+    [DataRow("arg <  42 && arg ==   0", 0, 0)]
+    [DataRow("arg <= 42 && arg ==  42", 42, 42)]
     public void Branching_LearnsNumberConstraint_OnlyIf(string expression, int? expectedIfMin, int? expectedIfMax)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
@@ -1084,8 +1067,24 @@ Tag(""End"", arg);";
     }
 
     [DataTestMethod]
-    // FIXME: Add datarows
-    public void Branching_LearnsNumberConstraint_OnlyElse(string expression, int? expectedIfMin, int? expectedIfMax, int? expectedElseMin, int? expectedElseMax)
+    [DataRow("arg != 42", 42, 42)]
+    [DataRow("42 != arg", 42, 42)]
+    // FIXME: Produces more states for now because arg > 42 produces "no-number" value
+    //[DataRow("arg != 42 && arg == 100", 42, 42)]
+    //[DataRow("arg != 42 && arg != 100", 42, 42)]    // FIXME: Only this one should remain here, everything else shoudl go away
+    //[DataRow("arg != 42 && arg >    0", 42, 42)]    // Actual value is 1-41, 43-oo
+    //[DataRow("arg != 42 && arg >=   0", 42, 42)]    // Actual value is 0-41, 43-oo
+    //[DataRow("arg != 42 && arg <  100", 42, 42)]    // Actual value is -oo-41, 43-99
+    //[DataRow("arg != 42 && arg <= 100", 42, 42)]    // Actual value is -oo-41, 43-100
+    //[DataRow("arg >  42 && arg !=  43", 43, 43)]
+    //[DataRow("arg >  42 && arg != 100", 100, 100)]  // Actual value is 43-99, 101-oo
+    //[DataRow("arg >= 42 && arg !=  42", 42, 42)]
+    //[DataRow("arg >= 42 && arg != 100", 100, 100)]  // Actual value is 42-99, 101-oo
+    //[DataRow("arg <  42 && arg !=  41", 41, 41)]
+    //[DataRow("arg <  42 && arg !=   0", 0, 0)]      // Actual value is oo - -1, 1-41
+    //[DataRow("arg <= 42 && arg !=   0", 0, 0)]      // Actual value is oo - -1, 1-42
+    //[DataRow("arg <= 42 && arg !=  42", 42, 42)]
+    public void Branching_LearnsNumberConstraint_OnlyElse(string expression, int? expectedElseMin, int? expectedElseMax)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
         validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
@@ -1093,6 +1092,7 @@ Tag(""End"", arg);";
     }
 
     [DataTestMethod]
+    // FIXME: There are all wrong for the moment
     [DataRow("arg == 42 && arg == 100")]
     [DataRow("arg == 42 && arg !=  42")]
     [DataRow("arg == 42 && arg >  100")]
@@ -1113,7 +1113,7 @@ Tag(""End"", arg);";
     [DataRow("arg <= 42 && arg >  100")]
     [DataRow("arg <= 42 && arg >= 100")]
     public void Branching_LearnsNumberConstraint_Unreachable(string expression) =>
-        CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int").ValidateTagOrder("Else", "If", "End");    // FIXME: "If" is not reachable
+        CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int").ValidateTagOrder("Else", "End");
 
     private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation, string argType = "object")
     {

@@ -36,6 +36,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             state = LearnBranchingEqualityConstraint<ObjectConstraint>(state, operation, falseBranch) ?? state;
             state = LearnBranchingEqualityConstraint<BoolConstraint>(state, operation, falseBranch) ?? state;
+            state = LearnBranchingEqualityConstraint<NumberConstraint>(state, operation, falseBranch) ?? state;
         }
         else if (operation.OperatorKind.IsAnyRelational())
         {
