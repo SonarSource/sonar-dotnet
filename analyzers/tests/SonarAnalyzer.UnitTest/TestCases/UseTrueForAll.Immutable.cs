@@ -22,22 +22,22 @@ class ImmutableListTestcases
         var nullableMethodBad = DoWork()?.All(x => true); // Noncompliant
         var inlineInitialization = new int[] { 42 }.All(x => true); // Noncompliant
 
-        _ = immutable.Fluent().Fluent().Fluent().Fluent().All(x => true); //Noncompliant
-        _ = immutable.Fluent().Fluent().Fluent().Fluent()?.All(x => true); //Noncompliant
-        _ = immutable.Fluent().Fluent().Fluent()?.Fluent().All(x => true); //Noncompliant
-        _ = immutable.Fluent().Fluent().Fluent()?.Fluent()?.All(x => true); //Noncompliant
-        _ = immutable.Fluent().Fluent()?.Fluent().Fluent().All(x => true); //Noncompliant
-        _ = immutable.Fluent().Fluent()?.Fluent().Fluent()?.All(x => true); //Noncompliant
-        _ = immutable.Fluent().Fluent()?.Fluent()?.Fluent().All(x => true); //Noncompliant
-        _ = immutable.Fluent().Fluent()?.Fluent()?.Fluent()?.All(x => true); //Noncompliant
-        _ = immutable.Fluent()?.Fluent().Fluent().Fluent().All(x => true); //Noncompliant
-        _ = immutable.Fluent()?.Fluent().Fluent().Fluent()?.All(x => true); //Noncompliant
-        _ = immutable.Fluent()?.Fluent().Fluent()?.Fluent().All(x => true); //Noncompliant
-        _ = immutable.Fluent()?.Fluent().Fluent()?.Fluent()?.All(x => true); //Noncompliant
-        _ = immutable.Fluent()?.Fluent()?.Fluent().Fluent().All(x => true); //Noncompliant
-        _ = immutable.Fluent()?.Fluent()?.Fluent().Fluent()?.All(x => true); //Noncompliant
-        _ = immutable.Fluent()?.Fluent()?.Fluent()?.Fluent().All(x => true); //Noncompliant
-        _ = immutable.Fluent()?.Fluent()?.Fluent()?.Fluent()?.All(x => true); //Noncompliant
+         immutable.Fluent().Fluent().Fluent().Fluent().All(x => true); //Noncompliant
+         immutable.Fluent().Fluent().Fluent().Fluent()?.All(x => true); //Noncompliant
+         immutable.Fluent().Fluent().Fluent()?.Fluent().All(x => true); //Noncompliant
+         immutable.Fluent().Fluent().Fluent()?.Fluent()?.All(x => true); //Noncompliant
+         immutable.Fluent().Fluent()?.Fluent().Fluent().All(x => true); //Noncompliant
+         immutable.Fluent().Fluent()?.Fluent().Fluent()?.All(x => true); //Noncompliant
+         immutable.Fluent().Fluent()?.Fluent()?.Fluent().All(x => true); //Noncompliant
+         immutable.Fluent().Fluent()?.Fluent()?.Fluent()?.All(x => true); //Noncompliant
+         immutable.Fluent()?.Fluent().Fluent().Fluent().All(x => true); //Noncompliant
+         immutable.Fluent()?.Fluent().Fluent().Fluent()?.All(x => true); //Noncompliant
+         immutable.Fluent()?.Fluent().Fluent()?.Fluent().All(x => true); //Noncompliant
+         immutable.Fluent()?.Fluent().Fluent()?.Fluent()?.All(x => true); //Noncompliant
+         immutable.Fluent()?.Fluent()?.Fluent().Fluent().All(x => true); //Noncompliant
+         immutable.Fluent()?.Fluent()?.Fluent().Fluent()?.All(x => true); //Noncompliant
+         immutable.Fluent()?.Fluent()?.Fluent()?.Fluent().All(x => true); //Noncompliant
+         immutable.Fluent()?.Fluent()?.Fluent()?.Fluent()?.All(x => true); //Noncompliant
     }
 }
 

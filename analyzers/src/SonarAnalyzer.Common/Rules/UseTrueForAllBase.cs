@@ -28,8 +28,6 @@ public abstract class UseTrueForAllBase<TSyntaxKind, TInvocation> : SonarDiagnos
 
     protected override string MessageFormat => "The collection-specific \"TrueForAll\" method should be used instead of the \"All\" extension";
 
-    protected UseTrueForAllBase() : base(DiagnosticId) { }
-
     private static readonly ImmutableArray<KnownType> TargetTypes = ImmutableArray.Create(
         KnownType.System_Array,
         KnownType.System_Collections_Generic_List_T,
@@ -37,6 +35,8 @@ public abstract class UseTrueForAllBase<TSyntaxKind, TInvocation> : SonarDiagnos
 
     protected abstract bool TryGetOperands(TInvocation invocation, out SyntaxNode left, out SyntaxNode right);
     protected abstract SyntaxToken? GetIdentifier(TInvocation invocation);
+
+    protected UseTrueForAllBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
