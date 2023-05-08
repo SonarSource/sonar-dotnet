@@ -718,29 +718,43 @@ Tag(""End"")";
         validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
     }
 
-    [TestMethod]
-    public void Binary_Add_UpdatesNumberConstraint_CS()
+    [DataTestMethod]
+    [DataRow("i + j", 47)]
+    [DataRow("i + 1", 43)]
+    [DataRow("i + j + 1", 48)]
+    [DataRow("(i + 1) + j", 48)]
+    [DataRow("(i + j) + 1", 48)]
+    [DataRow("i + (1 + j)", 48)]
+    [DataRow("1 + (i + j)", 48)]
+    [DataRow("i - j", 37)]
+    [DataRow("j - i", -37)]
+    [DataRow("i - 1", 41)]
+    [DataRow("i - j - 1", 36)]
+    [DataRow("(i - 1) - j", 36)]
+    [DataRow("(i - j) - 1", 36)]
+    [DataRow("i - (j - 1)", 38)]
+    [DataRow("i - (1 - j)", 46)]
+    [DataRow("1 - (i - j)", -36)]
+    [DataRow("i + j - 1", 46)]
+    [DataRow("(i + j) - 1", 46)]
+    [DataRow("(i + 1) - j", 38)]
+    [DataRow("i + (j - 1)", 46)]
+    [DataRow("i + (1 - j)", 38)]
+    [DataRow("1 + (i - j)", 38)]
+    [DataRow("i - j + 1", 38)]
+    [DataRow("(i - j) + 1", 38)]
+    [DataRow("(i - 1) + j", 46)]
+    [DataRow("i - (j + 1)", 36)]
+    [DataRow("1 - (i + j)", -46)]
+    public void Binary_Calculations_UpdatesNumberConstraint(string expression, int result)
     {
-        var code = """
+        var code = $"""
             var i = 42;
             var j = 5;
-            var x = i + j;
-            Tag("X", x);
+            var value = {expression};
+            Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("X", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(47)));
-    }
-
-    [TestMethod]
-    public void Binary_Substract_UpdatesNumberConstraint_CS()
-    {
-        var code = """
-            var i = 42;
-            var j = 5;
-            var x = i - j;
-            Tag("X", x);
-            """;
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("X", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(37)));
+        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(result)));
     }
 }
