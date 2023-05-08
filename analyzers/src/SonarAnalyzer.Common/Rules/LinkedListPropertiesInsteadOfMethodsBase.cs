@@ -31,6 +31,7 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
     protected override string MessageFormat => "'{0}' property of 'LinkedList' should be used instead of the '{0}()' extension method.";
 
     protected abstract bool TryGetOperands(TInvocationExpression invocation, out SyntaxNode left, out SyntaxNode right);
+    protected abstract bool HasAnyArguments(TInvocationExpression invocation);
     protected abstract bool IsCorrectType(TInvocationExpression invocation, SyntaxNode left, SemanticModel model);
     protected abstract void ReportIssue(SonarSyntaxNodeReportingContext node, string methodName);
 
@@ -44,6 +45,7 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
 
             if (IsFirstOrLast(methodName)
                 && TryGetOperands(invocation, out var left, out var right)
+                && !HasAnyArguments(invocation)
                 && IsCorrectCall(right, c.SemanticModel)
                 && IsCorrectType(invocation, left, c.SemanticModel))
             {

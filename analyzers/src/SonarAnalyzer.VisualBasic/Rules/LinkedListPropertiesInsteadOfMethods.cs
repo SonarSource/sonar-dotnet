@@ -28,6 +28,8 @@ public sealed class LinkedListPropertiesInsteadOfMethods : LinkedListPropertiesI
     protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
         invocation.TryGetOperands(out left, out right);
 
+    protected override bool HasAnyArguments(InvocationExpressionSyntax invocation) => false;
+
     protected override bool IsCorrectType(InvocationExpressionSyntax invocation, SyntaxNode left, SemanticModel model) =>
         invocation is { ArgumentList: { Arguments: { Count: 1 } arg } }
         && model.GetTypeInfo(arg.First().GetExpression()).Type is { } type

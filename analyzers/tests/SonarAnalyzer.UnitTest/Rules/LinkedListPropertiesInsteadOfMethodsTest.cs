@@ -76,6 +76,19 @@ public class LinkedListPropertiesInsteadOfMethodsTest
             End Class
             """).Verify();
 
+    private static string GenerateBatchTests_CS(string name) => $$$"""
+        var data = new LinkedList<int>();
+
+        data.{{{name}}}(); // Noncompliant {{'{{{name}}}' property of 'LinkedList' should be used instead of the '{{{name}}}()' extension method.}}
+        //   {{{string.Concat(Enumerable.Repeat("^", name.Length))}}}
+
+        data.{{{name}}}(x => x > 0);            // Compliant
+        _ = data.{{{name}}}.Value;              // Compliant
+        data.Count();                           // Compliant
+        data.Append(1).{{{name}}}().ToString(); // Compliant
+        data?.{{{name}}}().ToString();          // Noncompliant
+        """;
+
     private static string GenerateBatchTests_VB(string name) => $$$"""
         Enumerable.{{{name}}}(data)   ' Noncompliant {{'{{{name}}}' property of 'LinkedList' should be used instead of the '{{{name}}}()' extension method.}}
         '                  {{{string.Concat(Enumerable.Repeat("^", name.Length))}}}
@@ -84,17 +97,5 @@ public class LinkedListPropertiesInsteadOfMethodsTest
         Dim b = data.{{{name}}}()     ' Compliant
         Dim c = data.{{{name}}}.Value ' Compliant
         Dim d = data.Count()          ' Compliant
-        """;
-
-    private static string GenerateBatchTests_CS(string name) => $$$"""
-        var data = new LinkedList<int>();
-
-        data.{{{name}}}(); // Noncompliant {{'{{{name}}}' property of 'LinkedList' should be used instead of the '{{{name}}}()' extension method.}}
-        //   {{{string.Concat(Enumerable.Repeat("^", name.Length))}}}
-
-        _ = data.{{{name}}}.Value;              // Compliant
-        data.Count();                           // Compliant
-        data.Append(1).{{{name}}}().ToString(); // Compliant
-        data?.{{{name}}}().ToString();          // Noncompliant
         """;
 }
