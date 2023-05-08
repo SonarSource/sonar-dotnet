@@ -1,10 +1,11 @@
 ﻿using System;
 
-file class ClassWontBeExtended { } // Noncompliant {{File-scoped classes which are not derived in the current assembly should be marked as 'sealed'.}}
-//         ^^^^^^^^^^^^^^^^^^^
-
-file record RecordWontBeExtended { } // Noncompliant {{File-scoped records which are not derived in the current assembly should be marked as 'sealed'.}}
-//          ^^^^^^^^^^^^^^^^^^^^
+file class ClassNotExtended { } // Noncompliant {{File-scoped classes which are not derived in the current file should be marked as 'sealed'.}}
+//         ^^^^^^^^^^^^^^^^
+file record RecordNotExtended { } // Noncompliant {{File-scoped record classes which are not derived in the current file should be marked as 'sealed'.}}
+//          ^^^^^^^^^^^^^^^^^
+file record class RecordNotExtended2 { } // Noncompliant {{File-scoped record classes which are not derived in the current file should be marked as 'sealed'.}}
+//                ^^^^^^^^^^^^^^^^^^
 
 file class FileClassVirtualMethod // Compliant, the class has a virtual member.
 {
@@ -49,9 +50,10 @@ file class FileDerivedClassSecondExtension : FileDerivedClass { }
 
 file class TheThirdExtension : FileDerivedClassSecondExtension { } // Noncompliant
 
-file sealed class ClassWontBeExtendedButFile { }
+file sealed class ClassNotExtendedButFile { }
 
 file struct AStruct { } // Compliant, structs cannot be inherited.
+file record struct ARecordStruct { } // Compliant, record structs cannot be inherited.
 
 file static class FileStaticClass { } // Compliant, static classes cannot be inherited.
 
@@ -86,3 +88,16 @@ namespace GenericRecords
     abstract record AbstractImplementationRecord<T> : InheritedGenericRecord<T> { } // Compliant
 }
 
+namespace GenericRecordClasses
+{
+    file record class NotInheritedGenericRecord<T> { } // Noncompliant
+    file record class InheritedGenericRecord<T> { } // Compliant
+
+    file record class ImplementationRecord : InheritedGenericRecord<int> { } // Noncompliant
+    file record class ImplementationRecord<T> : InheritedGenericRecord<T> { } // Noncompliant
+
+    file sealed record class SealedImplementationRecord : InheritedGenericRecord<int> { } // Compliant
+    file sealed record class SealedImplementationRecord<T> : InheritedGenericRecord<T> { } // Compliant
+    abstract record class AbstractImplementationRecord : InheritedGenericRecord<int> { } // Compliant
+    abstract record class AbstractImplementationRecord<T> : InheritedGenericRecord<T> { } // Compliant
+}

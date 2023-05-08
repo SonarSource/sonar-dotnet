@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class NonDerivedPrivateClassesShouldBeSealed : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3260";
-        private const string MessageFormat = "{0} {1} which are not derived in the current assembly should be marked as 'sealed'.";
+        private const string MessageFormat = "{0} {1} which are not derived in the current {2} should be marked as 'sealed'.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -59,10 +59,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (!IsSealed(declaration)
                         && !HasVirtualMembers(declaration)
-                        && !IsPossiblyDerived(declaration, model, symbols, out var modifierDescription))
+                        && !IsPossiblyDerived(declaration, model, symbols, out var modifier, out var inheritanceScope))
                     {
-                        var typeDescription = declaration.IsKind(SyntaxKind.ClassDeclaration) ? "classes" : "records";
-                        c.ReportIssue(Diagnostic.Create(Rule, declaration.Identifier.GetLocation(), modifierDescription, typeDescription));
+                        var type = declaration.IsKind(SyntaxKind.ClassDeclaration) ? "classes" : "record classes";
+                        c.ReportIssue(Diagnostic.Create(Rule, declaration.Identifier.GetLocation(), modifier, type, inheritanceScope));
                     }
                 }
             });
@@ -77,12 +77,17 @@ namespace SonarAnalyzer.Rules.CSharp
             || typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
             || typeDeclaration.Modifiers.Any(SyntaxKind.AbstractKeyword);
 
-        private static bool IsPossiblyDerived(TypeDeclarationSyntax declaration, Lazy<SemanticModel> model, Lazy<List<INamedTypeSymbol>> otherSymbols, out string modifierDescription)
+        private static bool IsPossiblyDerived(
+            TypeDeclarationSyntax declaration,
+            Lazy<SemanticModel> model,
+            Lazy<List<INamedTypeSymbol>> otherSymbols,
+            out string modifierDescription,
+            out string scopeDescription)
         {
-            modifierDescription = string.Empty;
             if (declaration.Modifiers.Any(SyntaxKind.PrivateKeyword))
             {
                 modifierDescription = "Private";
+                scopeDescription = "assembly";
                 var symbol = model.Value.GetDeclaredSymbol(declaration);
                 return symbol.ContainingType.GetAllNamedTypes().Any(other =>
                     !other.MetadataName.Equals(symbol.MetadataName)
@@ -91,12 +96,14 @@ namespace SonarAnalyzer.Rules.CSharp
             if (declaration.Modifiers.Any(SyntaxKindEx.FileKeyword))
             {
                 modifierDescription = "File-scoped";
+                scopeDescription = "file";
                 var symbol = model.Value.GetDeclaredSymbol(declaration);
                 return otherSymbols.Value.Exists(other =>
                     !other.MetadataName.Equals(symbol.MetadataName)
                     && other.DerivesFrom(symbol));
             }
 
+            modifierDescription = scopeDescription =  string.Empty;
             return true;
         }
     }
