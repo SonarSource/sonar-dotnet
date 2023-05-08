@@ -34,32 +34,3 @@ public sealed class UseIndexingInsteadOfLinqMethods : UseIndexingInsteadOfLinqMe
     protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
         invocation.TryGetOperands(out left, out right);
 }
-
-public static class InvocationExtensions // TO BE DELETED
-{
-    public static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
-    {
-        if (invocation.Expression is MemberAccessExpressionSyntax access)
-        {
-            left = access.Expression ?? GetLeft(invocation);
-            right = access.Name;
-            return true;
-        }
-        left = right = null;
-        return false;
-
-        static SyntaxNode GetLeft(SyntaxNode current, int iteration = 0)
-        {
-            const int recursionThreshold = 42;
-            if (iteration > recursionThreshold || current.Parent is CompilationUnitSyntax)
-            {
-                return null;
-            }
-            if (current.Parent is ConditionalAccessExpressionSyntax conditional && conditional.WhenNotNull == current)
-            {
-                return conditional.Expression;
-            }
-            return GetLeft(current.Parent, iteration + 1);
-        }
-    }
-}

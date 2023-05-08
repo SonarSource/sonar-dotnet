@@ -32,7 +32,7 @@ public class UseIndexingInsteadOfLinqMethodsTest
 
     [TestMethod]
     public void UseIndexingInsteadOfLinqMethods_CS() =>
-        builderCS.AddPaths("UseIndexingInsteadOfLinqMethods.cs").Verify();
+        builderCS.AddPaths("UseIndexingInsteadOfLinqMethods.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
     public void UseIndexingInsteadOfLinqMethods_VB() =>

@@ -29,7 +29,7 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
         KnownType.System_Collections_Generic_IList_T);
 
     private const string DiagnosticId = "S6608";
-    protected override string MessageFormat => "Indexing {0} should be used instead of the \"Enumerable\" extension method \"{1}\"";
+    protected override string MessageFormat => "{0} should be used instead of the \"Enumerable\" extension method \"{1}\"";
 
     protected UseIndexingInsteadOfLinqMethodsBase() : base(DiagnosticId) { }
 
@@ -59,7 +59,7 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
             var diagnostic = Diagnostic.Create(
                 Rule,
                 GetIdentifier(invocation)?.GetLocation(),
-                indexLocation == null ? string.Empty : $"at {indexLocation}",
+                indexLocation == null ? "Indexing" : $"Indexing at {indexLocation}",
                 methodName);
             c.ReportIssue(diagnostic);
         }
@@ -71,5 +71,4 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
     protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
-
 }
