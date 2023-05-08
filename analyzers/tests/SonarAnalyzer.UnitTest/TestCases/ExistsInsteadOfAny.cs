@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,13 +31,61 @@ public class TestClass
         list?.Any(x => x > 0).ToString(); // Noncompliant
         classB?.Any(x => x); // Compliant
 
+        var enumList = new EnumList<int>();
+        enumList.Any(x => x > 0); // Compliant
+
+        var goodList = new GoodList<int>();
+        goodList.Any(x => x > 0); // Noncompliant
+
+        var ternary = (true ? list : goodList).Any(x => x > 0); // Noncompliant
+        var nullCoalesce = (list ?? goodList).Any(x => x > 0); // Noncompliant
+        var ternaryNullCoalesce = (list ?? (true ? list : goodList)).Any(x => x > 0); // Noncompliant
+
+        goodList.GetList().Any(x => true); // Noncompliant
+
+        Any<int>(x => x > 0); // Compliant
+        AcceptMethod<int>(goodList.Any); // Compliant
+
+        goodList.GetList().GetList().GetList().GetList().Any(x => x > 0);     //Noncompliant
+        goodList.GetList().GetList().GetList().GetList()?.Any(x => x > 0);    //Noncompliant
+        goodList.GetList().GetList().GetList()?.GetList().Any(x => x > 0);    //Noncompliant
+        goodList.GetList().GetList().GetList()?.GetList()?.Any(x => x > 0);   //Noncompliant
+        goodList.GetList().GetList()?.GetList().GetList().Any(x => x > 0);    //Noncompliant
+        goodList.GetList().GetList()?.GetList().GetList()?.Any(x => x > 0);   //Noncompliant
+        goodList.GetList().GetList()?.GetList()?.GetList().Any(x => x > 0);   //Noncompliant
+        goodList.GetList().GetList()?.GetList()?.GetList()?.Any(x => x > 0);  //Noncompliant
+        goodList.GetList()?.GetList().GetList().GetList().Any(x => x > 0);    //Noncompliant
+        goodList.GetList()?.GetList().GetList().GetList()?.Any(x => x > 0);   //Noncompliant
+        goodList.GetList()?.GetList().GetList()?.GetList().Any(x => x > 0);   //Noncompliant
+        goodList.GetList()?.GetList().GetList()?.GetList()?.Any(x => x > 0);  //Noncompliant
+        goodList.GetList()?.GetList()?.GetList().GetList().Any(x => x > 0);   //Noncompliant
+        goodList.GetList()?.GetList()?.GetList().GetList()?.Any(x => x > 0);  //Noncompliant
+        goodList.GetList()?.GetList()?.GetList()?.GetList().Any(x => x > 0);  //Noncompliant
+        goodList.GetList()?.GetList()?.GetList()?.GetList()?.Any(x => x > 0); //Noncompliant
+
         return list.Any(x => x % 2 == 0); // Noncompliant
     }
 
     bool ContainsEvenExpression(List<int> data) =>
         data.Any(x => x % 2 == 0); // Noncompliant
 
-    public class ClassA
+    bool Any<T>(Func<T, bool> predicate) => true;
+
+    void AcceptMethod<T>(Func<Func<T, bool>, bool> methodThatLooksLikeAny) { }
+
+    class GoodList<T> : List<T>
+    {
+        public GoodList<T> GetList() => this;
+        void CallAny() => this.Any(x => true); // Noncompliant
+    }
+
+    class EnumList<T> : IEnumerable<T>
+    {
+        public IEnumerator<T> GetEnumerator() => null;
+        IEnumerator IEnumerable.GetEnumerator() => null;
+    }
+
+    class ClassA
     {
         public List<int> myListField = new List<int>();
 
