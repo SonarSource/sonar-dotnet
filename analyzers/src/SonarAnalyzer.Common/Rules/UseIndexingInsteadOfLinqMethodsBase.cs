@@ -24,18 +24,18 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
     where TSyntaxKind : struct
     where TInvocation : SyntaxNode
 {
+    private const string DiagnosticId = "S6608";
+    protected override string MessageFormat => "{0} should be used instead of the \"Enumerable\" extension method \"{1}\"";
+
     private static readonly ImmutableArray<KnownType> TargetInterfaces = ImmutableArray.Create(
         KnownType.System_Collections_IList,
         KnownType.System_Collections_Generic_IList_T);
 
-    private const string DiagnosticId = "S6608";
-    protected override string MessageFormat => "{0} should be used instead of the \"Enumerable\" extension method \"{1}\"";
-
-    protected UseIndexingInsteadOfLinqMethodsBase() : base(DiagnosticId) { }
-
     protected abstract int GetArgumentCount(TInvocation invocation);
     protected abstract bool TryGetOperands(TInvocation invocation, out SyntaxNode left, out SyntaxNode right);
     protected abstract SyntaxToken? GetIdentifier(TInvocation invocation);
+
+    protected UseIndexingInsteadOfLinqMethodsBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>

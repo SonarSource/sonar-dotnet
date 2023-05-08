@@ -26,52 +26,52 @@ Func<List<int>, int> func = l => l.First(); // Noncompliant
 
 List<int> DoWork() => null;
 
-_ = DoWork().First(); // Noncompliant
-_ = DoWork().Last(); // Noncompliant
-_ = DoWork().ElementAt(42); // Noncompliant
+DoWork().First(); // Noncompliant
+DoWork().Last(); // Noncompliant
+DoWork().ElementAt(42); // Noncompliant
 
-_ = DoWork()?.First(); // Noncompliant
-_ = DoWork()?.Last(); // Noncompliant
-_ = DoWork()?.ElementAt(42); // Noncompliant
+DoWork()?.First(); // Noncompliant
+DoWork()?.Last(); // Noncompliant
+DoWork()?.ElementAt(42); // Noncompliant
 
-_ = new List<int> { 42 }.First(); // Noncompliant
-_ = new List<int> { 42 }.Last(); // Noncompliant
-_ = new List<int> { 42 }.ElementAt(42); // Noncompliant
+new List<int> { 42 }.First(); // Noncompliant
+new List<int> { 42 }.Last(); // Noncompliant
+new List<int> { 42 }.ElementAt(42); // Noncompliant
 
 var implementsIList = new ImplementsIList<int>();
 
-_ = (true ? implementsIList : implementsIList).First(); // Noncompliant
-_ = (true ? implementsIList : implementsIList).Last(); // Noncompliant
-_ = (true ? implementsIList : implementsIList).ElementAt(42); // Noncompliant
+(true ? implementsIList : implementsIList).First(); // Noncompliant
+(true ? implementsIList : implementsIList).Last(); // Noncompliant
+(true ? implementsIList : implementsIList).ElementAt(42); // Noncompliant
 
-_ = (implementsIList ?? implementsIList).First(); // Noncompliant
-_ = (implementsIList ?? implementsIList).Last(); // Noncompliant
-_ = (implementsIList ?? implementsIList).ElementAt(42); // Noncompliant
+(implementsIList ?? implementsIList).First(); // Noncompliant
+(implementsIList ?? implementsIList).Last(); // Noncompliant
+(implementsIList ?? implementsIList).ElementAt(42); // Noncompliant
 
-_ = (implementsIList ?? (true ? implementsIList : implementsIList)).First(); // Noncompliant
-_ = (implementsIList ?? (true ? implementsIList : implementsIList)).Last(); // Noncompliant
-_ = (implementsIList ?? (true ? implementsIList : implementsIList)).ElementAt(42); // Noncompliant
+(implementsIList ?? (true ? implementsIList : implementsIList)).First(); // Noncompliant
+(implementsIList ?? (true ? implementsIList : implementsIList)).Last(); // Noncompliant
+(implementsIList ?? (true ? implementsIList : implementsIList)).ElementAt(42); // Noncompliant
 
-_ = implementsIList.Fluent().Fluent().Fluent().Fluent().First(); // Noncompliant
-_ = implementsIList.Fluent().Fluent().Fluent().Fluent()?.Last(); // Noncompliant
-_ = implementsIList.Fluent().Fluent().Fluent()?.Fluent().ElementAt(42); // Noncompliant
-_ = implementsIList.Fluent().Fluent().Fluent()?.Fluent()?.First(); // Noncompliant
-_ = implementsIList.Fluent().Fluent()?.Fluent().Fluent().Last(); // Noncompliant
-_ = implementsIList.Fluent().Fluent()?.Fluent().Fluent()?.ElementAt(42); // Noncompliant
-_ = implementsIList.Fluent().Fluent()?.Fluent()?.Fluent().First(); // Noncompliant
-_ = implementsIList.Fluent().Fluent()?.Fluent()?.Fluent()?.Last(); // Noncompliant
-_ = implementsIList.Fluent()?.Fluent().Fluent().Fluent().ElementAt(42); // Noncompliant
-_ = implementsIList.Fluent()?.Fluent().Fluent().Fluent()?.First(); // Noncompliant
-_ = implementsIList.Fluent()?.Fluent().Fluent()?.Fluent().Last(); // Noncompliant
-_ = implementsIList.Fluent()?.Fluent().Fluent()?.Fluent()?.ElementAt(42); // Noncompliant
-_ = implementsIList.Fluent()?.Fluent()?.Fluent().Fluent().First(); // Noncompliant
-_ = implementsIList.Fluent()?.Fluent()?.Fluent().Fluent()?.Last(); // Noncompliant
-_ = implementsIList.Fluent()?.Fluent()?.Fluent()?.Fluent().ElementAt(42); // Noncompliant
-_ = implementsIList.Fluent()?.Fluent()?.Fluent()?.Fluent()?.First(); // Noncompliant
-//                                                          ^^^^^
+implementsIList.Fluent().Fluent().Fluent().Fluent().First(); // Noncompliant
+implementsIList.Fluent().Fluent().Fluent().Fluent()?.Last(); // Noncompliant
+implementsIList.Fluent().Fluent().Fluent()?.Fluent().ElementAt(42); // Noncompliant
+implementsIList.Fluent().Fluent().Fluent()?.Fluent()?.First(); // Noncompliant
+implementsIList.Fluent().Fluent()?.Fluent().Fluent().Last(); // Noncompliant
+implementsIList.Fluent().Fluent()?.Fluent().Fluent()?.ElementAt(42); // Noncompliant
+implementsIList.Fluent().Fluent()?.Fluent()?.Fluent().First(); // Noncompliant
+implementsIList.Fluent().Fluent()?.Fluent()?.Fluent()?.Last(); // Noncompliant
+implementsIList.Fluent()?.Fluent().Fluent().Fluent().ElementAt(42); // Noncompliant
+implementsIList.Fluent()?.Fluent().Fluent().Fluent()?.First(); // Noncompliant
+implementsIList.Fluent()?.Fluent().Fluent()?.Fluent().Last(); // Noncompliant
+implementsIList.Fluent()?.Fluent().Fluent()?.Fluent()?.ElementAt(42); // Noncompliant
+implementsIList.Fluent()?.Fluent()?.Fluent().Fluent().First(); // Noncompliant
+implementsIList.Fluent()?.Fluent()?.Fluent().Fluent()?.Last(); // Noncompliant
+implementsIList.Fluent()?.Fluent()?.Fluent()?.Fluent().ElementAt(42); // Noncompliant
+implementsIList.Fluent()?.Fluent()?.Fluent()?.Fluent()?.First(); // Noncompliant
+//                                                      ^^^^^
 
-_ = implementsIList.First(x => x == 42); // Compliant, calls with the predicate cannot be replaced with indexes
-_ = implementsIList.Last(x => x == 42); // Compliant, calls with the predicate cannot be replaced with indexes
+implementsIList.First(x => x == 42); // Compliant, calls with the predicate cannot be replaced with indexes
+implementsIList.Last(x => x == 42); // Compliant, calls with the predicate cannot be replaced with indexes
 
 T First<T>() => default;
 T Last<T>() => default;
