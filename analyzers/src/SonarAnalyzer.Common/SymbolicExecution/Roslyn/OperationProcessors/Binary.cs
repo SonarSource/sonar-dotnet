@@ -59,8 +59,28 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         return state;
     }
 
-    private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) =>
-        NumberConstraint.From(Calculation(kind, left.Min, right.Min), Calculation(kind, left.Max, right.Max));
+    private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right)
+    {
+        BigInteger? min, max;
+        switch (kind)
+        {
+            case BinaryOperatorKind.Add:
+                min = Calculation(kind, left.Min, right.Min);
+                max = Calculation(kind, left.Max, right.Max);
+                break;
+            case BinaryOperatorKind.Subtract:
+                min = Calculation(kind, left.Min, right.Max);
+                max = Calculation(kind, left.Max, right.Min);
+                break;
+            default:
+                min = null;
+                max = null;
+                break;
+        }
+        return min is not null || max is not null
+            ? NumberConstraint.From(min, max)
+            : null;
+    }
 
     private static BigInteger? Calculation(BinaryOperatorKind kind, BigInteger? a, BigInteger? b) =>
         a is not null && b is not null
