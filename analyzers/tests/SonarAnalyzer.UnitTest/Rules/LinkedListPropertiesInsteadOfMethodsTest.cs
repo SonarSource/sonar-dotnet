@@ -93,9 +93,10 @@ public class LinkedListPropertiesInsteadOfMethodsTest
         Enumerable.{{{name}}}(data)   ' Noncompliant {{'{{{name}}}' property of 'LinkedList' should be used instead of the '{{{name}}}()' extension method.}}
         '                  {{{string.Concat(Enumerable.Repeat("^", name.Length))}}}
 
-        Dim a = Enumerable.Any(data)  ' Compliant
-        Dim b = data.{{{name}}}()     ' Compliant
-        Dim c = data.{{{name}}}.Value ' Compliant
-        Dim d = data.Count()          ' Compliant
+        Dim a = Enumerable.Any(data)     ' Compliant
+        Dim b = data.{{{name}}}()        ' Compliant
+        Dim c = data.{{{name}}}.Value    ' Compliant
+        Dim d = data.Count()             ' Compliant
+        Dim e = Enumerable.{{{name}}}(data, Function(x) x > 0) ' Compliant
         """;
 }
