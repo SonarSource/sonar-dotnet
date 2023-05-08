@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>It is needlessly complex to invert the result of a boolean comparison. The opposite comparison should be made instead.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 If Not (a = 2) Then  // Noncompliant
 Dim b as Boolean = Not (i &lt; 10)  // Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 If a &lt;&gt; 2 Then
 Dim b as Boolean = i &gt;= 10

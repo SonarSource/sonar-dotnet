@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>When the names of parameters in a procedure call match the names of the procedure arguments, it contributes to a clearer, more readable code.
 However, when the names match but are passed in a different order than the method arguments, it indicates a mistake in the parameter order which will
 likely lead to unexpected results.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Public Function Divide(ByVal divisor As Integer, ByVal dividend As Integer) As Double
     Return divisor / dividend
@@ -15,7 +16,7 @@ Public Sub DoTheThing()
     '...
 End Sub
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Public Function Divide(ByVal divisor As Integer, ByVal dividend As Integer) As Double
     Return divisor / dividend

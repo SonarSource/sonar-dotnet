@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>Because parameter names could be changed during refactoring, they should not be spelled out literally in strings. Instead, use
 <code>NameOf()</code>, and the string that’s output will always be correct.</p>
 <p>This rule raises an issue when any string in the <code>Throw</code> statement is an exact match for the name of one of the method parameters.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Public Sub DoSomething(param As Integer, secondParam As String)
     If (param &lt; 0)
@@ -12,7 +13,7 @@ Public Sub DoSomething(param As Integer, secondParam As String)
     End If
 End Sub
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Public Sub DoSomething(param As Integer, secondParam As String)
     If (param &lt; 0)
@@ -23,7 +24,7 @@ Public Sub DoSomething(param As Integer, secondParam As String)
     End If
 End Sub
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <ul>
   <li> The rule doesn’t raise any issue when using VB.NET &lt; 14.0. </li>
   <li> When the parameter name is contained in a sentence inside the <code>Throw</code> statement string, the rule will raise an issue only if the

@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Shared naming conventions allow teams to collaborate efficiently. This rule checks that all enum names match a provided regular expression.</p>
 <p>The default configuration is the one recommended by Microsoft:</p>
 <ul>
@@ -6,7 +7,7 @@
   <li> Longer abbreviations need to be lower case, e.g. GetHtml </li>
   <li> If the enum is marked as [Flags] then its name should be plural (e.g. MyOptions), otherwise, names should be singular (e.g. MyOption) </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <p>With the default regular expression for non-flags enums: <code>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code></p>
 <pre>
 Public Enum foo ' Noncompliant
@@ -22,7 +23,7 @@ Public Enum Option ' Noncompliant
     Option2 = 2
 End Enum
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Public Enum Foo
     FooValue = 0

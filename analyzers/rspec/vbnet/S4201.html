@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>There’s no need to null test in conjunction with an <code>TypeOf ... Is</code> test. <code>Nothing</code> is not an instance of anything, so a null
 check is redundant.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 If (x IsNot Nothing And TypeOf x Is MyClass)
     ' ...
@@ -10,7 +11,7 @@ If (x Is Nothing Or TypeOf x IsNot MyClass)
     ' ...
 End If
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 If (TypeOf x Is MyClass)
     ' ...

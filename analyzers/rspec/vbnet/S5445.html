@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Creating temporary files using insecure methods exposes the application to race conditions on filenames: a malicious user can try to create a file
 with a predictable name before the application does. A successful attack can result in other files being accessed, modified, corrupted or deleted.
 This risk is even higher if the application run with elevated permissions.</p>
@@ -8,7 +9,25 @@ This risk is even higher if the application run with elevated permissions.</p>
 </ul>
 <p><code>Path.GetTempFileName()</code>&nbsp;generates predictable file names and is inherently unreliable and insecure. Additionally, the&nbsp;method
 will raise an&nbsp;<code>IOException</code> if it is used to create more than 65535 files without deleting previous temporary files.</p>
-<h2>Recommended Secure Coding Practices</h2>
+<h3>Noncompliant code example</h3>
+<pre>
+Dim TempPath = Path.GetTempFileName() 'Noncompliant
+
+Using Writer As New StreamWriter(TempPath)
+    Writer.WriteLine("content")
+End Using
+</pre>
+<h3>Compliant solution</h3>
+<pre>
+Dim RandomPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName())
+
+Using FileStream As new FileStream(RandomPath, FileMode.CreateNew, FileAccess.Write, FileShare.None, 4096, FileOptions.DeleteOnClose)
+    Using Writer As New StreamWriter(FileStream)
+        Writer.WriteLine("content")
+    End Using
+End Using
+</pre>
+<h4>Recommended Secure Coding Practices</h4>
 <p>Out of the box, .NET is missing secure-by-design APIs to create temporary files. To overcome this, one of the following options can be used:</p>
 <ul>
   <li> Use a dedicated sub-folder with tightly controlled permissions </li>
@@ -20,25 +39,7 @@ will raise an&nbsp;<code>IOException</code> if it is used to create more than 65
       <li> File is destroyed as soon as it is closed </li>
     </ul>  </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
-<pre>
-Dim TempPath = Path.GetTempFileName() 'Noncompliant
-
-Using Writer As New StreamWriter(TempPath)
-    Writer.WriteLine("content")
-End Using
-</pre>
-<h2>Compliant Solution</h2>
-<pre>
-Dim RandomPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName())
-
-Using FileStream As new FileStream(RandomPath, FileMode.CreateNew, FileAccess.Write, FileShare.None, 4096, FileOptions.DeleteOnClose)
-    Using Writer As New StreamWriter(FileStream)
-        Writer.WriteLine("content")
-    End Using
-End Using
-</pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">OWASP Top 10 2021 Category A1</a> - Broken Access Control </li>
   <li> <a href="https://owasp.org/www-project-top-ten/2017/A9_2017-Using_Components_with_Known_Vulnerabilities">OWASP Top 10 2017 Category A9</a> -

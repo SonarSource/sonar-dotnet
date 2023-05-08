@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Properties provide a way to enforce encapsulation by providing <code>public</code>, <code>protected</code> or <code>internal</code> methods that
 give controlled access to <code>private</code> fields. However in classes with multiple fields it is not unusual that cut and paste is used to quickly
 create the needed properties, which can result in the wrong field being accessed by a getter or setter.</p>
@@ -10,7 +11,7 @@ create the needed properties, which can result in the wrong field being accessed
 href="https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/procedures/auto-implemented-properties">auto-implemented
 properties</a> (VB.NET 10.0 or later).</p>
 <p>Field and property names are compared as case-insensitive. All underscore characters are ignored.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Public Class Sample
 
@@ -28,7 +29,7 @@ Public Class Sample
 
 End Class
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Public Class Sample
 

@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>If a lock is held or acquired and then released within a method, it should be released along all execution paths.</p>
 <p>Failing to do so could make an application deadlock-prone because there is a risk of the lock not being released.</p>
 <p>The types tracked by the rule are: <code>Monitor</code>, <code>Mutex</code>, <code>ReaderWriterLock</code>, <code>ReaderWriterLockSlim</code>, and
 <code>SpinLock</code> from the <code>System.Threading</code> namespace.</p>
 <p>This rule raises an issue when a lock is acquired in a method but only released on some paths. No issue is raised when the lock is never released
 in the method. The assumption is that callers will release it.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Class Example
     Private obj As Object = New Object()
@@ -29,7 +30,7 @@ Class Example
     End Sub
 End Class
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Class Example
     Private obj As Object = New Object()
@@ -55,7 +56,7 @@ Class Example
     End Sub
 End Class
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/459">MITRE, CWE-459</a> - Incomplete Cleanup </li>
   <li> <a

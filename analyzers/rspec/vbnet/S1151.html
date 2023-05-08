@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>The <code>Select...Case</code> statement should be used only to clearly define some new branches in the control flow. As soon as a case clause
 contains too many statements this highly decreases the readability of the overall control flow statement. In such case, the content of the case clause
 should be extracted into a dedicated procedure.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <p>With the default threshold of 3:</p>
 <pre>
 Select Case number
@@ -14,7 +15,7 @@ Select Case number
         ' ...
 End Select
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Select Case number
     Case 1 To 5

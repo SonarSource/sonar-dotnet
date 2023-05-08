@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>A <code>Do ... Loop</code> without a <code>While</code> or <code>Until</code> condition must be terminated by an unstructured <code>Exit Do</code>
 statement. It is safer and more readable to use structured loops instead.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Module Module1
     Sub Main()
@@ -18,7 +19,7 @@ Module Module1
     End Sub
 End Module
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Module Module1
     Sub Main()

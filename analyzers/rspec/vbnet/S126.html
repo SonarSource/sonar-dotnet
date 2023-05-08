@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p>This rule applies whenever an <code>If</code> statement is followed by one or more <code>ElseIf</code> statements; the final <code>ElseIf</code>
 should be followed by an <code>Else</code> statement.</p>
 <p>The requirement for a final <code>Else</code> statement is defensive programming.</p>
 <p>The <code>Else</code> statement should either take appropriate action or contain a suitable comment as to why no action is taken. This is
 consistent with the requirement to have a final <code>Case Else</code> clause in a <code>Select Case</code> statement.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 If x = 0 Then
     DoSomething()
@@ -11,7 +12,7 @@ ElseIf x = 1 Then
     DoSomethingElse()
 End If
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 If x = 0 Then
     DoSomething()
@@ -21,6 +22,6 @@ Else
     Throw New ArgumentException("...")
 End If
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>None</p>
 

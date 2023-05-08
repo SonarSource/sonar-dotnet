@@ -1,19 +1,20 @@
+<h2>Why is this an issue?</h2>
 <p>There is no good excuse for an empty class. If it’s being used simply as a common extension point, it should be replaced with an
 <code>Interface</code>. If it was stubbed in as a placeholder for future development it should be fleshed-out. In any other case, it should be
 eliminated.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Public Class Empty ' Noncompliant
 
 End Class
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Public Interface IEmpty
 
 End Interface
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>Partial classes are ignored entirely, as they are often used with Source Generators. Subclasses of System.Exception are ignored, as even an empty
 Exception class can provide useful information by its type name alone. Subclasses of System.Attribute are ignored, as well as classes which are
 annotated with attributes. Subclasses of generic classes are ignored, as even when empty they can be used for type specialization. Subclasses of

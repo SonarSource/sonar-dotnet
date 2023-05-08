@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>There are several reasons for a method not to have a method body:</p>
 <ul>
   <li> It is an unintentional omission, and should be fixed. </li>
   <li> It is not yet, or never will be, supported. In this case a <code>NotSupportedException</code> should be thrown. </li>
   <li> The method is an intentionally-blank override. In this case a nested comment should explain the reason for the blank override. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Sub DoSomething()
 End Sub
@@ -12,7 +13,7 @@ End Sub
 Function DoSomething() As String
 End Function
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Sub DoSomething()
     ' Not implemented because of reason
@@ -22,7 +23,7 @@ Function DoSomething() As String
     Throw New NotSupportedException
 End Function
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>The following methods are ignored:</p>
 <ul>
   <li> empty <code>Overridable</code> or <code>MustOverride</code> methods, </li>

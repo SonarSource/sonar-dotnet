@@ -1,5 +1,6 @@
+<h2>Why is this an issue?</h2>
 <p>Using the <code>With</code> statement for a series of calls to the same object makes the code more readable.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <p>With the default value of 6:</p>
 <pre>
 Module Module1
@@ -15,7 +16,7 @@ Module Module1
     End Sub
 End Module
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Module Module1
     Dim product = New With {.Name = "paperclips", .RetailPrice = 1.2, .WholesalePrice = 0.6, .A = 0, .B = 0, .C = 0}

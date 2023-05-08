@@ -1,5 +1,6 @@
+<h2>Why is this an issue?</h2>
 <p>The information that an enumeration type is actually an enumeration or a set of flags should not be duplicated in its name.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Enum FooFlags ' Noncompliant
     Foo = 1
@@ -7,7 +8,7 @@ Enum FooFlags ' Noncompliant
     Baz = 4
 End Enum
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Enum Foo      ' Compliant
     Foo = 1
