@@ -25,11 +25,31 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
+    // TO BE DELETED
     protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
     {
-        left = null;
-        right = null;
+        if (invocation.Expression is MemberAccessExpressionSyntax access)
+        {
+            left = access.Expression ?? GetLeft(invocation);
+            right = access.Name;
+            return true;
+        }
+        left = right = null;
         return false;
+
+        static SyntaxNode GetLeft(SyntaxNode current, int iteration = 0)
+        {
+            const int recursionThreshold = 42;
+            if (iteration > recursionThreshold || current.Parent is CompilationUnitSyntax)
+            {
+                return null;
+            }
+            if (current.Parent is ConditionalAccessExpressionSyntax conditional && conditional.WhenNotNull == current)
+            {
+                return conditional.Expression;
+            }
+            return GetLeft(current.Parent, iteration + 1);
+        }
     }
 
     protected override bool HasAnyArguments(InvocationExpressionSyntax node) =>

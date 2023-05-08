@@ -5,7 +5,7 @@ Imports System.Linq
 Public Class TestClass
     Private Function MyMethod(ByVal data As List(Of Integer)) As Boolean
         data.Any(Function(x) x > 0) ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
-        '       ^^^^^^^^
+        '    ^^^
         data.Append(1).Any(Function(x) x > 0) ' Compliant
         data.Append(1).Append(2).Any(Function(x) x > 0) ' Compliant
         data.Append(1).Append(2).Any(Function(x) x > 0).ToString() ' Compliant

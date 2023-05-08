@@ -25,6 +25,7 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
+    // TO BE DELETED
     protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
     {
         if (invocation.Expression is MemberAccessExpressionSyntax access)
