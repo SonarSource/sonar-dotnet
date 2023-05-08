@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -953,6 +954,167 @@ Tag(""End"", arg);";
         validator.ValidateTag("End", x => x.Should().HaveNoConstraints()); // Should have NotNull constraint
     }
 
+    [DataTestMethod]
+    [DataRow("sbyte")]
+    [DataRow("byte")]
+    [DataRow("short")]
+    [DataRow("ushort")]
+    [DataRow("int")]
+    [DataRow("uint")]
+    [DataRow("nint")]
+    [DataRow("nuint")]
+    [DataRow("long")]
+    [DataRow("ulong")]
+    public void Branching_LearnsNumberConstraint(string argType)
+    {
+        var validator = CreateIfElseEndValidatorCS("arg == 42", OperationKind.Binary, argType);
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull)); // FIXME: , NumberConstraint.From(42)));
+        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValues("End").Should().SatisfyRespectively(
+            // FIXME: x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42)),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+    }
+
+    [DataTestMethod]        // FIXME: Everything except one should go away
+    [DataRow("arg == 42")]
+    [DataRow("42 == arg")]
+    [DataRow("arg != 42")]
+    [DataRow("42 != arg")]
+    [DataRow("arg >  42")]
+    [DataRow("42 <  arg")]
+    [DataRow("arg >= 42")]
+    [DataRow("42 <= arg")]
+    [DataRow("arg <  42")]
+    [DataRow("42 >  arg")]
+    [DataRow("arg <= 42")]
+    [DataRow("42 >= arg")]
+    [DataRow("arg == 42 && arg ==  42")]
+    [DataRow("arg == 42 && arg != 100")]
+    [DataRow("arg == 42 && arg >    0")]
+    [DataRow("arg == 42 && arg >=   0")]
+    [DataRow("arg == 42 && arg <  100")]
+    [DataRow("arg == 42 && arg <= 100")]
+    [DataRow("arg != 42 && arg == 100")]
+    [DataRow("arg != 42 && arg != 100")]    // FIXME: Only this one should remain here, everything else shoudl go away
+    [DataRow("arg != 42 && arg >    0")]    // Actual value is 1-41, 43-oo
+    [DataRow("arg != 42 && arg >=   0")]    // Actual value is 0-41, 43-oo
+    [DataRow("arg != 42 && arg <  100")]    // Actual value is -oo-41, 43-99
+    [DataRow("arg != 42 && arg <= 100")]    // Actual value is -oo-41, 43-100
+    [DataRow("arg >  42 && arg == 100")]
+    [DataRow("arg >  42 && arg !=  43")]
+    [DataRow("arg >  42 && arg != 100")]     // Actual value is 43-99, 101-oo
+    [DataRow("arg >  42 && arg >    0")]
+    [DataRow("arg >  42 && arg >   42")]
+    [DataRow("arg >  42 && arg >  100")]
+    [DataRow("arg >  42 && arg >= 100")]
+    [DataRow("arg >  42 && arg >=   0")]
+    [DataRow("arg >  42 && arg >=  41")]
+    [DataRow("arg >  42 && arg >=  42")]
+    [DataRow("arg >  42 && arg >=  43")]
+    [DataRow("arg >  42 && arg <  100")]
+    [DataRow("arg >  42 && arg <= 100")]
+    [DataRow("arg >= 42 && arg == 100")]
+    [DataRow("arg >= 42 && arg !=  42")]
+    [DataRow("arg >= 42 && arg != 100")]     // Actual value is 42-99, 101-oo
+    [DataRow("arg >= 42 && arg >    0")]
+    [DataRow("arg >= 42 && arg >   41")]
+    [DataRow("arg >= 42 && arg >   42")]
+    [DataRow("arg >= 42 && arg >   43")]
+    [DataRow("arg >= 42 && arg >  100")]
+    [DataRow("arg >= 42 && arg >=   0")]
+    [DataRow("arg >= 42 && arg >=  41")]
+    [DataRow("arg >= 42 && arg >=  42")]
+    [DataRow("arg >= 42 && arg >=  43")]
+    [DataRow("arg >= 42 && arg >= 100")]
+    [DataRow("arg >= 42 && arg <  100")]
+    [DataRow("arg >= 42 && arg <= 100")]
+    [DataRow("arg <  42 && arg ==   0")]
+    [DataRow("arg <  42 && arg !=  41")]
+    [DataRow("arg <  42 && arg !=   0")]     // Actual value is oo - -1, 1-41
+    [DataRow("arg <  42 && arg >    0")]
+    [DataRow("arg <  42 && arg >=   0")]
+    [DataRow("arg <  42 && arg <    0")]
+    [DataRow("arg <  42 && arg <   41")]
+    [DataRow("arg <  42 && arg <   42")]
+    [DataRow("arg <  42 && arg <   43")]
+    [DataRow("arg <  42 && arg <  100")]
+    [DataRow("arg <  42 && arg <=   0")]
+    [DataRow("arg <  42 && arg <=  41")]
+    [DataRow("arg <  42 && arg <=  42")]
+    [DataRow("arg <  42 && arg <=  43")]
+    [DataRow("arg <  42 && arg <= 100")]
+    [DataRow("arg <= 42 && arg ==  42")]
+    [DataRow("arg <= 42 && arg !=   0")]     // Actual value is oo - -1, 1-42
+    [DataRow("arg <= 42 && arg !=  42")]
+    [DataRow("arg <= 42 && arg >    0")]
+    [DataRow("arg <= 42 && arg >=   0")]
+    [DataRow("arg <= 42 && arg <    0")]
+    [DataRow("arg <= 42 && arg <   41")]
+    [DataRow("arg <= 42 && arg <   42")]
+    [DataRow("arg <= 42 && arg <   43")]
+    [DataRow("arg <= 42 && arg <  100")]
+    [DataRow("arg <= 42 && arg <=   0")]
+    [DataRow("arg <= 42 && arg <=  41")]
+    [DataRow("arg <= 42 && arg <=  42")]
+    [DataRow("arg <= 42 && arg <=  43")]
+    [DataRow("arg <= 42 && arg <= 100")]
+    public void Branching_LearnsNumberConstraint_NoConstraints(string expression)
+    {
+        var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+    }
+
+    [DataTestMethod]
+    // FIXME: Add datarows
+    public void Branching_LearnsNumberConstraint_OnlyIf(string expression, int? expectedIfMin, int? expectedIfMax)
+    {
+        var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedIfMin, expectedIfMax)));
+        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+    }
+
+    [DataTestMethod]
+    // FIXME: Add datarows
+    public void Branching_LearnsNumberConstraint_IfElse(string expression, int? expectedIfMin, int? expectedIfMax, int? expectedElseMin, int? expectedElseMax)
+    {
+        var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedIfMin, expectedIfMax)));
+        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedElseMin, expectedElseMax)));
+    }
+
+    [DataTestMethod]
+    // FIXME: Add datarows
+    public void Branching_LearnsNumberConstraint_OnlyElse(string expression, int? expectedIfMin, int? expectedIfMax, int? expectedElseMin, int? expectedElseMax)
+    {
+        var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedElseMin, expectedElseMax)));
+    }
+
+    [DataTestMethod]
+    [DataRow("arg == 42 && arg == 100")]
+    [DataRow("arg == 42 && arg !=  42")]
+    [DataRow("arg == 42 && arg >  100")]
+    [DataRow("arg == 42 && arg >= 100")]
+    [DataRow("arg == 42 && arg <    0")]
+    [DataRow("arg == 42 && arg <=   0")]
+    [DataRow("arg != 42 && arg ==  42")]
+    [DataRow("arg >  42 && arg ==   0")]
+    [DataRow("arg >  42 && arg <    0")]
+    [DataRow("arg >  42 && arg <=   0")]
+    [DataRow("arg >= 42 && arg ==   0")]
+    [DataRow("arg >= 42 && arg <    0")]
+    [DataRow("arg >= 42 && arg <=   0")]
+    [DataRow("arg <  42 && arg ==  42")]
+    [DataRow("arg <  42 && arg >  100")]
+    [DataRow("arg <  42 && arg >= 100")]
+    [DataRow("arg <= 42 && arg == 100")]
+    [DataRow("arg <= 42 && arg >  100")]
+    [DataRow("arg <= 42 && arg >= 100")]
+    public void Branching_LearnsNumberConstraint_Unreachable(string expression) =>
+        CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int").ValidateTagOrder("Else", "If", "End");    // FIXME: "If" is not reachable
+
     private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation, string argType = "object")
     {
         var code = @$"
@@ -990,4 +1152,7 @@ Tag(""End"", Arg)";
         validator.ValidateContainsOperation(expectedOperation);
         return validator;
     }
+
+    private static NumberConstraint ExpectedNumber(int? min, int? max) =>
+        NumberConstraint.From(min.HasValue? new BigInteger(min.Value) : null, max.HasValue? new BigInteger(max.Value) : null);
 }
