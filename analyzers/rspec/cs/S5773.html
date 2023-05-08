@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>During the deserialization process, the state of an object will be reconstructed from the serialized data stream which can contain dangerous
 operations.</p>
 <p>For example, a well-known attack vector consists in serializing an object of type <code><a
@@ -15,7 +16,7 @@ it’s not possible then try to mitigate the risk by restricting the types allow
   <li> or/and implementing a tamper protection, such as <a href="https://en.wikipedia.org/wiki/HMAC">message authentication codes</a> (MAC). This way
   only objects serialized with the correct MAC hash will be deserialized. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <p>For <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.binary.binaryformatter?view=netframework-4.8">BinaryFormatter</a>,
 <a
@@ -40,7 +41,7 @@ MAC verification:</p>
 LosFormatter formatter = new LosFormatter(); // Noncompliant
 formatter.Deserialize(fs);
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <p><a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.binary.binaryformatter?view=netframework-4.8">BinaryFormatter</a>,
 <a
@@ -91,7 +92,7 @@ verification:</p>
 LosFormatter formatter = new LosFormatter(true, secret); // Compliant
 formatter.Deserialize(fs);
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures/">OWASP Top 10 2021 Category A8</a> - Software and Data
   Integrity Failures </li>

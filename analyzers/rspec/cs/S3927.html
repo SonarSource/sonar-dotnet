@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Serialization event handlers that don’t have the correct signature will simply not be called, thus bypassing any attempts to augment the automated
 de/serialization.</p>
 <p>This rule raises an issue when a method marked with one of the following attributes is <code>public</code>, <code>static</code>, does not return
@@ -8,7 +9,7 @@ de/serialization.</p>
   <li> <code>System.Runtime.Serialization.OnDeserializingAttribute</code> </li>
   <li> <code>System.Runtime.Serialization.OnDeserializedAttribute</code> </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 [Serializable]
 public class Foo
@@ -29,7 +30,7 @@ public class Foo
     void OnDeserialized(StreamingContext context, string str) {} // Noncompliant should have a single parameter of type StreamingContext
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 [Serializable]
 public class Foo

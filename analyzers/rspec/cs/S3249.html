@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>Making a <code>base</code> call in an overriding method is generally a good idea, but not in <code>GetHashCode</code> and <code>Equals</code> for
 classes that directly extend <code>object</code> because those methods are based on the object reference. Meaning that no two <code>objects</code>
 that use those <code>base</code> methods will ever be equal or have the same hash.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class Point
 {
@@ -16,7 +17,7 @@ public class Point
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class Point
 {
@@ -31,7 +32,7 @@ public class Point
   }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>This rule doesn’t report on guard conditions checking for reference equality.</p>
 <pre>
 public class Point

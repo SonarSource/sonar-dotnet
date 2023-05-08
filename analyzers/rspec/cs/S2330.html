@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p>Array covariance is the principle that if an implicit or explicit reference conversion exits from type <code>A</code> to <code>B</code>, then the
 same conversion exists from the array type <code>A[]</code> to <code>B[]</code>.</p>
 <p>While this array conversion can be useful in readonly situations to pass instances of <code>A[]</code> where <code>B[]</code> is expected, it must
 be used with care, since assigning an instance of <code>B</code> into an array of <code>A</code> will cause an <code>ArrayTypeMismatchException</code>
 to be thrown at runtime.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 abstract class Fruit { }
 class Apple : Fruit { }
@@ -27,7 +28,7 @@ class Program
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 abstract class Fruit { }
 class Apple : Fruit { }

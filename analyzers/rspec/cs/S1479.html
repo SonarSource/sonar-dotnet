@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>When <code>switch</code> statements have large sets of case clauses, it is usually an attempt to map two sets of data. A <code>Dictionary</code>
 should be used instead to make the code more readable and maintainable.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <p>With a "Maximum number of case" set to 4</p>
 <pre>
 public class TooManyCase
@@ -27,7 +28,7 @@ public class TooManyCase
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System.Collections.Generic;
 
@@ -50,6 +51,6 @@ public class TooManyCase
     }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>This rule ignores <code>switch</code>es over <code>Enum</code>s and empty, fall-through cases.</p>
 

@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Empty <code>case</code> clauses that fall through to the default are useless. Whether or not such a <code>case</code> is present, the
 <code>default</code> clause will be invoked. Such <code>case</code>s simply clutter the code, and should be removed.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 switch(ch)
 {
@@ -16,7 +17,7 @@ switch(ch)
     break;
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 switch(ch)
 {

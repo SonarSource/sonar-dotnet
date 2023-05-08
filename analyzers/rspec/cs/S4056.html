@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>When a <code>System.Globalization.CultureInfo</code> or <code>IFormatProvider</code> object is not supplied, the default value that is supplied by
 the overloaded member might not have the effect that you want in all locales.</p>
 <p>You should supply culture-specific information according to the following guidelines:</p>
@@ -16,7 +17,7 @@ following methods:</p>
   <li> <code>ResourceManager.GetObject</code> </li>
   <li> <code>ResourceManager.GetString</code> </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 
@@ -34,7 +35,7 @@ namespace MyLibrary
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 using System.Globalization;
@@ -54,6 +55,6 @@ namespace MyLibrary
     }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>This rule will not raise an issue when the overload is marked as obsolete.</p>
 

@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Locking on a class field synchronizes not on the field itself, but on the object assigned to it. Thus, there are some good practices to follow to
 avoid bugs related to thread synchronization.</p>
 <ol>
@@ -8,7 +9,7 @@ avoid bugs related to thread synchronization.</p>
   <li> Locking on a string literal is also dangerous since, depending on whether the string is interned or not, different threads may or may not
   synchronize on the same object instance. </li>
 </ol>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 private Color color = new Color("red");
 private readonly string colorString = "red";
@@ -32,7 +33,7 @@ private void DoSomething()
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 private Color color = new Color("red");
 private readonly object lockObj = new object();
@@ -47,7 +48,7 @@ private void DoSomething()
   }
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock">Lock Statement</a> - lock statement - ensure
   exclusive access to a shared resource </li>

@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>A <code>for</code> loop with a counter that moves in the wrong direction is not an infinite loop. Because of wraparound, the loop will eventually
 reach its stop condition, but in doing so, it will run many, many more times than anticipated, potentially causing unexpected behavior.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public void DoSomething(string[] strings)
 {
@@ -11,7 +12,7 @@ public void DoSomething(string[] strings)
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public void DoSomething(string[] strings)
 {

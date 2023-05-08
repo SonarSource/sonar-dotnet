@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p>Caller information attributes (<code>CallerFilePathAttribute</code>, <code>CallerLineNumberAttribute</code>,
 <code>CallerMemberNameAttribute</code>, and <code>CallerArgumentExpressionAttribute</code>) provide a way to get information about the caller of a
 method through optional parameters. But they only work right if their values aren’t provided explicitly. So if you define a method with caller info
 attributes in the middle of the parameter list, you put your callers in a bad position: they are forced to use named arguments if they want to use the
 method properly.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 void TraceMessage([CallerMemberName] string memberName = "",
   [CallerFilePath] string filePath = "",
@@ -13,7 +14,7 @@ void TraceMessage([CallerMemberName] string memberName = "",
   /* ... */
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 void TraceMessage(string message = null,
   [CallerMemberName] string memberName = "",

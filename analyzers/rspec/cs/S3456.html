@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p><code>ToCharArray</code> can be omitted when the operation on the array could have been done directly on the string, such as when iterating over
 the characters in a string, and when accessing a character in a string via an array index. In those cases, explicit <code>ToCharArray</code> calls
 should be omitted.</p>
 <p>C#11 introduced support for UTF-8 string literals, which are stored as <code>ReadOnlySpan&lt;byte&gt;</code> objects. For that reason, the rule
 also raises on <code>ToArray</code> invocations of <code>ReadOnlySpan&lt;T&gt;</code>.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 string str = "some string";
 foreach (var c in str.ToCharArray()) // Noncompliant
@@ -17,7 +18,7 @@ foreach (var c in span.ToArray()) // Noncompliant
   // ...
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 string str = "some string";
 foreach (var c in str)

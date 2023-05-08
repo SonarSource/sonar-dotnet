@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>The recommended way to access Azure Durable Entities is Interfaces via generated proxy objects.</p>
 <p>The following restrictions, during interface design, are enforced:</p>
 <ul>
@@ -11,7 +12,7 @@
 <code>IDurableEntityContext.SignalEntity&lt;TEntityInterface&gt;</code>, <code>IDurableEntityClient.SignalEntityAsync&lt;TEntityInterface&gt;</code>
 or <code>IDurableOrchestrationContext.CreateEntityProxy&lt;TEntityInterface&gt;</code>. The exception message explains which rule was broken.</p>
 <p>This rule raises an issue in case any of the restrictions above is not respected.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 namespace Foo // Noncompliant, must be defined in the same assembly as the entity class that implements it
 {
@@ -44,7 +45,7 @@ namespace Bar
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 namespace Bar
 {
@@ -76,7 +77,7 @@ namespace Bar
     }
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a
   href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-dotnet-entities#restrictions-on-entity-interfaces">Restrictions on Entity Interfaces</a> </li>

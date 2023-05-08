@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>When a reference parameter (keyword <code>ref</code>) is used, the passed argument type must exactly match the reference parameter type. This means
 that to be able to pass a derived type, it must be cast and assigned to a variable of the proper type. Use of generic methods eliminates that
 cumbersome down casting and should therefore be preferred.</p>
 <p>This rule raises an issue when a method contains a <code>ref</code> parameter of type <code>System.Object</code>.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 
@@ -16,7 +17,7 @@ namespace MyLibrary
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 

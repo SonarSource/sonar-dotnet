@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p><code>GC.SuppressFinalize</code> asks the Common Language Runtime not to call the finalizer of an object. This is useful when implementing the
 dispose pattern where object finalization is already handled in <code>IDisposable.Dispose</code>. However, it has no effect if there is no finalizer
 defined in the object’s type, so using it in such cases is just confusing.</p>
 <p>This rule raises an issue when <code>GC.SuppressFinalize</code> is called for objects of <code>sealed</code> types without a finalizer.</p>
 <p><strong>Note:</strong> {rule:csharpsquid:S3971} is a stricter version of this rule. Typically it makes sense to activate only one of these 2
 rules.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 sealed class MyClass
 {
@@ -15,7 +16,7 @@ sealed class MyClass
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 sealed class MyClass
 {

@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>If a local variable is declared but not used, it is dead code and should be removed. Doing so will improve maintainability because developers will
 not wonder what the variable is used for.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public int NumberOfMinutes(int hours)
 {
@@ -8,14 +9,14 @@ public int NumberOfMinutes(int hours)
   return hours * 60;
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public int NumberOfMinutes(int hours)
 {
   return hours * 60;
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>Unused locally created resources in a <code>using</code> statement are not reported.</p>
 <pre>
 using(var t = new TestTimer()) // t never used, but compliant.

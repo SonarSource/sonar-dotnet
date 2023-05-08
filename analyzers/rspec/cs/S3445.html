@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>When rethrowing an exception, you should do it by simply calling <code>throw;</code> and not <code>throw exc;</code>, because the stack trace is
 reset with the second syntax, making debugging a lot harder.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 try
 {}
@@ -14,7 +15,7 @@ catch (ExceptionType2 exc)
   throw new Exception("My custom message", exc);  // Compliant; stack trace preserved
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 try
 {}

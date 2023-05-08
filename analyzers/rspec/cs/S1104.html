@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Public fields in public classes do not respect the encapsulation principle and has three main disadvantages:</p>
 <ul>
   <li> Additional behavior such as validation cannot be added. </li>
@@ -7,14 +8,14 @@
 <p>By using private fields and public properties (set and get), unauthorized modifications are prevented. Properties also benefit from additional
 protection (security) features such as Link Demands.</p>
 <p>Note that due to optimizations on simple properties, public fields provide only very little performance gain.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class Foo
 {
     public int instanceData = 32; // Noncompliant
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class Foo
 {
@@ -27,10 +28,10 @@ public class Foo
     }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>Fields marked as <code>readonly</code> or <code>const</code> are ignored by this rule.</p>
 <p>Fields inside classes or structs annotated with the <code>StructLayoutAttribute</code> are ignored by this rule.</p>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/493">MITRE, CWE-493</a> - Critical Public Variable Without Final Modifier </li>
 </ul>

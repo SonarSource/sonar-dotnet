@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>Throwing such general exceptions as <code>Exception</code>, <code>SystemException</code>, <code>ApplicationException</code>,
 <code>IndexOutOfRangeException</code>, <code>NullReferenceException</code>, <code>OutOfMemoryException</code> and
 <code>ExecutionEngineException</code> prevents calling methods from handling true, system-generated exceptions differently than application-generated
 errors.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public void DoSomething(object obj)
 {
@@ -13,7 +14,7 @@ public void DoSomething(object obj)
   // ...
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public void DoSomething(object obj)
 {
@@ -24,7 +25,7 @@ public void DoSomething(object obj)
   // ...
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/397">MITRE, CWE-397</a> - Declaration of Throws for Generic Exception </li>
 </ul>

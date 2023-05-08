@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>Changing an inherited member to <code>private</code> will not prevent access to the base class implementation.</p>
 <p>This rule raises an issue when a <code>private</code> method in an unsealed type has a signature that is identical to a <code>public</code> method
 declared in a base type.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 
@@ -17,7 +18,7 @@ namespace MyLibrary
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 

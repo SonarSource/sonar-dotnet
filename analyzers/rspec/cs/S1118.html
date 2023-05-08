@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>Utility classes, which are collections of <code>static</code> members, are not meant to be instantiated.</p>
 <p>C# adds an implicit public constructor to every class which does not explicitly define at least one constructor. Hence, at least one
 <code>protected</code> constructor should be defined if you wish to subclass this utility class. Or the <code>static</code> keyword should be added to
 the class declaration to prevent subclassing.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class StringUtils // Noncompliant
 {
@@ -12,7 +13,7 @@ public class StringUtils // Noncompliant
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public static class StringUtils
 {

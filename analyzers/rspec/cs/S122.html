@@ -1,16 +1,17 @@
+<h2>Why is this an issue?</h2>
 <p>For better readability, do not put more than one statement on a single line.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 if(someCondition) DoSomething();
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 if(someCondition)
 {
   DoSomething();
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>Anonymous functions containing a single statement are ignored. Block statements are not considered either.</p>
 <pre>
 Func&lt;object, bool&gt; item1 = o =&gt; { return true; }; // Compliant

@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>The requirement for a final <code>default</code> clause is defensive programming. The clause should either take appropriate action, or contain a
 suitable comment as to why no action is taken. Even when the <code>switch</code> covers all current values of an <code>enum</code>, a
 <code>default</code> case should still be used because there is no guarantee that the <code>enum</code> won’t be extended.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 int foo = 42;
 switch (foo) // Noncompliant
@@ -14,7 +15,7 @@ switch (foo) // Noncompliant
     break;
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 int foo = 42;
 switch (foo) // Compliant
@@ -29,7 +30,7 @@ switch (foo) // Compliant
     throw new InvalidOperationException("Unexpected value foo = " + foo);
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/478">MITRE, CWE-478</a> - Missing Default Case in Switch Statement </li>
 </ul>

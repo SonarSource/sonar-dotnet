@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>The top-most level of an Azure Function code should include a try/catch block to capture and log all errors so you can monitor the health of the
 application effectively. In case a retry policy has been defined for your Azure Function, you should rethrow any errors that should result in a
 retry.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 [FunctionName("HttpExample")]
 public static async Task&lt;IActionResult&gt; Run(
@@ -13,7 +14,7 @@ public static async Task&lt;IActionResult&gt; Run(
     // do stuff
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 [FunctionName("HttpExample")]
 public static async Task&lt;IActionResult&gt; Run(
@@ -31,7 +32,7 @@ public static async Task&lt;IActionResult&gt; Run(
     }
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-error-pages?tabs=csharp">Azure Functions error handling and
   retries</a> </li>

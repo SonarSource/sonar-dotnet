@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Because serialization constructors allocate and initialize objects, security checks that are present on regular constructors must also be present
 on a serialization constructor. Failure to do so would allow callers that could not otherwise create an instance to use the serialization constructor
 to do this.</p>
@@ -5,7 +6,7 @@ to do this.</p>
 interface, is declared in an assembly that allows partially trusted callers and has a constructor that takes a
 <code>System.Runtime.Serialization.SerializationInfo</code> object and a <code>System.Runtime.Serialization.StreamingContext</code> object which is
 not secured by a security check, but one or more of the regular constructors in the type is secured.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 using System.IO;
@@ -40,7 +41,7 @@ namespace MyLibrary
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 using System.IO;
@@ -76,7 +77,7 @@ namespace MyLibrary
     }
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures/">OWASP Top 10 2021 Category A8</a> - Software and Data
   Integrity Failures </li>

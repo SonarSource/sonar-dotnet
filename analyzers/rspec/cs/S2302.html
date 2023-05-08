@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>Because parameter names could be changed during refactoring, they should not be spelled out literally in strings. Instead, use
 <code>nameof()</code>, and the string that’s output will always be correct.</p>
 <p>This rule raises an issue when a string in the <code>throw</code> statement contains the name of one of the method parameters.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 void DoSomething(int someParameter, string anotherParam)
 {
@@ -15,7 +16,7 @@ void DoSomething(int someParameter, string anotherParam)
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 void DoSomething(int someParameter)
 {
@@ -29,7 +30,7 @@ void DoSomething(int someParameter)
     }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <ul>
   <li> The rule doesn’t raise any issue when using C# &lt; 6.0. </li>
   <li> When the parameter name is contained in a sentence inside the <code>throw</code> statement string, the rule will raise an issue only if the

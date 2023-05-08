@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p>Using the equality <code>==</code> and inequality <code>!=</code> operators to compare two objects generally works. The operators can be
 overloaded, and therefore the comparison can resolve to the appropriate method. However, when the operators are used on interface instances, then
 <code>==</code> resolves to reference equality, which may result in unexpected behavior if implementing classes override <code>Equals</code>.
 Similarly, when a class overrides <code>Equals</code>, but instances are compared with non-overloaded <code>==</code>, there is a high chance that
 value comparison was meant instead of the reference one.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public interface IMyInterface
 {
@@ -28,7 +29,7 @@ public class Program
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public interface IMyInterface
 {
@@ -53,11 +54,11 @@ public class Program
     }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>The rule does not report on comparisons of <code>System.Type</code> instances and on comparisons inside <code>Equals</code> overrides.</p>
 <p>It also does not raise an issue when one of the operands is <code>null</code> nor when one of the operand is cast to <code>object</code> (because
 in this case we want to ensure reference equality even if some <code>==</code> overload is present).</p>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/595">MITRE, CWE-595</a> - Comparison of Object References Instead of Object Contents </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/597">MITRE, CWE-597</a> - Use of Wrong Operator in String Comparison </li>

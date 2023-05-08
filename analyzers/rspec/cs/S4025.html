@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Having a field in a child class with a name that differs from a parent class' field only by capitalization is sure to cause confusion. Such child
 class fields should be renamed.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class Fruit
 {
@@ -14,7 +15,7 @@ public class Raspberry : Fruit
   // ...
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class Fruit
 {
@@ -42,7 +43,7 @@ public class Raspberry : Fruit
   // ...
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>This rule ignores same-name fields that are <code>static</code> in both the parent and child classes. It also ignores <code>private</code> parent
 class fields, but in all other such cases, the child class field should be renamed.</p>
 

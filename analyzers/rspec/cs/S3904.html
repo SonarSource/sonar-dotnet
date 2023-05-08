@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>If no <code>AssemblyVersionAttribute</code> is provided, the same default version will be used for every build. Since the version number is used by
 The .NET Framework to uniquely identify an assembly this can lead to broken dependencies.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System.Reflection;
 
@@ -10,7 +11,7 @@ namespace MyLibrary
 {
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System.Reflection;
 
@@ -21,6 +22,6 @@ namespace MyLibrary
 {
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/standard/assembly/versioning">Microsoft documentation - Assembly Versioning</a></p>
 

@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>Native methods are functions that reside in libraries outside the .NET runtime. Calling them is helpful for interoperability with applications and
 libraries written in other programming languages, mainly when performing platform-specific operations. However, doing so comes with additional risks
 since it means stepping out of the memory-safety model of the runtime. It is therefore highly recommended to take extra steps, like input validation,
 when invoking native methods. Making the native method <code>private</code> and providing a wrapper that performs these additional steps is the best
 way to do so.</p>
 <p>This rule raises an issue when a native method is declared <code>public</code> or its wrapper is too trivial.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 using System.Runtime.InteropServices;
@@ -18,7 +19,7 @@ namespace MyLibrary
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 using System.Runtime.InteropServices;

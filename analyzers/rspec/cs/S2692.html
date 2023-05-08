@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Most checks against an <code>IndexOf</code> value compare it with -1 because 0 is a valid index. Any checks which look for values <code>&gt;
 0</code> ignore the first element, which is likely a bug. If the intent is merely to check inclusion of a value in a <code>string</code>,
 <code>List</code>, or an array, consider using the <code>Contains</code> method instead.</p>
@@ -5,7 +6,7 @@
 <code>&gt; 0</code>.</p>
 <p>This rule also raises an issue when <code>IndexOfAny</code>, <code>LastIndexOf</code> or <code>LastIndexOfAny</code> from a <code>string</code> is
 tested against <code>&gt; 0</code></p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 string color = "blue";
 string name = "ishmael";
@@ -35,7 +36,7 @@ if (Array.IndexOf(stringArray, color) &gt; 0) // Noncompliant
   // ...
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 string color = "blue";
 string name = "ishmael";

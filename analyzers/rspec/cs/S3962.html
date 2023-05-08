@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>The value of a <code>static readonly</code> field is computed at runtime while the value of a <code>const</code> field is calculated at compile
 time, which improves performance.</p>
 <p>This rule raises an issue when a <code>static readonly</code> field is initialized with a value that is computable at compile time.</p>
@@ -72,7 +73,7 @@ time, which improves performance.</p>
     </tr>
   </tbody>
 </table>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 namespace myLib
 {
@@ -84,7 +85,7 @@ namespace myLib
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 namespace myLib
 {

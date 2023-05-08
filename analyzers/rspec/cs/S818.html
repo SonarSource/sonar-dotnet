@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p>Using upper case literal suffixes removes the potential ambiguity between "1" (digit 1) and "l" (letter el) for declaring literals.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 const long b = 0l;      // Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 const long b = 0L;
 </pre>

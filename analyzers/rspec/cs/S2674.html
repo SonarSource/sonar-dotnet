@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p>You cannot assume that any given stream reading call will fill the <code>byte[]</code> passed in to the method with the number of bytes requested.
 Instead, you must check the value returned by the read method to see how many bytes were read. Fail to do so, and you introduce a bug that is both
 harmful and difficult to reproduce.</p>
 <p>This rule raises an issue when a <code>Stream.Read</code> or a <code>Stream.ReadAsync</code> method is called, but the return value is not
 checked.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public void DoSomething(string fileName)
 {
@@ -15,7 +16,7 @@ public void DoSomething(string fileName)
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public void DoSomething(string fileName)
 {

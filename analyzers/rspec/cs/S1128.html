@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Although unnecessary <code>using</code> won’t change anything to the produced application, removing them:</p>
 <ul>
   <li> Will help readability and maintenance. </li>
@@ -6,7 +7,7 @@
   <li> May improve compilation time because the compiler has fewer namespaces to look-up when it resolves types. </li>
   <li> The build will fail if this namespace is removed from the project. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System.Collections.Generic; // Noncompliant - unnecessary using
 
@@ -21,7 +22,7 @@ namespace Foo
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System.IO;
 

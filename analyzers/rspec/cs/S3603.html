@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>Marking a method with the <code>Pure</code> attribute specifies that the method doesn’t make any visible changes; thus, the method should return a
 result, otherwise the call to the method should be equal to no-operation. So <code>Pure</code> on a <code>void</code> method is either a mistake, or
 the method doesn’t do any meaningful task.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class Person
 {
@@ -15,7 +16,7 @@ class Person
   ...
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class Person
 {

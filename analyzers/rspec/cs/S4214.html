@@ -1,7 +1,9 @@
+<p>This rule is deprecated; use {rule:csharpsquid:S4200} instead.</p>
+<h2>Why is this an issue?</h2>
 <p>Methods marked with the <code>System.Runtime.InteropServices.DllImportAttribute</code> attribute use Platform Invocation Services to access
 unmanaged code and should not be exposed. Keeping them private or internal makes sure that their access is controlled and properly managed.</p>
 <p>This rule raises an issue when a method declared with <code>DllImport</code> is public or protected.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 using System.Runtime.InteropServices;
@@ -15,7 +17,7 @@ namespace MyLibrary
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 using System.Runtime.InteropServices;
@@ -29,6 +31,4 @@ namespace MyLibrary
     }
 }
 </pre>
-<h2>Deprecated</h2>
-<p>This rule is deprecated; use {rule:csharpsquid:S4200} instead.</p>
 

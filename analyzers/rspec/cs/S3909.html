@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>The NET Framework 2.0 introduced the generic interface <code>System.Collections.Generic.IEnumerable&lt;T&gt;</code> and it should be preferred over
 the older, non generic, interfaces.</p>
 <p>This rule raises an issue when a public type implements <code>System.Collections.IEnumerable</code>.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 using System.Collections;
@@ -23,7 +24,7 @@ public class MyList : CollectionBase // Noncompliant
   // ...
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 using System.Collections.ObjectModel;

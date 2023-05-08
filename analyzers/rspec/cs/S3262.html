@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Overriding methods automatically inherit the <code>params</code> behavior. To ease readability, this modifier should be explicitly used in the
 overriding method as well.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class Base
 {
@@ -17,7 +18,7 @@ class Derived : Base
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class Base
 {

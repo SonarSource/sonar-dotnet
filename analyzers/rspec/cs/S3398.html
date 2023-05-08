@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>When a <code>private static</code> method is only invoked by a nested class, there’s no reason not to move it into that class. It will still have
 the same access to the outer class' static members, but the outer class will be clearer and less cluttered.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class Outer
 {
@@ -20,7 +21,7 @@ public class Outer
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class Outer
 {

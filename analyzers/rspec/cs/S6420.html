@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>To avoid holding more connections than necessary and to avoid potentially exhausting the number of available sockets when using
 <code>HttpClient</code>, <code>DocumentClient</code>, <code>QueueClient</code>, <code>ConnectionMultiplexer</code> or Azure Storage clients,
 consider:</p>
@@ -8,7 +9,7 @@ consider:</p>
 </ul>
 <p>These classes typically manage their own connections to the resource, and thus are intended to be instantiated once and reused throughout the
 lifetime of an application.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
     public class HttpExample
     {
@@ -22,7 +23,7 @@ lifetime of an application.</p>
         }
     }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
     public class HttpExample
     {
@@ -35,7 +36,7 @@ lifetime of an application.</p>
         }
     }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/manage-connections?tabs=csharp#static-clients">Manage connections in Azure
   Functions: Static Clients</a> </li>

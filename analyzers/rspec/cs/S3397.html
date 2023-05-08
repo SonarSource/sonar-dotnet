@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p><code>object.Equals()</code> overrides can be optimized by checking first for reference equality between <code>this</code> and the parameter. This
 check can be implemented by calling <code>object.ReferenceEquals()</code> or <code>base.Equals()</code>, where <code>base</code> is
 <code>object</code>. However, using <code>base.Equals()</code> is a maintenance hazard because while it works if you extend <code>Object</code>
 directly, if you introduce a new base class that overrides <code>Equals</code>, it suddenly stops working.</p>
 <p>This rule raises an issue if <code>base.Equals()</code> is used but <code>base</code> is not <code>object</code>.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class Base
 {
@@ -35,7 +36,7 @@ class Derived : Base
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class Base
 {

@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>A test case without assertions ensures only that no exceptions are thrown. Beyond basic runnability, it ensures nothing about the behavior of the
 code under test.</p>
 <p>This rule raises an exception when no assertions from any of the following frameworks are found in a test:</p>
@@ -10,7 +11,7 @@ code under test.</p>
   <li> <code>NSubstitute</code> </li>
   <li> <code>Shoudly</code> </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 [TestMethod]
 public void MyMethod_WhenSomething_ExpectsSomething()
@@ -19,7 +20,7 @@ public void MyMethod_WhenSomething_ExpectsSomething()
     var result = myClass.GetFoo();
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 [TestMethod]
 public void MyMethod_WhenSomething_ExpectsSomething()
@@ -29,7 +30,7 @@ public void MyMethod_WhenSomething_ExpectsSomething()
     Assert.IsTrue(result);
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>To create a custom assertion method declare an attribute with name <code>AssertionMethodAttribute</code> and mark the method with it:</p>
 <pre>
 using System;

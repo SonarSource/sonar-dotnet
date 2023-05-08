@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Unused parameters are misleading. Whatever the values passed to such parameters, the behavior will be the same.</p>
 <p>This rule raises an issue when a <code>private</code> method or constructor of a class/struct takes a parameter without using it.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 private void DoSomething(int a, int b) // "b" is unused
 {
@@ -13,7 +14,7 @@ private void DoSomething2(int a) // value of "a" is unused
     Compute(a);
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 private void DoSomething(int a)
 {
@@ -26,7 +27,7 @@ private void DoSomething2()
     Compute(a);
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>This rule doesn’t raise any issue in the following contexts:</p>
 <ul>
   <li> The <code>this</code> parameter of extension methods. </li>

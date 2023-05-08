@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Operator overloading is convenient but unfortunately not portable across languages. To be able to access the same functionality from another
 language you need to provide an alternate named method following the convention:</p>
 <table>
@@ -87,7 +88,7 @@ language you need to provide an alternate named method following the convention:
   </tbody>
 </table>
 <p>This rule raises an issue when there is an operator overload without the expected named alternative method.</p>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>This rule does not raise an issue when the class implementing the comparison operators <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code> and
 <code>&lt;=</code> contains a method named <code>CompareTo</code>.</p>
 

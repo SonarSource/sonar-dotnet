@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>When a method in a derived class has the same name as a method in the base class but with a signature that only differs by types that are weakly
 derived (e.g. <code>object</code> vs <code>string</code>), the result is that the base method becomes hidden.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 
@@ -17,7 +18,7 @@ namespace MyLibrary
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 

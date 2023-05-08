@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>It is very easy to write incomplete assertions when using some test frameworks. This rule enforces complete assertions in the following cases:</p>
 <ul>
   <li> Fluent Assertions: <a href="https://fluentassertions.com/introduction"><code>Should()</code></a> is not followed by an assertion invocation.
@@ -6,7 +7,7 @@
   <li> NSubstitute: <a href="https://nsubstitute.github.io/help/received-calls"><code>Received()</code></a> is not followed by an invocation. </li>
 </ul>
 <p>In such cases, what is intended to be a test doesn’t actually verify anything.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 string actual = "Hello World!";
 // Fluent Assertions
@@ -16,7 +17,7 @@ Check.That(actual);  // Noncompliant
 // NSubstitute
 command.Received();  // Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 string actual = "Hello World!";
 // Fluent Assertions

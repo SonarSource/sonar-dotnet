@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p><code>ValueTask&lt;TResult&gt;</code> was introduced in .NET Core 2.0 <a
 href="https://devblogs.microsoft.com/dotnet/understanding-the-whys-whats-and-whens-of-valuetask/">to optimize memory allocation</a> when functions
 return their results synchronously.</p>
@@ -24,7 +25,7 @@ calling <code>ConfigureAwait(false)</code> on it, or by calling <code>.AsTask()<
   <li> Using <code>.Result</code> or <code>.GetAwaiter().GetResult()</code> when the operation has not yet completed </li>
   <li> Using more than one of these ways to consume the instance. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 ValueTask&lt;int&gt; vt = SomeValueTaskReturningMethodAsync();
 int result = await vt;
@@ -32,7 +33,7 @@ int result2 = await vt; // Noncompliant, variable is awaited multiple times
 
 int value = SomeValueTaskReturningMethodAsync().GetAwaiter().GetResult(); // Noncompliant, uses GetAwaiter().GetResult() when it's not known to be done
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 int result = await SomeValueTaskReturningMethodAsync();
 
@@ -40,9 +41,9 @@ int result = await SomeValueTaskReturningMethodAsync().ConfigureAwait(false);
 
 Task&lt;int&gt; t = SomeValueTaskReturningMethodAsync().AsTask();
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>This rule does not raise any issue when a <code>ValueTask / ValueTask&lt;TResult&gt;</code> is awaited multiple time in a loop.</p>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask-1">ValueTask&lt;TResult&gt; official documentation</a>
   </li>

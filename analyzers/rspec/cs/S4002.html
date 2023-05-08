@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>This rule raises an issue when a disposable type contains fields of the following types and does not implement a finalizer:</p>
 <ul>
   <li> <code>System.IntPtr</code> </li>
   <li> <code>System.UIntPtr</code> </li>
   <li> <code>System.Runtime.InteropService.HandleRef</code> </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 using System.Runtime.InteropServices;
@@ -38,7 +39,7 @@ namespace MyLibrary
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 using System.Runtime.InteropServices;
@@ -73,7 +74,7 @@ namespace MyLibrary
   }
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> Related: {rule:csharpsquid:S3881} - "IDisposable" should be implemented correctly </li>
 </ul>

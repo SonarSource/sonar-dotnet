@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>When a derived type is used as a parameter instead of the base type, it limits the uses of the method. If the additional functionality that is
 provided in the derived type is not required then that limitation isn’t required, and should be removed.</p>
 <p>This rule raises an issue when a method declaration includes a parameter that is a derived type and accesses only members of the base type.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 using System.IO;
@@ -21,7 +22,7 @@ namespace MyLibrary
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 using System.IO;
