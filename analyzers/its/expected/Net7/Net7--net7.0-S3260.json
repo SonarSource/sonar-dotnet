@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "File-scoped classes which are not derived in the current file should be marked as 'sealed'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\FileScopeAccess.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  16,
+"endLine":  8,
+"endColumn":  28
+}
+}
+}
+]
+}

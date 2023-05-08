@@ -4,8 +4,9 @@ namespace Tests.Diagnostics
 {
     public class Foo
     {
-        private class ClassWontBeExtended { } // Noncompliant {{Private classes or records which are not derived in the current assembly should be marked as 'sealed'.}}
+        private class ClassWontBeExtended { } // Noncompliant {{Private classes which are not derived in the current assembly should be marked as 'sealed'.}}
 //                    ^^^^^^^^^^^^^^^^^^^
+
         private class PrivateClassVirtualMethod // Compliant, the class has a virtual member.
         {
             public virtual void AMethod() { }
