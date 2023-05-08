@@ -70,22 +70,20 @@ public class LinkedListPropertiesInsteadOfMethodsTest
             Imports System.Linq
             
             Public Class Program
-                Private Sub Test()
+                Function Test(data As LinkedList(Of Integer)) As Integer
                     {{GenerateBatchTests_VB(name)}}
-                End Sub
+                End Function
             End Class
             """).Verify();
 
     private static string GenerateBatchTests_VB(string name) => $$$"""
-        Dim data = New LinkedList(Of Integer)()
+        Enumerable.{{{name}}}(data)   ' Noncompliant {{'{{{name}}}' property of 'LinkedList' should be used instead of the '{{{name}}}()' extension method.}}
+        '                  {{{string.Concat(Enumerable.Repeat("^", name.Length))}}}
 
-        data.{{{name}}}() ' Noncompliant {{'{{{name}}}' property of 'LinkedList' should be used instead of the '{{{name}}}()' extension method.}}
-        //   {{{string.Concat(Enumerable.Repeat("^", name.Length))}}}
-
-        __ = data.{{{name}}}.Value ' Compliant
-        data.Count() ' Compliant
-        data.Append(1).{{{name}}}().ToString() ' Compliant
-        data?.{{{name}}}().ToString() ' Noncompliant
+        Dim a = Enumerable.Any(data)  ' Compliant
+        Dim b = data.{{{name}}}()     ' Compliant
+        Dim c = data.{{{name}}}.Value ' Compliant
+        Dim d = data.Count()          ' Compliant
         """;
 
     private static string GenerateBatchTests_CS(string name) => $$$"""
@@ -94,9 +92,9 @@ public class LinkedListPropertiesInsteadOfMethodsTest
         data.{{{name}}}(); // Noncompliant {{'{{{name}}}' property of 'LinkedList' should be used instead of the '{{{name}}}()' extension method.}}
         //   {{{string.Concat(Enumerable.Repeat("^", name.Length))}}}
 
-        _ = data.{{{name}}}.Value; // Compliant
-        data.Count(); // Compliant
+        _ = data.{{{name}}}.Value;              // Compliant
+        data.Count();                           // Compliant
         data.Append(1).{{{name}}}().ToString(); // Compliant
-        data?.{{{name}}}().ToString(); // Noncompliant
+        data?.{{{name}}}().ToString();          // Noncompliant
         """;
 }

@@ -25,25 +25,12 @@ public sealed class LinkedListPropertiesInsteadOfMethods : LinkedListPropertiesI
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
-        invocation.GetIdentifier();
+    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
+        invocation.TryGetOperands(out left, out right);
 
-    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
-    {
-        if (invocation.Expression is MemberAccessExpressionSyntax access)
-        {
-            left = access.Expression;
-            right = access.Name;
-            return true;
-        }
-        else if (invocation.Expression is MemberBindingExpressionSyntax binding)
-        {
-            left = invocation.GetParentConditionalAccessExpression().Expression;
-            right = binding.Name;
-            return true;
-        }
+    protected override bool IsCorrectType(InvocationExpressionSyntax invocation, SyntaxNode left, SemanticModel model) =>
+        model.GetTypeInfo(left).Type is { } type && type.DerivesFrom(KnownType.System_Collections_Generic_LinkedList_T);
 
-        left = right = null;
-        return false;
-    }
+    protected override void ReportIssue(SonarSyntaxNodeReportingContext node, string methodName) =>
+        node.ReportIssue(Diagnostic.Create(Rule, node.Node.GetIdentifier()?.GetLocation(), methodName));
 }

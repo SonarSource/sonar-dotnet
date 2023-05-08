@@ -30,9 +30,9 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
 
     protected override string MessageFormat => "'{0}' property of 'LinkedList' should be used instead of the '{0}()' extension method.";
 
-    protected abstract bool TryGetOperands(TInvocationExpression node, out SyntaxNode left, out SyntaxNode right);
-
-    protected abstract SyntaxToken? GetIdentifier(TInvocationExpression invocation);
+    protected abstract bool TryGetOperands(TInvocationExpression invocation, out SyntaxNode left, out SyntaxNode right);
+    protected abstract bool IsCorrectType(TInvocationExpression invocation, SyntaxNode left, SemanticModel model);
+    protected abstract void ReportIssue(SonarSyntaxNodeReportingContext node, string methodName);
 
     protected LinkedListPropertiesInsteadOfMethodsBase() : base(DiagnosticId) { }
 
@@ -45,21 +45,17 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
             if (IsFirstOrLast(methodName)
                 && TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectCall(right, c.SemanticModel)
-                && IsCorrectType(left, c.SemanticModel))
+                && IsCorrectType(invocation, left, c.SemanticModel))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, GetIdentifier(invocation)?.GetLocation(), methodName));
+                ReportIssue(c, methodName);
             }
         }, Language.SyntaxKind.InvocationExpression);
 
-    private bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
-        model.GetTypeInfo(left).Type is { } type && type.DerivesFrom(KnownType.System_Collections_Generic_LinkedList_T);
-
-    private bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+    private static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
     private bool IsFirstOrLast(string methodName) =>
         methodName.Equals("First", Language.NameComparison)
         || methodName.Equals("Last", Language.NameComparison);
-
 }
