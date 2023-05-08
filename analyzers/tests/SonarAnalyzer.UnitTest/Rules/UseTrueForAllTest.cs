@@ -31,20 +31,17 @@ public class UseTrueForAllTest
 
     [TestMethod]
     public void UseTrueForAll_CS() =>
-        builderCS.AddPaths("UseTrueForAll.cs").WithOutputKind(OutputKind.DynamicallyLinkedLibrary).Verify();
+        builderCS.AddPaths("UseTrueForAll.cs").Verify();
 
 #if NET
 
     [TestMethod]
     public void UseTrueForAll_CS_Immutable() =>
-        builderCS.AddPaths("UseTrueForAll.Immutable.cs")
-            .AddReferences(MetadataReferenceFacade.SystemCollections)
-            .WithOutputKind(OutputKind.DynamicallyLinkedLibrary)
-            .Verify();
+        builderCS.AddPaths("UseTrueForAll.Immutable.cs").AddReferences(MetadataReferenceFacade.SystemCollections).Verify();
 
 #endif
 
     [TestMethod]
     public void UseTrueForAll_VB() =>
-        builderVB.AddPaths("UseTrueForAll.vb").WithOutputKind(OutputKind.DynamicallyLinkedLibrary).Verify();
+        builderVB.AddPaths("UseTrueForAll.vb").Verify();
 }
