@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -62,6 +63,8 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
         BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
         BinaryOperatorKind.Multiply => CalculateMultiply(left, right),
+        BinaryOperatorKind.And when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min & right.Min),
+        BinaryOperatorKind.And => CalculateAnd(left, right),
         _ => null
     };
 
@@ -81,6 +84,42 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             ? null
             : products.Max();
         return NumberConstraint.From(min, max);
+    }
+
+    private static NumberConstraint CalculateAnd(NumberConstraint left, NumberConstraint right)
+    {
+        var min = left.Max < 0 && right.Max < 0
+            ? Magnitude(BigInteger.Min(left.Max ?? 0, right.Max ?? 0))
+            : 0;
+
+        // If both operands are negative, the result is negative. Otherwise, it is positive.
+        // If operands are both negative or both positive the result cannot be bigger than the smaller of the two.
+        // If the operands have different signs, the result cannot be bigger than the positive one.
+        // Therefore follows:
+        BigInteger? max;
+        if (left.Max > 0 ^ right.Max > 0)
+        {
+            max = BigInteger.Max(left.Max ?? 0, right.Max ?? 0);
+        }
+        else if (left.Max is not null && right.Max is not null)
+        {
+            max = BigInteger.Min(left.Max.Value, right.Max.Value);
+        }
+        else
+        {
+            max = null;
+        }
+        return NumberConstraint.From(min, max);
+    }
+
+    private static BigInteger? Magnitude(BigInteger value)
+    {
+        BigInteger m = 2;
+        while (value / m > 1)
+        {
+            m *= 2;
+        }
+        return m;
     }
 
     private static ProgramState LearnBranchingEqualityConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
