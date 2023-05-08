@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  47,
+"endLine":  52,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  61,
+"endLine":  101,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  25,
+"endLine":  131,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  51,
+"endLine":  256,
+"endColumn":  56
+}
+}
+}
+]
+}

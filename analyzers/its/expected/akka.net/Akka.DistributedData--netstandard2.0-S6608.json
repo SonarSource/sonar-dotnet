@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  67,
+"endLine":  390,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"region":  {
+"startLine":  357,
+"startColumn":  67,
+"endLine":  357,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounterDictionary.cs",
+"region":  {
+"startLine":  262,
+"startColumn":  67,
+"endLine":  262,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  314,
+"startColumn":  62,
+"endLine":  314,
+"endColumn":  67
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  863,
+"startColumn":  37,
+"endLine":  863,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"region":  {
+"startLine":  655,
+"startColumn":  29,
+"endLine":  655,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  55,
+"endLine":  143,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  96,
+"endLine":  182,
+"endColumn":  101
+}
+}
+}
+]
+}

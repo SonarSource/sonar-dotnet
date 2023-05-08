@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  453,
+"startColumn":  69,
+"endLine":  453,
+"endColumn":  73
+}
+}
+}
+]
+}
