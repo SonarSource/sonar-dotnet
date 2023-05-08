@@ -101,9 +101,9 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             return BinaryBoolConstraint(kind, leftBool == BoolConstraint.True, rightBool == BoolConstraint.True);
         }
-        else if (left?.HasConstraint<NumberConstraint>() is true && right?.HasConstraint<NumberConstraint>() is true)
+        else if (left?.Constraint<NumberConstraint>() is { } leftNumber && right?.Constraint<NumberConstraint>() is { } rightNumber)
         {
-            return BinaryNumberConstraint(kind, left.Constraint<NumberConstraint>(), right.Constraint<NumberConstraint>());
+            return BinaryNumberConstraint(kind, leftNumber, rightNumber);
         }
         else if (left?.HasConstraint<ObjectConstraint>() is true && right?.HasConstraint<ObjectConstraint>() is true)
         {
