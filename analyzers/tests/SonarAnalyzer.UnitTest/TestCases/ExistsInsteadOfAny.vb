@@ -31,6 +31,7 @@ Public Class TestClass
         goodList.GetList().Any(Function(x) x > 0) ' Noncompliant
 
         Any(Of Integer)(Function(x) x > 0) ' Compliant
+        Dim inlineInitialization = {42}.Any(Function(x) x > 0) ' FN .GetTypeInfo(CollectionInitializer) returns null
 
         goodList.GetList().GetList().GetList().GetList().Any(Function(x) x > 0)     ' Noncompliant
         goodList.GetList().GetList().GetList().GetList()?.Any(Function(x) x > 0)    ' Noncompliant
