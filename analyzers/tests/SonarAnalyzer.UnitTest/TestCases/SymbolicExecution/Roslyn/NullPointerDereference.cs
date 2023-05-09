@@ -1180,7 +1180,7 @@ namespace Tests.Diagnostics
             {
                 s = "";
             }
-            return s.Trim(); // Noncompliant FP due to loop traversal
+            return s.Trim(); // Compliant
         }
     }
 
@@ -1410,7 +1410,7 @@ namespace Repro_3395
                 & helper == Helper.C & helper == Helper.D & helper == Helper.E & helper == Helper.F
                 & helper == Helper.G & helper == Helper.H & helper == Helper.I & helper == Helper.J)
             {
-                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
+                o.ToString(); // Compliant, helper is A so helper==B produces false, and the entire expression si false
             }
         }
 
@@ -1627,7 +1627,7 @@ public class Repo_890
                 lastEx = e;
             }
         }
-        lastEx.ToString(); // Noncompliant FP. The loop is always entered and so lastEx is never null here.
+        lastEx.ToString(); // Compliant. The loop is always entered and so lastEx is never null here.
     }
 }
 
@@ -1931,7 +1931,7 @@ public class PeachReproducers
         {
             return;
         }
-        arr.ToString();         // Noncompliant FP
+        arr.ToString();         // Compliant
     }
 
     public void ConditionalIntTrackingMinusOne(string value)
@@ -1939,7 +1939,7 @@ public class PeachReproducers
         var index = value?.IndexOf("x") ?? -1;
         if (index != -1)
         {
-            value.ToString();   // Noncompliant FP
+            value.ToString();   // Compliant
         }
     }
 

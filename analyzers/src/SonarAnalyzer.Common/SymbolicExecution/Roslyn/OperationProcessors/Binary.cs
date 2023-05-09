@@ -101,6 +101,10 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             return BinaryBoolConstraint(kind, leftBool == BoolConstraint.True, rightBool == BoolConstraint.True);
         }
+        else if (left?.Constraint<NumberConstraint>() is { } leftNumber && right?.Constraint<NumberConstraint>() is { } rightNumber)
+        {
+            return BinaryNumberConstraint(kind, leftNumber, rightNumber);
+        }
         else if (left?.HasConstraint<ObjectConstraint>() is true && right?.HasConstraint<ObjectConstraint>() is true)
         {
             return BinaryNullConstraint(kind, left.HasConstraint(ObjectConstraint.Null), right.HasConstraint(ObjectConstraint.Null));
@@ -123,6 +127,22 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd => BoolConstraint.From(left && right),
             BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr => BoolConstraint.From(left || right),
             BinaryOperatorKind.ExclusiveOr => BoolConstraint.From(left ^ right),
+            _ => null
+        };
+
+    private static SymbolicConstraint BinaryNumberConstraint(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) =>
+        kind switch
+        {
+            BinaryOperatorKind.Equals when left.IsSingleValue && right.IsSingleValue => BoolConstraint.From(left.Equals(right)),
+            BinaryOperatorKind.NotEquals when left.IsSingleValue && right.IsSingleValue => BoolConstraint.From(!left.Equals(right)),
+            BinaryOperatorKind.GreaterThan when left.Min > right.Max => BoolConstraint.True,
+            BinaryOperatorKind.GreaterThan when left.Max <= right.Min => BoolConstraint.False,
+            BinaryOperatorKind.GreaterThanOrEqual when left.Min >= right.Max => BoolConstraint.True,
+            BinaryOperatorKind.GreaterThanOrEqual when left.Max < right.Min => BoolConstraint.False,
+            BinaryOperatorKind.LessThan when left.Max < right.Min => BoolConstraint.True,
+            BinaryOperatorKind.LessThan when left.Min >= right.Max => BoolConstraint.False,
+            BinaryOperatorKind.LessThanOrEqual when left.Max <= right.Min => BoolConstraint.True,
+            BinaryOperatorKind.LessThanOrEqual when left.Min > right.Max => BoolConstraint.False,
             _ => null
         };
 

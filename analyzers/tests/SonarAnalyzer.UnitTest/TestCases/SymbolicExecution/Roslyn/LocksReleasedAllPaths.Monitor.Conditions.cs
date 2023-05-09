@@ -550,6 +550,46 @@ namespace Monitor_Conditions
                 }
             }
         }
+
+        public void Numbers_Equals()
+        {
+            Monitor.Enter(obj);     // Compliant, always released
+            Monitor.Enter(other);   // Noncompliant
+            if (condition)          // Release on some paths
+            {
+                Monitor.Exit(obj);
+                Monitor.Exit(other);
+            }
+            var value = 42;
+            if (value == 42)
+            {
+                Monitor.Exit(obj);
+            }
+            else
+            {
+                Monitor.Exit(other);
+            }
+        }
+
+        public void Numbers_NotEquals()
+        {
+            Monitor.Enter(obj);     // Compliant, always released
+            Monitor.Enter(other);   // Noncompliant
+            if (condition)          // Release on some paths
+            {
+                Monitor.Exit(obj);
+                Monitor.Exit(other);
+            }
+            var value = 42;
+            if (value != 0)
+            {
+                Monitor.Exit(obj);
+            }
+            else
+            {
+                Monitor.Exit(other);
+            }
+        }
     }
 
     class LockOnField

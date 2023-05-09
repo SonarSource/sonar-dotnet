@@ -273,7 +273,7 @@ namespace Tests.Diagnostics
                 return -1;
             }
 
-            return dict.Count; // Noncompliant FP, we don't track integer constraints (yet, see MMF-3077)
+            return dict.Count; // Compliant
         }
     }
 }
