@@ -38,6 +38,10 @@ Module Module1
         dummy = (New List(Of Integer)() From {42}).Last() ' Noncompliant
         dummy = (New List(Of Integer)() From {42}).ElementAt(42) ' Noncompliant
 
+        Dim inlineInitialization = {42}.First() ' FN, .GetTypeInfo(CollectionInitializer) returns null
+        inlineInitialization = {42}.Last() ' FN, .GetTypeInfo(CollectionInitializer) returns null
+        inlineInitialization = {42}.ElementAt(42) ' FN, .GetTypeInfo(CollectionInitializer) returns null
+
         Dim implementsIList = New ImplementsIList(Of Integer)()
 
         implementsIList.Fluent().Fluent().Fluent().Fluent().First() ' Noncompliant
