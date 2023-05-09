@@ -34,7 +34,7 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            var invocation = c.Node as TInvocation;
+            var invocation = (TInvocation)c.Node;
 
             if (Language.GetName(invocation).Equals("Where", Language.NameComparison)
                 && TryGetOperands(invocation, out var left, out var right)
