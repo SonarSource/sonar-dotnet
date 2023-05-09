@@ -1,0 +1,17 @@
+{
+  "title": "The collection should be filtered before sorting by using \"Where\" before \"OrderBy\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6607",
+  "sqKey": "S6607",
+  "scope": "All",
+  "quickfix": "targeted"
+}
