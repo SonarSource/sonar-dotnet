@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflowBase
 {
-    internal static readonly DiagnosticDescriptor S3949 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    public static readonly DiagnosticDescriptor S3949 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     protected override DiagnosticDescriptor Rule => S3949;
 

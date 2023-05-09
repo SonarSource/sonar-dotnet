@@ -22,7 +22,6 @@ using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarRules = SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
