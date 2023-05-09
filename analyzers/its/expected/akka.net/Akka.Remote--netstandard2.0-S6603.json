@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  719,
+"startColumn":  70,
+"endLine":  719,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  899,
+"startColumn":  50,
+"endLine":  899,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  911,
+"startColumn":  52,
+"endLine":  911,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  672,
+"startColumn":  30,
+"endLine":  672,
+"endColumn":  33
+}
+}
+}
+]
+}

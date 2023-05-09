@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"region":  {
+"startLine":  473,
+"startColumn":  26,
+"endLine":  473,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ObjectFactory.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  109,
+"endLine":  36,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  59,
+"endLine":  183,
+"endColumn":  62
+}
+}
+}
+]
+}
