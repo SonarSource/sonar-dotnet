@@ -28,22 +28,9 @@ public class LinkedListPropertiesInsteadOfMethodsTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.LinkedListPropertiesInsteadOfMethods>();
 
-    [DataTestMethod]
-    [DataRow("First")]
-    [DataRow("Last")]
-    public void LinkedListPropertiesInsteadOfMethods_CS(string name) =>
-        builderCS.AddSnippet($$"""
-            using System.Collections.Generic;
-            using System.Linq;
-
-            public class Program
-            {
-                void Test()
-                {
-                    {{GenerateBatchTests_CS(name)}}
-                }
-            }
-            """).Verify();
+    [TestMethod]
+    public void LinkedListPropertiesInsteadOfMethods_CS() =>
+        builderCS.AddPaths("LinkedListPropertiesInsteadOfMethods.cs").Verify();
 
 #if NET
 
@@ -51,52 +38,26 @@ public class LinkedListPropertiesInsteadOfMethodsTest
     [DataRow("First")]
     [DataRow("Last")]
     public void LinkedListPropertiesInsteadOfMethods_TopLevelStatements(string name) =>
-        builderCS.AddSnippet($$"""
+        builderCS.AddSnippet($$$"""
             using System.Collections.Generic;
             using System.Linq;
 
-            {{GenerateBatchTests_CS(name)}}
+            var data = new LinkedList<int>();
+            
+            data.{{{name}}}(); // Noncompliant {{'{{{name}}}' property of 'LinkedList' should be used instead of the '{{{name}}}()' extension method.}}
+            //   {{{string.Concat(Enumerable.Repeat("^", name.Length))}}}
+            
+            data.{{{name}}}(x => x > 0);            // Compliant
+            _ = data.{{{name}}}.Value;              // Compliant
+            data.Count();                           // Compliant
+            data.Append(1).{{{name}}}().ToString(); // Compliant
+            data?.{{{name}}}().ToString();          // Noncompliant
 
             """).WithTopLevelStatements().Verify();
 
 #endif
 
-    [DataTestMethod]
-    [DataRow("First")]
-    [DataRow("Last")]
-    public void LinkedListPropertiesInsteadOfMethods_VB(string name) =>
-        new VerifierBuilder<VB.LinkedListPropertiesInsteadOfMethods>().AddSnippet($$"""
-            Imports System.Collections.Generic
-            Imports System.Linq
-            
-            Public Class Program
-                Function Test(data As LinkedList(Of Integer)) As Integer
-                    {{GenerateBatchTests_VB(name)}}
-                End Function
-            End Class
-            """).Verify();
-
-    private static string GenerateBatchTests_CS(string name) => $$$"""
-        var data = new LinkedList<int>();
-
-        data.{{{name}}}(); // Noncompliant {{'{{{name}}}' property of 'LinkedList' should be used instead of the '{{{name}}}()' extension method.}}
-        //   {{{string.Concat(Enumerable.Repeat("^", name.Length))}}}
-
-        data.{{{name}}}(x => x > 0);            // Compliant
-        _ = data.{{{name}}}.Value;              // Compliant
-        data.Count();                           // Compliant
-        data.Append(1).{{{name}}}().ToString(); // Compliant
-        data?.{{{name}}}().ToString();          // Noncompliant
-        """;
-
-    private static string GenerateBatchTests_VB(string name) => $$$"""
-        Enumerable.{{{name}}}(data)   ' Noncompliant {{'{{{name}}}' property of 'LinkedList' should be used instead of the '{{{name}}}()' extension method.}}
-        '                  {{{string.Concat(Enumerable.Repeat("^", name.Length))}}}
-
-        Dim a = Enumerable.Any(data)     ' Compliant
-        Dim b = data.{{{name}}}()        ' Compliant
-        Dim c = data.{{{name}}}.Value    ' Compliant
-        Dim d = data.Count()             ' Compliant
-        Dim e = Enumerable.{{{name}}}(data, Function(x) x > 0) ' Compliant
-        """;
+    [TestMethod]
+    public void LinkedListPropertiesInsteadOfMethods_VB() =>
+        new VerifierBuilder<VB.LinkedListPropertiesInsteadOfMethods>().AddPaths("LinkedListPropertiesInsteadOfMethods.vb").Verify();
 }
