@@ -976,14 +976,6 @@ Tag(""End"", arg);";
     }
 
     [DataTestMethod]        // FIXME: Everything except one should go away
-    [DataRow("arg >  42")]
-    [DataRow("42 <  arg")]
-    [DataRow("arg >= 42")]
-    [DataRow("42 <= arg")]
-    [DataRow("arg <  42")]
-    [DataRow("42 >  arg")]
-    [DataRow("arg <= 42")]
-    [DataRow("42 >= arg")]
     [DataRow("arg >  42 && arg >    0")]
     [DataRow("arg >  42 && arg >   42")]
     [DataRow("arg >  42 && arg >  100")]
@@ -1058,7 +1050,14 @@ Tag(""End"", arg);";
     }
 
     [DataTestMethod]
-    // FIXME: Add datarows
+    [DataRow("arg >  42", 43, null, null, 42)]
+    [DataRow("42  < arg", 43, null, null, 42)]
+    [DataRow("arg >= 42", 42, null, null, 41)]
+    [DataRow("42 <= arg", 42, null, null, 41)]
+    [DataRow("arg <  42", null, 41, 42, null)]
+    [DataRow("42  > arg", null, 41, 42, null)]
+    [DataRow("arg <= 42", null, 42, 43, null)]
+    [DataRow("42 >= arg", null, 42, 43, null)]
     public void Branching_LearnsNumberConstraint_IfElse(string expression, int? expectedIfMin, int? expectedIfMax, int? expectedElseMin, int? expectedElseMax)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
@@ -1092,7 +1091,7 @@ Tag(""End"", arg);";
     }
 
     [DataTestMethod]
-    // FIXME: There are all wrong for the moment
+    // FIXME: These are all wrong for the moment
     [DataRow("arg == 42 && arg == 100")]
     [DataRow("arg == 42 && arg !=  42")]
     [DataRow("arg == 42 && arg >  100")]
