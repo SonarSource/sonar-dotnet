@@ -830,4 +830,25 @@ Tag(""End"")";
             """;
         SETestContext.CreateCS(code, "int i, int j").Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
     }
+
+    [DataTestMethod]
+    [DataRow(0b0101, 0b0101, 0b0101)]
+    [DataRow(0b0101, 0b0001, 0b0001)]
+    [DataRow(0b1010, 0b0110, 0b0010)]
+    [DataRow(0b1010, 0b0000, 0b0000)]
+    [DataRow(5, -5, 1)]
+    [DataRow(5, -4, 4)]
+    [DataRow(-5, -5, -5)]
+    [DataRow(-5, -4, -8)]
+    public void Binary_BitAnd_UpdatesNumberConstraint(int i, int j, int expected)
+    {
+        var code = $"""
+            var i = {i};
+            var j = {j};
+            var value = i & j;
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
+    }
 }
