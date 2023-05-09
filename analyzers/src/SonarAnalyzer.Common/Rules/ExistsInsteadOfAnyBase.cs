@@ -27,13 +27,14 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
     private const string DiagnosticId = "S6605";
 
     private static readonly ImmutableArray<KnownType> TargetTypes = ImmutableArray.Create(
+        KnownType.System_Array,
         KnownType.System_Collections_Generic_List_T,
         KnownType.System_Collections_Immutable_ImmutableList_T);
 
     protected override string MessageFormat => """Collection-specific "Exists" method should be used instead of the "Any" extension.""";
 
     protected abstract bool TryGetOperands(TInvocationExpression node, out SyntaxNode left, out SyntaxNode right);
-    protected abstract bool HasAnyArguments(TInvocationExpression node);
+    protected abstract bool HasValidDelegate(TInvocationExpression node);
     protected abstract SyntaxToken? GetIdentifier(TInvocationExpression invocation);
 
     protected ExistsInsteadOfAnyBase() : base(DiagnosticId) { }
@@ -44,7 +45,7 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
             var invocation = c.Node as TInvocationExpression;
 
             if (Language.GetName(invocation).Equals(nameof(Enumerable.Any), Language.NameComparison)
-                && HasAnyArguments(invocation)
+                && HasValidDelegate(invocation)
                 && TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectCall(right, c.SemanticModel)
                 && IsCorrectType(left, c.SemanticModel))
@@ -56,7 +57,7 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
     private static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
         model.GetTypeInfo(left).Type is { } type && type.DerivesFromAny(TargetTypes);
 
-    private static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+    internal static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 }

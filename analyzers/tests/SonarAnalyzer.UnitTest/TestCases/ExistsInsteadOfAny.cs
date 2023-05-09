@@ -5,7 +5,7 @@ using System.Linq;
 
 public class TestClass
 {
-    bool MyMethod(List<int> list)
+    bool MyMethod(List<int> list, int[] array)
     {
         list.Any(x => x > 0); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
 //           ^^^
@@ -17,19 +17,20 @@ public class TestClass
         list.Any(); // Compliant (you can't use Exists with no arguments, CS7036)
         list.Exists(x => x > 0); // Compliant
 
+        array.Any(x => x > 0); // Noncompliant
+        array.Any(); // Compliant
+
         var classA = new ClassA();
         classA.myListField.Any(x => x > 0); // Noncompliant
         classA.classB.myListField.Any(x => x > 0); // Noncompliant
         classA.classB.myListField.Any(); // Compliant
 
         var classB = new ClassB();
-        classB.Any(x => x); // Compliant
-
-        var boolList = new List<bool>();
+        classB.Any(x => x > 0); // Compliant
 
         list?.Any(x => x > 0); // Noncompliant
         list?.Any(x => x > 0).ToString(); // Noncompliant
-        classB?.Any(x => x); // Compliant
+        classB?.Any(x => x > 0); // Compliant
 
         var enumList = new EnumList<int>();
         enumList.Any(x => x > 0); // Compliant
@@ -66,6 +67,36 @@ public class TestClass
         return list.Any(x => x % 2 == 0); // Noncompliant
     }
 
+    void CheckDelegate(List<int> intList, List<string> stringList, List<ClassA> customList, string someString)
+    {
+        intList.Any(x => x == 0); // Compliant (should raise S6617)
+        intList.Any(x => 0 == x); // Compliant (should raise S6617)
+        intList.Any(x => x.Equals(0)); // Compliant (should raise S6617)
+        intList.Any(x => 0.Equals(x)); // Compliant (should raise S6617)
+        intList.Any(x => x.Equals(x + 1)); // Compliant(should raise S6617);
+
+        intList.Any(x => MyIntCheck(x)); // Noncompliant FP
+        intList.Any(x => x != 0);     // Noncompliant
+        intList.Any(x => x.Equals(0) && true);   // Noncompliant
+        intList.Any(x => (x == 0 ? 2 : 0) == 0); // Noncompliant
+
+        stringList.Any(x => x == ""); // Compliant (should raise S6617)
+        stringList.Any(x => "" == x); // Compliant (should raise S6617)
+        stringList.Any(x => x.Equals("")); // Compliant (should raise S6617)
+        stringList.Any(x => "".Equals(x)); // Compliant (should raise S6617)
+        stringList.Any(x => x.Equals("" + someString)); // Compliant(should raise S6617);
+
+        stringList.Any(x => MyStringCheck(x)); // Noncompliant FP
+        stringList.Any(x => x != "");     // Noncompliant
+        stringList.Any(x => x.Equals("") && true);   // Noncompliant
+        stringList.Any(x => (x == "" ? "a" : "b") == "a"); // Noncompliant
+
+        customList.Any(x => x.Equals()); // FN
+
+        bool MyIntCheck(int x) => x == 0;
+        bool MyStringCheck(string x) => x == "";
+    }
+
     bool ContainsEvenExpression(List<int> data) =>
         data.Any(x => x % 2 == 0); // Noncompliant
 
@@ -100,6 +131,8 @@ public class TestClass
             }
         }
 
+        public bool Equals() => false;
+
         public ClassB classB = new ClassB();
     }
 }
@@ -108,5 +141,5 @@ public class ClassB
 {
     public List<int> myListField = new List<int>();
 
-    public bool Any(Func<bool, bool> predicate) => false;
+    public bool Any(Func<int, bool> predicate) => false;
 }

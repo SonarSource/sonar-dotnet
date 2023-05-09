@@ -28,9 +28,23 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
     protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
         invocation.TryGetOperands(out left, out right);
 
-    protected override bool HasAnyArguments(InvocationExpressionSyntax node) =>
-        node.ArgumentList.Arguments is { Count: > 0 };
+    protected override bool HasValidDelegate(InvocationExpressionSyntax node) =>
+        node.ArgumentList.Arguments is { Count: > 0 } arg
+        && arg.First().GetExpression() is SingleLineLambdaExpressionSyntax { } lambda
+        && CheckExpression(lambda.Body);
 
     protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
         invocation.GetIdentifier();
+
+    private bool CheckExpression(SyntaxNode body) =>
+        body switch
+        {
+            BinaryExpressionSyntax { } binary =>
+                !(binary.OperatorToken.IsKind(SyntaxKind.EqualsToken)
+                && ((binary.Left is IdentifierNameSyntax && binary.Right is LiteralExpressionSyntax)
+                    || (binary.Right is IdentifierNameSyntax && binary.Left is LiteralExpressionSyntax))),
+            InvocationExpressionSyntax { } invocation =>
+                !Language.GetName(invocation).Equals(nameof(Equals), Language.NameComparison),
+            _ => true
+        };
 }
