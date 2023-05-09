@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Xml.Linq;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules;
@@ -31,9 +32,9 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
     protected override string MessageFormat => "'{0}' property of 'LinkedList' should be used instead of the '{0}()' extension method.";
 
     protected abstract bool TryGetOperands(TInvocationExpression invocation, out SyntaxNode left, out SyntaxNode right);
-    protected abstract bool HasAnyArguments(TInvocationExpression invocation);
+    protected abstract bool HasNoArguments(TInvocationExpression invocation);
     protected abstract bool IsCorrectType(TInvocationExpression invocation, SyntaxNode left, SemanticModel model);
-    protected abstract void ReportIssue(SonarSyntaxNodeReportingContext node, string methodName);
+    protected abstract SyntaxToken? GetIdentifier(TInvocationExpression invocation);
 
     protected LinkedListPropertiesInsteadOfMethodsBase() : base(DiagnosticId) { }
 
@@ -44,12 +45,12 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
             var methodName = Language.GetName(invocation);
 
             if (IsFirstOrLast(methodName)
+                && HasNoArguments(invocation)
                 && TryGetOperands(invocation, out var left, out var right)
-                && !HasAnyArguments(invocation)
                 && IsCorrectCall(right, c.SemanticModel)
                 && IsCorrectType(invocation, left, c.SemanticModel))
             {
-                ReportIssue(c, methodName);
+                c.ReportIssue(Diagnostic.Create(Rule, GetIdentifier(invocation)?.GetLocation(), methodName));
             }
         }, Language.SyntaxKind.InvocationExpression);
 

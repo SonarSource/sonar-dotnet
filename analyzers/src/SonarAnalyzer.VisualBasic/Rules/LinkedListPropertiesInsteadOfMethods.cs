@@ -28,13 +28,13 @@ public sealed class LinkedListPropertiesInsteadOfMethods : LinkedListPropertiesI
     protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
         invocation.TryGetOperands(out left, out right);
 
-    protected override bool HasAnyArguments(InvocationExpressionSyntax invocation) => false;
+    protected override bool HasNoArguments(InvocationExpressionSyntax invocation) => true;
 
     protected override bool IsCorrectType(InvocationExpressionSyntax invocation, SyntaxNode left, SemanticModel model) =>
-        invocation is { ArgumentList: { Arguments: { Count: 1 } arg } }
-        && model.GetTypeInfo(arg.First().GetExpression()).Type is { } type
+        invocation is { ArgumentList: { Arguments: { Count: 1 } args } }
+        && model.GetTypeInfo(args.First().GetExpression()).Type is { } type
         && type.DerivesFrom(KnownType.System_Collections_Generic_LinkedList_T);
 
-    protected override void ReportIssue(SonarSyntaxNodeReportingContext node, string methodName) =>
-        node.ReportIssue(Diagnostic.Create(Rule, node.Node.GetIdentifier()?.GetLocation(), methodName));
+    protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
+        invocation.GetIdentifier();
 }
