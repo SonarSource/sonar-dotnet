@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Older versions of SSL/TLS protocol like "SSLv3" have been proven to be insecure.</p>
 <p>This rule raises an issue when an SSL/TLS is configured at application level with an insecure version (ie: a protocol different from "TLSv1.2" or
 "TLSv1.3").</p>
@@ -6,7 +7,7 @@ href="https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-s
 TLSv1.1 enabled by default</a>. Administrators can configure the OS to enforce TLSv1.2 minumum by <a
 href="https://docs.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings">updateing registry settings</a> or by applying a group
 policy.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls; // Noncompliant; legacy version TLSv1 is enabled
 </pre>
@@ -17,7 +18,7 @@ new HttpClientHandler
     SslProtocols = SslProtocols.Tls // Noncompliant; legacy version TLSv1 is enabled
 };
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault; // Compliant; choice of the SSL/TLS versions rely on the OS configuration
 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13; // Compliant
@@ -34,7 +35,7 @@ new HttpClientHandler
     SslProtocols = SslProtocols.None // Compliant; choice of the TLS versions rely on the OS configuration
 };
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">OWASP Top 10 2021 Category A2</a> - Cryptographic Failures </li>
   <li> <a href="https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/">OWASP Top 10 2021 Category A7</a> - Identification and

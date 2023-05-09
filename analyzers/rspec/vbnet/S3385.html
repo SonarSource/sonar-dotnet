@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Other than <code>Exit Select</code>, using an <code>Exit</code> statement is never a good idea.</p>
 <p><code>Exit Do</code>, <code>Exit For</code>, <code>Exit Try</code>, and <code>Exit While</code> will all result in unstructured control flow, i.e.
 spaghetti code.</p>
@@ -6,7 +7,7 @@ spaghetti code.</p>
 could result in a <code>NullReferenceException</code>.</p>
 <p>This rule raises an issue for all uses of <code>Exit</code> except <code>Exit Select</code> and <code>Exit Do</code> statements in loops without
 condition.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Public Class Sample
   Dim condition As Boolean
@@ -30,7 +31,7 @@ Public Class Sample
   End Function
 End Class
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Public Class Sample
   Dim condition As Boolean

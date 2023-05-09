@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p><code>private</code> classes and records aren’t visible outside of their assemblies anyway, so if they’re not extended inside the assemblies, they
 should be made explicitly non-extensible with the addition of the <code>sealed</code> keyword.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 private class MyClass  // Noncompliant
 {
@@ -12,7 +13,7 @@ private record MyRecord  // Noncompliant
   // ...
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 private sealed class MyClass
 {

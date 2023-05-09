@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>One of the principles of a unit test is that it must have full control of the system under test. This is problematic when production code includes
 calls to static methods, which cannot be changed or controlled. Date/time functions are usually provided by system libraries as static methods.</p>
 <p>This can be improved by wrapping the system calls in an object or service that can be controlled inside the unit test.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class Foo
 {
@@ -9,7 +10,7 @@ public class Foo
         $"Hello at {DateTime.UtcNow}";
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <p>There are different approaches to solve this problem. One of them is suggested below. There are also open source libraries (such as NodaTime) which
 already implement an <code>IClock</code> interface and a <code>FakeClock</code> testing class.</p>
 <pre>
@@ -67,6 +68,6 @@ public class FooTest
     }
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <p><a href="https://nodatime.org/3.0.x/api/NodaTime.Testing.html">NodaTime testing</a></p>
 

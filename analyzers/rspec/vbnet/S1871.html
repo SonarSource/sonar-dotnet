@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>Having two <code>Cases</code> in the same <code>Select</code> statement or branches in the same <code>If</code> structure with the same
 implementation is at best duplicate code, and at worst a coding error. If the same logic is truly needed for both instances, then in an
 <code>If</code> structure they should be combined, or for a <code>Select</code>, one should fall through to the other.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Select i
   Case 1
@@ -28,7 +29,7 @@ Else
   DoTheRest();
 End If
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>Blocks in an <code>If</code> chain or <code>Case</code> clause that contain a single line of code are ignored.</p>
 <pre>
 If a &gt;= 0 AndAlso a &lt; 10 Then

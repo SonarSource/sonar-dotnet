@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Non-private <code>static</code> fields that are neither <code>const</code> nor <code>readonly</code> can lead to errors and unpredictable
 behavior.</p>
 <p>This can happen because: * Any object can modify these fields and alter the global state. This makes the code more difficult to read, debug and
@@ -5,7 +6,7 @@ test. * Correctly accessing these fields from different threads needs synchroniz
 unexpected results.</p>
 <p>Publicly visible static fields should only be used to store shared data that does not change. To enforce this intent, these fields should be marked
 <code>readonly</code> or converted to <code>const</code>.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class Math
 {
@@ -23,7 +24,7 @@ public class Shape
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class Math
 {

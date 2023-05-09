@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>It is expected that some methods should be called with caution, but others, such as <code>ToString</code>, are expected to "just work". Throwing an
 exception from such a method is likely to break callers' code unexpectedly.</p>
 <p>An issue is raised when an exception is thrown from any of the following:</p>
@@ -13,7 +14,7 @@ exception from such a method is likely to break callers' code unexpectedly.</p>
   <li> operators <code>==, !=, &lt;, &gt;, &lt;=, &gt;=</code> </li>
   <li> <code>implicit</code> cast operators </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public override string ToString()
 {
@@ -23,7 +24,7 @@ public override string ToString()
   }
   //...
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p><code>System.NotImplementedException</code> and its derivatives are ignored.</p>
 <p><code>System.InvalidOperationException</code>, <code>System.NotSupportedException</code>, and <code>System.ArgumentException</code> and their
 derivatives are ignored in event accessors.</p>

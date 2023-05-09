@@ -1,9 +1,10 @@
+<h2>Why is this an issue?</h2>
 <p>Methods declared as <code>Public</code>, <code>Protected</code>, or <code>Protected Friend</code> can be accessed from other assemblies, which
 means you should validate parameters to be within the expected constraints. In general, checking against <code>Nothing</code> is recommended in
 defensive programming.</p>
 <p>This rule raises an issue when a parameter of a publicly accessible method is not validated against <code>Nothing</code> before being
 dereferenced.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Public Class Sample
 
@@ -19,7 +20,7 @@ Public Class Sample
 
 End Class
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Public Class Sample
 
@@ -40,7 +41,7 @@ Public Class Sample
 
 End Class
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <ul>
   <li> Arguments validated for <code>Nothing</code> via helper methods should be annotated with the <a
   href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull"><code>[NotNull</code></a>] attribute. </li>

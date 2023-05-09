@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p><code>switch</code> statements and expressions are useful when there are many different cases depending on the value of the same expression.</p>
 <p>When a <code>switch</code> statement or expression is simple enough, the code will be more readable with a single <code>if</code>,
 <code>if-else</code> or ternary conditional operator.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 switch (variable)
 {
@@ -19,7 +20,7 @@ var foo = variable switch
   _ =&gt; doSomethingElse(),
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 if (variable == 0)
 {

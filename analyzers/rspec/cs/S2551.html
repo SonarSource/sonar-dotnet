@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Shared resources should not be used for locking as it increases the chance of deadlocks. Any other thread could acquire (or attempt to acquire) the
 same lock for another unrelated purpose.</p>
 <p>Instead, a dedicated <code>object</code> instance should be used for each shared resource, to avoid deadlocks or lock contention.</p>
@@ -8,7 +9,7 @@ same lock for another unrelated purpose.</p>
   <li> a string literal </li>
   <li> a string instance </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public void MyLockingMethod()
 {
@@ -18,7 +19,7 @@ public void MyLockingMethod()
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 private readonly object lockObj = new object();
 
@@ -30,7 +31,7 @@ public void MyLockingMethod()
     }
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/standard/threading/managed-threading-best-practices">Microsoft Documentation: Managed Threading
 Best Practices</a></p>
 

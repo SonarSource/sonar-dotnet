@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>Inappropriate casts are issues that will lead to unexpected behavior or runtime errors, such as <code>InvalidCastException</code>s. The compiler
 will catch bad casts from one class to another, but not bad casts to interfaces. Nor will it catch nullable values that are known to be null but that
 are cast to their underlying value types anyway.</p>
 <p>It is much better to use the <code>as</code> operator because it will return <code>null</code> instead of throwing an exception.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public interface IMyInterface
 { /* ... */ }
@@ -26,7 +27,7 @@ public static class Program
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public interface IMyInterface
 { /* ... */ }
@@ -53,9 +54,9 @@ public static class Program
   }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>No issue is reported if the interface has no implementing class in the assembly.</p>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/588">MITRE, CWE-588</a> - Attempt to Access Child of a Non-structure Pointer </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/704">MITRE, CWE-704</a> - Incorrect Type Conversion or Cast </li>

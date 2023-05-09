@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>This rule raises an issue when an externally visible enumeration is marked with <code>FlagsAttribute</code> and one, or more, of its values is not
 a power of 2 or a combination of the other defined values.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 
@@ -16,7 +17,7 @@ namespace MyLibrary
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 

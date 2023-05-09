@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>An <code>IDisposable</code> object should be disposed (there are some rare exceptions where not disposing is fine, most notably <code>Task</code>).
 If a class has an <code>IDisposable</code> field, there can be two situations:</p>
 <ul>
@@ -7,7 +8,7 @@ If a class has an <code>IDisposable</code> field, there can be two situations:</
 <p>In the second case, the safest way for the class to ensure <code>Dispose</code> is called is to call it in its own <code>Dispose</code> function,
 and therefore to be itself <code>IDisposable</code>. A class is considered to own an <code>IDisposable</code> field resource if it created the object
 referenced by the field.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class ResourceHolder   // Noncompliant; doesn't implement IDisposable
 {
@@ -22,7 +23,7 @@ public class ResourceHolder   // Noncompliant; doesn't implement IDisposable
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class ResourceHolder : IDisposable
 {
@@ -42,7 +43,7 @@ public class ResourceHolder : IDisposable
 &nbsp;&nbsp;}
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/459">MITRE, CWE-459</a> - Incomplete Cleanup </li>
 </ul>

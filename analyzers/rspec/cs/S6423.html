@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>Capturing and logging errors is critical to monitoring the health of your Azure Functions application.</p>
 <p>Each <code>catch</code> block inside an Azure Function should log helpful details about the failure. Moreover, the logging should not be done at
 <code>Debug</code> or <code>Trace</code> level.</p>
 <p>Consider using the built-in integration with Application Insights for better monitoring of your Application.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 [FunctionName("Foo")]
 public static async Task&lt;IActionResult&gt; Run(
@@ -19,7 +20,7 @@ public static async Task&lt;IActionResult&gt; Run(
 	}
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 [FunctionName("Foo")]
 public static async Task&lt;IActionResult&gt; Run(
@@ -36,7 +37,7 @@ public static async Task&lt;IActionResult&gt; Run(
 	}
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-error-pages?tabs=csharp">Azure Functions error handling and
   retries</a> </li>

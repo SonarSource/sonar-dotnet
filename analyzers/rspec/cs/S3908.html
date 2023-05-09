@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>Since .Net Framework version 2.0 it is not necessary to declare a delegate that specifies a class derived from <code>System.EventArgs</code>. The
 <code>System.EventHandler&lt;TEventArgs&gt;</code> delegate mechanism should be used instead as it allows any class derived from
 <code>EventArgs</code> to be used with that handler.</p>
 <p>This rule raises an issue when an old style delegate is used as an event handler.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class MyEventArgs : EventArgs
 {
@@ -36,7 +37,7 @@ public class EventConsumer
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class MyEventArgs : EventArgs
 {

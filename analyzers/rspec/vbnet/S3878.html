@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>There’s no point in creating an array solely for the purpose of passing it to a <code>ParamArray</code> parameter. Simply pass the elements
 directly. They will be consolidated into an array automatically.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Class SurroundingClass
     Public Sub Base()
@@ -13,7 +14,7 @@ Class SurroundingClass
     End Sub
 End Class
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Class SurroundingClass
     Public Sub Base()

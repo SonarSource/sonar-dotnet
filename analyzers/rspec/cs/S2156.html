@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>The difference between <code>private</code> and <code>protected</code> visibility is that child classes can see and use <code>protected</code>
 members, but they cannot see <code>private</code> ones. Since a <code>sealed</code> class cannot have children, marking its members
 <code>protected</code> is confusingly pointless.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public sealed class MySealedClass
 {
@@ -12,7 +13,7 @@ public sealed class MySealedClass
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public sealed class MySealedClass
 {

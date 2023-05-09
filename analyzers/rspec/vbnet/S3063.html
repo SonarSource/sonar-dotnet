@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p><code>StringBuilder</code> instances that never build a <code>string</code> clutter the code and worse are a drag on performance. Either they
 should be removed, or the missing <code>ToString()</code> call should be added.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Public Sub DoSomething(ByVal strings As List(Of String))
     Dim sb As StringBuilder = New StringBuilder() ' Noncompliant
@@ -11,7 +12,7 @@ Public Sub DoSomething(ByVal strings As List(Of String))
     Next
 End Sub
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Public Sub DoSomething(ByVal strings As List(Of String))
     For Each str As String In strings
@@ -31,7 +32,7 @@ Public Sub DoSomething(ByVal strings As List(Of String))
     My.Application.Log.WriteEntry(sb.ToString())
 End Sub
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>No issue is reported when <code>StringBuilder</code> is:</p>
 <ul>
   <li> Accessed through <code>sb.CopyTo()</code>, <code>sb.GetChunks()</code>, <code>sb.Length</code>, or <code>sb(index)</code>. </li>

@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>When constraints have not been applied to restrict a generic type parameter to be a reference type, then a value type, such as a
 <code>struct</code>, could also be passed. In such cases, comparing the type parameter to <code>null</code> would always be false, because a
 <code>struct</code> can be empty, but never <code>null</code>. If a value type is truly what’s expected, then the comparison should use
 <code>default()</code>. If it’s not, then constraints should be added so that no value type can be passed.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 private bool IsDefault&lt;T&gt;(T value)
 {
@@ -13,7 +14,7 @@ private bool IsDefault&lt;T&gt;(T value)
   // ...
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 private bool IsDefault&lt;T&gt;(T value)
 {

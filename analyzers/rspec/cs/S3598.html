@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>When declaring a Windows Communication Foundation (WCF) <code>OperationContract</code> method one-way, that service method won’t return any result,
 not even an underlying empty confirmation message. These are fire-and-forget methods that are useful in event-like communication. Specifying a return
 type therefore does not make sense.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 [ServiceContract]
 interface IMyService
@@ -10,7 +11,7 @@ interface IMyService
   int SomethingHappened(int parameter); // Noncompliant
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 [ServiceContract]
 interface IMyService
@@ -19,6 +20,6 @@ interface IMyService
   void SomethingHappened(int parameter);
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>The rule doesn’t report if <code>OperationContractAttribute.AsyncPattern</code> is set to <code>true</code>.</p>
 

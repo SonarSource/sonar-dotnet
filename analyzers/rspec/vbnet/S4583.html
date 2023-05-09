@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Calling the <code>BeginInvoke</code> method of a delegate will allocate some resources that are only freed-up when <code>EndInvoke</code> is
 called. This is why you should always pair <code>BeginInvoke</code> with an <code>EndInvoke</code> to complete your asynchronous call.</p>
 <p>This rule raises an issue when:</p>
@@ -6,7 +7,7 @@ called. This is why you should always pair <code>BeginInvoke</code> with an <cod
   block. </li>
   <li> a callback with a single parameter of type <code>IAsyncResult</code> doesn’t contain a call to <code>EndInvoke</code>. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <p>BeginInvoke without callback</p>
 <pre>
 Public Delegate Function AsyncMethodCaller() As String
@@ -38,7 +39,7 @@ Public Class Sample
 
 End Class
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <p>BeginInvoke without callback</p>
 <pre>
 Public Delegate Function AsyncMethodCaller() As String
@@ -75,7 +76,7 @@ Public Class Sample
 
 End Class
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/calling-synchronous-methods-asynchronously">Calling
 Synchronous Methods Asynchronously</a></p>
 

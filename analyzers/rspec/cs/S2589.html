@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>If a boolean expression doesn’t change the evaluation of the condition, then it is entirely unnecessary, and can be removed. If it is gratuitous
 because it does not match the programmer’s intent, then it’s a bug and the expression should be fixed.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public void Sample(bool b, bool c, string s)
 {
@@ -25,7 +26,7 @@ public void Sample(bool b, bool c, string s)
     var v2 = s ?? d; // Noncompliant, d is always null and the produced value is always equal to s. The condition to check the value of s is gratuitous.
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public void Sample(bool b, bool c, string s)
 {
@@ -49,7 +50,7 @@ public void Sample(bool b, bool c, string s)
     var v2 = s;
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/571">MITRE, CWE-571</a> - Expression is Always True </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/570">MITRE, CWE-570</a> - Expression is Always False </li>

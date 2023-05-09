@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>When implementing operator overloads, it is very important to make sure that all related operators and methods are consistent in their
 implementation.</p>
 <p>The following guidelines should be followed:</p>
@@ -8,7 +9,7 @@ implementation.</p>
   </li>
 </ul>
 <p>This rule raises an issue when any of these guidelines are not followed on publicly-visible type (public, protected or protected internal).</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 
@@ -37,7 +38,7 @@ namespace MyLibrary
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 

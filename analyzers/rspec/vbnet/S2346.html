@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Consistent use of "None" in flags enumerations indicates that all flag values are cleared. The value 0 should not be used to indicate any other
 state, since there is no way to check that the bit <code>0</code> is set.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 &lt;Flags()&gt;
 Enum FruitType
@@ -10,7 +11,7 @@ Enum FruitType
     Strawberry = 4
 End Enum
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 &lt;Flags()&gt;
 Enum FruitType

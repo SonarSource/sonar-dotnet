@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>An Azure Function should be stateless as there’s no control over where and when function instances are provisioned and de-provisioned. Managing and
 storing data/state between requests can lead to inconsistencies. If, for any reason, you need to have a stateful function, consider using the Durable
 Functions extension of Azure Functions.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
     public static class HttpExample
     {
@@ -20,7 +21,7 @@ Functions extension of Azure Functions.</p>
         }
     }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
     public static class HttpExample
     {
@@ -38,7 +39,7 @@ Functions extension of Azure Functions.</p>
         }
     }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/performance-reliability#write-functions-to-be-stateless">Improve the
   performance and reliability of Azure Functions</a> </li>

@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>Default arguments are determined by the static type of the object. If a default argument is different for a parameter in an overriding method, the
 value used in the call will be different when calls are made via the base or derived object, which may be contrary to developer expectations.</p>
 <p>Default parameter values are useless in explicit interface implementations, because the static type of the object will always be the implemented
 interface. Thus, specifying default values is useless and confusing.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 
@@ -37,7 +38,7 @@ public class Program
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 

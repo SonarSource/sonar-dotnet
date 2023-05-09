@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>When a type name matches the name of a publicly defined namespace, for instance one in the .NET framework class library, it leads to confusion and
 makes the library that much harder to use.</p>
 <p>This rule raises an issue when a name of a public type matches the name of a .NET Framework namespace, or a namespace of the project assembly, in a
 case-insensitive comparison.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 
@@ -13,7 +14,7 @@ namespace MyLibrary
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 

@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p><code>readonly</code> fields can only be assigned in a class constructor. If a class has a field that’s not marked <code>readonly</code> but is
 only set in the constructor, it could cause confusion about the field’s intended use. To avoid confusion, such fields should be marked
 <code>readonly</code> to make their intended use explicit, and to prevent future maintainers from inadvertently changing their use.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class Person
 {
@@ -13,7 +14,7 @@ public class Person
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class Person
 {
@@ -25,12 +26,12 @@ public class Person
     }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <ul>
   <li> Fields with attributes are ignored. </li>
   <li> Fields of type <code>struct</code> that are not primitive or pointer types are also ignored because of possible unwanted behavior. </li>
 </ul>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://ericlippert.com/2008/05/14/mutating-readonly-structs/">Mutating readonly structs</a> </li>
 </ul>

@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Using <code>.Count()</code> to test for emptiness works, but using <code>.Any()</code> makes the intent clearer, and the code more readable.
 However, there are some cases where special attention should be paid:</p>
 <ul>
@@ -8,7 +9,7 @@ However, there are some cases where special attention should be paid:</p>
   be unnecessarily allocated. Calling <code>.Any()</code> will be much more efficient because it will execute fewer iterations of the enumerable.
   </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 private static bool HasContent(IEnumerable&lt;string&gt; strings)
 {
@@ -25,7 +26,7 @@ private static bool IsEmpty(IEnumerable&lt;string&gt; strings)
   return strings.Count() == 0;  // Noncompliant
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 private static bool HasContent(IEnumerable&lt;string&gt; strings)
 {

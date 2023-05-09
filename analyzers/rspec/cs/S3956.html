@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p><code>System.Collections.Generic.List&lt;T&gt;</code> is a generic collection that is designed for performance and not inheritance. For example, it
 does not contain virtual members that make it easier to change the behavior of an inherited class. That means that future attempts to expand the
 behavior will be spoiled because the extension points simply aren’t there. Instead, one of the following generic collections should be used:</p>
@@ -17,7 +18,7 @@ behavior will be spoiled because the extension points simply aren’t there. Ins
   <li> As the return type of an externally visible method. </li>
   <li> As a parameter type of an an externally visible method. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 namespace Foo
 {
@@ -30,7 +31,7 @@ namespace Foo
    }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 namespace Foo
 {

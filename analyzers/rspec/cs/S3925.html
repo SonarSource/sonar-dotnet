@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>The <code>ISerializable</code> interface is the mechanism to control the type serialization process. If not implemented correctly this could result
 in an invalid serialization and hard to detect bugs.</p>
 <p>This rules raises an issue on types that implement <code>ISerializable</code> without following the serialization pattern recommended by
@@ -17,7 +18,7 @@ Microsoft.</p>
 <p>Classes which inherit from <code>Exception</code> are implementing <code>ISerializable</code>. Make sure <code>[Serializable]</code> attribute is
 used and that <code>ISerializable</code>&nbsp;is correctly implemented.&nbsp;Even it you don’t plan to explicitly serialize the object yourself, it
 might still require serialization, for instance when crossing the boundary of an <code>AppDomain</code>.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class Foo : ISerializable // Noncompliant the [Serializable] attribute is missing
 {
@@ -35,7 +36,7 @@ public class Foo : ISerializable // Noncompliant the serialization constructor i
     private readonly Bar bar; // Noncompliant the field is not marked with [NonSerialized]
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class Bar
 {
@@ -86,7 +87,7 @@ public sealed class SubFoo : Foo
     }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <ul>
   <li> Classes in test projects are not checked. </li>
 </ul>

@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p><code>GoTo</code> is an unstructured control flow statement. It makes code less readable and maintainable. Structured control flow statements such
 as <code>If</code>, <code>For</code>, <code>While</code>, or <code>Exit</code> should be used instead.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
     Sub GoToStatementDemo()
         Dim number As Integer = 1
@@ -18,7 +19,7 @@ LastLine:
         Debug.WriteLine(sampleString)
     End Sub
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
     Sub GoToStatementDemo()
         Dim number As Integer = 1

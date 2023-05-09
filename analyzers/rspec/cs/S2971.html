@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>In the interests of readability, code that can be simplified should be simplified. To that end, there are several ways <code>IEnumerable</code>
 language integrated queries (LINQ) can be simplified</p>
 <ul>
@@ -10,7 +11,7 @@ language integrated queries (LINQ) can be simplified</p>
 </ul>
 <p>Using <code>EntityFramework</code> may require enforcing client evaluations. Such queries should use <code>AsEnumerable()</code> instead of
 <code>ToArray()</code> or <code>ToList()</code> in the middle of a query chain.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 seq1.Select(element =&gt; element as T).Any(element =&gt; element != null);  // Noncompliant; use OfType
 seq2.Select(element =&gt; element as T).Any(element =&gt; element != null &amp;&amp; CheckCondition(element));  // Noncompliant; use OfType
@@ -22,7 +23,7 @@ var num = seq6.Count(); // Noncompliant
 var arr = seq.ToList().ToArray(); //Noncompliant
 var count = seq.ToList().Count(x=&gt;[condition]); //Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 seq1.OfType&lt;T&gt;().Any();
 seq2.OfType&lt;T&gt;().Any(element =&gt; CheckCondition(element));

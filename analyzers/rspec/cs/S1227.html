@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p><code>break;</code> is an unstructured control flow statement which makes code harder to read.</p>
 <p>Ideally, every loop should have a single termination condition.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 int i = 0;
 while (true)
@@ -14,7 +15,7 @@ while (true)
   i++;
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 int i = 0;
 while (i != 10) // Compliant

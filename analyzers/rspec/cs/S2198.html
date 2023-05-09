@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Certain mathematical comparisons will always return the same value, and should simply not be made.</p>
 <p>These comparisons will return either always <code>true</code> or always <code>false</code> depending on the kind of comparison:</p>
 <ul>
@@ -6,7 +7,7 @@
   <li> Comparing a <code>long</code> with a numeric constant that is outside of the range of <code>long</code>. </li>
   <li> Comparing a <code>ulong</code> with a numeric constant that is outside of the range of <code>ulong</code>. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 float f = 42.0f;
 if (f &lt;= double.MaxValue) { } // Noncompliant

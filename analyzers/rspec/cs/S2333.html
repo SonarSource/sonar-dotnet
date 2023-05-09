@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Unnecessary keywords simply clutter the code and should be removed. Specifically:</p>
 <ul>
   <li> <code>partial</code> on type declarations that are completely defined in one place </li>
@@ -6,7 +7,7 @@
   constructs in the block </li>
   <li> <code>checked</code> and <code>unchecked</code> blocks with no integral-type arithmetic operations </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public partial class MyClass // Noncompliant
 {
@@ -22,7 +23,7 @@ public sealed class MyOtherClass : MyClass
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class MyClass
 {

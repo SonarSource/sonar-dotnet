@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>Nested <code>Select Case</code> structures are difficult to understand because you can easily confuse the cases of an inner <code>Select
 Case</code> as belonging to an outer statement. Therefore nested <code>Select Case</code> statements should be avoided.</p>
 <p>Specifically, you should structure your code to avoid the need for nested <code>Select Case</code> statements, but if you cannot, then consider
 moving the inner <code>Select Case</code> to another function.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Public Sub Foo(A As Integer, B As Integer)
     Select Case A
@@ -26,7 +27,7 @@ Public Sub Foo(A As Integer, B As Integer)
     End Select
 End Sub
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Public Sub Foo(A As Integer, B As Integer)
     Select Case A

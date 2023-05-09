@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>In C#, delegates can be added together to chain their execution, and subtracted to remove their execution from the chain.</p>
 <p>Subtracting a chain of delegates from another one might yield unexpected results as shown hereunder - and is likely to be a bug.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 MyDelegate first, second, third, fourth;
 first = () =&gt; Console.Write("1");
@@ -23,7 +24,7 @@ chain23 = chain1234 - (first + fourth); // Noncompliant
 
 chain23(); // will print "1234"!
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 MyDelegate chain23 = chain1234 - first - fourth; // Compliant - "1" is first removed, followed by "4"
 

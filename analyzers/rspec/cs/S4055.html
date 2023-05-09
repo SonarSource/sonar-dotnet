@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>String literals embedded in the source code will not be localized properly.</p>
 <p>This rule raises an issue when a literal string is passed as a parameter or property and one or more of the following cases is true:</p>
 <ul>
@@ -6,7 +7,7 @@
   <li> The name of the string parameter that is passed to a <code>Console.Write</code> or <code>Console.WriteLine</code> method is either "value" or
   "format". </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 using System.Globalization;
@@ -28,7 +29,7 @@ namespace MyLibrary
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 using System.Globalization;

@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>It makes little sense to create an extension method when it is possible to just add that method to the class itself.</p>
 <p>This rule raises an issue when an extension is declared in the same namespace as the class it is extending.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 namespace MyLibrary
 {
@@ -18,7 +19,7 @@ namespace MyLibrary
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <p>Using separate namespace:</p>
 <pre>
 namespace MyLibrary
@@ -54,7 +55,7 @@ namespace MyLibrary
     }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <ul>
   <li> Extension methods added for clases decorated with <code>System.CodeDom.Compiler.GeneratedCodeAttribute</code> attribute. </li>
 </ul>

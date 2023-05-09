@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>Because of the way <code>async/await</code> methods are rewritten by the compiler, any exceptions thrown during the parameters check will happen
 only when the task is observed. That could happen far away from the source of the buggy code or never happen for fire-and-forget tasks.</p>
 <p>Therefore it is recommended to split the method into two: an outer method handling the parameter checks (without being <code>async/await</code>)
 and an inner method to handle the iterator block with the <code>async/await</code> pattern.</p>
 <p>This rule raises an issue when an <code>async</code> method throws any exception derived from <code>ArgumentException</code> and contains
 <code>await</code> keyword.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public static async Task SkipLinesAsync(this TextReader reader, int linesToSkip) // Noncompliant
 {
@@ -18,7 +19,7 @@ public static async Task SkipLinesAsync(this TextReader reader, int linesToSkip)
     }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public static Task SkipLinesAsync(this TextReader reader, int linesToSkip)
 {

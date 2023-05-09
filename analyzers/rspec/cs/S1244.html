@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Floating point math is imprecise because of the challenges of storing such values in a binary representation. Even worse, floating point math is
 not associative; push a <code>float</code> or a <code>double</code> through a series of simple mathematical operations and the answer will be
 different based on the order of those operation because of the rounding that takes place at each step.</p>
@@ -10,7 +11,7 @@ double d = 0.10000000000000001; // 0.1
 <p>Therefore, the use of the equality (<code>==</code>) and inequality (<code>!=</code>) operators on <code>float</code> or <code>double</code> values
 is almost always an error.</p>
 <p>This rule checks for the use of direct and indirect equality/inequality tests on floats and doubles.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 float myNumber = 3.146f;
 if ( myNumber == 3.146f ) //Noncompliant. Because of floating point imprecision, this will be false

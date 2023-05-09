@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>An inheritance list entry is redundant if:</p>
 <ul>
   <li> It is <code>Object</code> - all classes extend <code>Object</code> implicitly. </li>
@@ -5,13 +6,13 @@
   <li> It is a base class of another listed inheritance. </li>
 </ul>
 <p>Such redundant declarations should be removed because they needlessly clutter the code and can be confusing.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class MyClass : Object  // Noncompliant
 
 enum MyEnum : int  // Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class MyClass
 

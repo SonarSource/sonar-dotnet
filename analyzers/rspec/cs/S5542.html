@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Encryption algorithms should use secure modes and padding schemes where appropriate to guarantee data confidentiality and integrity.</p>
 <ul>
   <li> For block cipher encryption algorithms (like AES):
@@ -14,7 +15,7 @@
     </ul>  </li>
   <li> For RSA encryption algorithm, the recommended padding scheme is OAEP. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.aesmanaged?view=netframework-4.8">AesManaged</a> object with
 insecure mode:</p>
 <pre>
@@ -33,7 +34,7 @@ object without OAEP padding:</p>
 RSACryptoServiceProvider RSA1 = new RSACryptoServiceProvider();
 encryptedData = RSA1.Encrypt(dataToEncrypt, false); // Noncompliant: OAEP Padding is not used (second parameter set to false)
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <p>AES with GCM mode with <a href="https://www.bouncycastle.org/">bouncycastle</a> library:</p>
 <pre>
 GcmBlockCipher blockCipher = new GcmBlockCipher(new AesEngine()); // Compliant
@@ -51,7 +52,7 @@ object:</p>
 RSACryptoServiceProvider RSA2 = new RSACryptoServiceProvider();
 encryptedData = RSA2.Encrypt(dataToEncrypt, true); // Compliant: OAEP Padding is used (second parameter set to true)
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">OWASP Top 10 2021 Category A2</a> - Cryptographic Failures </li>
   <li> <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security

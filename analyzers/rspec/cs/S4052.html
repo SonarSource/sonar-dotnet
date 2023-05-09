@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>With the advent of .NET framework version 2, certain practices have become obsolete.</p>
 <p>In particular, exceptions should now extend <code>System.Exception</code> instead of <code>System.ApplicationException</code>. Similarly, generic
 collections should be used instead of the older, non-generic, ones. Finally when creating an XML view, you should not extend
@@ -13,7 +14,7 @@ collections should be used instead of the older, non-generic, ones. Finally when
   <li> <code>System.Collections.SortedList</code> </li>
   <li> <code>System.Collections.Stack</code> </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 using System.Collections;
@@ -25,7 +26,7 @@ namespace MyLibrary
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 using System.Collections;

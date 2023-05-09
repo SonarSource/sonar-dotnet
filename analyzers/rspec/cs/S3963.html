@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>When a <code>static</code> constructor serves no other purpose that initializing <code>static</code> fields, it comes with an unnecessary
 performance cost because the compiler generates a check before each <code>static</code> method or instance constructor invocation.</p>
 <p>Instead, inline initialization is highly recommended.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 namespace myLib
 {
@@ -19,7 +20,7 @@ namespace myLib
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 namespace myLib
 {

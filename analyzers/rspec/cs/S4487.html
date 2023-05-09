@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Private fields only used to store values without reading them later is a case of dead store. So changing the value of such field is useless and
 most probably indicates a serious error in the code.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class Rectangle
 {
@@ -22,7 +23,7 @@ public class Rectangle
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class Rectangle
 {
@@ -44,7 +45,7 @@ public class Rectangle
   }
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/563">MITRE, CWE-563</a> - Assignment to Variable without Use ('Unused Variable') </li>
 </ul>

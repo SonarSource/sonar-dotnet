@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Visual Basic .NET, unlike many other programming languages, has no "fall-through" for its <code>Select</code> cases. Each case already has an
 implicit <code>Exit Select</code> as its last instruction. It therefore is redundant to explicitly add one.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Module Module1
   Sub Main()
@@ -16,7 +17,7 @@ Module Module1
   End Sub
 End Module
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Module Module1
   Sub Main()

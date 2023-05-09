@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>When writing managed code, you don’t need to worry about allocating or freeing memory: The garbage collector takes care of it. For efficiency
 reasons, some objects such as <code>Bitmap</code> use unmanaged memory, enabling for example the use of pointer arithmetic. Such objects have
 potentially huge unmanaged memory footprints, but will have tiny managed ones. Unfortunately, the garbage collector only sees the tiny managed
@@ -39,7 +40,7 @@ which are never disposed, closed, aliased, returned, or passed to other methods.
   <li> <code>System.Drawing.Image.FromStream()</code> </li>
 </ul>
 <p>on both private fields and local variables.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class ResourceHolder
 {
@@ -58,7 +59,7 @@ public class ResourceHolder
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class ResourceHolder : IDisposable, IAsyncDisposable
 {
@@ -89,7 +90,7 @@ public class ResourceHolder : IDisposable, IAsyncDisposable
   }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p><code>IDisposable</code> / <code>IAsyncDisposable</code> variables returned from a method or passed to other methods are ignored, as are local
 <code>IDisposable</code> / <code>IAsyncDisposable</code> objects that are initialized with other <code>IDisposable</code> /
 <code>IAsyncDisposable</code> objects.</p>
@@ -108,7 +109,7 @@ public void ReadFromStream(Stream s)
   // ...
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/459">MITRE, CWE-459</a> - Incomplete Cleanup </li>
 </ul>

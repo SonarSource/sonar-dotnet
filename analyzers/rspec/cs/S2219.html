@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>To check the type of an object there are several options:</p>
 <ul>
   <li> <code>expr is SomeType</code> or <code>expr.GetType() == typeof(SomeType)</code> if the type is known at compile time, </li>
@@ -16,7 +17,7 @@ converted to an <code>is</code> call. Simplifying the calls also make <code>null
   <li> <code>expr as T != null</code> checks should be simplified to <code>expr is T</code>, and </li>
   <li> <code>expr is T</code> should be converted to <code>expr != null</code>, when <code>expr</code> is of type <code>T</code>. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class Fruit { }
 sealed class Apple : Fruit { }
@@ -48,7 +49,7 @@ class Program
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class Fruit { }
 sealed class Apple : Fruit { }
@@ -74,7 +75,7 @@ class Program
   }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>Calling <code>GetType</code> on an object of <code>Nullable&lt;T&gt;</code> type returns the underlying generic type parameter <code>T</code>, thus
 a comparison with <code>typeof(Nullable&lt;T&gt;)</code> can’t be simplified to use the <code>is</code> operator, which doesn’t make difference
 between <code>T</code> and <code>T?</code>.</p>

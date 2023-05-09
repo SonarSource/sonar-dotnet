@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>When multiple, adjacent <code>try</code> statements have duplicate <code>catch</code> and/or <code>finally</code> blocks, they should be merged to
 consolidate the <code>catch/finally</code> logic for cleaner, more readable code. Note that this applies even when there is intervening code outside
 any <code>try</code> block.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 try
 {
@@ -32,7 +33,7 @@ catch (InvalidOperationException ex)
   LogAndDie(ex);
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 try
 {

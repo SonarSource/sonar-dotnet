@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Type parameters that aren’t used are dead code, which can only distract and possibly confuse developers during maintenance. Therefore, unused type
 parameters should be removed.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class MoreMath&lt;T&gt;   // Noncompliant; &lt;T&gt; is ignored
 {
@@ -10,7 +11,7 @@ public class MoreMath&lt;T&gt;   // Noncompliant; &lt;T&gt; is ignored
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class MoreMath
 {

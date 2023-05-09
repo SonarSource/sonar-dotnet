@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>String representations of URIs or URLs are prone to parsing and encoding errors which can lead to vulnerabilities. The <code>System.Uri</code>
 class is a safe alternative and should be preferred.</p>
 <p>This rule raises an issue when a called method has a string parameter with a name containing "uri", "Uri", "urn", "Urn", "url" or "Url" and the
 declaring type contains a corresponding overload that takes a <code>System.Uri</code> as a parameter.</p>
 <p>When there is a choice between two overloads that differ only regarding the representation of a URI, the user should choose the overload that takes
 a <code>System.Uri</code> argument.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 using System;
 
@@ -25,7 +26,7 @@ namespace MyLibrary
    }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 using System;
 

@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Fields, properties and events can be initialized either inline or in the constructor. Initializing them inline and in the constructor at the same
 time is redundant; the inline initialization will be overridden.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class Person
 {
@@ -11,7 +12,7 @@ class Person
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class Person
 {
@@ -22,7 +23,7 @@ class Person
   }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>This rule doesn’t report an issue if not all constructors initialize the field. If the field is initialized inline to its default value, then
 {rule:csharpsquid:S3052} already reports an issue on the initialization.</p>
 

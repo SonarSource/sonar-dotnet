@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>While it is technically correct to assign to parameters from within method bodies, doing so before the parameter value is read is likely a bug.
 Instead, initial values of parameters should be, if not treated as <code>readonly</code> then at least read before reassignment.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Module Module1
     Sub Foo(ByVal a As Integer)
@@ -8,7 +9,7 @@ Module Module1
     End Sub
 End Module
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Module Module1
     Sub Foo(ByVal a As Integer)
@@ -17,7 +18,7 @@ Module Module1
     End Sub
 End Module
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p><code>ByRef</code> parameters are ignored.</p>
 <pre>
 Module Module1

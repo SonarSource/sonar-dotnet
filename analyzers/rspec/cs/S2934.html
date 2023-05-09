@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>While the properties of a <code>readonly</code> reference type field can still be changed after initialization, those of a <code>readonly</code>
 value field, such as a <code>struct</code>, cannot.</p>
 <p>If the member could be either a <code>class</code> or a <code>struct</code> then assignment to its properties could be unreliable, working
 sometimes but not others.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 interface IPoint
 {
@@ -25,7 +26,7 @@ class PointManager&lt;T&gt; where T: IPoint
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 interface IPoint
 {

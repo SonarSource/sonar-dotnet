@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>Nullable value types can hold either a value or <code>null</code>. The value held in the nullable type can be accessed with the <code>Value</code>
 property or by casting it to the underlying type. Still, both operations throw an <code>InvalidOperationException</code> when the value is
 <code>null</code>. A nullable type should always be tested before the value is accessed to avoid the exception.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public void Sample(bool condition)
 {
@@ -12,7 +13,7 @@ public void Sample(bool condition)
     Console.WriteLine((int)nullableCast);   // Noncompliant
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public void Sample(bool condition)
 {
@@ -29,7 +30,7 @@ public void Sample(bool condition)
     }
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/476">MITRE, CWE-476</a> - NULL Pointer Dereference </li>
 </ul>

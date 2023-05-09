@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p><code>string.ToLower()</code>, <code>ToUpper</code>, <code>IndexOf</code>, <code>LastIndexOf</code>, and <code>Compare</code> are all
 culture-dependent, as are some (floating point number and <code>DateTime</code>-related) calls to <code>ToString</code>. Fortunately, all have
 variants which accept an argument specifying the culture or formatter to use. Leave that argument off and the call will use the system default
@@ -6,11 +7,11 @@ culture, possibly creating problems with international characters.</p>
 <code>CompareOrdinal</code>, or <code>Compare</code> with culture.</p>
 <p>Calls without a culture may work fine in the system’s "home" environment, but break in ways that are extremely difficult to diagnose for customers
 who use different encodings. Such bugs can be nearly, if not completely, impossible to reproduce when it’s time to fix them.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 var lowered = someString.ToLower(); //Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 var lowered = someString.ToLower(CultureInfo.InvariantCulture);
 </pre>

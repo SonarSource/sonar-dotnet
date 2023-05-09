@@ -1,3 +1,4 @@
+<h2>Why is this an issue?</h2>
 <p>Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate.</p>
 <p>This rule allows to check that all interface names match a provided regular expression.</p>
 <p>The default configuration is the one recommended by Microsoft:</p>
@@ -7,13 +8,13 @@
   <li> Short abbreviations of 2 letters can be capitalized, e.g. IFooID </li>
   <li> Longer abbreviations need to be lower cased, e.g. IFooHtml </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <p>With the default regular expression <code>^I([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code>:</p>
 <pre>
 Interface Foo  ' Noncompliant
 End Interface
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Interface IFoo ' Compliant
 End Interface

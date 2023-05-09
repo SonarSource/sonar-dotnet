@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>It is possible in an <code>IDisposable</code> to call <code>Dispose</code> on class members from any method, but the contract of
 <code>Dispose</code> is that it will clean up all unmanaged resources. Move disposing of members to some other method, and you risk resource
 leaks.</p>
 <p>This rule also applies for disposable ref structs.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class ResourceHolder : IDisposable
 {
@@ -27,7 +28,7 @@ public class ResourceHolder : IDisposable
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class ResourceHolder : IDisposable
 {
@@ -47,7 +48,7 @@ public class ResourceHolder : IDisposable
   }
 }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/459">MITRE, CWE-459</a> - Incomplete Cleanup </li>
 </ul>

@@ -1,6 +1,7 @@
+<h2>Why is this an issue?</h2>
 <p>Nested code blocks can be used to create a new scope and restrict the visibility of the variables defined inside it. Using this feature in a method
 typically indicates that the method has too many responsibilities, and should be refactored into smaller methods.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public void Evaluate()
 {
@@ -14,7 +15,7 @@ public void Evaluate()
     /* ... */
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public void Evaluate()
 {
@@ -31,6 +32,6 @@ private void StackAdd()
       stack.push(result);
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>The usage of a code block after a "case" is allowed for this rule.</p>
 

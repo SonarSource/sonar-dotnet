@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p>Needing to cast from an <code>interface</code> to a concrete type indicates that something is wrong with the abstractions in use, likely that
 something is missing from the <code>interface</code>. Instead of casting to a discrete type, the missing functionality should be added to the
 <code>interface</code>. Otherwise there is a risk of runtime exceptions.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public interface IMyInterface
 {
@@ -33,7 +34,7 @@ public static class DowncastExampleProgram
   }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>Casting to <code>object</code> doesn’t raise an issue, because it can never fail.</p>
 <pre>
 static void EntryPoint(IMyInterface interfaceRef)

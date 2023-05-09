@@ -1,8 +1,9 @@
+<h2>Why is this an issue?</h2>
 <p>When division is performed on <code>int</code>s, the result will always be an <code>int</code>. You can assign that result to a
 <code>double</code>, <code>float</code> or <code>decimal</code> with automatic type conversion, but having started as an <code>int</code>, the result
 will likely not be what you expect. If the result of <code>int</code> division is assigned to a floating-point variable, precision will have been lost
 before the assignment. Instead, at least one operand should be cast or promoted to the final type before the operation takes place.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 static void Main()
 {
@@ -12,7 +13,7 @@ static void Main()
 
 static void Method(float f) { }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 static void Main()
 {
@@ -22,7 +23,7 @@ static void Main()
 
 static void Method(float f) { }
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/190">MITRE, CWE-190</a> - Integer Overflow or Wraparound </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat2">SANS Top 25</a> - Risky Resource Management </li>

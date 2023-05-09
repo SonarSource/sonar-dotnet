@@ -1,10 +1,11 @@
+<h2>Why is this an issue?</h2>
 <p>An <code>async</code> method with a <code>void</code> return type is a "fire and forget" method best reserved for event handlers because there’s no
 way to wait for the method’s execution to complete and respond accordingly. There’s also no way to <code>catch</code> exceptions thrown from the
 method.</p>
 <p>Having an <code>async void</code> method that is not an event handler could mean your program works some times and not others because of timing
 issues. Instead, <code>async</code> methods should return <code>Task</code>.</p>
 <p>This rule raises an issue when non-event handler methods are both <code>async</code> and <code>void</code>.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 class HttpPrinter
 {
@@ -25,7 +26,7 @@ class HttpPrinter
   }
 }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 class HttpPrinter
 {
@@ -46,7 +47,7 @@ class HttpPrinter
   }
 }
 </pre>
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 <p>Event handlers, i.e. methods with two arguments, first one matching type <code>object</code> or name <code>sender</code> and the second being or
 inheriting from <code>EventArgs</code>, are ignored.</p>
 <p>Methods named as <code>OnSomething</code> are also ignored.</p>

@@ -1,7 +1,8 @@
+<h2>Why is this an issue?</h2>
 <p><code>GetHashCode</code> is used to file an object in a <code>Dictionary</code> or <code>Hashtable</code>. If <code>GetHashCode</code> uses
 non-<code>readonly</code> fields and those fields change after the object is stored, the object immediately becomes mis-filed in the
 <code>Hashtable</code>. Any subsequent test to see if the object is in the <code>Hashtable</code> will return a false negative.</p>
-<h2>Noncompliant Code Example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 public class Person
 {
@@ -16,7 +17,7 @@ public class Person
     return hash;
   }
 </pre>
-<h2>Compliant Solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 public class Person
 {
