@@ -49,21 +49,18 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
 
     private bool LeftHasCorrectName(SyntaxNode left, out string methodName)
     {
-        if (Language.GetName(left).Equals("OrderBy", Language.NameComparison))
+        var leftName = Language.GetName(left);
+        if (leftName.Equals("OrderBy", Language.NameComparison)
+            && leftName.Equals("OrderByDescending", Language.NameComparison))
         {
-            methodName = "OrderBy";
-            return true;
-        }
-        if (Language.GetName(left).Equals("OrderByDescending", Language.NameComparison))
-        {
-            methodName = "OrderByDescending";
+            methodName = leftName;
             return true;
         }
         methodName = null;
         return false;
     }
 
-    private bool MethodIsLinqExtension(SyntaxNode node, SemanticModel model) =>
+    private static bool MethodIsLinqExtension(SyntaxNode node, SemanticModel model) =>
         model.GetSymbolInfo(node).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 }
