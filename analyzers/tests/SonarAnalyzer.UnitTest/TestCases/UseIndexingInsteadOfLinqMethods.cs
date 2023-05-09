@@ -94,6 +94,12 @@ fakeList.First(); // Compliant
 fakeList.Last(); // Compliant
 fakeList.ElementAt(42); // Compliant
 
+var doesNotImplementIList = new DoesNotImplementIList<int>();
+
+doesNotImplementIList.First(); // Compliant, does not implement IList
+doesNotImplementIList.Last(); // Compliant, does not implement IList
+doesNotImplementIList.ElementAt(42); // Compliant, does not implement IList
+
 class ImplementsIList<T> : IList<T>
 {
     public ImplementsIList<T> Fluent() => this;
@@ -110,6 +116,12 @@ class ImplementsIList<T> : IList<T>
     public void Insert(int index, T item) { }
     public bool Remove(T item) => false;
     public void RemoveAt(int index) { }
+    public IEnumerator<T> GetEnumerator() => null;
+    IEnumerator IEnumerable.GetEnumerator() => null;
+}
+
+class DoesNotImplementIList<T> : IEnumerable<T>
+{
     public IEnumerator<T> GetEnumerator() => null;
     IEnumerator IEnumerable.GetEnumerator() => null;
 }
