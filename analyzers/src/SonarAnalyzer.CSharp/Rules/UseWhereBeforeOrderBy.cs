@@ -21,19 +21,10 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UseWhereBeforeOrderBy : UseWhereBeforeOrderByBase<SyntaxKind>
+public sealed class UseWhereBeforeOrderBy : UseWhereBeforeOrderByBase<SyntaxKind, InvocationExpressionSyntax>
 {
-
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
+        invocation.TryGetOperands(out left, out right);
 }

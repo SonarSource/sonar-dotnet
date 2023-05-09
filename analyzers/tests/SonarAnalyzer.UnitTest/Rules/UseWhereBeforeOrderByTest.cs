@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -28,12 +27,11 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class UseWhereBeforeOrderByTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseWhereBeforeOrderBy>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseWhereBeforeOrderBy>();
 
     [TestMethod]
     public void UseWhereBeforeOrderBy_CS() =>
-        builderCS.AddPaths("UseWhereBeforeOrderBy.cs").Verify();
-
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseWhereBeforeOrderBy>();    // FIXME: Move this up
+        builderCS.AddPaths("UseWhereBeforeOrderBy.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
     public void UseWhereBeforeOrderBy_VB() =>

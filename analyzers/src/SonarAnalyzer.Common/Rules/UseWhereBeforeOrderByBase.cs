@@ -20,12 +20,50 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UseWhereBeforeOrderByBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
+    where TInvocation : SyntaxNode
 {
     private const string DiagnosticId = "S6607";
+    protected override string MessageFormat => "\"Where\" should be used before \"{0}\"";
 
-    protected override string MessageFormat => "FIXME";
+    protected abstract bool TryGetOperands(TInvocation invocation, out SyntaxNode left, out SyntaxNode right);
 
     protected UseWhereBeforeOrderByBase() : base(DiagnosticId) { }
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+        {
+            var invocation = c.Node as TInvocation;
+
+            if (Language.GetName(invocation).Equals("Where", Language.NameComparison)
+                && TryGetOperands(invocation, out var left, out var right)
+                && LeftHasCorrectName(left, out var orderByMethodDescription)
+                && MethodIsLinqExtension(left, c.SemanticModel)
+                && MethodIsLinqExtension(right, c.SemanticModel))
+            {
+                c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation(), orderByMethodDescription));
+            }
+        },
+        Language.SyntaxKind.InvocationExpression);
+
+    private bool LeftHasCorrectName(SyntaxNode left, out string methodName)
+    {
+        if (Language.GetName(left).Equals("OrderBy", Language.NameComparison))
+        {
+            methodName = "OrderBy";
+            return true;
+        }
+        if (Language.GetName(left).Equals("OrderByDescending", Language.NameComparison))
+        {
+            methodName = "OrderByDescending";
+            return true;
+        }
+        methodName = null;
+        return false;
+    }
+
+    private bool MethodIsLinqExtension(SyntaxNode node, SemanticModel model) =>
+        model.GetSymbolInfo(node).Symbol is IMethodSymbol method
+        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 }

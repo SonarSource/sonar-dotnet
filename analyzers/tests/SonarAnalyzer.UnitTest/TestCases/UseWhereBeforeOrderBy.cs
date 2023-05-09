@@ -1,5 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
-public class Program
-{
-}
+var list = new List<int>();
+
+list.OrderBy(x => x).Where(x => true); // Noncompliant
+list.OrderBy(x => x)?.Where(x => true); // Noncompliant
+list?.OrderBy(x => x).Where(x => true); // Noncompliant
+list?.OrderBy(x => x)?.Where(x => true); // Noncompliant
+
