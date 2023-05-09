@@ -48,49 +48,21 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
 
     protected override ProgramState PreProcess(ProgramState state, IBinaryOperationWrapper operation)
     {
-        if (operation.LeftOperand is { } leftOperand
-            && operation.RightOperand is { } rightOperand
-            && state[leftOperand]?.Constraint<NumberConstraint>() is { } leftNumber
-            && state[rightOperand]?.Constraint<NumberConstraint>() is { } rightNumber
-            && Calculate(operation.OperatorKind, leftNumber, rightNumber) is { } newConstraint)
+        if (state[operation.LeftOperand]?.Constraint<NumberConstraint>() is { } leftNumber
+            && state[operation.RightOperand]?.Constraint<NumberConstraint>() is { } rightNumber
+            && Calculate(operation.OperatorKind, leftNumber, rightNumber) is { } constraint)
         {
-            state = state.SetOperationConstraint(operation.WrappedOperation, newConstraint);
+            state = state.SetOperationConstraint(operation, constraint);
         }
         return state;
     }
 
-    private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right)
+    private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) => kind switch
     {
-        BigInteger? min, max;
-        switch (kind)
-        {
-            case BinaryOperatorKind.Add:
-                min = Calculation(kind, left.Min, right.Min);
-                max = Calculation(kind, left.Max, right.Max);
-                break;
-            case BinaryOperatorKind.Subtract:
-                min = Calculation(kind, left.Min, right.Max);
-                max = Calculation(kind, left.Max, right.Min);
-                break;
-            default:
-                min = null;
-                max = null;
-                break;
-        }
-        return min is not null || max is not null
-            ? NumberConstraint.From(min, max)
-            : null;
-    }
-
-    private static BigInteger? Calculation(BinaryOperatorKind kind, BigInteger? a, BigInteger? b) =>
-        a is not null && b is not null
-        ? kind switch
-        {
-            BinaryOperatorKind.Add => a + b,
-            BinaryOperatorKind.Subtract => a - b,
-            _ => null
-        }
-        : null;
+        BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
+        BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
+        _ => null
+    };
 
     private static ProgramState LearnBranchingEqualityConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
         where T : SymbolicConstraint

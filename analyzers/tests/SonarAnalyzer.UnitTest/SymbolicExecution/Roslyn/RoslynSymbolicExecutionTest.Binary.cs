@@ -746,7 +746,7 @@ Tag(""End"")";
     [DataRow("(i - 1) + j", 46)]
     [DataRow("i - (j + 1)", 36)]
     [DataRow("1 - (i + j)", -46)]
-    public void Binary_Calculations_UpdatesNumberConstraint(string expression, int result)
+    public void Binary_Calculations_UpdatesNumberConstraint(string expression, int expected)
     {
         var code = $"""
             var i = 42;
@@ -755,6 +755,6 @@ Tag(""End"")";
             Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(result)));
+        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
     }
 }

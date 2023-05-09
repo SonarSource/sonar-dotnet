@@ -93,7 +93,7 @@ public sealed class NumberConstraint : SymbolicConstraint
         }
         else
         {
-            return Empty;
+            return null;
         }
     }
 
