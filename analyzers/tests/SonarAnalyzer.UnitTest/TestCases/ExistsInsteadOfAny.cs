@@ -67,7 +67,12 @@ public class TestClass
         return list.Any(x => x % 2 == 0); // Noncompliant
     }
 
-    void CheckDelegate(List<int> intList, List<string> stringList, List<ClassA> customList, string someString, int someInt)
+    void CheckDelegate(
+        List<int> intList,
+        List<string> stringList,
+        int[] intArray,
+        string someString,
+        int someInt)
     {
         intList.Any(x => x == 0); // Compliant (should raise S6617)
         intList.Any(x => 0 == x); // Compliant (should raise S6617)
@@ -97,7 +102,13 @@ public class TestClass
         stringList.Any(x => x.Equals("") && true);   // Noncompliant
         stringList.Any(x => (x == "" ? "a" : "b") == "a"); // Noncompliant
 
-        customList.Any(x => x.Equals()); // FN
+        intArray.Any(x => x == 0); // Noncompliant (this is not raising S6617)
+        intArray.Any(x => 0 == x); // Noncompliant (this is not raising S6617)
+        intArray.Any(x => x == someInt); // Noncompliant (this is not raising S6617)
+        intArray.Any(x => someInt == x); // Noncompliant (this is not raising S6617)
+        intArray.Any(x => x.Equals(0)); // Noncompliant (this is not raising S6617)
+        intArray.Any(x => 0.Equals(x)); // Noncompliant (this is not raising S6617)
+        intArray.Any(x => x.Equals(x + 1)); // Noncompliant (this is not raising S6617)
 
         bool MyIntCheck(int x) => x == 0;
         bool MyStringCheck(string x) => x == "";
@@ -136,8 +147,6 @@ public class TestClass
                 var c = myListField.Exists(x => x > 0); // Compliant
             }
         }
-
-        public bool Equals() => false;
 
         public ClassB classB = new ClassB();
     }

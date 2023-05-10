@@ -26,15 +26,11 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
 {
     private const string DiagnosticId = "S6605";
 
-    private static readonly ImmutableArray<KnownType> TargetTypes = ImmutableArray.Create(
-        KnownType.System_Array,
-        KnownType.System_Collections_Generic_List_T,
-        KnownType.System_Collections_Immutable_ImmutableList_T);
-
     protected override string MessageFormat => """Collection-specific "Exists" method should be used instead of the "Any" extension.""";
 
     protected abstract bool TryGetOperands(TInvocationExpression node, out SyntaxNode left, out SyntaxNode right);
     protected abstract bool HasValidDelegate(TInvocationExpression node);
+    protected abstract bool HasOneArgument(TInvocationExpression node);
     protected abstract SyntaxToken? GetIdentifier(TInvocationExpression invocation);
 
     protected ExistsInsteadOfAnyBase() : base(DiagnosticId) { }
@@ -45,17 +41,17 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
             var invocation = c.Node as TInvocationExpression;
 
             if (Language.GetName(invocation).Equals(nameof(Enumerable.Any), Language.NameComparison)
-                && HasValidDelegate(invocation)
+                && HasOneArgument(invocation)
                 && TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectCall(right, c.SemanticModel)
-                && IsCorrectType(left, c.SemanticModel))
+                && c.SemanticModel.GetTypeInfo(left).Type is { } type
+                && (type.DerivesFrom(KnownType.System_Array)
+                    || type.DerivesFrom(KnownType.System_Collections_Immutable_ImmutableList_T)
+                    || (type.DerivesFrom(KnownType.System_Collections_Generic_List_T) && HasValidDelegate(invocation)))) // This check avoids overlapping with S6617
             {
                 c.ReportIssue(Diagnostic.Create(Rule, GetIdentifier(invocation)?.GetLocation()));
             }
         }, Language.SyntaxKind.InvocationExpression);
-
-    private static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
-        model.GetTypeInfo(left).Type is { } type && type.DerivesFromAny(TargetTypes);
 
     internal static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
