@@ -747,11 +747,31 @@ Tag(""End"")";
     [DataRow("(i - 1) + j", 46)]
     [DataRow("i - (j + 1)", 36)]
     [DataRow("1 - (i + j)", -46)]
-    public void Binary_Calculations_UpdatesNumberConstraint(string expression, int expected)
+    public void Binary_PlusAndMinus_UpdatesNumberConstraint(string expression, int expected)
     {
         var code = $"""
             var i = 42;
             var j = 5;
+            var value = {expression};
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
+    }
+
+    [DataTestMethod]
+    [DataRow(5, 4, "i * j", 20)]
+    [DataRow(5, -4, "i * j", -20)]
+    [DataRow(-5, -4, "i * j", 20)]
+    [DataRow(5, 0, "i * j", 0)]
+    [DataRow(-5, 0, "i * j", 0)]
+    [DataRow(5, 1, "i * j", 5)]
+    [DataRow(-5, 1, "i * j", -5)]
+    public void Binary_Calculations_UpdatesNumberConstraint(int i, int j, string expression, int expected)
+    {
+        var code = $"""
+            var i = {i};
+            var j = {j};
             var value = {expression};
             Tag("Value", value);
             """;

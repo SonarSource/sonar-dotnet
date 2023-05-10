@@ -61,8 +61,29 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     {
         BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
         BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
+        BinaryOperatorKind.Multiply => CalculateMultiply(left, right),
         _ => null
     };
+
+    private static NumberConstraint CalculateMultiply(NumberConstraint left, NumberConstraint right)
+    {
+        var products = new[] { left.Min * right.Min, left.Min * right.Max, left.Max * right.Min, left.Max * right.Max };
+        var min = products.Min();
+        var max = products.Max();
+
+        if ((left.Min is null && right.CanBePositive) || (right.Min is null && left.CanBePositive)
+            || (left.Max is null && right.CanBeNegative) || (right.Max is null && left.CanBeNegative))
+        {
+            min = null;
+        }
+        if ((left.Min is null && right.CanBeNegative) || (right.Min is null && left.CanBeNegative)
+            || (left.Max is null && right.CanBePositive) || (right.Max is null && left.CanBePositive))
+        {
+            max = null;
+        }
+
+        return NumberConstraint.From(min, max);
+    }
 
     private static ProgramState LearnBranchingEqualityConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
         where T : SymbolicConstraint
