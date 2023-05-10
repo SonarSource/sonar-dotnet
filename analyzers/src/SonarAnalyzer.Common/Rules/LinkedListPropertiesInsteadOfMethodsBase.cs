@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
+
 namespace SonarAnalyzer.Rules;
 
 public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInvocationExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -36,7 +38,7 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            var invocation = c.Node as TInvocationExpression;
+            var invocation = (TInvocationExpression)c.Node;
             var methodName = Language.GetName(invocation);
 
             if (IsFirstOrLast(methodName) && IsCorrectCallAndType(invocation, c.SemanticModel))

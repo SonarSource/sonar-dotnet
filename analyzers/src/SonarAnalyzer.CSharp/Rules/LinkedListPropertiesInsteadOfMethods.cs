@@ -34,7 +34,7 @@ public sealed class LinkedListPropertiesInsteadOfMethods : LinkedListPropertiesI
         && IsCorrectType(left, model);
 
     private static bool HasNoArguments(InvocationExpressionSyntax invocation) =>
-        invocation.ArgumentList.Arguments.Count == 0;
+        invocation.HasExactlyNArguments(0);
 
     private static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
         model.GetTypeInfo(left).Type is { } type && type.DerivesFrom(KnownType.System_Collections_Generic_LinkedList_T);
