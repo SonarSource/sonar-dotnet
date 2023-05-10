@@ -44,8 +44,8 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
             {
                 var diagnostic = Diagnostic.Create(
                     Rule,
-                    Language.GetIdentifier(right)?.GetLocation(),
-                    new[] { Language.GetIdentifier(left)?.GetLocation() },
+                    Language.Syntax.NodeIdentifier(right)?.GetLocation(),
+                    new[] { Language.Syntax.NodeIdentifier(left)?.GetLocation() },
                     orderByMethodDescription);
                 c.ReportIssue(diagnostic);
             }

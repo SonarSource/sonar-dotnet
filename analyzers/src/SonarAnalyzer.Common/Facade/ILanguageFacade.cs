@@ -34,7 +34,6 @@ public interface ILanguageFacade
     object FindConstantValue(SemanticModel model, SyntaxNode node);
     IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
     IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, SemanticModel semanticModel);
-    SyntaxToken? GetIdentifier(SyntaxNode expression);
     string GetName(SyntaxNode expression);
 }
 
