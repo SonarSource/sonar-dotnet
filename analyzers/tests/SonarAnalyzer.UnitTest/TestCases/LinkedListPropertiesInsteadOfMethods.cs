@@ -42,7 +42,7 @@ class MyClass
         var ternaryNullCoalesce = (data ?? (true ? data : goodLinkedList)).First(); // Noncompliant
     }
 
-    void ConditionalsCombinations(GoodLinkedList<int>() goodLinkedList)
+    void ConditionalsCombinations(GoodLinkedList<int> goodLinkedList)
     { 
         goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList().GetLinkedList().First();     //Noncompliant
         goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList().GetLinkedList()?.First();    //Noncompliant
