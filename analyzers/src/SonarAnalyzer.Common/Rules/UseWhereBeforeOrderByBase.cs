@@ -42,7 +42,12 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
                 && MethodIsLinqExtension(left, c.SemanticModel)
                 && MethodIsLinqExtension(right, c.SemanticModel))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation(), orderByMethodDescription));
+                var diagnostic = Diagnostic.Create(
+                    Rule,
+                    Language.GetIdentifier(right)?.GetLocation(),
+                    new[] { Language.GetIdentifier(left)?.GetLocation() },
+                    orderByMethodDescription);
+                c.ReportIssue(diagnostic);
             }
         },
         Language.SyntaxKind.InvocationExpression);
@@ -51,7 +56,7 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
     {
         var leftName = Language.GetName(left);
         if (leftName.Equals("OrderBy", Language.NameComparison)
-            && leftName.Equals("OrderByDescending", Language.NameComparison))
+            || leftName.Equals("OrderByDescending", Language.NameComparison))
         {
             methodName = leftName;
             return true;

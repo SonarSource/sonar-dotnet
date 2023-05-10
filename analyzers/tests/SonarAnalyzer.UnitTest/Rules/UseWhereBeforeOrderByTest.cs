@@ -31,7 +31,7 @@ public class UseWhereBeforeOrderByTest
 
     [TestMethod]
     public void UseWhereBeforeOrderBy_CS() =>
-        builderCS.AddPaths("UseWhereBeforeOrderBy.cs").WithTopLevelStatements().Verify();
+        builderCS.AddPaths("UseWhereBeforeOrderBy.cs").Verify();
 
     [TestMethod]
     public void UseWhereBeforeOrderBy_VB() =>

@@ -66,6 +66,9 @@ internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
             _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
         };
 
+    public SyntaxToken? GetIdentifier(SyntaxNode expression) =>
+        expression.GetIdentifier();
+
     public string GetName(SyntaxNode expression) =>
         expression.GetName();
 }
