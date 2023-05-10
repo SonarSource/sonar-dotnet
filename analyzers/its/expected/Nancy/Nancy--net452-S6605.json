@@ -30,19 +30,6 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
-"region":  {
-"startLine":  58,
-"startColumn":  46,
-"endLine":  58,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S6605",
-"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
 "region":  {
 "startLine":  89,
