@@ -975,60 +975,6 @@ Tag(""End"", arg);";
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
     }
 
-    [DataTestMethod]        // FIXME: Everything except one should go away
-    [DataRow("arg >  42 && arg >    0")]
-    [DataRow("arg >  42 && arg >   42")]
-    [DataRow("arg >  42 && arg >  100")]
-    [DataRow("arg >  42 && arg >= 100")]
-    [DataRow("arg >  42 && arg >=   0")]
-    [DataRow("arg >  42 && arg >=  41")]
-    [DataRow("arg >  42 && arg >=  42")]
-    [DataRow("arg >  42 && arg >=  43")]
-    [DataRow("arg >  42 && arg <  100")]
-    [DataRow("arg >  42 && arg <= 100")]
-    [DataRow("arg >= 42 && arg >    0")]
-    [DataRow("arg >= 42 && arg >   41")]
-    [DataRow("arg >= 42 && arg >   42")]
-    [DataRow("arg >= 42 && arg >   43")]
-    [DataRow("arg >= 42 && arg >  100")]
-    [DataRow("arg >= 42 && arg >=   0")]
-    [DataRow("arg >= 42 && arg >=  41")]
-    [DataRow("arg >= 42 && arg >=  42")]
-    [DataRow("arg >= 42 && arg >=  43")]
-    [DataRow("arg >= 42 && arg >= 100")]
-    [DataRow("arg >= 42 && arg <  100")]
-    [DataRow("arg >= 42 && arg <= 100")]
-    [DataRow("arg <  42 && arg >    0")]
-    [DataRow("arg <  42 && arg >=   0")]
-    [DataRow("arg <  42 && arg <    0")]
-    [DataRow("arg <  42 && arg <   41")]
-    [DataRow("arg <  42 && arg <   42")]
-    [DataRow("arg <  42 && arg <   43")]
-    [DataRow("arg <  42 && arg <  100")]
-    [DataRow("arg <  42 && arg <=   0")]
-    [DataRow("arg <  42 && arg <=  41")]
-    [DataRow("arg <  42 && arg <=  42")]
-    [DataRow("arg <  42 && arg <=  43")]
-    [DataRow("arg <  42 && arg <= 100")]
-    [DataRow("arg <= 42 && arg >    0")]
-    [DataRow("arg <= 42 && arg >=   0")]
-    [DataRow("arg <= 42 && arg <    0")]
-    [DataRow("arg <= 42 && arg <   41")]
-    [DataRow("arg <= 42 && arg <   42")]
-    [DataRow("arg <= 42 && arg <   43")]
-    [DataRow("arg <= 42 && arg <  100")]
-    [DataRow("arg <= 42 && arg <=   0")]
-    [DataRow("arg <= 42 && arg <=  41")]
-    [DataRow("arg <= 42 && arg <=  42")]
-    [DataRow("arg <= 42 && arg <=  43")]
-    [DataRow("arg <= 42 && arg <= 100")]
-    public void Branching_LearnsNumberConstraint_NoConstraints(string expression)
-    {
-        var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
-        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-    }
-
     [DataTestMethod]
     [DataRow("arg == 42", 42, 42)]
     [DataRow("42 == arg", 42, 42)]
@@ -1038,10 +984,6 @@ Tag(""End"", arg);";
     [DataRow("arg == 42 && arg >=   0", 42, 42)]
     [DataRow("arg == 42 && arg <  100", 42, 42)]
     [DataRow("arg == 42 && arg <= 100", 42, 42)]
-    [DataRow("arg >  42 && arg == 100", 100, 100)]
-    [DataRow("arg >= 42 && arg == 100", 100, 100)]
-    [DataRow("arg <  42 && arg ==   0", 0, 0)]
-    [DataRow("arg <= 42 && arg ==  42", 42, 42)]
     public void Branching_LearnsNumberConstraint_OnlyIf(string expression, int? expectedIfMin, int? expectedIfMax)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
@@ -1066,23 +1008,85 @@ Tag(""End"", arg);";
     }
 
     [DataTestMethod]
+    [DataRow("arg != 42 && arg ==  42", 42, 42)]    // This should be unreachable, but we don't track arg != 42 with multiple ranges -oo-41, 43-oo
+    [DataRow("arg != 42 && arg == 100", 100, 100)]
+    [DataRow("arg != 42 && arg >    0", 1, null)]   // We don't track arg != 42 in "if" branch. Actual range is 1-41, 43-oo
+    [DataRow("arg != 42 && arg >=   0", 0, null)]   // We don't track arg != 42 in "if" branch. Actual range is 0-41, 43-oo
+    [DataRow("arg != 42 && arg <  100", null, 99)]  // We don't track arg != 42 in "if" branch. Actual range is -oo-41, 43-99
+    [DataRow("arg != 42 && arg <= 100", null, 100)] // We don't track arg != 42 in "if" branch. Actual range is -oo-41, 43-100
+    [DataRow("arg >  42 && arg ==   0", 43, null)]  // ToDo: Should be unreachable
+    [DataRow("arg >  42 && arg == 100", 43, null)]  // ToDo #7143: 100, 100
+    [DataRow("arg >  42 && arg !=  43", 43, null)]  // ToDo #7143 44, null
+    [DataRow("arg >  42 && arg != 100", 43, null)]  // Actual value is 43-99, 101-oo
+    [DataRow("arg >  42 && arg >    0", 43, null)]
+    [DataRow("arg >  42 && arg >   42", 43, null)]
+    [DataRow("arg >  42 && arg >  100", 101, null)]
+    [DataRow("arg >  42 && arg >=   0", 43, null)]
+    [DataRow("arg >  42 && arg >=  41", 43, null)]
+    [DataRow("arg >  42 && arg >=  42", 43, null)]
+    [DataRow("arg >  42 && arg >=  43", 43, null)]
+    [DataRow("arg >  42 && arg >=  44", 44, null)]
+    [DataRow("arg >  42 && arg >= 100", 100, null)]
+    [DataRow("arg >  42 && arg <  100", null, 99)]  // ToDo #7143: 43, 99
+    [DataRow("arg >  42 && arg <= 100", null, 100)] // ToDo #7143: 43, 100
+    [DataRow("arg >= 42 && arg ==   0", 42, null)]  // ToDo Should be unreachable
+    [DataRow("arg >= 42 && arg == 100", 42, null)]  // ToDo #7143: 100, 100
+    [DataRow("arg >= 42 && arg !=  42", 42, null)]  // ToDo #7143: 43, null
+    [DataRow("arg >= 42 && arg != 100", 42, null)]  // Actual value is 42-99, 101-oo
+    [DataRow("arg >= 42 && arg >    0", 42, null)]
+    [DataRow("arg >= 42 && arg >   41", 42, null)]
+    [DataRow("arg >= 42 && arg >   42", 43, null)]
+    [DataRow("arg >= 42 && arg >   43", 44, null)]
+    [DataRow("arg >= 42 && arg >  100", 101, null)]
+    [DataRow("arg >= 42 && arg >=   0", 42, null)]
+    [DataRow("arg >= 42 && arg >=  41", 42, null)]
+    [DataRow("arg >= 42 && arg >=  42", 42, null)]
+    [DataRow("arg >= 42 && arg >=  43", 43, null)]
+    [DataRow("arg >= 42 && arg >= 100", 100, null)]  // ToDo #7143: 42, null
+    [DataRow("arg >= 42 && arg <  100", null, 99)]
+    [DataRow("arg >= 42 && arg <= 100", null, 100)]
+    [DataRow("arg <  42 && arg ==   0", null, 41)]  // ToDo #7143: 0, 0
+    [DataRow("arg <  42 && arg ==  42", null, 41)]  // ToDo Should be unreachable
+    [DataRow("arg <  42 && arg !=  41", null, 41)]  // ToDo #7143: null, 40
+    [DataRow("arg <  42 && arg !=   0", null, 41)]  // Actual value is oo - -1, 1-41
+    [DataRow("arg <  42 && arg >    0", 1, null)]   // ToDo #7143: 1, 41
+    [DataRow("arg <  42 && arg >=   0", 0, null)]   // ToDo #7143: 0, 41
+    [DataRow("arg <  42 && arg <    0", null, -1)]
+    [DataRow("arg <  42 && arg <   41", null, 40)]
+    [DataRow("arg <  42 && arg <   42", null, 41)]
+    [DataRow("arg <  42 && arg <   43", null, 41)]
+    [DataRow("arg <  42 && arg <  100", null, 41)]
+    [DataRow("arg <  42 && arg <=   0", null, 0)]
+    [DataRow("arg <  42 && arg <=  40", null, 40)]
+    [DataRow("arg <  42 && arg <=  41", null, 41)]
+    [DataRow("arg <  42 && arg <=  42", null, 41)]
+    [DataRow("arg <  42 && arg <=  43", null, 41)]
+    [DataRow("arg <  42 && arg <= 100", null, 41)]
+    [DataRow("arg <= 42 && arg ==  42", null, 42)]  // ToDo #7143: 42, 42
+    [DataRow("arg <= 42 && arg == 100", null, 42)]  // ToDo Should be unreachable
+    [DataRow("arg <= 42 && arg !=   0", null, 42)]  // Actual value is oo - -1, 1-42
+    [DataRow("arg <= 42 && arg !=  42", null, 42)]  // ToDo #7143: null, 41
+    [DataRow("arg <= 42 && arg >    0", 1, null)]   // ToDo #7143: 1, 42
+    [DataRow("arg <= 42 && arg >=   0", 0, null)]   // ToDo #7143: 0, 42
+    [DataRow("arg <= 42 && arg <    0", null, -1)]
+    [DataRow("arg <= 42 && arg <   41", null, 40)]
+    [DataRow("arg <= 42 && arg <   42", null, 41)]
+    [DataRow("arg <= 42 && arg <   43", null, 42)]
+    [DataRow("arg <= 42 && arg <  100", null, 42)]
+    [DataRow("arg <= 42 && arg <=   0", null, 0)]
+    [DataRow("arg <= 42 && arg <=  41", null, 41)]
+    [DataRow("arg <= 42 && arg <=  42", null, 42)]
+    [DataRow("arg <= 42 && arg <=  43", null, 42)]
+    [DataRow("arg <= 42 && arg <= 100", null, 42)]
+    public void Branching_LearnsNumberConstraint_IfElse_Combined(string expression, int? expectedIfMin, int? expectedIfMax)
+    {
+        var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedIfMin, expectedIfMax)));
+    }
+
+    [DataTestMethod]
     [DataRow("arg != 42", 42, 42)]
     [DataRow("42 != arg", 42, 42)]
-    // FIXME: Produces more states for now because arg > 42 produces "no-number" value
-    //[DataRow("arg != 42 && arg == 100", 42, 42)]
-    //[DataRow("arg != 42 && arg != 100", 42, 42)]    // FIXME: Only this one should remain here, everything else shoudl go away
-    //[DataRow("arg != 42 && arg >    0", 42, 42)]    // Actual value is 1-41, 43-oo
-    //[DataRow("arg != 42 && arg >=   0", 42, 42)]    // Actual value is 0-41, 43-oo
-    //[DataRow("arg != 42 && arg <  100", 42, 42)]    // Actual value is -oo-41, 43-99
-    //[DataRow("arg != 42 && arg <= 100", 42, 42)]    // Actual value is -oo-41, 43-100
-    //[DataRow("arg >  42 && arg !=  43", 43, 43)]
-    //[DataRow("arg >  42 && arg != 100", 100, 100)]  // Actual value is 43-99, 101-oo
-    //[DataRow("arg >= 42 && arg !=  42", 42, 42)]
-    //[DataRow("arg >= 42 && arg != 100", 100, 100)]  // Actual value is 42-99, 101-oo
-    //[DataRow("arg <  42 && arg !=  41", 41, 41)]
-    //[DataRow("arg <  42 && arg !=   0", 0, 0)]      // Actual value is oo - -1, 1-41
-    //[DataRow("arg <= 42 && arg !=   0", 0, 0)]      // Actual value is oo - -1, 1-42
-    //[DataRow("arg <= 42 && arg !=  42", 42, 42)]
     public void Branching_LearnsNumberConstraint_OnlyElse(string expression, int? expectedElseMin, int? expectedElseMax)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
@@ -1090,29 +1094,71 @@ Tag(""End"", arg);";
         validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedElseMin, expectedElseMax)));
     }
 
+    [TestMethod]
+    public void Branching_LearnsNumberConstraint_NotEqualsTwice()
+    {
+        var validator = CreateIfElseEndValidatorCS("arg != 42 && arg != 100", OperationKind.Binary, "int");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));     // Visited with unknown value
+        validator.TagValues("Else").Should().SatisfyRespectively(                                       // Visited once for each failed condition
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(42, 42)),      // Once we're sure it was 42
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(100, 100)));   // Once we're sure it was 100
+    }
+
+    [TestMethod]
+    public void Branching_LearnsNumberConstraint_Nested_Collapsed()
+    {
+        var validator = CreateIfElseEndValidatorCS("arg >= 42 && arg <= 100", OperationKind.Binary, "int");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 100)));  // ToDo #7143: 42, 100
+        validator.TagValues("Else").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 41)),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(101, null)));
+    }
+
+    [TestMethod]
+    public void Branching_LearnsNumberConstraint_Nested_Expanded()
+    {
+        const string code = """
+            if (arg >= 42)
+            {
+                Tag("IfOuter", arg);
+                if (arg <= 100)
+                {
+                    Tag("IfInner", arg);
+                }
+                else
+                {
+                    Tag("ElseInner", arg);
+                }
+            }
+            else
+            {
+                Tag("ElseOuter", arg);
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg").Validator;
+        validator.ValidateTag("IfOuter", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42, null)));
+        validator.ValidateTag("IfInner", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 100)));      // ToDo #7143: 42, 100
+        validator.ValidateTag("ElseInner", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(101, null)));
+        validator.ValidateTag("ElseOuter", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 41)));
+    }
+
     [DataTestMethod]
-    // FIXME: These are all wrong for the moment
     [DataRow("arg == 42 && arg == 100")]
     [DataRow("arg == 42 && arg !=  42")]
     [DataRow("arg == 42 && arg >  100")]
     [DataRow("arg == 42 && arg >= 100")]
     [DataRow("arg == 42 && arg <    0")]
     [DataRow("arg == 42 && arg <=   0")]
-    [DataRow("arg != 42 && arg ==  42")]
-    [DataRow("arg >  42 && arg ==   0")]
     [DataRow("arg >  42 && arg <    0")]
     [DataRow("arg >  42 && arg <=   0")]
-    [DataRow("arg >= 42 && arg ==   0")]
     [DataRow("arg >= 42 && arg <    0")]
     [DataRow("arg >= 42 && arg <=   0")]
-    [DataRow("arg <  42 && arg ==  42")]
     [DataRow("arg <  42 && arg >  100")]
     [DataRow("arg <  42 && arg >= 100")]
-    [DataRow("arg <= 42 && arg == 100")]
     [DataRow("arg <= 42 && arg >  100")]
     [DataRow("arg <= 42 && arg >= 100")]
     public void Branching_LearnsNumberConstraint_Unreachable(string expression) =>
-        CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int").ValidateTagOrder("Else", "End");
+        CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int").TagStates("If").Should().BeEmpty();
 
     private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation, string argType = "object")
     {
@@ -1153,5 +1199,5 @@ Tag(""End"", Arg)";
     }
 
     private static NumberConstraint ExpectedNumber(int? min, int? max) =>
-        NumberConstraint.From(min.HasValue? new BigInteger(min.Value) : null, max.HasValue? new BigInteger(max.Value) : null);
+        NumberConstraint.From(min.HasValue ? new BigInteger(min.Value) : null, max.HasValue ? new BigInteger(max.Value) : null);
 }
