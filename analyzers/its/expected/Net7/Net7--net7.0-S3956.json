@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\OrderByBeforeWhere.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  23,
+"endLine":  5,
+"endColumn":  32
+}
+}
+}
+]
+}
