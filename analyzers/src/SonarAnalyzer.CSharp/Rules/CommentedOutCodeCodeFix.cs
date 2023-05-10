@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Xml.Linq;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
@@ -28,6 +27,8 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class CommentedOutCodeCodeFix : SonarCodeFix
 {
     public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CommentedOutCode.DiagnosticId);
+
+    public override FixAllProvider GetFixAllProvider() => null;
 
     protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
     {
