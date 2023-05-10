@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  62,
+"endLine":  72,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  29,
+"endLine":  87,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  46,
+"endLine":  58,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  18,
+"endLine":  89,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyOptionsExtensions.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  73,
+"endLine":  18,
+"endColumn":  76
+}
+}
+}
+]
+}
