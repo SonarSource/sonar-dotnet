@@ -1,0 +1,28 @@
+<p>Numbers are infinite, but the types that hold them are not. Each numeric type has hard upper and lower bounds. Try to calculate or assign numbers
+beyond those bounds, and the result will be a value that has silently wrapped around from the expected positive value to a negative one, or vice
+versa.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public int Transform(int value)
+{
+    if (value &lt;= 0)
+    {
+        return value;
+    }
+    int number = int.MaxValue;
+    return number + value;  // Noncompliant
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public long Transform(int value)
+{
+    if (value &lt;= 0)
+    {
+        return value;
+    }
+    long number = int.MaxValue;
+    return number + value;
+}
+</pre>
+
