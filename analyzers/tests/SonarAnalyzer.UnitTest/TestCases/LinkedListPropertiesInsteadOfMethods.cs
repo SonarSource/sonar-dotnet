@@ -23,10 +23,9 @@ class MyClass
         data?.First().ToString();          // Noncompliant
         data?.Last().ToString();           // Noncompliant
 
-        var classA = new ClassA();
-        classA.myLinkedListField.First();  // Noncompliant
-        classA.classB.myLinkedListField.First(); // Noncompliant
-        classA.classB.First(); // Compliant
+        var classContainingLinkedList = new ClassContainingLinkedList();
+        classContainingLinkedList.myLinkedListField.First();  // Noncompliant
+        classContainingLinkedList.notALinkedList.First(); // Compliant
 
         data?.First();            // Noncompliant
         data?.First().ToString(); // Noncompliant
@@ -41,7 +40,10 @@ class MyClass
         var ternary = (true ? data : goodLinkedList).First(); // Noncompliant
         var nullCoalesce = (data ?? goodLinkedList).First();  // Noncompliant
         var ternaryNullCoalesce = (data ?? (true ? data : goodLinkedList)).First(); // Noncompliant
+    }
 
+    void ConditionalsCombinations(GoodLinkedList<int>() goodLinkedList)
+    { 
         goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList().GetLinkedList().First();     //Noncompliant
         goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList().GetLinkedList()?.First();    //Noncompliant
         goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList()?.GetLinkedList().First();    //Noncompliant
@@ -75,7 +77,7 @@ class MyClass
         IEnumerator IEnumerable.GetEnumerator() => null;
     }
 
-    class ClassA
+    class ClassContainingLinkedList
     {
         public LinkedList<int> myLinkedListField = new LinkedList<int>();
 
@@ -85,13 +87,11 @@ class MyClass
             set => myLinkedListField.AddLast(value.First()); // Noncompliant
         }
 
-        public ClassB classB = new ClassB();
+        public NotALinkedList notALinkedList = new NotALinkedList();
     }
 }
 
-public class ClassB
+public class NotALinkedList
 {
-    public LinkedList<int> myLinkedListField = new LinkedList<int>();
-
     public int First() => 0;
 }

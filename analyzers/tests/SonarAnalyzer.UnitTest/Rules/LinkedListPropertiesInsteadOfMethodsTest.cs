@@ -45,7 +45,7 @@ public class LinkedListPropertiesInsteadOfMethodsTest
             var data = new LinkedList<int>();
             
             data.{{{name}}}(); // Noncompliant {{'{{{name}}}' property of 'LinkedList' should be used instead of the '{{{name}}}()' extension method.}}
-            //   {{{string.Concat(Enumerable.Repeat("^", name.Length))}}}
+            //   {{{new string('^', name.Length)}}}
             
             data.{{{name}}}(x => x > 0);            // Compliant
             _ = data.{{{name}}}.Value;              // Compliant

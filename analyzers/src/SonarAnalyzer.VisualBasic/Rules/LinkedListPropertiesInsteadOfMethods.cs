@@ -25,16 +25,13 @@ public sealed class LinkedListPropertiesInsteadOfMethods : LinkedListPropertiesI
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
-        invocation.GetIdentifier();
-
-    protected override bool IsCorrectCallAndType(InvocationExpressionSyntax invocation, SemanticModel model) =>
+    protected override bool IsRelevantCallAndType(InvocationExpressionSyntax invocation, SemanticModel model) =>
         invocation.TryGetOperands(out _, out var right)
-        && IsCorrectCall(right, model)
+        && IsRelevantType(right, model)
         && IsCorrectType(invocation, model);
 
     private static bool IsCorrectType(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        invocation is { ArgumentList: { Arguments: { Count: 1 } args } }
+        invocation?.ArgumentList?.Arguments is { Count: 1 } args
         && model.GetTypeInfo(args[0].GetExpression()).Type is { } type
         && type.DerivesFrom(KnownType.System_Collections_Generic_LinkedList_T);
 }

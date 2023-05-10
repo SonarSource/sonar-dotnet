@@ -28,8 +28,7 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
 
     protected override string MessageFormat => "'{0}' property of 'LinkedList' should be used instead of the '{0}()' extension method.";
 
-    protected abstract SyntaxToken? GetIdentifier(TInvocationExpression invocation);
-    protected abstract bool IsCorrectCallAndType(TInvocationExpression invocation, SemanticModel model);
+    protected abstract bool IsRelevantCallAndType(TInvocationExpression invocation, SemanticModel model);
 
     protected LinkedListPropertiesInsteadOfMethodsBase() : base(DiagnosticId) { }
 
@@ -39,13 +38,13 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
             var invocation = (TInvocationExpression)c.Node;
             var methodName = Language.GetName(invocation);
 
-            if (IsFirstOrLast(methodName) && IsCorrectCallAndType(invocation, c.SemanticModel))
+            if (IsFirstOrLast(methodName) && IsRelevantCallAndType(invocation, c.SemanticModel))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, GetIdentifier(invocation)?.GetLocation(), methodName));
+                c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
             }
         }, Language.SyntaxKind.InvocationExpression);
 
-    internal static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+    internal static bool IsRelevantType(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
