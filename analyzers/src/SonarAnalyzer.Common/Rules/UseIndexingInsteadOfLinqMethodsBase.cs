@@ -32,7 +32,6 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
         KnownType.System_Collections_Generic_IList_T);
 
     protected abstract int GetArgumentCount(TInvocation invocation);
-    protected abstract SyntaxToken? GetIdentifier(TInvocation invocation);
 
     protected UseIndexingInsteadOfLinqMethodsBase() : base(DiagnosticId) { }
 
@@ -48,7 +47,7 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
             {
                 var diagnostic = Diagnostic.Create(
                     Rule,
-                    GetIdentifier(invocation)?.GetLocation(),
+                    Language.Syntax.NodeIdentifier(invocation)?.GetLocation(),
                     indexDescriptor == null ? "Indexing" : $"Indexing at {indexDescriptor}",
                     methodName);
                 c.ReportIssue(diagnostic);
