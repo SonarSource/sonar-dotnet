@@ -29,9 +29,8 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
     protected override string MessageFormat => """Collection-specific "Exists" method should be used instead of the "Any" extension.""";
 
     protected abstract bool TryGetOperands(TInvocationExpression node, out SyntaxNode left, out SyntaxNode right);
-    protected abstract bool IsValueEquality(TInvocationExpression node);
+    protected abstract bool IsValueEquality(TInvocationExpression node, SemanticModel model);
     protected abstract bool HasOneArgument(TInvocationExpression node);
-    protected abstract SyntaxToken? GetIdentifier(TInvocationExpression invocation);
 
     protected ExistsInsteadOfAnyBase() : base(DiagnosticId) { }
 
@@ -47,9 +46,9 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
                 && c.SemanticModel.GetTypeInfo(left).Type is { } type
                 && (type.DerivesFrom(KnownType.System_Array)
                     || type.DerivesFrom(KnownType.System_Collections_Immutable_ImmutableList_T)
-                    || (type.DerivesFrom(KnownType.System_Collections_Generic_List_T) && !IsValueEquality(invocation)))) // This check avoids overlapping with S6617
+                    || (type.DerivesFrom(KnownType.System_Collections_Generic_List_T) && !IsValueEquality(invocation, c.SemanticModel)))) // This check avoids overlapping with S6617
             {
-                c.ReportIssue(Diagnostic.Create(Rule, GetIdentifier(invocation)?.GetLocation()));
+                c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
             }
         }, Language.SyntaxKind.InvocationExpression);
 

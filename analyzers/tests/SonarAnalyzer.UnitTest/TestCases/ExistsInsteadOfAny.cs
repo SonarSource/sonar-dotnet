@@ -83,14 +83,15 @@ public class TestClass
         intList.Any(x => someInt == x); // Compliant (should raise S6617)
         intList.Any(x => x.Equals(0)); // Compliant (should raise S6617)
         intList.Any(x => 0.Equals(x)); // Compliant (should raise S6617)
-        intList.Any(x => x.Equals(x + 1)); // Compliant(should raise S6617);
+        intList.Any(x => x.Equals(x + 1)); // Compliant (should raise S6617);
 
         intList.Any(x => x.GetType() == typeof(int)); // Noncompliant
-        intList.Any(x => x.GetType().Equals(typeof(int))); // NonCompliant FP
+        intList.Any(x => x.GetType().Equals(typeof(int))); // Compliant
         intList.Any(x => MyIntCheck(x)); // Noncompliant
         intList.Any(x => x != 0);     // Noncompliant
         intList.Any(x => x.Equals(0) && true);   // Noncompliant
         intList.Any(x => (x == 0 ? 2 : 0) == 0); // Noncompliant
+        intList.Any(x => x == x); // Compliant FN
         intList.Any(x => { return x == 0; }); // Noncompliant FP
 
         stringList.Any(x => x == ""); // Compliant (should raise S6617)
@@ -99,7 +100,7 @@ public class TestClass
         stringList.Any(x => someString == x); // Compliant (should raise S6617)
         stringList.Any(x => x.Equals("")); // Compliant (should raise S6617)
         stringList.Any(x => "".Equals(x)); // Compliant (should raise S6617)
-        stringList.Any(x => x.Equals("" + someString)); // Compliant(should raise S6617);
+        stringList.Any(x => x.Equals("" + someString)); // Compliant (should raise S6617);
 
         stringList.Any(x => MyStringCheck(x)); // Noncompliant
         stringList.Any(x => x != "");     // Noncompliant

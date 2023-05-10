@@ -31,29 +31,21 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
     protected override bool HasOneArgument(InvocationExpressionSyntax node) =>
         node.HasExactlyNArguments(1);
 
-    protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
-        invocation.GetIdentifier();
-
-    protected override bool IsValueEquality(InvocationExpressionSyntax node)
-    {
-        if (node.ArgumentList.Arguments[0].GetExpression() is not SingleLineLambdaExpressionSyntax lambda)
+    protected override bool IsValueEquality(InvocationExpressionSyntax node, SemanticModel model) =>
+        node.ArgumentList.Arguments[0].GetExpression() is SingleLineLambdaExpressionSyntax lambda
+        && lambda.Body switch
         {
-            return false;
-        }
+            BinaryExpressionSyntax binary =>
+                binary.OperatorToken.IsKind(SyntaxKind.EqualsToken)
+                && IsIdentifierOrLiteralValueType(binary.Left, model)
+                && IsIdentifierOrLiteralValueType(binary.Right, model),
+            InvocationExpressionSyntax invocation =>
+                Language.GetName(invocation).Equals(nameof(Equals), Language.NameComparison),
+            _ => false
+        };
 
-        if (lambda.Body is BinaryExpressionSyntax binary)
-        {
-            return binary.OperatorToken.IsKind(SyntaxKind.EqualsToken)
-                && ((binary.Left is IdentifierNameSyntax && binary.Right is LiteralExpressionSyntax)
-                    || (binary.Right is IdentifierNameSyntax && binary.Left is LiteralExpressionSyntax)
-                    || (binary.Left is IdentifierNameSyntax && binary.Right is IdentifierNameSyntax));
-        }
-
-        if (lambda.Body is InvocationExpressionSyntax invocation)
-        {
-            return Language.GetName(invocation).Equals(nameof(Equals), Language.NameComparison);
-        }
-
-        return false;
-    }
+    private static bool IsIdentifierOrLiteralValueType(ExpressionSyntax expression, SemanticModel model) =>
+        expression is IdentifierNameSyntax or LiteralExpressionSyntax
+        && model.GetTypeInfo(expression).Type is { } type
+        && (type.IsValueType || type.Is(KnownType.System_String));
 }
