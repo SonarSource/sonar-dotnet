@@ -90,7 +90,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
             NumberConstraint.From(1, 1).IsSingleValue.Should().BeTrue();
             NumberConstraint.From(null, 42).IsSingleValue.Should().BeFalse();
             NumberConstraint.From(42, null).IsSingleValue.Should().BeFalse();
-            NumberConstraint.Empty.IsSingleValue.Should().BeFalse();
         }
 
         [TestMethod]
@@ -103,7 +102,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
             NumberConstraint.From(42, null).ToString().Should().Be("Number from 42 to *");
             NumberConstraint.From(-1, null).ToString().Should().Be("Number from -1 to *");
             NumberConstraint.From(-4321, -42).ToString().Should().Be("Number from -4321 to -42");
-            NumberConstraint.Empty.ToString().Should().Be("Number from * to *");
         }
 
         [DataTestMethod]

@@ -31,6 +31,8 @@ Namespace Monitor_Loops
                 If i = 5 Then Exit For
                 If i = 9 Then Monitor.Exit(Obj)
             Next
+            Monitor.Enter(Other)    ' FN, exploration stopped after loop
+            If Condition Then Monitor.Exit(Other)
         End Sub
 
         Public Sub Method4()
@@ -49,6 +51,8 @@ Namespace Monitor_Loops
                 If i = 9 Then Continue For
                 If i = 9 Then Monitor.Exit(Obj)
             Next
+            Monitor.Enter(Other)    ' FN, exploration stopped after loop
+            If Condition Then Monitor.Exit(Other)
         End Sub
 
         Public Sub Method6(Array() As Byte)
