@@ -28,25 +28,32 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
     protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
         invocation.TryGetOperands(out left, out right);
 
-    protected override bool HasValidDelegate(InvocationExpressionSyntax node) =>
-        !(node.ArgumentList.Arguments.First().GetExpression() is SingleLineLambdaExpressionSyntax { } lambda) || CheckExpression(lambda.Body);
-
     protected override bool HasOneArgument(InvocationExpressionSyntax node) =>
         node.HasExactlyNArguments(1);
 
     protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
         invocation.GetIdentifier();
 
-    private bool CheckExpression(SyntaxNode body) =>
-        body switch
+    protected override bool IsValueEquality(InvocationExpressionSyntax node)
+    {
+        if (node.ArgumentList.Arguments[0].GetExpression() is not SingleLineLambdaExpressionSyntax lambda)
         {
-            BinaryExpressionSyntax { } binary =>
-                !(binary.OperatorToken.IsKind(SyntaxKind.EqualsToken)
+            return false;
+        }
+
+        if (lambda.Body is BinaryExpressionSyntax binary)
+        {
+            return binary.OperatorToken.IsKind(SyntaxKind.EqualsToken)
                 && ((binary.Left is IdentifierNameSyntax && binary.Right is LiteralExpressionSyntax)
                     || (binary.Right is IdentifierNameSyntax && binary.Left is LiteralExpressionSyntax)
-                    || (binary.Left is IdentifierNameSyntax && binary.Right is IdentifierNameSyntax))),
-            InvocationExpressionSyntax { } invocation =>
-                !Language.GetName(invocation).Equals(nameof(Equals), Language.NameComparison),
-            _ => true
-        };
+                    || (binary.Left is IdentifierNameSyntax && binary.Right is IdentifierNameSyntax));
+        }
+
+        if (lambda.Body is InvocationExpressionSyntax invocation)
+        {
+            return Language.GetName(invocation).Equals(nameof(Equals), Language.NameComparison);
+        }
+
+        return false;
+    }
 }

@@ -29,7 +29,7 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
     protected override string MessageFormat => """Collection-specific "Exists" method should be used instead of the "Any" extension.""";
 
     protected abstract bool TryGetOperands(TInvocationExpression node, out SyntaxNode left, out SyntaxNode right);
-    protected abstract bool HasValidDelegate(TInvocationExpression node);
+    protected abstract bool IsValueEquality(TInvocationExpression node);
     protected abstract bool HasOneArgument(TInvocationExpression node);
     protected abstract SyntaxToken? GetIdentifier(TInvocationExpression invocation);
 
@@ -38,7 +38,7 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            var invocation = c.Node as TInvocationExpression;
+            var invocation = (TInvocationExpression)c.Node;
 
             if (Language.GetName(invocation).Equals(nameof(Enumerable.Any), Language.NameComparison)
                 && HasOneArgument(invocation)
@@ -47,7 +47,7 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
                 && c.SemanticModel.GetTypeInfo(left).Type is { } type
                 && (type.DerivesFrom(KnownType.System_Array)
                     || type.DerivesFrom(KnownType.System_Collections_Immutable_ImmutableList_T)
-                    || (type.DerivesFrom(KnownType.System_Collections_Generic_List_T) && HasValidDelegate(invocation)))) // This check avoids overlapping with S6617
+                    || (type.DerivesFrom(KnownType.System_Collections_Generic_List_T) && !IsValueEquality(invocation)))) // This check avoids overlapping with S6617
             {
                 c.ReportIssue(Diagnostic.Create(Rule, GetIdentifier(invocation)?.GetLocation()));
             }

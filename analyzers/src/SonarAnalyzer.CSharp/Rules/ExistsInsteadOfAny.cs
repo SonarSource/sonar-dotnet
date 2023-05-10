@@ -28,25 +28,40 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
     protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
         invocation.TryGetOperands(out left, out right);
 
-    protected override bool HasValidDelegate(InvocationExpressionSyntax node) =>
-        !(node.ArgumentList.Arguments.First().Expression is SimpleLambdaExpressionSyntax { } lambda) || CheckExpression(lambda.Body);
-
     protected override bool HasOneArgument(InvocationExpressionSyntax node) =>
         node.HasExactlyNArguments(1);
 
     protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
         invocation.GetIdentifier();
 
-    private bool CheckExpression(SyntaxNode body) =>
-        body switch
+    // Equals on value/refs? yes
+    // == on values? yes
+
+    // == on reference types 
+    // x => x == x IdentifierNameSyntax are the same variable
+
+    //SemanticModel m;
+    //m.GetTypeInfo(node).Type.IsValueType || // is string
+    protected override bool IsValueEquality(InvocationExpressionSyntax node)
+    {
+        if (node.ArgumentList.Arguments[0].Expression is not SimpleLambdaExpressionSyntax lambda)
         {
-            BinaryExpressionSyntax { } binary =>
-                !(binary.OperatorToken.IsKind(SyntaxKind.EqualsEqualsToken)
+            return false;
+        }
+
+        if (lambda.Body is BinaryExpressionSyntax binary)
+        {
+            return binary.OperatorToken.IsKind(SyntaxKind.EqualsEqualsToken)
                 && ((binary.Left is IdentifierNameSyntax && binary.Right is LiteralExpressionSyntax)
                     || (binary.Right is IdentifierNameSyntax && binary.Left is LiteralExpressionSyntax)
-                    || (binary.Left is IdentifierNameSyntax && binary.Right is IdentifierNameSyntax))),
-            InvocationExpressionSyntax { } invocation =>
-                !Language.GetName(invocation).Equals(nameof(Equals), Language.NameComparison),
-            _ => true
-        };
+                    || (binary.Left is IdentifierNameSyntax && binary.Right is IdentifierNameSyntax));
+        }
+
+        if (lambda.Body is InvocationExpressionSyntax invocation)
+        {
+            return Language.GetName(invocation).Equals(nameof(Equals), Language.NameComparison);
+        }
+
+        return false;
+    }
 }

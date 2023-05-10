@@ -91,6 +91,7 @@ public class TestClass
         intList.Any(x => x != 0);     // Noncompliant
         intList.Any(x => x.Equals(0) && true);   // Noncompliant
         intList.Any(x => (x == 0 ? 2 : 0) == 0); // Noncompliant
+        intList.Any(x => { return x == 0; }); // Noncompliant FP
 
         stringList.Any(x => x == ""); // Compliant (should raise S6617)
         stringList.Any(x => "" == x); // Compliant (should raise S6617)
