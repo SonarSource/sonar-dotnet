@@ -33,7 +33,7 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
         && CheckExpression(lambda.Body);
 
     protected override bool HasOneArgument(InvocationExpressionSyntax node) =>
-        node.ArgumentList.Arguments.Count == 1;
+        node.HasExactlyNArguments(1);
 
     protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
         invocation.GetIdentifier();
