@@ -129,4 +129,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool IsStatic(SyntaxNode node) =>
         Cast<MethodBlockSyntax>(node).IsShared();
+
+    public override bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right) =>
+        Cast<InvocationExpressionSyntax>(invocation).TryGetOperands(out left, out right);
 }
