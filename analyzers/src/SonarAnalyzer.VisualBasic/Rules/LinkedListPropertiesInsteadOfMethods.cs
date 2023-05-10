@@ -35,6 +35,6 @@ public sealed class LinkedListPropertiesInsteadOfMethods : LinkedListPropertiesI
 
     private static bool IsCorrectType(InvocationExpressionSyntax invocation, SemanticModel model) =>
         invocation is { ArgumentList: { Arguments: { Count: 1 } args } }
-        && model.GetTypeInfo(args.First().GetExpression()).Type is { } type
+        && model.GetTypeInfo(args[0].GetExpression()).Type is { } type
         && type.DerivesFrom(KnownType.System_Collections_Generic_LinkedList_T);
 }
