@@ -67,10 +67,12 @@ public class TestClass
         return list.Any(x => x % 2 == 0); // Noncompliant
     }
 
-    void CheckDelegate(List<int> intList, List<string> stringList, List<ClassA> customList, string someString)
+    void CheckDelegate(List<int> intList, List<string> stringList, List<ClassA> customList, string someString, int someInt)
     {
         intList.Any(x => x == 0); // Compliant (should raise S6617)
         intList.Any(x => 0 == x); // Compliant (should raise S6617)
+        intList.Any(x => x == someInt); // Compliant (should raise S6617)
+        intList.Any(x => someInt == x); // Compliant (should raise S6617)
         intList.Any(x => x.Equals(0)); // Compliant (should raise S6617)
         intList.Any(x => 0.Equals(x)); // Compliant (should raise S6617)
         intList.Any(x => x.Equals(x + 1)); // Compliant(should raise S6617);
@@ -84,6 +86,8 @@ public class TestClass
 
         stringList.Any(x => x == ""); // Compliant (should raise S6617)
         stringList.Any(x => "" == x); // Compliant (should raise S6617)
+        stringList.Any(x => x == someString); // Compliant (should raise S6617)
+        stringList.Any(x => someString == x); // Compliant (should raise S6617)
         stringList.Any(x => x.Equals("")); // Compliant (should raise S6617)
         stringList.Any(x => "".Equals(x)); // Compliant (should raise S6617)
         stringList.Any(x => x.Equals("" + someString)); // Compliant(should raise S6617);
