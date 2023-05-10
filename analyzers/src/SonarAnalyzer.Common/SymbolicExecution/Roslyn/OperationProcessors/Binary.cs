@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Data;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -92,7 +93,8 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         }
 
         ProgramState LearnBranching(ISymbol leftSymbol, BinaryOperatorKind kind, NumberConstraint rightConstraint) =>
-            RelationalNumberConstraint(kind, rightConstraint) is { } leftConstraint
+            !(falseBranch && leftSymbol.GetSymbolType().IsNullableValueType())  // Don't learn opposite for "nullable != 0", because it could also be <null>.
+            && RelationalNumberConstraint(kind, rightConstraint) is { } leftConstraint
                 ? state.SetSymbolConstraint(leftSymbol, leftConstraint)
                 : null;
 

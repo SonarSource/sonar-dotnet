@@ -1008,6 +1008,22 @@ Tag(""End"", arg);";
     }
 
     [DataTestMethod]
+    [DataRow("arg >  42", 43, null)]
+    [DataRow("42  < arg", 43, null)]
+    [DataRow("arg >= 42", 42, null)]
+    [DataRow("42 <= arg", 42, null)]
+    [DataRow("arg <  42", null, 41)]
+    [DataRow("42  > arg", null, 41)]
+    [DataRow("arg <= 42", null, 42)]
+    [DataRow("42 >= arg", null, 42)]
+    public void Branching_LearnsNumberConstraint_IfElse_Nullable(string expression, int? expectedIfMin, int? expectedIfMax)
+    {
+        var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int?");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedIfMin, expectedIfMax)));
+        validator.ValidateTag("Else", x => x.Should().HaveNoConstraints("arg could be opposite, or null"));
+    }
+
+    [DataTestMethod]
     [DataRow("arg != 42 && arg ==  42", 42, 42)]    // This should be unreachable, but we don't track arg != 42 with multiple ranges -oo-41, 43-oo
     [DataRow("arg != 42 && arg == 100", 100, 100)]
     [DataRow("arg != 42 && arg >    0", 1, null)]   // We don't track arg != 42 in "if" branch. Actual range is 1-41, 43-oo

@@ -620,7 +620,8 @@ Tag(""End"")";
             """;
         var validator = SETestContext.CreateCS(code, "int? arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "arg comparison true, hence non-null"));
+        validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("arg comparison true, hence non-null"));
+        validator.ValidateTag("If", x => x.HasConstraint<NumberConstraint>().Should().BeTrue("arg inferred a value from the comparison"));
         validator.ValidateTag("Else", x => x.Should().HaveNoConstraints("arg either null or comparison false"));
     }
 
