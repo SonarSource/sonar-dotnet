@@ -28,9 +28,6 @@ public sealed class UseIndexingInsteadOfLinqMethods : UseIndexingInsteadOfLinqMe
     protected override int GetArgumentCount(InvocationExpressionSyntax invocation) =>
         invocation.ArgumentList.Arguments.Count;
 
-    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
-        invocation.TryGetOperands(out left, out right);
-
     protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
         invocation.GetIdentifier();
 }

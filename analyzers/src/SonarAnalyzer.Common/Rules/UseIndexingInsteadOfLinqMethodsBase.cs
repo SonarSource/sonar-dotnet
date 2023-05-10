@@ -32,7 +32,6 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
         KnownType.System_Collections_Generic_IList_T);
 
     protected abstract int GetArgumentCount(TInvocation invocation);
-    protected abstract bool TryGetOperands(TInvocation invocation, out SyntaxNode left, out SyntaxNode right);
     protected abstract SyntaxToken? GetIdentifier(TInvocation invocation);
 
     protected UseIndexingInsteadOfLinqMethodsBase() : base(DiagnosticId) { }
@@ -40,29 +39,44 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            CheckInvocation(c, nameof(Enumerable.First), 0, "0");
-            CheckInvocation(c, nameof(Enumerable.Last), 0, "Count-1");
-            CheckInvocation(c, nameof(Enumerable.ElementAt), 1);
+            var invocation = (TInvocation)c.Node;
+
+            if (HasValidSignature(invocation, out var methodName, out var indexDescriptor)
+                && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
+                && IsCorrectType(left, c.SemanticModel)
+                && IsCorrectCall(right, c.SemanticModel))
+            {
+                var diagnostic = Diagnostic.Create(
+                    Rule,
+                    GetIdentifier(invocation)?.GetLocation(),
+                    indexDescriptor == null ? "Indexing" : $"Indexing at {indexDescriptor}",
+                    methodName);
+                c.ReportIssue(diagnostic);
+            }
         },
         Language.SyntaxKind.InvocationExpression);
 
-    protected void CheckInvocation(SonarSyntaxNodeReportingContext c, string methodName, int methodArity, string indexLocation = null)
+    private bool HasValidSignature(TInvocation invocation, out string methodName, out string indexDescriptor)
     {
-        var invocation = (TInvocation)c.Node;
+        methodName = Language.GetName(invocation);
+        indexDescriptor = null;
 
-        if (Language.GetName(invocation).Equals(methodName, Language.NameComparison)
-            && GetArgumentCount(invocation) == methodArity
-            && TryGetOperands(invocation, out var left, out var right)
-            && IsCorrectType(left, c.SemanticModel)
-            && IsCorrectCall(right, c.SemanticModel))
+        if (methodName.Equals(nameof(Enumerable.First), Language.NameComparison))
         {
-            var diagnostic = Diagnostic.Create(
-                Rule,
-                GetIdentifier(invocation)?.GetLocation(),
-                indexLocation == null ? "Indexing" : $"Indexing at {indexLocation}",
-                methodName);
-            c.ReportIssue(diagnostic);
+            indexDescriptor = "0";
+            return GetArgumentCount(invocation) == 0;
         }
+        if (methodName.Equals(nameof(Enumerable.Last), Language.NameComparison))
+        {
+            indexDescriptor = "Count-1";
+            return GetArgumentCount(invocation) == 0;
+        }
+        if (methodName.Equals(nameof(Enumerable.ElementAt), Language.NameComparison))
+        {
+            return GetArgumentCount(invocation) == 1;
+        }
+
+        return false;
     }
 
     protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
