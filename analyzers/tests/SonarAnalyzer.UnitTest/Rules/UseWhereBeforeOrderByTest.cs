@@ -26,14 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class UseWhereBeforeOrderByTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseWhereBeforeOrderBy>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseWhereBeforeOrderBy>();
-
     [TestMethod]
     public void UseWhereBeforeOrderBy_CS() =>
-        builderCS.AddPaths("UseWhereBeforeOrderBy.cs").Verify();
+        new VerifierBuilder<CS.UseWhereBeforeOrderBy>().AddPaths("UseWhereBeforeOrderBy.cs").Verify();
 
     [TestMethod]
     public void UseWhereBeforeOrderBy_VB() =>
-        builderVB.AddPaths("UseWhereBeforeOrderBy.vb").Verify();
+        new VerifierBuilder<VB.UseWhereBeforeOrderBy>().AddPaths("UseWhereBeforeOrderBy.vb").Verify();
 }
