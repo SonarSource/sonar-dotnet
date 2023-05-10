@@ -28,7 +28,6 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
 
     protected override string MessageFormat => """Collection-specific "Exists" method should be used instead of the "Any" extension.""";
 
-    protected abstract bool TryGetOperands(TInvocationExpression node, out SyntaxNode left, out SyntaxNode right);
     protected abstract bool IsValueEquality(TInvocationExpression node, SemanticModel model);
     protected abstract bool HasOneArgument(TInvocationExpression node);
 
@@ -41,7 +40,7 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
 
             if (Language.GetName(invocation).Equals(nameof(Enumerable.Any), Language.NameComparison)
                 && HasOneArgument(invocation)
-                && TryGetOperands(invocation, out var left, out var right)
+                && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectCall(right, c.SemanticModel)
                 && c.SemanticModel.GetTypeInfo(left).Type is { } type
                 && (type.DerivesFrom(KnownType.System_Array)

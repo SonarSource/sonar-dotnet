@@ -25,9 +25,6 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
-        invocation.TryGetOperands(out left, out right);
-
     protected override bool HasOneArgument(InvocationExpressionSyntax node) =>
         node.HasExactlyNArguments(1);
 
