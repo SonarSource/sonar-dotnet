@@ -1,0 +1,150 @@
+<h2>Why is this an issue?</h2>
+<p>Both the <code>Enumerable.Max</code> extension method and the <code>SortedSet&lt;T&gt;.Max</code> property can be used to find the maximum value in
+a <code>SortedSet&lt;T&gt;</code>. However, <code>SortedSet&lt;T&gt;.Max</code> is much faster than <code>Enumerable.Max</code>. For small
+collections, the performance difference may be minor, but for large collections, it can be noticeable. The same applies for the <code>Min</code>
+property as well.</p>
+<p><code>Max</code> and <code>Min</code> in <code>SortedSet&lt;T&gt;</code> exploit the fact that the set is implemented via a <code>Red-Black
+tree</code>. The algorithm to find the <code>Max</code>/<code>Min</code> is "go left/right whenever possible". The operation has the time complexity
+of <code>O(h)</code> which becomes <code>O(ln(n))</code> due to the fact that the tree is balanced. This is much better than the <code>O(n)</code>
+time complexity of extension methods.</p>
+<p><code>Max</code> and <code>Min</code> in <code>ImmutableSortedSet&lt;T&gt;</code> exploits a tree augmentation technique, storing the
+<code>Min</code>, <code>Max</code> and <code>Count</code> values on each node of the data structure. The time complexity in this case is
+<code>O(1)</code> that is significantly better than <code>O(n)</code> of extension methods.</p>
+<p><strong>Applies to:</strong></p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1.max">SortedSet&lt;T&gt;.Max</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1.min">SortedSet&lt;T&gt;.Min</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.max">ImmutableSortedSet&lt;T&gt;.Max</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.min">ImmutableSortedSet&lt;T&gt;.Min</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.builder.max">ImmutableSortedSet&lt;T&gt;.Builder.Max</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.builder.min">ImmutableSortedSet&lt;T&gt;.Builder.Min</a> </li>
+</ul>
+<h3>What is the potential impact?</h3>
+<p>We measured a significant improvement both in execution time and memory allocation. For more details see the <code>Benchmarks</code> section from
+the <code>More info</code> tab.</p>
+<h2>How to fix it</h2>
+<p>The <code>Min</code> and <code>Max</code> properties are defined on the following classes, and the extension method call can be replaced by calling
+the propery instead:</p>
+<ul>
+  <li> <code>SortedSet&lt;T&gt;</code> </li>
+  <li> <code>ImmutableSortedSet&lt;T&gt;</code> </li>
+  <li> <code>ImmutableSortedSet&lt;T&gt;.Builder</code> </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+int GetMax(SortedSet&lt;int&gt; data) =&gt;
+    data.Max();
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+int GetMin(SortedSet&lt;int&gt; data) =&gt;
+    data.Min();
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+int GetMax(SortedSet&lt;int&gt; data) =&gt;
+    data.Max;
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+int GetMin(SortedSet&lt;int&gt; data) =&gt;
+    data.Min;
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1">SortedSet&lt;T&gt;</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1">ImmutableSortedSet&lt;T&gt;</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.builder">ImmutableSortedSet&lt;T&gt;.Builder</a> </li>
+</ul>
+<h3>Benchmarks</h3>
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Runtime</th>
+      <th>Mean</th>
+      <th>StdDev</th>
+      <th>Allocated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p>MaxMethod</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>68,961.483 us</p></td>
+      <td><p>499.6623 us</p></td>
+      <td><p>248063 B</p></td>
+    </tr>
+    <tr>
+      <td><p>MaxProperty</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>4.638 us</p></td>
+      <td><p>0.0634 us</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td><p>MaxMethod</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>85,827.359 us</p></td>
+      <td><p>1,531.1611 us</p></td>
+      <td><p>281259 B</p></td>
+    </tr>
+    <tr>
+      <td><p>MaxProperty</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>67.682 us</p></td>
+      <td><p>0.3757 us</p></td>
+      <td><p>312919 B</p></td>
+    </tr>
+  </tbody>
+</table>
+<p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
+<pre>
+private SortedSet&lt;string&gt; data;
+
+[Params(1_000)]
+public int Iterations;
+
+[GlobalSetup]
+public void Setup() =&gt;
+    data = new SortedSet&lt;string&gt;(Enumerable.Range(0, Iterations).Select(x =&gt; Guid.NewGuid().ToString()));
+
+[Benchmark(Baseline = true)]
+public void MaxMethod()
+{
+    for (var i = 0; i &lt; Iterations; i++)
+    {
+        _ = data.Max();     // Max() extension method
+    }
+}
+
+[Benchmark]
+public void MaxProperty()
+{
+    for (var i = 0; i &lt; Iterations; i++)
+    {
+        _ = data.Max;       // Max property
+    }
+}
+</pre>
+<p>Hardware configuration:</p>
+<pre>
+BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.2846/22H2/2022Update)
+11th Gen Intel Core i7-11850H 2.50GHz, 1 CPU, 16 logical and 8 physical cores
+  [Host]               : .NET Framework 4.8 (4.8.4614.0), X64 RyuJIT VectorSize=256
+  .NET 7.0             : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+  .NET Framework 4.6.2 : .NET Framework 4.8 (4.8.4614.0), X64 RyuJIT VectorSize=256
+</pre>
+
