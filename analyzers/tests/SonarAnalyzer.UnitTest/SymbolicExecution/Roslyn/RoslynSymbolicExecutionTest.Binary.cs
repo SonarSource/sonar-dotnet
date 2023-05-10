@@ -762,12 +762,15 @@ Tag(""End"")";
     [DataTestMethod]
     [DataRow(5, 4, "i * j", 20)]
     [DataRow(5, -4, "i * j", -20)]
+    [DataRow(-5, 4, "i * j", -20)]
     [DataRow(-5, -4, "i * j", 20)]
     [DataRow(5, 0, "i * j", 0)]
     [DataRow(-5, 0, "i * j", 0)]
     [DataRow(5, 1, "i * j", 5)]
     [DataRow(-5, 1, "i * j", -5)]
-    public void Binary_Calculations_UpdatesNumberConstraint(int i, int j, string expression, int expected)
+    [DataRow(5, -1, "i * j", -5)]
+    [DataRow(-5, -1, "i * j", 5)]
+    public void Binary_CalculationWithFixedValues_UpdatesNumberConstraint(int i, int j, string expression, int expected)
     {
         var code = $"""
             var i = {i};
@@ -777,5 +780,57 @@ Tag(""End"")";
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
+    }
+
+    [DataTestMethod]
+    [DataRow("i >=  3 && j >=  5", 3 * 5, null)]
+    [DataRow("i >=  3 && j <= -5", null, 3 * -5)]
+    [DataRow("i <= -3 && j >=  5", null, -3 * 5)]
+    [DataRow("i <= -3 && j <= -5", -3 * -5, null)]
+    [DataRow("i ==  3 && j >=  5", 3 * 5, null)]
+    [DataRow("i ==  3 && j >= -5", 3 * -5, null)]
+    [DataRow("i ==  3 && j <=  5", null, 3 * 5)]
+    [DataRow("i ==  3 && j <= -5", null, 3 * -5)]
+    [DataRow("i == -3 && j >=  5", null, -3 * 5)]
+    [DataRow("i == -3 && j >= -5", null, -3 * -5)]
+    [DataRow("i == -3 && j <=  5", -3 * 5, null)]
+    [DataRow("i == -3 && j <= -5", -3 * -5, null)]
+    public void Binary_MultiplicationWithRange_UpdatesNumberConstraint(string expression, int? expectedMin, int?expectedMax)
+    {
+        var code = $$"""
+            if ({{expression}})
+            {
+                var value = i * j;
+                Tag("Value", value);
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int? i, int? j").Validator;
+        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(NumberConstraint.From(expectedMin, expectedMax)));
+    }
+
+    [DataTestMethod]
+    [DataRow("i >=  3 && j >= -5")]
+    [DataRow("i >=  3 && j <=  5")]
+    [DataRow("i >= -3 && j >=  5")]
+    [DataRow("i >= -3 && j >= -5")]
+    [DataRow("i >= -3 && j <=  5")]
+    [DataRow("i >= -3 && j <= -5")]
+    [DataRow("i <=  3 && j >=  5")]
+    [DataRow("i <=  3 && j >= -5")]
+    [DataRow("i <=  3 && j <=  5")]
+    [DataRow("i <=  3 && j <= -5")]
+    [DataRow("i <= -3 && j >= -5")]
+    [DataRow("i <= -3 && j <=  5")]
+    public void Binary_MultiplicationWithRange_NoNumberConstraint(string expression)
+    {
+        var code = $$"""
+            if ({{expression}})
+            {
+                var value = i * j;
+                Tag("Value", value);
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int? i, int? j").Validator;
+        validator.ValidateTag("Value", x => x.Should().BeNull());
     }
 }
