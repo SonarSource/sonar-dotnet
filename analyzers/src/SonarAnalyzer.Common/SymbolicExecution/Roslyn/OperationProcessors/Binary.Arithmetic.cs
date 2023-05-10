@@ -30,6 +30,7 @@ internal sealed partial class Binary
         BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
         BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
         BinaryOperatorKind.Multiply => CalculateMultiply(left, right),
+        BinaryOperatorKind.Divide => CalculateDivide(left, right),
         BinaryOperatorKind.And when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value & right.Min.Value),
         BinaryOperatorKind.And => NumberConstraint.From(CalculateAndMin(left, right), CalculateAndMax(left, right)),
         BinaryOperatorKind.Or when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value | right.Min.Value),
@@ -51,6 +52,67 @@ internal sealed partial class Binary
         if ((left.Min is null && right.CanBeNegative) || (right.Min is null && left.CanBeNegative)
             || (left.Max is null && right.CanBePositive) || (right.Max is null && left.CanBePositive))
         {
+            max = null;
+        }
+
+        return NumberConstraint.From(min, max);
+    }
+
+    private static NumberConstraint CalculateDivide(NumberConstraint left, NumberConstraint right)
+    {
+        if (right.Equals(NumberConstraint.Zero))
+        {
+            return null;
+        }
+        else if (right.Min == 0)
+        {
+            right = NumberConstraint.From(1, right.Max);
+        }
+        else if (right.Max == 0)
+        {
+            right = NumberConstraint.From(right.Min, -1);
+        }
+
+        BigInteger? min, max;
+        if (left.IsPositive && right.IsPositive)
+        {
+            min = right.Max is null ? 0 : left.Min / right.Max;
+            max = left.Max / right.Min;
+        }
+        else if (left.IsNegative && right.IsNegative)
+        {
+            min = right.Min is null ? 0 : left.Max / right.Min;
+            max = left.Min / right.Max;
+        }
+        else if (left.IsPositive && right.IsNegative)
+        {
+            min = left.Max / right.Max;
+            max = right.Min is null ? 0 : left.Min / right.Min;
+        }
+        else if (left.IsNegative && right.IsPositive)
+        {
+            min = left.Min / right.Min;
+            max = right.Max is null ? 0 : left.Max / right.Max;
+        }
+        else if (right.IsPositive)
+        {
+            min = left.Min / right.Min;
+            max = left.Max / right.Min;
+        }
+        else if (right.IsNegative)
+        {
+            min = left.Max / right.Max;
+            max = left.Min / right.Max;
+        }
+        else if (left.Min is not null && left.Max is not null)
+        {
+            var absMax = BigInteger.Max(BigInteger.Abs(left.Min.Value), left.Max.Value);
+            min = -absMax;
+            max = absMax;
+        }
+        else
+        {
+            min = null;
             max = null;
         }
 
