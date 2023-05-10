@@ -321,8 +321,8 @@ if (value = boolParameter)
     [DataTestMethod]
     [DataRow("arg == isObject", "object")]
     [DataRow("isObject == arg", "object")]
-    [DataRow("arg == 42", "int?")]
-    [DataRow("42 == arg", "int?")]
+    [DataRow("arg == 'x'", "char?")]
+    [DataRow("'x' == arg", "char?")]
     public void Branching_LearnsObjectConstraint_Binary_UndefinedInOtherBranch_CS(string expression, string argType)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, argType);
@@ -352,8 +352,8 @@ if (value = boolParameter)
     [DataTestMethod]
     [DataRow("arg != isObject", "object")]
     [DataRow("isObject != arg", "object")]
-    [DataRow("arg != 42", "int?")]
-    [DataRow("42 != arg", "int?")]
+    [DataRow("arg != 'x'", "char?")]
+    [DataRow("'x' != arg", "char?")]
     public void Branching_LearnsObjectConstraint_Binary_UndefinedInOtherBranch_Negated_CS(string expression, string argType)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, argType);

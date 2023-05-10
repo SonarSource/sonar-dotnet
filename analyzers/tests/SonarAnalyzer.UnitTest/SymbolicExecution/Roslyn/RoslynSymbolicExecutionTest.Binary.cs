@@ -587,7 +587,6 @@ Tag(""End"")";
             }
             Tag("End");
             """;
-
         var validator = SETestContext.CreateCS(code, "int? arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.ValidateTagOrder("Value", "Else", "End");
@@ -619,7 +618,6 @@ Tag(""End"")";
                 Tag("Else", arg);
             }
             """;
-
         var validator = SETestContext.CreateCS(code, "int? arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.ValidateTag("If", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "arg comparison true, hence non-null"));
@@ -715,6 +713,8 @@ Tag(""End"")";
             Tag("Result", result);
             """;
         var validator = SETestContext.CreateCS(code, "int arg").Validator;
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValues("Result").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
     }
 }
