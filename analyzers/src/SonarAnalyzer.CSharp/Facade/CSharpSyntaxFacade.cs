@@ -127,4 +127,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool IsStatic(SyntaxNode node) =>
         Cast<BaseMethodDeclarationSyntax>(node).IsStatic();
+
+    public override bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right) =>
+        Cast<InvocationExpressionSyntax>(invocation).TryGetOperands(out  left, out right);
 }
