@@ -42,7 +42,8 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
             BinaryExpressionSyntax { } binary =>
                 !(binary.OperatorToken.IsKind(SyntaxKind.EqualsToken)
                 && ((binary.Left is IdentifierNameSyntax && binary.Right is LiteralExpressionSyntax)
-                    || (binary.Right is IdentifierNameSyntax && binary.Left is LiteralExpressionSyntax))),
+                    || (binary.Right is IdentifierNameSyntax && binary.Left is LiteralExpressionSyntax)
+                    || (binary.Left is IdentifierNameSyntax && binary.Right is IdentifierNameSyntax))),
             InvocationExpressionSyntax { } invocation =>
                 !Language.GetName(invocation).Equals(nameof(Equals), Language.NameComparison),
             _ => true

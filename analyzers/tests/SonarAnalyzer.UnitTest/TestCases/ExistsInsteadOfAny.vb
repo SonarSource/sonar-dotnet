@@ -53,9 +53,11 @@ Public Class TestClass
         Return data.Any(Function(x) x Mod 2 = 0) ' Noncompliant
     End Function
 
-    Private Sub CheckDelegate(ByVal intList As List(Of Integer), ByVal stringList As List(Of String), ByVal customList As List(Of ClassA), ByVal someString As String)
+    Private Sub CheckDelegate(ByVal intList As List(Of Integer), ByVal stringList As List(Of String), ByVal customList As List(Of ClassA), ByVal someString As String, ByVal someInt As Integer)
         intList.Any(Function(x) x = 0) ' Compliant (should raise S6617)
         intList.Any(Function(x) 0 = x) ' Compliant (should raise S6617)
+        intList.Any(Function(x) x = someInt) ' Compliant (should raise S6617)
+        intList.Any(Function(x) someInt = x) ' Compliant (should raise S6617)
         intList.Any(Function(x) x.Equals(0)) ' Compliant (should raise S6617)
         intList.Any(Function(x) 0.Equals(x)) ' Compliant (should raise S6617)
         intList.Any(Function(x) x.Equals(x + 1)) ' Compliant (should raise S6617)
@@ -64,6 +66,8 @@ Public Class TestClass
 
         stringList.Any(Function(x) x = "") ' Compliant (should raise S6617)
         stringList.Any(Function(x) "" = x) ' Compliant (should raise S6617)
+        stringList.Any(Function(x) x = someString) ' Compliant (should raise S6617)
+        stringList.Any(Function(x) someString = x) ' Compliant (should raise S6617)
         stringList.Any(Function(x) x.Equals("")) ' Compliant (should raise S6617)
         stringList.Any(Function(x) "".Equals(x)) ' Compliant (should raise S6617)
         stringList.Any(Function(x) x.Equals("" & someString)) ' Compliant (should raise S6617)
