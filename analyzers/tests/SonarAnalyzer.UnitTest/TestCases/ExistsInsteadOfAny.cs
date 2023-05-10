@@ -32,6 +32,9 @@ public class TestClass
         list?.Any(x => x > 0).ToString(); // Noncompliant
         classB?.Any(x => x > 0); // Compliant
 
+        Func<int, bool> del = x => true;
+        list.Any(del); // Noncompliant
+
         var enumList = new EnumList<int>();
         enumList.Any(x => x > 0); // Compliant
 

@@ -29,8 +29,7 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
         invocation.TryGetOperands(out left, out right);
 
     protected override bool HasValidDelegate(InvocationExpressionSyntax node) =>
-        node.ArgumentList.Arguments.First().Expression is SimpleLambdaExpressionSyntax { } lambda
-        && CheckExpression(lambda.Body);
+        !(node.ArgumentList.Arguments.First().Expression is SimpleLambdaExpressionSyntax { } lambda) || CheckExpression(lambda.Body);
 
     protected override bool HasOneArgument(InvocationExpressionSyntax node) =>
         node.HasExactlyNArguments(1);

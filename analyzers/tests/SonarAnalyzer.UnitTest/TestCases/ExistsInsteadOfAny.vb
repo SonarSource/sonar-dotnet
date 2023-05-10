@@ -26,6 +26,9 @@ Public Class TestClass
         data?.Any(Function(x) x > 0).ToString() ' Noncompliant
         classB?.Any(Function(x) x > 0) ' Compliant
 
+        Dim del As Func(Of Integer, Boolean) = Function(x) True
+        data.Any(del) ' Noncompliant
+
         Dim goodList = New GoodList(Of Integer)()
 
         goodList.GetList().Any(Function(x) x > 0) ' Noncompliant
