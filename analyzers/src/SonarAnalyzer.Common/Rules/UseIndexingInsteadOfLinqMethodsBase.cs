@@ -48,7 +48,7 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
 
     protected void CheckInvocation(SonarSyntaxNodeReportingContext c, string methodName, int methodArity, string indexLocation = null)
     {
-        var invocation = c.Node as TInvocation;
+        var invocation = (TInvocation)c.Node;
 
         if (Language.GetName(invocation).Equals(methodName, Language.NameComparison)
             && GetArgumentCount(invocation) == methodArity
