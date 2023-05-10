@@ -27,6 +27,7 @@ public sealed class LinkedListPropertiesInsteadOfMethods : LinkedListPropertiesI
 
     protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
         invocation.GetIdentifier();
+
     protected override bool IsCorrectCallAndType(InvocationExpressionSyntax invocation, SemanticModel model) =>
         HasNoArguments(invocation)
         && invocation.TryGetOperands(out var left, out var right)
