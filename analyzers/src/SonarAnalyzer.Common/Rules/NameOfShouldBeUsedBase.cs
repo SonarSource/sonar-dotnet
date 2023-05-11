@@ -30,13 +30,14 @@ namespace SonarAnalyzer.Rules
         private const int MinStringLength = 5;
         private readonly char[] separators = { ' ', '.', ',', ';', '!', '?' };
 
+        protected abstract string NameOf { get; }
         protected abstract IEnumerable<string> GetParameterNames(TMethodSyntax method); // Handle parameters with the same name (in the IDE it can happen)
         protected abstract bool IsStringLiteral(SyntaxToken t);
         protected abstract bool LeastLanguageVersionMatches(SonarSyntaxNodeReportingContext context);
         protected abstract bool IsArgumentExceptionCallingNameOf(SyntaxNode node, IEnumerable<string> arguments);
         protected abstract TMethodSyntax MethodSyntax(SyntaxNode node);
 
-        protected override string MessageFormat => "Replace the string '{0}' with 'nameof({0})'.";
+        protected override string MessageFormat => "Replace the string '{0}' with '{1}({0})'.";
 
         protected NameOfShouldBeUsedBase() : base(DiagnosticId) { }
 
@@ -87,7 +88,7 @@ namespace SonarAnalyzer.Rules
 
             foreach (var stringTokenAndParam in GetStringTokenAndParamNamePairs(stringTokensInsideThrowExpressions, parameterNames))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, stringTokenAndParam.Key.GetLocation(), stringTokenAndParam.Value));
+                context.ReportIssue(Diagnostic.Create(Rule, stringTokenAndParam.Key.GetLocation(), stringTokenAndParam.Value, NameOf));
             }
         }
 

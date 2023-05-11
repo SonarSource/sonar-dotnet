@@ -11,12 +11,12 @@ Namespace Tests.TestCases
 
         Public Sub Method_01(arg1 As Integer, argument As Integer)
             If arg1 < 0 Then
-                Throw New Exception("arg1") ' Noncompliant {{Replace the string 'arg1' with 'nameof(arg1)'.}}
+                Throw New Exception("arg1") ' Noncompliant {{Replace the string 'arg1' with 'NameOf(arg1)'.}}
 '                                   ^^^^^^
             End If
 
             If ARG1 < 0 Then
-                Throw New ArgumentException("ARG1") ' Noncompliant {{Replace the string 'arg1' with 'nameof(arg1)'.}}
+                Throw New ArgumentException("ARG1") ' Noncompliant {{Replace the string 'arg1' with 'NameOf(arg1)'.}}
             End If
 
             Const foo As String = "arg1"

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2302",
-"message":  "Replace the string 'source' with 'nameof(source)'.",
+"message":  "Replace the string 'source' with 'NameOf(source)'.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S2302",
-"message":  "Replace the string 'separator' with 'nameof(separator)'.",
+"message":  "Replace the string 'separator' with 'NameOf(separator)'.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
 "region":  {

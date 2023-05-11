@@ -32,6 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override string NameOf => "nameof";
 
         protected override BaseMethodDeclarationSyntax MethodSyntax(SyntaxNode node) =>
              (BaseMethodDeclarationSyntax)node;
