@@ -114,34 +114,35 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     private static ProgramState LearnBranchingNumberConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
     {
         var kind = falseBranch ? Opposite(binary.OperatorKind) : binary.OperatorKind;
-        // If left and right already had NumberConstraint, BoolConstraintFromOperation already did the job and it will not arrive here.
-        if (state[binary.RightOperand]?.Constraint<NumberConstraint>() is { } rightConstraint && binary.LeftOperand.TrackedSymbol() is { } leftSymbol)
+        var leftNumber = state[binary.LeftOperand]?.Constraint<NumberConstraint>();
+        var rightNumber = state[binary.RightOperand]?.Constraint<NumberConstraint>();
+        if (rightNumber is not null && binary.LeftOperand.TrackedSymbol() is { } leftSymbol)
         {
-            return LearnBranching(leftSymbol, kind, rightConstraint);
+            return LearnBranching(leftSymbol, leftNumber, kind, rightNumber);
         }
-        else if (state[binary.LeftOperand]?.Constraint<NumberConstraint>() is { } leftConstraint && binary.RightOperand.TrackedSymbol() is { } rightSymbol)
+        else if (leftNumber is not null && binary.RightOperand.TrackedSymbol() is { } rightSymbol)
         {
-            return LearnBranching(rightSymbol, Flip(kind), leftConstraint);
+            return LearnBranching(rightSymbol, rightNumber, Flip(kind), leftNumber);
         }
         else
         {
             return null;
         }
 
-        ProgramState LearnBranching(ISymbol leftSymbol, BinaryOperatorKind kind, NumberConstraint rightConstraint) =>
-            !(falseBranch && leftSymbol.GetSymbolType().IsNullableValueType())  // Don't learn opposite for "nullable > 0", because it could also be <null>.
-            && RelationalNumberConstraint(kind, rightConstraint) is { } leftConstraint
-                ? state.SetSymbolConstraint(leftSymbol, leftConstraint)
+        ProgramState LearnBranching(ISymbol symbol, NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
+            !(falseBranch && symbol.GetSymbolType().IsNullableValueType())  // Don't learn opposite for "nullable > 0", because it could also be <null>.
+            && RelationalNumberConstraint(existingNumber, kind, comparedNumber) is { } leftConstraint
+                ? state.SetSymbolConstraint(symbol, leftConstraint)
                 : null;
 
-        static NumberConstraint RelationalNumberConstraint(BinaryOperatorKind kind, NumberConstraint constraint) =>
+        static NumberConstraint RelationalNumberConstraint(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
             kind switch
             {
-                BinaryOperatorKind.Equals => constraint,
-                BinaryOperatorKind.GreaterThan when constraint.Min.HasValue => NumberConstraint.From(constraint.Min + 1, null),
-                BinaryOperatorKind.GreaterThanOrEqual when constraint.Min.HasValue => NumberConstraint.From(constraint.Min, null),
-                BinaryOperatorKind.LessThan when constraint.Max.HasValue => NumberConstraint.From(null, constraint.Max - 1),
-                BinaryOperatorKind.LessThanOrEqual when constraint.Max.HasValue => NumberConstraint.From(null, constraint.Max),
+                BinaryOperatorKind.Equals => comparedNumber,
+                BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => NumberConstraint.From(comparedNumber.Min + 1, null),
+                BinaryOperatorKind.GreaterThanOrEqual when comparedNumber.Min.HasValue => NumberConstraint.From(comparedNumber.Min, null),
+                BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue => NumberConstraint.From(null, comparedNumber.Max - 1),
+                BinaryOperatorKind.LessThanOrEqual when comparedNumber.Max.HasValue => NumberConstraint.From(null, comparedNumber.Max),
                 _ => null
             };
 
