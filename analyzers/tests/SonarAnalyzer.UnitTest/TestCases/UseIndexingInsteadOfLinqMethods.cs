@@ -6,13 +6,27 @@ using System.Runtime.InteropServices;
 
 static class Program
 {
-    static void Main()
+    static void Main() { }
+
+    static void InterfaceCases()
+    {
+        IList<int> ilist = new List<int>();
+
+        ilist.First(); // Noncompliant
+        ilist.Last(); // Noncompliant
+        ilist.ElementAt(42); // Noncompliant
+
+        ilist?.First(); // Noncompliant
+        ilist?.Last(); // Noncompliant
+        ilist?.ElementAt(42); // Noncompliant
+
+        ((IList<int>)new List<int> { 42 }).First(); // Noncompliant
+        ((IList<int>)new List<int> { 42 })?.Last(); // Noncompliant
+    }
+
+    static void ListCases()
     {
         var list = new List<int>();
-
-        _ = list[0]; // Compliant
-        _ = list[list.Count - 1]; // Compliant
-        _ = list[42]; // Compliant
 
         var badFirst = list.First(); // Noncompliant {{Indexing at 0 should be used instead of the "Enumerable" extension method "First"}}
         //                  ^^^^^
@@ -42,7 +56,10 @@ static class Program
         new List<int> { 42 }.First(); // Noncompliant
         new List<int> { 42 }.Last(); // Noncompliant
         new List<int> { 42 }.ElementAt(42); // Noncompliant
+    }
 
+    static void IListImplementation()
+    {
         var implementsIList = new ImplementsIList<int>();
 
         (true ? implementsIList : implementsIList).First(); // Noncompliant
@@ -78,14 +95,6 @@ static class Program
         implementsIList.First(x => x == 42); // Compliant, calls with the predicate cannot be replaced with indexes
         implementsIList.Last(x => x == 42); // Compliant, calls with the predicate cannot be replaced with indexes
 
-        T First<T>() => default(T);
-        T Last<T>() => default(T);
-        T ElementAt<T>(int index) => default(T);
-
-        First<int>(); // Compliant
-        Last<int>(); // Compliant
-        ElementAt<int>(42); // Compliant
-
         void AcceptsFirstOrLast<T>(Func<T> methodWithNoArguments)
         { }
         void AcceptsElementAt<T>(Func<int, T> methodWithOneArgument)
@@ -94,6 +103,39 @@ static class Program
         AcceptsFirstOrLast(implementsIList.First); //FN this is not an invocation, just a member access
         AcceptsFirstOrLast(implementsIList.Last); //FN this is not an invocation, just a member access
         AcceptsElementAt(implementsIList.ElementAt); //FN this is not an invocation, just a member access
+    }
+
+    static void IReadonlyListImplementation()
+    {
+        var readonlyList = new ImplementsIReadonlyList<int>();
+        readonlyList.First(); // Noncompliant
+        readonlyList.Last(); // Noncompliant
+        readonlyList.ElementAt(42); // Noncompliant
+
+        readonlyList?.First(); // Noncompliant
+        readonlyList?.Last(); // Noncompliant
+        readonlyList?.ElementAt(42); // Noncompliant
+
+        object obj = null;
+        ((IReadOnlyList<int>)obj).First(); // Noncompliant
+        ((IReadOnlyList<int>)null).Last(); // Noncompliant
+        (null as IReadOnlyList<int>).ElementAt(42); // Noncompliant
+    }
+
+    static void TrueNegatives()
+    {
+        var list = new List<int>();
+        _ = list[0]; // Compliant
+        _ = list[list.Count - 1]; // Compliant
+        _ = list[42]; // Compliant
+
+        T First<T>() => default(T);
+        T Last<T>() => default(T);
+        T ElementAt<T>(int index) => default(T);
+
+        First<int>(); // Compliant
+        Last<int>(); // Compliant
+        ElementAt<int>(42); // Compliant
 
         var fakeList = new FakeList<int>();
 
@@ -125,6 +167,14 @@ class ImplementsIList<T> : IList<T>
     public void Insert(int index, T item) { }
     public bool Remove(T item) => false;
     public void RemoveAt(int index) { }
+    public IEnumerator<T> GetEnumerator() => null;
+    IEnumerator IEnumerable.GetEnumerator() => null;
+}
+
+class ImplementsIReadonlyList<T> : IReadOnlyList<T>
+{
+    public T this[int index] => default(T);
+    public int Count => 42;
     public IEnumerator<T> GetEnumerator() => null;
     IEnumerator IEnumerable.GetEnumerator() => null;
 }

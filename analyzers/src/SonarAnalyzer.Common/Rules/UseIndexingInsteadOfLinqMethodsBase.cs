@@ -29,7 +29,8 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
 
     private static readonly ImmutableArray<KnownType> TargetInterfaces = ImmutableArray.Create(
         KnownType.System_Collections_IList,
-        KnownType.System_Collections_Generic_IList_T);
+        KnownType.System_Collections_Generic_IList_T,
+        KnownType.System_Collections_Generic_IReadOnlyList_T);
 
     protected abstract int GetArgumentCount(TInvocation invocation);
 
@@ -79,7 +80,8 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
     }
 
     protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
-        model.GetTypeInfo(left).Type is { } type && type.ImplementsAny(TargetInterfaces);
+        model.GetTypeInfo(left).Type is { } type
+        && (type.ImplementsAny(TargetInterfaces) || type.IsAny(TargetInterfaces));
 
     protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
