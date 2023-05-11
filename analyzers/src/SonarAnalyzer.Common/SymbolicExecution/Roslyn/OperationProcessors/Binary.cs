@@ -139,6 +139,8 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             kind switch
             {
                 BinaryOperatorKind.Equals => comparedNumber,
+                BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Min => NumberConstraint.From(existingNumber.Min + 1, existingNumber.Max),
+                BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Max => NumberConstraint.From(existingNumber.Min, existingNumber.Max - 1),
                 BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => NumberConstraint.From(comparedNumber.Min + 1, existingNumber?.Max),
                 BinaryOperatorKind.GreaterThanOrEqual when comparedNumber.Min.HasValue => NumberConstraint.From(comparedNumber.Min, existingNumber?.Max),
                 BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue => NumberConstraint.From(existingNumber?.Min, comparedNumber.Max - 1),

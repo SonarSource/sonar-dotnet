@@ -1065,7 +1065,7 @@ Tag(""End"", arg);";
     [DataRow("arg != 42 && arg <= 100", null, 100)] // We don't track arg != 42 in "if" branch. Actual range is -oo-41, 43-100
     [DataRow("arg >  42 && arg ==   0", 0, 0)]      // ToDo: Should be unreachable
     [DataRow("arg >  42 && arg == 100", 100, 100)]
-    [DataRow("arg >  42 && arg !=  43", 43, null)]  // ToDo #7143 44, null
+    [DataRow("arg >  42 && arg !=  43", 44, null)]
     [DataRow("arg >  42 && arg != 100", 43, null)]  // Actual value is 43-99, 101-oo
     [DataRow("arg >  42 && arg >    0", 43, null)]
     [DataRow("arg >  42 && arg >   42", 43, null)]
@@ -1080,7 +1080,7 @@ Tag(""End"", arg);";
     [DataRow("arg >  42 && arg <= 100", null, 100)] // ToDo #7143: 43, 100
     [DataRow("arg >= 42 && arg ==   0", 0, 0)]      // ToDo Should be unreachable
     [DataRow("arg >= 42 && arg == 100", 100, 100)]
-    [DataRow("arg >= 42 && arg !=  42", 42, null)]  // ToDo #7143: 43, null
+    [DataRow("arg >= 42 && arg !=  42", 43, null)]
     [DataRow("arg >= 42 && arg != 100", 42, null)]  // Actual value is 42-99, 101-oo
     [DataRow("arg >= 42 && arg >    0", 42, null)]
     [DataRow("arg >= 42 && arg >   41", 42, null)]
@@ -1096,7 +1096,7 @@ Tag(""End"", arg);";
     [DataRow("arg >= 42 && arg <= 100", null, 100)]
     [DataRow("arg <  42 && arg ==   0", 0, 0)]
     [DataRow("arg <  42 && arg ==  42", 42, 42)]    // ToDo Should be unreachable
-    [DataRow("arg <  42 && arg !=  41", null, 41)]  // ToDo #7143: null, 40
+    [DataRow("arg <  42 && arg !=  41", null, 40)]
     [DataRow("arg <  42 && arg !=   0", null, 41)]  // Actual value is oo - -1, 1-41
     [DataRow("arg <  42 && arg >    0", 1, 41)]
     [DataRow("arg <  42 && arg >=   0", 0, 41)]
@@ -1114,7 +1114,7 @@ Tag(""End"", arg);";
     [DataRow("arg <= 42 && arg ==  42", 42, 42)]
     [DataRow("arg <= 42 && arg == 100", 100, 100)]  // ToDo Should be unreachable
     [DataRow("arg <= 42 && arg !=   0", null, 42)]  // Actual value is oo - -1, 1-42
-    [DataRow("arg <= 42 && arg !=  42", null, 42)]  // ToDo #7143: null, 41
+    [DataRow("arg <= 42 && arg !=  42", null, 41)]
     [DataRow("arg <= 42 && arg >    0", 1, 42)]
     [DataRow("arg <= 42 && arg >=   0", 0, 42)]
     [DataRow("arg <= 42 && arg <    0", null, -1)]
