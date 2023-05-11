@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  72,
+"endLine":  82,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\QueryMapperVisitor.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  119,
+"endLine":  128,
+"endColumn":  123
+}
+}
+}
+]
+}

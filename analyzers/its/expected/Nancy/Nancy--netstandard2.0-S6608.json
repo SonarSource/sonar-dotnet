@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  36,
+"endLine":  84,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  66,
+"endLine":  91,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  66,
+"endLine":  103,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  68,
+"endLine":  75,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  68,
+"endLine":  76,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  47,
+"endLine":  42,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  32,
+"endLine":  75,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  69,
+"endLine":  66,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  69,
+"endLine":  113,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  42,
+"endLine":  153,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewLocator.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  36,
+"endLine":  129,
+"endColumn":  41
+}
+}
+}
+]
+}

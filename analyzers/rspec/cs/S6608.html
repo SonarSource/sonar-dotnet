@@ -1,0 +1,266 @@
+<h2>Why is this an issue?</h2>
+<p>Indexes in C# provide direct access to an element at a specific position within an array or collection. When compared to <code>Enumerable</code>
+methods, indexing can be more efficient for certain scenarios, such as iterating over a large collection, due to avoiding the overhead of checking the
+underlying collection type before accessing it.</p>
+<p>This applies to types that implement one of these interfaces:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.ilist">IList</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a> </li>
+</ul>
+<h3>What is the potential impact?</h3>
+<p>We measured a significant improvement in execution time by running the following snippet with <a
+href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>.</p>
+<pre>
+private List&lt;byte&gt; data;
+private Random random;
+
+[Params(1_000_000)]
+public int SampleSize;
+
+[Params(1_000)]
+public int LoopSize;
+
+[GlobalSetup]
+public void Setup()
+{
+    random = new Random(42);
+    var bytes = new byte[SampleSize];
+    random.NextBytes(bytes);
+    data = bytes.ToList();
+}
+
+[Benchmark]
+public void ElementAt()
+{
+    for (int i = 0; i &lt; LoopSize; i++)
+    {
+        var index = random.Next(0, SampleSize);
+        _ = data.ElementAt(index);
+    }
+}
+
+[Benchmark]
+public void Index()
+{
+    for (int i = 0; i &lt; LoopSize; i++)
+    {
+        var index = random.Next(0, SampleSize);
+        _ = data[index];
+    }
+}
+
+[Benchmark]
+public void First()
+{
+    for (int i = 0; i &lt; LoopSize; i++)
+    {
+        _ = data.First();
+    }
+}
+
+[Benchmark]
+public void First_Index()
+{
+    for (int i = 0; i &lt; LoopSize; i++)
+    {
+        _ = data[0];
+    }
+}
+
+[Benchmark]
+public void Last()
+{
+    for (int i = 0; i &lt; LoopSize; i++)
+    {
+        _ = data.Last();
+    }
+}
+
+[Benchmark]
+public void Last_Index()
+{
+    for (int i = 0; i &lt; LoopSize; i++)
+    {
+        _ = data[data.Count - 1];
+    }
+}
+</pre>
+<table>
+  <colgroup>
+    <col style="width: 14.2857%;">
+    <col style="width: 14.2857%;">
+    <col style="width: 14.2857%;">
+    <col style="width: 14.2857%;">
+    <col style="width: 14.2857%;">
+    <col style="width: 14.2857%;">
+    <col style="width: 14.2858%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Runtime</th>
+      <th>SampleSize</th>
+      <th>LoopSize</th>
+      <th>Mean</th>
+      <th>Error</th>
+      <th>StdDev</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p>ElementAt</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>1000000</p></td>
+      <td><p>1000</p></td>
+      <td><p>15,193.1 ns</p></td>
+      <td><p>249.59 ns</p></td>
+      <td><p>233.47 ns</p></td>
+    </tr>
+    <tr>
+      <td><p>Index</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>1000000</p></td>
+      <td><p>1000</p></td>
+      <td><p>9,465.6 ns</p></td>
+      <td><p>158.40 ns</p></td>
+      <td><p>148.16 ns</p></td>
+    </tr>
+    <tr>
+      <td><p>First</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>1000000</p></td>
+      <td><p>1000</p></td>
+      <td><p>7,790.2 ns</p></td>
+      <td><p>149.08 ns</p></td>
+      <td><p>165.70 ns</p></td>
+    </tr>
+    <tr>
+      <td><p>First_Index</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>1000000</p></td>
+      <td><p>1000</p></td>
+      <td><p>398.5 ns</p></td>
+      <td><p>5.73 ns</p></td>
+      <td><p>5.36 ns</p></td>
+    </tr>
+    <tr>
+      <td><p>Last</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>1000000</p></td>
+      <td><p>1000</p></td>
+      <td><p>7,398.2 ns</p></td>
+      <td><p>142.51 ns</p></td>
+      <td><p>152.48 ns</p></td>
+    </tr>
+    <tr>
+      <td><p>Last_Index</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>1000000</p></td>
+      <td><p>1000</p></td>
+      <td><p>347.3 ns</p></td>
+      <td><p>6.18 ns</p></td>
+      <td><p>5.47 ns</p></td>
+    </tr>
+    <tr>
+      <td><p>ElementAt</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>1000000</p></td>
+      <td><p>1000</p></td>
+      <td><p>12,205.7 ns</p></td>
+      <td><p>236.02 ns</p></td>
+      <td><p>298.49 ns</p></td>
+    </tr>
+    <tr>
+      <td><p>Index</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>1000000</p></td>
+      <td><p>1000</p></td>
+      <td><p>8,917.8 ns</p></td>
+      <td><p>55.11 ns</p></td>
+      <td><p>51.55 ns</p></td>
+    </tr>
+    <tr>
+      <td><p>First</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>1000000</p></td>
+      <td><p>1000</p></td>
+      <td><p>5,109.1 ns</p></td>
+      <td><p>101.95 ns</p></td>
+      <td><p>100.13 ns</p></td>
+    </tr>
+    <tr>
+      <td><p>First_Index</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>1000000</p></td>
+      <td><p>1000</p></td>
+      <td><p>566.0 ns</p></td>
+      <td><p>7.40 ns</p></td>
+      <td><p>6.56 ns</p></td>
+    </tr>
+    <tr>
+      <td><p>Last</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>1000000</p></td>
+      <td><p>1000</p></td>
+      <td><p>5,052.7 ns</p></td>
+      <td><p>81.27 ns</p></td>
+      <td><p>76.02 ns</p></td>
+    </tr>
+    <tr>
+      <td><p>Last_Index</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>1000000</p></td>
+      <td><p>1000</p></td>
+      <td><p>680.7 ns</p></td>
+      <td><p>10.22 ns</p></td>
+      <td><p>9.56 ns</p></td>
+    </tr>
+  </tbody>
+</table>
+<p>Configuration used for running the benchmarks:</p>
+<pre>
+BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.2846/22H2/2022Update)
+11th Gen Intel Core i7-11850H 2.50GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=7.0.203
+  [Host]               : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+  .NET 7.0             : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+  .NET Framework 4.6.2 : .NET Framework 4.8.1 (4.8.9139.0), X64 RyuJIT VectorSize=256
+</pre>
+<h2>How to fix it</h2>
+<p>If the type you are using implements <code>IList</code> or <code>IList&lt;T&gt;</code>, it implements <code>this[int index]</code>. This means
+calls to <code>First</code>, <code>Last</code>, or <code>ElementAt(index)</code> can be replaced with indexing at <code>0</code>, <code>Count-1</code>
+and <code>index</code> respectively.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+int GetAt(List&lt;int&gt; data, int index)
+    =&gt; data.ElementAt(index);
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+int GetFirst(List&lt;int&gt; data)
+    =&gt; data.First();
+</pre>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+int GetLast(List&lt;int&gt; data)
+    =&gt; data.Last();
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+int GetAt(List&lt;int&gt; data, int index)
+    =&gt; data[index];
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+int GetFirst(List&lt;int&gt; data)
+    =&gt; data[0];
+</pre>
+<pre data-diff-id="3" data-diff-type="compliant">
+int GetLast(List&lt;int&gt; data)
+    =&gt; data[data.Count-1];
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.ilist.item">IList.Item[Int32]</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ilist-1.item">IList&lt;T&gt;.Item[Int32]</a> </li>
+</ul>
+

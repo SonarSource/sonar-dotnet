@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  370,
+"startColumn":  137,
+"endLine":  370,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  371,
+"startColumn":  70,
+"endLine":  371,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  392,
+"startColumn":  50,
+"endLine":  392,
+"endColumn":  55
+}
+}
+}
+]
+}

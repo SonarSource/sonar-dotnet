@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"region":  {
+"startLine":  846,
+"startColumn":  51,
+"endLine":  846,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  77,
+"endLine":  199,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  78,
+"endLine":  210,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  77,
+"endLine":  297,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  84,
+"endLine":  217,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  498,
+"startColumn":  84,
+"endLine":  498,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  680,
+"startColumn":  36,
+"endLine":  680,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  31,
+"endLine":  152,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\TypeExtensions.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  22,
+"endLine":  32,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Util\TypeExtensions.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  22,
+"endLine":  47,
+"endColumn":  27
+}
+}
+}
+]
+}
