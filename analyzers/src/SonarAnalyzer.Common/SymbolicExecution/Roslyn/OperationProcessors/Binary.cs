@@ -141,7 +141,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
                 BinaryOperatorKind.Equals => comparedNumber,
                 BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => NumberConstraint.From(comparedNumber.Min + 1, null),
                 BinaryOperatorKind.GreaterThanOrEqual when comparedNumber.Min.HasValue => NumberConstraint.From(comparedNumber.Min, null),
-                BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue => NumberConstraint.From(null, comparedNumber.Max - 1),
+                BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue => NumberConstraint.From(existingNumber?.Min, comparedNumber.Max - 1),
                 BinaryOperatorKind.LessThanOrEqual when comparedNumber.Max.HasValue => NumberConstraint.From(null, comparedNumber.Max),
                 _ => null
             };

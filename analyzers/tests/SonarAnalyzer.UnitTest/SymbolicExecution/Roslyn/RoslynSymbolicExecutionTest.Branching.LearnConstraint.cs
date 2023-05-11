@@ -1076,7 +1076,7 @@ Tag(""End"", arg);";
     [DataRow("arg >  42 && arg >=  43", 43, null)]
     [DataRow("arg >  42 && arg >=  44", 44, null)]
     [DataRow("arg >  42 && arg >= 100", 100, null)]
-    [DataRow("arg >  42 && arg <  100", null, 99)]  // ToDo #7143: 43, 99
+    [DataRow("arg >  42 && arg <  100", 43, 99)]
     [DataRow("arg >  42 && arg <= 100", null, 100)] // ToDo #7143: 43, 100
     [DataRow("arg >= 42 && arg ==   0", 0, 0)]      // ToDo Should be unreachable
     [DataRow("arg >= 42 && arg == 100", 100, 100)]
@@ -1092,7 +1092,7 @@ Tag(""End"", arg);";
     [DataRow("arg >= 42 && arg >=  42", 42, null)]
     [DataRow("arg >= 42 && arg >=  43", 43, null)]
     [DataRow("arg >= 42 && arg >= 100", 100, null)]  // ToDo #7143: 42, null
-    [DataRow("arg >= 42 && arg <  100", null, 99)]
+    [DataRow("arg >= 42 && arg <  100", 42, 99)]
     [DataRow("arg >= 42 && arg <= 100", null, 100)]
     [DataRow("arg <  42 && arg ==   0", 0, 0)]
     [DataRow("arg <  42 && arg ==  42", 42, 42)]    // ToDo Should be unreachable
