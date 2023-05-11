@@ -1167,7 +1167,7 @@ Tag(""End"", arg);";
     public void Branching_LearnsNumberConstraint_Nested_Collapsed()
     {
         var validator = CreateIfElseEndValidatorCS("arg >= 42 && arg <= 100", OperationKind.Binary, "int");
-        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 100)));  // ToDo #7143: 42, 100
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42, 100)));
         validator.TagValues("Else").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 41)),
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(101, null)));
@@ -1196,7 +1196,7 @@ Tag(""End"", arg);";
             """;
         var validator = SETestContext.CreateCS(code, "int arg").Validator;
         validator.ValidateTag("IfOuter", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42, null)));
-        validator.ValidateTag("IfInner", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 100)));      // ToDo #7143: 42, 100
+        validator.ValidateTag("IfInner", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42, 100)));
         validator.ValidateTag("ElseInner", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(101, null)));
         validator.ValidateTag("ElseOuter", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 41)));
     }
