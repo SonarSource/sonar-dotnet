@@ -44,6 +44,24 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         return state;
     }
 
+    protected override ProgramState PreProcess(ProgramState state, IBinaryOperationWrapper operation)
+    {
+        if (state[operation.LeftOperand]?.Constraint<NumberConstraint>() is { } leftNumber
+            && state[operation.RightOperand]?.Constraint<NumberConstraint>() is { } rightNumber
+            && Calculate(operation.OperatorKind, leftNumber, rightNumber) is { } constraint)
+        {
+            state = state.SetOperationConstraint(operation, constraint);
+        }
+        return state;
+    }
+
+    private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) => kind switch
+    {
+        BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
+        BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
+        _ => null
+    };
+
     private static ProgramState LearnBranchingEqualityConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
         where T : SymbolicConstraint
     {

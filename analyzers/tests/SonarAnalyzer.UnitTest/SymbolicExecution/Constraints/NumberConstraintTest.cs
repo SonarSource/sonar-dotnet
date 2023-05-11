@@ -80,6 +80,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
             NumberConstraint.From(new Exception()).Should().BeNull();
             NumberConstraint.From("Lorem ipsum").Should().BeNull();
             NumberConstraint.From((object)'*').Should().BeNull();
+            NumberConstraint.From(null, null).Should().BeNull();
         }
 
         [TestMethod]
@@ -87,7 +88,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         {
             NumberConstraint.From(42).IsSingleValue.Should().BeTrue();
             NumberConstraint.From(1, 1).IsSingleValue.Should().BeTrue();
-            NumberConstraint.From(null, null).IsSingleValue.Should().BeFalse();
             NumberConstraint.From(null, 42).IsSingleValue.Should().BeFalse();
             NumberConstraint.From(42, null).IsSingleValue.Should().BeFalse();
         }
@@ -98,7 +98,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
             NumberConstraint.From(0).ToString().Should().Be("Number 0");
             NumberConstraint.From(42).ToString().Should().Be("Number 42");
             NumberConstraint.From(1, 1).ToString().Should().Be("Number 1");
-            NumberConstraint.From(null, null).ToString().Should().Be("Number from * to *");
             NumberConstraint.From(null, 42).ToString().Should().Be("Number from * to 42");
             NumberConstraint.From(42, null).ToString().Should().Be("Number from 42 to *");
             NumberConstraint.From(-1, null).ToString().Should().Be("Number from -1 to *");
@@ -106,7 +105,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [DataTestMethod]
-        [DataRow(null, null)]
         [DataRow(42, null)]
         [DataRow(null, 42)]
         [DataRow(42, 42)]
@@ -121,7 +119,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [DataTestMethod]
-        [DataRow(null, null)]
         [DataRow(42, null)]
         [DataRow(null, 42)]
         [DataRow(42, 42)]

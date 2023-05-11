@@ -18,14 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Numerics;
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints;
 
 public sealed class NumberConstraint : SymbolicConstraint
 {
-    public static readonly NumberConstraint Empty = new(null, null);
     public static readonly NumberConstraint Zero = new(0, 0);
     public static readonly NumberConstraint One = new(1, 1);
 
@@ -93,7 +91,7 @@ public sealed class NumberConstraint : SymbolicConstraint
         }
         else
         {
-            return Empty;
+            return null;
         }
     }
 

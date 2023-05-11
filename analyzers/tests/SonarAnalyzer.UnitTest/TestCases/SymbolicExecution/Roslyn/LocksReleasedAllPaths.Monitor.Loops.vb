@@ -6,12 +6,15 @@ Namespace Monitor_Loops
 
         Private Condition As Boolean
         Private Obj As New Object()
+        Private Other As New Object()
 
         Public Sub Method1()
-            Monitor.Enter(Obj)     ' Noncompliant tricky FP, as the execution should always reach number 9, but we don't track that
+            Monitor.Enter(Obj)     ' Compliant for the wrong reason. Should be FP, as the execution should always reach number 9, but we don't track that
             For i As Integer = 0 To 9
                 If i = 9 Then Monitor.Exit(Obj)
             Next
+            Monitor.Enter(Other)    ' FN, exploration stopped after loop
+            If Condition Then Monitor.Exit(Other)
         End Sub
 
         Public Sub Method2()
@@ -23,27 +26,33 @@ Namespace Monitor_Loops
         End Sub
 
         Public Sub Method3()
-            Monitor.Enter(Obj) ' Noncompliant
+            Monitor.Enter(Obj) ' FN, exploration stopped after loop
             For i As Integer = 0 To 9
                 If i = 5 Then Exit For
                 If i = 9 Then Monitor.Exit(Obj)
             Next
+            Monitor.Enter(Other)    ' FN, exploration stopped after loop
+            If Condition Then Monitor.Exit(Other)
         End Sub
 
         Public Sub Method4()
-            Monitor.Enter(Obj) ' Noncompliant tricky FP, as the execution should always reach number 9, but we don't track that
+            Monitor.Enter(Obj) ' Compliant for the wrong reason. Should be FP, as the execution should always reach number 9, but we don't track that
             For i As Integer = 0 To 9
                 If i = 10 Then Exit For
                 If i = 9 Then Monitor.Exit(Obj)
             Next
+            Monitor.Enter(Other)    ' FN, exploration stopped after loop
+            If Condition Then Monitor.Exit(Other)
         End Sub
 
         Public Sub Method5()
-            Monitor.Enter(Obj) ' Noncompliant
+            Monitor.Enter(Obj) ' FN, exploration stopped after loop
             For i As Integer = 0 To 9
                 If i = 9 Then Continue For
                 If i = 9 Then Monitor.Exit(Obj)
             Next
+            Monitor.Enter(Other)    ' FN, exploration stopped after loop
+            If Condition Then Monitor.Exit(Other)
         End Sub
 
         Public Sub Method6(Array() As Byte)
