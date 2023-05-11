@@ -187,4 +187,12 @@ Public Class ClassB
     Public Function Any(ByVal predicate As Func(Of Integer, Boolean)) As Boolean
         Return False
     End Function
+
+    Private Sub CheckEquals(ByVal intList As List(Of Integer), ByVal someInt As Integer)
+        intList.Any(Function(x) Equals(x, someInt, someInt)) ' Noncompliant
+    End Sub
+
+    Private Function Equals(ByVal a As Integer, ByVal b As Integer, ByVal c As Integer) As Boolean
+        Return False
+    End Function
 End Class

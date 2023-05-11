@@ -159,6 +159,13 @@ public class TestClass
         bool MyStringCheck(string x) => x == "";
     }
 
+    void EqualsCheck(List<int> intList, int someInt)
+    {
+        intList.Any(x => Equals(x, someInt, someInt)); // Noncompliant
+
+        bool Equals(int a, int b, int c) => false;
+    }
+
     bool ContainsEvenExpression(List<int> data) =>
         data.Any(x => x % 2 == 0); // Noncompliant
 
