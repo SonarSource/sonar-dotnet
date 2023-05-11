@@ -31,6 +31,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
+        protected override string NameOf => "NameOf";
+
         protected override MethodBlockBaseSyntax MethodSyntax(SyntaxNode node) =>
             node.AncestorsAndSelf().OfType<MethodBlockBaseSyntax>().FirstOrDefault();
 
