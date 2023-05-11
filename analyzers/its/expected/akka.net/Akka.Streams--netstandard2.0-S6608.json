@@ -82,6 +82,32 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"region":  {
+"startLine":  680,
+"startColumn":  36,
+"endLine":  680,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  31,
+"endLine":  152,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
 "uri":  "sources\akka.net\src\core\Akka.Streams\Util\TypeExtensions.cs",
 "region":  {
 "startLine":  32,

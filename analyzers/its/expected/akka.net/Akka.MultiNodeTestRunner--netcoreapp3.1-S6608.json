@@ -51,6 +51,19 @@
 "endColumn":  56
 }
 }
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  526,
+"startColumn":  30,
+"endLine":  526,
+"endColumn":  35
+}
+}
 }
 ]
 }

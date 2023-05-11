@@ -121,6 +121,19 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  42,
+"endLine":  153,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewLocator.cs",
 "region":  {
 "startLine":  129,
