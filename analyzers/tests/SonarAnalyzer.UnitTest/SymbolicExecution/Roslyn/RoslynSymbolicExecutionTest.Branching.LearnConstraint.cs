@@ -987,7 +987,7 @@ Tag(""End"", arg);";
     public void Branching_LearnsNumberConstraint_OnlyIf(string expression, int? expectedIfMin, int? expectedIfMax)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
-        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedIfMin, expectedIfMax)));
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedIfMin, expectedIfMax)));
         validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
     }
 
@@ -1003,8 +1003,8 @@ Tag(""End"", arg);";
     public void Branching_LearnsNumberConstraint_IfElse(string expression, int? expectedIfMin, int? expectedIfMax, int? expectedElseMin, int? expectedElseMax)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
-        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedIfMin, expectedIfMax)));
-        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedElseMin, expectedElseMax)));
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedIfMin, expectedIfMax)));
+        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedElseMin, expectedElseMax)));
     }
 
     [DataTestMethod]
@@ -1019,7 +1019,7 @@ Tag(""End"", arg);";
     public void Branching_LearnsNumberConstraint_IfElse_Nullable(string expression, int? expectedIfMin, int? expectedIfMax)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int?");
-        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedIfMin, expectedIfMax)));
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedIfMin, expectedIfMax)));
         validator.ValidateTag("Else", x => x.Should().HaveNoConstraints("arg could be opposite, or null"));
     }
 
@@ -1097,7 +1097,7 @@ Tag(""End"", arg);";
     public void Branching_LearnsNumberConstraint_IfElse_Combined(string expression, int? expectedIfMin, int? expectedIfMax)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
-        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedIfMin, expectedIfMax)));
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedIfMin, expectedIfMax)));
     }
 
     [DataTestMethod]
@@ -1107,7 +1107,7 @@ Tag(""End"", arg);";
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
         validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedElseMin, expectedElseMax)));
+        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedElseMin, expectedElseMax)));
     }
 
     [TestMethod]
@@ -1116,8 +1116,8 @@ Tag(""End"", arg);";
         var validator = CreateIfElseEndValidatorCS("arg != 42 && arg != 100", OperationKind.Binary, "int");
         validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));     // Visited with unknown value
         validator.TagValues("Else").Should().SatisfyRespectively(                                       // Visited once for each failed condition
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(42, 42)),      // Once we're sure it was 42
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(100, 100)));   // Once we're sure it was 100
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42, 42)),      // Once we're sure it was 42
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(100, 100)));   // Once we're sure it was 100
     }
 
     [TestMethod]
@@ -1195,7 +1195,7 @@ Tag(""End"", arg);";
             }
             """;
         var validator = SETestContext.CreateCS(code, "int arg, int onlyMin, int onlyMax").Validator;
-        validator.ValidateTag("Arg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedMin, expectedMax)));
+        validator.ValidateTag("Arg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
     }
 
     [DataTestMethod]
@@ -1253,7 +1253,4 @@ Tag(""End"", Arg)";
         validator.ValidateContainsOperation(expectedOperation);
         return validator;
     }
-
-    private static NumberConstraint ExpectedNumber(int? min, int? max) =>
-        NumberConstraint.From(min.HasValue ? new BigInteger(min.Value) : null, max.HasValue ? new BigInteger(max.Value) : null);
 }
