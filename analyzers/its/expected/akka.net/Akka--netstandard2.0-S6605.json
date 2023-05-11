@@ -30,6 +30,19 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventBus.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  33,
+"endLine":  66,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
 "uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
 "region":  {
 "startLine":  160,
