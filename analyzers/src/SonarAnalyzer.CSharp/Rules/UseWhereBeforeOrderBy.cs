@@ -24,7 +24,4 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class UseWhereBeforeOrderBy : UseWhereBeforeOrderByBase<SyntaxKind, InvocationExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
-        invocation.TryGetOperands(out left, out right);
 }

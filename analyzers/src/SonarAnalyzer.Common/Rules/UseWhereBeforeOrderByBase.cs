@@ -27,8 +27,6 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
     private const string DiagnosticId = "S6607";
     protected override string MessageFormat => "\"Where\" should be used before \"{0}\"";
 
-    protected abstract bool TryGetOperands(TInvocation invocation, out SyntaxNode left, out SyntaxNode right);
-
     protected UseWhereBeforeOrderByBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -37,7 +35,7 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
             var invocation = (TInvocation)c.Node;
 
             if (Language.GetName(invocation).Equals("Where", Language.NameComparison)
-                && TryGetOperands(invocation, out var left, out var right)
+                && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && LeftHasCorrectName(left, out var orderByMethodDescription)
                 && MethodIsLinqExtension(left, c.SemanticModel)
                 && MethodIsLinqExtension(right, c.SemanticModel))
