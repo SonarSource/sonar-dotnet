@@ -44,7 +44,7 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
             }
         }, Language.SyntaxKind.InvocationExpression);
 
-    internal static bool IsRelevantType(SyntaxNode right, SemanticModel model) =>
+    protected static bool IsRelevantType(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
