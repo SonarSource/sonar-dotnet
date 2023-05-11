@@ -1032,7 +1032,7 @@ Tag(""End"", arg);";
     [DataRow("arg != 42 && arg <= 100", null, 100)] // We don't track arg != 42 in "if" branch. Actual range is -oo-41, 43-100
     [DataRow("arg >  42 && arg == 100", 100, 100)]
     [DataRow("arg >  42 && 100 == arg", 100, 100)]
-    [DataRow("arg >  42 && arg !=  43", 43, null)]  // ToDo #7143: 44, null
+    [DataRow("arg >  42 && arg !=  43", 44, null)]
     [DataRow("arg >  42 && arg != 100", 43, null)]  // Actual value is 43-99, 101-oo
     [DataRow("arg >  42 && arg >    0", 43, null)]
     [DataRow("arg >  42 && arg >   42", 43, null)]
@@ -1043,11 +1043,11 @@ Tag(""End"", arg);";
     [DataRow("arg >  42 && arg >=  43", 43, null)]
     [DataRow("arg >  42 && arg >=  44", 44, null)]
     [DataRow("arg >  42 && arg >= 100", 100, null)]
-    [DataRow("arg >  42 && arg <  100", null, 99)]  // ToDo #7143: 43, 99
-    [DataRow("arg >  42 && arg <= 100", null, 100)] // ToDo #7143: 43, 100
+    [DataRow("arg >  42 && arg <  100", 43, 99)]
+    [DataRow("arg >  42 && arg <= 100", 43, 100)]
     [DataRow("arg >= 42 && arg == 100", 100, 100)]
     [DataRow("arg >= 42 && 100 == arg", 100, 100)]
-    [DataRow("arg >= 42 && arg !=  42", 42, null)]  // ToDo #7143: 43, null
+    [DataRow("arg >= 42 && arg !=  42", 43, null)]
     [DataRow("arg >= 42 && arg != 100", 42, null)]  // Actual value is 42-99, 101-oo
     [DataRow("arg >= 42 && arg >    0", 42, null)]
     [DataRow("arg >= 42 && arg >   41", 42, null)]
@@ -1058,15 +1058,15 @@ Tag(""End"", arg);";
     [DataRow("arg >= 42 && arg >=  41", 42, null)]
     [DataRow("arg >= 42 && arg >=  42", 42, null)]
     [DataRow("arg >= 42 && arg >=  43", 43, null)]
-    [DataRow("arg >= 42 && arg >= 100", 100, null)]  // ToDo #7143: 42, null
-    [DataRow("arg >= 42 && arg <  100", null, 99)]
-    [DataRow("arg >= 42 && arg <= 100", null, 100)]
+    [DataRow("arg >= 42 && arg >= 100", 100, null)]
+    [DataRow("arg >= 42 && arg <  100", 42, 99)]
+    [DataRow("arg >= 42 && arg <= 100", 42, 100)]
     [DataRow("arg <  42 && arg ==   0", 0, 0)]
     [DataRow("arg <  42 &&   0 == arg", 0, 0)]
-    [DataRow("arg <  42 && arg !=  41", null, 41)]  // ToDo #7143: null, 40
+    [DataRow("arg <  42 && arg !=  41", null, 40)]
     [DataRow("arg <  42 && arg !=   0", null, 41)]  // Actual value is oo - -1, 1-41
-    [DataRow("arg <  42 && arg >    0", 1, null)]   // ToDo #7143: 1, 41
-    [DataRow("arg <  42 && arg >=   0", 0, null)]   // ToDo #7143: 0, 41
+    [DataRow("arg <  42 && arg >    0", 1, 41)]
+    [DataRow("arg <  42 && arg >=   0", 0, 41)]
     [DataRow("arg <  42 && arg <    0", null, -1)]
     [DataRow("arg <  42 && arg <   41", null, 40)]
     [DataRow("arg <  42 && arg <   42", null, 41)]
@@ -1081,9 +1081,9 @@ Tag(""End"", arg);";
     [DataRow("arg <= 42 && arg ==  42", 42, 42)]
     [DataRow("arg <= 42 &&  42 == arg", 42, 42)]
     [DataRow("arg <= 42 && arg !=   0", null, 42)]  // Actual value is oo - -1, 1-42
-    [DataRow("arg <= 42 && arg !=  42", null, 42)]  // ToDo #7143: null, 41
-    [DataRow("arg <= 42 && arg >    0", 1, null)]   // ToDo #7143: 1, 42
-    [DataRow("arg <= 42 && arg >=   0", 0, null)]   // ToDo #7143: 0, 42
+    [DataRow("arg <= 42 && arg !=  42", null, 41)]
+    [DataRow("arg <= 42 && arg >    0", 1, 42)]
+    [DataRow("arg <= 42 && arg >=   0", 0, 42)]
     [DataRow("arg <= 42 && arg <    0", null, -1)]
     [DataRow("arg <= 42 && arg <   41", null, 40)]
     [DataRow("arg <= 42 && arg <   42", null, 41)]
@@ -1150,7 +1150,7 @@ Tag(""End"", arg);";
     public void Branching_LearnsNumberConstraint_Nested_Collapsed()
     {
         var validator = CreateIfElseEndValidatorCS("arg >= 42 && arg <= 100", OperationKind.Binary, "int");
-        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 100)));  // ToDo #7143: 42, 100
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42, 100)));
         validator.TagValues("Else").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 41)),
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(101, null)));
@@ -1179,7 +1179,7 @@ Tag(""End"", arg);";
             """;
         var validator = SETestContext.CreateCS(code, "int arg").Validator;
         validator.ValidateTag("IfOuter", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42, null)));
-        validator.ValidateTag("IfInner", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 100)));      // ToDo #7143: 42, 100
+        validator.ValidateTag("IfInner", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42, 100)));
         validator.ValidateTag("ElseInner", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(101, null)));
         validator.ValidateTag("ElseOuter", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 41)));
     }
