@@ -2,7 +2,7 @@
 class Compliant
 {
     int SingleLine() { return 42; } // Single line comment.
-    int BlockComment() { return 42; } /* Single line comment. */
+    int BlockComment() { return 42; } /* Block comment. */
 }
 
 class Noncompliant
@@ -24,7 +24,4 @@ class Noncompliant
 
     // Fixed
     int SeperateLineBlock() { return 42; }
-    /*
-     * return 42;
-     */
 }

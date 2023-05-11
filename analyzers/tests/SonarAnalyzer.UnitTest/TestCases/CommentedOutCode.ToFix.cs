@@ -12,7 +12,7 @@ class Noncompliant
     int SingleLine() { return 42; }// return 42;
 
     // Noncompliant@+1
-    int SingleLineWithSpacing() { return 42; } // return 42;
+    int SingleLineWithSpacing() { return 42; }              // return 42;
 
     // Noncompliant@+2
     int SeperateLine() { return 42; }
