@@ -87,6 +87,10 @@ public class TestClass
         intList.Any(x => someInt == x); // Compliant (should raise S6617)
         intList.Any(x => x.Equals(0)); // Compliant (should raise S6617)
         intList.Any(x => 0.Equals(x)); // Compliant (should raise S6617)
+        intList.Any(x => x is 1); // Noncompliant FP (should raise S6617)
+        intList.Any(x => 1 is x); // Error [CS0150]
+        intList.Any(x => x is someInt); // Error [CS0150]
+        intList.Any(x => someInt is x); // Error [CS0150]
 
         intList.Any(x => x == x); // Noncompliant
         intList.Any(x => someInt == anotherInt); // Noncompliant
@@ -114,6 +118,10 @@ public class TestClass
         stringList.Any(x => x.Equals("")); // Compliant (should raise S6617)
         stringList.Any(x => "".Equals(x)); // Compliant (should raise S6617)
         stringList.Any(x => Equals(x, "")); // Compliant (should raise S6617)
+        stringList.Any(x => x is ""); // Noncompliant FP (should raise S6617)
+        stringList.Any(x => "" is x); // Error [CS0150]
+        stringList.Any(x => x is someString); // Error [CS0150]
+        stringList.Any(x => someString is x); // Error [CS0150]
 
         stringList.Any(x => MyStringCheck(x)); // Noncompliant
         stringList.Any(x => x != "");     // Noncompliant
@@ -136,6 +144,8 @@ public class TestClass
         refList.Any(x => someRef.Equals(x)); // Compliant (should raise S6617)
         refList.Any(x => Equals(someRef, x)); // Compliant (should raise S6617)
         refList.Any(x => Equals(x, someRef)); // Compliant (should raise S6617)
+        refList.Any(x => x is someRef); // Error [CS0150]
+        refList.Any(x => someRef is x); // Error [CS0150]
 
         intList.Any(x => x == null); // Compliant FN (warning: the result of this expression will always be false since a value-type is never equal to null)
         intList.Any(x => x.Equals(null)); // Compliant FN (warning: the result of this expression will always be false since a value-type is never equal to null)

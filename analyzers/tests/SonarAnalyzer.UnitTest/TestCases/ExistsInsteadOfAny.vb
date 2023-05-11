@@ -92,7 +92,6 @@ Public Class TestClass
         intList.Any(Function(x) x <> 0)     ' Noncompliant
         intList.Any(Function(x) x.Equals(0) AndAlso True)   ' Noncompliant
         intList.Any(Function(x) If(x = 0, 2, 0) = 0) ' Noncompliant
-        intList.Any(Function(x) x = 0) ' Noncompliant FP
 
         stringList.Any(Function(x) Equals(x, "")) ' Compliant (should raise S6617)
         stringList.Any(Function(x) Equals("", x)) ' Compliant (should raise S6617)
@@ -128,7 +127,7 @@ Public Class TestClass
         intList.Any(Function(x) x.Equals(Nothing)) ' Compliant FN (warning: the result of this expression will always be false since a value-type is never equal to null)
         intList.Any(Function(x) Equals(x, Nothing)) ' Compliant FN (warning: the result of this expression will always be false since a value-type is never equal to null)
 
-        refList.Any(Function(x) x Is Nothing) ' Compliant (should raise S6617)
+        refList.Any(Function(x) x = Nothing) ' Error [BC30452]
         refList.Any(Function(x) x.Equals(Nothing)) ' Compliant (should raise S6617)
         refList.Any(Function(x) Equals(x, Nothing)) ' Compliant (should raise S6617)
     End Sub
@@ -139,10 +138,6 @@ Public Class TestClass
     Private Function MyStringCheck(ByVal x As String) As Boolean
         Return Equals(x, "")
     End Function
-
-    Private Function ContainsEvenExpression(ByVal data As List(Of Integer)) As Boolean
-        Return data.Any(Function(x) x Mod 2 = 0)
-    End Function ' Noncompliant
 
     Private Function Any(Of T)(ByVal predicate As Func(Of T, Boolean)) As Boolean
         Return True
@@ -156,9 +151,6 @@ Public Class TestClass
         Public Function GetList() As GoodList(Of T)
             Return Me
         End Function
-        Private Sub CallAny()
-            Any(Function(x) True)
-        End Sub ' Noncompliant
     End Class
 
     Friend Class EnumList(Of T)

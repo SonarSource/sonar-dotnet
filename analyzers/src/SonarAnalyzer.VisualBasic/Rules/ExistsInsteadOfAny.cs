@@ -44,17 +44,8 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
         };
 
     private bool HasBinaryValidOperands(string lambdaVariableName, SyntaxNode first, SyntaxNode second, SemanticModel model) =>
-        (AreValidOperands(lambdaVariableName, first, second) && IsNullOrValueTypeOrString(second, model))
-        || (AreValidOperands(lambdaVariableName, second, first) && IsNullOrValueTypeOrString(first, model));
-
-    private static bool IsNullOrValueTypeOrString(SyntaxNode node, SemanticModel model)
-    {
-        if (node.IsKind(SyntaxKind.NothingLiteralExpression))
-        {
-            var a = 1;
-        }
-        return node.IsKind(SyntaxKind.NothingLiteralExpression) || IsValueTypeOrString(node, model);
-    }
+        (AreValidOperands(lambdaVariableName, first, second) && IsValueTypeOrString(second, model))
+        || (AreValidOperands(lambdaVariableName, second, first) && IsValueTypeOrString(first, model));
 
     private bool CheckInvocationArguments(InvocationExpressionSyntax invocation, string lambdaVariableName)
     {

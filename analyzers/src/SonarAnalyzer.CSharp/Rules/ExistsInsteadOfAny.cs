@@ -34,7 +34,7 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
         && lambda.Body switch
         {
             BinaryExpressionSyntax binary =>
-                binary.OperatorToken.IsKind(SyntaxKind.EqualsEqualsToken)
+                binary.OperatorToken.IsAnyKind(SyntaxKind.EqualsEqualsToken)
                 && HasBinaryValidOperands(lambdaVariableName, binary.Left, binary.Right, model),
             InvocationExpressionSyntax invocation =>
                 IsNameEqual(invocation, nameof(Equals))
