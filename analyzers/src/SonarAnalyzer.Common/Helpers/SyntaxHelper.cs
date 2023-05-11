@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal static class SyntaxHelper
 {
-    internal static class SyntaxHelper
+    public static IEnumerable<int> GetLineNumbers(this SyntaxToken token, bool isZeroBasedCount = true)
+        => token.GetLocation().GetLineSpan().GetLineNumbers(isZeroBasedCount);
+
+    public static IEnumerable<int> GetLineNumbers(this FileLinePositionSpan lineSpan, bool isZeroBasedCount = true)
     {
-        public static IEnumerable<int> GetLineNumbers(this SyntaxToken token, bool isZeroBasedCount = true)
-        {
-            var offset = isZeroBasedCount ? 0 : 1;
-            var lineSpan = token.GetLocation().GetLineSpan();
-
-            int start = lineSpan.StartLinePosition.Line + offset;
-            int end = lineSpan.EndLinePosition.Line + offset;
-
-            return Enumerable.Range(start, end - start + 1);
-        }
+        var offset = isZeroBasedCount ? 0 : 1;
+        var start = lineSpan.StartLinePosition.Line + offset;
+        var end = lineSpan.EndLinePosition.Line + offset;
+        return Enumerable.Range(start, end - start + 1);
     }
 }
