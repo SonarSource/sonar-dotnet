@@ -27,7 +27,6 @@ public partial class RoslynSymbolicExecutionTest
 {
     [DataTestMethod]
     [DataRow("for (var i = 0; i < items.Length; i++)")]
-    [DataRow("while (arg > 0)")]
     [DataRow("while (Condition)")]
     public void Loops_InstructionVisitedMaxTwice(string loop)
     {
@@ -35,7 +34,6 @@ public partial class RoslynSymbolicExecutionTest
 {loop}
 {{
     arg.ToString(); // Add another constraint to 'arg'
-    arg -= 1;
 }}
 Tag(""End"", arg);";
         var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("arg")).Validator;

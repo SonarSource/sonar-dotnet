@@ -1394,7 +1394,7 @@ namespace Repro_3395
                 | helper == Helper.C | helper == Helper.D | helper == Helper.E | helper == Helper.F
                 | helper == Helper.G | helper == Helper.H | helper == Helper.I | helper == Helper.J)
             {
-                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
+                o.ToString(); // FN (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
 
@@ -1426,7 +1426,7 @@ namespace Repro_3395
                 ^ helper == Helper.C ^ helper == Helper.D ^ helper == Helper.E ^ helper == Helper.F
                 ^ helper == Helper.G ^ helper == Helper.H ^ helper == Helper.I ^ helper == Helper.J)
             {
-                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
+                o.ToString(); // FN (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
 
@@ -1442,7 +1442,7 @@ namespace Repro_3395
                 | helper != Helper.C | helper != Helper.D | helper != Helper.E | helper != Helper.F
                 | helper == Helper.G | helper == Helper.H | helper == Helper.I | helper == Helper.J)
             {
-                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
+                o.ToString(); // FN (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
 
@@ -1458,7 +1458,7 @@ namespace Repro_3395
                 | helper == Helper.C & helper == Helper.D ^ helper == Helper.E & helper == Helper.F
                 | helper == Helper.G & helper == Helper.H ^ helper == Helper.I & helper == Helper.J)
             {
-                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
+                o.ToString(); // FN (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
     }
