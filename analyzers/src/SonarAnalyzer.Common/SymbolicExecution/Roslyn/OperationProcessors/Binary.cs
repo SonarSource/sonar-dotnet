@@ -28,8 +28,26 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     protected override IBinaryOperationWrapper Convert(IOperation operation) =>
         IBinaryOperationWrapper.FromOperation(operation);
 
+    protected override ProgramState PreProcess(ProgramState state, IBinaryOperationWrapper operation)
+    {
+        if (state[operation.LeftOperand]?.Constraint<NumberConstraint>() is { } leftNumber
+            && state[operation.RightOperand]?.Constraint<NumberConstraint>() is { } rightNumber
+            && Calculate(operation.OperatorKind, leftNumber, rightNumber) is { } constraint)
+        {
+            state = state.SetOperationConstraint(operation, constraint);
+        }
+        return state;
+    }
+
     protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation) =>
         BinaryConstraint(operation.OperatorKind, state[operation.LeftOperand], state[operation.RightOperand]);
+
+    protected override ProgramState PostProcess(ProgramState state, IBinaryOperationWrapper operation) =>
+        (operation.OperatorKind.IsAnyEquality() || operation.OperatorKind.IsAnyRelational())
+        && state[operation.LeftOperand]?.Constraint<NumberConstraint>() is { } leftNumber
+        && state[operation.RightOperand]?.Constraint<NumberConstraint>() is { } rightNumber
+            ? IntersectNumbers(state, operation, leftNumber, rightNumber)
+            : state;
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch)
     {
@@ -44,17 +62,6 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             state = LearnBranchingRelationalObjectConstraint(state, operation, falseBranch) ?? state;
             state = LearnBranchingNumberConstraint(state, operation, falseBranch) ?? state;
-        }
-        return state;
-    }
-
-    protected override ProgramState PreProcess(ProgramState state, IBinaryOperationWrapper operation)
-    {
-        if (state[operation.LeftOperand]?.Constraint<NumberConstraint>() is { } leftNumber
-            && state[operation.RightOperand]?.Constraint<NumberConstraint>() is { } rightNumber
-            && Calculate(operation.OperatorKind, leftNumber, rightNumber) is { } constraint)
-        {
-            state = state.SetOperationConstraint(operation, constraint);
         }
         return state;
     }
@@ -152,6 +159,17 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
                 _ => throw new InvalidOperationException() // Unreachable due to preconditions
             };
     }
+
+    private static ProgramState IntersectNumbers(ProgramState state, IBinaryOperationWrapper binary, NumberConstraint leftNumber, NumberConstraint rightNumber)
+    {
+        state = IntersectNumbers(state, binary.OperatorKind, binary.LeftOperand.TrackedSymbol(), rightNumber);
+        return IntersectNumbers(state, binary.OperatorKind, binary.RightOperand.TrackedSymbol(), leftNumber);
+    }
+
+    private static ProgramState IntersectNumbers(ProgramState state, BinaryOperatorKind kind, ISymbol symbol, NumberConstraint number) =>
+        kind == BinaryOperatorKind.Equals && symbol is not null && number.IsSingleValue
+            ? state.SetSymbolConstraint(symbol, number)
+            : state;
 
     private static SymbolicConstraint BinaryOperandConstraint<T>(ProgramState state, IBinaryOperationWrapper binary) where T : SymbolicConstraint =>
         state[binary.LeftOperand]?.Constraint<T>() ?? state[binary.RightOperand]?.Constraint<T>();

@@ -36,12 +36,15 @@ internal abstract class BranchingProcessor<T> : MultiProcessor<T>
     protected virtual ProgramState PreProcess(ProgramState state, T operation) =>
         state;
 
+    protected virtual ProgramState PostProcess(ProgramState state, T operation) =>
+        state;
+
     protected override ProgramState[] Process(SymbolicContext context, T operation)
     {
         var state = PreProcess(context.State, operation);
         if (BoolConstraintFromOperation(state, operation) is { } constraint)
         {
-            return state.SetOperationConstraint(context.Operation, constraint).ToArray();    // We already know the answer from existing constraints
+            return PostProcess(state.SetOperationConstraint(context.Operation, constraint), operation).ToArray();    // We already know the answer from existing constraints
         }
         else
         {
