@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -37,11 +38,12 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             state = LearnBranchingEqualityConstraint<ObjectConstraint>(state, operation, falseBranch) ?? state;
             state = LearnBranchingEqualityConstraint<BoolConstraint>(state, operation, falseBranch) ?? state;
             state = LearnBranchingEqualityConstraint<NumberConstraint>(state, operation, falseBranch) ?? state;
+            state = LearnBranchingNumberConstraint(state, operation, falseBranch) ?? state;
         }
         else if (operation.OperatorKind.IsAnyRelational())
         {
             state = LearnBranchingRelationalObjectConstraint(state, operation, falseBranch) ?? state;
-            state = LearnBranchingRelationalNumberConstraint(state, operation, falseBranch) ?? state;
+            state = LearnBranchingNumberConstraint(state, operation, falseBranch) ?? state;
         }
         return state;
     }
@@ -92,7 +94,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             ? state.SetSymbolConstraint(testedSymbol, ObjectConstraint.NotNull)
             : null;
 
-    private static ProgramState LearnBranchingRelationalNumberConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
+    private static ProgramState LearnBranchingNumberConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
     {
         var kind = falseBranch ? Opposite(binary.OperatorKind) : binary.OperatorKind;
         // If left and right already had NumberConstraint, BoolConstraintFromOperation already did the job and it will not arrive here.
@@ -118,6 +120,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         static NumberConstraint RelationalNumberConstraint(BinaryOperatorKind kind, NumberConstraint constraint) =>
             kind switch
             {
+                BinaryOperatorKind.Equals => constraint,
                 BinaryOperatorKind.GreaterThan when constraint.Min.HasValue => NumberConstraint.From(constraint.Min + 1, null),
                 BinaryOperatorKind.GreaterThanOrEqual when constraint.Min.HasValue => NumberConstraint.From(constraint.Min, null),
                 BinaryOperatorKind.LessThan when constraint.Max.HasValue => NumberConstraint.From(null, constraint.Max - 1),
@@ -128,6 +131,8 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         static BinaryOperatorKind Flip(BinaryOperatorKind kind) =>
             kind switch
             {
+                BinaryOperatorKind.Equals => BinaryOperatorKind.Equals,
+                BinaryOperatorKind.NotEquals => BinaryOperatorKind.NotEquals,
                 BinaryOperatorKind.GreaterThan => BinaryOperatorKind.LessThan,
                 BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThanOrEqual,
                 BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThan,
@@ -138,6 +143,8 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         static BinaryOperatorKind Opposite(BinaryOperatorKind kind) =>
             kind switch
             {
+                BinaryOperatorKind.Equals => BinaryOperatorKind.NotEquals,
+                BinaryOperatorKind.NotEquals => BinaryOperatorKind.Equals,
                 BinaryOperatorKind.GreaterThan => BinaryOperatorKind.LessThanOrEqual,
                 BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThan,
                 BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThanOrEqual,
@@ -207,8 +214,11 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     private static SymbolicConstraint BinaryNumberConstraint(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) =>
         kind switch
         {
-            BinaryOperatorKind.Equals when left.IsSingleValue && right.IsSingleValue => BoolConstraint.From(left.Equals(right)),
+            BinaryOperatorKind.Equals when left.IsSingleValue => BoolConstraint.From(IsInRange(right, left.Min.Value)),
+            BinaryOperatorKind.Equals when right.IsSingleValue => BoolConstraint.From(IsInRange(left, right.Min.Value)),
             BinaryOperatorKind.NotEquals when left.IsSingleValue && right.IsSingleValue => BoolConstraint.From(!left.Equals(right)),
+            BinaryOperatorKind.NotEquals when left.IsSingleValue && !IsInRange(right, left.Min.Value) => BoolConstraint.True,
+            BinaryOperatorKind.NotEquals when right.IsSingleValue && !IsInRange(left, right.Min.Value) => BoolConstraint.True,
             BinaryOperatorKind.GreaterThan when left.Min > right.Max => BoolConstraint.True,
             BinaryOperatorKind.GreaterThan when left.Max <= right.Min => BoolConstraint.False,
             BinaryOperatorKind.GreaterThanOrEqual when left.Min >= right.Max => BoolConstraint.True,
@@ -219,6 +229,10 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             BinaryOperatorKind.LessThanOrEqual when left.Min > right.Max => BoolConstraint.False,
             _ => null
         };
+
+    private static bool IsInRange(NumberConstraint range, BigInteger value) =>
+        (!range.Min.HasValue || range.Min <= value)
+        && (!range.Max.HasValue || value <= range.Max);
 
     private static SymbolicConstraint BinaryNullConstraint(BinaryOperatorKind kind, bool isNullLeft, bool isNullRight) =>
         isNullLeft || isNullRight
