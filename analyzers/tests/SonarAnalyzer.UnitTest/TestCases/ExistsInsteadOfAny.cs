@@ -5,7 +5,7 @@ using System.Linq;
 
 public class TestClass
 {
-    bool MyMethod(List<int> list, int[] array)
+    void MyMethod(List<int> list, int[] array)
     {
         list.Any(x => x > 0); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
 //           ^^^
@@ -49,25 +49,26 @@ public class TestClass
 
         Any<int>(x => x > 0); // Compliant
         AcceptMethod<int>(goodList.Any); // Compliant
+    }
 
-        goodList.GetList().GetList().GetList().GetList().Any(x => x > 0);     //Noncompliant
-        goodList.GetList().GetList().GetList().GetList()?.Any(x => x > 0);    //Noncompliant
-        goodList.GetList().GetList().GetList()?.GetList().Any(x => x > 0);    //Noncompliant
-        goodList.GetList().GetList().GetList()?.GetList()?.Any(x => x > 0);   //Noncompliant
-        goodList.GetList().GetList()?.GetList().GetList().Any(x => x > 0);    //Noncompliant
-        goodList.GetList().GetList()?.GetList().GetList()?.Any(x => x > 0);   //Noncompliant
-        goodList.GetList().GetList()?.GetList()?.GetList().Any(x => x > 0);   //Noncompliant
-        goodList.GetList().GetList()?.GetList()?.GetList()?.Any(x => x > 0);  //Noncompliant
-        goodList.GetList()?.GetList().GetList().GetList().Any(x => x > 0);    //Noncompliant
-        goodList.GetList()?.GetList().GetList().GetList()?.Any(x => x > 0);   //Noncompliant
-        goodList.GetList()?.GetList().GetList()?.GetList().Any(x => x > 0);   //Noncompliant
-        goodList.GetList()?.GetList().GetList()?.GetList()?.Any(x => x > 0);  //Noncompliant
-        goodList.GetList()?.GetList()?.GetList().GetList().Any(x => x > 0);   //Noncompliant
-        goodList.GetList()?.GetList()?.GetList().GetList()?.Any(x => x > 0);  //Noncompliant
-        goodList.GetList()?.GetList()?.GetList()?.GetList().Any(x => x > 0);  //Noncompliant
-        goodList.GetList()?.GetList()?.GetList()?.GetList()?.Any(x => x > 0); //Noncompliant
-
-        return list.Any(x => x % 2 == 0); // Noncompliant
+    void ConditionalsMatrix(GoodList<int> goodList)
+    {
+        goodList.GetList().GetList().GetList().GetList().Any(x => x > 0);     // Noncompliant
+        goodList.GetList().GetList().GetList().GetList()?.Any(x => x > 0);    // Noncompliant
+        goodList.GetList().GetList().GetList()?.GetList().Any(x => x > 0);    // Noncompliant
+        goodList.GetList().GetList().GetList()?.GetList()?.Any(x => x > 0);   // Noncompliant
+        goodList.GetList().GetList()?.GetList().GetList().Any(x => x > 0);    // Noncompliant
+        goodList.GetList().GetList()?.GetList().GetList()?.Any(x => x > 0);   // Noncompliant
+        goodList.GetList().GetList()?.GetList()?.GetList().Any(x => x > 0);   // Noncompliant
+        goodList.GetList().GetList()?.GetList()?.GetList()?.Any(x => x > 0);  // Noncompliant
+        goodList.GetList()?.GetList().GetList().GetList().Any(x => x > 0);    // Noncompliant
+        goodList.GetList()?.GetList().GetList().GetList()?.Any(x => x > 0);   // Noncompliant
+        goodList.GetList()?.GetList().GetList()?.GetList().Any(x => x > 0);   // Noncompliant
+        goodList.GetList()?.GetList().GetList()?.GetList()?.Any(x => x > 0);  // Noncompliant
+        goodList.GetList()?.GetList()?.GetList().GetList().Any(x => x > 0);   // Noncompliant
+        goodList.GetList()?.GetList()?.GetList().GetList()?.Any(x => x > 0);  // Noncompliant
+        goodList.GetList()?.GetList()?.GetList()?.GetList().Any(x => x > 0);  // Noncompliant
+        goodList.GetList()?.GetList()?.GetList()?.GetList()?.Any(x => x > 0); // Noncompliant
     }
 
     void CheckDelegate(
@@ -75,7 +76,8 @@ public class TestClass
         List<string> stringList,
         int[] intArray,
         string someString,
-        int someInt)
+        int someInt,
+        int anotherInt)
     {
         intList.Any(x => x == 0); // Compliant (should raise S6617)
         intList.Any(x => 0 == x); // Compliant (should raise S6617)
@@ -83,15 +85,24 @@ public class TestClass
         intList.Any(x => someInt == x); // Compliant (should raise S6617)
         intList.Any(x => x.Equals(0)); // Compliant (should raise S6617)
         intList.Any(x => 0.Equals(x)); // Compliant (should raise S6617)
-        intList.Any(x => x.Equals(x + 1)); // Compliant (should raise S6617);
+
+        intList.Any(x => x == x); // Noncompliant
+        intList.Any(x => someInt == anotherInt); // Noncompliant
+        intList.Any(x => someInt == 0); // Noncompliant
+        intList.Any(x => 0 == 0); // Noncompliant
+
+        intList.Any(x => x.Equals(x)); // Noncompliant
+        intList.Any(x => someInt.Equals(anotherInt)); // Noncompliant
+        intList.Any(x => someInt.Equals(0)); // Noncompliant
+        intList.Any(x => 0.Equals(0)); // Noncompliant
+        intList.Any(x => x.Equals(x + 1)); // Noncompliant FP
 
         intList.Any(x => x.GetType() == typeof(int)); // Noncompliant
-        intList.Any(x => x.GetType().Equals(typeof(int))); // Compliant
+        intList.Any(x => x.GetType().Equals(typeof(int))); // Noncompliant FP
         intList.Any(x => MyIntCheck(x)); // Noncompliant
         intList.Any(x => x != 0);     // Noncompliant
         intList.Any(x => x.Equals(0) && true);   // Noncompliant
         intList.Any(x => (x == 0 ? 2 : 0) == 0); // Noncompliant
-        intList.Any(x => x == x); // Compliant FN
         intList.Any(x => { return x == 0; }); // Noncompliant FP
 
         stringList.Any(x => x == ""); // Compliant (should raise S6617)
@@ -100,12 +111,13 @@ public class TestClass
         stringList.Any(x => someString == x); // Compliant (should raise S6617)
         stringList.Any(x => x.Equals("")); // Compliant (should raise S6617)
         stringList.Any(x => "".Equals(x)); // Compliant (should raise S6617)
-        stringList.Any(x => x.Equals("" + someString)); // Compliant (should raise S6617);
+        stringList.Any(x => Equals(x, "")); // Noncompliant FP
 
         stringList.Any(x => MyStringCheck(x)); // Noncompliant
         stringList.Any(x => x != "");     // Noncompliant
         stringList.Any(x => x.Equals("") && true);   // Noncompliant
         stringList.Any(x => (x == "" ? "a" : "b") == "a"); // Noncompliant
+        stringList.Any(x => x.Equals("" + someString)); // Noncompliant FP
 
         intArray.Any(x => x == 0); // Noncompliant (this is not raising S6617)
         intArray.Any(x => 0 == x); // Noncompliant (this is not raising S6617)

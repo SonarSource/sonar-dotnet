@@ -38,7 +38,7 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
         {
             var invocation = (TInvocationExpression)c.Node;
 
-            if (Language.GetName(invocation).Equals(nameof(Enumerable.Any), Language.NameComparison)
+            if (IsNameEqual(invocation, nameof(Enumerable.Any))
                 && HasOneArgument(invocation)
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectCall(right, c.SemanticModel)
@@ -51,7 +51,14 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
             }
         }, Language.SyntaxKind.InvocationExpression);
 
-    internal static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+    protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+
+    protected bool IsNameEqual(SyntaxNode node, string name) =>
+        Language.GetName(node).Equals(name, Language.NameComparison);
+
+    protected static bool IsValueTypeOrString(SyntaxNode expression, SemanticModel model) =>
+        model.GetTypeInfo(expression).Type is { } type
+        && (type.IsValueType || type.Is(KnownType.System_String));
 }

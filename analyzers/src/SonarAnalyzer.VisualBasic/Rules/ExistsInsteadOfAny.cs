@@ -30,19 +30,35 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
 
     protected override bool IsValueEquality(InvocationExpressionSyntax node, SemanticModel model) =>
         node.ArgumentList.Arguments[0].GetExpression() is SingleLineLambdaExpressionSyntax lambda
+        && lambda.SubOrFunctionHeader.ParameterList.Parameters is { Count: 1 } parameters
+        && parameters[0].Identifier.GetName() is var lambdaVariableName
         && lambda.Body switch
         {
             BinaryExpressionSyntax binary =>
                 binary.OperatorToken.IsKind(SyntaxKind.EqualsToken)
-                && IsIdentifierOrLiteralValueType(binary.Left, model)
-                && IsIdentifierOrLiteralValueType(binary.Right, model),
+                && HasValidOperands(lambdaVariableName, binary.Left, binary.Right, model),
             InvocationExpressionSyntax invocation =>
-                Language.GetName(invocation).Equals(nameof(Equals), Language.NameComparison),
+                IsNameEqual(invocation, nameof(Equals))
+                && Language.Syntax.TryGetOperands(invocation, out var left, out _)
+                && invocation.HasExactlyNArguments(1)
+                && HasValidOperands(lambdaVariableName, left, invocation.ArgumentList.Arguments[0].GetExpression(), model, true),
             _ => false
         };
 
-    private static bool IsIdentifierOrLiteralValueType(ExpressionSyntax expression, SemanticModel model) =>
-        expression is IdentifierNameSyntax or LiteralExpressionSyntax
-        && model.GetTypeInfo(expression).Type is { } type
-        && (type.IsValueType || type.Is(KnownType.System_String));
+    private bool HasValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second, SemanticModel model, bool avoidTypeChecks = false)
+    {
+        if (first is IdentifierNameSyntax && second is LiteralExpressionSyntax)
+        {
+            return IsNameEqual(first, lambdaVariable) && (avoidTypeChecks || IsValueTypeOrString(second, model));
+        }
+        if (second is IdentifierNameSyntax && first is LiteralExpressionSyntax)
+        {
+            return IsNameEqual(second, lambdaVariable) && (avoidTypeChecks || IsValueTypeOrString(first, model));
+        }
+        if (first is IdentifierNameSyntax && second is IdentifierNameSyntax)
+        {
+            return !IsNameEqual(first, second.GetName()) && (IsNameEqual(first, lambdaVariable) || IsNameEqual(second, lambdaVariable));
+        }
+        return false;
+    }
 }

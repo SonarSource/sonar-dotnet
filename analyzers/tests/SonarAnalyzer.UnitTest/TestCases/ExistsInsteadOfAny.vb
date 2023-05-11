@@ -4,15 +4,19 @@ Imports System.Collections.Generic
 Imports System.Linq
 
 Public Class TestClass
-    Private Function MyMethod(ByVal data As List(Of Integer)) As Boolean
-        data.Any(Function(x) x > 0) ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
+    Private Sub MyMethod(ByVal list As List(Of Integer), ByVal array As Integer())
+        list.Any(Function(x) x > 0) ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
         '    ^^^
-        data.Append(1).Any(Function(x) x > 0) ' Compliant
-        data.Append(1).Append(2).Any(Function(x) x > 0) ' Compliant
-        data.Append(1).Append(2).Any(Function(x) x > 0).ToString() ' Compliant
 
-        data.Any() ' Compliant (you can't use Exists with no arguments, BC30455)
-        data.Exists(Function(x) x > 0) ' Compliant
+        list.Append(1).Any(Function(x) x > 1) ' Compliant (Appended list becomes an IEnumerable)
+        list.Append(1).Append(2).Any(Function(x) x > 1) ' Compliant
+        Enumerable.Any(Enumerable.Append(Enumerable.Append(list, 1), 2), Function(x) x > 1).ToString() ' Compliant 
+
+        list.Any() ' Compliant (you can't use Exists with no arguments, CS7036)
+        list.Exists(Function(x) x > 0) ' Compliant
+
+        array.Any(Function(x) x > 0) ' Noncompliant
+        array.Any() ' Compliant
 
         Dim classA = New ClassA()
         classA.myListField.Any(Function(x) x > 0) ' Noncompliant
@@ -22,20 +26,29 @@ Public Class TestClass
         Dim classB = New ClassB()
         classB.Any(Function(x) x > 0) ' Compliant
 
-        data?.Any(Function(x) x > 0) ' Noncompliant
-        data?.Any(Function(x) x > 0).ToString() ' Noncompliant
+        list?.Any(Function(x) x > 0) ' Noncompliant
         classB?.Any(Function(x) x > 0) ' Compliant
 
         Dim del As Func(Of Integer, Boolean) = Function(x) True
-        data.Any(del) ' Noncompliant
+        list.Any(del) ' Noncompliant
+
+        Dim enumList = New EnumList(Of Integer)()
+        enumList.Any(Function(x) x > 0) ' Compliant
 
         Dim goodList = New GoodList(Of Integer)()
+        goodList.Any(Function(x) x > 0) ' Noncompliant
 
-        goodList.GetList().Any(Function(x) x > 0) ' Noncompliant
+        Dim ternary = If(True, list, goodList).Any(Function(x) x > 0) ' Noncompliant
+        Dim nullCoalesce = If(list, goodList).Any(Function(x) x > 0) ' Noncompliant
+        Dim ternaryNullCoalesce = If(list, If(True, list, goodList)).Any(Function(x) x > 0) ' Noncompliant
+
+        goodList.GetList().Any(Function(x) True) ' Noncompliant
 
         Any(Of Integer)(Function(x) x > 0) ' Compliant
-        Dim inlineInitialization = {42}.Any(Function(x) x > 0) ' FN .GetTypeInfo(CollectionInitializer) returns null
+        Call AcceptMethod(New Func(Of Func(Of Integer, Boolean), Boolean)(AddressOf goodList.Any)) ' Compliant
+    End Sub
 
+    Private Sub ConditionalsMatrix(ByVal goodList As GoodList(Of Integer))
         goodList.GetList().GetList().GetList().GetList().Any(Function(x) x > 0)     ' Noncompliant
         goodList.GetList().GetList().GetList().GetList()?.Any(Function(x) x > 0)    ' Noncompliant
         goodList.GetList().GetList().GetList()?.GetList().Any(Function(x) x > 0)    ' Noncompliant
@@ -52,36 +65,64 @@ Public Class TestClass
         goodList.GetList()?.GetList()?.GetList().GetList()?.Any(Function(x) x > 0)  ' Noncompliant
         goodList.GetList()?.GetList()?.GetList()?.GetList().Any(Function(x) x > 0)  ' Noncompliant
         goodList.GetList()?.GetList()?.GetList()?.GetList()?.Any(Function(x) x > 0) ' Noncompliant
+    End Sub
 
-        Return data.Any(Function(x) x Mod 2 = 0) ' Noncompliant
-    End Function
-
-    Private Sub CheckDelegate(ByVal intList As List(Of Integer), ByVal stringList As List(Of String), ByVal customList As List(Of ClassA), ByVal someString As String, ByVal someInt As Integer)
+    Private Sub CheckDelegate(ByVal intList As List(Of Integer), ByVal stringList As List(Of String), ByVal intArray As Integer(), ByVal someString As String, ByVal someInt As Integer, ByVal anotherInt As Integer)
         intList.Any(Function(x) x = 0) ' Compliant (should raise S6617)
         intList.Any(Function(x) 0 = x) ' Compliant (should raise S6617)
         intList.Any(Function(x) x = someInt) ' Compliant (should raise S6617)
         intList.Any(Function(x) someInt = x) ' Compliant (should raise S6617)
         intList.Any(Function(x) x.Equals(0)) ' Compliant (should raise S6617)
         intList.Any(Function(x) 0.Equals(x)) ' Compliant (should raise S6617)
-        intList.Any(Function(x) x.Equals(x + 1)) ' Compliant (should raise S6617)
-        intList.Any(Function(x) x.Equals(0) AndAlso True) ' Noncompliant
-        intList.Any(Function(x) (If(x = 0, 2, 0)) = 0) ' Noncompliant
+
+        intList.Any(Function(x) x = x) ' Noncompliant
+        intList.Any(Function(x) someInt = anotherInt) ' Noncompliant
+        intList.Any(Function(x) someInt = 0) ' Noncompliant
+        intList.Any(Function(x) 0 = 0) ' Noncompliant
+
+        intList.Any(Function(x) x.Equals(x)) ' Noncompliant
+        intList.Any(Function(x) someInt.Equals(anotherInt)) ' Noncompliant
+        intList.Any(Function(x) someInt.Equals(0)) ' Noncompliant
+        intList.Any(Function(x) 0.Equals(0)) ' Noncompliant
+        intList.Any(Function(x) x.Equals(x + 1)) ' Noncompliant FP
+
+        intList.Any(Function(x) x.GetType() Is GetType(Integer)) ' Noncompliant
+        intList.Any(Function(x) x.GetType().Equals(GetType(Integer))) ' Noncompliant FP
+        intList.Any(Function(x) MyIntCheck(x)) ' Noncompliant
+        intList.Any(Function(x) x <> 0)     ' Noncompliant
+        intList.Any(Function(x) x.Equals(0) AndAlso True)   ' Noncompliant
+        intList.Any(Function(x) If(x = 0, 2, 0) = 0) ' Noncompliant
 
         stringList.Any(Function(x) x = "") ' Compliant (should raise S6617)
         stringList.Any(Function(x) "" = x) ' Compliant (should raise S6617)
         stringList.Any(Function(x) x = someString) ' Compliant (should raise S6617)
-        stringList.Any(Function(x) someString = x) ' Compliant (should raise S6617)
+        stringList.Any(Function(x) x.Equals(someString)) ' Compliant (should raise S6617)
+        stringList.Any(Function(x) someString.Equals(x)) ' Compliant (should raise S6617)
         stringList.Any(Function(x) x.Equals("")) ' Compliant (should raise S6617)
         stringList.Any(Function(x) "".Equals(x)) ' Compliant (should raise S6617)
-        stringList.Any(Function(x) x.Equals("" & someString)) ' Compliant (should raise S6617)
-        stringList.Any(Function(x) x.Equals("") AndAlso True) ' Noncompliant
-        stringList.Any(Function(x) (If(x = "", "a", "b")) = "a") ' Noncompliant
+        stringList.Any(Function(x) Equals(x, "")) ' Noncompliant FP
 
-        customList.Any(Function(x) x.Equals()) ' FN
+        stringList.Any(Function(x) MyStringCheck(x)) ' Noncompliant
+        stringList.Any(Function(x) Not Equals(x, ""))     ' Noncompliant
+        stringList.Any(Function(x) x.Equals("") AndAlso True)   ' Noncompliant
+        stringList.Any(Function(x) Equals(If(Equals(x, ""), "a", "b"), "a")) ' Noncompliant
+        stringList.Any(Function(x) x.Equals("" & someString)) ' Noncompliant FP
+
+        intArray.Any(Function(x) x = 0) ' Noncompliant (this is not raising S6617)
+        intArray.Any(Function(x) 0 = x) ' Noncompliant (this is not raising S6617)
+        intArray.Any(Function(x) x = someInt) ' Noncompliant (this is not raising S6617)
+        intArray.Any(Function(x) someInt = x) ' Noncompliant (this is not raising S6617)
+        intArray.Any(Function(x) x.Equals(0)) ' Noncompliant (this is not raising S6617)
+        intArray.Any(Function(x) 0.Equals(x)) ' Noncompliant (this is not raising S6617)
+        intArray.Any(Function(x) x.Equals(x + 1)) ' Noncompliant (this is not raising S6617)
     End Sub
 
-    Private Function ContainsEvenExpression(ByVal data As List(Of Integer)) As Boolean
-        Return data.Any(Function(x) x Mod 2 = 0) ' Noncompliant
+    Private Function MyIntCheck(ByVal x As Integer) As Boolean
+        Return x = 0
+    End Function
+
+    Private Function MyStringCheck(ByVal x As String) As Boolean
+        Return Equals(x, "")
     End Function
 
     Private Function Any(Of T)(ByVal predicate As Func(Of T, Boolean)) As Boolean
@@ -91,31 +132,27 @@ Public Class TestClass
     Private Sub AcceptMethod(Of T)(ByVal methodThatLooksLikeAny As Func(Of Func(Of T, Boolean), Boolean))
     End Sub
 
-    Private Class GoodList(Of T)
+    Friend Class GoodList(Of T)
         Inherits List(Of T)
-
         Public Function GetList() As GoodList(Of T)
             Return Me
         End Function
-
         Private Sub CallAny()
-            Me.Any(Function(x) True) ' Noncompliant
+            Any(Function(x) True) ' Compliant
         End Sub
     End Class
 
-    Private Class EnumList(Of T)
+    Friend Class EnumList(Of T)
         Implements IEnumerable(Of T)
-
         Public Function GetEnumerator() As IEnumerator(Of T) Implements IEnumerable(Of T).GetEnumerator
             Return Nothing
         End Function
-
-        Private Function IEnumerable_GetEnumerator() As IEnumerator Implements IEnumerable.GetEnumerator
+        Private Function GetEnumerator1() As IEnumerator Implements IEnumerable.GetEnumerator
             Return Nothing
         End Function
     End Class
 
-    Public Class ClassA
+    Friend Class ClassA
         Public myListField As List(Of Integer) = New List(Of Integer)()
 
         Public Property myListProperty As List(Of Integer)
@@ -129,17 +166,14 @@ Public Class TestClass
             End Set
         End Property
 
-        Public Function Equals() As Boolean
-            Return False
-        End Function
-
         Public classB As ClassB = New ClassB()
     End Class
 End Class
 
 Public Class ClassB
     Public myListField As List(Of Integer) = New List(Of Integer)()
-    Public Function Any(ByVal predicate As Func(Of Boolean, Boolean)) As Boolean
+
+    Public Function Any(ByVal predicate As Func(Of Integer, Boolean)) As Boolean
         Return False
     End Function
 End Class
