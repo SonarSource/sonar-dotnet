@@ -36,29 +36,49 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
         {
             BinaryExpressionSyntax binary =>
                 binary.OperatorToken.IsKind(SyntaxKind.EqualsToken)
-                && HasValidOperands(lambdaVariableName, binary.Left, binary.Right, model),
+                && HasBinaryValidOperands(lambdaVariableName, binary.Left, binary.Right, model),
             InvocationExpressionSyntax invocation =>
                 IsNameEqual(invocation, nameof(Equals))
-                && Language.Syntax.TryGetOperands(invocation, out var left, out _)
-                && invocation.HasExactlyNArguments(1)
-                && HasValidOperands(lambdaVariableName, left, invocation.ArgumentList.Arguments[0].GetExpression(), model, true),
+                && CheckInvocationArguments(invocation, lambdaVariableName),
             _ => false
         };
 
-    private bool HasValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second, SemanticModel model, bool avoidTypeChecks = false)
+    private bool HasBinaryValidOperands(string lambdaVariableName, SyntaxNode first, SyntaxNode second, SemanticModel model) =>
+        (AreValidOperands(lambdaVariableName, first, second) && IsNullOrValueTypeOrString(second, model))
+        || (AreValidOperands(lambdaVariableName, second, first) && IsNullOrValueTypeOrString(first, model));
+
+    private static bool IsNullOrValueTypeOrString(SyntaxNode node, SemanticModel model)
     {
-        if (first is IdentifierNameSyntax && second is LiteralExpressionSyntax)
+        if (node.IsKind(SyntaxKind.NothingLiteralExpression))
         {
-            return IsNameEqual(first, lambdaVariable) && (avoidTypeChecks || IsValueTypeOrString(second, model));
+            var a = 1;
         }
-        if (second is IdentifierNameSyntax && first is LiteralExpressionSyntax)
+        return node.IsKind(SyntaxKind.NothingLiteralExpression) || IsValueTypeOrString(node, model);
+    }
+
+    private bool CheckInvocationArguments(InvocationExpressionSyntax invocation, string lambdaVariableName)
+    {
+        if (invocation.HasExactlyNArguments(1))
         {
-            return IsNameEqual(second, lambdaVariable) && (avoidTypeChecks || IsValueTypeOrString(first, model));
+            return Language.Syntax.TryGetOperands(invocation, out var left, out _)
+                && HasInvocationValidOperands(left, invocation.ArgumentList.Arguments[0].GetExpression());
         }
-        if (first is IdentifierNameSyntax && second is IdentifierNameSyntax)
+        if (invocation.HasExactlyNArguments(2))
         {
-            return !IsNameEqual(first, second.GetName()) && (IsNameEqual(first, lambdaVariable) || IsNameEqual(second, lambdaVariable));
+            return HasInvocationValidOperands(invocation.ArgumentList.Arguments[0].GetExpression(), invocation.ArgumentList.Arguments[1].GetExpression());
         }
         return false;
+
+        bool HasInvocationValidOperands(SyntaxNode first, SyntaxNode second) =>
+            AreValidOperands(lambdaVariableName, first, second) || AreValidOperands(lambdaVariableName, second, first);
     }
+
+    private bool AreValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second) =>
+        first is IdentifierNameSyntax && IsNameEqual(first, lambdaVariable)
+        && second switch
+        {
+            LiteralExpressionSyntax => true,
+            IdentifierNameSyntax => !IsNameEqual(first, second.GetName()),
+            _ => false,
+        };
 }

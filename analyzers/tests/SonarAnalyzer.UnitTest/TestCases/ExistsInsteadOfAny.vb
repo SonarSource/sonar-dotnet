@@ -67,7 +67,7 @@ Public Class TestClass
         goodList.GetList()?.GetList()?.GetList()?.GetList()?.Any(Function(x) x > 0) ' Noncompliant
     End Sub
 
-    Private Sub CheckDelegate(ByVal intList As List(Of Integer), ByVal stringList As List(Of String), ByVal intArray As Integer(), ByVal someString As String, ByVal someInt As Integer, ByVal anotherInt As Integer)
+    Private Sub CheckDelegate(ByVal intList As List(Of Integer), ByVal stringList As List(Of String), ByVal refList As List(Of ClassA), ByVal intArray As Integer(), ByVal someString As String, ByVal someInt As Integer, ByVal anotherInt As Integer, ByVal someRef As ClassA)
         intList.Any(Function(x) x = 0) ' Compliant (should raise S6617)
         intList.Any(Function(x) 0 = x) ' Compliant (should raise S6617)
         intList.Any(Function(x) x = someInt) ' Compliant (should raise S6617)
@@ -84,7 +84,7 @@ Public Class TestClass
         intList.Any(Function(x) someInt.Equals(anotherInt)) ' Noncompliant
         intList.Any(Function(x) someInt.Equals(0)) ' Noncompliant
         intList.Any(Function(x) 0.Equals(0)) ' Noncompliant
-        intList.Any(Function(x) x.Equals(x + 1)) ' Noncompliant FP
+        intList.Any(Function(x) x.Equals(x + 1)) ' Noncompliant
 
         intList.Any(Function(x) x.GetType() Is GetType(Integer)) ' Noncompliant
         intList.Any(Function(x) x.GetType().Equals(GetType(Integer))) ' Noncompliant FP
@@ -92,21 +92,21 @@ Public Class TestClass
         intList.Any(Function(x) x <> 0)     ' Noncompliant
         intList.Any(Function(x) x.Equals(0) AndAlso True)   ' Noncompliant
         intList.Any(Function(x) If(x = 0, 2, 0) = 0) ' Noncompliant
+        intList.Any(Function(x) x = 0) ' Noncompliant FP
 
-        stringList.Any(Function(x) x = "") ' Compliant (should raise S6617)
-        stringList.Any(Function(x) "" = x) ' Compliant (should raise S6617)
-        stringList.Any(Function(x) x = someString) ' Compliant (should raise S6617)
-        stringList.Any(Function(x) x.Equals(someString)) ' Compliant (should raise S6617)
-        stringList.Any(Function(x) someString.Equals(x)) ' Compliant (should raise S6617)
+        stringList.Any(Function(x) Equals(x, "")) ' Compliant (should raise S6617)
+        stringList.Any(Function(x) Equals("", x)) ' Compliant (should raise S6617)
+        stringList.Any(Function(x) Equals(x, someString)) ' Compliant (should raise S6617)
+        stringList.Any(Function(x) Equals(someString, x)) ' Compliant (should raise S6617)
         stringList.Any(Function(x) x.Equals("")) ' Compliant (should raise S6617)
         stringList.Any(Function(x) "".Equals(x)) ' Compliant (should raise S6617)
-        stringList.Any(Function(x) Equals(x, "")) ' Noncompliant FP
+        stringList.Any(Function(x) Equals(x, "")) ' Compliant (should raise S6617)
 
         stringList.Any(Function(x) MyStringCheck(x)) ' Noncompliant
         stringList.Any(Function(x) Not Equals(x, ""))     ' Noncompliant
         stringList.Any(Function(x) x.Equals("") AndAlso True)   ' Noncompliant
         stringList.Any(Function(x) Equals(If(Equals(x, ""), "a", "b"), "a")) ' Noncompliant
-        stringList.Any(Function(x) x.Equals("" & someString)) ' Noncompliant FP
+        stringList.Any(Function(x) x.Equals("" & someString)) ' Noncompliant
 
         intArray.Any(Function(x) x = 0) ' Noncompliant (this is not raising S6617)
         intArray.Any(Function(x) 0 = x) ' Noncompliant (this is not raising S6617)
@@ -114,16 +114,35 @@ Public Class TestClass
         intArray.Any(Function(x) someInt = x) ' Noncompliant (this is not raising S6617)
         intArray.Any(Function(x) x.Equals(0)) ' Noncompliant (this is not raising S6617)
         intArray.Any(Function(x) 0.Equals(x)) ' Noncompliant (this is not raising S6617)
+        intArray.Any(Function(x) someInt.Equals(x)) ' Noncompliant (this is not raising S6617)
         intArray.Any(Function(x) x.Equals(x + 1)) ' Noncompliant (this is not raising S6617)
+
+        refList.Any(Function(x) x Is someRef) ' Noncompliant (this is not raising S6617)
+        refList.Any(Function(x) someRef Is x) ' Noncompliant (this is not raising S6617)
+        refList.Any(Function(x) x.Equals(someRef)) ' Compliant (should raise S6617)
+        refList.Any(Function(x) someRef.Equals(x)) ' Compliant (should raise S6617)
+        refList.Any(Function(x) Equals(someRef, x)) ' Compliant (should raise S6617)
+        refList.Any(Function(x) Equals(x, someRef)) ' Compliant (should raise S6617)
+
+        intList.Any(Function(x) x Is Nothing) ' Error [BC30020]
+        intList.Any(Function(x) x.Equals(Nothing)) ' Compliant FN (warning: the result of this expression will always be false since a value-type is never equal to null)
+        intList.Any(Function(x) Equals(x, Nothing)) ' Compliant FN (warning: the result of this expression will always be false since a value-type is never equal to null)
+
+        refList.Any(Function(x) x Is Nothing) ' Compliant (should raise S6617)
+        refList.Any(Function(x) x.Equals(Nothing)) ' Compliant (should raise S6617)
+        refList.Any(Function(x) Equals(x, Nothing)) ' Compliant (should raise S6617)
     End Sub
 
     Private Function MyIntCheck(ByVal x As Integer) As Boolean
         Return x = 0
     End Function
-
     Private Function MyStringCheck(ByVal x As String) As Boolean
         Return Equals(x, "")
     End Function
+
+    Private Function ContainsEvenExpression(ByVal data As List(Of Integer)) As Boolean
+        Return data.Any(Function(x) x Mod 2 = 0)
+    End Function ' Noncompliant
 
     Private Function Any(Of T)(ByVal predicate As Func(Of T, Boolean)) As Boolean
         Return True
@@ -138,8 +157,8 @@ Public Class TestClass
             Return Me
         End Function
         Private Sub CallAny()
-            Any(Function(x) True) ' Compliant
-        End Sub
+            Any(Function(x) True)
+        End Sub ' Noncompliant
     End Class
 
     Friend Class EnumList(Of T)
