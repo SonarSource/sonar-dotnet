@@ -21,19 +21,17 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class SetPropertiesInsteadOfMethods : SetPropertiesInsteadOfMethodsBase<SyntaxKind>
+public sealed class SetPropertiesInsteadOfMethods : SetPropertiesInsteadOfMethodsBase<SyntaxKind, InvocationExpressionSyntax>
 {
-
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+    protected override bool HasCorrectArgumentCount(InvocationExpressionSyntax invocation) =>
+        invocation.ArgumentList?.Arguments.Count == 1;
+
+    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode typeNode, out SyntaxNode methodNode)
+    {
+        typeNode = invocation.ArgumentList.Arguments[0];
+        methodNode = invocation;
+        return typeNode is not null && methodNode is not null;
+    }
 }

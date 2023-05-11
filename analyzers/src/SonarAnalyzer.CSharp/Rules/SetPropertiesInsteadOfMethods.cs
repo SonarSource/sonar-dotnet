@@ -21,19 +21,13 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class SetPropertiesInsteadOfMethods : SetPropertiesInsteadOfMethodsBase<SyntaxKind>
+public sealed class SetPropertiesInsteadOfMethods : SetPropertiesInsteadOfMethodsBase<SyntaxKind, InvocationExpressionSyntax>
 {
-
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+    protected override bool HasCorrectArgumentCount(InvocationExpressionSyntax invocation) =>
+        invocation.HasExactlyNArguments(0);
+
+    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode typeNode, out SyntaxNode methodNode) =>
+        invocation.TryGetOperands(out typeNode, out methodNode);
 }

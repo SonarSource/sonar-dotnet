@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -28,12 +27,11 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class SetPropertiesInsteadOfMethodsTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SetPropertiesInsteadOfMethods>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.SetPropertiesInsteadOfMethods>();
 
     [TestMethod]
     public void SetPropertiesInsteadOfMethods_CS() =>
         builderCS.AddPaths("SetPropertiesInsteadOfMethods.cs").Verify();
-
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.SetPropertiesInsteadOfMethods>();    // FIXME: Move this up
 
     [TestMethod]
     public void SetPropertiesInsteadOfMethods_VB() =>
