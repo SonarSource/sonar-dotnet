@@ -1159,6 +1159,46 @@ Tag(""End"", arg);";
     }
 
     [DataTestMethod]
+    [DataRow("arg <  onlyMin")]
+    [DataRow("arg <= onlyMin")]
+    [DataRow("arg >  onlyMax")]
+    [DataRow("arg >= onlyMax")]
+    public void Branching_LearnsNumberConstraint_FromRanges_NoNumber(string expression)
+    {
+        var code = $$"""
+            if (onlyMin >= 0 && onlyMax <= 100)  // Prepare ranged value to compare with
+            {
+                if ({{expression}})
+                {
+                    Tag("Arg", arg);
+                }
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg, int onlyMin, int onlyMax").Validator;
+        validator.ValidateTag("Arg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+    }
+
+    [DataTestMethod]
+    [DataRow("arg >  onlyMin", 1, null)]
+    [DataRow("arg >= onlyMin", 0, null)]
+    [DataRow("arg <  onlyMax", null, 99)]
+    [DataRow("arg <= onlyMax", null, 100)]
+    public void Branching_LearnsNumberConstraint_FromRanges_HasNumber(string expression, int? expectedMin, int? expectedMax)
+    {
+        var code = $$"""
+            if (onlyMin >= 0 && onlyMax <= 100)  // Prepare ranged value to compare with
+            {
+                if ({{expression}})
+                {
+                    Tag("Arg", arg);
+                }
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg, int onlyMin, int onlyMax").Validator;
+        validator.ValidateTag("Arg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, ExpectedNumber(expectedMin, expectedMax)));
+    }
+
+    [DataTestMethod]
     [DataRow("arg == 42 && arg == 100")]
     [DataRow("arg == 42 && arg !=  42")]
     [DataRow("arg == 42 && arg >  100")]
