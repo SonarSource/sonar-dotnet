@@ -80,7 +80,6 @@ public sealed class NumberConstraint : SymbolicConstraint
             uint v => From(new BigInteger(v)),
             long v => From(new BigInteger(v)),
             ulong v => From(new BigInteger(v)),
-            BigInteger v => From(v),
             _ => null
         };
 

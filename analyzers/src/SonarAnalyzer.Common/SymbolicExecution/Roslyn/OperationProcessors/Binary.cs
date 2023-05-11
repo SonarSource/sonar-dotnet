@@ -63,7 +63,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
         BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
         BinaryOperatorKind.Multiply => CalculateMultiply(left, right),
-        BinaryOperatorKind.And when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min & right.Min),
+        BinaryOperatorKind.And when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value & right.Min.Value),
         BinaryOperatorKind.And => CalculateAnd(left, right),
         _ => null
     };
@@ -88,20 +88,18 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
 
     private static NumberConstraint CalculateAnd(NumberConstraint left, NumberConstraint right)
     {
-        var min = left.Max < 0 && right.Max < 0
-            ? Magnitude(BigInteger.Min(left.Max ?? 0, right.Max ?? 0))
+        var min = left.Max < 0 && right.Max < 0 && left.Min.HasValue && right.Min.HasValue
+            ? NegativeMagnitude(BigInteger.Min(left.Min.Value, right.Min.Value))
             : 0;
-
         // If both operands are negative, the result is negative. Otherwise, it is positive.
         // If operands are both negative or both positive the result cannot be bigger than the smaller of the two.
         // If the operands have different signs, the result cannot be bigger than the positive one.
-        // Therefore follows:
         BigInteger? max;
         if (left.Max > 0 ^ right.Max > 0)
         {
             max = BigInteger.Max(left.Max ?? 0, right.Max ?? 0);
         }
-        else if (left.Max is not null && right.Max is not null)
+        else if (left.Max.HasValue && right.Max.HasValue)
         {
             max = BigInteger.Min(left.Max.Value, right.Max.Value);
         }
@@ -112,10 +110,17 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         return NumberConstraint.From(min, max);
     }
 
-    private static BigInteger? Magnitude(BigInteger value)
+    private static BigInteger? NegativeMagnitude(BigInteger value)
     {
-        BigInteger m = 2;
-        while (value / m > 1)
+        // For various inputs, we're looking for the longest chain of 1 from the MSB side
+        // 11000000 - 64
+        // 11000001 - 63
+        // 11000010 - 62
+        // ------------ -
+        // 11000000 - 64 expected result
+        // ^^
+        BigInteger m = -1;
+        while (value < m)
         {
             m *= 2;
         }
