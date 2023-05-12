@@ -25,7 +25,7 @@ public abstract class SetPropertiesInsteadOfMethodsBase<TSyntaxKind, TInvocation
     where TInvocation : SyntaxNode
 {
     private const string DiagnosticId = "S6609";
-    protected override string MessageFormat => "'{0}' property of Set type should be used instead of the '{0}()' extension method.";
+    protected override string MessageFormat => "\"{0}\" property of Set type should be used instead of the \"{0}()\" extension method.";
 
     private static readonly ImmutableArray<KnownType> TargetTypes = ImmutableArray.Create(
         KnownType.System_Collections_Generic_SortedSet_T,

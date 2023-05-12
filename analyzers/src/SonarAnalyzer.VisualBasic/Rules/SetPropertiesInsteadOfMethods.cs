@@ -28,9 +28,10 @@ public sealed class SetPropertiesInsteadOfMethods : SetPropertiesInsteadOfMethod
     protected override bool HasCorrectArgumentCount(InvocationExpressionSyntax invocation) =>
         invocation.ArgumentList?.Arguments.Count == 1;
 
+    // In VB you need to be explicit: Enumerable.Min(set), because set.Min() resolves to the property.
     protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode typeNode, out SyntaxNode methodNode)
     {
-        typeNode = invocation.ArgumentList.Arguments[0];
+        typeNode = invocation.ArgumentList.Arguments[0].GetExpression();
         methodNode = invocation;
         return typeNode is not null && methodNode is not null;
     }
