@@ -99,6 +99,9 @@ public sealed class NumberConstraint : SymbolicConstraint
         }
     }
 
+    public bool CanContain(BigInteger value) =>
+        (!Min.HasValue || Min <= value) && (!Max.HasValue || value <= Max);
+
     public override bool Equals(object obj) =>
         obj is NumberConstraint other && other.Min == Min && other.Max == Max;
 
