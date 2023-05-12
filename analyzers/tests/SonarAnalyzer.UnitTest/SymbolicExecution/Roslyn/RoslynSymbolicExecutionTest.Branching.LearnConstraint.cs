@@ -1263,6 +1263,32 @@ Tag(""End"", arg);";
     public void Branching_LearnsNumberConstraint_Unreachable(string expression) =>
         CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int").TagStates("If").Should().BeEmpty();
 
+    [DataTestMethod]
+    [DataRow("arg == 42", "arg != 0", 42, 42)]
+    [DataRow("arg >  42", "arg != 0", 43, null)]
+    [DataRow("arg >= 42", "arg != 0", 42, null)]
+    [DataRow("arg <   0", "arg != 42", null, -1)]
+    [DataRow("arg <=  0", "arg != 42", null, 0)]
+    public void Branching_LearnsNumberConstraint_NotEqualsTrue(string range, string expression, int? expectedMin, int? expectedMax)
+    {
+        var code = $$"""
+            if ({{range}})  // Prepare range to compare against
+            {
+                if ({{expression}})
+                {
+                    Tag("If", arg);
+                }
+                else
+                {
+                    Tag("Unreachable");
+                }
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg").Validator;
+        validator.ValidateTagOrder("If");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
+    }
+
     private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation, string argType = "object")
     {
         var code = @$"
