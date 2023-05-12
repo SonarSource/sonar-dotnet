@@ -237,6 +237,8 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         kind switch
         {
             BinaryOperatorKind.Equals when left.IsSingleValue && right.IsSingleValue => BoolConstraint.From(left.Equals(right)),
+            BinaryOperatorKind.Equals when left.IsSingleValue && !right.CanContain(left.Min.Value) => BoolConstraint.False,
+            BinaryOperatorKind.Equals when right.IsSingleValue && !left.CanContain(right.Min.Value) => BoolConstraint.False,
             BinaryOperatorKind.NotEquals when left.IsSingleValue && right.IsSingleValue => BoolConstraint.From(!left.Equals(right)),
             BinaryOperatorKind.GreaterThan when left.Min > right.Max => BoolConstraint.True,
             BinaryOperatorKind.GreaterThan when left.Max <= right.Min => BoolConstraint.False,
