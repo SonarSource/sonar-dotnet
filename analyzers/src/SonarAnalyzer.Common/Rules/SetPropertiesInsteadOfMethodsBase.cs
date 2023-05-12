@@ -56,10 +56,10 @@ public abstract class SetPropertiesInsteadOfMethodsBase<TSyntaxKind, TInvocation
         methodName.Equals(nameof(Enumerable.Min), Language.NameComparison)
         || methodName.Equals(nameof(Enumerable.Max), Language.NameComparison);
 
-    private bool IsCorrectType(SyntaxNode node, SemanticModel model) =>
+    private static bool IsCorrectType(SyntaxNode node, SemanticModel model) =>
         model.GetTypeInfo(node).Type is { } type && type.DerivesFromAny(TargetTypes);
 
-    private bool IsCorrectCall(SyntaxNode node, SemanticModel model) =>
+    private static bool IsCorrectCall(SyntaxNode node, SemanticModel model) =>
         model.GetSymbolInfo(node).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 }
