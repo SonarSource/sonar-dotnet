@@ -54,6 +54,19 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private method 'Method'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\SetPropertiesInsteadOfLinqMethods.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  20,
+"endLine":  8,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused internal class 'lowercasename'.",
 "location":  {
 "uri":  "sources\Net7\Net7\features\WarningWave7.cs",
