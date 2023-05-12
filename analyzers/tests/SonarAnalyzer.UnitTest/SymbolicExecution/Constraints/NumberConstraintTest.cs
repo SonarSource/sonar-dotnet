@@ -90,6 +90,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
             NumberConstraint.From(1, 1).IsSingleValue.Should().BeTrue();
             NumberConstraint.From(null, 42).IsSingleValue.Should().BeFalse();
             NumberConstraint.From(42, null).IsSingleValue.Should().BeFalse();
+            NumberConstraint.From(1, 100).IsSingleValue.Should().BeFalse();
         }
 
         [TestMethod]
