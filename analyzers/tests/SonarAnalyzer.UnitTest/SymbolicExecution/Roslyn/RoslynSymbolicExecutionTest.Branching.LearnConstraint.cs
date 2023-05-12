@@ -383,6 +383,7 @@ if (value = boolParameter)
     [DataTestMethod]
     [DataRow("Arg Is Nothing")]
     [DataRow("Arg = Nothing")]
+    [DataRow("Nothing = Arg")]
     [DataRow("Nothing Is Arg")]
     [DataRow("Nothing = Arg")]
     [DataRow("Not Not Not Arg <> Nothing")]

@@ -442,12 +442,14 @@ Tag(""EqualsFalse"", EqualsFalse)";
     [DataTestMethod]
     [DataRow("Arg Is Nothing")]
     [DataRow("Arg = Nothing")]
+    [DataRow("Nothing = Arg ")]
     public void BinaryEqualsNull_SetsBoolConstraint_Unknown_ComparedToNull_VB(string expression)
     {
         var code = @$"
 Dim Value = {expression}
 Tag(""End"")";
-        var validator = SETestContext.CreateVB(code, "Arg As Object").Validator;
+        var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(NumberConstraint.Zero)); // Coverage of Flip local function with ObjectValueEquals
+        var validator = SETestContext.CreateVB(code, "Arg As Object", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.TagStates("End").Should().HaveCount(2)
             .And.ContainSingle(state => state.SymbolsWith(BoolConstraint.True).Any(x => x.Name == "Value") && state.SymbolsWith(ObjectConstraint.Null).Any(x => x.Name == "Arg"))
@@ -541,6 +543,7 @@ Tag(""EqualsFalse"", EqualsFalse)";
     [DataTestMethod]
     [DataRow("Arg IsNot Nothing")]
     [DataRow("Arg <> Nothing")]
+    [DataRow("Nothing <> Arg")]
     public void BinaryNotEqualsNull_SetsBoolConstraint_Unknown_ComparedToNull_VB(string expression)
     {
         var code = @$"

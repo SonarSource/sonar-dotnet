@@ -136,7 +136,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
                 BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThanOrEqual,
                 BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThan,
                 BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThanOrEqual,
-                _ => BinaryOperatorKind.None    // We don't care about ObjectValueEquals
+                _ => BinaryOperatorKind.None    // Unreachable under normal conditions, VB ObjectValueEquals would need comparison with a number
             };
 
         static BinaryOperatorKind Opposite(BinaryOperatorKind kind) =>
