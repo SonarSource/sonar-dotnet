@@ -984,9 +984,25 @@ Tag(""End"", arg);";
     [DataRow("arg == 42 && arg >=   0", 42, 42)]
     [DataRow("arg == 42 && arg <  100", 42, 42)]
     [DataRow("arg == 42 && arg <= 100", 42, 42)]
-    public void Branching_LearnsNumberConstraint_OnlyIf(string expression, int? expectedIfMin, int? expectedIfMax)
+    public void Branching_LearnsNumberConstraint_OnlyIf_CS(string expression, int? expectedIfMin, int? expectedIfMax)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedIfMin, expectedIfMax)));
+        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+    }
+
+    [DataTestMethod]
+    [DataRow("Arg = 42", 42, 42)]
+    [DataRow("42 = Arg", 42, 42)]
+    [DataRow("Arg = 42 AndAlso Arg =   42", 42, 42)]
+    [DataRow("Arg = 42 AndAlso Arg <> 100", 42, 42)]
+    [DataRow("Arg = 42 AndAlso Arg >    0", 42, 42)]
+    [DataRow("Arg = 42 AndAlso Arg >=   0", 42, 42)]
+    [DataRow("Arg = 42 AndAlso Arg <  100", 42, 42)]
+    [DataRow("Arg = 42 AndAlso Arg <= 100", 42, 42)]
+    public void Branching_LearnsNumberConstraint_OnlyIf_VB(string expression, int? expectedIfMin, int? expectedIfMax)
+    {
+        var validator = CreateIfElseEndValidatorVB(expression, OperationKind.Binary, "Integer");
         validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedIfMin, expectedIfMax)));
         validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
     }
@@ -1000,9 +1016,25 @@ Tag(""End"", arg);";
     [DataRow("42  > arg", null, 41, 42, null)]
     [DataRow("arg <= 42", null, 42, 43, null)]
     [DataRow("42 >= arg", null, 42, 43, null)]
-    public void Branching_LearnsNumberConstraint_IfElse(string expression, int? expectedIfMin, int? expectedIfMax, int? expectedElseMin, int? expectedElseMax)
+    public void Branching_LearnsNumberConstraint_IfElse_CS(string expression, int? expectedIfMin, int? expectedIfMax, int? expectedElseMin, int? expectedElseMax)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedIfMin, expectedIfMax)));
+        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedElseMin, expectedElseMax)));
+    }
+
+    [DataTestMethod]
+    [DataRow("Arg >  42", 43, null, null, 42)]
+    [DataRow("42  < Arg", 43, null, null, 42)]
+    [DataRow("Arg >= 42", 42, null, null, 41)]
+    [DataRow("42 <= Arg", 42, null, null, 41)]
+    [DataRow("Arg <  42", null, 41, 42, null)]
+    [DataRow("42  > Arg", null, 41, 42, null)]
+    [DataRow("Arg <= 42", null, 42, 43, null)]
+    [DataRow("42 >= Arg", null, 42, 43, null)]
+    public void Branching_LearnsNumberConstraint_IfElse_VB(string expression, int? expectedIfMin, int? expectedIfMax, int? expectedElseMin, int? expectedElseMax)
+    {
+        var validator = CreateIfElseEndValidatorVB(expression, OperationKind.Binary, "Integer");
         validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedIfMin, expectedIfMax)));
         validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedElseMin, expectedElseMax)));
     }
@@ -1103,9 +1135,19 @@ Tag(""End"", arg);";
     [DataTestMethod]
     [DataRow("arg != 42", 42, 42)]
     [DataRow("42 != arg", 42, 42)]
-    public void Branching_LearnsNumberConstraint_OnlyElse(string expression, int? expectedElseMin, int? expectedElseMax)
+    public void Branching_LearnsNumberConstraint_OnlyElse_CS(string expression, int? expectedElseMin, int? expectedElseMax)
     {
         var validator = CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedElseMin, expectedElseMax)));
+    }
+
+    [DataTestMethod]
+    [DataRow("Arg <> 42", 42, 42)]
+    [DataRow("42 <> Arg", 42, 42)]
+    public void Branching_LearnsNumberConstraint_OnlyElse_VB(string expression, int? expectedElseMin, int? expectedElseMax)
+    {
+        var validator = CreateIfElseEndValidatorVB(expression, OperationKind.Binary, "Integer");
         validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
         validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedElseMin, expectedElseMax)));
     }

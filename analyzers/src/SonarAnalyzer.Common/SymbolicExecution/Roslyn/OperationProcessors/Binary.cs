@@ -136,7 +136,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
                 BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThanOrEqual,
                 BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThan,
                 BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThanOrEqual,
-                _ => throw new InvalidOperationException() // Unreachable due to preconditions
+                _ => BinaryOperatorKind.None    // We don't care about ObjectValueEquals
             };
 
         static BinaryOperatorKind Opposite(BinaryOperatorKind kind) =>
@@ -148,7 +148,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
                 BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThan,
                 BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThanOrEqual,
                 BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThan,
-                _ => throw new InvalidOperationException() // Unreachable due to preconditions
+                _ => BinaryOperatorKind.None    // We don't care about ObjectValueEquals
             };
     }
 
