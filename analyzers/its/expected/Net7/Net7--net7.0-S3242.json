@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<int>' instead of 'System.Collections.Generic.List<int>'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\ContainsInsteadOfAny.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  42,
+"endLine":  5,
+"endColumn":  46
+}
+}
+}
+]
+}
