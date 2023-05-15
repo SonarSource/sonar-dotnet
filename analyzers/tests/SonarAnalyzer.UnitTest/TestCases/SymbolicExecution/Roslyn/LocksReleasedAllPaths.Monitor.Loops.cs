@@ -7,11 +7,12 @@ namespace Monitor_Loops
     class Program
     {
         private object obj = new object();
+        private object other = new object();
         private bool condition;
 
         public void Method1()
         {
-            Monitor.Enter(obj);     // Noncompliant tricky FP, as the execution should always reach number 9, but we don't track that
+            Monitor.Enter(obj);     // Compliant for the wrong reason. Should be FP, as the execution should always reach number 9, but we don't track that
             if (condition)
             {
                 Monitor.Exit(obj);  // To release it on at least one path to activate the rule
@@ -22,6 +23,10 @@ namespace Monitor_Loops
                 {
                     Monitor.Exit(obj);
                 }
+            }
+            Monitor.Enter(other);   // FN, exploration stopped after loop
+            if (condition) {
+                Monitor.Exit(other);
             }
         }
 
@@ -36,11 +41,16 @@ namespace Monitor_Loops
                     Monitor.Exit(obj);
                 }
             }
+            Monitor.Enter(other);   // Noncompliant, to make sure we explore paths after the loop
+            if (condition)
+            {
+                Monitor.Exit(other);
+            }
         }
 
         public void Method3()
         {
-            Monitor.Enter(obj); // Noncompliant
+            Monitor.Enter(obj); // FN, exploration stopped after loop
             if (condition)
             {
                 Monitor.Exit(obj);  // To release it on at least one path to activate the rule
@@ -57,11 +67,16 @@ namespace Monitor_Loops
                     Monitor.Exit(obj);
                 }
             }
+            Monitor.Enter(other);   // FN, exploration stopped after loop
+            if (condition)
+            {
+                Monitor.Exit(other);
+            }
         }
 
         public void Method4()
         {
-            Monitor.Enter(obj); // Noncompliant tricky FP, as the execution should always reach number 9, but we don't track that
+            Monitor.Enter(obj); // Compliant for the wrong reason. Should be FP, as the execution should always reach number 9, but we don't track that
             if (condition)
             {
                 Monitor.Exit(obj);  // To release it on at least one path to activate the rule
@@ -78,11 +93,16 @@ namespace Monitor_Loops
                     Monitor.Exit(obj);
                 }
             }
+            Monitor.Enter(other);   // FN, exploration stopped after loop
+            if (condition)
+            {
+                Monitor.Exit(other);
+            }
         }
 
         public void Method5()
         {
-            Monitor.Enter(obj); // Noncompliant
+            Monitor.Enter(obj); // FN, exploration stopped after loop
             if (condition)
             {
                 Monitor.Exit(obj);  // To release it on at least one path to activate the rule
@@ -98,6 +118,11 @@ namespace Monitor_Loops
                 {
                     Monitor.Exit(obj);
                 }
+            }
+            Monitor.Enter(other);   // FN, exploration stopped after loop
+            if (condition)
+            {
+                Monitor.Exit(other);
             }
         }
 
@@ -177,7 +202,7 @@ namespace Monitor_Loops
                 Console.WriteLine();
             }
 
-            Monitor.Enter(obj); // Noncompliant
+            Monitor.Enter(obj); // FN, exploration stopped after loop
             if (condition)
             {
                 Monitor.Exit(obj);
@@ -191,7 +216,7 @@ namespace Monitor_Loops
                 Console.WriteLine();
             }
 
-            Monitor.Enter(obj); // Noncompliant
+            Monitor.Enter(obj); // FN, exploration stopped after loop
             if (condition)
             {
                 Monitor.Exit(obj);
@@ -205,7 +230,7 @@ namespace Monitor_Loops
                 Console.WriteLine();
             }
 
-            Monitor.Enter(obj); // Noncompliant
+            Monitor.Enter(obj); // FN, exploration stopped after loop
             if (condition)
             {
                 Monitor.Exit(obj);
@@ -219,7 +244,7 @@ namespace Monitor_Loops
                 Console.WriteLine();
             }
 
-            Monitor.Enter(obj); // Noncompliant
+            Monitor.Enter(obj); // FN, exploration stopped after loop
             if (condition)
             {
                 Monitor.Exit(obj);

@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal sealed class IncrementOrDecrement : SimpleProcessor<IIncrementOrDecrementOperationWrapper>
@@ -25,8 +27,23 @@ internal sealed class IncrementOrDecrement : SimpleProcessor<IIncrementOrDecreme
     protected override IIncrementOrDecrementOperationWrapper Convert(IOperation operation) =>
         IIncrementOrDecrementOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState Process(SymbolicContext context, IIncrementOrDecrementOperationWrapper incrementOrDecrement) =>
-        incrementOrDecrement.Target.TrackedSymbol() is { } symbol
-            ? context.State.SetSymbolValue(symbol, null)
-            : context.State;
+    protected override ProgramState Process(SymbolicContext context, IIncrementOrDecrementOperationWrapper incrementOrDecrement)
+    {
+        if (context.State[incrementOrDecrement.Target]?.Constraint<NumberConstraint>() is { } oldNumber)
+        {
+            var newNumber = incrementOrDecrement.WrappedOperation.Kind == OperationKindEx.Increment
+                ? NumberConstraint.From(oldNumber.Min + 1, oldNumber.Max + 1)
+                : NumberConstraint.From(oldNumber.Min - 1, oldNumber.Max - 1);
+            var state = incrementOrDecrement.Target.TrackedSymbol() is { } symbol
+                ? context.SetSymbolConstraint(symbol, newNumber)
+                : context.State;
+            return incrementOrDecrement.IsPostfix
+                ? state.SetOperationConstraint(context.Operation, oldNumber)
+                : state.SetOperationConstraint(context.Operation, newNumber);
+        }
+        else
+        {
+            return context.State;
+        }
+    }
 }

@@ -55,12 +55,10 @@ Tag(""End"", arg);";
 {loop}
 {{
     arg.ToString(); // Add another constraint to 'arg'
-    arg -= 1;
 }}
 Tag(""End"", arg);";
         var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck()).Validator;
-        validator.ValidateExitReachCount(1);
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));  // arg has only it's final constraints after looping
+        validator.ValidateExitReachCount(0);    // For now, we don't explore states after fixed loops
     }
 
     [TestMethod]
