@@ -30,12 +30,13 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("while (Condition)")]
     public void Loops_InstructionVisitedMaxTwice(string loop)
     {
-        var code = $@"
-{loop}
-{{
-    arg.ToString(); // Add another constraint to 'arg'
-}}
-Tag(""End"", arg);";
+        var code = $$"""
+            {{loop}}
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+            }
+            Tag("End", arg);
+            """;
         var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("arg")).Validator;
         validator.ValidateExitReachCount(2);    // PreserveTestCheck is needed for this, otherwise, variables are thrown away by LVA when going to the Exit block
         validator.TagValues("End").Should().HaveCount(2)
@@ -51,14 +52,68 @@ Tag(""End"", arg);";
     [DataRow("for (var i = 10; i > 0; --i)")]
     public void Loops_InstructionVisitedMaxTwice_For_FixedCount(string loop)
     {
-        var code = $@"
-{loop}
-{{
-    arg.ToString(); // Add another constraint to 'arg'
-}}
-Tag(""End"", arg);";
-        var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck()).Validator;
+        var code = $$"""
+            {{loop}}
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+            }
+            Tag("End", arg);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
         validator.ValidateExitReachCount(0);    // For now, we don't explore states after fixed loops
+    }
+
+    [TestMethod]
+    public void Loops_For_ComplexCondition_MultipleVariables()
+    {
+        const string code = """
+            for (int i = 0, j = 10; i < 10 && j > 0; i++, j++)
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+            }
+            Tag("End", arg);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(1);
+        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));  // arg has only it's final constraints after looping
+    }
+
+    [TestMethod]
+    public void Loops_For_ComplexCondition_AlwaysTrue()
+    {
+        const string code = """
+            boolParameter = true;
+            for (var i = 0; i < 10 || boolParameter; i++)
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+                Tag("Arg", arg);
+            }
+            Tag("Unreachable", arg);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(0);
+        validator.ValidateTagOrder("Arg", "Arg");
+        validator.TagValues("Arg").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
+    }
+
+    [TestMethod]
+    public void Loops_For_ComplexCondition_AlwaysFalse()
+    {
+        const string code = """
+            boolParameter = false;
+            for (var i = 0; i < 10 && boolParameter; i++)
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+                Tag("Unreachable");
+            }
+            Tag("End", arg);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(1);
+        validator.ValidateTagOrder("End");
+        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));    // AddConstraintOnInvocationCheck didn't add anything
     }
 
     [TestMethod]
