@@ -760,6 +760,27 @@ Tag(""End"")";
     }
 
     [DataTestMethod]
+    [DataRow(0b0101, 0b0101, "i & j", 0b0101)]
+    [DataRow(0b0101, 0b0001, "i & j", 0b0001)]
+    [DataRow(0b1010, 0b0110, "i & j", 0b0010)]
+    [DataRow(0b1010, 0b0000, "i & j", 0b0000)]
+    [DataRow(5, -5, "i & j", 1)]
+    [DataRow(5, -4, "i & j", 4)]
+    [DataRow(-5, -5, "i & j", -5)]
+    [DataRow(-5, -4, "i & j", -8)]
+    public void Binary_CalculationWithFixedValues_UpdatesNumberConstraint(int i, int j, string expression, int expected)
+    {
+        var code = $"""
+            var i = {i};
+            var j = {j};
+            var value = {expression};
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
+    }
+
+    [DataTestMethod]
     [DataRow(5, 0, 0)]
     [DataRow(5, 1, 5)]
     [DataRow(5, -1, -5)]
@@ -832,38 +853,26 @@ Tag(""End"")";
     }
 
     [DataTestMethod]
-    [DataRow(0b0101, 0b0101, 0b0101)]
-    [DataRow(0b0101, 0b0001, 0b0001)]
-    [DataRow(0b1010, 0b0110, 0b0010)]
-    [DataRow(0b1010, 0b0000, 0b0000)]
-    [DataRow(5, -5, 1)]
-    [DataRow(5, -4, 4)]
-    [DataRow(-5, -5, -5)]
-    [DataRow(-5, -4, -8)]
-    public void Binary_BitAndWithFixedValues_UpdatesNumberConstraint(int left, int right, int expected)
-    {
-        var code = $"""
-            var left = {left};
-            var right = {right};
-            var value = left & right;
-            Tag("Value", value);
-            """;
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
-    }
-
-    [DataTestMethod]
-    [DataRow("i >   2 && j >  4", 3 * 5, null)]
-    [DataRow("i >   2 && j < -4", null, 3 * -5)]
-    [DataRow("i <  -2 && j < -4", -3 * -5, null)]
-    [DataRow("i ==  3 && j >  4", 3 * 5, null)]
-    [DataRow("i ==  3 && j < -4", null, 3 * -5)]
-    [DataRow("i ==  3 && j > -6", 3 * -5, null)]
-    [DataRow("i ==  3 && j <  6", null, 3 * 5)]
-    [DataRow("i == -3 && j >  4", null, -3 * 5)]
-    [DataRow("i == -3 && j < -4", -3 * -5, null)]
-    [DataRow("i == -3 && j > -6", null, -3 * -5)]
-    [DataRow("i == -3 && j <  6", -3 * 5, null)]
+    [DataRow("i >=  3 && j >=  5", 0, null)]
+    [DataRow("i >=  3 && j >= -5", 0, null)]
+    [DataRow("i >=  3 && j <=  5", 0, null)]
+    [DataRow("i >=  3 && j <= -5", 0, null)]
+    [DataRow("i >= -3 && j >=  5", 0, null)]
+    [DataRow("i >= -3 && j >= -5", -8, null)]
+    [DataRow("i <=  3 && j >=  5", 0, null)]
+    [DataRow("i <=  3 && j <=  5", null, 5)]
+    [DataRow("i <=  3 && j <= -5", null, 3)]
+    [DataRow("i <= -3 && j >=  5", 0, null)]
+    [DataRow("i <= -3 && j <=  5", null, 5)]
+    [DataRow("i <= -3 && j <= -5", null, -5)]
+    [DataRow("i ==  3 && j >=  5", 0, 3)]
+    [DataRow("i ==  3 && j <= -5", 0, 3)]
+    [DataRow("i ==  3 && j >= -5", 0, 3)]
+    [DataRow("i ==  3 && j <=  5", 0, 3)]
+    [DataRow("i == -3 && j >=  5", 0, null)]
+    [DataRow("i == -3 && j <= -5", null, -5)]
+    [DataRow("i == -3 && j >= -5", -8, null)]
+    [DataRow("i == -3 && j <=  5", null, 5)]
     public void Binary_BitAndWithRange_UpdatesNumberConstraint(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""
@@ -875,5 +884,23 @@ Tag(""End"")";
             """;
         var validator = SETestContext.CreateCS(code, "int? i, int? j").Validator;
         validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(NumberConstraint.From(expectedMin, expectedMax)));
+    }
+
+    [DataTestMethod]
+    [DataRow("i >= -3 && j <=  5")]
+    [DataRow("i >= -3 && j <= -5")]
+    [DataRow("i <=  3 && j >= -5")]
+    [DataRow("i <= -3 && j >= -5")]
+    public void Binary_BitAndWithRange_NoNumberConstraint(string expression)
+    {
+        var code = $$"""
+            if ({{expression}})
+            {
+                var value = i & j;
+                Tag("Value", value);
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int? i, int? j").Validator;
+        validator.ValidateTag("Value", x => x.Should().BeNull());
     }
 }

@@ -88,25 +88,42 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
 
     private static NumberConstraint CalculateAnd(NumberConstraint left, NumberConstraint right)
     {
-        var min = left.Max < 0 && right.Max < 0 && left.Min.HasValue && right.Min.HasValue
-            ? NegativeMagnitude(BigInteger.Min(left.Min.Value, right.Min.Value))
-            : 0;
+        BigInteger? min = 0;
+        if (left.CanBeNegative && right.CanBeNegative)
+        {
+            min = left.Min.HasValue && right.Min.HasValue
+                ? NegativeMagnitude(BigInteger.Min(left.Min.Value, right.Min.Value))
+                : null;
+        }
         // If both operands are negative, the result is negative. Otherwise, it is positive.
         // If operands are both negative or both positive the result cannot be bigger than the smaller of the two.
         // If the operands have different signs, the result cannot be bigger than the positive one.
-        BigInteger? max;
-        if (left.Max > 0 ^ right.Max > 0)
+        BigInteger? max = null;
+        if (left.IsNegative && right.CanBePositive)
         {
-            max = BigInteger.Max(left.Max ?? 0, right.Max ?? 0);
+            max = right.Max;
         }
-        else if (left.Max.HasValue && right.Max.HasValue)
+        else if (left.CanBePositive && right.IsNegative)
         {
-            max = BigInteger.Min(left.Max.Value, right.Max.Value);
+            max = left.Max;
         }
-        else
+        else if (left.IsPositive && right.CanBePositive && right.CanBeNegative)
         {
-            max = null;
+            max = left.Max;
         }
+        else if (left.CanBePositive && left.CanBeNegative && right.IsPositive)
+        {
+            max = right.Max;
+        }
+        else if (left.CanBePositive && left.CanBeNegative && right.CanBePositive && right.CanBeNegative && left.Max.HasValue && right.Max.HasValue)
+        {
+            max = BigInteger.Max(left.Max.Value, right.Max.Value);
+        }
+        else if ((left.IsNegative && right.IsNegative) || (left.IsPositive && right.IsPositive))
+        {
+            max = SmallestMaximum(left, right);
+        }
+
         return NumberConstraint.From(min, max);
     }
 
@@ -125,6 +142,22 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             m *= 2;
         }
         return m;
+    }
+
+    private static BigInteger? SmallestMaximum(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.Max is null)
+        {
+            return right.Max;
+        }
+        else if (right.Max is null)
+        {
+            return left.Max;
+        }
+        else
+        {
+            return BigInteger.Min(left.Max.Value, right.Max.Value);
+        }
     }
 
     private static ProgramState LearnBranchingEqualityConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
