@@ -173,7 +173,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
-            foreach (var preProcessed in checks.PreProcess(new(node.Operation, node.State, lva.CapturedVariables, IsLoopCondition(node.Operation))))
+            foreach (var preProcessed in checks.PreProcess(new(node.Operation, node.State, lva.CapturedVariables, IsLoopCondition(node))))
             {
                 foreach (var processed in OperationDispatcher.Process(preProcessed))
                 {
@@ -282,8 +282,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             || region.ExceptionType.Is(KnownType.System_Exception)
             || thrown.Type.DerivesFrom(region.ExceptionType);
 
-        private static bool IsLoopCondition(IOperationWrapperSonar operation) =>
+        private static bool IsLoopCondition(ExplodedNode node) =>
             // FIXME: Lazy prototype
-            operation.Instance.Kind == OperationKindEx.Binary;
+            node.Operation.Instance.Kind == OperationKindEx.Binary
+            && node.VisitCount == 2;
     }
 }
