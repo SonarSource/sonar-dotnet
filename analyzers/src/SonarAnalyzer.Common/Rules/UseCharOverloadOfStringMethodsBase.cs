@@ -22,13 +22,15 @@ namespace SonarAnalyzer.Rules;
 
 public abstract class UseCharOverloadOfStringMethodsBase<TSyntaxKind, TInvocation> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
-    where TInvocation: SyntaxNode 
+    where TInvocation : SyntaxNode
 {
     private const string DiagnosticId = "S6610";
     protected override string MessageFormat => "\"{0}\" overloads that take a \"char\" should be used";
 
-    protected abstract bool HasCorrectArgumentCount(TInvocation invocation);
-    protected abstract bool HasArgumentOfLengthOne(TInvocation invocation, SemanticModel model);
+    // FIXME: Remove this
+    protected override bool EnableConcurrentExecution => false;
+
+    protected abstract bool HasCorrectArguments(TInvocation invocation);
 
     protected UseCharOverloadOfStringMethodsBase() : base(DiagnosticId) { }
 
@@ -38,12 +40,10 @@ public abstract class UseCharOverloadOfStringMethodsBase<TSyntaxKind, TInvocatio
             var invocation = (TInvocation)c.Node;
             var methodName = Language.GetName(invocation);
             if (HasCorrectName(methodName)
-                && HasCorrectArgumentCount(invocation)
-                && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
+                && HasCorrectArguments(invocation)
+                && Language.Syntax.TryGetOperands(invocation, out var left, out _)
                 //&& CompilationRunsOnValidNetVersion(c.Compilation)
-                && IsCorrectType(left, c.SemanticModel)
-                && HasStringArgument(right, c.SemanticModel)
-                && HasArgumentOfLengthOne(invocation, c.SemanticModel))
+                && IsCorrectType(left, c.SemanticModel))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
             }
@@ -56,11 +56,6 @@ public abstract class UseCharOverloadOfStringMethodsBase<TSyntaxKind, TInvocatio
         methodName.Equals(nameof(string.StartsWith), Language.NameComparison)
         || methodName.Equals(nameof(string.EndsWith), Language.NameComparison);
 
-    private static bool IsCorrectType(SyntaxNode node, SemanticModel model) =>
-        model.GetTypeInfo(node).Type is { } type && type.Is(KnownType.System_String);
-
-    // TODO check if this can be dropped
-    private bool HasStringArgument(SyntaxNode node, SemanticModel model) =>
-        model.GetSymbolInfo(node).Symbol is IMethodSymbol method
-        && method.Parameters[0].IsType(KnownType.System_String);
+    private static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
+        model.GetTypeInfo(left).Type is { } type && type.Is(KnownType.System_String);
 }

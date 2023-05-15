@@ -25,10 +25,9 @@ public sealed class UseCharOverloadOfStringMethods : UseCharOverloadOfStringMeth
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override bool HasArgumentOfLengthOne(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        model.GetConstantValue(invocation.ArgumentList.Arguments[0]) is { HasValue: true, Value: var value }
-        && value is string { Length: 1 };
-
-    protected override bool HasCorrectArgumentCount(InvocationExpressionSyntax invocation) =>
-        invocation.HasExactlyNArguments(1);
+    protected override bool HasCorrectArguments(InvocationExpressionSyntax invocation) =>
+        invocation.HasExactlyNArguments(1)
+        && invocation.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax literal
+        && literal.IsKind(SyntaxKind.StringLiteralExpression)
+        && literal.Token.ValueText is { Length: 1 };
 }
