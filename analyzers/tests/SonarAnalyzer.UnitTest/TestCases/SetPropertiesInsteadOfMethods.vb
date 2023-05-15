@@ -56,6 +56,8 @@ Module Program
         Dim doesNotDerive = New DoesNotDeriveFromSetType(Of Integer)()
         doesNotDerive.Min() ' Compliant, does not derive from Set type
         doesNotDerive.Max() ' Compliant, does not derive from Set type
+        dummy = Enumerable.Min(doesNotDerive) ' Compliant, does not derive from Set type
+        dummy = Enumerable.Max(doesNotDerive) ' Compliant, does not derive from Set type
     End Sub
 End Module
 
@@ -69,6 +71,14 @@ End Class
 
 Class DoesNotDeriveFromSetType(Of T)
     Implements IEnumerable(Of T)
+
+    Public Function Min() As Integer
+        Return 42
+    End Function
+
+    Public Function Max() As Integer
+        Return 42
+    End Function
 
     Public Function GetEnumerator() As IEnumerator(Of T) Implements IEnumerable(Of T).GetEnumerator
         Return Nothing

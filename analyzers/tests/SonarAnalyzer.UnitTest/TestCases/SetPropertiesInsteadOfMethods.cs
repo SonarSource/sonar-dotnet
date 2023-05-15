@@ -86,6 +86,10 @@ static class Program
         var doesNotDerive = new DoesNotDeriveFromSetType<int>();
         doesNotDerive.Min(); // Compliant, does not derive from Set type
         doesNotDerive.Max(); // Compliant, does not derive from Set type
+
+        dynamic dynamicSet = new SortedSet<int>();
+        dynamicSet.Min(); // Compliant, dynamic type
+        dynamicSet.Max(); // Compliant, dynamic type
     }
 }
 
