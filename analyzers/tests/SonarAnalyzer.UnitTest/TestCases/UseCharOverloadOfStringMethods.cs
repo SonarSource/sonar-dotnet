@@ -5,7 +5,7 @@ using System.Linq;
 
 class Testcases
 {
-    void Method()
+    void Simple()
     {
         var str = "hello";
 
@@ -43,13 +43,21 @@ class Testcases
 
         var list = new List<string> { "hey" };
         list.First().StartsWith("x"); // Noncompliant
+        list.Any(x => x.EndsWith("x")); // Noncompliant
+    }
 
+    void Edgecases()
+    {
         new List<int> { 42 }.Select(x => x.ToString()).Last().Trim().EndsWith("x"); // Noncompliant
-
         (true ? "hey" : "hello").StartsWith("x"); // Noncompliant
         ("hey" ?? "hello").EndsWith("x"); // Noncompliant
         (true ? "hey" : ("hello" ?? "heya")).StartsWith("x"); // Noncompliant
         (true ? "hey" : ("hello" ?? "heya")).StartsWith("x", StringComparison.CurrentCulture); // Compliant
+    }
+
+    void Chaining()
+    {
+        var str = "hello";
 
         GetString().StartsWith("x"); // Noncompliant
         GetString().EndsWith("x", StringComparison.InvariantCultureIgnoreCase); // Compliant
@@ -57,19 +65,6 @@ class Testcases
         MutateString(MutateString(MutateString(GetString()))).StartsWith("x"); // Noncompliant
         MutateString(MutateString(MutateString(GetString()))).EndsWith("x", true, CultureInfo.CurrentCulture); // Compliant
 
-        var fake = new FakeString();
-        fake.StartsWith("x"); // Compliant
-        fake.EndsWith("x"); // Compliant
-        fake.StartsWith('x'); // Compliant
-        fake.EndsWith('x'); // Compliant
-    }
-
-    static string GetString() => "42";
-    static string MutateString(string str) => "42";
-
-    void Fluent()
-    {
-        var str = "hello";
         str.Trim().PadLeft(42).PadRight(42).ToLower().StartsWith("x"); // Noncompliant
         str.Trim().PadLeft(42).PadRight(42).ToLower()?.EndsWith("x"); // Noncompliant
         str.Trim().PadLeft(42).PadRight(42)?.ToLower().StartsWith("x"); // Noncompliant
@@ -86,6 +81,19 @@ class Testcases
         str.Trim()?.PadLeft(42)?.PadRight(42).ToLower()?.EndsWith("x"); // Noncompliant
         str.Trim()?.PadLeft(42)?.PadRight(42)?.ToLower().StartsWith("x"); // Noncompliant
         str.Trim()?.PadLeft(42)?.PadRight(42)?.ToLower()?.EndsWith("x"); // Noncompliant
+        //                                                ^^^^^^^^
+    }
+
+    static string GetString() => "42";
+    static string MutateString(string str) => "42";
+
+    void NotCalledOnString()
+    {
+        var fake = new FakeString();
+        fake.StartsWith("x"); // Compliant
+        fake.EndsWith("x"); // Compliant
+        fake.StartsWith('x'); // Compliant
+        fake.EndsWith('x'); // Compliant
     }
 
     class FakeString

@@ -29,9 +29,19 @@ public class UseCharOverloadOfStringMethodsTest
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseCharOverloadOfStringMethods>();
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseCharOverloadOfStringMethods>();
 
+#if NETFRAMEWORK
+
+    [TestMethod]
+    public void UseCharOverloadOfStringMethods_CS() =>
+        builderCS.AddPaths("UseCharOverloadOfStringMethods.Framework.cs").Verify();
+
+#else
+
     [TestMethod]
     public void UseCharOverloadOfStringMethods_CS() =>
         builderCS.AddPaths("UseCharOverloadOfStringMethods.cs").Verify();
+
+#endif
 
     [TestMethod]
     public void UseCharOverloadOfStringMethods_VB() =>

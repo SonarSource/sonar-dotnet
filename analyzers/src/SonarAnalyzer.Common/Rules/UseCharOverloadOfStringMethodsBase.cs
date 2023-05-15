@@ -27,9 +27,6 @@ public abstract class UseCharOverloadOfStringMethodsBase<TSyntaxKind, TInvocatio
     private const string DiagnosticId = "S6610";
     protected override string MessageFormat => "\"{0}\" overloads that take a \"char\" should be used";
 
-    // FIXME: Remove this
-    protected override bool EnableConcurrentExecution => false;
-
     protected abstract bool HasCorrectArguments(TInvocation invocation);
 
     protected UseCharOverloadOfStringMethodsBase() : base(DiagnosticId) { }
@@ -39,22 +36,28 @@ public abstract class UseCharOverloadOfStringMethodsBase<TSyntaxKind, TInvocatio
         {
             var invocation = (TInvocation)c.Node;
             var methodName = Language.GetName(invocation);
+
             if (HasCorrectName(methodName)
                 && HasCorrectArguments(invocation)
+                && CompilationRunsOnValidNetVersion(c.Compilation, methodName)
                 && Language.Syntax.TryGetOperands(invocation, out var left, out _)
-                //&& CompilationRunsOnValidNetVersion(c.Compilation)
                 && IsCorrectType(left, c.SemanticModel))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
             }
         }, Language.SyntaxKind.InvocationExpression);
 
-    // "char" overload introduced at .NET Core 2.0
-    private bool CompilationRunsOnValidNetVersion(Compilation compilation) => throw new NotImplementedException();
-
     private bool HasCorrectName(string methodName) =>
         methodName.Equals(nameof(string.StartsWith), Language.NameComparison)
         || methodName.Equals(nameof(string.EndsWith), Language.NameComparison);
+
+    // "char" overload introduced at .NET Core 2.0
+    private bool CompilationRunsOnValidNetVersion(Compilation compilation, string methodName) =>
+        compilation.GetTypeByMetadataName(KnownType.System_String) is { } str
+        && str.GetMembers(methodName) is { } members
+        && members.Any(x => x is IMethodSymbol { } method
+                            && method.Parameters is { Length: 1 } parameters
+                            && parameters[0].IsType(KnownType.System_Char));
 
     private static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
         model.GetTypeInfo(left).Type is { } type && type.Is(KnownType.System_String);
