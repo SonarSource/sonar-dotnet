@@ -96,7 +96,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             if (node.Block.Kind == BasicBlockKind.Exit)
             {
                 logger.Log(node.State, "Exit Reached");
-                checks.ExitReached(new(null, node.State, lva.CapturedVariables, false));
+                checks.ExitReached(new(null, node.State, lva.CapturedVariables, node.VisitCount));
             }
             else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is { } exception)
             {
@@ -138,10 +138,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                 CreateNode(cfg.Blocks[finallyPoint.BlockIndex], finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
 
             ExplodedNode CreateNode(BasicBlock block, FinallyPoint finallyPoint) =>
-                ProcessBranchState(branch, node.State) is { } newState ? new(block, newState, finallyPoint) : null;
+                ProcessBranchState(branch, node.State, node.VisitCount) is { } newState ? new(block, newState, finallyPoint) : null;
         }
 
-        private ProgramState ProcessBranchState(ControlFlowBranch branch, ProgramState state)
+        private ProgramState ProcessBranchState(ControlFlowBranch branch, ProgramState state, int visitCount)
         {
             if (cfg.OriginalOperation.Syntax.Language == LanguageNames.VisualBasic) // Avoid C# FPs as we don't support tuple deconstructions yet
             {
@@ -150,7 +150,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
             {
                 state = SetBranchingConstraints(branch, state, branchValue);
-                state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state, lva.CapturedVariables, false)); // FIXME: false as a lazy prototype
+                state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state, lva.CapturedVariables, visitCount));
                 if (state is null)
                 {
                     return null;
@@ -173,7 +173,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
-            foreach (var preProcessed in checks.PreProcess(new(node.Operation, node.State, lva.CapturedVariables, IsLoopCondition(node))))
+            foreach (var preProcessed in checks.PreProcess(new(node.Operation, node.State, lva.CapturedVariables, node.VisitCount)))
             {
                 foreach (var processed in OperationDispatcher.Process(preProcessed))
                 {
@@ -281,10 +281,5 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             || region.ExceptionType.Is(KnownType.System_Object)       // catch when (condition)
             || region.ExceptionType.Is(KnownType.System_Exception)
             || thrown.Type.DerivesFrom(region.ExceptionType);
-
-        private static bool IsLoopCondition(ExplodedNode node) =>
-            // FIXME: Lazy prototype
-            node.Operation.Instance.Kind == OperationKindEx.Binary
-            && node.VisitCount == 2;
     }
 }

@@ -87,7 +87,7 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
         return state;
     }
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IPropertyReferenceOperationWrapper operation, bool isLoopCondition) =>
+    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IPropertyReferenceOperationWrapper operation, int visitCount) =>
         IsNullableProperty(operation, "HasValue") && state[operation.Instance]?.Constraint<ObjectConstraint>() is { } objectConstraint
             ? BoolConstraint.From(objectConstraint == ObjectConstraint.NotNull)
             : null;
