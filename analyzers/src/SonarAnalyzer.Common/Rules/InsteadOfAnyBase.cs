@@ -26,8 +26,9 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
 {
     protected abstract ImmutableArray<(KnownType Type, bool CheckContext)> RuleSpecificTypes { get; }
     protected abstract bool IsSimpleEqualityCheck(TInvocationExpression node, SemanticModel model);
-    protected abstract bool HasOneArgument(TInvocationExpression node);
     protected abstract bool IsInValidContext(TInvocationExpression invocation, SemanticModel model);
+    protected abstract SyntaxNode GetArgumentExpression(TInvocationExpression invocation, int index);
+    protected abstract bool AreValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second);
 
     protected InsteadOfAnyBase(string diagnosticId) : base(diagnosticId) { }
 
@@ -37,7 +38,7 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
             var invocation = (TInvocationExpression)c.Node;
 
             if (IsNameEqual(invocation, nameof(Enumerable.Any))
-                && HasOneArgument(invocation)
+                && Language.Syntax.HasExactlyNArguments(invocation, 1)
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectCall(right, c.SemanticModel)
                 && c.SemanticModel.GetTypeInfo(left).Type is { } type
@@ -60,4 +61,21 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
     protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+
+    protected bool CheckInvocationArguments(TInvocationExpression invocation, string lambdaVariableName)
+    {
+        if (Language.Syntax.HasExactlyNArguments(invocation, 1))
+        {
+            return Language.Syntax.TryGetOperands(invocation, out var left, out _)
+                && HasInvocationValidOperands(left, GetArgumentExpression(invocation, 0));
+        }
+        if (Language.Syntax.HasExactlyNArguments(invocation, 2))
+        {
+            return HasInvocationValidOperands(GetArgumentExpression(invocation, 0), GetArgumentExpression(invocation, 1));
+        }
+        return false;
+
+        bool HasInvocationValidOperands(SyntaxNode first, SyntaxNode second) =>
+            AreValidOperands(lambdaVariableName, first, second) || AreValidOperands(lambdaVariableName, second, first);
+    }
 }
