@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class InsteadOfAny<TSyntaxKind, TInvocationExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
     where TInvocationExpression : SyntaxNode
 {
@@ -29,7 +29,7 @@ public abstract class InsteadOfAny<TSyntaxKind, TInvocationExpression> : SonarDi
     protected abstract bool HasOneArgument(TInvocationExpression node);
     protected abstract bool IsInValidContext(TInvocationExpression invocation, SemanticModel model);
 
-    protected InsteadOfAny(string diagnosticId) : base(diagnosticId) { }
+    protected InsteadOfAnyBase(string diagnosticId) : base(diagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>

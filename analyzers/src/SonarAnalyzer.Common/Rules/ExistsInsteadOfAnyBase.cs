@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : InsteadOfAny<TSyntaxKind, TInvocationExpression>
+public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : InsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
     where TSyntaxKind : struct
     where TInvocationExpression : SyntaxNode
 {
