@@ -53,7 +53,9 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
 
     private static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
-        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+        && method.Parameters.Length > 0
+        && method.Parameters.FirstOrDefault().Type.Is(KnownType.System_Func_T_TResult);
 
     private bool IsNameEqual(SyntaxNode node, string name) =>
         Language.GetName(node).Equals(name, Language.NameComparison);

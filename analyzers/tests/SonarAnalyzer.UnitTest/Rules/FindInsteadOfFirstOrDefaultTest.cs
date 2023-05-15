@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-using Microsoft.CodeAnalysis.CSharp;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -40,6 +38,14 @@ public class FindInsteadOfFirstOrDefaultTest
     [TestMethod]
     public void FindInsteadOfFirstOrDefault_Immutable_CS() =>
         builderCS.AddPaths("FindInsteadOfFirstOrDefault.Immutable.cs").AddReferences(MetadataReferenceFacade.SystemCollections).Verify();
+
+    [TestMethod]
+    public void FindInsteadOfFirstOrDefault_Net_CS() =>
+        builderCS.AddPaths("FindInsteadOfFirstOrDefault.Net.cs").Verify();
+
+    [TestMethod]
+    public void FindInsteadOfFirstOrDefault_Net_VB() =>
+        builderVB.AddPaths("FindInsteadOfFirstOrDefault.Net.vb").Verify();
 
 #endif
 

@@ -14,6 +14,8 @@ public class FindInsteadOfFirstOrDefault
         //       ^^^^^^^^^^^^^^
         _ = Array.Find(data, x => true); // Compliant
 
+        _ = data.FirstOrDefault(); // Compliant
+
         data.Select(x => x * 2).ToArray().FirstOrDefault(x => true); // Noncompliant
         //                                ^^^^^^^^^^^^^^
         Array.Find(data.Select(x => x * 2).ToArray(), x => true); // Compliant

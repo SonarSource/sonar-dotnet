@@ -1,7 +1,6 @@
 Imports System.Collections.Generic
 Imports System.Linq
 Imports System
-Imports System.ComponentModel
 
 Module HelperClass
     Function DoWorkReturnGroup() As List(Of Integer)
@@ -10,9 +9,13 @@ Module HelperClass
 
     Sub DoWorkMethodGroup(Of T)(firstOrDefault As Func(Of Func(Of T, Boolean), T))
     End Sub
+
+    Function FilterMethod(nb As Integer) As Boolean
+        Return true
+    End Function
 End Module
 
-Public Class UseFind
+Public Class FindInsteadOfFirstOrDefault
     Public Class Dummy
         Public Function FirstOrDefault() As Object
             Return Nothing
@@ -50,10 +53,20 @@ Public Class UseFind
         End Function
     End Class
 
+    Public Function FilterMethod(nb As Integer) As Boolean
+        Return True
+    End Function
+
     Public Sub ListBasic(ByVal data As List(Of Integer))
         Dim unused = data.FirstOrDefault(Function(x) True) ' Noncompliant
 '                         ^^^^^^^^^^^^^^
         unused = data.Find(Function(x) True) ' Compliant
+
+        unused = data.FirstOrDefault() ' Compliant
+        unused = data.FirstOrDefault(AddressOf HelperClass.FilterMethod) ' Noncompliant
+'                     ^^^^^^^^^^^^^^
+        unused = data.FirstOrDefault(AddressOf FilterMethod) ' Noncompliant
+'                     ^^^^^^^^^^^^^^
     End Sub
 
     Public Sub ThroughLinq(data As List(Of Integer))

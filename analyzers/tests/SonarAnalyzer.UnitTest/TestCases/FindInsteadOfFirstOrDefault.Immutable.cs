@@ -4,8 +4,6 @@ using System;
 
 public class FindInsteadOfFirstOrDefault
 {
-    #region ImmutableList
-
     public static class ImmutableHelperClass
     {
         public static ImmutableList<int> DoWorkReturnGroup() => null;
@@ -17,6 +15,10 @@ public class FindInsteadOfFirstOrDefault
         _ = data.FirstOrDefault(x => true); // Noncompliant {{"Find" method should be used instead of the "FirstOrDefault" extension method.}}
         //       ^^^^^^^^^^^^^^
         _ = data.Find(x => true); // Compliant
+
+        _ = data.FirstOrDefault(); // Compliant
+        _ = data.FirstOrDefault(default(int)); // Compliant
+        _ = data.FirstOrDefault(x => false, default(int)); // Noncompliant
     }
 
     public void ThroughLinq(ImmutableList<int> data)
@@ -62,6 +64,4 @@ public class FindInsteadOfFirstOrDefault
         //        ^^^^^^^^^^^^^^
         _ = data?.Find(x => true); // Compliant
     }
-
-    #endregion
 }

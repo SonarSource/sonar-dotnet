@@ -29,8 +29,6 @@ public class FindInsteadOfFirstOrDefault
         _ = anotherDummy?.FirstOrDefault;
     }
 
-    #region List
-
     public class MyList : List<int>
     {
     }
@@ -44,13 +42,23 @@ public class FindInsteadOfFirstOrDefault
     {
         public static List<int> DoWorkReturnGroup() => null;
         public static void DoWorkMethodGroup<T>(Func<Func<T, bool>, T> firstOrDefault) { }
+
+        public static bool FilterMethod(int nb) => true;
     }
+
+    public bool FilterMethod(int nb) => true;
 
     public void ListBasic(List<int> data)
     {
         _ = data.FirstOrDefault(x => true); // Noncompliant {{"Find" method should be used instead of the "FirstOrDefault" extension method.}}
         //       ^^^^^^^^^^^^^^
         _ = data.Find(x => true); // Compliant
+
+        _ = data.FirstOrDefault(); // Compliant
+        _ = data.FirstOrDefault(HelperClass.FilterMethod); // Noncompliant
+        //       ^^^^^^^^^^^^^^
+        _ = data.FirstOrDefault(FilterMethod); // Noncompliant
+        //       ^^^^^^^^^^^^^^
     }
 
     public void ThroughLinq(List<int> data)
@@ -109,6 +117,4 @@ public class FindInsteadOfFirstOrDefault
         //        ^^^^^^^^^^^^^^
         _ = data?.Find(x => true); // Compliant
     }
-
-    #endregion
 }
