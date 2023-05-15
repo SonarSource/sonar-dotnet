@@ -25,33 +25,33 @@ public class Sample
         _ = ui16 - 1;           // FIXME Non-compliant
 
         int i = int.MaxValue;
-        _ = i + 1;              // FIXME Non-compliant
+        _ = i + 1;              // Noncompliant
         i = int.MinValue;
-        _ = i - 1;              // FIXME Non-compliant
+        _ = i - 1;              // Noncompliant
 
         uint ui = uint.MaxValue;
-        _ = ui + 1;             // FIXME Non-compliant
+        _ = ui + 1;             // Noncompliant
         ui = uint.MinValue;
-        _ = ui - 1;             // FIXME Non-compliant
+        _ = ui - 1;             // Noncompliant
 
         long i64 = long.MaxValue;
-        _ = i64 + 1;            // FIXME Non-compliant
+        _ = i64 + 1;            // Noncompliant
         i64 = long.MinValue;
-        _ = i64 - 1;            // FIXME Non-compliant
+        _ = i64 - 1;            // Noncompliant
 
         ulong ui64 = ulong.MaxValue;
-        _ = ui64 + 1;           // FIXME Non-compliant
+        _ = ui64 + 1;           // Noncompliant
         ui64 = ulong.MinValue;
-        _ = ui64 - 1;           // FIXME Non-compliant
+        _ = ui64 - 1;           // Noncompliant
     }
 
     public void BasicOperators()
     {
         int i = 2147483600;
-        _ = i + 100;            // FIXME Non-compliant
+        _ = i + 100;            // Noncompliant
 
         i = -2147483600;
-        _ = i - 100;            // FIXME Non-compliant
+        _ = i - 100;            // Noncompliant
 
         i = 2147483600;
         _ = i * 100;            // FIXME Non-compliant
@@ -118,17 +118,20 @@ public class Sample
         if (i <= 2147483547)
             _ = i + 100;        // Compliant
         else
-            _ = i + 100;        // FIXME Non-compliant
+            _ = i + 100;        // Noncompliant
 
         for (i = 0; i <= 2147483547; i++)
             _ = i + 100;        // Compliant
         for (i = 0; i <= 2147483547; i++)
-            _ = i + 101;        // FN symbolic execution engine is not looping that often
+            _ = i + 101;        // Noncompliant likely
         for (i = 2147483546; i <= 2147483547; i++)
             _ = i + 100;        // Compliant
         for (i = 2147483546; i <= 2147483547; i++)
-            _ = i + 101;        // FIXME Non-compliant
+            _ = i + 101;        // Noncompliant
+    }
 
+    public void Branching2(int i)
+    {
         switch (i)
         {
             case 2147483547:
@@ -186,7 +189,7 @@ class DotnetOverflow
         {
             unchecked
             {
-                int i = 1834567890 + 1834567890;    // FIXME Non-compliant
+                int i = 1834567890 + 1834567890;    // Noncompliant
                 return i;
             }
         }
@@ -201,7 +204,7 @@ class DotnetOverflow
         public int Overflow3()
         {
             int i = 1834567890;
-            var j = i + i;                          // FIXME Non-compliant
+            var j = i + i;                          // Noncompliant
             return j;
         }
 
@@ -209,7 +212,7 @@ class DotnetOverflow
         {
             int i = -1834567890;
             int j = 1834567890;
-            var k = i - j;                          // FIXME Non-compliant
+            var k = i - j;                          // Noncompliant
             return k;
         }
 
@@ -217,7 +220,7 @@ class DotnetOverflow
         {
             if (i > 1834567890)
             {
-                return i + i;                       // FIXME Non-compliant
+                return i + i;                       // Noncompliant
             }
             return 0;
         }
