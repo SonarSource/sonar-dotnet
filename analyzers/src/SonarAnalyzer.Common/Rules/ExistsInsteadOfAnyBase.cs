@@ -36,5 +36,5 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
     protected override bool IsInValidContext(TInvocationExpression invocation, SemanticModel model) =>
         !IsSimpleEqualityCheck(invocation, model);
 
-    protected InsteadOfAnyBase() : base(DiagnosticId) { }
+    protected ExistsInsteadOfAnyBase() : base(DiagnosticId) { }
 }
