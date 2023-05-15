@@ -747,7 +747,7 @@ Tag(""End"")";
     [DataRow("(i - 1) + j", 46)]
     [DataRow("i - (j + 1)", 36)]
     [DataRow("1 - (i + j)", -46)]
-    public void Binary_PlusAndMinus_UpdatesNumberConstraint(string expression, int expected)
+    public void Binary_PlusAndMinus(string expression, int expected)
     {
         var code = $"""
             var i = 42;
@@ -760,17 +760,17 @@ Tag(""End"")";
     }
 
     [DataTestMethod]
+    [DataRow(5, 0, "i * j", 0)]
+    [DataRow(5, 1, "i * j", 5)]
+    [DataRow(5, -1, "i * j", -5)]
     [DataRow(5, 4, "i * j", 20)]
     [DataRow(5, -4, "i * j", -20)]
+    [DataRow(-5, 0, "i * j", 0)]
+    [DataRow(-5, 1, "i * j", -5)]
+    [DataRow(-5, -1, "i * j", 5)]
     [DataRow(-5, 4, "i * j", -20)]
     [DataRow(-5, -4, "i * j", 20)]
-    [DataRow(5, 0, "i * j", 0)]
-    [DataRow(-5, 0, "i * j", 0)]
-    [DataRow(5, 1, "i * j", 5)]
-    [DataRow(-5, 1, "i * j", -5)]
-    [DataRow(5, -1, "i * j", -5)]
-    [DataRow(-5, -1, "i * j", 5)]
-    public void Binary_CalculationWithFixedValues_UpdatesNumberConstraint(int i, int j, string expression, int expected)
+    public void Binary_CalculationWith_SingleValue(int i, int j, string expression, int expected)
     {
         var code = $"""
             var i = {i};
@@ -778,24 +778,23 @@ Tag(""End"")";
             var value = {expression};
             Tag("Value", value);
             """;
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
+        SETestContext.CreateCS(code).Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
     }
 
     [DataTestMethod]
-    [DataRow("i >=  3 && j >=  5", 3 * 5, null)]
-    [DataRow("i >=  3 && j <= -5", null, 3 * -5)]
-    [DataRow("i <= -3 && j >=  5", null, -3 * 5)]
-    [DataRow("i <= -3 && j <= -5", -3 * -5, null)]
-    [DataRow("i ==  3 && j >=  5", 3 * 5, null)]
-    [DataRow("i ==  3 && j >= -5", 3 * -5, null)]
-    [DataRow("i ==  3 && j <=  5", null, 3 * 5)]
-    [DataRow("i ==  3 && j <= -5", null, 3 * -5)]
-    [DataRow("i == -3 && j >=  5", null, -3 * 5)]
-    [DataRow("i == -3 && j >= -5", null, -3 * -5)]
-    [DataRow("i == -3 && j <=  5", -3 * 5, null)]
-    [DataRow("i == -3 && j <= -5", -3 * -5, null)]
-    public void Binary_MultiplicationWithRange_UpdatesNumberConstraint(string expression, int? expectedMin, int?expectedMax)
+    [DataRow("i >=  3 && j >=  5", 15, null)]
+    [DataRow("i >=  3 && j <= -5", null, -15)]
+    [DataRow("i <= -3 && j >=  5", null, -15)]
+    [DataRow("i <= -3 && j <= -5", 15, null)]
+    [DataRow("i ==  3 && j >=  5", 15, null)]
+    [DataRow("i ==  3 && j >= -5", -15, null)]
+    [DataRow("i ==  3 && j <=  5", null, 15)]
+    [DataRow("i ==  3 && j <= -5", null, -15)]
+    [DataRow("i == -3 && j >=  5", null, -15)]
+    [DataRow("i == -3 && j >= -5", null, 15)]
+    [DataRow("i == -3 && j <=  5", -15, null)]
+    [DataRow("i == -3 && j <= -5", 15, null)]
+    public void Binary_Multiplication_Range(string expression, int? expectedMin, int?expectedMax)
     {
         var code = $$"""
             if ({{expression}})
@@ -804,8 +803,7 @@ Tag(""End"")";
                 Tag("Value", value);
             }
             """;
-        var validator = SETestContext.CreateCS(code, "int? i, int? j").Validator;
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(NumberConstraint.From(expectedMin, expectedMax)));
+        SETestContext.CreateCS(code, "int i, int j").Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
     }
 
     [DataTestMethod]
@@ -821,7 +819,7 @@ Tag(""End"")";
     [DataRow("i <=  3 && j <= -5")]
     [DataRow("i <= -3 && j >= -5")]
     [DataRow("i <= -3 && j <=  5")]
-    public void Binary_MultiplicationWithRange_NoNumberConstraint(string expression)
+    public void Binary_Multiplication_Range_NoNumberConstraint(string expression)
     {
         var code = $$"""
             if ({{expression}})
@@ -830,7 +828,6 @@ Tag(""End"")";
                 Tag("Value", value);
             }
             """;
-        var validator = SETestContext.CreateCS(code, "int? i, int? j").Validator;
-        validator.ValidateTag("Value", x => x.Should().BeNull());
+        SETestContext.CreateCS(code, "int i, int j").Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
     }
 }
