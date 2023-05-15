@@ -20,10 +20,13 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
+    where TInvocationExpression : SyntaxNode
 {
     private const string DiagnosticId = "S6602";
+
+    protected override string MessageFormat => $"\"{nameof(Array.Find)}\" method should be used instead of the \"{nameof(Enumerable.FirstOrDefault)}\" extension method.";
 
     private readonly ImmutableArray<KnownType> appliedToTypes =
         ImmutableArray.Create(
@@ -31,44 +34,33 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind> : SonarDiagno
             KnownType.System_Array,
             KnownType.System_Collections_Immutable_ImmutableList_T);
 
-    protected struct AccessInfo
-    {
-        public SyntaxNode Node { get; set; }
-        public SyntaxNode LeftExpression { get; set; }
-        public SyntaxNode RightExpression { get; set; }
-    }
-
-    protected override string MessageFormat => $"\"{nameof(Array.Find)}\" method should be used instead of the \"{nameof(Enumerable.FirstOrDefault)}\" extension method.";
-
     protected FindInsteadOfFirstOrDefaultBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
             {
-                if (TryGetAccessInfo(c.Node, out var accessInfo)
-                    && IsInvocationNamedFirstOrDefault(accessInfo.Node)
-                    && IsInvokedOnAppliedTypes(c, accessInfo.LeftExpression)
-                    && IsEnumerableFirstOrDefault(c, accessInfo.RightExpression))
+                var invocation = (TInvocationExpression)c.Node;
+
+                if (IsNameEqual(invocation, nameof(Enumerable.FirstOrDefault))
+                    && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
+                    && IsCorrectCall(right, c.SemanticModel)
+                    && IsInvokedOnAppliedTypes(left, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, GetIssueLocation(accessInfo.Node)));
+                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
                 }
             },
-            Language.SyntaxKind.SimpleMemberAccessExpression,
-            Language.SyntaxKind.ConditionalAccessExpression);
+            Language.SyntaxKind.InvocationExpression);
 
-    protected abstract bool TryGetAccessInfo(SyntaxNode node, out AccessInfo accessInfo);
+    private static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
+        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
-    protected abstract bool IsInvocationNamedFirstOrDefault(SyntaxNode syntaxNode);
-    protected abstract Location GetIssueLocation(SyntaxNode syntaxNode);
+    private bool IsNameEqual(SyntaxNode node, string name) =>
+        Language.GetName(node).Equals(name, Language.NameComparison);
 
-    private bool IsInvokedOnAppliedTypes(SonarSyntaxNodeReportingContext context, SyntaxNode expression)
+    private bool IsInvokedOnAppliedTypes(SyntaxNode left, SemanticModel model)
     {
-        var memberTypeSymbol = context.SemanticModel.GetTypeInfo(expression).Type;
-
+        var memberTypeSymbol = model.GetTypeInfo(left).Type;
         return memberTypeSymbol.IsAny(appliedToTypes) || memberTypeSymbol.DerivesFromAny(appliedToTypes);
     }
-
-    private bool IsEnumerableFirstOrDefault(SonarSyntaxNodeReportingContext context, SyntaxNode expression) =>
-        context.SemanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol { Name: nameof(Enumerable.FirstOrDefault) } method
-        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 }

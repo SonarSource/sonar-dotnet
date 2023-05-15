@@ -31,6 +31,13 @@ Public Class UseFind
         End Property
     End Class
 
+    Public Sub UnrelatedType(ByVal dummy As Dummy, ByVal anotherDummy As AnotherDummy)
+        Dim unused = dummy.FirstOrDefault() ' Compliant
+        unused = dummy.FirstOrDefault(Function(x) True) ' Compliant
+
+        unused = anotherDummy.FirstOrDefault
+    End Sub
+
     Public Class MyList
         Inherits List(Of Integer)
     End Class
@@ -42,13 +49,6 @@ Public Class UseFind
             Return Nothing
         End Function
     End Class
-
-    Public Sub UnrelatedType(ByVal dummy As Dummy, ByVal anotherDummy As AnotherDummy)
-        Dim unused = dummy.FirstOrDefault() ' Compliant
-        unused = dummy.FirstOrDefault(Function(x) True) ' Compliant
-
-        unused = anotherDummy.FirstOrDefault
-    End Sub
 
     Public Sub ListBasic(ByVal data As List(Of Integer))
         Dim unused = data.FirstOrDefault(Function(x) True) ' Noncompliant
@@ -80,7 +80,6 @@ Public Class UseFind
     End Sub
 
     Public Sub AsMethodGroup(data As List(Of Integer))
-        HelperClass.DoWorkMethodGroup(Of Integer)(AddressOf data.FirstOrDefault) ' Noncompliant
-'                                                                ^^^^^^^^^^^^^^
+        HelperClass.DoWorkMethodGroup(Of Integer)(AddressOf data.FirstOrDefault) ' FN
     End Sub
 End Class

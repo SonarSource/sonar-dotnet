@@ -21,31 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class FindInsteadOfFirstOrDefault : FindInsteadOfFirstOrDefaultBase<SyntaxKind>
+public sealed class FindInsteadOfFirstOrDefault : FindInsteadOfFirstOrDefaultBase<SyntaxKind, InvocationExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-    protected override bool TryGetAccessInfo(SyntaxNode node, out AccessInfo accessInfo)
-    {
-        var (syntaxNode, left, right) = node switch
-        {
-            ConditionalAccessExpressionSyntax { WhenNotNull: InvocationExpressionSyntax inv } condAccess => ((SyntaxNode)inv, condAccess.Expression, inv.Expression),
-            MemberAccessExpressionSyntax memberAccess => (memberAccess, memberAccess.Expression, memberAccess.Name),
-            _ => (null, null, null)
-        };
-
-        if (syntaxNode is null)
-        {
-            return false;
-        }
-
-        accessInfo.Node = syntaxNode;
-        accessInfo.LeftExpression = left;
-        accessInfo.RightExpression = right;
-
-        return true;
-    }
-
-    protected override bool IsInvocationNamedFirstOrDefault(SyntaxNode syntaxNode) => syntaxNode.NameIs(nameof(Enumerable.FirstOrDefault));
-    protected override Location GetIssueLocation(SyntaxNode syntaxNode) => syntaxNode.GetIdentifier()?.GetLocation();
 }

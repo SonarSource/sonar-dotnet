@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using System.ComponentModel;
 
 public class FindInsteadOfFirstOrDefault
 {
@@ -16,6 +15,22 @@ public class FindInsteadOfFirstOrDefault
         public object FirstOrDefault => null;
     }
 
+    public void UnrelatedType(Dummy dummy, AnotherDummy anotherDummy)
+    {
+        _ = dummy.FirstOrDefault(); // Compliant
+        _ = dummy.FirstOrDefault(x => true); // Compliant
+
+        _ = anotherDummy.FirstOrDefault;
+
+        // Nullable
+        _ = dummy?.FirstOrDefault(); // Compliant
+        _ = dummy?.FirstOrDefault(x => true); // Compliant
+
+        _ = anotherDummy?.FirstOrDefault;
+    }
+
+    #region List
+
     public class MyList : List<int>
     {
     }
@@ -29,14 +44,6 @@ public class FindInsteadOfFirstOrDefault
     {
         public static List<int> DoWorkReturnGroup() => null;
         public static void DoWorkMethodGroup<T>(Func<Func<T, bool>, T> firstOrDefault) { }
-    }
-
-    public void UnrelatedType(Dummy dummy, AnotherDummy anotherDummy)
-    {
-        _ = dummy.FirstOrDefault(); // Compliant
-        _ = dummy.FirstOrDefault(x => true); // Compliant
-
-        _ = anotherDummy.FirstOrDefault;
     }
 
     public void ListBasic(List<int> data)
@@ -75,8 +82,7 @@ public class FindInsteadOfFirstOrDefault
 
     public void AsMethodGroup(List<int> data)
     {
-        HelperClass.DoWorkMethodGroup<int>(data.FirstOrDefault); // Noncompliant
-        //                                      ^^^^^^^^^^^^^^
+        HelperClass.DoWorkMethodGroup<int>(data.FirstOrDefault); // FN, this raise as a SimpleAccessMemberExpression
     }
 
     public void Miscellaneous(List<int> data)
@@ -97,15 +103,12 @@ public class FindInsteadOfFirstOrDefault
         _ = data.Find(x => true); // Compliant
     }
 
-    public static void Nullable(List<int> data = null, Dummy dummy = null, AnotherDummy anotherDummy = null)
+    public static void Nullable(List<int> data = null)
     {
         _ = data?.FirstOrDefault(x => true); // Noncompliant
         //        ^^^^^^^^^^^^^^
         _ = data?.Find(x => true); // Compliant
-
-        _ = dummy?.FirstOrDefault(); // Compliant
-        _ = dummy?.FirstOrDefault(x => true); // Compliant
-
-        _ = anotherDummy?.FirstOrDefault;
     }
+
+    #endregion
 }

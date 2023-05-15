@@ -32,14 +32,22 @@ public class FindInsteadOfFirstOrDefaultTest
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.FindInsteadOfFirstOrDefault>();
 
     [TestMethod]
-    public void UseFind_CS() =>
+    public void FindInsteadOfFirstOrDefault_CS() =>
         builderCS.AddPaths("FindInsteadOfFirstOrDefault.cs").Verify();
 
+#if NET
+
     [TestMethod]
-    public void UseFind_Array_CS() =>
+    public void FindInsteadOfFirstOrDefault_Immutable_CS() =>
+        builderCS.AddPaths("FindInsteadOfFirstOrDefault.Immutable.cs").AddReferences(MetadataReferenceFacade.SystemCollections).Verify();
+
+#endif
+
+    [TestMethod]
+    public void FindInsteadOfFirstOrDefault_Array_CS() =>
         builderCS.AddPaths("FindInsteadOfFirstOrDefault.Array.cs").Verify();
 
     [TestMethod]
-    public void UseFind_VB() =>
+    public void FindInsteadOfFirstOrDefault_VB() =>
         builderVB.WithConcurrentAnalysis(false).AddPaths("FindInsteadOfFirstOrDefault.vb").Verify();
 }
