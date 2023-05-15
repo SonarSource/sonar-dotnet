@@ -32,32 +32,39 @@ public abstract class UseCharOverloadOfStringMethodsBase<TSyntaxKind, TInvocatio
     protected UseCharOverloadOfStringMethodsBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+        context.RegisterCompilationStartAction(start =>
         {
-            var invocation = (TInvocation)c.Node;
-            var methodName = Language.GetName(invocation);
-
-            if (HasCorrectName(methodName)
-                && HasCorrectArguments(invocation)
-                && CompilationRunsOnValidNetVersion(c.Compilation, methodName)
-                && Language.Syntax.TryGetOperands(invocation, out var left, out _)
-                && IsCorrectType(left, c.SemanticModel))
+            if (!CompilationTargetsValidNetVersion(start.Compilation))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
+                return;
             }
-        }, Language.SyntaxKind.InvocationExpression);
+
+            start.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+            {
+                var invocation = (TInvocation)c.Node;
+                var methodName = Language.GetName(invocation);
+
+                if (HasCorrectName(methodName)
+                    && HasCorrectArguments(invocation)
+                    && Language.Syntax.TryGetOperands(invocation, out var left, out _)
+                    && IsCorrectType(left, c.SemanticModel))
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
+                }
+            }, Language.SyntaxKind.InvocationExpression);
+        });
+
+    // "char" overload introduced at .NET Core 2.0/.NET Standard 2.1
+    private static bool CompilationTargetsValidNetVersion(Compilation compilation)
+    {
+        var stringType = compilation.GetTypeByMetadataName(KnownType.System_String);
+        var methods = stringType.GetMembers(nameof(string.StartsWith)).Where(x => x is IMethodSymbol);
+        return methods.Any(x => ((IMethodSymbol)x).Parameters[0].IsType(KnownType.System_Char));
+    }
 
     private bool HasCorrectName(string methodName) =>
         methodName.Equals(nameof(string.StartsWith), Language.NameComparison)
         || methodName.Equals(nameof(string.EndsWith), Language.NameComparison);
-
-    // "char" overload introduced at .NET Core 2.0
-    private bool CompilationRunsOnValidNetVersion(Compilation compilation, string methodName) =>
-        compilation.GetTypeByMetadataName(KnownType.System_String) is { } str
-        && str.GetMembers(methodName) is { } members
-        && members.Any(x => x is IMethodSymbol { } method
-                            && method.Parameters is { Length: 1 } parameters
-                            && parameters[0].IsType(KnownType.System_Char));
 
     private static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
         model.GetTypeInfo(left).Type is { } type && type.Is(KnownType.System_String);

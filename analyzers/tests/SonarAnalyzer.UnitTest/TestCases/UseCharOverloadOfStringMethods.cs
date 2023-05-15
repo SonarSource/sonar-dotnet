@@ -94,6 +94,9 @@ class Testcases
         fake.EndsWith("x"); // Compliant
         fake.StartsWith('x'); // Compliant
         fake.EndsWith('x'); // Compliant
+
+        fake.StartsWith(); // Compliant
+        fake.EndsWith(); // Compliant
     }
 
     class FakeString
@@ -103,5 +106,8 @@ class Testcases
 
         public bool StartsWith(char value) => true;
         public bool EndsWith(char value) => false;
+
+        public bool StartsWith() => true;
+        public bool EndsWith() => false;
     }
 }
