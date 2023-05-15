@@ -1,0 +1,17 @@
+{
+"issues": [
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\akka.net\src\core\Akka.Remote\RemoteActorRef.cs",
+"region": {
+"startLine": 112,
+"startColumn": 27,
+"endLine": 112,
+"endColumn": 41
+}
+}
+}
+]
+}

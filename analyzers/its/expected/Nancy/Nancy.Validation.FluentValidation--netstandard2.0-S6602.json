@@ -1,0 +1,17 @@
+{
+"issues": [
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Nancy\src\Nancy.Validation.FluentValidation\FluentValidationValidatorFactory.cs",
+"region": {
+"startLine": 64,
+"startColumn": 30,
+"endLine": 64,
+"endColumn": 44
+}
+}
+}
+]
+}

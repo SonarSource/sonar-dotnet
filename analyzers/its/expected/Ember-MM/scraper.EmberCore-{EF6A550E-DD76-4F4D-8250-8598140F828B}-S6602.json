@@ -1,0 +1,940 @@
+{
+"issues": [
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region": {
+"startLine": 37,
+"startColumn": 80,
+"endLine": 37,
+"endColumn": 94
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region": {
+"startLine": 39,
+"startColumn": 61,
+"endLine": 39,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region": {
+"startLine": 40,
+"startColumn": 61,
+"endLine": 40,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region": {
+"startLine": 47,
+"startColumn": 80,
+"endLine": 47,
+"endColumn": 94
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region": {
+"startLine": 49,
+"startColumn": 61,
+"endLine": 49,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region": {
+"startLine": 50,
+"startColumn": 61,
+"endLine": 50,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region": {
+"startLine": 188,
+"startColumn": 80,
+"endLine": 188,
+"endColumn": 94
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region": {
+"startLine": 37,
+"startColumn": 80,
+"endLine": 37,
+"endColumn": 94
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region": {
+"startLine": 39,
+"startColumn": 61,
+"endLine": 39,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region": {
+"startLine": 40,
+"startColumn": 61,
+"endLine": 40,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region": {
+"startLine": 47,
+"startColumn": 80,
+"endLine": 47,
+"endColumn": 94
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region": {
+"startLine": 49,
+"startColumn": 61,
+"endLine": 49,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region": {
+"startLine": 50,
+"startColumn": 61,
+"endLine": 50,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region": {
+"startLine": 120,
+"startColumn": 80,
+"endLine": 120,
+"endColumn": 94
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region": {
+"startLine": 37,
+"startColumn": 80,
+"endLine": 37,
+"endColumn": 94
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region": {
+"startLine": 39,
+"startColumn": 61,
+"endLine": 39,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region": {
+"startLine": 40,
+"startColumn": 61,
+"endLine": 40,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region": {
+"startLine": 47,
+"startColumn": 80,
+"endLine": 47,
+"endColumn": 94
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region": {
+"startLine": 49,
+"startColumn": 61,
+"endLine": 49,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region": {
+"startLine": 50,
+"startColumn": 61,
+"endLine": 50,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region": {
+"startLine": 67,
+"startColumn": 80,
+"endLine": 67,
+"endColumn": 94
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region": {
+"startLine": 37,
+"startColumn": 80,
+"endLine": 37,
+"endColumn": 94
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region": {
+"startLine": 39,
+"startColumn": 61,
+"endLine": 39,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region": {
+"startLine": 40,
+"startColumn": 61,
+"endLine": 40,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region": {
+"startLine": 47,
+"startColumn": 80,
+"endLine": 47,
+"endColumn": 94
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region": {
+"startLine": 49,
+"startColumn": 61,
+"endLine": 49,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region": {
+"startLine": 50,
+"startColumn": 61,
+"endLine": 50,
+"endColumn": 75
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region": {
+"startLine": 67,
+"startColumn": 80,
+"endLine": 67,
+"endColumn": 94
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region": {
+"startLine": 294,
+"startColumn": 50,
+"endLine": 294,
+"endColumn": 64
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region": {
+"startLine": 415,
+"startColumn": 56,
+"endLine": 415,
+"endColumn": 70
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region": {
+"startLine": 439,
+"startColumn": 112,
+"endLine": 439,
+"endColumn": 126
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region": {
+"startLine": 474,
+"startColumn": 104,
+"endLine": 474,
+"endColumn": 118
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region": {
+"startLine": 843,
+"startColumn": 54,
+"endLine": 843,
+"endColumn": 68
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region": {
+"startLine": 998,
+"startColumn": 91,
+"endLine": 998,
+"endColumn": 105
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region": {
+"startLine": 1026,
+"startColumn": 79,
+"endLine": 1026,
+"endColumn": 93
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"region": {
+"startLine": 101,
+"startColumn": 88,
+"endLine": 101,
+"endColumn": 102
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 72,
+"startColumn": 72,
+"endLine": 72,
+"endColumn": 86
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 75,
+"startColumn": 69,
+"endLine": 75,
+"endColumn": 83
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 78,
+"startColumn": 65,
+"endLine": 78,
+"endColumn": 79
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 81,
+"startColumn": 65,
+"endLine": 81,
+"endColumn": 79
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 89,
+"startColumn": 76,
+"endLine": 89,
+"endColumn": 90
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 91,
+"startColumn": 74,
+"endLine": 91,
+"endColumn": 88
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 100,
+"startColumn": 72,
+"endLine": 100,
+"endColumn": 86
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 103,
+"startColumn": 74,
+"endLine": 103,
+"endColumn": 88
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 106,
+"startColumn": 70,
+"endLine": 106,
+"endColumn": 84
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 109,
+"startColumn": 70,
+"endLine": 109,
+"endColumn": 84
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 116,
+"startColumn": 76,
+"endLine": 116,
+"endColumn": 90
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 118,
+"startColumn": 69,
+"endLine": 118,
+"endColumn": 83
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 135,
+"startColumn": 60,
+"endLine": 135,
+"endColumn": 74
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 137,
+"startColumn": 57,
+"endLine": 137,
+"endColumn": 71
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 140,
+"startColumn": 57,
+"endLine": 140,
+"endColumn": 71
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 166,
+"startColumn": 72,
+"endLine": 166,
+"endColumn": 86
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 168,
+"startColumn": 65,
+"endLine": 168,
+"endColumn": 79
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 171,
+"startColumn": 65,
+"endLine": 171,
+"endColumn": 79
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 179,
+"startColumn": 76,
+"endLine": 179,
+"endColumn": 90
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 181,
+"startColumn": 74,
+"endLine": 181,
+"endColumn": 88
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 190,
+"startColumn": 72,
+"endLine": 190,
+"endColumn": 86
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 192,
+"startColumn": 70,
+"endLine": 192,
+"endColumn": 84
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 195,
+"startColumn": 70,
+"endLine": 195,
+"endColumn": 84
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 202,
+"startColumn": 76,
+"endLine": 202,
+"endColumn": 90
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 204,
+"startColumn": 69,
+"endLine": 204,
+"endColumn": 83
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 225,
+"startColumn": 47,
+"endLine": 225,
+"endColumn": 61
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 226,
+"startColumn": 71,
+"endLine": 226,
+"endColumn": 85
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 227,
+"startColumn": 71,
+"endLine": 227,
+"endColumn": 85
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 1018,
+"startColumn": 69,
+"endLine": 1018,
+"endColumn": 83
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 1019,
+"startColumn": 52,
+"endLine": 1019,
+"endColumn": 66
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 1022,
+"startColumn": 81,
+"endLine": 1022,
+"endColumn": 95
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 1023,
+"startColumn": 86,
+"endLine": 1023,
+"endColumn": 100
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 1058,
+"startColumn": 52,
+"endLine": 1058,
+"endColumn": 66
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 1060,
+"startColumn": 85,
+"endLine": 1060,
+"endColumn": 99
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 1150,
+"startColumn": 105,
+"endLine": 1150,
+"endColumn": 119
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region": {
+"startLine": 1164,
+"startColumn": 105,
+"endLine": 1164,
+"endColumn": 119
+}
+}
+}
+]
+}

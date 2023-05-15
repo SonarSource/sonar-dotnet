@@ -1,0 +1,43 @@
+{
+"issues": [
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region": {
+"startLine": 115,
+"startColumn": 22,
+"endLine": 115,
+"endColumn": 36
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region": {
+"startLine": 115,
+"startColumn": 68,
+"endLine": 115,
+"endColumn": 82
+}
+}
+},
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region": {
+"startLine": 127,
+"startColumn": 31,
+"endLine": 127,
+"endColumn": 45
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues": [
+{
+"id": "S6602",
+"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location": {
+"uri": "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
+"region": {
+"startLine": 62,
+"startColumn": 31,
+"endLine": 62,
+"endColumn": 45
+}
+}
+}
+]
+}
