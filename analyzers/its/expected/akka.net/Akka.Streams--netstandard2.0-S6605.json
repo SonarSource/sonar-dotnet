@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  29,
+"endLine":  332,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  503,
+"startColumn":  51,
+"endLine":  503,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1131,
+"startColumn":  45,
+"endLine":  1131,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"region":  {
+"startLine":  1140,
+"startColumn":  42,
+"endLine":  1140,
+"endColumn":  45
+}
+}
+}
+]
+}

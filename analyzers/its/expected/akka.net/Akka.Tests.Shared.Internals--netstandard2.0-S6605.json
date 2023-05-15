@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  76,
+"endLine":  127,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  70,
+"endLine":  135,
+"endColumn":  73
+}
+}
+}
+]
+}
