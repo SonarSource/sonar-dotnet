@@ -1,0 +1,17 @@
+{
+  "title": "\"Contains\" should be used instead of \"Any\" for simple equality checks",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6617",
+  "sqKey": "S6617",
+  "scope": "All",
+  "quickfix": "targeted"
+}

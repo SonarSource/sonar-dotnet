@@ -1,0 +1,196 @@
+<h2>Why is this an issue?</h2>
+<p>When testing if a collection contains a specific item by simple equality, both <code>ICollection.Contains(T item)</code> and
+<code>IEnumerable.Any(x ⇒ x == item)</code> can be used. However, <code>Any</code> searches the data structure in a linear manner using a foreach
+loop, whereas <code>Contains</code> is considerably faster in some collection types, because of the underlying implementation. More specifically:</p>
+<ul>
+  <li> <code>HashSet&lt;T&gt;</code> is a hashtable, and therefore has an O(1) lookup </li>
+  <li> <code>SortedSet&lt;T&gt;</code> is a red-black tree, and therefore has a O(logN) lookup </li>
+  <li> <code>List&lt;T&gt;</code> is a linear search, and therefore has an O(N) lookup, but the EqualityComparer is optimized for the <code>T</code>
+  type, which is not the case for <code>Any</code> </li>
+</ul>
+<p>For small collections, the performance difference may be negligible, but for large collections, it can be noticeable.</p>
+<h3>What is the potential impact?</h3>
+<p>We measured a significant improvement both in execution time and memory allocation. For more details see the <code>Benchmarks</code> section from
+the <code>More info</code> tab.</p>
+<h2>How to fix it</h2>
+<p><code>Contains</code> is a method defined on the <code>ICollection&lt;T&gt;</code> interface and takes a <code>T item</code> argument.
+<code>Any</code> is an extension method defined on the <code>IEnumerable&lt;T&gt;</code> interface and takes a predicate argument. Therefore, calls
+with simple equality checks like <code>Any(x ⇒ x == item)</code> can be replaced by <code>Contains(item)</code>.</p>
+<p>This applies to the following collection types:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1">HashSet&lt;T&gt;</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1">SortedSet&lt;T&gt;</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a> </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Function ValueExists(data As HashSet(Of Integer)) As Boolean
+    Return data.Any(Function(x) x = 42)
+End Function
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+Function ValueExists(data As List(Of Integer)) As Boolean
+    Return data.Any(Function(x) x = 42)
+End Function
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+Function ValueExists(data As HashSet(Of Integer)) As Boolean
+    Return data.Contains(42)
+End Function
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+Function ValueExists(data As List(Of Integer)) As Boolean
+    Return data.Contains(42)
+End Function
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1.contains">HashSet&lt;T&gt;.Contains(T)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1.contains">SortedSet&lt;T&gt;.Contains(T)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.contains">List.Contains(T)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any">Enumerable.Any</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/collections/">Collections and Data Structures</a> </li>
+</ul>
+<h3>Benchmarks</h3>
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Runtime</th>
+      <th>Mean</th>
+      <th>StdDev</th>
+      <th>Allocated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p>HashSet_Any</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>35,388.333 us</p></td>
+      <td><p>620.1863 us</p></td>
+      <td><p>40132 B</p></td>
+    </tr>
+    <tr>
+      <td><p>HashSet_Contains</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>3.799 us</p></td>
+      <td><p>0.1489 us</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td><p>List_Any</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>32,851.509 us</p></td>
+      <td><p>667.1658 us</p></td>
+      <td><p>40130 B</p></td>
+    </tr>
+    <tr>
+      <td><p>List_Contains</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>375.132 us</p></td>
+      <td><p>8.0764 us</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td><p>HashSet_Any</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>28,979.763 us</p></td>
+      <td><p>678.0093 us</p></td>
+      <td><p>40448 B</p></td>
+    </tr>
+    <tr>
+      <td><p>HashSet_Contains</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>5.987 us</p></td>
+      <td><p>0.1090 us</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td><p>List_Any</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>25,830.221 us</p></td>
+      <td><p>487.2470 us</p></td>
+      <td><p>40448 B</p></td>
+    </tr>
+    <tr>
+      <td><p>List_Contains</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>5,935.812 us</p></td>
+      <td><p>57.7569 us</p></td>
+      <td><p>-</p></td>
+    </tr>
+  </tbody>
+</table>
+<p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
+<pre>
+[Params(10_000)]
+public int SampleSize;
+
+[Params(1_000)]
+public int Iterations;
+
+private static HashSet&lt;int&gt; hashSet;
+private static List&lt;int&gt; list;
+
+[GlobalSetup]
+public void Setup()
+{
+    hashSet = new HashSet&lt;int&gt;(Enumerable.Range(0, SampleSize));
+    list = Enumerable.Range(0, SampleSize).ToList();
+}
+
+[Benchmark]
+public void HashSet_Any() =&gt;
+    CheckAny(hashSet, SampleSize / 2);
+
+[Benchmark]
+public void HashSet_Contains() =&gt;
+    CheckContains(hashSet, SampleSize / 2);
+
+[Benchmark]
+public void List_Any() =&gt;
+    CheckAny(list, SampleSize / 2);
+
+[Benchmark]
+public void List_Contains() =&gt;
+    CheckContains(list, SampleSize / 2);
+
+void CheckAny(IEnumerable&lt;int&gt; values, int target)
+{
+    for (int i = 0; i &lt; Iterations; i++)
+    {
+        _ = values.Any(x =&gt; x == target);  // Enumerable.Any
+    }
+}
+
+void CheckContains(ICollection&lt;int&gt; values, int target)
+{
+    for (int i = 0; i &lt; Iterations; i++)
+    {
+        _ = values.Contains(target); // ICollection&lt;T&gt;.Contains
+    }
+}
+</pre>
+<p>Hardware configuration:</p>
+<pre>
+BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.2846/22H2/2022Update)
+11th Gen Intel Core i7-11850H 2.50GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK=7.0.203
+  [Host]               : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+  .NET 7.0             : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+  .NET Framework 4.6.2 : .NET Framework 4.8.1 (4.8.9139.0), X64 RyuJIT VectorSize=256
+</pre>
+
