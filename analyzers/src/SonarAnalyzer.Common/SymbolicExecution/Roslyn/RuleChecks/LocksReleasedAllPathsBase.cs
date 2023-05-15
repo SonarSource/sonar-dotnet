@@ -118,13 +118,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         public override ProgramState ConditionEvaluated(SymbolicContext context)
         {
-            if (context.Operation.Instance.AsPropertyReference() is { } property
+            if (context.Operation.Instance.TryWrapPropertyReference(out var property)
                 && IsLockHeldProperties.Contains(property.Property.Name)
                 && ((IMemberReferenceOperationWrapper)property).IsOnReaderWriterLockOrSlim())
             {
                 return ProcessCondition(property.Instance.TrackedSymbol());
             }
-            else if (context.Operation.Instance.AsInvocation() is { } invocation && invocation.IsMonitorIsEntered())    // Same condition also needs to be in ExceptionCandidate
+            else if (context.Operation.Instance.TryWrapInvocation(out var invocation) && invocation.IsMonitorIsEntered())    // Same condition also needs to be in ExceptionCandidate
             {
                 return ProcessCondition(ArgumentSymbol(invocation, 0));
             }
@@ -216,14 +216,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
 
         private static ISymbol ArgumentSymbol(IInvocationOperationWrapper invocation, int parameterIndex) =>
             invocation.TargetMethod.Parameters[parameterIndex].Name is var parameterName
-            && invocation.Arguments[parameterIndex].ToArgument() is var argument
+            && invocation.Arguments[parameterIndex].TryWrapArgument(out var argument)
             && argument.Parameter.Name == parameterName
                 ? argument.Value.TrackedSymbol()
-                : invocation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Name == parameterName)?.ToArgument().Value.TrackedSymbol();
+                : invocation.Arguments.SingleOrDefault(x => x.WrapArgument().Parameter.Name == parameterName)?.WrapArgument().Value.TrackedSymbol();
 
         private static ISymbol FindLockSymbolWithConditionalReturnValue(SymbolicContext context)
         {
-            if (context.Operation.Instance.AsInvocation().Value is var invocation
+            if (context.Operation.Instance.TryWrapInvocation(out var invocation)
                 && invocation.TargetMethod.ReturnType.Is(KnownType.System_Boolean))
             {
                 if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "TryEnter"))
@@ -244,14 +244,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks
             ?? BoolRefParamFromInstance(context, KnownType.System_Threading_SpinLock, "Enter", "TryEnter");
 
         private static RefParamContext BoolRefParamFromArgument(SymbolicContext context, KnownType type, params string[] methodNames) =>
-            context.Operation.Instance.AsInvocation().Value is var invocation
+            context.Operation.Instance.TryWrapInvocation(out var invocation)
             && InvocationBoolRefSymbol(invocation, type, methodNames) is { } refParameter
             && ArgumentSymbol(invocation, 0) is { } lockObject
                 ? new RefParamContext(context, lockObject, refParameter)
                 : null;
 
         private static RefParamContext BoolRefParamFromInstance(SymbolicContext context, KnownType type, params string[] methodNames) =>
-            context.Operation.Instance.AsInvocation().Value is var invocation
+            context.Operation.Instance.TryWrapInvocation(out var invocation)
             && InvocationBoolRefSymbol(invocation, type, methodNames) is { } refParameter
             && invocation.Instance.TrackedSymbol() is { } lockObject
                 ? new RefParamContext(context, lockObject, refParameter)
