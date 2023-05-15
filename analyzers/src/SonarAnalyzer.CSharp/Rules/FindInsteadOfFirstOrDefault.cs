@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UseFind : UseFindBase<SyntaxKind>
+public sealed class FindInsteadOfFirstOrDefault : FindInsteadOfFirstOrDefaultBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 

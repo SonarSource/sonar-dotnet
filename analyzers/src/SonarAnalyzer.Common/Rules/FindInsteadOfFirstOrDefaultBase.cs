@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UseFindBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6602";
@@ -40,7 +40,7 @@ public abstract class UseFindBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntax
 
     protected override string MessageFormat => $"\"{nameof(Array.Find)}\" method should be used instead of the \"{nameof(Enumerable.FirstOrDefault)}\" extension method.";
 
-    protected UseFindBase() : base(DiagnosticId) { }
+    protected FindInsteadOfFirstOrDefaultBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>

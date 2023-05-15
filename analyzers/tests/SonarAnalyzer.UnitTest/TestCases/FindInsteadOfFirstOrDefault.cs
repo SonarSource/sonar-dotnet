@@ -3,7 +3,7 @@ using System.Linq;
 using System;
 using System.ComponentModel;
 
-public class UseFind
+public class FindInsteadOfFirstOrDefault
 {
     public class Dummy
     {

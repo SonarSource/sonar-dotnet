@@ -26,20 +26,20 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
-public class UseFindTest
+public class FindInsteadOfFirstOrDefaultTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseFind>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseFind>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.FindInsteadOfFirstOrDefault>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.FindInsteadOfFirstOrDefault>();
 
     [TestMethod]
     public void UseFind_CS() =>
-        builderCS.AddPaths("UseFind.cs").Verify();
+        builderCS.AddPaths("FindInsteadOfFirstOrDefault.cs").Verify();
 
     [TestMethod]
     public void UseFind_Array_CS() =>
-        builderCS.AddPaths("UseFind.Array.cs").Verify();
+        builderCS.AddPaths("FindInsteadOfFirstOrDefault.Array.cs").Verify();
 
     [TestMethod]
     public void UseFind_VB() =>
-        builderVB.WithConcurrentAnalysis(false).AddPaths("UseFind.vb").Verify();
+        builderVB.WithConcurrentAnalysis(false).AddPaths("FindInsteadOfFirstOrDefault.vb").Verify();
 }
