@@ -82,6 +82,10 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
                         queue.Enqueue(node);
                     }
                 }
+                else
+                {
+                    logger.Log(current, "Not visiting");
+                }
             }
             logger.Log("Completed");
             checks.ExecutionCompleted();
