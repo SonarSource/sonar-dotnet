@@ -60,7 +60,10 @@ public partial class RoslynSymbolicExecutionTest
             Tag("End", arg);
             """;
         var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
-        validator.ValidateExitReachCount(0);    // For now, we don't explore states after fixed loops
+        validator.ValidateExitReachCount(1);
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),                          // For assumption that we didn't enter the loop, and continued after it
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));   // Loop was entered, arg has only it's final constraints after looping
     }
 
     [TestMethod]
@@ -74,8 +77,39 @@ public partial class RoslynSymbolicExecutionTest
             Tag("End", arg);
             """;
         var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        var arg = validator.Symbol("arg");
+        var i = validator.Symbol("i");
+        var j = validator.Symbol("j");
         validator.ValidateExitReachCount(1);
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));  // arg has only it's final constraints after looping
+        validator.TagStates("End").Should().SatisfyRespectively(
+            x =>
+            {
+                // Assumed flow that didn't enter the loop (because of "i", "j" was not tested) to be able to continue after it
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null));
+                x[j].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+            },
+            x =>
+            {
+                // Assumed flow that didn't enter the loop (because of "j", "i < 10" was true) to be able to continue after it
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 9));
+                x[j].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 0));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+            },
+            x =>
+            {
+                // Normal flow for i < 10 && j > 0 being true
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null));
+                x[j].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2, null));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);
+            },
+            x =>
+            {
+                // Flow that entered the loop, for "i < 10", assuming "j" not satisfying "j > 0" and moving on to reach after the loop too
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 9));
+                x[j].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 0));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);
+            });
     }
 
     [TestMethod]
@@ -86,16 +120,36 @@ public partial class RoslynSymbolicExecutionTest
             for (var i = 0; i < 10 || boolParameter; i++)
             {
                 arg.ToString(); // Add another constraint to 'arg'
-                Tag("Arg", arg);
+                Tag("InLoop");
             }
             Tag("Unreachable", arg);
             """;
         var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        var arg = validator.Symbol("arg");
+        var i = validator.Symbol("i");
         validator.ValidateExitReachCount(0);
-        validator.ValidateTagOrder("Arg", "Arg");
-        validator.TagValues("Arg").Should().SatisfyRespectively(
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
+        validator.ValidateTagOrder("InLoop", "InLoop", "InLoop", "InLoop");
+        validator.TagStates("InLoop").Should().SatisfyRespectively(
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 9));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);
+            },
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);
+            },
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 9));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True);
+            },
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True);
+            });
     }
 
     [TestMethod]
@@ -111,9 +165,40 @@ public partial class RoslynSymbolicExecutionTest
             Tag("End", arg);
             """;
         var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        var arg = validator.Symbol("arg");
+        var i = validator.Symbol("i");
         validator.ValidateExitReachCount(1);
-        validator.ValidateTagOrder("End");
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));    // AddConstraintOnInvocationCheck didn't add anything
+        validator.ValidateTagOrder("End", "End");
+        validator.TagStates("End").Should().SatisfyRespectively(
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null));   // LVA did not kick in yet
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull);                                  // AddConstraintOnInvocationCheck didn't add anything
+            },
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 9));    // LVA did not kick in yet
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull);                                  // AddConstraintOnInvocationCheck didn't add anything
+            });
+    }
+
+    [TestMethod]
+    public void Loops_While_FixedCount()
+    {
+        const string code = """
+            var i = 0;
+            while(i < 10)   // Same as: for(var i=0; i < 10; i++)
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+                i++;
+            }
+            Tag("End", arg);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(1);
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),                          // Flow for i < 10 being false, not adding constraints
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));   // arg has only it's final constraints after looping
     }
 
     [TestMethod]

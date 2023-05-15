@@ -25,12 +25,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         public IOperationWrapperSonar Operation { get; }
         public ProgramState State { get; }
         public IReadOnlyCollection<ISymbol> CapturedVariables { get; }
+        public bool IsLoopCondition { get; }
 
-        public SymbolicContext(IOperationWrapperSonar operation, ProgramState state, IReadOnlyCollection<ISymbol> capturedVariables)
+        public SymbolicContext(IOperationWrapperSonar operation, ProgramState state, IReadOnlyCollection<ISymbol> capturedVariables, bool isLoopCondition)
         {
             Operation = operation; // Operation can be null for the branch nodes.
             State = state ?? throw new ArgumentNullException(nameof(state));
             CapturedVariables = capturedVariables ?? throw new ArgumentNullException(nameof(capturedVariables));
+            IsLoopCondition = isLoopCondition;
         }
 
         public ProgramState SetOperationConstraint(SymbolicConstraint constraint) =>
@@ -40,7 +42,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             State.SetSymbolConstraint(symbol, constraint);
 
         public SymbolicContext WithState(ProgramState newState) =>
-            State == newState ? this : new(Operation, newState, CapturedVariables);
+            State == newState ? this : new(Operation, newState, CapturedVariables, IsLoopCondition);
 
         public bool HasConstraint(IOperation operation, SymbolicConstraint constraint) =>
             State[operation]?.HasConstraint(constraint) is true;

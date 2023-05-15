@@ -27,8 +27,8 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     protected override IBinaryOperationWrapper Convert(IOperation operation) =>
         IBinaryOperationWrapper.FromOperation(operation);
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation) =>
-        BinaryConstraint(operation.OperatorKind, state[operation.LeftOperand], state[operation.RightOperand]);
+    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation, bool isLoopCondition) =>
+        BinaryConstraint(operation.OperatorKind, state[operation.LeftOperand], state[operation.RightOperand], isLoopCondition);
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch)
     {
@@ -158,7 +158,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             ? symbol
             : null;
 
-    private static SymbolicConstraint BinaryConstraint(BinaryOperatorKind kind, SymbolicValue left, SymbolicValue right)
+    private static SymbolicConstraint BinaryConstraint(BinaryOperatorKind kind, SymbolicValue left, SymbolicValue right, bool isLoopCondition)
     {
         var leftBool = left?.Constraint<BoolConstraint>();
         var rightBool = right?.Constraint<BoolConstraint>();
@@ -175,7 +175,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             return BinaryBoolConstraint(kind, leftBool == BoolConstraint.True, rightBool == BoolConstraint.True);
         }
-        else if (left?.Constraint<NumberConstraint>() is { } leftNumber && right?.Constraint<NumberConstraint>() is { } rightNumber)
+        else if (left?.Constraint<NumberConstraint>() is { } leftNumber && right?.Constraint<NumberConstraint>() is { } rightNumber && !isLoopCondition)    // We need to learn range in loops instead
         {
             return BinaryNumberConstraint(kind, leftNumber, rightNumber);
         }
