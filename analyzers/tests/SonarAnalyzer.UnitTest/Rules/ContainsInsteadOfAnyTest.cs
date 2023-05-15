@@ -33,6 +33,17 @@ public class ContainsInsteadOfAnyTest
     public void ContainsInsteadOfAny_CS() =>
         builderCS.AddPaths("ContainsInsteadOfAny.cs").Verify();
 
+#if NET
+
+    [TestMethod]
+    public void ContainsInsteadOfAny_TopLevelStatements() =>
+        builderCS.AddPaths("ContainsInsteadOfAny.CSharp9.cs")
+            .WithTopLevelStatements()
+            .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .Verify();
+
+#endif
+
     [TestMethod]
     public void ContainsInsteadOfAny_VB() =>
         new VerifierBuilder<VB.ContainsInsteadOfAny>().AddPaths("ContainsInsteadOfAny.vb").Verify();

@@ -20,18 +20,21 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class ContainsInsteadOfAnyBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class ContainsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : InsteadOfAny<TSyntaxKind, TInvocationExpression>
     where TSyntaxKind : struct
+    where TInvocationExpression : SyntaxNode
 {
     private const string DiagnosticId = "S6617";
 
     protected override string MessageFormat => """Collection-specific "Contains" method should be used instead of the "Any" extension.""";
 
-    protected ContainsInsteadOfAnyBase() : base(DiagnosticId) { }
+    protected override ImmutableArray<(KnownType Type, bool CheckContext)> RuleSpecificTypes { get; } = ImmutableArray.Create(
+        (KnownType.System_Collections_Generic_List_T, true),
+        (KnownType.System_Collections_Generic_HashSet_T, true),
+        (KnownType.System_Collections_Generic_SortedSet_T, true));
 
-    protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
-        {
-            
-        }, Language.SyntaxKind.InvocationExpression);
+    protected override bool IsInValidContext(TInvocationExpression invocation, SemanticModel model) =>
+        IsSimpleEqualityCheck(invocation, model);
+
+    protected ContainsInsteadOfAnyBase() : base(DiagnosticId) { }
 }

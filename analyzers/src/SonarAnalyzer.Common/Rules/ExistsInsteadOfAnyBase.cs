@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : InsteadOfAny<TSyntaxKind, TInvocationExpression>
     where TSyntaxKind : struct
     where TInvocationExpression : SyntaxNode
 {
@@ -28,37 +28,13 @@ public abstract class ExistsInsteadOfAnyBase<TSyntaxKind, TInvocationExpression>
 
     protected override string MessageFormat => """Collection-specific "Exists" method should be used instead of the "Any" extension.""";
 
-    protected abstract bool IsValueEquality(TInvocationExpression node, SemanticModel model);
-    protected abstract bool HasOneArgument(TInvocationExpression node);
+    protected override ImmutableArray<(KnownType Type, bool CheckContext)> RuleSpecificTypes { get; } = ImmutableArray.Create(
+        (KnownType.System_Collections_Generic_List_T, true),
+        (KnownType.System_Array, false),
+        (KnownType.System_Collections_Immutable_ImmutableList_T, false));
 
-    protected ExistsInsteadOfAnyBase() : base(DiagnosticId) { }
+    protected override bool IsInValidContext(TInvocationExpression invocation, SemanticModel model) =>
+        !IsSimpleEqualityCheck(invocation, model);
 
-    protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
-        {
-            var invocation = (TInvocationExpression)c.Node;
-
-            if (IsNameEqual(invocation, nameof(Enumerable.Any))
-                && HasOneArgument(invocation)
-                && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
-                && IsCorrectCall(right, c.SemanticModel)
-                && c.SemanticModel.GetTypeInfo(left).Type is { } type
-                && (type.DerivesFrom(KnownType.System_Array)
-                    || type.DerivesFrom(KnownType.System_Collections_Immutable_ImmutableList_T)
-                    || (type.DerivesFrom(KnownType.System_Collections_Generic_List_T) && !IsValueEquality(invocation, c.SemanticModel)))) // This check avoids overlapping with S6617
-            {
-                c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
-            }
-        }, Language.SyntaxKind.InvocationExpression);
-
-    protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
-        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
-        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
-
-    protected bool IsNameEqual(SyntaxNode node, string name) =>
-        Language.GetName(node).Equals(name, Language.NameComparison);
-
-    protected static bool IsValueTypeOrString(SyntaxNode expression, SemanticModel model) =>
-        model.GetTypeInfo(expression).Type is { } type
-        && (type.IsValueType || type.Is(KnownType.System_String));
+    protected InsteadOfAnyBase() : base(DiagnosticId) { }
 }

@@ -21,14 +21,14 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax>
+public sealed class ExistsInsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
     protected override bool HasOneArgument(InvocationExpressionSyntax node) =>
         node.HasExactlyNArguments(1);
 
-    protected override bool IsValueEquality(InvocationExpressionSyntax node, SemanticModel model) =>
+    protected override bool IsSimpleEqualityCheck(InvocationExpressionSyntax node, SemanticModel model) =>
         node.ArgumentList.Arguments[0].Expression is SimpleLambdaExpressionSyntax lambda
         && lambda.Parameter.Identifier.ValueText is var lambdaVariableName
         && lambda.Body switch

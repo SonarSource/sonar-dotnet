@@ -21,7 +21,55 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class ContainsInsteadOfAny : ContainsInsteadOfAnyBase<SyntaxKind>
+public sealed class ContainsInsteadOfAny : ContainsInsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override bool HasOneArgument(InvocationExpressionSyntax node) =>
+        node.HasExactlyNArguments(1);
+
+    protected override bool IsSimpleEqualityCheck(InvocationExpressionSyntax node, SemanticModel model) =>
+        node.ArgumentList.Arguments[0].GetExpression() is SingleLineLambdaExpressionSyntax lambda
+        && lambda.SubOrFunctionHeader.ParameterList.Parameters is { Count: 1 } parameters
+        && parameters[0].Identifier.GetName() is var lambdaVariableName
+        && lambda.Body switch
+        {
+            BinaryExpressionSyntax binary =>
+                binary.OperatorToken.IsKind(SyntaxKind.EqualsToken)
+                && HasBinaryValidOperands(lambdaVariableName, binary.Left, binary.Right, model),
+            InvocationExpressionSyntax invocation =>
+                IsNameEqual(invocation, nameof(Equals))
+                && CheckInvocationArguments(invocation, lambdaVariableName),
+            _ => false
+        };
+
+    private bool HasBinaryValidOperands(string lambdaVariableName, SyntaxNode first, SyntaxNode second, SemanticModel model) =>
+        (AreValidOperands(lambdaVariableName, first, second) && IsValueTypeOrString(second, model))
+        || (AreValidOperands(lambdaVariableName, second, first) && IsValueTypeOrString(first, model));
+
+    private bool CheckInvocationArguments(InvocationExpressionSyntax invocation, string lambdaVariableName)
+    {
+        if (invocation.HasExactlyNArguments(1))
+        {
+            return Language.Syntax.TryGetOperands(invocation, out var left, out _)
+                && HasInvocationValidOperands(left, invocation.ArgumentList.Arguments[0].GetExpression());
+        }
+        if (invocation.HasExactlyNArguments(2))
+        {
+            return HasInvocationValidOperands(invocation.ArgumentList.Arguments[0].GetExpression(), invocation.ArgumentList.Arguments[1].GetExpression());
+        }
+        return false;
+
+        bool HasInvocationValidOperands(SyntaxNode first, SyntaxNode second) =>
+            AreValidOperands(lambdaVariableName, first, second) || AreValidOperands(lambdaVariableName, second, first);
+    }
+
+    private bool AreValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second) =>
+        first is IdentifierNameSyntax && IsNameEqual(first, lambdaVariable)
+        && second switch
+        {
+            LiteralExpressionSyntax => true,
+            IdentifierNameSyntax => !IsNameEqual(first, second.GetName()),
+            _ => false,
+        };
 }

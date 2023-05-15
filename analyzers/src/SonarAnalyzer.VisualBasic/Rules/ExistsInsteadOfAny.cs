@@ -21,14 +21,14 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax>
+public sealed class ExistsInsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override bool HasOneArgument(InvocationExpressionSyntax node) =>
         node.HasExactlyNArguments(1);
 
-    protected override bool IsValueEquality(InvocationExpressionSyntax node, SemanticModel model) =>
+    protected override bool IsSimpleEqualityCheck(InvocationExpressionSyntax node, SemanticModel model) =>
         node.ArgumentList.Arguments[0].GetExpression() is SingleLineLambdaExpressionSyntax lambda
         && lambda.SubOrFunctionHeader.ParameterList.Parameters is { Count: 1 } parameters
         && parameters[0].Identifier.GetName() is var lambdaVariableName
