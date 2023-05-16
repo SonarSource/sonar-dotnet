@@ -35,11 +35,11 @@ public class UseStringCreateTest
             .WithOptions(ParseOptionsHelper.FromCSharp10)
             .Verify();
 
-#elif NETFRAMEWORK
+#else
 
     [TestMethod]
-    public void UseStringCreate_NetFramework() =>
-        builderCS.AddPaths("UseStringCreate.NetFramework.cs").Verify();
+    public void UseStringCreate() =>
+        builderCS.AddPaths("UseStringCreate.cs").Verify();
 
 #endif
 
