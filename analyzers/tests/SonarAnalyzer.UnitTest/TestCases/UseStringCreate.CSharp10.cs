@@ -5,9 +5,9 @@ public class Program
 {
     public void Method(string value)
     {
-        FormattableString.CurrentCulture($"Value: {value}"); // Noncompliant
+        FormattableString.CurrentCulture($"Value: {value}"); // Noncompliant {{Use "string.Create" instead of "FormattableString".}}
         //                ^^^^^^^^^^^^^^
-        FormattableString.Invariant($"Value: {value}"); // Noncompliant
+        FormattableString.Invariant($"Value: {value}"); // Noncompliant {{Use "string.Create" instead of "FormattableString".}}
         //                ^^^^^^^^^
 
         string.Create(CultureInfo.CurrentCulture, $"Value: {value}"); // Compliant

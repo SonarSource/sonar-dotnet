@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class UseStringCreate : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6618";
-    private const string MessageFormat = """Use "string.Create(CultureInfo.InvariantCulture" instead of "FormattableString.Invariant".""";
+    private const string MessageFormat = """Use "string.Create" instead of "FormattableString".""";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -51,7 +51,7 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
                 if (methodNames.Any(x => NameIsEqual(node, x))
                     && node.TryGetOperands(out var left, out _)
                     && NameIsEqual(left, nameof(FormattableString))
-                    && IsCorrectType(node, c.SemanticModel))
+                    && c.SemanticModel.GetTypeInfo(node).Type.DerivesFrom(KnownType.System_String))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, node.NodeIdentifier()?.GetLocation()));
                 }
@@ -65,7 +65,4 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
     private static bool CompilationTargetsValidNetVersion(Compilation compilation) =>
         compilation.GetTypeByMetadataName(KnownType.System_String) is var stringType
         && stringType.GetMembers("Create").Any(x => x is IMethodSymbol);
-
-    private static bool IsCorrectType(SyntaxNode node, SemanticModel model) =>
-        model.GetTypeInfo(node).Type is { } type && type.DerivesFrom(KnownType.System_String);
 }
