@@ -27,7 +27,7 @@ public sealed class UseCharOverloadOfStringMethods : UseCharOverloadOfStringMeth
 
     protected override bool HasCorrectArguments(InvocationExpressionSyntax invocation) =>
         invocation.HasExactlyNArguments(1)
-        && invocation.ArgumentList.Arguments[0].GetExpression() is LiteralExpressionSyntax literal
+        && invocation.ArgumentList.Arguments[0].GetExpression() is { } literal
         && literal.IsKind(SyntaxKind.StringLiteralExpression)
-        && literal.Token.ValueText is { Length: 1 };
+        && ((LiteralExpressionSyntax)literal).Token.ValueText.Length == 1;
 }
