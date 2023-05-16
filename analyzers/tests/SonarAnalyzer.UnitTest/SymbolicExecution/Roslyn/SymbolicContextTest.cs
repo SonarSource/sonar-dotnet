@@ -31,20 +31,20 @@ public class SymbolicContextTest
     [TestMethod]
     public void NullArgument_State_Throws()
     {
-        var create = () => new SymbolicContext(CreateOperation(), null, Array.Empty<ISymbol>());
+        var create = () => new SymbolicContext(CreateOperation(), null, 0, Array.Empty<ISymbol>());
         create.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
     }
 
     [TestMethod]
     public void NullArgument_CapturedVariables_Throws()
     {
-        var create = () => new SymbolicContext(CreateOperation(), ProgramState.Empty, null);
+        var create = () => new SymbolicContext(CreateOperation(), ProgramState.Empty, 0, null);
         create.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("capturedVariables");
     }
 
     [TestMethod]
     public void NullOperation_SetsOperationToNull() =>
-        new SymbolicContext(null, ProgramState.Empty, Array.Empty<ISymbol>()).Operation.Should().Be(null);
+        new SymbolicContext(null, ProgramState.Empty, 0, Array.Empty<ISymbol>()).Operation.Should().Be(null);
 
     [TestMethod]
     public void PropertiesArePersisted()
@@ -52,9 +52,10 @@ public class SymbolicContextTest
         var operation = CreateOperation();
         var state = ProgramState.Empty.SetOperationValue(operation, SymbolicValue.Empty);
 
-        var sut = new SymbolicContext(operation, state, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(operation, state, 42, Array.Empty<ISymbol>());
         sut.Operation.Should().Be(operation);
         sut.State.Should().Be(state);
+        sut.VisitCount.Should().Be(42);
     }
 
     [TestMethod]
@@ -63,7 +64,7 @@ public class SymbolicContextTest
         var operation = CreateOperation();
         var state = ProgramState.Empty.SetOperationValue(operation, SymbolicValue.Empty);
 
-        var sut = new SymbolicContext(operation, state, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(operation, state, 0, Array.Empty<ISymbol>());
         var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
         result.Should().NotBe(state, "new ProgramState instance should be created");
         result[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -75,7 +76,7 @@ public class SymbolicContextTest
         var operation = CreateOperation();
         var state = ProgramState.Empty;
 
-        var sut = new SymbolicContext(operation, state, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(operation, state, 0, Array.Empty<ISymbol>());
         var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
         result.Should().NotBe(state, "new ProgramState instance should be created");
         result[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -88,7 +89,7 @@ public class SymbolicContextTest
         var symbol = operation.Children.First().TrackedSymbol();
         var state = ProgramState.Empty.SetSymbolValue(symbol, SymbolicValue.Empty);
 
-        var sut = new SymbolicContext(operation, state, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(operation, state, 0, Array.Empty<ISymbol>());
         var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
         result.Should().NotBe(state, "new ProgramState instance should be created");
         result[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -101,7 +102,7 @@ public class SymbolicContextTest
         var symbol = operation.Children.First().TrackedSymbol();
         var state = ProgramState.Empty;
 
-        var sut = new SymbolicContext(operation, state, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(operation, state, 0, Array.Empty<ISymbol>());
         var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
         result.Should().NotBe(state, "new ProgramState instance should be created");
         result[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -111,7 +112,7 @@ public class SymbolicContextTest
     public void WithState_SameState_ReturnsThis()
     {
         var state = ProgramState.Empty;
-        var sut = new SymbolicContext(null, state, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(null, state, 0, Array.Empty<ISymbol>());
         sut.WithState(state).Should().Be(sut);
     }
 
@@ -119,7 +120,7 @@ public class SymbolicContextTest
     public void WithState_DifferentState_ReturnsNew()
     {
         var state = ProgramState.Empty;
-        var sut = new SymbolicContext(null, state, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(null, state, 0, Array.Empty<ISymbol>());
         var newState = state.SetOperationValue(CreateOperation(), SymbolicValue.Empty);
         sut.WithState(newState).Should().NotBe(sut);
     }

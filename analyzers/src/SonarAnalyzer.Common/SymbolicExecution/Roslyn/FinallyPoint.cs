@@ -20,25 +20,24 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+public sealed class FinallyPoint
 {
-    internal sealed class FinallyPoint
+    private readonly ControlFlowBranch branch;
+    private readonly int finallyIndex;
+
+    public bool IsFinallyBlock => finallyIndex < branch.FinallyRegions.Length;
+    public int BlockIndex => IsFinallyBlock ? branch.FinallyRegions[finallyIndex].FirstBlockOrdinal : branch.Destination.Ordinal;
+    public FinallyPoint Previous { get; }
+
+    public FinallyPoint(FinallyPoint previous, ControlFlowBranch branch, int finallyIndex = 0)
     {
-        private readonly ControlFlowBranch branch;
-        private readonly int finallyIndex;
-
-        public bool IsFinallyBlock => finallyIndex < branch.FinallyRegions.Length;
-        public int BlockIndex => IsFinallyBlock ? branch.FinallyRegions[finallyIndex].FirstBlockOrdinal : branch.Destination.Ordinal;
-        public FinallyPoint Previous { get; }
-
-        public FinallyPoint(FinallyPoint previous, ControlFlowBranch branch, int finallyIndex = 0)
-        {
-            Previous = previous;
-            this.branch = branch ?? throw new ArgumentNullException(nameof(branch));
-            this.finallyIndex = finallyIndex;
-        }
-
-        public FinallyPoint CreateNext() =>
-            new(Previous, branch, finallyIndex + 1);
+        Previous = previous;
+        this.branch = branch ?? throw new ArgumentNullException(nameof(branch));
+        this.finallyIndex = finallyIndex;
     }
+
+    public FinallyPoint CreateNext() =>
+        new(Previous, branch, finallyIndex + 1);
 }

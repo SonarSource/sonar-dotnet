@@ -30,12 +30,13 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("while (Condition)")]
     public void Loops_InstructionVisitedMaxTwice(string loop)
     {
-        var code = $@"
-{loop}
-{{
-    arg.ToString(); // Add another constraint to 'arg'
-}}
-Tag(""End"", arg);";
+        var code = $$"""
+            {{loop}}
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+            }
+            Tag("End", arg);
+            """;
         var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("arg")).Validator;
         validator.ValidateExitReachCount(2);    // PreserveTestCheck is needed for this, otherwise, variables are thrown away by LVA when going to the Exit block
         validator.TagValues("End").Should().HaveCount(2)
@@ -51,14 +52,171 @@ Tag(""End"", arg);";
     [DataRow("for (var i = 10; i > 0; --i)")]
     public void Loops_InstructionVisitedMaxTwice_For_FixedCount(string loop)
     {
-        var code = $@"
-{loop}
-{{
-    arg.ToString(); // Add another constraint to 'arg'
-}}
-Tag(""End"", arg);";
-        var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck()).Validator;
-        validator.ValidateExitReachCount(0);    // For now, we don't explore states after fixed loops
+        var code = $$"""
+            {{loop}}
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+            }
+            Tag("End", arg);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(1);
+        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));   // Loop was entered, arg has only it's final constraints after looping once
+    }
+
+    [TestMethod]
+    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_Expanded()
+    {
+        const string code = """
+            for (var i = 0; i < 10; i++)
+            {
+                Tag("Inside", i);
+            }
+            Tag("End");
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.TagValues("Inside").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 9))); // 1 to 9 would be more precise
+        validator.TagStates("End").Should().SatisfyRespectively(
+            x => x[validator.Symbol("i")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null)));   // We can assert because LVA did not kick in yet
+    }
+
+    [TestMethod]
+    public void Loops_For_ComplexCondition_MultipleVariables()
+    {
+        const string code = """
+            for (int i = 0, j = 10; i < 10 && j > 0; i++, j++)
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+            }
+            Tag("End");
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        var arg = validator.Symbol("arg");
+        var i = validator.Symbol("i");
+        var j = validator.Symbol("j");
+        validator.ValidateExitReachCount(1);
+        validator.TagStates("End").Should().SatisfyRespectively(
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null));
+                x[j].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(11));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);
+            },
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 9));
+                x[j].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 0));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);
+            });
+    }
+
+    [TestMethod]
+    public void Loops_For_ComplexCondition_AlwaysTrue()
+    {
+        const string code = """
+            boolParameter = true;
+            for (var i = 0; i < 10 || boolParameter; i++)
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+                Tag("InLoop");
+            }
+            Tag("Unreachable");
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        var arg = validator.Symbol("arg");
+        var i = validator.Symbol("i");
+        validator.ValidateExitReachCount(0);
+        validator.ValidateTagOrder("InLoop", "InLoop", "InLoop");
+        validator.TagStates("InLoop").Should().SatisfyRespectively(
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);
+            },
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 9));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True);
+            },
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True);
+            });
+    }
+
+    [TestMethod]
+    public void Loops_For_ComplexCondition_AlwaysFalse()
+    {
+        const string code = """
+            boolParameter = false;
+            for (var i = 0; i < 10 && boolParameter; i++)
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+                Tag("Unreachable");
+            }
+            Tag("End", arg);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(1);
+        validator.ValidateTagOrder("End");
+        validator.TagStates("End").Should().SatisfyRespectively(
+            x =>
+            {
+                x[validator.Symbol("i")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0));  // We can assert because LVA did not kick in yet
+                x[validator.Symbol("arg")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull);                          // AddConstraintOnInvocationCheck didn't add anything
+            });
+    }
+
+    [TestMethod]
+    public void Loops_While_FixedCount()
+    {
+        const string code = """
+            var i = 0;
+            while(i < 10)   // Same as: for(var i=0; i < 10; i++)
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+                i++;
+                Tag("Inside", i);
+            }
+            Tag("After", i);
+            Tag("End", arg);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(1);
+        validator.TagValues("Inside").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 10))); // 1 to 10 would be more precise
+        validator.ValidateTag("After", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null)));
+        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));   // arg has only it's final constraints after looping once
+    }
+
+    [TestMethod]
+    public void Loops_NestedBinaryIf_BehavesLikeLoopConditionIf()
+    {
+        const string code = """
+            var i = 0;
+            while (Condition)   // We are inside a loop => binary operations are evaluated to true/false for 1st pass, and learn range condition for 2nd pass
+            {
+                if (i < 10)
+                {
+                    Tag("Inside", i);
+                    i++;
+                }
+                Tag("After", i);
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(2);
+        validator.TagValues("Inside").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 9)));     // 1 to 9 would be more precise
+        validator.TagValues("After").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)),            // Initial pass through "if"
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null)),     // Broke away from "loop", assuming it looped until the "if" condition resulted in false
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 10)));    // Second pass through "if", for inner range
     }
 
     [TestMethod]
