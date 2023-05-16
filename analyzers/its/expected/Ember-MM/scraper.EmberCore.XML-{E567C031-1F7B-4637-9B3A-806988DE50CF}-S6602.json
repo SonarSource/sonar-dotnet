@@ -1,275 +1,275 @@
 {
-"issues": [
+"issues":  [
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
-"region": {
-"startLine": 51,
-"startColumn": 84,
-"endLine": 51,
-"endColumn": 98
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  51,
+"startColumn":  84,
+"endLine":  51,
+"endColumn":  98
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
-"region": {
-"startLine": 53,
-"startColumn": 65,
-"endLine": 53,
-"endColumn": 79
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  53,
+"startColumn":  65,
+"endLine":  53,
+"endColumn":  79
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
-"region": {
-"startLine": 54,
-"startColumn": 65,
-"endLine": 54,
-"endColumn": 79
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  65,
+"endLine":  54,
+"endColumn":  79
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
-"region": {
-"startLine": 63,
-"startColumn": 84,
-"endLine": 63,
-"endColumn": 98
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  63,
+"startColumn":  84,
+"endLine":  63,
+"endColumn":  98
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
-"region": {
-"startLine": 72,
-"startColumn": 84,
-"endLine": 72,
-"endColumn": 98
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  72,
+"startColumn":  84,
+"endLine":  72,
+"endColumn":  98
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
-"region": {
-"startLine": 74,
-"startColumn": 65,
-"endLine": 74,
-"endColumn": 79
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  74,
+"startColumn":  65,
+"endLine":  74,
+"endColumn":  79
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
-"region": {
-"startLine": 75,
-"startColumn": 65,
-"endLine": 75,
-"endColumn": 79
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  75,
+"startColumn":  65,
+"endLine":  75,
+"endColumn":  79
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
-"region": {
-"startLine": 108,
-"startColumn": 80,
-"endLine": 108,
-"endColumn": 94
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  80,
+"endLine":  108,
+"endColumn":  94
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
-"region": {
-"startLine": 110,
-"startColumn": 61,
-"endLine": 110,
-"endColumn": 75
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  110,
+"startColumn":  61,
+"endLine":  110,
+"endColumn":  75
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
-"region": {
-"startLine": 111,
-"startColumn": 61,
-"endLine": 111,
-"endColumn": 75
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  111,
+"startColumn":  61,
+"endLine":  111,
+"endColumn":  75
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
-"region": {
-"startLine": 117,
-"startColumn": 80,
-"endLine": 117,
-"endColumn": 94
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  117,
+"startColumn":  80,
+"endLine":  117,
+"endColumn":  94
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
-"region": {
-"startLine": 123,
-"startColumn": 80,
-"endLine": 123,
-"endColumn": 94
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  123,
+"startColumn":  80,
+"endLine":  123,
+"endColumn":  94
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
-"region": {
-"startLine": 125,
-"startColumn": 61,
-"endLine": 125,
-"endColumn": 75
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  125,
+"startColumn":  61,
+"endLine":  125,
+"endColumn":  75
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
-"region": {
-"startLine": 126,
-"startColumn": 61,
-"endLine": 126,
-"endColumn": 75
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  61,
+"endLine":  126,
+"endColumn":  75
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
-"region": {
-"startLine": 268,
-"startColumn": 79,
-"endLine": 268,
-"endColumn": 93
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  268,
+"startColumn":  79,
+"endLine":  268,
+"endColumn":  93
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
-"region": {
-"startLine": 318,
-"startColumn": 79,
-"endLine": 318,
-"endColumn": 93
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  318,
+"startColumn":  79,
+"endLine":  318,
+"endColumn":  93
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
-"region": {
-"startLine": 353,
-"startColumn": 73,
-"endLine": 353,
-"endColumn": 87
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  353,
+"startColumn":  73,
+"endLine":  353,
+"endColumn":  87
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
-"region": {
-"startLine": 597,
-"startColumn": 55,
-"endLine": 597,
-"endColumn": 69
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  597,
+"startColumn":  55,
+"endLine":  597,
+"endColumn":  69
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
-"region": {
-"startLine": 633,
-"startColumn": 59,
-"endLine": 633,
-"endColumn": 73
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  633,
+"startColumn":  59,
+"endLine":  633,
+"endColumn":  73
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
-"region": {
-"startLine": 687,
-"startColumn": 55,
-"endLine": 687,
-"endColumn": 69
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  687,
+"startColumn":  55,
+"endLine":  687,
+"endColumn":  69
 }
 }
 },
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
-"region": {
-"startLine": 701,
-"startColumn": 63,
-"endLine": 701,
-"endColumn": 77
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  701,
+"startColumn":  63,
+"endLine":  701,
+"endColumn":  77
 }
 }
 }

@@ -1,41 +1,15 @@
 {
-"issues": [
+"issues":  [
 {
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
-"region": {
-"startLine": 406,
-"startColumn": 49,
-"endLine": 406,
-"endColumn": 63
-}
-}
-},
-{
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
-"region": {
-"startLine": 103,
-"startColumn": 40,
-"endLine": 103,
-"endColumn": 54
-}
-}
-},
-{
-"id": "S6602",
-"message": ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location": {
-"uri": "sources\akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
-"region": {
-"startLine": 189,
-"startColumn": 18,
-"endLine": 189,
-"endColumn": 32
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  18,
+"endLine":  189,
+"endColumn":  32
 }
 }
 }
