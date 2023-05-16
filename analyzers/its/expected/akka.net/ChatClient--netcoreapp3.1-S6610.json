@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  31,
+"endLine":  45,
+"endColumn":  41
+}
+}
+}
+]
+}
