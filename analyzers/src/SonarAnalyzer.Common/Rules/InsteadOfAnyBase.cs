@@ -62,16 +62,19 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
-    protected bool CheckInvocationArguments(TInvocationExpression invocation, string lambdaVariableName)
+    protected bool IsSimpleEqualsInvocation(TInvocationExpression invocation, string lambdaVariableName)
     {
-        if (Language.Syntax.HasExactlyNArguments(invocation, 1))
+        if (IsNameEqual(invocation, nameof(Equals)))
         {
-            return Language.Syntax.TryGetOperands(invocation, out var left, out _)
-                && HasInvocationValidOperands(left, GetArgumentExpression(invocation, 0));
-        }
-        if (Language.Syntax.HasExactlyNArguments(invocation, 2))
-        {
-            return HasInvocationValidOperands(GetArgumentExpression(invocation, 0), GetArgumentExpression(invocation, 1));
+            if (Language.Syntax.HasExactlyNArguments(invocation, 1))
+            {
+                return Language.Syntax.TryGetOperands(invocation, out var left, out _)
+                    && HasInvocationValidOperands(left, GetArgumentExpression(invocation, 0));
+            }
+            if (Language.Syntax.HasExactlyNArguments(invocation, 2))
+            {
+                return HasInvocationValidOperands(GetArgumentExpression(invocation, 0), GetArgumentExpression(invocation, 1));
+            }
         }
         return false;
 
