@@ -36,12 +36,12 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         {
             state = LearnBranchingEqualityConstraint<ObjectConstraint>(state, operation, falseBranch) ?? state;
             state = LearnBranchingEqualityConstraint<BoolConstraint>(state, operation, falseBranch) ?? state;
-            state = LearnBranchingEqualityConstraint<NumberConstraint>(state, operation, falseBranch) ?? state;
+            state = LearnBranchingNumberConstraint(state, operation, falseBranch) ?? state;
         }
         else if (operation.OperatorKind.IsAnyRelational())
         {
             state = LearnBranchingRelationalObjectConstraint(state, operation, falseBranch) ?? state;
-            state = LearnBranchingRelationalNumberConstraint(state, operation, falseBranch) ?? state;
+            state = LearnBranchingNumberConstraint(state, operation, falseBranch) ?? state;
         }
         return state;
     }
@@ -111,7 +111,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             ? state.SetSymbolConstraint(testedSymbol, ObjectConstraint.NotNull)
             : null;
 
-    private static ProgramState LearnBranchingRelationalNumberConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
+    private static ProgramState LearnBranchingNumberConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
     {
         var kind = falseBranch ? Opposite(binary.OperatorKind) : binary.OperatorKind;
         // If left and right already had NumberConstraint, BoolConstraintFromOperation already did the job and it will not arrive here.
@@ -137,6 +137,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         static NumberConstraint RelationalNumberConstraint(BinaryOperatorKind kind, NumberConstraint constraint) =>
             kind switch
             {
+                BinaryOperatorKind.Equals => constraint,
                 BinaryOperatorKind.GreaterThan when constraint.Min.HasValue => NumberConstraint.From(constraint.Min + 1, null),
                 BinaryOperatorKind.GreaterThanOrEqual when constraint.Min.HasValue => NumberConstraint.From(constraint.Min, null),
                 BinaryOperatorKind.LessThan when constraint.Max.HasValue => NumberConstraint.From(null, constraint.Max - 1),
@@ -147,21 +148,25 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         static BinaryOperatorKind Flip(BinaryOperatorKind kind) =>
             kind switch
             {
+                BinaryOperatorKind.Equals => BinaryOperatorKind.Equals,
+                BinaryOperatorKind.NotEquals => BinaryOperatorKind.NotEquals,
                 BinaryOperatorKind.GreaterThan => BinaryOperatorKind.LessThan,
                 BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThanOrEqual,
                 BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThan,
                 BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThanOrEqual,
-                _ => throw new InvalidOperationException() // Unreachable due to preconditions
+                _ => BinaryOperatorKind.None    // Unreachable under normal conditions, VB ObjectValueEquals would need comparison with a number
             };
 
         static BinaryOperatorKind Opposite(BinaryOperatorKind kind) =>
             kind switch
             {
+                BinaryOperatorKind.Equals => BinaryOperatorKind.NotEquals,
+                BinaryOperatorKind.NotEquals => BinaryOperatorKind.Equals,
                 BinaryOperatorKind.GreaterThan => BinaryOperatorKind.LessThanOrEqual,
                 BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThan,
                 BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThanOrEqual,
                 BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThan,
-                _ => throw new InvalidOperationException() // Unreachable due to preconditions
+                _ => BinaryOperatorKind.None    // We don't care about ObjectValueEquals
             };
     }
 
