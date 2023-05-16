@@ -1263,6 +1263,25 @@ Tag(""End"", arg);";
         CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int").TagStates("If").Should().BeEmpty();
 
     [DataTestMethod]
+    [DataRow("arg < 0 && arg == big")]
+    [DataRow("arg > 0 && arg == small")]
+    public void Branching_LearnsNumberConstraint_Unreachable_Ranges(string expression)
+    {
+        var code = $$"""
+            if (small <= -100 && big >= 100)  // Prepare ranged value to compare with
+            {
+                if ({{expression}})
+                {
+                    Tag("Unreachable");
+                }
+            }
+            Tag("End");
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg, int small, int big", new PreserveTestCheck("small", "big")).Validator;
+        validator.ValidateTagOrder("End", "End", "End", "End");
+    }
+
+    [DataTestMethod]
     [DataRow("arg == 42", "arg != 0", 42, 42)]
     [DataRow("arg >  42", "arg != 0", 43, null)]
     [DataRow("arg >= 42", "arg != 0", 42, null)]
