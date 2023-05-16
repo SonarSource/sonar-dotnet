@@ -37,7 +37,6 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
 
     protected FindInsteadOfFirstOrDefaultBase() : base(DiagnosticId) { }
 
-
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
             {
@@ -54,7 +53,7 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
             },
             Language.SyntaxKind.InvocationExpression);
 
-    private bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+    private static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
         && method.Parameters.Length == 1
