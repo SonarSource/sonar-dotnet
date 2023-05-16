@@ -1,8 +1,8 @@
 ﻿namespace Net7.features
 {
-    public static class Foo
+    public static class OrderByBeforeWhere
     {
-        public static List<int> Bar()
+        public static List<int> Method()
         {
             var list = new List<int>();
             return list.OrderBy(x => x).Where(x => true).ToList();

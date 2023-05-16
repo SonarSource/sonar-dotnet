@@ -193,6 +193,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Collections_Generic_KeyValuePair_TKey_TValue = new("System.Collections.Generic.KeyValuePair", "TKey", "TValue");
         public static readonly KnownType System_Collections_Generic_List_T = new("System.Collections.Generic.List", "T");
         public static readonly KnownType System_Collections_Generic_Queue_T = new("System.Collections.Generic.Queue", "T");
+        public static readonly KnownType System_Collections_Generic_SortedSet_T = new("System.Collections.Generic.SortedSet", "T");
         public static readonly KnownType System_Collections_Generic_Stack_T = new("System.Collections.Generic.Stack", "T");
         public static readonly KnownType System_Collections_Generic_LinkedList_T = new("System.Collections.Generic.LinkedList", "T");
         public static readonly KnownType System_Collections_ICollection = new("System.Collections.ICollection");
