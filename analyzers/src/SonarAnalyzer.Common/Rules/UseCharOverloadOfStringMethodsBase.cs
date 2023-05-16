@@ -67,5 +67,5 @@ public abstract class UseCharOverloadOfStringMethodsBase<TSyntaxKind, TInvocatio
         || methodName.Equals(nameof(string.EndsWith), Language.NameComparison);
 
     private static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
-        model.GetTypeInfo(left).Type is { } type && type.Is(KnownType.System_String);
+        model.GetTypeInfo(left).Type.Is(KnownType.System_String);
 }
