@@ -93,6 +93,44 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         }
 
         [TestMethod]
+        public void IsFullyPositive()
+        {
+            NumberConstraint.From(42).IsPositive.Should().BeTrue();
+            NumberConstraint.From(-42).IsPositive.Should().BeFalse();
+            NumberConstraint.From(0).IsPositive.Should().BeTrue();
+            NumberConstraint.From(5, 42).IsPositive.Should().BeTrue();
+            NumberConstraint.From(0, 42).IsPositive.Should().BeTrue();
+            NumberConstraint.From(5, null).IsPositive.Should().BeTrue();
+            NumberConstraint.From(0, null).IsPositive.Should().BeTrue();
+            NumberConstraint.From(-42, -5).IsPositive.Should().BeFalse();
+            NumberConstraint.From(null, -5).IsPositive.Should().BeFalse();
+            NumberConstraint.From(-42, 42).IsPositive.Should().BeFalse();
+            NumberConstraint.From(-42, 0).IsPositive.Should().BeFalse();
+            NumberConstraint.From(-42, null).IsPositive.Should().BeFalse();
+            NumberConstraint.From(null, 42).IsPositive.Should().BeFalse();
+            NumberConstraint.From(null, 0).IsPositive.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void IsFullyNegative()
+        {
+            NumberConstraint.From(42).IsNegative.Should().BeFalse();
+            NumberConstraint.From(-42).IsNegative.Should().BeTrue();
+            NumberConstraint.From(0).IsNegative.Should().BeFalse();
+            NumberConstraint.From(5, 42).IsNegative.Should().BeFalse();
+            NumberConstraint.From(0, 42).IsNegative.Should().BeFalse();
+            NumberConstraint.From(5, null).IsNegative.Should().BeFalse();
+            NumberConstraint.From(0, null).IsNegative.Should().BeFalse();
+            NumberConstraint.From(-42, -5).IsNegative.Should().BeTrue();
+            NumberConstraint.From(null, -5).IsNegative.Should().BeTrue();
+            NumberConstraint.From(-42, 42).IsNegative.Should().BeFalse();
+            NumberConstraint.From(-42, 0).IsNegative.Should().BeFalse();
+            NumberConstraint.From(-42, null).IsNegative.Should().BeFalse();
+            NumberConstraint.From(null, 42).IsNegative.Should().BeFalse();
+            NumberConstraint.From(null, 0).IsPositive.Should().BeFalse();
+        }
+
+        [TestMethod]
         public void ToString_Serialization()
         {
             NumberConstraint.From(0).ToString().Should().Be("Number 0");

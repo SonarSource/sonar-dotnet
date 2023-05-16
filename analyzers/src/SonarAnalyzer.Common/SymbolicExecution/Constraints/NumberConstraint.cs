@@ -30,6 +30,10 @@ public sealed class NumberConstraint : SymbolicConstraint
     public BigInteger? Min { get; }
     public BigInteger? Max { get; }
     public bool IsSingleValue => Min.HasValue && Min == Max;
+    public bool IsPositive => Min >= 0;
+    public bool IsNegative => Max < 0;
+    public bool CanBePositive => !IsNegative;
+    public bool CanBeNegative => !IsPositive;
     public override bool CacheEnabled => false;
 
     public override SymbolicConstraint Opposite =>
