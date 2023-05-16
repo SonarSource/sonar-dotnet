@@ -131,8 +131,8 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
 
         ProgramState LearnBranching(ISymbol symbol, NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
             !(falseBranch && symbol.GetSymbolType().IsNullableValueType())  // Don't learn opposite for "nullable > 0", because it could also be <null>.
-            && RelationalNumberConstraint(existingNumber, kind, comparedNumber) is { } leftConstraint
-                ? state.SetSymbolConstraint(symbol, leftConstraint)
+            && RelationalNumberConstraint(existingNumber, kind, comparedNumber) is { } newConstraint
+                ? state.SetSymbolConstraint(symbol, newConstraint)
                 : null;
 
         static NumberConstraint RelationalNumberConstraint(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
