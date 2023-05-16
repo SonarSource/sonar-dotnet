@@ -36,10 +36,9 @@ public class SetPropertiesInsteadOfMethodsTest
 
     [TestMethod]
     public void SetPropertiesInsteadOfMethods_CS_Immutable() =>
-        builderCS
+        builderCS.AddPaths("SetPropertiesInsteadOfMethods.Immutable.cs")
         .WithTopLevelStatements()
         .AddReferences(MetadataReferenceFacade.SystemCollections)
-        .AddPaths("SetPropertiesInsteadOfMethods.Immutable.cs")
         .Verify();
 
 #endif
