@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
+internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrapper>
 {
     protected override IBinaryOperationWrapper Convert(IOperation operation) =>
         IBinaryOperationWrapper.FromOperation(operation);
@@ -56,108 +55,6 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
             state = state.SetOperationConstraint(operation, constraint);
         }
         return state;
-    }
-
-    private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) => kind switch
-    {
-        BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
-        BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
-        BinaryOperatorKind.Multiply => CalculateMultiply(left, right),
-        BinaryOperatorKind.And when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value & right.Min.Value),
-        BinaryOperatorKind.And => CalculateAnd(left, right),
-        _ => null
-    };
-
-    private static NumberConstraint CalculateMultiply(NumberConstraint left, NumberConstraint right)
-    {
-        var products = new[] { left.Min * right.Min, left.Min * right.Max, left.Max * right.Min, left.Max * right.Max };
-        var min = (left.Min is null && right.CanBePositive)
-            || (right.Min is null && left.CanBePositive)
-            || (left.Max is null && right.CanBeNegative)
-            || (right.Max is null && left.CanBeNegative)
-            ? null
-            : products.Min();
-        var max = (left.Min is null && right.CanBeNegative)
-            || (right.Min is null && left.CanBeNegative)
-            || (left.Max is null && right.CanBePositive)
-            || (right.Max is null && left.CanBePositive)
-            ? null
-            : products.Max();
-        return NumberConstraint.From(min, max);
-    }
-
-    private static NumberConstraint CalculateAnd(NumberConstraint left, NumberConstraint right)
-    {
-        BigInteger? min = 0;
-        if (left.CanBeNegative && right.CanBeNegative)
-        {
-            min = left.Min.HasValue && right.Min.HasValue
-                ? NegativeMagnitude(BigInteger.Min(left.Min.Value, right.Min.Value))
-                : null;
-        }
-        // If both operands are negative, the result is negative. Otherwise, it is positive.
-        // If operands are both negative or both positive the result cannot be bigger than the smaller of the two.
-        // If the operands have different signs, the result cannot be bigger than the positive one.
-        BigInteger? max = null;
-        if (left.IsNegative && right.CanBePositive)
-        {
-            max = right.Max;
-        }
-        else if (left.CanBePositive && right.IsNegative)
-        {
-            max = left.Max;
-        }
-        else if (left.IsPositive && right.CanBePositive && right.CanBeNegative)
-        {
-            max = left.Max;
-        }
-        else if (left.CanBePositive && left.CanBeNegative && right.IsPositive)
-        {
-            max = right.Max;
-        }
-        else if (left.CanBePositive && left.CanBeNegative && right.CanBePositive && right.CanBeNegative && left.Max.HasValue && right.Max.HasValue)
-        {
-            max = BigInteger.Max(left.Max.Value, right.Max.Value);
-        }
-        else if ((left.IsNegative && right.IsNegative) || (left.IsPositive && right.IsPositive))
-        {
-            max = SmallestMaximum(left, right);
-        }
-
-        return NumberConstraint.From(min, max);
-    }
-
-    private static BigInteger? NegativeMagnitude(BigInteger value)
-    {
-        // For various inputs, we're looking for the longest chain of 1 from the MSB side
-        // 11000000 - 64
-        // 11000001 - 63
-        // 11000010 - 62
-        // ------------ -
-        // 11000000 - 64 expected result
-        // ^^
-        BigInteger m = -1;
-        while (value < m)
-        {
-            m *= 2;
-        }
-        return m;
-    }
-
-    private static BigInteger? SmallestMaximum(NumberConstraint left, NumberConstraint right)
-    {
-        if (left.Max is null)
-        {
-            return right.Max;
-        }
-        else if (right.Max is null)
-        {
-            return left.Max;
-        }
-        else
-        {
-            return BigInteger.Min(left.Max.Value, right.Max.Value);
-        }
     }
 
     private static ProgramState LearnBranchingEqualityConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)

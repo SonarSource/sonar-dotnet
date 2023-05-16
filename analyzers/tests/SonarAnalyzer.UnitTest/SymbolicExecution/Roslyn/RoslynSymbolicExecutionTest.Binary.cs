@@ -760,27 +760,6 @@ Tag(""End"")";
     }
 
     [DataTestMethod]
-    [DataRow(0b0101, 0b0101, "i & j", 0b0101)]
-    [DataRow(0b0101, 0b0001, "i & j", 0b0001)]
-    [DataRow(0b1010, 0b0110, "i & j", 0b0010)]
-    [DataRow(0b1010, 0b0000, "i & j", 0b0000)]
-    [DataRow(5, -5, "i & j", 1)]
-    [DataRow(5, -4, "i & j", 4)]
-    [DataRow(-5, -5, "i & j", -5)]
-    [DataRow(-5, -4, "i & j", -8)]
-    public void Binary_CalculationWithFixedValues_UpdatesNumberConstraint(int i, int j, string expression, int expected)
-    {
-        var code = $"""
-            var i = {i};
-            var j = {j};
-            var value = {expression};
-            Tag("Value", value);
-            """;
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
-    }
-
-    [DataTestMethod]
     [DataRow(5, 0, 0)]
     [DataRow(5, 1, 5)]
     [DataRow(5, -1, -5)]
@@ -853,6 +832,28 @@ Tag(""End"")";
     }
 
     [DataTestMethod]
+    [DataRow(0b0000, 0b0000, 0b0000)]
+    [DataRow(0b0101, 0b0101, 0b0101)]
+    [DataRow(0b0101, 0b0001, 0b0001)]
+    [DataRow(0b1010, 0b0110, 0b0010)]
+    [DataRow(0b1010, 0b0000, 0b0000)]
+    [DataRow(0b1111, 0b1111, 0b1111)]
+    [DataRow(5, -5, 1)]
+    [DataRow(5, -4, 4)]
+    [DataRow(-5, -5, -5)]
+    [DataRow(-5, -4, -8)]
+    public void Binary_BitAnd_SingleValue(int left, int right, int expected)
+    {
+        var code = $"""
+            var left = {left};
+            var right = {right};
+            var value = left & right;
+            Tag("Value", value);
+            """;
+        SETestContext.CreateCS(code).Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
+    }
+
+    [DataTestMethod]
     [DataRow("i >=  3 && j >=  5", 0, null)]
     [DataRow("i >=  3 && j >= -5", 0, null)]
     [DataRow("i >=  3 && j <=  5", 0, null)]
@@ -873,7 +874,7 @@ Tag(""End"")";
     [DataRow("i == -3 && j <= -5", null, -5)]
     [DataRow("i == -3 && j >= -5", -8, null)]
     [DataRow("i == -3 && j <=  5", null, 5)]
-    public void Binary_BitAndWithRange_UpdatesNumberConstraint(string expression, int? expectedMin, int? expectedMax)
+    public void Binary_BitAnd_Range(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""
             if ({{expression}})
@@ -882,8 +883,7 @@ Tag(""End"")";
                 Tag("Value", value);
             }
             """;
-        var validator = SETestContext.CreateCS(code, "int? i, int? j").Validator;
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(NumberConstraint.From(expectedMin, expectedMax)));
+        SETestContext.CreateCS(code, "int i, int j").Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
     }
 
     [DataTestMethod]
@@ -891,7 +891,7 @@ Tag(""End"")";
     [DataRow("i >= -3 && j <= -5")]
     [DataRow("i <=  3 && j >= -5")]
     [DataRow("i <= -3 && j >= -5")]
-    public void Binary_BitAndWithRange_NoNumberConstraint(string expression)
+    public void Binary_BitAnd_Range_NoNumberConstraint(string expression)
     {
         var code = $$"""
             if ({{expression}})
@@ -900,7 +900,6 @@ Tag(""End"")";
                 Tag("Value", value);
             }
             """;
-        var validator = SETestContext.CreateCS(code, "int? i, int? j").Validator;
-        validator.ValidateTag("Value", x => x.Should().BeNull());
+        SETestContext.CreateCS(code, "int i, int j").Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
     }
 }
