@@ -43,6 +43,10 @@ Public Class FindInsteadOfFirstOrDefault
 
     Public Class MyList
         Inherits List(Of Integer)
+
+        Public Function Fluent() As MyList
+            Return Me
+        End Function
     End Class
 
     Public Class HiddenList
@@ -59,40 +63,84 @@ Public Class FindInsteadOfFirstOrDefault
 
     Public Sub ListBasic(ByVal data As List(Of Integer))
         Dim unused = data.FirstOrDefault(Function(x) True) ' Noncompliant
-'                         ^^^^^^^^^^^^^^
+        '                 ^^^^^^^^^^^^^^
         unused = data.Find(Function(x) True) ' Compliant
 
         unused = data.FirstOrDefault() ' Compliant
         unused = data.FirstOrDefault(AddressOf HelperClass.FilterMethod) ' Noncompliant
-'                     ^^^^^^^^^^^^^^
+        '             ^^^^^^^^^^^^^^
         unused = data.FirstOrDefault(AddressOf FilterMethod) ' Noncompliant
-'                     ^^^^^^^^^^^^^^
+        '             ^^^^^^^^^^^^^^
     End Sub
 
     Public Sub ThroughLinq(data As List(Of Integer))
         data.[Select](Function(x) x * 2).ToList().FirstOrDefault(Function(x) True) ' Noncompliant {{"Find" method should be used instead of the "FirstOrDefault" extension method.}}
-'                                                 ^^^^^^^^^^^^^^
+        '                                         ^^^^^^^^^^^^^^
         data.[Select](Function(x) x * 2).ToList().Find(Function(x) True) ' Compliant
     End Sub
 
     Public Sub ThroughFunction()
         Dim unused = HelperClass.DoWorkReturnGroup().FirstOrDefault(Function(x) True) ' Noncompliant
-'                                                    ^^^^^^^^^^^^^^
+        '                                            ^^^^^^^^^^^^^^
         unused = HelperClass.DoWorkReturnGroup().Find(Function(x) True) ' Compliant
     End Sub
 
     Public Sub ThroughLambda(lambda As Func(Of List(Of Integer)))
         Dim unused = lambda().FirstOrDefault(Function(x) True) ' Noncompliant
-'                             ^^^^^^^^^^^^^^
+        '                     ^^^^^^^^^^^^^^
         unused = lambda().Find(Function(x) True) ' Compliant
     End Sub
 
     Public Sub WithinALambda()
         Dim unused = New Func(Of List(Of Integer), Integer)(Function(list) list.FirstOrDefault(Function(x) True)) ' Noncompliant
-'                                                                               ^^^^^^^^^^^^^^
+        '                                                                       ^^^^^^^^^^^^^^
     End Sub
 
     Public Sub AsMethodGroup(data As List(Of Integer))
         HelperClass.DoWorkMethodGroup(Of Integer)(AddressOf data.FirstOrDefault) ' FN
+    End Sub
+
+    Public Sub Ternary(data As List(Of Integer))
+        Dim unused = (If(True, data, data)).FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                   ^^^^^^^^^^^^^^
+        unused = (If(data, data)).FirstOrDefault(Function(x) True) ' Noncompliant
+        '                         ^^^^^^^^^^^^^^
+        unused = (If(data, (If(True, data, data)))).FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                           ^^^^^^^^^^^^^^
+    End Sub
+
+    Public Sub Fluent(data As MyList)
+        data.Fluent().Fluent().Fluent().Fluent().FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                        ^^^^^^^^^^^^^^
+        data.Fluent().Fluent().Fluent().Fluent()?.FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                         ^^^^^^^^^^^^^^
+        data.Fluent().Fluent().Fluent()?.Fluent().FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                         ^^^^^^^^^^^^^^
+        data.Fluent().Fluent()?.Fluent().Fluent().FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                         ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent().Fluent().Fluent().FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                         ^^^^^^^^^^^^^^
+        data.Fluent().Fluent().Fluent()?.Fluent()?.FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                          ^^^^^^^^^^^^^^
+        data.Fluent().Fluent()?.Fluent().Fluent()?.FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                          ^^^^^^^^^^^^^^
+        data.Fluent().Fluent()?.Fluent()?.Fluent().FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                          ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent().Fluent().Fluent()?.FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                          ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent().Fluent()?.Fluent().FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                          ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent()?.Fluent().Fluent().FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                          ^^^^^^^^^^^^^^
+        data.Fluent().Fluent()?.Fluent()?.Fluent()?.FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                           ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent().Fluent()?.Fluent()?.FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                           ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent()?.Fluent().Fluent()?.FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                           ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent()?.Fluent()?.Fluent().FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                           ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent()?.Fluent()?.Fluent()?.FirstOrDefault(Function(x) True) ' Noncompliant
+        '                                            ^^^^^^^^^^^^^^
     End Sub
 End Class

@@ -24,4 +24,6 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 public sealed class FindInsteadOfFirstOrDefault : FindInsteadOfFirstOrDefaultBase<SyntaxKind, InvocationExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override bool HasOneArgument(InvocationExpressionSyntax invocation) => invocation.ArgumentList.Arguments.Count == 1;
 }

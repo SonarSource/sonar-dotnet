@@ -35,4 +35,14 @@ public class FindInsteadOfFirstOrDefault
         //           ^^^^^^^^^^^^^^
         _ = Array.Find(lambda(), x => true); // Compliant
     }
+
+    public static void Ternary(int[] data)
+    {
+        (true ? data : data).FirstOrDefault(x => true); // Noncompliant
+        //                   ^^^^^^^^^^^^^^
+        (data ?? data).FirstOrDefault(x => true); // Noncompliant
+        //             ^^^^^^^^^^^^^^
+        (data ?? (true ? data : data)).FirstOrDefault(x => true); // Noncompliant
+        //                             ^^^^^^^^^^^^^^
+    }
 }

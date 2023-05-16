@@ -31,6 +31,7 @@ public class FindInsteadOfFirstOrDefault
 
     public class MyList : List<int>
     {
+        public MyList Fluent() => this;
     }
 
     public class HiddenList : List<int>
@@ -116,5 +117,51 @@ public class FindInsteadOfFirstOrDefault
         _ = data?.FirstOrDefault(x => true); // Noncompliant
         //        ^^^^^^^^^^^^^^
         _ = data?.Find(x => true); // Compliant
+    }
+
+    public static void Ternary(List<int> data)
+    {
+        (true ? data : data).FirstOrDefault(x => true); // Noncompliant
+        //                   ^^^^^^^^^^^^^^
+        (data ?? data).FirstOrDefault(x => true); // Noncompliant
+        //             ^^^^^^^^^^^^^^
+        (data ?? (true ? data : data)).FirstOrDefault(x => true); // Noncompliant
+        //                             ^^^^^^^^^^^^^^
+    }
+
+    public static void FluentNullable(MyList data = null)
+    {
+        data.Fluent().Fluent().Fluent().Fluent().FirstOrDefault(x => true); // Noncompliant
+        //                                       ^^^^^^^^^^^^^^
+        data.Fluent().Fluent().Fluent().Fluent()?.FirstOrDefault(x => true); // Noncompliant
+        //                                        ^^^^^^^^^^^^^^
+        data.Fluent().Fluent().Fluent()?.Fluent().FirstOrDefault(x => true); // Noncompliant
+        //                                        ^^^^^^^^^^^^^^
+        data.Fluent().Fluent()?.Fluent().Fluent().FirstOrDefault(x => true); // Noncompliant
+        //                                        ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent().Fluent().Fluent().FirstOrDefault(x => true); // Noncompliant
+        //                                        ^^^^^^^^^^^^^^
+        data.Fluent().Fluent().Fluent()?.Fluent()?.FirstOrDefault(x => true); // Noncompliant
+        //                                         ^^^^^^^^^^^^^^
+        data.Fluent().Fluent()?.Fluent().Fluent()?.FirstOrDefault(x => true); // Noncompliant
+        //                                         ^^^^^^^^^^^^^^
+        data.Fluent().Fluent()?.Fluent()?.Fluent().FirstOrDefault(x => true); // Noncompliant
+        //                                         ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent().Fluent().Fluent()?.FirstOrDefault(x => true); // Noncompliant
+        //                                         ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent().Fluent()?.Fluent().FirstOrDefault(x => true); // Noncompliant
+        //                                         ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent()?.Fluent().Fluent().FirstOrDefault(x => true); // Noncompliant
+        //                                         ^^^^^^^^^^^^^^
+        data.Fluent().Fluent()?.Fluent()?.Fluent()?.FirstOrDefault(x => true); // Noncompliant
+        //                                          ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent().Fluent()?.Fluent()?.FirstOrDefault(x => true); // Noncompliant
+        //                                          ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent()?.Fluent().Fluent()?.FirstOrDefault(x => true); // Noncompliant
+        //                                          ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent()?.Fluent()?.Fluent().FirstOrDefault(x => true); // Noncompliant
+        //                                          ^^^^^^^^^^^^^^
+        data.Fluent()?.Fluent()?.Fluent()?.Fluent()?.FirstOrDefault(x => true); // Noncompliant
+        //                                           ^^^^^^^^^^^^^^
     }
 }

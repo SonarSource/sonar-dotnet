@@ -18,7 +18,7 @@ public class FindInsteadOfFirstOrDefault
 
         _ = data.FirstOrDefault(); // Compliant
         _ = data.FirstOrDefault(default(int)); // Compliant
-        _ = data.FirstOrDefault(x => false, default(int)); // Noncompliant
+        _ = data.FirstOrDefault(x => false, default(int)); // Compliant
     }
 
     public void ThroughLinq(ImmutableList<int> data)
@@ -63,5 +63,15 @@ public class FindInsteadOfFirstOrDefault
         _ = data?.FirstOrDefault(x => true); // Noncompliant
         //        ^^^^^^^^^^^^^^
         _ = data?.Find(x => true); // Compliant
+    }
+
+    public static void Ternary(ImmutableList<int> list1, ImmutableList<int> list2, ImmutableList<int> list3)
+    {
+        var ternary = (true ? list1 : list2).FirstOrDefault(x => true); // Noncompliant
+        //                                   ^^^^^^^^^^^^^^
+        var nullCoalesce = (list1 ?? list2).FirstOrDefault(x => true); // Noncompliant
+        //                                  ^^^^^^^^^^^^^^
+        var ternaryNullCoalesce = (list1 ?? (true ? list2 : list3)).FirstOrDefault(x => true); // Noncompliant
+        //                                                          ^^^^^^^^^^^^^^
     }
 }

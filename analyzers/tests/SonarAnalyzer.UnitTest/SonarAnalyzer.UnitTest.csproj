@@ -50,10 +50,6 @@
     <None Include="TestCases\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestCases\FindInsteadOfFirstOrDefault.Immutable.cs" />
-    <None Include="TestCases\FindInsteadOfFirstOrDefault.Net.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>

@@ -28,11 +28,10 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
 
     protected override string MessageFormat => $"\"{nameof(Array.Find)}\" method should be used instead of the \"{nameof(Enumerable.FirstOrDefault)}\" extension method.";
 
-    private readonly ImmutableArray<KnownType> appliedToTypes =
-        ImmutableArray.Create(
-            KnownType.System_Collections_Generic_List_T,
-            KnownType.System_Array,
-            KnownType.System_Collections_Immutable_ImmutableList_T);
+    private static readonly ImmutableArray<KnownType> RuleSpecificTypes = ImmutableArray.Create(
+        KnownType.System_Collections_Generic_List_T,
+        KnownType.System_Array,
+        KnownType.System_Collections_Immutable_ImmutableList_T);
 
     protected FindInsteadOfFirstOrDefaultBase() : base(DiagnosticId) { }
 
@@ -41,28 +40,25 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
             {
                 var invocation = (TInvocationExpression)c.Node;
 
-                if (IsNameEqual(invocation, nameof(Enumerable.FirstOrDefault))
+                if (Language.GetName(invocation).Equals(nameof(Enumerable.FirstOrDefault), Language.NameComparison)
                     && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
-                    && IsCorrectCall(right, c.SemanticModel)
-                    && IsInvokedOnAppliedTypes(left, c.SemanticModel))
+                    && IsCorrectCall(invocation, right, c.SemanticModel)
+                    && IsCorrectType(left, c.SemanticModel))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
                 }
             },
             Language.SyntaxKind.InvocationExpression);
 
-    private static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
-        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
+    private bool IsCorrectCall(TInvocationExpression invocation, SyntaxNode right, SemanticModel model) =>
+        HasOneArgument(invocation)
+        && model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
-        && method.Parameters.Length > 0
-        && method.Parameters.FirstOrDefault().Type.Is(KnownType.System_Func_T_TResult);
+        && method.Parameters.Length == 1
+        && method.Parameters[0].IsType(KnownType.System_Func_T_TResult);
 
-    private bool IsNameEqual(SyntaxNode node, string name) =>
-        Language.GetName(node).Equals(name, Language.NameComparison);
+    protected abstract bool HasOneArgument(TInvocationExpression invocation);
 
-    private bool IsInvokedOnAppliedTypes(SyntaxNode left, SemanticModel model)
-    {
-        var memberTypeSymbol = model.GetTypeInfo(left).Type;
-        return memberTypeSymbol.IsAny(appliedToTypes) || memberTypeSymbol.DerivesFromAny(appliedToTypes);
-    }
+    private static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
+        model.GetTypeInfo(left).Type.DerivesFromAny(RuleSpecificTypes);
 }
