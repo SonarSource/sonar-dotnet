@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6618",
+"message":  "Use "string.Create" instead of "FormattableString".",
+"location":  {
+"uri":  "sources\Net7\Net7\features\UseStringCreate.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  31,
+"endLine":  6,
+"endColumn":  45
+}
+}
+}
+]
+}
