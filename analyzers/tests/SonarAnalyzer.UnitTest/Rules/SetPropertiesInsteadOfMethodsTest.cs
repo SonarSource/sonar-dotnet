@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class SetPropertiesInsteadOfMethodsTest
 {
-    private readonly VerifierBuilder builderCS =  new VerifierBuilder<CS.SetPropertiesInsteadOfMethods>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SetPropertiesInsteadOfMethods>();
 
     [TestMethod]
     public void SetPropertiesInsteadOfMethods_CS() =>
@@ -37,9 +37,9 @@ public class SetPropertiesInsteadOfMethodsTest
     [TestMethod]
     public void SetPropertiesInsteadOfMethods_CS_Immutable() =>
         builderCS.AddPaths("SetPropertiesInsteadOfMethods.Immutable.cs")
-        .WithTopLevelStatements()
-        .AddReferences(MetadataReferenceFacade.SystemCollections)
-        .Verify();
+            .WithTopLevelStatements()
+            .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .Verify();
 
 #endif
 
