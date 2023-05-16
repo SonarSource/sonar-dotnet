@@ -46,7 +46,6 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
         SyntaxKind.EqualsExpression,
         SyntaxKind.NotEqualsExpression,
     };
-    public SyntaxKind ConditionalAccessExpression => SyntaxKind.ConditionalAccessExpression;
     public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorDeclaration;
     public SyntaxKind[] DefaultExpressions => new[] { SyntaxKind.DefaultExpression, SyntaxKindEx.DefaultLiteralExpression };
     public SyntaxKind EnumDeclaration => SyntaxKind.EnumDeclaration;
