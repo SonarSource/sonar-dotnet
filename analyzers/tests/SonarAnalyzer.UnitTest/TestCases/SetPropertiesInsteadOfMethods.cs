@@ -87,6 +87,10 @@ static class Program
         doesNotDerive.Min(); // Compliant, does not derive from Set type
         doesNotDerive.Max(); // Compliant, does not derive from Set type
 
+        var hidden = new DerivesFromSetTypeButHidesEnumerableMethods<int>();
+        hidden.Min(); // Compliant, hides LINQ's Min extension
+        hidden.Max(); // Compliant, hides LINQ's Max extension
+
         dynamic dynamicSet = new SortedSet<int>();
         dynamicSet.Min(); // Compliant, dynamic type
         dynamicSet.Max(); // Compliant, dynamic type
@@ -96,6 +100,12 @@ static class Program
 class DerivesFromSetType<T> : SortedSet<T>
 {
     public DerivesFromSetType<T> Fluent() => this;
+}
+
+class DerivesFromSetTypeButHidesEnumerableMethods<T> : SortedSet<T>
+{
+    public T Min() => default(T);
+    public T Max() => default(T);
 }
 
 class DoesNotDeriveFromSetType<T> : IEnumerable<T>
