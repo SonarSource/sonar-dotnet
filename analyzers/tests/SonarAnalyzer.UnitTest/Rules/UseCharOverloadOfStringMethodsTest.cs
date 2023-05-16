@@ -35,15 +35,20 @@ public class UseCharOverloadOfStringMethodsTest
     public void UseCharOverloadOfStringMethods_CS() =>
         builderCS.AddPaths("UseCharOverloadOfStringMethods.Framework.cs").Verify();
 
+    [TestMethod]
+    public void UseCharOverloadOfStringMethods_VB() =>
+        builderVB.AddPaths("UseCharOverloadOfStringMethods.Framework.vb").Verify();
+
 #else
 
     [TestMethod]
     public void UseCharOverloadOfStringMethods_CS() =>
         builderCS.AddPaths("UseCharOverloadOfStringMethods.cs").Verify();
 
-#endif
-
     [TestMethod]
     public void UseCharOverloadOfStringMethods_VB() =>
         builderVB.AddPaths("UseCharOverloadOfStringMethods.vb").Verify();
+
+#endif
+
 }

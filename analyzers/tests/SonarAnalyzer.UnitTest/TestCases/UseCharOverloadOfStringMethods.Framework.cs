@@ -9,6 +9,7 @@ class Testcases
     {
         var str = "hello";
 
+        // "char" overloads do not exist on .NET Framework
         str.StartsWith("x"); // Compliant
         str.EndsWith("x"); // Compliant
 
