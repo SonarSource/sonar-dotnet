@@ -1265,7 +1265,7 @@ Tag(""End"", arg);";
     [DataTestMethod]
     [DataRow("arg < 0 && arg == big")]
     [DataRow("arg > 0 && arg == small")]
-    public void Branching_LearnsNumberConstraint_Unreachable_Ranges(string expression)
+    public void Branching_LearnsNumberConstraint_Unreachable_Ranges_Equals(string expression)
     {
         var code = $$"""
             if (small <= -100 && big >= 100)  // Prepare ranged value to compare with
@@ -1279,6 +1279,29 @@ Tag(""End"", arg);";
             """;
         var validator = SETestContext.CreateCS(code, "int arg, int small, int big", new PreserveTestCheck("small", "big")).Validator;
         validator.ValidateTagOrder("End", "End", "End", "End");
+    }
+
+    [DataTestMethod]
+    [DataRow("arg < 0", "arg != big")]
+    [DataRow("arg > 0", "arg != small")]
+    public void Branching_LearnsNumberConstraint_Unreachable_Ranges_NotEquals(string prepare, string expression)
+    {
+        var code = $$"""
+            if (small <= -100 && big >= 100 && {{prepare}})  // Prepare ranged value to compare with
+            {
+                if ({{expression}})
+                {
+                    Tag("If");
+                }
+                else
+                {
+                    Tag("Unreachable");
+                }
+            }
+            Tag("End");
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg, int small, int big", new PreserveTestCheck("small", "big")).Validator;
+        validator.ValidateTagOrder("End", "End", "End", "If", "End");
     }
 
     [DataTestMethod]
