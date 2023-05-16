@@ -15,6 +15,9 @@ Class Testcases
         str.StartsWith("x"c) ' Compliant
         str.EndsWith("x"c) ' Compliant
 
+        str.StartsWith("xx") ' Compliant (length > 1)
+        str.EndsWith("xx")  ' Compliant (length > 1)
+
         Dim hString = "x"
         str.StartsWith(hString) ' Compliant, only raise on literals
         str.EndsWith(hString) ' Compliant, only raise on literals
