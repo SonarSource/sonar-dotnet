@@ -27,10 +27,6 @@ public class UseStringCreateTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseStringCreate>();
 
-    [TestMethod]
-    public void UseStringCreate() =>
-        builderCS.AddPaths("UseStringCreate.cs").Verify();
-
 #if NET6_0_OR_GREATER
 
     [TestMethod]
@@ -38,6 +34,12 @@ public class UseStringCreateTest
         builderCS.AddPaths("UseStringCreate.CSharp10.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp10)
             .Verify();
+
+#elif NETFRAMEWORK
+
+    [TestMethod]
+    public void UseStringCreate_NetFramework() =>
+        builderCS.AddPaths("UseStringCreate.NetFramework.cs").Verify();
 
 #endif
 

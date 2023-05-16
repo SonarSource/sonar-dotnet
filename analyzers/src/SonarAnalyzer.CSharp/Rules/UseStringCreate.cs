@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -35,24 +37,35 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(start =>
         {
-            var node = (InvocationExpressionSyntax)c.Node;
-            if (methodNames.Any(x => node.GetName().Equals(x, StringComparison.Ordinal))
-                && IsCorrectType(node, c.SemanticModel))
+            if (!CompilationTargetsValidNetVersion(start.Compilation))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, node.NodeIdentifier()?.GetLocation()));
+                return;
             }
-        },
-        SyntaxKind.InvocationExpression);
+
+            context.RegisterNodeAction(c =>
+            {
+                var node = (InvocationExpressionSyntax)c.Node;
+
+                if (methodNames.Any(x => NameIsEqual(node, x))
+                    && node.TryGetOperands(out var left, out _)
+                    && NameIsEqual(left, nameof(FormattableString))
+                    && IsCorrectType(node, c.SemanticModel))
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, node.NodeIdentifier()?.GetLocation()));
+                }
+            },
+            SyntaxKind.InvocationExpression);
+        });
+
+    private static bool NameIsEqual(SyntaxNode node, string name) =>
+        node.GetName().Equals(name, StringComparison.Ordinal);
+
+    private static bool CompilationTargetsValidNetVersion(Compilation compilation) =>
+        compilation.GetTypeByMetadataName(KnownType.System_String) is var stringType
+        && stringType.GetMembers("Create").Any(x => x is IMethodSymbol);
 
     private static bool IsCorrectType(SyntaxNode node, SemanticModel model) =>
         model.GetTypeInfo(node).Type is { } type && type.DerivesFrom(KnownType.System_String);
-
-    private bool CompilationRunsOnValidNetVersion(Compilation compilation, string methodName) =>
-        compilation.GetTypeByMetadataName(KnownType.System_String) is { } str
-        && str.GetMembers(methodName) is { } members
-        && members.Any(x => x is IMethodSymbol { } method
-                            && method.Parameters is { Length: 1 } parameters
-                            && parameters[0].IsType(KnownType.System_Char));
 }
