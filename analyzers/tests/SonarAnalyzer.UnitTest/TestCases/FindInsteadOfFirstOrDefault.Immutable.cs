@@ -65,7 +65,7 @@ public class FindInsteadOfFirstOrDefault
         _ = data?.Find(x => true); // Compliant
     }
 
-    public static void Ternary(ImmutableList<int> list1, ImmutableList<int> list2, ImmutableList<int> list3)
+    public static void SpecialPattern(ImmutableList<int> list1, ImmutableList<int> list2, ImmutableList<int> list3)
     {
         var ternary = (true ? list1 : list2).FirstOrDefault(x => true); // Noncompliant
         //                                   ^^^^^^^^^^^^^^

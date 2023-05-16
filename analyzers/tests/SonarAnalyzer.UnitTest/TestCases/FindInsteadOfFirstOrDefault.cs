@@ -119,7 +119,7 @@ public class FindInsteadOfFirstOrDefault
         _ = data?.Find(x => true); // Compliant
     }
 
-    public static void Ternary(List<int> data)
+    public static void SpecialPattern(List<int> data)
     {
         (true ? data : data).FirstOrDefault(x => true); // Noncompliant
         //                   ^^^^^^^^^^^^^^

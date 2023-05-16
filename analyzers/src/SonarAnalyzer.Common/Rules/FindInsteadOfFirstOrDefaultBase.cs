@@ -33,7 +33,10 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
         KnownType.System_Array,
         KnownType.System_Collections_Immutable_ImmutableList_T);
 
+    protected abstract bool HasOneArgument(TInvocationExpression invocation);
+
     protected FindInsteadOfFirstOrDefaultBase() : base(DiagnosticId) { }
+
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
@@ -41,8 +44,9 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
                 var invocation = (TInvocationExpression)c.Node;
 
                 if (Language.GetName(invocation).Equals(nameof(Enumerable.FirstOrDefault), Language.NameComparison)
+                    && HasOneArgument(invocation)
                     && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
-                    && IsCorrectCall(invocation, right, c.SemanticModel)
+                    && IsCorrectCall(right, c.SemanticModel)
                     && IsCorrectType(left, c.SemanticModel))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
@@ -50,14 +54,11 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
             },
             Language.SyntaxKind.InvocationExpression);
 
-    private bool IsCorrectCall(TInvocationExpression invocation, SyntaxNode right, SemanticModel model) =>
-        HasOneArgument(invocation)
-        && model.GetSymbolInfo(right).Symbol is IMethodSymbol method
+    private bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
         && method.Parameters.Length == 1
         && method.Parameters[0].IsType(KnownType.System_Func_T_TResult);
-
-    protected abstract bool HasOneArgument(TInvocationExpression invocation);
 
     private static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
         model.GetTypeInfo(left).Type.DerivesFromAny(RuleSpecificTypes);

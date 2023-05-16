@@ -100,7 +100,7 @@ Public Class FindInsteadOfFirstOrDefault
         HelperClass.DoWorkMethodGroup(Of Integer)(AddressOf data.FirstOrDefault) ' FN
     End Sub
 
-    Public Sub Ternary(data As List(Of Integer))
+    Public Sub SpecialPattern(data As List(Of Integer))
         Dim unused = (If(True, data, data)).FirstOrDefault(Function(x) True) ' Noncompliant
         '                                   ^^^^^^^^^^^^^^
         unused = (If(data, data)).FirstOrDefault(Function(x) True) ' Noncompliant

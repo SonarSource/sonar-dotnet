@@ -36,7 +36,7 @@ public class FindInsteadOfFirstOrDefault
         _ = Array.Find(lambda(), x => true); // Compliant
     }
 
-    public static void Ternary(int[] data)
+    public static void SpecialPattern(int[] data)
     {
         (true ? data : data).FirstOrDefault(x => true); // Noncompliant
         //                   ^^^^^^^^^^^^^^
