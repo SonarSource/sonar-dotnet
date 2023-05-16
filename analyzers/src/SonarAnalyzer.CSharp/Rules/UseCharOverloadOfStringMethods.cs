@@ -25,9 +25,24 @@ public sealed class UseCharOverloadOfStringMethods : UseCharOverloadOfStringMeth
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override bool HasCorrectArguments(InvocationExpressionSyntax invocation) =>
-        invocation.HasExactlyNArguments(1)
-        && invocation.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax literal
-        && literal.IsKind(SyntaxKind.StringLiteralExpression)
-        && literal.Token.ValueText is { Length: 1 };
+    protected override bool HasCorrectArguments(InvocationExpressionSyntax invocation)
+    {
+        if (!invocation.HasExactlyNArguments(1))
+        {
+            return false;
+        }
+        if (invocation.ArgumentList.Arguments[0].Expression is not LiteralExpressionSyntax literal)
+        {
+            return false;
+        }
+        if (!literal.IsKind(SyntaxKind.StringLiteralExpression))
+        {
+            return false;
+        }
+        if (literal.Token.ValueText is not { Length: 1 })
+        {
+            return false;
+        }
+        return true;
+    }
 }
