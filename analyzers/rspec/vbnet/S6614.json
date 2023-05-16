@@ -1,0 +1,17 @@
+{
+  "title": "\"Regex\" instances should be cached",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6614",
+  "sqKey": "S6614",
+  "scope": "All",
+  "quickfix": "unknown"
+}
