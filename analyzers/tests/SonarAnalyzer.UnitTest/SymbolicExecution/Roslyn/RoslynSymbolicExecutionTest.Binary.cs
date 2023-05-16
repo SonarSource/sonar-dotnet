@@ -760,22 +760,22 @@ Tag(""End"")";
     }
 
     [DataTestMethod]
-    [DataRow(5, 0, "i * j", 0)]
-    [DataRow(5, 1, "i * j", 5)]
-    [DataRow(5, -1, "i * j", -5)]
-    [DataRow(5, 4, "i * j", 20)]
-    [DataRow(5, -4, "i * j", -20)]
-    [DataRow(-5, 0, "i * j", 0)]
-    [DataRow(-5, 1, "i * j", -5)]
-    [DataRow(-5, -1, "i * j", 5)]
-    [DataRow(-5, 4, "i * j", -20)]
-    [DataRow(-5, -4, "i * j", 20)]
-    public void Binary_CalculationWith_SingleValue(int i, int j, string expression, int expected)
+    [DataRow(5, 0, 0)]
+    [DataRow(5, 1, 5)]
+    [DataRow(5, -1, -5)]
+    [DataRow(5, 4, 20)]
+    [DataRow(5, -4, -20)]
+    [DataRow(-5, 0, 0)]
+    [DataRow(-5, 1, -5)]
+    [DataRow(-5, -1, 5)]
+    [DataRow(-5, 4, -20)]
+    [DataRow(-5, -4, 20)]
+    public void Binary_Multiplication_SingleValue(int left, int right, int expected)
     {
         var code = $"""
-            var i = {i};
-            var j = {j};
-            var value = {expression};
+            var left = {left};
+            var right = {right};
+            var value = left * right;
             Tag("Value", value);
             """;
         SETestContext.CreateCS(code).Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
