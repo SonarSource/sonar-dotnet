@@ -90,7 +90,7 @@ public partial class RoslynSymbolicExecutionTest
             {
                 arg.ToString(); // Add another constraint to 'arg'
             }
-            Tag("End", arg);
+            Tag("End");
             """;
         var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
         var arg = validator.Symbol("arg");
@@ -122,7 +122,7 @@ public partial class RoslynSymbolicExecutionTest
                 arg.ToString(); // Add another constraint to 'arg'
                 Tag("InLoop");
             }
-            Tag("Unreachable", arg);
+            Tag("Unreachable");
             """;
         var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
         var arg = validator.Symbol("arg");

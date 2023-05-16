@@ -22,7 +22,7 @@ using SonarAnalyzer.CFG.Roslyn;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn
 {
-    internal sealed class ExplodedNode : IEquatable<ExplodedNode>
+    public sealed class ExplodedNode : IEquatable<ExplodedNode>
     {
         private readonly IOperationWrapperSonar[] operations;
         private readonly int index;
