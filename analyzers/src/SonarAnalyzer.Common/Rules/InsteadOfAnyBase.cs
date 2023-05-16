@@ -37,7 +37,7 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
         {
             var invocation = (TInvocationExpression)c.Node;
 
-            if (IsNameEqual(invocation, nameof(Enumerable.Any))
+            if (IsNameEqualTo(invocation, nameof(Enumerable.Any))
                 && Language.Syntax.HasExactlyNArguments(invocation, 1)
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectCall(right, c.SemanticModel)
@@ -48,7 +48,7 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
             }
         }, Language.SyntaxKind.InvocationExpression);
 
-    protected bool IsNameEqual(SyntaxNode node, string name) =>
+    protected bool IsNameEqualTo(SyntaxNode node, string name) =>
         Language.GetName(node).Equals(name, Language.NameComparison);
 
     protected static bool IsValueTypeOrString(SyntaxNode expression, SemanticModel model) =>
@@ -64,7 +64,7 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
 
     protected bool IsSimpleEqualsInvocation(TInvocationExpression invocation, string lambdaVariableName)
     {
-        if (IsNameEqual(invocation, nameof(Equals)))
+        if (IsNameEqualTo(invocation, nameof(Equals)))
         {
             if (Language.Syntax.HasExactlyNArguments(invocation, 1))
             {

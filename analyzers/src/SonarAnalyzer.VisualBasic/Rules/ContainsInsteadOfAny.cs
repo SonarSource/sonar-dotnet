@@ -44,11 +44,11 @@ public sealed class ContainsInsteadOfAny : ContainsInsteadOfAnyBase<SyntaxKind, 
         || (AreValidOperands(lambdaVariableName, second, first) && IsValueTypeOrString(first, model));
 
     protected override bool AreValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second) =>
-        first is IdentifierNameSyntax && IsNameEqual(first, lambdaVariable)
+        first is IdentifierNameSyntax && IsNameEqualTo(first, lambdaVariable)
         && second switch
         {
             LiteralExpressionSyntax => true,
-            IdentifierNameSyntax => !IsNameEqual(first, second.GetName()),
+            IdentifierNameSyntax => !IsNameEqualTo(first, second.GetName()),
             _ => false,
         };
 
