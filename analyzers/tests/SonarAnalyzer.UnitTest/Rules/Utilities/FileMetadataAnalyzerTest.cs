@@ -99,7 +99,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             tree.SetupGet(x => x.Encoding).Returns(() => null);
             var sut = new TestFileMetadataAnalyzer(null, isTestProject);
 
-            sut.TestCreateMessage(UtilityAnalyzerParameter.Default, tree.Object, null).Encoding.Should().BeEmpty();
+            sut.TestCreateMessage(UtilityAnalyzerParameters.Default, tree.Object, null).Encoding.Should().BeEmpty();
         }
 
         [DataTestMethod]
@@ -142,11 +142,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 this.isTestProject = isTestProject;
             }
 
-            protected override UtilityAnalyzerParameter ReadParameters(SonarCompilationStartAnalysisContext context) =>
+            protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationStartAnalysisContext context) =>
                 base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
 
-            public FileMetadataInfo TestCreateMessage(UtilityAnalyzerParameter parameter, SyntaxTree syntaxTree, SemanticModel semanticModel) =>
-                CreateMessage(parameter, syntaxTree, semanticModel);
+            public FileMetadataInfo TestCreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree syntaxTree, SemanticModel semanticModel) =>
+                CreateMessage(parameters, syntaxTree, semanticModel);
         }
     }
 }

@@ -125,7 +125,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
         private class TestUtilityAnalyzer : UtilityAnalyzerBase
         {
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => throw new NotImplementedException();
-            public UtilityAnalyzerParameter Parameters { get; }
+            public UtilityAnalyzerParameters Parameters { get; }
 
             public TestUtilityAnalyzer(string language, params string[] additionalPaths) : base("S9999-test", "Title")
             {

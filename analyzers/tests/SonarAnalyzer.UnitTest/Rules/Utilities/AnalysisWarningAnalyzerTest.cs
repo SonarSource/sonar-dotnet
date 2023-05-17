@@ -100,7 +100,7 @@ public class AnalysisWarningAnalyzerTest
             this.outPath = outPath;
         }
 
-        protected override UtilityAnalyzerParameter ReadParameters(SonarCompilationStartAnalysisContext context) =>
+        protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationStartAnalysisContext context) =>
             base.ReadParameters(context) with { IsAnalyzerEnabled = isAnalyzerEnabled, OutPath = outPath };
     }
 
@@ -117,7 +117,7 @@ public class AnalysisWarningAnalyzerTest
             this.outPath = outPath;
         }
 
-        protected override UtilityAnalyzerParameter ReadParameters(SonarCompilationStartAnalysisContext context) =>
+        protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationStartAnalysisContext context) =>
             base.ReadParameters(context) with { IsAnalyzerEnabled = isAnalyzerEnabled, OutPath = outPath };
     }
 }
