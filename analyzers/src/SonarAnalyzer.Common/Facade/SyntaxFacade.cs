@@ -52,6 +52,7 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue);
     public abstract bool IsStatic(SyntaxNode node);
     public abstract bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right);
+    public abstract bool HasExactlyNArguments(SyntaxNode invocation, int count);
 
     protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>
         node as T ?? throw new InvalidCastException($"A {node.GetType().Name} node can not be cast to a {typeof(T).Name} node.");

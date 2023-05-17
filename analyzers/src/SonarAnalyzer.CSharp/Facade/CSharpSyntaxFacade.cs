@@ -129,5 +129,8 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         Cast<BaseMethodDeclarationSyntax>(node).IsStatic();
 
     public override bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right) =>
-        Cast<InvocationExpressionSyntax>(invocation).TryGetOperands(out  left, out right);
+        Cast<InvocationExpressionSyntax>(invocation).TryGetOperands(out left, out right);
+
+    public override bool HasExactlyNArguments(SyntaxNode invocation, int count) =>
+        Cast<InvocationExpressionSyntax>(invocation).HasExactlyNArguments(count);
 }

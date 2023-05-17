@@ -33,8 +33,6 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
         KnownType.System_Array,
         KnownType.System_Collections_Immutable_ImmutableList_T);
 
-    protected abstract bool HasOneArgument(TInvocationExpression invocation);
-
     protected FindInsteadOfFirstOrDefaultBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
@@ -43,7 +41,7 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
                 var invocation = (TInvocationExpression)c.Node;
 
                 if (Language.GetName(invocation).Equals(nameof(Enumerable.FirstOrDefault), Language.NameComparison)
-                    && HasOneArgument(invocation)
+                    && Language.Syntax.HasExactlyNArguments(invocation, 1)
                     && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                     && IsCorrectCall(right, c.SemanticModel)
                     && IsCorrectType(left, c.SemanticModel))

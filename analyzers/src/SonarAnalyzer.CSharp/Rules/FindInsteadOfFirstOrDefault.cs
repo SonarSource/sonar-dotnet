@@ -24,6 +24,4 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class FindInsteadOfFirstOrDefault : FindInsteadOfFirstOrDefaultBase<SyntaxKind, InvocationExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-    protected override bool HasOneArgument(InvocationExpressionSyntax invocation) => invocation.HasExactlyNArguments(1);
 }
