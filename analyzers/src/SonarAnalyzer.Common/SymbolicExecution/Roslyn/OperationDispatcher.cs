@@ -42,6 +42,7 @@ internal static class OperationDispatcher
         { OperationKindEx.AnonymousObjectCreation, new NotNullOperation() },
         { OperationKindEx.Await, new Await() },
         { OperationKindEx.CaughtException, new NotNullOperation() },
+        { OperationKindEx.CompoundAssignment, new CompoundAssignment() },
         { OperationKindEx.Conversion, new Conversion() },
         { OperationKindEx.DeclarationPattern, new DeclarationPattern() },
         { OperationKindEx.Decrement, new IncrementOrDecrement() },

@@ -590,6 +590,27 @@ namespace Monitor_Conditions
                 Monitor.Exit(other);
             }
         }
+
+        public void Numbers_CompoundAssignment()
+        {
+            Monitor.Enter(obj);     // Noncompliant FP, always released
+            Monitor.Enter(other);   // Noncompliant
+            if (condition)          // Release on some paths
+            {
+                Monitor.Exit(obj);
+                Monitor.Exit(other);
+            }
+            var value = 42;
+            value += 1;
+            if (value == 43)
+            {
+                Monitor.Exit(obj);
+            }
+            else
+            {
+                Monitor.Exit(other);
+            }
+        }
     }
 
     class LockOnField
