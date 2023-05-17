@@ -17,14 +17,14 @@ public class FindInsteadOfFirstOrDefault
 
     public void UnrelatedType(Dummy dummy, AnotherDummy anotherDummy)
     {
-        _ = dummy.FirstOrDefault(); // Compliant
-        _ = dummy.FirstOrDefault(x => true); // Compliant
+        dummy.FirstOrDefault(); // Compliant
+        dummy.FirstOrDefault(x => true); // Compliant
 
         _ = anotherDummy.FirstOrDefault;
 
         // Nullable
-        _ = dummy?.FirstOrDefault(); // Compliant
-        _ = dummy?.FirstOrDefault(x => true); // Compliant
+        dummy?.FirstOrDefault(); // Compliant
+        dummy?.FirstOrDefault(x => true); // Compliant
 
         _ = anotherDummy?.FirstOrDefault;
     }
@@ -51,15 +51,15 @@ public class FindInsteadOfFirstOrDefault
 
     public void ListBasic(List<int> data)
     {
-        _ = data.FirstOrDefault(x => true); // Noncompliant {{"Find" method should be used instead of the "FirstOrDefault" extension method.}}
-        //       ^^^^^^^^^^^^^^
-        _ = data.Find(x => true); // Compliant
+        data.FirstOrDefault(x => true); // Noncompliant {{"Find" method should be used instead of the "FirstOrDefault" extension method.}}
+        //   ^^^^^^^^^^^^^^
+        data.Find(x => true); // Compliant
 
-        _ = data.FirstOrDefault(); // Compliant
-        _ = data.FirstOrDefault(HelperClass.FilterMethod); // Noncompliant
-        //       ^^^^^^^^^^^^^^
-        _ = data.FirstOrDefault(FilterMethod); // Noncompliant
-        //       ^^^^^^^^^^^^^^
+        data.FirstOrDefault(); // Compliant
+        data.FirstOrDefault(HelperClass.FilterMethod); // Noncompliant
+        //   ^^^^^^^^^^^^^^
+        data.FirstOrDefault(FilterMethod); // Noncompliant
+        //   ^^^^^^^^^^^^^^
     }
 
     public void ThroughLinq(List<int> data)
@@ -71,16 +71,16 @@ public class FindInsteadOfFirstOrDefault
 
     public void ThroughFunction()
     {
-        _ = HelperClass.DoWorkReturnGroup().FirstOrDefault(x => true); // Noncompliant
-        //                                  ^^^^^^^^^^^^^^
-        _ = HelperClass.DoWorkReturnGroup().Find(x => true); // Compliant
+        HelperClass.DoWorkReturnGroup().FirstOrDefault(x => true); // Noncompliant
+        //                              ^^^^^^^^^^^^^^
+        HelperClass.DoWorkReturnGroup().Find(x => true); // Compliant
     }
 
     public void ThroughLambda(Func<List<int>> lambda)
     {
-        _ = lambda().FirstOrDefault(x => true); // Noncompliant
-        //           ^^^^^^^^^^^^^^
-        _ = lambda().Find(x => true); // Compliant
+        lambda().FirstOrDefault(x => true); // Noncompliant
+        //       ^^^^^^^^^^^^^^
+        lambda().Find(x => true); // Compliant
     }
 
     public void WithinALambda()
@@ -101,22 +101,22 @@ public class FindInsteadOfFirstOrDefault
 
     public static void FirstOrdefaultNotHidden(MyList data)
     {
-        _ = data.FirstOrDefault(x => true); // Noncompliant
-        //       ^^^^^^^^^^^^^^
-        _ = data.Find(x => true); // Compliant
+        data.FirstOrDefault(x => true); // Noncompliant
+        //   ^^^^^^^^^^^^^^
+        data.Find(x => true); // Compliant
     }
 
     public static void FirstOrdefaultHidden(HiddenList data)
     {
-        _ = data.FirstOrDefault(x => true); // Compliant
-        _ = data.Find(x => true); // Compliant
+        data.FirstOrDefault(x => true); // Compliant
+        data.Find(x => true); // Compliant
     }
 
     public static void Nullable(List<int> data = null)
     {
-        _ = data?.FirstOrDefault(x => true); // Noncompliant
-        //        ^^^^^^^^^^^^^^
-        _ = data?.Find(x => true); // Compliant
+        data?.FirstOrDefault(x => true); // Noncompliant
+        //    ^^^^^^^^^^^^^^
+        data?.Find(x => true); // Compliant
     }
 
     public static void SpecialPattern(List<int> data)

@@ -44,7 +44,6 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
         SyntaxKind.EqualsExpression,
         SyntaxKind.NotEqualsExpression,
     };
-
     public SyntaxKind ConstructorDeclaration => SyntaxKind.ConstructorBlock;
     public SyntaxKind[] DefaultExpressions => new[] { SyntaxKind.NothingLiteralExpression };
     public SyntaxKind EndOfLineTrivia => SyntaxKind.EndOfLineTrivia;

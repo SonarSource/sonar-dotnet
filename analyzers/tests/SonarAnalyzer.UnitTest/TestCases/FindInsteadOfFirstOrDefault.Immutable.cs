@@ -12,13 +12,13 @@ public class FindInsteadOfFirstOrDefault
 
     public void ListBasic(ImmutableList<int> data)
     {
-        _ = data.FirstOrDefault(x => true); // Noncompliant {{"Find" method should be used instead of the "FirstOrDefault" extension method.}}
-        //       ^^^^^^^^^^^^^^
-        _ = data.Find(x => true); // Compliant
+        data.FirstOrDefault(x => true); // Noncompliant {{"Find" method should be used instead of the "FirstOrDefault" extension method.}}
+        //   ^^^^^^^^^^^^^^
+        data.Find(x => true); // Compliant
 
-        _ = data.FirstOrDefault(); // Compliant
-        _ = data.FirstOrDefault(default(int)); // Compliant
-        _ = data.FirstOrDefault(x => false, default(int)); // Compliant
+        data.FirstOrDefault(); // Compliant
+        data.FirstOrDefault(default(int)); // Compliant
+        data.FirstOrDefault(x => false, default(int)); // Compliant
     }
 
     public void ThroughLinq(ImmutableList<int> data)
@@ -30,16 +30,16 @@ public class FindInsteadOfFirstOrDefault
 
     public void ThroughFunction()
     {
-        _ = ImmutableHelperClass.DoWorkReturnGroup().FirstOrDefault(x => true); // Noncompliant
-        //                                           ^^^^^^^^^^^^^^
-        _ = ImmutableHelperClass.DoWorkReturnGroup().Find(x => true); // Compliant
+        ImmutableHelperClass.DoWorkReturnGroup().FirstOrDefault(x => true); // Noncompliant
+        //                                       ^^^^^^^^^^^^^^
+        ImmutableHelperClass.DoWorkReturnGroup().Find(x => true); // Compliant
     }
 
     public void ThroughLambda(Func<ImmutableList<int>> lambda)
     {
-        _ = lambda().FirstOrDefault(x => true); // Noncompliant
-        //           ^^^^^^^^^^^^^^
-        _ = lambda().Find(x => true); // Compliant
+        lambda().FirstOrDefault(x => true); // Noncompliant
+        //       ^^^^^^^^^^^^^^
+        lambda().Find(x => true); // Compliant
     }
 
     public void WithinALambda()
@@ -60,18 +60,18 @@ public class FindInsteadOfFirstOrDefault
 
     public static void Nullable(ImmutableList<int> data = null)
     {
-        _ = data?.FirstOrDefault(x => true); // Noncompliant
-        //        ^^^^^^^^^^^^^^
-        _ = data?.Find(x => true); // Compliant
+        data?.FirstOrDefault(x => true); // Noncompliant
+        //    ^^^^^^^^^^^^^^
+        data?.Find(x => true); // Compliant
     }
 
     public static void SpecialPattern(ImmutableList<int> list1, ImmutableList<int> list2, ImmutableList<int> list3)
     {
-        var ternary = (true ? list1 : list2).FirstOrDefault(x => true); // Noncompliant
-        //                                   ^^^^^^^^^^^^^^
-        var nullCoalesce = (list1 ?? list2).FirstOrDefault(x => true); // Noncompliant
-        //                                  ^^^^^^^^^^^^^^
-        var ternaryNullCoalesce = (list1 ?? (true ? list2 : list3)).FirstOrDefault(x => true); // Noncompliant
-        //                                                          ^^^^^^^^^^^^^^
+        (true ? list1 : list2).FirstOrDefault(x => true); // Noncompliant
+        //                     ^^^^^^^^^^^^^^
+        (list1 ?? list2).FirstOrDefault(x => true); // Noncompliant
+        //               ^^^^^^^^^^^^^^
+        (list1 ?? (true ? list2 : list3)).FirstOrDefault(x => true); // Noncompliant
+        //                                ^^^^^^^^^^^^^^
     }
 }
