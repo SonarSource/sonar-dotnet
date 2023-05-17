@@ -3,7 +3,7 @@ using System.Globalization;
 
 class Program
 {
-    void Method(string value)
+    void Method(string value, FormattableString formString)
     {
         FormattableString.CurrentCulture($"Value: {value}"); // Noncompliant {{Use "string.Create" instead of "FormattableString".}}
         //                ^^^^^^^^^^^^^^
@@ -13,16 +13,19 @@ class Program
         string.Create(CultureInfo.CurrentCulture, $"Value: {value}");    // Compliant
         string.Create(CultureInfo.InvariantCulture, $"Value: {value}");  // Compliant
 
+        FormattableString.CurrentCulture(formString); // Compliant
+        FormattableString.Invariant(formString);      // Compliant
+        
         var classImplementingIFormattable = new ClassImplementingIFormattable();
         classImplementingIFormattable.CurrentCulture($"Value: {value}"); // Compliant
-        classImplementingIFormattable.Invariant($"Value: {value}");      // Compliant
+        classImplementingIFormattable.Invariant();                       // Compliant
     }
 
     class ClassImplementingIFormattable : IFormattable
     {
         public string ToString(string? format, IFormatProvider? formatProvider) => "";
         public string CurrentCulture(FormattableString formattable) => "";
-        public string Invariant(FormattableString formattable) => "";
+        public string Invariant() => "";
     }
 }
 
