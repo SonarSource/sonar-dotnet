@@ -25,6 +25,7 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
     where TInvocationExpression : SyntaxNode
 {
     private const string DiagnosticId = "S6602";
+    private const int NumberOfArgument = 1;
 
     protected override string MessageFormat => $"\"{nameof(Array.Find)}\" method should be used instead of the \"{nameof(Enumerable.FirstOrDefault)}\" extension method.";
 
@@ -41,7 +42,7 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
                 var invocation = (TInvocationExpression)c.Node;
 
                 if (Language.GetName(invocation).Equals(nameof(Enumerable.FirstOrDefault), Language.NameComparison)
-                    && Language.Syntax.HasExactlyNArguments(invocation, 1)
+                    && Language.Syntax.HasExactlyNArguments(invocation, NumberOfArgument)
                     && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                     && IsCorrectCall(right, c.SemanticModel)
                     && IsCorrectType(left, c.SemanticModel))
@@ -54,7 +55,7 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
     private static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
-        && method.Parameters.Length == 1
+        && method.Parameters.Length == NumberOfArgument
         && method.Parameters[0].IsType(KnownType.System_Func_T_TResult);
 
     private static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
