@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Runtime.CompilerServices;
+
 namespace SonarAnalyzer.Helpers
 {
     /// <summary>
@@ -28,13 +30,15 @@ namespace SonarAnalyzer.Helpers
     /// </remarks>
     public class NetFrameworkVersionProvider : INetFrameworkVersionProvider
     {
-        public NetFrameworkVersion GetDotNetFrameworkVersion(Compilation compilation)
-        {
-            if (compilation == null)
-            {
-                return NetFrameworkVersion.Unknown;
-            }
+        private static readonly ConditionalWeakTable<Compilation, VersionContainer> CompilationVersions = new();
 
+        public NetFrameworkVersion GetDotNetFrameworkVersion(Compilation compilation)
+            => compilation is null
+                ? NetFrameworkVersion.Unknown
+                : CompilationVersions.GetValue(compilation, x => new VersionContainer(Calculate(x))).Value;
+
+        private static NetFrameworkVersion Calculate(Compilation compilation)
+        {
             /// See https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ee471421(v=vs.100)
             var debuggerSymbol = compilation.GetTypeByMetadataName(KnownType.System_Diagnostics_Debugger);
 
@@ -68,5 +72,8 @@ namespace SonarAnalyzer.Helpers
 
             return NetFrameworkVersion.Between4And451;
         }
+
+        // ConditionalWeakTable TValue has to be a class
+        private sealed record VersionContainer(NetFrameworkVersion Value);
     }
 }
