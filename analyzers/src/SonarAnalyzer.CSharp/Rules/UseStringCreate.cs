@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -30,7 +28,7 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    private ImmutableArray<string> methodNames = ImmutableArray.Create<string>(
+    private ImmutableArray<string> methodNames = ImmutableArray.Create(
         "CurrentCulture",
         "Invariant");
 
@@ -51,7 +49,7 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
                 if (methodNames.Any(x => NameIsEqual(node, x))
                     && node.TryGetOperands(out var left, out _)
                     && NameIsEqual(left, nameof(FormattableString))
-                    && c.SemanticModel.GetTypeInfo(node).Type.DerivesFrom(KnownType.System_String))
+                    && c.SemanticModel.GetTypeInfo(left).Type.DerivesFrom(KnownType.System_FormattableString))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, node.NodeIdentifier()?.GetLocation()));
                 }
