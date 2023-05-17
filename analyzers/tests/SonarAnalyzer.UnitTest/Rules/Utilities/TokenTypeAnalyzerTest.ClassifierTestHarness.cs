@@ -11,6 +11,9 @@ public partial class TokenTypeAnalyzerTest
 {
     private static class ClassifierTestHarness
     {
+        private const int TokenAnotationChars = 4; // [u:]
+        private const int PrefixTokenAnotationChar = 3; // [u:
+
         private static readonly Regex TokenTypeRegEx = new(TokenGroups(
             TokenGroup(TokenType.Keyword, "k"),
             TokenGroup(TokenType.NumericLiteral, "n"),
@@ -19,11 +22,11 @@ public partial class TokenTypeAnalyzerTest
             TokenGroup(TokenType.Comment, "c"),
             TokenGroup(TokenType.UnknownTokentype, "u")));
 
-        public static void AssertTokenTypes(string code, bool allowSemanticModel = true)
+        public static void AssertTokenTypes(string code, bool allowSemanticModel = true, bool ignoreIssues = false)
         {
-            var (tree, model, expectedTokens) = ParseTokens(code);
+            var (tree, model, expectedTokens) = ParseTokens(code, ignoreIssues);
             var root = tree.GetRoot();
-            model = allowSemanticModel ? model : new Mock<SemanticModel>(MockBehavior.Strict).Object;
+            model = allowSemanticModel ? model : new Mock<SemanticModel>(MockBehavior.Strict).Object; // The Mock will throw if the semantic model was used.
             var tokenClassifier = new SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer.TokenClassifier(model, false);
             var triviaClassifier = new SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer.TriviaClassifier();
             expectedTokens.Should().SatisfyRespectively(expectedTokens.Select((Func<ExpectedToken, Action<ExpectedToken>>)(e => expected =>
@@ -70,7 +73,7 @@ public partial class TokenTypeAnalyzerTest
             })));
         }
 
-        private static (SyntaxTree Tree, SemanticModel Model, IReadOnlyCollection<ExpectedToken> ExpectedTokens) ParseTokens(string code)
+        private static (SyntaxTree Tree, SemanticModel Model, IReadOnlyCollection<ExpectedToken> ExpectedTokens) ParseTokens(string code, bool ignoreIssues = false)
         {
             var matches = TokenTypeRegEx.Matches(code);
             var sb = new StringBuilder(code.Length);
@@ -80,9 +83,9 @@ public partial class TokenTypeAnalyzerTest
             foreach (var group in matches.Cast<Match>().Select(m => m.Groups.Cast<Group>().First(g => g.Success && g.Name != "0")))
             {
                 var expectedTokenType = (TokenType)Enum.Parse(typeof(TokenType), group.Name);
-                var position = group.Index - (match * 4);
-                var length = group.Length - 4;
-                var tokenText = group.Value.Substring(3, group.Value.Length - 4);
+                var position = group.Index - (match * TokenAnotationChars);
+                var length = group.Length - TokenAnotationChars;
+                var tokenText = group.Value.Substring(PrefixTokenAnotationChar, group.Value.Length - TokenAnotationChars);
                 expectedTokens.Add(new ExpectedToken(expectedTokenType, tokenText, new TextSpan(position, length)));
 
                 sb.Append(code.Substring(lastMatchEnd, group.Index - lastMatchEnd));
@@ -91,7 +94,7 @@ public partial class TokenTypeAnalyzerTest
                 match++;
             }
             sb.Append(code.Substring(lastMatchEnd));
-            var (tree, model) = TestHelper.CompileCS(sb.ToString());
+            var (tree, model) = ignoreIssues ? TestHelper.CompileIgnoreErrorsCS(sb.ToString()) : TestHelper.CompileCS(sb.ToString());
             return (tree, model, expectedTokens);
         }
 
