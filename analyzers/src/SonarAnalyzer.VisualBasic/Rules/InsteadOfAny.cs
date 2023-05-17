@@ -31,17 +31,19 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
         && parameters[0].Identifier.GetName() is var lambdaVariableName
         && lambda.Body switch
         {
-            BinaryExpressionSyntax binary =>
-                binary.OperatorToken.IsKind(SyntaxKind.EqualsToken)
-                && HasBinaryValidOperands(lambdaVariableName, binary.Left, binary.Right, model),
+            BinaryExpressionSyntax binary when binary.OperatorToken.IsAnyKind(SyntaxKind.EqualsToken, SyntaxKind.IsKeyword) =>
+                HasValidBinaryOperands(lambdaVariableName, binary.Left, binary.Right, model),
             InvocationExpressionSyntax invocation =>
-                IsSimpleEqualsInvocation(invocation, lambdaVariableName),
+                HasValidInvocationOperands(invocation, lambdaVariableName, model),
             _ => false
         };
 
-    private bool HasBinaryValidOperands(string lambdaVariableName, SyntaxNode first, SyntaxNode second, SemanticModel model) =>
-        (AreValidOperands(lambdaVariableName, first, second) && IsValueTypeOrString(second, model))
-        || (AreValidOperands(lambdaVariableName, second, first) && IsValueTypeOrString(first, model));
+    private bool HasValidBinaryOperands(string lambdaVariableName, SyntaxNode first, SyntaxNode second, SemanticModel model) =>
+        (AreValidOperands(lambdaVariableName, first, second) && IsNullOrValueTypeOrString(second, model))
+        || (AreValidOperands(lambdaVariableName, second, first) && IsNullOrValueTypeOrString(first, model));
+
+    private static bool IsNullOrValueTypeOrString(SyntaxNode node, SemanticModel model) =>
+        node.IsKind(SyntaxKind.NothingLiteralExpression) || IsValueTypeOrString(node, model);
 
     protected override bool AreValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second) =>
         first is IdentifierNameSyntax && IsNameEqualTo(first, lambdaVariable)

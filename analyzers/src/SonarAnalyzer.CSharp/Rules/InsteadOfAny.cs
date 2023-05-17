@@ -30,15 +30,14 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
         && lambda.Parameter.Identifier.ValueText is var lambdaVariableName
         && lambda.Body switch
         {
-            BinaryExpressionSyntax binary =>
-                binary.OperatorToken.IsAnyKind(SyntaxKind.EqualsEqualsToken)
-                && HasBinaryValidOperands(lambdaVariableName, binary.Left, binary.Right, model),
+            BinaryExpressionSyntax binary when binary.OperatorToken.IsKind(SyntaxKind.EqualsEqualsToken) =>
+                HasValidBinaryOperands(lambdaVariableName, binary.Left, binary.Right, model),
             InvocationExpressionSyntax invocation =>
-                IsSimpleEqualsInvocation(invocation, lambdaVariableName),
+                HasValidInvocationOperands(invocation, lambdaVariableName, model),
             _ => false
         };
 
-    private bool HasBinaryValidOperands(string lambdaVariableName, SyntaxNode first, SyntaxNode second, SemanticModel model) =>
+    private bool HasValidBinaryOperands(string lambdaVariableName, SyntaxNode first, SyntaxNode second, SemanticModel model) =>
         (AreValidOperands(lambdaVariableName, first, second) && IsNullOrValueTypeOrString(second, model))
         || (AreValidOperands(lambdaVariableName, second, first) && IsNullOrValueTypeOrString(first, model));
 

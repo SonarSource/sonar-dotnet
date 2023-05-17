@@ -51,6 +51,30 @@ Public Class TestClass
         Call AcceptMethod(New Func(Of Func(Of Integer, Boolean), Boolean)(AddressOf goodList.Any)) ' Compliant
     End Sub
 
+    Private Sub List(ByVal pList As List(Of Integer))
+        pList.Any(Function(x) x = 0) ' Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
+        pList.Any(Function(x) x > 0) ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
+        pList.Any() ' Compliant
+    End Sub
+
+    Private Sub HashSet(ByVal pHashSet As HashSet(Of Integer))
+        pHashSet.Any(Function(x) x = 0) ' Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
+        pHashSet.Any(Function(x) x > 0) ' Compliant
+        pHashSet.Any() ' Compliant
+    End Sub
+
+    Private Sub SortedSet(ByVal pSortedSet As SortedSet(Of Integer))
+        pSortedSet.Any(Function(x) x = 0) ' Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
+        pSortedSet.Any(Function(x) x > 0) ' Compliant
+        pSortedSet.Any() ' Compliant
+    End Sub
+
+    Private Sub Array(ByVal pArray As Integer())
+        pArray.Any(Function(x) x = 0) ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
+        pArray.Any(Function(x) x > 0) ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
+        pArray.Any() ' Compliant
+    End Sub
+
     Private Sub ConditionalsMatrix(ByVal goodList As GoodList(Of Integer))
         goodList.GetList().GetList().GetList().GetList().Any(Function(x) x > 0)     ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
         goodList.GetList().GetList().GetList().GetList()?.Any(Function(x) x > 0)    ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
@@ -103,6 +127,9 @@ Public Class TestClass
         stringList.Any(Function(x) x.Equals("")) ' Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
         stringList.Any(Function(x) "".Equals(x)) ' Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
         stringList.Any(Function(x) Equals(x, "")) ' Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
+        stringList.Any(Function(x) "" Is x) ' Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
+        stringList.Any(Function(x) x Is "") ' Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
+        stringList.Any(Function(x) x Is Nothing) ' Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
 
         stringList.Any(Function(x) MyStringCheck(x)) ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
         stringList.Any(Function(x) Not Equals(x, ""))     ' Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
