@@ -259,6 +259,7 @@ namespace SonarAnalyzer.Helpers
                 MemberAccessExpressionSyntax { Name.Identifier: var identifier } => identifier,
                 NamespaceDeclarationSyntax { Name: { } name } => GetIdentifier(name),
                 NullableTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
+                ObjectCreationExpressionSyntax { Type: { } type } => GetIdentifier(type),
                 OperatorDeclarationSyntax { OperatorToken: var operatorToken } => operatorToken,
                 ParameterSyntax { Identifier: var identifier } => identifier,
                 PropertyDeclarationSyntax { Identifier: var identifier } => identifier,

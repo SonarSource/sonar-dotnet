@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Text.RegularExpressions;
+
 namespace SonarAnalyzer.Rules;
 
 public abstract class UseCachedRegexBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -25,7 +27,7 @@ public abstract class UseCachedRegexBase<TSyntaxKind> : SonarDiagnosticAnalyzer<
 {
     private const string DiagnosticId = "S6614";
 
-    protected override string MessageFormat => "FIXME";
+    protected override string MessageFormat => $"{nameof(Regex)} instances should be cached";
 
     protected UseCachedRegexBase() : base(DiagnosticId) { }
 }
