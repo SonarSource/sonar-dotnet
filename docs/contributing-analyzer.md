@@ -12,6 +12,8 @@ In general, it is best to run commands from the Visual Studio Developer Command 
 
 ## Developing with Visual Studio 2022 or Rider
 
+Visual Studio 2022 version 17.6+ is required to build the project (due to source generators) and run the unit tests.
+
 1. [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) or [Rider](https://www.jetbrains.com/rider/download)
 1. When using Visual Studio, ensure to install the following Workloads:
     - ASP.NET and web development
