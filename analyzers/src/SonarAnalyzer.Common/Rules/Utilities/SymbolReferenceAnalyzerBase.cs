@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
 
         protected SymbolReferenceAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected sealed override SymbolReferenceInfo CreateMessage(UtilityAnalyzerParameters parameter, SyntaxTree syntaxTree, SemanticModel semanticModel)
+        protected sealed override SymbolReferenceInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = syntaxTree.FilePath };
             var references = GetReferences(syntaxTree.GetRoot(), semanticModel);
