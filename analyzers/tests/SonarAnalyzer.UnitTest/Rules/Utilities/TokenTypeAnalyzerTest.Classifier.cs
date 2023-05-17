@@ -158,4 +158,20 @@ public partial class TokenTypeAnalyzerTest
                 void M(delegate* unmanaged[[u:Cdecl]]<int, int> m) { }
             }
             """, false);
+
+    [TestMethod]
+    public void IndentifierToken_ExternAlias() =>
+    ClassifierTestHarness.AssertTokenTypes("""
+            extern alias [u:ThisIsAnAlias];
+            public class Test {
+            }
+            """, false, true);
+
+    [TestMethod]
+    public void IndentifierToken_AccessorDeclaration() =>
+    ClassifierTestHarness.AssertTokenTypes("""
+            public class Test {
+                public string Property { [u:unknown]; }
+            }
+            """, false, true);
 }
