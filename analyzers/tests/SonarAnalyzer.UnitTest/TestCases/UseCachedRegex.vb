@@ -1,4 +1,4 @@
-Public Class Program
+﻿Public Class Program
 
     Public Sub Test()
 

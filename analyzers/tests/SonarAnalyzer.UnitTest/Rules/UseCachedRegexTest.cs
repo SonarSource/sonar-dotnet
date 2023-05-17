@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -31,7 +32,11 @@ public class UseCachedRegexTest
 
     [TestMethod]
     public void UseCachedRegex_CS() =>
-        builderCS.AddPaths("UseCachedRegex.cs").Verify();
+        builderCS.AddReferences(MetadataReferenceFacade.RegularExpressions).AddPaths("UseCachedRegex.cs").Verify();
+
+    [TestMethod]
+    public void UseCachedRegex_CSharp9() =>
+        builderCS.AddReferences(MetadataReferenceFacade.RegularExpressions).WithLanguageVersion(LanguageVersion.CSharp9).AddPaths("UseCachedRegex.CSharp9.cs").Verify();
 
     [TestMethod]
     public void UseCachedRegex_VB() =>
