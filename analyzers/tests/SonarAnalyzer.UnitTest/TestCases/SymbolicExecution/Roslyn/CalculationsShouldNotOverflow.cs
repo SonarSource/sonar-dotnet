@@ -5,24 +5,67 @@ public class Sample
     public void Types()
     {
         sbyte sb = sbyte.MaxValue;
-        _ = sb + 1;             // FIXME Non-compliant
+        sb++;                   // Noncompliant
         sb = sbyte.MinValue;
-        _ = sb - 1;             // FIXME Non-compliant
+        sb--;                   // Noncompliant
 
         byte b = byte.MaxValue;
-        _ = b + 1;              // FIXME Non-compliant
+        b++;                    // Noncompliant
         b = byte.MinValue;
-        _ = b - 1;              // FIXME Non-compliant
+        b--;                    // Noncompliant
 
         short i16 = short.MaxValue;
-        _ = i16 + 1;            // FIXME Non-compliant
+        i16++;                  // Noncompliant
         i16 = short.MinValue;
-        _ = i16 - 1;            // FIXME Non-compliant
+        i16--;                  // Noncompliant
 
         ushort ui16 = ushort.MaxValue;
-        _ = ui16 + 1;           // FIXME Non-compliant
+        ui16++;                 // Noncompliant
         ui16 = ushort.MinValue;
-        _ = ui16 - 1;           // FIXME Non-compliant
+        ui16--;                 // Noncompliant
+
+        int i = int.MaxValue;
+        i++;                    // Noncompliant
+        i = int.MinValue;
+        i--;                    // Noncompliant
+
+        uint ui = uint.MaxValue;
+        ui++;                   // Noncompliant
+        ui = uint.MinValue;
+        ui--;                   // Noncompliant
+
+        long i64 = long.MaxValue;
+        i64++;                  // Noncompliant
+        i64 = long.MinValue;
+        i64--;                  // Noncompliant
+
+        ulong ui64 = ulong.MaxValue;
+        ui64++;                 // Noncompliant
+        ui64 = ulong.MinValue;
+        ui64--;                 // Noncompliant
+    }
+
+    public void Upcast()
+    {
+        sbyte sb = sbyte.MaxValue;
+        _ = sb + 1;             // Compliant, upcast to int
+        sb = sbyte.MinValue;
+        _ = sb - 1;             // Compliant, upcast to int
+
+        byte b = byte.MaxValue;
+        _ = b + 1;              // Compliant, upcast to int
+        b = byte.MinValue;
+        _ = b - 1;              // Compliant, upcast to int
+
+        short i16 = short.MaxValue;
+        _ = i16 + 1;            // Compliant, upcast to int
+        i16 = short.MinValue;
+        _ = i16 - 1;            // Compliant, upcast to int
+
+        ushort ui16 = ushort.MaxValue;
+        _ = ui16 + 1;           // Compliant, upcast to int
+        ui16 = ushort.MinValue;
+        _ = ui16 - 1;           // Compliant, upcast to int
 
         int i = int.MaxValue;
         _ = i + 1;              // Noncompliant
