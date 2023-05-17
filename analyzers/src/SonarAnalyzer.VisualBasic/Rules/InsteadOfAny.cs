@@ -18,20 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.Rules.VisualBasic;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax>
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override bool IsSimpleEqualityCheck(InvocationExpressionSyntax node, SemanticModel model) =>
-        GetArgumentExpression(node, 0) is SimpleLambdaExpressionSyntax lambda
-        && lambda.Parameter.Identifier.ValueText is var lambdaVariableName
+        GetArgumentExpression(node, 0) is SingleLineLambdaExpressionSyntax lambda
+        && lambda.SubOrFunctionHeader.ParameterList.Parameters is { Count: 1 } parameters
+        && parameters[0].Identifier.GetName() is var lambdaVariableName
         && lambda.Body switch
         {
             BinaryExpressionSyntax binary =>
-                binary.OperatorToken.IsAnyKind(SyntaxKind.EqualsEqualsToken)
+                binary.OperatorToken.IsKind(SyntaxKind.EqualsToken)
                 && HasBinaryValidOperands(lambdaVariableName, binary.Left, binary.Right, model),
             InvocationExpressionSyntax invocation =>
                 IsSimpleEqualsInvocation(invocation, lambdaVariableName),
@@ -39,11 +40,8 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
         };
 
     private bool HasBinaryValidOperands(string lambdaVariableName, SyntaxNode first, SyntaxNode second, SemanticModel model) =>
-        (AreValidOperands(lambdaVariableName, first, second) && IsNullOrValueTypeOrString(second, model))
-        || (AreValidOperands(lambdaVariableName, second, first) && IsNullOrValueTypeOrString(first, model));
-
-    private static bool IsNullOrValueTypeOrString(SyntaxNode node, SemanticModel model) =>
-        node.IsKind(SyntaxKind.NullLiteralExpression) || IsValueTypeOrString(node, model);
+        (AreValidOperands(lambdaVariableName, first, second) && IsValueTypeOrString(second, model))
+        || (AreValidOperands(lambdaVariableName, second, first) && IsValueTypeOrString(first, model));
 
     protected override bool AreValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second) =>
         first is IdentifierNameSyntax && IsNameEqualTo(first, lambdaVariable)
@@ -55,5 +53,5 @@ public sealed class ExistsInsteadOfAny : ExistsInsteadOfAnyBase<SyntaxKind, Invo
         };
 
     protected override SyntaxNode GetArgumentExpression(InvocationExpressionSyntax invocation, int index) =>
-        invocation.ArgumentList.Arguments[index].Expression;
+        invocation.ArgumentList.Arguments[index].GetExpression();
 }

@@ -18,19 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
+
 namespace SonarAnalyzer.Rules;
 
-public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : SonarDiagnosticAnalyzer
     where TSyntaxKind : struct
     where TInvocationExpression : SyntaxNode
 {
-    protected abstract ImmutableArray<(KnownType Type, bool CheckContext)> RuleSpecificTypes { get; }
+    private const string ExistsDiagnosticId = "S6605"; // Collection-specific "Exists" method should be used instead of the "Any" extension.
+    private const string ContainsDiagnosticId = "S6617"; // Collection-specific "Contains" method should be used instead of the "Any" extension.
+    private const string MessageFormat = "Collection-specific \"{0}\" method should be used instead of the \"Any\" extension.";
+
+    private readonly DiagnosticDescriptor existsRule;
+    private readonly DiagnosticDescriptor containsRule;
+    private ImmutableArray<KnownType> ExistsTypes { get; } = ImmutableArray.Create(
+        KnownType.System_Array,
+        KnownType.System_Collections_Immutable_ImmutableList_T);
+
+    private ImmutableArray<KnownType> ContainsTypes { get; } = ImmutableArray.Create(
+        KnownType.System_Collections_Generic_HashSet_T,
+        KnownType.System_Collections_Generic_SortedSet_T);
+
+    protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(existsRule, containsRule);
+
     protected abstract bool IsSimpleEqualityCheck(TInvocationExpression node, SemanticModel model);
-    protected abstract bool IsInValidContext(TInvocationExpression invocation, SemanticModel model);
     protected abstract SyntaxNode GetArgumentExpression(TInvocationExpression invocation, int index);
     protected abstract bool AreValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second);
 
-    protected InsteadOfAnyBase(string diagnosticId) : base(diagnosticId) { }
+    protected InsteadOfAnyBase()
+    {
+        existsRule = Language.CreateDescriptor(ExistsDiagnosticId, MessageFormat);
+        containsRule = Language.CreateDescriptor(ContainsDiagnosticId, MessageFormat);
+    }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
@@ -41,10 +63,27 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
                 && Language.Syntax.HasExactlyNArguments(invocation, 1)
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectCall(right, c.SemanticModel)
-                && c.SemanticModel.GetTypeInfo(left).Type is { } type
-                && IsCorrectTypeAndContext(type, invocation, c.SemanticModel))
+                && c.SemanticModel.GetTypeInfo(left).Type is { } type)
             {
-                c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
+                if (ExistsTypes.Any(x => type.DerivesFrom(x)))
+                {
+                    RaiseExists(c, invocation);
+                }
+                else if (ContainsTypes.Any(x => type.DerivesFrom(x) && IsSimpleEqualityCheck(invocation, c.SemanticModel)))
+                {
+                    RaiseContains(c, invocation);
+                }
+                else if (type.DerivesFrom(KnownType.System_Collections_Generic_List_T))
+                {
+                    if (IsSimpleEqualityCheck(invocation, c.SemanticModel))
+                    {
+                        RaiseContains(c, invocation);
+                    }
+                    else
+                    {
+                        RaiseExists(c, invocation);
+                    }
+                }
             }
         }, Language.SyntaxKind.InvocationExpression);
 
@@ -54,13 +93,6 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
     protected static bool IsValueTypeOrString(SyntaxNode expression, SemanticModel model) =>
         model.GetTypeInfo(expression).Type is { } type
         && (type.IsValueType || type.Is(KnownType.System_String));
-
-    protected bool IsCorrectTypeAndContext(ITypeSymbol type, TInvocationExpression invocation, SemanticModel model) =>
-        RuleSpecificTypes.Any(x => type.DerivesFrom(x.Type) && (!x.CheckContext || IsInValidContext(invocation, model)));
-
-    protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
-        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
-        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
     protected bool IsSimpleEqualsInvocation(TInvocationExpression invocation, string lambdaVariableName)
     {
@@ -81,4 +113,14 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
         bool HasInvocationValidOperands(SyntaxNode first, SyntaxNode second) =>
             AreValidOperands(lambdaVariableName, first, second) || AreValidOperands(lambdaVariableName, second, first);
     }
+
+    private static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
+        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+
+    private void RaiseExists(SonarSyntaxNodeReportingContext c, SyntaxNode invocation) =>
+        c.ReportIssue(Diagnostic.Create(existsRule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), "Exists"));
+
+    private void RaiseContains(SonarSyntaxNodeReportingContext c, SyntaxNode invocation) =>
+        c.ReportIssue(Diagnostic.Create(containsRule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), "Contains"));
 }

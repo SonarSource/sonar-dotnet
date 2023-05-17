@@ -24,19 +24,19 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
-public class ExistsInsteadOfAnyTest
+public class InsteadOfAnyTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ExistsInsteadOfAny>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.InsteadOfAny>();
 
     [TestMethod]
-    public void ExistsInsteadOfAny_CS() =>
-        builderCS.AddPaths("ExistsInsteadOfAny.cs").Verify();
+    public void InsteadOfAny_CS() =>
+        builderCS.AddPaths("InsteadOfAny.cs").Verify();
 
 #if NET
 
     [TestMethod]
-    public void ExistsInsteadOfAny_TopLevelStatements() =>
-        builderCS.AddPaths("ExistsInsteadOfAny.CSharp9.cs")
+    public void InsteadOfAny_TopLevelStatements() =>
+        builderCS.AddPaths("InsteadOfAny.CSharp9.cs")
             .WithTopLevelStatements()
             .AddReferences(MetadataReferenceFacade.SystemCollections)
             .Verify();
@@ -45,5 +45,5 @@ public class ExistsInsteadOfAnyTest
 
     [TestMethod]
     public void ExistsInsteadOfAny_VB() =>
-        new VerifierBuilder<VB.ExistsInsteadOfAny>().AddPaths("ExistsInsteadOfAny.vb").Verify();
+        new VerifierBuilder<VB.InsteadOfAny>().AddPaths("InsteadOfAny.vb").Verify();
 }
