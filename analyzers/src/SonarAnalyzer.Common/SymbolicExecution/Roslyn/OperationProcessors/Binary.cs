@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -36,12 +37,12 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         {
             state = LearnBranchingEqualityConstraint<ObjectConstraint>(state, operation, falseBranch) ?? state;
             state = LearnBranchingEqualityConstraint<BoolConstraint>(state, operation, falseBranch) ?? state;
-            state = LearnBranchingNumberConstraint(state, operation, falseBranch) ?? state;
+            state = LearnBranchingNumberConstraint(state, operation, falseBranch);
         }
         else if (operation.OperatorKind.IsAnyRelational())
         {
             state = LearnBranchingRelationalObjectConstraint(state, operation, falseBranch) ?? state;
-            state = LearnBranchingNumberConstraint(state, operation, falseBranch) ?? state;
+            state = LearnBranchingNumberConstraint(state, operation, falseBranch);
         }
         return state;
     }
@@ -92,16 +93,13 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         var rightNumber = state[binary.RightOperand]?.Constraint<NumberConstraint>();
         if (rightNumber is not null && binary.LeftOperand.TrackedSymbol() is { } leftSymbol)
         {
-            return LearnBranching(leftSymbol, leftNumber, kind, rightNumber);
+            state = LearnBranching(leftSymbol, leftNumber, kind, rightNumber) ?? state;
         }
-        else if (leftNumber is not null && binary.RightOperand.TrackedSymbol() is { } rightSymbol)
+        if (leftNumber is not null && binary.RightOperand.TrackedSymbol() is { } rightSymbol)
         {
-            return LearnBranching(rightSymbol, rightNumber, Flip(kind), leftNumber);
+            state = LearnBranching(rightSymbol, rightNumber, Flip(kind), leftNumber) ?? state;
         }
-        else
-        {
-            return null;
-        }
+        return state;
 
         ProgramState LearnBranching(ISymbol symbol, NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
             !(falseBranch && symbol.GetSymbolType().IsNullableValueType())  // Don't learn opposite for "nullable > 0", because it could also be <null>.
@@ -112,7 +110,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         static NumberConstraint RelationalNumberConstraint(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
             kind switch
             {
-                BinaryOperatorKind.Equals => comparedNumber,
+                BinaryOperatorKind.Equals => NumberConstraint.From(BiggestMinimum(comparedNumber, existingNumber), SmallestMaximum(comparedNumber, existingNumber)),
                 BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Min => NumberConstraint.From(existingNumber.Min + 1, existingNumber.Max),
                 BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Max => NumberConstraint.From(existingNumber.Min, existingNumber.Max - 1),
                 BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => NumberConstraint.From(comparedNumber.Min + 1, existingNumber?.Max),
@@ -241,4 +239,38 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
                 _ => null
             }
             : null;
+
+    // FIXME: REmove after rebase, make it null tolerant
+    private static BigInteger? SmallestMaximum(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.Max is null)
+        {
+            return right?.Max;
+        }
+        else if (right?.Max is null)
+        {
+            return left.Max;
+        }
+        else
+        {
+            return BigInteger.Min(left.Max.Value, right.Max.Value);
+        }
+    }
+
+    // FIXME: Move after rebase to arithmetics file
+    private static BigInteger? BiggestMinimum(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.Min is null)
+        {
+            return right?.Min;
+        }
+        else if (right?.Min is null)
+        {
+            return left.Min;
+        }
+        else
+        {
+            return BigInteger.Max(left.Min.Value, right.Min.Value);
+        }
+    }
 }

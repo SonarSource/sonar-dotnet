@@ -1237,6 +1237,32 @@ Tag(""End"", arg);";
     }
 
     [DataTestMethod]
+    [DataRow("left >=  0", 0, null)]
+    [DataRow("right >= 0", 0, null)]
+    [DataRow("left >=  0 && right <= 50", 0, 50)]
+    [DataRow("left <= 50 && right >=  0", 0, 50)]
+    [DataRow("left >=  0 && left <= 50 && right >= 10 && right <= 20", 10, 20)]
+    [DataRow("left >= 10 && left <= 20 && right >=  0 && right <= 50", 10, 20)]
+    [DataRow("left >=  0 && left <= 20 && right >= 10 && right <= 50", 10, 20)]
+    [DataRow("left >= 10 && left <= 50 && right >=  0 && right <= 20", 10, 20)]
+    public void Branching_LearnsNumberConstraint_FromRanges_Equals(string expression, int? expectedMin, int? expectedMax)
+    {
+        var code = $$"""
+            if ({{expression}})  // Prepare ranged value to compare with
+            {
+                if (left == right)
+                {
+                    Tag("Left", left);
+                    Tag("Right", right);
+                }
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int left, int right").Validator;
+        validator.ValidateTag("Left", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
+        validator.ValidateTag("Right", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
+    }
+
+    [DataTestMethod]
     [DataRow("arg == 42 && arg == 100")]
     [DataRow("arg == 42 && arg !=  42")]
     [DataRow("arg == 42 && arg >  100")]
