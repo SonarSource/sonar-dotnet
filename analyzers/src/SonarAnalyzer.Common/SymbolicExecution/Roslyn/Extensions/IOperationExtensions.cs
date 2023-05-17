@@ -79,6 +79,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         internal static IConversionOperationWrapper ToConversion(this IOperation operation) =>
             IConversionOperationWrapper.FromOperation(operation);
 
+        internal static IIncrementOrDecrementOperationWrapper ToIncrementOrDecrement(this IOperation operation) =>
+            IIncrementOrDecrementOperationWrapper.FromOperation(operation);
+
         internal static IInvocationOperationWrapper ToInvocation(this IOperation operation) =>
             IInvocationOperationWrapper.FromOperation(operation);
 

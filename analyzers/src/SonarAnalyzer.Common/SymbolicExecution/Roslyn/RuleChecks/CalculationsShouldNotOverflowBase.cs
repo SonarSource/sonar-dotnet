@@ -35,8 +35,7 @@ public abstract class CalculationsShouldNotOverflowBase : SymbolicRuleCheck
     protected override ProgramState PostProcessSimple(SymbolicContext context)
     {
         if (context.Operation.Instance is var operation
-            && CanOverflow(operation)
-            && context.State[context.Operation]?.Constraint<NumberConstraint>() is { } number
+            && CanOverflow(context.State, operation)?.Constraint<NumberConstraint>() is { } number
             && Min(operation.Type) is { } typeMin
             && Max(operation.Type) is { } typeMax)
         {
@@ -61,12 +60,12 @@ public abstract class CalculationsShouldNotOverflowBase : SymbolicRuleCheck
         return context.State;
     }
 
-    private static bool CanOverflow(IOperation operation) => operation.Kind switch
+    private static SymbolicValue CanOverflow(ProgramState state, IOperation operation) => operation.Kind switch
     {
-        OperationKindEx.Binary => CanOverflow(operation.ToBinary().OperatorKind),
-        OperationKindEx.CompoundAssignment => CanOverflow(operation.ToCompoundAssignment().OperatorKind),
-        OperationKindEx.Increment or OperationKindEx.Decrement => true,
-        _ => false
+        OperationKindEx.Binary when CanOverflow(operation.ToBinary().OperatorKind) => state[operation],
+        OperationKindEx.CompoundAssignment when CanOverflow(operation.ToCompoundAssignment().OperatorKind) => state[operation],
+        OperationKindEx.Increment or OperationKindEx.Decrement => state[operation.ToIncrementOrDecrement().Target.TrackedSymbol()],
+        _ => null
     };
 
     private static bool CanOverflow(BinaryOperatorKind kind) =>

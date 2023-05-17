@@ -97,25 +97,25 @@ public class Sample
         _ = i - 100;            // Noncompliant
 
         i = 2147483600;
-        _ = i * 100;            // FIXME Non-compliant
+        _ = i * 100;            // Noncompliant
 
         i = 2147483600 / 10;
-        _ = i * 100;            // FIXME Non-compliant
+        _ = i * 100;            // Noncompliant, TODO why? not implemented yet
 
         _ = 2147483600 << 16;   // Compliant
         _ = -2147483600 << 16;  // Compliant
 
         i = 2 & 10;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // Noncompliant, TODO why? not implemented yet
 
         i = 2 | 10;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // Noncompliant, TODO why? not implemented yet
 
         i = 2 ^ 10;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // Noncompliant, TODO why? not implemented yet
 
         i = 2 % 10;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // Noncompliant, TODO why? not implemented yet
     }
 
     public void AssignmentOperators()
@@ -131,7 +131,7 @@ public class Sample
 
         i = 2147483600;
         i /= 10;
-        _ = i * 100;            // FIXME Non-compliant 
+        _ = i * 100;            // Noncompliant, TODO why? and is not implemented yet
 
         i = 2147483600;
         i <<= 1;                // Compliant
@@ -141,19 +141,19 @@ public class Sample
 
         i = 2;
         i &= 10;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // Noncompliant, TODO why? and is not implemented yet
 
         i = 2;
         i |= 10;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // Noncompliant, TODO why? and is not implemented yet
 
         i = 2;
         i ^= 10;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // Noncompliant, TODO why? and is not implemented yet
 
         i = 2;
         i %= 10;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // Noncompliant, TODO why? and is not implemented yet
     }
 
     public void Branching(int i)
