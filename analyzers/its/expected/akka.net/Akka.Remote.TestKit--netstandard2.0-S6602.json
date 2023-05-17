@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  41,
+"endLine":  133,
+"endColumn":  55
+}
+}
+}
+]
+}

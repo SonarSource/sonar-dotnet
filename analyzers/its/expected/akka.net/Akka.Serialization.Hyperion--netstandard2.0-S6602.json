@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  30,
+"endLine":  149,
+"endColumn":  44
+}
+}
+}
+]
+}

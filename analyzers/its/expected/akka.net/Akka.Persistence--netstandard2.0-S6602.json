@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  38,
+"endLine":  34,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  46,
+"endLine":  61,
+"endColumn":  60
+}
+}
+}
+]
+}

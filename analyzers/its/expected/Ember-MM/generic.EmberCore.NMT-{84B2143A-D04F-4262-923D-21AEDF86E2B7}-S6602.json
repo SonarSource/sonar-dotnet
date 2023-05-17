@@ -1,0 +1,537 @@
+{
+"issues":  [
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  166,
+"startColumn":  106,
+"endLine":  166,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  298,
+"startColumn":  72,
+"endLine":  298,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  299,
+"startColumn":  79,
+"endLine":  299,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  339,
+"startColumn":  75,
+"endLine":  339,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  341,
+"startColumn":  96,
+"endLine":  341,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  380,
+"startColumn":  72,
+"endLine":  380,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  381,
+"startColumn":  83,
+"endLine":  381,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  382,
+"startColumn":  85,
+"endLine":  382,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  383,
+"startColumn":  81,
+"endLine":  383,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  413,
+"startColumn":  75,
+"endLine":  413,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  427,
+"startColumn":  90,
+"endLine":  427,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  443,
+"startColumn":  96,
+"endLine":  443,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  464,
+"startColumn":  97,
+"endLine":  464,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  531,
+"startColumn":  83,
+"endLine":  531,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  533,
+"startColumn":  84,
+"endLine":  533,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  549,
+"startColumn":  60,
+"endLine":  549,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  644,
+"startColumn":  57,
+"endLine":  644,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  697,
+"startColumn":  57,
+"endLine":  697,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  729,
+"startColumn":  57,
+"endLine":  729,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  960,
+"startColumn":  51,
+"endLine":  960,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  969,
+"startColumn":  64,
+"endLine":  969,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  976,
+"startColumn":  64,
+"endLine":  976,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  987,
+"startColumn":  68,
+"endLine":  987,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  997,
+"startColumn":  75,
+"endLine":  997,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  998,
+"startColumn":  32,
+"endLine":  998,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1220,
+"startColumn":  61,
+"endLine":  1220,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1224,
+"startColumn":  46,
+"endLine":  1224,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1231,
+"startColumn":  64,
+"endLine":  1231,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1235,
+"startColumn":  49,
+"endLine":  1235,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1241,
+"startColumn":  63,
+"endLine":  1241,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1245,
+"startColumn":  48,
+"endLine":  1245,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1251,
+"startColumn":  63,
+"endLine":  1251,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1255,
+"startColumn":  48,
+"endLine":  1255,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1261,
+"startColumn":  62,
+"endLine":  1261,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1265,
+"startColumn":  47,
+"endLine":  1265,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1498,
+"startColumn":  82,
+"endLine":  1498,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1498,
+"startColumn":  179,
+"endLine":  1498,
+"endColumn":  193
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1561,
+"startColumn":  82,
+"endLine":  1561,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1561,
+"startColumn":  176,
+"endLine":  1561,
+"endColumn":  190
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1695,
+"startColumn":  41,
+"endLine":  1695,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1706,
+"startColumn":  45,
+"endLine":  1706,
+"endColumn":  59
+}
+}
+}
+]
+}

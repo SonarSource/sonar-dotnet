@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"region":  {
+"startLine":  385,
+"startColumn":  28,
+"endLine":  385,
+"endColumn":  42
+}
+}
+}
+]
+}

@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  71,
+"endLine":  108,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  643,
+"startColumn":  68,
+"endLine":  643,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  670,
+"startColumn":  68,
+"endLine":  670,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  836,
+"startColumn":  49,
+"endLine":  836,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2499,
+"startColumn":  53,
+"endLine":  2499,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2617,
+"startColumn":  34,
+"endLine":  2617,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2630,
+"startColumn":  54,
+"endLine":  2630,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2634,
+"startColumn":  54,
+"endLine":  2634,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3596,
+"startColumn":  49,
+"endLine":  3596,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4315,
+"startColumn":  42,
+"endLine":  4315,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"region":  {
+"startLine":  13,
+"startColumn":  67,
+"endLine":  13,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  175,
+"startColumn":  40,
+"endLine":  175,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  371,
+"startColumn":  36,
+"endLine":  371,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  444,
+"startColumn":  40,
+"endLine":  444,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5521,
+"startColumn":  134,
+"endLine":  5521,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6608,
+"startColumn":  59,
+"endLine":  6608,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6610,
+"startColumn":  47,
+"endLine":  6610,
+"endColumn":  61
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  36,
+"endLine":  274,
+"endColumn":  50
+}
+}
+}
+]
+}
