@@ -288,6 +288,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Exception = new("System.Exception");
         public static readonly KnownType System_ExecutionEngineException = new("System.ExecutionEngineException");
         public static readonly KnownType System_FlagsAttribute = new("System.FlagsAttribute");
+        public static readonly KnownType System_FormattableString = new("System.FormattableString");
         public static readonly KnownType System_Func_TResult = new("System.Func", "TResult");
         public static readonly KnownType System_Func_T_TResult = new("System.Func", "T", "TResult");
         public static readonly KnownType System_Func_T1_T2_TResult = new("System.Func", "T1", "T2", "TResult");
