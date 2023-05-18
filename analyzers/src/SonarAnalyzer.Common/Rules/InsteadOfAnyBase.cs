@@ -95,22 +95,27 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
 
     protected bool HasValidInvocationOperands(TInvocationExpression invocation, string lambdaVariableName, SemanticModel model)
     {
-        if (IsNameEqualTo(invocation, nameof(Equals)) && model.GetSymbolInfo(invocation).Symbol.ContainingAssembly.Name == "System.Private.CoreLib")
+        if (IsNameEqualTo(invocation, nameof(Equals)))
         {
             if (Language.Syntax.HasExactlyNArguments(invocation, 1)) // x.Equals(y)
             {
                 return Language.Syntax.TryGetOperands(invocation, out var left, out _)
-                    && HasInvocationValidOperands(left, GetArgumentExpression(invocation, 0));
+                    && HasInvocationValidOperands(left, GetArgumentExpression(invocation, 0))
+                    && IsSystemEquals();
             }
             if (Language.Syntax.HasExactlyNArguments(invocation, 2)) // Equals(x,y)
             {
-                return HasInvocationValidOperands(GetArgumentExpression(invocation, 0), GetArgumentExpression(invocation, 1));
+                return HasInvocationValidOperands(GetArgumentExpression(invocation, 0), GetArgumentExpression(invocation, 1))
+                    && IsSystemEquals();
             }
         }
         return false;
 
         bool HasInvocationValidOperands(SyntaxNode first, SyntaxNode second) =>
             AreValidOperands(lambdaVariableName, first, second) || AreValidOperands(lambdaVariableName, second, first);
+
+        bool IsSystemEquals() =>
+            model.GetSymbolInfo(invocation).Symbol.ContainingNamespace.Name == nameof(System);
     }
 
     private static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>

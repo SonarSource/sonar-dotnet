@@ -198,6 +198,13 @@ public class TestClass
 
     void EqualsCheck(List<int> intList, int someInt)
     {
+        intList.Any(x => Equals(x, someInt)); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
+
+        bool Equals(int a, int b) => false;
+    }
+
+    void EqualsCheckMoreParam(List<int> intList, int someInt)
+    {
         intList.Any(x => Equals(x, someInt, someInt)); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
 
         bool Equals(int a, int b, int c) => false;
