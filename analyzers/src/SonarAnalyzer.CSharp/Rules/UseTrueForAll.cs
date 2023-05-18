@@ -21,13 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class UseTrueForAll : UseTrueForAllBase<SyntaxKind, InvocationExpressionSyntax>
+public class UseTrueForAll : UseTrueForAllBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-    protected override SyntaxToken? GetIdentifier(InvocationExpressionSyntax invocation) =>
-        invocation.GetIdentifier();
-
-    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right) =>
-        invocation.TryGetOperands(out left, out right);
 }
