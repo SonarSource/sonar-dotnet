@@ -38,6 +38,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static MetadataReference System { get; } = CreateReference("System.dll");
         internal static MetadataReference SystemCollections { get; } = CreateReference("System.Collections.dll");
         internal static MetadataReference SystemCore { get; } = CreateReference("System.Core.dll");
+        internal static MetadataReference SystemCollectionsConcurrent { get; } = CreateReference("System.Collections.Concurrent.dll");
         internal static MetadataReference SystemCollectionsImmutable { get; } = CreateReference("System.Collections.Immutable.dll");
         internal static MetadataReference SystemCollectionsSpecialized { get; } = CreateReference("System.Collections.Specialized.dll");
         internal static MetadataReference SystemCollectionsNonGeneric { get; } = CreateReference("System.Collections.NonGeneric.dll");

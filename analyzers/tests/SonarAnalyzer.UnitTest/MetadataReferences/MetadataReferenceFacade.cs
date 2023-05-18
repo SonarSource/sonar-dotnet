@@ -85,7 +85,8 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             {
                 CoreMetadataReference.SystemCollections,
                 CoreMetadataReference.SystemCollectionsImmutable,
-                CoreMetadataReference.SystemCollectionsNonGeneric
+                CoreMetadataReference.SystemCollectionsNonGeneric,
+                CoreMetadataReference.SystemCollectionsConcurrent
             };
 #endif
 
