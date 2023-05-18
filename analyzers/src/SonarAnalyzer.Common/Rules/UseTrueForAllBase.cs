@@ -33,9 +33,6 @@ public abstract class UseTrueForAllBase<TSyntaxKind, TInvocation> : SonarDiagnos
         KnownType.System_Collections_Generic_List_T,
         KnownType.System_Collections_Immutable_ImmutableList_T);
 
-    protected abstract bool TryGetOperands(TInvocation invocation, out SyntaxNode left, out SyntaxNode right);
-    protected abstract SyntaxToken? GetIdentifier(TInvocation invocation);
-
     protected UseTrueForAllBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -44,17 +41,17 @@ public abstract class UseTrueForAllBase<TSyntaxKind, TInvocation> : SonarDiagnos
             var invocation = c.Node as TInvocation;
 
             if (Language.GetName(invocation).Equals(nameof(Enumerable.All), Language.NameComparison)
-                && TryGetOperands(invocation, out var left, out var right)
+                && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectType(left, c.SemanticModel)
                 && IsCorrectCall(right, c.SemanticModel))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, GetIdentifier(invocation)?.GetLocation()));
+                c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
             }
         },
         Language.SyntaxKind.InvocationExpression);
 
     protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
-        model.GetTypeInfo(left).Type is { } type && type.DerivesFromAny(TargetTypes);
+        model.GetTypeInfo(left).Type.DerivesFromAny(TargetTypes);
 
     protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
