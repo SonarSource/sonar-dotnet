@@ -62,5 +62,5 @@ public abstract class UseLambdaParameterInConcurrentDictionaryBase<TSyntaxKind, 
         || methodName.Equals("AddOrUpdate", Language.NameComparison);
 
     protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
-        model.GetTypeInfo(left).Type.Is(KnownType.System_Collections_Concurrent_ConcurrentDictionary_TKey_TValue);
+        model.GetTypeInfo(left).Type.DerivesFrom(KnownType.System_Collections_Concurrent_ConcurrentDictionary_TKey_TValue);
 }

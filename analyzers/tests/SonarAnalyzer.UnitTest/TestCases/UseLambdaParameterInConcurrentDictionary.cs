@@ -69,4 +69,11 @@ public class Programs
         dictionary.TryAdd(key, 42);
         list.Any(x => key > 0);
     }
+
+    void MyDictionary(MyConcurrentDictionary dictionary, int key)
+    {
+        dictionary.GetOrAdd(key, _ => key + 42); // Noncompliant
+    }
+
+    class MyConcurrentDictionary : ConcurrentDictionary<int, int> { }
 }
