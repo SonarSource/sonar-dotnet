@@ -31,11 +31,11 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
     private readonly DiagnosticDescriptor existsRule;
     private readonly DiagnosticDescriptor containsRule;
 
-    private static ImmutableArray<KnownType> existsTypes = ImmutableArray.Create(
+    private static readonly ImmutableArray<KnownType> ExistsTypes = ImmutableArray.Create(
         KnownType.System_Array,
         KnownType.System_Collections_Immutable_ImmutableList_T);
 
-    private static ImmutableArray<KnownType> containsTypes = ImmutableArray.Create(
+    private static readonly ImmutableArray<KnownType> ContainsTypes = ImmutableArray.Create(
         KnownType.System_Collections_Generic_HashSet_T,
         KnownType.System_Collections_Generic_SortedSet_T);
 
@@ -64,11 +64,11 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
                 && IsCorrectCall(right, c.SemanticModel)
                 && c.SemanticModel.GetTypeInfo(left).Type is { } type)
             {
-                if (existsTypes.Any(x => type.DerivesFrom(x)))
+                if (ExistsTypes.Any(x => type.DerivesFrom(x)))
                 {
                     RaiseIssue(c, invocation, existsRule, "Exists");
                 }
-                else if (containsTypes.Any(x => type.DerivesFrom(x) && IsSimpleEqualityCheck(invocation, c.SemanticModel)))
+                else if (ContainsTypes.Any(x => type.DerivesFrom(x) && IsSimpleEqualityCheck(invocation, c.SemanticModel)))
                 {
                     RaiseIssue(c, invocation, containsRule, "Contains");
                 }
