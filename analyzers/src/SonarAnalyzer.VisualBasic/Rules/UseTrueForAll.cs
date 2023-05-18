@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class UseTrueForAll : UseTrueForAllBase<SyntaxKind, InvocationExpressionSyntax>
+public sealed class UseTrueForAll : UseTrueForAllBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 }

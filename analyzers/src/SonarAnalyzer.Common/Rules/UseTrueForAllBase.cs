@@ -20,9 +20,7 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UseTrueForAllBase<TSyntaxKind, TInvocation> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TSyntaxKind : struct
-    where TInvocation : SyntaxNode
+public abstract class UseTrueForAllBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind> where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6603";
 
@@ -38,14 +36,12 @@ public abstract class UseTrueForAllBase<TSyntaxKind, TInvocation> : SonarDiagnos
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            var invocation = c.Node as TInvocation;
-
-            if (Language.GetName(invocation).Equals(nameof(Enumerable.All), Language.NameComparison)
-                && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
+            if (Language.GetName(c.Node).Equals(nameof(Enumerable.All), Language.NameComparison)
+                && Language.Syntax.TryGetOperands(c.Node, out var left, out var right)
                 && IsCorrectType(left, c.SemanticModel)
                 && IsCorrectCall(right, c.SemanticModel))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
+                c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(c.Node)?.GetLocation()));
             }
         },
         Language.SyntaxKind.InvocationExpression);
