@@ -99,23 +99,24 @@ public class Sample
         i = 2147483600;
         _ = i * 100;            // Noncompliant
 
-        i = 2147483600 / 10;
-        _ = i * 100;            // Noncompliant, TODO why? not implemented yet
+        var j = 10;
+        i = 2147483600 / j;
+        _ = i * 100;            // FIXME Non-compliant
 
         _ = 2147483600 << 16;   // Compliant
         _ = -2147483600 << 16;  // Compliant
 
-        i = 2 & 10;
-        _ = i * 2147483600;     // Noncompliant, TODO why? not implemented yet
+        i = 2 & j;
+        _ = i * 2147483600;     // FIXME Non-compliant
 
-        i = 2 | 10;
-        _ = i * 2147483600;     // Noncompliant, TODO why? not implemented yet
+        i = 2 | j;
+        _ = i * 2147483600;     // FIXME Non-compliant
 
-        i = 2 ^ 10;
-        _ = i * 2147483600;     // Noncompliant, TODO why? not implemented yet
+        i = 2 ^ j;
+        _ = i * 2147483600;     // FIXME Non-compliant
 
-        i = 2 % 10;
-        _ = i * 2147483600;     // Noncompliant, TODO why? not implemented yet
+        i = 2 % j;
+        _ = i * 2147483600;     // FIXME Non-compliant
     }
 
     public void AssignmentOperators()
@@ -129,9 +130,10 @@ public class Sample
         i = 2147483600;
         i *= 100;               // FIXME Non-compliant
 
+        var j = 10;
         i = 2147483600;
-        i /= 10;
-        _ = i * 100;            // Noncompliant, TODO why? and is not implemented yet
+        i /= j;
+        _ = i * 100;            // Noncompliant FIXME wrong reason, i doesn't change because compoundassignment is ignored
 
         i = 2147483600;
         i <<= 1;                // Compliant
@@ -140,20 +142,20 @@ public class Sample
         i <<= 1;                // Compliant
 
         i = 2;
-        i &= 10;
-        _ = i * 2147483600;     // Noncompliant, TODO why? and is not implemented yet
+        i &= j;
+        _ = i * 2147483600;     // Noncompliant FIXME wrong reason, i doesn't change because compoundassignment is ignored
 
         i = 2;
-        i |= 10;
-        _ = i * 2147483600;     // Noncompliant, TODO why? and is not implemented yet
+        i |= j;
+        _ = i * 2147483600;     // Noncompliant FIXME wrong reason, i doesn't change because compoundassignment is ignored
 
         i = 2;
-        i ^= 10;
-        _ = i * 2147483600;     // Noncompliant, TODO why? and is not implemented yet
+        i ^= j;
+        _ = i * 2147483600;     // Noncompliant FIXME wrong reason, i doesn't change because compoundassignment is ignored
 
         i = 2;
-        i %= 10;
-        _ = i * 2147483600;     // Noncompliant, TODO why? and is not implemented yet
+        i %= j;
+        _ = i * 2147483600;     // Noncompliant FIXME wrong reason, i doesn't change because compoundassignment is ignored
     }
 
     public void Branching(int i)
@@ -180,7 +182,7 @@ public class Sample
             case 2147483547:
                 _ = i + 100;    // Compliant
                 break;
-            case 2147483599:
+            case 2147483600:
                 _ = i + 100;    // FIXME Non-compliant
                 break;
             default:
