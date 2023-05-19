@@ -35,6 +35,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
+        public void SymbolicValue_HaveOnlyConstraints_Pass_ExpectedAlsoNull()
+        {
+            var sv = SymbolicValue.Empty.WithConstraint(BoolConstraint.True);
+            sv.Invoking(x => x.Should().HaveOnlyConstraints(null, BoolConstraint.True, null)).Should().NotThrow();
+        }
+
+        [TestMethod]
         public void SymbolicValue_HaveOnlyConstraint_WrongConstraint()
         {
             var sv = SymbolicValue.Empty.WithConstraint(BoolConstraint.True);
@@ -115,6 +122,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void SymbolicValue_HaveOnlyConstraints_Empty()
         {
             var assertion = () => ((SymbolicValue)null).Should().HaveOnlyConstraints();
+            assertion.Should().Throw<AssertFailedException>()
+                .WithMessage(@"Expected constraints are empty. Use HaveNoConstraints() instead.");
+        }
+
+        [TestMethod]
+        public void SymbolicValue_HaveOnlyConstraints_ExpectedNull()
+        {
+            var assertion = () => ((SymbolicValue)null).Should().HaveOnlyConstraints(null, null, null, null);
             assertion.Should().Throw<AssertFailedException>()
                 .WithMessage(@"Expected constraints are empty. Use HaveNoConstraints() instead.");
         }
