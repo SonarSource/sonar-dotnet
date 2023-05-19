@@ -25,6 +25,17 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
 
 public partial class RoslynSymbolicExecutionTest
 {
+    [TestMethod]
+    public void CompoundAssignment_UntrackedSymbol()
+    {
+        const string code = """
+            var result = arg.Property += 1;
+            Tag("Result", result);
+            """;
+        var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
+        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+    }
+
     [DataTestMethod]
     [DataRow("+=")]
     [DataRow("-=")]
@@ -66,5 +77,4 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
         validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
     }
-
 }
