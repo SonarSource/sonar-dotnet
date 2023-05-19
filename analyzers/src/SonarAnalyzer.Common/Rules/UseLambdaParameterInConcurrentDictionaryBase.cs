@@ -31,7 +31,7 @@ public abstract class UseLambdaParameterInConcurrentDictionaryBase<TSyntaxKind, 
 
     protected abstract SeparatedSyntaxList<TArgumentSyntax> GetArguments(TInvocationExpression invocation);
     protected abstract bool TryGetKeyName(TArgumentSyntax argument, out string keyName);
-    protected abstract bool IsLambdaAndContainsIdentifier(string keyName, TArgumentSyntax argument);
+    protected abstract bool IsLambdaAndContainsIdentifier(TArgumentSyntax argument, string keyName);
 
     protected UseLambdaParameterInConcurrentDictionaryBase() : base(DiagnosticId) { }
 
@@ -43,13 +43,13 @@ public abstract class UseLambdaParameterInConcurrentDictionaryBase<TSyntaxKind, 
             if (HasCorrectName(Language.GetName(invocation))
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectType(left, c.SemanticModel)
-                && c.SemanticModel.GetSymbolInfo(right).Symbol.ContainingNamespace.Name == "Concurrent"
+                && IsCorrectCall(right, c.SemanticModel)
                 && GetArguments(invocation) is { Count: > 1 } arguments
                 && TryGetKeyName(arguments[0], out var keyName))
             {
                 for (var i = 1; i < arguments.Count; i++)
                 {
-                    if (IsLambdaAndContainsIdentifier(keyName, arguments[i]))
+                    if (IsLambdaAndContainsIdentifier(arguments[i], keyName))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, arguments[i].GetLocation()));
                     }
@@ -61,6 +61,10 @@ public abstract class UseLambdaParameterInConcurrentDictionaryBase<TSyntaxKind, 
         methodName.Equals("GetOrAdd", Language.NameComparison)
         || methodName.Equals("AddOrUpdate", Language.NameComparison);
 
-    protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
+    private static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
         model.GetTypeInfo(left).Type.DerivesFrom(KnownType.System_Collections_Concurrent_ConcurrentDictionary_TKey_TValue);
+
+    private static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
+        && method.ContainingType.Is(KnownType.System_Collections_Concurrent_ConcurrentDictionary_TKey_TValue);
 }

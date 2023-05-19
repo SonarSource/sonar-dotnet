@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -64,10 +65,11 @@ public class Programs
         dictionary.AddOrUpdate(42, (_, arg) => key, (_, key, arg) => key + arg, key); // Error [CS0136]
     }
 
-    void CompliantInvocations(ConcurrentDictionary<int, int> dictionary, List<int> list, int key)
+    void CompliantInvocations(ConcurrentDictionary<int, int> dictionary, HidesMethod<int, int> hidesMethod, List<int> list, int key)
     {
         dictionary.TryAdd(key, 42);
         list.Any(x => key > 0);
+        hidesMethod.GetOrAdd(key, _ => key);
     }
 
     void MyDictionary(MyConcurrentDictionary dictionary, int key)
@@ -76,4 +78,9 @@ public class Programs
     }
 
     class MyConcurrentDictionary : ConcurrentDictionary<int, int> { }
+
+    class HidesMethod<TKey, TValue> : ConcurrentDictionary<TKey, TValue>
+    {
+        public TValue GetOrAdd(TKey key, Func<TKey, TValue> valueFactory) => default(TValue);
+    }
 }

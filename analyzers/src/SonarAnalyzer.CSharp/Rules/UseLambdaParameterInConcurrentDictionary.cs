@@ -28,7 +28,7 @@ public sealed class UseLambdaParameterInConcurrentDictionary : UseLambdaParamete
     protected override SeparatedSyntaxList<ArgumentSyntax> GetArguments(InvocationExpressionSyntax invocation) =>
          invocation.ArgumentList.Arguments;
 
-    protected override bool IsLambdaAndContainsIdentifier(string keyName, ArgumentSyntax argument) =>
+    protected override bool IsLambdaAndContainsIdentifier(ArgumentSyntax argument, string keyName) =>
         argument.Expression switch
         {
             SimpleLambdaExpressionSyntax simpleLambda =>
