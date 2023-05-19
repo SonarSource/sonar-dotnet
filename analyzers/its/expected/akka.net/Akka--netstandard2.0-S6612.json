@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6612",
+"message":  "Use the lambda parameter instead of capturing the argument 'name'",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  807,
+"startColumn":  48,
+"endLine":  811,
+"endColumn":  14
+}
+}
+}
+]
+}

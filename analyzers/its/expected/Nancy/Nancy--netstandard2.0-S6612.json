@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6612",
+"message":  "Use the lambda parameter instead of capturing the argument 'type'",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultTypeCatalog.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  46,
+"endLine":  36,
+"endColumn":  82
+}
+}
+}
+]
+}
