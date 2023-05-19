@@ -133,10 +133,10 @@ Tag(""Success"", success);
 Tag(""Result"", result);
 Tag(""ObjectField"", ObjectField);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("ByteString", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
-        validator.ValidateTag("Success", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("ObjectField", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+        validator.TagValue("ByteString").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("Success").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("ObjectField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
     }
 
     [TestMethod]
@@ -151,10 +151,10 @@ Tag(""Success"", success);
 Tag(""Result"", result);
 Tag(""ObjectField"", ObjectField);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("ByteString", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("Success", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("ObjectField", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+        validator.TagValue("ByteString").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Success").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("ObjectField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
     }
 
     [TestMethod]
@@ -277,7 +277,7 @@ if(CustomValidator(first, untracked.field))
 public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
         var validator = SETestContext.CreateCSMethod(code).Validator;
         validator.ValidateTag("First", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("Second", x => x.Should().BeNull());  // We didn't learn anything. And we continued
+        validator.TagValue("Second").Should().BeNull();  // We didn't learn anything. And we continued
     }
 
     [DataTestMethod]

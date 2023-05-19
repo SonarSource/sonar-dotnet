@@ -61,7 +61,7 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
         validator.ValidateExitReachCount(1);
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));   // Loop was entered, arg has only it's final constraints after looping once
+        validator.TagValue("End").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);   // Loop was entered, arg has only it's final constraints after looping once
     }
 
     [TestMethod]
@@ -189,8 +189,8 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValues("Inside").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)),
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2, 10)));
-        validator.ValidateTag("After", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null)));
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));   // arg has only it's final constraints after looping once
+        validator.TagValue("After").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null));
+        validator.TagValue("End").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);   // arg has only it's final constraints after looping once
     }
 
     [TestMethod]
