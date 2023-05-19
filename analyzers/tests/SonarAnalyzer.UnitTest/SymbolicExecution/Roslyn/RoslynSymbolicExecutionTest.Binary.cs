@@ -783,8 +783,20 @@ Tag(""End"")";
 
     [DataTestMethod]
     [DataRow("i >=  3 && j >=  5", 15, null)]
+    [DataRow("i >=  3 && j >= -5", null, null)]
+    [DataRow("i >=  3 && j <=  5", null, null)]
     [DataRow("i >=  3 && j <= -5", null, -15)]
+    [DataRow("i >= -3 && j >=  5", null, null)]
+    [DataRow("i >= -3 && j >= -5", null, null)]
+    [DataRow("i >= -3 && j <=  5", null, null)]
+    [DataRow("i >= -3 && j <= -5", null, null)]
+    [DataRow("i <=  3 && j >=  5", null, null)]
+    [DataRow("i <=  3 && j >= -5", null, null)]
+    [DataRow("i <=  3 && j <=  5", null, null)]
+    [DataRow("i <=  3 && j <= -5", null, null)]
     [DataRow("i <= -3 && j >=  5", null, -15)]
+    [DataRow("i <= -3 && j >= -5", null, null)]
+    [DataRow("i <= -3 && j <=  5", null, null)]
     [DataRow("i <= -3 && j <= -5", 15, null)]
     [DataRow("i ==  3 && j >=  5", 15, null)]
     [DataRow("i ==  3 && j >= -5", -15, null)]
@@ -803,32 +815,15 @@ Tag(""End"")";
                 Tag("Value", value);
             }
             """;
-        SETestContext.CreateCS(code, "int i, int j").Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
-    }
-
-    [DataTestMethod]
-    [DataRow("i >=  3 && j >= -5")]
-    [DataRow("i >=  3 && j <=  5")]
-    [DataRow("i >= -3 && j >=  5")]
-    [DataRow("i >= -3 && j >= -5")]
-    [DataRow("i >= -3 && j <=  5")]
-    [DataRow("i >= -3 && j <= -5")]
-    [DataRow("i <=  3 && j >=  5")]
-    [DataRow("i <=  3 && j >= -5")]
-    [DataRow("i <=  3 && j <=  5")]
-    [DataRow("i <=  3 && j <= -5")]
-    [DataRow("i <= -3 && j >= -5")]
-    [DataRow("i <= -3 && j <=  5")]
-    public void Binary_Multiplication_Range_NoNumberConstraint(string expression)
-    {
-        var code = $$"""
-            if ({{expression}})
-            {
-                var value = i * j;
-                Tag("Value", value);
-            }
-            """;
-        SETestContext.CreateCS(code, "int i, int j").Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
+        if (expectedMin is null && expectedMax is null)
+        {
+            validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        }
+        else
+        {
+            validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
+        }
     }
 
     [DataTestMethod]
@@ -860,10 +855,14 @@ Tag(""End"")";
     [DataRow("i >=  3 && j <= -5", 0, null)]
     [DataRow("i >= -3 && j >=  5", 0, null)]
     [DataRow("i >= -3 && j >= -5", -8, null)]
+    [DataRow("i >= -3 && j <=  5", null, null)]
+    [DataRow("i >= -3 && j <= -5", null, null)]
     [DataRow("i <=  3 && j >=  5", 0, null)]
+    [DataRow("i <=  3 && j >= -5", null, null)]
     [DataRow("i <=  3 && j <=  5", null, 5)]
     [DataRow("i <=  3 && j <= -5", null, 3)]
     [DataRow("i <= -3 && j >=  5", 0, null)]
+    [DataRow("i <= -3 && j >= -5", null, null)]
     [DataRow("i <= -3 && j <=  5", null, 5)]
     [DataRow("i <= -3 && j <= -5", null, -5)]
     [DataRow("i ==  3 && j >=  5", 0, 3)]
@@ -883,23 +882,14 @@ Tag(""End"")";
                 Tag("Value", value);
             }
             """;
-        SETestContext.CreateCS(code, "int i, int j").Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
-    }
-
-    [DataTestMethod]
-    [DataRow("i >= -3 && j <=  5")]
-    [DataRow("i >= -3 && j <= -5")]
-    [DataRow("i <=  3 && j >= -5")]
-    [DataRow("i <= -3 && j >= -5")]
-    public void Binary_BitAnd_Range_NoNumberConstraint(string expression)
-    {
-        var code = $$"""
-            if ({{expression}})
-            {
-                var value = i & j;
-                Tag("Value", value);
-            }
-            """;
-        SETestContext.CreateCS(code, "int i, int j").Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
+        if (expectedMin is null && expectedMax is null)
+        {
+            validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        }
+        else
+        {
+            validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
+        }
     }
 }
