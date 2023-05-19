@@ -16,6 +16,7 @@ public class Programs
         dictionary.GetOrAdd(key, key => key + 42); // Error [CS0136]
                                                    // Noncompliant@-1
         dictionary.GetOrAdd(42, key => key + 42);  // Error [CS0136]
+        dictionary.GetOrAdd(key, delegate (int k) { return key + 42; }); // Noncompliant
 
         // GetOrAdd(TKey, TValue)
         dictionary.GetOrAdd(42, 42);
@@ -25,6 +26,7 @@ public class Programs
         // GetOrAdd<TArg>(TKey, Func<TKey,TArg,TValue>, TArg)
         dictionary.GetOrAdd(key, (_, arg) => key + 42, 42);   // Noncompliant
         //                       ^^^^^^^^^^^^^^^^^^^^
+        dictionary.GetOrAdd(key, delegate (int _, int arg) { return key + 42; }, 42);   // Noncompliant
         dictionary.GetOrAdd(key, (_, arg) => arg + 42, 42);
         dictionary.GetOrAdd(42, (key, arg) => arg + 42, 42);  // Error [CS0136]
         dictionary.GetOrAdd(key, (key, arg) => arg + 42, 42); // Error [CS0136]

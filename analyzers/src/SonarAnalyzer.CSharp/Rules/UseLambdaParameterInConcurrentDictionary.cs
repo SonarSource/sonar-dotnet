@@ -35,6 +35,8 @@ public sealed class UseLambdaParameterInConcurrentDictionary : UseLambdaParamete
                 simpleLambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName)),
             ParenthesizedLambdaExpressionSyntax parentesizedLambda =>
                 parentesizedLambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName)),
+            AnonymousMethodExpressionSyntax anonymousMethod =>
+                anonymousMethod.Block.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName)),
             _ => false
         };
 
