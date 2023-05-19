@@ -3,7 +3,6 @@ using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.Protobuf;
-using SonarAnalyzer.Rules.CSharp;
 using Match = System.Text.RegularExpressions.Match;
 
 namespace SonarAnalyzer.UnitTest.Rules;
