@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S6612",
-"message":  "Use the lambda parameter instead of capturing the argument",
+"message":  "Use the lambda parameter instead of capturing the argument 'connectionString'",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\ConnectionContext.cs",
 "region":  {

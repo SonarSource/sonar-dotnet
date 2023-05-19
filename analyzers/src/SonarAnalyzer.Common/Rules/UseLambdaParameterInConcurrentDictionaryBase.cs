@@ -27,7 +27,7 @@ public abstract class UseLambdaParameterInConcurrentDictionaryBase<TSyntaxKind, 
 {
     private const string DiagnosticId = "S6612";
 
-    protected override string MessageFormat => "Use the lambda parameter instead of capturing the argument";
+    protected override string MessageFormat => "Use the lambda parameter instead of capturing the argument '{0}'";
 
     protected abstract SeparatedSyntaxList<TArgumentSyntax> GetArguments(TInvocationExpression invocation);
     protected abstract bool TryGetKeyName(TArgumentSyntax argument, out string keyName);
@@ -51,7 +51,7 @@ public abstract class UseLambdaParameterInConcurrentDictionaryBase<TSyntaxKind, 
                 {
                     if (IsLambdaAndContainsIdentifier(arguments[i], keyName))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, arguments[i].GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, arguments[i].GetLocation(), keyName));
                     }
                 }
             }

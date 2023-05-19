@@ -5,7 +5,7 @@ Imports System.Linq
 Public Class Programs
     Private Sub GetOrAdd(ByVal dictionary As ConcurrentDictionary(Of Integer, Integer), ByVal key As Integer)
         ' GetOrAdd(TKey, Func<TKey,TValue>)
-        dictionary.GetOrAdd(key, Function(__) key + 42) ' Noncompliant {{Use the lambda parameter instead of capturing the argument}}
+        dictionary.GetOrAdd(key, Function(__) key + 42) ' Noncompliant {{Use the lambda parameter instead of capturing the argument 'key'}}
         '                        ^^^^^^^^^^^^^^^^^^^^^
         dictionary.GetOrAdd(key, Function(__) key) ' Noncompliant
 
@@ -32,8 +32,8 @@ Public Class Programs
         dictionary.AddOrUpdate(key, Function(__) key, Function(__, oldValue) oldValue + 42) ' Noncompliant
         '                           ^^^^^^^^^^^^^^^^
         dictionary.AddOrUpdate(key, Function(__) key, Function(__, oldValue) key + 42)
-        '                           ^^^^^^^^^^^^^^^^ {{Use the lambda parameter instead of capturing the argument}}
-        '                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ @-1 {{Use the lambda parameter instead of capturing the argument}}
+        '                           ^^^^^^^^^^^^^^^^ {{Use the lambda parameter instead of capturing the argument 'key'}}
+        '                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ @-1 {{Use the lambda parameter instead of capturing the argument 'key'}}
         dictionary.AddOrUpdate(key, Function(__) 42, Function(__, oldValue) oldValue + 42)
         dictionary.AddOrUpdate(42, Function(__) 42, Function(__, oldValue) oldValue + 42)
         dictionary.AddOrUpdate(42, Function(__) 42, Function(key, oldValue) key + 42) ' Error [BC36641]

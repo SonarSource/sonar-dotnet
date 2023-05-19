@@ -8,7 +8,7 @@ public class Programs
     void GetOrAdd(ConcurrentDictionary<int, int> dictionary, int key)
     {
         // GetOrAdd(TKey, Func<TKey,TValue>)
-        dictionary.GetOrAdd(key, _ => key + 42); // Noncompliant {{Use the lambda parameter instead of capturing the argument}}
+        dictionary.GetOrAdd(key, _ => key + 42); // Noncompliant {{Use the lambda parameter instead of capturing the argument 'key'}}
         //                       ^^^^^^^^^^^^^
         dictionary.GetOrAdd(key, _ => key); // Noncompliant
 
@@ -38,8 +38,8 @@ public class Programs
         dictionary.AddOrUpdate(key, _ => key, (_, oldValue) => oldValue + 42); // Noncompliant
         //                          ^^^^^^^^
         dictionary.AddOrUpdate(key, _ => key, (_, oldValue) => key + 42);
-        //                          ^^^^^^^^ {{Use the lambda parameter instead of capturing the argument}}
-        //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^ @-1 {{Use the lambda parameter instead of capturing the argument}}
+        //                          ^^^^^^^^ {{Use the lambda parameter instead of capturing the argument 'key'}}
+        //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^ @-1 {{Use the lambda parameter instead of capturing the argument 'key'}}
         dictionary.AddOrUpdate(key, _ => 42, (_, oldValue) => oldValue + 42);
         dictionary.AddOrUpdate(42, _ => 42, (_, oldValue) => oldValue + 42);
         dictionary.AddOrUpdate(42, _ => 42, (key, oldValue) => key + 42); // Error [CS0136]
