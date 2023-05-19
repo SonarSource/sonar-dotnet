@@ -67,6 +67,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         public void Validate(string operation, Action<SymbolicContext> action) =>
             action(postProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation));
 
+        [Obsolete(@"Use TagValue(""Name"").Should()... instead")]
         public void ValidateTag(string tag, Action<SymbolicValue> action)
         {
             var values = TagValues(tag);
@@ -76,6 +77,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
 
         public ProgramState[] TagStates(string tag) =>
             tags.Where(x => x.Name == tag).Select(x => x.Context.State).ToArray();
+
+        public SymbolicValue TagValue(string tag) =>
+            TagValues(tag).Should().ContainSingle().Subject;
 
         public SymbolicValue[] TagValues(string tag) =>
             tags.Where(x => x.Name == tag).Select(x => TagValue(x.Context)).ToArray();
