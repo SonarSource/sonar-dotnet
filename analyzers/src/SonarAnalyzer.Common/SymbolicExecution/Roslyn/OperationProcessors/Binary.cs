@@ -93,11 +93,11 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         var rightNumber = state[binary.RightOperand]?.Constraint<NumberConstraint>();
         if (rightNumber is not null && binary.LeftOperand.TrackedSymbol() is { } leftSymbol)
         {
-            state = LearnBranching(leftSymbol, leftNumber, kind, rightNumber) ?? state;
+            state = LearnBranching(leftSymbol, leftNumber, kind, rightNumber);
         }
         if (leftNumber is not null && binary.RightOperand.TrackedSymbol() is { } rightSymbol)
         {
-            state = LearnBranching(rightSymbol, rightNumber, Flip(kind), leftNumber) ?? state;
+            state = LearnBranching(rightSymbol, rightNumber, Flip(kind), leftNumber);
         }
         return state;
 
@@ -105,7 +105,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
             !(falseBranch && symbol.GetSymbolType().IsNullableValueType())  // Don't learn opposite for "nullable > 0", because it could also be <null>.
             && RelationalNumberConstraint(falseBranch ? null : existingNumber, kind, comparedNumber) is { } newConstraint
                 ? state.SetSymbolConstraint(symbol, newConstraint)
-                : null;
+                : state;
 
         static NumberConstraint RelationalNumberConstraint(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
             kind switch
