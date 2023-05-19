@@ -1967,7 +1967,7 @@ public class PeachReproducers
             var len = value == null ? 0 : value.Length;
             if (len == 1)
             {
-                value.ToString();   // Noncompliant FP
+                value.ToString();   // Noncompliant FP because 2nd pass through the loop doesn't evaluate len == 1, but learns instead. Allowing null branch to pass.
             }
         }
     }
