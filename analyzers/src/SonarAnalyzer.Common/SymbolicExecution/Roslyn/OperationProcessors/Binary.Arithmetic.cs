@@ -70,6 +70,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
 
     private static BigInteger? CalculateAndMax(NumberConstraint left, NumberConstraint right)
     {
+        // BitAnd can only turn 1s into 0s, not the other way around => If both operands have the same sign, the result cannot be bigger than the smaller of the two.
         if ((left.IsNegative && right.IsNegative)
             || (left.IsPositive && right.IsPositive))
         {
@@ -77,24 +78,19 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         }
         // -1 == 0b11111111 => a & -1 == a =>
         // If one operand can be -1 and one is positive, the result will be positive, but not bigger than the positive operand.
-        else if ((left.IsNegative && right.CanBePositive)                          // left has no positive values => max must come from right
-            || (left.CanBePositive && left.CanBeNegative && right.IsPositive))     // right cannot be -1 => max must come from right
-        {
-            return right.Max;
-        }
-        else if ((right.IsNegative && left.CanBePositive)                          // right has no positive values => max must come from left
-            || (right.CanBePositive && right.CanBeNegative && left.IsPositive))    // left cannot be -1 => max must come from left
+        else if (left.IsPositive)
         {
             return left.Max;
         }
-        // Both operands can be -1 and both can have positive values => The result can get as big as the bigger of the two maxima.
-        else if (left.CanBePositive && left.CanBeNegative && right.CanBePositive && right.CanBeNegative && left.Max.HasValue && right.Max.HasValue)
+        else if (right.IsPositive)
         {
-            return BigInteger.Max(left.Max.Value, right.Max.Value);
+            return right.Max;
         }
         else
         {
-            return null;
+            // If both operands can be -1 and both can have positive values => The result cannot be bigger than the bigger of the two maxima.
+            // If one operand is negative and one can have positive values => The result cannot be bigger than the positive maximum.
+            return BiggestMaximum(left, right);
         }
     }
 
@@ -128,6 +124,18 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         else
         {
             return BigInteger.Min(left.Max.Value, right.Max.Value);
+        }
+    }
+
+    private static BigInteger? BiggestMaximum(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.Max is null || right.Max is null)
+        {
+            return null;
+        }
+        else
+        {
+            return BigInteger.Max(left.Max.Value, right.Max.Value);
         }
     }
 }
