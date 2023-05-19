@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.Helpers;
@@ -162,22 +164,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private sealed class TestLogAnalyzer_CS : CS.LogAnalyzer
         {
+            private readonly string outPath;
+
             public TestLogAnalyzer_CS(string outPath)
             {
-                IsAnalyzerEnabled = true;
-                OutPath = outPath;
-                IsTestProject = false;
+                this.outPath = outPath;
             }
+
+            protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationStartAnalysisContext context) =>
+                base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = false };
         }
 
         private sealed class TestLogAnalyzer_VB : VB.LogAnalyzer
         {
+            private readonly string outPath;
+
             public TestLogAnalyzer_VB(string outPath)
             {
-                IsAnalyzerEnabled = true;
-                OutPath = outPath;
-                IsTestProject = false;
+                this.outPath = outPath;
             }
+
+            protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationStartAnalysisContext context) =>
+                base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = false };
         }
     }
 }

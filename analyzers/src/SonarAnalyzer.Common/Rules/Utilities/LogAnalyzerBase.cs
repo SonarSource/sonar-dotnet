@@ -31,7 +31,8 @@ namespace SonarAnalyzer.Rules
         protected abstract string LanguageVersion(Compilation compilation);
 
         protected sealed override string FileName => "log.pb";
-        protected override bool AnalyzeGeneratedCode => true;
+        protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationStartAnalysisContext context) =>
+            base.ReadParameters(context) with { AnalyzeGeneratedCode = true };
 
         protected LogAnalyzerBase() : base(DiagnosticId, Title) { }
 
@@ -43,7 +44,7 @@ namespace SonarAnalyzer.Rules
                 new LogInfo { Severity = LogSeverity.Info, Text = "Concurrent execution: " + (IsConcurrentExecutionEnabled() ? "enabled" : "disabled") }
             };
 
-        protected sealed override LogInfo CreateMessage(SyntaxTree tree, SemanticModel model) =>
+        protected sealed override LogInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model) =>
             tree.IsGenerated(Language.GeneratedCodeRecognizer, model.Compilation)
             ? CreateMessage(tree)
             : null;
