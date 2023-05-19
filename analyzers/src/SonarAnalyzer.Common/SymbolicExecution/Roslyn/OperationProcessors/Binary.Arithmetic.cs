@@ -115,9 +115,9 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
     {
         if (left.Max is null)
         {
-            return right.Max;
+            return right?.Max;
         }
-        else if (right.Max is null)
+        else if (right?.Max is null)
         {
             return left.Max;
         }
@@ -136,6 +136,22 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         else
         {
             return BigInteger.Max(left.Max.Value, right.Max.Value);
+        }
+    }
+
+    private static BigInteger? BiggestMinimum(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.Min is null)
+        {
+            return right?.Min;
+        }
+        else if (right?.Min is null)
+        {
+            return left.Min;
+        }
+        else
+        {
+            return BigInteger.Max(left.Min.Value, right.Min.Value);
         }
     }
 }

@@ -239,38 +239,4 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
                 _ => null
             }
             : null;
-
-    // FIXME: REmove after rebase, make it null tolerant
-    private static BigInteger? SmallestMaximum(NumberConstraint left, NumberConstraint right)
-    {
-        if (left.Max is null)
-        {
-            return right?.Max;
-        }
-        else if (right?.Max is null)
-        {
-            return left.Max;
-        }
-        else
-        {
-            return BigInteger.Min(left.Max.Value, right.Max.Value);
-        }
-    }
-
-    // FIXME: Move after rebase to arithmetics file
-    private static BigInteger? BiggestMinimum(NumberConstraint left, NumberConstraint right)
-    {
-        if (left.Min is null)
-        {
-            return right?.Min;
-        }
-        else if (right?.Min is null)
-        {
-            return left.Min;
-        }
-        else
-        {
-            return BigInteger.Max(left.Min.Value, right.Min.Value);
-        }
-    }
 }
