@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
 using X = global::Tests.Diagnostics.NullPointerDereferenceWithFields;
 
@@ -659,7 +662,7 @@ namespace Tests.Diagnostics
 
         public void WithDelegate(object asParameter, object asVariable)
         {
-            if(asParameter == null)
+            if (asParameter == null)
             {
             }
 
@@ -1052,7 +1055,7 @@ namespace Tests.Diagnostics
             {
                 bool.Parse("No");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (ex == null)
                 {
@@ -1085,10 +1088,11 @@ namespace Tests.Diagnostics
         {
             Guard1(s1);
 
-            if (s1 == null) s1.ToUpper(); // Compliant, this code is unreachable
+            if (s1 == null)
+                s1.ToUpper(); // Compliant, this code is unreachable
         }
 
-        public static void Guard1<T>([ValidatedNotNull]T value) where T : class { }
+        public static void Guard1<T>([ValidatedNotNull] T value) where T : class { }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/3850
         public static void UsedAsExtension()
@@ -1193,7 +1197,7 @@ namespace Tests.Diagnostics
             {
                 //SE creates both constrains for 'current'
             }
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 if (item == current)
                 {
@@ -1288,11 +1292,11 @@ namespace Tests.Diagnostics
     {
         public void WithDynamic(string first, dynamic second)
         {
-            if(first == null && second == null)
+            if (first == null && second == null)
             {
                 throw new Exception("Both first and second are null");
             }
-            if(second == null && first.Length == 0)     // Noncompliant FP, if both first and second were null, an exception was already thrown
+            if (second == null && first.Length == 0)     // Noncompliant FP, if both first and second were null, an exception was already thrown
             {
                 // Do something
             }
@@ -1335,11 +1339,11 @@ namespace Tests.Diagnostics
         {
             var first = message as IFirst;
             var second = message as ISecond;
-            if(first != null)
+            if (first != null)
             {
                 // Do something
             }
-            else if(second?.Property is string)
+            else if (second?.Property is string)
             {
                 var str = second.Property; // Compliant
             }
@@ -1598,9 +1602,12 @@ public class Repro_GridChecks
 {
     public int Go(string first, string second)
     {
-        if (first == second) return 0;
-        if (first != null && second == null) return -1;
-        if (first == null && second != null) return 1;
+        if (first == second)
+            return 0;
+        if (first != null && second == null)
+            return -1;
+        if (first == null && second != null)
+            return 1;
 
         first.Split('.');   // Noncompliant FP
         second.Split('.');  // Noncompliant FP
@@ -1942,6 +1949,30 @@ public class PeachReproducers
             value.ToString();   // Compliant
         }
     }
+
+    public void ConditionalIntTrackingOne(string value)
+    {
+        var index = value != null ? value.Length : 0;
+        if (index == 1)
+        {
+            value.ToString();   // Compliant
+        }
+    }
+
+    public void ConditionalIntTrackingOne_InsideLoop(int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            var value = Unknown();
+            var len = value == null ? 0 : value.Length;
+            if (len == 1)
+            {
+                value.ToString();   // Noncompliant FP because 2nd pass through the loop doesn't evaluate len == 1, but learns instead. Allowing null branch to pass.
+            }
+        }
+    }
+
+    private string Unknown() => null;
 
     public void WithDynamic(IEnumerable<Exception> list, dynamic message, dynamic displayName)
     {
