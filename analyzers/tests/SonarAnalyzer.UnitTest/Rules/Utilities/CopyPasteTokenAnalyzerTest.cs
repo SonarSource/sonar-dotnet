@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
@@ -141,22 +142,32 @@ namespace SonarAnalyzer.UnitTest.Rules
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private sealed class TestCopyPasteTokenAnalyzer_CS : CS.CopyPasteTokenAnalyzer
         {
+            private readonly string outPath;
+            private readonly bool isTestProject;
+
             public TestCopyPasteTokenAnalyzer_CS(string outPath, bool isTestProject)
             {
-                IsAnalyzerEnabled = true;
-                OutPath = outPath;
-                IsTestProject = isTestProject;
+                this.outPath = outPath;
+                this.isTestProject = isTestProject;
             }
+
+            protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationStartAnalysisContext context) =>
+                base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
         }
 
         private sealed class TestCopyPasteTokenAnalyzer_VB : VB.CopyPasteTokenAnalyzer
         {
+            private readonly string outPath;
+            private readonly bool isTestProject;
+
             public TestCopyPasteTokenAnalyzer_VB(string outPath, bool isTestProject)
             {
-                IsAnalyzerEnabled = true;
-                OutPath = outPath;
-                IsTestProject = isTestProject;
+                this.outPath = outPath;
+                this.isTestProject = isTestProject;
             }
+
+            protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationStartAnalysisContext context) =>
+                base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
         }
     }
 }

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens);
         protected abstract TriviaClassifierBase GetTriviaClassifier();
 
-        protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        protected sealed override TokenTypeInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var tokens = syntaxTree.GetRoot().DescendantTokens();
             var identifierTokenKind = Language.SyntaxKind.IdentifierToken;  // Performance optimization
