@@ -1398,7 +1398,7 @@ namespace Repro_3395
                 | helper == Helper.C | helper == Helper.D | helper == Helper.E | helper == Helper.F
                 | helper == Helper.G | helper == Helper.H | helper == Helper.I | helper == Helper.J)
             {
-                o.ToString(); // FN (old engine: FN, the condition state generation is too big to explore all constraint combinations)
+                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
 
@@ -1430,7 +1430,7 @@ namespace Repro_3395
                 ^ helper == Helper.C ^ helper == Helper.D ^ helper == Helper.E ^ helper == Helper.F
                 ^ helper == Helper.G ^ helper == Helper.H ^ helper == Helper.I ^ helper == Helper.J)
             {
-                o.ToString(); // FN (old engine: FN, the condition state generation is too big to explore all constraint combinations)
+                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
 
@@ -1446,7 +1446,7 @@ namespace Repro_3395
                 | helper != Helper.C | helper != Helper.D | helper != Helper.E | helper != Helper.F
                 | helper == Helper.G | helper == Helper.H | helper == Helper.I | helper == Helper.J)
             {
-                o.ToString(); // FN (old engine: FN, the condition state generation is too big to explore all constraint combinations)
+                o.ToString(); // Noncompliant (old engine: FN, the condition state generation is too big to explore all constraint combinations)
             }
         }
 
@@ -1462,109 +1462,108 @@ namespace Repro_3395
                 | helper == Helper.C & helper == Helper.D ^ helper == Helper.E & helper == Helper.F
                 | helper == Helper.G & helper == Helper.H ^ helper == Helper.I & helper == Helper.J)
             {
-                o.ToString(); // FN (old engine: FN, the condition state generation is too big to explore all constraint combinations)
+                o.ToString(); // Compliant, unreachable
             }
         }
     }
-
-    // https://github.com/SonarSource/sonar-dotnet/issues/4784
-    class Repro_4784
+}
+// https://github.com/SonarSource/sonar-dotnet/issues/4784
+class Repro_4784
+{
+    public static int Reproducer()
     {
-        public static int Reproducer()
+        List<long> test = new[] { 1L, 2L, 3L }.ToList();
+        if (test?.Count == 0)
         {
-            List<long> test = new[] { 1L, 2L, 3L }.ToList();
-            if (test?.Count == 0)
+            // Do something
+        }
+
+        return test.Count; // Compliant
+    }
+
+    public static int NoIssueReported()
+    {
+        var something = new Something();
+        if (something?.SomeProperty == 0)
+        {
+            // Do something
+        }
+
+        return something.SomeProperty;
+    }
+
+    public static int IssueReported()
+    {
+        var something = GetSomething();
+        if (something?.SomeProperty == 0)
+        {
+            // Do something
+        }
+
+        return something.SomeProperty; // Noncompliant
+    }
+
+    public static Something GetSomething()
+    {
+        return new Something();
+    }
+
+    public class Something
+    {
+        public int SomeProperty { get; set; }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/4989
+class Repro_4989
+{
+    static void Main(string[] args)
+    {
+        var providerCourses = new List<ProviderCourse>
+        {
+            new ProviderCourse
             {
-                // Do something
+                Items = new List<string>
+                {
+                    "item1",
+                    "item2"
+                }
+            },
+            new ProviderCourse
+            {
+                Items = new List<string>
+                {
+                    "item1",
+                    "item2"
+                }
+            }
+        };
+
+        foreach (var providerCourse in providerCourses)
+        {
+            if (!providerCourse?.Items?.Any() ?? true)
+            {
+                continue;
             }
 
-            return test.Count; // Compliant
+            _ = providerCourse.Items; // Compliant
         }
 
-        public static int NoIssueReported()
+        foreach (var providerCourse in providerCourses)
         {
-            var something = new Something();
-            if (something?.SomeProperty == 0)
+            if (!providerCourse?.Items?.Any() ?? true)
             {
-                // Do something
+                Console.WriteLine("FAIL");
+                continue;
             }
 
-            return something.SomeProperty;
-        }
-
-        public static int IssueReported()
-        {
-            var something = GetSomething();
-            if (something?.SomeProperty == 0)
-            {
-                // Do something
-            }
-
-            return something.SomeProperty; // Noncompliant
-        }
-
-        public static Something GetSomething()
-        {
-            return new Something();
-        }
-
-        public class Something
-        {
-            public int SomeProperty { get; set; }
+            _ = providerCourse.Items.Where(items => items == "item1"); // Compliant
         }
     }
 
-    // https://github.com/SonarSource/sonar-dotnet/issues/4989
-    class Repro_4989
+    class ProviderCourse
     {
-        static void Main(string[] args)
-        {
-            var providerCourses = new List<ProviderCourse>
-            {
-                new ProviderCourse
-                {
-                    Items = new List<string>
-                    {
-                        "item1",
-                        "item2"
-                    }
-                },
-                new ProviderCourse
-                {
-                    Items = new List<string>
-                    {
-                        "item1",
-                        "item2"
-                    }
-                }
-            };
-
-            foreach (var providerCourse in providerCourses)
-            {
-                if (!providerCourse?.Items?.Any() ?? true)
-                {
-                    continue;
-                }
-
-                _ = providerCourse.Items; // Compliant
-            }
-
-            foreach (var providerCourse in providerCourses)
-            {
-                if (!providerCourse?.Items?.Any() ?? true)
-                {
-                    Console.WriteLine("FAIL");
-                    continue;
-                }
-
-                _ = providerCourse.Items.Where(items => items == "item1"); // Compliant
-            }
-        }
-
-        class ProviderCourse
-        {
-            public IEnumerable<string> Items { get; set; }
-        }
+        public IEnumerable<string> Items { get; set; }
     }
 }
 

@@ -154,6 +154,25 @@ public void Method()
     }
 
     [TestMethod]
+    public void SimpleAssignment_FromEnum()
+    {
+        const string code = """
+            public enum E
+            {
+                None,
+                Value = 42
+            }
+            public void Method()
+            {
+                var value = E.Value;
+                Tag("Value", value);
+            }
+            """;
+        var validator = SETestContext.CreateCSMethod(code).Validator;
+        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42)));
+    }
+
+    [TestMethod]
     public void ElementAccess_FromLiteral_ToUntracked()
     {
         var validator = SETestContext.CreateCS("""var arr = new object[] { 13 }; arr[0] = 42;""", new LiteralDummyTestCheck()).Validator;

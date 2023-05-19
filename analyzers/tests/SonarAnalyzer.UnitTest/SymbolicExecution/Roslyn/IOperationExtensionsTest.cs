@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
@@ -58,6 +59,29 @@ public class IOperationExtensionsTest
         var assignmentTarget = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
         var fieldReferenceSymbol = IFieldReferenceOperationWrapper.FromOperation(assignmentTarget).Field;
         assignmentTarget.TrackedSymbol().Should().Be(fieldReferenceSymbol);
+    }
+
+    [TestMethod]
+    public void TrackedSymbol_FieldReference_Enum()
+    {
+        var code = """
+            public enum E
+            {
+                None
+            }
+
+            public class Sample
+            {
+                public void Method()
+                {
+                    var none = E.None;
+                }
+            }
+            """;
+        var cfg = TestHelper.CompileCfgCS(code);
+        var assignment = (ISimpleAssignmentOperation)cfg.Blocks[1].Operations.Single();
+        var enumReference = (IFieldReferenceOperation)assignment.Value;
+        enumReference.TrackedSymbol().Should().BeNull();
     }
 
     [DataTestMethod]
