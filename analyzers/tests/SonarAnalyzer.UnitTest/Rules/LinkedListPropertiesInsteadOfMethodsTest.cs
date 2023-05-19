@@ -32,6 +32,13 @@ public class LinkedListPropertiesInsteadOfMethodsTest
     public void LinkedListPropertiesInsteadOfMethods_CS() =>
         builderCS.AddPaths("LinkedListPropertiesInsteadOfMethods.cs").Verify();
 
+    [TestMethod]
+    public void LinkedListPropertiesInsteadOfMethods_CS_CodeFix() =>
+        builderCS.AddPaths("LinkedListPropertiesInsteadOfMethods.cs")
+            .WithCodeFix<CS.LinkedListPropertiesInsteadOfMethodsCodeFix>()
+            .WithCodeFixedPaths("LinkedListPropertiesInsteadOfMethods.Fixed.cs")
+            .VerifyCodeFix();
+
 #if NET
 
     [DataTestMethod]

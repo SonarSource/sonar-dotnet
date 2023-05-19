@@ -24,7 +24,7 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
     where TSyntaxKind : struct
     where TInvocationExpression : SyntaxNode
 {
-    private const string DiagnosticId = "S6613";
+    internal const string DiagnosticId = "S6613";
 
     protected override string MessageFormat => "'{0}' property of 'LinkedList' should be used instead of the '{0}()' extension method.";
 
