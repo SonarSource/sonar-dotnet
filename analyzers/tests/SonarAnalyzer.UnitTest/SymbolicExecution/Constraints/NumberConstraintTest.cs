@@ -90,6 +90,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
             NumberConstraint.From(1, 1).IsSingleValue.Should().BeTrue();
             NumberConstraint.From(null, 42).IsSingleValue.Should().BeFalse();
             NumberConstraint.From(42, null).IsSingleValue.Should().BeFalse();
+            NumberConstraint.From(1, 100).IsSingleValue.Should().BeFalse();
         }
 
         [TestMethod]
@@ -167,5 +168,28 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
                 .And.NotBe(NumberConstraint.From(-10, 100).GetHashCode())
                 .And.NotBe(NumberConstraint.From(min, 100).GetHashCode())
                 .And.NotBe(NumberConstraint.From(-10, max).GetHashCode());
+
+        [DataTestMethod]
+        [DataRow(null, 42, 0)]
+        [DataRow(null, 42, 42)]
+        [DataRow(0, 42, 0)]
+        [DataRow(0, 42, 10)]
+        [DataRow(0, 42, 42)]
+        [DataRow(42, null, 42)]
+        [DataRow(42, null, 100)]
+        public void CanContain_True(int? min, int? max, int value) =>
+            NumberConstraint.From(min, max).CanContain(value).Should().BeTrue();
+
+        [DataTestMethod]
+        [DataRow(null, 42, 43)]
+        [DataRow(null, 42, 100)]
+        [DataRow(0, 42, -100)]
+        [DataRow(0, 42, -1)]
+        [DataRow(0, 42, 43)]
+        [DataRow(0, 42, 100)]
+        [DataRow(42, null, 0)]
+        [DataRow(42, null, 41)]
+        public void CanContain_False(int? min, int? max, int value) =>
+            NumberConstraint.From(min, max).CanContain(value).Should().BeFalse();
     }
 }

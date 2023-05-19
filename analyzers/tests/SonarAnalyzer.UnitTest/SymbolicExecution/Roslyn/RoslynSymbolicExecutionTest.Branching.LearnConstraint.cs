@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -1063,7 +1062,6 @@ Tag(""End"", arg);";
     [DataRow("arg != 42 && arg >=   0", 0, null)]   // We don't track arg != 42 in "if" branch. Actual range is 0-41, 43-oo
     [DataRow("arg != 42 && arg <  100", null, 99)]  // We don't track arg != 42 in "if" branch. Actual range is -oo-41, 43-99
     [DataRow("arg != 42 && arg <= 100", null, 100)] // We don't track arg != 42 in "if" branch. Actual range is -oo-41, 43-100
-    [DataRow("arg >  42 && arg ==   0", 0, 0)]      // ToDo: Should be unreachable
     [DataRow("arg >  42 && arg == 100", 100, 100)]
     [DataRow("arg >  42 && arg !=  43", 44, null)]
     [DataRow("arg >  42 && arg != 100", 43, null)]  // Actual value is 43-99, 101-oo
@@ -1078,7 +1076,6 @@ Tag(""End"", arg);";
     [DataRow("arg >  42 && arg >= 100", 100, null)]
     [DataRow("arg >  42 && arg <  100", 43, 99)]
     [DataRow("arg >  42 && arg <= 100", 43, 100)]
-    [DataRow("arg >= 42 && arg ==   0", 0, 0)]      // ToDo Should be unreachable
     [DataRow("arg >= 42 && arg == 100", 100, 100)]
     [DataRow("arg >= 42 && arg !=  42", 43, null)]
     [DataRow("arg >= 42 && arg != 100", 42, null)]  // Actual value is 42-99, 101-oo
@@ -1095,7 +1092,6 @@ Tag(""End"", arg);";
     [DataRow("arg >= 42 && arg <  100", 42, 99)]
     [DataRow("arg >= 42 && arg <= 100", 42, 100)]
     [DataRow("arg <  42 && arg ==   0", 0, 0)]
-    [DataRow("arg <  42 && arg ==  42", 42, 42)]    // ToDo Should be unreachable
     [DataRow("arg <  42 && arg !=  41", null, 40)]
     [DataRow("arg <  42 && arg !=   0", null, 41)]  // Actual value is oo - -1, 1-41
     [DataRow("arg <  42 && arg >    0", 1, 41)]
@@ -1112,7 +1108,6 @@ Tag(""End"", arg);";
     [DataRow("arg <  42 && arg <=  43", null, 41)]
     [DataRow("arg <  42 && arg <= 100", null, 41)]
     [DataRow("arg <= 42 && arg ==  42", 42, 42)]
-    [DataRow("arg <= 42 && arg == 100", 100, 100)]  // ToDo Should be unreachable
     [DataRow("arg <= 42 && arg !=   0", null, 42)]  // Actual value is oo - -1, 1-42
     [DataRow("arg <= 42 && arg !=  42", null, 41)]
     [DataRow("arg <= 42 && arg >    0", 1, 42)]
@@ -1248,16 +1243,92 @@ Tag(""End"", arg);";
     [DataRow("arg == 42 && arg >= 100")]
     [DataRow("arg == 42 && arg <    0")]
     [DataRow("arg == 42 && arg <=   0")]
+    [DataRow("arg >  42 && arg ==   0")]
+    [DataRow("arg >  42 &&   0 == arg")]
     [DataRow("arg >  42 && arg <    0")]
     [DataRow("arg >  42 && arg <=   0")]
+    [DataRow("arg >= 42 && arg ==   0")]
+    [DataRow("arg >= 42 &&   0 == arg")]
     [DataRow("arg >= 42 && arg <    0")]
     [DataRow("arg >= 42 && arg <=   0")]
+    [DataRow("arg <  42 && arg ==  42")]
+    [DataRow("arg <  42 &&  42 == arg")]
     [DataRow("arg <  42 && arg >  100")]
     [DataRow("arg <  42 && arg >= 100")]
     [DataRow("arg <= 42 && arg >  100")]
     [DataRow("arg <= 42 && arg >= 100")]
+    [DataRow("arg <= 42 && arg == 100")]
+    [DataRow("arg <= 42 && 100 == arg")]
     public void Branching_LearnsNumberConstraint_Unreachable(string expression) =>
         CreateIfElseEndValidatorCS(expression, OperationKind.Binary, "int").TagStates("If").Should().BeEmpty();
+
+    [DataTestMethod]
+    [DataRow("arg < 0 && arg == big")]
+    [DataRow("arg > 0 && arg == small")]
+    public void Branching_LearnsNumberConstraint_Unreachable_Ranges_Equals(string expression)
+    {
+        var code = $$"""
+            if (small <= -100 && big >= 100)  // Prepare ranged value to compare with
+            {
+                if ({{expression}})
+                {
+                    Tag("Unreachable");
+                }
+            }
+            Tag("End");
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg, int small, int big", new PreserveTestCheck("small", "big")).Validator;
+        validator.ValidateTagOrder("End", "End", "End", "End");
+    }
+
+    [DataTestMethod]
+    [DataRow("arg < 0", "arg != big")]
+    [DataRow("arg > 0", "arg != small")]
+    public void Branching_LearnsNumberConstraint_Unreachable_Ranges_NotEquals(string prepare, string expression)
+    {
+        var code = $$"""
+            if (small <= -100 && big >= 100 && {{prepare}})  // Prepare ranged value to compare with
+            {
+                if ({{expression}})
+                {
+                    Tag("If");
+                }
+                else
+                {
+                    Tag("Unreachable");
+                }
+            }
+            Tag("End");
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg, int small, int big", new PreserveTestCheck("small", "big")).Validator;
+        validator.ValidateTagOrder("End", "End", "End", "If", "End");
+    }
+
+    [DataTestMethod]
+    [DataRow("arg == 42", "arg != 0", 42, 42)]
+    [DataRow("arg >  42", "arg != 0", 43, null)]
+    [DataRow("arg >= 42", "arg != 0", 42, null)]
+    [DataRow("arg <   0", "arg != 42", null, -1)]
+    [DataRow("arg <=  0", "arg != 42", null, 0)]
+    public void Branching_LearnsNumberConstraint_NotEqualsTrue(string range, string expression, int? expectedMin, int? expectedMax)
+    {
+        var code = $$"""
+            if ({{range}})  // Prepare range to compare against
+            {
+                if ({{expression}})
+                {
+                    Tag("If", arg);
+                }
+                else
+                {
+                    Tag("Unreachable");
+                }
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg").Validator;
+        validator.ValidateTagOrder("If");
+        validator.ValidateTag("If", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
+    }
 
     private static ValidatorTestCheck CreateIfElseEndValidatorCS(string expression, OperationKind expectedOperation, string argType = "object")
     {
