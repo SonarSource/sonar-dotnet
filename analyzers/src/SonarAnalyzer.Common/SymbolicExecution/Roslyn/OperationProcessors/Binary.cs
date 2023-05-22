@@ -113,9 +113,9 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
                 BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Min => NumberConstraint.From(existingNumber.Min + 1, existingNumber.Max),
                 BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Max => NumberConstraint.From(existingNumber.Min, existingNumber.Max - 1),
                 BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => NumberConstraint.From(existingNumber, comparedNumber.Min + 1, null),
-                BinaryOperatorKind.GreaterThanOrEqual when comparedNumber.Min.HasValue => NumberConstraint.From(comparedNumber.Min, existingNumber?.Max),
+                BinaryOperatorKind.GreaterThanOrEqual when comparedNumber.Min.HasValue => NumberConstraint.From(existingNumber, comparedNumber.Min, null),
                 BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue => NumberConstraint.From(existingNumber, null, comparedNumber.Max - 1),
-                BinaryOperatorKind.LessThanOrEqual when comparedNumber.Max.HasValue => NumberConstraint.From(existingNumber?.Min, comparedNumber.Max),
+                BinaryOperatorKind.LessThanOrEqual when comparedNumber.Max.HasValue => NumberConstraint.From(existingNumber, null, comparedNumber.Max),
                 _ => null
             };
 
