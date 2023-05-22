@@ -92,7 +92,7 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
             ? BoolConstraint.From(objectConstraint == ObjectConstraint.NotNull)
             : null;
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IPropertyReferenceOperationWrapper operation, bool falseBranch) =>
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IPropertyReferenceOperationWrapper operation, int visitCount, bool falseBranch) =>
         IsNullableProperty(operation, "HasValue") && operation.Instance.TrackedSymbol() is { } testedSymbol
             // Can't use ObjectConstraint.ApplyOpposite() because here, we are sure that it is either Null or NotNull
             ? state.SetSymbolConstraint(testedSymbol, falseBranch ? ObjectConstraint.Null : ObjectConstraint.NotNull)

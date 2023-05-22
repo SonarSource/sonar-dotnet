@@ -32,7 +32,7 @@ internal sealed class IsNull : BranchingProcessor<IIsNullOperationWrapper>
             ? BoolConstraint.From(value.HasConstraint(ObjectConstraint.Null))
             : null;
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsNullOperationWrapper operation, bool falseBranch)
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsNullOperationWrapper operation, int visitCount, bool falseBranch)
     {
         var constraint = falseBranch ? ObjectConstraint.NotNull : ObjectConstraint.Null;
         state = state.SetOperationConstraint(operation.Operand, constraint);

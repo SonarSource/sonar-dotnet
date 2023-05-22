@@ -31,7 +31,7 @@ internal abstract class BranchingProcessor<T> : MultiProcessor<T>
     where T : IOperationWrapper
 {
     protected abstract SymbolicConstraint BoolConstraintFromOperation(ProgramState state, T operation, int visitCount);
-    protected abstract ProgramState LearnBranchingConstraint(ProgramState state, T operation, bool falseBranch);
+    protected abstract ProgramState LearnBranchingConstraint(ProgramState state, T operation, int visitCount, bool falseBranch);
 
     protected virtual ProgramState PreProcess(ProgramState state, T operation) =>
         state;
@@ -46,8 +46,8 @@ internal abstract class BranchingProcessor<T> : MultiProcessor<T>
         else
         {
             var beforeLearningState = state;
-            var positive = LearnBranchingConstraint(state, operation, false);
-            var negative = LearnBranchingConstraint(state, operation, true);
+            var positive = LearnBranchingConstraint(state, operation, context.VisitCount, false);
+            var negative = LearnBranchingConstraint(state, operation, context.VisitCount, true);
             return positive == beforeLearningState && negative == beforeLearningState
                 ? beforeLearningState.ToArray()   // We can't learn anything, just move on
                 : new[]

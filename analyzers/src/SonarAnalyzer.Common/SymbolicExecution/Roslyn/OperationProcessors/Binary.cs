@@ -31,18 +31,18 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
     protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation, int visitCount) =>
         BinaryConstraint(operation.OperatorKind, state[operation.LeftOperand], state[operation.RightOperand], visitCount);
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch)
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, int visitCount, bool falseBranch)
     {
         if (operation.OperatorKind.IsAnyEquality())
         {
             state = LearnBranchingEqualityConstraint<ObjectConstraint>(state, operation, falseBranch) ?? state;
             state = LearnBranchingEqualityConstraint<BoolConstraint>(state, operation, falseBranch) ?? state;
-            state = LearnBranchingNumberConstraint(state, operation, falseBranch);
+            state = LearnBranchingNumberConstraint(state, operation, visitCount, falseBranch);
         }
         else if (operation.OperatorKind.IsAnyRelational())
         {
             state = LearnBranchingRelationalObjectConstraint(state, operation, falseBranch) ?? state;
-            state = LearnBranchingNumberConstraint(state, operation, falseBranch);
+            state = LearnBranchingNumberConstraint(state, operation, visitCount, falseBranch);
         }
         return state;
     }
@@ -86,7 +86,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
             ? state.SetSymbolConstraint(testedSymbol, ObjectConstraint.NotNull)
             : null;
 
-    private static ProgramState LearnBranchingNumberConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
+    private static ProgramState LearnBranchingNumberConstraint(ProgramState state, IBinaryOperationWrapper binary, int visitCount, bool falseBranch)
     {
         var kind = falseBranch ? Opposite(binary.OperatorKind) : binary.OperatorKind;
         var leftNumber = state[binary.LeftOperand]?.Constraint<NumberConstraint>();
@@ -103,7 +103,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
 
         ProgramState LearnBranching(ISymbol symbol, NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
             !(falseBranch && symbol.GetSymbolType().IsNullableValueType())  // Don't learn opposite for "nullable > 0", because it could also be <null>.
-            && RelationalNumberConstraint(falseBranch ? null : existingNumber, kind, comparedNumber) is { } newConstraint
+            && RelationalNumberConstraint(falseBranch ? null : existingNumber, kind, comparedNumber, visitCount) is { } newConstraint
                 ? state.SetSymbolConstraint(symbol, newConstraint)
                 : state;
 
@@ -132,7 +132,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
             };
     }
 
-    private static NumberConstraint RelationalNumberConstraint(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber)
+    private static NumberConstraint RelationalNumberConstraint(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber, int visitCount)
     {
         return kind switch
         {
@@ -150,11 +150,11 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         {
             if (existingNumber is not null)
             {
-                if (!newMin.HasValue || existingNumber.Min > newMin)
+                if (!newMin.HasValue || (existingNumber.Min > newMin && IsFirstLoopVisit(visitCount)))
                 {
                     newMin = existingNumber.Min;
                 }
-                if (!newMax.HasValue || existingNumber.Max < newMax)
+                if (!newMax.HasValue || (existingNumber.Max < newMax && IsFirstLoopVisit(visitCount)))
                 {
                     newMax = existingNumber.Max;
                 }
@@ -194,7 +194,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         }
         else if (left?.Constraint<NumberConstraint>() is { } leftNumber
             && right?.Constraint<NumberConstraint>() is { } rightNumber
-            && visitCount == 1)    // Fixed loops: 1st visit decides on value, 2nd visit learns range instead to be able to exit the loop
+            && IsFirstLoopVisit(visitCount))
         {
             return BinaryNumberConstraint(kind, leftNumber, rightNumber);
         }
@@ -257,4 +257,10 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
                 _ => null
             }
             : null;
+
+    // Fixed loops:
+    // 1st visit decides on the initial value. We don't learn from binary comparison.
+    // 2nd visit does not decide on the current value. It learns range from binary comparison instead to be able to exit the loop.
+    private static bool IsFirstLoopVisit(int visitCount) =>
+        visitCount == 1;
 }
