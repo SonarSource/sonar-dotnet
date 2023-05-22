@@ -87,6 +87,22 @@ public sealed class NumberConstraint : SymbolicConstraint
     public bool CanContain(BigInteger value) =>
         !(value < Min || Max < value);
 
+    public bool CanOverlap(NumberConstraint other)
+    {
+        if (Min is null)
+        {
+            return other.Min is null || Max < other.Min;
+        }
+        else if (Max < other.Min || Min > other.Max)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     public override bool Equals(object obj) =>
         obj is NumberConstraint other && other.Min == Min && other.Max == Max;
 

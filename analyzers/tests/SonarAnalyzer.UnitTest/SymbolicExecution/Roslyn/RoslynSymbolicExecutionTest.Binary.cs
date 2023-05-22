@@ -922,7 +922,7 @@ Tag(""End"")";
             var value = left & right;
             Tag("Value", value);
             """;
-        SETestContext.CreateCS(code).Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
+        SETestContext.CreateCS(code).Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
     }
 
     [DataTestMethod]
@@ -1016,6 +1016,73 @@ Tag(""End"")";
             if ({{expression}})
             {
                 var value = i | j;
+                Tag("Value", value);
+            }
+            """;
+
+        if (expectedMin is not null || expectedMax is not null)
+        {
+            SETestContext.CreateCS(code, "int i, int j").Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+        }
+        else
+        {
+            SETestContext.CreateCS(code, "int i, int j").Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        }
+    }
+
+    [DataTestMethod]
+    [DataRow(0b0000, 0b0000, 0b0000)]
+    [DataRow(0b0101, 0b0101, 0b0000)]
+    [DataRow(0b0101, 0b0001, 0b0100)]
+    [DataRow(0b1010, 0b0110, 0b1100)]
+    [DataRow(0b1010, 0b0000, 0b1010)]
+    [DataRow(0b1111, 0b1111, 0b0000)]
+    [DataRow(5, -5, -2)]
+    [DataRow(5, -4, -7)]
+    [DataRow(-5, -5, 0)]
+    [DataRow(-5, -4, 7)]
+    public void Binary_BitXor_SingleValue(int left, int right, int expected)
+    {
+        var code = $"""
+            var left = {left};
+            var right = {right};
+            var value = left ^ right;
+            Tag("Value", value);
+            """;
+        SETestContext.CreateCS(code).Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+    }
+
+    [DataTestMethod]
+    [DataRow("i >=  4 && j >=  6", 0, null)]
+    [DataRow("i >=  4 && j >= -6", null, null)]
+    [DataRow("i >=  4 && j <=  6", null, null)]
+    [DataRow("i >=  4 && j <= -6", null, -1)]
+    [DataRow("i >= -4 && j >=  6", null, null)]
+    [DataRow("i >= -4 && j >= -6", null, null)]
+    [DataRow("i >= -4 && j <=  6", null, null)]
+    [DataRow("i >= -4 && j <= -6", null, null)]  // exact range: null, -1
+    [DataRow("i ==  4 && j >=  6", 2, null)]
+    [DataRow("i ==  4 && j >= -6", null, null)]  // exact range: -8, null
+    [DataRow("i ==  4 && j <=  6", null, 7)]
+    [DataRow("i ==  4 && j <= -6", null, -1)]    // exact range: null, -2
+    [DataRow("i == -4 && j >=  6", null, null)]  // exact range: null, -5
+    [DataRow("i == -4 && j >= -6", null, null)]  // exact range: null, 7
+    [DataRow("i == -4 && j <=  6", null, null)]  // exact range: -8, null
+    [DataRow("i == -4 && j <= -6", -2, null)]    // exact range: 4, null
+    [DataRow("i <=  4 && j >=  6", null, null)]
+    [DataRow("i <=  4 && j >= -6", null, null)]
+    [DataRow("i <=  4 && j <=  6", null, null)]
+    [DataRow("i <=  4 && j <= -6", null, null)]
+    [DataRow("i <= -4 && j >=  6", null, null)]   // exact range: null, -1
+    [DataRow("i <= -4 && j >= -6", null, null)]
+    [DataRow("i <= -4 && j <=  6", null, null)]
+    [DataRow("i <= -4 && j <= -6", 0, null)]
+    public void Binary_BitXor_Range(string expression, int? expectedMin, int? expectedMax)
+    {
+        var code = $$"""
+            if ({{expression}})
+            {
+                var value = i ^ j;
                 Tag("Value", value);
             }
             """;
