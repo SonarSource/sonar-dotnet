@@ -75,6 +75,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         [CustomAssertion]
         public AndConstraint<SymbolicValueAssertions> HaveOnlyConstraints(IEnumerable<SymbolicConstraint> expected, string because = "", params object[] becauseArgs)
         {
+            expected = expected?.WhereNotNull();
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(expected is not null && expected.Any())

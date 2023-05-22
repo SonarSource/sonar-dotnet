@@ -819,14 +819,7 @@ Tag(""End"")";
             }
             """;
         var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
-        if (expectedMin is null && expectedMax is null)
-        {
-            validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-        }
-        else
-        {
-            validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
-        }
+        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
     }
 
     [DataTestMethod]
@@ -886,13 +879,6 @@ Tag(""End"")";
             }
             """;
         var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
-        if (expectedMin is null && expectedMax is null)
-        {
-            validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-        }
-        else
-        {
-            validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
-        }
+        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
     }
 }
