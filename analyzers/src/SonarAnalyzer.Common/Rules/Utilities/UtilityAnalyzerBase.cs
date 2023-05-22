@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
 using System.IO;
 using Google.Protobuf;
 using SonarAnalyzer.Protobuf;
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.Rules
     {
         protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb" };
         private readonly DiagnosticDescriptor rule;
-        protected override bool EnableConcurrentExecution => false;
+        protected override bool EnableConcurrentExecution => true;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(rule);
@@ -100,7 +101,7 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
-                var treeMessages = new List<TMessage>();
+                var treeMessages = new ConcurrentBag<TMessage>();
                 startContext.RegisterSemanticModelAction(modelContext =>
                 {
                     if (ShouldGenerateMetrics(parameters, modelContext))
