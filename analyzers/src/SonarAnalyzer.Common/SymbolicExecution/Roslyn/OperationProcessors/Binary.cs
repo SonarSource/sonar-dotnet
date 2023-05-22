@@ -112,9 +112,9 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
                 BinaryOperatorKind.Equals => NumberConstraint.From(BiggestMinimum(comparedNumber, existingNumber), SmallestMaximum(comparedNumber, existingNumber)),
                 BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Min => NumberConstraint.From(existingNumber.Min + 1, existingNumber.Max),
                 BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Max => NumberConstraint.From(existingNumber.Min, existingNumber.Max - 1),
-                BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => NumberConstraint.From(comparedNumber.Min + 1, existingNumber?.Max),
+                BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => NumberConstraint.From(existingNumber?.Min > comparedNumber.Min + 1 ? existingNumber.Min : comparedNumber.Min + 1, existingNumber?.Max),
                 BinaryOperatorKind.GreaterThanOrEqual when comparedNumber.Min.HasValue => NumberConstraint.From(comparedNumber.Min, existingNumber?.Max),
-                BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue => NumberConstraint.From(existingNumber?.Min, comparedNumber.Max - 1),
+                BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue => NumberConstraint.From(existingNumber?.Min, existingNumber?.Max < comparedNumber.Max - 1 ? existingNumber.Max : comparedNumber.Max - 1),
                 BinaryOperatorKind.LessThanOrEqual when comparedNumber.Max.HasValue => NumberConstraint.From(existingNumber?.Min, comparedNumber.Max),
                 _ => null
             };
