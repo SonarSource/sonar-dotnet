@@ -197,6 +197,6 @@ namespace FPRepros
     public class B2bSomethingCalculator // Noncompliant FP
     { }
 
-    public class L10nService // Noncompliant
+    public class L10nService // Noncompliant FP
     { }
 }
