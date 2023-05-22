@@ -20,7 +20,9 @@
 
 using SonarAnalyzer.Common;
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
@@ -32,9 +34,17 @@ public class CalculationsShouldNotOverflowTest
         .WithBasePath(@"SymbolicExecution\Roslyn")
         .WithOnlyDiagnostics(ChecksCS.CalculationsShouldNotOverflow.S3949);
 
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.SymbolicExecutionRunner>()
+        .WithBasePath(@"SymbolicExecution\Roslyn")
+        .WithOnlyDiagnostics(ChecksVB.CalculationsShouldNotOverflow.S3949);
+
     [TestMethod]
     public void CalculationsShouldNotOverflow_CS() =>
         builderCS.AddPaths("CalculationsShouldNotOverflow.cs").Verify();
+
+    [TestMethod]
+    public void CalculationsShouldNotOverflow_VB() =>
+        builderVB.AddPaths("CalculationsShouldNotOverflow.vb").Verify();
 
     [TestMethod]
     public void CalculationsShouldNotOverflow_CSharp8() =>
