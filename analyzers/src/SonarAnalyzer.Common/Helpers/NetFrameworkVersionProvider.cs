@@ -35,11 +35,11 @@ namespace SonarAnalyzer.Helpers
         public NetFrameworkVersion GetDotNetFrameworkVersion(Compilation compilation)
             => compilation is null
                 ? NetFrameworkVersion.Unknown
-                : CompilationVersions.GetValue(compilation, x => new VersionContainer(Calculate(x))).Value;
+                : CompilationVersions.GetValue(compilation, x => new VersionContainer(DetectVersion(x))).Value;
 
-        private static NetFrameworkVersion Calculate(Compilation compilation)
+        private static NetFrameworkVersion DetectVersion(Compilation compilation)
         {
-            /// See https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ee471421(v=vs.100)
+            // See https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ee471421(v=vs.100)
             var debuggerSymbol = compilation.GetTypeByMetadataName(KnownType.System_Diagnostics_Debugger);
 
             var mscorlibAssembly = debuggerSymbol?.ContainingAssembly;
