@@ -5,9 +5,10 @@ public class Sample
     public void Types()
     {
         sbyte sb = sbyte.MaxValue;
-        sb++;                   // Noncompliant
+        sb++;                   // Noncompliant {{This calculation is guaranteed to overflow the maximum value of '127'.}}
+//      ^^^^
         sb = sbyte.MinValue;
-        sb--;                   // Noncompliant
+        sb--;                   // Noncompliant {{This calculation is guaranteed to underflow the minimum value of '-128'.}}
 
         byte b = byte.MaxValue;
         b++;                    // Noncompliant
@@ -91,10 +92,11 @@ public class Sample
     public void BasicOperators()
     {
         int i = 2147483600;
-        _ = i + 100;            // Noncompliant
+        _ = i + 100;            // Noncompliant {{This calculation is guaranteed to overflow the maximum value of '2147483647'.}}
+//          ^^^^^^^
 
         i = -2147483600;
-        _ = i - 100;            // Noncompliant
+        _ = i - 100;            // Noncompliant {{This calculation is guaranteed to underflow the minimum value of '-2147483648'.}}
 
         i = 2147483600;
         _ = i * 100;            // Noncompliant
@@ -158,6 +160,18 @@ public class Sample
         _ = i * 2147483600;     // Noncompliant FIXME wrong reason, i doesn't change because compoundassignment is ignored
     }
 
+    public void Ranges(int i)
+    {
+        if (i > 2147483600)
+            _ = i + 100;        // Noncompliant {{This calculation is guaranteed to overflow the maximum value of '2147483647'.}}
+        if (i < 2147483600)
+            _ = i + 100;        // Noncompliant {{This calculation is likely to overflow the maximum value of '2147483647'.}}
+        if (i > -2147483600)
+            _ = i - 100;        // Noncompliant {{This calculation is likely to underflow the minimum value of '-2147483648'.}}
+        if (i < -2147483600)
+            _ = i - 100;        // Noncompliant {{This calculation is guaranteed to underflow the minimum value of '-2147483648'.}}
+    }
+
     public void Branching(int i)
     {
         if (i <= 2147483547)
@@ -168,7 +182,7 @@ public class Sample
         for (i = 0; i <= 2147483547; i++)
             _ = i + 100;        // Compliant
         for (i = 0; i <= 2147483547; i++)
-            _ = i + 101;        // Noncompliant likely
+            _ = i + 101;        // Noncompliant {{This calculation is likely to overflow the maximum value of '2147483647'.}}
         for (i = 2147483546; i <= 2147483547; i++)
             _ = i + 100;        // Compliant
         for (i = 2147483546; i <= 2147483547; i++)
@@ -224,6 +238,18 @@ public class Properties
             i += 100;           // FIXME Non-compliant
         }
     }
+
+    public void Untracked(Properties o)
+    {
+        if (o.GetSet == int.MaxValue)
+            o.GetSet++;         // Compliant
+        if (o.GetSet == int.MaxValue)
+            ++o.GetSet;         // Compliant
+        if (o.GetSet == int.MinValue)
+            o.GetSet--;         // Compliant
+        if (o.GetSet == int.MinValue)
+            --o.GetSet;         // Compliant
+    }
 }
 
 class DotnetOverflow
@@ -234,7 +260,7 @@ class DotnetOverflow
         {
             unchecked
             {
-                int i = 1834567890 + 1834567890;    // Noncompliant
+                int i = 1834567890 + 1834567890;    // Noncompliant FP, we don't want to run for methods with unchecked
                 return i;
             }
         }

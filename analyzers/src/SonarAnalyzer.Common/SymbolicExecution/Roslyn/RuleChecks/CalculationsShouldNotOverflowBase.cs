@@ -34,14 +34,14 @@ public abstract class CalculationsShouldNotOverflowBase : SymbolicRuleCheck
 
     protected override ProgramState PostProcessSimple(SymbolicContext context)
     {
-        if (context.Operation.Instance is var operation
-            && CanOverflow(context.State, operation)?.Constraint<NumberConstraint>() is { } number
+        var operation = context.Operation.Instance;
+        if (OverflowCandidateValue(context.State, operation)?.Constraint<NumberConstraint>() is { } number
             && Min(operation.Type) is { } typeMin
             && Max(operation.Type) is { } typeMax)
         {
             if (number.Max < typeMin)
             {
-                ReportIssue(operation, MessageGuaranteed, MessageUnderflow, typeMax);
+                ReportIssue(operation, MessageGuaranteed, MessageUnderflow, typeMin);
             }
             else if (number.Min > typeMax)
             {
@@ -53,47 +53,49 @@ public abstract class CalculationsShouldNotOverflowBase : SymbolicRuleCheck
             }
             else if (number.Min < typeMin)
             {
-                ReportIssue(operation, MessageLikely, MessageUnderflow, typeMax);
+                ReportIssue(operation, MessageLikely, MessageUnderflow, typeMin);
             }
         }
-
         return context.State;
     }
 
-    private static SymbolicValue CanOverflow(ProgramState state, IOperation operation) => operation.Kind switch
-    {
-        OperationKindEx.Binary when CanOverflow(operation.ToBinary().OperatorKind) => state[operation],
-        OperationKindEx.CompoundAssignment when CanOverflow(operation.ToCompoundAssignment().OperatorKind) => state[operation],
-        OperationKindEx.Increment or OperationKindEx.Decrement when operation.ToIncrementOrDecrement().Target.TrackedSymbol() is { } symbol => state[symbol],
-        _ => null
-    };
+    private static SymbolicValue OverflowCandidateValue(ProgramState state, IOperation operation) =>
+        operation.Kind switch
+        {
+            OperationKindEx.Binary when CanOverflow(operation.ToBinary().OperatorKind) => state[operation],
+            OperationKindEx.CompoundAssignment when CanOverflow(operation.ToCompoundAssignment().OperatorKind) => state[operation],
+            OperationKindEx.Increment or OperationKindEx.Decrement when operation.ToIncrementOrDecrement().Target.TrackedSymbol() is { } symbol => state[symbol],
+            _ => null
+        };
 
     private static bool CanOverflow(BinaryOperatorKind kind) =>
         kind is BinaryOperatorKind.Add or BinaryOperatorKind.Subtract or BinaryOperatorKind.Multiply or BinaryOperatorKind.Power;
 
-    private static BigInteger? Min(ITypeSymbol type) => type switch
-    {
-        _ when type.Is(KnownType.System_SByte) => sbyte.MinValue,
-        _ when type.Is(KnownType.System_Byte) => byte.MinValue,
-        _ when type.Is(KnownType.System_Int16) => short.MinValue,
-        _ when type.Is(KnownType.System_UInt16) => ushort.MinValue,
-        _ when type.Is(KnownType.System_Int32) => int.MinValue,
-        _ when type.Is(KnownType.System_UInt32) => uint.MinValue,
-        _ when type.Is(KnownType.System_Int64) => long.MinValue,
-        _ when type.Is(KnownType.System_UInt64) => ulong.MinValue,
-        _ => null
-    };
+    private static BigInteger? Min(ITypeSymbol type) =>
+        type switch
+        {
+            _ when type.Is(KnownType.System_SByte) => sbyte.MinValue,
+            _ when type.Is(KnownType.System_Byte) => byte.MinValue,
+            _ when type.Is(KnownType.System_Int16) => short.MinValue,
+            _ when type.Is(KnownType.System_UInt16) => ushort.MinValue,
+            _ when type.Is(KnownType.System_Int32) => int.MinValue,
+            _ when type.Is(KnownType.System_UInt32) => uint.MinValue,
+            _ when type.Is(KnownType.System_Int64) => long.MinValue,
+            _ when type.Is(KnownType.System_UInt64) => ulong.MinValue,
+            _ => null
+        };
 
-    private static BigInteger? Max(ITypeSymbol type) => type switch
-    {
-        _ when type.Is(KnownType.System_SByte) => sbyte.MaxValue,
-        _ when type.Is(KnownType.System_Byte) => byte.MaxValue,
-        _ when type.Is(KnownType.System_Int16) => short.MaxValue,
-        _ when type.Is(KnownType.System_UInt16) => ushort.MaxValue,
-        _ when type.Is(KnownType.System_Int32) => int.MaxValue,
-        _ when type.Is(KnownType.System_UInt32) => uint.MaxValue,
-        _ when type.Is(KnownType.System_Int64) => long.MaxValue,
-        _ when type.Is(KnownType.System_UInt64) => ulong.MaxValue,
-        _ => null
-    };
+    private static BigInteger? Max(ITypeSymbol type)
+        => type switch
+        {
+            _ when type.Is(KnownType.System_SByte) => sbyte.MaxValue,
+            _ when type.Is(KnownType.System_Byte) => byte.MaxValue,
+            _ when type.Is(KnownType.System_Int16) => short.MaxValue,
+            _ when type.Is(KnownType.System_UInt16) => ushort.MaxValue,
+            _ when type.Is(KnownType.System_Int32) => int.MaxValue,
+            _ when type.Is(KnownType.System_UInt32) => uint.MaxValue,
+            _ when type.Is(KnownType.System_Int64) => long.MaxValue,
+            _ when type.Is(KnownType.System_UInt64) => ulong.MaxValue,
+            _ => null
+        };
 }
