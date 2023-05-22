@@ -27,6 +27,19 @@ public sealed class UseCachedRegex : UseCachedRegexBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
+    private static readonly HashSet<SyntaxKind> CorrectContextSyntaxKinds = new()
+    {
+        SyntaxKind.MethodDeclaration,
+        SyntaxKind.ConstructorDeclaration,
+        SyntaxKind.DestructorDeclaration,
+        SyntaxKind.GetAccessorDeclaration,
+        SyntaxKind.SetAccessorDeclaration,
+        SyntaxKindEx.LocalFunctionStatement,
+        SyntaxKind.SimpleLambdaExpression,
+        SyntaxKind.ParenthesizedLambdaExpression,
+        SyntaxKind.AnonymousMethodExpression
+    };
+
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
@@ -43,20 +56,40 @@ public sealed class UseCachedRegex : UseCachedRegexBase<SyntaxKind>
             },
             SyntaxKind.ObjectCreationExpression);
 
+    private static bool IsWithinCorrectContext(SyntaxNode node)
+    {
+        while (!node.IsKind(SyntaxKind.CompilationUnit))
+        {
+            if (node.Parent.IsAnyKind(CorrectContextSyntaxKinds))
+            {
+                return true;
+            }
+
+            node = node.Parent;
+        }
+
+        return false;
+    }
+
+    private static bool IsCorrectObjectType(ObjectCreationExpressionSyntax objectCreationExpression, SemanticModel model) =>
+        model.GetTypeInfo(objectCreationExpression).Type.Is(KnownType.System_Text_RegularExpressions_Regex);
+
+    private static bool IsArgumentConstantOrReadOnly(ObjectCreationExpressionSyntax objectCreationExpression, SemanticModel model) =>
+        objectCreationExpression.ArgumentList?.Arguments[0].Expression is { } expression
+        && (model.GetConstantValue(expression).HasValue
+            || model.GetSymbolInfo(expression).Symbol is IFieldSymbol { IsReadOnly: true });
+
     private static bool IsCompliantAssignment(ObjectCreationExpressionSyntax objectCreationExpression, SemanticModel model) =>
         objectCreationExpression.Parent switch
         {
-            AssignmentExpressionSyntax { RawKind: (int)SyntaxKind.SimpleAssignmentExpression } assignmentExpression =>
-                model.GetSymbolInfo(assignmentExpression.Left).Symbol is IFieldSymbol { IsReadOnly: true } or IPropertySymbol { IsReadOnly: true }
-                || IsAssignmentWithinIfStatement(assignmentExpression, model),
-            AssignmentExpressionSyntax { RawKind: (int)SyntaxKindEx.CoalesceAssignmentExpression } assignmentExpression =>
-                model.GetSymbolInfo(assignmentExpression.Left).Symbol is IFieldSymbol or IPropertySymbol,
-            BinaryExpressionSyntax
-            {
-                RawKind: (int)SyntaxKind.CoalesceExpression,
-                Parent: AssignmentExpressionSyntax { RawKind: (int)SyntaxKind.SimpleAssignmentExpression or (int)SyntaxKindEx.CoalesceAssignmentExpression } assignmentExpression
-            } coalesceExpression => coalesceExpression.Left.GetName() == assignmentExpression.Left.GetName()
-                                    && model.GetSymbolInfo(assignmentExpression.Left).Symbol is IFieldSymbol or IPropertySymbol,
+            AssignmentExpressionSyntax assignment when assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) =>
+                model.GetSymbolInfo(assignment.Left).Symbol is IFieldSymbol { IsReadOnly: true } or IPropertySymbol { IsReadOnly: true }
+                || IsAssignmentWithinIfStatement(assignment, model),
+            AssignmentExpressionSyntax assignment when assignment.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) =>
+                model.GetSymbolInfo(assignment.Left).Symbol is IFieldSymbol or IPropertySymbol,
+            BinaryExpressionSyntax { Parent: AssignmentExpressionSyntax assignment } coalesce
+                when coalesce.IsKind(SyntaxKind.CoalesceExpression) && assignment.IsAnyKind(SyntaxKind.SimpleAssignmentExpression, SyntaxKindEx.CoalesceAssignmentExpression)
+                => coalesce.Left.GetName() == assignment.Left.GetName() && model.GetSymbolInfo(assignment.Left).Symbol is IFieldSymbol or IPropertySymbol,
             _ => false
         };
 
@@ -73,42 +106,12 @@ public sealed class UseCachedRegex : UseCachedRegexBase<SyntaxKind>
             node = node.Parent;
         }
 
-        return node.Parent is IfStatementSyntax { Condition: BinaryExpressionSyntax { RawKind: (int)SyntaxKind.EqualsExpression or (int)SyntaxKind.IsExpression } condition }
-               && ((assignmentExpression.Left.GetName() == condition.Left.GetName()
-                    && condition.Right is LiteralExpressionSyntax { RawKind: (int)SyntaxKind.NullLiteralExpression })
-                   || (assignmentExpression.Left.GetName() == condition.Right.GetName()
-                       && condition.Left is LiteralExpressionSyntax { RawKind: (int)SyntaxKind.NullLiteralExpression }))
+        return node.Parent is IfStatementSyntax { Condition: BinaryExpressionSyntax condition }
+               && condition.IsAnyKind(SyntaxKind.EqualsExpression, SyntaxKind.IsExpression)
+               && (ChecksForNullOnAssigned(condition.Left, condition.Right) || ChecksForNullOnAssigned(condition.Right, condition.Left))
                && model.GetSymbolInfo(assignmentExpression.Left).Symbol is IFieldSymbol or IPropertySymbol;
-    }
 
-    private static bool IsCorrectObjectType(ObjectCreationExpressionSyntax objectCreationExpression, SemanticModel model) =>
-        model.GetTypeInfo(objectCreationExpression).Type.Is(KnownType.System_Text_RegularExpressions_Regex);
-
-    private static bool IsArgumentConstantOrReadOnly(ObjectCreationExpressionSyntax objectCreationExpression, SemanticModel model) =>
-        model.GetConstantValue(objectCreationExpression.ArgumentList?.Arguments[0].Expression).HasValue
-        || model.GetSymbolInfo(objectCreationExpression.ArgumentList?.Arguments[0].Expression).Symbol is IFieldSymbol { IsReadOnly: true };
-
-    private static bool IsWithinCorrectContext(SyntaxNode node)
-    {
-        while (!node.IsKind(SyntaxKind.CompilationUnit))
-        {
-            if (node.Parent.IsAnyKind(
-                    SyntaxKind.MethodDeclaration,
-                    SyntaxKind.ConstructorDeclaration,
-                    SyntaxKind.DestructorDeclaration,
-                    SyntaxKind.GetAccessorDeclaration,
-                    SyntaxKind.SetAccessorDeclaration,
-                    SyntaxKindEx.LocalFunctionStatement,
-                    SyntaxKind.SimpleLambdaExpression,
-                    SyntaxKind.ParenthesizedLambdaExpression,
-                    SyntaxKind.AnonymousMethodExpression))
-            {
-                return true;
-            }
-
-            node = node.Parent;
-        }
-
-        return false;
+        bool ChecksForNullOnAssigned(ExpressionSyntax first, ExpressionSyntax second) =>
+            assignmentExpression.Left.GetName() == first.GetName() && second is LiteralExpressionSyntax literal && literal.IsKind(SyntaxKind.NullLiteralExpression);
     }
 }

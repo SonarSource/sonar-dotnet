@@ -5,11 +5,10 @@ public class UseCachedRegex
     const string IMMUTABLE_REGEX_PATTERN = "^[a-zA-Z]$";
     readonly string READONLY_REGEX_PATTERN = "^[a-zA-Z]$";
 
-    Regex MutableCachedRegex = new ("^[a-zA-Z]$"); // ???
-    static Regex StaticMutableCachedRegex = new ("^[a-zA-Z]$"); // ???
+    Regex MutableCachedRegex = new ("^[a-zA-Z]$"); // Compliant
+    static Regex StaticMutableCachedRegex = new ("^[a-zA-Z]$"); // Compliant
     string mutableRegexPattern = "^[a-zA-Z]$";
-
-    public Regex PropertyCachedRegex { get; set; } = new (IMMUTABLE_REGEX_PATTERN); // Compliant
+    public Regex PropertyCachedRegex { get; set; } = new Regex(IMMUTABLE_REGEX_PATTERN); // Compliant
 
     void Compliant(string input)
     {
@@ -22,6 +21,10 @@ public class UseCachedRegex
         MutableCachedRegex ??= MutableCachedRegex ?? new Regex("^[a-zA-Z]$"); // Compliant
         StaticMutableCachedRegex ??= new Regex("^[a-zA-Z]$"); // Compliant
         StaticMutableCachedRegex ??= StaticMutableCachedRegex ?? new Regex("^[a-zA-Z]$"); // Compliant
+
+        PropertyCachedRegex = PropertyCachedRegex is not null ? PropertyCachedRegex : new Regex("^[a-zA-Z]$"); // Compliant
+        MutableCachedRegex = MutableCachedRegex is not null ? MutableCachedRegex : new Regex("^[a-zA-Z]$"); // Compliant
+        StaticMutableCachedRegex = StaticMutableCachedRegex is not null ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Compliant
     }
 
     void Noncompliant()
@@ -44,6 +47,11 @@ public class UseCachedRegex
         MutableCachedRegex = new ("^[a-zA-Z]$"); // Noncompliant
         StaticMutableCachedRegex = new ("^[a-zA-Z]$"); // Noncompliant
         PropertyCachedRegex = new ("^[a-zA-Z]$"); // Noncompliant
+
+        PropertyCachedRegex = PropertyCachedRegex is not null ? new Regex("^[a-zA-Z]$") : PropertyCachedRegex; // Noncompliant
+        MutableCachedRegex = MutableCachedRegex is not null ? MutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
+        StaticMutableCachedRegex = StaticMutableCachedRegex is not null ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
+
 
         UseRegex(new ("^[a-zA-Z]$")); // Noncompliant
         //       ^^^^^^^^^^^^^^^^^^
