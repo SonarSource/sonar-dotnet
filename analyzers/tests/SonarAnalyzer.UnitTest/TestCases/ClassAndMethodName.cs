@@ -189,4 +189,10 @@ namespace FPRepros
             public static int SizeOf = Marshal.SizeOf(typeof(IMAGE_NT_HEADERS32));
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/7238
+    public class B2b // Noncompliant FP
+    {
+
+    }
 }
