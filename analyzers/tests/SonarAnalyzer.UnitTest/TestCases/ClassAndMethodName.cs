@@ -193,4 +193,7 @@ namespace FPRepros
     // https://github.com/SonarSource/sonar-dotnet/issues/7238
     public class B2b // Noncompliant {{Rename class 'B2b' to match pascal case naming rules, consider using 'B2B'.}}
     { }
+
+    public class B2bSomethingCalculator // Noncompliant FP
+    { }
 }
