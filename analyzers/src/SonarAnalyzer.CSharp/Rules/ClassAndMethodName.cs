@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     currentWord.Append(c);
                 }
-                else if (char.IsLower(c) || char.IsNumber(c))
+                else if (char.IsLower(c))
                 {
                     if (currentWord.Length > 1 && char.IsUpper(currentWord[currentWord.Length - 1]))
                     {
