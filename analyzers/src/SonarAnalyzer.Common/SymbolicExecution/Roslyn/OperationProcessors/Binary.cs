@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -106,19 +107,6 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
                 ? state.SetSymbolConstraint(symbol, newConstraint)
                 : state;
 
-        static NumberConstraint RelationalNumberConstraint(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
-            kind switch
-            {
-                BinaryOperatorKind.Equals => NumberConstraint.From(BiggestMinimum(comparedNumber, existingNumber), SmallestMaximum(comparedNumber, existingNumber)),
-                BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Min => NumberConstraint.From(existingNumber.Min + 1, existingNumber.Max),
-                BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Max => NumberConstraint.From(existingNumber.Min, existingNumber.Max - 1),
-                BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => NumberConstraint.From(existingNumber, comparedNumber.Min + 1, null),
-                BinaryOperatorKind.GreaterThanOrEqual when comparedNumber.Min.HasValue => NumberConstraint.From(existingNumber, comparedNumber.Min, null),
-                BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue => NumberConstraint.From(existingNumber, null, comparedNumber.Max - 1),
-                BinaryOperatorKind.LessThanOrEqual when comparedNumber.Max.HasValue => NumberConstraint.From(existingNumber, null, comparedNumber.Max),
-                _ => null
-            };
-
         static BinaryOperatorKind Flip(BinaryOperatorKind kind) =>
             kind switch
             {
@@ -142,6 +130,37 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
                 BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThan,
                 _ => BinaryOperatorKind.None    // We don't care about ObjectValueEquals
             };
+    }
+
+    private static NumberConstraint RelationalNumberConstraint(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber)
+    {
+        return kind switch
+        {
+            BinaryOperatorKind.Equals => NumberConstraint.From(BiggestMinimum(comparedNumber, existingNumber), SmallestMaximum(comparedNumber, existingNumber)),
+            BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Min => NumberConstraint.From(existingNumber.Min + 1, existingNumber.Max),
+            BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Max => NumberConstraint.From(existingNumber.Min, existingNumber.Max - 1),
+            BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => From(comparedNumber.Min + 1, null),
+            BinaryOperatorKind.GreaterThanOrEqual when comparedNumber.Min.HasValue => From(comparedNumber.Min, null),
+            BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue => From(null, comparedNumber.Max - 1),
+            BinaryOperatorKind.LessThanOrEqual when comparedNumber.Max.HasValue => From(null, comparedNumber.Max),
+            _ => null
+        };
+
+        NumberConstraint From(BigInteger? newMin, BigInteger? newMax)
+        {
+            if (existingNumber is not null)
+            {
+                if (!newMin.HasValue || existingNumber.Min > newMin)
+                {
+                    newMin = existingNumber.Min;
+                }
+                if (!newMax.HasValue || existingNumber.Max < newMax)
+                {
+                    newMax = existingNumber.Max;
+                }
+            }
+            return NumberConstraint.From(newMin, newMax);
+        }
     }
 
     private static SymbolicConstraint BinaryOperandConstraint<T>(ProgramState state, IBinaryOperationWrapper binary) where T : SymbolicConstraint =>
