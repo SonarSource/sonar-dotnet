@@ -32,6 +32,8 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         BinaryOperatorKind.Multiply => CalculateMultiply(left, right),
         BinaryOperatorKind.And when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value & right.Min.Value),
         BinaryOperatorKind.And => CalculateAnd(left, right),
+        BinaryOperatorKind.Or when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value | right.Min.Value),
+        BinaryOperatorKind.Or => CalculateOr(left, right),
         _ => null
     };
 
@@ -139,6 +141,18 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         }
     }
 
+    private static BigInteger? SmallestMinimum(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.Min is null || right.Min is null)
+        {
+            return null;
+        }
+        else
+        {
+            return BigInteger.Min(left.Min.Value, right.Min.Value);
+        }
+    }
+
     private static BigInteger? BiggestMinimum(NumberConstraint left, NumberConstraint right)
     {
         if (left.Min is null)
@@ -152,6 +166,47 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         else
         {
             return BigInteger.Max(left.Min.Value, right.Min.Value);
+        }
+    }
+
+    private static NumberConstraint CalculateOr(NumberConstraint left, NumberConstraint right) =>
+        NumberConstraint.From(CalculateOrMin(left, right), CalculateOrMax(left, right));
+
+    private static BigInteger? CalculateOrMin(NumberConstraint left, NumberConstraint right)
+    {
+        // BitOr can only turn 0s into 1s, not the other way around => If both operands have the same sign, the result cannot be smaller than the bigger of the two.
+        if ((left.IsNegative && right.IsNegative) || (left.IsPositive && right.IsPositive))
+        {
+            return BiggestMinimum(left, right);
+        }
+        // -1 == 0b11111111 => a | -1 == -1 =>
+        // If one operand can be -1 and one is positive, the result will be negative, but not smaller than the negative operand.
+        else if (left.IsNegative)
+        {
+            return left.Min;
+        }
+        else if (right.IsNegative)
+        {
+            return right.Min;
+        }
+        else
+        {
+            // If both operands can be -1 and both can have positive values => The result cannot be smaller than the smaller of the two minima.
+            // If one operand is negative and one can have positive values => The result cannot be smaller than the negative minimum.
+            return SmallestMinimum(left, right);
+        }
+    }
+
+    private static BigInteger? CalculateOrMax(NumberConstraint left, NumberConstraint right)
+    {
+        // The result can only be positive if both operands are positive => The result must be < 0 unless both ranges include positive numbers.
+        if (left.CanBePositive && right.CanBePositive)
+        {
+            return left.Max.HasValue && right.Max.HasValue ? left.Max.Value | right.Max.Value : null;
+        }
+        else
+        {
+            return -1;
         }
     }
 }
