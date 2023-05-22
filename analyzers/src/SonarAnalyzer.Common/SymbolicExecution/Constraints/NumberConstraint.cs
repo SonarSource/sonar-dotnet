@@ -99,6 +99,22 @@ public sealed class NumberConstraint : SymbolicConstraint
         }
     }
 
+    public static NumberConstraint From(NumberConstraint existing, BigInteger? newMin, BigInteger? newMax)
+    {
+        if (existing is not null)
+        {
+            if (!newMin.HasValue || existing.Min > newMin)
+            {
+                newMin = existing.Min;
+            }
+            if (!newMax.HasValue || existing.Max < newMax)
+            {
+                newMax = existing.Max;
+            }
+        }
+        return From(newMin, newMax);
+    }
+
     public bool CanContain(BigInteger value) =>
         !(value < Min || Max < value);
 
