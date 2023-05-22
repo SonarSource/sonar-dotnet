@@ -13,10 +13,10 @@ public class Programs
         dictionary.GetOrAdd(key, _ => key); // Noncompliant
 
         dictionary.GetOrAdd(42, _ => key + 42);
-        dictionary.GetOrAdd(key, key => key + 42); // Error [CS0136]
-                                                   // Noncompliant@-1
-        dictionary.GetOrAdd(42, key => key + 42);  // Error [CS0136]
+        dictionary.GetOrAdd(key, key => key + 42); // Compliant (the 'key' referenced is the lambda parameter)
+        dictionary.GetOrAdd(42, key => key + 42);
         dictionary.GetOrAdd(key, delegate (int k) { return key + 42; }); // Noncompliant
+        dictionary.GetOrAdd(key, delegate (int key) { return key + 42; });
 
         // GetOrAdd(TKey, TValue)
         dictionary.GetOrAdd(42, 42);
@@ -28,8 +28,8 @@ public class Programs
         //                       ^^^^^^^^^^^^^^^^^^^^
         dictionary.GetOrAdd(key, delegate (int _, int arg) { return key + 42; }, 42);   // Noncompliant
         dictionary.GetOrAdd(key, (_, arg) => arg + 42, 42);
-        dictionary.GetOrAdd(42, (key, arg) => arg + 42, 42);  // Error [CS0136]
-        dictionary.GetOrAdd(key, (key, arg) => arg + 42, 42); // Error [CS0136]
+        dictionary.GetOrAdd(42, (key, arg) => arg + 42, 42);
+        dictionary.GetOrAdd(key, (key, arg) => arg + 42, 42);
     }
 
     void AddOrUpdate(ConcurrentDictionary<int, int> dictionary, int key)
@@ -42,14 +42,14 @@ public class Programs
         //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^ @-1 {{Use the lambda parameter instead of capturing the argument 'key'}}
         dictionary.AddOrUpdate(key, _ => 42, (_, oldValue) => oldValue + 42);
         dictionary.AddOrUpdate(42, _ => 42, (_, oldValue) => oldValue + 42);
-        dictionary.AddOrUpdate(42, _ => 42, (key, oldValue) => key + 42); // Error [CS0136]
+        dictionary.AddOrUpdate(42, _ => 42, (key, oldValue) => key + 42);
 
         // AddOrUpdate(TKey, TValue, Func<TKey,TValue,TValue>)
         dictionary.AddOrUpdate(key, 42, (_, oldValue) => key + 42); // Noncompliant
         dictionary.AddOrUpdate(42, key, (_, oldValue) => key + 42);
         dictionary.AddOrUpdate(42, 42, (_, oldValue) => key + 42);
         dictionary.AddOrUpdate(key, key, (_, oldValue) => oldValue + 42);
-        dictionary.AddOrUpdate(42, 42, (key, oldValue) => key + 42); // Error [CS0136]
+        dictionary.AddOrUpdate(42, 42, (key, oldValue) => key + 42);
         dictionary.AddOrUpdate(42, 42, (_, oldValue) => oldValue + 42);
 
         // AddOrUpdate<TArg>(TKey, Func<TKey,TArg,TValue>, Func<TKey,TValue,TArg,TValue>, TArg)
@@ -62,9 +62,8 @@ public class Programs
         dictionary.AddOrUpdate(42, (_, arg) => key, (_, oldValue, arg) => oldValue + arg, 42);
         dictionary.AddOrUpdate(42, (_, arg) => arg, (_, oldValue, arg) => oldValue + arg, key);
         dictionary.AddOrUpdate(42, (_, arg) => key, (_, oldValue, arg) => oldValue + arg, key);
-        dictionary.AddOrUpdate(key, (_, arg) => key, (_, key, arg) => arg, key); // Error [CS0136]
-                                                                                 // Noncompliant@-1
-        dictionary.AddOrUpdate(42, (_, arg) => key, (_, key, arg) => key + arg, key); // Error [CS0136]
+        dictionary.AddOrUpdate(key, (_, arg) => key, (_, key, arg) => arg, key); // Noncompliant
+        dictionary.AddOrUpdate(42, (_, arg) => key, (_, key, arg) => key + arg, key);
     }
 
     void CompliantInvocations(ConcurrentDictionary<int, int> dictionary, HidesMethod<int, int> hidesMethod, List<int> list, int key)

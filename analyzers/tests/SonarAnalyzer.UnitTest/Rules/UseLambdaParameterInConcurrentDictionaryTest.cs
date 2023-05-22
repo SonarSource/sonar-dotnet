@@ -27,9 +27,10 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class UseLambdaParameterInConcurrentDictionaryTest
 {
     [TestMethod]
-    public void UseLambdaParameterInConcurrentDictionary_CS() =>
-        new VerifierBuilder<CS.UseLambdaParameterInConcurrentDictionary>().AddPaths("UseLambdaParameterInConcurrentDictionary.cs")
+    public void UseLambdaParameterInConcurrentDictionary_CSharp8() =>
+        new VerifierBuilder<CS.UseLambdaParameterInConcurrentDictionary>().AddPaths("UseLambdaParameterInConcurrentDictionary.CSharp8.cs")
             .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
     [TestMethod]

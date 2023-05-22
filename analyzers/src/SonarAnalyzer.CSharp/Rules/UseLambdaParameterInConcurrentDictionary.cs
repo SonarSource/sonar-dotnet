@@ -32,11 +32,14 @@ public sealed class UseLambdaParameterInConcurrentDictionary : UseLambdaParamete
         argument.Expression switch
         {
             SimpleLambdaExpressionSyntax simpleLambda =>
-                simpleLambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName)),
+                !simpleLambda.Parameter.GetName().Equals(keyName)
+                && simpleLambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName)),
             ParenthesizedLambdaExpressionSyntax parentesizedLambda =>
-                parentesizedLambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName)),
+                !parentesizedLambda.ParameterList.Parameters.Any(x => x.GetName().Equals(keyName))
+                && parentesizedLambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName)),
             AnonymousMethodExpressionSyntax anonymousMethod =>
-                anonymousMethod.Block.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName)),
+                !anonymousMethod.ParameterList.Parameters.Any(x => x.GetName().Equals(keyName))
+                && anonymousMethod.Block.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName)),
             _ => false
         };
 
