@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.Formatting;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,18 +32,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
-            /*
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
-            if (root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is not InvocationExpressionSyntax syntaxNode)
+            if (root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is IdentifierNameSyntax identifierSyntax
+                && identifierSyntax is { Parent: ExpressionSyntax { Parent: InvocationExpressionSyntax invocationExpression } expression })
             {
-                return Task.CompletedTask;
+                var newMember = SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, expression, SyntaxFactory.IdentifierName("Value"));
+                context.RegisterCodeFix(
+                    CodeAction.Create(
+                        Title,
+                        c =>
+                        {
+                            var newRoot = root.ReplaceNode(invocationExpression, newMember);
+                            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                        }),
+                    context.Diagnostics);
             }
-
-            var a = syntaxNode.RemoveParentheses();
-
-            */
             return Task.CompletedTask;
         }
     }

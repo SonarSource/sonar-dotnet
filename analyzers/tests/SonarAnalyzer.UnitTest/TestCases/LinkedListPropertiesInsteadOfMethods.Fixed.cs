@@ -7,10 +7,8 @@ class MyClass
 {
     void Basic(LinkedList<int> data)
     {
-        data.First.Value; // Fixed
-
-        data.Last.Value; // Fixed
-
+        _ = data.First.Value; // Fixed
+        _ = data.Last.Value; // Fixed
         data.First(x => x > 0);            // Compliant
         data.Last(x => x > 0);             // Compliant
         _ = data.First.Value;              // Compliant
@@ -18,22 +16,22 @@ class MyClass
         data.Count();                      // Compliant
         data.Append(1).First().ToString(); // Compliant
         data.Append(1).Last().ToString();  // Compliant
-        data?.First.Value.ToString();      // Fixed
-        data?.Last.Value.ToString();       // Fixed
+        data?.First.Value.ToString();          // Fixed
+        data?.Last.Value.ToString();           // Fixed
 
     }
 
     void CustomClass(LinkedList<int> data)
     {
         var classContainingLinkedList = new ClassContainingLinkedList();
-        classContainingLinkedList.myLinkedListField.First.Value;  // Fixed
-        classContainingLinkedList.notALinkedList.First(); // Compliant
+        _ = classContainingLinkedList.myLinkedListField.First.Value;  // Fixed
+        _ = classContainingLinkedList.notALinkedList.First(); // Compliant
 
         var enumData = new EnumData<int>();
         enumData.First(); // Compliant
 
         var goodLinkedList = new GoodLinkedList<int>();
-        goodLinkedList.First.Value; // Fixed
+        _ = goodLinkedList.First.Value; // Fixed
 
         var ternary = (true ? data : goodLinkedList).First.Value; // Fixed
         var nullCoalesce = (data ?? goodLinkedList).First.Value;  // Fixed
@@ -41,26 +39,25 @@ class MyClass
     }
 
     void ConditionalsCombinations(GoodLinkedList<int> goodLinkedList)
-    { 
-        goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList().GetLinkedList().First.Value;     // Fixed
-        goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList().GetLinkedList()?.First.Value;    // Fixed
-        goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList()?.GetLinkedList().First.Value;    // Fixed
-        goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList()?.GetLinkedList()?.First.Value;   // Fixed
-        goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList().GetLinkedList().First.Value;    // Fixed
-        goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList().GetLinkedList()?.First.Value;   // Fixed
-        goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList()?.GetLinkedList().First.Value;   // Fixed
-        goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.First.Value;  // Fixed
-        goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList().GetLinkedList().First.Value;    // Fixed
-        goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList().GetLinkedList()?.First.Value;   // Fixed
-        goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList()?.GetLinkedList().First.Value;   // Fixed
-        goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList()?.GetLinkedList()?.First.Value;  // Fixed
-        goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList().GetLinkedList().First.Value;   // Fixed
-        goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList().GetLinkedList()?.First.Value;  // Fixed
-        goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.GetLinkedList().First.Value;  // Fixed
-        goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.First.Value; // Fixed
-
-        goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.First(x => x > 0); // Compliant
-}
+    {
+        _ = goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList().GetLinkedList().First.Value;     // Fixed
+        _ = goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList().GetLinkedList()?.First.Value;    // Fixed
+        _ = goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList()?.GetLinkedList().First.Value;    // Fixed
+        _ = goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList()?.GetLinkedList()?.First.Value;   // Fixed
+        _ = goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList().GetLinkedList().First.Value;    // Fixed
+        _ = goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList().GetLinkedList()?.First.Value;   // Fixed
+        _ = goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList()?.GetLinkedList().First.Value;   // Fixed
+        _ = goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.First.Value;  // Fixed
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList().GetLinkedList().First.Value;    // Fixed
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList().GetLinkedList()?.First.Value;   // Fixed
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList()?.GetLinkedList().First.Value;   // Fixed
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList()?.GetLinkedList()?.First.Value;  // Fixed
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList().GetLinkedList().First.Value;   // Fixed
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList().GetLinkedList()?.First.Value;  // Fixed
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.GetLinkedList().First.Value;  // Fixed
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.First.Value; // Fixed
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.First(x => x > 0); // Compliant
+    }
 
     int GetFirst(LinkedList<int> data) => data.First.Value; // Fixed
 
