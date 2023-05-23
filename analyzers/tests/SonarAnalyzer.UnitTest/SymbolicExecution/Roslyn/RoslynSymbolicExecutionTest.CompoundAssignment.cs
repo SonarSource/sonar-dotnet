@@ -36,6 +36,37 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
     }
 
+    [TestMethod]
+    public void CompoundAssignment_TrackedSymbolOnRightSide()
+    {
+        const string code = """
+            var left = 40;
+            var right = 2;
+            var result = left += right;
+            Tag("Left", left);
+            Tag("Right", right);
+            Tag("Result", result);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTag("Left", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.ValidateTag("Right", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2)));
+        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+    }
+
+    [TestMethod]
+    public void CompoundAssignment_SelfUpdate()
+    {
+        const string code = """
+            var value = 21;
+            var result = value += value;
+            Tag("Result", result);
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+    }
+
     [DataTestMethod]
     [DataRow("+=")]
     [DataRow("-=")]
@@ -48,11 +79,36 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("<<=")]
     [DataRow(">>=")]
     [DataRow(">>>=")]
-    public void CompoundAssignment_Arithmetics(string op)
+    public void CompoundAssignment_Arithmetics_Int(string op)
     {
         var code = $"""
             var value = 42;
             var result = value {op} 1;
+            Tag("Result", result);
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+    }
+
+    [DataTestMethod]
+    [DataRow("+=")]
+    [DataRow("-=")]
+    [DataRow("*=")]
+    [DataRow("/=")]
+    [DataRow("%=")]
+    [DataRow("&=")]
+    [DataRow("|=")]
+    [DataRow("^=")]
+    [DataRow("<<=")]
+    [DataRow(">>=")]
+    [DataRow(">>>=")]
+    public void CompoundAssignment_Arithmetics_Char(string op)
+    {
+        var code = $"""
+            var value = 'z';
+            var result = value {op} 'a';
             Tag("Result", result);
             Tag("Value", value);
             """;
