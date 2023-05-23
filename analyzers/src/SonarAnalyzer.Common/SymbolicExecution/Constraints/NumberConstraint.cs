@@ -18,14 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
 using System.Numerics;
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints;
 
 public sealed class NumberConstraint : SymbolicConstraint
 {
-    public static readonly NumberConstraint Zero = new(0, 0);
-    public static readonly NumberConstraint One = new(1, 1);
+    private const int CacheLimit = 100_000; // Measured projects produced around 1000 distinct values.
+
+    private static ConcurrentDictionary<CacheKey, NumberConstraint> cache = new();
 
     public BigInteger? Min { get; }
     public BigInteger? Max { get; }
@@ -41,33 +43,12 @@ public sealed class NumberConstraint : SymbolicConstraint
 
     private NumberConstraint(BigInteger? min, BigInteger? max) : base(ConstraintKind.Number)
     {
-        if (min.HasValue && max.HasValue && min.Value > max.Value)
-        {
-            Max = min;  // Swap
-            Min = max;
-        }
-        else
-        {
-            Min = min;
-            Max = max;
-        }
+        Min = min;
+        Max = max;
     }
 
-    public static NumberConstraint From(BigInteger value)
-    {
-        if (value.IsZero)
-        {
-            return Zero;
-        }
-        else if (value.IsOne)
-        {
-            return One;
-        }
-        else
-        {
-            return new(value, value);
-        }
-    }
+    public static NumberConstraint From(BigInteger value) =>
+        From(value, value);
 
     public static NumberConstraint From(object value) =>
         value switch
@@ -85,18 +66,24 @@ public sealed class NumberConstraint : SymbolicConstraint
 
     public static NumberConstraint From(BigInteger? min, BigInteger? max)
     {
-        if (min.HasValue && max.HasValue && min.Value == max.Value)
-        {
-            return From(min.Value);
-        }
-        else if (min.HasValue || max.HasValue)
-        {
-            return new(min, max);
-        }
-        else
+        if (!min.HasValue && !max.HasValue)
         {
             return null;
         }
+        if (min.HasValue && max.HasValue && min.Value > max.Value)
+        {
+            var tmp = min;
+            min = max;
+            max = tmp;
+        }
+        if (cache.Count > CacheLimit)
+        {
+            ResetCache();
+        }
+        var key = new CacheKey(min, max);
+        return cache.TryGetValue(key, out var constraint)
+            ? constraint
+            : cache.GetOrAdd(key, new NumberConstraint(min, max));
     }
 
     public bool CanContain(BigInteger value) =>
@@ -111,6 +98,11 @@ public sealed class NumberConstraint : SymbolicConstraint
     public override string ToString() =>
         Min.HasValue && Min == Max ? $"{Kind} {Min}" : $"{Kind} from {Serialize(Min)} to {Serialize(Max)}";
 
+    public static void ResetCache() =>
+        cache.Clear();
+
     private static string Serialize(BigInteger? value) =>
         value.HasValue ? value.Value.ToString() : "*";
+
+    private readonly record struct CacheKey(BigInteger? Min, BigInteger? Max);
 }

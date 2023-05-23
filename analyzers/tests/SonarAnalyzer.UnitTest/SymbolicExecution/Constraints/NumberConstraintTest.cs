@@ -83,6 +83,38 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
             NumberConstraint.From(null, null).Should().BeNull();
         }
 
+        [DataTestMethod]
+        [DataRow(0, 0)]
+        [DataRow(null, 42)]
+        [DataRow(42, null)]
+        [DataRow(0, 100)]
+        public void From_IsCached(int? min, int? max)
+        {
+            NumberConstraint.ResetCache();  // Otherwise the cache test could reset this half way through the testing
+            NumberConstraint.From(min, max).Should().BeSameAs(NumberConstraint.From(min, max));
+        }
+
+        [TestMethod]
+        public void From_Cache_ResetsAfterLimit()
+        {
+            var zero = NumberConstraint.From(0);
+            zero.Should().BeSameAs(NumberConstraint.From(0));
+            for (var i = 0; i <= 100_000; i++)
+            {
+                NumberConstraint.From(i);   // Abuse the cache
+            }
+            zero.Should().NotBeSameAs(NumberConstraint.From(0), "Cache should have been cleared and this should be a new instance");
+        }
+
+        [TestMethod]
+        public void From_ResetCache()
+        {
+            var value = NumberConstraint.From(42);
+            value.Should().BeSameAs(NumberConstraint.From(42));
+            NumberConstraint.ResetCache();
+            value.Should().NotBeSameAs(NumberConstraint.From(42));
+        }
+
         [TestMethod]
         public void IsSingleValue()
         {
