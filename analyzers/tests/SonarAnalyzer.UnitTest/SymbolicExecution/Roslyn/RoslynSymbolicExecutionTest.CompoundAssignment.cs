@@ -33,7 +33,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("Result", result);
             """;
         var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -48,9 +48,9 @@ public partial class RoslynSymbolicExecutionTest
             Tag("Result", result);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Left", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-        validator.ValidateTag("Right", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2)));
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Right").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2));
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -63,8 +63,8 @@ public partial class RoslynSymbolicExecutionTest
             Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -88,8 +88,8 @@ public partial class RoslynSymbolicExecutionTest
             Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -113,8 +113,8 @@ public partial class RoslynSymbolicExecutionTest
             Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -130,7 +130,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 }
