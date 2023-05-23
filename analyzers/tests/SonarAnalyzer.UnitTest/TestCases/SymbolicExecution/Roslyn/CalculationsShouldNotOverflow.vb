@@ -32,9 +32,9 @@ Public Class Sample
         __ = i - 1              ' Noncompliant
 
         Dim ui As UInteger = UInteger.MaxValue
-        __ = ui + 1             ' Noncompliant
+        __ = ui + 1             ' FIXME Non-compliant
         ui = UInteger.MinValue
-        __ = ui - 1             ' Noncompliant
+        __ = ui - 1             ' FIXME Non-compliant
 
         Dim i64 As Long = Long.MaxValue
         __ = i64 + 1            ' Noncompliant
@@ -42,18 +42,18 @@ Public Class Sample
         __ = i64 - 1            ' Noncompliant
 
         Dim ui64 As ULong = ULong.MaxValue
-        __ = ui64 + 1           ' Noncompliant
+        __ = ui64 + 1           ' FIXME Non-compliant
         ui64 = ULong.MinValue
-        __ = ui64 - 1           ' Noncompliant
+        __ = ui64 - 1           ' FIXME Non-compliant
     End Sub
 
     Public Sub BasicOperators()
         Dim i As Integer = 2147483600
-        __ = i + 100            ' Noncompliant {{This calculation Is guaranteed to overflow the maximum value of '2147483647'.}}
+        __ = i + 100            ' Noncompliant {{This calculation is guaranteed to overflow the maximum value of '2147483647'.}}
         '    ^^^^^^^
 
         i = -2147483600
-        __ = i - 100            ' Noncompliant {{This calculation Is guaranteed to underflow the minimum value of '-2147483648'.}}
+        __ = i - 100            ' Noncompliant {{This calculation is guaranteed to underflow the minimum value of '-2147483648'.}}
 
         i = 2147483600
         __ = i * 100            ' Noncompliant
@@ -66,7 +66,7 @@ Public Class Sample
         __ = -2147483600 << 16  ' Compliant
 
         i = 2 And j
-        __ = i * 2147483600     ' FIXME Non-compliant
+        __ = i * 2147483600     ' Noncompliant
 
         i = 2 Or j
         __ = i * 2147483600     ' FIXME Non-compliant
@@ -80,31 +80,31 @@ Public Class Sample
 
     Public Sub AssignmentOperators()
         Dim i As Integer = 2147483600
-        i += 100               ' FIXME Non-compliant
+        i += 100                ' FIXME Non-compliant
 
         i = -2147483600
-        i -= 100               ' FIXME Non-compliant
+        i -= 100                ' FIXME Non-compliant
 
         i = 2147483600
-        i *= 100               ' FIXME Non-compliant
+        i *= 100                ' FIXME Non-compliant
 
         Dim j As Integer = 10
         i = 2147483600
         i \= j
-        __ = i * 100            ' Noncompliant FIXME wrong reason, i doesn't change because compound assignment is ignored
+        __ = i * 100            ' FIXME Non-compliant
 
         i = 2147483600
-        i <<= 1                ' Compliant
+        i <<= 1                 ' Compliant
 
         i = -2147483600
-        i <<= 1                ' Compliant
+        i <<= 1                 ' Compliant
     End Sub
 
     Public Sub Ranges(i As Integer)
-        If i > 2147483600 Then __ = i + 100    ' Noncompliant {{This calculation Is guaranteed to overflow the maximum value of '2147483647'.}}
-        If i < 2147483600 Then __ = i + 100    ' Noncompliant {{This calculation Is likely to overflow the maximum value of '2147483647'.}}
-        If i > -2147483600 Then __ = i - 100    ' Noncompliant {{This calculation Is likely to underflow the minimum value of '-2147483648'.}}
-        If i < -2147483600 Then __ = i - 100    ' Noncompliant {{This calculation Is guaranteed to underflow the minimum value of '-2147483648'.}}
+        If i > 2147483600 Then __ = i + 100     ' Noncompliant {{This calculation is guaranteed to overflow the maximum value of '2147483647'.}}
+        If i < 2147483600 Then __ = i + 100     ' Noncompliant {{This calculation is likely to overflow the maximum value of '2147483647'.}}
+        If i > -2147483600 Then __ = i - 100    ' Noncompliant {{This calculation is likely to underflow the minimum value of '-2147483648'.}}
+        If i < -2147483600 Then __ = i - 100    ' Noncompliant {{This calculation is guaranteed to underflow the minimum value of '-2147483648'.}}
     End Sub
 
     Public Sub Branching(i As Integer)
@@ -117,7 +117,7 @@ Public Class Sample
             __ = i + 100        ' Compliant
         Next
         For i = 0 To 2147483547
-            __ = i + 101        ' Noncompliant {{This calculation Is likely to overflow the maximum value of '2147483647'.}}
+            __ = i + 101        ' Noncompliant {{This calculation is likely to overflow the maximum value of '2147483647'.}}
         Next
         For i = 2147483546 To 2147483547
             __ = i + 100        ' Compliant
