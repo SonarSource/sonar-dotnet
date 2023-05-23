@@ -109,7 +109,7 @@ public class Sample
         _ = -2147483600 << 16;  // Compliant
 
         i = 2 & j;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // Noncompliant
 
         i = 2 | j;
         _ = i * 2147483600;     // FIXME Non-compliant
@@ -135,7 +135,7 @@ public class Sample
         var j = 10;
         i = 2147483600;
         i /= j;
-        _ = i * 100;            // Noncompliant FIXME wrong reason, i doesn't change because compoundassignment is ignored
+        _ = i * 100;            // FIXME Non-compliant
 
         i = 2147483600;
         i <<= 1;                // Compliant
@@ -145,19 +145,19 @@ public class Sample
 
         i = 2;
         i &= j;
-        _ = i * 2147483600;     // Noncompliant FIXME wrong reason, i doesn't change because compoundassignment is ignored
+        _ = i * 2147483600;     // FIXME Non-compliant
 
         i = 2;
         i |= j;
-        _ = i * 2147483600;     // Noncompliant FIXME wrong reason, i doesn't change because compoundassignment is ignored
+        _ = i * 2147483600;     // FIXME Non-compliant
 
         i = 2;
         i ^= j;
-        _ = i * 2147483600;     // Noncompliant FIXME wrong reason, i doesn't change because compoundassignment is ignored
+        _ = i * 2147483600;     // FIXME Non-compliant
 
         i = 2;
         i %= j;
-        _ = i * 2147483600;     // Noncompliant FIXME wrong reason, i doesn't change because compoundassignment is ignored
+        _ = i * 2147483600;     // FIXME Non-compliant
     }
 
     public void Ranges(int i)
