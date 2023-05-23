@@ -77,13 +77,13 @@ public class UseCachedRegex
         MutableCachedRegex = MutableCachedRegex == null ? new Regex("^[a-zA-Z]$") : MutableCachedRegex; // Compliant
         MutableCachedRegex = MutableCachedRegex != null ? MutableCachedRegex : new Regex("^[a-zA-Z]$"); // Compliant
         MutableCachedRegex = null == MutableCachedRegex ? new Regex("^[a-zA-Z]$") : MutableCachedRegex; // Compliant
-        MutableCachedRegex = null == MutableCachedRegex ? MutableCachedRegex : new Regex("^[a-zA-Z]$"); // Compliant
+        MutableCachedRegex = null != MutableCachedRegex ? MutableCachedRegex : new Regex("^[a-zA-Z]$"); // Compliant
         MutableCachedRegex = MutableCachedRegex is null ? new Regex("^[a-zA-Z]$") : MutableCachedRegex; // Compliant
 
         StaticMutableCachedRegex = StaticMutableCachedRegex == null ? new Regex("^[a-zA-Z]$") : StaticMutableCachedRegex; // Compliant
         StaticMutableCachedRegex = StaticMutableCachedRegex != null ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Compliant
         StaticMutableCachedRegex = null == StaticMutableCachedRegex ? new Regex("^[a-zA-Z]$") : StaticMutableCachedRegex; // Compliant
-        StaticMutableCachedRegex = null == StaticMutableCachedRegex ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Compliant
+        StaticMutableCachedRegex = null != StaticMutableCachedRegex ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Compliant
         StaticMutableCachedRegex = StaticMutableCachedRegex is null ? new Regex("^[a-zA-Z]$") : StaticMutableCachedRegex; // Compliant
 
         if (MutableCachedRegex == null)
@@ -126,15 +126,20 @@ public class UseCachedRegex
         //        ^^^^^^^^^^^^^^^^^^^^^^^
 
         myRegex = new Regex(IMMUTABLE_REGEX_PATTERN); // Noncompliant
-        //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         myRegex = new Regex(READONLY_REGEX_PATTERN); // Noncompliant
         //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         myRegex = myRegex ?? new Regex("^[a-zA-Z]$"); // Noncompliant
         //                   ^^^^^^^^^^^^^^^^^^^^^^^
 
         MutableCachedRegex = myRegex == null ? new Regex("^[a-zA-Z]$") : myRegex; // Noncompliant
-        myRegex = true ? new Regex("^[a-zA-Z]$") : false ? new Regex("^[0-9]$") : new Regex("^[a-zA-Z0-9]$"); // Noncompliant
-        MutableCachedRegex = MutableCachedRegex != null ? MutableCachedRegex : false ? new Regex("^[a-zA-Z]$") : new Regex("^[0-9]$"); // Noncompliant, FP
+        myRegex = true ? new Regex("^[a-zA-Z]$") : false ? new Regex("^[0-9]$") : new Regex("^[a-zA-Z0-9]$");
+        //               ^^^^^^^^^^^^^^^^^^^^^^^
+        //                                                 ^^^^^^^^^^^^^^^^^^^^@-1
+        //                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^@-2
+        MutableCachedRegex = MutableCachedRegex != null ? MutableCachedRegex : false ? new Regex("^[a-zA-Z]$") : new Regex("^[0-9]$"); // FP
+        //                                                                             ^^^^^^^^^^^^^^^^^^^^^^^
+        //                                                                                                       ^^^^^^^^^^^^^^^^^^^^@-1
         MutableCachedRegex = new Regex("^[a-zA-Z]$") ?? MutableCachedRegex; // Noncompliant
 
         PropertyCachedRegex = PropertyCachedRegex != null ? new Regex("^[a-zA-Z]$") : PropertyCachedRegex; // Noncompliant
@@ -143,18 +148,17 @@ public class UseCachedRegex
         PropertyCachedRegex = null == PropertyCachedRegex ? PropertyCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
         PropertyCachedRegex = PropertyCachedRegex is null ? PropertyCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
 
-        MutableCachedRegex = MutableCachedRegex == null ? new Regex("^[a-zA-Z]$") : MutableCachedRegex; // Noncompliant
-        MutableCachedRegex = MutableCachedRegex != null ? MutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
-        MutableCachedRegex = null == MutableCachedRegex ? new Regex("^[a-zA-Z]$") : MutableCachedRegex; // Noncompliant
+        MutableCachedRegex = MutableCachedRegex != null ? new Regex("^[a-zA-Z]$") : MutableCachedRegex; // Noncompliant
+        MutableCachedRegex = MutableCachedRegex == null ? MutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
+        MutableCachedRegex = null != MutableCachedRegex ? new Regex("^[a-zA-Z]$") : MutableCachedRegex; // Noncompliant
         MutableCachedRegex = null == MutableCachedRegex ? MutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
-        MutableCachedRegex = MutableCachedRegex is null ? new Regex("^[a-zA-Z]$") : MutableCachedRegex; // Noncompliant
+        MutableCachedRegex = MutableCachedRegex is null ? MutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
 
-        StaticMutableCachedRegex = StaticMutableCachedRegex == null ? new Regex("^[a-zA-Z]$") : StaticMutableCachedRegex; // Noncompliant
-        StaticMutableCachedRegex = StaticMutableCachedRegex != null ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
-        StaticMutableCachedRegex = null == StaticMutableCachedRegex ? new Regex("^[a-zA-Z]$") : StaticMutableCachedRegex; // Noncompliant
+        StaticMutableCachedRegex = StaticMutableCachedRegex != null ? new Regex("^[a-zA-Z]$") : StaticMutableCachedRegex; // Noncompliant
+        StaticMutableCachedRegex = StaticMutableCachedRegex == null ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
+        StaticMutableCachedRegex = null != StaticMutableCachedRegex ? new Regex("^[a-zA-Z]$") : StaticMutableCachedRegex; // Noncompliant
         StaticMutableCachedRegex = null == StaticMutableCachedRegex ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
-        StaticMutableCachedRegex = StaticMutableCachedRegex is null ? new Regex("^[a-zA-Z]$") : StaticMutableCachedRegex; // Noncompliant
-
+        StaticMutableCachedRegex = StaticMutableCachedRegex is null ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
 
         if (myRegex == null)
         {
@@ -236,7 +240,7 @@ public class UseCachedRegexFP
         }
         else
         {
-            var regex = new Regex(patternString, options); // FP?
+            var regex = new Regex(patternString, options); // Compliant
             subordinateRegexCache.Add(patternString, regex);
             return regex;
         }
