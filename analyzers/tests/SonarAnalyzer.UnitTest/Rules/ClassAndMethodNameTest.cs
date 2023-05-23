@@ -94,27 +94,19 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
-        public void TestSplitToParts() =>
-            new[]
-            {
-                ("foo", new[] { "foo" }),
-                ("Foo", new[] { "Foo" }),
-                ("FFF", new[] { "FFF" }),
-                ("FfF", new[] { "Ff", "F" }),
-                ("Ff9F", new[] { "Ff", "9", "F" }),
-                ("你好", new[] { "你", "好" }),
-                ("FFf", new[] { "F", "Ff" }),
-                (string.Empty,  Array.Empty<string>()),
-                ("FF9d", new[] { "FF", "9", "d" }),
-                ("y2x5__w7", new[] { "y", "2", "x", "5", "_", "_", "w", "7" }),
-                ("3%c#account", new[] { "3", "%", "c", "#", "account" }),
-            }
-            .Select(x =>
-            (
-                actual: CS.ClassAndMethodName.SplitToParts(x.Item1).ToArray(),
-                expected: x.Item2))
-            .ToList()
-            .ForEach(x => x.actual.Should().Equal(x.expected));
+        [DataTestMethod]
+        [DataRow("foo", "foo")]
+        [DataRow("Foo", "Foo")]
+        [DataRow("FFF", "FFF")]
+        [DataRow("FfF", "Ff", "F")]
+        [DataRow("Ff9F", "Ff", "9", "F")]
+        [DataRow("你好", "你", "好")]
+        [DataRow("FFf", "F", "Ff")]
+        [DataRow("")]
+        [DataRow("FF9d", "FF", "9", "d")]
+        [DataRow("y2x5__w7", "y", "2", "x", "5", "_", "_", "w", "7")]
+        [DataRow("3%c#account", "3", "%", "c", "#", "account")]
+        public void TestSplitToParts(string name, params string[] expectedParts) =>
+            CS.ClassAndMethodName.SplitToParts(name).Should().BeEquivalentTo(expectedParts);
     }
 }

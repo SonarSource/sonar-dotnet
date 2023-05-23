@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal static IEnumerable<string> SplitToParts(string name)
         {
-            var currentWord = new StringBuilder();
+            var currentWord = new StringBuilder(name.Length);
             foreach (var c in name)
             {
                 if (char.IsUpper(c))
