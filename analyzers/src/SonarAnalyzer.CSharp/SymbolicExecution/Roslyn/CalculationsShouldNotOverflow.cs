@@ -29,6 +29,6 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
 
     public override bool ShouldExecute()
     {
-        return false;
+        return true;
     }
 }

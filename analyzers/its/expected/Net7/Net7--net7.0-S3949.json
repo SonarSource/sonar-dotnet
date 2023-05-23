@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3949",
+"message":  "This calculation is guaranteed to overflow the maximum value of '2147483647'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  41,
+"endLine":  10,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3949",
+"message":  "This calculation is guaranteed to overflow the maximum value of '2147483647'.",
+"location":  {
+"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  33,
+"endLine":  13,
+"endColumn":  38
+}
+}
+}
+]
+}

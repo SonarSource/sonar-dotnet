@@ -5,7 +5,7 @@ public class Sample
     public void TupleDeconstruction()
     {
         int i = 2147483600;
-        (i, int j) = (i + 100, 100);    // FN
+        (i, int j) = (i + 100, 100);    // Noncompliant
     }
 
     public void ExtendedPropertyPattern(Type t)
