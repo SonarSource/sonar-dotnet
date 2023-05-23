@@ -31,20 +31,6 @@ public class UseCachedRegex
     public Regex PropertyCachedRegexWithBackingFieldCoalesce =>
         this.backingRegex ?? (this.backingRegex = new Regex("^[a-zA-Z]$")); // Compliant
 
-    // See https://github.com/dotnet/csharplang/issues/140#issuecomment-284895933
-    // Not sure if this compile in C# 12
-    // public Regex CSharp12SemiAutoPropertyCachedRegex
-    // {
-    //     get
-    //     {
-    //         if (field == null)
-    //         {
-    //             field = new Regex("^[a-zA-Z]$"); // Compliant
-    //         }
-    //         return field;
-    //     }
-    // }
-
     readonly static Regex StaticCachedRegex = new Regex("^[a-zA-Z]$"); // Compliant
 
     Regex MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Compliant
