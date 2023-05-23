@@ -32,9 +32,11 @@ Public Class Sample
         __ = i - 1              ' Noncompliant
 
         Dim ui As UInteger = UInteger.MaxValue
-        __ = ui + 1             ' FIXME Non-compliant
+        __ = ui + 1UI           ' Noncompliant
+        __ = ui + 1             ' Compliant, because it's upcasted to Long
         ui = UInteger.MinValue
-        __ = ui - 1             ' FIXME Non-compliant
+        __ = ui - 1UI           ' Noncompliant
+        __ = ui - 1             ' Compliant, because it's upcasted to Long
 
         Dim i64 As Long = Long.MaxValue
         __ = i64 + 1            ' Noncompliant
@@ -42,9 +44,11 @@ Public Class Sample
         __ = i64 - 1            ' Noncompliant
 
         Dim ui64 As ULong = ULong.MaxValue
-        __ = ui64 + 1           ' FIXME Non-compliant
+        __ = ui64 + 1UI         ' Noncompliant
+        __ = ui64 + 1           ' Compliant, because it's upcasted to Decimal
         ui64 = ULong.MinValue
-        __ = ui64 - 1           ' FIXME Non-compliant
+        __ = ui64 - 1UI         ' Noncompliant
+        __ = ui64 - 1           ' Compliant, because it's upcasted to Decimal
     End Sub
 
     Public Sub BasicOperators()
