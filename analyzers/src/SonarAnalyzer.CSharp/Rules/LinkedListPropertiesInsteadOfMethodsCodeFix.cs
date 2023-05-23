@@ -34,9 +34,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
+            var identifierSyntax = (IdentifierNameSyntax)root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
 
-            if (root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is IdentifierNameSyntax identifierSyntax
-                && identifierSyntax is { Parent: ExpressionSyntax { Parent: InvocationExpressionSyntax invocationExpression } expression })
+            if (identifierSyntax is { Parent: ExpressionSyntax { Parent: InvocationExpressionSyntax invocationExpression } expression })
             {
                 var newMember = SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, expression, SyntaxFactory.IdentifierName("Value"));
                 context.RegisterCodeFix(
