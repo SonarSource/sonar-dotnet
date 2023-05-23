@@ -5,73 +5,119 @@ public class Sample
     public void Types()
     {
         sbyte sb = sbyte.MaxValue;
-        _ = sb + 1;             // FIXME Non-compliant
+        sb++;                   // Noncompliant {{This calculation is guaranteed to overflow the maximum value of '127'.}}
+//      ^^^^
         sb = sbyte.MinValue;
-        _ = sb - 1;             // FIXME Non-compliant
+        sb--;                   // Noncompliant {{This calculation is guaranteed to underflow the minimum value of '-128'.}}
 
         byte b = byte.MaxValue;
-        _ = b + 1;              // FIXME Non-compliant
+        b++;                    // Noncompliant
         b = byte.MinValue;
-        _ = b - 1;              // FIXME Non-compliant
+        b--;                    // Noncompliant
 
         short i16 = short.MaxValue;
-        _ = i16 + 1;            // FIXME Non-compliant
+        i16++;                  // Noncompliant
         i16 = short.MinValue;
-        _ = i16 - 1;            // FIXME Non-compliant
+        i16--;                  // Noncompliant
 
         ushort ui16 = ushort.MaxValue;
-        _ = ui16 + 1;           // FIXME Non-compliant
+        ui16++;                 // Noncompliant
         ui16 = ushort.MinValue;
-        _ = ui16 - 1;           // FIXME Non-compliant
+        ui16--;                 // Noncompliant
 
         int i = int.MaxValue;
-        _ = i + 1;              // FIXME Non-compliant
+        i++;                    // Noncompliant
         i = int.MinValue;
-        _ = i - 1;              // FIXME Non-compliant
+        i--;                    // Noncompliant
 
         uint ui = uint.MaxValue;
-        _ = ui + 1;             // FIXME Non-compliant
+        ui++;                   // Noncompliant
         ui = uint.MinValue;
-        _ = ui - 1;             // FIXME Non-compliant
+        ui--;                   // Noncompliant
 
         long i64 = long.MaxValue;
-        _ = i64 + 1;            // FIXME Non-compliant
+        i64++;                  // Noncompliant
         i64 = long.MinValue;
-        _ = i64 - 1;            // FIXME Non-compliant
+        i64--;                  // Noncompliant
 
         ulong ui64 = ulong.MaxValue;
-        _ = ui64 + 1;           // FIXME Non-compliant
+        ui64++;                 // Noncompliant
         ui64 = ulong.MinValue;
-        _ = ui64 - 1;           // FIXME Non-compliant
+        ui64--;                 // Noncompliant
+    }
+
+    public void Upcast()
+    {
+        sbyte sb = sbyte.MaxValue;
+        _ = sb + 1;             // Compliant, upcast to int
+        sb = sbyte.MinValue;
+        _ = sb - 1;             // Compliant, upcast to int
+
+        byte b = byte.MaxValue;
+        _ = b + 1;              // Compliant, upcast to int
+        b = byte.MinValue;
+        _ = b - 1;              // Compliant, upcast to int
+
+        short i16 = short.MaxValue;
+        _ = i16 + 1;            // Compliant, upcast to int
+        i16 = short.MinValue;
+        _ = i16 - 1;            // Compliant, upcast to int
+
+        ushort ui16 = ushort.MaxValue;
+        _ = ui16 + 1;           // Compliant, upcast to int
+        ui16 = ushort.MinValue;
+        _ = ui16 - 1;           // Compliant, upcast to int
+
+        int i = int.MaxValue;
+        _ = i + 1;              // Noncompliant
+        i = int.MinValue;
+        _ = i - 1;              // Noncompliant
+
+        uint ui = uint.MaxValue;
+        _ = ui + 1;             // Noncompliant
+        ui = uint.MinValue;
+        _ = ui - 1;             // Noncompliant
+
+        long i64 = long.MaxValue;
+        _ = i64 + 1;            // Noncompliant
+        i64 = long.MinValue;
+        _ = i64 - 1;            // Noncompliant
+
+        ulong ui64 = ulong.MaxValue;
+        _ = ui64 + 1;           // Noncompliant
+        ui64 = ulong.MinValue;
+        _ = ui64 - 1;           // Noncompliant
     }
 
     public void BasicOperators()
     {
         int i = 2147483600;
-        _ = i + 100;            // FIXME Non-compliant
+        _ = i + 100;            // Noncompliant {{This calculation is guaranteed to overflow the maximum value of '2147483647'.}}
+//          ^^^^^^^
 
         i = -2147483600;
-        _ = i - 100;            // FIXME Non-compliant
+        _ = i - 100;            // Noncompliant {{This calculation is guaranteed to underflow the minimum value of '-2147483648'.}}
 
         i = 2147483600;
-        _ = i * 100;            // FIXME Non-compliant
+        _ = i * 100;            // Noncompliant
 
-        i = 2147483600 / 10;
+        var j = 10;
+        i = 2147483600 / j;
         _ = i * 100;            // FIXME Non-compliant
 
         _ = 2147483600 << 16;   // Compliant
         _ = -2147483600 << 16;  // Compliant
 
-        i = 2 & 10;
+        i = 2 & j;
+        _ = i * 2147483600;     // Noncompliant
+
+        i = 2 | j;
         _ = i * 2147483600;     // FIXME Non-compliant
 
-        i = 2 | 10;
+        i = 2 ^ j;
         _ = i * 2147483600;     // FIXME Non-compliant
 
-        i = 2 ^ 10;
-        _ = i * 2147483600;     // FIXME Non-compliant
-
-        i = 2 % 10;
+        i = 2 % j;
         _ = i * 2147483600;     // FIXME Non-compliant
     }
 
@@ -86,9 +132,10 @@ public class Sample
         i = 2147483600;
         i *= 100;               // FIXME Non-compliant
 
+        var j = 10;
         i = 2147483600;
-        i /= 10;
-        _ = i * 100;            // FIXME Non-compliant 
+        i /= j;
+        _ = i * 100;            // FIXME Non-compliant
 
         i = 2147483600;
         i <<= 1;                // Compliant
@@ -97,20 +144,32 @@ public class Sample
         i <<= 1;                // Compliant
 
         i = 2;
-        i &= 10;
+        i &= j;
         _ = i * 2147483600;     // FIXME Non-compliant
 
         i = 2;
-        i |= 10;
+        i |= j;
         _ = i * 2147483600;     // FIXME Non-compliant
 
         i = 2;
-        i ^= 10;
+        i ^= j;
         _ = i * 2147483600;     // FIXME Non-compliant
 
         i = 2;
-        i %= 10;
+        i %= j;
         _ = i * 2147483600;     // FIXME Non-compliant
+    }
+
+    public void Ranges(int i)
+    {
+        if (i > 2147483600)
+            _ = i + 100;        // Noncompliant {{This calculation is guaranteed to overflow the maximum value of '2147483647'.}}
+        if (i < 2147483600)
+            _ = i + 100;        // Noncompliant {{This calculation is likely to overflow the maximum value of '2147483647'.}}
+        if (i > -2147483600)
+            _ = i - 100;        // Noncompliant {{This calculation is likely to underflow the minimum value of '-2147483648'.}}
+        if (i < -2147483600)
+            _ = i - 100;        // Noncompliant {{This calculation is guaranteed to underflow the minimum value of '-2147483648'.}}
     }
 
     public void Branching(int i)
@@ -118,23 +177,26 @@ public class Sample
         if (i <= 2147483547)
             _ = i + 100;        // Compliant
         else
-            _ = i + 100;        // FIXME Non-compliant
+            _ = i + 100;        // Noncompliant
 
         for (i = 0; i <= 2147483547; i++)
             _ = i + 100;        // Compliant
         for (i = 0; i <= 2147483547; i++)
-            _ = i + 101;        // FN symbolic execution engine is not looping that often
+            _ = i + 101;        // Noncompliant {{This calculation is likely to overflow the maximum value of '2147483647'.}}
         for (i = 2147483546; i <= 2147483547; i++)
             _ = i + 100;        // Compliant
         for (i = 2147483546; i <= 2147483547; i++)
-            _ = i + 101;        // FIXME Non-compliant
+            _ = i + 101;        // Noncompliant
+    }
 
+    public void Branching2(int i)
+    {
         switch (i)
         {
             case 2147483547:
                 _ = i + 100;    // Compliant
                 break;
-            case 2147483599:
+            case 2147483600:
                 _ = i + 100;    // FIXME Non-compliant
                 break;
             default:
@@ -176,6 +238,18 @@ public class Properties
             i += 100;           // FIXME Non-compliant
         }
     }
+
+    public void Untracked(Properties o)
+    {
+        if (o.GetSet == int.MaxValue)
+            o.GetSet++;         // Compliant
+        if (o.GetSet == int.MaxValue)
+            ++o.GetSet;         // Compliant
+        if (o.GetSet == int.MinValue)
+            o.GetSet--;         // Compliant
+        if (o.GetSet == int.MinValue)
+            --o.GetSet;         // Compliant
+    }
 }
 
 class DotnetOverflow
@@ -186,7 +260,7 @@ class DotnetOverflow
         {
             unchecked
             {
-                int i = 1834567890 + 1834567890;    // FIXME Non-compliant
+                int i = 1834567890 + 1834567890;    // Noncompliant FP, we don't want to run for methods with unchecked
                 return i;
             }
         }
@@ -201,7 +275,7 @@ class DotnetOverflow
         public int Overflow3()
         {
             int i = 1834567890;
-            var j = i + i;                          // FIXME Non-compliant
+            var j = i + i;                          // Noncompliant
             return j;
         }
 
@@ -209,7 +283,7 @@ class DotnetOverflow
         {
             int i = -1834567890;
             int j = 1834567890;
-            var k = i - j;                          // FIXME Non-compliant
+            var k = i - j;                          // Noncompliant
             return k;
         }
 
@@ -217,7 +291,7 @@ class DotnetOverflow
         {
             if (i > 1834567890)
             {
-                return i + i;                       // FIXME Non-compliant
+                return i + i;                       // Noncompliant
             }
             return 0;
         }
