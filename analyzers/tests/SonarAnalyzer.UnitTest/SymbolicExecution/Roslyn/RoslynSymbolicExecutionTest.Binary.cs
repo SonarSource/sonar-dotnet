@@ -633,7 +633,6 @@ Tag(""End"")";
     [DataRow("s = s + null;")]
     public void Binary_StringConcatenation_Binary_CS(string expression)
     {
-        // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12105-addition-operator
         var code = $$"""
             string s = null;
             {{expression}}
@@ -641,15 +640,14 @@ Tag(""End"")";
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.TagValue("S").Should().HaveNoConstraints(); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
+        validator.TagValue("S").Should().HaveNoConstraints();   // ToDo: s is NotNull here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
     }
 
     [DataTestMethod]
     [DataRow("s += s;")]
     [DataRow("s += null;")]
-    public void Binary_StringConcatenation_Compund_CS(string expression)
+    public void Binary_StringConcatenation_Compound_CS(string expression)
     {
-        // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12105-addition-operator
         var code = $$"""
             string s = null;
             {{expression}}
@@ -657,7 +655,7 @@ Tag(""End"")";
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.TagValue("S").Should().HaveOnlyConstraint(ObjectConstraint.Null); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
+        validator.TagValue("S").Should().HaveNoConstraints();   // ToDo: s is NotNull here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
     }
 
     [DataTestMethod]

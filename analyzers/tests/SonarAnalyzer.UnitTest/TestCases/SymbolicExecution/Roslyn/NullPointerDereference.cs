@@ -966,7 +966,7 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             System.Threading.Monitor.Wait(this); // This is a multi-threaded application, the fields could change
-            _foo1.ToString(); // Noncompliant FIXME (was compliant before)
+            _foo1.ToString(); // Noncompliant FP (was compliant before)
             o.ToString(); // Noncompliant, local variable constraints are not cleared
         }
 

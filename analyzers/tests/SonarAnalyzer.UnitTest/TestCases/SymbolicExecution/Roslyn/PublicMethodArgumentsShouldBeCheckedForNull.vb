@@ -447,7 +447,7 @@ Public Class Conversion
 
     Public Sub MultipleCasts(o As Object)
         DirectCast(DirectCast(DirectCast(o, String), Object), String).ToString()    ' Noncompliant
-        CType(CType(CType(o, String), Object), String).ToString()                   ' FN FIXME
+        CType(CType(CType(o, String), Object), String).ToString()                   ' FN
     End Sub
 
 
@@ -472,7 +472,7 @@ Public Class Conversion
     End Sub
 
     Public Sub ForEachLoopWithParentheses(arr As Object())
-        For Each o As Object In ((arr))                                         ' FN FIXME
+        For Each o As Object In ((arr))                                         ' FN
         Next
     End Sub
 

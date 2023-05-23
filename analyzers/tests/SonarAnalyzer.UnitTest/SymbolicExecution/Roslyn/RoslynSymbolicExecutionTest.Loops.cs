@@ -226,7 +226,7 @@ public partial class RoslynSymbolicExecutionTest
 foreach (var i in items)
 {{
     arg.ToString(); // Add another constraint to 'arg'
-    arg -= 1;
+    arg--;
 }}
 Tag(""End"", arg);";
         var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck()).Validator;
@@ -275,7 +275,7 @@ Tag(""End"", arg);";
 do
 {{
     arg.ToString(); // Add another constraint to 'arg'
-    arg -= 1;
+    arg--;
 }} while (arg > 0);
 Tag(""End"", arg);";
         var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
@@ -324,7 +324,7 @@ goto Start;";
         const string code = @"
 Start:
 arg.ToString(); // Add another constraint to 'arg'
-arg -= 1;
+arg--;
 if (arg > 0)
 {
     goto Start;

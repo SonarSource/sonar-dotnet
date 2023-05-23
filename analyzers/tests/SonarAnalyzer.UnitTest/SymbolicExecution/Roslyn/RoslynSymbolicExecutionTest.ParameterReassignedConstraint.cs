@@ -209,21 +209,21 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("|=")]
     [DataRow("&=")]
     [DataRow("^=")]
-    public void ParameterReassignedConstraint_CompoundAssignment_KeepsNullConstraintForNullableValueTypes(string compoundAssigment)
+    public void ParameterReassignedConstraint_CompoundAssignment_KeepsNullConstraintForNullableValueTypes(string compoundAssignment)
     {
         var validator = SETestContext.CreateCS($$"""
                 int? local = null;
-                local {{compoundAssigment}} 1;
+                local {{compoundAssignment}} 1;
                 Tag("AfterNull", local);
                 local = 42;
-                local {{compoundAssigment}} 1;
+                local {{compoundAssignment}} 1;
                 Tag("AfterValue", local);
                 local = Unknown<int?>();
-                local {{compoundAssigment}} 1;
+                local {{compoundAssignment}} 1;
                 Tag("AfterUnknown", local);
                 """, new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.TagValue("AfterNull").Should().HaveOnlyConstraint(ObjectConstraint.Null); // ToDo: Misses ParameterReassignedConstraint in all cases
-        validator.TagValue("AfterValue").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));    // ToDo: Value 42 is wrong, should be result of the operation
+        validator.TagValue("AfterNull").Should().HaveNoConstraints();    // ToDo: Misses ParameterReassignedConstraint in all cases
+        validator.TagValue("AfterValue").Should().HaveNoConstraints();
         validator.TagValue("AfterUnknown").Should().HaveNoConstraints();
     }
 
