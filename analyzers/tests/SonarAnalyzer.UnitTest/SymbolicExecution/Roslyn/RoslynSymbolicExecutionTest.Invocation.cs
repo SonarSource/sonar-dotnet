@@ -86,12 +86,12 @@ public static class Extensions
 }";
         var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
-        validator.ValidateTag("BeforeInstance", x => x.Should().BeNull());
-        validator.ValidateTag("BeforeExtensionArg", x => x.Should().BeNull());
+        validator.TagValue("BeforeInstance").Should().BeNull();
+        validator.TagValue("BeforeExtensionArg").Should().BeNull();
         validator.ValidateTag("BeforeExtensionNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         validator.ValidateTag("BeforePreserve", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
         validator.ValidateTag("AfterInstance", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Instance method should set NotNull constraint."));
-        validator.ValidateTag("AfterExtensionArg", x => x.Should().BeNull("Extensions can run on null instances."));
+        validator.TagValue("AfterExtensionArg").Should().BeNull("Extensions can run on null instances.");
         validator.ValidateTag("AfterExtensionNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue("Extensions can run on null instances."));
         validator.ValidateTag("AfterPreserve", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue("Other constraints should not be removed."));
     }
@@ -136,12 +136,12 @@ Public Module Extensions
 End Module";
         var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, Array.Empty<SymbolicCheck>()).Validator;
         validator.ValidateContainsOperation(OperationKind.ObjectCreation);
-        validator.ValidateTag("BeforeInstance", x => x.Should().BeNull());
-        validator.ValidateTag("BeforeStatic", x => x.Should().BeNull());
-        validator.ValidateTag("BeforeExtension", x => x.Should().BeNull());
+        validator.TagValue("BeforeInstance").Should().BeNull();
+        validator.TagValue("BeforeStatic").Should().BeNull();
+        validator.TagValue("BeforeExtension").Should().BeNull();
         validator.ValidateTag("AfterInstance", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Instance method should set NotNull constraint."));
-        validator.ValidateTag("AfterStatic", x => x.Should().BeNull("Static method can execute from null instances."));
-        validator.ValidateTag("AfterExtension", x => x.Should().BeNull("Extensions can run on null instances."));
+        validator.TagValue("AfterStatic").Should().BeNull("Static method can execute from null instances.");
+        validator.TagValue("AfterExtension").Should().BeNull("Extensions can run on null instances.");
     }
 
     [DataTestMethod]
@@ -216,10 +216,10 @@ public static class Extensions
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
-        validator.ValidateTag("BeforeField", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
-        validator.ValidateTag("BeforeStaticField", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
-        validator.ValidateTag("AfterField", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
-        validator.ValidateTag("AfterStaticField", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null));
+        validator.TagValue("BeforeField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("BeforeStaticField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("AfterField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("AfterStaticField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
     }
 
     [DataTestMethod]
@@ -685,7 +685,7 @@ Tag(""Value"", value);";
 var value = arg.{expression};
 Tag(""Value"", value);";
         var validator = SETestContext.CreateCS(code, $"IEnumerable<object> arg").Validator;
-        validator.ValidateTag("Value", x => x.Should().BeNull());
+        validator.TagValue("Value").Should().BeNull();
     }
 
     [TestMethod]
@@ -698,7 +698,7 @@ If Query.Count <> 0 Then
     Tag(""Value"", Value)
 End If";
         var validator = SETestContext.CreateVB(code, "Items() As Object").Validator;
-        validator.ValidateTag("Value", x => x.Should().BeNull());
+        validator.TagValue("Value").Should().BeNull();
     }
 
     [DataTestMethod]
@@ -746,7 +746,7 @@ End Sub";
 Dim Result As Boolean = IsNothing("""" & Arg.ToString())
 Tag(""Result"", Result)";
         var validator = SETestContext.CreateVB(code, "Arg As Object").Validator;
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -783,8 +783,8 @@ Debug.Assert(arg1 != null && arg2 != null);
 Tag(""Arg1"", arg1);
 Tag(""Arg2"", arg2);";
         var validator = SETestContext.CreateCS(code, $"object arg1, object arg2").Validator;
-        validator.ValidateTag("Arg1", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("Arg2", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValue("Arg1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Arg2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -972,7 +972,7 @@ object right = {right};
 var result = object.Equals(left, right);
 Tag(""Result"", result);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -1013,7 +1013,7 @@ Tag(""End"");";
             var result = left.Equals(right);
             Tag("Result", result);
             """;
-        SETestContext.CreateCS(code).Validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult)));
+        SETestContext.CreateCS(code).Validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
     }
 
     [DataTestMethod]
@@ -1031,7 +1031,7 @@ Tag(""End"");";
             var result = left.Equals(right);
             Tag("Result", result);
             """;
-        SETestContext.CreateCS(code).Validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        SETestContext.CreateCS(code).Validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -1082,10 +1082,10 @@ private bool Equals(object a, object b) => false;
 private static bool Equals() => false;
 private static bool Equals(object a, object b, object c) => false;";
         var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.ValidateTag("InstanceOne", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("InstanceTwo", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("NoArgs", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("MoreArgs", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValue("InstanceOne").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("InstanceTwo").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("NoArgs").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("MoreArgs").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -1129,7 +1129,7 @@ private static bool Equals(object a, object b, object c) => false;";
             Tag("Result", result);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -1182,9 +1182,9 @@ private static bool Equals(object a, object b, object c) => false;";
                 private bool ReferenceEquals(object a, object b, object c) => false;
                 """;
         var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.ValidateTag("Args0", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("Args1", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("Args2", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("Args3", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValue("Args0").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Args1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Args2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Args3").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 }

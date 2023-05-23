@@ -35,8 +35,8 @@ public partial class RoslynSymbolicExecutionTest
             Tag("Result", result);
             """;
         var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
-        validator.ValidateTag("Target", x => x.Should().HaveNoConstraints());
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.TagValue("Target").Should().HaveNoConstraints();
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -48,7 +48,7 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var setter = new PostProcessTestCheck(OperationKind.PropertyReference, x => x.SetOperationConstraint(NumberConstraint.From(10)));
         var validator = SETestContext.CreateCS(code, "Sample arg", setter).Validator;
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(11)));
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(11));
     }
 
     [TestMethod]
@@ -60,8 +60,8 @@ public partial class RoslynSymbolicExecutionTest
             Tag("Result", result);
             """;
         var validator = SETestContext.CreateCS(code, "int arg").Validator;
-        validator.ValidateTag("Arg", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        validator.TagValue("Arg").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -78,8 +78,8 @@ public partial class RoslynSymbolicExecutionTest
             Tag("Result", result);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Target", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedTarget)));
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedResult)));
+        validator.TagValue("Target").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedTarget));
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedResult));
     }
 
     [DataTestMethod]
@@ -96,8 +96,8 @@ public partial class RoslynSymbolicExecutionTest
             }
             """;
         var validator = SETestContext.CreateCS(code, "int onlyMin, int onlyMax").Validator;
-        validator.ValidateTag("OnlyMin", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2, null)));
-        validator.ValidateTag("OnlyMax", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 100)));
+        validator.TagValue("OnlyMin").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2, null));
+        validator.TagValue("OnlyMax").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 100));
     }
 
     [DataTestMethod]
@@ -114,7 +114,7 @@ public partial class RoslynSymbolicExecutionTest
             }
             """;
         var validator = SETestContext.CreateCS(code, "int onlyMin, int onlyMax").Validator;
-        validator.ValidateTag("OnlyMin", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0, null)));
-        validator.ValidateTag("OnlyMax", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 98)));
+        validator.TagValue("OnlyMin").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0, null));
+        validator.TagValue("OnlyMax").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 98));
     }
 }

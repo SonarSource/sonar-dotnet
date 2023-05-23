@@ -625,7 +625,7 @@ Tag(""End"")";
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("arg comparison true, hence non-null"));
         validator.ValidateTag("If", x => x.HasConstraint<NumberConstraint>().Should().BeTrue("arg inferred a value from the comparison"));
-        validator.ValidateTag("Else", x => x.Should().HaveNoConstraints("arg either null or comparison false"));
+        validator.TagValue("Else").Should().HaveNoConstraints("arg either null or comparison false");
     }
 
     [DataTestMethod]
@@ -641,7 +641,7 @@ Tag(""End"")";
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.ValidateTag("S", x => x.Should().HaveNoConstraints()); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
+        validator.TagValue("S").Should().HaveNoConstraints(); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
     }
 
     [DataTestMethod]
@@ -657,7 +657,7 @@ Tag(""End"")";
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.ValidateTag("S", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null)); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
+        validator.TagValue("S").Should().HaveOnlyConstraint(ObjectConstraint.Null); // FIXME: s is not null here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
     }
 
     [DataTestMethod]
@@ -680,7 +680,7 @@ Tag(""End"")";
             Tag("Result", result);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True));
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
     }
 
     [DataTestMethod]
@@ -700,7 +700,7 @@ Tag(""End"")";
             Tag("Result", result);
             """;
         var validator = SETestContext.CreateCS(code, "int arg").Validator;
-        validator.ValidateTag("Result", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
     }
 
     [DataTestMethod]
@@ -759,7 +759,7 @@ Tag(""End"")";
             Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
     }
 
     [DataTestMethod]
@@ -781,7 +781,7 @@ Tag(""End"")";
             var value = left * right;
             Tag("Value", value);
             """;
-        SETestContext.CreateCS(code).Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected)));
+        SETestContext.CreateCS(code).Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
     }
 
     [DataTestMethod]
@@ -819,7 +819,7 @@ Tag(""End"")";
             }
             """;
         var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
     }
 
     [DataTestMethod]
@@ -879,6 +879,6 @@ Tag(""End"")";
             }
             """;
         var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
     }
 }

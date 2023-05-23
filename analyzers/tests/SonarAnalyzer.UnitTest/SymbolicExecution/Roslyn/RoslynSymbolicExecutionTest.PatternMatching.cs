@@ -292,10 +292,10 @@ Tag(""End"", arg);";
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
         var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
-        validator.ValidateTag("A", x => x.Should().BeNull());
-        validator.ValidateTag("B", x => x.Should().BeNull());
-        validator.ValidateTag("C", x => x.Should().BeNull());
-        validator.ValidateTag("D", x => x.Should().BeNull());
+        validator.TagValue("A").Should().BeNull();
+        validator.TagValue("B").Should().BeNull();
+        validator.TagValue("C").Should().BeNull();
+        validator.TagValue("D").Should().BeNull();
         validator.TagValues("End").Should().HaveCount(2)
             .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(ObjectConstraint.Null))
             .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(ObjectConstraint.NotNull));

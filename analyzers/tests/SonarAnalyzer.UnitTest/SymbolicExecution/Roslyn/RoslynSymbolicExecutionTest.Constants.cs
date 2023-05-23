@@ -53,7 +53,7 @@ public partial class RoslynSymbolicExecutionTest
             var v = {value};
             Tag("Value", v);
             """).Validator;
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(value)));
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(value));
     }
 
     [TestMethod]
@@ -105,7 +105,7 @@ public void Main(bool arg = true)
 {
     Tag(""Arg"", arg);
 }";
-        SETestContext.CreateCSMethod(code).Validator.ValidateTag("Arg", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        SETestContext.CreateCSMethod(code).Validator.TagValue("Arg").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     private static BoolConstraint GetConstraint(bool value) =>

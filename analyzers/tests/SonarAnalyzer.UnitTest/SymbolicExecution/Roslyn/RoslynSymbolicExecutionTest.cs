@@ -278,7 +278,7 @@ Tag(""End"");";
 
     [TestMethod]
     public void Execute_LocalScopeRegion_Struct_NoAction() =>
-        SETestContext.CreateVB(@"Dim Value As Integer : Tag(""Value"", Value)").Validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        SETestContext.CreateVB(@"Dim Value As Integer : Tag(""Value"", Value)").Validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
 
     [TestMethod]
     public void Execute_FieldSymbolsAreNotRemovedByLva()

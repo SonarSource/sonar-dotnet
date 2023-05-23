@@ -42,7 +42,7 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var argumentSnippet = $"{argumentType} arg";
         var validator = SETestContext.CreateCS(methodBody, argumentSnippet, new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ParameterReassignedConstraint.Instance));
+        validator.TagValue("End").Should().HaveOnlyConstraints(ParameterReassignedConstraint.Instance);
     }
 
     [TestMethod]
@@ -53,7 +53,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("End", arg);
             """;
         var validator = SETestContext.CreateCS(methodBody, "int arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ParameterReassignedConstraint.Instance, ObjectConstraint.NotNull));
+        validator.TagValue("End").Should().HaveOnlyConstraints(ParameterReassignedConstraint.Instance, ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -71,7 +71,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("End", arg);
             """;
         var validator = SETestContext.CreateCS(methodBody, "object arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ParameterReassignedConstraint.Instance));
+        validator.TagValue("End").Should().HaveOnlyConstraints(ParameterReassignedConstraint.Instance);
     }
 
     [TestMethod]
@@ -83,7 +83,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("End", arg);
             """;
         var validator = SETestContext.CreateCS(methodBody, "object arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(ParameterReassignedConstraint.Instance, ObjectConstraint.NotNull));
+        validator.TagValue("End").Should().HaveOnlyConstraints(ParameterReassignedConstraint.Instance, ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -97,7 +97,7 @@ public partial class RoslynSymbolicExecutionTest
             Tag("End", arg);
             """;
         var validator = SETestContext.CreateCS(methodBody, "object arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("End", x => x.Should().HaveNoConstraints()); // ToDo: arg should have the ParameterReassignedConstraint
+        validator.TagValue("End").Should().HaveNoConstraints(); // ToDo: arg should have the ParameterReassignedConstraint
     }
 
     [TestMethod]
@@ -145,7 +145,7 @@ public partial class RoslynSymbolicExecutionTest
             arg = arg ?? throw new ArgumentNullException();
             Tag("End", arg);
             """, "string arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValue("End").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -170,7 +170,7 @@ public partial class RoslynSymbolicExecutionTest
                 : arg;
             Tag("End", arg);
             """, "string arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValue("End").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -182,7 +182,7 @@ public partial class RoslynSymbolicExecutionTest
                 : Unknown<string>();
             Tag("End", arg);
             """, "string arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("End", x => x.Should().HaveNoConstraints()); // ToDo: Misses ParameterReassignedConstraint
+        validator.TagValue("End").Should().HaveNoConstraints(); // ToDo: Misses ParameterReassignedConstraint
     }
 
 #if NET
@@ -196,7 +196,7 @@ public partial class RoslynSymbolicExecutionTest
                 ArgumentNullException.{{throwIfNullMethod}}(arg);
                 Tag("End", arg);
                 """, "string arg", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValue("End").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
 #endif
@@ -222,9 +222,9 @@ public partial class RoslynSymbolicExecutionTest
                 local {{compoundAssigment}} 1;
                 Tag("AfterUnknown", local);
                 """, new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("AfterNull", x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null)); // ToDo: Misses ParameterReassignedConstraint in all cases
-        validator.ValidateTag("AfterValue", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42)));    // ToDo: Value 42 is wrong, should be result of the operation
-        validator.ValidateTag("AfterUnknown", x => x.Should().HaveNoConstraints());
+        validator.TagValue("AfterNull").Should().HaveOnlyConstraint(ObjectConstraint.Null); // ToDo: Misses ParameterReassignedConstraint in all cases
+        validator.TagValue("AfterValue").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));    // ToDo: Value 42 is wrong, should be result of the operation
+        validator.TagValue("AfterUnknown").Should().HaveNoConstraints();
     }
 
     [TestMethod]
@@ -236,8 +236,8 @@ public partial class RoslynSymbolicExecutionTest
             Tag("AfterAssignmentArg2", arg2);
             """;
         var validator = SETestContext.CreateCS(snippet, "object arg1, object arg2", new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("AfterAssignmentArg1", x => x.Should().HaveOnlyConstraints(ParameterReassignedConstraint.Instance));
-        validator.ValidateTag("AfterAssignmentArg2", x => x.Should().HaveNoConstraints());
+        validator.TagValue("AfterAssignmentArg1").Should().HaveOnlyConstraints(ParameterReassignedConstraint.Instance);
+        validator.TagValue("AfterAssignmentArg2").Should().HaveNoConstraints();
     }
 
     [DataTestMethod]
@@ -247,7 +247,7 @@ public partial class RoslynSymbolicExecutionTest
     public void ParameterReassignedConstraint_IgnoreNonParameters(string snippet)
     {
         var validator = SETestContext.CreateCS(snippet, new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("AfterAssignment", x => x.Should().HaveNoConstraints());
+        validator.TagValue("AfterAssignment").Should().HaveNoConstraints();
     }
 
     [TestMethod]
@@ -278,6 +278,6 @@ public partial class RoslynSymbolicExecutionTest
             }
             """;
         var validator = SETestContext.CreateCSMethod(methodCode, new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.ValidateTag("End", x => x.Should().HaveOnlyConstraints(expectedConstraints));
+        validator.TagValue("End").Should().HaveOnlyConstraints(expectedConstraints);
     }
 }
