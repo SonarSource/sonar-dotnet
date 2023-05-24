@@ -94,7 +94,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         }
         else
         {
-            // If both ranges are mixed or one negative and one mixed => bigger of the two maxima is just the general upper boundary for max.
+            // For all other cases we exploit the fact that & cannot make the result bigger than any of its inputs
             return BiggestMaximum(left, right);
         }
     }
@@ -123,7 +123,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         }
         else
         {
-            // If both ranges are mixed or one negative and one mixed => smaller of the two minima is just the general lower boundary for min.
+            // For all other cases we exploit the fact that | cannot make the result smaller than any of its inputs
             return SmallestMinimum(left, right);
         }
     }
