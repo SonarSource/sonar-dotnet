@@ -31,6 +31,8 @@ internal sealed partial class Binary
         BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
         BinaryOperatorKind.Multiply => CalculateMultiply(left, right),
         BinaryOperatorKind.Divide => CalculateDivide(left, right),
+        BinaryOperatorKind.Remainder when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value % right.Min.Value),
+        BinaryOperatorKind.Remainder => CalculateRemainder(left, right),
         BinaryOperatorKind.And when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value & right.Min.Value),
         BinaryOperatorKind.And => NumberConstraint.From(CalculateAndMin(left, right), CalculateAndMax(left, right)),
         BinaryOperatorKind.Or when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value | right.Min.Value),
@@ -126,6 +128,82 @@ internal sealed partial class Binary
         else
         {
             return constraint;
+        }
+    }
+
+    private static NumberConstraint CalculateRemainder(NumberConstraint left, NumberConstraint right)
+    {
+        if (right.Min == 0 && right.Max == 0)
+        {
+            return null;
+        }
+        else if (right.Min == 0)
+        {
+            right = NumberConstraint.From(1, right.Max);
+        }
+        else if (right.Max == 0)
+        {
+            right = NumberConstraint.From(right.Min, -1);
+        }
+        return NumberConstraint.From(CalculateRemainderMin(left, right), CalculateRemainderMax(left, right));
+    }
+
+    private static BigInteger? CalculateRemainderMin(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.IsPositive)
+        {
+            return left.Min >= AbsoluteMin(right) ? 0 : left.Min;
+        }
+        else
+        {
+            var minDerivedFromRight = -AbsoluteMax(right) + 1;
+            if (minDerivedFromRight is null)
+            {
+                return left.Min;
+            }
+            else
+            {
+                return left.Min is null ? minDerivedFromRight : BigInteger.Max(left.Min.Value, minDerivedFromRight.Value);
+            }
+        }
+    }
+
+    private static BigInteger? CalculateRemainderMax(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.IsNegative)
+        {
+            return left.Max <= -AbsoluteMin(right) ? 0 : left.Max;
+        }
+        else
+        {
+            var maxDerivedFromRight = AbsoluteMax(right) - 1;
+            if (maxDerivedFromRight is null)
+            {
+                return left.Max;
+            }
+            else
+            {
+                return left.Max is null ? maxDerivedFromRight : BigInteger.Min(left.Max.Value, maxDerivedFromRight.Value);
+            }
+        }
+    }
+
+    private static BigInteger? AbsoluteMax(NumberConstraint constraint) =>
+        constraint.Min is null || constraint.Max is null ? null : BigInteger.Max(BigInteger.Abs(constraint.Min.Value), BigInteger.Abs(constraint.Max.Value));
+
+    private static BigInteger? AbsoluteMin(NumberConstraint constraint)
+    {
+        if (constraint.IsPositive)
+        {
+            return constraint.Min;
+        }
+        else if (constraint.IsNegative)
+        {
+            return -constraint.Max;
+        }
+        else
+        {
+            return 0;
         }
     }
 
