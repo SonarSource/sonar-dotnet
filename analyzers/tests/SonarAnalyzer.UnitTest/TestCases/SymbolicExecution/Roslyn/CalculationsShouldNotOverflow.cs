@@ -297,3 +297,15 @@ class DotnetOverflow
         }
     }
 }
+
+public class CustomOperator
+{
+    public void Coverage()
+    {
+        // To cover the `Min(ITypeSymbol)` returning `null`. The char doesn't help here, because ch+ch returns int.
+        CustomOperator value = (CustomOperator)(object)42;      // Anything with NumberConstraint and + operation
+        value = value + value;                                  // Compliant
+    }
+
+    public static CustomOperator operator +(CustomOperator left, CustomOperator right) => null;
+}
