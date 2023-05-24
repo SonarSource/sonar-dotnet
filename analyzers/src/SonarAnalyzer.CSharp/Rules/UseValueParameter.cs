@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class UseValueParameter : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3237";
-        private const string MessageFormat = "Use the 'value' parameter in this {0} accessor declaration.";
+        private const string MessageFormat = "Use the 'value' contextual keyword in this {0} accessor declaration.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
