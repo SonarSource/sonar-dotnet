@@ -1,6 +1,15 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
+void UseRegex(Regex regex) { }
+
+Regex myRegex = new ("^[a-zA-Z]$"); // Compliant
+myRegex = new ("^[a-zA-Z]$"); // Compliant
+myRegex = myRegex ?? new Regex("^[a-zA-Z]$"); // Compliant
+myRegex = true ? new Regex("^[a-zA-Z]$") : false ? new Regex("^[0-9]$") : new Regex("^[a-zA-Z0-9]$"); // Compliant
+
+UseRegex(new Regex("^[a-zA-Z]$")); // Compliant
+
 public class UseCachedRegex
 {
     const string IMMUTABLE_REGEX_PATTERN = "^[a-zA-Z]$";

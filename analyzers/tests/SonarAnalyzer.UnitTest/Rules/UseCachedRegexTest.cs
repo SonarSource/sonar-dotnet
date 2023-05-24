@@ -35,7 +35,7 @@ public class UseCachedRegexTest
     [TestMethod]
     public void UseCachedRegex_CSharp9() =>
         builderCS.AddPaths("UseCachedRegex.CSharp9.cs")
-                 .WithOptions(ParseOptionsHelper.FromCSharp9)
+                 .WithTopLevelStatements()
                  .Verify();
 #endif
 }

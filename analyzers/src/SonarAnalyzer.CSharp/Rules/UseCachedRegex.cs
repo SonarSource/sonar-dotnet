@@ -18,17 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Text.RegularExpressions;
-
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
 {
+    private const string RegexName = "Regex";
     private const string DiagnosticId = "S6614";
 
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-    protected override string MessageFormat => $"{nameof(Regex)} instances should be cached";
+    protected override string MessageFormat => $"{RegexName} instances should be cached";
 
     private static readonly HashSet<SyntaxKind> CorrectContextSyntaxKinds = new()
     {
@@ -62,7 +61,7 @@ public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
     private bool CanBeCorrectObjectCreation(SyntaxNode objectCreation) =>
         objectCreation switch
         {
-            ObjectCreationExpressionSyntax => objectCreation.NameIs(nameof(Regex)) && HasRightArgumentCount(objectCreation),
+            ObjectCreationExpressionSyntax => objectCreation.NameIs(RegexName) && HasRightArgumentCount(objectCreation),
             _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(objectCreation) => HasRightArgumentCount(objectCreation),
             _ => false,
         };
