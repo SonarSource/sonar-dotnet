@@ -45,6 +45,24 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
+        public void EmptyMethod_CSharp9_CodeFix_Throw() =>
+            builderCS.WithCodeFix<CS.EmptyMethodCodeFix>()
+                .AddPaths("EmptyMethod.CSharp9.cs")
+                .WithTopLevelStatements()
+                .WithCodeFixedPaths("EmptyMethod.CSharp9.Throw.Fixed.cs")
+                .WithCodeFixTitle(CS.EmptyMethodCodeFix.TitleThrow)
+                .VerifyCodeFix();
+
+        [TestMethod]
+        public void EmptyMethod_CSharp9_CodeFix_Comment() =>
+            builderCS.WithCodeFix<CS.EmptyMethodCodeFix>()
+                .AddPaths("EmptyMethod.CSharp9.cs")
+                .WithTopLevelStatements()
+                .WithCodeFixedPaths("EmptyMethod.CSharp9.Comment.Fixed.cs")
+                .WithCodeFixTitle(CS.EmptyMethodCodeFix.TitleComment)
+                .VerifyCodeFix();
+
+        [TestMethod]
         public void EmptyMethod_CSharp10() =>
             builderCS.AddPaths("EmptyMethod.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)

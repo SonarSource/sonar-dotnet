@@ -3,7 +3,10 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-void Empty() { } // Noncompliant
+void Empty()
+{
+    // Method intentionally left empty.
+} // Fixed
 
 void WithComment()
 {
@@ -35,8 +38,9 @@ record EmptyMethod
     }
 
     [Conditional("DEBUG")]
-    void F4()    // Noncompliant {{Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.}}
+    void F4()    // Fixed
     {
+        // Method intentionally left empty.
     }
 
     protected virtual void F5()
@@ -50,16 +54,19 @@ record EmptyMethod
 
     void F8()
     {
-        void F9() // Noncompliant
+        void F9() // Fixed
         {
-
+            // Method intentionally left empty.
         }
     }
 }
 
 abstract record MyR
 {
-    void F1() { } // Noncompliant
+    void F1()
+    {
+        // Method intentionally left empty.
+    } // Fixed
     public abstract void F2();
 }
 
@@ -81,8 +88,9 @@ class WithProp
 class M
 {
     [ModuleInitializer]
-    internal static void M1() // Noncompliant
+    internal static void M1() // Fixed
     {
+        // Method intentionally left empty.
     }
 
     [ModuleInitializer]
@@ -109,7 +117,10 @@ namespace D
 
     partial class C
     {
-        public partial void Foo() { } // Noncompliant
+        public partial void Foo()
+        {
+            // Method intentionally left empty.
+        } // Fixed
 
         public partial void Bar()
         {

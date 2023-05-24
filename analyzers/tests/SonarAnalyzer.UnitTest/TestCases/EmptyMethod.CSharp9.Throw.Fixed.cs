@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-void Empty() { } // Noncompliant
+void Empty() { throw new NotSupportedException(); } // Fixed
 
 void WithComment()
 {
@@ -35,8 +35,9 @@ record EmptyMethod
     }
 
     [Conditional("DEBUG")]
-    void F4()    // Noncompliant {{Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.}}
+    void F4()    // Fixed
     {
+        throw new NotSupportedException();
     }
 
     protected virtual void F5()
@@ -50,16 +51,19 @@ record EmptyMethod
 
     void F8()
     {
-        void F9() // Noncompliant
+        void F9() // Fixed
         {
-
+            throw new NotSupportedException();
         }
     }
 }
 
 abstract record MyR
 {
-    void F1() { } // Noncompliant
+    void F1()
+    {
+        throw new NotSupportedException();
+    } // Fixed
     public abstract void F2();
 }
 
@@ -81,8 +85,9 @@ class WithProp
 class M
 {
     [ModuleInitializer]
-    internal static void M1() // Noncompliant
+    internal static void M1() // Fixed
     {
+        throw new NotSupportedException();
     }
 
     [ModuleInitializer]
@@ -109,7 +114,10 @@ namespace D
 
     partial class C
     {
-        public partial void Foo() { } // Noncompliant
+        public partial void Foo()
+        {
+            throw new NotSupportedException();
+        } // Fixed
 
         public partial void Bar()
         {
