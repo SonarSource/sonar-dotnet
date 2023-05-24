@@ -30,42 +30,37 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string TitleThrow = "Throw NotSupportedException";
         internal const string TitleComment = "Add comment";
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(EmptyMethod.DiagnosticId);
-            }
-        }
-
         private const string LiteralNotSupportedException = "NotSupportedException";
         private const string LiteralSystem = "System";
+
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(EmptyMethod.DiagnosticId);
 
         protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var syntaxNode = root.FindNode(diagnosticSpan);
-            var method = syntaxNode.FirstAncestorOrSelf<MethodDeclarationSyntax>();
+            var syntaxNode = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
+            var method = syntaxNode.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKind.MethodDeclaration, SyntaxKindEx.LocalFunctionStatement));
+            var methodBody = method.IsKind(SyntaxKind.MethodDeclaration)
+                ? ((BaseMethodDeclarationSyntax)method).Body
+                : ((LocalFunctionStatementSyntaxWrapper)method).Body;
 
-            if (method.Body.CloseBraceToken.IsMissing ||
-                method.Body.OpenBraceToken.IsMissing)
+            if (methodBody.CloseBraceToken.IsMissing || methodBody.OpenBraceToken.IsMissing)
             {
                 return;
             }
 
-            await RegisterCodeFixesForMethodsAsync(context, root, method).ConfigureAwait(false);
+            await RegisterCodeFixesForMethodsAsync(context, root, methodBody).ConfigureAwait(false);
         }
 
-        private static async Task RegisterCodeFixesForMethodsAsync(CodeFixContext context, SyntaxNode root, MethodDeclarationSyntax method)
+        private static async Task RegisterCodeFixesForMethodsAsync(CodeFixContext context, SyntaxNode root, BlockSyntax methodBody)
         {
             context.RegisterCodeFix(
                 CodeAction.Create(
                     TitleComment,
                     c =>
                     {
-                        var newMethodBody = method.Body;
-
+                        var newMethodBody = methodBody;
                         newMethodBody = newMethodBody
                             .WithOpenBraceToken(newMethodBody.OpenBraceToken
                                 .WithTrailingTrivia(SyntaxFactory.TriviaList()
@@ -78,8 +73,8 @@ namespace SonarAnalyzer.Rules.CSharp
                                     .Add(SyntaxFactory.EndOfLine(Environment.NewLine))));
 
                         var newRoot = root.ReplaceNode(
-                            method.Body,
-                            newMethodBody.WithTriviaFrom(method.Body).WithAdditionalAnnotations(Formatter.Annotation));
+                            methodBody,
+                            newMethodBody.WithTriviaFrom(methodBody).WithAdditionalAnnotations(Formatter.Annotation));
                         return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                     },
                     TitleComment),
@@ -87,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
 
-            var systemNeedsToBeAdded = NamespaceNeedsToBeAdded(method, semanticModel);
+            var systemNeedsToBeAdded = NamespaceNeedsToBeAdded(methodBody, semanticModel);
 
             var memberAccessRoot = systemNeedsToBeAdded
                 ? (NameSyntax)SyntaxFactory.QualifiedName(
@@ -100,8 +95,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     TitleThrow,
                     c =>
                     {
-                        var newRoot = root.ReplaceNode(method.Body,
-                            method.Body.WithStatements(
+                        var newRoot = root.ReplaceNode(methodBody,
+                            methodBody.WithStatements(
                                 SyntaxFactory.List(
                                     new StatementSyntax[]
                                     {
@@ -111,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                                 SyntaxFactory.ArgumentList(),
                                                 null))
                                     }))
-                                    .WithTriviaFrom(method.Body)
+                                    .WithTriviaFrom(methodBody)
                                     .WithAdditionalAnnotations(Formatter.Annotation));
                         return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                     },
@@ -119,16 +114,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.Diagnostics);
         }
 
-        private static bool NamespaceNeedsToBeAdded(BaseMethodDeclarationSyntax method,
-            SemanticModel semanticModel)
-        {
-            return !semanticModel.LookupNamespacesAndTypes(method.Body.CloseBraceToken.SpanStart)
+        private static bool NamespaceNeedsToBeAdded(BlockSyntax methodBody, SemanticModel semanticModel) =>
+            !semanticModel.LookupNamespacesAndTypes(methodBody.CloseBraceToken.SpanStart)
                 .OfType<INamedTypeSymbol>()
-                .Any(nt =>
-                    nt.IsType &&
-                    nt.Name == LiteralNotSupportedException &&
-                    nt.ContainingNamespace.Name == LiteralSystem);
-        }
+                .Any(nt => nt.IsType
+                           && nt.Name == LiteralNotSupportedException
+                           && nt.ContainingNamespace.Name == LiteralSystem);
     }
 }
-
