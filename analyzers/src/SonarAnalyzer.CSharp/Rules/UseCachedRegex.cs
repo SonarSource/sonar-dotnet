@@ -23,6 +23,8 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
 {
+    private const int MinCtorParamsCount = 1;
+    private const int MaxCtorParamsCount = 1;
     private const string RegexName = "Regex";
     private const string DiagnosticId = "S6614";
 
@@ -48,7 +50,7 @@ public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
         context.RegisterNodeAction(c =>
             {
                 if (CanBeCorrectObjectCreation(c.Node)
-                    && IsWithinCorrectContext(c.Node, CorrectContextSyntaxKinds, out var kindContext)
+                    && IsWithinCorrectContext(c.Node, CorrectContextSyntaxKinds, out SyntaxNode kindContext)
                     && IsCorrectObjectType(c.Node, c.SemanticModel)
                     && IsArgumentConstantOrReadOnly(Language.Syntax.ArgumentExpressions(c.Node).FirstOrDefault(), c.SemanticModel)
                     && !IsCompliantAssignment(c.Node, c.SemanticModel, kindContext))
@@ -59,26 +61,24 @@ public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
             Language.SyntaxKind.ObjectCreationExpressions);
 
     private bool CanBeCorrectObjectCreation(SyntaxNode objectCreation) =>
-        objectCreation switch
-        {
-            ObjectCreationExpressionSyntax => objectCreation.NameIs(RegexName) && HasRightArgumentCount(objectCreation),
-            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(objectCreation) => HasRightArgumentCount(objectCreation),
-            _ => false,
-        };
+        (objectCreation.NameIs(RegexName)
+         || ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(objectCreation))
+        && HasRightArgumentCount(objectCreation);
 
     private bool HasRightArgumentCount(SyntaxNode objectCreation) =>
-        Language.Syntax.ArgumentExpressions(objectCreation).Count() is >= 1 and <= 3;
+        Language.Syntax.ArgumentExpressions(objectCreation).Count() is >= MinCtorParamsCount and <= MaxCtorParamsCount;
 
-    private static bool IsWithinCorrectContext(SyntaxNode node, ISet<SyntaxKind> correctContextList, out SyntaxNode contextNode)
+    private static bool IsWithinCorrectContext<TSyntaxNode>(SyntaxNode node, ISet<SyntaxKind> correctContextList, out TSyntaxNode contextNode)
+        where TSyntaxNode : SyntaxNode
     {
-        contextNode = node;
-
-        while (!contextNode.IsKind(SyntaxKind.CompilationUnit) && !contextNode.IsAnyKind(correctContextList))
+        while (!node.IsKind(SyntaxKind.CompilationUnit) && !node.IsAnyKind(correctContextList))
         {
-            contextNode = contextNode.Parent;
+            node = node.Parent;
         }
 
-        return !contextNode.IsKind(SyntaxKind.CompilationUnit);
+        contextNode = !node.IsKind(SyntaxKind.CompilationUnit) ? (TSyntaxNode)node : null;
+
+        return !node.IsKind(SyntaxKind.CompilationUnit);
     }
 
     private static bool IsCorrectObjectType(SyntaxNode objectCreation, SemanticModel model) =>
@@ -162,12 +162,11 @@ public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
 
     private static bool IsAssignmentWithinIfStatement(AssignmentExpressionSyntax assignment, SemanticModel model)
     {
-        return IsWithinCorrectContext(assignment, new HashSet<SyntaxKind> { SyntaxKind.IfStatement }, out var ifStatement)
-               && ifStatement is IfStatementSyntax { Condition: { } condition }
-               && condition switch
+        return IsWithinCorrectContext(assignment, new HashSet<SyntaxKind> { SyntaxKind.IfStatement }, out IfStatementSyntax ifStatement)
+               && ifStatement.Condition switch
                {
                    BinaryExpressionSyntax binaryExpression => IsValidBinaryCondition(binaryExpression),
-                   { RawKind: (int)SyntaxKindEx.IsPatternExpression } => IsValidPatternCondition(condition),
+                   { RawKind: (int)SyntaxKindEx.IsPatternExpression } => IsValidPatternCondition(ifStatement.Condition),
                    _ => false,
                };
 

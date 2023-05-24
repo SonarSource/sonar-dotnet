@@ -124,6 +124,10 @@ public class UseCachedRegex
         var myRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
         //            ^^^^^^^^^^^^^^^^^^^^^^^
 
+        myRegex = new Regex(); // Error [CS0122]
+        myRegex += new Regex("^[a-zA-Z]$"); // Error [CS0019]
+        myRegex += myRegex ?? new Regex("^[a-zA-Z]$"); // Error [CS0019]
+
         myRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
         //        ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -163,6 +167,16 @@ public class UseCachedRegex
         StaticMutableCachedRegex = StaticMutableCachedRegex is null ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
 
         if (MutableCachedRegex != null)
+        {
+            MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
+
+        if (MutableCachedRegex < 42) // Error [CS0019]
+        {
+            MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
+
+        if (MutableCachedRegex == StaticMutableCachedRegex)
         {
             MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
         }
