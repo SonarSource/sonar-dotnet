@@ -24,6 +24,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     {
         public IOperationWrapperSonar Operation { get; }
         public ProgramState State { get; }
+        public bool IsLoopCondition { get; }
         public int VisitCount { get; }
         public IReadOnlyCollection<ISymbol> CapturedVariables { get; }
 
@@ -33,6 +34,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         {
             Operation = operation; // Operation can be null for the branch nodes.
             State = state ?? throw new ArgumentNullException(nameof(state));
+            IsLoopCondition = true; // FIXME: Not so easy
             VisitCount = visitCount;
             CapturedVariables = capturedVariables ?? throw new ArgumentNullException(nameof(capturedVariables));
         }
