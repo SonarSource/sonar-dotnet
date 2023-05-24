@@ -83,6 +83,31 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
+    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_NestedNumberCondition()
+    {
+        const string code = """
+            for (var i = 0; i < 10; i++)
+            {
+                int value = 42;
+                if (value < 100)  // Should be always true
+                {
+                    Tag("If", value);
+                }
+                else
+                {
+                    Tag("Unreachable");
+                }
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(1);
+        validator.TagValues("If").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42)),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42, 99)));  // FIXME: Should not be here
+        validator.TagStates("Unreachable").Should().ContainSingle();    // FIXME: BeEmpty()
+    }
+
+    [TestMethod]
     public void Loops_For_ComplexCondition_MultipleVariables()
     {
         const string code = """
@@ -191,6 +216,37 @@ public partial class RoslynSymbolicExecutionTest
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2, 10)));
         validator.TagValue("After").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null));
         validator.TagValue("End").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);   // arg has only it's final constraints after looping once
+    }
+
+    [TestMethod]
+    public void Loops_While_NestedNumberCondition()
+    {
+        const string code = """
+            string s = null;
+            while(Condition)
+            {
+                int value = 42;
+                if (value < 100)  // Should be always true
+                {
+                    Tag("If", value);
+                }
+                else
+                {
+                    Tag("Unreachable");
+                }
+                s = "NotNull for the second loop pass";
+            }
+            Tag("End", s);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(1);
+        validator.ValidateTagOrder("End", "If", "End", "Unreachable", "If");  // FIXME: Unreachable should not be there
+        validator.TagValues("If").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42)),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42, 99)));  // FIXME: Should not be here
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null),
+            x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
     }
 
     [TestMethod]
