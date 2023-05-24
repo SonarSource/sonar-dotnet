@@ -30,7 +30,7 @@ public sealed class UseLambdaParameterInConcurrentDictionary : UseLambdaParamete
 
     protected override bool IsLambdaAndContainsIdentifier(ArgumentSyntax argument, string keyName) =>
         argument.GetExpression() is SingleLineLambdaExpressionSyntax lambda
-        && lambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName));
+        && lambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName) && p.Parent is not NameOfExpressionSyntax);
 
     protected override bool TryGetKeyName(ArgumentSyntax argument, out string keyName)
     {

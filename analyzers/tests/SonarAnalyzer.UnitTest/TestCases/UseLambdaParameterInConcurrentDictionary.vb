@@ -1,4 +1,5 @@
-﻿Imports System.Collections.Concurrent
+﻿Imports System
+Imports System.Collections.Concurrent
 Imports System.Collections.Generic
 Imports System.Linq
 
@@ -61,8 +62,33 @@ Public Class Programs
         dictionary.AddOrUpdate(42, Function(__, arg) key, Function(__, key, arg) key + arg, key) ' Error [BC36641]
     End Sub
 
-    Private Sub CompliantInvocations(ByVal dictionary As ConcurrentDictionary(Of Integer, Integer), ByVal list As List(Of Integer), ByVal key As Integer)
-        dictionary.TryAdd(key, 42)
-        list.Any(Function(x) key > 0)
+    Private Sub CompliantInvocations(ByVal dictionary As ConcurrentDictionary(Of Integer, Integer), ByVal hidesMethod As HidesMethod(Of Integer, Integer), ByVal list As List(Of Integer), ByVal key As Integer)
+        dictionary.TryAdd(key, 42) ' Compliant
+        list.Any(Function(x) key > 0) ' Compliant
+        hidesMethod.GetOrAdd(key, Function(__) key) ' Compliant
     End Sub
+
+    Private Sub MyDictionary(ByVal dictionary As MyConcurrentDictionary, ByVal key As Integer)
+        dictionary.GetOrAdd(key, Function(__) key + 42) ' Noncompliant
+    End Sub
+
+    Private Sub [NameOf](ByVal dictionary As ConcurrentDictionary(Of String, String), ByVal key As String, ByVal str As String)
+        dictionary.GetOrAdd(key, Function(__) NameOf(key)) ' Compliant
+        dictionary.GetOrAdd(key, Function(x)
+                                     Dim something = $"The name should be {NameOf(key)} and not {NameOf(x)}" ' Compliant
+                                     Return x
+                                 End Function)
+    End Sub
+
+    Class MyConcurrentDictionary
+        Inherits ConcurrentDictionary(Of Integer, Integer)
+    End Class
+
+    Class HidesMethod(Of TKey, TValue)
+        Inherits ConcurrentDictionary(Of TKey, TValue)
+
+        Public Function GetOrAdd(ByVal key As TKey, ByVal valueFactory As Func(Of TKey, TValue)) As TValue
+            Return Nothing
+        End Function
+    End Class
 End Class

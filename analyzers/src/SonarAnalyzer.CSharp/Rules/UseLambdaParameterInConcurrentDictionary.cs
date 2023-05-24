@@ -33,13 +33,13 @@ public sealed class UseLambdaParameterInConcurrentDictionary : UseLambdaParamete
         {
             SimpleLambdaExpressionSyntax simpleLambda =>
                 !simpleLambda.Parameter.GetName().Equals(keyName)
-                && simpleLambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName)),
+                && IsContainingValidIdentifier(simpleLambda.Body, keyName),
             ParenthesizedLambdaExpressionSyntax parentesizedLambda =>
                 !parentesizedLambda.ParameterList.Parameters.Any(x => x.GetName().Equals(keyName))
-                && parentesizedLambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName)),
+                && IsContainingValidIdentifier(parentesizedLambda.Body, keyName),
             AnonymousMethodExpressionSyntax anonymousMethod =>
                 !anonymousMethod.ParameterList.Parameters.Any(x => x.GetName().Equals(keyName))
-                && anonymousMethod.Block.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName)),
+                && IsContainingValidIdentifier(anonymousMethod.Block, keyName),
             _ => false
         };
 
@@ -53,4 +53,11 @@ public sealed class UseLambdaParameterInConcurrentDictionary : UseLambdaParamete
         }
         return false;
     }
+
+    private bool IsContainingValidIdentifier(SyntaxNode node, string keyName) =>
+        node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(p => p.GetName().Equals(keyName) && !IsContainedInNameOfInvocation(p));
+
+    private bool IsContainedInNameOfInvocation(IdentifierNameSyntax identifier) =>
+        identifier.Parent is ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax expression } } }
+        && expression.NameIs("nameof");
 }
