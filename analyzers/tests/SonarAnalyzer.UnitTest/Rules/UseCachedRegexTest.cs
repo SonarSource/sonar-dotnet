@@ -18,22 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
 public class UseCachedRegexTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseCachedRegex>().AddReferences(MetadataReferenceFacade.RegularExpressions);
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<UseCachedRegex>().AddReferences(MetadataReferenceFacade.RegularExpressions);
 
     [TestMethod]
     public void UseCachedRegex_CS() =>
         builderCS.AddPaths("UseCachedRegex.cs").Verify();
 
+#if NET
     [TestMethod]
     public void UseCachedRegex_CSharp9() =>
-        builderCS.WithLanguageVersion(LanguageVersion.CSharp9).AddPaths("UseCachedRegex.CSharp9.cs").Verify();
+        builderCS.AddPaths("UseCachedRegex.CSharp9.cs")
+                 .WithOptions(ParseOptionsHelper.FromCSharp9)
+                 .Verify();
+#endif
 }

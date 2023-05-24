@@ -48,53 +48,53 @@ public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var objectCreation = c.Node as ObjectCreationExpressionSyntax;
-                ImplicitObjectCreationExpressionSyntaxWrapper? implicitObjectCreation = objectCreation is null ? (ImplicitObjectCreationExpressionSyntaxWrapper)c.Node : null;
-
-                if (IsCorrectName(c.Node)
-                    && IsWithinCorrectContext(c.Node, out var kindContext)
+                if (CanBeCorrectObjectCreation(c.Node)
+                    && IsWithinCorrectContext(c.Node, CorrectContextSyntaxKinds, out var kindContext)
                     && IsCorrectObjectType(c.Node, c.SemanticModel)
-                    && IsArgumentConstantOrReadOnly(objectCreation?.ArgumentList ?? implicitObjectCreation?.ArgumentList, c.SemanticModel)
+                    && IsArgumentConstantOrReadOnly(Language.Syntax.ArgumentExpressions(c.Node).FirstOrDefault(), c.SemanticModel)
                     && !IsCompliantAssignment(c.Node, c.SemanticModel, kindContext))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                 }
             },
-            SyntaxKind.ObjectCreationExpression,
-            SyntaxKindEx.ImplicitObjectCreationExpression);
+            Language.SyntaxKind.ObjectCreationExpressions);
 
-    private static bool IsCorrectName(SyntaxNode node) =>
-        node.NameIs(nameof(Regex)) || node is { RawKind: (int)SyntaxKindEx.ImplicitObjectCreationExpression }; // We check the TypeInfo in IsCorrectObjectType
-
-    private static bool IsWithinCorrectContext(SyntaxNode node, out SyntaxKind context)
-    {
-        context = SyntaxKind.None;
-        while (!node.IsKind(SyntaxKind.CompilationUnit))
+    private bool CanBeCorrectObjectCreation(SyntaxNode objectCreation) =>
+        objectCreation switch
         {
-            if (node.Parent.IsAnyKind(CorrectContextSyntaxKinds))
-            {
-                context = (SyntaxKind)node.Parent.RawKind;
-                return true;
-            }
+            ObjectCreationExpressionSyntax => objectCreation.NameIs(nameof(Regex)) && HasRightArgumentCount(objectCreation),
+            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(objectCreation) => HasRightArgumentCount(objectCreation),
+            _ => false,
+        };
 
-            node = node.Parent;
+    private bool HasRightArgumentCount(SyntaxNode objectCreation) =>
+        Language.Syntax.ArgumentExpressions(objectCreation).Count() is >= 1 and <= 3;
+
+    private static bool IsWithinCorrectContext(SyntaxNode node, ISet<SyntaxKind> correctContextList, out SyntaxNode contextNode)
+    {
+        contextNode = node;
+
+        while (!contextNode.IsKind(SyntaxKind.CompilationUnit) && !contextNode.IsAnyKind(correctContextList))
+        {
+            contextNode = contextNode.Parent;
         }
 
-        return false;
+        return !contextNode.IsKind(SyntaxKind.CompilationUnit);
     }
 
     private static bool IsCorrectObjectType(SyntaxNode objectCreation, SemanticModel model) =>
         model.GetTypeInfo(objectCreation).Type.Is(KnownType.System_Text_RegularExpressions_Regex);
 
-    private static bool IsArgumentConstantOrReadOnly(ArgumentListSyntax argumentList, SemanticModel model) =>
-        argumentList?.Arguments[0].Expression is { } expression
-        && (model.GetConstantValue(expression).HasValue
-            || model.GetSymbolInfo(expression).Symbol is IFieldSymbol { IsReadOnly: true });
+    private static bool IsArgumentConstantOrReadOnly(SyntaxNode argument, SemanticModel model) =>
+        argument is not null
+        && (model.GetConstantValue(argument).HasValue
+            || model.GetSymbolInfo(argument).Symbol is IFieldSymbol { IsReadOnly: true });
 
-    private static bool IsCompliantAssignment(SyntaxNode objectCreation, SemanticModel model, SyntaxKind context) =>
+    private static bool IsCompliantAssignment(SyntaxNode objectCreation, SemanticModel model, SyntaxNode context) =>
         objectCreation.Parent switch
         {
-            AssignmentExpressionSyntax assignment when assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) => IsCompliantSimpleAssignment(assignment, model, context),
+            AssignmentExpressionSyntax assignment when assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) =>
+                IsCompliantSimpleAssignment(assignment, model, context),
             AssignmentExpressionSyntax assignment when assignment.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) =>
                 IsSymbolFieldOrProperty(assignment.Left, model),
             BinaryExpressionSyntax { Parent: AssignmentExpressionSyntax assignment } coalesce
@@ -109,13 +109,13 @@ public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
 
     private static bool IsSymbolFieldOrProperty(SyntaxNode identifier, SemanticModel model) => model.GetSymbolInfo(identifier).Symbol is IFieldSymbol or IPropertySymbol;
 
-    private static bool IsCompliantSimpleAssignment(AssignmentExpressionSyntax assignment, SemanticModel model, SyntaxKind context)
+    private static bool IsCompliantSimpleAssignment(AssignmentExpressionSyntax assignment, SemanticModel model, SyntaxNode context)
     {
         var symbol = model.GetSymbolInfo(assignment.Left).Symbol;
 
         return symbol is IFieldSymbol or IPropertySymbol
                && (symbol is IFieldSymbol { IsReadOnly: true } or IPropertySymbol { IsReadOnly: true }
-                   || context == SyntaxKind.ConstructorDeclaration
+                   || context.IsKind(SyntaxKind.ConstructorDeclaration)
                    || IsAssignmentWithinIfStatement(assignment, model)
                    || IsAssignmentWithinCoalesceExpressionAsFunctionArgument(assignment));
     }
@@ -126,7 +126,7 @@ public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
         {
             BinaryExpressionSyntax when condition.IsAnyKind(SyntaxKind.EqualsExpression) => CheckCorrectBranchResult(conditional.WhenTrue, conditional.WhenFalse),
             BinaryExpressionSyntax when condition.IsAnyKind(SyntaxKind.NotEqualsExpression) => CheckCorrectBranchResult(conditional.WhenFalse, conditional.WhenTrue),
-            { RawKind: (int)SyntaxKindEx.IsPatternExpression } =>
+            _ when IsPatternExpressionSyntaxWrapper.IsInstance(condition) =>
                 (IsPatternExpressionSyntaxWrapper)condition switch
                 {
                     { Pattern.SyntaxNode.RawKind: (int)SyntaxKindEx.ConstantPattern } => CheckCorrectBranchResult(conditional.WhenTrue, conditional.WhenFalse),
@@ -163,16 +163,11 @@ public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
 
     private static bool IsAssignmentWithinIfStatement(AssignmentExpressionSyntax assignment, SemanticModel model)
     {
-        SyntaxNode node = assignment;
-        while (!node.IsAnyKind(SyntaxKind.CompilationUnit, SyntaxKind.IfStatement))
-        {
-            node = node.Parent;
-        }
-
-        return node is IfStatementSyntax { Condition: { } condition }
+        return IsWithinCorrectContext(assignment, new HashSet<SyntaxKind> { SyntaxKind.IfStatement }, out var ifStatement)
+               && ifStatement is IfStatementSyntax { Condition: { } condition }
                && condition switch
                {
-                   BinaryExpressionSyntax binaryExpression  => IsValidBinaryCondition(binaryExpression),
+                   BinaryExpressionSyntax binaryExpression => IsValidBinaryCondition(binaryExpression),
                    { RawKind: (int)SyntaxKindEx.IsPatternExpression } => IsValidPatternCondition(condition),
                    _ => false,
                };
