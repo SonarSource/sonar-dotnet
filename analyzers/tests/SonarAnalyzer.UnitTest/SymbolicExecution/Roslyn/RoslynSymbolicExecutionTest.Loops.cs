@@ -64,11 +64,13 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValue("End").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);   // Loop was entered, arg has only it's final constraints after looping once
     }
 
-    [TestMethod]
-    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_Expanded()
+    [DataTestMethod]
+    [DataRow("i < 10")]
+    [DataRow("!(i >= 10)")]
+    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_Expanded(string condition)
     {
-        const string code = """
-            for (var i = 0; i < 10; i++)
+        var code = $$"""
+            for (var i = 0; {{condition}}; i++)
             {
                 Tag("Inside", i);
             }
