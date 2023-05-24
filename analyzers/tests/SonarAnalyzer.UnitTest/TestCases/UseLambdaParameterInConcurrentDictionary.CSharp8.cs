@@ -78,6 +78,16 @@ public class Programs
         dictionary.GetOrAdd(key, _ => key + 42); // Noncompliant
     }
 
+    void NameOf(ConcurrentDictionary<string, string> dictionary, string key, string str)
+    {
+        dictionary.GetOrAdd(key, _ => nameof(key)); // Compliant
+        dictionary.GetOrAdd(key, x =>
+        {
+            var something = $"The name should be {nameof(key)} and not {nameof(x)}"; // Compliant
+            return x;
+        });
+    }
+
     class MyConcurrentDictionary : ConcurrentDictionary<int, int> { }
 
     class HidesMethod<TKey, TValue> : ConcurrentDictionary<TKey, TValue>
