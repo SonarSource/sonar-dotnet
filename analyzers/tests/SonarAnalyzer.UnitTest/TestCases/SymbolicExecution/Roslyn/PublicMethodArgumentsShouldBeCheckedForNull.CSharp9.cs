@@ -191,7 +191,7 @@ public class Assignments
     public void CompundAssignment_String(string s)
     {
         s += "Test";
-        s.ToString(); // Noncompliant - FP: string concatenation supports null for its arguments
+        s.ToString(); // Compliant, += never returns null
     }
 
     public void CompundAssignment_NullabaleInt(int? i)
