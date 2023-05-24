@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3237",
-"message":  "Use the 'value' parameter in this property init accessor declaration.",
+"message":  "Use the 'value' contextual keyword in this property init accessor declaration.",
 "location":  {
 "uri":  "sources\Net5\Net5\S134.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3237",
-"message":  "Use the 'value' parameter in this property init accessor declaration.",
+"message":  "Use the 'value' contextual keyword in this property init accessor declaration.",
 "location":  {
 "uri":  "sources\Net5\Net5\S1541.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3237",
-"message":  "Use the 'value' parameter in this property init accessor declaration.",
+"message":  "Use the 'value' contextual keyword in this property init accessor declaration.",
 "location":  {
 "uri":  "sources\Net5\Net5\S2259.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S3237",
-"message":  "Use the 'value' parameter in this property init accessor declaration.",
+"message":  "Use the 'value' contextual keyword in this property init accessor declaration.",
 "location":  {
 "uri":  "sources\Net5\Net5\S2930.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S3237",
-"message":  "Use the 'value' parameter in this property init accessor declaration.",
+"message":  "Use the 'value' contextual keyword in this property init accessor declaration.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3237.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S3237",
-"message":  "Use the 'value' parameter in this property init accessor declaration.",
+"message":  "Use the 'value' contextual keyword in this property init accessor declaration.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3440.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S3237",
-"message":  "Use the 'value' parameter in this property init accessor declaration.",
+"message":  "Use the 'value' contextual keyword in this property init accessor declaration.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3626.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S3237",
-"message":  "Use the 'value' parameter in this property init accessor declaration.",
+"message":  "Use the 'value' contextual keyword in this property init accessor declaration.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3776.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S3237",
-"message":  "Use the 'value' parameter in this property init accessor declaration.",
+"message":  "Use the 'value' contextual keyword in this property init accessor declaration.",
 "location":  {
 "uri":  "sources\Net5\Net5\S3928.cs",
 "region":  {
