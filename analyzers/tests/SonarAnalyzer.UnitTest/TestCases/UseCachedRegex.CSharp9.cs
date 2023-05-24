@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 public class UseCachedRegex
 {
@@ -12,6 +13,8 @@ public class UseCachedRegex
 
     void Compliant(string input)
     {
+        DateTime _ = new (42); // Compliant
+
         Regex myRegex = new ($"^.+{input}.+$"); // Compliant
         myRegex = new ($"^.+" + input + ".+$"); // Compliant
         myRegex = new(mutableRegexPattern); // Compliant
@@ -93,6 +96,26 @@ public class UseCachedRegex
         StaticMutableCachedRegex ??= null == StaticMutableCachedRegex ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
         StaticMutableCachedRegex ??= StaticMutableCachedRegex is null ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
         StaticMutableCachedRegex ??= StaticMutableCachedRegex is not null ? new Regex("^[a-zA-Z]$") : StaticMutableCachedRegex; // Noncompliant
+
+        if (MutableCachedRegex is not null)
+        {
+            MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
+
+        if (StaticMutableCachedRegex is not null)
+        {
+            StaticMutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
+
+        if (PropertyCachedRegex is not null)
+        {
+            PropertyCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
+
+        if (PropertyCachedRegex is { Options: RegexOptions.Compiled } )
+        {
+            PropertyCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
 
         UseRegex(new ("^[a-zA-Z]$")); // Noncompliant
         //       ^^^^^^^^^^^^^^^^^^

@@ -60,6 +60,8 @@ public class UseCachedRegex
 
     void Compliant(string input)
     {
+        _ = new DateTime(42); // Compliant
+
         var myRegex = new Regex($"^.+{input}.+$"); // Compliant
         myRegex = new Regex($"^.+" + input + ".+$"); // Compliant
         myRegex = new Regex(mutableRegexPattern); // Compliant
@@ -160,6 +162,27 @@ public class UseCachedRegex
         StaticMutableCachedRegex = null == StaticMutableCachedRegex ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
         StaticMutableCachedRegex = StaticMutableCachedRegex is null ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
 
+        if (MutableCachedRegex != null)
+        {
+            MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
+
+        if (MutableCachedRegex != null)
+            MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+
+        if (null != MutableCachedRegex)
+            MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+
+        if (StaticMutableCachedRegex != null)
+        {
+            StaticMutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
+
+        if (PropertyCachedRegex != null)
+        {
+            PropertyCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
+
         if (myRegex == null)
         {
             MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
@@ -203,6 +226,12 @@ public class UseCachedRegex
         if (MutableCachedRegex is null)
             myRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
         //            ^^^^^^^^^^^^^^^^^^^^^^^
+
+        if (MutableCachedRegex == null && StaticMutableCachedRegex == null)
+        {
+            MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+            StaticMutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
 
         MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
         StaticMutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant

@@ -158,35 +158,37 @@ public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
             _ => false
         };
 
+    private static bool ChecksForNullOnAssigned(AssignmentExpressionSyntax assignmentExpression, SyntaxNode first, SyntaxNode second) =>
+        assignmentExpression.Left.GetName() == first.GetName() && second is LiteralExpressionSyntax literal && literal.IsKind(SyntaxKind.NullLiteralExpression);
+
     private static bool IsAssignmentWithinIfStatement(AssignmentExpressionSyntax assignment, SemanticModel model)
     {
         SyntaxNode node = assignment;
-        while (!node.Parent.IsKind(SyntaxKind.CompilationUnit))
+        while (!node.IsAnyKind(SyntaxKind.CompilationUnit, SyntaxKind.IfStatement))
         {
-            if (node.Parent.IsKind(SyntaxKind.IfStatement))
-            {
-                break;
-            }
-
             node = node.Parent;
         }
 
-        return node.Parent is IfStatementSyntax { Condition: { } condition }
+        return node is IfStatementSyntax { Condition: { } condition }
                && condition switch
                {
-                   BinaryExpressionSyntax binaryExpression when binaryExpression.IsKind(SyntaxKind.EqualsExpression) && binaryExpression.OperatorToken.IsKind(SyntaxKind.EqualsEqualsToken) =>
-                       (ChecksForNullOnAssigned(assignment, binaryExpression.Left, binaryExpression.Right) || ChecksForNullOnAssigned(assignment, binaryExpression.Right, binaryExpression.Left))
-                       && IsSymbolFieldOrProperty(assignment.Left, model),
-                   { RawKind: (int)SyntaxKindEx.IsPatternExpression } isPattern =>
-                       (IsPatternExpressionSyntaxWrapper)isPattern is { Expression: { } expression, Pattern: { SyntaxNode.RawKind: (int)SyntaxKindEx.ConstantPattern } pattern }
-                       && ChecksForNullOnAssigned(assignment, expression, ((ConstantPatternSyntaxWrapper)pattern).Expression)
-                       && IsSymbolFieldOrProperty(assignment.Left, model),
+                   BinaryExpressionSyntax binaryExpression  => IsValidBinaryCondition(binaryExpression),
+                   { RawKind: (int)SyntaxKindEx.IsPatternExpression } => IsValidPatternCondition(condition),
                    _ => false,
                };
-    }
 
-    private static bool ChecksForNullOnAssigned(AssignmentExpressionSyntax assignmentExpression, SyntaxNode first, SyntaxNode second) =>
-        assignmentExpression.Left.GetName() == first.GetName() && second is LiteralExpressionSyntax literal && literal.IsKind(SyntaxKind.NullLiteralExpression);
+        bool IsValidBinaryCondition(BinaryExpressionSyntax binaryExpression) =>
+            binaryExpression.IsKind(SyntaxKind.EqualsExpression)
+            && binaryExpression.OperatorToken.IsKind(SyntaxKind.EqualsEqualsToken)
+            && (ChecksForNullOnAssigned(assignment, binaryExpression.Left, binaryExpression.Right)
+                || ChecksForNullOnAssigned(assignment, binaryExpression.Right, binaryExpression.Left))
+            && IsSymbolFieldOrProperty(assignment.Left, model);
+
+        bool IsValidPatternCondition(ExpressionSyntax isPattern) =>
+            (IsPatternExpressionSyntaxWrapper)isPattern is { Expression: { } expression, Pattern: { SyntaxNode.RawKind: (int)SyntaxKindEx.ConstantPattern } pattern }
+            && ChecksForNullOnAssigned(assignment, expression, ((ConstantPatternSyntaxWrapper)pattern).Expression)
+            && IsSymbolFieldOrProperty(assignment.Left, model);
+    }
 
     private static bool IsAssignmentWithinCoalesceExpressionAsFunctionArgument(AssignmentExpressionSyntax assignment) =>
         assignment.Parent is ParenthesizedExpressionSyntax { Parent: BinaryExpressionSyntax coalesce }
