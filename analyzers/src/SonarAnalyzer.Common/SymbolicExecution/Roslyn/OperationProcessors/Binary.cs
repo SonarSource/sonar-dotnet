@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -30,18 +31,18 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
     protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation, int visitCount) =>
         BinaryConstraint(operation.OperatorKind, state[operation.LeftOperand], state[operation.RightOperand], visitCount);
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch)
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, int visitCount, bool falseBranch)
     {
         if (operation.OperatorKind.IsAnyEquality())
         {
             state = LearnBranchingEqualityConstraint<ObjectConstraint>(state, operation, falseBranch) ?? state;
             state = LearnBranchingEqualityConstraint<BoolConstraint>(state, operation, falseBranch) ?? state;
-            state = LearnBranchingNumberConstraint(state, operation, falseBranch);
+            state = LearnBranchingNumberConstraint(state, operation, visitCount, falseBranch);
         }
         else if (operation.OperatorKind.IsAnyRelational())
         {
             state = LearnBranchingRelationalObjectConstraint(state, operation, falseBranch) ?? state;
-            state = LearnBranchingNumberConstraint(state, operation, falseBranch);
+            state = LearnBranchingNumberConstraint(state, operation, visitCount, falseBranch);
         }
         return state;
     }
@@ -85,7 +86,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
             ? state.SetSymbolConstraint(testedSymbol, ObjectConstraint.NotNull)
             : null;
 
-    private static ProgramState LearnBranchingNumberConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
+    private static ProgramState LearnBranchingNumberConstraint(ProgramState state, IBinaryOperationWrapper binary, int visitCount, bool falseBranch)
     {
         var kind = falseBranch ? Opposite(binary.OperatorKind) : binary.OperatorKind;
         var leftNumber = state[binary.LeftOperand]?.Constraint<NumberConstraint>();
@@ -102,22 +103,9 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
 
         ProgramState LearnBranching(ISymbol symbol, NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
             !(falseBranch && symbol.GetSymbolType().IsNullableValueType())  // Don't learn opposite for "nullable > 0", because it could also be <null>.
-            && RelationalNumberConstraint(falseBranch ? null : existingNumber, kind, comparedNumber) is { } newConstraint
+            && RelationalNumberConstraint(falseBranch ? null : existingNumber, kind, comparedNumber, visitCount) is { } newConstraint
                 ? state.SetSymbolConstraint(symbol, newConstraint)
                 : state;
-
-        static NumberConstraint RelationalNumberConstraint(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
-            kind switch
-            {
-                BinaryOperatorKind.Equals => NumberConstraint.From(BiggestMinimum(comparedNumber, existingNumber), SmallestMaximum(comparedNumber, existingNumber)),
-                BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Min => NumberConstraint.From(existingNumber.Min + 1, existingNumber.Max),
-                BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Max => NumberConstraint.From(existingNumber.Min, existingNumber.Max - 1),
-                BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => NumberConstraint.From(comparedNumber.Min + 1, existingNumber?.Max),
-                BinaryOperatorKind.GreaterThanOrEqual when comparedNumber.Min.HasValue => NumberConstraint.From(comparedNumber.Min, existingNumber?.Max),
-                BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue => NumberConstraint.From(existingNumber?.Min, comparedNumber.Max - 1),
-                BinaryOperatorKind.LessThanOrEqual when comparedNumber.Max.HasValue => NumberConstraint.From(existingNumber?.Min, comparedNumber.Max),
-                _ => null
-            };
 
         static BinaryOperatorKind Flip(BinaryOperatorKind kind) =>
             kind switch
@@ -142,6 +130,37 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
                 BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThan,
                 _ => BinaryOperatorKind.None    // We don't care about ObjectValueEquals
             };
+    }
+
+    private static NumberConstraint RelationalNumberConstraint(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber, int visitCount)
+    {
+        return kind switch
+        {
+            BinaryOperatorKind.Equals => NumberConstraint.From(BiggestMinimum(comparedNumber, existingNumber), SmallestMaximum(comparedNumber, existingNumber)),
+            BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Min => NumberConstraint.From(existingNumber.Min + 1, existingNumber.Max),
+            BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Max => NumberConstraint.From(existingNumber.Min, existingNumber.Max - 1),
+            BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => From(comparedNumber.Min + 1, null),
+            BinaryOperatorKind.GreaterThanOrEqual when comparedNumber.Min.HasValue => From(comparedNumber.Min, null),
+            BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue => From(null, comparedNumber.Max - 1),
+            BinaryOperatorKind.LessThanOrEqual when comparedNumber.Max.HasValue => From(null, comparedNumber.Max),
+            _ => null
+        };
+
+        NumberConstraint From(BigInteger? newMin, BigInteger? newMax)
+        {
+            if (existingNumber is not null)
+            {
+                if (!newMin.HasValue || (existingNumber.Min > newMin && IsFirstLoopVisit(visitCount)))
+                {
+                    newMin = existingNumber.Min;
+                }
+                if (!newMax.HasValue || (existingNumber.Max < newMax && IsFirstLoopVisit(visitCount)))
+                {
+                    newMax = existingNumber.Max;
+                }
+            }
+            return NumberConstraint.From(newMin, newMax);
+        }
     }
 
     private static SymbolicConstraint BinaryOperandConstraint<T>(ProgramState state, IBinaryOperationWrapper binary) where T : SymbolicConstraint =>
@@ -175,7 +194,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         }
         else if (left?.Constraint<NumberConstraint>() is { } leftNumber
             && right?.Constraint<NumberConstraint>() is { } rightNumber
-            && visitCount == 1)    // Fixed loops: 1st visit decides on value, 2nd visit learns range instead to be able to exit the loop
+            && IsFirstLoopVisit(visitCount))
         {
             return BinaryNumberConstraint(kind, leftNumber, rightNumber);
         }
@@ -238,4 +257,10 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
                 _ => null
             }
             : null;
+
+    // Fixed loops:
+    // 1st visit decides on the initial value. We don't learn from binary comparison.
+    // 2nd visit does not decide on the current value. It learns range from binary comparison instead to be able to exit the loop.
+    private static bool IsFirstLoopVisit(int visitCount) =>
+        visitCount == 1;
 }

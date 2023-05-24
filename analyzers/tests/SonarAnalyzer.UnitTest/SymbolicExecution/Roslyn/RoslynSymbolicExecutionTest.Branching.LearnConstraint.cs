@@ -1271,10 +1271,10 @@ Tag(""End"", arg);";
     [DataRow("right <= 50", null, null, null, 50)]
     [DataRow("left  >=  0 && right <= 50", 0, null, null, 50)]
     [DataRow("left  <= 50 && right >=  0", 1, 50, 0, 49)]
-    [DataRow("left  >=  0 && left <= 50 && right >= 10 && right <= 20", 11, 50, 10, 49)] // ToDo: Should be 11, 50, 10, 20
-    [DataRow("left  >= 10 && left <= 20 && right >=  0 && right <= 50", 1, 20, 0, 19)]   // ToDo: Should be 10, 20, 0, 19
+    [DataRow("left  >=  0 && left <= 50 && right >= 10 && right <= 20", 11, 50, 10, 20)]
+    [DataRow("left  >= 10 && left <= 20 && right >=  0 && right <= 50", 10, 20, 0, 19)]
     [DataRow("left  >=  0 && left <= 20 && right >= 10 && right <= 50", 11, 20, 10, 19)]
-    [DataRow("left  >= 10 && left <= 50 && right >=  0 && right <= 20", 1, 50, 0, 49)]   // ToDo: Should be 10, 50, 0, 20
+    [DataRow("left  >= 10 && left <= 50 && right >=  0 && right <= 20", 10, 50, 0, 20)]
     public void Branching_LearnsNumberConstraint_FromRanges_GreaterThan(string expression, int? expectedLeftMin, int? expectedLeftMax, int? expectedRightMin, int? expectedRightMax)
     {
         var code = $$"""
@@ -1299,10 +1299,10 @@ Tag(""End"", arg);";
     [DataRow("right <= 50", null, null, null, 50)]
     [DataRow("left  >=  0 && right <= 50", 0, null, null, 50)]
     [DataRow("left  <= 50 && right >=  0", 0, 50, 0, 50)]
-    [DataRow("left  >=  0 && left <= 50 && right >= 10 && right <= 20", 10, 50, 10, 50)] // ToDo: Should be 10, 50, 10, 20
-    [DataRow("left  >= 10 && left <= 20 && right >=  0 && right <= 50", 0, 20, 0, 20)]   // ToDo: Should be 10, 20, 0, 20
+    [DataRow("left  >=  0 && left <= 50 && right >= 10 && right <= 20", 10, 50, 10, 20)]
+    [DataRow("left  >= 10 && left <= 20 && right >=  0 && right <= 50", 10, 20, 0, 20)]
     [DataRow("left  >=  0 && left <= 20 && right >= 10 && right <= 50", 10, 20, 10, 20)]
-    [DataRow("left  >= 10 && left <= 50 && right >=  0 && right <= 20", 0, 50, 0, 50)]   // ToDo: Should be 10, 50, 0, 20
+    [DataRow("left  >= 10 && left <= 50 && right >=  0 && right <= 20", 10, 50, 0, 20)]
     public void Branching_LearnsNumberConstraint_FromRanges_GreaterThanOrEqual(string expression, int? expectedLeftMin, int? expectedLeftMax, int? expectedRightMin, int? expectedRightMax)
     {
         var code = $$"""
@@ -1327,9 +1327,9 @@ Tag(""End"", arg);";
     [DataRow("right <= 50", null, 49, null, 50)]
     [DataRow("left  >=  0 && right <= 50", 0, 49, 1, 50)]
     [DataRow("left  <= 50 && right >=  0", null, 50, 0, null)]
-    [DataRow("left  >=  0 && left <= 50 && right >= 10 && right <= 20", 0, 19, 1, 20)]   // ToDo: Should be 0, 19, 10, 20
-    [DataRow("left  >= 10 && left <= 20 && right >=  0 && right <= 50", 10, 49, 11, 50)] // ToDo: Should be 10, 20, 0, 19
-    [DataRow("left  >=  0 && left <= 20 && right >= 10 && right <= 50", 0, 49, 1, 50)]   // ToDo: Should be 0, 20, 10, 50
+    [DataRow("left  >=  0 && left <= 50 && right >= 10 && right <= 20", 0, 19, 10, 20)]
+    [DataRow("left  >= 10 && left <= 20 && right >=  0 && right <= 50", 10, 20, 11, 50)]
+    [DataRow("left  >=  0 && left <= 20 && right >= 10 && right <= 50", 0, 20, 10, 50)]
     [DataRow("left  >= 10 && left <= 50 && right >=  0 && right <= 20", 10, 19, 11, 20)]
     public void Branching_LearnsNumberConstraint_FromRanges_LessThan(string expression, int? expectedLeftMin, int? expectedLeftMax, int? expectedRightMin, int? expectedRightMax)
     {
@@ -1355,9 +1355,9 @@ Tag(""End"", arg);";
     [DataRow("right <= 50", null, 50, null, 50)]
     [DataRow("left  >=  0 && right <= 50", 0, 50, 0, 50)]
     [DataRow("left  <= 50 && right >=  0", null, 50, 0, null)]
-    [DataRow("left  >=  0 && left <= 50 && right >= 10 && right <= 20", 0, 20, 0, 20)]   // ToDo: Should be 0, 20, 10, 20
-    [DataRow("left  >= 10 && left <= 20 && right >=  0 && right <= 50", 10, 50, 10, 50)] // ToDo: Should be 10, 20, 0, 20
-    [DataRow("left  >=  0 && left <= 20 && right >= 10 && right <= 50", 0, 50, 0, 50)]   // ToDo: Should be 0, 20, 10, 50
+    [DataRow("left  >=  0 && left <= 50 && right >= 10 && right <= 20", 0, 20, 10, 20)]
+    [DataRow("left  >= 10 && left <= 20 && right >=  0 && right <= 50", 10, 20, 10, 50)]
+    [DataRow("left  >=  0 && left <= 20 && right >= 10 && right <= 50", 0, 20, 10, 50)]
     [DataRow("left  >= 10 && left <= 50 && right >=  0 && right <= 20", 10, 20, 10, 20)]
     public void Branching_LearnsNumberConstraint_FromRanges_LessThanOrEqual(string expression, int? expectedLeftMin, int? expectedLeftMax, int? expectedRightMin, int? expectedRightMax)
     {
