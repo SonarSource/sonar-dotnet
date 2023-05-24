@@ -35,25 +35,23 @@ public abstract class CalculationsShouldNotOverflowBase : SymbolicRuleCheck
     protected override ProgramState PostProcessSimple(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        if (OverflowCandidateValue(context.State, operation)?.Constraint<NumberConstraint>() is { } number
-            && Min(operation.Type) is { } typeMin
-            && Max(operation.Type) is { } typeMax)
+        if (OverflowCandidateValue(context.State, operation)?.Constraint<NumberConstraint>() is { } number && Bounds(operation.Type) is { } bounds)
         {
-            if (number.Max < typeMin)
+            if (number.Max < bounds.Min)
             {
-                ReportIssue(operation, MessageGuaranteed, MessageUnderflow, typeMin);
+                ReportIssue(operation, MessageGuaranteed, MessageUnderflow, bounds.Min);
             }
-            else if (number.Min > typeMax)
+            else if (number.Min > bounds.Max)
             {
-                ReportIssue(operation, MessageGuaranteed, MessageOverflow, typeMax);
+                ReportIssue(operation, MessageGuaranteed, MessageOverflow, bounds.Max);
             }
-            else if (number.Max > typeMax)
+            else if (number.Max > bounds.Max)
             {
-                ReportIssue(operation, MessageLikely, MessageOverflow, typeMax);
+                ReportIssue(operation, MessageLikely, MessageOverflow, bounds.Max);
             }
-            else if (number.Min < typeMin)
+            else if (number.Min < bounds.Min)
             {
-                ReportIssue(operation, MessageLikely, MessageUnderflow, typeMin);
+                ReportIssue(operation, MessageLikely, MessageUnderflow, bounds.Min);
             }
         }
         return context.State;
@@ -71,31 +69,17 @@ public abstract class CalculationsShouldNotOverflowBase : SymbolicRuleCheck
     private static bool CanOverflow(BinaryOperatorKind kind) =>
         kind is BinaryOperatorKind.Add or BinaryOperatorKind.Subtract or BinaryOperatorKind.Multiply or BinaryOperatorKind.Power;
 
-    private static BigInteger? Min(ITypeSymbol type) =>
+    private static NumberConstraint Bounds(ITypeSymbol type) =>
         type switch
         {
-            _ when type.Is(KnownType.System_SByte) => sbyte.MinValue,
-            _ when type.Is(KnownType.System_Byte) => byte.MinValue,
-            _ when type.Is(KnownType.System_Int16) => short.MinValue,
-            _ when type.Is(KnownType.System_UInt16) => ushort.MinValue,
-            _ when type.Is(KnownType.System_Int32) => int.MinValue,
-            _ when type.Is(KnownType.System_UInt32) => uint.MinValue,
-            _ when type.Is(KnownType.System_Int64) => long.MinValue,
-            _ when type.Is(KnownType.System_UInt64) => ulong.MinValue,
-            _ => null
-        };
-
-    private static BigInteger? Max(ITypeSymbol type)
-        => type switch
-        {
-            _ when type.Is(KnownType.System_SByte) => sbyte.MaxValue,
-            _ when type.Is(KnownType.System_Byte) => byte.MaxValue,
-            _ when type.Is(KnownType.System_Int16) => short.MaxValue,
-            _ when type.Is(KnownType.System_UInt16) => ushort.MaxValue,
-            _ when type.Is(KnownType.System_Int32) => int.MaxValue,
-            _ when type.Is(KnownType.System_UInt32) => uint.MaxValue,
-            _ when type.Is(KnownType.System_Int64) => long.MaxValue,
-            _ when type.Is(KnownType.System_UInt64) => ulong.MaxValue,
+            _ when type.Is(KnownType.System_SByte) => NumberConstraint.From(sbyte.MinValue, sbyte.MaxValue),
+            _ when type.Is(KnownType.System_Byte) => NumberConstraint.From(byte.MinValue, byte.MaxValue),
+            _ when type.Is(KnownType.System_Int16) => NumberConstraint.From(short.MinValue, short.MaxValue),
+            _ when type.Is(KnownType.System_UInt16) => NumberConstraint.From(ushort.MinValue, ushort.MaxValue),
+            _ when type.Is(KnownType.System_Int32) => NumberConstraint.From(int.MinValue, int.MaxValue),
+            _ when type.Is(KnownType.System_UInt32) => NumberConstraint.From(uint.MinValue, uint.MaxValue),
+            _ when type.Is(KnownType.System_Int64) => NumberConstraint.From(long.MinValue, long.MaxValue),
+            _ when type.Is(KnownType.System_UInt64) => NumberConstraint.From(ulong.MinValue, ulong.MaxValue),
             _ => null
         };
 }
