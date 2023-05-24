@@ -23,9 +23,12 @@ using System.Text.RegularExpressions;
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UseCachedRegex : UseCachedRegexBase<SyntaxKind>
+public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
 {
+    private const string DiagnosticId = "S6614";
+
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override string MessageFormat => $"{nameof(Regex)} instances should be cached";
 
     private static readonly HashSet<SyntaxKind> CorrectContextSyntaxKinds = new()
     {
@@ -39,6 +42,8 @@ public sealed class UseCachedRegex : UseCachedRegexBase<SyntaxKind>
         SyntaxKind.ParenthesizedLambdaExpression,
         SyntaxKind.AnonymousMethodExpression
     };
+
+    public UseCachedRegex() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
@@ -102,6 +107,8 @@ public sealed class UseCachedRegex : UseCachedRegexBase<SyntaxKind>
             _ => false
         };
 
+    private static bool IsSymbolFieldOrProperty(SyntaxNode identifier, SemanticModel model) => model.GetSymbolInfo(identifier).Symbol is IFieldSymbol or IPropertySymbol;
+
     private static bool IsCompliantSimpleAssignment(AssignmentExpressionSyntax assignment, SemanticModel model, SyntaxKind context)
     {
         var symbol = model.GetSymbolInfo(assignment.Left).Symbol;
@@ -150,8 +157,6 @@ public sealed class UseCachedRegex : UseCachedRegexBase<SyntaxKind>
                 },
             _ => false
         };
-
-    private static bool IsSymbolFieldOrProperty(SyntaxNode identifier, SemanticModel model) => model.GetSymbolInfo(identifier).Symbol is IFieldSymbol or IPropertySymbol;
 
     private static bool IsAssignmentWithinIfStatement(AssignmentExpressionSyntax assignment, SemanticModel model)
     {

@@ -27,18 +27,13 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class UseCachedRegexTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseCachedRegex>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseCachedRegex>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseCachedRegex>().AddReferences(MetadataReferenceFacade.RegularExpressions);
 
     [TestMethod]
     public void UseCachedRegex_CS() =>
-        builderCS.AddReferences(MetadataReferenceFacade.RegularExpressions).AddPaths("UseCachedRegex.cs").Verify();
+        builderCS.AddPaths("UseCachedRegex.cs").Verify();
 
     [TestMethod]
     public void UseCachedRegex_CSharp9() =>
-        builderCS.AddReferences(MetadataReferenceFacade.RegularExpressions).WithLanguageVersion(LanguageVersion.CSharp9).AddPaths("UseCachedRegex.CSharp9.cs").Verify();
-
-    [TestMethod]
-    public void UseCachedRegex_VB() =>
-        builderVB.AddPaths("UseCachedRegex.vb").Verify();
+        builderCS.WithLanguageVersion(LanguageVersion.CSharp9).AddPaths("UseCachedRegex.CSharp9.cs").Verify();
 }
