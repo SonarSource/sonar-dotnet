@@ -144,47 +144,49 @@ internal sealed partial class Binary
 
     private static BigInteger? CalculateRemainderMin(NumberConstraint left, NumberConstraint right)
     {
-        if (left.IsPositive)
+        // If every divisor is absolutely bigger than any dividend => resulting range == dividend range.
+        // Otherwise, the result is bigger or equals 0 for positive dividend values and absolutely bigger than the divisor for negative dividend values.
+        if (left.CanBeNegative || left.Max < MinOfAbsoluteValues(right))
         {
-            // Assuming both ranges are positive and every possible divisor value is > every possible dividend value => resulting range == dividend range.
-            // The sign of the divisor has no impact on the result => For negative or mixed divisor, we can take its absolute value and apply the same logic as above.
-            return left.Max is null || left.Max >= MinOfAbsoluteValues(right) ? 0 : left.Min;
-        }
-        else
-        {
-            var minDerivedFromRight = -MaxOfAbsoluteValues(right) + 1;
-            if (minDerivedFromRight is null)
+            if (right.Min is null || right.Max is null)
             {
-                // If righ is not finite, there will always be a divisor which is absolutely bigger than any value in left => resulting range == dividend range.
+                // If right is not finite, there will always be a divisor which is absolutely bigger than any value in left => resulting range == dividend range.
                 return left.Min;
             }
             else
             {
-                return left.Min is null ? minDerivedFromRight : BigInteger.Max(left.Min.Value, minDerivedFromRight.Value);
+                // The result cannot be absolutely bigger than the absolute divisor - 1. For negative dividends the inverse is true.
+                var minDerivedFromRight = -MaxOfAbsoluteValues(right).Value + 1;
+                return left.Min is null ? minDerivedFromRight : BigInteger.Max(left.Min.Value, minDerivedFromRight);
             }
+        }
+        else
+        {
+            return 0;
         }
     }
 
     private static BigInteger? CalculateRemainderMax(NumberConstraint left, NumberConstraint right)
     {
-        if (left.IsNegative)
+        // If every divisor is absolutely bigger than any dividend => resulting range == dividend range.
+        // Otherwise, the result is smaller or equals 0 for negative dividend values and absolutely smaller than the divisor for positive dividend values.
+        if (left.CanBePositive || -left.Max < MinOfAbsoluteValues(right))
         {
-            // Assuming both ranges are negative and every possible divisor value is < every possible dividend value => resulting range == dividend range.
-            // The sign of the divisor has no impact on the result => For positive or mixed divisor, we can take its absolute value and apply the same logic as above.
-            return left.Max <= -MinOfAbsoluteValues(right) ? 0 : left.Max;
-        }
-        else
-        {
-            var maxDerivedFromRight = MaxOfAbsoluteValues(right) - 1;
-            if (maxDerivedFromRight is null)
+            if (right.Min is null || right.Max is null)
             {
-                // If righ is not finite, there will always be a divisor which is absolutely bigger than any value in left => resulting range == dividend range.
+                // If right is not finite, there will always be a divisor which is absolutely bigger than any value in left => resulting range == dividend range.
                 return left.Max;
             }
             else
             {
+                // The result cannot be absolutely bigger than the absolute divisor - 1.
+                var maxDerivedFromRight = MaxOfAbsoluteValues(right) - 1;
                 return left.Max is null ? maxDerivedFromRight : BigInteger.Min(left.Max.Value, maxDerivedFromRight.Value);
             }
+        }
+        else
+        {
+            return 0;
         }
     }
 
