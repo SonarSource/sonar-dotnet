@@ -117,8 +117,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool NamespaceNeedsToBeAdded(BlockSyntax methodBody, SemanticModel semanticModel) =>
             !semanticModel.LookupNamespacesAndTypes(methodBody.CloseBraceToken.SpanStart)
                 .OfType<INamedTypeSymbol>()
-                .Any(nt => nt.IsType
-                           && nt.Name == LiteralNotSupportedException
-                           && nt.ContainingNamespace.Name == LiteralSystem);
+                .Any(x => x.IsType
+                          && x.Name == LiteralNotSupportedException
+                          && x.ContainingNamespace.Name == LiteralSystem);
     }
 }
