@@ -143,17 +143,6 @@ public partial class SonarAnalysisContextTest
     }
 
     [TestMethod]
-    public void SonarCompilationStartAnalysisContext_RegisterSemanticModel()
-    {
-        var context = new DummyAnalysisContext(TestContext);
-        var startContext = new DummyCompilationStartAnalysisContext(context);
-        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
-        sut.RegisterSemanticModelAction(_ => { });
-
-        startContext.AssertExpectedInvocationCounts(expectedSemanticModelCount: 1);
-    }
-
-    [TestMethod]
     public void SonarCompilationStartAnalysisContext_RegisterSymbolAction()
     {
         var context = new DummyAnalysisContext(TestContext);
@@ -173,18 +162,6 @@ public partial class SonarAnalysisContextTest
         sut.RegisterNodeAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, _ => { });
 
         startContext.AssertExpectedInvocationCounts(expectedNodeCount: 0); // RegisterNodeAction doesn't use DummyCompilationStartAnalysisContext to register but a newly created context
-    }
-
-    [TestMethod]
-    public void SonarCompilationStartAnalysisContext_RegisterSemanticModel_ReportsIssue()
-    {
-        var context = new DummyAnalysisContext(TestContext);
-        var startContext = new DummyCompilationStartAnalysisContext(context);
-        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
-        var diagnostic = Diagnostic.Create(DiagnosticDescriptorFactory.CreateUtility("TEST", "Test report"), context.Tree.GetRoot().GetLocation());
-        sut.RegisterSemanticModelAction(x => x.ReportIssue(diagnostic));
-
-        startContext.RaisedDiagnostic.Should().NotBeNull().And.BeSameAs(diagnostic);
     }
 
     [TestMethod]

@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
 
-        protected void ReadParameters(SonarCompilationStartAnalysisContext context)
+        protected void ReadParameters(SonarCompilationReportingContext context)
         {
             var outPath = context.ProjectConfiguration().OutPath;
             // For backward compatibility with S4MSB <= 5.0
@@ -87,39 +87,31 @@ namespace SonarAnalyzer.Rules
         protected UtilityAnalyzerBase(string diagnosticId, string title) : base(diagnosticId, title) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCompilationStartAction(startContext =>
+            context.RegisterCompilationAction(context =>
             {
-                ReadParameters(startContext);
+                ReadParameters(context);
                 if (!IsAnalyzerEnabled)
                 {
                     return;
                 }
 
-                var treeMessages = new List<TMessage>();
-                startContext.RegisterSemanticModelAction(modelContext =>
-                {
-                    if (ShouldGenerateMetrics(modelContext))
-                    {
-                        treeMessages.Add(CreateMessage(modelContext.Tree, modelContext.SemanticModel));
-                    }
-                });
+                var treeMessages = context.Compilation.SyntaxTrees
+                    .Where(x => ShouldGenerateMetrics(context, x))
+                    .Select(x => CreateMessage(x, context.Compilation.GetSemanticModel(x)));
 
-                startContext.RegisterCompilationEndAction(endContext =>
+                var allMessages = CreateAnalysisMessages(context)
+                    .Concat(treeMessages)
+                    .WhereNotNull()
+                    .ToArray();
+                lock (FileWriteLock)
                 {
-                    var allMessages = CreateAnalysisMessages(endContext)
-                        .Concat(treeMessages)
-                        .WhereNotNull()
-                        .ToArray();
-                    lock (FileWriteLock)
+                    Directory.CreateDirectory(OutPath);
+                    using var stream = File.Create(Path.Combine(OutPath, FileName));
+                    foreach (var message in allMessages)
                     {
-                        Directory.CreateDirectory(OutPath);
-                        using var stream = File.Create(Path.Combine(OutPath, FileName));
-                        foreach (var message in allMessages)
-                        {
-                            message.WriteDelimitedTo(stream);
-                        }
+                        message.WriteDelimitedTo(stream);
                     }
-                });
+                }
             });
 
         protected virtual bool ShouldGenerateMetrics(SyntaxTree tree) =>
@@ -128,8 +120,8 @@ namespace SonarAnalyzer.Rules
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
             && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
 
-        private bool ShouldGenerateMetrics(SonarSematicModelReportingContext context) =>
-            (AnalyzeUnchangedFiles || !context.IsUnchanged(context.Tree))
-            && ShouldGenerateMetrics(context.Tree);
+        private bool ShouldGenerateMetrics(SonarCompilationReportingContext context, SyntaxTree tree) =>
+            (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))
+            && ShouldGenerateMetrics(tree);
     }
 }
