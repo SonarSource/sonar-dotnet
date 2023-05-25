@@ -1004,6 +1004,7 @@ Tag(""End"")";
     [DataRow("i >= -10 && i <=   5 && j <= -21", -10, 5)]
     [DataRow("i >= -10 && i <=  -5 && j >=  21", -10, -5)]
     [DataRow("i >= -10 && i <=  -5 && j <= -21", -10, -5)]
+    [DataRow("i >=   4 && i <=   7 && j >=   5 && j <= 10", 0, 7)]
     public void Binary_Remainder_Range(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""

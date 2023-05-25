@@ -19,6 +19,7 @@
  */
 
 using System.Numerics;
+using Google.Protobuf.WellKnownTypes;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -137,14 +138,7 @@ internal sealed partial class Binary
         {
             return null;
         }
-        else if (right.Min == 0)
-        {
-            right = NumberConstraint.From(1, right.Max);
-        }
-        else if (right.Max == 0)
-        {
-            right = NumberConstraint.From(right.Min, -1);
-        }
+        right = AccountForZero(right);
         return NumberConstraint.From(CalculateRemainderMin(left, right), CalculateRemainderMax(left, right));
     }
 
@@ -152,13 +146,16 @@ internal sealed partial class Binary
     {
         if (left.IsPositive)
         {
-            return left.Min >= AbsoluteMin(right) ? 0 : left.Min;
+            // Assuming both ranges are positive and every possible divisor value is > every possible dividend value => resulting range == dividend range.
+            // The sign of the divisor has no impact on the result => For negative or mixed divisor, we can take its absolute value and apply the same logic as above.
+            return left.Max is null || left.Max >= MinOfAbsoluteValues(right) ? 0 : left.Min;
         }
         else
         {
-            var minDerivedFromRight = -AbsoluteMax(right) + 1;
+            var minDerivedFromRight = -MaxOfAbsoluteValues(right) + 1;
             if (minDerivedFromRight is null)
             {
+                // If righ is not finite, there will always be a divisor which is absolutely bigger than any value in left => resulting range == dividend range.
                 return left.Min;
             }
             else
@@ -172,13 +169,16 @@ internal sealed partial class Binary
     {
         if (left.IsNegative)
         {
-            return left.Max <= -AbsoluteMin(right) ? 0 : left.Max;
+            // Assuming both ranges are negative and every possible divisor value is < every possible dividend value => resulting range == dividend range.
+            // The sign of the divisor has no impact on the result => For positive or mixed divisor, we can take its absolute value and apply the same logic as above.
+            return left.Max <= -MinOfAbsoluteValues(right) ? 0 : left.Max;
         }
         else
         {
-            var maxDerivedFromRight = AbsoluteMax(right) - 1;
+            var maxDerivedFromRight = MaxOfAbsoluteValues(right) - 1;
             if (maxDerivedFromRight is null)
             {
+                // If righ is not finite, there will always be a divisor which is absolutely bigger than any value in left => resulting range == dividend range.
                 return left.Max;
             }
             else
@@ -188,10 +188,26 @@ internal sealed partial class Binary
         }
     }
 
-    private static BigInteger? AbsoluteMax(NumberConstraint constraint) =>
+    private static NumberConstraint AccountForZero(NumberConstraint constraint)
+    {
+        if (constraint.Min == 0)
+        {
+            return NumberConstraint.From(1, constraint.Max);
+        }
+        else if (constraint.Max == 0)
+        {
+            return NumberConstraint.From(constraint.Min, -1);
+        }
+        else
+        {
+            return constraint;
+        }
+    }
+
+    private static BigInteger? MaxOfAbsoluteValues(NumberConstraint constraint) =>
         constraint.Min is null || constraint.Max is null ? null : BigInteger.Max(BigInteger.Abs(constraint.Min.Value), BigInteger.Abs(constraint.Max.Value));
 
-    private static BigInteger? AbsoluteMin(NumberConstraint constraint)
+    private static BigInteger? MinOfAbsoluteValues(NumberConstraint constraint)
     {
         if (constraint.IsPositive)
         {
