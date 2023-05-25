@@ -50,7 +50,7 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
         {
             if (!IsUnchecked)
             {
-                IsUnchecked = node.IsKind(SyntaxKind.UncheckedStatement);
+                IsUnchecked = node.IsAnyKind(SyntaxKind.UncheckedStatement, SyntaxKind.UncheckedExpression);
                 if (!HasOverflow)
                 {
                     HasOverflow = node.IsAnyKind(
