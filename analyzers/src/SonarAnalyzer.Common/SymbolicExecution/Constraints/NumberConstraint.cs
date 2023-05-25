@@ -91,7 +91,7 @@ public sealed class NumberConstraint : SymbolicConstraint
     {
         if (Min is null)
         {
-            return other.Min is null || Max < other.Min;
+            return other.Min is null || Max >= other.Min;
         }
         else if (Max < other.Min || Min > other.Max)
         {
