@@ -35,7 +35,7 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
     protected AnalysisWarningAnalyzerBase() : base(DiagnosticId, Title) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterCompilationStartAction(c =>
+        context.RegisterCompilationAction(c =>
             {
                 ReadParameters(c);
                 if (IsAnalyzerEnabled && !RoslynHelper.IsRoslynCfgSupported(MinimalSupportedRoslynVersion))     // MsBuild 15 is bound with Roslyn 2.x, where Roslyn CFG is not available.
