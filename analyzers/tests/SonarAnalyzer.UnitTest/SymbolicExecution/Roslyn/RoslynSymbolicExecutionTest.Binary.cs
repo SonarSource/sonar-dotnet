@@ -1077,6 +1077,9 @@ Tag(""End"")";
     [DataRow("i <= -4 && j >= -6", null, null)]
     [DataRow("i <= -4 && j <=  6", null, null)]
     [DataRow("i <= -4 && j <= -6", 0, null)]
+    [DataRow("i >=  4 && i <=  6 && j >=  6", 0, null)]
+    [DataRow("i >=  4 && i <=  6 && j >=  6 && j <= 8", 0, 15)]  // exact range: 0, 14
+    [DataRow("i >=  4 && i <=  5 && j >=  6 && j <= 8", -4, 15)] // exact range: 2, 13
     public void Binary_BitXor_Range(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""
