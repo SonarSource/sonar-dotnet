@@ -1,5 +1,5 @@
 <h2>Why is this an issue?</h2>
-<p>The recommended way to access Azure Durable Entities is Interfaces via generated proxy objects.</p>
+<p>The recommended way to access Azure Durable Entities is through generated proxy objects with the help of interfaces.</p>
 <p>The following restrictions, during interface design, are enforced:</p>
 <ul>
   <li> Entity interfaces must be defined in the same assembly as the entity class. This is not detected by the rule. </li>
@@ -13,7 +13,7 @@
 or <code>IDurableOrchestrationContext.CreateEntityProxy&lt;TEntityInterface&gt;</code>. The exception message explains which rule was broken.</p>
 <p>This rule raises an issue in case any of the restrictions above is not respected.</p>
 <h3>Noncompliant code example</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 namespace Foo // Noncompliant, must be defined in the same assembly as the entity class that implements it
 {
     public interface ICounter&lt;T&gt; // Noncompliant, interfaces cannot contain generic parameters
@@ -46,7 +46,7 @@ namespace Bar
 }
 </pre>
 <h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 namespace Bar
 {
     public interface ICounter
@@ -82,5 +82,11 @@ namespace Bar
   <li> <a
   href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-dotnet-entities#restrictions-on-entity-interfaces">Restrictions on Entity Interfaces</a> </li>
   <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-entities?tabs=csharp">Durable Entities</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableentitycontext.signalentity?view=azure-dotnet">IDurableEntityContext.SignalEntity</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableentityclient.signalentityasync?view=azure-dotnet">IDurableEntityClient.SignalEntityAsync</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableorchestrationcontext.createentityproxy?view=azure-dotnet">IDurableOrchestrationContext.CreateEntity</a> </li>
 </ul>
 

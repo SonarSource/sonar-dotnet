@@ -6,6 +6,7 @@ underlying collection type before accessing it.</p>
 <ul>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.ilist">IList</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ireadonlylist-1">IReadonlyList&lt;T&gt;</a> </li>
 </ul>
 <h3>What is the potential impact?</h3>
 <p>We measured a significant improvement in execution time by running the following snippet with <a
@@ -227,9 +228,9 @@ BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.2846/22H2/2022Update)
   .NET Framework 4.6.2 : .NET Framework 4.8.1 (4.8.9139.0), X64 RyuJIT VectorSize=256
 </pre>
 <h2>How to fix it</h2>
-<p>If the type you are using implements <code>IList</code> or <code>IList&lt;T&gt;</code>, it implements <code>this[int index]</code>. This means
-calls to <code>First</code>, <code>Last</code>, or <code>ElementAt(index)</code> can be replaced with indexing at <code>0</code>, <code>Count-1</code>
-and <code>index</code> respectively.</p>
+<p>If the type you are using implements <code>IList</code>, <code>IList&lt;T&gt;</code> or <code>IReadonlyList&lt;T&gt;</code>, it implements
+<code>this[int index]</code>. This means calls to <code>First</code>, <code>Last</code>, or <code>ElementAt(index)</code> can be replaced with
+indexing at <code>0</code>, <code>Count-1</code> and <code>index</code> respectively.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -262,5 +263,7 @@ int GetLast(List&lt;int&gt; data)
 <ul>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.ilist.item">IList.Item[Int32]</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ilist-1.item">IList&lt;T&gt;.Item[Int32]</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ireadonlylist-1.item">IReadonlyList&lt;T&gt;.Item[Int32]</a>
+  </li>
 </ul>
 
