@@ -27,6 +27,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 /// </summary>
 public abstract class SyntaxClassifierBase
 {
+    protected abstract bool IsCfgBoundary(SyntaxNode node);
     protected abstract bool IsStatement(SyntaxNode node);
     protected abstract SyntaxNode ParentLoopCondition(SyntaxNode node);
 
@@ -39,7 +40,7 @@ public abstract class SyntaxClassifierBase
             {
                 return true;
             }
-            if (IsStatement(node))
+            if (IsStatement(node) || IsCfgBoundary(node))
             {
                 return false;
             }

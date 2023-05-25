@@ -83,7 +83,7 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_NestedNumberCondition()
+    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_NestedNumberCondition_CS()
     {
         const string code = """
             for (var i = 0; i < 10; i++)
@@ -103,6 +103,37 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateExitReachCount(1);
         var i = validator.Symbol("i");
         var value = validator.Symbol("value");
+        validator.TagStates("If").Should().SatisfyRespectively(
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0));
+                x[value].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));
+            },
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1, 9));
+                x[value].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));
+            });
+        validator.TagStates("Unreachable").Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_NestedNumberCondition_VB()
+    {
+        const string code = """
+            For i As Integer = 0 To 9
+                Dim Value As Integer = 42
+                If Value < 100 Then ' Should Then be always True
+                    Tag("If", Value)
+                Else
+                    Tag("Unreachable")
+                End If
+            Next
+            """;
+        var validator = SETestContext.CreateVB(code, "Arg As Integer", new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(1);
+        var i = validator.Symbol("i");
+        var value = validator.Symbol("Value");
         validator.TagStates("If").Should().SatisfyRespectively(
             x =>
             {
@@ -229,7 +260,7 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Loops_While_NestedNumberCondition()
+    public void Loops_While_NestedNumberCondition_CS()
     {
         const string code = """
             var i = 0;
@@ -248,6 +279,32 @@ public partial class RoslynSymbolicExecutionTest
             }
             """;
         var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(2);
+        validator.ValidateTagOrder("Inside", "After", "Inside", "After");
+        validator.TagValues("Inside").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)));
+        validator.TagValues("After").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)),    // Initial pass through "if"
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2)));   // Second pass through "if"
+    }
+
+    [TestMethod]
+    public void Loops_While_NestedNumberCondition_VB()
+    {
+        const string code = """
+            Dim i As Integer = 0
+            While Condition     ' We are inside a Loop => binary operations are evaluated To True/False For 1St pass, And learn range condition For 2nd pass
+                If i < 10 Then
+                    Tag("Inside", i)
+                    i = i + 1
+                Else
+                    Tag("Unreachable")
+                End If
+                Tag("After", i)
+            End While
+            """;
+        var validator = SETestContext.CreateVB(code, new AddConstraintOnInvocationCheck()).Validator;
         validator.ValidateExitReachCount(2);
         validator.ValidateTagOrder("Inside", "After", "Inside", "After");
         validator.TagValues("Inside").Should().SatisfyRespectively(
@@ -374,6 +431,29 @@ Tag(""End"", arg);";
         validator.TagValues("End").Should().HaveCount(2)
             .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
             .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy));
+    }
+
+    [TestMethod]
+    public void GoTo_FixedCount()
+    {
+        const string code = """
+            var i = 0;
+            Start:
+            if (i < 10)
+            {
+                Tag("InLoop", i);
+                i++;
+                goto Start;
+            }
+            Tag("End");
+            """;
+        var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
+        validator.ValidateExitReachCount(0);    // We don't get out of the loop
+        validator.ValidateTagOrder("InLoop", "InLoop");
+        validator.TagValues("InLoop").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)));
+        validator.TagStates("End").Should().BeEmpty();
     }
 
     [DataTestMethod]

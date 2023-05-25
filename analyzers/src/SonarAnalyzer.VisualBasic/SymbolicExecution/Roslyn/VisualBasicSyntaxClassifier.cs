@@ -40,4 +40,7 @@ public sealed class VisualBasicSyntaxClassifier : SyntaxClassifierBase
             WhileStatementSyntax whileStatement => whileStatement.Condition,
             _ => null
         };
+
+    protected override bool IsCfgBoundary(SyntaxNode node) =>
+        node is LambdaExpressionSyntax;
 }

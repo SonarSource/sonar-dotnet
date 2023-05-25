@@ -39,4 +39,6 @@ public sealed class CSharpSyntaxClassifier : SyntaxClassifierBase
             WhileStatementSyntax whileStatement => whileStatement.Condition,
             _ => null
         };
+    protected override bool IsCfgBoundary(SyntaxNode node) =>
+        node is LambdaExpressionSyntax || node.IsKind(SyntaxKindEx.LocalFunctionStatement);
 }
