@@ -95,7 +95,6 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
-
                 var treeMessages = context.Compilation.SyntaxTrees
                     .Where(x => ShouldGenerateMetrics(context, x))
                     .Select(x => CreateMessage(x, context.Compilation.GetSemanticModel(x)));
