@@ -64,35 +64,28 @@ internal sealed partial class Binary
         {
             return null;
         }
-        else if (right.Min == 0)
-        {
-            right = NumberConstraint.From(1, right.Max);
-        }
-        else if (right.Max == 0)
-        {
-            right = NumberConstraint.From(right.Min, -1);
-        }
+        right = AccountForZero(right);
 
         BigInteger? min, max;
         if (left.IsPositive && right.IsPositive)
         {
-            min = right.Max is null ? 0 : left.Min / right.Max;
+            min = left.Min / right.Max ?? 0;
             max = left.Max / right.Min;
         }
         else if (left.IsNegative && right.IsNegative)
         {
-            min = right.Min is null ? 0 : left.Max / right.Min;
+            min = left.Max / right.Min ?? 0;
             max = left.Min / right.Max;
         }
         else if (left.IsPositive && right.IsNegative)
         {
             min = left.Max / right.Max;
-            max = right.Min is null ? 0 : left.Min / right.Min;
+            max = left.Min / right.Min ?? 0;
         }
         else if (left.IsNegative && right.IsPositive)
         {
             min = left.Min / right.Min;
-            max = right.Max is null ? 0 : left.Max / right.Max;
+            max = left.Max / right.Max ?? 0;
         }
         else if (right.IsPositive)
         {
@@ -115,8 +108,23 @@ internal sealed partial class Binary
             min = null;
             max = null;
         }
-
         return NumberConstraint.From(min, max);
+    }
+
+    private static NumberConstraint AccountForZero(NumberConstraint constraint)
+    {
+        if (constraint.Min == 0)
+        {
+            return NumberConstraint.From(1, constraint.Max);
+        }
+        else if (constraint.Max == 0)
+        {
+            return NumberConstraint.From(constraint.Min, -1);
+        }
+        else
+        {
+            return constraint;
+        }
     }
 
     private static BigInteger? CalculateAndMin(NumberConstraint left, NumberConstraint right)
