@@ -72,9 +72,7 @@ public sealed class NumberConstraint : SymbolicConstraint
         }
         if (min.HasValue && max.HasValue && min.Value > max.Value)
         {
-            var tmp = min;
-            min = max;
-            max = tmp;
+            (min, max) = (max, min);
         }
         if (cache.Count > CacheLimit)
         {
