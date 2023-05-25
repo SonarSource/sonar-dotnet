@@ -93,6 +93,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .VerifyCodeFix();
 
         [TestMethod]
+        public void EmptyMethod_WithoutClosingBracket_CodeFix_Comment() =>
+            builderCS.WithCodeFix<CS.EmptyMethodCodeFix>()
+                .AddPaths("EmptyMethod.WithoutClosingBracket.cs")
+                .WithCodeFixedPaths("EmptyMethod.WithoutClosingBracket.Comment.Fixed.cs")
+                .WithCodeFixTitle(CS.EmptyMethodCodeFix.TitleComment)
+                .VerifyCodeFix();
+
+        [TestMethod]
         public void EmptyMethod_VB() =>
             builderVB.AddPaths("EmptyMethod.vb").Verify();
 
