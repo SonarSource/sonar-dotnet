@@ -29,6 +29,44 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
 
     public override bool ShouldExecute()
     {
-        return true;
+        if (ContainingSymbol?.Name == nameof(GetHashCode))
+        {
+            return false;
+        }
+        else
+        {
+            var walker = new SyntaxKindWalker();
+            walker.SafeVisit(Node);
+            return walker.HasOverflow && !walker.IsUnchecked;
+        }
+    }
+
+    private sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
+    {
+        public bool IsUnchecked { get; private set; }
+        public bool HasOverflow { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!IsUnchecked)
+            {
+                IsUnchecked = node.IsKind(SyntaxKind.UncheckedStatement);
+                if (!HasOverflow)
+                {
+                    HasOverflow = node.IsAnyKind(
+                        SyntaxKind.AddExpression,
+                        SyntaxKind.AddAssignmentExpression,
+                        SyntaxKind.MultiplyExpression,
+                        SyntaxKind.MultiplyAssignmentExpression,
+                        SyntaxKind.SubtractExpression,
+                        SyntaxKind.SubtractAssignmentExpression,
+                        SyntaxKind.PostDecrementExpression,
+                        SyntaxKind.PostIncrementExpression,
+                        SyntaxKind.PreDecrementExpression,
+                        SyntaxKind.PreIncrementExpression);
+                    base.Visit(node);
+                }
+            }
+        }
     }
 }

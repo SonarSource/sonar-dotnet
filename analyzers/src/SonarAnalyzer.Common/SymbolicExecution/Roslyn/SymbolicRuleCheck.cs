@@ -25,6 +25,7 @@ public abstract class SymbolicRuleCheck : SymbolicCheck
     protected SonarAnalysisContext SonarContext { get; private set; }
     protected SyntaxNode Node => context.Node;
     protected SemanticModel SemanticModel => context.SemanticModel;
+    protected ISymbol ContainingSymbol => context.ContainingSymbol; // IMethodSymbol or IPropertySymbol, also for lambda CFGs
 
     private readonly HashSet<Location> reportedDiagnostics = new();
     private SonarSyntaxNodeReportingContext context;
