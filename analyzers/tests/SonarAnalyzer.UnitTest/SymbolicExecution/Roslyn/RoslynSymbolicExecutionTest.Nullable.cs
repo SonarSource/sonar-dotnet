@@ -215,7 +215,7 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValue("UnknownArg").Should().HaveNoConstraints();
         validator.TagValue("UnknownValue").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("NullArg").Should().HaveOnlyConstraints(ObjectConstraint.Null, DummyConstraint.Dummy);
-        validator.TagValue("NullValue").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("NullValue").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0));
         validator.TagValue("NotNullArg").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy, NumberConstraint.From(42));
         validator.TagValue("NotNullValue").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy, NumberConstraint.From(42));
     }
