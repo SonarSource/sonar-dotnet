@@ -27,4 +27,17 @@ public sealed class VisualBasicSyntaxClassifier : SyntaxClassifierBase
     public static VisualBasicSyntaxClassifier Instance => instance ??= new();
 
     private VisualBasicSyntaxClassifier() { }
+
+    protected override bool IsStatement(SyntaxNode node) =>
+        node is StatementSyntax;
+
+    protected override SyntaxNode ParentLoopCondition(SyntaxNode node) =>
+        node.Parent switch
+        {
+            DoStatementSyntax doStatement => doStatement.WhileOrUntilClause,
+            LoopStatementSyntax loopStatement => loopStatement.WhileOrUntilClause,
+            ForBlockSyntax forBlock => forBlock.ForStatement,
+            WhileStatementSyntax whileStatement => whileStatement.Condition,
+            _ => null
+        };
 }

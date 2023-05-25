@@ -27,4 +27,16 @@ public sealed class CSharpSyntaxClassifier : SyntaxClassifierBase
     public static CSharpSyntaxClassifier Instance => instance ??= new();
 
     private CSharpSyntaxClassifier() { }
+
+    protected override bool IsStatement(SyntaxNode node) =>
+            node is StatementSyntax;
+
+    protected override SyntaxNode ParentLoopCondition(SyntaxNode node) =>
+        node.Parent switch
+        {
+            DoStatementSyntax doStatement => doStatement.Condition,
+            ForStatementSyntax forStatement => forStatement.Condition,
+            WhileStatementSyntax whileStatement => whileStatement.Condition,
+            _ => null
+        };
 }

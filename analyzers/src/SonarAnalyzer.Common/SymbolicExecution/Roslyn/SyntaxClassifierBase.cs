@@ -20,8 +20,34 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
+/// <summary>
+/// This class violates the basic principle that SE should only depend on IOperation.
+///
+/// Anything added here needs to have extremely rare reason why it exists.
+/// </summary>
 public abstract class SyntaxClassifierBase
 {
-    public bool IsInLoopCondition(SyntaxNode node) =>
-        true; // FIXME: Not so easy
+    protected abstract bool IsStatement(SyntaxNode node);
+    protected abstract SyntaxNode ParentLoopCondition(SyntaxNode node);
+
+    // Detecting loops from CFG shape is not possible from the shape of CFG, because of nested loops.
+    public bool IsInLoopCondition(SyntaxNode node)
+    {
+        while (node is not null)
+        {
+            if (ParentLoopCondition(node) == node)
+            {
+                return true;
+            }
+            if (IsStatement(node))
+            {
+                return false;
+            }
+            else
+            {
+                node = node.Parent;
+            }
+        }
+        return false;
+    }
 }
