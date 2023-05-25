@@ -24,18 +24,19 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
     {
         public IOperationWrapperSonar Operation { get; }
         public ProgramState State { get; }
-        public bool IsLoopCondition { get; }
         public int VisitCount { get; }
+        public bool IsLoopCondition { get; }
         public IReadOnlyCollection<ISymbol> CapturedVariables { get; }
 
-        public SymbolicContext(ExplodedNode node, IReadOnlyCollection<ISymbol> capturedVariables) : this(node.Operation, node.State, node.VisitCount, capturedVariables) { }
+        public SymbolicContext(ExplodedNode node, IReadOnlyCollection<ISymbol> capturedVariables, bool isLoopCondition)
+            : this(node.Operation, node.State, isLoopCondition, node.VisitCount, capturedVariables) { }
 
-        public SymbolicContext(IOperationWrapperSonar operation, ProgramState state, int visitCount, IReadOnlyCollection<ISymbol> capturedVariables)
+        public SymbolicContext(IOperationWrapperSonar operation, ProgramState state, bool isLoopCondition, int visitCount, IReadOnlyCollection<ISymbol> capturedVariables)
         {
             Operation = operation; // Operation can be null for the branch nodes.
             State = state ?? throw new ArgumentNullException(nameof(state));
-            IsLoopCondition = true; // FIXME: Not so easy
             VisitCount = visitCount;
+            IsLoopCondition = isLoopCondition;
             CapturedVariables = capturedVariables ?? throw new ArgumentNullException(nameof(capturedVariables));
         }
 
@@ -46,7 +47,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             State.SetSymbolConstraint(symbol, constraint);
 
         public SymbolicContext WithState(ProgramState newState) =>
-            State == newState ? this : new(Operation, newState, VisitCount, CapturedVariables);
+            State == newState ? this : new(Operation, newState, IsLoopCondition, VisitCount, CapturedVariables);
 
         public bool HasConstraint(IOperation operation, SymbolicConstraint constraint) =>
             State[operation]?.HasConstraint(constraint) is true;
