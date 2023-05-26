@@ -20,57 +20,56 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+public sealed class ExplodedNode : IEquatable<ExplodedNode>
 {
-    public sealed class ExplodedNode : IEquatable<ExplodedNode>
+    private readonly IOperationWrapperSonar[] operations;
+    private readonly int index;
+    private readonly int programPointHash;
+
+    public ProgramState State { get; private set; }
+    public BasicBlock Block { get; }
+    public FinallyPoint FinallyPoint { get; }
+    public IOperationWrapperSonar Operation => index < operations.Length ? operations[index] : null;
+    public int VisitCount => State.GetVisitCount(programPointHash);
+
+    public ExplodedNode(BasicBlock block, ProgramState state, FinallyPoint finallyPoint)
+        : this(block, block.OperationsAndBranchValue.ToExecutionOrder().ToArray(), 0, state, finallyPoint) { }
+
+    private ExplodedNode(BasicBlock block, IOperationWrapperSonar[] operations, int index, ProgramState state, FinallyPoint finallyPoint)
     {
-        private readonly IOperationWrapperSonar[] operations;
-        private readonly int index;
-        private readonly int programPointHash;
-
-        public ProgramState State { get; private set; }
-        public BasicBlock Block { get; }
-        public FinallyPoint FinallyPoint { get; }
-        public IOperationWrapperSonar Operation => index < operations.Length ? operations[index] : null;
-        public int VisitCount => State.GetVisitCount(programPointHash);
-
-        public ExplodedNode(BasicBlock block, ProgramState state, FinallyPoint finallyPoint)
-            : this(block, block.OperationsAndBranchValue.ToExecutionOrder().ToArray(), 0, state, finallyPoint) { }
-
-        private ExplodedNode(BasicBlock block, IOperationWrapperSonar[] operations, int index, ProgramState state, FinallyPoint finallyPoint)
-        {
-            Block = block;
-            State = state ?? throw new ArgumentNullException(nameof(state));
-            FinallyPoint = finallyPoint;
-            this.operations = operations;
-            this.index = index;
-            programPointHash = ProgramPoint.Hash(block, index);
-            state.CheckConsistency();
-        }
-
-        public ExplodedNode CreateNext(ProgramState state) =>
-            new(Block, operations, index + 1, state, FinallyPoint);
-
-        public int AddVisit()
-        {
-            State = State.AddVisit(programPointHash);
-            return State.GetVisitCount(programPointHash);
-        }
-
-        public override int GetHashCode() =>
-            HashCode.Combine(programPointHash, State);
-
-        public override bool Equals(object obj) =>
-            Equals(obj as ExplodedNode);
-
-        public bool Equals(ExplodedNode other) =>
-            other is not null
-            && other.programPointHash == programPointHash
-            && other.State.Equals(State);
-
-        public override string ToString() =>
-            Operation is null
-                ? $"Block #{Block.Ordinal}, Branching{Environment.NewLine}{State}"
-                : $"Block #{Block.Ordinal}, Operation #{index}, {Operation.Instance.Serialize()}{Environment.NewLine}{State}";
+        Block = block;
+        State = state ?? throw new ArgumentNullException(nameof(state));
+        FinallyPoint = finallyPoint;
+        this.operations = operations;
+        this.index = index;
+        programPointHash = ProgramPoint.Hash(block, index);
+        state.CheckConsistency();
     }
+
+    public ExplodedNode CreateNext(ProgramState state) =>
+        new(Block, operations, index + 1, state, FinallyPoint);
+
+    public int AddVisit()
+    {
+        State = State.AddVisit(programPointHash);
+        return State.GetVisitCount(programPointHash);
+    }
+
+    public override int GetHashCode() =>
+        HashCode.Combine(programPointHash, State);
+
+    public override bool Equals(object obj) =>
+        Equals(obj as ExplodedNode);
+
+    public bool Equals(ExplodedNode other) =>
+        other is not null
+        && other.programPointHash == programPointHash
+        && other.State.Equals(State);
+
+    public override string ToString() =>
+        Operation is null
+            ? $"Block #{Block.Ordinal}, Branching{Environment.NewLine}{State}"
+            : $"Block #{Block.Ordinal}, Operation #{index}, {Operation.Instance.Serialize()}{Environment.NewLine}{State}";
 }

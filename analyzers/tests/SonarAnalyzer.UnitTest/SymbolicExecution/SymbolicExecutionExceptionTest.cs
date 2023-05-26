@@ -20,51 +20,50 @@
 
 using SonarAnalyzer.SymbolicExecution;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints;
+
+[TestClass]
+public class SymbolicExecutionExceptionTest
 {
-    [TestClass]
-    public class SymbolicExecutionExceptionTest
+    [TestMethod]
+    public void Constructor_ParameterLess()
     {
-        [TestMethod]
-        public void Constructor_ParameterLess()
-        {
-            var sut = new SymbolicExecutionException();
-            sut.Message.Should().Be("Exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' was thrown.");
-            sut.InnerException.Should().BeNull();
-        }
+        var sut = new SymbolicExecutionException();
+        sut.Message.Should().Be("Exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' was thrown.");
+        sut.InnerException.Should().BeNull();
+    }
 
-        [TestMethod]
-        public void Constructor_MessageArg()
-        {
-            var sut = new SymbolicExecutionException("Lorem ipsum");
-            sut.Message.Should().Be("Lorem ipsum");
-            sut.InnerException.Should().BeNull();
-        }
+    [TestMethod]
+    public void Constructor_MessageArg()
+    {
+        var sut = new SymbolicExecutionException("Lorem ipsum");
+        sut.Message.Should().Be("Lorem ipsum");
+        sut.InnerException.Should().BeNull();
+    }
 
-        [TestMethod]
-        public void Constructor_MessageAndInnerException()
-        {
-            var inner = new InvalidOperationException();
-            var sut = new SymbolicExecutionException("Lorem ipsum", inner);
-            sut.Message.Should().Be("Lorem ipsum");
-            sut.InnerException.Should().Be(inner);
-        }
+    [TestMethod]
+    public void Constructor_MessageAndInnerException()
+    {
+        var inner = new InvalidOperationException();
+        var sut = new SymbolicExecutionException("Lorem ipsum", inner);
+        sut.Message.Should().Be("Lorem ipsum");
+        sut.InnerException.Should().Be(inner);
+    }
 
-        [TestMethod]
-        public void Constructor_SymbolAndLocation()
-        {
-            var inner = new InvalidOperationException("Lorem Ipsum");
-            var (tree, semanticModel) = TestHelper.CompileCS("public class Sample { }");
-            var symbol = semanticModel.LookupSymbols(0, name: "Sample").Single();
-            var location = tree.GetRoot().GetLocation();
+    [TestMethod]
+    public void Constructor_SymbolAndLocation()
+    {
+        var inner = new InvalidOperationException("Lorem Ipsum");
+        var (tree, semanticModel) = TestHelper.CompileCS("public class Sample { }");
+        var symbol = semanticModel.LookupSymbols(0, name: "Sample").Single();
+        var location = tree.GetRoot().GetLocation();
 
-            var sut = new SymbolicExecutionException(inner, null, null);
-            sut.Message.Should().Be("Error processing method: {unknown} ## Method file: {unknown} ## Method line: {unknown} ## Inner exception: System.InvalidOperationException: Lorem Ipsum");
-            sut.InnerException.Should().Be(inner);
+        var sut = new SymbolicExecutionException(inner, null, null);
+        sut.Message.Should().Be("Error processing method: {unknown} ## Method file: {unknown} ## Method line: {unknown} ## Inner exception: System.InvalidOperationException: Lorem Ipsum");
+        sut.InnerException.Should().Be(inner);
 
-            sut = new SymbolicExecutionException(inner, symbol, location);
-            sut.Message.Should().Be("Error processing method: Sample ## Method file: snippet0.cs ## Method line: 0,0 ## Inner exception: System.InvalidOperationException: Lorem Ipsum");
-            sut.InnerException.Should().Be(inner);
-        }
+        sut = new SymbolicExecutionException(inner, symbol, location);
+        sut.Message.Should().Be("Error processing method: Sample ## Method file: snippet0.cs ## Method line: 0,0 ## Inner exception: System.InvalidOperationException: Lorem Ipsum");
+        sut.InnerException.Should().Be(inner);
     }
 }

@@ -18,55 +18,54 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+/// <summary>
+/// Lifespan of this class is one method analyzed with SE.
+/// </summary>
+public class SymbolicCheck
 {
     /// <summary>
-    /// Lifespan of this class is one method analyzed with SE.
+    /// Stop processing this branch of the exploded graph. There will be no follow up states.
     /// </summary>
-    public class SymbolicCheck
-    {
-        /// <summary>
-        /// Stop processing this branch of the exploded graph. There will be no follow up states.
-        /// </summary>
-        protected static readonly ProgramState[] EmptyStates =  Array.Empty<ProgramState>();
+    protected static readonly ProgramState[] EmptyStates =  Array.Empty<ProgramState>();
 
-        protected SymbolicCheck() { } // Avoid abstract class, fixes S1694
+    protected SymbolicCheck() { } // Avoid abstract class, fixes S1694
 
-        public virtual ProgramState ConditionEvaluated(SymbolicContext context) =>
-            context.State;
+    public virtual ProgramState ConditionEvaluated(SymbolicContext context) =>
+        context.State;
 
-        /// <summary>
-        /// Override this if you need to return multiple states.
-        /// </summary>
-        public virtual ProgramState[] PreProcess(SymbolicContext context) =>
-            PreProcessSimple(context) is { } newState ? newState.ToArray() : EmptyStates;
+    /// <summary>
+    /// Override this if you need to return multiple states.
+    /// </summary>
+    public virtual ProgramState[] PreProcess(SymbolicContext context) =>
+        PreProcessSimple(context) is { } newState ? newState.ToArray() : EmptyStates;
 
-        /// <summary>
-        /// Override this if you need to return multiple states.
-        /// </summary>
-        public virtual ProgramState[] PostProcess(SymbolicContext context) =>
-            PostProcessSimple(context) is { } newState ? newState.ToArray() : EmptyStates;
+    /// <summary>
+    /// Override this if you need to return multiple states.
+    /// </summary>
+    public virtual ProgramState[] PostProcess(SymbolicContext context) =>
+        PostProcessSimple(context) is { } newState ? newState.ToArray() : EmptyStates;
 
-        /// <summary>
-        /// Method is invoked for each execution flow that reaches exit block. Once for each unique state after LVA cleanup.
-        /// </summary>
-        public virtual void ExitReached(SymbolicContext context) { }
+    /// <summary>
+    /// Method is invoked for each execution flow that reaches exit block. Once for each unique state after LVA cleanup.
+    /// </summary>
+    public virtual void ExitReached(SymbolicContext context) { }
 
-        /// <summary>
-        /// Method is invoked once for analyzed CFG.
-        /// </summary>
-        public virtual void ExecutionCompleted() { }
+    /// <summary>
+    /// Method is invoked once for analyzed CFG.
+    /// </summary>
+    public virtual void ExecutionCompleted() { }
 
-        /// <summary>
-        /// Override this if you need to return a single state or null to stop the execution.
-        /// </summary>
-        protected virtual ProgramState PreProcessSimple(SymbolicContext context) =>
-            context.State;
+    /// <summary>
+    /// Override this if you need to return a single state or null to stop the execution.
+    /// </summary>
+    protected virtual ProgramState PreProcessSimple(SymbolicContext context) =>
+        context.State;
 
-        /// <summary>
-        /// Override this if you need to return a single state or null to stop the execution.
-        /// </summary>
-        protected virtual ProgramState PostProcessSimple(SymbolicContext context) =>
-            context.State;
-    }
+    /// <summary>
+    /// Override this if you need to return a single state or null to stop the execution.
+    /// </summary>
+    protected virtual ProgramState PostProcessSimple(SymbolicContext context) =>
+        context.State;
 }

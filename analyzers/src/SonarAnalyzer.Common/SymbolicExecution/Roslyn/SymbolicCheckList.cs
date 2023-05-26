@@ -18,72 +18,71 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+public class SymbolicCheckList
 {
-    public class SymbolicCheckList
+    private readonly SymbolicCheck[] checks;
+
+    public SymbolicCheckList(SymbolicCheck[] checks) =>
+        this.checks = checks ?? throw new ArgumentNullException(nameof(checks));
+
+    public ProgramState ConditionEvaluated(SymbolicContext context)
     {
-        private readonly SymbolicCheck[] checks;
-
-        public SymbolicCheckList(SymbolicCheck[] checks) =>
-            this.checks = checks ?? throw new ArgumentNullException(nameof(checks));
-
-        public ProgramState ConditionEvaluated(SymbolicContext context)
+        foreach (var check in checks)
         {
-            foreach (var check in checks)
+            if (check.ConditionEvaluated(context) is { } newState)
             {
-                if (check.ConditionEvaluated(context) is { } newState)
+                context = context.WithState(newState);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        return context.State;
+    }
+
+    public void ExitReached(SymbolicContext context)
+    {
+        foreach (var check in checks)
+        {
+            check.ExitReached(context);
+        }
+    }
+
+    public void ExecutionCompleted()
+    {
+        foreach (var check in checks)
+        {
+            check.ExecutionCompleted();
+        }
+    }
+
+    public SymbolicContext[] PreProcess(SymbolicContext context) =>
+        InvokeChecks(context, preProcess: true);
+
+    public SymbolicContext[] PostProcess(SymbolicContext context) =>
+        InvokeChecks(context, preProcess: false);
+
+    private SymbolicContext[] InvokeChecks(SymbolicContext context, bool preProcess)
+    {
+        // Performance: Hotpath. Don't do changes here without profiling allocation impact.
+        var before = new List<SymbolicContext> { context };
+        var after = new List<SymbolicContext>();
+        foreach (var check in checks)
+        {
+            foreach (var beforeContext in before)
+            {
+                var newStates = preProcess ? check.PreProcess(beforeContext) : check.PostProcess(beforeContext);
+                foreach (var newState in newStates)
                 {
-                    context = context.WithState(newState);
-                }
-                else
-                {
-                    return null;
+                    after.Add(beforeContext.WithState(newState));
                 }
             }
-            return context.State;
+            after = Interlocked.Exchange(ref before, after);
+            after.Clear();
         }
-
-        public void ExitReached(SymbolicContext context)
-        {
-            foreach (var check in checks)
-            {
-                check.ExitReached(context);
-            }
-        }
-
-        public void ExecutionCompleted()
-        {
-            foreach (var check in checks)
-            {
-                check.ExecutionCompleted();
-            }
-        }
-
-        public SymbolicContext[] PreProcess(SymbolicContext context) =>
-            InvokeChecks(context, preProcess: true);
-
-        public SymbolicContext[] PostProcess(SymbolicContext context) =>
-            InvokeChecks(context, preProcess: false);
-
-        private SymbolicContext[] InvokeChecks(SymbolicContext context, bool preProcess)
-        {
-            // Performance: Hotpath. Don't do changes here without profiling allocation impact.
-            var before = new List<SymbolicContext> { context };
-            var after = new List<SymbolicContext>();
-            foreach (var check in checks)
-            {
-                foreach (var beforeContext in before)
-                {
-                    var newStates = preProcess ? check.PreProcess(beforeContext) : check.PostProcess(beforeContext);
-                    foreach (var newState in newStates)
-                    {
-                        after.Add(beforeContext.WithState(newState));
-                    }
-                }
-                after = Interlocked.Exchange(ref before, after);
-                after.Clear();
-            }
-            return before.ToArray();
-        }
+        return before.ToArray();
     }
 }

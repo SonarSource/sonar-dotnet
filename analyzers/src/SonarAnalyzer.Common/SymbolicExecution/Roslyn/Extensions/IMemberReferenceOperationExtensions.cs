@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+internal static class IMemberReferenceOperationExtensions
 {
-    internal static class IMemberReferenceOperationExtensions
-    {
-        public static bool IsOnReaderWriterLockOrSlim(this IMemberReferenceOperationWrapper reference) =>
-            reference.Instance.Type.IsAny(KnownType.System_Threading_ReaderWriterLock, KnownType.System_Threading_ReaderWriterLockSlim);
-    }
+    public static bool IsOnReaderWriterLockOrSlim(this IMemberReferenceOperationWrapper reference) =>
+        reference.Instance.Type.IsAny(KnownType.System_Threading_ReaderWriterLock, KnownType.System_Threading_ReaderWriterLockSlim);
 }

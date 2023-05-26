@@ -20,65 +20,64 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+internal class ExceptionCandidate
 {
-    internal class ExceptionCandidate
-    {
-        private readonly TypeCatalog typeCatalog;
+    private readonly TypeCatalog typeCatalog;
 
-        public ExceptionCandidate(Compilation compilation) =>
-            typeCatalog = new TypeCatalog(compilation);
+    public ExceptionCandidate(Compilation compilation) =>
+        typeCatalog = new TypeCatalog(compilation);
 
-        public ExceptionState FromOperation(ProgramState state, IOperationWrapperSonar operation) =>
-            operation.Instance.Kind switch
-            {
-                OperationKindEx.ArrayElementReference => FromOperation(IArrayElementReferenceOperationWrapper.FromOperation(operation.Instance)),
-                OperationKindEx.Conversion => FromConversion(operation),
-                OperationKindEx.DynamicIndexerAccess => new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
-                OperationKindEx.DynamicInvocation => ExceptionState.UnknownException,      // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
-                OperationKindEx.DynamicMemberReference => ExceptionState.UnknownException, // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
-                OperationKindEx.DynamicObjectCreation => ExceptionState.UnknownException,  // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
-                OperationKindEx.EventReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
-                OperationKindEx.FieldReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
-                OperationKindEx.Invocation => FromOperation(IInvocationOperationWrapper.FromOperation(operation.Instance)),
-                OperationKindEx.MethodReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
-                OperationKindEx.ObjectCreation => operation.Instance.Type.DerivesFrom(KnownType.System_Exception) ? null : ExceptionState.UnknownException,
-                OperationKindEx.PropertyReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
-                _ => null
-            };
-
-        private ExceptionState FromConversion(IOperationWrapperSonar operation)
+    public ExceptionState FromOperation(ProgramState state, IOperationWrapperSonar operation) =>
+        operation.Instance.Kind switch
         {
-            if (operation.IsImplicit)
-            {
-                return null;
-            }
+            OperationKindEx.ArrayElementReference => FromOperation(IArrayElementReferenceOperationWrapper.FromOperation(operation.Instance)),
+            OperationKindEx.Conversion => FromConversion(operation),
+            OperationKindEx.DynamicIndexerAccess => new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
+            OperationKindEx.DynamicInvocation => ExceptionState.UnknownException,      // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
+            OperationKindEx.DynamicMemberReference => ExceptionState.UnknownException, // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
+            OperationKindEx.DynamicObjectCreation => ExceptionState.UnknownException,  // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
+            OperationKindEx.EventReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
+            OperationKindEx.FieldReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
+            OperationKindEx.Invocation => FromOperation(IInvocationOperationWrapper.FromOperation(operation.Instance)),
+            OperationKindEx.MethodReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
+            OperationKindEx.ObjectCreation => operation.Instance.Type.DerivesFrom(KnownType.System_Exception) ? null : ExceptionState.UnknownException,
+            OperationKindEx.PropertyReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
+            _ => null
+        };
 
-            var conversion = operation.Instance.ToConversion();
-            return conversion.Operand.Type.DerivesOrImplements(conversion.Type)
-                       ? null
-                       : new ExceptionState(typeCatalog.SystemInvalidCastException);
+    private ExceptionState FromConversion(IOperationWrapperSonar operation)
+    {
+        if (operation.IsImplicit)
+        {
+            return null;
         }
 
-        private ExceptionState FromOperation(IArrayElementReferenceOperationWrapper reference) =>
-            reference.Indices.Any(x => x.Kind == OperationKindEx.Range) // In case of Range, ArgumentOutOfRangeException is raised
-                ? new ExceptionState(typeCatalog.SystemArgumentOutOfRangeException)
-                : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException);
-
-        private ExceptionState FromOperation(ProgramState state, IMemberReferenceOperationWrapper reference) =>
-            reference.IsStaticOrThis()
-            || state[reference.Instance]?.HasConstraint(ObjectConstraint.NotNull) is true
-            || reference.IsOnReaderWriterLockOrSlim()   // Needed by S2222
-                ? null
-                : new ExceptionState(typeCatalog.SystemNullReferenceException);
-
-        private static ExceptionState FromOperation(IInvocationOperationWrapper invocation) =>
-            // These methods are declared as well-known methods that (usually) do not throw.
-            // Otherwise, we would have FPs because engine would split the flow to happy path with constraints and possible exception path.
-            invocation.IsMonitorExit()          // Needed by S2222
-            || invocation.IsMonitorIsEntered()  // Needed by S2222
-            || invocation.IsLockRelease()       // Needed by S2222
-            ? null
-            : ExceptionState.UnknownException;
+        var conversion = operation.Instance.ToConversion();
+        return conversion.Operand.Type.DerivesOrImplements(conversion.Type)
+                   ? null
+                   : new ExceptionState(typeCatalog.SystemInvalidCastException);
     }
+
+    private ExceptionState FromOperation(IArrayElementReferenceOperationWrapper reference) =>
+        reference.Indices.Any(x => x.Kind == OperationKindEx.Range) // In case of Range, ArgumentOutOfRangeException is raised
+            ? new ExceptionState(typeCatalog.SystemArgumentOutOfRangeException)
+            : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException);
+
+    private ExceptionState FromOperation(ProgramState state, IMemberReferenceOperationWrapper reference) =>
+        reference.IsStaticOrThis()
+        || state[reference.Instance]?.HasConstraint(ObjectConstraint.NotNull) is true
+        || reference.IsOnReaderWriterLockOrSlim()   // Needed by S2222
+            ? null
+            : new ExceptionState(typeCatalog.SystemNullReferenceException);
+
+    private static ExceptionState FromOperation(IInvocationOperationWrapper invocation) =>
+        // These methods are declared as well-known methods that (usually) do not throw.
+        // Otherwise, we would have FPs because engine would split the flow to happy path with constraints and possible exception path.
+        invocation.IsMonitorExit()          // Needed by S2222
+        || invocation.IsMonitorIsEntered()  // Needed by S2222
+        || invocation.IsLockRelease()       // Needed by S2222
+        ? null
+        : ExceptionState.UnknownException;
 }

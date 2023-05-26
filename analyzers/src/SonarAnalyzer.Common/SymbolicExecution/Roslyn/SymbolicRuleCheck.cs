@@ -18,43 +18,42 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+public abstract class SymbolicRuleCheck : SymbolicCheck
 {
-    public abstract class SymbolicRuleCheck : SymbolicCheck
+    protected SonarAnalysisContext SonarContext { get; private set; }
+    protected SyntaxNode Node => context.Node;
+    protected SemanticModel SemanticModel => context.SemanticModel;
+
+    private readonly HashSet<Location> reportedDiagnostics = new();
+    private SonarSyntaxNodeReportingContext context;
+
+    protected abstract DiagnosticDescriptor Rule { get; }
+
+    /// <summary>
+    /// Decide if a CFG should be created for current method and SE should be evaluated. We should only run SE for a method if there's a chance for finding something for performance reasons.
+    /// </summary>
+    /// <remarks>
+    /// For example: It doesn't make sense to execute SE about handling disposing if there's no Dispose() invocation in the code.
+    /// </remarks>
+    public abstract bool ShouldExecute();
+
+    public void Init(SonarAnalysisContext sonarContext, SonarSyntaxNodeReportingContext nodeContext)
     {
-        protected SonarAnalysisContext SonarContext { get; private set; }
-        protected SyntaxNode Node => context.Node;
-        protected SemanticModel SemanticModel => context.SemanticModel;
+        SonarContext = sonarContext;
+        context = nodeContext;
+    }
 
-        private readonly HashSet<Location> reportedDiagnostics = new();
-        private SonarSyntaxNodeReportingContext context;
+    protected void ReportIssue(IOperationWrapperSonar operation, params object[] messageArgs) =>
+        ReportIssue(operation.Instance, messageArgs);
 
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        /// <summary>
-        /// Decide if a CFG should be created for current method and SE should be evaluated. We should only run SE for a method if there's a chance for finding something for performance reasons.
-        /// </summary>
-        /// <remarks>
-        /// For example: It doesn't make sense to execute SE about handling disposing if there's no Dispose() invocation in the code.
-        /// </remarks>
-        public abstract bool ShouldExecute();
-
-        public void Init(SonarAnalysisContext sonarContext, SonarSyntaxNodeReportingContext nodeContext)
+    protected void ReportIssue(IOperation operation, params object[] messageArgs)
+    {
+        var location = operation.Syntax.GetLocation();
+        if (reportedDiagnostics.Add(location))
         {
-            SonarContext = sonarContext;
-            context = nodeContext;
-        }
-
-        protected void ReportIssue(IOperationWrapperSonar operation, params object[] messageArgs) =>
-            ReportIssue(operation.Instance, messageArgs);
-
-        protected void ReportIssue(IOperation operation, params object[] messageArgs)
-        {
-            var location = operation.Syntax.GetLocation();
-            if (reportedDiagnostics.Add(location))
-            {
-                context.ReportIssue(Diagnostic.Create(Rule, location, messageArgs));
-            }
+            context.ReportIssue(Diagnostic.Create(Rule, location, messageArgs));
         }
     }
 }

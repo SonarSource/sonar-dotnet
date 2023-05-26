@@ -18,29 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+internal static class IInvocationOperationExtensions
 {
-    internal static class IInvocationOperationExtensions
-    {
-        public static bool IsMonitorExit(this IInvocationOperationWrapper invocation) =>
-            invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "Exit");
+    public static bool IsMonitorExit(this IInvocationOperationWrapper invocation) =>
+        invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "Exit");
 
-        public static bool IsMonitorIsEntered(this IInvocationOperationWrapper invocation) =>
-            invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "IsEntered");
+    public static bool IsMonitorIsEntered(this IInvocationOperationWrapper invocation) =>
+        invocation.TargetMethod.Is(KnownType.System_Threading_Monitor, "IsEntered");
 
-        public static bool IsLockRelease(this IInvocationOperationWrapper invocation) =>
-            invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLock, "ReleaseLock", "ReleaseReaderLock", "ReleaseWriterLock")
-            || invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, "ExitReadLock", "ExitWriteLock", "ExitUpgradeableReadLock")
-            || invocation.TargetMethod.Is(KnownType.System_Threading_Mutex, "ReleaseMutex")
-            || invocation.TargetMethod.Is(KnownType.System_Threading_SpinLock, "Exit");
+    public static bool IsLockRelease(this IInvocationOperationWrapper invocation) =>
+        invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLock, "ReleaseLock", "ReleaseReaderLock", "ReleaseWriterLock")
+        || invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, "ExitReadLock", "ExitWriteLock", "ExitUpgradeableReadLock")
+        || invocation.TargetMethod.Is(KnownType.System_Threading_Mutex, "ReleaseMutex")
+        || invocation.TargetMethod.Is(KnownType.System_Threading_SpinLock, "Exit");
 
-        /// <summary>
-        /// Returns <see langword="true"/>, if the method is an instance method, or an extension method, where the argument passed to the receiver parameter is <see langword="this"/>.
-        /// </summary>
-        public static bool HasThisReceiver(this IInvocationOperationWrapper invocation, ProgramState state) =>
-            state.ResolveCapture(invocation.Instance.UnwrapConversion()) is { Kind: OperationKindEx.InstanceReference }
-            || (invocation.TargetMethod.IsExtensionMethod
-                && !invocation.Arguments.IsEmpty
-                && state.ResolveCapture(invocation.Arguments[0].ToArgument().Value.UnwrapConversion()).Kind == OperationKindEx.InstanceReference);
-    }
+    /// <summary>
+    /// Returns <see langword="true"/>, if the method is an instance method, or an extension method, where the argument passed to the receiver parameter is <see langword="this"/>.
+    /// </summary>
+    public static bool HasThisReceiver(this IInvocationOperationWrapper invocation, ProgramState state) =>
+        state.ResolveCapture(invocation.Instance.UnwrapConversion()) is { Kind: OperationKindEx.InstanceReference }
+        || (invocation.TargetMethod.IsExtensionMethod
+            && !invocation.Arguments.IsEmpty
+            && state.ResolveCapture(invocation.Arguments[0].ToArgument().Value.UnwrapConversion()).Kind == OperationKindEx.InstanceReference);
 }

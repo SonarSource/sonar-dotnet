@@ -21,104 +21,103 @@
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution
+namespace SonarAnalyzer.UnitTest.SymbolicExecution;
+
+[TestClass]
+public class SymbolicConstraintTest
 {
-    [TestClass]
-    public class SymbolicConstraintTest
+    [TestMethod]
+    public void BoolConstraint_ToString()
     {
-        [TestMethod]
-        public void BoolConstraint_ToString()
-        {
-            BoolConstraint.True.ToString().Should().Be("True");
-            BoolConstraint.False.ToString().Should().Be("False");
-        }
+        BoolConstraint.True.ToString().Should().Be("True");
+        BoolConstraint.False.ToString().Should().Be("False");
+    }
 
-        [TestMethod]
-        public void BoolConstraint_From()
-        {
-            BoolConstraint.From(true).Should().Be(BoolConstraint.True);
-            BoolConstraint.From(false).Should().Be(BoolConstraint.False);
-        }
+    [TestMethod]
+    public void BoolConstraint_From()
+    {
+        BoolConstraint.From(true).Should().Be(BoolConstraint.True);
+        BoolConstraint.From(false).Should().Be(BoolConstraint.False);
+    }
 
-        [TestMethod]
-        public void ByteArrayConstraint_ToString()
-        {
-            ByteArrayConstraint.Constant.ToString().Should().Be("ByteArrayConstant");
-            ByteArrayConstraint.Modified.ToString().Should().Be("ByteArrayModified");
-        }
+    [TestMethod]
+    public void ByteArrayConstraint_ToString()
+    {
+        ByteArrayConstraint.Constant.ToString().Should().Be("ByteArrayConstant");
+        ByteArrayConstraint.Modified.ToString().Should().Be("ByteArrayModified");
+    }
 
-        [TestMethod]
-        public void CollectionConstraint_ToString()
-        {
-            CollectionConstraint.Empty.ToString().Should().Be("CollectionEmpty");
-            CollectionConstraint.NotEmpty.ToString().Should().Be("CollectionNotEmpty");
-        }
+    [TestMethod]
+    public void CollectionConstraint_ToString()
+    {
+        CollectionConstraint.Empty.ToString().Should().Be("CollectionEmpty");
+        CollectionConstraint.NotEmpty.ToString().Should().Be("CollectionNotEmpty");
+    }
 
-        [TestMethod]
-        public void InitializationVectorConstraint_ToString()
-        {
-            InitializationVectorConstraint.Initialized.ToString().Should().Be("InitializationVectorInitialized");
-            InitializationVectorConstraint.NotInitialized.ToString().Should().Be("InitializationVectorNotInitialized");
-        }
+    [TestMethod]
+    public void InitializationVectorConstraint_ToString()
+    {
+        InitializationVectorConstraint.Initialized.ToString().Should().Be("InitializationVectorInitialized");
+        InitializationVectorConstraint.NotInitialized.ToString().Should().Be("InitializationVectorNotInitialized");
+    }
 
-        [TestMethod]
-        public void DisposableConstraint_ToString()
-        {
-            DisposableConstraint.Disposed.ToString().Should().Be("DisposableDisposed");
-            DisposableConstraint.NotDisposed.ToString().Should().Be("DisposableNotDisposed");
-        }
+    [TestMethod]
+    public void DisposableConstraint_ToString()
+    {
+        DisposableConstraint.Disposed.ToString().Should().Be("DisposableDisposed");
+        DisposableConstraint.NotDisposed.ToString().Should().Be("DisposableNotDisposed");
+    }
 
-        [TestMethod]
-        public void LockConstraint_ToString()
-        {
-            LockConstraint.Held.ToString().Should().Be("LockHeld");
-            LockConstraint.Released.ToString().Should().Be("LockReleased");
-        }
+    [TestMethod]
+    public void LockConstraint_ToString()
+    {
+        LockConstraint.Held.ToString().Should().Be("LockHeld");
+        LockConstraint.Released.ToString().Should().Be("LockReleased");
+    }
 
-        [TestMethod]
-        public void LockConstraint_Opposite()
-        {
-            LockConstraint.Held.Opposite.Should().Be(LockConstraint.Released);
-            LockConstraint.Released.Opposite.Should().Be(LockConstraint.Held);
-        }
+    [TestMethod]
+    public void LockConstraint_Opposite()
+    {
+        LockConstraint.Held.Opposite.Should().Be(LockConstraint.Released);
+        LockConstraint.Released.Opposite.Should().Be(LockConstraint.Held);
+    }
 
-        [TestMethod]
-        public void NullableConstraint_ToString()
-        {
-            NullableConstraint.HasValue.ToString().Should().Be("NullableHasValue");
-            NullableConstraint.NoValue.ToString().Should().Be("NullableNoValue");
-        }
+    [TestMethod]
+    public void NullableConstraint_ToString()
+    {
+        NullableConstraint.HasValue.ToString().Should().Be("NullableHasValue");
+        NullableConstraint.NoValue.ToString().Should().Be("NullableNoValue");
+    }
 
-        [TestMethod]
-        public void ObjectConstraint_ToString()
-        {
-            ObjectConstraint.Null.ToString().Should().Be("Null");
-            ObjectConstraint.NotNull.ToString().Should().Be("NotNull");
-        }
+    [TestMethod]
+    public void ObjectConstraint_ToString()
+    {
+        ObjectConstraint.Null.ToString().Should().Be("Null");
+        ObjectConstraint.NotNull.ToString().Should().Be("NotNull");
+    }
 
-        [TestMethod]
-        public void SaltSizeConstraint_ToString()
-        {
-            SaltSizeConstraint.Safe.ToString().Should().Be("SaltSizeSafe");
-            SaltSizeConstraint.Short.ToString().Should().Be("SaltSizeShort");
-        }
+    [TestMethod]
+    public void SaltSizeConstraint_ToString()
+    {
+        SaltSizeConstraint.Safe.ToString().Should().Be("SaltSizeSafe");
+        SaltSizeConstraint.Short.ToString().Should().Be("SaltSizeShort");
+    }
 
-        [TestMethod]
-        public void SerializationConstraint_ToString()
-        {
-            SerializationConstraint.Safe.ToString().Should().Be("SerializationSafe");
-            SerializationConstraint.Unsafe.ToString().Should().Be("SerializationUnsafe");
-        }
+    [TestMethod]
+    public void SerializationConstraint_ToString()
+    {
+        SerializationConstraint.Safe.ToString().Should().Be("SerializationSafe");
+        SerializationConstraint.Unsafe.ToString().Should().Be("SerializationUnsafe");
+    }
 
-        [TestMethod]
-        public void StringConstraint_ToString()
-        {
-            StringConstraint.EmptyString.ToString().Should().Be("StringEmpty");
-            StringConstraint.FullString.ToString().Should().Be("StringFull");
-            StringConstraint.FullOrNullString.ToString().Should().Be("StringFullOrNull");
-            StringConstraint.WhiteSpaceString.ToString().Should().Be("StringWhiteSpace");
-            StringConstraint.NotWhiteSpaceString.ToString().Should().Be("StringNotWhiteSpace");
-            StringConstraint.FullNotWhiteSpaceString.ToString().Should().Be("StringFullNotWhiteSpace");
-        }
+    [TestMethod]
+    public void StringConstraint_ToString()
+    {
+        StringConstraint.EmptyString.ToString().Should().Be("StringEmpty");
+        StringConstraint.FullString.ToString().Should().Be("StringFull");
+        StringConstraint.FullOrNullString.ToString().Should().Be("StringFullOrNull");
+        StringConstraint.WhiteSpaceString.ToString().Should().Be("StringWhiteSpace");
+        StringConstraint.NotWhiteSpaceString.ToString().Should().Be("StringNotWhiteSpace");
+        StringConstraint.FullNotWhiteSpaceString.ToString().Should().Be("StringFullNotWhiteSpace");
     }
 }

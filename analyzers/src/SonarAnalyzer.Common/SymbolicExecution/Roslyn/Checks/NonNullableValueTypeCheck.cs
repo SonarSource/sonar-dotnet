@@ -20,25 +20,24 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
+
+internal sealed class NonNullableValueTypeCheck : SymbolicCheck
 {
-    internal sealed class NonNullableValueTypeCheck : SymbolicCheck
+    protected override ProgramState PostProcessSimple(SymbolicContext context)
     {
-        protected override ProgramState PostProcessSimple(SymbolicContext context)
+        var state = context.State;
+        var operation = context.Operation.Instance;
+        if (operation.Type is { } type && (type.IsNonNullableValueType() || type.IsEnum()))
         {
-            var state = context.State;
-            var operation = context.Operation.Instance;
-            if (operation.Type is { } type && (type.IsNonNullableValueType() || type.IsEnum()))
-            {
-                state = context.SetOperationConstraint(ObjectConstraint.NotNull);
-            }
-            if (operation.TrackedSymbol() is { } trackedSymbol
-                && trackedSymbol.GetSymbolType() is { } symbol
-                && (symbol.IsNonNullableValueType() || symbol.IsEnum()))
-            {
-                state = state.SetSymbolConstraint(trackedSymbol, ObjectConstraint.NotNull);
-            }
-            return state;
+            state = context.SetOperationConstraint(ObjectConstraint.NotNull);
         }
+        if (operation.TrackedSymbol() is { } trackedSymbol
+            && trackedSymbol.GetSymbolType() is { } symbol
+            && (symbol.IsNonNullableValueType() || symbol.IsEnum()))
+        {
+            state = state.SetSymbolConstraint(trackedSymbol, ObjectConstraint.NotNull);
+        }
+        return state;
     }
 }

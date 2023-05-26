@@ -20,18 +20,17 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+public static class ProgramPoint
 {
-    public static class ProgramPoint
-    {
-        private const int BlockIndexBits = 10;  // Hash is 10 bits of block-index followed by 22 bits of instruction-index
-        private const int BlockCountMax = 1 << BlockIndexBits;
-        private const int BitShift = 32 - BlockIndexBits;
+    private const int BlockIndexBits = 10;  // Hash is 10 bits of block-index followed by 22 bits of instruction-index
+    private const int BlockCountMax = 1 << BlockIndexBits;
+    private const int BitShift = 32 - BlockIndexBits;
 
-        public static bool HasSupportedSize(ControlFlowGraph cfg) =>
-            cfg.Blocks.Length <= BlockCountMax;
+    public static bool HasSupportedSize(ControlFlowGraph cfg) =>
+        cfg.Blocks.Length <= BlockCountMax;
 
-        public static int Hash(BasicBlock block, int instructionIndex) =>
-            (int)(((uint)block.Ordinal << BitShift) + (uint)instructionIndex);
-    }
+    public static int Hash(BasicBlock block, int instructionIndex) =>
+        (int)(((uint)block.Ordinal << BitShift) + (uint)instructionIndex);
 }
