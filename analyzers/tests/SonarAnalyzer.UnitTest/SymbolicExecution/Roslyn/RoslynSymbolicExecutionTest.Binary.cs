@@ -631,6 +631,8 @@ Tag(""End"")";
     [DataTestMethod]
     [DataRow("s = s + s;")]
     [DataRow("s = s + null;")]
+    [DataRow("s += s;")]
+    [DataRow("s += null;")]
     public void Binary_StringConcatenation_Binary_CS(string expression)
     {
         var code = $"""
@@ -648,39 +650,11 @@ Tag(""End"")";
     [DataRow("s = s + Nothing")]
     [DataRow("s = s & s")]
     [DataRow("s = s & Nothing")]
-    public void Binary_StringConcatenation_Binary_VB(string expression)
-    {
-        var code = $"""
-            Dim S As String = Nothing
-            {expression}
-            Tag("S", s)
-            """;
-        var validator = SETestContext.CreateVB(code).Validator;
-        validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.TagValue("S").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
-    }
-
-    [DataTestMethod]
-    [DataRow("s += s;")]
-    [DataRow("s += null;")]
-    public void Binary_StringConcatenation_Compound_CS(string expression)
-    {
-        var code = $"""
-            string s = null;
-            {expression}
-            Tag("S", s);
-            """;
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.TagValue("S").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
-    }
-
-    [DataTestMethod]
     [DataRow("s += s")]
     [DataRow("s += Nothing")]
     [DataRow("s &= s")]
     [DataRow("s &= Nothing")]
-    public void Binary_StringConcatenation_Compound_VB(string expression)
+    public void Binary_StringConcatenation_Binary_VB(string expression)
     {
         var code = $"""
             Dim S As String = Nothing
