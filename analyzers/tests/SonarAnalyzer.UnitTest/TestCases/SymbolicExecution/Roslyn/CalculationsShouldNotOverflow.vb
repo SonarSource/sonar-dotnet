@@ -73,7 +73,7 @@ Public Class Sample
         __ = i * 2147483600     ' Noncompliant
 
         i = 2 Or j
-        __ = i * 2147483600     ' FIXME Non-compliant
+        __ = i * 2147483600     ' Noncompliant
 
         i = 2 Xor j
         __ = i * 2147483600     ' FIXME Non-compliant
