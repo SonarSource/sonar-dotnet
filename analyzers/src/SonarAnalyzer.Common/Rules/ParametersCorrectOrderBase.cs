@@ -43,7 +43,7 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
         Func<Location> getLocationToReport)
     {
         var argumentParameterMappings = methodParameterLookup.GetAllArgumentParameterMappings()
-            .ToDictionary(pair => pair.Node, pair => pair.Symbol);
+                                                             .ToDictionary(x => x.Node, x => x.Symbol);
 
         var methodSymbol = methodParameterLookup.MethodSymbol;
         if (methodSymbol == null)
@@ -52,24 +52,23 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
         }
 
         var parameterNames = argumentParameterMappings.Values
-            .Select(symbol => symbol.Name.ToLowerInvariant())
+            .Select(x => x.Name.ToLowerInvariant())
             .Distinct()
             .ToList();
 
         var argumentIdentifiers = argumentList
-            .Select(argument => ConvertToArgumentIdentifier(argument, analysisContext.SemanticModel))
+            .Select(x => ConvertToArgumentIdentifier(x, analysisContext.SemanticModel))
             .ToList();
         var identifierNames = argumentIdentifiers
-            .Select(p => p.IdentifierName?.ToLowerInvariant())
+            .Select(x => x.IdentifierName?.ToLowerInvariant())
             .ToList();
 
-        if (parameterNames.Intersect(identifierNames).Any() &&
-            HasIncorrectlyOrderedParameters(argumentIdentifiers, argumentParameterMappings, parameterNames, identifierNames,
-                analysisContext.SemanticModel))
+        if (parameterNames.Intersect(identifierNames).Any()
+            && HasIncorrectlyOrderedParameters(argumentIdentifiers, argumentParameterMappings, parameterNames, identifierNames, analysisContext.SemanticModel))
         {
             // for VB the symbol does not contain the method syntax reference
             var secondaryLocations = methodSymbol.DeclaringSyntaxReferences
-                .Select(s => GetMethodDeclarationIdentifierLocation(s.GetSyntax()))
+                .Select(x => GetMethodDeclarationIdentifierLocation(x.GetSyntax()))
                 .WhereNotNull();
 
             analysisContext.ReportIssue(Diagnostic.Create(rule, getLocationToReport(), secondaryLocations, methodSymbol.Name));
@@ -96,8 +95,7 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
                 continue;
             }
 
-            if (argumentIdentifier is PositionalArgumentIdentifier positional &&
-                (parameter.IsParams || identifierName == parameterName))
+            if (argumentIdentifier is PositionalArgumentIdentifier && (parameter.IsParams || identifierName == parameterName))
             {
                 mappedParams.Add(parameterName);
                 mappedArgs.Add(identifierName);
@@ -117,21 +115,20 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
         return false;
 
         bool IdentifierWithSameNameAndTypeExists(IParameterSymbol parameter) =>
-            argumentIdentifiers.Any(x =>
-                x.IdentifierName == parameter.Name &&
-                GetArgumentTypeSymbolInfo(x.ArgumentSyntax, model).ConvertedType.DerivesOrImplements(parameter.Type));
+            argumentIdentifiers.Any(x => x.IdentifierName == parameter.Name
+                                         && GetArgumentTypeSymbolInfo(x.ArgumentSyntax, model).ConvertedType.DerivesOrImplements(parameter.Type));
 
         bool IdentifierWithSameNameAndTypeExistsLater(ArgumentIdentifier argumentIdentifier, int index) =>
             argumentIdentifiers.Skip(index + 1)
                                .Any(x => string.Equals(x.IdentifierName, argumentIdentifier.IdentifierName, StringComparison.OrdinalIgnoreCase)
-                                    && ArgumentTypesAreSame(x.ArgumentSyntax, argumentIdentifier.ArgumentSyntax));
+                                         && ArgumentTypesAreSame(x.ArgumentSyntax, argumentIdentifier.ArgumentSyntax));
 
         bool ArgumentTypesAreSame(TArgumentSyntax first, TArgumentSyntax second) =>
             GetArgumentTypeSymbolInfo(first, model).ConvertedType.DerivesOrImplements(GetArgumentTypeSymbolInfo(second, model).ConvertedType);
 
         bool ParameterWithSameNameAndTypeExists(ArgumentIdentifier argumentIdentifier) =>
-            argumentParameterMappings.Values.Any(parameter => string.Equals(parameter.Name, argumentIdentifier.IdentifierName, StringComparison.OrdinalIgnoreCase) &&
-                                                              GetArgumentTypeSymbolInfo(argumentIdentifier.ArgumentSyntax, model).ConvertedType.DerivesOrImplements(parameter.Type));
+            argumentParameterMappings.Values.Any(x => string.Equals(x.Name, argumentIdentifier.IdentifierName, StringComparison.OrdinalIgnoreCase)
+                                                      && GetArgumentTypeSymbolInfo(argumentIdentifier.ArgumentSyntax, model).ConvertedType.DerivesOrImplements(x.Type));
     }
 
     private ArgumentIdentifier ConvertToArgumentIdentifier(TArgumentSyntax argument, SemanticModel model)
