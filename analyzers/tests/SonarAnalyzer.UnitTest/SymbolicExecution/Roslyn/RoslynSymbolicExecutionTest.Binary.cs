@@ -821,6 +821,89 @@ Tag(""End"")";
     }
 
     [DataTestMethod]
+    [DataRow(21, 4, 5)]
+    [DataRow(21, -4, -5)]
+    [DataRow(-21, 4, -5)]
+    [DataRow(-21, -4, 5)]
+    [DataRow(4, 5, 0)]
+    [DataRow(-4, 5, 0)]
+    [DataRow(4, -5, 0)]
+    [DataRow(-4, -5, 0)]
+    [DataRow(5, 1, 5)]
+    [DataRow(5, -1, -5)]
+    [DataRow(-5, 1, -5)]
+    [DataRow(-5, -1, 5)]
+    public void Binary_Division_SingleValue(int left, int right, int expected)
+    {
+        var code = $"""
+            var left = {left};
+            var right = {right};
+            var value = left / right;
+            Tag("Value", value);
+            """;
+        SETestContext.CreateCS(code).Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+    }
+
+    [DataTestMethod]
+    [DataRow("i >=  21 && j >=  5", 0, null)]
+    [DataRow("i >=  21 && j >= -5", null, null)]
+    [DataRow("i >=  21 && j ==  5", 4, null)]
+    [DataRow("i >=  21 && j == -5", null, -4)]
+    [DataRow("i >=  21 && j <=  5", null, null)]
+    [DataRow("i >=  21 && j <= -5", null, 0)]
+    [DataRow("i >= -21 && j >=  5", -4, null)]
+    [DataRow("i >= -21 && j >= -5", null, null)]
+    [DataRow("i >= -21 && j ==  5", -4, null)]
+    [DataRow("i >= -21 && j == -5", null, 4)]
+    [DataRow("i >= -21 && j <=  5", null, null)]
+    [DataRow("i >= -21 && j <= -5", null, 4)]
+    [DataRow("i ==  21 && j >=  5", 0, 4)]
+    [DataRow("i ==  21 && j >= -5", -21, 21)]
+    [DataRow("i ==  21 && j <=  5", -21, 21)]
+    [DataRow("i ==  21 && j <= -5", -4, 0)]
+    [DataRow("i == -21 && j >=  5", -4, 0)]
+    [DataRow("i == -21 && j >= -5", -21, 21)]
+    [DataRow("i == -21 && j <=  5", -21, 21)]
+    [DataRow("i == -21 && j <= -5", 0, 4)]
+    [DataRow("i <=  21 && j >=  5", null, 4)]
+    [DataRow("i <=  21 && j >= -5", null, null)]
+    [DataRow("i <=  21 && j ==  5", null, 4)]
+    [DataRow("i <=  21 && j == -5", -4, null)]
+    [DataRow("i <=  21 && j <=  5", null, null)]
+    [DataRow("i <=  21 && j <= -5", -4, null)]
+    [DataRow("i <= -21 && j >=  5", null, 0)]
+    [DataRow("i <= -21 && j >= -5", null, null)]
+    [DataRow("i <= -21 && j ==  5", null, -4)]
+    [DataRow("i <= -21 && j == -5", 4, null)]
+    [DataRow("i <= -21 && j <=  5", null, null)]
+    [DataRow("i <= -21 && j <= -5", 0, null)]
+    [DataRow("i >= -21 && i <= 15 && j >= -5", -21, 21)]
+    [DataRow("i >= -15 && i <= 21 && j >= -5", -21, 21)]
+    [DataRow("i >=  21 && j >= 0", 0, null)]
+    [DataRow("i >=  21 && j == 0", null, null)]
+    [DataRow("i >=  21 && j <= 0", null, 0)]
+    [DataRow("i >= -21 && j >= 0", -21, null)]
+    [DataRow("i >= -21 && j == 0", null, null)]
+    [DataRow("i >= -21 && j <= 0", null, 21)]
+    [DataRow("i <=  21 && j >= 0", null, 21)]
+    [DataRow("i <=  21 && j == 0", null, null)]
+    [DataRow("i <=  21 && j <= 0", -21, null)]
+    [DataRow("i <= -21 && j >= 0", null, 0)]
+    [DataRow("i <= -21 && j == 0", null, null)]
+    [DataRow("i <= -21 && j <= 0", 0, null)]
+    public void Binary_Division_Range(string expression, int? expectedMin, int? expectedMax)
+    {
+        var code = $$"""
+            if ({{expression}})
+            {
+                var value = i / j;
+                Tag("Value", value);
+            }
+            """;
+        SETestContext.CreateCS(code, "int i, int j").Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+    }
+
+    [DataTestMethod]
     [DataRow(0b0000, 0b0000, 0b0000)]
     [DataRow(0b0101, 0b0101, 0b0101)]
     [DataRow(0b0101, 0b0001, 0b0001)]
