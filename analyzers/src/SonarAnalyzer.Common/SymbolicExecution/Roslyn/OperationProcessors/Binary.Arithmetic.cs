@@ -23,7 +23,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrapper>
+internal sealed partial class Binary
 {
     private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) => kind switch
     {

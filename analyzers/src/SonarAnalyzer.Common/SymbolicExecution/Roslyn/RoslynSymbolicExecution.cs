@@ -31,17 +31,19 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
         private const int MaxOperationVisits = 2;
 
         private readonly ControlFlowGraph cfg;
-        private readonly CancellationToken cancel;
+        private readonly SyntaxClassifierBase syntaxClassifier;
         private readonly SymbolicCheckList checks;
+        private readonly CancellationToken cancel;
         private readonly Queue<ExplodedNode> queue = new();
         private readonly HashSet<ExplodedNode> visited = new();
         private readonly RoslynLiveVariableAnalysis lva;
         private readonly DebugLogger logger = new();
         private readonly ExceptionCandidate exceptionCandidate;
 
-        public RoslynSymbolicExecution(ControlFlowGraph cfg, SymbolicCheck[] checks, CancellationToken cancel)
+        public RoslynSymbolicExecution(ControlFlowGraph cfg, SyntaxClassifierBase syntaxClassifier, SymbolicCheck[] checks, CancellationToken cancel)
         {
             this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
+            this.syntaxClassifier = syntaxClassifier ?? throw new ArgumentNullException(nameof(syntaxClassifier));
             if (checks == null || checks.Length == 0)
             {
                 throw new ArgumentException("At least one check is expected", nameof(checks));
@@ -96,7 +98,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             if (node.Block.Kind == BasicBlockKind.Exit)
             {
                 logger.Log(node.State, "Exit Reached");
-                checks.ExitReached(new(node, lva.CapturedVariables));
+                checks.ExitReached(new(node, lva.CapturedVariables, false));
             }
             else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is { } exception)
             {
@@ -150,7 +152,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
             if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
             {
                 state = SetBranchingConstraints(branch, state, branchValue);
-                state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state, visitCount, lva.CapturedVariables));
+                state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state, false, visitCount, lva.CapturedVariables));
                 if (state is null)
                 {
                     return null;
@@ -173,7 +175,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn
 
         private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
         {
-            foreach (var preProcessed in checks.PreProcess(new(node, lva.CapturedVariables)))
+            foreach (var preProcessed in checks.PreProcess(new(node, lva.CapturedVariables, syntaxClassifier.IsInLoopCondition(node.Operation.Instance.Syntax))))
             {
                 foreach (var processed in OperationDispatcher.Process(preProcessed))
                 {

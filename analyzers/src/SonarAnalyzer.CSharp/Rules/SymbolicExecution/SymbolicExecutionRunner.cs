@@ -22,6 +22,8 @@ using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.SymbolicExecution.Roslyn.CSharp;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarRules = SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
@@ -52,6 +54,8 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull, SonarRules.PublicMethodArgumentsShouldBeCheckedForNull>());
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
+
+    protected override SyntaxClassifierBase SyntaxClassifier => CSharpSyntaxClassifier.Instance;
 
     protected override void Initialize(SonarAnalysisContext context)
     {

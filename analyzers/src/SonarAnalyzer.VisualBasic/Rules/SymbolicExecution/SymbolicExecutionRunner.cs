@@ -19,7 +19,9 @@
  */
 
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
+using SonarAnalyzer.SymbolicExecution.Roslyn.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic;
 
@@ -33,6 +35,8 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference>())
         .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess>())
         .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull>());
+
+    protected override SyntaxClassifierBase SyntaxClassifier => VisualBasicSyntaxClassifier.Instance;
 
     protected override void Initialize(SonarAnalysisContext context)
     {

@@ -20,6 +20,8 @@
 
 using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.SymbolicExecution.Roslyn.CSharp;
+using SonarAnalyzer.SymbolicExecution.Roslyn.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -36,7 +38,13 @@ internal class SETestContext
     {
         var cfg = TestHelper.CompileCfg(code, language, false, localFunctionName, anonymousFunctionFragment, outputKind);
         Validator = new ValidatorTestCheck(cfg);
-        var se = new RoslynSymbolicExecution(cfg, additionalChecks.Concat(new[] { Validator }).ToArray(), default);
+        SyntaxClassifierBase syntaxClassifier = language.LanguageName switch
+        {
+            LanguageNames.CSharp => CSharpSyntaxClassifier.Instance,
+            LanguageNames.VisualBasic => VisualBasicSyntaxClassifier.Instance,
+            _ => throw new UnexpectedLanguageException(language)
+        };
+        var se = new RoslynSymbolicExecution(cfg, syntaxClassifier, additionalChecks.Concat(new[] { Validator }).ToArray(), default);
         se.Execute();
     }
 

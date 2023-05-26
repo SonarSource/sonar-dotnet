@@ -29,6 +29,7 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
     protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; }
     protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel);
     protected abstract void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol);
+    protected abstract SyntaxClassifierBase SyntaxClassifier { get; }
 
     protected IAnalyzerConfiguration Configuration { get; }
 
@@ -105,7 +106,7 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
             {
                 if (CreateCfg(nodeContext.SemanticModel, body, nodeContext.Cancel) is { } cfg)
                 {
-                    var engine = new RoslynSymbolicExecution(cfg, checks, nodeContext.Cancel);
+                    var engine = new RoslynSymbolicExecution(cfg, SyntaxClassifier, checks, nodeContext.Cancel);
                     engine.Execute();
                 }
             }
