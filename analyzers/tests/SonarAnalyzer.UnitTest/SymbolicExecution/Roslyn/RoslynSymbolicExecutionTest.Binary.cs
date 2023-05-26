@@ -25,109 +25,106 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
 
 public partial class RoslynSymbolicExecutionTest
 {
-    [TestMethod]
-    public void Binary_BoolOperands_Equals_CS()
+    [DataTestMethod]
+    [DataRow("isTrue == true", true)]
+    [DataRow("isTrue == false", false)]
+    [DataRow("isTrue == isTrue", true)]
+    [DataRow("isTrue == isFalse", false)]
+    [DataRow("isTrue == isNullableNull", false)]
+    [DataRow("isTrue == isNullableTrue", true)]
+    [DataRow("isTrue == isNullableFalse", false)]
+    [DataRow("isFalse == true", false)]
+    [DataRow("isFalse == false", true)]
+    [DataRow("isFalse == isTrue", false)]
+    [DataRow("isFalse == isFalse", true)]
+    [DataRow("isFalse == isNullableNull", false)]
+    [DataRow("isFalse == isNullableTrue", false)]
+    [DataRow("isFalse == isNullableFalse", true)]
+    [DataRow("isTrue != true", false)]
+    [DataRow("isTrue != false", true)]
+    [DataRow("isTrue != isTrue", false)]
+    [DataRow("isTrue != isFalse", true)]
+    [DataRow("isTrue != isNullableNull", true)]
+    [DataRow("isTrue != isNullableTrue", false)]
+    [DataRow("isTrue != isNullableFalse", true)]
+    [DataRow("isFalse != true", true)]
+    [DataRow("isFalse != false", false)]
+    [DataRow("isFalse != isTrue", true)]
+    [DataRow("isFalse != isFalse", false)]
+    [DataRow("isFalse != isNullableNull", true)]
+    [DataRow("isFalse != isNullableTrue", true)]
+    [DataRow("isFalse != isNullableFalse", false)]
+    [DataRow("true == isTrue", true)]
+    [DataRow("false == isTrue", false)]
+    [DataRow("isNullableNull == isTrue", false)]
+    [DataRow("isNullableTrue == isTrue", true)]
+    [DataRow("true != isTrue", false)]
+    [DataRow("false != isTrue", true)]
+    [DataRow("isNullableNull != isTrue", true)]
+    [DataRow("isNullableTrue != isTrue", false)]
+    public void Binary_BoolOperands_Equals_CS(string expression, bool expected)
     {
-        const string code = @"
-var isTrue = true;
-var isFalse = false;
-
-if (isTrue == true)
-    Tag(""True"");
-else
-    Tag(""True Unreachable"");
-
-if (isFalse == false)
-    Tag(""False"");
-else
-    Tag(""False Unreachable"");
-
-if (isTrue == isFalse)
-    Tag(""Variables Unreachable"");
-else
-    Tag(""Variables"");";
-        SETestContext.CreateCS(code).Validator.ValidateTagOrder("True", "False", "Variables");
+        var code = $"""
+            bool isTrue = true;
+            bool isFalse = false;
+            bool? isNullableNull = null;
+            bool? isNullableTrue = true;
+            bool? isNullableFalse = false;
+            var result = {expression};
+            Tag("Result", result);
+            """;
+        SETestContext.CreateCS(code).Validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
     }
 
-    [TestMethod]
-    public void Binary_BoolOperands_Equals_VB()
+    [DataTestMethod]
+    [DataRow("IsTrue = True", true)]
+    [DataRow("IsTrue = False", false)]
+    [DataRow("IsTrue = IsTrue", true)]
+    [DataRow("IsTrue = IsFalse", false)]
+    [DataRow("IsTrue = IsNullableNull", false)]
+    [DataRow("IsTrue = IsNullableTrue", true)]
+    [DataRow("IsTrue = IsNullableFalse", false)]
+    [DataRow("IsFalse = True", false)]
+    [DataRow("IsFalse = False", true)]
+    [DataRow("IsFalse = IsTrue", false)]
+    [DataRow("IsFalse = IsFalse", true)]
+    [DataRow("IsFalse = IsNullableNull", false)]
+    [DataRow("IsFalse = IsNullableTrue", false)]
+    [DataRow("IsFalse = IsNullableFalse", true)]
+    [DataRow("IsTrue <> True", false)]
+    [DataRow("IsTrue <> False", true)]
+    [DataRow("IsTrue <> IsTrue", false)]
+    [DataRow("IsTrue <> IsFalse", true)]
+    [DataRow("IsTrue <> IsNullableNull", true)]
+    [DataRow("IsTrue <> IsNullableTrue", false)]
+    [DataRow("IsTrue <> IsNullableFalse", true)]
+    [DataRow("IsFalse <> True", true)]
+    [DataRow("IsFalse <> False", false)]
+    [DataRow("IsFalse <> IsTrue", true)]
+    [DataRow("IsFalse <> IsFalse", false)]
+    [DataRow("IsFalse <> IsNullableNull", true)]
+    [DataRow("IsFalse <> IsNullableTrue", true)]
+    [DataRow("IsFalse <> IsNullableFalse", false)]
+    [DataRow("True = IsTrue", true)]
+    [DataRow("False = IsTrue", false)]
+    [DataRow("IsNullableNull = IsTrue", false)]
+    [DataRow("IsNullableTrue = IsTrue", true)]
+    [DataRow("True <> IsTrue", false)]
+    [DataRow("False <> IsTrue", true)]
+    [DataRow("IsNullableNull <> IsTrue", true)]
+    [DataRow("IsNullableTrue <> IsTrue", false)]
+    public void Binary_BoolOperands_Equals_VB(string expression, bool expected)
     {
-        const string code = @"
-Dim IsTrue = True
-Dim IsFalse = False
-
-If IsTrue = True Then
-    Tag(""True"")
-Else
-    Tag(""True Unreachable"")
-End If
-
-If IsFalse = False Then
-    Tag(""False"")
-Else
-    Tag(""False Unreachable"")
-End If
-
-If IsTrue = IsFalse Then
-    Tag(""Variables Unreachable"")
-Else
-    Tag(""Variables"")
-End If";
-        SETestContext.CreateVB(code).Validator.ValidateTagOrder("True", "False", "Variables");
-    }
-
-    [TestMethod]
-    public void Binary_BoolOperands_NotEquals_CS()
-    {
-        const string code = @"
-var isTrue = true;
-var isFalse = false;
-
-if (isTrue != true)
-    Tag(""True Unreachable"");
-else
-    Tag(""True"");
-
-if (isFalse != false)
-    Tag(""False Unreachable"");
-else
-    Tag(""False"");
-
-if (isTrue != isFalse)
-    Tag(""Variables"");
-else
-    Tag(""Variables Unreachable"");";
-        SETestContext.CreateCS(code).Validator.ValidateTagOrder("True", "False", "Variables");
-    }
-
-    [TestMethod]
-    public void Binary_BoolOperands_NotEquals_VB()
-    {
-        const string code = @"
-Dim IsTrue = True
-Dim IsFalse = False
-
-If IsTrue <> True Then
-    Tag(""True Unreachable"")
-Else
-    Tag(""True"")
-End If
-
-If IsFalse <> False Then
-    Tag(""False Unreachable"")
-Else
-    Tag(""False"")
-End If
-
-If IsTrue <> IsFalse Then
-    Tag(""Variables"")
-Else
-    Tag(""Variables Unreachable"")
-End If";
-        SETestContext.CreateVB(code).Validator.ValidateTagOrder(
-            "True",
-            "False",
-            "Variables");
+        var code = $"""
+            Dim IsTrue As Boolean= true
+            Dim IsFalse As Boolean= false
+            Dim IsNullableNull As Boolean? = Nothing
+            Dim IsNullableTrue As Boolean? = True
+            Dim IsNullableFalse As Boolean? = False
+            Dim Result As Integer = {expression}
+            Tag("Result", Result)
+            """;
+        SETestContext.CreateVB(code).Validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
     }
 
     [TestMethod]
@@ -807,7 +804,7 @@ Tag(""End"")";
     [DataRow("i == -3 && j >= -5", null, 15)]
     [DataRow("i == -3 && j <=  5", -15, null)]
     [DataRow("i == -3 && j <= -5", 15, null)]
-    public void Binary_Multiplication_Range(string expression, int? expectedMin, int?expectedMax)
+    public void Binary_Multiplication_Range(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""
             if ({{expression}})

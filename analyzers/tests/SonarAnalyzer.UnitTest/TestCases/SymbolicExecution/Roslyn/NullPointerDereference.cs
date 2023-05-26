@@ -1918,7 +1918,7 @@ public class PeachReproducers
     {
         if (t?.IsCompleted == true)
         {
-            t.ToString();       // Noncompliant FP
+            t.ToString();       // Compliant
         }
     }
 
@@ -1927,7 +1927,7 @@ public class PeachReproducers
         var list = condition ? null : new List<string>();
         if (list?.Contains("key") == true)
         {
-            list.ToString();    // Noncompliant FP
+            list.ToString();    // Compliant
         }
     }
 
@@ -2031,7 +2031,7 @@ public class Repro_7104
     {
         if (data?.IsBoolean == true)
         {
-            return data.Property;   // Noncompliant FP
+            return data.Property;   // Compliant
         }
         return null;
     }
@@ -2041,7 +2041,7 @@ public class Repro_7104
         if (records?.Any() != true)
             return 0;
 
-        return records.Count; // Noncompliant FP
+        return records.Count; // Compliant
     }
 
     public class Data

@@ -185,6 +185,8 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         {
             return kind switch
             {
+                BinaryOperatorKind.Equals when leftIsNull || rightIsNull => BoolConstraint.False,
+                BinaryOperatorKind.NotEquals when leftIsNull || rightIsNull => BoolConstraint.True,
                 BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr when (leftBool ?? rightBool) == BoolConstraint.True => BoolConstraint.True,
                 BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd when (leftBool ?? rightBool) == BoolConstraint.False => BoolConstraint.False,
                 _ => null
