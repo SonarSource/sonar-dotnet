@@ -2018,9 +2018,18 @@ public class Repro_7104
 {
     private Data data;
 
-    public static bool BoolMethod(Data data)
+    public static bool BoolPropertyPatternMatching(Data data)
     {
-        if (data?.IsTrue() is true && data.Property != null)    // Noncompliant FP
+        if (data?.IsBoolean is true && data.Property != null)    // Compliant
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static bool BoolMethodPatternMatching(Data data)
+    {
+        if (data?.IsTrue() is true && data.Property != null)    // Compliant
         {
             return true;
         }
