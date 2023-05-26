@@ -101,12 +101,13 @@ namespace SonarAnalyzer.Rules
                     .Concat(treeMessages)
                     .WhereNotNull()
                     .ToArray();
-                    Directory.CreateDirectory(OutPath);
-                    using var stream = File.Create(Path.Combine(OutPath, FileName));
-                    foreach (var message in allMessages)
-                    {
-                        message.WriteDelimitedTo(stream);
-                    }
+
+                Directory.CreateDirectory(OutPath);
+                using var stream = File.Create(Path.Combine(OutPath, FileName));
+                foreach (var message in allMessages)
+                {
+                    message.WriteDelimitedTo(stream);
+                }
             });
 
         protected virtual bool ShouldGenerateMetrics(SyntaxTree tree) =>
