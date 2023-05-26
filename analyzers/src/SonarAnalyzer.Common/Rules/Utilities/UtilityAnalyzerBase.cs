@@ -74,6 +74,8 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
         where TMessage : class, IMessage, new()
     {
+        private static readonly object FileWriteLock = new TMessage();
+
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string FileName { get; }
         protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
@@ -101,12 +103,14 @@ namespace SonarAnalyzer.Rules
                     .Concat(treeMessages)
                     .WhereNotNull()
                     .ToArray();
-
-                Directory.CreateDirectory(OutPath);
-                using var stream = File.Create(Path.Combine(OutPath, FileName));
-                foreach (var message in allMessages)
+                lock (FileWriteLock)
                 {
-                    message.WriteDelimitedTo(stream);
+                    Directory.CreateDirectory(OutPath);
+                    using var stream = File.Create(Path.Combine(OutPath, FileName));
+                    foreach (var message in allMessages)
+                    {
+                        message.WriteDelimitedTo(stream);
+                    }
                 }
             });
 
