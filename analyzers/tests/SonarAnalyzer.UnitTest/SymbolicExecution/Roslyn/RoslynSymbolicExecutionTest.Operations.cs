@@ -541,7 +541,7 @@ Tag(""AfterNullableInt"", argNullableInt);";
         validator.TagValue("BeforeNullableInt").Should().HaveNoConstraints();
         validator.TagValue("AfterObjNull").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.TagValue("AfterObjDefault").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.TagValue("AfterInt").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.Zero);
+        validator.TagValue("AfterInt").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0));
         validator.TagValue("AfterNullableInt").Should().HaveOnlyConstraint(ObjectConstraint.Null);
     }
 
@@ -560,7 +560,7 @@ Tag(""AfterInt"", ArgInt)";
         validator.TagValue("BeforeObj").Should().HaveNoConstraints();
         validator.TagValue("BeforeInt").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("AfterObj").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.TagValue("AfterInt").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.Zero);
+        validator.TagValue("AfterInt").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0));
     }
 
     [TestMethod]

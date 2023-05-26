@@ -448,7 +448,7 @@ Tag(""EqualsFalse"", EqualsFalse)";
         var code = @$"
 Dim Value = {expression}
 Tag(""End"")";
-        var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(NumberConstraint.Zero)); // Coverage of Flip local function with ObjectValueEquals
+        var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(NumberConstraint.From(0))); // Coverage of Flip local function with ObjectValueEquals
         var validator = SETestContext.CreateVB(code, "Arg As Object", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.TagStates("End").Should().HaveCount(2)
