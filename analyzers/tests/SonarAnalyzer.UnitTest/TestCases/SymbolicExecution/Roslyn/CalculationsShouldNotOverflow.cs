@@ -103,7 +103,7 @@ public class Sample
 
         var j = 10;
         i = 2147483600 / j;
-        _ = i * 100;            // FN
+        _ = i * 100;            // Noncompliant
 
         _ = 2147483600 << 16;   // Compliant
         _ = -2147483600 << 16;  // Compliant
