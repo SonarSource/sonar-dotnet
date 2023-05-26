@@ -50,10 +50,10 @@ public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
         context.RegisterNodeAction(c =>
             {
                 if (CanBeCorrectObjectCreation(c.Node)
-                    && IsWithinCorrectContext(c.Node, CorrectContextSyntaxKinds, out SyntaxNode kindContext)
+                    && IsWithinContext(c.Node, CorrectContextSyntaxKinds, out SyntaxNode kindContext)
                     && IsCorrectObjectType(c.Node, c.SemanticModel)
                     && IsArgumentConstantOrReadOnly(Language.Syntax.ArgumentExpressions(c.Node).FirstOrDefault(), c.SemanticModel)
-                    && !IsCompliantAssignment(c.Node, c.SemanticModel, kindContext))
+                    && IsNoncompliant(c.Node, c.SemanticModel, kindContext))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                 }
@@ -68,10 +68,13 @@ public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
     private bool HasRightArgumentCount(SyntaxNode objectCreation) =>
         Language.Syntax.ArgumentExpressions(objectCreation).Count() is >= MinCtorParamsCount and <= MaxCtorParamsCount;
 
-    private static bool IsWithinCorrectContext<TSyntaxNode>(SyntaxNode node, ISet<SyntaxKind> correctContextList, out TSyntaxNode contextNode)
+    private static bool IsWithinContext<TSyntaxNode>(SyntaxNode node, SyntaxKind expectedContext, out TSyntaxNode contextNode) where TSyntaxNode : SyntaxNode =>
+        IsWithinContext(node, new HashSet<SyntaxKind> { expectedContext }, out contextNode);
+
+    private static bool IsWithinContext<TSyntaxNode>(SyntaxNode node, ISet<SyntaxKind> expectedContextList, out TSyntaxNode contextNode)
         where TSyntaxNode : SyntaxNode
     {
-        while (!node.IsKind(SyntaxKind.CompilationUnit) && !node.IsAnyKind(correctContextList))
+        while (!node.IsKind(SyntaxKind.CompilationUnit) && !node.IsAnyKind(expectedContextList))
         {
             node = node.Parent;
         }
@@ -89,101 +92,116 @@ public sealed class UseCachedRegex : SonarDiagnosticAnalyzer<SyntaxKind>
         && (model.GetConstantValue(argument).HasValue
             || model.GetSymbolInfo(argument).Symbol is IFieldSymbol { IsReadOnly: true });
 
-    private static bool IsCompliantAssignment(SyntaxNode objectCreation, SemanticModel model, SyntaxNode context) =>
-        objectCreation.Parent switch
+    private bool IsNoncompliant(SyntaxNode node, SemanticModel model, SyntaxNode context) =>
+        node.Parent switch
         {
+            EqualsValueClauseSyntax { Parent.Parent.Parent: LocalDeclarationStatementSyntax } => true,
+            AssignmentExpressionSyntax assignment when IsWithinContext(assignment, SyntaxKind.CoalesceExpression, out BinaryExpressionSyntax coalesce) =>
+                IsNoncompliantCondition(coalesce.Left, assignment.Left, model),
             AssignmentExpressionSyntax assignment when assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) =>
-                IsCompliantSimpleAssignment(assignment, model, context),
+                IsNoncompliantSimpleAssignment(assignment, model, context)
+                && (!IsWithinContext(assignment, SyntaxKind.IfStatement, out IfStatementSyntax ifStatement)
+                    || IsNoncompliantCondition(ifStatement.Condition, assignment.Left, model)
+                    || !IsConditionCheckingForNull(ifStatement.Condition)),
             AssignmentExpressionSyntax assignment when assignment.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) =>
-                IsSymbolFieldOrProperty(assignment.Left, model),
-            BinaryExpressionSyntax { Parent: AssignmentExpressionSyntax assignment } coalesce
-                when coalesce.IsKind(SyntaxKind.CoalesceExpression) && assignment.IsAnyKind(SyntaxKind.SimpleAssignmentExpression, SyntaxKindEx.CoalesceAssignmentExpression) =>
-                coalesce.Left.GetName() == assignment.Left.GetName() && IsSymbolFieldOrProperty(assignment.Left, model),
-            ConditionalExpressionSyntax { Parent: AssignmentExpressionSyntax assignment, Condition: { } condition } conditional
-                when assignment.IsAnyKind(SyntaxKind.SimpleAssignmentExpression, SyntaxKindEx.CoalesceAssignmentExpression) =>
-                IsConditionInvolveAssigned(condition, assignment)
-                && IsCompliantConditionalResultBranches(conditional, condition, assignment),
+                !IsSymbolFieldOrProperty(assignment.Left, model),
+            BinaryExpressionSyntax { Parent: AssignmentExpressionSyntax assignment } coalesce when coalesce.IsKind(SyntaxKind.CoalesceExpression) =>
+                IsNoncompliant(coalesce, model, context)
+                || IsNoncompliantCondition(coalesce.Left, assignment.Left, model),
+            BinaryExpressionSyntax coalesce when coalesce.IsKind(SyntaxKind.CoalesceExpression) => true,
+            ConditionalExpressionSyntax { Parent: AssignmentExpressionSyntax assignment, Condition: { } condition } conditional =>
+                IsNoncompliant(conditional, model, context)
+                || IsNoncompliantCondition(condition, assignment.Left, model)
+                || IsNoncompliantBranches(conditional, assignment.Left),
+            ArgumentSyntax => true,
             _ => false
         };
 
-    private static bool IsSymbolFieldOrProperty(SyntaxNode identifier, SemanticModel model) => model.GetSymbolInfo(identifier).Symbol is IFieldSymbol or IPropertySymbol;
-
-    private static bool IsCompliantSimpleAssignment(AssignmentExpressionSyntax assignment, SemanticModel model, SyntaxNode context)
+    private bool IsNoncompliantSimpleAssignment(AssignmentExpressionSyntax assignment, SemanticModel model, SyntaxNode context)
     {
         var symbol = model.GetSymbolInfo(assignment.Left).Symbol;
 
-        return symbol is IFieldSymbol or IPropertySymbol
-               && (symbol is IFieldSymbol { IsReadOnly: true } or IPropertySymbol { IsReadOnly: true }
-                   || context.IsKind(SyntaxKind.ConstructorDeclaration)
-                   || IsAssignmentWithinIfStatement(assignment, model)
-                   || IsAssignmentWithinCoalesceExpressionAsFunctionArgument(assignment));
+        return symbol is IParameterSymbol or ILocalSymbol
+               || (assignment.Right.IsAnyKind(Language.SyntaxKind.ObjectCreationExpressions)
+                   && symbol is IFieldSymbol { IsReadOnly: false } or IPropertySymbol { IsReadOnly: false }
+                   && !context.IsKind(SyntaxKind.ConstructorDeclaration));
     }
 
-    private static bool IsCompliantConditionalResultBranches(ConditionalExpressionSyntax conditional, ExpressionSyntax condition, AssignmentExpressionSyntax assignment)
-    {
-        return condition switch
-        {
-            BinaryExpressionSyntax when condition.IsAnyKind(SyntaxKind.EqualsExpression) => CheckCorrectBranchResult(conditional.WhenTrue, conditional.WhenFalse),
-            BinaryExpressionSyntax when condition.IsAnyKind(SyntaxKind.NotEqualsExpression) => CheckCorrectBranchResult(conditional.WhenFalse, conditional.WhenTrue),
-            _ when IsPatternExpressionSyntaxWrapper.IsInstance(condition) =>
-                (IsPatternExpressionSyntaxWrapper)condition switch
-                {
-                    { Pattern.SyntaxNode.RawKind: (int)SyntaxKindEx.ConstantPattern } => CheckCorrectBranchResult(conditional.WhenTrue, conditional.WhenFalse),
-                    { Pattern.SyntaxNode.RawKind: (int)SyntaxKindEx.NotPattern } => CheckCorrectBranchResult(conditional.WhenFalse, conditional.WhenTrue),
-                    _ => false
-                },
-            _ => false
-        };
-
-        bool CheckCorrectBranchResult(ExpressionSyntax first, ExpressionSyntax second) =>
-            first is ObjectCreationExpressionSyntax && second.GetName() == assignment.Left.GetName();
-    }
-
-    private static bool IsConditionInvolveAssigned(ExpressionSyntax condition, AssignmentExpressionSyntax assignment) =>
+    private static bool IsNoncompliantCondition(ExpressionSyntax condition, ExpressionSyntax left, SemanticModel model) =>
         condition switch
         {
-            BinaryExpressionSyntax binaryCondition when condition.IsAnyKind(SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression) =>
-                ChecksForNullOnAssigned(assignment, binaryCondition.Left, binaryCondition.Right) || ChecksForNullOnAssigned(assignment, binaryCondition.Right, binaryCondition.Left),
-            { RawKind: (int)SyntaxKindEx.IsPatternExpression } =>
-                (IsPatternExpressionSyntaxWrapper)condition switch
-                {
-                    { Expression: { } expression, Pattern: { SyntaxNode.RawKind: (int)SyntaxKindEx.ConstantPattern } pattern } =>
-                        ChecksForNullOnAssigned(assignment, expression, ((ConstantPatternSyntaxWrapper)pattern).Expression),
-                    { Expression: { } expression, Pattern: { SyntaxNode.RawKind: (int)SyntaxKindEx.NotPattern } notPattern } =>
-                        (UnaryPatternSyntaxWrapper)notPattern is { Pattern: { SyntaxNode.RawKind: (int)SyntaxKindEx.ConstantPattern } pattern }
-                        && ChecksForNullOnAssigned(assignment, expression, ((ConstantPatternSyntaxWrapper)pattern).Expression),
-                    _ => false
-                },
+            BinaryExpressionSyntax expression =>
+                (!left.NameIs(expression.Left.GetName())
+                 && !left.NameIs(expression.Right.GetName()))
+                || (!expression.Left.IsKind(SyntaxKind.NullLiteralExpression)
+                    && !expression.Right.IsKind(SyntaxKind.NullLiteralExpression)),
+            _ when IsPatternExpressionSyntaxWrapper.IsInstance(condition) =>
+                !((IsPatternExpressionSyntaxWrapper)condition).Expression.NameIs(left.GetName())
+                || IsNoncompliantPatternCondition(((IsPatternExpressionSyntaxWrapper)condition).Pattern, model),
+            ObjectCreationExpressionSyntax => true,
+            IdentifierNameSyntax identifier =>
+                !identifier.NameIs(left.GetName())
+                || !IsSymbolFieldOrProperty(identifier, model),
+            _ => false,
+        };
+
+    private static bool IsNoncompliantPatternCondition(PatternSyntaxWrapper pattern, SemanticModel model) =>
+        pattern.SyntaxNode switch
+        {
+            SyntaxNode node when ConstantPatternSyntaxWrapper.IsInstance(node) =>
+                !((ConstantPatternSyntaxWrapper)node).Expression.IsKind(SyntaxKind.NullLiteralExpression)
+                && !model.GetTypeInfo(((ConstantPatternSyntaxWrapper)node).Expression).Type.Is(KnownType.System_Text_RegularExpressions_Regex),
+            SyntaxNode node when UnaryPatternSyntaxWrapper.IsInstance(node) =>
+                IsNoncompliantNotPatternCondition(((UnaryPatternSyntaxWrapper)node).Pattern, model),
+            SyntaxNode node when DeclarationPatternSyntaxWrapper.IsInstance(node) =>
+                !model.GetTypeInfo(((DeclarationPatternSyntaxWrapper)node).Type).Type.Is(KnownType.System_Text_RegularExpressions_Regex),
+            SyntaxNode node when RecursivePatternSyntaxWrapper.IsInstance(node) => true,
             _ => false
         };
 
-    private static bool ChecksForNullOnAssigned(AssignmentExpressionSyntax assignmentExpression, SyntaxNode first, SyntaxNode second) =>
-        assignmentExpression.Left.GetName() == first.GetName() && second is LiteralExpressionSyntax literal && literal.IsKind(SyntaxKind.NullLiteralExpression);
+    private static bool IsNoncompliantNotPatternCondition(PatternSyntaxWrapper pattern, SemanticModel model) =>
+        pattern.SyntaxNode switch
+        {
+            SyntaxNode node when RecursivePatternSyntaxWrapper.IsInstance(node) =>
+                ((RecursivePatternSyntaxWrapper)node).PropertyPatternClause.Subpatterns.Count > 0,
+            _ => IsNoncompliantPatternCondition(pattern, model)
+        };
 
-    private static bool IsAssignmentWithinIfStatement(AssignmentExpressionSyntax assignment, SemanticModel model)
+    private static bool IsNoncompliantBranches(ConditionalExpressionSyntax conditional, ExpressionSyntax left)
     {
-        return IsWithinCorrectContext(assignment, new HashSet<SyntaxKind> { SyntaxKind.IfStatement }, out IfStatementSyntax ifStatement)
-               && ifStatement.Condition switch
-               {
-                   BinaryExpressionSyntax binaryExpression => IsValidBinaryCondition(binaryExpression),
-                   { RawKind: (int)SyntaxKindEx.IsPatternExpression } => IsValidPatternCondition(ifStatement.Condition),
-                   _ => false,
-               };
+        var isCheckingNull = IsConditionCheckingForNull(conditional.Condition);
 
-        bool IsValidBinaryCondition(BinaryExpressionSyntax binaryExpression) =>
-            binaryExpression.IsKind(SyntaxKind.EqualsExpression)
-            && binaryExpression.OperatorToken.IsKind(SyntaxKind.EqualsEqualsToken)
-            && (ChecksForNullOnAssigned(assignment, binaryExpression.Left, binaryExpression.Right)
-                || ChecksForNullOnAssigned(assignment, binaryExpression.Right, binaryExpression.Left))
-            && IsSymbolFieldOrProperty(assignment.Left, model);
-
-        bool IsValidPatternCondition(ExpressionSyntax isPattern) =>
-            (IsPatternExpressionSyntaxWrapper)isPattern is { Expression: { } expression, Pattern: { SyntaxNode.RawKind: (int)SyntaxKindEx.ConstantPattern } pattern }
-            && ChecksForNullOnAssigned(assignment, expression, ((ConstantPatternSyntaxWrapper)pattern).Expression)
-            && IsSymbolFieldOrProperty(assignment.Left, model);
+        return (!isCheckingNull
+                && (!conditional.WhenTrue.NameIs(left.GetName())
+                    || !conditional.WhenFalse.IsKind(SyntaxKind.ObjectCreationExpression)))
+               || (isCheckingNull
+                   && (!conditional.WhenTrue.IsKind(SyntaxKind.ObjectCreationExpression)
+                       || !conditional.WhenFalse.NameIs(left.GetName())));
     }
 
-    private static bool IsAssignmentWithinCoalesceExpressionAsFunctionArgument(AssignmentExpressionSyntax assignment) =>
-        assignment.Parent is ParenthesizedExpressionSyntax { Parent: BinaryExpressionSyntax coalesce }
-        && coalesce.IsKind(SyntaxKind.CoalesceExpression);
+    private static bool IsConditionCheckingForNull(ExpressionSyntax condition) =>
+        condition switch
+        {
+            BinaryExpressionSyntax expression when condition.IsKind(SyntaxKind.EqualsExpression) =>
+                expression.Left.IsKind(SyntaxKind.NullLiteralExpression) || expression.Right.IsKind(SyntaxKind.NullLiteralExpression),
+            _ when IsPatternExpressionSyntaxWrapper.IsInstance(condition) =>
+                IsPatternCheckingForNull(((IsPatternExpressionSyntaxWrapper)condition).Pattern),
+            _ => false,
+        };
+
+    private static bool IsPatternCheckingForNull(PatternSyntaxWrapper pattern) =>
+        pattern.SyntaxNode switch
+        {
+            SyntaxNode node when ConstantPatternSyntaxWrapper.IsInstance(node) =>
+                ((ConstantPatternSyntaxWrapper)node).Expression.IsKind(SyntaxKind.NullLiteralExpression)
+                || !((ConstantPatternSyntaxWrapper)node).Expression.NameIs(RegexName),
+            SyntaxNode node when RecursivePatternSyntaxWrapper.IsInstance(node) => false,
+            SyntaxNode node when DeclarationPatternSyntaxWrapper.IsInstance(node) =>
+                !((DeclarationPatternSyntaxWrapper)node).Type.NameIs(RegexName),
+            SyntaxNode node when UnaryPatternSyntaxWrapper.IsInstance(node) =>
+                !IsPatternCheckingForNull(((UnaryPatternSyntaxWrapper)node).Pattern),
+            _ => false,
+        };
+
+    private static bool IsSymbolFieldOrProperty(SyntaxNode identifier, SemanticModel model) => model.GetSymbolInfo(identifier).Symbol is IFieldSymbol or IPropertySymbol;
 }

@@ -58,6 +58,21 @@ public class UseCachedRegex
         StaticMutableCachedRegex ??= null != StaticMutableCachedRegex ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Compliant
         StaticMutableCachedRegex ??= StaticMutableCachedRegex is null ? new Regex("^[a-zA-Z]$") : StaticMutableCachedRegex; // Compliant
         StaticMutableCachedRegex ??= StaticMutableCachedRegex is not null ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Compliant
+
+        if (PropertyCachedRegex is not { })
+        {
+            PropertyCachedRegex = new Regex("^[a-zA-Z]$"); // Compliant
+        }
+
+        if (PropertyCachedRegex is not Regex)
+        {
+            PropertyCachedRegex = new Regex("^[a-zA-Z]$"); // Compliant
+        }
+
+        if (PropertyCachedRegex is not Regex reg)
+        {
+            PropertyCachedRegex = new Regex("^[a-zA-Z]$"); // Compliant
+        }
     }
 
     void Noncompliant()
@@ -126,6 +141,17 @@ public class UseCachedRegex
             PropertyCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
         }
 
+        if (PropertyCachedRegex is Regex)
+        {
+            PropertyCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
+
+        if (PropertyCachedRegex is Regex anotherReg)
+        {
+            PropertyCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
+
+
         UseRegex(new ("^[a-zA-Z]$")); // Noncompliant
         //       ^^^^^^^^^^^^^^^^^^
 
@@ -140,6 +166,6 @@ public partial class CompiledRegex
     [GeneratedRegex("^[a-zA-Z]$")]
     private static partial Regex CreateCachedRegex();
 #else
-    private static Regex CreateCachedRegex() => new Regex("^[a-zA-Z]$", RegexOptions.Compiled); // Noncompliant Potential FP as it is a shim for [GenerateRegex] attribute prior to .NET 7.0
+    private static Regex CreateCachedRegex() => new Regex("^[a-zA-Z]$", RegexOptions.Compiled); // Compliant
 #endif
 }

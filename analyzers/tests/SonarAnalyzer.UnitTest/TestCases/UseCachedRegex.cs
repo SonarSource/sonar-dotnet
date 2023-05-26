@@ -88,6 +88,8 @@ public class UseCachedRegex
         StaticMutableCachedRegex = null != StaticMutableCachedRegex ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Compliant
         StaticMutableCachedRegex = StaticMutableCachedRegex is null ? new Regex("^[a-zA-Z]$") : StaticMutableCachedRegex; // Compliant
 
+        StaticMutableCachedRegex = StaticMutableCachedRegex is null ? PropertyCachedRegex : MutableCachedRegex; // Compliant
+
         if (MutableCachedRegex == null)
         {
             MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Compliant
@@ -117,6 +119,8 @@ public class UseCachedRegex
         UseRegex(MutableCachedRegex ?? (MutableCachedRegex = new Regex("^[a-zA-Z]$"))); // Compliant
         UseRegex(StaticMutableCachedRegex ?? (StaticMutableCachedRegex = new Regex("^[a-zA-Z]$"))); // Compliant
         UseRegex(PropertyCachedRegex ?? (PropertyCachedRegex = new Regex("^[a-zA-Z]$"))); // Compliant
+
+        MutableCachedRegex = MutableCachedRegex != null ? MutableCachedRegex : false ? new Regex("^[a-zA-Z]$") : new Regex("^[0-9]$"); // FN
     }
 
     void Noncompliant()
@@ -126,7 +130,9 @@ public class UseCachedRegex
 
         myRegex = new Regex(); // Error [CS0122]
         myRegex += new Regex("^[a-zA-Z]$"); // Error [CS0019]
+        // Noncompliant@+1
         myRegex += myRegex ?? new Regex("^[a-zA-Z]$"); // Error [CS0019]
+        //                    ^^^^^^^^^^^^^^^^^^^^^^^
 
         myRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
         //        ^^^^^^^^^^^^^^^^^^^^^^^
@@ -138,21 +144,22 @@ public class UseCachedRegex
         myRegex = myRegex ?? new Regex("^[a-zA-Z]$"); // Noncompliant
         //                   ^^^^^^^^^^^^^^^^^^^^^^^
 
+        myRegex = true ? new Regex("^[a-zA-Z]$") : false ? new Regex("^[0-9]$") : new Regex("^[a-zA-Z0-9]$"); // Noncompliant, Doesn't raise on the last 2 object creations
+
+        MutableCachedRegex = StaticMutableCachedRegex ?? new Regex("^[a-zA-Z]$"); // Noncompliant
+        PropertyCachedRegex = MutableCachedRegex ?? new Regex("^[a-zA-Z]$"); // Noncompliant
+        StaticMutableCachedRegex = PropertyCachedRegex ?? new Regex("^[a-zA-Z]$"); // Noncompliant
+
         MutableCachedRegex = myRegex == null ? new Regex("^[a-zA-Z]$") : myRegex; // Noncompliant
-        myRegex = true ? new Regex("^[a-zA-Z]$") : false ? new Regex("^[0-9]$") : new Regex("^[a-zA-Z0-9]$");
-        //               ^^^^^^^^^^^^^^^^^^^^^^^
-        //                                                 ^^^^^^^^^^^^^^^^^^^^@-1
-        //                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^@-2
-        MutableCachedRegex = MutableCachedRegex != null ? MutableCachedRegex : false ? new Regex("^[a-zA-Z]$") : new Regex("^[0-9]$"); // FP
-        //                                                                             ^^^^^^^^^^^^^^^^^^^^^^^
-        //                                                                                                       ^^^^^^^^^^^^^^^^^^^^@-1
         MutableCachedRegex = new Regex("^[a-zA-Z]$") ?? MutableCachedRegex; // Noncompliant
 
+        PropertyCachedRegex = PropertyCachedRegex == MutableCachedRegex ? new Regex("^[a-zA-Z]$") : PropertyCachedRegex; // Noncompliant
         PropertyCachedRegex = PropertyCachedRegex != null ? new Regex("^[a-zA-Z]$") : PropertyCachedRegex; // Noncompliant
         PropertyCachedRegex = PropertyCachedRegex == null ? PropertyCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
         PropertyCachedRegex = null != PropertyCachedRegex ? new Regex("^[a-zA-Z]$") : PropertyCachedRegex; // Noncompliant
         PropertyCachedRegex = null == PropertyCachedRegex ? PropertyCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
         PropertyCachedRegex = PropertyCachedRegex is null ? PropertyCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
+        PropertyCachedRegex = PropertyCachedRegex is null ? new Regex("^[a-zA-Z]$") : myRegex; // Noncompliant
 
         MutableCachedRegex = MutableCachedRegex != null ? new Regex("^[a-zA-Z]$") : MutableCachedRegex; // Noncompliant
         MutableCachedRegex = MutableCachedRegex == null ? MutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
@@ -166,7 +173,20 @@ public class UseCachedRegex
         StaticMutableCachedRegex = null == StaticMutableCachedRegex ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
         StaticMutableCachedRegex = StaticMutableCachedRegex is null ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
 
+        StaticMutableCachedRegex =  new Regex("^[a-zA-Z]$") != null ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
+        StaticMutableCachedRegex = 42 % 2 == 0 ? StaticMutableCachedRegex : new Regex("^[a-zA-Z]$"); // Noncompliant
+
         if (MutableCachedRegex != null)
+        {
+            MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
+
+        if (MutableCachedRegex is { })
+        {
+            MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
+        }
+
+        if (MutableCachedRegex is { })
         {
             MutableCachedRegex = new Regex("^[a-zA-Z]$"); // Noncompliant
         }
@@ -257,6 +277,10 @@ public class UseCachedRegex
         //                                   ^^^^^^^^^^^^^^^^^^^^^^^
         UseRegex(PropertyCachedRegex ?? new Regex("^[a-zA-Z]$")); // Noncompliant
         //                              ^^^^^^^^^^^^^^^^^^^^^^^
+
+        UseRegex(MutableCachedRegex ?? (myRegex = new Regex("^[a-zA-Z]$"))); // Noncompliant
+        UseRegex(StaticMutableCachedRegex ?? (myRegex = new Regex("^[a-zA-Z]$"))); // Noncompliant
+        UseRegex(PropertyCachedRegex ?? (myRegex = new Regex("^[a-zA-Z]$"))); // Noncompliant
 
         UseRegex(new Regex("^[a-zA-Z]$")); // Noncompliant
         //       ^^^^^^^^^^^^^^^^^^^^^^^
