@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class LinkedListPropertiesInsteadOfMethodsCodeFix : SonarCodeFix
     {
-        private const string Title = "Use the 'LinkedList' property";
+        private const string Title = "Replace extension method call with property";
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(LinkedListPropertiesInsteadOfMethods.DiagnosticId);
