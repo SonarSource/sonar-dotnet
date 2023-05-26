@@ -29,6 +29,28 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
 
     public override bool ShouldExecute()
     {
-        return true;
+        var walker = new SyntaxKindWalker();
+        walker.SafeVisit(Node);
+        return walker.Result;
+    }
+
+    private sealed class SyntaxKindWalker : SafeVisualBasicSyntaxWalker
+    {
+        public bool Result { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!Result)
+            {
+                Result = node.IsAnyKind(
+                    SyntaxKind.AddExpression,
+                    SyntaxKind.AddAssignmentStatement,
+                    SyntaxKind.MultiplyExpression,
+                    SyntaxKind.MultiplyAssignmentStatement,
+                    SyntaxKind.SubtractExpression,
+                    SyntaxKind.SubtractAssignmentStatement);
+                base.Visit(node);
+            }
+        }
     }
 }
