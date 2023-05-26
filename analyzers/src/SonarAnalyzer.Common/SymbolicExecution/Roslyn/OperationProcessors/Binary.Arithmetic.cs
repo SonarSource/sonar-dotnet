@@ -60,7 +60,7 @@ internal sealed partial class Binary
 
     private static NumberConstraint CalculateDivide(NumberConstraint left, NumberConstraint right)
     {
-        if (right.Equals(NumberConstraint.Zero))
+        if (right.Min == 0 && right.Max == 0)
         {
             return null;
         }
