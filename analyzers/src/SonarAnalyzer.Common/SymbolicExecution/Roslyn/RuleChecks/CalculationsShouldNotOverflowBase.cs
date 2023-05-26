@@ -66,7 +66,7 @@ public abstract class CalculationsShouldNotOverflowBase : SymbolicRuleCheck
         };
 
     private static bool CanOverflow(BinaryOperatorKind kind) =>
-        kind is BinaryOperatorKind.Add or BinaryOperatorKind.Subtract or BinaryOperatorKind.Multiply or BinaryOperatorKind.Power;
+        kind is BinaryOperatorKind.Add or BinaryOperatorKind.Subtract or BinaryOperatorKind.Multiply;
 
     private static NumberConstraint Bounds(ITypeSymbol type) =>
         type switch
