@@ -99,6 +99,8 @@ internal sealed partial class Binary
         }
         else if (left.Min is not null && left.Max is not null)
         {
+            // We ignore division by zero, so the result can never be absolutely bigger than the absolute value of the dividend.
+            // a / 1 = a && a / -1 = -a => |result| <= |dividend|
             var absMax = BigInteger.Max(BigInteger.Abs(left.Min.Value), left.Max.Value);
             min = -absMax;
             max = absMax;
