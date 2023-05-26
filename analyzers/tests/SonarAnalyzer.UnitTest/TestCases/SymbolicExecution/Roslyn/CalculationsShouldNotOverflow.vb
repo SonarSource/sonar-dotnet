@@ -80,6 +80,8 @@ Public Class Sample
 
         i = 2 Mod j
         __ = i * 2147483600     ' FN
+
+        Dim Result = Integer.MaxValue ^ 2  ' Compliant, result is Double
     End Sub
 
     Public Sub AssignmentOperators()
