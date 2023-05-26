@@ -26,7 +26,8 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class LinkedListPropertiesInsteadOfMethodsCodeFix : SonarCodeFix
     {
-        internal const string Title = "Use the 'LinkedList' property";
+        private const string Title = "Use the 'LinkedList' property";
+
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(LinkedListPropertiesInsteadOfMethods.DiagnosticId);
 
@@ -42,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.RegisterCodeFix(
                     CodeAction.Create(
                         Title,
-                        c =>
+                        _ =>
                         {
                             var newRoot = root.ReplaceNode(invocationExpression, newMember);
                             return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
