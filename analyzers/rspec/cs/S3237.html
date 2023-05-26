@@ -1,9 +1,12 @@
 <h2>Why is this an issue?</h2>
-<p>In property and indexer <code>set</code> methods, and in event <code>add</code> and <code>remove</code> methods, the implicit <code>value</code>
-parameter holds the value the accessor was called with. Not using the <code>value</code> means that the accessor ignores the caller’s intent which
+<p>When you need to get external input for <code>set</code> and <code>init</code> methods defined for properties and indexers or for
+<code>remove</code> and <code>add</code> methods for events, you should always get this input throught the <code>value</code> contextual keyword.</p>
+<p>The contextual keyword <code>value</code> is similar to an input parameter of a method; it references the value that the client code is attempting
+to assign to the property, indexer or event.</p>
+<p>The keyword <code>value</code> holds the value the accessor was called with. Not using it means that the accessor ignores the caller’s intent which
 could cause unexpected results at runtime.</p>
 <h3>Noncompliant code example</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 private int count;
 public int Count
 {
@@ -12,7 +15,7 @@ public int Count
 }
 </pre>
 <h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 private int count;
 public int Count
 {
@@ -20,15 +23,16 @@ public int Count
   set { count = value; }
 }
 </pre>
-<p>or</p>
-<pre>
-public int Count
-{
-  get { return count; }
-  set { throw new InvalidOperationException(); }
-}
-</pre>
 <h3>Exceptions</h3>
-<p>This rule doesn’t raise an issue when the setter is empty and part of the implementation of an <code>interface</code> . The assumption is that this
+<p>This rule doesn’t raise an issue when the setter is empty and part of the implementation of an <code>interface</code>. The assumption is that this
 part of the interface is not meaningful to that particular implementation. A good example of that would be a "sink" logger that discards any logs.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties">Properties</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/value">Value keyword</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/add">Add keyword</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/remove">Remove keyword</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/set">Set keyword</a> </li>
+</ul>
 

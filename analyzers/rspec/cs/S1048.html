@@ -1,10 +1,15 @@
 <h2>Why is this an issue?</h2>
-<p>If Finalize or an override of Finalize throws an exception, and the runtime is not hosted by an application that overrides the default policy, the
-runtime terminates the process immediately without graceful cleanup (finally blocks and finalizers are not executed). This behavior ensures process
-integrity if the finalizer cannot free or destroy resources.</p>
-<p>The rule reports on throw statements used in finalizers.</p>
+<p>Finalizers (historically referred to as destructors) are used to perform any necessary final clean-up when the garbage collector is collecting a
+class instance. The programmer has no control over when the destructor is called; the garbage collector decides when to call it, and the destructor
+implicitly calls <code>Finalize</code> on the object’s base class.</p>
+<p>When you create a destructor, you should never throw an exception in it, as you are risking having your application terminated without a graceful
+cleanup.</p>
+<p>If a destructor throws an exception, and the runtime is not hosted by an application that overrides the default policy and the behavior of the
+<code>UnhandledExceptionEventHandler</code>, then the runtime terminates the process immediately without graceful cleanup (<code>finally</code> blocks
+and <code>Finalizer</code> methods are not executed).</p>
+<p>The rule raises an issue on <code>throw</code> statements used in destructors.</p>
 <h3>Noncompliant code example</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class MyClass
 {
     ~MyClass()
@@ -14,13 +19,20 @@ class MyClass
 }
 </pre>
 <h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 class MyClass
 {
     ~MyClass()
     {
-        // no throw
+
     }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/finalizers">Finalizers (destructors)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.appdomain">App Domain</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.appdomain.unhandledexception">AppDomain.UnhandledException Event</a> </li>
+</ul>
 

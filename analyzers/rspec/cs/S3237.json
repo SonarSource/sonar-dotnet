@@ -1,5 +1,5 @@
 {
-  "title": "\"value\" parameters should be used",
+  "title": "\"value\" contextual keyword should be used",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -13,5 +13,5 @@
   "ruleSpecification": "RSPEC-3237",
   "sqKey": "S3237",
   "scope": "All",
-  "quickfix": "unknown"
+  "quickfix": "infeasible"
 }
