@@ -1,10 +1,13 @@
 <h2>Why is this an issue?</h2>
-<p>If Finalize or an override of Finalize throws an exception, and the runtime is not hosted by an application that overrides the default policy, the
-runtime terminates the process immediately without graceful cleanup (finally blocks and finalizers are not executed). This behavior ensures process
-integrity if the finalizer cannot free or destroy resources.</p>
+<p>The Finalize method is used to perform cleanup operations on unmanaged resources held by the current object before the object is destroyed. The
+method is protected and therefore is accessible only through this class or through a derived class. When you override <code>Finalize</code>, you
+should never throw an exception in it, as you are risking having your application terminated without a graceful cleanup.</p>
+<p>If <code>Finalize</code> or an override of <code>Finalize</code> throws an exception and the runtime is not hosted by an application that overrides
+the default policy and the behavior of the <code>UnhandledExceptionEventHandler</code>, then the runtime terminates the process immediately without
+graceful cleanup (<code>finally</code> blocks and <code>Finalizer</code> methods are not executed).</p>
 <p>The rule reports on throw statements used in finalizers.</p>
 <h3>Noncompliant code example</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Class MyClass
     Protected Overrides Sub Finalize()
         Throw New NotImplementedException() ' Noncompliant
@@ -12,11 +15,18 @@ Class MyClass
 End Class
 </pre>
 <h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 Class MyClass
     Protected Overrides Sub Finalize()
-        ' No throw
+
     End Sub
 End Class
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.finalize">Object.Finalize method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.appdomain">App Domain</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.appdomain.unhandledexception">AppDomain.UnhandledException Event</a> </li>
+</ul>
 
