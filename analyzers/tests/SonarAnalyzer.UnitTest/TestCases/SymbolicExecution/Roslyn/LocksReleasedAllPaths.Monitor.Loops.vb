@@ -46,7 +46,7 @@ Namespace Monitor_Loops
         End Sub
 
         Public Sub Method5()
-            Monitor.Enter(Obj)      ' Noncompliant
+            Monitor.Enter(Obj)      ' Compliant, Exit is not reached on any path. Should be covered by S2583.
             For i As Integer = 0 To 9
                 If i = 9 Then Continue For
                 If i = 9 Then Monitor.Exit(Obj)
