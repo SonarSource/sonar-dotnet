@@ -160,6 +160,11 @@ Public Class Sample
         Return i
     End Function
 
+    Public Overrides Function GetHashCode() As Integer
+        Dim i As Integer = Integer.MaxValue
+        Return i + 1    ' Noncompliant, we want to raise here for VB because it would throw an exception without masking
+    End Function
+
 End Class
 
 Public Class Properties
