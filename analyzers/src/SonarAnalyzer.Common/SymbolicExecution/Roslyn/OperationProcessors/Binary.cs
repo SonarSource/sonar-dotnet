@@ -55,6 +55,10 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         {
             state = state.SetOperationConstraint(operation, constraint);
         }
+        if (operation.Type.Is(KnownType.System_String) && operation.OperatorKind is BinaryOperatorKind.Add or BinaryOperatorKind.Concatenate)
+        {
+            state = state.SetOperationConstraint(operation, ObjectConstraint.NotNull);
+        }
         return state;
     }
 
