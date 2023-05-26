@@ -106,7 +106,7 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
                 || mappedArgs.Contains(identifierName)
                 || IdentifierWithSameNameAndTypeExistsLater(argumentIdentifier, i)
                 || (!IdentifierWithSameNameAndTypeExists(parameter) && !ParameterWithSameNameAndTypeExists(argumentIdentifier))
-                || (argumentIdentifier is NamedArgumentIdentifier named && (!identifierNames.Contains(named.DeclaredName) || named.DeclaredName == named.IdentifierName)))
+                || IdentifierWithSameName(argumentIdentifier))
             {
                 continue;
             }
@@ -129,6 +129,10 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
         bool ParameterWithSameNameAndTypeExists(ArgumentIdentifier argumentIdentifier) =>
             argumentParameterMappings.Values.Any(x => string.Equals(x.Name, argumentIdentifier.IdentifierName, StringComparison.OrdinalIgnoreCase)
                                                       && GetArgumentTypeSymbolInfo(argumentIdentifier.ArgumentSyntax, model).ConvertedType.DerivesOrImplements(x.Type));
+
+        bool IdentifierWithSameName(ArgumentIdentifier argumentIdentifier) =>
+            argumentIdentifier is NamedArgumentIdentifier named
+            && (!identifierNames.Contains(named.DeclaredName) || named.DeclaredName == named.IdentifierName);
     }
 
     private ArgumentIdentifier ConvertToArgumentIdentifier(TArgumentSyntax argument, SemanticModel model)
