@@ -676,6 +676,13 @@ namespace Tests.Diagnostics
             void SomeAction(Func<string> a)
             { }
         }
+
+        public void ConcatNulls()
+        {
+            string s = null;
+            s = s + null;
+            s.ToString();   // Compliant
+        }
     }
 
     class A

@@ -640,7 +640,24 @@ Tag(""End"")";
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.TagValue("S").Should().HaveNoConstraints();   // ToDo: s is NotNull here (https://github.com/SonarSource/sonar-dotnet/issues/7111)
+        validator.TagValue("S").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+    [DataRow("s = s + s")]
+    [DataRow("s = s + Nothing")]
+    [DataRow("s = s & s")]
+    [DataRow("s = s & Nothing")]
+    public void Binary_StringConcatenation_Binary_VB(string expression)
+    {
+        var code = $"""
+            Dim S As String = Nothing
+            {expression}
+            Tag("S", s)
+            """;
+        var validator = SETestContext.CreateVB(code).Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.TagValue("S").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -654,6 +671,23 @@ Tag(""End"")";
             Tag("S", s);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
+        validator.ValidateContainsOperation(OperationKind.Binary);
+        validator.TagValue("S").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+    [DataRow("s += s")]
+    [DataRow("s += Nothing")]
+    [DataRow("s &= s")]
+    [DataRow("s &= Nothing")]
+    public void Binary_StringConcatenation_Compound_VB(string expression)
+    {
+        var code = $"""
+            Dim S As String = Nothing
+            {expression}
+            Tag("S", s)
+            """;
+        var validator = SETestContext.CreateVB(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.TagValue("S").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }

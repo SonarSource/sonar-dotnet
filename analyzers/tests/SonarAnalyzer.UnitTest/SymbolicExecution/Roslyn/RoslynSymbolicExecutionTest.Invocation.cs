@@ -743,7 +743,7 @@ End Sub";
     public void Invocation_InformationIsNothing_NoTrackedSymbol()
     {
         var code = $@"
-Dim Result As Boolean = IsNothing("""" & Arg.ToString())
+Dim Result As Boolean = IsNothing(Arg.ToString())
 Tag(""Result"", Result)";
         var validator = SETestContext.CreateVB(code, "Arg As Object").Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
