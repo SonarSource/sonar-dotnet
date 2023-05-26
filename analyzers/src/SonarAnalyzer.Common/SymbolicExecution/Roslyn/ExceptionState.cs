@@ -18,20 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+public sealed record ExceptionState
 {
-    public sealed record ExceptionState
-    {
-        public static readonly ExceptionState UnknownException = new();
+    public static readonly ExceptionState UnknownException = new();
 
-        public ITypeSymbol Type { get; }
+    public ITypeSymbol Type { get; }
 
-        public ExceptionState(ITypeSymbol type) =>
-            Type = type ?? throw new ArgumentNullException(nameof(type));
+    public ExceptionState(ITypeSymbol type) =>
+        Type = type ?? throw new ArgumentNullException(nameof(type));
 
-        private ExceptionState() { }
+    private ExceptionState() { }
 
-        public override string ToString() =>
-            Type is null ? "Unknown" : Type.Name;
-    }
+    public override string ToString() =>
+        Type is null ? "Unknown" : Type.Name;
 }

@@ -20,56 +20,55 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
+
+internal class ConstantCheck : SymbolicCheck
 {
-    internal class ConstantCheck : SymbolicCheck
+    protected override ProgramState PreProcessSimple(SymbolicContext context) =>
+        context.Operation.Instance.ConstantValue.HasValue
+        && ConstraintFromConstantValue(context.Operation) is { } value
+            ? context.State.SetOperationValue(context.Operation, value)
+            : context.State;
+
+    public static SymbolicConstraint ConstraintFromType(ITypeSymbol type)
     {
-        protected override ProgramState PreProcessSimple(SymbolicContext context) =>
-            context.Operation.Instance.ConstantValue.HasValue
-            && ConstraintFromConstantValue(context.Operation) is { } value
-                ? context.State.SetOperationValue(context.Operation, value)
-                : context.State;
-
-        public static SymbolicConstraint ConstraintFromType(ITypeSymbol type)
+        if (type.Is(KnownType.System_Boolean))
         {
-            if (type.Is(KnownType.System_Boolean))
-            {
-                return BoolConstraint.False;
-            }
-            else if (type.IsReferenceType)
-            {
-                return ObjectConstraint.Null;
-            }
-            else if (type.IsAny(KnownType.IntegralNumbersIncludingNative))
-            {
-                return NumberConstraint.From(0);
-            }
-            else
-            {
-                return null;
-            }
+            return BoolConstraint.False;
         }
-
-        private static SymbolicValue ConstraintFromConstantValue(IOperationWrapperSonar operation) =>
-            operation.Instance.ConstantValue.Value switch
-            {
-                // Update DefaultValue when adding new types
-                true => SymbolicValue.True,
-                false => SymbolicValue.False,
-                null when CanBeNull(operation) => SymbolicValue.Null,
-                string => SymbolicValue.NotNull,
-                _ when NumberConstraint.From(operation.Instance.ConstantValue.Value) is { } number => SymbolicValue.NotNull.WithConstraint(number),
-                _ => null
-            };
-
-        private static ITypeSymbol ConvertedType(IOperation operation) =>
-            // Some version of Roslyn can send null here with "return default;". It's not reproducible by UTs, as we have "Type" set in that case.
-            operation?.Kind == OperationKindEx.Conversion ? operation.ToConversion().Type : null;
-
-        private static bool CanBeNull(IOperationWrapperSonar operation)
+        else if (type.IsReferenceType)
         {
-            var type = operation.Instance.Type ?? ConvertedType(operation.Parent);
-            return type is null || type.CanBeNull();
+            return ObjectConstraint.Null;
         }
+        else if (type.IsAny(KnownType.IntegralNumbersIncludingNative))
+        {
+            return NumberConstraint.From(0);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private static SymbolicValue ConstraintFromConstantValue(IOperationWrapperSonar operation) =>
+        operation.Instance.ConstantValue.Value switch
+        {
+            // Update DefaultValue when adding new types
+            true => SymbolicValue.True,
+            false => SymbolicValue.False,
+            null when CanBeNull(operation) => SymbolicValue.Null,
+            string => SymbolicValue.NotNull,
+            _ when NumberConstraint.From(operation.Instance.ConstantValue.Value) is { } number => SymbolicValue.NotNull.WithConstraint(number),
+            _ => null
+        };
+
+    private static ITypeSymbol ConvertedType(IOperation operation) =>
+        // Some version of Roslyn can send null here with "return default;". It's not reproducible by UTs, as we have "Type" set in that case.
+        operation?.Kind == OperationKindEx.Conversion ? operation.ToConversion().Type : null;
+
+    private static bool CanBeNull(IOperationWrapperSonar operation)
+    {
+        var type = operation.Instance.Type ?? ConvertedType(operation.Parent);
+        return type is null || type.CanBeNull();
     }
 }

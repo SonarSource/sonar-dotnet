@@ -21,189 +21,188 @@
 using System.Collections.Concurrent;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+public sealed record SymbolicValue
 {
-    public sealed record SymbolicValue
+    private static ConcurrentDictionary<CacheKey, SymbolicValue> cache = new();
+
+    // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
+    public static readonly SymbolicValue Empty = new();
+    public static readonly SymbolicValue Null = Empty.WithConstraint(ObjectConstraint.Null);
+    public static readonly SymbolicValue NotNull = Empty.WithConstraint(ObjectConstraint.NotNull);
+    public static readonly SymbolicValue True = NotNull.WithConstraint(BoolConstraint.True);
+    public static readonly SymbolicValue False = NotNull.WithConstraint(BoolConstraint.False);
+
+    private readonly ImmutableDictionary<Type, SymbolicConstraint> constraints = ImmutableDictionary<Type, SymbolicConstraint>.Empty;
+    private int? hashCode;
+
+    // SymbolicValue can have only one constraint instance of specific type at a time
+    private ImmutableDictionary<Type, SymbolicConstraint> Constraints
     {
-        private static ConcurrentDictionary<CacheKey, SymbolicValue> cache = new();
-
-        // Reuse instances to save memory. This "True" has the same semantic meaning and any other symbolic value with BoolConstraint.True constraint
-        public static readonly SymbolicValue Empty = new();
-        public static readonly SymbolicValue Null = Empty.WithConstraint(ObjectConstraint.Null);
-        public static readonly SymbolicValue NotNull = Empty.WithConstraint(ObjectConstraint.NotNull);
-        public static readonly SymbolicValue True = NotNull.WithConstraint(BoolConstraint.True);
-        public static readonly SymbolicValue False = NotNull.WithConstraint(BoolConstraint.False);
-
-        private readonly ImmutableDictionary<Type, SymbolicConstraint> constraints = ImmutableDictionary<Type, SymbolicConstraint>.Empty;
-        private int? hashCode;
-
-        // SymbolicValue can have only one constraint instance of specific type at a time
-        private ImmutableDictionary<Type, SymbolicConstraint> Constraints
+        get => constraints;
+        init
         {
-            get => constraints;
-            init
-            {
-                constraints = value;
-                hashCode = null;
-            }
+            constraints = value;
+            hashCode = null;
         }
+    }
 
-        public IEnumerable<SymbolicConstraint> AllConstraints =>
-            Constraints.Values;
+    public IEnumerable<SymbolicConstraint> AllConstraints =>
+        Constraints.Values;
 
-        private SymbolicValue() { }
+    private SymbolicValue() { }
 
-        public override string ToString() =>
-            SerializeConstraints();
+    public override string ToString() =>
+        SerializeConstraints();
 
-        public SymbolicValue WithConstraint(SymbolicConstraint constraint)
+    public SymbolicValue WithConstraint(SymbolicConstraint constraint)
+    {
+        if (Constraints.Count == 0)
         {
-            if (Constraints.Count == 0)
-            {
-                return CachedSymbolicValue(constraint);
-            }
-            else if (HasConstraint(constraint))
-            {
-                return this;
-            }
-            else
-            {
-                var containsContraintType = Constraints.ContainsKey(constraint.GetType());
-                return Constraints.Count switch
-                {
-                    1 when containsContraintType => CachedSymbolicValue(constraint),
-                    1 => CachedSymbolicValue(Constraints.Values.First(), constraint),
-                    2 when containsContraintType => CachedSymbolicValue(OtherSingleConstraint(constraint.GetType()), constraint),
-                    _ => this with { Constraints = Constraints.SetItem(constraint.GetType(), constraint) },
-                };
-            }
+            return CachedSymbolicValue(constraint);
         }
-
-        public SymbolicValue WithoutConstraint(SymbolicConstraint constraint) =>
-            HasConstraint(constraint) ? RemoveConstraint(constraint.GetType()) : this;
-
-        public SymbolicValue WithoutConstraint<T>() where T : SymbolicConstraint =>
-            HasConstraint<T>() ? RemoveConstraint(typeof(T)) : this;
-
-        public bool HasConstraint<T>() where T : SymbolicConstraint =>
-            Constraints.ContainsKey(typeof(T));
-
-        public bool HasConstraint(SymbolicConstraint constraint) =>
-            Constraints.TryGetValue(constraint.GetType(), out var current) && constraint == current;
-
-        public T Constraint<T>() where T : SymbolicConstraint =>
-            Constraints.TryGetValue(typeof(T), out var value) ? (T)value : null;
-
-        public override int GetHashCode() =>
-            hashCode ??= HashCode.DictionaryContentHash(constraints);
-
-        public bool Equals(SymbolicValue other) =>
-            other is not null && other.Constraints.DictionaryEquals(Constraints);
-
-        private string SerializeConstraints() =>
-            Constraints.Any()
-                ? Constraints.Values.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ")
-                : "No constraints";
-
-        private SymbolicValue RemoveConstraint(Type type) =>
-            Constraints.Count switch
+        else if (HasConstraint(constraint))
+        {
+            return this;
+        }
+        else
+        {
+            var containsContraintType = Constraints.ContainsKey(constraint.GetType());
+            return Constraints.Count switch
             {
-                1 => Empty,
-                2 => OtherSingle(type),
-                3 => OtherPair(type),
-                _ => this with { Constraints = Constraints.Remove(type) },
+                1 when containsContraintType => CachedSymbolicValue(constraint),
+                1 => CachedSymbolicValue(Constraints.Values.First(), constraint),
+                2 when containsContraintType => CachedSymbolicValue(OtherSingleConstraint(constraint.GetType()), constraint),
+                _ => this with { Constraints = Constraints.SetItem(constraint.GetType(), constraint) },
             };
-
-        private SymbolicValue OtherSingle(Type except) =>
-            CachedSymbolicValue(OtherSingleConstraint(except));
-
-        private SymbolicConstraint OtherSingleConstraint(Type except)
-        {
-            // Performance: Don't use LINQ here as it neglects any gains of the caching
-            foreach (var kvp in Constraints)
-            {
-                if (kvp.Key != except)
-                {
-                    return kvp.Value;
-                }
-            }
-
-            throw new InvalidOperationException("Unreachable. This method is called when there is exactly one other value present.");
         }
+    }
 
-        private SymbolicValue OtherPair(Type except)
+    public SymbolicValue WithoutConstraint(SymbolicConstraint constraint) =>
+        HasConstraint(constraint) ? RemoveConstraint(constraint.GetType()) : this;
+
+    public SymbolicValue WithoutConstraint<T>() where T : SymbolicConstraint =>
+        HasConstraint<T>() ? RemoveConstraint(typeof(T)) : this;
+
+    public bool HasConstraint<T>() where T : SymbolicConstraint =>
+        Constraints.ContainsKey(typeof(T));
+
+    public bool HasConstraint(SymbolicConstraint constraint) =>
+        Constraints.TryGetValue(constraint.GetType(), out var current) && constraint == current;
+
+    public T Constraint<T>() where T : SymbolicConstraint =>
+        Constraints.TryGetValue(typeof(T), out var value) ? (T)value : null;
+
+    public override int GetHashCode() =>
+        hashCode ??= HashCode.DictionaryContentHash(constraints);
+
+    public bool Equals(SymbolicValue other) =>
+        other is not null && other.Constraints.DictionaryEquals(Constraints);
+
+    private string SerializeConstraints() =>
+        Constraints.Any()
+            ? Constraints.Values.Select(x => x.ToString()).OrderBy(x => x).JoinStr(", ")
+            : "No constraints";
+
+    private SymbolicValue RemoveConstraint(Type type) =>
+        Constraints.Count switch
         {
-            // Performance: Don't use LINQ here as it neglects any gains of the caching
-            SymbolicConstraint first = null;
-            foreach (var kvp in Constraints)
-            {
-                if (kvp.Key != except)
-                {
-                    if (first == null)
-                    {
-                        first = kvp.Value;
-                    }
-                    else
-                    {
-                        return CachedSymbolicValue(first, kvp.Value);
-                    }
-                }
-            }
+            1 => Empty,
+            2 => OtherSingle(type),
+            3 => OtherPair(type),
+            _ => this with { Constraints = Constraints.Remove(type) },
+        };
 
-            throw new InvalidOperationException("Unreachable. This method is called when there are exactly two other value present.");
-        }
+    private SymbolicValue OtherSingle(Type except) =>
+        CachedSymbolicValue(OtherSingleConstraint(except));
 
-        private static SymbolicValue CachedSymbolicValue(SymbolicConstraint first, SymbolicConstraint second = null)
+    private SymbolicConstraint OtherSingleConstraint(Type except)
+    {
+        // Performance: Don't use LINQ here as it neglects any gains of the caching
+        foreach (var kvp in Constraints)
         {
-            if (first.CacheEnabled && (second is null || second.CacheEnabled))
+            if (kvp.Key != except)
             {
-                // Performance: Don't use the factory overload of GetOrAdd
-                var cacheKey = new CacheKey(first.Kind, second?.Kind);
-                return cache.TryGetValue(cacheKey, out var result)
-                    ? result
-                    : cache.GetOrAdd(cacheKey, CreateSymbolicValue(first, second));
-            }
-            else
-            {
-                return CreateSymbolicValue(first, second);
+                return kvp.Value;
             }
         }
 
-        private static SymbolicValue CreateSymbolicValue(SymbolicConstraint first, SymbolicConstraint second = null)
-        {
-            if (second is null)
-            {
-                return Empty with { Constraints = Empty.Constraints.SetItem(first.GetType(), first) };
-            }
-            else
-            {
-                var firstValue = CachedSymbolicValue(first);
-                return firstValue with { Constraints = firstValue.Constraints.SetItem(second.GetType(), second) };
-            }
-        }
+        throw new InvalidOperationException("Unreachable. This method is called when there is exactly one other value present.");
+    }
 
-        private readonly record struct CacheKey
+    private SymbolicValue OtherPair(Type except)
+    {
+        // Performance: Don't use LINQ here as it neglects any gains of the caching
+        SymbolicConstraint first = null;
+        foreach (var kvp in Constraints)
         {
-            private readonly ConstraintKind first;
-            private readonly ConstraintKind? second;
-
-            public CacheKey(ConstraintKind first, ConstraintKind? second)
+            if (kvp.Key != except)
             {
-                if (first == second)
+                if (first == null)
                 {
-                    this.first = first;
-                    this.second = null;
-                }
-                else if (first < second || second == null)
-                {
-                    this.first = first;
-                    this.second = second;
+                    first = kvp.Value;
                 }
                 else
                 {
-                    this.first = second.Value;
-                    this.second = first;
+                    return CachedSymbolicValue(first, kvp.Value);
                 }
+            }
+        }
+
+        throw new InvalidOperationException("Unreachable. This method is called when there are exactly two other value present.");
+    }
+
+    private static SymbolicValue CachedSymbolicValue(SymbolicConstraint first, SymbolicConstraint second = null)
+    {
+        if (first.CacheEnabled && (second is null || second.CacheEnabled))
+        {
+            // Performance: Don't use the factory overload of GetOrAdd
+            var cacheKey = new CacheKey(first.Kind, second?.Kind);
+            return cache.TryGetValue(cacheKey, out var result)
+                ? result
+                : cache.GetOrAdd(cacheKey, CreateSymbolicValue(first, second));
+        }
+        else
+        {
+            return CreateSymbolicValue(first, second);
+        }
+    }
+
+    private static SymbolicValue CreateSymbolicValue(SymbolicConstraint first, SymbolicConstraint second = null)
+    {
+        if (second is null)
+        {
+            return Empty with { Constraints = Empty.Constraints.SetItem(first.GetType(), first) };
+        }
+        else
+        {
+            var firstValue = CachedSymbolicValue(first);
+            return firstValue with { Constraints = firstValue.Constraints.SetItem(second.GetType(), second) };
+        }
+    }
+
+    private readonly record struct CacheKey
+    {
+        private readonly ConstraintKind first;
+        private readonly ConstraintKind? second;
+
+        public CacheKey(ConstraintKind first, ConstraintKind? second)
+        {
+            if (first == second)
+            {
+                this.first = first;
+                this.second = null;
+            }
+            else if (first < second || second == null)
+            {
+                this.first = first;
+                this.second = second;
+            }
+            else
+            {
+                this.first = second.Value;
+                this.second = first;
             }
         }
     }

@@ -23,265 +23,264 @@ using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+internal class RoslynSymbolicExecution
 {
-    internal class RoslynSymbolicExecution
+    internal const int MaxStepCount = 2000;
+    private const int MaxOperationVisits = 2;
+
+    private readonly ControlFlowGraph cfg;
+    private readonly SyntaxClassifierBase syntaxClassifier;
+    private readonly SymbolicCheckList checks;
+    private readonly CancellationToken cancel;
+    private readonly Queue<ExplodedNode> queue = new();
+    private readonly HashSet<ExplodedNode> visited = new();
+    private readonly RoslynLiveVariableAnalysis lva;
+    private readonly DebugLogger logger = new();
+    private readonly ExceptionCandidate exceptionCandidate;
+
+    public RoslynSymbolicExecution(ControlFlowGraph cfg, SyntaxClassifierBase syntaxClassifier, SymbolicCheck[] checks, CancellationToken cancel)
     {
-        internal const int MaxStepCount = 2000;
-        private const int MaxOperationVisits = 2;
-
-        private readonly ControlFlowGraph cfg;
-        private readonly SyntaxClassifierBase syntaxClassifier;
-        private readonly SymbolicCheckList checks;
-        private readonly CancellationToken cancel;
-        private readonly Queue<ExplodedNode> queue = new();
-        private readonly HashSet<ExplodedNode> visited = new();
-        private readonly RoslynLiveVariableAnalysis lva;
-        private readonly DebugLogger logger = new();
-        private readonly ExceptionCandidate exceptionCandidate;
-
-        public RoslynSymbolicExecution(ControlFlowGraph cfg, SyntaxClassifierBase syntaxClassifier, SymbolicCheck[] checks, CancellationToken cancel)
+        this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
+        this.syntaxClassifier = syntaxClassifier ?? throw new ArgumentNullException(nameof(syntaxClassifier));
+        if (checks == null || checks.Length == 0)
         {
-            this.cfg = cfg ?? throw new ArgumentNullException(nameof(cfg));
-            this.syntaxClassifier = syntaxClassifier ?? throw new ArgumentNullException(nameof(syntaxClassifier));
-            if (checks == null || checks.Length == 0)
-            {
-                throw new ArgumentException("At least one check is expected", nameof(checks));
-            }
-            this.checks = new(new SymbolicCheck[] { new NonNullableValueTypeCheck(), new ConstantCheck() }.Concat(checks).ToArray());
-            this.cancel = cancel;
-            exceptionCandidate = new(cfg.OriginalOperation.ToSonar().SemanticModel.Compilation);
-            lva = new(cfg, cancel);
-            logger.Log(cfg);
+            throw new ArgumentException("At least one check is expected", nameof(checks));
         }
+        this.checks = new(new SymbolicCheck[] { new NonNullableValueTypeCheck(), new ConstantCheck() }.Concat(checks).ToArray());
+        this.cancel = cancel;
+        exceptionCandidate = new(cfg.OriginalOperation.ToSonar().SemanticModel.Compilation);
+        lva = new(cfg, cancel);
+        logger.Log(cfg);
+    }
 
-        public void Execute()
+    public void Execute()
+    {
+        if (visited.Any())
         {
-            if (visited.Any())
-            {
-                throw new InvalidOperationException("Engine can be executed only once.");
-            }
-            if (!ProgramPoint.HasSupportedSize(cfg))
+            throw new InvalidOperationException("Engine can be executed only once.");
+        }
+        if (!ProgramPoint.HasSupportedSize(cfg))
+        {
+            return;
+        }
+        var steps = 0;
+        queue.Enqueue(new(cfg.EntryBlock, ProgramState.Empty, null));
+        while (queue.Any())
+        {
+            if (steps++ > MaxStepCount || cancel.IsCancellationRequested)
             {
                 return;
             }
-            var steps = 0;
-            queue.Enqueue(new(cfg.EntryBlock, ProgramState.Empty, null));
-            while (queue.Any())
+            var current = queue.Dequeue();
+            if (visited.Add(current) && current.AddVisit() <= MaxOperationVisits)
             {
-                if (steps++ > MaxStepCount || cancel.IsCancellationRequested)
+                logger.Log(current, "Processing");
+                var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
+                foreach (var node in successors)
                 {
-                    return;
-                }
-                var current = queue.Dequeue();
-                if (visited.Add(current) && current.AddVisit() <= MaxOperationVisits)
-                {
-                    logger.Log(current, "Processing");
-                    var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
-                    foreach (var node in successors)
-                    {
-                        logger.Log(node, "Enqueuing", true);
-                        queue.Enqueue(node);
-                    }
-                }
-                else
-                {
-                    logger.Log(current, "Not visiting");
-                }
-            }
-            logger.Log("Completed");
-            checks.ExecutionCompleted();
-        }
-
-        private IEnumerable<ExplodedNode> ProcessBranching(ExplodedNode node)
-        {
-            if (node.Block.Kind == BasicBlockKind.Exit)
-            {
-                logger.Log(node.State, "Exit Reached");
-                checks.ExitReached(new(node, lva.CapturedVariables, false));
-            }
-            else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is { } exception)
-            {
-                foreach (var successor in ExceptionSuccessors(node, exception, node.Block.EnclosingRegion(ControlFlowRegionKind.Try)))
-                {
-                    yield return successor;
+                    logger.Log(node, "Enqueuing", true);
+                    queue.Enqueue(node);
                 }
             }
             else
             {
-                foreach (var successor in node.Block.Successors.Where(x => IsReachable(node, x)))
-                {
-                    if (ProcessBranch(node, successor) is { } newNode)
-                    {
-                        yield return newNode;
-                    }
-                }
+                logger.Log(current, "Not visiting");
             }
         }
-
-        private ExplodedNode ProcessBranch(ExplodedNode node, ControlFlowBranch branch)
-        {
-            if (branch.Destination is not null)
-            {
-                return branch.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
-                    ? FromFinally(new FinallyPoint(node.FinallyPoint, branch))
-                    : CreateNode(branch.Destination, node.FinallyPoint);
-            }
-            else if (branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && node.FinallyPoint is not null)
-            {
-                return FromFinally(node.FinallyPoint.CreateNext());     // Redirect from finally back to the original place (or outer finally on the same branch)
-            }
-            else
-            {
-                return null;    // We don't know where to continue
-            }
-
-            ExplodedNode FromFinally(FinallyPoint finallyPoint) =>
-                CreateNode(cfg.Blocks[finallyPoint.BlockIndex], finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
-
-            ExplodedNode CreateNode(BasicBlock block, FinallyPoint finallyPoint) =>
-                ProcessBranchState(branch, node.State, node.VisitCount) is { } newState ? new(block, newState, finallyPoint) : null;
-        }
-
-        private ProgramState ProcessBranchState(ControlFlowBranch branch, ProgramState state, int visitCount)
-        {
-            if (cfg.OriginalOperation.Syntax.Language == LanguageNames.VisualBasic) // Avoid C# FPs as we don't support tuple deconstructions yet
-            {
-                state = InitLocals(branch, state);
-            }
-            if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
-            {
-                state = SetBranchingConstraints(branch, state, branchValue);
-                state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state, false, visitCount, lva.CapturedVariables));
-                if (state is null)
-                {
-                    return null;
-                }
-            }
-            foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
-            {
-                state = state.RemoveCapture(capture);
-            }
-            if (state.Exception is not null
-                && branch.Source.EnclosingNonLocalLifetimeRegion() is { Kind: ControlFlowRegionKind.Catch or ControlFlowRegionKind.FilterAndHandler } enclosingRegion
-                && branch.LeavingRegions.Contains(enclosingRegion))
-            {
-                state = state.PopException();
-            }
-            var liveVariables = lva.LiveOut(branch.Source).ToHashSet();
-            return state.RemoveSymbols(x => lva.IsLocal(x) && (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x))
-                .ResetOperations();
-        }
-
-        private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
-        {
-            foreach (var preProcessed in checks.PreProcess(new(node, lva.CapturedVariables, syntaxClassifier.IsInLoopCondition(node.Operation.Instance.Syntax))))
-            {
-                foreach (var processed in OperationDispatcher.Process(preProcessed))
-                {
-                    foreach (var postProcessed in checks.PostProcess(processed))
-                    {
-                        // When operation doesn't have a parent it is the outer statement. We need to reset operation states:
-                        // * We don't need to preserve the inner subexpression intermediate states after the outer statement.
-                        // * We don't want ProgramState to contain the path-history data, because we want to avoid exploring the same state twice.
-                        // When the operation is a BranchValue, we need to preserve it to evaluate branching. The state will be reset after branching.
-                        yield return node.CreateNext(node.Operation.Parent is null && node.Block.BranchValue != node.Operation.Instance ? postProcessed.State.ResetOperations() : postProcessed.State);
-                    }
-                }
-            }
-
-            if (exceptionCandidate.FromOperation(node.State, node.Operation) is { } exception && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
-            {
-                foreach (var successor in ExceptionSuccessors(node, exception, tryRegion))
-                {
-                    yield return successor;
-                }
-            }
-        }
-
-        private IEnumerable<ExplodedNode> ExceptionSuccessors(ExplodedNode node, ExceptionState exception, ControlFlowRegion tryRegion)
-        {
-            var state = node.State.ResetOperations();   // We're jumping out of the outer statement => We need to reset operation states.
-            state = node.Block.EnclosingRegion(ControlFlowRegionKind.Catch) is not null
-                ? state.PushException(exception)        // If we're nested inside catch, we need to preserve the exception chain
-                : state.SetException(exception);        // Otherwise we track only the current exception to avoid explosion of states after each statement
-            while (tryRegion is not null)
-            {
-                var reachableHandlers = tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try && IsReachable(x, state.Exception)).ToArray();
-                foreach (var handler in reachableHandlers)  // CatchRegion, FinallyRegion or FilterAndHandlerRegion
-                {
-                    yield return new(cfg.Blocks[handler.FirstBlockOrdinal], state, null);
-                }
-                if (reachableHandlers.Length != 0)
-                {
-                    yield break;
-                }
-                tryRegion = tryRegion.EnclosingRegion.EnclosingRegionOrSelf(ControlFlowRegionKind.Try); // Inner catch for specific exception doesn't match. Go to outer one.
-            }
-
-            yield return new(cfg.ExitBlock, node.State.SetException(exception), null);  // catch without finally or uncaught exception type
-        }
-
-        private static ExceptionState ThrownException(ExplodedNode node, ControlFlowBranchSemantics semantics) =>
-            semantics switch
-            {
-                ControlFlowBranchSemantics.Throw => ThrowExceptionType(node.Block.BranchValue),
-                ControlFlowBranchSemantics.Rethrow => node.State.Exception,
-                ControlFlowBranchSemantics.StructuredExceptionHandling when node.FinallyPoint is null => node.State.Exception,  // Exiting 'finally' with exception
-                _ => null
-            };
-
-        private static ExceptionState ThrowExceptionType(IOperation operation) =>
-            operation.Kind switch
-            {
-                OperationKindEx.ArrayElementReference => new ExceptionState(operation.Type),
-                OperationKindEx.FieldReference => new ExceptionState(operation.Type),
-                OperationKindEx.Invocation => new ExceptionState(operation.Type),
-                OperationKindEx.LocalReference => new ExceptionState(operation.Type),
-                OperationKindEx.ObjectCreation => new ExceptionState(operation.Type),
-                OperationKindEx.ParameterReference => new ExceptionState(operation.Type),
-                OperationKindEx.PropertyReference => new ExceptionState(operation.Type),
-                OperationKindEx.Conversion => ThrowExceptionType(operation.ToConversion().Operand),
-                _ => null
-            };
-
-        private static ProgramState SetBranchingConstraints(ControlFlowBranch branch, ProgramState state, IOperation branchValue)
-        {
-            var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
-            state = state.SetOperationConstraint(branchValue, ObjectConstraint.NotNull).SetOperationConstraint(branchValue, constraint);
-            return branchValue.TrackedSymbol() is { } symbol
-                && symbol.GetSymbolType() is { } type
-                && (type.SpecialType is SpecialType.System_Boolean || type.IsNullableBoolean())
-                ? state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull).SetSymbolConstraint(symbol, constraint)
-                : state;
-        }
-
-        private static ProgramState InitLocals(ControlFlowBranch branch, ProgramState state)
-        {
-            foreach (var local in branch.EnteringRegions.SelectMany(x => x.Locals))
-            {
-                if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
-                {
-                    state = state.SetSymbolConstraint(local, constraint);
-                }
-            }
-            return state;
-        }
-
-        private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
-            node.Block.ConditionKind == ControlFlowConditionKind.None
-            || node.State[node.Block.BranchValue] is not { } symbolicValue
-            || !symbolicValue.HasConstraint<BoolConstraint>()
-            || IsReachable(branch, node.Block.ConditionKind == ControlFlowConditionKind.WhenTrue, symbolicValue.HasConstraint(BoolConstraint.True));
-
-        private static bool IsReachable(ControlFlowBranch branch, bool condition, bool constraint) =>
-            branch.IsConditionalSuccessor ? condition == constraint : condition != constraint;
-
-        private static bool IsReachable(ControlFlowRegion region, ExceptionState thrown) =>
-            region.Kind == ControlFlowRegionKind.Finally
-            || thrown == ExceptionState.UnknownException
-            || region.ExceptionType.Is(KnownType.System_Object)       // catch when (condition)
-            || region.ExceptionType.Is(KnownType.System_Exception)
-            || thrown.Type.DerivesFrom(region.ExceptionType);
+        logger.Log("Completed");
+        checks.ExecutionCompleted();
     }
+
+    private IEnumerable<ExplodedNode> ProcessBranching(ExplodedNode node)
+    {
+        if (node.Block.Kind == BasicBlockKind.Exit)
+        {
+            logger.Log(node.State, "Exit Reached");
+            checks.ExitReached(new(node, lva.CapturedVariables, false));
+        }
+        else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is { } exception)
+        {
+            foreach (var successor in ExceptionSuccessors(node, exception, node.Block.EnclosingRegion(ControlFlowRegionKind.Try)))
+            {
+                yield return successor;
+            }
+        }
+        else
+        {
+            foreach (var successor in node.Block.Successors.Where(x => IsReachable(node, x)))
+            {
+                if (ProcessBranch(node, successor) is { } newNode)
+                {
+                    yield return newNode;
+                }
+            }
+        }
+    }
+
+    private ExplodedNode ProcessBranch(ExplodedNode node, ControlFlowBranch branch)
+    {
+        if (branch.Destination is not null)
+        {
+            return branch.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
+                ? FromFinally(new FinallyPoint(node.FinallyPoint, branch))
+                : CreateNode(branch.Destination, node.FinallyPoint);
+        }
+        else if (branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && node.FinallyPoint is not null)
+        {
+            return FromFinally(node.FinallyPoint.CreateNext());     // Redirect from finally back to the original place (or outer finally on the same branch)
+        }
+        else
+        {
+            return null;    // We don't know where to continue
+        }
+
+        ExplodedNode FromFinally(FinallyPoint finallyPoint) =>
+            CreateNode(cfg.Blocks[finallyPoint.BlockIndex], finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
+
+        ExplodedNode CreateNode(BasicBlock block, FinallyPoint finallyPoint) =>
+            ProcessBranchState(branch, node.State, node.VisitCount) is { } newState ? new(block, newState, finallyPoint) : null;
+    }
+
+    private ProgramState ProcessBranchState(ControlFlowBranch branch, ProgramState state, int visitCount)
+    {
+        if (cfg.OriginalOperation.Syntax.Language == LanguageNames.VisualBasic) // Avoid C# FPs as we don't support tuple deconstructions yet
+        {
+            state = InitLocals(branch, state);
+        }
+        if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
+        {
+            state = SetBranchingConstraints(branch, state, branchValue);
+            state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state, false, visitCount, lva.CapturedVariables));
+            if (state is null)
+            {
+                return null;
+            }
+        }
+        foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
+        {
+            state = state.RemoveCapture(capture);
+        }
+        if (state.Exception is not null
+            && branch.Source.EnclosingNonLocalLifetimeRegion() is { Kind: ControlFlowRegionKind.Catch or ControlFlowRegionKind.FilterAndHandler } enclosingRegion
+            && branch.LeavingRegions.Contains(enclosingRegion))
+        {
+            state = state.PopException();
+        }
+        var liveVariables = lva.LiveOut(branch.Source).ToHashSet();
+        return state.RemoveSymbols(x => lva.IsLocal(x) && (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x))
+            .ResetOperations();
+    }
+
+    private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
+    {
+        foreach (var preProcessed in checks.PreProcess(new(node, lva.CapturedVariables, syntaxClassifier.IsInLoopCondition(node.Operation.Instance.Syntax))))
+        {
+            foreach (var processed in OperationDispatcher.Process(preProcessed))
+            {
+                foreach (var postProcessed in checks.PostProcess(processed))
+                {
+                    // When operation doesn't have a parent it is the outer statement. We need to reset operation states:
+                    // * We don't need to preserve the inner subexpression intermediate states after the outer statement.
+                    // * We don't want ProgramState to contain the path-history data, because we want to avoid exploring the same state twice.
+                    // When the operation is a BranchValue, we need to preserve it to evaluate branching. The state will be reset after branching.
+                    yield return node.CreateNext(node.Operation.Parent is null && node.Block.BranchValue != node.Operation.Instance ? postProcessed.State.ResetOperations() : postProcessed.State);
+                }
+            }
+        }
+
+        if (exceptionCandidate.FromOperation(node.State, node.Operation) is { } exception && node.Block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
+        {
+            foreach (var successor in ExceptionSuccessors(node, exception, tryRegion))
+            {
+                yield return successor;
+            }
+        }
+    }
+
+    private IEnumerable<ExplodedNode> ExceptionSuccessors(ExplodedNode node, ExceptionState exception, ControlFlowRegion tryRegion)
+    {
+        var state = node.State.ResetOperations();   // We're jumping out of the outer statement => We need to reset operation states.
+        state = node.Block.EnclosingRegion(ControlFlowRegionKind.Catch) is not null
+            ? state.PushException(exception)        // If we're nested inside catch, we need to preserve the exception chain
+            : state.SetException(exception);        // Otherwise we track only the current exception to avoid explosion of states after each statement
+        while (tryRegion is not null)
+        {
+            var reachableHandlers = tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try && IsReachable(x, state.Exception)).ToArray();
+            foreach (var handler in reachableHandlers)  // CatchRegion, FinallyRegion or FilterAndHandlerRegion
+            {
+                yield return new(cfg.Blocks[handler.FirstBlockOrdinal], state, null);
+            }
+            if (reachableHandlers.Length != 0)
+            {
+                yield break;
+            }
+            tryRegion = tryRegion.EnclosingRegion.EnclosingRegionOrSelf(ControlFlowRegionKind.Try); // Inner catch for specific exception doesn't match. Go to outer one.
+        }
+
+        yield return new(cfg.ExitBlock, node.State.SetException(exception), null);  // catch without finally or uncaught exception type
+    }
+
+    private static ExceptionState ThrownException(ExplodedNode node, ControlFlowBranchSemantics semantics) =>
+        semantics switch
+        {
+            ControlFlowBranchSemantics.Throw => ThrowExceptionType(node.Block.BranchValue),
+            ControlFlowBranchSemantics.Rethrow => node.State.Exception,
+            ControlFlowBranchSemantics.StructuredExceptionHandling when node.FinallyPoint is null => node.State.Exception,  // Exiting 'finally' with exception
+            _ => null
+        };
+
+    private static ExceptionState ThrowExceptionType(IOperation operation) =>
+        operation.Kind switch
+        {
+            OperationKindEx.ArrayElementReference => new ExceptionState(operation.Type),
+            OperationKindEx.FieldReference => new ExceptionState(operation.Type),
+            OperationKindEx.Invocation => new ExceptionState(operation.Type),
+            OperationKindEx.LocalReference => new ExceptionState(operation.Type),
+            OperationKindEx.ObjectCreation => new ExceptionState(operation.Type),
+            OperationKindEx.ParameterReference => new ExceptionState(operation.Type),
+            OperationKindEx.PropertyReference => new ExceptionState(operation.Type),
+            OperationKindEx.Conversion => ThrowExceptionType(operation.ToConversion().Operand),
+            _ => null
+        };
+
+    private static ProgramState SetBranchingConstraints(ControlFlowBranch branch, ProgramState state, IOperation branchValue)
+    {
+        var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
+        state = state.SetOperationConstraint(branchValue, ObjectConstraint.NotNull).SetOperationConstraint(branchValue, constraint);
+        return branchValue.TrackedSymbol() is { } symbol
+            && symbol.GetSymbolType() is { } type
+            && (type.SpecialType is SpecialType.System_Boolean || type.IsNullableBoolean())
+            ? state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull).SetSymbolConstraint(symbol, constraint)
+            : state;
+    }
+
+    private static ProgramState InitLocals(ControlFlowBranch branch, ProgramState state)
+    {
+        foreach (var local in branch.EnteringRegions.SelectMany(x => x.Locals))
+        {
+            if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
+            {
+                state = state.SetSymbolConstraint(local, constraint);
+            }
+        }
+        return state;
+    }
+
+    private static bool IsReachable(ExplodedNode node, ControlFlowBranch branch) =>
+        node.Block.ConditionKind == ControlFlowConditionKind.None
+        || node.State[node.Block.BranchValue] is not { } symbolicValue
+        || !symbolicValue.HasConstraint<BoolConstraint>()
+        || IsReachable(branch, node.Block.ConditionKind == ControlFlowConditionKind.WhenTrue, symbolicValue.HasConstraint(BoolConstraint.True));
+
+    private static bool IsReachable(ControlFlowBranch branch, bool condition, bool constraint) =>
+        branch.IsConditionalSuccessor ? condition == constraint : condition != constraint;
+
+    private static bool IsReachable(ControlFlowRegion region, ExceptionState thrown) =>
+        region.Kind == ControlFlowRegionKind.Finally
+        || thrown == ExceptionState.UnknownException
+        || region.ExceptionType.Is(KnownType.System_Object)       // catch when (condition)
+        || region.ExceptionType.Is(KnownType.System_Exception)
+        || thrown.Type.DerivesFrom(region.ExceptionType);
 }

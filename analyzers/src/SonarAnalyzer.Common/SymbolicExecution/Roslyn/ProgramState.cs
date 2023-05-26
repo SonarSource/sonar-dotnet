@@ -22,222 +22,221 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+public sealed record ProgramState : IEquatable<ProgramState>
 {
-    public sealed record ProgramState : IEquatable<ProgramState>
+    public static readonly ProgramState Empty = new();
+    private ProgramState[] toArray;
+
+    private ImmutableDictionary<IOperation, SymbolicValue> OperationValue { get; init; }     // Current SymbolicValue result of a given operation
+    private ImmutableDictionary<ISymbol, SymbolicValue> SymbolValue { get; init; }
+    private ImmutableDictionary<int, int> VisitCount { get; init; }
+    private ImmutableDictionary<CaptureId, IOperation> CaptureOperation { get; init; }
+    private ImmutableHashSet<ISymbol> PreservedSymbols { get; init; }
+    private ImmutableStack<ExceptionState> Exceptions { get; init; }
+
+    public ExceptionState Exception => Exceptions.IsEmpty ? null : Exceptions.Peek();
+    public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
+    public SymbolicValue this[IOperationWrapper operation] => this[operation.WrappedOperation];
+    public SymbolicValue this[IOperation operation] => OperationValue.TryGetValue(ResolveCapture(operation), out var value) ? value : null;
+    public SymbolicValue this[ISymbol symbol] => SymbolValue.TryGetValue(symbol, out var value) ? value : null;
+    public IOperation this[CaptureId capture] => CaptureOperation.TryGetValue(capture, out var value) ? value : null;
+
+    private ProgramState()
     {
-        public static readonly ProgramState Empty = new();
-        private ProgramState[] toArray;
+        OperationValue = ImmutableDictionary<IOperation, SymbolicValue>.Empty;
+        SymbolValue = ImmutableDictionary<ISymbol, SymbolicValue>.Empty;
+        VisitCount = ImmutableDictionary<int, int>.Empty;
+        CaptureOperation = ImmutableDictionary<CaptureId, IOperation>.Empty;
+        PreservedSymbols = ImmutableHashSet<ISymbol>.Empty;
+        Exceptions = ImmutableStack<ExceptionState>.Empty;
+    }
 
-        private ImmutableDictionary<IOperation, SymbolicValue> OperationValue { get; init; }     // Current SymbolicValue result of a given operation
-        private ImmutableDictionary<ISymbol, SymbolicValue> SymbolValue { get; init; }
-        private ImmutableDictionary<int, int> VisitCount { get; init; }
-        private ImmutableDictionary<CaptureId, IOperation> CaptureOperation { get; init; }
-        private ImmutableHashSet<ISymbol> PreservedSymbols { get; init; }
-        private ImmutableStack<ExceptionState> Exceptions { get; init; }
+    protected ProgramState(ProgramState original)   // Custom record override constructor to reset "toArray"
+    {
+        OperationValue = original.OperationValue;
+        SymbolValue = original.SymbolValue;
+        VisitCount = original.VisitCount;
+        CaptureOperation = original.CaptureOperation;
+        PreservedSymbols = original.PreservedSymbols;
+        Exceptions = original.Exceptions;
+    }
 
-        public ExceptionState Exception => Exceptions.IsEmpty ? null : Exceptions.Peek();
-        public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
-        public SymbolicValue this[IOperationWrapper operation] => this[operation.WrappedOperation];
-        public SymbolicValue this[IOperation operation] => OperationValue.TryGetValue(ResolveCapture(operation), out var value) ? value : null;
-        public SymbolicValue this[ISymbol symbol] => SymbolValue.TryGetValue(symbol, out var value) ? value : null;
-        public IOperation this[CaptureId capture] => CaptureOperation.TryGetValue(capture, out var value) ? value : null;
+    public ProgramState SetOperationValue(IOperationWrapper operation, SymbolicValue value) =>
+        operation is null
+            ? throw new ArgumentNullException(nameof(operation))
+            : SetOperationValue(operation.WrappedOperation, value);
 
-        private ProgramState()
+    public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
+        operation is null
+            ? throw new ArgumentNullException(nameof(operation))
+            : SetOperationValue(operation.Instance, value);
+
+    public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
+        (operation ?? throw new ArgumentNullException(nameof(operation))) is var _
+        && value is null
+            ? this with { OperationValue = OperationValue.Remove(ResolveCapture(operation)) }
+            : this with { OperationValue = OperationValue.SetItem(ResolveCapture(operation), value) };
+
+    public ProgramState SetOperationConstraint(IOperationWrapper operation, SymbolicConstraint constraint) =>
+        SetOperationConstraint(operation.WrappedOperation, constraint);
+
+    public ProgramState SetOperationConstraint(IOperationWrapperSonar operation, SymbolicConstraint constraint) =>
+        SetOperationConstraint(operation.Instance, constraint);
+
+    public ProgramState SetOperationConstraint(IOperation operation, SymbolicConstraint constraint) =>
+        SetOperationValue(operation, (this[operation] ?? SymbolicValue.Empty).WithConstraint(constraint));
+
+    public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
+        value is null
+            ? this with { SymbolValue = SymbolValue.Remove(symbol) }
+            : this with { SymbolValue = SymbolValue.SetItem(symbol, value) };
+
+    public ProgramState SetSymbolConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
+        SetSymbolValue(symbol, (this[symbol] ?? SymbolicValue.Empty).WithConstraint(constraint));
+
+    public ProgramState SetCapture(CaptureId capture, IOperation operation) =>
+        this with { CaptureOperation = CaptureOperation.SetItem(capture, operation) };
+
+    public ProgramState SetException(ExceptionState exception) =>
+        this with { Exceptions = ImmutableStack<ExceptionState>.Empty.Push(exception) };
+
+    public ProgramState PushException(ExceptionState exception) =>
+        this with { Exceptions = Exceptions.Push(exception) };
+
+    public ProgramState PopException() =>
+        this with { Exceptions = Exceptions.Pop() };
+
+    public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
+        SymbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
+
+    public ProgramState ResetOperations()
+    {
+        var captured = CaptureOperation.Values.ToHashSet(); // Preserve only captured
+        return this with { OperationValue = OperationValue.Where(x => captured.Contains(x.Key)).ToImmutableDictionary() };
+    }
+
+    public ProgramState RemoveCapture(CaptureId capture) =>
+        this with { CaptureOperation = CaptureOperation.Remove(capture) };
+
+    public IOperation ResolveCapture(IOperation operation) =>
+        operation?.Kind == OperationKindEx.FlowCaptureReference
+        && this[IFlowCaptureReferenceOperationWrapper.FromOperation(operation).Id] is { } captured
+            ? captured
+            : operation;
+
+    public ProgramState RemoveSymbols(Func<ISymbol, bool> remove) =>
+        this with { SymbolValue = SymbolValue.Where(kv => PreservedSymbols.Contains(kv.Key) || !remove(kv.Key)).ToImmutableDictionary() };
+
+    public ProgramState ResetFieldConstraints() =>
+        ResetFieldConstraints(field => true);
+
+    public ProgramState ResetStaticFieldConstraints(INamedTypeSymbol containingType) =>
+        ResetFieldConstraints(field => field.IsStatic && containingType.DerivesFrom(field.ContainingType));
+
+    public ProgramState AddVisit(int programPointHash) =>
+        this with { VisitCount = VisitCount.SetItem(programPointHash, GetVisitCount(programPointHash) + 1) };
+
+    public ProgramState Preserve(ISymbol symbol) =>
+        this with { PreservedSymbols = PreservedSymbols.Add(symbol) };
+
+    public int GetVisitCount(int programPointHash) =>
+        VisitCount.TryGetValue(programPointHash, out var count) ? count : 0;
+
+    public override int GetHashCode() =>
+        // VisitCount is not included, it's not part of Equals
+        HashCode.Combine(
+            HashCode.DictionaryContentHash(OperationValue),
+            HashCode.DictionaryContentHash(SymbolValue),
+            HashCode.DictionaryContentHash(CaptureOperation),
+            HashCode.EnumerableUnorderedContentHash(PreservedSymbols),
+            HashCode.EnumerableOrderedContentHash(Exceptions));
+
+    public bool Equals(ProgramState other) =>
+        // VisitCount is not compared, two ProgramState are equal if their current state is equal. No matter what historical path led to it.
+        other is not null
+        && other.OperationValue.DictionaryEquals(OperationValue)
+        && other.SymbolValue.DictionaryEquals(SymbolValue)
+        && other.CaptureOperation.DictionaryEquals(CaptureOperation)
+        && other.PreservedSymbols.SetEquals(PreservedSymbols)
+        && other.Exceptions.SequenceEqual(Exceptions);
+
+    public ProgramState[] ToArray() =>
+        toArray ??= new[] { this };
+
+    public override string ToString() =>
+        Equals(Empty) ? "Empty" + Environment.NewLine : SerializeExceptions() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();
+
+    private string SerializeExceptions() =>
+        Exceptions.IsEmpty ? null : Exceptions.JoinStr(string.Empty, x => $"Exception: {x}{Environment.NewLine}");
+
+    private string SerializeSymbols() =>
+        Serialize(SymbolValue, "Symbols", x => x.Name, x => x.ToString());
+
+    private string SerializeOperations() =>
+        Serialize(OperationValue, "Operations", x => x.Serialize(), x => x.ToString());
+
+    private string SerializeCaptures() =>
+        Serialize(CaptureOperation, "Captures", x => "#" + x.GetHashCode(), x => x.Serialize());
+
+    private static string Serialize<TKey, TValue>(ImmutableDictionary<TKey, TValue> dictionary, string title, Func<TKey, string> serializeKey, Func<TValue, string> serializeValue)
+    {
+        if (dictionary.IsEmpty)
         {
-            OperationValue = ImmutableDictionary<IOperation, SymbolicValue>.Empty;
-            SymbolValue = ImmutableDictionary<ISymbol, SymbolicValue>.Empty;
-            VisitCount = ImmutableDictionary<int, int>.Empty;
-            CaptureOperation = ImmutableDictionary<CaptureId, IOperation>.Empty;
-            PreservedSymbols = ImmutableHashSet<ISymbol>.Empty;
-            Exceptions = ImmutableStack<ExceptionState>.Empty;
+            return null;
         }
-
-        protected ProgramState(ProgramState original)   // Custom record override constructor to reset "toArray"
+        else
         {
-            OperationValue = original.OperationValue;
-            SymbolValue = original.SymbolValue;
-            VisitCount = original.VisitCount;
-            CaptureOperation = original.CaptureOperation;
-            PreservedSymbols = original.PreservedSymbols;
-            Exceptions = original.Exceptions;
-        }
-
-        public ProgramState SetOperationValue(IOperationWrapper operation, SymbolicValue value) =>
-            operation is null
-                ? throw new ArgumentNullException(nameof(operation))
-                : SetOperationValue(operation.WrappedOperation, value);
-
-        public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
-            operation is null
-                ? throw new ArgumentNullException(nameof(operation))
-                : SetOperationValue(operation.Instance, value);
-
-        public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
-            (operation ?? throw new ArgumentNullException(nameof(operation))) is var _
-            && value is null
-                ? this with { OperationValue = OperationValue.Remove(ResolveCapture(operation)) }
-                : this with { OperationValue = OperationValue.SetItem(ResolveCapture(operation), value) };
-
-        public ProgramState SetOperationConstraint(IOperationWrapper operation, SymbolicConstraint constraint) =>
-            SetOperationConstraint(operation.WrappedOperation, constraint);
-
-        public ProgramState SetOperationConstraint(IOperationWrapperSonar operation, SymbolicConstraint constraint) =>
-            SetOperationConstraint(operation.Instance, constraint);
-
-        public ProgramState SetOperationConstraint(IOperation operation, SymbolicConstraint constraint) =>
-            SetOperationValue(operation, (this[operation] ?? SymbolicValue.Empty).WithConstraint(constraint));
-
-        public ProgramState SetSymbolValue(ISymbol symbol, SymbolicValue value) =>
-            value is null
-                ? this with { SymbolValue = SymbolValue.Remove(symbol) }
-                : this with { SymbolValue = SymbolValue.SetItem(symbol, value) };
-
-        public ProgramState SetSymbolConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
-            SetSymbolValue(symbol, (this[symbol] ?? SymbolicValue.Empty).WithConstraint(constraint));
-
-        public ProgramState SetCapture(CaptureId capture, IOperation operation) =>
-            this with { CaptureOperation = CaptureOperation.SetItem(capture, operation) };
-
-        public ProgramState SetException(ExceptionState exception) =>
-            this with { Exceptions = ImmutableStack<ExceptionState>.Empty.Push(exception) };
-
-        public ProgramState PushException(ExceptionState exception) =>
-            this with { Exceptions = Exceptions.Push(exception) };
-
-        public ProgramState PopException() =>
-            this with { Exceptions = Exceptions.Pop() };
-
-        public IEnumerable<ISymbol> SymbolsWith(SymbolicConstraint constraint) =>
-            SymbolValue.Where(x => x.Value != null && x.Value.HasConstraint(constraint)).Select(x => x.Key);
-
-        public ProgramState ResetOperations()
-        {
-            var captured = CaptureOperation.Values.ToHashSet(); // Preserve only captured
-            return this with { OperationValue = OperationValue.Where(x => captured.Contains(x.Key)).ToImmutableDictionary() };
-        }
-
-        public ProgramState RemoveCapture(CaptureId capture) =>
-            this with { CaptureOperation = CaptureOperation.Remove(capture) };
-
-        public IOperation ResolveCapture(IOperation operation) =>
-            operation?.Kind == OperationKindEx.FlowCaptureReference
-            && this[IFlowCaptureReferenceOperationWrapper.FromOperation(operation).Id] is { } captured
-                ? captured
-                : operation;
-
-        public ProgramState RemoveSymbols(Func<ISymbol, bool> remove) =>
-            this with { SymbolValue = SymbolValue.Where(kv => PreservedSymbols.Contains(kv.Key) || !remove(kv.Key)).ToImmutableDictionary() };
-
-        public ProgramState ResetFieldConstraints() =>
-            ResetFieldConstraints(field => true);
-
-        public ProgramState ResetStaticFieldConstraints(INamedTypeSymbol containingType) =>
-            ResetFieldConstraints(field => field.IsStatic && containingType.DerivesFrom(field.ContainingType));
-
-        public ProgramState AddVisit(int programPointHash) =>
-            this with { VisitCount = VisitCount.SetItem(programPointHash, GetVisitCount(programPointHash) + 1) };
-
-        public ProgramState Preserve(ISymbol symbol) =>
-            this with { PreservedSymbols = PreservedSymbols.Add(symbol) };
-
-        public int GetVisitCount(int programPointHash) =>
-            VisitCount.TryGetValue(programPointHash, out var count) ? count : 0;
-
-        public override int GetHashCode() =>
-            // VisitCount is not included, it's not part of Equals
-            HashCode.Combine(
-                HashCode.DictionaryContentHash(OperationValue),
-                HashCode.DictionaryContentHash(SymbolValue),
-                HashCode.DictionaryContentHash(CaptureOperation),
-                HashCode.EnumerableUnorderedContentHash(PreservedSymbols),
-                HashCode.EnumerableOrderedContentHash(Exceptions));
-
-        public bool Equals(ProgramState other) =>
-            // VisitCount is not compared, two ProgramState are equal if their current state is equal. No matter what historical path led to it.
-            other is not null
-            && other.OperationValue.DictionaryEquals(OperationValue)
-            && other.SymbolValue.DictionaryEquals(SymbolValue)
-            && other.CaptureOperation.DictionaryEquals(CaptureOperation)
-            && other.PreservedSymbols.SetEquals(PreservedSymbols)
-            && other.Exceptions.SequenceEqual(Exceptions);
-
-        public ProgramState[] ToArray() =>
-            toArray ??= new[] { this };
-
-        public override string ToString() =>
-            Equals(Empty) ? "Empty" + Environment.NewLine : SerializeExceptions() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();
-
-        private string SerializeExceptions() =>
-            Exceptions.IsEmpty ? null : Exceptions.JoinStr(string.Empty, x => $"Exception: {x}{Environment.NewLine}");
-
-        private string SerializeSymbols() =>
-            Serialize(SymbolValue, "Symbols", x => x.Name, x => x.ToString());
-
-        private string SerializeOperations() =>
-            Serialize(OperationValue, "Operations", x => x.Serialize(), x => x.ToString());
-
-        private string SerializeCaptures() =>
-            Serialize(CaptureOperation, "Captures", x => "#" + x.GetHashCode(), x => x.Serialize());
-
-        private static string Serialize<TKey, TValue>(ImmutableDictionary<TKey, TValue> dictionary, string title, Func<TKey, string> serializeKey, Func<TValue, string> serializeValue)
-        {
-            if (dictionary.IsEmpty)
+            var sb = new StringBuilder();
+            sb.Append(title).AppendLine(":");
+            foreach (var kvp in dictionary.Select(x => new KeyValuePair<string, string>(serializeKey(x.Key), serializeValue(x.Value))).OrderBy(x => x.Key))
             {
-                return null;
+                sb.Append(kvp.Key).Append(": ").AppendLine(kvp.Value);
             }
-            else
+            return sb.ToString();
+        }
+    }
+
+    private ProgramState ResetFieldConstraints(Func<IFieldSymbol, bool> predicate)
+    {
+        var state = this;
+        foreach (var kvp in SymbolValue.Where(x => x.Key is IFieldSymbol field && predicate(field)))
+        {
+            var symbolValue = kvp.Value;
+            if (symbolValue.AllConstraints.Where(x => !x.PreserveOnFieldReset).ToArray() is { Length: > 0 } resetConstraints)
             {
-                var sb = new StringBuilder();
-                sb.Append(title).AppendLine(":");
-                foreach (var kvp in dictionary.Select(x => new KeyValuePair<string, string>(serializeKey(x.Key), serializeValue(x.Value))).OrderBy(x => x.Key))
+                foreach (var constraint in resetConstraints)
                 {
-                    sb.Append(kvp.Key).Append(": ").AppendLine(kvp.Value);
+                    symbolValue = symbolValue.WithoutConstraint(constraint);
                 }
-                return sb.ToString();
+                state = state.SetSymbolValue(kvp.Key, symbolValue);
             }
         }
+        return state;
+    }
 
-        private ProgramState ResetFieldConstraints(Func<IFieldSymbol, bool> predicate)
+    [Conditional("DEBUG_TurnedOff")] // Turned off until all consistency check violations are fixed.
+    [ExcludeFromCodeCoverage]
+    public void CheckConsistency()
+    {
+        AssertCommonConditions(SymbolValue.Values);
+        AssertCommonConditions(OperationValue.Values);
+
+        static void AssertCommonConditions(IEnumerable<SymbolicValue> values)
         {
-            var state = this;
-            foreach (var kvp in SymbolValue.Where(x => x.Key is IFieldSymbol field && predicate(field)))
+            foreach (var value in values)
             {
-                var symbolValue = kvp.Value;
-                if (symbolValue.AllConstraints.Where(x => !x.PreserveOnFieldReset).ToArray() is { Length: > 0 } resetConstraints)
-                {
-                    foreach (var constraint in resetConstraints)
-                    {
-                        symbolValue = symbolValue.WithoutConstraint(constraint);
-                    }
-                    state = state.SetSymbolValue(kvp.Key, symbolValue);
-                }
+                Debug.Assert(CheckConstraintAlsoHasNotNull<BoolConstraint>(value), "If a BoolConstraint is set, NotNull should also be set.");
+                Debug.Assert(CheckConstraintAlsoHasNotNull<LockConstraint>(value), "If a LockConstraint is set, NotNull should also be set.");
+                Debug.Assert(CheckOnlyConstraint(value, ObjectConstraint.Null), "If Null is set, no other constraint should be set.");
             }
-            return state;
         }
 
-        [Conditional("DEBUG_TurnedOff")] // Turned off until all consistency check violations are fixed.
-        [ExcludeFromCodeCoverage]
-        public void CheckConsistency()
-        {
-            AssertCommonConditions(SymbolValue.Values);
-            AssertCommonConditions(OperationValue.Values);
+        static bool CheckConstraintAlsoHasNotNull<T>(SymbolicValue value) where T : SymbolicConstraint =>
+            !value.HasConstraint<T>() || value.HasConstraint(ObjectConstraint.NotNull);
 
-            static void AssertCommonConditions(IEnumerable<SymbolicValue> values)
-            {
-                foreach (var value in values)
-                {
-                    Debug.Assert(CheckConstraintAlsoHasNotNull<BoolConstraint>(value), "If a BoolConstraint is set, NotNull should also be set.");
-                    Debug.Assert(CheckConstraintAlsoHasNotNull<LockConstraint>(value), "If a LockConstraint is set, NotNull should also be set.");
-                    Debug.Assert(CheckOnlyConstraint(value, ObjectConstraint.Null), "If Null is set, no other constraint should be set.");
-                }
-            }
-
-            static bool CheckConstraintAlsoHasNotNull<T>(SymbolicValue value) where T : SymbolicConstraint =>
-                !value.HasConstraint<T>() || value.HasConstraint(ObjectConstraint.NotNull);
-
-            static bool CheckOnlyConstraint(SymbolicValue value, SymbolicConstraint single) =>
-                !value.HasConstraint(single) || value.AllConstraints.Count() == 1;
-        }
+        static bool CheckOnlyConstraint(SymbolicValue value, SymbolicConstraint single) =>
+            !value.HasConstraint(single) || value.AllConstraints.Count() == 1;
     }
 }

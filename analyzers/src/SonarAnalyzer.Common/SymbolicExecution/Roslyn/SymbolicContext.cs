@@ -18,41 +18,40 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.SymbolicExecution.Roslyn;
+
+public class SymbolicContext
 {
-    public class SymbolicContext
+    public IOperationWrapperSonar Operation { get; }
+    public ProgramState State { get; }
+    public int VisitCount { get; }
+    public bool IsLoopCondition { get; }
+    public IReadOnlyCollection<ISymbol> CapturedVariables { get; }
+
+    public SymbolicContext(ExplodedNode node, IReadOnlyCollection<ISymbol> capturedVariables, bool isLoopCondition)
+        : this(node.Operation, node.State, isLoopCondition, node.VisitCount, capturedVariables) { }
+
+    public SymbolicContext(IOperationWrapperSonar operation, ProgramState state, bool isLoopCondition, int visitCount, IReadOnlyCollection<ISymbol> capturedVariables)
     {
-        public IOperationWrapperSonar Operation { get; }
-        public ProgramState State { get; }
-        public int VisitCount { get; }
-        public bool IsLoopCondition { get; }
-        public IReadOnlyCollection<ISymbol> CapturedVariables { get; }
-
-        public SymbolicContext(ExplodedNode node, IReadOnlyCollection<ISymbol> capturedVariables, bool isLoopCondition)
-            : this(node.Operation, node.State, isLoopCondition, node.VisitCount, capturedVariables) { }
-
-        public SymbolicContext(IOperationWrapperSonar operation, ProgramState state, bool isLoopCondition, int visitCount, IReadOnlyCollection<ISymbol> capturedVariables)
-        {
-            Operation = operation; // Operation can be null for the branch nodes.
-            State = state ?? throw new ArgumentNullException(nameof(state));
-            VisitCount = visitCount;
-            IsLoopCondition = isLoopCondition;
-            CapturedVariables = capturedVariables ?? throw new ArgumentNullException(nameof(capturedVariables));
-        }
-
-        public ProgramState SetOperationConstraint(SymbolicConstraint constraint) =>
-            State.SetOperationConstraint(Operation, constraint);
-
-        public ProgramState SetSymbolConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
-            State.SetSymbolConstraint(symbol, constraint);
-
-        public SymbolicContext WithState(ProgramState newState) =>
-            State == newState ? this : new(Operation, newState, IsLoopCondition, VisitCount, CapturedVariables);
-
-        public bool HasConstraint(IOperation operation, SymbolicConstraint constraint) =>
-            State[operation]?.HasConstraint(constraint) is true;
-
-        public bool HasConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
-            State[symbol]?.HasConstraint(constraint) is true;
+        Operation = operation; // Operation can be null for the branch nodes.
+        State = state ?? throw new ArgumentNullException(nameof(state));
+        VisitCount = visitCount;
+        IsLoopCondition = isLoopCondition;
+        CapturedVariables = capturedVariables ?? throw new ArgumentNullException(nameof(capturedVariables));
     }
+
+    public ProgramState SetOperationConstraint(SymbolicConstraint constraint) =>
+        State.SetOperationConstraint(Operation, constraint);
+
+    public ProgramState SetSymbolConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
+        State.SetSymbolConstraint(symbol, constraint);
+
+    public SymbolicContext WithState(ProgramState newState) =>
+        State == newState ? this : new(Operation, newState, IsLoopCondition, VisitCount, CapturedVariables);
+
+    public bool HasConstraint(IOperation operation, SymbolicConstraint constraint) =>
+        State[operation]?.HasConstraint(constraint) is true;
+
+    public bool HasConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
+        State[symbol]?.HasConstraint(constraint) is true;
 }
