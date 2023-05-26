@@ -179,10 +179,14 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
     {
         var leftBool = left?.Constraint<BoolConstraint>();
         var rightBool = right?.Constraint<BoolConstraint>();
+        var leftIsNull = left?.Constraint<ObjectConstraint>() == ObjectConstraint.Null;
+        var rightIsNull = right?.Constraint<ObjectConstraint>() == ObjectConstraint.Null;
         if (leftBool is null ^ rightBool is null)
         {
             return kind switch
             {
+                BinaryOperatorKind.Equals when leftIsNull || rightIsNull => BoolConstraint.False,
+                BinaryOperatorKind.NotEquals when leftIsNull || rightIsNull => BoolConstraint.True,
                 BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr when (leftBool ?? rightBool) == BoolConstraint.True => BoolConstraint.True,
                 BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd when (leftBool ?? rightBool) == BoolConstraint.False => BoolConstraint.False,
                 _ => null
@@ -200,9 +204,9 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         }
         else if (left?.HasConstraint<ObjectConstraint>() is true && right?.HasConstraint<ObjectConstraint>() is true)
         {
-            return BinaryNullConstraint(kind, left.HasConstraint(ObjectConstraint.Null), right.HasConstraint(ObjectConstraint.Null));
+            return BinaryNullConstraint(kind, leftIsNull, rightIsNull);
         }
-        else if (left?.HasConstraint(ObjectConstraint.Null) is true || right?.HasConstraint(ObjectConstraint.Null) is true)
+        else if (leftIsNull || rightIsNull)
         {
             return kind.IsAnyRelational() ? BoolConstraint.False : null;
         }

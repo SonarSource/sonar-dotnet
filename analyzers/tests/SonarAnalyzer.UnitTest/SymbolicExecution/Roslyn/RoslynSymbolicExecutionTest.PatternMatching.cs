@@ -306,10 +306,14 @@ Tag(""End"", arg);";
     [DataRow("objectNotNull is 1", null)]
     [DataRow(@"objectNotNull is """"", null)]
     [DataRow("objectNull is null", true)]
+    [DataRow("objectNull is true", false)]
+    [DataRow("objectNull is false", false)]
     [DataRow("nullableBoolTrue is true", true)]
     [DataRow("nullableBoolTrue is false", false)]
     [DataRow("nullableBoolFalse is true", false)]
     [DataRow("nullableBoolFalse is false", true)]
+    [DataRow("nullableBoolNull is true", false)]
+    [DataRow("nullableBoolNull is false", false)]
     public void ConstantPatternSetBoolConstraint_SingleState(string isPattern, bool? expectedBoolConstraint) =>
         ValidateSetBoolConstraint(isPattern, OperationKindEx.ConstantPattern, expectedBoolConstraint);
 
@@ -318,15 +322,11 @@ Tag(""End"", arg);";
     [DataRow("objectNotNull", "is false", new[] { ConstraintKind.False, ConstraintKind.NotNull }, new[] { ConstraintKind.NotNull })]
     [DataRow("objectNull", "is 1", new[] { ConstraintKind.NotNull }, new[] { ConstraintKind.Null })]          // Should recognize that objectNull doesn't match instead
     [DataRow("objectNull", @"is """"", new[] { ConstraintKind.NotNull }, new[] { ConstraintKind.Null })]      // Should recognize that objectNull doesn't match instead
-    [DataRow("objectNull", "is true", new[] { ConstraintKind.True, ConstraintKind.Null }, new[] { ConstraintKind.Null })]    // Should recognize that objectNull doesn't match instead, should not have BoolConstraint and Null at the same time
-    [DataRow("objectNull", "is false", new[] { ConstraintKind.False, ConstraintKind.Null }, new[] { ConstraintKind.Null })]  // Should recognize that objectNull doesn't match instead, should not have BoolConstraint and Null at the same time
     [DataRow("objectUnknown", "is null", new[] { ConstraintKind.Null }, new[] { ConstraintKind.NotNull })]
     [DataRow("objectUnknown", "is 1", new[] { ConstraintKind.NotNull }, null)]
     [DataRow("objectUnknown", @"is """"", new[] { ConstraintKind.NotNull }, null)]
     [DataRow("objectUnknown", "is true", new[] { ConstraintKind.True }, null)]
     [DataRow("objectUnknown", "is false", new[] { ConstraintKind.False }, null)]
-    [DataRow("nullableBoolNull", "is true", new[] { ConstraintKind.True, ConstraintKind.Null }, new[] { ConstraintKind.Null })]    // Should recognize that nullableBoolNull doesn't match instead, should not have BoolConstraint and Null at the same time
-    [DataRow("nullableBoolNull", "is false", new[] { ConstraintKind.False, ConstraintKind.Null }, new[] { ConstraintKind.Null })]  // Should recognize that nullableBoolNull doesn't match instead, should not have BoolConstraint and Null at the same time
     [DataRow("nullableBoolUnknown", "is true", new[] { ConstraintKind.True }, null)]
     [DataRow("nullableBoolUnknown", "is false", new[] { ConstraintKind.False }, null)]
     public void ConstantPatternSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, ConstraintKind[] expectedForTrue, ConstraintKind[] expectedForFalse) =>

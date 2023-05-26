@@ -100,13 +100,23 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         }
     }
 
-    private static BoolConstraint BoolContraintFromConstant(ProgramState state, IIsPatternOperationWrapper isPattern) =>
-        state[isPattern.Value] is { } value
-        && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
-        && value.Constraint<BoolConstraint>() is { } valueConstraint
-        && IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value is bool boolConstant
-            ? BoolConstraint.From(valueConstraint == BoolConstraint.From(boolConstant))
-            : null; // We cannot take conclusive decision
+    private static BoolConstraint BoolContraintFromConstant(ProgramState state, IIsPatternOperationWrapper isPattern)
+    {
+        if (state[isPattern.Value] is { } value
+            && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
+            && IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value is bool boolConstant)
+        {
+            if (value.Constraint<BoolConstraint>() is { } valueConstraint)
+            {
+                return BoolConstraint.From(valueConstraint == BoolConstraint.From(boolConstant));
+            }
+            else if (value.HasConstraint(ObjectConstraint.Null))
+            {
+                return BoolConstraint.False;
+            }
+        }
+        return null; // We cannot take conclusive decision
+    }
 
     private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, IIsPatternOperationWrapper isPattern) =>
         state[isPattern.Value] is { } value
