@@ -11,7 +11,7 @@ public class Sample
     public void ExtendedPropertyPattern(Type t)
     {
         if (t is { Name.Length: > 2147483600 })
-            _ = t.Name.Length + 100;    // FIXME Non-compliant
+            _ = t.Name.Length + 100;    // FN
     }
 }
 

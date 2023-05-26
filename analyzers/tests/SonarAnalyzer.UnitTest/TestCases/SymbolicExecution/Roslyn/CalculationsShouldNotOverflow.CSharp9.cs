@@ -15,13 +15,13 @@ public class NativeInt
                 _ = i + 100;    // Compliant
                 break;
             default:
-                _ = i + 100;    // FIXME Non-compliant
+                _ = i + 100;    // FN
                 break;
         }
         _ = i switch
         {
             <= 2147483547 => i + 100,   // Compliant
-            _ => i + 100,               // FIXME Non-compliant
+            _ => i + 100,               // FN
         };
     }
 
@@ -83,14 +83,14 @@ public record SampleRecord(int I)
     public void Inc()
     {
         int i = 2147483600;
-        i += 100; // FIXME Non-compliant
+        i += 100; // FN
     }
 
     public void With()
     {
         var r = new SampleRecord(0);
         r = r with { I = 2147483600 };
-        _ = r.I + 100;  // FIXME Non-compliant
+        _ = r.I + 100;  // FN
     }
 }
 
@@ -104,6 +104,6 @@ public partial class Partial
     public partial void Method()
     {
         int i = 2147483600;
-        i += 100; // FIXME Non-compliant
+        i += 100; // FN
     }
 }

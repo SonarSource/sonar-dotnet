@@ -103,7 +103,7 @@ public class Sample
 
         var j = 10;
         i = 2147483600 / j;
-        _ = i * 100;            // FIXME Non-compliant
+        _ = i * 100;            // FN
 
         _ = 2147483600 << 16;   // Compliant
         _ = -2147483600 << 16;  // Compliant
@@ -112,30 +112,30 @@ public class Sample
         _ = i * 2147483600;     // Noncompliant
 
         i = 2 | j;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // Noncompliant
 
         i = 2 ^ j;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // FN
 
         i = 2 % j;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // FN
     }
 
     public void AssignmentOperators()
     {
         int i = 2147483600;
-        i += 100;               // FIXME Non-compliant
+        i += 100;               // FN
 
         i = -2147483600;
-        i -= 100;               // FIXME Non-compliant
+        i -= 100;               // FN
 
         i = 2147483600;
-        i *= 100;               // FIXME Non-compliant
+        i *= 100;               // FN
 
         var j = 10;
         i = 2147483600;
         i /= j;
-        _ = i * 100;            // FIXME Non-compliant
+        _ = i * 100;            // FN
 
         i = 2147483600;
         i <<= 1;                // Compliant
@@ -145,19 +145,19 @@ public class Sample
 
         i = 2;
         i &= j;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // FN
 
         i = 2;
         i |= j;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // FN
 
         i = 2;
         i ^= j;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // FN
 
         i = 2;
         i %= j;
-        _ = i * 2147483600;     // FIXME Non-compliant
+        _ = i * 2147483600;     // FN
     }
 
     public void Ranges(int i)
@@ -197,7 +197,7 @@ public class Sample
                 _ = i + 100;    // Compliant
                 break;
             case 2147483600:
-                _ = i + 100;    // FIXME Non-compliant
+                _ = i + 100;    // FN
                 break;
             default:
                 _ = i + 100;    // Compliant
@@ -210,7 +210,7 @@ public class Sample
         Action a = () =>
         {
             int i = -2147483600;
-            i -= 100;           // FIXME Non-compliant
+            i -= 100;           // FN
         };
     }
 
@@ -229,13 +229,13 @@ public class Properties
         get
         {
             int i = 2147483600;
-            i += 100;           // FIXME Non-compliant
+            i += 100;           // FN
             return i;
         }
         set
         {
             int i = 2147483600;
-            i += 100;           // FIXME Non-compliant
+            i += 100;           // FN
         }
     }
 
@@ -268,7 +268,7 @@ class DotnetOverflow
         public int Overflow2()
         {
             int i = 1834567890;
-            i += i;                                 // FIXME Non-compliant
+            i += i;                                 // FN
             return i;
         }
 
