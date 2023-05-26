@@ -1062,18 +1062,18 @@ Tag(""End"")";
     [DataRow("i >= -4 && j <=  6", null, null)]
     [DataRow("i >= -4 && j <= -6", null, null)]  // exact range: null, -1
     [DataRow("i ==  4 && j >=  6", 2, null)]
-    [DataRow("i ==  4 && j >= -6", null, null)]  // exact range: -8, null
+    [DataRow("i ==  4 && j >= -6", -8, null)]
     [DataRow("i ==  4 && j <=  6", null, 7)]
     [DataRow("i ==  4 && j <= -6", null, -1)]    // exact range: null, -2
-    [DataRow("i == -4 && j >=  6", null, null)]  // exact range: null, -5
-    [DataRow("i == -4 && j >= -6", null, null)]  // exact range: null, 7
-    [DataRow("i == -4 && j <=  6", null, null)]  // exact range: -8, null
-    [DataRow("i == -4 && j <= -6", -2, null)]    // exact range: 4, null
+    [DataRow("i == -4 && j >=  6", null, -1)]    // exact range: null, -5
+    [DataRow("i == -4 && j >= -6", null, 7)]     // exact range: null, 7
+    [DataRow("i == -4 && j <=  6", -8, null)]
+    [DataRow("i == -4 && j <= -6", 0, null)]     // exact range: 4, null
     [DataRow("i <=  4 && j >=  6", null, null)]
     [DataRow("i <=  4 && j >= -6", null, null)]
     [DataRow("i <=  4 && j <=  6", null, null)]
     [DataRow("i <=  4 && j <= -6", null, null)]
-    [DataRow("i <= -4 && j >=  6", null, null)]   // exact range: null, -1
+    [DataRow("i <= -4 && j >=  6", null, -1)]
     [DataRow("i <= -4 && j >= -6", null, null)]
     [DataRow("i <= -4 && j <=  6", null, null)]
     [DataRow("i <= -4 && j <= -6", 0, null)]
@@ -1081,7 +1081,7 @@ Tag(""End"")";
     [DataRow("i >=  4 && j >=  1 && j <=  3", 1, null)]          // exact range: 4, null
     [DataRow("i >=  4 && i <=  6 && j >=  6", 0, null)]
     [DataRow("i >=  4 && i <=  6 && j >=  6 && j <= 8", 0, 15)]  // exact range: 0, 14
-    [DataRow("i >=  4 && i <=  5 && j >=  6 && j <= 8", -4, 15)] // exact range: 2, 13
+    [DataRow("i >=  4 && i <=  5 && j >=  6 && j <= 8", 1, 15)]  // exact range: 2, 13
     public void Binary_BitXor_Range(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""

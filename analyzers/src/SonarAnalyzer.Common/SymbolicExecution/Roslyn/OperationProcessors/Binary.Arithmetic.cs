@@ -217,35 +217,84 @@ internal sealed partial class Binary
 
     private static BigInteger? CalculateXorMin(NumberConstraint left, NumberConstraint right)
     {
+        // Takes advantage of the property a - b <= a ^ b for all a >= 0 and b >= 0
+        // If ranges overlap => at least 1 value belongs to both ranges => xor can yield 0
         if (left.IsPositive && right.IsPositive)
         {
-            return left.CanOverlap(right) ? 0 : Min(left.Min - right.Max, right.Min - left.Max);
-        }
-        else if (left.IsNegative && right.IsNegative)
-        {
-            return left.CanOverlap(right) ? 0 : Min(left.Max - right.Min, right.Max - left.Min);
-        }
-        return null;
-
-        static BigInteger? Min(BigInteger? first, BigInteger? second)
-        {
-            if (first is null)
+            if (left.Min > right.Max)
             {
-                return second;
+                return left.Min - right.Max;
             }
-            else if (second is null)
+            else if (right.Min > left.Max)
             {
-                return first;
+                return right.Min - left.Max;
             }
             else
             {
-                return BigInteger.Min(first.Value, second.Value);
+                return 0;
             }
+        }
+        else if (left.IsNegative && right.IsNegative)
+        {
+            if (left.Max > right.Min)
+            {
+                return left.Max - right.Min;
+            }
+            else if (right.Max > left.Min)
+            {
+                return right.Max - left.Min;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        // Positive ^ negative gives a negative not smaller than negative magnitude of the absolutely bigger of the two
+        else if ((left.IsPositive || right.IsNegative) && left.Max.HasValue && right.Min.HasValue)
+        {
+            return NegativeMagnitude(-BigInteger.Max(left.Max.Value, BigInteger.Abs(right.Min.Value)));
+        }
+        else if ((left.IsNegative || right.IsPositive) && left.Min.HasValue && right.Max.HasValue)
+        {
+            return NegativeMagnitude(-BigInteger.Max(BigInteger.Abs(left.Min.Value), right.Max.Value));
+        }
+        else if (left.Min.HasValue && left.Max.HasValue && right.Min.HasValue && right.Max.HasValue)
+        {
+            return NegativeMagnitude(-BigInteger.Max(
+                BigInteger.Max(BigInteger.Abs(left.Min.Value), right.Max.Value),
+                BigInteger.Max(left.Max.Value, BigInteger.Abs(right.Min.Value))));
+        }
+        else
+        {
+            return null;
         }
     }
 
     private static BigInteger? CalculateXorMax(NumberConstraint left, NumberConstraint right)
     {
+        if ((left.IsPositive && right.IsNegative) || (left.IsNegative && right.IsPositive))
+        {
+            return -1;
+        }
+        else if ((left.IsPositive || right.IsPositive) && left.Max.HasValue && right.Max.HasValue)
+        {
+            return PositiveMagnitude(BigInteger.Max(left.Max.Value, right.Max.Value));
+        }
+        else if ((left.IsNegative || right.IsNegative) && left.Min.HasValue && right.Min.HasValue)
+        {
+            return PositiveMagnitude(BigInteger.Max(BigInteger.Abs(left.Min.Value), BigInteger.Abs(right.Min.Value)));
+        }
+        else if (left.Min.HasValue && left.Max.HasValue && right.Min.HasValue && right.Max.HasValue)
+        {
+            return PositiveMagnitude(BigInteger.Max(
+                BigInteger.Max(left.Max.Value, right.Max.Value),
+                BigInteger.Max(BigInteger.Abs(left.Min.Value), BigInteger.Abs(right.Min.Value))));
+        }
+        else
+        {
+            return null;
+        }
+
         if ((left.IsPositive && right.IsPositive) || (left.IsPositive && right.CanBePositive) || (right.IsPositive && left.CanBeNegative))
         {
             return left.Max.HasValue && right.Max.HasValue ? PositiveMagnitude(left.Max.Value | right.Max.Value) : null;
@@ -254,7 +303,22 @@ internal sealed partial class Binary
         {
             return -1;
         }
-        return null;
+        {
+            return null;
+        }
+
+        if ((left.IsPositive && right.IsNegative) || (left.IsNegative && right.IsPositive))
+        {
+            return -1;
+        }
+        else if (left.Max.HasValue && right.Max.HasValue)
+        {
+            return PositiveMagnitude(left.Max.Value | right.Max.Value);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private static BigInteger? NegativeMagnitude(BigInteger value)

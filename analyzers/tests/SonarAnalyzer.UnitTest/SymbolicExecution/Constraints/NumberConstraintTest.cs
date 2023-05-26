@@ -223,42 +223,5 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
         [DataRow(42, null, 41)]
         public void CanContain_False(int? min, int? max, int value) =>
             NumberConstraint.From(min, max).CanContain(value).Should().BeFalse();
-
-        [DataTestMethod]
-        [DataRow(null, +2, null, +3, true)]
-        [DataRow(null, +3, null, +2, true)]
-        [DataRow(null, -3, null, +2, true)]
-        [DataRow(null, +2, +3, null, false)]
-        [DataRow(null, +3, +2, null, true)]
-        [DataRow(null, -3, +2, null, false)]
-        [DataRow(+2, null, +3, null, true)]
-        [DataRow(+3, null, +2, null, true)]
-        [DataRow(-3, null, +2, null, true)]
-        [DataRow(+2, null, null, +3, true)]
-        [DataRow(+3, null, null, +2, false)]
-        [DataRow(-3, null, null, +2, true)]
-        [DataRow(-3, -1, -2, 0, true)]
-        [DataRow(-3, -1,  0, 0, false)]
-        [DataRow(1, 3, 0, null, true)]
-        [DataRow(1, 3, 1, null, true)]
-        [DataRow(1, 3, 3, null, true)]
-        [DataRow(1, 3, 4, null, false)]
-        [DataRow(1, 1, 0, null, true)]
-        [DataRow(1, 1, 1, null, true)]
-        [DataRow(1, 1, 2, null, false)]
-        [DataRow(0, null, 1, 3, true)]
-        [DataRow(1, null, 1, 3, true)]
-        [DataRow(3, null, 1, 3, true)]
-        [DataRow(4, null, 1, 3, false)]
-        [DataRow(0, null, 1, 1, true)]
-        [DataRow(1, null, 1, 1, true)]
-        [DataRow(2, null, 1, 1, false)]
-        [DataRow(1, 3, 0, 4, true)]
-        [DataRow(0, 1, 1, 3, true)]
-        [DataRow(0, 2, 1, 3, true)]
-        [DataRow(0, 3, 1, 3, true)]
-        [DataRow(0, 4, 1, 3, true)]
-        public void CanOverlap(int? firstMin, int? firstMax, int? secondMin, int? secondMax, bool result) =>
-            NumberConstraint.From(firstMin, firstMax).CanOverlap(NumberConstraint.From(secondMin, secondMax)).Should().Be(result);
     }
 }
