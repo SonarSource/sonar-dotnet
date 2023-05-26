@@ -64,7 +64,7 @@ Public Class Sample
 
         Dim j As Integer = 10
         i = 2147483600 \ j
-        __ = i * 100            ' FIXME Non-compliant
+        __ = i * 100            ' FN
 
         __ = 2147483600 << 16   ' Compliant
         __ = -2147483600 << 16  ' Compliant
@@ -73,29 +73,29 @@ Public Class Sample
         __ = i * 2147483600     ' Noncompliant
 
         i = 2 Or j
-        __ = i * 2147483600     ' FIXME Non-compliant
+        __ = i * 2147483600     ' Noncompliant
 
         i = 2 Xor j
-        __ = i * 2147483600     ' FIXME Non-compliant
+        __ = i * 2147483600     ' FN
 
         i = 2 Mod j
-        __ = i * 2147483600     ' FIXME Non-compliant
+        __ = i * 2147483600     ' FN
     End Sub
 
     Public Sub AssignmentOperators()
         Dim i As Integer = 2147483600
-        i += 100                ' FIXME Non-compliant
+        i += 100                ' FN
 
         i = -2147483600
-        i -= 100                ' FIXME Non-compliant
+        i -= 100                ' FN
 
         i = 2147483600
-        i *= 100                ' FIXME Non-compliant
+        i *= 100                ' FN
 
         Dim j As Integer = 10
         i = 2147483600
         i \= j
-        __ = i * 100            ' FIXME Non-compliant
+        __ = i * 100            ' FN
 
         i = 2147483600
         i <<= 1                 ' Compliant
@@ -136,7 +136,7 @@ Public Class Sample
             Case 2147483547
                 __ = i + 100    ' Compliant
             Case 2147483600
-                __ = i + 100    ' FIXME Non-compliant
+                __ = i + 100    ' FN
             Case Else
                 __ = i + 100    ' Compliant
         End Select
@@ -145,11 +145,11 @@ Public Class Sample
     Public Sub Lambda()
         Dim a As Action = Sub()
                               Dim i As Integer = -2147483600
-                              i -= 100           ' FIXME Non-compliant
+                              i -= 100           ' FN
                           End Sub
         Dim b As Func(Of Integer) = Function()
                                         Dim i As Integer = -2147483600
-                                        i -= 100           ' FIXME Non-compliant
+                                        i -= 100           ' FN
                                         Return i
                                     End Function
     End Sub
@@ -172,12 +172,12 @@ Public Class Properties
     Public Property GetSet As Integer
         Get
             Dim i As Integer = 2147483600
-            i += 100           ' FIXME Non-compliant
+            i += 100           ' FN
             Return i
         End Get
         Set(value As Integer)
             Dim i As Integer = 2147483600
-            i += 100           ' FIXME Non-compliant
+            i += 100           ' FN
         End Set
     End Property
 
@@ -192,7 +192,7 @@ Public Class DotnetOverflow
 
     Public Function Overflow2() As Integer
         Dim i As Integer = 1834567890
-        i += i                              ' FIXME Non-compliant
+        i += i                              ' FN
         Return i
     End Function
 
