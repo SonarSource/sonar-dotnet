@@ -2012,3 +2012,43 @@ public class PeachReproducers
             Array.Empty<string>();
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/7104
+public class Repro_7104
+{
+    private Data data;
+
+    public static bool BoolMethod(Data data)
+    {
+        if (data?.IsTrue() is true && data.Property != null)    // Noncompliant FP
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private object BoolProperty()
+    {
+        if (data?.IsBoolean == true)
+        {
+            return data.Property;   // Noncompliant FP
+        }
+        return null;
+    }
+
+    public static int BoolExtensionNegated<T>(ICollection<T> records)
+    {
+        if (records?.Any() != true)
+            return 0;
+
+        return records.Count; // Noncompliant FP
+    }
+
+    public class Data
+    {
+        public bool IsBoolean { get; set; }
+        public object Property { get; set; }
+
+        public bool IsTrue() => true;
+    }
+}
