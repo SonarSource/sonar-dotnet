@@ -241,6 +241,8 @@ public void Method()
     [DataRow("decimal")]
     [DataRow("float")]
     [DataRow("double")]
+    [DataRow("IntPtr")]
+    [DataRow("UIntPtr")]
     public void Conversion_BuiltInConversion_PropagateState(string type)
     {
         var code = $"""
@@ -248,7 +250,26 @@ public void Method()
             {type} value = b;
             Tag("Value", value);
             """;
-        SETestContext.CreateCS(code, new LiteralDummyTestCheck()).Validator.ValidateTag("Value", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        SETestContext.CreateCS(code, new LiteralDummyTestCheck()).Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy, NumberConstraint.From(42));
+    }
+
+    [DataTestMethod]
+    [DataRow("Int16")]
+    [DataRow("Int32")]
+    [DataRow("Int64")]
+    [DataRow("Decimal")]
+    [DataRow("Single")]
+    [DataRow("Double")]
+    [DataRow("IntPtr")]
+    [DataRow("UIntPtr")]
+    public void Conversion_BuiltInConversion_PropagateState_VB(string type)
+    {
+        var code = $"""
+            Dim B As Byte = 42
+            Dim Value As {type} = B
+            Tag("Value", Value)
+            """;
+        SETestContext.CreateVB(code, new LiteralDummyTestCheck()).Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, DummyConstraint.Dummy, NumberConstraint.From(42));
     }
 
     [TestMethod]

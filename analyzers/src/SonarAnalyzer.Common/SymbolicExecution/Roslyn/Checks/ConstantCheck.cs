@@ -40,7 +40,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks
             {
                 return ObjectConstraint.Null;
             }
-            else if (type.IsAny(KnownType.IntegralNumbers))
+            else if (type.IsAny(KnownType.IntegralNumbersIncludingNative))
             {
                 return NumberConstraint.From(0);
             }

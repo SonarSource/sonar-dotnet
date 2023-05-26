@@ -273,5 +273,18 @@ Namespace Monitor_Conditions
             If Condition Then Monitor.Exit(Arg)
         End Sub
 
+        Public Sub AutoInitializedInt()
+            Dim i As Integer
+            Monitor.Enter(Obj) ' Compliant, because exit is never reached
+            If i <> 0 AndAlso Condition Then Monitor.Exit(Obj)
+        End Sub
+
+        Public Sub AutoInitializedPointeger()
+            Dim i As IntPtr
+            Monitor.Enter(Obj) ' Compliant, because exit is never reached
+            If i <> 0 AndAlso Condition Then Monitor.Exit(Obj)
+        End Sub
+
     End Class
+
 End Namespace

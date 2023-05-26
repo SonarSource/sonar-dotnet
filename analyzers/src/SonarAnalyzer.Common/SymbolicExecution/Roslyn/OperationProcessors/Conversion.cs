@@ -26,7 +26,10 @@ internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
         operation.ToConversion();
 
     protected override ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
-        context.State[conversion.Operand] is { } value && conversion.OperatorMethod is null // Built-in conversions only
+        context.State[conversion.Operand] is { } value && IsBuildIn(conversion.OperatorMethod) // Built-in conversions only
             ? context.State.SetOperationValue(context.Operation, value)
             : context.State;
+
+    private static bool IsBuildIn(ISymbol symbol) =>
+        symbol is null || symbol.ContainingType.IsAny(KnownType.PointerTypes);
 }

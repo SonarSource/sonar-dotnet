@@ -287,7 +287,9 @@ Tag(""End"");";
     [DataRow("UInteger")]
     [DataRow("Long")]
     [DataRow("ULong")]
-    public void Execute_LocalScopeRegion_Integral_NoAction(string type) =>
+    [DataRow("IntPtr")]
+    [DataRow("UIntPtr")]
+    public void Execute_LocalScopeRegion_Integral_AssignDefaultZeroConstraint(string type) =>
         SETestContext.CreateVB(@$"Dim Value As {type} : Tag(""Value"", Value)").Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0));
 
     [TestMethod]
