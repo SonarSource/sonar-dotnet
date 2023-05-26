@@ -48,24 +48,21 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
 
         public override void Visit(SyntaxNode node)
         {
-            if (!IsUnchecked)
+            if (!IsUnchecked && !HasOverflow)
             {
                 IsUnchecked = node.IsAnyKind(SyntaxKind.UncheckedStatement, SyntaxKind.UncheckedExpression);
-                if (!HasOverflow)
-                {
-                    HasOverflow = node.IsAnyKind(
-                        SyntaxKind.AddExpression,
-                        SyntaxKind.AddAssignmentExpression,
-                        SyntaxKind.MultiplyExpression,
-                        SyntaxKind.MultiplyAssignmentExpression,
-                        SyntaxKind.SubtractExpression,
-                        SyntaxKind.SubtractAssignmentExpression,
-                        SyntaxKind.PostDecrementExpression,
-                        SyntaxKind.PostIncrementExpression,
-                        SyntaxKind.PreDecrementExpression,
-                        SyntaxKind.PreIncrementExpression);
-                    base.Visit(node);
-                }
+                HasOverflow = node.IsAnyKind(
+                    SyntaxKind.AddExpression,
+                    SyntaxKind.AddAssignmentExpression,
+                    SyntaxKind.MultiplyExpression,
+                    SyntaxKind.MultiplyAssignmentExpression,
+                    SyntaxKind.SubtractExpression,
+                    SyntaxKind.SubtractAssignmentExpression,
+                    SyntaxKind.PostDecrementExpression,
+                    SyntaxKind.PostIncrementExpression,
+                    SyntaxKind.PreDecrementExpression,
+                    SyntaxKind.PreIncrementExpression);
+                base.Visit(node);
             }
         }
     }

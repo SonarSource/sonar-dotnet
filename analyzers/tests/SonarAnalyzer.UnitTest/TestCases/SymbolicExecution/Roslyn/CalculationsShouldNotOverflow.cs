@@ -260,7 +260,7 @@ public class Properties
 
 class DotnetOverflow
 {
-    public int UmcheckedStatement()
+    public int UncheckedStatement()
     {
         int i, j = int.MaxValue;
         unchecked
@@ -271,7 +271,7 @@ class DotnetOverflow
         return i + j;   // Compliant
     }
 
-    public int UmcheckedExpression()
+    public int UncheckedExpression()
     {
         int i, j = int.MaxValue;
         i = unchecked(1834567890 + 1834567890);    // Compliant, we don't want to run for methods with unchecked
