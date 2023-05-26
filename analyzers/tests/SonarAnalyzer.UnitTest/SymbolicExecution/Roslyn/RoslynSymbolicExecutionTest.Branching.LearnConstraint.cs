@@ -1208,7 +1208,6 @@ Tag(""End"", arg);";
             {
                 if ({{innerCondition}})
                 {
-                    Tag("If", arg);
                 }
                 else
                 {
@@ -1217,7 +1216,7 @@ Tag(""End"", arg);";
             }
             """;
         var validator = SETestContext.CreateCS(code, "int arg").Validator;
-        validator.ValidateTag("Else", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
+        validator.TagValue("Else").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
     }
 
     [DataTestMethod]
