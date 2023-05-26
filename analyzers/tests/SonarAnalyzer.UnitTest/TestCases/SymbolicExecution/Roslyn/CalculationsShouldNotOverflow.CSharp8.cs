@@ -9,7 +9,7 @@ public class NativeInt
         _ = i switch
         {
             2147483547 => i + 100,  // Compliant
-            2147483599 => i + 100,  // FIXME: Non-compliant
+            2147483599 => i + 100,  // FN
             _ => i + 100,           // Compliant
         };
     }
