@@ -19,7 +19,6 @@
  */
 
 using System.Numerics;
-using Google.Protobuf.WellKnownTypes;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -116,22 +115,6 @@ internal sealed partial class Binary
         return NumberConstraint.From(min, max);
     }
 
-    private static NumberConstraint AccountForZero(NumberConstraint constraint)
-    {
-        if (constraint.Min == 0)
-        {
-            return NumberConstraint.From(1, constraint.Max);
-        }
-        else if (constraint.Max == 0)
-        {
-            return NumberConstraint.From(constraint.Min, -1);
-        }
-        else
-        {
-            return constraint;
-        }
-    }
-
     private static NumberConstraint CalculateRemainder(NumberConstraint left, NumberConstraint right)
     {
         if (right.Min == 0 && right.Max == 0)
@@ -156,7 +139,7 @@ internal sealed partial class Binary
             else
             {
                 // The result cannot be absolutely bigger than the absolute divisor - 1. For negative dividends the inverse is true.
-                var minDerivedFromRight = -MaxOfAbsoluteValues(right).Value + 1;
+                var minDerivedFromRight = -MaxOfAbsoluteValues(right) + 1;
                 return left.Min is null ? minDerivedFromRight : BigInteger.Max(left.Min.Value, minDerivedFromRight);
             }
         }
@@ -181,7 +164,7 @@ internal sealed partial class Binary
             {
                 // The result cannot be absolutely bigger than the absolute divisor - 1.
                 var maxDerivedFromRight = MaxOfAbsoluteValues(right) - 1;
-                return left.Max is null ? maxDerivedFromRight : BigInteger.Min(left.Max.Value, maxDerivedFromRight.Value);
+                return left.Max is null ? maxDerivedFromRight : BigInteger.Min(left.Max.Value, maxDerivedFromRight);
             }
         }
         else
@@ -206,18 +189,18 @@ internal sealed partial class Binary
         }
     }
 
-    private static BigInteger? MaxOfAbsoluteValues(NumberConstraint constraint) =>
-        constraint.Min is null || constraint.Max is null ? null : BigInteger.Max(BigInteger.Abs(constraint.Min.Value), BigInteger.Abs(constraint.Max.Value));
+    private static BigInteger MaxOfAbsoluteValues(NumberConstraint constraint) =>
+        BigInteger.Max(BigInteger.Abs(constraint.Min.Value), BigInteger.Abs(constraint.Max.Value));
 
-    private static BigInteger? MinOfAbsoluteValues(NumberConstraint constraint)
+    private static BigInteger MinOfAbsoluteValues(NumberConstraint constraint)
     {
         if (constraint.IsPositive)
         {
-            return constraint.Min;
+            return constraint.Min.Value;
         }
         else if (constraint.IsNegative)
         {
-            return -constraint.Max;
+            return -constraint.Max.Value;
         }
         else
         {
