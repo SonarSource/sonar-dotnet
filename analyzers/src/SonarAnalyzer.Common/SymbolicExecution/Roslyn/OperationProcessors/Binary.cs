@@ -103,7 +103,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
 
         ProgramState LearnBranching(ISymbol symbol, NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
             !(falseBranch && symbol.GetSymbolType().IsNullableValueType())  // Don't learn opposite for "nullable > 0", because it could also be <null>.
-            && RelationalNumberConstraint(falseBranch ? null : existingNumber, kind, comparedNumber, isLoopCondition, visitCount) is { } newConstraint
+            && RelationalNumberConstraint(existingNumber, kind, comparedNumber, isLoopCondition, visitCount) is { } newConstraint
                 ? state.SetSymbolConstraint(symbol, newConstraint)
                 : state;
 
@@ -150,11 +150,11 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         {
             if (existingNumber is not null)
             {
-                if (!newMin.HasValue || (existingNumber.Min > newMin && EvaluateBranchingCondition(isLoopCondition, visitCount)))
+                if ((newMin is null || (existingNumber.Min > newMin && EvaluateBranchingCondition(isLoopCondition, visitCount))) && !(existingNumber.Min > newMax))
                 {
                     newMin = existingNumber.Min;
                 }
-                if (!newMax.HasValue || (existingNumber.Max < newMax && EvaluateBranchingCondition(isLoopCondition, visitCount)))
+                if ((newMax is null || (existingNumber.Max < newMax && EvaluateBranchingCondition(isLoopCondition, visitCount))) && !(existingNumber.Max < newMin))
                 {
                     newMax = existingNumber.Max;
                 }

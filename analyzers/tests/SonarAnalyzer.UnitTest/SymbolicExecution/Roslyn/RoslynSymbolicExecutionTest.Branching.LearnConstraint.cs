@@ -1197,6 +1197,29 @@ Tag(""End"", arg);";
     }
 
     [DataTestMethod]
+    [DataRow("arg > 0", "arg > 5", 1, 5)]
+    [DataRow("arg > 0", "arg >= 5", 1, 4)]
+    [DataRow("arg < 10", "arg < 5", 5, 9)]
+    [DataRow("arg < 10", "arg <= 5", 6, 9)]
+    public void Branching_LearnsNumberConstraint_Nested_Else(string outerCondition, string innerCondition, int? expectedMin, int? expectedMax)
+    {
+        var code = $$"""
+            if ({{outerCondition}})
+            {
+                if ({{innerCondition}})
+                {
+                }
+                else
+                {
+                    Tag("Else", arg);
+                }
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg").Validator;
+        validator.TagValue("Else").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+    }
+
+    [DataTestMethod]
     [DataRow("arg <  onlyMin")]
     [DataRow("arg <= onlyMin")]
     [DataRow("arg >  onlyMax")]
