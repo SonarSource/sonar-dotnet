@@ -293,7 +293,7 @@ public partial class RoslynSymbolicExecutionTest
     public void Loops_While_NestedNumberCondition_VB()
     {
         const string code = """
-            Dim i As Integer = 0
+            Dim i As Integer
             While Condition     ' We are inside a Loop => binary operations are evaluated To True/False For 1St pass, And learn range condition For 2nd pass
                 If i < 10 Then
                     Tag("Inside", i)

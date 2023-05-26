@@ -272,15 +272,29 @@ Tag(""End"");";
 
     [TestMethod]
     public void Execute_LocalScopeRegion_Boolean_AssignDefaultBoolConstraint() =>
-        SETestContext.CreateVB(@"Dim Value As Boolean : Tag(""Value"", Value)").Validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        SETestContext.CreateVB(@"Dim Value As Boolean : Tag(""Value"", Value)").Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
 
     [TestMethod]
     public void Execute_LocalScopeRegion_ReferenceType_AssignDefaultNullConstraint() =>
-        SETestContext.CreateVB(@"Dim Value As Exception : Tag(""Value"", Value)").Validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        SETestContext.CreateVB(@"Dim Value As Exception : Tag(""Value"", Value)").Validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+
+    [DataTestMethod]
+    [DataRow("SByte")]
+    [DataRow("Byte")]
+    [DataRow("Short")]
+    [DataRow("UShort")]
+    [DataRow("Integer")]
+    [DataRow("UInteger")]
+    [DataRow("Long")]
+    [DataRow("ULong")]
+    [DataRow("IntPtr")]
+    [DataRow("UIntPtr")]
+    public void Execute_LocalScopeRegion_Integral_AssignDefaultZeroConstraint(string type) =>
+        SETestContext.CreateVB(@$"Dim Value As {type} : Tag(""Value"", Value)").Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0));
 
     [TestMethod]
     public void Execute_LocalScopeRegion_Struct_NoAction() =>
-        SETestContext.CreateVB(@"Dim Value As Integer : Tag(""Value"", Value)").Validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        SETestContext.CreateVB(@"Dim Value As DateTime : Tag(""Value"", Value)").Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
 
     [TestMethod]
     public void Execute_FieldSymbolsAreNotRemovedByLva()
@@ -290,7 +304,6 @@ if (boolParameter)
 {
     field = 42;
 }";
-
         var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
         var validator = SETestContext.CreateCS(code, postProcess).Validator;
         validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
@@ -307,7 +320,6 @@ if (boolParameter)
 {{
     {paramName} = 42;
 }}";
-
         var postProcess = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(DummyConstraint.Dummy));
         var validator = SETestContext.CreateCS(code, $"{refKind} int {paramName}", postProcess).Validator;
         validator.ValidateExitReachCount(2);    // Once with the constraint and once without it.
