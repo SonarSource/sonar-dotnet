@@ -5,7 +5,7 @@
     public int Count
     {
         get { return count; }
-        init { count = 3; } // Noncompliant {{Use the 'value' parameter in this property init accessor declaration.}}
+        init { count = 3; } // Noncompliant {{Use the 'value' contextual keyword in this property init accessor declaration.}}
     }
 
     public int Count2

@@ -13,7 +13,7 @@ namespace Tests.Diagnostics
         public int Count
         {
             get { return count; }
-            set { count = 3; } // Noncompliant {{Use the 'value' parameter in this property set accessor declaration.}}
+            set { count = 3; } // Noncompliant {{Use the 'value' contextual keyword in this property set accessor declaration.}}
 //          ^^^
         }
         public int Count2
@@ -55,7 +55,7 @@ namespace Tests.Diagnostics
 
         event EventHandler IDrawing.OnDraw
         {
-            add // Noncompliant {{Use the 'value' parameter in this event accessor declaration.}}
+            add // Noncompliant {{Use the 'value' contextual keyword in this event accessor declaration.}}
             {
                 lock (PreDrawEvent)
                 {
