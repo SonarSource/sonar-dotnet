@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
+using static SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp.InvalidCastToInterface;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string MessageReviewFormat = "Review this cast; in this project there's no type that {0}.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(InvalidCastToInterfaceSymbolicExecution.S1944);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S1944);
         protected override bool EnableConcurrentExecution => false;
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? $"implements both '{expressionTypeName}' and '{interfaceTypeName}'"
                 : $"extends '{expressionTypeName}' and implements '{interfaceTypeName}'";
 
-            context.ReportIssue(Diagnostic.Create(InvalidCastToInterfaceSymbolicExecution.S1944, issueLocation, string.Format(MessageReviewFormat, messageReasoning)));
+            context.ReportIssue(Diagnostic.Create(S1944, issueLocation, string.Format(MessageReviewFormat, messageReasoning)));
         }
     }
 }

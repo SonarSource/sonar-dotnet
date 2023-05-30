@@ -18,39 +18,63 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
+using SonarAnalyzer.Common;
+using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class InvalidCastToInterfaceTest
 {
-    [TestClass]
-    public class InvalidCastToInterfaceTest
-    {
-        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>()
-            .AddAnalyzer(() => new InvalidCastToInterface())
-            .WithBasePath(@"SymbolicExecution\Sonar")
-            .WithOnlyDiagnostics(InvalidCastToInterfaceSymbolicExecution.S1944);
+    private readonly VerifierBuilder sonar = new VerifierBuilder()
+        .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg)) // SE part
+        .AddAnalyzer(() => new CS.InvalidCastToInterface())                                                    // Syntax-based part
+        .WithBasePath(@"SymbolicExecution\Sonar")
+        .WithOnlyDiagnostics(ChecksCS.InvalidCastToInterface.S1944);
 
-        [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void InvalidCastToInterface(ProjectType projectType) =>
-            sonar.AddPaths("InvalidCastToInterface.cs")
-                .AddReferences(TestHelper.ProjectTypeReference(projectType).Union(MetadataReferenceFacade.NETStandard21))
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+    private readonly VerifierBuilder roslynCS = new VerifierBuilder()
+        // ToDo: .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))     // SE part
+        .AddAnalyzer(() => new CS.InvalidCastToInterface())                                         // Syntax-based part
+        .WithBasePath(@"SymbolicExecution\Roslyn")
+        .WithOnlyDiagnostics(ChecksCS.InvalidCastToInterface.S1944);
+
+    [DataTestMethod]
+    [DataRow(ProjectType.Product)]
+    [DataRow(ProjectType.Test)]
+    public void InvalidCastToInterface_Sonar_CS(ProjectType projectType) =>
+        sonar.AddPaths("InvalidCastToInterface.cs")
+            .AddReferences(TestHelper.ProjectTypeReference(projectType).Union(MetadataReferenceFacade.NETStandard21))
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
+
+    [DataTestMethod]
+    [DataRow(ProjectType.Product)]
+    [DataRow(ProjectType.Test)]
+    public void InvalidCastToInterface_Roslyn_CS(ProjectType projectType) =>
+        roslynCS.AddPaths("InvalidCastToInterface.cs").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
 
 #if NET
 
-        [TestMethod]
-        public void InvalidCastToInterface_CSharp9() =>
-            sonar.AddPaths("InvalidCastToInterface.CSharp9.cs").WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void InvalidCastToInterface_Roslyn_CSharp8() =>
+        roslynCS.AddPaths("InvalidCastToInterface.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
-        public void InvalidCastToInterface_CSharp10() =>
-            sonar.AddPaths("InvalidCastToInterface.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    [TestMethod]
+    public void InvalidCastToInterface_Sonar_CSharp9() =>
+        sonar.AddPaths("InvalidCastToInterface.CSharp9.cs").WithTopLevelStatements().Verify();
+
+    [TestMethod]
+    public void InvalidCastToInterface_Roslyn_CSharp9() =>
+        roslynCS.AddPaths("InvalidCastToInterface.CSharp9.cs").WithTopLevelStatements().Verify();
+
+    [TestMethod]
+    public void InvalidCastToInterface_Sonar_CSharp10() =>
+        sonar.AddPaths("InvalidCastToInterface.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+    [TestMethod]
+    public void InvalidCastToInterface_Roslyn_CSharp10() =>
+        roslynCS.AddPaths("InvalidCastToInterface.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
-
-    }
 }
