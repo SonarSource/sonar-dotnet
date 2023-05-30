@@ -220,6 +220,12 @@ public class Sample
         _ = DontRaiseOnUnknownValues(i) + 100;
         return i;
     }
+
+    public override int GetHashCode()
+    {
+        int i = int.MaxValue;
+        return i + 100; // Compliant, we don't want to run here
+    }
 }
 
 public class Properties
@@ -254,47 +260,54 @@ public class Properties
 
 class DotnetOverflow
 {
-    class A
+    public int UncheckedStatement()
     {
-        public int Overflow1()
+        int i, j = int.MaxValue;
+        unchecked
         {
-            unchecked
-            {
-                int i = 1834567890 + 1834567890;    // Noncompliant FP, we don't want to run for methods with unchecked
-                return i;
-            }
+            i = 1834567890 + 1834567890;    // Compliant, we don't want to run for methods with unchecked
         }
+        j = j + 100;    // Compliant, we don't want to run here either, because there's unchecked part in the code
+        return i + j;   // Compliant
+    }
 
-        public int Overflow2()
-        {
-            int i = 1834567890;
-            i += i;                                 // FN
-            return i;
-        }
+    public int UncheckedExpression()
+    {
+        int i, j = int.MaxValue;
+        i = unchecked(1834567890 + 1834567890);    // Compliant, we don't want to run for methods with unchecked
+        j = j + 100;    // Compliant, we don't want to run here either, because there's unchecked part in the code
+        return i + j;   // Compliant
+    }
 
-        public int Overflow3()
-        {
-            int i = 1834567890;
-            var j = i + i;                          // Noncompliant
-            return j;
-        }
+    public int Overflow2()
+    {
+        int i = 1834567890;
+        i += i;                                 // FN
+        return i;
+    }
 
-        public int Overflow4()
-        {
-            int i = -1834567890;
-            int j = 1834567890;
-            var k = i - j;                          // Noncompliant
-            return k;
-        }
+    public int Overflow3()
+    {
+        int i = 1834567890;
+        var j = i + i;                          // Noncompliant
+        return j;
+    }
 
-        public int Overflow5(int i)
+    public int Overflow4()
+    {
+        int i = -1834567890;
+        int j = 1834567890;
+        var k = i - j;                          // Noncompliant
+        return k;
+    }
+
+    public int Overflow5(int i)
+    {
+        if (i > 1834567890)
         {
-            if (i > 1834567890)
-            {
-                return i + i;                       // Noncompliant
-            }
-            return 0;
+            return i + i;                       // Noncompliant
         }
+        return 0;
     }
 }
 
