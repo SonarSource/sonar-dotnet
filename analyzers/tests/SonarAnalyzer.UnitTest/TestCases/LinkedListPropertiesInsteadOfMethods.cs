@@ -7,10 +7,10 @@ class MyClass
 {
     void Basic(LinkedList<int> data)
     {
-        data.First(); // Noncompliant {{'First' property of 'LinkedList' should be used instead of the 'First()' extension method.}}
-//           ^^^^^
-        data.Last(); // Noncompliant {{'Last' property of 'LinkedList' should be used instead of the 'Last()' extension method.}}
-//           ^^^^
+        _ = data.First(); // Noncompliant {{'First' property of 'LinkedList' should be used instead of the 'First()' extension method.}}
+//               ^^^^^
+        _ = data.Last(); // Noncompliant {{'Last' property of 'LinkedList' should be used instead of the 'Last()' extension method.}}
+//               ^^^^
         data.First(x => x > 0);            // Compliant
         data.Last(x => x > 0);             // Compliant
         _ = data.First.Value;              // Compliant
@@ -26,14 +26,14 @@ class MyClass
     void CustomClass(LinkedList<int> data)
     {
         var classContainingLinkedList = new ClassContainingLinkedList();
-        classContainingLinkedList.myLinkedListField.First();  // Noncompliant
-        classContainingLinkedList.notALinkedList.First(); // Compliant
+        _ = classContainingLinkedList.myLinkedListField.First();  // Noncompliant
+        _ = classContainingLinkedList.notALinkedList.First(); // Compliant
 
         var enumData = new EnumData<int>();
         enumData.First(); // Compliant
 
         var goodLinkedList = new GoodLinkedList<int>();
-        goodLinkedList.First(); // Noncompliant
+        _ = goodLinkedList.First(); // Noncompliant
 
         var ternary = (true ? data : goodLinkedList).First(); // Noncompliant
         var nullCoalesce = (data ?? goodLinkedList).First();  // Noncompliant
@@ -41,26 +41,26 @@ class MyClass
     }
 
     void ConditionalsCombinations(GoodLinkedList<int> goodLinkedList)
-    { 
-        goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList().GetLinkedList().First();     // Noncompliant
-        goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList().GetLinkedList()?.First();    // Noncompliant
-        goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList()?.GetLinkedList().First();    // Noncompliant
-        goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList()?.GetLinkedList()?.First();   // Noncompliant
-        goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList().GetLinkedList().First();    // Noncompliant
-        goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList().GetLinkedList()?.First();   // Noncompliant
-        goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList()?.GetLinkedList().First();   // Noncompliant
-        goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.First();  // Noncompliant
-        goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList().GetLinkedList().First();    // Noncompliant
-        goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList().GetLinkedList()?.First();   // Noncompliant
-        goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList()?.GetLinkedList().First();   // Noncompliant
-        goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList()?.GetLinkedList()?.First();  // Noncompliant
-        goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList().GetLinkedList().First();   // Noncompliant
-        goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList().GetLinkedList()?.First();  // Noncompliant
-        goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.GetLinkedList().First();  // Noncompliant
-        goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.First(); // Noncompliant
-//                                                                                         ^^^^^
-        goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.First(x => x > 0); // Compliant
-}
+    {
+        _ = goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList().GetLinkedList().First();     // Noncompliant
+        _ = goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList().GetLinkedList()?.First();    // Noncompliant
+        _ = goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList()?.GetLinkedList().First();    // Noncompliant
+        _ = goodLinkedList.GetLinkedList().GetLinkedList().GetLinkedList()?.GetLinkedList()?.First();   // Noncompliant
+        _ = goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList().GetLinkedList().First();    // Noncompliant
+        _ = goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList().GetLinkedList()?.First();   // Noncompliant
+        _ = goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList()?.GetLinkedList().First();   // Noncompliant
+        _ = goodLinkedList.GetLinkedList().GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.First();  // Noncompliant
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList().GetLinkedList().First();    // Noncompliant
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList().GetLinkedList()?.First();   // Noncompliant
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList()?.GetLinkedList().First();   // Noncompliant
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList().GetLinkedList()?.GetLinkedList()?.First();  // Noncompliant
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList().GetLinkedList().First();   // Noncompliant
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList().GetLinkedList()?.First();  // Noncompliant
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.GetLinkedList().First();  // Noncompliant
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.First(); // Noncompliant
+//                                                                                             ^^^^^
+        _ = goodLinkedList.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.GetLinkedList()?.First(x => x > 0); // Compliant
+    }
 
     int GetFirst(LinkedList<int> data) => data.First(); // Noncompliant
 
