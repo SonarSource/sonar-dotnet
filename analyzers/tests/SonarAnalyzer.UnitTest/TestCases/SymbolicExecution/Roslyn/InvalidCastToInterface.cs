@@ -3,10 +3,12 @@ using System.Collections.Generic;
 
 public interface IMyInterface { }
 public interface IMyInterface2 { }
-public interface IMyInterface4 : IMyInterface { }
 public interface IMyInterface3 : IMyInterface { }
+public interface IMyInterface4 : IMyInterface { }
+public interface IMyInterface5 { }
 
 public class Implementer : IMyInterface { }
+public class Implementer5 : IMyInterface5 { }
 
 public class MyClass1 { }
 public class MyClass2 { }
@@ -23,8 +25,9 @@ public class InvalidCastToInterface
     static void Main()
     {
         var myclass1 = new MyClass1();
-        var x = (IMyInterface)myclass1; // Noncompliant {{Review this cast; in this project there's no type that extends 'MyClass1' and implements 'IMyInterface'.}}, this part is not based on SE
+        var x = (IMyInterface)myclass1; // Noncompliant {{Review this cast; in this project there's no type that extends 'MyClass1' and implements 'IMyInterface'.}},   this part is not based on SE
 //               ^^^^^^^^^^^^
+        var a = (IMyInterface5)x;       // Noncompliant {{Review this cast; in this project there's no type that implements both 'IMyInterface' and 'IMyInterface5'.}}, this part is not based on SE
         x = myclass1 as IMyInterface;
         bool b = myclass1 is IMyInterface;
 
@@ -35,7 +38,7 @@ public class InvalidCastToInterface
         var y = (IMyInterface)myclass2;
 
         IMyInterface i = new MyClass3();
-        var c = (IMyInterface2)i; // Compliant
+        var c = (IMyInterface2)i; // Compliant, because IMyInterface2 doesn't have concrete implementation
         IMyInterface4 ii = null;
         var d = (IMyInterface2)i; // Compliant
         var e = (IMyInterface3)i;
