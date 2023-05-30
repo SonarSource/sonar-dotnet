@@ -223,11 +223,11 @@ internal sealed partial class Binary
         {
             if (left.Min > right.Max)
             {
-                return left.Min - right.Max;
+                return left.Min.Value - right.Max.Value;
             }
             else if (right.Min > left.Max)
             {
-                return right.Min - left.Max;
+                return right.Min.Value - left.Max.Value;
             }
             else
             {
@@ -238,11 +238,11 @@ internal sealed partial class Binary
         {
             if (right.Min > left.Max)
             {
-                return right.Min - left.Max;
+                return right.Min.Value - left.Max.Value;
             }
             else if (left.Min > right.Max)
             {
-                return left.Min - right.Max;
+                return left.Min.Value - right.Max.Value;
             }
             else
             {
@@ -259,7 +259,7 @@ internal sealed partial class Binary
     {
         if ((left.IsPositive && right.CanBePositive) || (right.IsPositive && left.CanBeNegative))
         {
-            return left.Max.HasValue && right.Max.HasValue ? PositiveMagnitude(BigInteger.Max(left.Max.Value, right.Max.Value)) : null;
+            return left.Max.HasValue && right.Max.HasValue ? PositiveMagnitude(left.Max.Value | right.Max.Value) : null;
         }
         else if ((left.IsPositive && right.IsNegative) || (left.IsNegative && right.IsPositive))
         {
