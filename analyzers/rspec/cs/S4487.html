@@ -1,12 +1,11 @@
 <h2>Why is this an issue?</h2>
-<p>Private fields only used to store values without reading them later is a case of dead store. So changing the value of such field is useless and
-most probably indicates a serious error in the code.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>Private fields which are written but never read are a case of "dead store". Changing the value of such a field is useless and most probably
+indicates an error in the code.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public class Rectangle
 {
   private readonly int length;
-  private readonly int width;  // width is written but never read
+  private readonly int width;  // Noncompliant: width is written but never read
 
   public Rectangle(int length, int width)
   {
@@ -23,8 +22,8 @@ public class Rectangle
   }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<p>Remove this field if it doesn’t need to be read, or fix the code to read it.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
 public class Rectangle
 {
   private readonly int length;
@@ -46,6 +45,7 @@ public class Rectangle
 }
 </pre>
 <h2>Resources</h2>
+<h3>Standards</h3>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/563">MITRE, CWE-563</a> - Assignment to Variable without Use ('Unused Variable') </li>
 </ul>
