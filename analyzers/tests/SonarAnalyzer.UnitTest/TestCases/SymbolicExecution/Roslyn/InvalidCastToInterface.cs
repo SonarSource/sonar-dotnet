@@ -70,8 +70,8 @@ public class NullableTest
     public void Test1()
     {
         int? i1 = null;
-        var ii = (int)i1; // FIXME Non-compliant {{Nullable is known to be empty, this cast throws an exception.}}, this part is not based on SE
-//               ~~~~~~~
+        var ii = (int)i1; // Noncompliant {{Nullable is known to be empty, this cast throws an exception.}}, this part is not based on SE
+//               ^^^^^^^
     }
 
     public void Test2()
@@ -83,13 +83,13 @@ public class NullableTest
     public void Test3()
     {
         int? i3 = null;
-        var d = (double)i3; // FIXME Non-compliant
+        var d = (double)i3; // Noncompliant
     }
 
     public void Test4()
     {
         int? i4 = null;
-        var n = (NullableTest)i4; // don't care, custom cast
+        var n = (NullableTest)i4; // Compliant, custom cast
     }
 
     public void Test5()
@@ -114,6 +114,13 @@ public class NullableTest
     {
         var a = obj as MyClass;
         var test = (ushort?)a?.D;
+    }
+
+    public void ToObject()
+    {
+        int? value = null;
+        object o = value;
+        object[] arr = { value };
     }
 
     public static explicit operator NullableTest(int? i)

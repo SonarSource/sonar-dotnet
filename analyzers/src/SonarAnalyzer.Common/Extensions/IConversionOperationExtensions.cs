@@ -18,15 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
+namespace SonarAnalyzer.Extensions;
 
-internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
+public static class IConversionOperationExtensions
 {
-    protected override IConversionOperationWrapper Convert(IOperation operation) =>
-        operation.ToConversion();
-
-    protected override ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
-        context.State[conversion.Operand] is { } value && conversion.IsBuildIn()
-            ? context.State.SetOperationValue(context.Operation, value)
-            : context.State;
+    public static bool IsBuildIn(this IConversionOperationWrapper conversion) =>
+        conversion.OperatorMethod is null || conversion.OperatorMethod.ContainingType.IsAny(KnownType.PointerTypes);
 }

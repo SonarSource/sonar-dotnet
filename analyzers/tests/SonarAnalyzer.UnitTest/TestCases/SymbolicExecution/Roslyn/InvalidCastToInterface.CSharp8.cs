@@ -3,7 +3,7 @@
     public void NullCoalescenceAssignment_Null()
     {
         int? i1 = null;
-        i1 ??= (int)i1; // FIXME Non-compliant {{Nullable is known to be empty, this cast throws an exception.}}
+        i1 ??= (int)i1; // Noncompliant {{Nullable is known to be empty, this cast throws an exception.}}
     }
 
     public void NullCoalescenceAssignment_NotNull()
@@ -16,14 +16,14 @@
     {
         int? i = null;
         i ??= null;
-        var r1 = (int)i; // FIXME Non-compliant
+        var r1 = (int)i; // Noncompliant
     }
 
     public void NullCoalescenceAssignmentResult_NotNull()
     {
         int? i = null;
         i ??= 1;
-        var r1 = (int)i;
+        var r1 = (int)i;    // Noncompliant FP FIXME, this doesn't call property int?.HasValue, but method int?.HasValue.get
     }
 }
 
@@ -34,7 +34,7 @@ public class SwitchExpressions
         int? i = null;
         int? result = i switch
         {
-            null => (int) i, // FIXME Non-compliant
+            null => (int) i, // Noncompliant
             _ => 0
         };
     }
@@ -47,7 +47,7 @@ public class SwitchExpressions
             2 => null,
             _ => null
         };
-        return (int)result; // FIXME Non-compliant
+        return (int)result; // Noncompliant
     }
 
     public int AlwaysNonNull(int val)
@@ -74,7 +74,7 @@ public class SwitchExpressions
     {
         return val.HasValue switch
         {
-            false => (int)val, // FN
+            false => (int)val, // Noncompliant
             _ => 0
         };
     }
@@ -85,7 +85,7 @@ public interface IWithDefaultMembers
     void NoncompliantDefaultInterfaceMethod()
     {
         int? i1 = null;
-        var i2 = (int)i1; // FIXME Non-compliant
+        var i2 = (int)i1; // Noncompliant
     }
 
     void CompliantDefaultInterfaceMethod()

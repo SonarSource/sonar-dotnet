@@ -29,13 +29,13 @@ public class InvalidCastToInterfaceTest
 {
     private readonly VerifierBuilder sonar = new VerifierBuilder()
         .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg)) // SE part
-        .AddAnalyzer(() => new CS.InvalidCastToInterface())                                                    // Syntax-based part
+        .AddAnalyzer(() => new CS.InvalidCastToInterfaceAnalyzer())                                         // Syntax-based part
         .WithBasePath(@"SymbolicExecution\Sonar")
         .WithOnlyDiagnostics(ChecksCS.InvalidCastToInterface.S1944);
 
     private readonly VerifierBuilder roslynCS = new VerifierBuilder()
-        // ToDo: .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))     // SE part
-        .AddAnalyzer(() => new CS.InvalidCastToInterface())                                         // Syntax-based part
+        .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))     // SE part
+        .AddAnalyzer(() => new CS.InvalidCastToInterfaceAnalyzer())                                 // Syntax-based part
         .WithBasePath(@"SymbolicExecution\Roslyn")
         .WithOnlyDiagnostics(ChecksCS.InvalidCastToInterface.S1944);
 

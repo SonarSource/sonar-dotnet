@@ -48,7 +48,7 @@ public class Sample
         var i = (int)nullable;
 
         nullable = null;
-        i = (int)nullable; // FN, can't build CFG for this method
+        i = (int)nullable; // Noncompliant
     }
 
     public void StaticLambda()
@@ -65,7 +65,7 @@ public class Sample
             var i = (int)nullable;
 
             nullable = null;
-            i = (int)nullable; // FIXME Non-compliant
+            i = (int)nullable; // Noncompliant
         };
         a();
     }
@@ -85,7 +85,7 @@ public class Sample
             var i = (int)nullable;
 
             nullable = null;
-            i = (int)nullable;  // FIXME Non-compliant
+            i = (int)nullable;  // Noncompliant
         }
     }
 }
@@ -107,7 +107,7 @@ public record Record
         var i = (int)nullable;
 
         nullable = null;
-        i = (int)nullable; // FIXME Non-compliant
+        i = (int)nullable; // Noncompliant
     }
 
     public void MethodWithRecords()
@@ -142,6 +142,6 @@ public partial class Partial
         var i = (int)nullable;
 
         nullable = null;
-        i = (int)nullable; // FIXME Non-compliant
+        i = (int)nullable; // Noncompliant
     }
 }

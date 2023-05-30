@@ -29,6 +29,6 @@ public sealed class InvalidCastToInterface : InvalidCastToInterfaceBase
 
     public override bool ShouldExecute()
     {
-        return false;
+        return true;
     }
 }

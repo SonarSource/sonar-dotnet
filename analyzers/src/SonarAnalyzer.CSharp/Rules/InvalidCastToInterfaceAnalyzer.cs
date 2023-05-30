@@ -23,7 +23,7 @@ using static SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp.InvalidCas
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class InvalidCastToInterface : SonarDiagnosticAnalyzer
+    public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
     {
         private const string MessageReviewFormat = "Review this cast; in this project there's no type that {0}.";
 
