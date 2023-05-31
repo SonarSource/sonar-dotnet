@@ -29,6 +29,24 @@ public sealed class InvalidCastToInterface : InvalidCastToInterfaceBase
 
     public override bool ShouldExecute()
     {
-        return true;
+        var walker = new Walker();
+        walker.SafeVisit(Node);
+        return walker.Result;
+    }
+
+    private sealed class Walker : SafeCSharpSyntaxWalker
+    {
+        public bool Result { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!Result)
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitCastExpression(CastExpressionSyntax node) =>
+            Result = true;
     }
 }
