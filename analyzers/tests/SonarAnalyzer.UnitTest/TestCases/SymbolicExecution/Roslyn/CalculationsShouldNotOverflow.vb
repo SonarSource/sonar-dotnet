@@ -79,7 +79,7 @@ Public Class Sample
         __ = i * 2147483600     ' FN
 
         i = 2 Mod j
-        __ = i * 2147483600     ' FN
+        __ = i * 2147483600     ' Noncompliant
 
         Dim Result = Integer.MaxValue ^ 2  ' Compliant, result is Double
     End Sub

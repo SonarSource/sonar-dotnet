@@ -31,6 +31,8 @@ internal sealed partial class Binary
         BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
         BinaryOperatorKind.Multiply => CalculateMultiply(left, right),
         BinaryOperatorKind.Divide => CalculateDivide(left, right),
+        BinaryOperatorKind.Remainder when left.IsSingleValue && right.IsSingleValue && right.Min != 0 => NumberConstraint.From(left.Min.Value % right.Min.Value),
+        BinaryOperatorKind.Remainder => CalculateRemainder(left, right),
         BinaryOperatorKind.And when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value & right.Min.Value),
         BinaryOperatorKind.And => NumberConstraint.From(CalculateAndMin(left, right), CalculateAndMax(left, right)),
         BinaryOperatorKind.Or when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value | right.Min.Value),
@@ -113,6 +115,69 @@ internal sealed partial class Binary
         return NumberConstraint.From(min, max);
     }
 
+    private static NumberConstraint CalculateRemainder(NumberConstraint left, NumberConstraint right)
+    {
+        if (right.Min == 0 && right.Max == 0)
+        {
+            return null;
+        }
+        else
+        {
+            right = AccountForZero(right);
+            return NumberConstraint.From(CalculateRemainderMin(left, right), CalculateRemainderMax(left, right));
+        }
+    }
+
+    private static BigInteger? CalculateRemainderMin(NumberConstraint left, NumberConstraint right)
+    {
+        // If the absolute value of the divisor is bigger than the absolute value of the dividend, the result is equal to the dividend =>
+        // If the absolute value of every divisor is bigger than the absolute value of any dividend => resulting range == dividend range.
+        // Otherwise, the result is between 0 and the absolute value of the divisor - 1 for positive dividends or in the same range multiplied by -1 for negative dividends.
+        if (left.CanBeNegative || left.Max < MinOfAbsoluteValues(right))
+        {
+            if (right.Min is null || right.Max is null)
+            {
+                // If right is not finite, there will always be a divisor for which its absolute value is bigger than the absolute value of any value in left => resulting range == dividend range.
+                return left.Min;
+            }
+            else
+            {
+                // Otherwise, the result value is limited by the dividend and the divisor.
+                var minDerivedFromRight = -MaxOfAbsoluteValues(right) + 1;
+                return left.Min is null ? minDerivedFromRight : BigInteger.Max(left.Min.Value, minDerivedFromRight);
+            }
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    private static BigInteger? CalculateRemainderMax(NumberConstraint left, NumberConstraint right)
+    {
+        // If the absolute value of the divisor is bigger than the absolute value of the dividend, the result is equal to the dividend =>
+        // If the absolute value of every divisor is bigger than the absolute value of any dividend => resulting range == dividend range.
+        // Otherwise, the result is between 0 and the absolute value of the divisor - 1 for positive dividends or in the same range multiplied by -1 for negative dividends.
+        if (left.CanBePositive || -left.Max < MinOfAbsoluteValues(right))
+        {
+            if (right.Min is null || right.Max is null)
+            {
+                // If right is not finite, there will always be a divisor for which its absolute value is bigger than the absolute value of any value in left => resulting range == dividend range.
+                return left.Max;
+            }
+            else
+            {
+                // Otherwise, the result value is limited by the dividend and the divisor.
+                var maxDerivedFromRight = MaxOfAbsoluteValues(right) - 1;
+                return left.Max is null ? maxDerivedFromRight : BigInteger.Min(left.Max.Value, maxDerivedFromRight);
+            }
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     private static NumberConstraint AccountForZero(NumberConstraint constraint)
     {
         if (constraint.Min == 0)
@@ -126,6 +191,25 @@ internal sealed partial class Binary
         else
         {
             return constraint;
+        }
+    }
+
+    private static BigInteger MaxOfAbsoluteValues(NumberConstraint constraint) =>
+        BigInteger.Max(BigInteger.Abs(constraint.Min.Value), BigInteger.Abs(constraint.Max.Value));
+
+    private static BigInteger MinOfAbsoluteValues(NumberConstraint constraint)
+    {
+        if (constraint.IsPositive)
+        {
+            return constraint.Min.Value;
+        }
+        else if (constraint.IsNegative)
+        {
+            return -constraint.Max.Value;
+        }
+        else
+        {
+            return 0;
         }
     }
 

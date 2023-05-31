@@ -118,7 +118,7 @@ public class Sample
         _ = i * 2147483600;     // FN
 
         i = 2 % j;
-        _ = i * 2147483600;     // FN
+        _ = i * 2147483600;     // Noncompliant
     }
 
     public void AssignmentOperators()

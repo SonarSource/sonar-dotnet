@@ -909,6 +909,121 @@ Tag(""End"")";
     }
 
     [DataTestMethod]
+    [DataRow(21, 4, 1)]
+    [DataRow(21, -4, 1)]
+    [DataRow(-21, 4, -1)]
+    [DataRow(-21, -4, -1)]
+    [DataRow(4, 5, 4)]
+    [DataRow(-4, 5, -4)]
+    [DataRow(4, -5, 4)]
+    [DataRow(-4, -5, -4)]
+    [DataRow(5, 5, 0)]
+    [DataRow(5, -5, 0)]
+    [DataRow(-5, 5, 0)]
+    [DataRow(-5, -5, 0)]
+    [DataRow(5, 1, 0)]
+    [DataRow(5, -1, 0)]
+    [DataRow(-5, 1, 0)]
+    [DataRow(-5, -1, 0)]
+    public void Binary_Remainder_SingleValue(int left, int right, int expected)
+    {
+        var code = $"""
+            var left = {left};
+            var right = {right};
+            var value = left % right;
+            Tag("Value", value);
+            """;
+        SETestContext.CreateCS(code).Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+    }
+
+    [DataTestMethod]
+    [DataRow("i >=  21 && j >=  5", 0, null)]
+    [DataRow("i >=  21 && j >= -5", 0, null)]
+    [DataRow("i >=  21 && j ==  5", 0, 4)]
+    [DataRow("i >=  21 && j == -5", 0, 4)]
+    [DataRow("i >=  21 && j <=  5", 0, null)]
+    [DataRow("i >=  21 && j <= -5", 0, null)]
+    [DataRow("i >= -21 && j >=  5", -21, null)]
+    [DataRow("i >= -21 && j >= -5", -21, null)]
+    [DataRow("i >= -21 && j ==  5", -4, 4)]
+    [DataRow("i >= -21 && j == -5", -4, 4)]
+    [DataRow("i >= -21 && j <=  5", -21, null)]
+    [DataRow("i >= -21 && j <= -5", -21, null)]
+    [DataRow("i ==  21 && j >=  5", 0, 21)]
+    [DataRow("i ==  21 && j >= -5", 0, 21)]
+    [DataRow("i ==  21 && j <=  5", 0, 21)]
+    [DataRow("i ==  21 && j <= -5", 0, 21)]
+    [DataRow("i == -21 && j >=  5", -21, 0)]
+    [DataRow("i == -21 && j >= -5", -21, 0)]
+    [DataRow("i == -21 && j <=  5", -21, 0)]
+    [DataRow("i == -21 && j <= -5", -21, 0)]
+    [DataRow("i <=  21 && j >=  5", null, 21)]
+    [DataRow("i <=  21 && j >= -5", null, 21)]
+    [DataRow("i <=  21 && j ==  5", -4, 4)]
+    [DataRow("i <=  21 && j == -5", -4, 4)]
+    [DataRow("i <=  21 && j <=  5", null, 21)]
+    [DataRow("i <=  21 && j <= -5", null, 21)]
+    [DataRow("i <= -21 && j >=  5", null, 0)]
+    [DataRow("i <= -21 && j >= -5", null, 0)]
+    [DataRow("i <= -21 && j ==  5", -4, 0)]
+    [DataRow("i <= -21 && j == -5", -4, 0)]
+    [DataRow("i <= -21 && j <=  5", null, 0)]
+    [DataRow("i <= -21 && j <= -5", null, 0)]
+    [DataRow("i >=  21 && j >= 0", 0, null)]
+    [DataRow("i >=  21 && j == 0", null, null)]
+    [DataRow("i >=  21 && j <= 0", 0, null)]
+    [DataRow("i >= -21 && j >= 0", -21, null)]
+    [DataRow("i >= -21 && j == 0", null, null)]
+    [DataRow("i >= -21 && j <= 0", -21, null)]
+    [DataRow("i <=  21 && j >= 0", null, 21)]
+    [DataRow("i <=  21 && j == 0", null, null)]
+    [DataRow("i <=  21 && j <= 0", null, 21)]
+    [DataRow("i <= -21 && j >= 0", null, 0)]
+    [DataRow("i <= -21 && j == 0", null, null)]
+    [DataRow("i <= -21 && j <= 0", null, 0)]
+    [DataRow("i >=  21 && j == 1", 0, 0)]
+    [DataRow("i >= -21 && j == 1", 0, 0)]
+    [DataRow("i <=  21 && j == 1", 0, 0)]
+    [DataRow("i <= -21 && j == 1", 0, 0)]
+    [DataRow("i >=  21 && j >=   5 && j <= 10", 0, 9)]
+    [DataRow("i >=  21 && j >=  -5 && j <= 10", 0, 9)]
+    [DataRow("i >=  21 && j >= -10 && j <=  5", 0, 9)]
+    [DataRow("i >=  21 && j >= -10 && j <= -5", 0, 9)]
+    [DataRow("i >= -21 && j >=   5 && j <= 10", -9, 9)]
+    [DataRow("i >= -21 && j >=  -5 && j <= 10", -9, 9)]
+    [DataRow("i >= -21 && j >= -10 && j <=  5", -9, 9)]
+    [DataRow("i >= -21 && j >= -10 && j <= -5", -9, 9)]
+    [DataRow("i <=  21 && j >=   5 && j <= 10", -9, 9)]
+    [DataRow("i <=  21 && j >=  -5 && j <= 10", -9, 9)]
+    [DataRow("i <=  21 && j >= -10 && j <=  5", -9, 9)]
+    [DataRow("i <=  21 && j >= -10 && j <= -5", -9, 9)]
+    [DataRow("i <= -21 && j >=   5 && j <= 10", -9, 0)]
+    [DataRow("i <= -21 && j >=  -5 && j <= 10", -9, 0)]
+    [DataRow("i <= -21 && j >= -10 && j <=  5", -9, 0)]
+    [DataRow("i <= -21 && j >= -10 && j <= -5", -9, 0)]
+    [DataRow("i >=   5 && i <=  10 && j >=  21", 5, 10)]
+    [DataRow("i >=   5 && i <=  10 && j <= -21", 5, 10)]
+    [DataRow("i >=  -5 && i <=  10 && j >=  21", -5, 10)]
+    [DataRow("i >=  -5 && i <=  10 && j <= -21", -5, 10)]
+    [DataRow("i >= -10 && i <=   5 && j >=  21", -10, 5)]
+    [DataRow("i >= -10 && i <=   5 && j <= -21", -10, 5)]
+    [DataRow("i >= -10 && i <=  -5 && j >=  21", -10, -5)]
+    [DataRow("i >= -10 && i <=  -5 && j <= -21", -10, -5)]
+    [DataRow("i >=   4 && i <=   7 && j >=   5 && j <= 10", 0, 7)]
+    [DataRow("i == 5 && j == 0", null, null)]
+    public void Binary_Remainder_Range(string expression, int? expectedMin, int? expectedMax)
+    {
+        var code = $$"""
+            if ({{expression}})
+            {
+                var value = i % j;
+                Tag("Value", value);
+            }
+            """;
+        SETestContext.CreateCS(code, "int i, int j").Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+    }
+
+    [DataTestMethod]
     [DataRow(0b0000, 0b0000, 0b0000)]
     [DataRow(0b0101, 0b0101, 0b0101)]
     [DataRow(0b0101, 0b0001, 0b0001)]
