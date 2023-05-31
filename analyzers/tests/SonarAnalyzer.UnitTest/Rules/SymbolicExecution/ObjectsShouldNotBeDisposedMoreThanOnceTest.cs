@@ -69,8 +69,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Sonar_CSharp9() =>
             sonar.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs")
-            .WithTopLevelStatements()
-            .Verify();
+                .WithTopLevelStatements()
+                .Verify();
 
         [Ignore] // ToDo: Remove after S3966 implementation
         [TestMethod]
