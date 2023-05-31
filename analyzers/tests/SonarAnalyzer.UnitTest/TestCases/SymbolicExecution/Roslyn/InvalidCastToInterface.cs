@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 public interface IBase { }
@@ -47,6 +48,14 @@ public class InvalidCastToInterface
         var z = (IDisposable)new EmptyClass();
         var w = (IDisposable)(new Node());
     }
+
+    public void Generics()
+    {
+        var list = new List<int>();
+        var ilist = (IList)list;                // Noncompliant FP
+        var icollection = (ICollection)list;    // Noncompliant FP
+    }
+}
 
     public void Nullable()
     {
