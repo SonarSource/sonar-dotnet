@@ -47,8 +47,16 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
                         var cast = (CastExpressionSyntax)c.Node;
                         var interfaceType = c.SemanticModel.GetTypeInfo(cast.Type).Type as INamedTypeSymbol;
                         var expressionType = c.SemanticModel.GetTypeInfo(cast.Expression).Type as INamedTypeSymbol;
-
-                        CheckTypesForInvalidCast(c, interfaceType, expressionType, interfaceImplementer, cast.Type.GetLocation());
+                        if (IsImpossibleCast(interfaceImplementer, interfaceType, expressionType))
+                        {
+                            var location = cast.Type.GetLocation();
+                            var interfaceTypeName = interfaceType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
+                            var expressionTypeName = expressionType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
+                            var messageReasoning = expressionType.IsInterface()
+                                ? $"implements both '{expressionTypeName}' and '{interfaceTypeName}'"
+                                : $"extends '{expressionTypeName}' and implements '{interfaceTypeName}'";
+                            c.ReportIssue(Diagnostic.Create(S1944, location, string.Format(MessageReviewFormat, messageReasoning)));
+                        }
                     },
                     SyntaxKind.CastExpression);
             });
@@ -81,49 +89,32 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
         }
     }
 
-    private static void CheckTypesForInvalidCast(SonarSyntaxNodeReportingContext context, INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType, TypeMap interfaceImplementer, Location issueLocation)
+    private static bool IsImpossibleCast(TypeMap interfaceImplementer, INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType)
     {
         if (interfaceType == null ||
             expressionType == null ||
             !interfaceType.IsInterface() ||
             expressionType.Is(KnownType.System_Object))
         {
-            return;
+            return false;
         }
 
         if (!HasExistingConcreteImplementation(interfaceType, interfaceImplementer))
         {
-            return;
+            return false;
         }
 
         if (expressionType.IsInterface() &&
             !HasExistingConcreteImplementation(expressionType, interfaceImplementer))
         {
-            return;
+            return false;
         }
 
-        if (interfaceImplementer.ContainsKey(interfaceType.OriginalDefinition) &&
-            !interfaceImplementer[interfaceType.OriginalDefinition].Any(t => t.DerivesOrImplements(expressionType.OriginalDefinition)) &&
-            !expressionType.IsSealed)
-        {
-            ReportIssue(context, interfaceType, expressionType, issueLocation);
-        }
+        return interfaceImplementer.ContainsKey(interfaceType.OriginalDefinition)
+            && !interfaceImplementer[interfaceType.OriginalDefinition].Any(t => t.DerivesOrImplements(expressionType.OriginalDefinition))
+            && !expressionType.IsSealed;
     }
 
-    private static bool HasExistingConcreteImplementation(INamedTypeSymbol type,
-        TypeMap interfaceImplementer) =>
-        interfaceImplementer.ContainsKey(type) &&
-        interfaceImplementer[type].Any(t => t.IsClassOrStruct());
-
-    private static void ReportIssue(SonarSyntaxNodeReportingContext context, ISymbol interfaceType, ITypeSymbol expressionType, Location issueLocation)
-    {
-        var interfaceTypeName = interfaceType.ToMinimalDisplayString(context.SemanticModel, issueLocation.SourceSpan.Start);
-        var expressionTypeName = expressionType.ToMinimalDisplayString(context.SemanticModel, issueLocation.SourceSpan.Start);
-
-        var messageReasoning = expressionType.IsInterface()
-            ? $"implements both '{expressionTypeName}' and '{interfaceTypeName}'"
-            : $"extends '{expressionTypeName}' and implements '{interfaceTypeName}'";
-
-        context.ReportIssue(Diagnostic.Create(S1944, issueLocation, string.Format(MessageReviewFormat, messageReasoning)));
-    }
+    private static bool HasExistingConcreteImplementation(INamedTypeSymbol type, TypeMap interfaceImplementer) =>
+        interfaceImplementer.ContainsKey(type) && interfaceImplementer[type].Any(t => t.IsClassOrStruct());
 }
