@@ -11,7 +11,7 @@ int? nullable = 42;
 var i = (int)nullable;
 
 nullable = null;
-i = (int)nullable; // FN {{Nullable is known to be empty, this cast throws an exception.}};
+i = (int)nullable; // FN {{Nullable is known to be empty, this cast throws an exception.}}, SE part
 
 void TopLevelLocalFunction()
 {
@@ -48,7 +48,7 @@ public class Sample
         var i = (int)nullable;
 
         nullable = null;
-        i = (int)nullable; // Noncompliant
+        i = (int)nullable; // Noncompliant, SE part
     }
 
     public void StaticLambda()
@@ -65,7 +65,7 @@ public class Sample
             var i = (int)nullable;
 
             nullable = null;
-            i = (int)nullable; // Noncompliant
+            i = (int)nullable; // Noncompliant, SE part
         };
         a();
     }
@@ -85,7 +85,7 @@ public class Sample
             var i = (int)nullable;
 
             nullable = null;
-            i = (int)nullable;  // Noncompliant
+            i = (int)nullable;  // Noncompliant, SE part
         }
     }
 }
@@ -107,7 +107,7 @@ public record Record
         var i = (int)nullable;
 
         nullable = null;
-        i = (int)nullable; // Noncompliant
+        i = (int)nullable; // Noncompliant, SE part
     }
 
     public void MethodWithRecords()
@@ -142,6 +142,6 @@ public partial class Partial
         var i = (int)nullable;
 
         nullable = null;
-        i = (int)nullable; // Noncompliant
+        i = (int)nullable; // Noncompliant, SE part
     }
 }

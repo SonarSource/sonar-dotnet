@@ -3,7 +3,7 @@
     public void NullCoalescenceAssignment_Null()
     {
         int? i1 = null;
-        i1 ??= (int)i1; // Noncompliant {{Nullable is known to be empty, this cast throws an exception.}}
+        i1 ??= (int)i1; // Noncompliant {{Nullable is known to be empty, this cast throws an exception.}}, SE part
     }
 
     public void NullCoalescenceAssignment_NotNull()
@@ -16,7 +16,7 @@
     {
         int? i = null;
         i ??= null;
-        var r1 = (int)i; // Noncompliant
+        var r1 = (int)i; // Noncompliant, SE part
     }
 
     public void NullCoalescenceResult_NotNull()
@@ -41,7 +41,7 @@ public class SwitchExpressions
         int? i = null;
         int? result = i switch
         {
-            null => (int) i, // Noncompliant
+            null => (int) i, // Noncompliant, SE part
             _ => 0
         };
     }
@@ -54,7 +54,7 @@ public class SwitchExpressions
             2 => null,
             _ => null
         };
-        return (int)result; // Noncompliant
+        return (int)result; // Noncompliant, SE part
     }
 
     public int AlwaysNonNull(int val)
@@ -81,7 +81,7 @@ public class SwitchExpressions
     {
         return val.HasValue switch
         {
-            false => (int)val, // Noncompliant
+            false => (int)val, // Noncompliant, SE part
             _ => 0
         };
     }
@@ -92,7 +92,7 @@ public interface IWithDefaultMembers
     void NoncompliantDefaultInterfaceMethod()
     {
         int? i1 = null;
-        var i2 = (int)i1; // Noncompliant
+        var i2 = (int)i1; // Noncompliant, SE part
     }
 
     void CompliantDefaultInterfaceMethod()

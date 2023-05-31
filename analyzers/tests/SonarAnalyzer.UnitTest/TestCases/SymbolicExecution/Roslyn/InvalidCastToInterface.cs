@@ -83,7 +83,7 @@ public class NullableTest
     public void Test3()
     {
         int? i3 = null;
-        var d = (double)i3; // Noncompliant
+        var d = (double)i3; // Noncompliant, SE part
     }
 
     public void Test4()
@@ -149,7 +149,7 @@ class Other
         FinalBar finalbar = null;
         object o = null;
 
-        o = (IFoo)bar;      // Noncompliant
+        o = (IFoo)bar;      // Noncompliant, this part is not based on SE
         o = (IFoo)ibar;
         o = (Foo)bar;       // Compliant; causes compiler error // Error [CS0030] - invalid cast
         o = (Foo)ibar;
