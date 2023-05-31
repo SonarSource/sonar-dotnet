@@ -19,11 +19,18 @@
         var r1 = (int)i; // Noncompliant
     }
 
+    public void NullCoalescenceResult_NotNull()
+    {
+        int? i = null;
+        i = i ?? 1;         // This uses IsNullOperation
+        var r1 = (int)i;    // Compliant
+    }
+
     public void NullCoalescenceAssignmentResult_NotNull()
     {
         int? i = null;
-        i ??= 1;
-        var r1 = (int)i;    // Noncompliant FP FIXME, this doesn't call property int?.HasValue, but method int?.HasValue.get
+        i ??= 1;            // This uses int?.HasValue.get() invocation
+        var r1 = (int)i;    // Compliant
     }
 }
 
