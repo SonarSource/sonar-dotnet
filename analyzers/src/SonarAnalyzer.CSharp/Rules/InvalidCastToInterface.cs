@@ -71,7 +71,7 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
             {
                 Add(type, type);
             }
-            foreach (var @interface in type.AllInterfaces.Select(i => i.OriginalDefinition))    // FIXME: OriginalDefinition? Why? Add or remove
+            foreach (var @interface in type.AllInterfaces)
             {
                 Add(@interface, type);
             }
@@ -80,10 +80,10 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
 
         void Add(INamedTypeSymbol key, INamedTypeSymbol value)
         {
-            if (!ret.TryGetValue(key, out var values))
+            if (!ret.TryGetValue(key.OriginalDefinition, out var values))
             {
                 values = new();
-                ret.Add(key, values);
+                ret.Add(key.OriginalDefinition, values);
             }
             values.Add(value);
         }
@@ -97,8 +97,8 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
             && !expressionType.IsSealed
             && !expressionType.Is(KnownType.System_Object)
             && (!expressionType.IsInterface() || ConcreteImplementationExists(expressionType))
-            && interfaceImplementer.TryGetValue(interfaceType.OriginalDefinition, out var implementers)
-            && !implementers.Any(x => x.DerivesOrImplements(expressionType.OriginalDefinition));
+            && interfaceImplementer.TryGetValue(interfaceType, out var implementers)
+            && !implementers.Any(x => x.DerivesOrImplements(expressionType));
 
         bool ConcreteImplementationExists(INamedTypeSymbol type) =>
             interfaceImplementer.ContainsKey(type) && interfaceImplementer[type].Any(t => t.IsClassOrStruct());
