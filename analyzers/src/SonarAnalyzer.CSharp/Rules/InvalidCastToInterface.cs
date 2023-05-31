@@ -28,7 +28,8 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S1944";
     private const string MessageFormat = "{0}"; // This format string can be removed after we drop the old SE engine.
-    private const string MessageReviewFormat = "Review this cast; in this project there's no type that {0}.";
+    private const string MessageInterface = "Review this cast; in this project there's no type that implements both '{0}' and '{1}'.";
+    private const string MessageClass = "Review this cast; in this project there's no type that extends '{0}' and implements '{1}'.";
 
     public static readonly DiagnosticDescriptor S1944 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -52,10 +53,8 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
                             var location = cast.Type.GetLocation();
                             var interfaceTypeName = interfaceType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
                             var expressionTypeName = expressionType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
-                            var messageReasoning = expressionType.IsInterface()
-                                ? $"implements both '{expressionTypeName}' and '{interfaceTypeName}'"
-                                : $"extends '{expressionTypeName}' and implements '{interfaceTypeName}'";
-                            c.ReportIssue(Diagnostic.Create(S1944, location, string.Format(MessageReviewFormat, messageReasoning)));
+                            var message = expressionType.IsInterface() ? MessageInterface : MessageClass;
+                            c.ReportIssue(Diagnostic.Create(S1944, location, string.Format(message, expressionTypeName, interfaceTypeName)));
                         }
                     },
                     SyntaxKind.CastExpression);
