@@ -91,30 +91,16 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
 
     private static bool IsImpossibleCast(TypeMap interfaceImplementer, INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType)
     {
-        if (interfaceType == null ||
-            expressionType == null ||
-            !interfaceType.IsInterface() ||
-            expressionType.Is(KnownType.System_Object))
-        {
-            return false;
-        }
+        return interfaceType.IsInterface()
+            && ConcreteImplementationExists(interfaceType)
+            && expressionType is not null
+            && !expressionType.IsSealed
+            && !expressionType.Is(KnownType.System_Object)
+            && (!expressionType.IsInterface() || ConcreteImplementationExists(expressionType))
+            && interfaceImplementer.TryGetValue(interfaceType.OriginalDefinition, out var implementers)
+            && !implementers.Any(x => x.DerivesOrImplements(expressionType.OriginalDefinition));
 
-        if (!HasExistingConcreteImplementation(interfaceType, interfaceImplementer))
-        {
-            return false;
-        }
-
-        if (expressionType.IsInterface() &&
-            !HasExistingConcreteImplementation(expressionType, interfaceImplementer))
-        {
-            return false;
-        }
-
-        return interfaceImplementer.ContainsKey(interfaceType.OriginalDefinition)
-            && !interfaceImplementer[interfaceType.OriginalDefinition].Any(t => t.DerivesOrImplements(expressionType.OriginalDefinition))
-            && !expressionType.IsSealed;
+        bool ConcreteImplementationExists(INamedTypeSymbol type) =>
+            interfaceImplementer.ContainsKey(type) && interfaceImplementer[type].Any(t => t.IsClassOrStruct());
     }
-
-    private static bool HasExistingConcreteImplementation(INamedTypeSymbol type, TypeMap interfaceImplementer) =>
-        interfaceImplementer.ContainsKey(type) && interfaceImplementer[type].Any(t => t.IsClassOrStruct());
 }
