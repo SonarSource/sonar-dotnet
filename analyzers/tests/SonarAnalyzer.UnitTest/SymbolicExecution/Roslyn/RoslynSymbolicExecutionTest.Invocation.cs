@@ -1187,4 +1187,29 @@ private static bool Equals(object a, object b, object c) => false;";
         validator.TagValue("Args2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("Args3").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
+
+    [DataTestMethod]
+    [DataRow("null", 0)]
+    [DataRow("42", 42)]
+    public void Invocation_NullableGetHasValue_LearnsBoolConstraint(string value, int expected)
+    {
+        var code = $"""
+            int? value = {value};
+            value ??= 0;    // Uses InvocationOperation int?.HasValue.get()
+            Tag("Value", value);
+            """;
+        SETestContext.CreateCS(code).Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+    }
+
+    [TestMethod]
+    public void Invocation_NullableGetHasValue_Unknown()
+    {
+        const string code = """
+            arg ??= 0;      // Uses InvocationOperation int?.HasValue.get()
+            Tag("Arg", arg);
+            """;
+        SETestContext.CreateCS(code, "int? arg").Validator.TagValues("Arg").Should().SatisfyRespectively(
+            x => x.Should().HaveNoConstraints(),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)));
+    }
 }
