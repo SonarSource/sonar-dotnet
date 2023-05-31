@@ -52,8 +52,8 @@ public class InvalidCastToInterface
     public void Generics()
     {
         var list = new List<int>();
-        var ilist = (IList)list;                // Noncompliant FP
-        var icollection = (ICollection)list;    // Noncompliant FP
+        var ilist = (IList)list;
+        var icollection = (ICollection)list;
     }
 }
 

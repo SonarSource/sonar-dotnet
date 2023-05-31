@@ -97,9 +97,9 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
             && !expressionType.Is(KnownType.System_Object)
             && (!expressionType.IsInterface() || ConcreteImplementationExists(expressionType))
             && interfaceImplementer.TryGetValue(interfaceType, out var implementers)
-            && !implementers.Any(x => x.DerivesOrImplements(expressionType));
+            && !implementers.Any(x => x.DerivesOrImplements(expressionType.OriginalDefinition));
 
         bool ConcreteImplementationExists(INamedTypeSymbol type) =>
-            interfaceImplementer.ContainsKey(type) && interfaceImplementer[type].Any(t => t.IsClassOrStruct());
+            interfaceImplementer.TryGetValue(type, out var implementers) && implementers.Any(x => x.IsClassOrStruct());
     }
 }
