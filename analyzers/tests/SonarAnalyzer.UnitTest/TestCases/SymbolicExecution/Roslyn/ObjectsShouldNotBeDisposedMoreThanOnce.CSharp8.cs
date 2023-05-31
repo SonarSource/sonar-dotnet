@@ -5,6 +5,11 @@ namespace Tests.Diagnostics
 {
     namespace CSharp8
     {
+        public class Disposable : IDisposable
+        {
+            public void Dispose() { }
+        }
+
         class UsingDeclaration
         {
             public void Disposed_UsingDeclaration()
