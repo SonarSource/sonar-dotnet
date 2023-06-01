@@ -26,7 +26,7 @@ public abstract class TestsShouldNotUseThreadSleepBase<TMethodSyntax, TSyntaxKin
 {
     private const string DiagnosticId = "S2925";
 
-    protected override string MessageFormat => "Do not use Thread.Sleep() in a test.";
+    protected override string MessageFormat => "Do not use 'Thread.Sleep()' in a test.";
 
     protected abstract SyntaxNode MethodBody(TMethodSyntax method);
 
