@@ -78,7 +78,7 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
     {
         if (!ShareLine(comment, token))
         {
-            foreach (var shared in triviaList.Keys.Where(x => ShareLine(comment, x)))
+            foreach (var shared in triviaList.Keys.Where(x => ShareLine(comment, x)).ToArray())
             {
                 triviaList.Remove(shared);
             }
@@ -89,7 +89,8 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
     {
         foreach (var whitespace in triviaList
             .Where(x => x.Value.IsKind(SyntaxKind.WhitespaceTrivia) && ShareLine(x.Key, token))
-            .Select(x => x.Key))
+            .Select(x => x.Key)
+            .ToArray())
         {
             triviaList.Remove(whitespace);
         }
