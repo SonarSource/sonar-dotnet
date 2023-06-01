@@ -22,22 +22,18 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.CSharp
 {
-    [ExportCodeFixProvider(LanguageNames.VisualBasic)]
-    public sealed class SillyBitwiseOperationCodeFix : SillyBitwiseOperationCodeFixBase
+    [ExportCodeFixProvider(LanguageNames.CSharp)]
+    public sealed class UnnecessaryBitwiseOperationCodeFix : UnnecessaryBitwiseOperationCodeFixBase
     {
-        protected override Func<SyntaxNode> CreateNewRoot(SyntaxNode root, TextSpan diagnosticSpan, bool isReportingOnLeft)
-        {
-            if (root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is BinaryExpressionSyntax binary)
+        protected override Func<SyntaxNode> CreateNewRoot(SyntaxNode root, TextSpan diagnosticSpan, bool isReportingOnLeft) =>
+            root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) switch
             {
-                var newNode = isReportingOnLeft ? binary.Right : binary.Left;
-                return () => root.ReplaceNode(binary, newNode.WithTrailingTrivia(binary.GetTrailingTrivia()).WithAdditionalAnnotations(Formatter.Annotation));
-            }
-            else
-            {
-                return null;
-            }
-        }
+                StatementSyntax statement => () => root.RemoveNode(statement, SyntaxRemoveOptions.KeepNoTrivia),
+                AssignmentExpressionSyntax assignment => () => root.ReplaceNode(assignment, assignment.Left.WithAdditionalAnnotations(Formatter.Annotation)),
+                BinaryExpressionSyntax binary => () => root.ReplaceNode(binary, (isReportingOnLeft ? binary.Right : binary.Left).WithAdditionalAnnotations(Formatter.Annotation)),
+                _ => null
+            };
     }
 }

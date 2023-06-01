@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
         Private = 4
     }
 
-    class SillyBitwiseOperation
+    class UnnecessaryBitwiseOperation
     {
         static void Main(string[] args)
         {
@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
             result = bitMask | 0;  // Noncompliant
 //                           ^^^
             result = bitMask ^ 0;  // Noncompliant
-            result = bitMask ^ 0;  // Noncompliant {{Remove this silly bit operation.}}
+            result = bitMask ^ 0;  // Noncompliant {{Remove this unnecessary bit operation.}}
             result &= -1; // Noncompliant
             result |= 0;  // Noncompliant
             result ^= 0;  // Noncompliant

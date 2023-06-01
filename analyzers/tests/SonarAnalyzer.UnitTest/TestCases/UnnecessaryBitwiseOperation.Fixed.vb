@@ -8,7 +8,7 @@ Public Enum Types
     [Private] = 4
 End Enum
 
-Class SillyBitwiseOperation
+Class UnnecessaryBitwiseOperation
 
     Public Sub Method()
         Dim Result As Integer

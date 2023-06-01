@@ -24,19 +24,19 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class SillyBitwiseOperationCodeFixBase : SonarCodeFix
+    public abstract class UnnecessaryBitwiseOperationCodeFixBase : SonarCodeFix
     {
         internal const string Title = "Remove bitwise operation";
 
         protected abstract Func<SyntaxNode> CreateNewRoot(SyntaxNode root, TextSpan diagnosticSpan, bool isReportingOnLeft);
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(SillyBitwiseOperationBase.DiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(UnnecessaryBitwiseOperationBase.DiagnosticId);
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
-            var isReportingOnLeft = diagnostic.Properties.ContainsKey(SillyBitwiseOperationBase.IsReportingOnLeftKey)
-                && bool.Parse(diagnostic.Properties[SillyBitwiseOperationBase.IsReportingOnLeftKey]);
+            var isReportingOnLeft = diagnostic.Properties.ContainsKey(UnnecessaryBitwiseOperationBase.IsReportingOnLeftKey)
+                && bool.Parse(diagnostic.Properties[UnnecessaryBitwiseOperationBase.IsReportingOnLeftKey]);
             if (CreateNewRoot(root, diagnostic.Location.SourceSpan, isReportingOnLeft) is { }  createNewRoot)
             {
                 context.RegisterCodeFix(CodeAction.Create(Title, c => Task.FromResult(context.Document.WithSyntaxRoot(createNewRoot()))), context.Diagnostics);

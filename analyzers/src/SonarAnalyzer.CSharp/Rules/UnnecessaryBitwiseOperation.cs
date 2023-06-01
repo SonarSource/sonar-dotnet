@@ -18,23 +18,45 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.CSharp
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class SillyBitwiseOperation : SillyBitwiseOperationBase
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    public sealed class UnnecessaryBitwiseOperation : UnnecessaryBitwiseOperationBase
     {
-        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterNodeAction(
                 c => CheckBinary(c, -1),
-                SyntaxKind.AndExpression);
+                SyntaxKind.BitwiseAndExpression);
 
             context.RegisterNodeAction(
                 c => CheckBinary(c, 0),
-                SyntaxKind.OrExpression,
+                SyntaxKind.BitwiseOrExpression,
                 SyntaxKind.ExclusiveOrExpression);
+
+            context.RegisterNodeAction(
+                c => CheckAssignment(c, -1),
+                SyntaxKind.AndAssignmentExpression);
+
+            context.RegisterNodeAction(
+                c => CheckAssignment(c, 0),
+                SyntaxKind.OrAssignmentExpression,
+                SyntaxKind.ExclusiveOrAssignmentExpression);
+        }
+
+        private void CheckAssignment(SonarSyntaxNodeReportingContext context, int constValueToLookFor)
+        {
+            var assignment = (AssignmentExpressionSyntax)context.Node;
+            if (FindIntConstant(context.SemanticModel, assignment.Right) is { } constValue
+                && constValue == constValueToLookFor)
+            {
+                var location = assignment.Parent is StatementSyntax
+                    ? assignment.Parent.GetLocation()
+                    : assignment.OperatorToken.CreateLocation(assignment.Right);
+                context.ReportIssue(Diagnostic.Create(Rule, location));
+            }
         }
 
         private void CheckBinary(SonarSyntaxNodeReportingContext context, int constValueToLookFor)
