@@ -217,37 +217,13 @@ internal sealed partial class Binary
 
     private static BigInteger? CalculateXorMin(NumberConstraint left, NumberConstraint right)
     {
-        // Takes advantage of the property a - b <= a ^ b for all a >= 0 and b >= 0
-        // If ranges overlap => at least 1 value belongs to both ranges => xor can yield 0
         if (left.IsPositive && right.IsPositive)
         {
-            if (left.Min > right.Max)
-            {
-                return left.Min.Value - right.Max.Value;
-            }
-            else if (right.Min > left.Max)
-            {
-                return right.Min.Value - left.Max.Value;
-            }
-            else
-            {
-                return 0;
-            }
+            return SameSign(left, right);
         }
         else if (left.IsNegative && right.IsNegative)
         {
-            if (right.Min > left.Max)
-            {
-                return right.Min.Value - left.Max.Value;
-            }
-            else if (left.Min > right.Max)
-            {
-                return left.Min.Value - right.Max.Value;
-            }
-            else
-            {
-                return 0;
-            }
+            return SameSign(right, left);
         }
         else if ((left.IsPositive || right.IsNegative) && left.Max.HasValue && right.Min.HasValue)
         {
@@ -259,13 +235,29 @@ internal sealed partial class Binary
         }
         else if (left.Min.HasValue && left.Max.HasValue && right.Min.HasValue && right.Max.HasValue)
         {
-            return NegativeMagnitude(-BigInteger.Max(
-                BigInteger.Max(BigInteger.Abs(left.Min.Value), right.Max.Value),
-                BigInteger.Max(left.Max.Value, BigInteger.Abs(right.Min.Value))));
+            return NegativeMagnitude(-Max(BigInteger.Abs(left.Min.Value), left.Max.Value, BigInteger.Abs(right.Min.Value), right.Max.Value));
         }
         else
         {
             return null;
+        }
+
+        static BigInteger? SameSign(NumberConstraint range1, NumberConstraint range2)
+        {
+            // Takes advantage of the property a - b <= a ^ b for all a >= 0 and b >= 0
+            // If ranges overlap => at least 1 value belongs to both ranges => xor can yield 0
+            if (range1.Min > range2.Max)
+            {
+                return range1.Min.Value - range2.Max.Value;
+            }
+            else if (range2.Min > range1.Max)
+            {
+                return range2.Min.Value - range1.Max.Value;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 
@@ -285,15 +277,15 @@ internal sealed partial class Binary
         }
         else if (left.Min.HasValue && left.Max.HasValue && right.Min.HasValue && right.Max.HasValue)
         {
-            return PositiveMagnitude(BigInteger.Max(
-                BigInteger.Max(left.Max.Value, right.Max.Value),
-                BigInteger.Max(BigInteger.Abs(left.Min.Value), BigInteger.Abs(right.Min.Value))));
+            return PositiveMagnitude(Max(BigInteger.Abs(left.Min.Value), left.Max.Value, BigInteger.Abs(right.Min.Value), right.Max.Value));
         }
         else
         {
             return null;
         }
     }
+
+    private static BigInteger Max(params BigInteger[] values) => values.Max();
 
     private static BigInteger? NegativeMagnitude(BigInteger value)
     {
