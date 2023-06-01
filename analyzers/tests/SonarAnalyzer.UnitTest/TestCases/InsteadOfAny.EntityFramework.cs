@@ -15,9 +15,14 @@ public class EntityFrameworkReproGH7286
         public DbSet<MyEntity> MyEntities { get; set; }
     }
 
-    public List<MyEntity> GetEntities(MyDbContext dbContext, List<int> ids) =>
-        dbContext
-            .MyEntities
-            .Where(e => ids.Any(i => e.Id == i)) // Noncompliant - FP, should not raise in context of EntityFramework queries. Exist cannot be translated to SQL query
-            .ToList();
+    public void GetEntities(MyDbContext dbContext, List<int> ids)
+    {
+        _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Id == i)); // Noncompliant - FP, should raise in context of EntityFramework queries. Exist cannot be translated to SQL query
+        _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Id is i)); // Error [CS0150]
+        // Noncompliant@+1
+        _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Id is 2)); // Error [CS8122]
+        _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Equals(i))); // Noncompliant - FP, should raise in context of EntityFramework queries. Exist cannot be translated to SQL query
+        // This will generate a runtime error as EF does not know how to translate it to SQL Query
+        _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Id > i)); // Noncompliant - FP
+    }
 }
