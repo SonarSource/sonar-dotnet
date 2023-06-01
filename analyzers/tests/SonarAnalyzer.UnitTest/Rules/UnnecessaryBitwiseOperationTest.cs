@@ -24,41 +24,41 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class SillyBitwiseOperationTest
+    public class UnnecessaryBitwiseOperationTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SillyBitwiseOperation>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.SillyBitwiseOperation>();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnnecessaryBitwiseOperation>();
+        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UnnecessaryBitwiseOperation>();
 
         [TestMethod]
-        public void SillyBitwiseOperation_CS() =>
-            builderCS.AddPaths("SillyBitwiseOperation.cs").Verify();
+        public void UnnecessaryBitwiseOperation_CS() =>
+            builderCS.AddPaths("UnnecessaryBitwiseOperation.cs").Verify();
 
 #if NET
 
         [TestMethod]
-        public void SillyBitwiseOperation_CSharp9() =>
-            builderCS.AddPaths("SillyBitwiseOperation.CSharp9.cs")
+        public void UnnecessaryBitwiseOperation_CSharp9() =>
+            builderCS.AddPaths("UnnecessaryBitwiseOperation.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
 #endif
 
         [TestMethod]
-        public void SillyBitwiseOperation_CS_CodeFix() =>
-            builderCS.AddPaths("SillyBitwiseOperation.cs")
-                .WithCodeFix<CS.SillyBitwiseOperationCodeFix>()
-                .WithCodeFixedPaths("SillyBitwiseOperation.Fixed.cs")
+        public void UnnecessaryBitwiseOperation_CS_CodeFix() =>
+            builderCS.AddPaths("UnnecessaryBitwiseOperation.cs")
+                .WithCodeFix<CS.UnnecessaryBitwiseOperationCodeFix>()
+                .WithCodeFixedPaths("UnnecessaryBitwiseOperation.Fixed.cs")
                 .VerifyCodeFix();
 
         [TestMethod]
-        public void SillyBitwiseOperation_VB() =>
-            builderVB.AddPaths("SillyBitwiseOperation.vb").Verify();
+        public void UnnecessaryBitwiseOperation_VB() =>
+            builderVB.AddPaths("UnnecessaryBitwiseOperation.vb").Verify();
 
         [TestMethod]
-        public void SillyBitwiseOperation_VB_CodeFix() =>
-            builderVB.AddPaths("SillyBitwiseOperation.vb")
-                .WithCodeFix<VB.SillyBitwiseOperationCodeFix>()
-                .WithCodeFixedPaths("SillyBitwiseOperation.Fixed.vb")
+        public void UnnecessaryBitwiseOperation_VB_CodeFix() =>
+            builderVB.AddPaths("UnnecessaryBitwiseOperation.vb")
+                .WithCodeFix<VB.UnnecessaryBitwiseOperationCodeFix>()
+                .WithCodeFixedPaths("UnnecessaryBitwiseOperation.Fixed.vb")
                 .VerifyCodeFix();
     }
 }

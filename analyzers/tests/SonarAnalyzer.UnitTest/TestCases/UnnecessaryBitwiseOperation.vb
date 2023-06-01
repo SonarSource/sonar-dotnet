@@ -8,7 +8,7 @@ Public Enum Types
     [Private] = 4
 End Enum
 
-Class SillyBitwiseOperation
+Class UnnecessaryBitwiseOperation
 
     Public Sub Method()
         Dim Result As Integer
@@ -21,7 +21,7 @@ Class SillyBitwiseOperation
         Result = BitMask Or 0   ' Noncompliant
         '                ^^^^
         Result = BitMask Xor 0  ' Noncompliant
-        Result = BitMask Xor 0  ' Noncompliant {{Remove this silly bit operation.}}
+        Result = BitMask Xor 0  ' Noncompliant {{Remove this unnecessary bit operation.}}
         Result = BitMask Xor Zero   ' Noncompliant
 
         Result = BitMask And 1  ' Compliant

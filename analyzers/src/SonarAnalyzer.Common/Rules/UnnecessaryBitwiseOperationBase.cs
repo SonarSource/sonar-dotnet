@@ -20,18 +20,18 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class SillyBitwiseOperationBase : SonarDiagnosticAnalyzer
+    public abstract class UnnecessaryBitwiseOperationBase : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2437";
         internal const string IsReportingOnLeftKey = "IsReportingOnLeft";
-        private const string MessageFormat = "Remove this silly bit operation.";
+        private const string MessageFormat = "Remove this unnecessary bit operation.";
 
         protected abstract ILanguageFacade Language { get; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
         protected DiagnosticDescriptor Rule { get; }
 
-        protected SillyBitwiseOperationBase() =>
+        protected UnnecessaryBitwiseOperationBase() =>
             Rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, fadeOutCode: true);
 
         protected void CheckBinary(SonarSyntaxNodeReportingContext context, SyntaxNode left, SyntaxToken @operator, SyntaxNode right, int constValueToLookFor)

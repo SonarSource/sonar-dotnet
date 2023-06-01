@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2437",
-"message":  "Remove this silly bit operation.",
+"message":  "Remove this unnecessary bit operation.",
 "location":  {
 "uri":  "sources\Net5\Net5\S2437.cs",
 "region":  {

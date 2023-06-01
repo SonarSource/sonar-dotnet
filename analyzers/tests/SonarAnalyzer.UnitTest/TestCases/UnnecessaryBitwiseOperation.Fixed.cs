@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
         Private = 4
     }
 
-    class SillyBitwiseOperation
+    class UnnecessaryBitwiseOperation
     {
         static void Main(string[] args)
         {
