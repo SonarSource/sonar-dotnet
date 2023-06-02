@@ -47,22 +47,24 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
                 .Verify();
 
-        //[DataTestMethod]
-        //[DataRow(ProjectType.Product)]
-        //[DataRow(ProjectType.Test)]
-        //public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn(ProjectType projectType) =>
-        //    roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.cs")
-        //        .WithOptions(ParseOptionsHelper.FromCSharp8)
-        //        .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
-        //        .Verify();
+        [Ignore] // Fix after S3966 implementation
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn(ProjectType projectType) =>
+            roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+                .Verify();
 
 #if NET
 
-        //[TestMethod]
-        //public void ObjectsShouldNotBeDisposedMoreThanOnce_Sonar_CSharp9() =>
-        //    roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs")
-        //        .WithTopLevelStatements()
-        //        .Verify();
+        [Ignore] // Fix after S3966 implementation
+        [TestMethod]
+        public void ObjectsShouldNotBeDisposedMoreThanOnce_Sonar_CSharp9() =>
+            roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_CSharp9() =>
