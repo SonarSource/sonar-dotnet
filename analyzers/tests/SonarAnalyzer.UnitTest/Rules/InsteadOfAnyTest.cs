@@ -37,9 +37,21 @@ public class InsteadOfAnyTest
     [TestMethod]
     public void InsteadOfAny_TopLevelStatements() =>
         builderCS.AddPaths("InsteadOfAny.CSharp9.cs")
-            .WithTopLevelStatements()
-            .AddReferences(MetadataReferenceFacade.SystemCollections)
-            .Verify();
+                 .WithTopLevelStatements()
+                 .AddReferences(MetadataReferenceFacade.SystemCollections)
+                 .Verify();
+
+    [TestMethod]
+    public void InsteadOfAny_EntityFramework() =>
+        builderCS.AddPaths("InsteadOfAny.EntityFramework.cs")
+                 .WithOptions(ParseOptionsHelper.FromCSharp8)
+                 .AddReferences(GetReferencesEntityFrameworkNetCore("2.2.6").Concat(NuGetMetadataReference.SystemComponentModelTypeConverter()))
+                 .Verify();
+
+    internal static IEnumerable<MetadataReference> GetReferencesEntityFrameworkNetCore(string entityFrameworkVersion) =>
+        Enumerable.Empty<MetadataReference>()
+                  .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
+                  .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
 
 #endif
 
