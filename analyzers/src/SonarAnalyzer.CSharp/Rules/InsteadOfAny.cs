@@ -23,6 +23,17 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax>
 {
+    private static readonly HashSet<SyntaxKind> ExitParentKinds = new()
+    {
+        SyntaxKind.MethodDeclaration,
+        SyntaxKind.ConstructorDeclaration,
+        SyntaxKind.DestructorDeclaration,
+        SyntaxKind.GetAccessorDeclaration,
+        SyntaxKind.SetAccessorDeclaration,
+        SyntaxKind.CompilationUnit,
+        SyntaxKindEx.LocalFunctionStatement,
+    };
+
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
     protected override bool IsSimpleEqualityCheck(InvocationExpressionSyntax node, SemanticModel model) =>
@@ -55,4 +66,22 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
 
     protected override SyntaxNode GetArgumentExpression(InvocationExpressionSyntax invocation, int index) =>
         invocation.ArgumentList.Arguments[index].Expression;
+
+    protected override bool IsEntityFramework(SyntaxNode node, SemanticModel model)
+    {
+        do
+        {
+            node = node.Parent;
+
+            if (node is InvocationExpressionSyntax invocation
+                && invocation.TryGetOperands(out var left, out var _)
+                && model.GetTypeInfo(left).Type.DerivesFromAny(DbSetTypes))
+            {
+                return true;
+            }
+        }
+        while (!node.IsAnyKind(ExitParentKinds));
+
+        return false;
+    }
 }

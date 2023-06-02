@@ -39,6 +39,12 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
         KnownType.System_Collections_Generic_HashSet_T,
         KnownType.System_Collections_Generic_SortedSet_T);
 
+    protected static readonly ImmutableArray<KnownType> DbSetTypes = ImmutableArray.Create(
+        KnownType.System_Data_Entity_DbSet,
+        KnownType.System_Data_Entity_DbSet_TEntity,
+        KnownType.Microsoft_EntityFrameworkCore_DbSet,
+        KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity);
+
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(existsRule, containsRule);
@@ -46,6 +52,7 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
     protected abstract bool IsSimpleEqualityCheck(TInvocationExpression node, SemanticModel model);
     protected abstract SyntaxNode GetArgumentExpression(TInvocationExpression invocation, int index);
     protected abstract bool AreValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second);
+    protected abstract bool IsEntityFramework(SyntaxNode node, SemanticModel model); // https://github.com/SonarSource/sonar-dotnet/issues/7286
 
     protected InsteadOfAnyBase()
     {
@@ -62,7 +69,8 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
                 && Language.Syntax.HasExactlyNArguments(invocation, 1)
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectCall(right, c.SemanticModel)
-                && c.SemanticModel.GetTypeInfo(left).Type is { } type)
+                && c.SemanticModel.GetTypeInfo(left).Type is { } type
+                && !IsEntityFramework(c.Node, c.SemanticModel))
             {
                 if (ExistsTypes.Any(x => type.DerivesFrom(x)))
                 {

@@ -83,6 +83,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_Azure_WebJobs_FunctionNameAttribute = new("Microsoft.Azure.WebJobs.FunctionNameAttribute");
         public static readonly KnownType Microsoft_Data_Sqlite_SqliteCommand = new("Microsoft.Data.Sqlite.SqliteCommand");
         public static readonly KnownType Microsoft_EntityFrameworkCore_DbContextOptionsBuilder = new("Microsoft.EntityFrameworkCore.DbContextOptionsBuilder");
+        public static readonly KnownType Microsoft_EntityFrameworkCore_DbSet = new("Microsoft.EntityFrameworkCore.DbSet");
+        public static readonly KnownType Microsoft_EntityFrameworkCore_DbSet_TEntity = new("Microsoft.EntityFrameworkCore.DbSet", "TEntity");
         public static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new("Microsoft.EntityFrameworkCore.Migrations.Migration");
         public static readonly KnownType Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions");
         public static readonly KnownType Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.NpgsqlDbContextOptionsExtensions");
@@ -457,7 +459,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_StackOverflowException = new("System.StackOverflowException");
         public static readonly KnownType System_STAThreadAttribute = new("System.STAThreadAttribute");
         public static readonly KnownType System_String = new("System.String");
-        public static readonly KnownType System_String_Array = new("System.String") { IsArray = true};
+        public static readonly KnownType System_String_Array = new("System.String") { IsArray = true };
         public static readonly KnownType System_StringComparison = new("System.StringComparison");
         public static readonly KnownType System_SystemException = new("System.SystemException");
         public static readonly KnownType System_Text_RegularExpressions_Regex = new("System.Text.RegularExpressions.Regex");
