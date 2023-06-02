@@ -39,7 +39,12 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
         KnownType.System_Collections_Generic_HashSet_T,
         KnownType.System_Collections_Generic_SortedSet_T);
 
+    protected static readonly ImmutableArray<KnownType> DbSetTypes = ImmutableArray.Create(
+        KnownType.System_Data_Entity_DbSet_TEntity,
+        KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity);
+
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+    protected abstract HashSet<TSyntaxKind> ExitParentKinds { get; }
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(existsRule, containsRule);
 
@@ -62,7 +67,8 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
                 && Language.Syntax.HasExactlyNArguments(invocation, 1)
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectCall(right, c.SemanticModel)
-                && c.SemanticModel.GetTypeInfo(left).Type is { } type)
+                && c.SemanticModel.GetTypeInfo(left).Type is { } type
+                && !IsUsedByEntityFramework(invocation, c.SemanticModel))
             {
                 if (ExistsTypes.Any(x => type.DerivesFrom(x)))
                 {
@@ -124,4 +130,23 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
 
     private void RaiseIssue(SonarSyntaxNodeReportingContext c, SyntaxNode invocation, DiagnosticDescriptor rule, string methodName) =>
         c.ReportIssue(Diagnostic.Create(rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/7286
+    private bool IsUsedByEntityFramework(SyntaxNode node, SemanticModel model)
+    {
+        do
+        {
+            node = node.Parent;
+
+            if (Language.Syntax.IsKind(node, Language.SyntaxKind.InvocationExpression)
+                && Language.Syntax.TryGetOperands(node, out var left, out var _)
+                && model.GetTypeInfo(left).Type.DerivesFromAny(DbSetTypes))
+            {
+                return true;
+            }
+        }
+        while (!Language.Syntax.IsAnyKind(node, ExitParentKinds));
+
+        return false;
+    }
 }

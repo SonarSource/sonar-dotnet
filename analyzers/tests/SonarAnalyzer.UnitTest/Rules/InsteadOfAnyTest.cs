@@ -27,6 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class InsteadOfAnyTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.InsteadOfAny>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.InsteadOfAny>();
 
     [TestMethod]
     public void InsteadOfAny_CS() =>
@@ -40,22 +41,43 @@ public class InsteadOfAnyTest
                  .WithTopLevelStatements()
                  .AddReferences(MetadataReferenceFacade.SystemCollections)
                  .Verify();
+#endif
 
     [TestMethod]
     public void InsteadOfAny_EntityFramework() =>
-        builderCS.AddPaths("InsteadOfAny.EntityFramework.cs")
+        builderCS.AddPaths("InsteadOfAny.EntityFramework.Core.cs")
                  .WithOptions(ParseOptionsHelper.FromCSharp8)
-                 .AddReferences(GetReferencesEntityFrameworkNetCore("2.2.6").Concat(NuGetMetadataReference.SystemComponentModelTypeConverter()))
+                 .AddReferences(GetReferencesEntityFrameworkNetCore())
                  .Verify();
 
-    internal static IEnumerable<MetadataReference> GetReferencesEntityFrameworkNetCore(string entityFrameworkVersion) =>
-        Enumerable.Empty<MetadataReference>()
-                  .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
-                  .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
+#if NETFRAMEWORK
+
+    [TestMethod]
+    public void InsteadOfAny_EntityFramework_Framework() =>
+        builderCS.AddPaths("InsteadOfAny.EntityFramework.Framework.cs")
+                 .AddReferences(GetReferencesEntityFrameworkNetFramework())
+                 .Verify();
 
 #endif
 
     [TestMethod]
     public void ExistsInsteadOfAny_VB() =>
-        new VerifierBuilder<VB.InsteadOfAny>().AddPaths("InsteadOfAny.vb").Verify();
+        builderVB.AddPaths("InsteadOfAny.vb").Verify();
+
+    [TestMethod]
+    public void InsteadOfAny_EntityFramework_VB() =>
+        builderVB.AddPaths("InsteadOfAny.EntityFramework.Core.vb")
+            .AddReferences(GetReferencesEntityFrameworkNetCore())
+            .Verify();
+
+    private static IEnumerable<MetadataReference> GetReferencesEntityFrameworkNetCore() =>
+        Enumerable.Empty<MetadataReference>()
+        .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore("2.2.6"))
+        .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational("2.2.6"))
+        .Concat(NuGetMetadataReference.SystemComponentModelTypeConverter());
+
+    private static IEnumerable<MetadataReference> GetReferencesEntityFrameworkNetFramework() =>
+        Enumerable.Empty<MetadataReference>()
+        .Concat(NuGetMetadataReference.EntityFramework());
+
 }
