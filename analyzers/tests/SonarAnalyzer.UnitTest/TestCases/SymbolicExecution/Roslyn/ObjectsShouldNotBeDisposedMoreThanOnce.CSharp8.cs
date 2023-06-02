@@ -10,7 +10,7 @@ public class Disposable : IDisposable
         {
             public void Disposed_UsingDeclaration()
             {
-                using var d = new Disposable();
+                using var d = new Disposable(); // Noncompliant FP
                 d.Dispose(); // FIXME Non-compliant {{Refactor this code to make sure 'd' is disposed only once.}}
             }
         }
@@ -38,7 +38,7 @@ public class Disposable : IDisposable
             {
                 var d = new Disposable();
                 d.Dispose();
-                d.Dispose(); // FIXME Non-compliant
+                d.Dispose(); // Noncompliant
             }
         }
 
@@ -76,12 +76,12 @@ public class Disposable : IDisposable
                 var s = new Struct();
 
                 s.Dispose();
-                s.Dispose(); // FIXME Non-compliant
+                s.Dispose(); // Noncompliant
             }
 
             public void M2()
             {
-                using var s = new Struct();
+                using var s = new Struct(); // Noncompliant FP
 
                 s.Dispose(); // FIXME Non-compliant
             }

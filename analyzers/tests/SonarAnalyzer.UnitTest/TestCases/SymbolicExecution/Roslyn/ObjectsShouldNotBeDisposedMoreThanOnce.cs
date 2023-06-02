@@ -9,7 +9,7 @@ using System.IO;
         {
             var d = new Disposable();
             d.Dispose();
-            d.Dispose(); // FIXME Non-compliant
+            d.Dispose(); // Noncompliant
         }
 
         public void DisposedTwice_Conditional()
@@ -20,8 +20,8 @@ using System.IO;
             {
                 d.Dispose();
             }
-            d.Dispose(); // FIXME Non-compliant {{Refactor this code to make sure 'd' is disposed only once.}}
-//          ^
+            d.Dispose(); // Noncompliant {{Refactor this code to make sure 'd' is disposed only once.}}
+//          ^^^^^^^^^^^
         }
 
         public void DisposedTwice_Try()
@@ -35,7 +35,7 @@ using System.IO;
             }
             finally
             {
-                d.Dispose(); // FIXME Non-compliant {{Refactor this code to make sure 'd' is disposed only once.}}
+                d.Dispose(); // FIXME - Non-compliant
             }
         }
 
@@ -64,7 +64,7 @@ using System.IO;
 
         public void Disposed_Using_WithDeclaration()
         {
-            using (var d = new Disposable()) // FIXME Non-compliant
+            using (var d = new Disposable()) // Noncompliant
             {
                 d.Dispose();
             }
@@ -73,7 +73,7 @@ using System.IO;
         public void Disposed_Using_WithExpressions()
         {
             var d = new Disposable();
-            using (d) // FIXME Non-compliant
+            using (d) // FIXME - Non-compliant
             {
                 d.Dispose();
             }
@@ -82,7 +82,7 @@ using System.IO;
         public void Disposed_Using_Parameters(IDisposable param1)
         {
             param1.Dispose();
-            param1.Dispose(); // FIXME Non-compliant
+            param1.Dispose(); // Noncompliant
         }
 
         public void Close_ParametersOfDifferentTypes(IInterface1 interface1, IDisposable interface2)
@@ -102,8 +102,8 @@ using System.IO;
         public void Close_OneParameterDisposedTwice(IInterface1 instance1, IInterface1 instance2)
         {
             instance1.Dispose();
-            instance1.Dispose(); // FIXME Non-compliant
-            instance1.Dispose(); // FIXME Non-compliant
+            instance1.Dispose(); // Noncompliant
+            instance1.Dispose(); // Noncompliant
 
             instance2.Dispose(); // ok - only disposed once
         }
@@ -121,8 +121,8 @@ using System.IO;
         public void DisposeMultipleTimes()
         {
             Dispose();
-            this.Dispose(); // FIXME Non-compliant
-            Dispose(); // FIXME Non-compliant
+            this.Dispose(); // FIXME - Non-compliant
+            Dispose(); // FIXME - Non-compliant
         }
 
         public void DoSomething()
@@ -141,7 +141,7 @@ using System.IO;
                 {
                     if (condition)
                     {
-                        instance1.Dispose(); // FIXME Non-compliant
+                        instance1.Dispose(); // FIXME - Non-compliant
                     }
                     break;
                 }
@@ -149,323 +149,6 @@ using System.IO;
                 {
                     continue;
                 }
-            }
-        }
-    }
-
-namespace Tests.Diagnostics
-{
-    namespace CSharp8
-    {
-        class UsingDeclaration
-        {
-            public void Disposed_UsingDeclaration()
-            {
-                using var d = new Disposable();
-                d.Dispose(); // FIXME Non-compliant {{Refactor this code to make sure 'd' is disposed only once.}}
-            }
-        }
-
-        public class NullCoalescenceAssignment
-        {
-            public void NullCoalescenceAssignment_Compliant(IDisposable s)
-            {
-                s ??= new Disposable();
-                s.Dispose();
-            }
-
-            public void NullCoalescenceAssignment_NonCompliant(IDisposable s)
-            {
-                using (s ??= new Disposable()) // FIXME Non-compliant
-                {
-                    s.Dispose();
-                }
-            }
-        }
-
-        public interface IWithDefaultMembers
-        {
-            void DoDispose()
-            {
-                var d = new Disposable();
-                d.Dispose();
-                d.Dispose(); // FIXME Non-compliant
-            }
-        }
-
-        public class LocalStaticFunctions
-        {
-            public void Method(object arg)
-            {
-                void LocalFunction()
-                {
-                    var d = new Disposable();
-                    d.Dispose();
-                    d.Dispose(); // FIXME Non-compliant - FN: local functions are not supported by the CFG
-                }
-
-                static void LocalStaticFunction()
-                {
-                    var d = new Disposable();
-                    d.Dispose();
-                    d.Dispose(); // FIXME Non-compliant - FN: local functions are not supported by the CFG
-                }
-            }
-        }
-
-        public class DefaultLiteralDoesNotCrashRule
-        {
-            public void Method(object arg)
-            {
-                int i = default;
-            }
-        }
-
-        public class TupleExpressionsDoNotCrashRule
-        {
-            public void Method(object myObject1, object myObject2)
-            {
-                var myTuple = (1, 2);
-                (object a, object b) c = (1, null);
-                (object d, object e) = (1, null);
-                (myObject1, myObject2) = (1, null);
-            }
-        }
-
-        public ref struct Struct
-        {
-            public void Dispose()
-            {
-            }
-        }
-
-        public class Consumer
-        {
-            public void M1()
-            {
-                var s = new Struct();
-
-                s.Dispose();
-                s.Dispose(); // FIXME Non-compliant
-            }
-
-            public void M2()
-            {
-                using var s = new Struct();
-
-                s.Dispose(); // FIXME Non-compliant
-            }
-        }
-    }
-}
-
-namespace Tests.Diagnostics
-{
-    namespace CSharp8
-    {
-        class UsingDeclaration
-        {
-            public void Disposed_UsingDeclaration()
-            {
-                using var d = new Disposable();
-                d.Dispose(); // FIXME Non-compliant {{Refactor this code to make sure 'd' is disposed only once.}}
-            }
-        }
-
-        public class NullCoalescenceAssignment
-        {
-            public void NullCoalescenceAssignment_Compliant(IDisposable s)
-            {
-                s ??= new Disposable();
-                s.Dispose();
-            }
-
-            public void NullCoalescenceAssignment_NonCompliant(IDisposable s)
-            {
-                using (s ??= new Disposable()) // FIXME Non-compliant
-                {
-                    s.Dispose();
-                }
-            }
-        }
-
-        public interface IWithDefaultMembers
-        {
-            void DoDispose()
-            {
-                var d = new Disposable();
-                d.Dispose();
-                d.Dispose(); // FIXME Non-compliant
-            }
-        }
-
-        public class LocalStaticFunctions
-        {
-            public void Method(object arg)
-            {
-                void LocalFunction()
-                {
-                    var d = new Disposable();
-                    d.Dispose();
-                    d.Dispose(); // FIXME Non-compliant - FN: local functions are not supported by the CFG
-                }
-
-                static void LocalStaticFunction()
-                {
-                    var d = new Disposable();
-                    d.Dispose();
-                    d.Dispose(); // FIXME Non-compliant - FN: local functions are not supported by the CFG
-                }
-            }
-        }
-
-        public class DefaultLiteralDoesNotCrashRule
-        {
-            public void Method(object arg)
-            {
-                int i = default;
-            }
-        }
-
-        public class TupleExpressionsDoNotCrashRule
-        {
-            public void Method(object myObject1, object myObject2)
-            {
-                var myTuple = (1, 2);
-                (object a, object b) c = (1, null);
-                (object d, object e) = (1, null);
-                (myObject1, myObject2) = (1, null);
-            }
-        }
-
-        public ref struct Struct
-        {
-            public void Dispose()
-            {
-            }
-        }
-
-        public class Consumer
-        {
-            public void M1()
-            {
-                var s = new Struct();
-
-                s.Dispose();
-                s.Dispose(); // FIXME Non-compliant
-            }
-
-            public void M2()
-            {
-                using var s = new Struct();
-
-                s.Dispose(); // FIXME Non-compliant
-            }
-        }
-    }
-}
-
-namespace Tests.Diagnostics
-{
-    namespace CSharp8
-    {
-        class UsingDeclaration
-        {
-            public void Disposed_UsingDeclaration()
-            {
-                using var d = new Disposable();
-                d.Dispose(); // FIXME Non-compliant {{Refactor this code to make sure 'd' is disposed only once.}}
-            }
-        }
-
-        public class NullCoalescenceAssignment
-        {
-            public void NullCoalescenceAssignment_Compliant(IDisposable s)
-            {
-                s ??= new Disposable();
-                s.Dispose();
-            }
-
-            public void NullCoalescenceAssignment_NonCompliant(IDisposable s)
-            {
-                using (s ??= new Disposable()) // FIXME Non-compliant
-                {
-                    s.Dispose();
-                }
-            }
-        }
-
-        public interface IWithDefaultMembers
-        {
-            void DoDispose()
-            {
-                var d = new Disposable();
-                d.Dispose();
-                d.Dispose(); // FIXME Non-compliant
-            }
-        }
-
-        public class LocalStaticFunctions
-        {
-            public void Method(object arg)
-            {
-                void LocalFunction()
-                {
-                    var d = new Disposable();
-                    d.Dispose();
-                    d.Dispose(); // FIXME Non-compliant - FN: local functions are not supported by the CFG
-                }
-
-                static void LocalStaticFunction()
-                {
-                    var d = new Disposable();
-                    d.Dispose();
-                    d.Dispose(); // FIXME Non-compliant - FN: local functions are not supported by the CFG
-                }
-            }
-        }
-
-        public class DefaultLiteralDoesNotCrashRule
-        {
-            public void Method(object arg)
-            {
-                int i = default;
-            }
-        }
-
-        public class TupleExpressionsDoNotCrashRule
-        {
-            public void Method(object myObject1, object myObject2)
-            {
-                var myTuple = (1, 2);
-                (object a, object b) c = (1, null);
-                (object d, object e) = (1, null);
-                (myObject1, myObject2) = (1, null);
-            }
-        }
-
-        public ref struct Struct
-        {
-            public void Dispose()
-            {
-            }
-        }
-
-        public class Consumer
-        {
-            public void M1()
-            {
-                var s = new Struct();
-
-                s.Dispose();
-                s.Dispose(); // FIXME Non-compliant
-            }
-
-            public void M2()
-            {
-                using var s = new Struct();
-
-                s.Dispose(); // FIXME Non-compliant
             }
         }
     }

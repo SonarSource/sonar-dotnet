@@ -3,7 +3,7 @@ using System.IO;
 
 var topLevel = new MemoryStream();
 topLevel.Dispose();
-topLevel.Dispose(); // FIXME Non-compliant
+topLevel.Dispose(); //  FN, Top level statements are not supported
 
 using var top = new MemoryStream(); // Compliant
 
@@ -11,7 +11,7 @@ void TopLevelLocalFunction()
 {
     var local = new MemoryStream();
     local.Dispose();
-    local.Dispose();    // FIXME Non-compliant
+    local.Dispose();    //  FN, Top level statements are not supported
 }
 
 public class Sample
@@ -20,7 +20,7 @@ public class Sample
     {
         MemoryStream ms = new();
         ms.Dispose();
-        ms.Dispose();   // FIXME Non-compliant, can't build CFG for this method
+        ms.Dispose();   // Noncompliant
     }
 
     public void StaticLambda()
@@ -29,7 +29,7 @@ public class Sample
         {
             var ms = new MemoryStream();
             ms.Dispose();
-            ms.Dispose();    // FIXME Non-compliant
+            ms.Dispose();    // Noncompliant
         };
         a();
     }
@@ -41,7 +41,7 @@ public class Sample
         {
             var ms = new MemoryStream();
             ms.Dispose();
-            ms.Dispose();    // FIXME Non-compliant
+            ms.Dispose();    // Noncompliant
         }
     }
 }
@@ -52,7 +52,8 @@ public record Record : IDisposable
     {
         var ms = new MemoryStream();
         ms.Dispose();
-        ms.Dispose();    // FIXME Non-compliant
+        ms.Dispose();    // Noncompliant
+                
     }
 
     public void Dispose() => throw new NotImplementedException();
@@ -61,7 +62,7 @@ public record Record : IDisposable
     {
         var r = new Record();
         r.Dispose();
-        r.Dispose();    // FIXME Non-compliant
+        r.Dispose();    // Noncompliant
     }
 }
 
@@ -76,7 +77,7 @@ public partial class Partial
     {
         var ms = new MemoryStream();
         ms.Dispose();
-        ms.Dispose();    // FIXME Non-compliant
+        ms.Dispose();    // Noncompliant
     }
 }
 
@@ -94,7 +95,7 @@ namespace TartetTypedConditional
             var b = new Second();
             a.Dispose();
             IDisposable result = condition ? a : b;
-            result.Dispose();  // FIXME Non-compliant
+            result.Dispose();  // Noncompliant
         }
     }
 }
