@@ -24,13 +24,4 @@ class Noncompliant
     // {
     //     return 42;
     // }
-
-    // Noncompliant@+1
-    int SingleLineBlock() { return 42; }/* return 42;*/
-
-    // Noncompliant@+2
-    int SeperateLineBlock() { return 42; }
-    /*
-     * return 42;
-     */
 }

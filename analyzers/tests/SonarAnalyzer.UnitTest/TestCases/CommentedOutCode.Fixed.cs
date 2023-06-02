@@ -18,10 +18,8 @@ class Noncompliant
 
     // Fixed
     int MultipleLines() { return 42; }
-
-    // Fixed
-    int SingleLineBlock() { return 42; }
-
-    // Fixed
-    int SeperateLineBlock() { return 42; }
+    // int OldImplementation()
+    // {
+    //     return 42;
+    // }
 }
