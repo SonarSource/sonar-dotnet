@@ -23,7 +23,9 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpressionSyntax>
 {
-    private static readonly HashSet<SyntaxKind> ExitParentKinds = new()
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override HashSet<SyntaxKind> ExitParentKinds => new()
     {
         SyntaxKind.SubStatement,
         SyntaxKind.SubNewStatement,
@@ -32,8 +34,6 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
         SyntaxKind.SetAccessorStatement,
         SyntaxKind.CompilationUnit,
     };
-
-    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override bool IsSimpleEqualityCheck(InvocationExpressionSyntax node, SemanticModel model) =>
         GetArgumentExpression(node, 0) is SingleLineLambdaExpressionSyntax lambda
@@ -66,22 +66,4 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
 
     protected override SyntaxNode GetArgumentExpression(InvocationExpressionSyntax invocation, int index) =>
         invocation.ArgumentList.Arguments[index].GetExpression();
-
-    protected override bool IsEntityFramework(SyntaxNode node, SemanticModel model)
-    {
-        do
-        {
-            node = node.Parent;
-
-            if (node is InvocationExpressionSyntax invocation
-                && invocation.TryGetOperands(out var left, out var _)
-                && model.GetTypeInfo(left).Type.DerivesFromAny(DbSetTypes))
-            {
-                return true;
-            }
-        }
-        while (!node.IsAnyKind(ExitParentKinds));
-
-        return false;
-    }
 }
