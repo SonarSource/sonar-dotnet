@@ -66,9 +66,9 @@ public class InsteadOfAnyTest
 
     [TestMethod]
     public void InsteadOfAny_EntityFramework_VB() =>
-    builderVB.AddPaths("InsteadOfAny.EntityFramework.Core.vb")
-             .AddReferences(GetReferencesEntityFrameworkNetCore())
-             .Verify();
+        builderVB.AddPaths("InsteadOfAny.EntityFramework.Core.vb")
+            .AddReferences(GetReferencesEntityFrameworkNetCore())
+            .Verify();
 
     private static IEnumerable<MetadataReference> GetReferencesEntityFrameworkNetCore() =>
         Enumerable.Empty<MetadataReference>()

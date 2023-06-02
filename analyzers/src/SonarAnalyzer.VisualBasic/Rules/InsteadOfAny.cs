@@ -25,7 +25,7 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override HashSet<SyntaxKind> ExitParentKinds => new()
+    protected override HashSet<SyntaxKind> ExitParentKinds { get; } = new()
     {
         SyntaxKind.SubStatement,
         SyntaxKind.SubNewStatement,

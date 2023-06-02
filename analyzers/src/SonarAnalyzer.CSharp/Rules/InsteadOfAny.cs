@@ -25,7 +25,7 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override HashSet<SyntaxKind> ExitParentKinds => new()
+    protected override HashSet<SyntaxKind> ExitParentKinds { get; } = new()
     {
         SyntaxKind.MethodDeclaration,
         SyntaxKind.ConstructorDeclaration,
@@ -34,6 +34,7 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
         SyntaxKind.SetAccessorDeclaration,
         SyntaxKind.CompilationUnit,
         SyntaxKindEx.LocalFunctionStatement,
+        SyntaxKindEx.InitAccessorDeclaration
     };
 
     protected override bool IsSimpleEqualityCheck(InvocationExpressionSyntax node, SemanticModel model) =>
