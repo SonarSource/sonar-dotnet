@@ -25,5 +25,5 @@ public sealed class TestsShouldNotUseThreadSleep : TestsShouldNotUseThreadSleepB
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override SyntaxNode MethodBody(MethodDeclarationSyntax method) => method;
+    protected override SyntaxNode MethodDeclaration(MethodDeclarationSyntax method) => method;
 }

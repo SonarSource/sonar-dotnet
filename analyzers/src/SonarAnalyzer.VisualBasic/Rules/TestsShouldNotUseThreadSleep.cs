@@ -25,5 +25,5 @@ public sealed class TestsShouldNotUseThreadSleep : TestsShouldNotUseThreadSleepB
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override SyntaxNode MethodBody(MethodBlockSyntax method) => method.SubOrFunctionStatement;
+    protected override SyntaxNode MethodDeclaration(MethodBlockSyntax method) => method.SubOrFunctionStatement;
 }

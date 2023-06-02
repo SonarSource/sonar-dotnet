@@ -28,7 +28,7 @@ public abstract class TestsShouldNotUseThreadSleepBase<TMethodSyntax, TSyntaxKin
 
     protected override string MessageFormat => "Do not use 'Thread.Sleep()' in a test.";
 
-    protected abstract SyntaxNode MethodBody(TMethodSyntax method);
+    protected abstract SyntaxNode MethodDeclaration(TMethodSyntax method);
 
     protected TestsShouldNotUseThreadSleepBase() : base(DiagnosticId) { }
 
@@ -47,6 +47,6 @@ public abstract class TestsShouldNotUseThreadSleepBase<TMethodSyntax, TSyntaxKin
 
     private bool IsInTestMethod(SyntaxNode node, SemanticModel model) =>
         node.Ancestors().OfType<TMethodSyntax>().FirstOrDefault() is { } method
-        && model.GetDeclaredSymbol(MethodBody(method)) is IMethodSymbol symbol
+        && model.GetDeclaredSymbol(MethodDeclaration(method)) is IMethodSymbol symbol
         && symbol.IsTestMethod();
 }
