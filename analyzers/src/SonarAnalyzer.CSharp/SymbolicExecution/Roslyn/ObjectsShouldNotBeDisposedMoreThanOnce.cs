@@ -25,5 +25,5 @@ public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ObjectsShouldNotBeD
     public static readonly DiagnosticDescriptor S3966 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
     protected override DiagnosticDescriptor Rule => S3966;
 
-    public override bool ShouldExecute() => false;
+    public override bool ShouldExecute() => true;
 }
