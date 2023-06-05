@@ -8,7 +8,7 @@
       <SonarAnalysisConfigPath>$(MSBuildStartupDirectory)\SonarQubeAnalysisConfig.xml</SonarAnalysisConfigPath>
       <SonarProjectOutputPath Condition="'$(TargetFramework)' != ''">$(SarifOutputPath)\$(TargetFramework)</SonarProjectOutputPath>
       <SonarProjectOutputPath Condition="'$(TargetFramework)' == ''">$(SarifOutputPath)</SonarProjectOutputPath>
-      <SonarProjectConfigFilePath>$(SarifOutputPath)\SonarProjectConfig-$(TargetFramework).xml</SonarProjectConfigFilePath>
+      <SonarProjectConfigFilePath>$(SonarProjectOutputPath)\SonarProjectConfig.xml</SonarProjectConfigFilePath>
       <SonarFilesToAnalyzePath>$(SarifOutputPath)\FilesToAnalyze.txt</SonarFilesToAnalyzePath>
       <!-- Only projects with explicit SonarQubeTestProject=true will be classified as test ones. -->
       <SonarProjectType Condition="$(SonarQubeTestProject) != 'true'">Product</SonarProjectType>
