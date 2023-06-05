@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpecAsyncAwait.cs",
 "region":  {

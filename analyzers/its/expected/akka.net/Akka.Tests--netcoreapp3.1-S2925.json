@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ContextWatchWithSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeadLetterSupressionSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeadLetterSuspensionSpec.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\InboxSpec.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\InboxSpec.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\SchedulerShutdownSpec.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Loggers\LoggerSpec.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\BackoffOnRestartSupervisorSpec.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\BackoffSupervisorSpec.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
 "region":  {
@@ -223,7 +223,7 @@
 },
 {
 "id":  "S2925",
-"message":  "Do not use Thread.Sleep() in a test.",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
 "region":  {
