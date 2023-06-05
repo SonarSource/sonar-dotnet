@@ -1,0 +1,74 @@
+<h2>Why is this an issue?</h2>
+<p>Using <code>Thread.Sleep</code> in a test might introduce unpredictable and incosistent results depending on the environment. Furthermore, it will
+block the <a href="https://en.wikipedia.org/wiki/Thread_(computing)">thread</a>, which means the system resources are not being fully used.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+[TestMethod]
+public void SomeTest()
+{
+    Thread.Sleep(500); // Noncompliant
+    // assertions...
+}
+</pre>
+<p>An alternative is a task-based asynchronous approach, using <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/">async and await</a>.</p>
+<p>More specifically the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.delay">Task.Delay</a> method should be
+used, because of the following advantages:</p>
+<ul>
+  <li> It is <strong>asynchronous</strong>: The thread will not be blocked, but instead will be reused by other operations </li>
+  <li> It is more <strong>precise</strong> in timing the delay than <code>Thread.Sleep</code> </li>
+  <li> It can be <strong>cancelled and continued</strong>, which gives more flexibility and control in the timing of your code </li>
+</ul>
+<pre data-diff-id="1" data-diff-type="compliant">
+[TestMethod]
+public async Task SomeTest()
+{
+    await Task.Delay(500);
+    // assertions...
+}
+</pre>
+<p>Another scenario is when some data might need to be mocked using <a href="https://github.com/moq/moq4">Moq</a>, and a delay needs to be
+introduced:</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+[TestMethod]
+public void UserService_Test()
+{
+    var userService = new Mock&lt;UserService&gt;();
+    var expected = new User();
+
+    userService
+        .Setup(m =&gt; m.GetUserById(42))
+        .Returns(() =&gt;
+        {
+            Thread.Sleep(500); // Noncompliant
+            return Task.FromResult(expected);
+        });
+
+    // assertions...
+}
+</pre>
+<p>An alternative to <code>Thread.Sleep</code> while mocking with <code>Moq</code> is to use <code>ReturnsAsync</code> and pass the amount of time to
+delay there:</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+[TestMethod]
+public void UserService_Test()
+{
+    var userService = new Mock&lt;UserService&gt;();
+    var expected = new User();
+
+    userService
+        .Setup(m =&gt; m.GetUserById(42))
+        .ReturnsAsync(expected, TimeSpan.FromMilliseconds(500));
+
+    // assertions...
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.thread.sleep">Thread.Sleep method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.delay">Task.Delay method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/">Asynchronous programming with async and await</a> </li>
+  <li> <a href="https://github.com/moq/moq4">Moq mocking library</a> </li>
+  <li> <a href="https://www.telerik.com/products/mocking.aspx">Telerik mocking library</a> </li>
+</ul>
+
