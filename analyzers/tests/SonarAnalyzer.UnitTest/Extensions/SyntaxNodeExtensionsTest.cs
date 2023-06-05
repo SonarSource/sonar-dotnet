@@ -717,6 +717,10 @@ public class X
             parentConditional.ToString().Should().Be(expression.Replace("$$", string.Empty));
         }
 
+        [TestMethod]
+        public void Kind_Null_ReturnsNone() =>
+            SonarAnalyzer.Helpers.SyntaxNodeExtensions.Kind<SyntaxKind>(null).Should().Be(SyntaxKind.None);
+
         private static SyntaxNode NodeBetweenMarkers(string code, string language)
         {
             var position = code.IndexOf("$$");
