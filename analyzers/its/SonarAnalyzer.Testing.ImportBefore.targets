@@ -4,10 +4,12 @@
           BeforeTargets="CoreCompile">
     <PropertyGroup>
       <BinariesFolder>$(MSBuildStartupDirectory)\..\packaging\binaries</BinariesFolder>
+      <SarifOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</SarifOutputPath>
       <SonarAnalysisConfigPath>$(MSBuildStartupDirectory)\SonarQubeAnalysisConfig.xml</SonarAnalysisConfigPath>
-      <SonarProjectOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</SonarProjectOutputPath>
-      <SonarProjectConfigFilePath>$(SonarProjectOutputPath)\SonarProjectConfig.xml</SonarProjectConfigFilePath>
-      <SonarFilesToAnalyzePath>$(SonarProjectOutputPath)\FilesToAnalyze.txt</SonarFilesToAnalyzePath>
+      <SonarProjectOutputPath Condition="'$(TargetFramework)' != ''">$(SarifOutputPath)\$(TargetFramework)</SonarProjectOutputPath>
+      <SonarProjectOutputPath Condition="'$(TargetFramework)' == ''">$(SarifOutputPath)</SonarProjectOutputPath>
+      <SonarProjectConfigFilePath>$(SarifOutputPath)\SonarProjectConfig-$(TargetFramework).xml</SonarProjectConfigFilePath>
+      <SonarFilesToAnalyzePath>$(SarifOutputPath)\FilesToAnalyze.txt</SonarFilesToAnalyzePath>
       <!-- Only projects with explicit SonarQubeTestProject=true will be classified as test ones. -->
       <SonarProjectType Condition="$(SonarQubeTestProject) != 'true'">Product</SonarProjectType>
       <SonarProjectType Condition="$(SonarQubeTestProject) == 'true'">Test</SonarProjectType>
@@ -30,6 +32,7 @@
       <SonarProjectConfigLine Include="&lt;/SonarProjectConfig&gt;" />
     </ItemGroup>
 
+    <MakeDir Directories="$(SarifOutputPath)"/>
     <MakeDir Directories="$(SonarProjectOutputPath)"/>
 
     <!-- First FINDSTR removes \bin\, \obj\ and \packages\ subdirectories from FilesToAnalyze.txt. Second FINDSTR includes only files with an extension, because DIR lists also directories themselves.-->
@@ -53,10 +56,10 @@
 
     <PropertyGroup>
       <!-- Set the path to the SARIF report -->
-      <ErrorLog Condition="'$(TargetFramework)' != ''">$(SonarProjectOutputPath)-$(ProjectGuid)-$(TargetFramework).json</ErrorLog>
-      <ErrorLog Condition="'$(TargetFramework)' == ''">$(SonarProjectOutputPath)-$(ProjectGuid).json</ErrorLog>
-      <RazorCompilationErrorLog Condition="'$(TargetFramework)' != ''">$(SonarProjectOutputPath)-$(ProjectGuid)-$(TargetFramework).Views.json</RazorCompilationErrorLog>
-      <RazorCompilationErrorLog Condition="'$(TargetFramework)' == ''">$(SonarProjectOutputPath)-$(ProjectGuid).Views.json</RazorCompilationErrorLog>
+      <ErrorLog Condition="'$(TargetFramework)' != ''">$(SarifOutputPath)-$(ProjectGuid)-$(TargetFramework).json</ErrorLog>
+      <ErrorLog Condition="'$(TargetFramework)' == ''">$(SarifOutputPath)-$(ProjectGuid).json</ErrorLog>
+      <RazorCompilationErrorLog Condition="'$(TargetFramework)' != ''">$(SarifOutputPath)-$(ProjectGuid)-$(TargetFramework).Views.json</RazorCompilationErrorLog>
+      <RazorCompilationErrorLog Condition="'$(TargetFramework)' == ''">$(SarifOutputPath)-$(ProjectGuid).Views.json</RazorCompilationErrorLog>
 
       <!-- Override the ruleset with all SonarAnalyzer rules -->
       <ResolvedCodeAnalysisRuleSet>$(MSBuildStartupDirectory)\output\AllSonarAnalyzerRules.ruleset</ResolvedCodeAnalysisRuleSet>
