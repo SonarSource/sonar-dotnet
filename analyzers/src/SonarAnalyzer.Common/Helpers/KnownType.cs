@@ -83,7 +83,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_Azure_WebJobs_FunctionNameAttribute = new("Microsoft.Azure.WebJobs.FunctionNameAttribute");
         public static readonly KnownType Microsoft_Data_Sqlite_SqliteCommand = new("Microsoft.Data.Sqlite.SqliteCommand");
         public static readonly KnownType Microsoft_EntityFrameworkCore_DbContextOptionsBuilder = new("Microsoft.EntityFrameworkCore.DbContextOptionsBuilder");
-        public static readonly KnownType Microsoft_EntityFrameworkCore_DbSet_TEntity = new("Microsoft.EntityFrameworkCore.DbSet", "TEntity");
         public static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new("Microsoft.EntityFrameworkCore.Migrations.Migration");
         public static readonly KnownType Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions");
         public static readonly KnownType Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.NpgsqlDbContextOptionsExtensions");
@@ -328,6 +327,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Linq_Expressions_Expression = new("System.Linq.Expressions.Expression");
         public static readonly KnownType System_Linq_Expressions_Expression_T = new("System.Linq.Expressions.Expression", "TDelegate");
         public static readonly KnownType System_Linq_ImmutableArrayExtensions = new("System.Linq.ImmutableArrayExtensions");
+        public static readonly KnownType System_Linq_IQueryable = new("System.Linq.IQueryable", "T");
         public static readonly KnownType System_Linq_Queryable = new("System.Linq.Queryable");
         public static readonly KnownType System_MarshalByRefObject = new("System.MarshalByRefObject");
         public static readonly KnownType System_MTAThreadAttribute = new("System.MTAThreadAttribute");

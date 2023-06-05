@@ -28,6 +28,9 @@ public class EntityFrameworkReproGH7286
         _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Id == i)); // Compliant
         _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Equals(i))); // Compliant
         _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Id > i)); // Compliant
+
+        var iqueryable = dbContext.MyEntities.OrderBy(e => e.Id);
+        _ = iqueryable.Where(e => ids.Any(i => e.Id == i)); // Compliant
     }
 
     public async Task GetEntitiesAsync(SecondContext secondContext, List<int> ids)

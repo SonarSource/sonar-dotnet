@@ -17,6 +17,10 @@ Public Class EntityFrameworkTestcases
             __ = dbContext.MyEntities.Where(Function(e) ids.Any(Function(i) e.Equals(i))) ' Compliant
             __ = dbContext.MyEntities.Where(Function(e) ids.Any(Function(i) e.Id > i)) ' Compliant
             __ = dbContext.MyEntities.Where(Function(e) ids.Any(Function(i) TypeOf e.Id Is i)) ' Error [BC30002]
+
+            Dim iqueryable = dbContext.MyEntities.OrderBy(Function(e) e.Id)
+            __ = iqueryable.Where(Function(e) ids.Any(Function(i) e.Id = i)) ' Compliant
+
         End Sub
     End Class
 End Class
