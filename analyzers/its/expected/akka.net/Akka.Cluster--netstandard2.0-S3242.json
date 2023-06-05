@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Immutable.IImmutableSet<Akka.Cluster.UniqueAddress>' instead of 'System.Collections.Immutable.ImmutableHashSet<Akka.Cluster.UniqueAddress>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  77,
+"endLine":  263,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Immutable.IImmutableSet<string>' instead of 'System.Collections.Immutable.ImmutableHashSet<string>'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
@@ -22,6 +35,19 @@
 "startLine":  287,
 "startColumn":  44,
 "endLine":  287,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Immutable.IImmutableSet<Akka.Cluster.UniqueAddress>' instead of 'System.Collections.Immutable.ImmutableHashSet<Akka.Cluster.UniqueAddress>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"region":  {
+"startLine":  501,
+"startColumn":  45,
+"endLine":  501,
 "endColumn":  56
 }
 }

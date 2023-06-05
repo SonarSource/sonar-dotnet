@@ -54,6 +54,32 @@
 },
 {
 "id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<string>' instead of 'System.Collections.Immutable.IImmutableSet<string>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"region":  {
+"startLine":  506,
+"startColumn":  115,
+"endLine":  506,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<string>' instead of 'System.Collections.Immutable.IImmutableSet<string>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"region":  {
+"startLine":  532,
+"startColumn":  142,
+"endLine":  532,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
