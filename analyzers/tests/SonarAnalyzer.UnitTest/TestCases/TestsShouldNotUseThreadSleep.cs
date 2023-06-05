@@ -25,6 +25,15 @@ class Compliant
         Thread.Sleep(42);
     }
 
+    public int Property
+    {
+        get
+        {
+            Thread.Sleep(1000); // Lovely, but compliant
+            return 42;
+        }
+    }
+
     private void Sleep(int durartion) { }
 }
 
