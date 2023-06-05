@@ -36,8 +36,7 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S1944);
     protected override bool EnableConcurrentExecution => false;
 
-    protected override void Initialize(SonarAnalysisContext context)
-    {
+    protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(
             compilationStartContext =>
             {
@@ -59,7 +58,6 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
                     },
                     SyntaxKind.CastExpression);
             });
-    }
 
     private static TypeMap BuildTypeMap(IEnumerable<INamedTypeSymbol> allTypes)
     {
