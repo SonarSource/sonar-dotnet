@@ -14,6 +14,8 @@ public class ImplementerOfIImplemented : IImplemented { }
 public class ImplementerOfIIGenericInt : IGeneric<int> { }
 public class ImplementerOfIIGenericString : IGeneric<string> { }
 public class ImplementerOfIIGenericStringObject : IGeneric<string, object> { }
+public class ImplementerOfIIGenericStringString : IGeneric<string, string> { }
+public class ImplementerOfIIGenericIntString : IGeneric<int, string> { }
 
 public class EmptyClass { }
 public class EmptyBase { }
@@ -49,7 +51,6 @@ public class InvalidCastToInterface
         var o = (object)true;
         e = (INotImplementedWithBase)o;
 
-        var coll = (IEnumerable<int>)new List<int>();
         var z = (IDisposable)new EmptyClass();
         var w = (IDisposable)(new Node());
     }
@@ -57,18 +58,24 @@ public class InvalidCastToInterface
     public void Generics()
     {
         var list = new List<int>();
-        var ilist = (IList)list;
-        var icollection = (ICollection)list;
+        var iEnumerable = (IEnumerable<int>)list;
+        var iList = (IList)list;
+        var iCollection = (ICollection)list;
 
         var fromString = new ImplementerOfIIGenericString();
         var toString = (IGeneric<string>)fromString;
-        var toInt = (IGeneric<int>)fromString;  // FN
+        var toInt = (IGeneric<int>)fromString;  // Noncompliant
 
         var fromStringObject = new ImplementerOfIIGenericStringObject();
         var toStringObject = (IGeneric<string, object>)fromStringObject;
-        var toStringString = (IGeneric<string, string>)fromStringObject;    // FN
-        var toIntString = (IGeneric<int, string>)fromStringObject;          // FN
-        var toSingleTyped = (IGeneric<int>)fromStringObject;                // FN
+        var toStringString = (IGeneric<string, string>)fromStringObject;    // Noncompliant
+        var toIntString = (IGeneric<int, string>)fromStringObject;          // Noncompliant
+        var toSingleTyped = (IGeneric<int>)fromStringObject;                // Noncompliant
+    }
+
+    public void Dynamic(dynamic d)
+    {
+        var b = (IBase)d;
     }
 }
 

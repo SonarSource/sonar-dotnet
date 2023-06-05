@@ -77,10 +77,10 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
 
         void Add(INamedTypeSymbol key, INamedTypeSymbol value)
         {
-            if (!ret.TryGetValue(key.OriginalDefinition, out var values))
+            if (!ret.TryGetValue(key, out var values))
             {
                 values = new();
-                ret.Add(key.OriginalDefinition, values);
+                ret.Add(key, values);
             }
             values.Add(value);
         }
@@ -90,14 +90,18 @@ public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
     {
         return interfaceType.IsInterface()
             && ConcreteImplementationExists(interfaceType)
-            && expressionType is not null
-            && !expressionType.IsSealed
-            && !expressionType.Is(KnownType.System_Object)
-            && (!expressionType.IsInterface() || ConcreteImplementationExists(expressionType))
+            && ExpressionTypeIsRelevant()
+            && !expressionType.DerivesOrImplements(interfaceType)
             && interfaceImplementer.TryGetValue(interfaceType, out var implementers)
-            && !implementers.Any(x => x.DerivesOrImplements(expressionType.OriginalDefinition));
+            && !implementers.Any(x => x.DerivesOrImplements(expressionType));
 
         bool ConcreteImplementationExists(INamedTypeSymbol type) =>
             interfaceImplementer.TryGetValue(type, out var implementers) && implementers.Any(x => x.IsClassOrStruct());
+
+        bool ExpressionTypeIsRelevant() =>
+            expressionType is not null
+            && !expressionType.IsSealed
+            && !expressionType.Is(KnownType.System_Object)
+            && (!expressionType.IsInterface() || ConcreteImplementationExists(expressionType));
     }
 }
