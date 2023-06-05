@@ -225,17 +225,20 @@ internal sealed partial class Binary
         {
             return SameSign(right, left);
         }
+        // Positive numbers start with Zeroes. Negative numbers start with Ones. XOR them, and the result will start with Ones and thus will be negative.
+        // By taking a look at the number of starting Zeroes and Ones, we can also learn a limit for the number of starting Ones of the result.
+        // Note: When passing a positive limit to NegativeMagnitude, it needs to be increased by 1 and then multiplied by -1 to get the expected result.
         else if ((left.IsPositive || right.IsNegative) && left.Max.HasValue && right.Min.HasValue)
         {
-            return NegativeMagnitude(-BigInteger.Max(left.Max.Value, BigInteger.Abs(right.Min.Value)));
+            return NegativeMagnitude(-BigInteger.Max(left.Max.Value + 1, BigInteger.Abs(right.Min.Value)));
         }
         else if ((left.IsNegative || right.IsPositive) && left.Min.HasValue && right.Max.HasValue)
         {
-            return NegativeMagnitude(-BigInteger.Max(BigInteger.Abs(left.Min.Value), right.Max.Value));
+            return NegativeMagnitude(-BigInteger.Max(BigInteger.Abs(left.Min.Value), right.Max.Value + 1));
         }
         else if (left.Min.HasValue && left.Max.HasValue && right.Min.HasValue && right.Max.HasValue)
         {
-            return NegativeMagnitude(-Max(BigInteger.Abs(left.Min.Value), left.Max.Value, BigInteger.Abs(right.Min.Value), right.Max.Value));
+            return NegativeMagnitude(-Max(BigInteger.Abs(left.Min.Value), left.Max.Value + 1, BigInteger.Abs(right.Min.Value), right.Max.Value + 1));
         }
         else
         {
