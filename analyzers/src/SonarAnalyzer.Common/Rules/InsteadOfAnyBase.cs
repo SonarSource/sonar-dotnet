@@ -39,10 +39,6 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
         KnownType.System_Collections_Generic_HashSet_T,
         KnownType.System_Collections_Generic_SortedSet_T);
 
-    protected static readonly ImmutableArray<KnownType> DbSetTypes = ImmutableArray.Create(
-        KnownType.System_Data_Entity_DbSet_TEntity,
-        KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity);
-
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
     protected abstract HashSet<TSyntaxKind> ExitParentKinds { get; }
 
@@ -140,7 +136,7 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
 
             if (Language.Syntax.IsKind(node, Language.SyntaxKind.InvocationExpression)
                 && Language.Syntax.TryGetOperands(node, out var left, out var _)
-                && model.GetTypeInfo(left).Type.DerivesFromAny(DbSetTypes))
+                && model.GetTypeInfo(left).Type.DerivesOrImplements(KnownType.System_Linq_IQueryable))
             {
                 return true;
             }
