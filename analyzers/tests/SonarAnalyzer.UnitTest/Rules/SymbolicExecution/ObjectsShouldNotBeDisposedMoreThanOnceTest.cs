@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             .WithOnlyDiagnostics(ObjectsShouldNotBeDisposedMoreThanOnce.S3966);
 
         private readonly VerifierBuilder roslynCS = new VerifierBuilder()
-            // ToDo: .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))     // SE part
+            .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
             .WithBasePath(@"SymbolicExecution\Roslyn")
             .WithOnlyDiagnostics(ChecksCS.ObjectsShouldNotBeDisposedMoreThanOnce.S3966);
 
@@ -47,28 +47,34 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
                 .Verify();
 
-        [Ignore] // Fix after S3966 implementation
+        [Ignore] // ToDo: Remove after S3966 implementation
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn(ProjectType projectType) =>
+        public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_CS(ProjectType projectType) =>
             roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
                 .Verify();
 
 #if NET
 
-        [Ignore] // Fix after S3966 implementation
+        [Ignore] // ToDo: Remove after S3966 implementation
+        [TestMethod]
+        public void ObjectsShouldNotBeDisposedMoreThanOnce_Sonar_CSharp8() =>
+            sonar.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp8.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .Verify();
+
+        [Ignore] // ToDo: Remove after S3966 implementation
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Sonar_CSharp9() =>
-            roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs")
+            sonar.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_CSharp9() =>
-            sonar.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs")
+            roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
