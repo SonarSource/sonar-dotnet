@@ -6,9 +6,14 @@ public interface IBase { }
 public interface INotImplemented { }
 public interface INotImplementedWithBase : IBase { }
 public interface IImplemented { }
+public interface IGeneric<T> { }
+public interface IGeneric<TFirst, TSecond> { }
 
 public class ImplementerOfIBase : IBase { }
 public class ImplementerOfIImplemented : IImplemented { }
+public class ImplementerOfIIGenericInt : IGeneric<int> { }
+public class ImplementerOfIIGenericString : IGeneric<string> { }
+public class ImplementerOfIIGenericStringObject : IGeneric<string, object> { }
 
 public class EmptyClass { }
 public class EmptyBase { }
@@ -54,6 +59,16 @@ public class InvalidCastToInterface
         var list = new List<int>();
         var ilist = (IList)list;
         var icollection = (ICollection)list;
+
+        var fromString = new ImplementerOfIIGenericString();
+        var toString = (IGeneric<string>)fromString;
+        var toInt = (IGeneric<int>)fromString;  // FN
+
+        var fromStringObject = new ImplementerOfIIGenericStringObject();
+        var toStringObject = (IGeneric<string, object>)fromStringObject;
+        var toStringString = (IGeneric<string, string>)fromStringObject;    // FN
+        var toIntString = (IGeneric<int, string>)fromStringObject;          // FN
+        var toSingleTyped = (IGeneric<int>)fromStringObject;                // FN
     }
 }
 
