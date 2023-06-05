@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S2925",
+"message":  "Do not use Thread.Sleep() in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"region":  {
+"startLine":  1890,
+"startColumn":  13,
+"endLine":  1890,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use Thread.Sleep() in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"region":  {
+"startLine":  1897,
+"startColumn":  13,
+"endLine":  1897,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use Thread.Sleep() in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"region":  {
+"startLine":  1904,
+"startColumn":  13,
+"endLine":  1904,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use Thread.Sleep() in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"region":  {
+"startLine":  1926,
+"startColumn":  13,
+"endLine":  1926,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use Thread.Sleep() in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"region":  {
+"startLine":  1935,
+"startColumn":  13,
+"endLine":  1935,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use Thread.Sleep() in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"region":  {
+"startLine":  1943,
+"startColumn":  13,
+"endLine":  1943,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use Thread.Sleep() in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"region":  {
+"startLine":  1953,
+"startColumn":  13,
+"endLine":  1953,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use Thread.Sleep() in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"region":  {
+"startLine":  1975,
+"startColumn":  13,
+"endLine":  1975,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use Thread.Sleep() in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"region":  {
+"startLine":  1983,
+"startColumn":  13,
+"endLine":  1983,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use Thread.Sleep() in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"region":  {
+"startLine":  1988,
+"startColumn":  13,
+"endLine":  1988,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use Thread.Sleep() in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"region":  {
+"startLine":  1992,
+"startColumn":  13,
+"endLine":  1992,
+"endColumn":  31
+}
+}
+}
+]
+}
