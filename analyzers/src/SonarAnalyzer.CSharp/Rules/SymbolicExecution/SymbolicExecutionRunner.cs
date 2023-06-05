@@ -36,7 +36,6 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 {
     // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
     private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
-        new SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce(),
         new SonarRules.EmptyCollectionsShouldNotBeEnumerated(),
         new SonarRules.ConditionEvaluatesToConstant(),
         new SonarRules.RestrictDeserializedTypes(),
