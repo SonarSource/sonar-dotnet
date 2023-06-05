@@ -217,37 +217,70 @@ internal sealed partial class Binary
 
     private static BigInteger? CalculateXorMin(NumberConstraint left, NumberConstraint right)
     {
-        // Takes advantage of the property a - b <= a ^ b for all a >= 0 and b >= 0
-        // If ranges overlap => at least 1 value belongs to both ranges => xor can yield 0
         if (left.IsPositive && right.IsPositive)
         {
-            if (left.Min > right.Max)
+            return SameSign(left, right);
+        }
+        else if (left.IsNegative && right.IsNegative)
+        {
+            return SameSign(right, left);
+        }
+        // Positive numbers start with Zeroes. Negative numbers start with Ones. XOR them, and the result will start with Ones and thus will be negative.
+        // By taking a look at the number of starting Zeroes and Ones, we can also learn a limit for the number of starting Ones of the result.
+        // Note: When passing a positive limit to NegativeMagnitude, it needs to be increased by 1 and then multiplied by -1 to get the expected result.
+        else if ((left.IsPositive || right.IsNegative) && left.Max.HasValue && right.Min.HasValue)
+        {
+            return NegativeMagnitude(-BigInteger.Max(left.Max.Value + 1, BigInteger.Abs(right.Min.Value)));
+        }
+        else if ((left.IsNegative || right.IsPositive) && left.Min.HasValue && right.Max.HasValue)
+        {
+            return NegativeMagnitude(-BigInteger.Max(BigInteger.Abs(left.Min.Value), right.Max.Value + 1));
+        }
+        else if (left.Min.HasValue && left.Max.HasValue && right.Min.HasValue && right.Max.HasValue)
+        {
+            return NegativeMagnitude(-Max(BigInteger.Abs(left.Min.Value), left.Max.Value + 1, BigInteger.Abs(right.Min.Value), right.Max.Value + 1));
+        }
+        else
+        {
+            return null;
+        }
+
+        static BigInteger? SameSign(NumberConstraint range1, NumberConstraint range2)
+        {
+            // Takes advantage of the property a - b <= a ^ b for all a >= 0 and b >= 0
+            // If ranges overlap => at least 1 value belongs to both ranges => xor can yield 0
+            if (range1.Min > range2.Max)
             {
-                return left.Min.Value - right.Max.Value;
+                return range1.Min.Value - range2.Max.Value;
             }
-            else if (right.Min > left.Max)
+            else if (range2.Min > range1.Max)
             {
-                return right.Min.Value - left.Max.Value;
+                return range2.Min.Value - range1.Max.Value;
             }
             else
             {
                 return 0;
             }
         }
-        else if (left.IsNegative && right.IsNegative)
+    }
+
+    private static BigInteger? CalculateXorMax(NumberConstraint left, NumberConstraint right)
+    {
+        if ((left.IsPositive && right.IsNegative) || (left.IsNegative && right.IsPositive))
         {
-            if (right.Min > left.Max)
-            {
-                return right.Min.Value - left.Max.Value;
-            }
-            else if (left.Min > right.Max)
-            {
-                return left.Min.Value - right.Max.Value;
-            }
-            else
-            {
-                return 0;
-            }
+            return -1;
+        }
+        else if ((left.IsPositive || right.IsPositive) && left.Max.HasValue && right.Max.HasValue)
+        {
+            return PositiveMagnitude(BigInteger.Max(left.Max.Value, right.Max.Value));
+        }
+        else if ((left.IsNegative || right.IsNegative) && left.Min.HasValue && right.Min.HasValue)
+        {
+            return PositiveMagnitude(BigInteger.Max(BigInteger.Abs(left.Min.Value), BigInteger.Abs(right.Min.Value)));
+        }
+        else if (left.Min.HasValue && left.Max.HasValue && right.Min.HasValue && right.Max.HasValue)
+        {
+            return PositiveMagnitude(Max(BigInteger.Abs(left.Min.Value), left.Max.Value, BigInteger.Abs(right.Min.Value), right.Max.Value));
         }
         else
         {
@@ -255,21 +288,7 @@ internal sealed partial class Binary
         }
     }
 
-    private static BigInteger? CalculateXorMax(NumberConstraint left, NumberConstraint right)
-    {
-        if ((left.IsPositive && right.CanBePositive) || (right.IsPositive && left.CanBeNegative))
-        {
-            return left.Max.HasValue && right.Max.HasValue ? PositiveMagnitude(left.Max.Value | right.Max.Value) : null;
-        }
-        else if ((left.IsPositive && right.IsNegative) || (left.IsNegative && right.IsPositive))
-        {
-            return -1;
-        }
-        else
-        {
-            return null;
-        }
-    }
+    private static BigInteger Max(params BigInteger[] values) => values.Max();
 
     private static BigInteger? NegativeMagnitude(BigInteger value)
     {
