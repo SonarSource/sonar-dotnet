@@ -137,7 +137,6 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
             if (Language.Syntax.IsKind(node, Language.SyntaxKind.InvocationExpression)
                 && Language.Syntax.TryGetOperands(node, out var left, out var _)
                 && model.GetTypeInfo(left).Type.DerivesOrImplements(KnownType.System_Linq_IQueryable))
-
             {
                 return true;
             }
