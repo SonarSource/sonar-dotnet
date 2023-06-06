@@ -23,10 +23,9 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints;
 internal sealed class DisposableConstraint : SymbolicConstraint
 {
     public static readonly DisposableConstraint Disposed = new(ConstraintKind.DisposableDisposed);
-    public static readonly DisposableConstraint NotDisposed = new(ConstraintKind.DisposableNotDisposed);
 
     public override SymbolicConstraint Opposite =>
-        this == Disposed ? NotDisposed : Disposed;
+        new DisposableConstraint(ConstraintKind.DisposableNotDisposed);
 
     private DisposableConstraint(ConstraintKind kind) : base(kind) { }
 }
