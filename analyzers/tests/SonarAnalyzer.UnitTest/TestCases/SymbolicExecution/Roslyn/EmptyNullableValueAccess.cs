@@ -540,20 +540,47 @@ class NullCoaleascingAssignment
     {
         (int? first, int? second)? tuple = null;
         tuple ??= (42, 42);
-        _ = tuple.Value.first.Value;  // Noncompliant {{'tuple' is null on at least one execution path.}}, FP: tuple non-empty
+        _ = tuple.Value.first.Value;  // Compliant
         _ = tuple.Value.second.Value; // Compliant, both tuple and tuple.Value.second non-empty
         tuple = null;
         tuple ??= (42, 42);
-        _ = tuple.Value.second.Value; // Noncompliant {{'tuple' is null on at least one execution path.}}, FP: tuple non-empty
+        _ = tuple.Value.second.Value; // Compliant
         _ = tuple.Value.first.Value;  // Compliant, both tuple and tuple.Value.first non-empty
         tuple = null;
         tuple ??= (null, 42);
-        _ = tuple.Value.first.Value;  // Noncompliant {{'tuple' is null on at least one execution path.}}, FP: tuple non-empty, FN: should report about first instead
+        _ = tuple.Value.first.Value;  // FN: should report about first instead
         _ = tuple.Value.second.Value; // Compliant, both tuple and tuple.Value.second non-empty
         tuple = null;
         tuple ??= (null, 42);
-        _ = tuple.Value.second.Value; // Noncompliant {{'tuple' is null on at least one execution path.}}, FP: tuple non-empty
+        _ = tuple.Value.second.Value; // Compliant
         _ = tuple.Value.first.Value;  // FN: tuple non-empty but tuple.Value.first empty
+    }
+
+    public void NullCoalescenceResult_NotNull()
+    {
+        int? i = null;
+        i = i ?? 1;         // This uses IsNullOperation
+        var r1 = (int)i;    // Compliant
+    }
+
+    public void NullCoalescenceAssignmentResult_NotNull()
+    {
+        int? i = null;
+        i ??= 1;            // This uses int?.HasValue.get() invocation
+        var r1 = (int)i;    // Compliant, this doesn't call property int?.HasValue, but method int?.HasValue.get
+    }
+
+    public void Learn_NotNull(int? arg)
+    {
+        arg ??= 0;
+        if (arg.HasValue)
+        {
+            _ = arg.Value;
+        }
+        else
+        {
+            _ = arg.Value; // Noncompliant FP, this path is unreachable
+        }
     }
 }
 
