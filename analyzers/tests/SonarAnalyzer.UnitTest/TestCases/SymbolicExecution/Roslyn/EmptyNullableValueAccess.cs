@@ -555,6 +555,33 @@ class NullCoaleascingAssignment
         _ = tuple.Value.second.Value; // Compliant
         _ = tuple.Value.first.Value;  // FN: tuple non-empty but tuple.Value.first empty
     }
+
+    public void NullCoalescenceResult_NotNull()
+    {
+        int? i = null;
+        i = i ?? 1;         // This uses IsNullOperation
+        var r1 = (int)i;    // Compliant
+    }
+
+    public void NullCoalescenceAssignmentResult_NotNull()
+    {
+        int? i = null;
+        i ??= 1;            // This uses int?.HasValue.get() invocation
+        var r1 = (int)i;    // Compliant, this doesn't call property int?.HasValue, but method int?.HasValue.get
+    }
+
+    public void Learn_NotNull(int? arg)
+    {
+        arg ??= 0;
+        if (arg.HasValue)
+        {
+            _ = arg.Value;
+        }
+        else
+        {
+            _ = arg.Value; // Noncompliant FP, this path is unreachable
+        }
+    }
 }
 
 class Linq
