@@ -50,16 +50,16 @@ public class Disposable : IDisposable
                 {
                     var d = new Disposable();
                     d.Dispose();
-                    d.Dispose(); // FIXME Non-compliant - FN: local functions are not supported by the CFG
+                    d.Dispose(); // FN: local functions are not supported
                 }
 
                 static void LocalStaticFunction()
                 {
                     var d = new Disposable();
                     d.Dispose();
-                    d.Dispose(); // FIXME Non-compliant - FN: local functions are not supported by the CFG
+                    d.Dispose(); // FN: local functions are not supported
                 }
-        }
+            }
         }
 
         public ref struct Struct
