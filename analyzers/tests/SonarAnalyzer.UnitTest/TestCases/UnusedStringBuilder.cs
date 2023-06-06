@@ -121,3 +121,40 @@ public static class StringBuilderExtensions
 {
     public static string ToStringAndFree(this StringBuilder sb) => string.Empty;
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/7324
+public class Repro_7324
+{
+    public string Concat_Prefix()
+    {
+        var sb = new StringBuilder();   // Noncompliant FP
+        sb.Append("Lorem ipsum");
+        var ret = "Prefix: " + sb;
+        return ret;
+    }
+
+    public string Concat_Infix()
+    {
+        var sb = new StringBuilder();   // Noncompliant FP
+        sb.Append("Lorem ipsum");
+        var ret = "Prefix: " + sb + " suffix";
+        return ret;
+    }
+
+    public string Concat_Suffix()
+    {
+        var sb = new StringBuilder();   // Noncompliant FP
+        sb.Append("Lorem ipsum");
+        var ret = sb + " suffix";
+        return ret;
+    }
+
+    public string Concat_OutsideDeclaration()
+    {
+        var sb = new StringBuilder();   // Noncompliant FP
+        sb.Append("Lorem ipsum");
+        string ret;
+        ret = "Prefix: " + sb;
+        return ret;
+    }
+}
