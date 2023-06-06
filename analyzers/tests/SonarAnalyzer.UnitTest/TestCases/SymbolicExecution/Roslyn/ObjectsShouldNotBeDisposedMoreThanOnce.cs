@@ -24,18 +24,25 @@ using System.IO;
 //          ^^^^^^^^^^^
         }
 
+        public void DisposedTwice_AssignDisposableObjectToAnotherVariable()
+        {
+            IDisposable d = new Disposable();
+            var x = d;
+            x.Dispose();
+            d.Dispose(); // FN
+        }
+
         public void DisposedTwice_Try()
         {
             IDisposable d = null;
             try
             {
                 d = new Disposable();
-                var x = d;
-                x.Dispose();
+                d.Dispose();
             }
             finally
             {
-                d.Dispose(); // FIXME - Non-compliant
+                d.Dispose(); // Noncompliant
             }
         }
 
