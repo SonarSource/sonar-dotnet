@@ -44,7 +44,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Sonar_CSharp8(ProjectType projectType) =>
             sonar.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
                 .Verify();
 
         [Ignore] // ToDo: Remove after S3966 implementation
@@ -53,7 +54,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_CS(ProjectType projectType) =>
             roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.cs")
-                .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddReferences(MetadataReferenceFacade.NETStandard21)
                 .Verify();
 
 #if NET
