@@ -13,6 +13,11 @@ same applies to <code>ImmutableList</code> and arrays too.</p>
 <p>We measured at least 3x improvement in execution time. For more details see the <code>Benchmarks</code> section from the <code>More info</code>
 tab.</p>
 <p>Also, no memory allocations were needed for the <code>Exists</code> method, since the search is done in-place.</p>
+<h3>Exceptions</h3>
+<p>Since <code><a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities">LINQ to
+Entities</a></code> relies a lot on <code>System.Linq</code> for <a
+href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities#query-conversion">query conversion</a>,
+this rule won’t raise when used within LINQ to Entities syntaxes.</p>
 <h2>How to fix it</h2>
 <p>The <code>Exists</code> method is defined on the collection class, and it has the same signature as <code>Any</code> extension method if a
 predicate is used. The method can be replaced in place.</p>
@@ -44,6 +49,7 @@ bool ContainsEven(int[] data) =&gt;
   <li> <a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablelist-1.exists">ImmutableList&lt;T&gt;.Exists(Predicate&lt;T&gt;)</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any">Enumerable.Any(Predicate&lt;T&gt;)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities">LINQ to Entities</a> </li>
 </ul>
 <h3>Benchmarks</h3>
 <table>
