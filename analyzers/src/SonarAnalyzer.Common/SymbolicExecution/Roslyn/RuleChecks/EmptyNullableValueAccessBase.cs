@@ -29,8 +29,7 @@ public abstract class EmptyNullableValueAccessBase : SymbolicRuleCheck
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var operationInstance = context.Operation.Instance;
-        if (operationInstance.Kind == OperationKindEx.PropertyReference
-            && operationInstance.ToPropertyReference() is var reference
+        if (operationInstance.AsPropertyReference() is { } reference
             && reference.Property.Name == nameof(Nullable<int>.Value)
             && reference.Instance is { } instance
             && instance.Type.IsNullableValueType()
@@ -39,8 +38,7 @@ public abstract class EmptyNullableValueAccessBase : SymbolicRuleCheck
         {
             ReportIssue(instance, instance.Syntax.ToString());
         }
-        else if (operationInstance.Kind == OperationKindEx.Conversion
-            && operationInstance.ToConversion() is var conversion
+        else if (operationInstance.AsConversion() is { } conversion
             && conversion.Operand.Type.IsNullableValueType()
             && conversion.Type.IsNonNullableValueType()
             && context.HasConstraint(conversion.Operand, ObjectConstraint.Null)
