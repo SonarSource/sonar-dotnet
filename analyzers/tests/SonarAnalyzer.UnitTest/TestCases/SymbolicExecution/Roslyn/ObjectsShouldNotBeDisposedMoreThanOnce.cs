@@ -124,7 +124,7 @@ using System.IO;
         }
     }
 
-    class TestLoopWithBreak
+    class TestLoops
     {
         public static void LoopWithBreak(System.Collections.Generic.IEnumerable<string> list, bool condition, IInterface1 instance1)
         {
@@ -134,9 +134,27 @@ using System.IO;
                 {
                     if (condition)
                     {
-                        instance1.Dispose(); // FIXME - Non-compliant
+                        instance1.Dispose(); // Compliant
                     }
                     break;
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
+        }
+
+        public static void Loop(System.Collections.Generic.IEnumerable<string> list, bool condition, IInterface1 instance1)
+        {
+            foreach (string x in list)
+            {
+                try
+                {
+                    if (condition)
+                    {
+                        instance1.Dispose(); // Noncompliant
+                    }
                 }
                 catch (Exception)
                 {
