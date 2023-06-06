@@ -5,7 +5,6 @@ block the <a href="https://en.wikipedia.org/wiki/Thread_(computing)">thread</a>,
 &lt;TestMethod&gt;
 Public Sub SomeTest()
     Threading.Thread.Sleep(500) ' Noncompliant
-
     ' assertions...
 End Sub
 </pre>
@@ -22,7 +21,6 @@ used, because of the following advantages:</p>
 &lt;TestMethod&gt;
 Public Async Function SomeTest() As Task
     Await Task.Delay(500)
-
     ' assertions...
 End Function
 </pre>
@@ -31,14 +29,13 @@ introduced:</p>
 <pre data-diff-id="2" data-diff-type="noncompliant">
 &lt;TestMethod&gt;
 Public Sub UserService_Test()
-    Dim userService = New Mock(Of UserService)()
-    Dim expected = New User()
-    userService.Setup(Function(m) m.GetUserById(42)).Returns(
+    Dim UserService As New Mock(Of UserService)
+    Dim Expected As New User
+    UserService.Setup(Function(X) X.GetUserById(42)).Returns(
         Function()
             Threading.Thread.Sleep(500) ' Noncompliant
-            Return Task.FromResult(expected)
+            Return Task.FromResult(Expected)
         End Function)
-
     ' assertions...
 End Sub
 </pre>
@@ -47,10 +44,9 @@ delay there:</p>
 <pre data-diff-id="2" data-diff-type="compliant">
 &lt;TestMethod&gt;
 Public Sub UserService_Test()
-    Dim userService = New Mock(Of UserService)()
-    Dim expected = New User()
-    userService.Setup(Function(m) m.GetUserById(42)).ReturnsAsync(expected, TimeSpan.FromMilliseconds(500))
-
+    Dim UserService As New Mock(Of UserService)
+    Dim Expected As New User
+    UserService.Setup(Function(X) X.GetUserById(42)).ReturnsAsync(Expected, TimeSpan.FromMilliseconds(500))
     ' assertions...
 End Sub
 </pre>
@@ -61,6 +57,5 @@ End Sub
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.delay">Task.Delay method</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/">Asynchronous programming with async and await</a> </li>
   <li> <a href="https://github.com/moq/moq4">Moq mocking library</a> </li>
-  <li> <a href="https://www.telerik.com/products/mocking.aspx">Telerik mocking library</a> </li>
 </ul>
 
