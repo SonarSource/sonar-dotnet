@@ -10,8 +10,16 @@ public class Disposable : IDisposable
         {
             public void Disposed_UsingDeclaration()
             {
-                using var d = new Disposable(); // Noncompliant FP
-                d.Dispose(); // FIXME Non-compliant {{Refactor this code to make sure 'd' is disposed only once.}}
+                using var d = new Disposable(); // Noncompliant {{Resource 'd = new Disposable()' is ensured to be disposed by this using statement. You don't need to dispose it twice.}}
+                d.Dispose();
+            }
+
+            public void Disposed_UsingStatement()
+            {
+                using (var d = new Disposable()) // Noncompliant {{Resource 'd = new Disposable()' is ensured to be disposed by this using statement. You don't need to dispose it twice.}}
+                {
+                    d.Dispose();
+                }
             }
         }
 
@@ -25,7 +33,7 @@ public class Disposable : IDisposable
 
             public void NullCoalescenceAssignment_NonCompliant(IDisposable s)
             {
-                using (s ??= new Disposable()) // FIXME Non-compliant
+                using (s ??= new Disposable()) // FN
                 {
                     s.Dispose();
                 }
@@ -81,8 +89,7 @@ public class Disposable : IDisposable
 
             public void M2()
             {
-                using var s = new Struct(); // Noncompliant FP
-
-                s.Dispose(); // FIXME Non-compliant
+                using var s = new Struct(); // Noncompliant {{Resource 's = new Struct()' is ensured to be disposed by this using statement. You don't need to dipose it twice.}}
+                s.Dispose();
             }
         }

@@ -9,7 +9,7 @@ using System.IO;
         {
             var d = new Disposable();
             d.Dispose();
-            d.Dispose(); // Noncompliant
+            d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed. Refactor the code to dispose it only once.}}
         }
 
         public void DisposedTwice_Conditional()
@@ -20,7 +20,7 @@ using System.IO;
             {
                 d.Dispose();
             }
-            d.Dispose(); // Noncompliant {{Refactor this code to make sure 'd' is disposed only once.}}
+            d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed. Refactor the code to dispose it only once.}}
 //          ^^^^^^^^^^^
         }
 
@@ -80,7 +80,7 @@ using System.IO;
         public void Disposed_Using_WithExpressions()
         {
             var d = new Disposable();
-            using (d) // FIXME - Non-compliant
+            using (d) // FN
             {
                 d.Dispose();
             }
@@ -114,8 +114,8 @@ using System.IO;
         public void DisposeMultipleTimes()
         {
             Dispose();
-            this.Dispose(); // FIXME - Non-compliant
-            Dispose(); // FIXME - Non-compliant
+            this.Dispose(); // FN
+            Dispose(); // FN
         }
 
         public void DoSomething()
