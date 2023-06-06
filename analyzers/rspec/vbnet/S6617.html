@@ -12,6 +12,11 @@ loop, whereas <code>Contains</code> is considerably faster in some collection ty
 <h3>What is the potential impact?</h3>
 <p>We measured a significant improvement both in execution time and memory allocation. For more details see the <code>Benchmarks</code> section from
 the <code>More info</code> tab.</p>
+<h3>Exceptions</h3>
+<p>Since <code><a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities">LINQ to
+Entities</a></code> relies a lot on <code>System.Linq</code> for <a
+href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities#query-conversion">query conversion</a>,
+this rule won’t raise when used within LINQ to Entities syntaxes.</p>
 <h2>How to fix it</h2>
 <p><code>Contains</code> is a method defined on the <code>ICollection&lt;T&gt;</code> interface and takes a <code>T item</code> argument.
 <code>Any</code> is an extension method defined on the <code>IEnumerable&lt;T&gt;</code> interface and takes a predicate argument. Therefore, calls
@@ -52,6 +57,7 @@ End Function
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1.contains">SortedSet&lt;T&gt;.Contains(T)</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.contains">List.Contains(T)</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any">Enumerable.Any</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities">LINQ to Entities</a> </li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
