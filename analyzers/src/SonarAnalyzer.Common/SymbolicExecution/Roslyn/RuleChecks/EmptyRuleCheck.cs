@@ -22,7 +22,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
 public sealed class EmptyRuleCheck : SymbolicRuleCheck
 {
-    protected override DiagnosticDescriptor Rule => throw new NotImplementedException();
+    protected override DiagnosticDescriptor Rule => throw new NotSupportedException();
 
     public override bool ShouldExecute() => false;
 }
