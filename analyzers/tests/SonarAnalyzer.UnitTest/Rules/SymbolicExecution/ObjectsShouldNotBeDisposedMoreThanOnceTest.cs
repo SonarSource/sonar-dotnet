@@ -60,18 +60,18 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [Ignore] // ToDo: Remove after S3966 implementation
         [TestMethod]
-        public void ObjectsShouldNotBeDisposedMoreThanOnce_Sonar_CSharp8() =>
-            sonar.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp8.cs")
+        public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_CSharp8() =>
+            roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp8.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
-        [Ignore] // ToDo: Remove after S3966 implementation
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Sonar_CSharp9() =>
             sonar.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
+        [Ignore] // ToDo: Remove after S3966 implementation
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_CSharp9() =>
             roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs")
