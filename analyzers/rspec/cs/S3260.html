@@ -2,136 +2,8 @@
 <p>Classes and records with either <code>private</code> or <code>file</code> access modifiers aren’t visible outside of their assemblies or files, so
 if they’re not extended inside their scope, they should be made explicitly non-extensible with the addition of the <code>sealed</code> keyword.</p>
 <h3>What is the potential impact?</h3>
-<p>We measured at least 4x improvement in the execution time by running the following snippet with <a
-href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>.</p>
-<pre>
-[Params(1_000_000)]
-public int Iterations { get; set; }
-
-private readonly UnsealedClass unsealedType = new UnsealedClass();
-private readonly SealedClass sealedType = new SealedClass();
-
-[Benchmark(Baseline = true)]
-public void UnsealedType()
-{
-    for (int i = 0; i &lt; Iterations; i++)
-    {
-        unsealedType.DoNothing();
-    }
-}
-
-[Benchmark]
-public void SealedType()
-{
-    for (int i = 0; i &lt; Iterations; i++)
-    {
-        sealedType.DoNothing();
-    }
-}
-
-private class BaseType
-{
-    public virtual void DoNothing() { }
-}
-
-private class UnsealedClass : BaseType
-{
-    public override void DoNothing() { }
-}
-
-private sealed class SealedClass : BaseType
-{
-    public override void DoNothing() { }
-}
-</pre>
-<table>
-  <colgroup>
-    <col style="width: 14.2857%;">
-    <col style="width: 14.2857%;">
-    <col style="width: 14.2857%;">
-    <col style="width: 14.2857%;">
-    <col style="width: 14.2857%;">
-    <col style="width: 14.2857%;">
-    <col style="width: 14.2858%;">
-  </colgroup>
-  <thead>
-    <tr>
-      <th>Method</th>
-      <th>Runtime</th>
-      <th>Iterations</th>
-      <th>Mean</th>
-      <th>Error</th>
-      <th>StdDev</th>
-      <th>Ratio</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><p>UnsealedType</p></td>
-      <td><p>.NET 5.0</p></td>
-      <td><p>1000000</p></td>
-      <td><p>918.7 us</p></td>
-      <td><p>12.09 us</p></td>
-      <td><p>10.72 us</p></td>
-      <td><p>1.00</p></td>
-    </tr>
-    <tr>
-      <td><p>SealedType</p></td>
-      <td><p>.NET 5.0</p></td>
-      <td><p>1000000</p></td>
-      <td><p>231.2 us</p></td>
-      <td><p>3.61 us</p></td>
-      <td><p>3.20 us</p></td>
-      <td><p>0.25</p></td>
-    </tr>
-    <tr>
-      <td><p>UnsealedType</p></td>
-      <td><p>.NET 6.0</p></td>
-      <td><p>1000000</p></td>
-      <td><p>867.9 us</p></td>
-      <td><p>6.38 us</p></td>
-      <td><p>5.65 us</p></td>
-      <td><p>1.00</p></td>
-    </tr>
-    <tr>
-      <td><p>SealedType</p></td>
-      <td><p>.NET 6.0</p></td>
-      <td><p>1000000</p></td>
-      <td><p>218.4 us</p></td>
-      <td><p>0.71 us</p></td>
-      <td><p>0.59 us</p></td>
-      <td><p>0.25</p></td>
-    </tr>
-    <tr>
-      <td><p>UnsealedType</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>1000000</p></td>
-      <td><p>1,074.5 us</p></td>
-      <td><p>3.55 us</p></td>
-      <td><p>3.15 us</p></td>
-      <td><p>1.00</p></td>
-    </tr>
-    <tr>
-      <td><p>SealedType</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>1000000</p></td>
-      <td><p>216.1 us</p></td>
-      <td><p>1.28 us</p></td>
-      <td><p>1.19 us</p></td>
-      <td><p>0.20</p></td>
-    </tr>
-  </tbody>
-</table>
-<p>Configuration used for running the benchmarks:</p>
-<pre>
-BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.2846/22H2/2022Update)
-12th Gen Intel Core i7-12800H, 1 CPU, 20 logical and 14 physical cores
-.NET SDK=7.0.203
-  [Host]   : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
-  .NET 5.0 : .NET 5.0.17 (5.0.1722.21314), X64 RyuJIT AVX2
-  .NET 6.0 : .NET 6.0.16 (6.0.1623.17311), X64 RyuJIT AVX2
-  .NET 7.0 : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
-</pre>
+<p>We measured at least 4x improvement in execution time. For more details see the <code>Benchmarks</code> section from the <code>More info</code>
+tab.</p>
 <h2>How to fix it</h2>
 <p>The code can be improved by adding the <code>sealed</code> keyword in front of the <code>class</code> or <code>record</code> types that have no
 inheritors.</p>
@@ -192,4 +64,118 @@ file sealed record MyRecord
   <li> <a href="https://code-maze.com/improve-performance-sealed-classes-dotnet">Boosting Performance With Sealed Classes in .NET</a> </li>
   <li> <a href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-6/#peanut-butter">Performance Improvements in .NET 6</a> </li>
 </ul>
+<h3>Benchmarks</h3>
+<table>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Runtime</th>
+      <th>Mean</th>
+      <th>StdDev</th>
+      <th>Ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p>UnsealedType</p></td>
+      <td><p>.NET 5.0</p></td>
+      <td><p>918.7 us</p></td>
+      <td><p>10.72 us</p></td>
+      <td><p>1.00</p></td>
+    </tr>
+    <tr>
+      <td><p>SealedType</p></td>
+      <td><p>.NET 5.0</p></td>
+      <td><p>231.2 us</p></td>
+      <td><p>3.20 us</p></td>
+      <td><p>0.25</p></td>
+    </tr>
+    <tr>
+      <td><p>UnsealedType</p></td>
+      <td><p>.NET 6.0</p></td>
+      <td><p>867.9 us</p></td>
+      <td><p>5.65 us</p></td>
+      <td><p>1.00</p></td>
+    </tr>
+    <tr>
+      <td><p>SealedType</p></td>
+      <td><p>.NET 6.0</p></td>
+      <td><p>218.4 us</p></td>
+      <td><p>0.59 us</p></td>
+      <td><p>0.25</p></td>
+    </tr>
+    <tr>
+      <td><p>UnsealedType</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>1,074.5 us</p></td>
+      <td><p>3.15 us</p></td>
+      <td><p>1.00</p></td>
+    </tr>
+    <tr>
+      <td><p>SealedType</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>216.1 us</p></td>
+      <td><p>1.19 us</p></td>
+      <td><p>0.20</p></td>
+    </tr>
+  </tbody>
+</table>
+<p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
+<pre>
+[Params(1_000_000)]
+public int Iterations { get; set; }
+
+private readonly UnsealedClass unsealedType = new UnsealedClass();
+private readonly SealedClass sealedType = new SealedClass();
+
+[Benchmark(Baseline = true)]
+public void UnsealedType()
+{
+    for (int i = 0; i &lt; Iterations; i++)
+    {
+        unsealedType.DoNothing();
+    }
+}
+
+[Benchmark]
+public void SealedType()
+{
+    for (int i = 0; i &lt; Iterations; i++)
+    {
+        sealedType.DoNothing();
+    }
+}
+
+private class BaseType
+{
+    public virtual void DoNothing() { }
+}
+
+private class UnsealedClass : BaseType
+{
+    public override void DoNothing() { }
+}
+
+private sealed class SealedClass : BaseType
+{
+    public override void DoNothing() { }
+}
+</pre>
+<p>Hardware Configuration:</p>
+<pre>
+BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.2846/22H2/2022Update)
+12th Gen Intel Core i7-12800H, 1 CPU, 20 logical and 14 physical cores
+.NET SDK=7.0.203
+  [Host]   : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+  .NET 5.0 : .NET 5.0.17 (5.0.1722.21314), X64 RyuJIT AVX2
+  .NET 6.0 : .NET 6.0.16 (6.0.1623.17311), X64 RyuJIT AVX2
+  .NET 7.0 : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+</pre>
 
