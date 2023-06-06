@@ -2849,7 +2849,7 @@ internal static class RuleTypeMappingCS
         // ["S2922"],
         // ["S2923"],
         // ["S2924"],
-        // ["S2925"],
+        ["S2925"] = "CODE_SMELL",
         // ["S2926"],
         // ["S2927"],
         // ["S2928"],

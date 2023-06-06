@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  25,
+"endLine":  252,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ContextWatchWithSpec.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  17,
+"endLine":  39,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeadLetterSupressionSpec.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  13,
+"endLine":  135,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeadLetterSuspensionSpec.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  13,
+"endLine":  104,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\InboxSpec.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  25,
+"endLine":  52,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\InboxSpec.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  25,
+"endLine":  57,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\SchedulerShutdownSpec.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  13,
+"endLine":  162,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  17,
+"endLine":  289,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Loggers\LoggerSpec.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  13,
+"endLine":  30,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\BackoffOnRestartSupervisorSpec.cs",
+"region":  {
+"startLine":  312,
+"startColumn":  13,
+"endLine":  312,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\BackoffSupervisorSpec.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  17,
+"endLine":  220,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  61,
+"endLine":  62,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  17,
+"endLine":  278,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  13,
+"endLine":  360,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  21,
+"endLine":  247,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  21,
+"endLine":  291,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  17,
+"endLine":  297,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  21,
+"endLine":  303,
+"endColumn":  61
+}
+}
+}
+]
+}
