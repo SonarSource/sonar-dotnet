@@ -18,14 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using static SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp.InvalidCastToInterface;
-
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class InvalidCastToInterface : SonarDiagnosticAnalyzer
     {
+        private const string DiagnosticId = "S1944";
+        private const string MessageFormat = "{0}"; // This format string can be removed after we drop the old SE engine.
         private const string MessageReviewFormat = "Review this cast; in this project there's no type that {0}.";
+
+        public static readonly DiagnosticDescriptor S1944 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S1944);
         protected override bool EnableConcurrentExecution => false;

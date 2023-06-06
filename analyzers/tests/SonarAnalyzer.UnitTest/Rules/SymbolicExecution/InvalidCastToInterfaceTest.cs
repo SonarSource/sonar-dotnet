@@ -29,15 +29,17 @@ public class InvalidCastToInterfaceTest
 {
     private readonly VerifierBuilder sonar = new VerifierBuilder()
         .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg)) // SE part
-        .AddAnalyzer(() => new CS.InvalidCastToInterface())                                                    // Syntax-based part
+        .AddAnalyzer(() => new CS.InvalidCastToInterface())                                                 // Syntax-based part
         .WithBasePath(@"SymbolicExecution\Sonar")
-        .WithOnlyDiagnostics(ChecksCS.InvalidCastToInterface.S1944);
+        .WithOnlyDiagnostics(CS.InvalidCastToInterface.S1944);
 
+    // The SE part that is empty and doesn't report anything. It exists to preven the old SE rule from running.
+    // When the old SE engine is removed, the SymbolicExecutionRunner runner should be removed from this class and test cases should be moved out of SymbolicExecution directory.
     private readonly VerifierBuilder roslynCS = new VerifierBuilder()
-        // ToDo: .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))     // SE part
+        .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
         .AddAnalyzer(() => new CS.InvalidCastToInterface())                                         // Syntax-based part
         .WithBasePath(@"SymbolicExecution\Roslyn")
-        .WithOnlyDiagnostics(ChecksCS.InvalidCastToInterface.S1944);
+        .WithOnlyDiagnostics(CS.InvalidCastToInterface.S1944);
 
     [DataTestMethod]
     [DataRow(ProjectType.Product)]
@@ -55,10 +57,6 @@ public class InvalidCastToInterfaceTest
         roslynCS.AddPaths("InvalidCastToInterface.cs").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
 
 #if NET
-
-    [TestMethod]
-    public void InvalidCastToInterface_Roslyn_CSharp8() =>
-        roslynCS.AddPaths("InvalidCastToInterface.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
     [TestMethod]
     public void InvalidCastToInterface_Sonar_CSharp9() =>
