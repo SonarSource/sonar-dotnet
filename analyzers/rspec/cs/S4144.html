@@ -1,9 +1,8 @@
 <h2>Why is this an issue?</h2>
-<p>When two methods have the same implementation, either it was a mistake - something else was intended - or the duplication was intentional, but may
-be confusing to maintainers. In the latter case, one implementation should invoke the other.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-private const string CODE = "bounteous";
+<p>Two methods having the same implementation are suspicious. It might be that something else was intended. Or the duplication is intentional, which
+becomes a maintenance burden.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+private const string CODE = "secret";
 private int callCount = 0;
 
 public string GetCode()
@@ -12,15 +11,16 @@ public string GetCode()
   return CODE;
 }
 
-public string GetName()  // Noncompliant
+public string GetName() // Noncompliant: duplicates GetCode
 {
   callCount++;
   return CODE;
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-private const string CODE = "bounteous";
+<p>If the identical logic is intentional, the code should be refactored to avoid duplication. For example, by having both methods call the same method
+or by having one implementation invoke the other.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+private const string CODE = "secret";
 private int callCount = 0;
 
 public string GetCode()
@@ -29,7 +29,7 @@ public string GetCode()
   return CODE;
 }
 
-public string GetName()
+public string GetName() // Intent is clear
 {
   return GetCode();
 }
