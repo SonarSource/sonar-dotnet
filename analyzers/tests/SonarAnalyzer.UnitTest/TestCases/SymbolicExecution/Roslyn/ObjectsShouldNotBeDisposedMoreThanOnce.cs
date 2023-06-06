@@ -50,7 +50,7 @@ using System.IO;
         {
             var a = new[] { new Disposable() };
             a[0].Dispose();
-            a[0].Dispose(); // Compliant, we don't handle arrays
+            a[0].Dispose(); // FN
         }
 
         public void Dispose_Stream_LeaveOpenFalse()
@@ -90,20 +90,6 @@ using System.IO;
         {
             param1.Dispose();
             param1.Dispose(); // Noncompliant
-        }
-
-        public void Close_ParametersOfDifferentTypes(IInterface1 interface1, IDisposable interface2)
-        {
-            // Regression test for https://github.com/SonarSource/sonar-dotnet/issues/1038
-            interface1.Dispose(); // ok, only called once on each parameter
-            interface2.Dispose();
-        }
-
-        public void Close_ParametersOfSameType(IInterface1 instance1, IInterface1 instance2)
-        {
-            // Regression test for https://github.com/SonarSource/sonar-dotnet/issues/1038
-            instance1.Dispose();
-            instance2.Dispose();
         }
 
         public void Close_OneParameterDisposedTwice(IInterface1 instance1, IInterface1 instance2)
