@@ -19,17 +19,15 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {
     internal sealed class InvalidCastToInterfaceSymbolicExecution : ISymbolicExecutionAnalyzer
     {
-        private const string DiagnosticId = "S1944";
         private const string MessageDefinite = "Nullable is known to be empty, this cast throws an exception.";
 
-        internal static readonly DiagnosticDescriptor S1944 = DescriptorFactory.Create(DiagnosticId, "{0}");
-
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S1944);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(InvalidCastToInterface.S1944);  // References the new SE because of the shared non-SE rule part
 
         public ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeReportingContext context, SonarExplodedGraph explodedGraph) =>
             new AnalysisContext(context, explodedGraph);
@@ -79,7 +77,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
                 if (!context.Equals(default(SyntaxNodeAnalysisContext)))
                 {
-                    context.ReportIssue(Diagnostic.Create(S1944, castExpression.GetLocation(), MessageDefinite));
+                    context.ReportIssue(Diagnostic.Create(InvalidCastToInterface.S1944, castExpression.GetLocation(), MessageDefinite));
                 }
 
                 return null;
