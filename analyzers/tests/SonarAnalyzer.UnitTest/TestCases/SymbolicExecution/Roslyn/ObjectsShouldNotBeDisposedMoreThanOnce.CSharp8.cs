@@ -92,4 +92,13 @@ public class Consumer
         using var s = new Struct(); // Noncompliant {{Resource 's = new Struct()' is ensured to be disposed by this using statement. You don't need to dispose it twice.}}
         s.Dispose();
     }
+
+    public void DonotDisposeOnAllPaths(bool flag)
+    {
+        using var s = new Struct(); // Noncompliant
+        if (flag)
+        {
+            s.Dispose();
+        }
+    }
 }
