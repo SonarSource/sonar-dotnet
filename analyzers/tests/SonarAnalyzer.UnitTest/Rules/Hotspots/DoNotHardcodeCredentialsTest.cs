@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using SonarAnalyzer.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 

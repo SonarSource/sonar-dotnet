@@ -19,7 +19,6 @@
  */
 
 using System.Xml;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Common
 {

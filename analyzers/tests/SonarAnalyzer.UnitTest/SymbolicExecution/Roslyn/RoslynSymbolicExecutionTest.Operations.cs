@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;

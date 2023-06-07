@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules

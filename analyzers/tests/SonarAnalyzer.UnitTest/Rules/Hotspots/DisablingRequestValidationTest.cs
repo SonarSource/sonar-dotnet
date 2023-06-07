@@ -21,7 +21,6 @@
 using System.Globalization;
 using System.IO;
 using System.Threading;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.Helpers;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;

@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {

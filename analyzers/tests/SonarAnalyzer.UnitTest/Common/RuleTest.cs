@@ -23,7 +23,6 @@ extern alias vbnet;
 
 using System.Reflection;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.UnitTest.Helpers;

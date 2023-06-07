@@ -21,7 +21,6 @@
 using System.IO;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.Rules;

@@ -21,7 +21,6 @@
 #if NET
 
 using System.IO;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules

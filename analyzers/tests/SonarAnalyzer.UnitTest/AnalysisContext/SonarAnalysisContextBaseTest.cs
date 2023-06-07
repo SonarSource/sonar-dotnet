@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 

@@ -20,7 +20,6 @@
 
 using System.Reflection;
 using Microsoft.CodeAnalysis.CodeFixes;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.UnitTest.TestFramework

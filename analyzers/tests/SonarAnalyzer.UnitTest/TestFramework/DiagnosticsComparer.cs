@@ -19,7 +19,6 @@
  */
 
 using System.Text;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {

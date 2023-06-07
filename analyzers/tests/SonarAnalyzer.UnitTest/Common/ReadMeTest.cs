@@ -22,7 +22,6 @@
 
 using System.IO;
 using System.Text.RegularExpressions;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Common;
 

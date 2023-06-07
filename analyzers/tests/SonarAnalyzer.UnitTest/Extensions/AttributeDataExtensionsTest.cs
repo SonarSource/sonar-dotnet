@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Moq;
 using Moq.Protected;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.UnitTest.Extensions

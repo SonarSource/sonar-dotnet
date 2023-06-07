@@ -20,7 +20,6 @@
 
 #if NET
 
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
