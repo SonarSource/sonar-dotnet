@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Tests
+public class Sample
 {
     public void Method()
     {

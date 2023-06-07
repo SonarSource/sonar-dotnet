@@ -42,10 +42,9 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
     [DataTestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
-    public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp8(ProjectType projectType) =>
+    public void EmptyCollectionsShouldNotBeEnumerated_Sonar(ProjectType projectType) =>
         sonar.AddReferences(TestHelper.ProjectTypeReference(projectType))
             .AddPaths("EmptyCollectionsShouldNotBeEnumerated.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
     [Ignore("Sonar-SE analyzer is still active.")]
@@ -55,8 +54,16 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CS(ProjectType projectType) =>
         roslynCS.AddReferences(TestHelper.ProjectTypeReference(projectType))
             .AddPaths("EmptyCollectionsShouldNotBeEnumerated.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
+
+    [TestMethod]
+    public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp8() =>
+        sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
+    [Ignore("Sonar-SE analyzer is still active.")]
+    [TestMethod]
+    public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp8() =>
+        roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 

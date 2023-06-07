@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class Tests
+public class Sample
 {
     void Spans(Span<char> chars, ReadOnlySpan<char> readonlyChars)
     {

@@ -9,14 +9,14 @@ topLevel.Clear();
 
 void TopLevelLocalFunction()
 {
-    var list = new List<int>();
-    list.Clear();   // FN
+    var local = new List<int>();
+    local.Clear();   // FN
 
-    list.Add(42);
-    list.Clear();
+    local.Add(42);
+    local.Clear();
 }
 
-public class Tests
+public class Sample
 {
     public void TargetTypedNew()
     {
@@ -34,6 +34,9 @@ public class Tests
 
         list = new(new[] { 42 });
         list.Clear();   // Compliant
+
+        list = new List<int>();
+        list.Clear();   // FN
     }
 
     public void StaticLambda()
@@ -65,7 +68,7 @@ public class Tests
 
         var empty2 = new List<int>();
         ICollection<int> collection2 = condition ? empty : empty2;
-        collection2.Clear();    // Non-compliant
+        collection2.Clear();    // FN
     }
 }
 

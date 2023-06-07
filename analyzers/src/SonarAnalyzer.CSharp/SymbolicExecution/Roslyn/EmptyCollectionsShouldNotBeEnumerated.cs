@@ -20,7 +20,6 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class EmptyCollectionsShouldNotBeEnumerated : EmptyCollectionsShouldNotBeEnumeratedBase
 {
     public static readonly DiagnosticDescriptor S4158 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
