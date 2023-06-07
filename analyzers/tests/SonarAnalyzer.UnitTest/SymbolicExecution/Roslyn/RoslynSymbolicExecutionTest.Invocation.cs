@@ -1209,7 +1209,22 @@ private static bool Equals(object a, object b, object c) => false;";
             Tag("Arg", arg);
             """;
         SETestContext.CreateCS(code, "int? arg").Validator.TagValues("Arg").Should().SatisfyRespectively(
-            x => x.Should().HaveNoConstraints(),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)));
+    }
+
+    [TestMethod]
+    public void Invocation_NullableGetHasValue_UntrackedSymbol()
+    {
+        const string code = """
+            var result = arg.NullableProperty ??= 0;      // Uses InvocationOperation int?.HasValue.get()
+            Tag("Property", arg.NullableProperty);
+            Tag("Result", result);
+            """;
+        var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
+        validator.TagValues("Property").Should().AllSatisfy(x => x.Should().HaveNoConstraints());
+        validator.TagValues("Result").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),  // Because it's int
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)));
     }
 }

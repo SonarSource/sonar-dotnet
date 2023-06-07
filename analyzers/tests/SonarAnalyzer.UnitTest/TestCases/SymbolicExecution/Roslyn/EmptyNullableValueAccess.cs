@@ -579,7 +579,7 @@ class NullCoaleascingAssignment
         }
         else
         {
-            _ = arg.Value; // Noncompliant FP, this path is unreachable
+            _ = arg.Value; // Compliant, this path is unreachable
         }
     }
 }
