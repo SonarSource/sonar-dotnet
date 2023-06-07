@@ -39,7 +39,7 @@ public sealed record ProgramState : IEquatable<ProgramState>
     public ExceptionState Exception => Exceptions.IsEmpty ? null : Exceptions.Peek();
     public SymbolicValue this[IOperationWrapperSonar operation] => this[operation.Instance];
     public SymbolicValue this[IOperationWrapper operation] => this[operation.WrappedOperation];
-    public SymbolicValue this[IOperation operation] => OperationValue.TryGetValue(ResolveCapture(operation), out var value) ? value : null;
+    public SymbolicValue this[IOperation operation] => OperationValue.TryGetValue(operation, out var value) ? value : null;
     public SymbolicValue this[ISymbol symbol] => SymbolValue.TryGetValue(symbol, out var value) ? value : null;
     public IOperation this[CaptureId capture] => CaptureOperation.TryGetValue(capture, out var value) ? value : null;
 
@@ -74,10 +74,13 @@ public sealed record ProgramState : IEquatable<ProgramState>
             : SetOperationValue(operation.Instance, value);
 
     public ProgramState SetOperationValue(IOperation operation, SymbolicValue value) =>
-        (operation ?? throw new ArgumentNullException(nameof(operation))) is var _
-        && value is null
-            ? this with { OperationValue = OperationValue.Remove(ResolveCapture(operation)) }
-            : this with { OperationValue = OperationValue.SetItem(ResolveCapture(operation), value) };
+        SetOperationValueCore(ResolveCapture(operation), value);
+
+    /// <summary>
+    /// Sets state directly to the FlowCaptureReferenceOperation directly, without resolving the capture itself.
+    /// </summary>
+    public ProgramState SetOperationValue(IFlowCaptureReferenceOperationWrapper capture, SymbolicValue value) =>
+        SetOperationValueCore(capture.WrappedOperation, value);
 
     public ProgramState SetOperationConstraint(IOperationWrapper operation, SymbolicConstraint constraint) =>
         SetOperationConstraint(operation.WrappedOperation, constraint);
@@ -167,6 +170,12 @@ public sealed record ProgramState : IEquatable<ProgramState>
 
     public override string ToString() =>
         Equals(Empty) ? "Empty" + Environment.NewLine : SerializeExceptions() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();
+
+    private ProgramState SetOperationValueCore(IOperation operation, SymbolicValue value) =>
+        (operation ?? throw new ArgumentNullException(nameof(operation))) is var _
+        && value is null
+            ? this with { OperationValue = OperationValue.Remove(operation) }
+            : this with { OperationValue = OperationValue.SetItem(operation, value) };
 
     private string SerializeExceptions() =>
         Exceptions.IsEmpty ? null : Exceptions.JoinStr(string.Empty, x => $"Exception: {x}{Environment.NewLine}");

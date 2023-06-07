@@ -52,6 +52,7 @@ internal static class OperationDispatcher
         { OperationKindEx.EventReference, new EventReference() },
         { OperationKindEx.FieldReference, new FieldReference() },
         { OperationKindEx.FlowCapture, new FlowCapture() },
+        { OperationKindEx.FlowCaptureReference, new FlowCaptureReference() },
         { OperationKindEx.Increment, new IncrementOrDecrement() },
         { OperationKindEx.InstanceReference, new InstanceReference() },
         { OperationKindEx.LocalReference, new LocalReference() },

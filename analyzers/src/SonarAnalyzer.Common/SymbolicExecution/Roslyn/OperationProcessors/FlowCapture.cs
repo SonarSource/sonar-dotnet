@@ -28,3 +28,15 @@ internal sealed class FlowCapture : SimpleProcessor<IFlowCaptureOperationWrapper
     protected override ProgramState Process(SymbolicContext context, IFlowCaptureOperationWrapper capture) =>
         context.State.SetCapture(capture.Id, context.State.ResolveCapture(capture.Value));  // Capture can transitively reference another IFlowCaptureReference
 }
+
+internal sealed class FlowCaptureReference : SimpleProcessor<IFlowCaptureReferenceOperationWrapper>
+{
+    protected override IFlowCaptureReferenceOperationWrapper Convert(IOperation operation) =>
+        IFlowCaptureReferenceOperationWrapper.FromOperation(operation);
+
+    protected override ProgramState Process(SymbolicContext context, IFlowCaptureReferenceOperationWrapper capture)
+    {
+        var resolved = context.State.ResolveCapture(capture.WrappedOperation);
+        return context.State.SetOperationValue(capture, context.State[resolved]);
+    }
+}
