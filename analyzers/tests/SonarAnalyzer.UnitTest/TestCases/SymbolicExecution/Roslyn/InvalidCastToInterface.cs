@@ -77,7 +77,6 @@ public class InvalidCastToInterface
     {
         var b = (IBase)d;
     }
-}
 
     public void Nullable()
     {
