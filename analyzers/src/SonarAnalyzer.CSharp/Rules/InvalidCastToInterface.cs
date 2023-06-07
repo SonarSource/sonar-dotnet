@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using static SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp.InvalidCastToInterface;
 using TypeMap = System.Collections.Generic.Dictionary<Microsoft.CodeAnalysis.INamedTypeSymbol, System.Collections.Generic.HashSet<Microsoft.CodeAnalysis.INamedTypeSymbol>>;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class InvalidCastToInterfaceAnalyzer : SonarDiagnosticAnalyzer
+public sealed class InvalidCastToInterface : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S1944";
     private const string MessageFormat = "{0}"; // This format string can be removed after we drop the old SE engine.
