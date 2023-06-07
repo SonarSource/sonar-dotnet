@@ -10,6 +10,6 @@ public struct S
     {
         var myclass = new MyClass();
         MyClass a;
-        (a, var b) = (myclass, (IMyInterface)myclass); // Noncompliant, this part is not based on SE
+        (a, var b) = (myclass, (IMyInterface)myclass); // Noncompliant
     }
 }

@@ -1,54 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public interface IMyInterface { }
-public interface IMyInterface2 { }
-public interface IMyInterface3 : IMyInterface { }
-public interface IMyInterface4 : IMyInterface { }
-public interface IMyInterface5 { }
+public interface IBase { }
+public interface INotImplemented { }
+public interface INotImplementedWithBase : IBase { }
+public interface IImplemented { }
 
-public class Implementer : IMyInterface { }
-public class Implementer5 : IMyInterface5 { }
+public class ImplementerOfIBase : IBase { }
+public class ImplementerOfIImplemented : IImplemented { }
 
-public class MyClass1 { }
-public class MyClass2 { }
-public class MyClass3 : MyClass2, IMyInterface { }
-public class MyClass4 { }
+public class EmptyClass { }
+public class EmptyBase { }
+public class InheritsAndImplements : EmptyBase, IBase { }
 
 public class InvalidCastToInterface
 {
-    public class Nested : MyClass4, IDisposable
+    public class Nested : EmptyClass, IDisposable
     {
         public void Dispose() { }
     }
 
     static void Main()
     {
-        var myclass1 = new MyClass1();
-        var x = (IMyInterface)myclass1; // Noncompliant {{Review this cast; in this project there's no type that extends 'MyClass1' and implements 'IMyInterface'.}},   this part is not based on SE
-//               ^^^^^^^^^^^^
-        var a = (IMyInterface5)x;       // Noncompliant {{Review this cast; in this project there's no type that implements both 'IMyInterface' and 'IMyInterface5'.}}, this part is not based on SE
-        x = myclass1 as IMyInterface;
-        bool b = myclass1 is IMyInterface;
+        var empty = new EmptyClass();
+        var x = (IBase)empty;       // Noncompliant {{Review this cast; in this project there's no type that extends 'EmptyClass' and implements 'IBase'.}}
+//               ^^^^^
+        var a = (IImplemented)x;    // Noncompliant {{Review this cast; in this project there's no type that implements both 'IBase' and 'IImplemented'.}}
+        x = empty as IBase;
+        bool b = empty is IBase;
 
-        var arr = new MyClass1[10];
-        var arr2 = (IMyInterface[])arr;
+        var arr = new EmptyClass[10];
+        var arr2 = (IBase[])arr;
 
-        var myclass2 = new MyClass2();
-        var y = (IMyInterface)myclass2;
+        var emptyBase = new EmptyBase();
+        var y = (IBase)emptyBase;
 
-        IMyInterface i = new MyClass3();
-        var c = (IMyInterface2)i; // Compliant, because IMyInterface2 doesn't have concrete implementation
-        IMyInterface4 ii = null;
-        var d = (IMyInterface2)i; // Compliant
-        var e = (IMyInterface3)i;
+        IBase i = new InheritsAndImplements();
+        var c = (INotImplemented)i; // Compliant, because INotImplemented doesn't have concrete implementation
+        var d = (INotImplemented)i; // Compliant
+        var e = (INotImplementedWithBase)i;
 
         var o = (object)true;
-        e = (IMyInterface3)o;
+        e = (INotImplementedWithBase)o;
 
         var coll = (IEnumerable<int>)new List<int>();
-        var z = (IDisposable)new MyClass4();
+        var z = (IDisposable)new EmptyClass();
         var w = (IDisposable)(new Node());
+    }
+
+    public void Nullable()
+    {
+        int? i1 = null;
+        var ii = (int)i1; // Compliant, this is handled by S3655
     }
 }
 
@@ -63,63 +66,6 @@ public class Node { }
 public class MyClass
 {
     public double? D { get; set; } = 1.001;
-}
-
-public class NullableTest
-{
-    public void Test1()
-    {
-        int? i1 = null;
-        var ii = (int)i1; // FIXME Non-compliant {{Nullable is known to be empty, this cast throws an exception.}}, this part is not based on SE
-//               ~~~~~~~
-    }
-
-    public void Test2()
-    {
-        int? i2 = 10;
-        var ii = (int)i2;
-    }
-
-    public void Test3()
-    {
-        int? i3 = null;
-        var d = (double)i3; // FIXME Non-compliant
-    }
-
-    public void Test4()
-    {
-        int? i4 = null;
-        var n = (NullableTest)i4; // don't care, custom cast
-    }
-
-    public void Test5()
-    {
-        int? i5 = null;
-        var d = (double?)i5; // Compliant as the resulting type allows null
-    }
-
-    public void Test6()
-    {
-        int? i6 = 42;
-        var d = (double?)i6;
-    }
-
-    public void Test7()
-    {
-        int i7 = 42;
-        var d = (double)i7;
-    }
-
-    public void TestMethod(object obj)
-    {
-        var a = obj as MyClass;
-        var test = (ushort?)a?.D;
-    }
-
-    public static explicit operator NullableTest(int? i)
-    {
-        return null;
-    }
 }
 
 interface IFoo { }

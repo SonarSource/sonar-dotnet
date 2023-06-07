@@ -765,61 +765,86 @@ class Casts
 {
     void DowncastWithReassignment(int? i)
     {
-        _ = (int)i;                   // Compliant, same as i.Value with i unknown
+        _ = (int)i;                 // Compliant, same as i.Value with i unknown
         i = null;
-        _ = (int)i;                   // Noncompliant, empty
+        _ = (int)i;                 // Noncompliant, empty
+        i = null;
+        _ = (double)i;              // Noncompliant, empty
+        i = null;
+        _ = (double?)i;             // Compliant, target type allows null
         i = 42;
-        _ = (int)i;                   // Compliant
+        _ = (int)i;                 // Compliant
     }
 
     void DowncastAfterLearnedNotNullViaLiteral(int? i)
     {
         i = 42;
-        _ = (int)i;                   // Compliant
+        _ = (int)i;                 // Compliant
     }
 
     void DowncastAfterLearnedNotNullViaValue()
     {
         int? i = null;
-        _ = i.Value;                  // Noncompliant, empty
-        _ = (int)i;                   // Compliant, when reached i.Value above implies i is not null
+        _ = i.Value;                // Noncompliant, empty
+        _ = (int)i;                 // Compliant, when reached i.Value above implies i is not null
     }
 
     void UpcastWithNull()
     {
-        _ = ((int?)null).Value;       // Noncompliant
+        _ = ((int?)null).Value;     // Noncompliant
     }
 
     void UpcastWithReassignment(int? i)
     {
-        _ = ((int?)null).Value;       // Noncompliant
+        _ = ((int?)null).Value;     // Noncompliant
         i = null;
-        _ = ((int?)i).Value;          // Noncompliant, when reached i.Value above implies i is not null
+        _ = ((int?)i).Value;        // Noncompliant, when reached i.Value above implies i is not null
     }
 
-    void UpcastWithNonNullLiteral(int? i)
+    void UpcastWithNonNullLiteral()
     {
-        _ = ((int?)42).Value;         // Compliant
+        _ = ((int?)42).Value;       // Compliant
     }
 
     void AsOperatorAndUnreachability(int? i)
     {
-        _ = (null as int?).Value;     // Noncompliant
+        _ = (null as int?).Value;   // Noncompliant
         i = null;
-        _ = (i as int?).Value;        // Noncompliant, when reached assignment above implies i is null
+        _ = (i as int?).Value;      // Noncompliant, when reached assignment above implies i is null
     }
 
     void AsOperatorWithUnknownAndReassignment(int? i)
     {
-        _ = (i as int?).Value;        // Compliant
+        _ = (i as int?).Value;      // Compliant
         i = null;
-        _ = (i as int?).Value;        // Noncompliant, empty
+        _ = (i as int?).Value;      // Noncompliant, empty
     }
 
     void AsOperatorWithNonNullLiteral(int? i)
     {
-        _ = (42 as int?).Value;       // Compliant
+        _ = (42 as int?).Value;     // Compliant
     }
+
+    public void ToObject()
+    {
+        int? value = null;
+        object o = value;
+        object[] arr = { value };
+    }
+
+    public void ToDynamic()
+    {
+        int? value = null;
+        var d = (dynamic)value;
+    }
+
+    public void WithCustomOperator()
+    {
+        int? i = null;
+        var n = (Casts)i;           // Compliant, custom cast
+    }
+
+    public static explicit operator Casts(int? i) => null;
 }
 
 class OutAndRefParams

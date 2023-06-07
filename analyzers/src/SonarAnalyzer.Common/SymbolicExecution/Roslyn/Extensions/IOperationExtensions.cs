@@ -43,6 +43,12 @@ internal static class IOperationExtensions
             conversion.IsTryCast && !conversion.Operand.Type.DerivesOrImplements(conversion.Type);
     }
 
+    internal static IAssignmentOperationWrapper? AsAssignment(this IOperation operation) =>
+        operation.As(OperationKindEx.SimpleAssignment, IAssignmentOperationWrapper.FromOperation);
+
+    internal static IConversionOperationWrapper? AsConversion(this IOperation operation) =>
+        operation.As(OperationKindEx.Conversion, IConversionOperationWrapper.FromOperation);
+
     internal static IInvocationOperationWrapper? AsInvocation(this IOperation operation) =>
         operation.As(OperationKindEx.Invocation, IInvocationOperationWrapper.FromOperation);
 
@@ -51,9 +57,6 @@ internal static class IOperationExtensions
 
     internal static IObjectCreationOperationWrapper? AsObjectCreation(this IOperation operation) =>
         operation.As(OperationKindEx.ObjectCreation, IObjectCreationOperationWrapper.FromOperation);
-
-    internal static IAssignmentOperationWrapper? AsAssignment(this IOperation operation) =>
-        operation.As(OperationKindEx.SimpleAssignment, IAssignmentOperationWrapper.FromOperation);
 
     internal static IPropertyReferenceOperationWrapper? AsPropertyReference(this IOperation operation) =>
         operation.As(OperationKindEx.PropertyReference, IPropertyReferenceOperationWrapper.FromOperation);

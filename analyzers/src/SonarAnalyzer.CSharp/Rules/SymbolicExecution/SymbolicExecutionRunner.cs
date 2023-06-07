@@ -24,6 +24,7 @@ using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.CSharp;
+using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarRules = SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
@@ -38,7 +39,6 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         new SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce(),
         new SonarRules.EmptyCollectionsShouldNotBeEnumerated(),
         new SonarRules.ConditionEvaluatesToConstant(),
-        new SonarRules.InvalidCastToInterfaceSymbolicExecution(),
         new SonarRules.RestrictDeserializedTypes(),
         new SonarRules.InitializationVectorShouldBeRandom(),
         new SonarRules.HashesShouldHaveUnpredictableSalt());
@@ -48,6 +48,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     internal /* for testing */ SymbolicExecutionRunner(IAnalyzerConfiguration configuration) : base(configuration) { }
 
     protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
+        .Add(InvalidCastToInterface.S1944, CreateFactory<EmptyRuleCheck, SonarRules.InvalidCastToInterfaceSymbolicExecution>()) // This old SE rule is part of S3655.
         .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
         .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
         .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess, SonarRules.EmptyNullableValueAccess>())

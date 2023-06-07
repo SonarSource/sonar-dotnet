@@ -18,17 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class InvalidCastToInterface : InvalidCastToInterfaceBase
+public sealed class EmptyRuleCheck : SymbolicRuleCheck
 {
-    public static readonly DiagnosticDescriptor S1944 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    protected override DiagnosticDescriptor Rule => throw new NotSupportedException();
 
-    protected override DiagnosticDescriptor Rule => S1944;
-
-    public override bool ShouldExecute()
-    {
-        return false;
-    }
+    public override bool ShouldExecute() => false;
 }

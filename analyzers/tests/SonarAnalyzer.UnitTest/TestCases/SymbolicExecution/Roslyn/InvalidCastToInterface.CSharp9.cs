@@ -2,30 +2,18 @@
 using System.Text;
 
 var standalone = new StandaloneClass();
-var casted = (ISomething)standalone;    // Noncompliant {{Review this cast; in this project there's no type that extends 'StandaloneClass' and implements 'ISomething'.}}, this part is not based on SE
+var casted = (ISomething)standalone;    // Noncompliant {{Review this cast; in this project there's no type that extends 'StandaloneClass' and implements 'ISomething'.}}
 
 var implementing = new ImplementingClass();
 casted = (ISomething)implementing;
 
-int? nullable = 42;
-var i = (int)nullable;
-
-nullable = null;
-i = (int)nullable; // FN {{Nullable is known to be empty, this cast throws an exception.}};
-
 void TopLevelLocalFunction()
 {
     var localstandalone = new StandaloneClass();
-    var localcasted = (ISomething)localstandalone;    // Noncompliant, this part is not based on SE
+    var localcasted = (ISomething)localstandalone;    // Noncompliant
 
     var localimplementing = new ImplementingClass();
     localcasted = (ISomething)localimplementing;
-
-    int? localnullable = 42;
-    var i = (int)localnullable;
-
-    localnullable = null;
-    i = (int)localnullable; // FN
 }
 
 public interface ISomething { }
@@ -34,21 +22,13 @@ public class ImplementingClass : ISomething { }
 
 public class Sample
 {
-    private string field;
-
     public void TargetTypedNew()
     {
         StandaloneClass standalone = new();
-        var casted = (ISomething)standalone;    // Noncompliant, this part is not based on SE
+        var casted = (ISomething)standalone;    // Noncompliant
 
         ImplementingClass implementing = new();
         casted = (ISomething)implementing;
-
-        int? nullable = 42;
-        var i = (int)nullable;
-
-        nullable = null;
-        i = (int)nullable; // FN, can't build CFG for this method
     }
 
     public void StaticLambda()
@@ -56,16 +36,10 @@ public class Sample
         Action a = static () =>
         {
             var standalone = new StandaloneClass();
-            var casted = (ISomething)standalone;     // Noncompliant, this part is not based on SE
+            var casted = (ISomething)standalone;     // Noncompliant
 
             var implementing = new ImplementingClass();
             casted = (ISomething)implementing;
-
-            int? nullable = 42;
-            var i = (int)nullable;
-
-            nullable = null;
-            i = (int)nullable; // FIXME Non-compliant
         };
         a();
     }
@@ -76,16 +50,10 @@ public class Sample
         init
         {
             var standalone = new StandaloneClass();
-            var casted = (ISomething)standalone;     // Noncompliant, this part is not based on SE
+            var casted = (ISomething)standalone;     // Noncompliant
 
             var implementing = new ImplementingClass();
             casted = (ISomething)implementing;
-
-            int? nullable = 42;
-            var i = (int)nullable;
-
-            nullable = null;
-            i = (int)nullable;  // FIXME Non-compliant
         }
     }
 }
@@ -98,22 +66,16 @@ public record Record
     public void MethodWithClasses()
     {
         var standalone = new StandaloneClass();
-        var casted = (ISomething)standalone;     // Noncompliant, this part is not based on SE
+        var casted = (ISomething)standalone;     // Noncompliant
 
         var implementing = new ImplementingClass();
         casted = (ISomething)implementing;
-
-        int? nullable = 42;
-        var i = (int)nullable;
-
-        nullable = null;
-        i = (int)nullable; // FIXME Non-compliant
     }
 
     public void MethodWithRecords()
     {
         var standalone = new StandaloneRecord();
-        var casted = (ISomething)standalone;     // Noncompliant, this part is not based on SE
+        var casted = (ISomething)standalone;     // Noncompliant
 
         var implementing = new ImplementingRecord();
         casted = (ISomething)implementing;
@@ -130,18 +92,12 @@ public partial class Partial
     public partial void Method()
     {
         var standalone = new StandaloneClass();
-        var casted = (ISomething)standalone;     // Noncompliant, this part is not based on SE
+        var casted = (ISomething)standalone;     // Noncompliant
 
         var implementing = new ImplementingClass();
         casted = (ISomething)implementing;
 
         var implementingPartial = new Partial();
         casted = (ISomething)implementingPartial;
-
-        int? nullable = 42;
-        var i = (int)nullable;
-
-        nullable = null;
-        i = (int)nullable; // FIXME Non-compliant
     }
 }

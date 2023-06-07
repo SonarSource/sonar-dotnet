@@ -18,16 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {
-    internal sealed class InvalidCastToInterfaceSymbolicExecution : ISymbolicExecutionAnalyzer
+    internal sealed class InvalidCastToInterfaceSymbolicExecution : ISymbolicExecutionAnalyzer  // This functionality is part of S3655 in the new SE engine.
     {
         private const string MessageDefinite = "Nullable is known to be empty, this cast throws an exception.";
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(InvalidCastToInterface.S1944);  // References the new SE because of the shared non-SE rule part
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(InvalidCastToInterface.S1944);
 
         public ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeReportingContext context, SonarExplodedGraph explodedGraph) =>
             new AnalysisContext(context, explodedGraph);
