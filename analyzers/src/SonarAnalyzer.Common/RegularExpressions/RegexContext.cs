@@ -22,6 +22,7 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.RegularExpressions;
 
+[DebuggerDisplay("Pattern = {Pattern}, Options = {Options}")]
 internal sealed class RegexContext
 {
     private static readonly RegexOptions ValidationMask = (RegexOptions)int.MaxValue ^ RegexOptions.Compiled;
@@ -102,7 +103,7 @@ internal sealed class RegexContext
             pattern,
             language.FindConstantValue(model, pattern) as string,
             options,
-            language.FindConstantValue(model, options) is RegexOptions value ? value : null);
+            language.FindConstantEnum<RegexOptions>(model, options));
     }
 
     private static SyntaxNode TryGetNonParamsSyntax(IMethodSymbol method, IMethodParameterLookup parameters, string paramName) =>
