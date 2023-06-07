@@ -125,7 +125,7 @@ internal class RoslynSymbolicExecution
         {
             return branch.FinallyRegions.Any() // When exiting finally region(s), redirect to 1st finally instead of the normal destination
                 ? FromFinally(new FinallyPoint(node.FinallyPoint, branch))
-                : CreateNode(branch.Destination, node.FinallyPoint);
+                : CreateNode(branch.Destination, node.FinallyPoint, null);
         }
         else if (branch.Source.EnclosingRegion.Kind == ControlFlowRegionKind.Finally && node.FinallyPoint is not null)
         {
@@ -137,13 +137,22 @@ internal class RoslynSymbolicExecution
         }
 
         ExplodedNode FromFinally(FinallyPoint finallyPoint) =>
-            CreateNode(cfg.Blocks[finallyPoint.BlockIndex], finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
+            CreateNode(cfg.Blocks[finallyPoint.BlockIndex], finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous, finallyPoint.IsFinallyBlock ? null : finallyPoint.Branch);
 
-        ExplodedNode CreateNode(BasicBlock block, FinallyPoint finallyPoint) =>
-            ProcessBranchState(branch, node.State, node.VisitCount) is { } newState ? new(block, newState, finallyPoint) : null;
+        ExplodedNode CreateNode(BasicBlock block, FinallyPoint finallyPoint, ControlFlowBranch finallyEntryBranch)
+        {
+            var state = node.State;
+            if (finallyPoint is null)   // Remove captures only when there's no finally, or when we're returning from finally.
+            {
+                state = RemoveCaptures(state, branch);
+                state = RemoveCaptures(state, finallyEntryBranch);  // Returning from finally to exit the original branch, process also the postponed branch.
+            }
+            state = ProcessBranchState(state, branch, node.VisitCount);
+            return state is null ? null : new(block, state, finallyPoint);
+        }
     }
 
-    private ProgramState ProcessBranchState(ControlFlowBranch branch, ProgramState state, int visitCount)
+    private ProgramState ProcessBranchState(ProgramState state, ControlFlowBranch branch, int visitCount)
     {
         if (cfg.OriginalOperation.Syntax.Language == LanguageNames.VisualBasic) // Avoid C# FPs as we don't support tuple deconstructions yet
         {
@@ -158,10 +167,6 @@ internal class RoslynSymbolicExecution
                 return null;
             }
         }
-        foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
-        {
-            state = state.RemoveCapture(capture);
-        }
         if (state.Exception is not null
             && branch.Source.EnclosingNonLocalLifetimeRegion() is { Kind: ControlFlowRegionKind.Catch or ControlFlowRegionKind.FilterAndHandler } enclosingRegion
             && branch.LeavingRegions.Contains(enclosingRegion))
@@ -169,7 +174,8 @@ internal class RoslynSymbolicExecution
             state = state.PopException();
         }
         var liveVariables = lva.LiveOut(branch.Source).ToHashSet();
-        return state.RemoveSymbols(x => lva.IsLocal(x) && (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x))
+        return state
+            .RemoveSymbols(x => lva.IsLocal(x) && (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x))
             .ResetOperations();
     }
 
@@ -263,6 +269,18 @@ internal class RoslynSymbolicExecution
             if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
             {
                 state = state.SetSymbolConstraint(local, constraint);
+            }
+        }
+        return state;
+    }
+
+    private static ProgramState RemoveCaptures(ProgramState state, ControlFlowBranch branch)
+    {
+        if (state is not null && branch is not null)
+        {
+            foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
+            {
+                state = state.RemoveCapture(capture);
             }
         }
         return state;

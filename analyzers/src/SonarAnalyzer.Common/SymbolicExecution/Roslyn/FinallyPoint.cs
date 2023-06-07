@@ -24,20 +24,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
 public sealed class FinallyPoint
 {
-    private readonly ControlFlowBranch branch;
     private readonly int finallyIndex;
 
-    public bool IsFinallyBlock => finallyIndex < branch.FinallyRegions.Length;
-    public int BlockIndex => IsFinallyBlock ? branch.FinallyRegions[finallyIndex].FirstBlockOrdinal : branch.Destination.Ordinal;
+    public bool IsFinallyBlock => finallyIndex < Branch.FinallyRegions.Length;
+    public int BlockIndex => IsFinallyBlock ? Branch.FinallyRegions[finallyIndex].FirstBlockOrdinal : Branch.Destination.Ordinal;
+    public ControlFlowBranch Branch { get; }
     public FinallyPoint Previous { get; }
 
     public FinallyPoint(FinallyPoint previous, ControlFlowBranch branch, int finallyIndex = 0)
     {
         Previous = previous;
-        this.branch = branch ?? throw new ArgumentNullException(nameof(branch));
+        Branch = branch ?? throw new ArgumentNullException(nameof(branch));
         this.finallyIndex = finallyIndex;
     }
 
     public FinallyPoint CreateNext() =>
-        new(Previous, branch, finallyIndex + 1);
+        new(Previous, Branch, finallyIndex + 1);
 }

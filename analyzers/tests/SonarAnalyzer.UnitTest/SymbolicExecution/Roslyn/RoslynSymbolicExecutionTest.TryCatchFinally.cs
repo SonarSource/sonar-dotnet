@@ -933,6 +933,20 @@ static bool Tag<T>(string name, T value) => true;";
         validator.ValidateTag("InCatch", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
     }
 
+    [TestMethod]
+    public void Finally_PreservesScopeState()
+    {
+        var invokeCount = 0;
+        var probe = new PreProcessTestCheck(OperationKind.FlowCaptureReference, x =>
+            {
+                x.State.ResolveCapture(x.Operation.Instance).Kind.Should().Be(OperationKind.ParameterReference, "FlowCaptureReference should get resolved to the underlaying operation");
+                invokeCount++;
+                return x.State;
+            });
+        SETestContext.CreateCS("using(arg) { }", "IDisposable arg", probe);
+        invokeCount.Should().Be(2); // https://github.com/SonarSource/sonar-dotnet/issues/7347
+    }
+
     private static bool HasNoException(ProgramState state) =>
         state.Exception == null;
 
