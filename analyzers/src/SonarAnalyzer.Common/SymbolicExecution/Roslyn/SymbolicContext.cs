@@ -46,6 +46,9 @@ public class SymbolicContext
     public ProgramState SetSymbolConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
         State.SetSymbolConstraint(symbol, constraint);
 
+    public ProgramState SetOperationValue(SymbolicValue value) =>
+        State.SetOperationValue(Operation, value);
+
     public SymbolicContext WithState(ProgramState newState) =>
         State == newState ? this : new(Operation, newState, IsLoopCondition, VisitCount, CapturedVariables);
 

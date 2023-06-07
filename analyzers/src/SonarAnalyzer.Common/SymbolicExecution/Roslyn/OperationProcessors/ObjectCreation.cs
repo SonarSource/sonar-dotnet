@@ -37,7 +37,7 @@ internal sealed class ObjectCreation : SimpleProcessor<IObjectCreationOperationW
             }
             else if (context.State[operation.Arguments.First().ToArgument().Value] is { } value)
             {
-                return context.State.SetOperationValue(context.Operation, value.WithConstraint(ObjectConstraint.NotNull));
+                return context.SetOperationValue(value.WithConstraint(ObjectConstraint.NotNull));
             }
             else
             {

@@ -27,7 +27,7 @@ internal class ConstantCheck : SymbolicCheck
     protected override ProgramState PreProcessSimple(SymbolicContext context) =>
         context.Operation.Instance.ConstantValue.HasValue
         && ConstraintFromConstantValue(context.Operation) is { } value
-            ? context.State.SetOperationValue(context.Operation, value)
+            ? context.SetOperationValue(value)
             : context.State;
 
     public static SymbolicConstraint ConstraintFromType(ITypeSymbol type)
