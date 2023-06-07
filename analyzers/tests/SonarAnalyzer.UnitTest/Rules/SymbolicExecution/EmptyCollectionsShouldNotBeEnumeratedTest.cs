@@ -56,6 +56,8 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
             .AddPaths("EmptyCollectionsShouldNotBeEnumerated.cs")
             .Verify();
 
+#if NET
+
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp8() =>
         sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
@@ -64,8 +66,6 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp8() =>
         roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
-
-#if NET
 
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp9() =>
