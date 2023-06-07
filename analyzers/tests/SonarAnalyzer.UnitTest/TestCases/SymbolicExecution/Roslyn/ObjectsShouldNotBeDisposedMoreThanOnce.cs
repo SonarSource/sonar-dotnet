@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Data.Common;
 
 public interface IInterface1 : IDisposable { }
 
@@ -134,7 +135,7 @@ class TestLoops
             {
                 if (condition)
                 {
-                    instance1.Dispose(); // Compliant
+                    instance1.Dispose(); // FIX ME - need to check the CFG as I'm not sure if this is an issue
                 }
                 break;
             }
@@ -149,17 +150,28 @@ class TestLoops
     {
         foreach (string x in list)
         {
-            try
+            if (condition)
             {
-                if (condition)
-                {
-                    instance1.Dispose(); // Noncompliant
-                }
-            }
-            catch (Exception)
-            {
-                continue;
+                instance1.Dispose(); // Noncompliant
             }
         }
+    }
+}
+
+public class Close
+{
+    public void CloseStreamTwice()
+    {
+        var fs = new FileStream(@"c:\foo.txt", FileMode.Open);
+        fs.Close();
+        fs.Close(); // FN - Close on streams is disposing resources
+    }
+
+    void CloseTwiceDBConnection(DbConnection connection)
+    {
+        connection.Open();
+        connection.Close();
+        connection.Open();
+        connection.Close(); // Compliant - close() in DB connection does not dispose the connection object.
     }
 }

@@ -31,8 +31,7 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
     protected const string MessageDisposeTwice = "has already been disposed. Refactor the code to dispose it only once.";
     protected const string MessageDisposeUsing = "is ensured to be disposed by this using statement. You don't need to dispose it twice.";
 
-
-    private static readonly string[] DisposeMethods = { "Dispose", "DisposeAsync", "Close" };
+    private static readonly string[] DisposeMethods = { "Dispose", "DisposeAsync"};
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
@@ -49,10 +48,10 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
             }
         }
         return state;
-    }
 
-    private static bool IsPartOfUsingStatement(IInvocationOperationWrapper invocation) =>
-         (invocation.Instance.Syntax.Ancestors().OfType<LocalDeclarationStatementSyntax>().FirstOrDefault() is { } localStatement
-          && localStatement.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
-         || invocation.Instance.Syntax.Ancestors().OfType<UsingStatementSyntax>().Any() is true;
+        static bool IsPartOfUsingStatement(IInvocationOperationWrapper invocation) =>
+            (invocation.Instance.Syntax.Ancestors().OfType<LocalDeclarationStatementSyntax>().FirstOrDefault() is { } localStatement
+            && localStatement.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
+            || invocation.Instance.Syntax.Ancestors().OfType<UsingStatementSyntax>().Any() is true;
+    }
 }
