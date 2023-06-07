@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 
 public class Disposable : IDisposable
 {
@@ -100,5 +101,67 @@ public class Consumer
         {
             s.Dispose();
         }
+    }
+}
+
+public class DisposableAsync : IDisposable, IAsyncDisposable
+{
+    public void Dispose() { }
+    public async ValueTask DisposeAsync() { }
+}
+
+public class DisposeAsync
+{
+    async Task DisposeAsyncTwiceUsingStatement()
+    {
+        await using var d = new DisposableAsync(); // Noncompliant
+        await d.DisposeAsync();
+    }
+
+    async Task DisposeAsyncTwice()
+    {
+        var d = new DisposableAsync();
+        await d.DisposeAsync();
+        await d.DisposeAsync(); // Noncompliant
+    }
+
+    async Task DisposeTwiceMixed()
+    {
+        var d = new DisposableAsync();
+        await d.DisposeAsync();
+        d.Dispose(); // Noncompliant
+    }
+}
+
+public class DisposableWithExplicitImplementation : IDisposable
+{
+    public void Dispose() { }
+    void IDisposable.Dispose() { } // Explicit Implementation
+}
+
+public class ExplicitDisposeImplementation
+{
+    void DisposeTwiceExplicit()
+    {
+        IDisposable d = new DisposableAsync();
+        d.Dispose();
+        d.Dispose(); // Noncompliant
+    }
+}
+
+public class ExpressionsTest
+{
+    public void CoalescingAssignment(Disposable a, Disposable b)
+    {
+        (a ??= b).Dispose();
+        a.Dispose(); // FN
+        b.Dispose(); // FN
+    }
+
+    public void Ternary(Disposable a, Disposable b, bool condition)
+    {
+        (condition ? a : b).Dispose();
+        a.Dispose(); // FN
+        b.Dispose(); // FN
     }
 }
