@@ -1,165 +1,164 @@
 ﻿using System;
 using System.IO;
 
-    public interface IInterface1 : IDisposable { }
+public interface IInterface1 : IDisposable { }
 
-    class Program
+class Program
+{
+    public void DisposedTwice()
     {
-        public void DisposedTwice()
+        var d = new Disposable();
+        d.Dispose();
+        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed. Refactor the code to dispose it only once.}}
+    }
+
+    public void DisposedTwice_Conditional()
+    {
+        IDisposable d = null;
+        d = new Disposable();
+        if (d != null)
         {
-            var d = new Disposable();
             d.Dispose();
-            d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed. Refactor the code to dispose it only once.}}
         }
+        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed. Refactor the code to dispose it only once.}}
+//      ^^^^^^^^^^^
+    }
 
-        public void DisposedTwice_Conditional()
+    public void DisposedTwice_AssignDisposableObjectToAnotherVariable()
+    {
+        IDisposable d = new Disposable();
+        var x = d;
+        x.Dispose();
+        d.Dispose(); // FN - FIXME add issue link
+    }
+
+    public void DisposedTwice_Try()
+    {
+        IDisposable d = null;
+        try
         {
-            IDisposable d = null;
             d = new Disposable();
-            if (d != null)
-            {
-                d.Dispose();
-            }
-            d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed. Refactor the code to dispose it only once.}}
-//          ^^^^^^^^^^^
+            d.Dispose();
         }
-
-        public void DisposedTwice_AssignDisposableObjectToAnotherVariable()
+        finally
         {
-            IDisposable d = new Disposable();
-            var x = d;
-            x.Dispose();
-            d.Dispose(); // FN
+            d.Dispose(); // Noncompliant
         }
+    }
 
-        public void DisposedTwice_Try()
+    public void DisposedTwice_Array()
+    {
+        var a = new[] { new Disposable() };
+        a[0].Dispose();
+        a[0].Dispose(); // FN - FIXME add issue link
+    }
+
+    public void Dispose_Stream_LeaveOpenFalse()
+    {
+        using (MemoryStream memoryStream = new MemoryStream()) // Compliant
+        using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: false))
         {
-            IDisposable d = null;
+        }
+    }
+
+    public void Dispose_Stream_LeaveOpenTrue()
+    {
+        using (MemoryStream memoryStream = new MemoryStream()) // Compliant
+        using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: true))
+        {
+        }
+    }
+
+    public void Disposed_Using_WithDeclaration()
+    {
+        using (var d = new Disposable()) // Noncompliant
+        {
+            d.Dispose();
+        }
+    }
+
+    public void Disposed_Using_WithExpressions()
+    {
+        var d = new Disposable();
+        using (d) // FN - FIXME add issue link
+        {
+            d.Dispose();
+        }
+    }
+
+    public void Disposed_Using_Parameters(IDisposable param1)
+    {
+        param1.Dispose();
+        param1.Dispose(); // Noncompliant
+    }
+
+    public void Close_OneParameterDisposedTwice(IInterface1 instance1, IInterface1 instance2)
+    {
+        instance1.Dispose();
+        instance1.Dispose(); // Noncompliant
+        instance1.Dispose(); // Noncompliant
+
+        instance2.Dispose(); // ok - only disposed once
+    }
+}
+
+public class Disposable : IDisposable
+{
+    public void Dispose() { }
+}
+
+public class MyClass : IDisposable
+{
+    public void Dispose() { }
+
+    public void DisposeMultipleTimes()
+    {
+        Dispose();
+        this.Dispose(); // FN - FIXME add issue link
+        Dispose(); // FN - FIXME add issue link
+    }
+
+    public void DoSomething()
+    {
+        Dispose();
+    }
+}
+
+class TestLoops
+{
+    public static void LoopWithBreak(System.Collections.Generic.IEnumerable<string> list, bool condition, IInterface1 instance1)
+    {
+        foreach (string x in list)
+        {
             try
             {
-                d = new Disposable();
-                d.Dispose();
+                if (condition)
+                {
+                    instance1.Dispose(); // Compliant
+                }
+                break;
             }
-            finally
+            catch (Exception)
             {
-                d.Dispose(); // Noncompliant
+                continue;
             }
-        }
-
-        public void DisposedTwice_Array()
-        {
-            var a = new[] { new Disposable() };
-            a[0].Dispose();
-            a[0].Dispose(); // FN
-        }
-
-        public void Dispose_Stream_LeaveOpenFalse()
-        {
-            using (MemoryStream memoryStream = new MemoryStream()) // Compliant
-            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: false))
-            {
-            }
-        }
-
-        public void Dispose_Stream_LeaveOpenTrue()
-        {
-            using (MemoryStream memoryStream = new MemoryStream()) // Compliant
-            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: true))
-            {
-            }
-        }
-
-        public void Disposed_Using_WithDeclaration()
-        {
-            using (var d = new Disposable()) // Noncompliant
-            {
-                d.Dispose();
-            }
-        }
-
-        public void Disposed_Using_WithExpressions()
-        {
-            var d = new Disposable();
-            using (d) // FN
-            {
-                d.Dispose();
-            }
-        }
-
-        public void Disposed_Using_Parameters(IDisposable param1)
-        {
-            param1.Dispose();
-            param1.Dispose(); // Noncompliant
-        }
-
-        public void Close_OneParameterDisposedTwice(IInterface1 instance1, IInterface1 instance2)
-        {
-            instance1.Dispose();
-            instance1.Dispose(); // Noncompliant
-            instance1.Dispose(); // Noncompliant
-
-            instance2.Dispose(); // ok - only disposed once
         }
     }
 
-    public class Disposable : IDisposable
+    public static void Loop(System.Collections.Generic.IEnumerable<string> list, bool condition, IInterface1 instance1)
     {
-        public void Dispose() { }
-    }
-
-    public class MyClass : IDisposable
-    {
-        public void Dispose() { }
-
-        public void DisposeMultipleTimes()
+        foreach (string x in list)
         {
-            Dispose();
-            this.Dispose(); // FN
-            Dispose(); // FN
-        }
-
-        public void DoSomething()
-        {
-            Dispose();
-        }
-    }
-
-    class TestLoops
-    {
-        public static void LoopWithBreak(System.Collections.Generic.IEnumerable<string> list, bool condition, IInterface1 instance1)
-        {
-            foreach (string x in list)
+            try
             {
-                try
+                if (condition)
                 {
-                    if (condition)
-                    {
-                        instance1.Dispose(); // Compliant
-                    }
-                    break;
-                }
-                catch (Exception)
-                {
-                    continue;
+                    instance1.Dispose(); // Noncompliant
                 }
             }
-        }
-
-        public static void Loop(System.Collections.Generic.IEnumerable<string> list, bool condition, IInterface1 instance1)
-        {
-            foreach (string x in list)
+            catch (Exception)
             {
-                try
-                {
-                    if (condition)
-                    {
-                        instance1.Dispose(); // Noncompliant
-                    }
-                }
-                catch (Exception)
-                {
-                    continue;
-                }
+                continue;
             }
         }
     }

@@ -48,7 +48,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(MetadataReferenceFacade.NETStandard21)
                 .Verify();
 
-        [Ignore] // ToDo: Remove after S3966 implementation
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
@@ -59,7 +58,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [Ignore] // ToDo: Remove after S3966 implementation
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_CSharp8() =>
             roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp8.cs")
@@ -72,7 +70,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithTopLevelStatements()
                 .Verify();
 
-        [Ignore] // ToDo: Remove after S3966 implementation
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_CSharp9() =>
             roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp9.cs")

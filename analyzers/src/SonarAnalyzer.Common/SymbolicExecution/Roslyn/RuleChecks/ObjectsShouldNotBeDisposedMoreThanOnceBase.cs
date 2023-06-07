@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
@@ -51,9 +50,9 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
         }
         return state;
     }
+
     private static bool IsPartOfUsingStatement(IInvocationOperationWrapper invocation) =>
          (invocation.Instance.Syntax.Ancestors().OfType<LocalDeclarationStatementSyntax>().FirstOrDefault() is { } localStatement
-         && localStatement.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
+          && localStatement.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
          || invocation.Instance.Syntax.Ancestors().OfType<UsingStatementSyntax>().Any() is true;
-
 }
