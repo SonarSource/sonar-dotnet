@@ -43,7 +43,7 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp8(ProjectType projectType) =>
-        sonar.AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+        sonar.AddReferences(TestHelper.ProjectTypeReference(projectType))
             .AddPaths("EmptyCollectionsShouldNotBeEnumerated.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
