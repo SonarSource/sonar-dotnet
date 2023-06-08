@@ -150,17 +150,25 @@ public class ExplicitDisposeImplementation
 
 public class ExpressionsTest
 {
-    public void CoalescingAssignment(Disposable a, Disposable b)
+    public void CoalescingAssignment(Disposable a, Disposable b, Disposable x, Disposable y)
     {
-        (a ??= b).Dispose();
-        a.Dispose(); // FN
-        b.Dispose(); // FN
+        a.Dispose(); 
+        b.Dispose(); 
+        (a ??= b).Dispose(); // Noncompliant
+
+        (x ??= y).Dispose();
+        x.Dispose(); // FN
+        y.Dispose(); // FN
     }
 
-    public void Ternary(Disposable a, Disposable b, bool condition)
+    public void Ternary(Disposable a, Disposable b, Disposable x, Disposable y, bool condition)
     {
-        (condition ? a : b).Dispose();
-        a.Dispose(); // FN
-        b.Dispose(); // FN
+        a.Dispose();
+        b.Dispose();
+        (condition ? a : b).Dispose(); // Noncompliant
+
+        (condition ? x : y).Dispose();
+        x.Dispose(); // FN
+        y.Dispose(); // FN
     }
 }
