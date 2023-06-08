@@ -39,14 +39,14 @@ public sealed class InvalidCastToInterface : SonarDiagnosticAnalyzer
         context.RegisterCompilationStartAction(
             compilationStartContext =>
             {
-                var interfaceImplementer = BuildTypeMap(compilationStartContext.Compilation.GlobalNamespace.GetAllNamedTypes());
+                var interfaceImplementers = BuildTypeMap(compilationStartContext.Compilation.GlobalNamespace.GetAllNamedTypes());
                 compilationStartContext.RegisterNodeAction(
                     c =>
                     {
                         var cast = (CastExpressionSyntax)c.Node;
                         var interfaceType = c.SemanticModel.GetTypeInfo(cast.Type).Type as INamedTypeSymbol;
                         var expressionType = c.SemanticModel.GetTypeInfo(cast.Expression).Type as INamedTypeSymbol;
-                        if (IsImpossibleCast(interfaceImplementer, interfaceType, expressionType))
+                        if (IsImpossibleCast(interfaceImplementers, interfaceType, expressionType))
                         {
                             var location = cast.Type.GetLocation();
                             var interfaceTypeName = interfaceType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
@@ -85,22 +85,22 @@ public sealed class InvalidCastToInterface : SonarDiagnosticAnalyzer
         }
     }
 
-    private static bool IsImpossibleCast(TypeMap interfaceImplementer, INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType)
+    private static bool IsImpossibleCast(TypeMap interfaceImplementers, INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType)
     {
         return interfaceType.IsInterface()
             && ConcreteImplementationExists(interfaceType)
             && ExpressionTypeIsRelevant()
             && !expressionType.DerivesOrImplements(interfaceType)
-            && interfaceImplementer.TryGetValue(interfaceType, out var implementers)
+            && interfaceImplementers.TryGetValue(interfaceType, out var implementers)
             && !implementers.Any(x => x.DerivesOrImplements(expressionType));
-
-        bool ConcreteImplementationExists(INamedTypeSymbol type) =>
-            interfaceImplementer.TryGetValue(type, out var implementers) && implementers.Any(x => x.IsClassOrStruct());
 
         bool ExpressionTypeIsRelevant() =>
             expressionType is not null
             && !expressionType.IsSealed
             && !expressionType.Is(KnownType.System_Object)
             && (!expressionType.IsInterface() || ConcreteImplementationExists(expressionType));
+
+        bool ConcreteImplementationExists(INamedTypeSymbol type) =>
+            interfaceImplementers.TryGetValue(type, out var implementers) && implementers.Any(x => x.IsClassOrStruct());
     }
 }
