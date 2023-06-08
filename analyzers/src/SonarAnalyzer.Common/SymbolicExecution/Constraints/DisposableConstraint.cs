@@ -24,8 +24,7 @@ internal sealed class DisposableConstraint : SymbolicConstraint
 {
     public static readonly DisposableConstraint Disposed = new(ConstraintKind.DisposableDisposed);
 
-    public override SymbolicConstraint Opposite =>
-        new DisposableConstraint(ConstraintKind.DisposableNotDisposed);
+    public override SymbolicConstraint Opposite => null;
 
     private DisposableConstraint(ConstraintKind kind) : base(kind) { }
 }
