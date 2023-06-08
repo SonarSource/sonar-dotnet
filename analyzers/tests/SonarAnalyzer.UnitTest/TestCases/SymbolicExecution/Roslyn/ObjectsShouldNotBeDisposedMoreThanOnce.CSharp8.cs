@@ -152,8 +152,8 @@ public class ExpressionsTest
 {
     public void CoalescingAssignment(Disposable a, Disposable b, Disposable x, Disposable y)
     {
-        a.Dispose(); 
-        b.Dispose(); 
+        a.Dispose();
+        b.Dispose();
         (a ??= b).Dispose(); // Noncompliant
 
         (x ??= y).Dispose();

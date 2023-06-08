@@ -53,7 +53,6 @@ public record Record : IDisposable
         var ms = new MemoryStream();
         ms.Dispose();
         ms.Dispose();    // Noncompliant
-                
     }
 
     public void Dispose() => throw new NotImplementedException();

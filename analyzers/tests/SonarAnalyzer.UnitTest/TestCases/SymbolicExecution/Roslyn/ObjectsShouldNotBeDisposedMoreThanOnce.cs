@@ -93,7 +93,7 @@ class Program
         param1.Dispose(); // Noncompliant
     }
 
-    public void Close_OneParameterDisposedTwice(IInterface1 instance1, IInterface1 instance2)
+    public void Close_OneParameterDisposedThrice(IInterface1 instance1, IInterface1 instance2)
     {
         instance1.Dispose();
         instance1.Dispose(); // Noncompliant
