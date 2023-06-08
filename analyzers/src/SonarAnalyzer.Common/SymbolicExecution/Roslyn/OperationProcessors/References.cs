@@ -25,7 +25,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 internal sealed class InstanceReference : ISimpleProcessor
 {
     public ProgramState Process(SymbolicContext context) =>
-        context.State.SetOperationValue(context.Operation, SymbolicValue.NotNull);     // Implicit and Explicit
+        context.SetOperationValue(SymbolicValue.NotNull);     // Implicit and Explicit
 }
 
 internal sealed class LocalReference : SimpleProcessor<ILocalReferenceOperationWrapper>
@@ -35,7 +35,7 @@ internal sealed class LocalReference : SimpleProcessor<ILocalReferenceOperationW
 
     protected override ProgramState Process(SymbolicContext context, ILocalReferenceOperationWrapper localReference) =>
         context.State[localReference.Local] is { } value
-            ? context.State.SetOperationValue(context.Operation, value)
+            ? context.SetOperationValue(value)
             : context.State;
 }
 
@@ -46,7 +46,7 @@ internal sealed class ParameterReference : SimpleProcessor<IParameterReferenceOp
 
     protected override ProgramState Process(SymbolicContext context, IParameterReferenceOperationWrapper parameterReference) =>
         context.State[parameterReference.Parameter] is { } value
-            ? context.State.SetOperationValue(context.Operation, value)
+            ? context.SetOperationValue(value)
             : context.State;
 }
 
@@ -58,7 +58,7 @@ internal sealed class FieldReference : SimpleProcessor<IFieldReferenceOperationW
     protected override ProgramState Process(SymbolicContext context, IFieldReferenceOperationWrapper fieldReference)
     {
         var state = fieldReference.WrappedOperation.TrackedSymbol() is { } fieldSymbol && context.State[fieldSymbol] is { } value
-            ? context.State.SetOperationValue(context.Operation, value)
+            ? context.SetOperationValue(value)
             : context.State;
         return fieldReference.Instance.TrackedSymbol() is { } instanceSymbol
             ? state.SetSymbolConstraint(instanceSymbol, ObjectConstraint.NotNull)

@@ -51,7 +51,6 @@ public class SymbolicContextTest
     {
         var operation = CreateOperation();
         var state = ProgramState.Empty.SetOperationValue(operation, SymbolicValue.Empty);
-
         var sut = new SymbolicContext(operation, state, true, 42, Array.Empty<ISymbol>());
         sut.Operation.Should().Be(operation);
         sut.State.Should().Be(state);
@@ -64,7 +63,6 @@ public class SymbolicContextTest
     {
         var operation = CreateOperation();
         var state = ProgramState.Empty.SetOperationValue(operation, SymbolicValue.Empty);
-
         var sut = new SymbolicContext(operation, state, false, 0, Array.Empty<ISymbol>());
         var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
         result.Should().NotBe(state, "new ProgramState instance should be created");
@@ -76,7 +74,6 @@ public class SymbolicContextTest
     {
         var operation = CreateOperation();
         var state = ProgramState.Empty;
-
         var sut = new SymbolicContext(operation, state, false, 0, Array.Empty<ISymbol>());
         var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
         result.Should().NotBe(state, "new ProgramState instance should be created");
@@ -89,7 +86,6 @@ public class SymbolicContextTest
         var operation = CreateOperation();
         var symbol = operation.Children.First().TrackedSymbol();
         var state = ProgramState.Empty.SetSymbolValue(symbol, SymbolicValue.Empty);
-
         var sut = new SymbolicContext(operation, state, false, 0, Array.Empty<ISymbol>());
         var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
         result.Should().NotBe(state, "new ProgramState instance should be created");
@@ -102,11 +98,21 @@ public class SymbolicContextTest
         var operation = CreateOperation();
         var symbol = operation.Children.First().TrackedSymbol();
         var state = ProgramState.Empty;
-
         var sut = new SymbolicContext(operation, state, false, 0, Array.Empty<ISymbol>());
         var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
         result.Should().NotBe(state, "new ProgramState instance should be created");
         result[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void SetOperationValue_PropagatesValue()
+    {
+        var operation = CreateOperation();
+        var state = ProgramState.Empty;
+        var sut = new SymbolicContext(operation, state, false, 0, Array.Empty<ISymbol>());
+        var result = sut.SetOperationValue(SymbolicValue.True);
+        result.Should().NotBe(state, "new ProgramState instance should be created");
+        result[operation].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
     }
 
     [TestMethod]
