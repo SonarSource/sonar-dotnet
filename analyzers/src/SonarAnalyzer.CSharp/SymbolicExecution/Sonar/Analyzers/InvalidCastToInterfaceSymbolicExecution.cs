@@ -75,7 +75,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                     return programState;
                 }
 
-                if (!context.Equals(default(SyntaxNodeAnalysisContext)))
+                if (context is not null)
                 {
                     context.ReportIssue(Diagnostic.Create(InvalidCastToInterface.S1944, castExpression.GetLocation(), MessageDefinite));
                 }
