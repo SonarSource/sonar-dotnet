@@ -1,41 +1,18 @@
 <h2>Why is this an issue?</h2>
-<p><code>Dispose</code> as a method name should be used exclusively to implement <code>IDisposable.Dispose</code> to prevent any confusion.</p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.idisposable">IDisposable</a> is an interface implemented by all types which need to
+provide a mechanism for <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/unmanaged">releasing unmanaged
+resources</a>.</p>
+<p>Unlike managed memory, which is taken care of by the <a
+href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals">garbage collection</a>,</p>
+<p>The interface declares a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose">Dispose</a> method, which the
+implementer has to define.</p>
+<p>The method name <code>Dispose</code> should be used exclusively to implement <code>IDisposable.Dispose</code> to prevent any confusion.</p>
 <p>It may be tempting to create a <code>Dispose</code> method for other purposes, but doing so will result in confusion and likely lead to problems in
 production.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-public class GarbageDisposal
-{
-  private int Dispose()  // Noncompliant
-  {
-    // ...
-  }
-}
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-public class GarbageDisposal : IDisposable
-{
-  public void Dispose()
-  {
-    // ...
-  }
-}
-</pre>
-<p>or</p>
-<pre>
-public class GarbageDisposal
-{
-  private int Grind()
-  {
-    // ...
-  }
-}
-</pre>
 <h3>Exceptions</h3>
 <p>Methods named <code>Dispose</code> and invoked from the <code>IDisposable.Dispose</code> implementation are not reported.</p>
 <pre>
-public class GarbageDisposal  :  IDisposable
+public class GarbageDisposal : IDisposable
 {
   protected virtual void Dispose(bool disposing)
   {
@@ -48,4 +25,52 @@ public class GarbageDisposal  :  IDisposable
   }
 }
 </pre>
+<h2>How to fix it</h2>
+<p>First, it is important to determine whether instances of the type defining the <code>Dispose</code> method should support the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.idisposable">IDisposable</a> interface or not.</p>
+<p>The decision would be based on whether the instance can have unmanaged resources which have to be dealt with, upon destruction or earlier in the
+lifetime of the object.</p>
+<p>The <a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/dispose-pattern">Dispose pattern</a> can help to take the
+decision.</p>
+<p>If the type should not support the pattern, the <code>Dispose</code> method should be renamed to something which is different than
+<code>Dispose</code>, but still relevant and possibly more specific to the context.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public class GarbageDisposal
+{
+  private int Dispose()  // Noncompliant
+  {
+    // ...
+  }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public class GarbageDisposal : IDisposable
+{
+  public void Dispose()
+  {
+    // ...
+  }
+}
+</pre>
+<p>or</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+public class GarbageDisposal
+{
+  private int Grind()
+  {
+    // ...
+  }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals">Fundamentals of garbage collection</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/unmanaged">Cleaning up unmanaged resources</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.idisposable">IDisposable Interface</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose">Implement a Dispose method</a> </li>
+</ul>
 

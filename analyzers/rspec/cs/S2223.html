@@ -1,45 +1,112 @@
 <h2>Why is this an issue?</h2>
-<p>Non-private <code>static</code> fields that are neither <code>const</code> nor <code>readonly</code> can lead to errors and unpredictable
-behavior.</p>
-<p>This can happen because: * Any object can modify these fields and alter the global state. This makes the code more difficult to read, debug and
-test. * Correctly accessing these fields from different threads needs synchronization with <code>lock</code>. Improper synchronization may lead to
-unexpected results.</p>
-<p>Publicly visible static fields should only be used to store shared data that does not change. To enforce this intent, these fields should be marked
-<code>readonly</code> or converted to <code>const</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>Unlike instance fields, which can only be accessed by code having a hold on the instance, <code>static</code> fields can be accessed by any code
+having visibility of the field and its type.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public class Math
 {
-  public static double Pi = 3.14;  // Noncompliant
+    public static double Pi = 3.14;  // Noncompliant
 }
+
+// Somewhere else, where Math and Math.Pi are visible
+var pi = Math.Pi; // Reading the value
+Math.Pi = 3.1416; // Mutating the value
 </pre>
-<p>or</p>
-<pre>
+<p>Another typical scenario of the use of a non-private mutable <code>static</code> field is the following:</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
 public class Shape
 {
-  public static Shape Empty = new EmptyShape();  // Noncompliant
+    public static Shape Empty = new EmptyShape();  // Noncompliant
 
-  private class EmptyShape : Shape
-  {
-  }
+    private class EmptyShape : Shape
+    {
+    }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<p>Non-private <code>static</code> fields that are neither <code>const</code> nor <code>readonly</code>, like the ones in the examples above, can lead
+to errors and unpredictable behavior.</p>
+<p>This can happen because:</p>
+<ul>
+  <li> Any object can modify these fields and alter the global state. This makes the code more difficult to read, debug and test. <pre>
+class Counters
+{
+    public static int ErrorCounter = 0;
+}
+
+class Program
+{
+    public static void Thread1()
+    {
+        // ...
+        Counters.ErrorCounter = 0; // Error counter reset
+        // ...
+    }
+
+    public static void Thread2()
+    {
+        // ...
+        if (Counters.ErrorCounter &gt; 0)
+        {
+            Trace.TraceError($"There are {Counters.ErrorCounter} errors"); // It may print "There are 0 errors"
+        }
+        // ...
+    }
+}
+</pre> </li>
+  <li> Correctly accessing these fields from different threads needs synchronization with <code>lock</code> or equivalent mechanisms. Improper synchronization may lead to unexpected results. <pre>
+class Counters
+{
+    public static volatile int ErrorCounter;
+}
+
+class Program
+{
+    public static void ImproperSynchronization()
+    {
+        Counters.ErrorCounter = 0;
+        Parallel.ForEach(Enumerable.Range(0, 1000), _ =&gt; Counters.ErrorCounter++); // Volatile is not enough
+        Console.WriteLine(Counters.ErrorCounter); // May print less than 1000
+    }
+
+    public static void ProperSynchronization()
+    {
+        Counters.ErrorCounter = 0;
+        Parallel.ForEach(Enumerable.Range(0, 1000), _ =&gt; Interlocked.Increment(ref Counters.ErrorCounter));
+        Console.WriteLine(Counters.ErrorCounter); // Always prints 1000
+    }
+}
+</pre> </li>
+</ul>
+<p>Publicly visible <code>static</code> fields should only be used to store shared data that does not change. To enforce this intent, these fields
+should be marked <code>readonly</code> or converted to <code>const</code>.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
 public class Math
 {
-  public const double Pi = 3.14;
+    public const double Pi = 3.14;
 }
 </pre>
-<p>or</p>
-<pre>
+<pre data-diff-id="2" data-diff-type="compliant">
 public class Shape
 {
-  public static readonly Shape Empty = new EmptyShape();
+    public static readonly Shape Empty = new EmptyShape();
 
-  private class EmptyShape : Shape
-  {
-  }
+    private class EmptyShape : Shape
+    {
+    }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static">static (C# Reference)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/threading/overview-of-synchronization-primitives">Overview of synchronization
+  primitives</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile">volatile (C# Reference)</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://softwareengineering.stackexchange.com/a/148154">Stack Exchange - Mutable global state is evil and alternatives to it</a> </li>
+  <li> <a href="https://ericlippert.com/2007/11/13/immutability-in-c-part-one-kinds-of-immutability/">Fabulous adventures in coding - Eric Lippert:
+  Immutability in C#</a> </li>
+  <li> <a href="https://stackoverflow.com/a/4628660">Stack Overflow - Eric Lippert: ++ is not "threadsafe"</a> </li>
+</ul>
 

@@ -1,18 +1,60 @@
 <h2>Why is this an issue?</h2>
-<p>The rules for method resolution are complex and perhaps not properly understood by all coders. Having overloads with optional parameter values
-makes the matter even harder to understand.</p>
-<p>This rule raises an issue when an overload with default parameter values is hidden by one without the optional parameters.</p>
-<h3>Noncompliant code example</h3>
+<p>The rules for method resolution can be complex and may not be fully understood by all developers. The situation becomes even more challenging when
+dealing with method overloads that have optional parameter values.</p>
+<p>This rule raises an issue when an overload with default parameter values is hidden by another overload that does not have the optional
+parameters.</p>
+<h3>What is the potential impact?</h3>
+<p>See the following example:</p>
 <pre>
-public class MyClass
+MyClass.Print(1);  // which overload of Print will be called?
+
+public static class MyClass
 {
-  void Print(string[] messages) {...}
-  void Print(string[] messages, string delimiter = "\n") {...} // Noncompliant; default parameter value is hidden by overload
+  public static void Print(int number) { }
+  public static void Print(int number, string delimiter = "\n") { } // Noncompliant, default parameter value is hidden by overload
 }
-
-// ...
-MyClass myClass = new MyClass();
-
-myClass.Print(new string[3] {"yes", "no", "maybe"});  // which version of Print will be called?
 </pre>
+<p>In this code snippet, the <code>Print</code> method is overloaded with two versions, where the first one hides the second one. This can lead to
+confusion and uncertainty about which overload of the method will be invoked when calling it.</p>
+<h2>How to fix it</h2>
+<p>To address the problem you have a couple of options:</p>
+<ul>
+  <li> Adjust the existing overloads to expose the optional parameters consistently across all overloads. By doing so, callers will have explicit
+  control over which overload they want to invoke. </li>
+  <li> Alternatively, you can differentiate the overloads by giving them distinct names. This approach clarifies the usage and intent of each
+  overload, making it clear to developers which overload to use in different contexts. </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+MyClass.Print(1);  // which overload of Print will be called?
+
+public static class MyClass
+{
+  public static void Print(int number) { }
+  public static void Print(int number, string delimiter = "\n") { } // Noncompliant: default parameter value is hidden by overload
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+MyClass.PrintWithDelimiter(1);
+
+public static class MyClass
+{
+  public static void Print(int number) { }
+  public static void PrintWithDelimiter(int number, string delimiter = "\n") { } // Compliant
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/member-overloading">Member overloading</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments#optional-arguments">Optional arguments</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://ericlippert.com/2011/05/09/optional-argument-corner-cases-part-one/">Optional argument corner cases - Eric Lippert’s blog</a>
+  </li>
+</ul>
 

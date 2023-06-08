@@ -1,13 +1,15 @@
 <h2>Why is this an issue?</h2>
-<p>The use of <code>ref</code> or <code>out</code> in combination with <code>[Optional]</code> is both confusing and contradictory.
-<code>[Optional]</code> indicates that the parameter doesn’t have to be provided, while <code>out</code> and <code>ref</code> mean that the parameter
-will be used to return data to the caller (<code>ref</code> additionally indicates that the parameter may also be used to pass data into the
-method).</p>
+<p>The use of <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/ref">ref</a> or <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/out-parameter-modifier">out</a> in combination with <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.optionalattribute">Optional</a> attribute is both confusing and
+contradictory. <code>[Optional]</code> indicates that the parameter doesn’t have to be provided, while <code>out</code> and <code>ref</code> mean that
+the parameter will be used to return data to the caller (<code>ref</code> additionally indicates that the parameter may also be used to pass data into
+the method).</p>
 <p>Thus, making it <code>[Optional]</code> to provide the parameter in which you will be passing back the method results doesn’t make sense. In fact,
 the compiler will raise an error on such code. Unfortunately, it raises the error on method calls where the <code>[Optional]</code> parameter has been
 omitted, not the source of the problem, the method declaration.</p>
 <h3>Noncompliant code example</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class MyClass
 {
     public void DoStuff([Optional] ref int i) // Noncompliant
@@ -17,12 +19,12 @@ class MyClass
 
     public static void Main()
     {
-        new MyClass().DoStuff(); // This doesn't compile, CS7036 shows
+        new MyClass().DoStuff(); // Compilation Error [CS7036]
     }
 }
 </pre>
 <h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 class MyClass
 {
   public void DoStuff(ref int i)
@@ -37,4 +39,11 @@ class MyClass
   }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/ref">ref keyword</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/out-parameter-modifier">out parameter modifier</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.optionalattribute">OptionalAttribute</a> </li>
+</ul>
 

@@ -1,8 +1,8 @@
 <h2>Why is this an issue?</h2>
-<p>Adding <code>params</code> to a method override has no effect. The compiler accepts it, but the callers won’t be able to benefit from the added
-modifier.</p>
+<p>Adding <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/params">params</a> to a method override has no effect.
+The compiler accepts it, but the callers won’t be able to benefit from the added modifier.</p>
 <h3>Noncompliant code example</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class Base
 {
   public virtual void Method(int[] numbers)
@@ -19,7 +19,7 @@ class Derived : Base
 }
 </pre>
 <h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 class Base
 {
   public virtual void Method(int[] numbers)
@@ -35,4 +35,9 @@ class Derived : Base
   }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/params">params keyword</a> </li>
+</ul>
 

@@ -1,14 +1,75 @@
 <h2>Why is this an issue?</h2>
-<p>Recursion is acceptable in methods, where you can break out of it. But with class types, you end up with code that will compile but not run if you
-try to instantiate the class.</p>
-<h3>Noncompliant code example</h3>
+<p><a href="https://en.wikipedia.org/wiki/Recursion">Recursion</a> is a technique used in computer science to define a problem in terms of the problem
+itself, usually in terms of a simpler version of the problem itself.</p>
+<p>For example, the implementation of the generator for the n-th value of the <a href="https://en.wikipedia.org/wiki/Fibonacci_sequence">Fibonacci
+sequence</a> comes naturally from its mathematical definition, when recursion is used:</p>
+<pre>
+Function NthFibonacciNumber(ByVal n As Integer) As Integer
+    If n &lt;= 1 Then
+        Return 1
+    Else
+        Return NthFibonacciNumber(n - 1) + NthFibonacciNumber(n - 2)
+    End If
+End Function
+</pre>
+<p>As opposed to:</p>
+<pre>
+Function NthFibonacciNumber(ByVal n As Integer) As Integer
+    Dim previous As Integer = 0
+    Dim last As Integer = 1
+
+    For i = 0 To n - 1
+        Dim temp = previous
+        previous = last
+        last = last + temp
+    Next
+
+    Return last
+End Function
+</pre>
+<p>Use of recursion is acceptable in methods, like the one above, where you can break out of it.</p>
+<pre>
+Function NthFibonacciNumber(ByVal n As Integer) As Integer
+    If n &lt;= 1 Then
+        Return 1 ' Base case: stop the recursion
+}
+</pre>
+<p>It is also acceptable and makes sense in some type definitions:</p>
+<pre>
+Class Box
+    Inherits IComparable(Of Box)
+
+    Public Function CompareTo(ByVal other As Box?) As Integer
+        ' Compare the two Box instances...
+    End Function
+End Class
+</pre>
+<p>With types, some invalid recursive definitions are caught by the compiler:</p>
+<pre>
+Class C2(Of T)               ' Error BC31447 C2(Of T) cannot reference itself in Inherits clause
+    Inherits C2(Of T)
+End Class
+
+Class C2(Of T)
+    Inherits C2(Of C2(Of T)) ' Error BC31447 C2(Of T) cannot reference itself in Inherits clause
+End Class
+</pre>
+<p>In more complex scenarios, however, the code will compile but execution will result into a <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.typeloadexception">TypeLoadException</a> if you try to instantiate the class.</p>
 <pre>
 Class C1(Of T)
 End Class
-Class C2(Of T)
-    Inherits C1(Of C2 (Of T))
+
+Class C2(Of T)              ' Noncompliant
+    Inherits C1(Of C2(Of C2(Of T)))
 End Class
-' ...
-Dim c2 = New C2(Of Integer)
+
+Dim c2 = New C2(Of Integer) ' This would result into a TypeLoadException
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">Recursion</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.typeloadexception?view=net-7.0">TypeLoadException</a> </li>
+</ul>
 

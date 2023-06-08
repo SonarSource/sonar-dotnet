@@ -1,7 +1,16 @@
 <h2>Why is this an issue?</h2>
-<p>A test case without assertions ensures only that no exceptions are thrown. Beyond basic runnability, it ensures nothing about the behavior of the
-code under test.</p>
-<p>This rule raises an exception when no assertions from any of the following frameworks are found in a test:</p>
+<p>The rule targets test methods that lack an assertion and consist solely of an action and, optionally, a setup.</p>
+<pre>
+[TestMethod]
+public void Add_SingleNumber_ReturnsSameNumber()
+{
+    var stringCalculator = new StringCalculator();
+    var actual = stringCalculator.Add("0");
+}
+</pre>
+<p>Such tests only verify that the system under test does not throw any exceptions without providing any guarantees regarding the code’s behavior
+under test. Those tests increase the coverage without enforcing anything on the covered code, resulting in a false sense of security.</p>
+<p>The rule identifies a potential issue when no assertions are present in tests utilizing the following frameworks:</p>
 <ul>
   <li> <code>MSTest</code> </li>
   <li> <code>NUnit</code> </li>
@@ -11,44 +20,115 @@ code under test.</p>
   <li> <code>NSubstitute</code> </li>
   <li> <code>Shoudly</code> </li>
 </ul>
-<h3>Noncompliant code example</h3>
-<pre>
-[TestMethod]
-public void MyMethod_WhenSomething_ExpectsSomething()
-{
-    var myClass = new Class();
-    var result = myClass.GetFoo();
-}
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-[TestMethod]
-public void MyMethod_WhenSomething_ExpectsSomething()
-{
-    var myClass = new Class();
-    var result = myClass.GetFoo();
-    Assert.IsTrue(result);
-}
-</pre>
+<p>By enforcing the presence of assertions, this rule aims to enhance the reliability and comprehensiveness of tests by ensuring that they provide
+meaningful validation of the expected behavior.</p>
 <h3>Exceptions</h3>
-<p>To create a custom assertion method declare an attribute with name <code>AssertionMethodAttribute</code> and mark the method with it:</p>
+<p>Test methods that include a call to a custom assertion method will not raise any issues.</p>
+<h2>How to fix it</h2>
+<p>To address this issue, you should include assertions to validate the expected behavior. Choose an appropriate assertion method provided by your
+testing framework (such as MSTest, NUnit, xUnit) or select a suitable assertion library like FluentAssertions, NFluent, NSubstitute, or Shouldly.</p>
+<p>In addition to using built-in assertion methods, you also have the option to create custom assertion methods. To do this, declare an attribute
+named <code>[AssertionMethodAttribute]</code> and apply it to the respective method. This allows you to encapsulate specific validation logic within
+your custom assertion methods without raising the issue. Here’s an example:</p>
 <pre>
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 [TestClass]
-public class CustomTest
+public class CustomTestExample
 {
     [TestMethod]
-    public void TestMethod1() =&gt; Validator.CustomMethod(42);    // Compliant
+    public void Add_SingleNumber_ReturnsSameNumber()
+    {
+        var stringCalculator = new StringCalculator();
+        var actual = stringCalculator.Add("0");
+        Validator.AssertCustomEquality(0, actual); // Compliant
+    }
 }
 
 public static class Validator
 {
     [AssertionMethod]
-    public static void CustomMethod(int value) { }
+    public static void AssertCustomEquality(int expected, int actual)
+    {
+        // ...
+    }
 }
 
 public class AssertionMethodAttribute : Attribute { }
 </pre>
+<h2>Hot to fix it in MSTest</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+[TestMethod]
+public void Add_SingleNumber_ReturnsSameNumber()
+{
+    var stringCalculator = new StringCalculator();
+    var actual = stringCalculator.Add("0");
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+[TestMethod]
+public void Add_SingleNumber_ReturnsSameNumber()
+{
+    var stringCalculator = new StringCalculator();
+    var actual = stringCalculator.Add("0");
+    Assert.AreEqual(0, actual);
+}
+</pre>
+<h2>Hot to fix it in NUnit</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+[Test]
+public void Add_SingleNumber_ReturnsSameNumber()
+{
+    var stringCalculator = new StringCalculator();
+    var actual = stringCalculator.Add("0");
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+[Test]
+public void Add_SingleNumber_ReturnsSameNumber()
+{
+    var stringCalculator = new StringCalculator();
+    var actual = stringCalculator.Add("0");
+    Assert.That(0, Is.EqualTo(actual));
+}
+</pre>
+<h2>Hot to fix it in xUnit</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+[Fact]
+public void Add_SingleNumber_ReturnsSameNumber()
+{
+    var stringCalculator = new StringCalculator();
+    var actual = stringCalculator.Add("0");
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+[Fact]
+public void Add_SingleNumber_ReturnsSameNumber()
+{
+    var stringCalculator = new StringCalculator();
+    var actual = stringCalculator.Add("0");
+    Assert.Equal(0, actual);
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-mstest">Unit testing C# with MSTest</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-nunit">Unit testing C# with NUnit</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test">Unit testing C# with xUnit</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://www.everydayunittesting.com/2017/03/unit-testing-anti-pattern-not-asserting.html">Unit Testing anti-pattern</a> </li>
+</ul>
 

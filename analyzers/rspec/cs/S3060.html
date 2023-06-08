@@ -1,18 +1,87 @@
 <h2>Why is this an issue?</h2>
-<p>There’s no valid reason to test <code>this</code> with <code>is</code>. The only plausible explanation for such a test is that you’re executing
-code in a parent class conditionally based on the kind of child class <code>this</code> is. But code that’s specific to a child class should be
-<em>in</em> that child class, not in the parent.</p>
-<h3>Noncompliant code example</h3>
+<p>One of the possible ways of performing <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast">type-testing</a> is via the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/is">is operator</a>: <code>food is Pizza</code>.</p>
+<p>The <code>is</code> operator is often used before a direct <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast#cast-expression">cast</a> to the target type,
+as a more flexible and powerful alternative to the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast#as-operator">as operator</a>, especially when
+used to perform <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast#type-testing-with-pattern-matching">pattern
+matching</a>.</p>
 <pre>
-public class JunkFood
+if (food is Pizza pizza)
+</pre>
+<p>There’s no valid reason to test <code>this</code> with <code>is</code>. The only plausible explanation for such a test is that you’re executing
+code in a parent class conditionally based on the kind of child class <code>this</code> is.</p>
+<pre>
+public class Food
 {
   public void DoSomething()
   {
     if (this is Pizza) // Noncompliant
     {
-      // ...
-    } else if (...
+      // Code specific to Pizza...
+    }
   }
 }
 </pre>
+<p>However, code that’s specific to a child class should be <em>in</em> that child class, not in the parent.</p>
+<h2>How to fix it</h2>
+<p>One way is to take advantage of the <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/tutorials/oop">object-orientation</a> of
+C# and use <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/polymorphism">polymorphism</a>.</p>
+<ul>
+  <li> Make the method <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/virtual">virtual</a>, if it is not
+  already. That will allow derived classes to perform <a href="https://en.wikipedia.org/wiki/Method_overriding">method overriding</a>. </li>
+  <li> Move the code to the right level of the type hierarchy. </li>
+  <li> Use <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/base">base</a> to call the method on the base class
+  that has been overridden. </li>
+</ul>
+<p>For example, when simple method polymorphism is not enough because it is necessary to reuse multiple sections of the parent method, the <a
+href="https://en.wikipedia.org/wiki/Template_method_pattern">Template method pattern</a> might help.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public class Food
+{
+  public void DoSomething()
+  {
+    // Code shared by all Food...
+    if (this is Pizza) // Noncompliant
+    {
+      // Code specific to Pizza...
+    }
+  }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public class Food
+{
+  public virtual void DoSomething()
+  {
+    // Code shared by all Food...
+  }
+}
+
+public class Pizza : Food
+{
+  public override void DoSomething()
+  {
+    base.DoSomething();
+    // Code specific to Pizza...
+  }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast">Type-testing operators and cast
+  expressions - is, as, typeof and casts</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching">Pattern matching overview</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/tutorials/oop">Object-Oriented programming (C#)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/polymorphism">Polymorphism</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Template_method_pattern">Template method pattern</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Method_overriding">Method overriding</a> </li>
+</ul>
 

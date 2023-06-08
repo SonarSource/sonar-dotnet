@@ -1,25 +1,53 @@
 <h2>Why is this an issue?</h2>
-<p>Exposing methods with multidimensional array parameters requires developers to have advanced knowledge about the language in order to be able to
-use them. Moreover, what exactly to pass to such parameters is not intuitive. Therefore, such methods should not be exposed, but can be used
-internally.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-Module Module1
-    Sub WriteMatrix(ByVal matrix As Integer()()) ' Non-Compliant
+<p>Using <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/multidimensional-arrays">multidimensional</a> and <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/jagged-arrays">jagged</a> arrays as method parameters in C# can be
+challenging for developers.</p>
+<p>When these methods are exposed to external users, it requires advanced language knowledge for effective usage.</p>
+<p>Determining the appropriate data to pass to these parameters may not be intuitive.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Public Class Program
+    Public Sub WriteMatrix(matrix As Integer()()) ' Noncompliant: data type is not intuitive
         ' ...
     End Sub
-End Module
+End Class
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-Class Matrix
+<p>In this example, it cannot be inferred easily what the matrix should look like. Is it a 2x2 Matrix or even a triangular Matrix?</p>
+<p>Using a collection, data structure, or class that provides a more suitable representation of the required data is recommended instead of a
+multidimensional array or jagged array to enhance code readability.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+Public Class Matrix2x2
     ' ...
 End Class
 
-Module Module1
-    Sub WriteMatrix(ByVal matrix As Matrix)      ' Compliant
+Public Class Program
+    Public Sub WriteMatrix(matrix As Matrix2x2) ' Compliant: data type is intuitive
         ' ...
     End Sub
-End Module
+End Class
 </pre>
+<p>As a result, avoiding exposing such methods to external users is recommended.</p>
+<h3>Exceptions</h3>
+<p>However, using multidimensional and jagged array method parameters internally, such as in <code>private</code> or <code>internal</code> methods or
+within <code>internal</code> classes, is compliant since they are not publicly exposed.</p>
+<pre>
+Public Class FirstClass
+    Private Sub UpdateMatrix(matrix As Integer()()) ' Compliant: method is private
+        ' ...
+    End Sub
+End Class
+
+Friend Class SecondClass
+    Public Sub UpdateMatrix(matrix As Integer()()) ' Compliant: class is internal
+        ' ...
+    End Sub
+End Class
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/collections/">Collections and Data Structures</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/arrays/">Arrays in Visual Basic</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/arrays/array-dimensions">Array Dimensions in
+  Visual Basic</a> </li>
+</ul>
 

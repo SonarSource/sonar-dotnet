@@ -1,10 +1,49 @@
 <h2>Why is this an issue?</h2>
-<p>Default arguments are determined by the static type of the object. If a default argument is different for a parameter in an overriding method, the
-value used in the call will be different when calls are made via the base or derived object, which may be contrary to developer expectations.</p>
-<p>Default parameter values are useless in explicit interface implementations, because the static type of the object will always be the implemented
-interface. Thus, specifying default values is useless and confusing.</p>
-<h3>Noncompliant code example</h3>
+<p><a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments#optional-arguments">Default
+arguments</a> are determined by the static type of the object.</p>
 <pre>
+class Base
+{
+    public virtual void Run(int distance = 42) { /* ... */ }
+}
+
+class Derived : Base
+{
+    public override void Run(int distance = 5) { /* ... */ }
+}
+
+Base x = new Base();
+x.Run(); // Here the default value of distance is 42
+Derived d = new Derived();
+d.Run(); // Here the default value of distance is 5
+Base b = new Derived();
+b.Run(); // Here the default value of distance is 42, not 5
+</pre>
+<p>If a default argument is different for a parameter in an overriding method, the value used in the call will be different when calls are made via
+the base or derived object, which may be contrary to developer expectations.</p>
+<p>Default parameter values in <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/explicit-interface-implementation">explicit interface
+implementations</a> will be never used, because the static type of the object will always be the implemented interface. Thus, specifying default
+values in this case is confusing.</p>
+<pre>
+interface IRunner
+{
+    void Run(int distance = 42) { /* ... */ }
+}
+
+class Runner : IRunner
+{
+    void IRunner.Run(int distance = 5) { /* ... */ }
+}
+
+IRunner x = new Runner();
+x.Run(); // Here the default value of distance is 42
+Runner d = new Runner();
+d.Run(); // This will not compile as the Run method is only visible through the specified interface
+</pre>
+<h3>Noncompliant code example</h3>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 using System;
 
 public class Base
@@ -39,7 +78,7 @@ public class Program
 }
 </pre>
 <h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 using System;
 
 public class Base
@@ -73,4 +112,12 @@ public class Program
     }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments#optional-arguments">Optional arguments</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/explicit-interface-implementation">Explicit Interface
+  Implementation</a> </li>
+</ul>
 

@@ -1,14 +1,39 @@
 <h2>Why is this an issue?</h2>
+<p><a href="https://en.wikipedia.org/wiki/Short-circuit_evaluation">Short-circuit evaluation</a> is an evaluation strategy for <a
+href="https://en.wikipedia.org/wiki/Logical_connective">Boolean operators</a>, that doesn’t evaluates the second argument of the operator if it is not
+needed to determine the result of the operation.</p>
+<p>VB.NET provides logical operators that implement short-circuit evaluation: <code>AndAlso</code> and <code>OrElse</code>, as well as
+non-short-circuit versions: <code>And</code> and <code>Or</code>. Unlike short-circuit operators, non-short-circuit ones evaluate both operands and
+afterwards perform the logical operation.</p>
+<p>For example <code>False AndAlso FunctionCall</code> always results in <code>False</code>, even when <code>FunctionCall</code> invocation would
+raise an exception. Instead, <code>False &amp; FunctionCall</code> also evaluates <code>FunctionCall</code>, and results in an exception if
+<code>FunctionCall</code> raises an exception.</p>
+<p>Similarly, <code>True OrElse FunctionCall</code> always results in <code>True</code>, no matter what the return value of <code>FunctionCall</code>
+would be.</p>
 <p>The use of non-short-circuit logic in a boolean context is likely a mistake - one that could cause serious program errors as conditions are
 evaluated under the wrong circumstances.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-If GetTrue() Or GetFalse() Then ' Noncompliant; both sides evaluated
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+If GetTrue() Or GetFalse() Then ' Noncompliant: both sides evaluated
 End If
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-If GetTrue() OrElse GetFalse() Then ' true short-circuit logic
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+If GetTrue() OrElse GetFalse() Then ' Compliant: short-circuit logic used
 End If
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/logical-and-bitwise-operators">Logical and Bitwise Operators in Visual Basic</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Short-circuit_evaluation">Short-circuit evaluation</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Logical_connective">Boolean operators</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://ericlippert.com/2015/11/02/when-would-you-use-on-a-bool/">Eric Lippert’s blog - When would you use &amp; on a bool?</a> </li>
+</ul>
 

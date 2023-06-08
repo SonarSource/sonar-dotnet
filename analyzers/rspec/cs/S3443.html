@@ -1,25 +1,47 @@
 <h2>Why is this an issue?</h2>
-<p>If you call <code>GetType()</code> on a <code>Type</code> variable, the return value will always be <code>typeof(System.Type)</code>. So there’s no
-real point in making that call. The same applies to passing a type argument to <code>IsInstanceOfType</code>. In both cases the results are entirely
-predictable.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-var intType = typeof(int);
-var runtimeType = intType.GetType(); // Noncompliant, always typeof(System.RuntimeType)
-
-var s = "abc";
-if (s.GetType().IsInstanceOfType(typeof(string))) // Noncompliant; false
-{ /* ... */ }
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-var s = "abc";
-
-if (s.GetType().IsInstanceOfType("string"))
-{ /* ... */ }
-</pre>
+<p>Calling <code>GetType</code> on a <code>Type</code> variable will always return the <code>System.Type</code> representation, which is equivalent to
+<code>typeof(System.Type)</code>. This also applies to passing a <code>Type</code> argument to <code>IsInstanceOfType</code> which always returns
+<code>false</code>.</p>
+<p>In both cases, the results are entirely predictable and should be avoided.</p>
 <h3>Exceptions</h3>
+<p>Calling <code>GetType</code> on <code>System.Type</code> is considered compliant to get an instance of <code>System.RuntimeType</code>, as
+demonstrated in the following example:</p>
 <pre>
-typeof(Type).GetType(); // Can be used by convention to get an instance of ‘System.RuntimeType’
+typeof(Type).GetType(); // Can be used by convention to get an instance of 'System.RuntimeType'
 </pre>
+<h2>How to fix it</h2>
+<p>Make sure the usage of <code>GetType</code> or <code>IsInstanceOfType</code> is invoked with the correct variable or argument type.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+void ExamineSystemType(string str)
+{
+    Type stringType = str.GetType();
+    Type runtimeType = stringType.GetType(); // Noncompliant
+
+    if (stringType.IsInstanceOfType(typeof(string))) // Noncompliant; will always return false
+    { /* ... */ }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+void ExamineSystemType(string str)
+{
+    Type stringType = str.GetType();
+
+    if (stringType.IsInstanceOfType(str)) // Compliant
+    { /* ... */ }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.type">"Type" class</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.gettype">"GetType" Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.type.isinstanceoftype">"IsInstanceOfType" Method</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://stackoverflow.com/a/5737947">Difference between "System.Type" and "System.RuntimeType"</a> </li>
+</ul>
 

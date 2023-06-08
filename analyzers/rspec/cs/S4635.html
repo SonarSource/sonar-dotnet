@@ -1,22 +1,206 @@
 <h2>Why is this an issue?</h2>
-<p>Looking for a given substring starting from a specified offset can be achieved by such code: <code>str.Substring(startIndex).IndexOf(char1)</code>.
-This works well, but it creates a new <code>string</code> for each call to the <code>Substring</code> method. When this is done in a loop, a lot of
-<code>strings</code> are created for nothing, which can lead to performance problems if <code>str</code> is large.</p>
-<p>To avoid performance problems, <code>string.Substring(startIndex)</code> should not be chained with the following methods:</p>
-<ul>
-  <li> <code>IndexOf</code> </li>
-  <li> <code>IndexOfAny</code> </li>
-  <li> <code>LastIndexOf</code> </li>
-  <li> <code>LastIndexOfAny</code> </li>
-</ul>
-<p>For each of these methods, another method with an additional parameter is available to specify an offset.</p>
-<p>Using these methods gives the same result while avoiding the creation of additional <code>String</code> instances.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-str.Substring(StartIndex).IndexOf(char1); // Noncompliant; a new string is going to be created by "Substring"
+<p>It is important to be careful when searching for characters within a substring. Let’s consider the following example:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+str.Substring(startIndex).IndexOf(char1); // Noncompliant: a new string is going to be created by "Substring"
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<p>A new <code>string</code> object is created with every call to the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.string.substring"><code>Substring</code></a> method. When chaining it with any of the
+following methods, it creates a new object for one-time use only:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexof"><code>IndexOf</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexofany"><code>IndexOfAny</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexof"><code>LastIndexOf</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexofany"><code>LastIndexOfAny</code></a> </li>
+</ul>
+<h3>What is the potential impact?</h3>
+<p>Creating a new object consumes significant <a href="https://en.wikipedia.org/wiki/System_resource">system resources</a>, especially CPU and memory.
+When using <code>Substring</code> repeatedly, such as in a loop, it can greatly impact the overall performance of the application or program. As the
+size of the string increases, the slower it becomes.</p>
+<p>To mitigate the creation of new objects while searching for a character within a substring, it is possible to utilize the overload of the mentioned
+methods that accepts an offset as the second parameter. Here is an example:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
 str.IndexOf(char1, startIndex) - startIndex;
+</pre>
+<p>Using these methods gives the same result while avoiding the creation of additional <code>string</code> objects.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.substring"><code>String.Substring</code> Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexof"><code>String.IndexOf</code> Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexofany"><code>String.IndexOfAny</code> Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexof"><code>String.LastIndexOf</code> Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexofany"><code>String.LastIndexOfAny</code> Method</a> </li>
+</ul>
+<h3>Benchmarks</h3>
+<table>
+  <colgroup>
+    <col style="width: 14.2857%;">
+    <col style="width: 14.2857%;">
+    <col style="width: 14.2857%;">
+    <col style="width: 14.2857%;">
+    <col style="width: 14.2857%;">
+    <col style="width: 14.2857%;">
+    <col style="width: 14.2858%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Runtime</th>
+      <th>StringSize</th>
+      <th>Mean</th>
+      <th>StdDev</th>
+      <th>Ratio</th>
+      <th>Allocated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p>SubstringThenIndexOf</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>10</p></td>
+      <td><p>11.234 ms</p></td>
+      <td><p>0.1319 ms</p></td>
+      <td><p>1.00</p></td>
+      <td><p>40000008 B</p></td>
+    </tr>
+    <tr>
+      <td><p>IndexOfOnly</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>10</p></td>
+      <td><p>2.477 ms</p></td>
+      <td><p>0.0473 ms</p></td>
+      <td><p>0.22</p></td>
+      <td><p>2 B</p></td>
+    </tr>
+    <tr>
+      <td><p>SubstringThenIndexOf</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>10</p></td>
+      <td><p>8.634 ms</p></td>
+      <td><p>0.4195 ms</p></td>
+      <td><p>1.00</p></td>
+      <td><p>48141349 B</p></td>
+    </tr>
+    <tr>
+      <td><p>IndexOfOnly</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>10</p></td>
+      <td><p>1.724 ms</p></td>
+      <td><p>0.0346 ms</p></td>
+      <td><p>0.19</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td><p>SubstringThenIndexOf</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>100</p></td>
+      <td><p>14.651 ms</p></td>
+      <td><p>0.2977 ms</p></td>
+      <td><p>1.00</p></td>
+      <td><p>176000008 B</p></td>
+    </tr>
+    <tr>
+      <td><p>IndexOfOnly</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>100</p></td>
+      <td><p>2.464 ms</p></td>
+      <td><p>0.0501 ms</p></td>
+      <td><p>0.17</p></td>
+      <td><p>2 B</p></td>
+    </tr>
+    <tr>
+      <td><p>SubstringThenIndexOf</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>100</p></td>
+      <td><p>13.363 ms</p></td>
+      <td><p>0.2044 ms</p></td>
+      <td><p>1.00</p></td>
+      <td><p>176518761 B</p></td>
+    </tr>
+    <tr>
+      <td><p>IndexOfOnly</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>100</p></td>
+      <td><p>1.689 ms</p></td>
+      <td><p>0.0290 ms</p></td>
+      <td><p>0.13</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td><p>SubstringThenIndexOf</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>1000</p></td>
+      <td><p>78.688 ms</p></td>
+      <td><p>2.4727 ms</p></td>
+      <td><p>1.00</p></td>
+      <td><p>1528000072 B</p></td>
+    </tr>
+    <tr>
+      <td><p>IndexOfOnly</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>1000</p></td>
+      <td><p>2.456 ms</p></td>
+      <td><p>0.0397 ms</p></td>
+      <td><p>0.03</p></td>
+      <td><p>2 B</p></td>
+    </tr>
+    <tr>
+      <td><p>SubstringThenIndexOf</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>1000</p></td>
+      <td><p>75.994 ms</p></td>
+      <td><p>1.2650 ms</p></td>
+      <td><p>1.00</p></td>
+      <td><p>1532637240 B</p></td>
+    </tr>
+    <tr>
+      <td><p>IndexOfOnly</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>1000</p></td>
+      <td><p>1.699 ms</p></td>
+      <td><p>0.0216 ms</p></td>
+      <td><p>0.02</p></td>
+      <td><p>-</p></td>
+    </tr>
+  </tbody>
+</table>
+<p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
+<pre>
+private string theString;
+private int iteration = 1_000_000;
+
+[Params(10, 100, 1_000)]
+public int StringSize { get; set; }
+
+[GlobalSetup]
+public void Setup() =&gt;
+    theString = string.Join("", Enumerable.Range(0, StringSize).Select(x =&gt; 'a'));
+
+[Benchmark(Baseline = true)]
+public void SubstringThenIndexOf()
+{
+    for (var i = 0; i &lt; iteration; i++)
+    {
+        _ = theString.Substring(StringSize / 4).IndexOf('a');
+    }
+}
+
+[Benchmark]
+public void IndexOfOnly()
+{
+    for (var i = 0; i &lt; iteration; i++)
+    {
+        _ = theString.IndexOf('a', StringSize / 4) - StringSize / 4;
+    }
+}
+</pre>
+<p>Hardware configuration:</p>
+<pre>
+BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.2965/22H2/2022Update)
+12th Gen Intel Core i7-12800H, 1 CPU, 20 logical and 14 physical cores
+.NET SDK=7.0.203
+  [Host]               : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+  .NET 7.0             : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+  .NET Framework 4.6.2 : .NET Framework 4.8 (4.8.4614.0), X64 RyuJIT VectorSize=256
 </pre>
 

@@ -1,13 +1,30 @@
 <h2>Why is this an issue?</h2>
-<p>Numbers can be shifted with the <code>&lt;&lt;</code> and <code>&gt;&gt;</code> operators, but the right operand of the operation needs to be an
-<code>int</code> or a type that has an implicit conversion to <code>int</code>. However, with <code>dynamic</code>, the compiler’s type checking is
-turned off, so you can pass anything to a shift operator and have it compile. And if the argument can’t be converted to <code>int</code> at runtime,
-then a <code>RuntimeBinderException</code> will be raised.</p>
-<h3>Noncompliant code example</h3>
+<p>Numbers can be shifted with the <code>&lt;&lt;</code> and <code>&gt;&gt;</code> <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators#left-shift-operator-">operators</a>,
+but the right operand of the operation needs to be an <code>int</code> or a type that has an <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions#102-implicit-conversions">implicit
+conversion</a> to <code>int</code>. However, when the left operand is <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/interop/using-type-dynamic">dynamic</a>, the compiler’s type checking is turned
+off, so you can pass anything to the right of a shift operator and have it compile. And if the argument can’t be implicitly converted to
+<code>int</code> at runtime, then a <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.csharp.runtimebinder.runtimebinderexception">RuntimeBinderException</a> will be
+raised.</p>
 <pre>
 dynamic d = 5;
-var x = d &gt;&gt; 5.4; // Noncompliant
-x = d &gt;&gt; null; // Noncompliant
+var x = d &gt;&gt; 5.4;   // Noncompliant
+x = d &lt;&lt; null;      // Noncompliant
 x &lt;&lt;= new object(); // Noncompliant
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators#left-shift-operator-">Shift
+  Operators</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions#102-implicit-conversions">Implicit
+  Conversions</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.csharp.runtimebinder.runtimebinderexception">RuntimeBinderException Class</a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/interop/using-type-dynamic">Using type dynamic</a> </li>
+</ul>
 

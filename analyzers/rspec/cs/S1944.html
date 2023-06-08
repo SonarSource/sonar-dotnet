@@ -1,7 +1,6 @@
 <h2>Why is this an issue?</h2>
-<p>Inappropriate casts are issues that will lead to unexpected behavior or runtime errors, such as <code>InvalidCastException</code>s. The compiler
-will catch bad casts from one class to another, but not bad casts to interfaces. Nor will it catch nullable values that are known to be null but that
-are cast to their underlying value types anyway.</p>
+<p>Inappropriate casts are issues that will lead to unexpected behavior or runtime errors, such as `InvalidCastException`s. The compiler will catch
+bad casts from one class to another, but not bad casts to interfaces.</p>
 <p>It is much better to use the <code>as</code> operator because it will return <code>null</code> instead of throwing an exception.</p>
 <h3>Noncompliant code example</h3>
 <pre>
@@ -19,11 +18,8 @@ public static class Program
   public static void Main()
   {
     var myclass = new MyClass();
-    var x = (IMyInterface) myclass; // Noncompliant, InvalidCastException is being thrown
-    var b = myclass is IMyInterface; // Noncompliant, always false
-
-    int? i = null;
-    var ii = (int)i; // Noncompliant, InvalidOperationException is being thrown
+    var x = (IMyInterface) myclass;     // Noncompliant, InvalidCastException is being thrown
+    var b = myclass is IMyInterface;    // Noncompliant, always false
   }
 }
 </pre>
@@ -43,14 +39,8 @@ public static class Program
   public static void Main()
   {
     var myclass = new MyClass();
-    var x = myclass as IMyInterface; // Compliant, but will always be null
+    var x = myclass as IMyInterface;    // Compliant, but will always be null
     var b = false;
-
-    int? i = null;
-    if (i.HasValue)
-    {
-      var ii = (int)i;
-    }
   }
 }
 </pre>
