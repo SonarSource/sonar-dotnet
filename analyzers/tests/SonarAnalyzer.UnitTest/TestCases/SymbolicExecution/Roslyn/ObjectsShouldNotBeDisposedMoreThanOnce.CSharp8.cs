@@ -135,7 +135,6 @@ public class DisposeAsync
 
 public class DisposableWithExplicitImplementation : IDisposable
 {
-    public void Dispose() { }
     void IDisposable.Dispose() { } // Explicit Implementation
 }
 
