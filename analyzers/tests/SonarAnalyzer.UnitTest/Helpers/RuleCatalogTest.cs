@@ -62,8 +62,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void Description_TakesFirstParagraph() =>
             ValidateDescription(
                 "S105",
-                "<p>So the use of the tabulation character must be banned.</p>",    // Asserting existence of the second paragraph that should not be part of the description
-                "Developers should not need to configure the tab width of their text editors in order to be able to read source code.");
+                "<p>That is why using spaces is preferable.</p>",    // Asserting existence of the second paragraph that should not be part of the description
+                "The tab width can differ from one development environment to another." +
+                " Using tabs may require other developers to configure their environment (text editor, preferences, etc.) to read source code.");
 
         [TestMethod]
         public void Description_TagsAreRemoved() =>
@@ -89,7 +90,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             rule.Status.Should().Be("ready");
             rule.Scope.Should().Be(SourceScope.All);
             rule.SonarWay.Should().BeFalse();
-            rule.Description.Should().Be("Having to scroll horizontally makes it harder to get a quick overview and understanding of any piece of code.");
+            rule.Description.Should().Be("Scrolling horizontally to see a full line of code lowers the code readability.");
         }
 
         private static void ValidateDescription(string id, string assertedSourceFragment, string expectedDescription)
