@@ -137,6 +137,7 @@ public unsafe class Sample
     public event EventHandler Event;
     public int Property {{ get; set; }}
     public Sample SampleProperty {{ get; set; }}
+    public int? NullableProperty {{ get; set; }}
     public object AutoProperty {{ get; set; }}
     public object FullProperty {{ get => ObjectField; set => ObjectField = value; }}
     public static object StaticAutoProperty {{ get; set; }}

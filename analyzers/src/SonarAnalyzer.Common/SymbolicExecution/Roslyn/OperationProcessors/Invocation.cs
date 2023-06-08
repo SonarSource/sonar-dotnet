@@ -62,7 +62,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ when invocation.TargetMethod.Is(KnownType.Microsoft_VisualBasic_Information, "IsNothing") => ProcessInformationIsNothing(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Object, nameof(ReferenceEquals)) => ProcessReferenceEquals(context, invocation),
-            _ when invocation.TargetMethod.Is(KnownType.System_Nullable_T, "get_HasValue") => ProcessNullableHasValue(state, invocation).ToArray(),
+            _ when invocation.TargetMethod.Is(KnownType.System_Nullable_T, "get_HasValue") => ProcessNullableHasValue(state, invocation),
             _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(context, invocation),
             _ when invocation.TargetMethod.Name == nameof(Equals) => ProcessEquals(context, invocation),
             _ when invocation.TargetMethod.IsAny(KnownType.System_String, nameof(string.IsNullOrEmpty), nameof(string.IsNullOrWhiteSpace)) =>
@@ -235,10 +235,25 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         }
     }
 
-    private static ProgramState ProcessNullableHasValue(ProgramState state, IInvocationOperationWrapper invocation) =>
-        state[invocation.Instance]?.Constraint<ObjectConstraint>() is { } objectConstraint
-            ? state.SetOperationConstraint(invocation, BoolConstraint.From(objectConstraint == ObjectConstraint.NotNull))
-            : state;
+    private static ProgramState[] ProcessNullableHasValue(ProgramState state, IInvocationOperationWrapper invocation)
+    {
+        if (state[invocation.Instance]?.Constraint<ObjectConstraint>() is { } objectConstraint)
+        {
+            return state.SetOperationConstraint(invocation, BoolConstraint.From(objectConstraint == ObjectConstraint.NotNull)).ToArray();
+        }
+        else if (state.ResolveCapture(invocation.Instance).TrackedSymbol() is { } symbol)
+        {
+            return new[]
+            {
+                state.SetSymbolConstraint(symbol, ObjectConstraint.Null).SetOperationConstraint(invocation, BoolConstraint.False),
+                state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull).SetOperationConstraint(invocation, BoolConstraint.True),
+            };
+        }
+        else
+        {
+            return state.ToArray();
+        }
+    }
 
     private static bool IsThrowHelper(IMethodSymbol method) =>
         method.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Fail))
