@@ -30,7 +30,7 @@ class Program
         IDisposable d = new Disposable();
         var x = d;
         x.Dispose();
-        d.Dispose(); // FN - FIXME add issue link
+        d.Dispose(); // FN
     }
 
     public void DisposedTwice_Try()
@@ -51,7 +51,7 @@ class Program
     {
         var a = new[] { new Disposable() };
         a[0].Dispose();
-        a[0].Dispose(); // FN - FIXME add issue link
+        a[0].Dispose(); // FN
     }
 
     public void Dispose_Stream_LeaveOpenFalse()
@@ -81,7 +81,7 @@ class Program
     public void Disposed_Using_WithExpressions()
     {
         var d = new Disposable();
-        using (d) // FN - FIXME add issue link
+        using (d) // FN
         {
             d.Dispose();
         }
@@ -115,8 +115,8 @@ public class MyClass : IDisposable
     public void DisposeMultipleTimes()
     {
         Dispose();
-        this.Dispose(); // FN - FIXME add issue link
-        Dispose(); // FN - FIXME add issue link
+        this.Dispose(); // FN
+        Dispose(); // FN
     }
 
     public void DoSomething()
@@ -135,7 +135,7 @@ class TestLoops
             {
                 if (condition)
                 {
-                    instance1.Dispose(); // FIX ME - need to check the CFG as I'm not sure if this is an issue
+                    instance1.Dispose(); // FN
                 }
                 break;
             }

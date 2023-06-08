@@ -34,7 +34,7 @@ public class NullCoalescenceAssignment
 
     public void NullCoalescenceAssignment_NonCompliant(IDisposable s)
     {
-        using (s ??= new Disposable()) // FN - FIXME add issue link
+        using (s ??= new Disposable()) // FN
         {
             s.Dispose();
         }
@@ -94,10 +94,10 @@ public class Consumer
         s.Dispose();
     }
 
-    public void DonotDisposeOnAllPaths(bool flag)
+    public void DoesNotDisposeTwiceOnAllPaths(bool condition)
     {
         using var s = new Struct(); // Noncompliant
-        if (flag)
+        if (condition)
         {
             s.Dispose();
         }
@@ -135,7 +135,7 @@ public class DisposeAsync
 
 public class DisposableWithExplicitImplementation : IDisposable
 {
-    void IDisposable.Dispose() { } // Explicit Implementation
+    void IDisposable.Dispose() { }
 }
 
 public class ExplicitDisposeImplementation
