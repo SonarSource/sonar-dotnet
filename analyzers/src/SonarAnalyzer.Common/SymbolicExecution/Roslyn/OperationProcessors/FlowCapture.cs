@@ -34,9 +34,6 @@ internal sealed class FlowCaptureReference : SimpleProcessor<IFlowCaptureReferen
     protected override IFlowCaptureReferenceOperationWrapper Convert(IOperation operation) =>
         IFlowCaptureReferenceOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState Process(SymbolicContext context, IFlowCaptureReferenceOperationWrapper capture)
-    {
-        var resolved = context.State.ResolveCapture(capture.WrappedOperation);
-        return context.State.SetOperationValue(capture, context.State[resolved]);
-    }
+    protected override ProgramState Process(SymbolicContext context, IFlowCaptureReferenceOperationWrapper capture) =>
+        context.State.SetOperationValue(capture, context.State[context.State.ResolveCapture(capture.WrappedOperation)]);
 }
