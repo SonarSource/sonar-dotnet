@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
@@ -27,9 +25,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleCheck
 {
     protected const string DiagnosticId = "S3966";
-    protected const string MessageFormat = "Resource '{1}' {0}";
-    protected const string MessageDisposeTwice = "has already been disposed. Refactor the code to dispose it only once.";
-    protected const string MessageDisposeUsing = "is ensured to be disposed by this using statement. You don't need to dispose it twice.";
+    protected const string MessageFormat = "Resource '{0}' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.";
 
     private static readonly string[] DisposeMethods = { "Dispose", "DisposeAsync"};
 
@@ -40,7 +36,7 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
         {
             if (state[invocation.Instance]?.HasConstraint(DisposableConstraint.Disposed) is true)
             {
-                ReportIssue(context.Operation.Instance, IsPartOfUsingStatement(invocation) ? MessageDisposeUsing : MessageDisposeTwice, invocation.Instance.Syntax.ToString());
+                ReportIssue(context.Operation.Instance, invocation.Instance.Syntax.ToString());
             }
             else if (invocation.Instance.TrackedSymbol() is { } instance)
             {
@@ -48,10 +44,5 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
             }
         }
         return state;
-
-        static bool IsPartOfUsingStatement(IInvocationOperationWrapper invocation) =>
-            (invocation.Instance.Syntax.Ancestors().OfType<LocalDeclarationStatementSyntax>().FirstOrDefault() is { } localStatement
-            && localStatement.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
-            || invocation.Instance.Syntax.Ancestors().OfType<UsingStatementSyntax>().Any() is true;
     }
 }

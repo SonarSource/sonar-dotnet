@@ -10,7 +10,7 @@ class Program
     {
         var d = new Disposable();
         d.Dispose();
-        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed. Refactor the code to dispose it only once.}}
+        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
     }
 
     public void DisposedTwice_Conditional()
@@ -21,7 +21,7 @@ class Program
         {
             d.Dispose();
         }
-        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed. Refactor the code to dispose it only once.}}
+        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
 //      ^^^^^^^^^^^
     }
 

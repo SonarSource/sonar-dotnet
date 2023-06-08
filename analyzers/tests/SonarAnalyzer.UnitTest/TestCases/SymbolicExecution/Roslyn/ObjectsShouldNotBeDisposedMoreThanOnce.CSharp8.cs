@@ -11,13 +11,13 @@ class UsingDeclaration
 {
     public void Disposed_UsingDeclaration()
     {
-        using var d = new Disposable(); // Noncompliant {{Resource 'd = new Disposable()' is ensured to be disposed by this using statement. You don't need to dispose it twice.}}
+        using var d = new Disposable(); // Noncompliant {{Resource 'd = new Disposable()' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
         d.Dispose();
     }
 
     public void Disposed_UsingStatement()
     {
-        using (var d = new Disposable()) // Noncompliant {{Resource 'd = new Disposable()' is ensured to be disposed by this using statement. You don't need to dispose it twice.}}
+        using (var d = new Disposable()) // Noncompliant {{Resource 'd = new Disposable()' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
         {
             d.Dispose();
         }
@@ -90,7 +90,7 @@ public class Consumer
 
     public void M2()
     {
-        using var s = new Struct(); // Noncompliant {{Resource 's = new Struct()' is ensured to be disposed by this using statement. You don't need to dispose it twice.}}
+        using var s = new Struct(); // Noncompliant {{Resource 's = new Struct()' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
         s.Dispose();
     }
 
