@@ -6,6 +6,20 @@ public interface IInterface1 : IDisposable { }
 
 class Program
 {
+    private IDisposable disposable;
+
+    public void DisposeField()
+    {
+        disposable.Dispose();
+        disposable.Dispose(); // Noncompliant
+    }
+
+    public void DisposePotentiallyNullField(IDisposable d)
+    {
+        d?.Dispose();
+        d?.Dispose(); // FN
+    }
+
     public void DisposedTwice()
     {
         var d = new Disposable();
@@ -93,7 +107,7 @@ class Program
         param1.Dispose(); // Noncompliant
     }
 
-    public void Close_OneParameterDisposedTwice(IInterface1 instance1, IInterface1 instance2)
+    public void Close_OneParameterDisposedThrice(IInterface1 instance1, IInterface1 instance2)
     {
         instance1.Dispose();
         instance1.Dispose(); // Noncompliant
