@@ -222,7 +222,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         return context.State[invocation.Instance] switch
         {
             { } instanceValue when instanceValue.HasConstraint(ObjectConstraint.Null) => NullableDefaultState(),
-            { } instanceValue => context.State.SetOperationValue(invocation, instanceValue),
+            { } instanceValue => context.SetOperationValue(instanceValue),
             _ => context.State
         };
 
