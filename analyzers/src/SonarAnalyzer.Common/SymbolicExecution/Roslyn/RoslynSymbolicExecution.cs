@@ -142,12 +142,12 @@ internal class RoslynSymbolicExecution
         ExplodedNode CreateNode(BasicBlock block, FinallyPoint finallyPoint, ControlFlowBranch finallyEntryBranch)
         {
             var state = node.State;
+            state = ProcessBranchState(state, branch, node.VisitCount);
             if (finallyPoint is null)   // Remove captures only when there's no finally, or when we're returning from finally.
             {
-                state = RemoveCaptures(state, branch);
-                state = RemoveCaptures(state, finallyEntryBranch);  // Returning from finally to exit the original branch, process also the postponed branch.
+                state = CleanupBranchState(state, branch);
+                state = CleanupBranchState(state, finallyEntryBranch);  // Returning from finally to exit the original branch, process also the postponed branch.
             }
-            state = ProcessBranchState(state, branch, node.VisitCount);
             return state is null ? null : new(block, state, finallyPoint);
         }
     }
@@ -173,10 +173,30 @@ internal class RoslynSymbolicExecution
         {
             state = state.PopException();
         }
-        var liveVariables = lva.LiveOut(branch.Source).ToHashSet();
-        return state
-            .RemoveSymbols(x => lva.IsLocal(x) && (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x))
-            .ResetOperations();
+        // FIXME: While this is needed to counterbalance the issue below (to verify: FilterAndHandler region), the LVA is not smart enough to counter-balance all consequences.
+        if (branch.Source.EnclosingNonLocalLifetimeRegion() is { Kind: ControlFlowRegionKind.Catch } catchRegion)
+        {
+            state = state.RemoveSymbols(catchRegion.Locals.Contains);
+        }
+        return state;
+    }
+
+    private ProgramState CleanupBranchState(ProgramState state, ControlFlowBranch branch)
+    {
+        if (state is not null && branch is not null)
+        {
+            foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
+            {
+                state = state.RemoveCapture(capture);
+            }
+            // FIXME: WIP experiement to workaround LVA limitations. LVA should do this for us.
+            var liveVariables = lva.LiveOut(branch.Source).ToHashSet();
+            liveVariables.AddRange(state.CapturedSymbols());
+            state = state
+                .RemoveSymbols(x => lva.IsLocal(x) && (x is ILocalSymbol or IParameterSymbol { RefKind: RefKind.None }) && !liveVariables.Contains(x))
+                .ResetOperations();
+        }
+        return state;
     }
 
     private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
@@ -269,18 +289,6 @@ internal class RoslynSymbolicExecution
             if (ConstantCheck.ConstraintFromType(local.Type) is { } constraint)
             {
                 state = state.SetSymbolConstraint(local, constraint);
-            }
-        }
-        return state;
-    }
-
-    private static ProgramState RemoveCaptures(ProgramState state, ControlFlowBranch branch)
-    {
-        if (state is not null && branch is not null)
-        {
-            foreach (var capture in branch.LeavingRegions.SelectMany(x => x.CaptureIds))
-            {
-                state = state.RemoveCapture(capture);
             }
         }
         return state;

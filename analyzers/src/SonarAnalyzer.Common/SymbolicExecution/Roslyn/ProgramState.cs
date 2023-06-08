@@ -144,6 +144,9 @@ public sealed record ProgramState : IEquatable<ProgramState>
     public int GetVisitCount(int programPointHash) =>
         VisitCount.TryGetValue(programPointHash, out var count) ? count : 0;
 
+    public IEnumerable<ISymbol> CapturedSymbols() =>
+        CaptureOperation.Values.Select(x => x.TrackedSymbol()).WhereNotNull();
+
     public override int GetHashCode() =>
         // VisitCount is not included, it's not part of Equals
         HashCode.Combine(
