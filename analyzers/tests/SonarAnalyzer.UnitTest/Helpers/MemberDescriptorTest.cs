@@ -19,7 +19,6 @@
  */
 
 using Moq;
-using SonarAnalyzer.Common;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 

@@ -21,7 +21,6 @@
 using System.IO;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Helpers

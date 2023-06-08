@@ -69,6 +69,7 @@
   <ItemGroup>
     <Using Include="FluentAssertions" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="SonarAnalyzer.UnitTest.MetadataReferences" />
     <Using Include="SonarAnalyzer.UnitTest.TestFramework" />

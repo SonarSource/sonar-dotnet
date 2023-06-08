@@ -22,7 +22,6 @@ using System.IO;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.UnitTest.PackagingTests;
 using StyleCop.Analyzers.Lightup;

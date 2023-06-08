@@ -20,7 +20,6 @@
 
 extern alias csharp;
 extern alias vbnet;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.PackagingTests
 {

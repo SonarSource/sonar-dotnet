@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.Common;
 using StyleCop.Analyzers.Lightup;
 using FlowAnalysis = Microsoft.CodeAnalysis.FlowAnalysis;
 

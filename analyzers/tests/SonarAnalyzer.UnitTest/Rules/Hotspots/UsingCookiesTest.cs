@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 

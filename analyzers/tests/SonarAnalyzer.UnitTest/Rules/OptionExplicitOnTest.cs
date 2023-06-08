@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis.VisualBasic;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.Helpers;
 

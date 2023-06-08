@@ -22,7 +22,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.UnitTest.Rules.Utilities

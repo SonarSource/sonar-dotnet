@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis.Text;
 using Moq;
-using SonarAnalyzer.Common;
 using static SonarAnalyzer.Common.AnalyzerConfiguration;
 
 namespace SonarAnalyzer.UnitTest.Common

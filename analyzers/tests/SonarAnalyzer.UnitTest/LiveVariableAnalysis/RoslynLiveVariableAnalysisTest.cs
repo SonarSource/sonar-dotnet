@@ -23,7 +23,6 @@ using csharp::SonarAnalyzer.Extensions;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
 {
