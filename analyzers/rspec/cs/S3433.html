@@ -1,29 +1,49 @@
 <h2>Why is this an issue?</h2>
-<p>A method is detected as test method if marked with one of the following attributes <code>[TestMethod]</code> or <code>[DataTestMethod]</code> (for
-mstest), <code>[Fact]</code> or <code>[Theory]</code> (for xunit) or <code>[Test]</code>, <code>[TestCase]</code>, <code>[TestCaseSource]</code> or
-<code>[Theory]</code> (for nunit). However, whether or not they have a test attribute, non-<code>public</code> methods are not recognized as tests,
-and therefore not executed. Neither are <code>async</code> <code>void</code> methods, or methods with generics anywhere in their signatures.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>A method is identified as a test method if it is marked with one of the following attributes:</p>
+<ul>
+  <li> <code>[TestMethod]</code> or <code>[DataTestMethod]</code> (for <strong>MSTest</strong>). </li>
+  <li> <code>[Fact]</code> or <code>[Theory]</code> (for <strong>xUnit</strong>). </li>
+  <li> <code>[Test]</code>, <code>[TestCase]</code>, <code>[TestCaseSource]</code>, or <code>[Theory]</code> (for <strong>NUnit</strong>). </li>
+</ul>
+<p>However, non-<code>public</code> methods are not considered test methods and will not be executed, regardless of whether they have a test
+attribute. Additionally, methods with the <code>async void</code> modifier or methods that contain generics <code>&lt;T&gt;</code> anywhere in their
+signatures are also excluded from being recognized as tests and will not be executed.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 [TestMethod]
-void TestNullArg()  // Noncompliant; method is not public
+void TestNullArg()  // Noncompliant, method is not public
 {  /* ... */  }
 
 [TestMethod]
-public async void MyIgnoredTestMethod()  // Noncompliant; this is an 'async void' method
+public async void MyIgnoredTestMethod()  // Noncompliant, this is an 'async void' method
 { /* ... */ }
 
 [TestMethod]
-public void MyIgnoredGenericTestMethod&lt;T&gt;(T foo)  // Noncompliant; method has generics in its signature
+public void MyIgnoredGenericTestMethod&lt;T&gt;(T foo)  // Noncompliant, method has generics in its signature
 { /* ... */ }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 [TestMethod]
 public void TestNullArg()
 {  /* ... */  }
+
+[TestMethod]
+public async Task MyIgnoredTestMethod()
+{ /* ... */ }
+
+[TestMethod]
+public void MyIgnoredGenericTestMethod(int foo)
+{ /* ... */ }
 </pre>
 <h3>Exceptions</h3>
-<p>Accessibility is ignored for xUnit <code>Fact</code> test methods, since they do not need to be <code>public</code>.</p>
-<p><code>[Theory]</code> test methods in xUnit and <code>[TestCase]</code> and <code>[TestCaseSource]</code> test methods in nunit can be generic.</p>
+<p>For <strong>xUnit</strong>, accessibility is disregarded when it comes to <code>[Fact]</code> test methods, as they do not necessarily need to be
+declared as <code>public</code>.</p>
+<p>In <strong>xUnit</strong>, <code>[Theory]</code> test methods, as well as <code>[TestCase]</code> and <code>[TestCaseSource]</code> test methods in
+<strong>NUnit</strong>, have the flexibility to be generic, allowing for a wider range of test scenarios.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-mstest">Unit testing C# with MSTest</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-nunit">Unit testing C# with NUnit</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test">Unit testing C# with xUnit</a> </li>
+</ul>
 

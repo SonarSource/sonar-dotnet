@@ -13,5 +13,5 @@
   "ruleSpecification": "RSPEC-3875",
   "sqKey": "S3875",
   "scope": "All",
-  "quickfix": "unknown"
+  "quickfix": "infeasible"
 }

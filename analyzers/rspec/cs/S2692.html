@@ -1,13 +1,36 @@
 <h2>Why is this an issue?</h2>
-<p>Most checks against an <code>IndexOf</code> value compare it with -1 because 0 is a valid index. Any checks which look for values <code>&gt;
-0</code> ignore the first element, which is likely a bug. If the intent is merely to check inclusion of a value in a <code>string</code>,
-<code>List</code>, or an array, consider using the <code>Contains</code> method instead.</p>
-<p>This rule raises an issue when an <code>IndexOf</code> value retrieved from a <code>string</code>, <code>List</code> or array is tested against
-<code>&gt; 0</code>.</p>
-<p>This rule also raises an issue when <code>IndexOfAny</code>, <code>LastIndexOf</code> or <code>LastIndexOfAny</code> from a <code>string</code> is
-tested against <code>&gt; 0</code></p>
-<h3>Noncompliant code example</h3>
+<p>Most checks against an <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexof">IndexOf</a> value compare it with -1 because
+<strong>0 is a valid index</strong>.</p>
 <pre>
+strings.IndexOf(someString) == -1 // Test for "index not found"
+strings.IndexOf(someString) &lt; 0   // Test for "index not found"
+strings.IndexOf(someString) &gt;= 0  // Test for "index found"
+</pre>
+<p>Any checks which look for values <code>&gt; 0</code> ignore the first element, which is likely a bug. If the intent is merely to check inclusion of
+a value in a <code>string</code>, <code>List</code>, or an array, consider using the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.string.contains">Contains</a> method instead.</p>
+<pre>
+strings.Contains(someString) // bool result
+</pre>
+<p>This rule raises an issue when the output value of any of the following methods is tested against <code>&gt; 0</code>:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.ilist.indexof">IndexOf</a>, applied to <code>string</code>, list or
+  array </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexofany">IndexOfAny</a>, applied to a <code>string</code> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexof">LastIndexOf</a>, applied to a <code>string</code>, list or
+  array </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexofany">LastIndexOfAny</a>, applied to a <code>string</code> </li>
+</ul>
+<pre>
+someArray.IndexOf(someItem) &gt; 0        // Noncompliant: index 0 missing
+someString.IndexOfAny(charsArray) &gt; 0  // Noncompliant: index 0 missing
+someList.LastIndexOf(someItem) &gt; 0     // Noncompliant: index 0 missing
+someString.LastIndexOf(charsArray) &gt; 0 // Noncompliant: index 0 missing
+</pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 string color = "blue";
 string name = "ishmael";
 
@@ -36,8 +59,8 @@ if (Array.IndexOf(stringArray, color) &gt; 0) // Noncompliant
   // ...
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 string color = "blue";
 string name = "ishmael";
 
@@ -66,4 +89,12 @@ if (Array.IndexOf(stringArray, color) &gt;= 0)
   // ...
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.contains">String.Contains Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexofany">String.IndexOfAny Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexof">String.LastIndexOf Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexofany">String.LastIndexOfAny Method</a> </li>
+</ul>
 

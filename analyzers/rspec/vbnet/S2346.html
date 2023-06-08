@@ -1,8 +1,70 @@
 <h2>Why is this an issue?</h2>
-<p>Consistent use of "None" in flags enumerations indicates that all flag values are cleared. The value 0 should not be used to indicate any other
-state, since there is no way to check that the bit <code>0</code> is set.</p>
-<h3>Noncompliant code example</h3>
+<p>An enumeration can be decorated with the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.flagsattribute">FlagsAttribute</a> to
+indicate that it can be used as a <a href="https://en.wikipedia.org/wiki/Bit_field">bit field</a>: a set of flags, that can be independently set and
+reset.</p>
+<p>For example, the following definition of the day of the week:</p>
 <pre>
+&lt;Flags()&gt;
+Enum Days
+    Monday = 1    ' 0b00000001
+    Tuesday = 2   ' 0b00000010
+    Wednesday = 4 ' 0b00000100
+    Thursday = 8  ' 0b00001000
+    Friday = 16   ' 0b00010000
+    Saturday = 32 ' 0b00100000
+    Sunday = 64   ' 0b01000000
+End Enum
+</pre>
+<p>allows to define special set of days, such as <code>WeekDays</code> and <code>Weekend</code> using the <code>Or</code> operator:</p>
+<pre>
+&lt;Flags()&gt;
+Enum Days
+    ' ...
+    None = 0                                                        ' 0b00000000
+    Weekdays = Monday Or Tuesday Or Wednesday Or Thursday Or Friday ' 0b00011111
+    Weekend = Saturday Or Sunday                                    ' 0b01100000
+    All = Weekdays Or Weekend                                       ' 0b01111111
+End Enum
+</pre>
+<p>These can be used to write more expressive conditions, taking advantage of <a
+href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/logical-and-bitwise-operators#bitwise-operations">bitwise
+operators</a> and <a href="https://learn.microsoft.com/en-us/dotnet/api/system.enum.hasflag">Enum.HasFlag</a>:</p>
+<pre>
+Dim someDays = Days.Wednesday | Days.Weekend ' 0b01100100
+someDays.HasFlag(Days.Wednesday)             ' someDays contains Wednesday
+
+Dim mondayAndWednesday = Days.Monday Or Days.Wednesday
+someDays.HasFlag(mondayAndWednesday)         ' someDays contains Monday and Wednesday
+someDays.HasFlag(Days.Monday) OrElse someDays.HasFlag(Days.Wednesday) ' someDays contains Monday or Wednesday
+someDays And Days.Weekend &lt;&gt; Days.None       ' someDays overlaps with the weekend
+someDays And Days.Weekdays = Days.Weekdays   ' someDays is only made of weekdays
+</pre>
+<p>Consistent use of <code>None</code> in flag enumerations indicates that all flag values are cleared. The value 0 should not be used to indicate any
+other state since there is no way to check that the bit <code>0</code> is set.</p>
+<pre>
+&lt;Flags()&gt;
+Enum Days
+    Monday = 0    ' 0 is used to indicate Monday
+    Tuesday = 1
+    Wednesday = 2
+    Thursday = 4
+    Friday = 8
+    Saturday = 16
+    Sunday = 32
+    Weekdays = Monday Or Tuesday Or Wednesday Or Thursday Or Friday
+    Weekend = Saturday Or Sunday
+    All = Weekdays Or Weekend
+End Enum
+
+Dim someDays = Days.Wednesday Or Days.Thursday
+someDays &amp; Days.Tuesday = Days.Tuesday ' False, because someDays doesn't contains Tuesday
+someDays &amp; Days.Monday = Days.Monday   ' True, even though someDays doesn't contains Monday!
+someDays.HasFlag(Days.Monday)          ' Same issue as above
+</pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 &lt;Flags()&gt;
 Enum FruitType
     Void = 0        ' Non-Compliant
@@ -11,8 +73,8 @@ Enum FruitType
     Strawberry = 4
 End Enum
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 &lt;Flags()&gt;
 Enum FruitType
     None = 0        ' Compliant
@@ -21,4 +83,17 @@ Enum FruitType
     Strawberry = 4
 End Enum
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.flagsattribute">FlagsAttribute</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Bit_field">Bit field</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/logical-and-bitwise-operators#bitwise-operations">Logical and Bitwise Operators in Visual Basic</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.enum.hasflag">Enum.HasFlag(Enum) Method</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms229062(v=vs.100)">Designing Flags Enumerations</a> </li>
+</ul>
 

@@ -1,13 +1,28 @@
 <h2>Why is this an issue?</h2>
-<p>Since C# 5.0, <code>async</code> and <code>await</code> are contextual keywords. Contextual keywords do have a particular meaning in some contexts,
-but can still be used as variable names. Keywords, on the other hand, are always reserved, and therefore are not valid variable names. To avoid any
-confusion though, it is best to not use <code>async</code> and <code>await</code> as identifiers.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-int await = 42; // Noncompliant
+<p>Since C# 5.0, <code>async</code> and <code>await</code> are <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/#contextual-keywords">contextual keywords</a>. Contextual keywords
+do have a particular meaning in some contexts, but are not reserved and therefore can be used as variable names.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+int await = 42; // Noncompliant, but compiles
+int async = 42; // Noncompliant, but compiles
 </pre>
-<h3>Compliant solution</h3>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords">Keywords</a>, on the other hand, are always reserved and
+therefore are not valid variable names.</p>
 <pre>
-int someOtherName = 42;
+int abstract = 42; // Error CS1585: Member modifier 'abstract' must precede the member type and name
+int foreach = 42; // Error CS1519: Invalid token 'foreach' in class, struct, or interface member declaration
 </pre>
+<pre>
+To avoid any confusion, it is best to not use `async` and `await` as identifiers.
+</pre>
+<pre data-diff-id="1" data-diff-type="compliant">
+int someVariableName = 42;
+int someOtherVariableName = 42;
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/#contextual-keywords">Contextual Keywords - MSDN</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/">Asynchronous programming - MSDN</a> </li>
+</ul>
 

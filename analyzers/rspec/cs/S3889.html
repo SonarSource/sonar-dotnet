@@ -1,19 +1,29 @@
 <h2>Why is this an issue?</h2>
 <p><code>Thread.Suspend</code> and <code>Thread.Resume</code> can give unpredictable results, and both methods have been deprecated. Indeed, if
-<code>Thread.Suspend</code> is not used very carefully, a thread can be suspended while holding a lock, thus leading to a deadlock. Other safer
-synchronization mechanisms should be used, such as <code>Monitor</code>, <code>Mutex</code>, and <code>Semaphore</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-static void Main(string[] args)
-{
-  // ...
-  Thread.CurrentThread.Suspend(); // Noncompliant
-  Thread.CurrentThread.Resume(); // Noncompliant
-}
-</pre>
-<h2>Resources</h2>
+<code>Thread.Suspend</code> is not used very carefully, a <a href="https://en.wikipedia.org/wiki/Thread_(computing)">thread</a> can be suspended while
+holding a <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">lock</a>, thus leading to a <a
+href="https://en.wikipedia.org/wiki/Deadlock">deadlock</a>.</p>
+<p>There are other synchronization mechanisms that are safer and should be used instead, such as:</p>
 <ul>
-  <li> <a href="https://msdn.microsoft.com/en-us/library/system.threading.thread.resume.aspx">Thread.Resume Method ()</a> </li>
-  <li> <a href="https://msdn.microsoft.com/en-us/library/system.threading.thread.suspend(v=vs.110).aspx">Thread.Suspend Method ()</a> </li>
+  <li> <code>Monitor</code> provides a mechanism that synchronizes access to objects. </li>
+  <li> <code>Mutex</code> provides a mechanism that synchronizes interprocess access to a protected resource. </li>
+  <li> <code>Semaphore</code> provides a mechanism that allows limiting the number of threads that have access to a protected resources concurrently.
+  </li>
+  <li> <code>Events</code> enable a class to notify others when something of interest occurs. </li>
+</ul>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://msdn.microsoft.com/en-us/library/system.threading.thread.resume.aspx">Thread.Resume Method</a> </li>
+  <li> <a href="https://msdn.microsoft.com/en-us/library/system.threading.thread.suspend(v=vs.110).aspx">Thread.Suspend Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.monitor?view=net-7.0">Monitor Class</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.mutex?view=net-7.0">Mutex Class</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.semaphore?view=net-7.0">Semaphore Class</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/">Events Programming Guide</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock">lock statement</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://stephencleary.com/book/">Concurrency in C# Cookbook - Stephen Cleary</a> </li>
 </ul>
 

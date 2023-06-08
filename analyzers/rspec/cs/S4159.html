@@ -1,22 +1,44 @@
 <h2>Why is this an issue?</h2>
-<p>In the Attributed Programming Model, the <code>ExportAttribute</code> declares that a part "exports", or provides to the composition container, an
-object that fulfills a particular contract. During composition, parts with imports that have matching contracts will have those dependencies filled by
-the exported object.</p>
+<p>The <a href="https://learn.microsoft.com/en-us/dotnet/framework/mef/attributed-programming-model-overview-mef">Attributed Programming Model</a>,
+also known as <a href="https://en.wikipedia.org/wiki/Attribute-oriented_programming">Attribute-oriented programming (@OP)</a>, is a programming model
+used to embed attributes within codes.</p>
+<p>In this model, objects are required to conform to a specific structure so that they can be used by the <a
+href="https://learn.microsoft.com/en-us/dotnet/framework/mef/">Managed Extensibility Framework (MEF)</a>.</p>
+<p>MEF provides a way to discover available components implicitly, via <strong>composition</strong>. A MEF component, called a <strong>part</strong>,
+declaratively specifies:</p>
+<ul>
+  <li> both its dependencies, known as <strong>imports</strong> </li>
+  <li> and what capabilities it makes available, known as <strong>exports</strong> </li>
+</ul>
+<p>The <a href="https://learn.microsoft.com/en-us/dotnet/api/system.composition.exportattribute">ExportAttribute</a> declares that a part "exports",
+or provides to the composition container, an object that fulfills a particular contract.</p>
+<p>During composition, parts with imports that have matching contracts will have those dependencies filled by the exported object.</p>
 <p>If the type doesn’t implement the interface it is exporting there will be an issue at runtime (either a cast exception or just a container not
 filled with the exported type) leading to unexpected behaviors/crashes.</p>
 <p>The rule raises an issue when a class doesn’t implement or inherit the type declared in the <code>ExportAttribute</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 [Export(typeof(ISomeType))]
-public class SomeType // Noncompliant; doesn't implement 'ISomeType'.
+public class SomeType // Noncompliant: doesn't implement 'ISomeType'.
 {
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 [Export(typeof(ISomeType))]
 public class SomeType : ISomeType
 {
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://en.wikipedia.org/wiki/Attribute-oriented_programming">Attribute-oriented programming (@OP)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/framework/mef/attributed-programming-model-overview-mef">Attributed Programming Model</a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/framework/mef/">Managed Extensibility Framework (MEF)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.composition.exportattribute">ExportAttribute Class</a> </li>
+</ul>
 

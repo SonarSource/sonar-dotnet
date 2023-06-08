@@ -1,5 +1,5 @@
 {
-  "title": "Neither \"Thread.Resume\" nor \"Thread.Suspend\" should be used",
+  "title": "\"Thread.Resume\" and \"Thread.Suspend\" should not be used",
   "type": "BUG",
   "status": "ready",
   "remediation": {
@@ -14,5 +14,5 @@
   "ruleSpecification": "RSPEC-3889",
   "sqKey": "S3889",
   "scope": "All",
-  "quickfix": "unknown"
+  "quickfix": "infeasible"
 }

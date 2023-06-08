@@ -1,5 +1,5 @@
 {
-  "title": "Method overloads with default parameter values should not overlap ",
+  "title": "Method overloads with default parameter values should not overlap",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -14,5 +14,5 @@
   "ruleSpecification": "RSPEC-3427",
   "sqKey": "S3427",
   "scope": "All",
-  "quickfix": "unknown"
+  "quickfix": "infeasible"
 }

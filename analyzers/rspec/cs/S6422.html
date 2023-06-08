@@ -1,6 +1,34 @@
 <h2>Why is this an issue?</h2>
-<p>Making blocking calls to <code>async</code> methods transforms code that was intended to be asynchronous into a blocking operation. Doing so inside
-an Azure Function can lead to thread exhaustion.</p>
+<p>Making <a href="https://en.wikipedia.org/wiki/Blocking_(computing)">blocking calls</a> to <code>async</code> methods transforms the code into a
+synchronous operation. Doing so inside an Azure Function can lead to thread pool exhaustion.</p>
+<p>Thread pool exhaustion refers to a situation where all available threads in a thread pool are occupied, and new tasks or work items cannot be
+scheduled for execution due to the lack of available threads. This can lead to delayed execution and degraded performance.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+class RequestParser
+{
+	[FunctionName(nameof(ParseRequest))]
+	public static async Task&lt;IActionResult&gt; ParseRequest([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
+	{
+		// This can lead to thread exhaustion
+		string requestBody = new StreamReader(req.Body).ReadToEndAsync().Result;
+		// do stuff...
+	}
+}
+</pre>
+<p>Instead, <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/">asynchronous</a> mechanisms should be used:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+class RequestParser
+{
+	[FunctionName(nameof(ParseRequest))]
+	public static async Task&lt;IActionResult&gt; ParseRequest([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
+	{
+		// Non-blocking, asynchronous operation
+		string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+		// do stuff...
+	}
+}
+</pre>
+<p>This applies to multiple methods that are available when working with tasks:</p>
 <table>
   <colgroup>
     <col style="width: 33.3333%;">
@@ -9,24 +37,24 @@ an Azure Function can lead to thread exhaustion.</p>
   </colgroup>
   <thead>
     <tr>
-      <th>To Do This …</th>
-      <th>Instead of This …</th>
-      <th>Use This</th>
+      <th>Goal</th>
+      <th>Blocking</th>
+      <th>Asynchronous</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><p>Retrieve the result of a background task</p></td>
+      <td><p>Wait for the result of a task</p></td>
       <td><p><code>Task.Wait</code>, <code>Task.Result</code> or <code>Task.GetAwaiter.GetResult</code></p></td>
       <td><p><code>await</code></p></td>
     </tr>
     <tr>
-      <td><p>Wait for any task to complete</p></td>
+      <td><p>Wait for any of many task to complete</p></td>
       <td><p><code>Task.WaitAny</code></p></td>
       <td><p><code>await Task.WhenAny</code></p></td>
     </tr>
     <tr>
-      <td><p>Retrieve the results of multiple tasks</p></td>
+      <td><p>Wait for all of many tasks to complete</p></td>
       <td><p><code>Task.WaitAll</code></p></td>
       <td><p><code>await Task.WhenAll</code></p></td>
     </tr>
@@ -37,38 +65,13 @@ an Azure Function can lead to thread exhaustion.</p>
     </tr>
   </tbody>
 </table>
-<h3>Noncompliant code example</h3>
-<pre>
-public static class AvoidBlockingCalls
-{
-	[FunctionName("Foo")]
-	public static async Task&lt;IActionResult&gt; Foo([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
-	{
-		// This can lead to thread exhaustion
-		string requestBody = new StreamReader(req.Body).ReadToEndAsync().Result;
-
-		// do stuff...
-	}
-}
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-public static class AvoidBlockingCalls
-{
-	[FunctionName("Foo")]
-	public static async Task&lt;IActionResult&gt; Foo([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
-	{
-		string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-
-		// do stuff...
-	}
-}
-</pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> <a href="https://msdn.microsoft.com/en-us/magazine/jj991977.aspx">Async/Await - Best Practices in Asynchronous Programming</a> </li>
   <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/performance-reliability#use-async-code-but-avoid-blocking-calls">Improve the
   performance and reliability of Azure Functions - Scalability best practices</a> </li>
-  <li> {rule:csharpsquid:S4462} - a more generic rule about detecting blocking calls to <code>async</code> methods. </li>
+  <li> <a href="https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md">Async Guidance - David Fowl</a> </li>
+  <li> <a href="https://rules.sonarsource.com/csharp/RSPEC-4462">{rule:csharpsquid:S4462} - a more general version of this rule</a> </li>
 </ul>
 

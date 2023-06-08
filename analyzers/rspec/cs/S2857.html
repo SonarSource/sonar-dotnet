@@ -1,16 +1,16 @@
 <h2>Why is this an issue?</h2>
-<p>Badly formed SQL is likely to cause errors at runtime.</p>
-<p>This rule raises an issue when the spacing around SQL keywords appears to be missing.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-string select = "SELECT p.fname, p.lname, p.street1, p.street2, p.city, p.state, p.zip" +
-        "FROM person p" +  // Noncompliant; concatenates to: p.zipFROM
-        "WHERE p.id = @ID";  // Noncompliant; concatenates to: pWHERE
+<p>When concatenating strings, it is very easy to forget a whitespace.</p>
+<p>In some scenarios this might cause runtime errors, one of which is while creating an SQL query via concatenation:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+string select = "SELECT p.FirstName, p.LastName, p.PhoneNumber" +
+        "FROM Person as p" +    // Noncompliant: concatenation results in "p.PhoneNumberFROM"
+        "WHERE p.Id = @Id";     // Noncompliant: concatenation results in "pWHERE"
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-string select = "SELECT p.fname, p.lname, p.street1, p.street2, p.city, p.state, p.zip" +
-    " FROM person p" +
-    " WHERE p.id = @ID";
+<p>This rule raises an issue when the spacing around SQL keywords appears to be missing, making the concatenated string invalid SQL syntax. It would
+require the user to add the appropriate whitespaces:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+string select = "SELECT p.FirstName, p.LastName, p.PhoneNumber" +
+        " FROM Person as p" +
+        " WHERE p.Id = @Id";
 </pre>
 

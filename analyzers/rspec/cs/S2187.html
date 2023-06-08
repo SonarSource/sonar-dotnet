@@ -1,31 +1,61 @@
 <h2>Why is this an issue?</h2>
-<p>There’s no point in having a test class without any test methods.This could lead a maintainer to assume a class is covered by tests even though it
-is not.</p>
-<p>Supported test frameworks are <code>NUnit</code> and <code>MSTest</code> (not applicable to <code>xUnit</code>).</p>
+<p>To ensure proper testing, it is important to include test cases in a test class. If a test class does not have any test cases, it can give the
+wrong impression that the class being tested has been thoroughly tested, when in reality, it has not.</p>
 <p>This rule will raise an issue when any of these conditions are met:</p>
 <ul>
-  <li> For <strong>NUnit</strong>, a class is marked with <code>TestFixture</code> but does not contain any method marked with <code>Test</code>,
-  <code>TestCase</code>, <code>TestCaseSource</code> or <code>Theory</code>. </li>
-  <li> For <strong>MSTest</strong>, a class is marked with <code>TestClass</code> but does not contain any method marked with <code>TestMethod</code>
-  or <code>DataTestMethod</code>. </li>
+  <li> For <code>NUnit</code>, a class is marked with <code>TestFixture</code> but does not contain any method marked with <code>Test</code>,
+  <code>TestCase</code>, <code>TestCaseSource</code>, or <code>Theory</code>. </li>
+  <li> For <code>MSTest</code>, a class is marked with <code>TestClass</code> but does not contain any method marked with <code>TestMethod</code> or
+  <code>DataTestMethod</code>. </li>
 </ul>
-<h3>Noncompliant code example</h3>
-<pre>
-[TestFixture]
-public class SomeClassTest { } // Noncompliant - no test
-
+<p>It does not apply to <code>xUnit</code> since <code>xUnit</code> does not require a <a href="https://xunit.net/docs/comparisons#attributes">test
+class attribute</a>.</p>
+<h3>Exceptions</h3>
+<p>There are scenarios where not having any test cases within a test class is perfectly acceptable and not seen as a problem.</p>
+<h4><code>abstract</code> classes</h4>
+<p>To facilitate the creation of common test cases, test logic, or test infrastructure, it is advisable to use a base class.</p>
+<p>Additionally, in both <code>NUnit</code> and <code>MSTest</code>, abstract classes that are annotated with their respective attributes
+(<code>TestFixture</code> in NUnit and <code>TestClass</code> in MSTest) are automatically ignored.</p>
+<p>Therefore, there is no need to raise an issue in this particular scenario.</p>
+<p>More information here:</p>
+<ul>
+  <li> <a href="https://docs.nunit.org/articles/nunit/writing-tests/attributes/testfixture.html"><code>TestFixture</code> documentation in
+  <code>NUnit</code></a> </li>
+  <li> <a
+  href="https://github.com/microsoft/testfx/blob/0f19160cc319338ef6e23acb320da1562b40decd/src/Adapter/MSTest.TestAdapter/Discovery/TypeValidator.cs#L86-L97"><code>TypeValidator</code> class in <code>MSTest</code> (GitHub)</a> </li>
+</ul>
+<h4>Derived classes that inherit test cases from a base class</h4>
+<p>A base class containing one or more test cases to provide generic test cases is also considered a compliant scenario.</p>
+<h4>Classes that contain <code>AssemblyInitialize</code> or <code>AssemblyCleanup</code> methods</h4>
+<p><strong>This particular exception scenario only applies to the MSTest test framework.</strong></p>
+<p>The <code>AssemblyInitialize</code> and <code>AssemblyCleanup</code> attributes are used to annotate methods that are executed only once at the
+beginning and at the end of a test run. These attributes can only be applied once per assembly.</p>
+<p>It is logical to have a dedicated class for these methods, and this scenario is also considered compliant.</p>
+<p>Furthermore, it is important to note that the test engine will execute a method annotated with either the <code>AssemblyInitialize</code> or
+<code>AssemblyCleanup</code> attribute only if that method is part of a class annotated with the <code>TestClass</code> attribute.</p>
+<p>More information here:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2008/ms245278(v=vs.90)"><code>AssemblyInitialize</code>
+  attribute</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2008/ms245265(v=vs.90)"><code>AssemblyCleanup</code>
+  attribute</a> </li>
+</ul>
+<h2>How to fix it in MSTest</h2>
+<p>To fix this issue in <code>MSTest</code>, it is important that all test classes annotated with the <code>[TestClass]</code> attribute contain at
+least one test case.</p>
+<p>To achieve this, at least one method needs to be annotated with one of the following method attributes:</p>
+<ul>
+  <li> <code>TestMethod</code> </li>
+  <li> <code>DataTestMethod</code> </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 [TestClass]
-public class SomeOtherClassTest { } // Noncompliant - no test
+public class SomeOtherClassTest { } // Noncompliant: no test
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-[TestFixture]
-public class SomeClassTest
-{
-    [Test]
-    public void SomeMethodShouldReturnTrue() { }
-}
-
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 [TestClass]
 public class SomeOtherClassTest
 {
@@ -33,11 +63,45 @@ public class SomeOtherClassTest
     public void SomeMethodShouldReturnTrue() { }
 }
 </pre>
-<h3>Exceptions</h3>
+<h2>How to fix it in NUnit</h2>
+<p>To fix this issue in <code>NUnit</code>, it is important that all test classes annotated with the <code>[TestFixture]</code> attribute contain at
+least one test case.</p>
+<p>To achieve this, at least one method needs to be annotated with one of the following method attributes:</p>
 <ul>
-  <li> abstract classes </li>
-  <li> derived classes that inherit from a base class that does have test methods </li>
-  <li> in <strong>MSTest</strong>, classes that contain methods marked with either <code>AssemblyInitialize</code> or <code>AssemblyCleanup</code>.
-  </li>
+  <li> <code>Test</code> </li>
+  <li> <code>TestCase</code> </li>
+  <li> <code>TestCaseSource</code> </li>
+  <li> <code>Theory</code> </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+[TestFixture]
+public class SomeClassTest { } // Noncompliant: no test
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+[TestFixture]
+public class SomeClassTest
+{
+    [Test]
+    public void SomeMethodShouldReturnTrue() { }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://docs.nunit.org/articles/nunit/intro.html"><code>NUnit</code> documentation</a>
+    <ul>
+      <li> <a href="https://docs.nunit.org/articles/nunit/writing-tests/attributes/testfixture.html"><code>TestFixture</code> attribute</a> </li>
+      <li> <a href="https://docs.nunit.org/articles/nunit/writing-tests/attributes/test.html"><code>Test</code> attribute</a> </li>
+      <li> <a href="https://docs.nunit.org/articles/nunit/writing-tests/attributes/testcase.html"><code>TestCase</code> attribute</a> </li>
+      <li> <a href="https://docs.nunit.org/articles/nunit/writing-tests/attributes/testcasesource.html"><code>TestCaseSource</code> attribute</a>
+      </li>
+      <li> <a href="https://docs.nunit.org/articles/nunit/writing-tests/attributes/theory.html"><code>Theory</code> attribute</a> </li>
+    </ul>  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-mstest">Unit testing C# with MSTest</a> </li>
+  <li> <a href="https://github.com/microsoft/testfx/blob/main/docs/README.md"><code>MSTest</code> documentation</a> </li>
+  <li> <a href="https://xunit.net/docs/comparisons#attributes">Comparing <code>xUnit</code> to other frameworks - Attributes</a> </li>
 </ul>
 

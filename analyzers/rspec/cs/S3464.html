@@ -1,16 +1,89 @@
 <h2>Why is this an issue?</h2>
-<p>Recursion is acceptable in methods, where you can break out of it. But with class types, you end up with code that will compile but not run if you
-try to instantiate the class.</p>
-<h3>Noncompliant code example</h3>
+<p>Recursion is a technique used in computer science to define a problem in terms of the problem itself, usually in terms of a simpler version of the
+problem itself.</p>
+<p>For example, the implementation of the generator for the n-th value of the Fibonacci sequence comes naturally from its mathematical definition,
+when recursion is used:</p>
+<pre>
+int NthFibonacciNumber(int n)
+{
+    if (n &lt;= 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return NthFibonacciNumber(n - 1) + NthFibonacciNumber(n - 2);
+    }
+}
+</pre>
+<p>As opposed to:</p>
+<pre>
+int NthFibonacciNumber(int n)
+{
+    int previous = 0;
+	int last = 1;
+	for (var i = 0; i &lt; n; i++)
+	{
+        (previous, last) = (last, last + previous);
+	}
+	return last;
+}
+</pre>
+<p>Use of recursion is acceptable in methods, like the one above, where you can break out of it.</p>
+<pre>
+int NthFibonacciNumber(int n)
+{
+    if (n &lt;= 1)
+    {
+        return 1; // Base case: stop the recursion
+    }
+    // ...
+}
+</pre>
+<p>It is also acceptable and makes sense in some type definitions:</p>
+<pre>
+class Box : IComparable&lt;Box&gt;
+{
+    public int CompareTo(Box? other)
+    {
+        // Compare the two Box instances...
+    }
+}
+</pre>
+<p>With types, some invalid recursive definitions are caught by the compiler:</p>
+<pre>
+class C2&lt;T&gt; : C2&lt;T&gt;     // Error CS0146: Circular base type dependency
+{
+}
+
+class C2&lt;T&gt; : C2&lt;C2&lt;T&gt;&gt; // Error CS0146: Circular base type dependency
+{
+}
+</pre>
+<p>In more complex scenarios, however, the code will compile but execution will result into a <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.typeloadexception">TypeLoadException</a> if you try to instantiate the class.</p>
 <pre>
 class C1&lt;T&gt;
 {
 }
+
 class C2&lt;T&gt; : C1&lt;C2&lt;C2&lt;T&gt;&gt;&gt; // Noncompliant
 {
 }
 
-...
-var c2 = new C2&lt;int&gt;();
+var c2 = new C2&lt;int&gt;();     // This would result into a TypeLoadException
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">Recursion</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.typeloadexception">TypeLoadException</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern">Curiously recurring template pattern</a> </li>
+  <li> <a href="https://blog.stephencleary.com/2022/09/modern-csharp-techniques-1-curiously-recurring-generic-pattern.html">Modern C# Techniques, Part
+  1: Curiously Recurring Generic Pattern</a> </li>
+  <li> <a href="https://ericlippert.com/2011/02/02/curiouser-and-curiouser/">Curiouser and curiouser</a> </li>
+</ul>
 

@@ -1,31 +1,52 @@
 <h2>Why is this an issue?</h2>
-<p>If a lock is held or acquired and then released within a method, it should be released along all execution paths.</p>
-<p>Failing to do so could make an application deadlock-prone because there is a risk of the lock not being released.</p>
-<p>The types tracked by the rule are: <code>Monitor</code>, <code>Mutex</code>, <code>ReaderWriterLock</code>, <code>ReaderWriterLockSlim</code>, and
-<code>SpinLock</code> from the <code>System.Threading</code> namespace.</p>
-<p>This rule raises an issue when a lock is acquired in a method but only released on some paths. No issue is raised when the lock is never released
-in the method. The assumption is that callers will release it.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>To prevent potential <a href="https://en.wikipedia.org/wiki/Deadlock">deadlocks</a> in an application, it is crucial to release any locks that are
+acquired within a method along all possible execution paths.</p>
+<p>Failing to release locks properly can lead to potential deadlocks, where the lock might not be released, causing issues in the application.</p>
+<p>This rule specifically focuses on tracking the following types from the <code>System.Threading</code> namespace:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.monitor"><code>Monitor</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.mutex"><code>Mutex</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock"><code>ReaderWriterLock</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim"><code>ReaderWriterLockSlim</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock"><code>SpinLock</code> </a> </li>
+</ul>
+<p>An issue is reported when a lock is acquired within a method but not released on all paths.</p>
+<h3>Exceptions</h3>
+<p>If the lock is never released within the method, no issue is raised, assuming that the callers will handle the release.</p>
+<h2>How to fix it</h2>
+<p>To make sure that a lock is always released correctly, you can follow one of these two methods:</p>
+<ul>
+  <li> Use a <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock"><code>lock</code></a> statement with your
+  lock object. </li>
+  <li> Use a <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements#the-try-finally-statement"><code>try-finally</code></a> statement and put the release of your lock object within the finally block. </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class MyClass
 {
   private object obj = new object();
 
   public void DoSomethingWithMonitor()
   {
-    Monitor.Enter(obj); // Noncompliant
+    Monitor.Enter(obj); // Noncompliant: not all paths release the lock
     if (IsInitialized())
     {
       // ...
       Monitor.Exit(obj);
     }
   }
-
+}
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+class MyClass
+{
   private ReaderWriterLockSlim lockObj = new ReaderWriterLockSlim();
 
   public void DoSomethingWithReaderWriteLockSlim()
   {
-    lockObj.EnterReadLock(); // Noncompliant
+    lockObj.EnterReadLock(); // Noncompliant: not all paths release the lock
     if (IsInitialized())
     {
       // ...
@@ -34,31 +55,37 @@ class MyClass
   }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class MyClass
 {
   private object obj = new object();
 
   public void DoSomethingWithMonitor()
   {
-    lock(obj) // lock() {...} is easier to use than explicit Monitor calls
+    lock(obj) // Compliant: the lock will be released at the end of the lock block
     {
       if (IsInitialized())
       {
+        // ...
       }
     }
   }
-
+}
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+class MyClass
+{
   private ReaderWriterLockSlim lockObj = new ReaderWriterLockSlim();
 
   public void DoSomethingWithReaderWriteLockSlim()
   {
-    lockObj.EnterReadLock();
+    lockObj.EnterReadLock(); // Compliant: the lock will be released in the finally block
     try
     {
       if (IsInitialized())
       {
+        // ...
       }
     }
     finally
@@ -70,8 +97,12 @@ class MyClass
 </pre>
 <h2>Resources</h2>
 <ul>
-  <li> <a href="https://cwe.mitre.org/data/definitions/459">MITRE, CWE-459</a> - Incomplete Cleanup </li>
   <li> <a
-  href="https://docs.microsoft.com/en-us/dotnet/standard/threading/overview-of-synchronization-primitives#synchronization-of-access-to-a-shared-resource">Synchronization of access to a shared resource</a>. </li>
+  href="https://docs.microsoft.com/en-us/dotnet/standard/threading/overview-of-synchronization-primitives#synchronization-of-access-to-a-shared-resource">Synchronization of access to a shared resource</a> </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/459">MITRE, CWE-459 - Incomplete Cleanup</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock"><code>lock</code> statement</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements#the-try-finally-statement">The
+  <code>try-finally</code> statement</a> </li>
 </ul>
 

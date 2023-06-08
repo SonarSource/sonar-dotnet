@@ -14,5 +14,5 @@
   "ruleSpecification": "RSPEC-3060",
   "sqKey": "S3060",
   "scope": "Main",
-  "quickfix": "unknown"
+  "quickfix": "infeasible"
 }

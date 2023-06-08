@@ -1,28 +1,29 @@
 <h2>Why is this an issue?</h2>
-<p>Shared naming conventions allow teams to collaborate efficiently. This rule checks whether or not method and property names are PascalCased. To
-reduce noise, two consecutive upper case characters are allowed unless they form the whole name. So, <code>MyXMethod</code> is compliant, but
-<code>XM</code> on its own is not.</p>
-<h3>Noncompliant code example</h3>
+<p>Shared naming conventions allow teams to collaborate efficiently.</p>
+<p>This rule raises an issue when a method or a property name is not PascalCased.</p>
+<p>For example, the method</p>
 <pre>
-public int doSomething() {...}
+public int doSomething() {...} // Noncompliant
 </pre>
-<h3>Compliant solution</h3>
+<p>should be renamed to</p>
 <pre>
 public int DoSomething() {...}
 </pre>
 <h3>Exceptions</h3>
 <ul>
-  <li> The rule ignores members in types that are marked with <code>ComImportAttribute</code> or <code>InterfaceTypeAttribute</code>. </li>
+  <li> The rule ignores members in types marked with <code>ComImportAttribute</code> or <code>InterfaceTypeAttribute</code>. </li>
   <li> The rule ignores <code>extern</code> methods. </li>
-  <li> The rule allows for two-letter acronyms in which both letters are capitalized, as shown in the following identifier:
-  <code>ExecuteOnUIThread</code>. </li>
-  <li> Furthermore, when <code>'_'</code> character is found in a name, the camel casing is not enforced. </li>
+  <li> To reduce noise, two consecutive upper-case characters are allowed unless they form the full name. So, <code>MyXMethod</code> is compliant, but
+  <code>XM</code> is not. </li>
+  <li> The camel casing is not enforced when a name contains the <code>'_'</code> character. </li>
 </ul>
 <pre>
-void My_method(){...} // valid
-void My_method_(){...} // invalid, leading and trailing underscores are reported
+void My_method_(){...} // Noncompliant, leading and trailing underscores are reported
+
+void My_method(){...} // Compliant by exception
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions">Microsoft Capitalization
 Conventions</a></p>
 

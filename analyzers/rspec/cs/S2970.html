@@ -1,30 +1,73 @@
 <h2>Why is this an issue?</h2>
-<p>It is very easy to write incomplete assertions when using some test frameworks. This rule enforces complete assertions in the following cases:</p>
+<p>This rule addresses the issue of incomplete assertions that can occur when using certain test frameworks. Incomplete assertions can lead to tests
+that do not effectively verify anything. The rule enforces the use of complete assertions in specific cases, namely:</p>
 <ul>
-  <li> Fluent Assertions: <a href="https://fluentassertions.com/introduction"><code>Should()</code></a> is not followed by an assertion invocation.
-  </li>
-  <li> NFluent: <a href="https://www.n-fluent.net"><code>Check.That()</code></a> is not followed by an assertion invocation. </li>
-  <li> NSubstitute: <a href="https://nsubstitute.github.io/help/received-calls"><code>Received()</code></a> is not followed by an invocation. </li>
+  <li> Fluent Assertions: <a href="https://fluentassertions.com/introduction">Should()</a> is not followed by an assertion invocation. </li>
 </ul>
-<p>In such cases, what is intended to be a test doesn’t actually verify anything.</p>
-<h3>Noncompliant code example</h3>
 <pre>
-string actual = "Hello World!";
-// Fluent Assertions
-actual.Should();     // Noncompliant
-// NFluent
-Check.That(actual);  // Noncompliant
-// NSubstitute
-command.Received();  // Noncompliant
+string actual = "Using Fluent Assertions";
+actual.Should(); // Noncompliant
 </pre>
-<h3>Compliant solution</h3>
+<ul>
+  <li> NFluent: <a href="https://www.n-fluent.net">Check.That()</a> is not followed by an assertion invocation. </li>
+</ul>
 <pre>
+string actual = "Using NFluent";
+Check.That(actual); // Noncompliant
+</pre>
+<ul>
+  <li> NSubstitute: <a href="https://nsubstitute.github.io/help/received-calls">Received()</a> is not followed by an invocation. </li>
+</ul>
+<pre>
+string actual = "Using NSubstitute";
+command.Received(); // Noncompliant
+</pre>
+<p>In such cases, what is intended to be a test doesn’t actually verify anything.</p>
+<h2>How to fix it in Fluent Assertions</h2>
+<p><code>Fluent Assertions</code> provides an interface for writing assertions, and it is important to ensure that <code>Should()</code> is properly
+used in conjunction with an assertion method.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 string actual = "Hello World!";
-// Fluent Assertions
+actual.Should(); // Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+string actual = "Hello World!";
 actual.Should().Contain("Hello");
-// NFluent
+</pre>
+<h2>How to fix it in NFluent</h2>
+<p><code>NFluent</code> offers a syntax for assertions, and it’s important to follow <code>Check.That()</code> with an assertion method to complete
+the assertion.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+string actual = "Hello World!";
+Check.That(actual); // Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+string actual = "Hello World!";
 Check.That(actual).Contains("Hello");
-// NSubstitute
+</pre>
+<h2>How to fix it in NSubstitute</h2>
+<p><code>NSubstitute</code> is a mocking framework, and <code>Received()</code> is used to verify that a specific method has been called. However,
+invoking a method on the mock after calling <code>Received()</code> is necessary to ensure the complete assertion.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+command.Received(); // Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
 command.Received().Execute();
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://fluentassertions.com/introduction">Fluent assertions: Should()</a> </li>
+  <li> <a href="https://www.n-fluent.net">NFluent: Check.That()</a> </li>
+  <li> <a href="https://nsubstitute.github.io/help/received-calls">NSubstitute: Received()</a> </li>
+</ul>
 

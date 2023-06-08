@@ -1,5 +1,49 @@
 <h2>Why is this an issue?</h2>
-<p>Certain bit operations are just silly and should not be performed because their results are predictable.</p>
-<p>Specifically, using <code>&amp; -1</code> with any value will always result in the original value, as will <code>anyValue ^ 0</code> and
-<code>anyValue | 0</code>.</p>
+<p>Certain <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators">bitwise operations</a>
+are not needed and should not be performed because their results are predictable.</p>
+<p>Specifically, using <code>&amp; -1</code> with any value always results in the original value.</p>
+<p>That is because the binary representation of <code>-1</code> on a <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types">integral numeric type</a> supporting
+negative numbers, such as <code>int</code> or <code>long</code>, is based on <a href="https://en.wikipedia.org/wiki/Two%27s_complement">two’s
+complement</a> and made of all 1s: <code>0b111…​111</code>.</p>
+<p>Performing <code>&amp;</code> between a value and <code>0b111…​111</code> means applying the <code>&amp;</code> operator to each bit of the value
+and the bit <code>1</code>, resulting in a value equal to the provided one, bit by bit.</p>
+<pre>
+anyValue &amp; -1 // Noncompliant
+anyValue      // Compliant
+</pre>
+<p>Similarly, <code>anyValue | 0</code> always results in <code>anyValue</code>, because the binary representation of <code>0</code> is always
+<code>0b000…​000</code> and the <code>|</code> operator returns its first input when the second is <code>0</code>.</p>
+<pre>
+anyValue | 0  // Noncompliant
+anyValue      // Compliant
+</pre>
+<p>The same applies to <code>anyValue ^ 0</code>: the <code>^</code> operator returns <code>1</code> when its two input bits are different
+(<code>1</code> and <code>0</code> or <code>0</code> and <code>1</code>) and returns <code>0</code> when its two input bits are the same (both
+<code>0</code> or both <code>1</code>). When <code>^</code> is applied with <code>0</code>, the result would be <code>1</code> if the other input is
+<code>1</code>, because the two input bits are different, and <code>0</code> if the other input bit is <code>0</code>, because the two input are the
+same. That results in returning <code>anyValue</code>.</p>
+<pre>
+anyValue ^ 0  // Noncompliant
+anyValue      // Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators">Bitwise operations (C#
+  reference)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/and-operator">And Operator (Visual Basic)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/or-operator">Or Operator (Visual Basic)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/xor-operator">Xor Operator (Visual Basic)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types">Integral numeric types (C#
+  reference)</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/numeric-data-types">Numeric Data
+  Types (Visual Basic)</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Two%27s_complement">Two’s complement</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://stackoverflow.com/questions/12764670/are-there-any-bitwise-operator-laws">Stack Overflow - Are there any Bitwise Operator
+  Laws?</a> </li>
+</ul>
 

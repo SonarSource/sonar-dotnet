@@ -1,5 +1,5 @@
 {
-  "title": "TestCases should contain tests",
+  "title": "Test classes should contain at least one test case",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -15,5 +15,5 @@
   "ruleSpecification": "RSPEC-2187",
   "sqKey": "S2187",
   "scope": "Tests",
-  "quickfix": "unknown"
+  "quickfix": "infeasible"
 }

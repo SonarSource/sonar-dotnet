@@ -1,18 +1,41 @@
-<h2>Why is this an issue?</h2>
-<p>Correctly updating a <code>static</code> field from a non-static method is tricky to get right and could easily lead to bugs if there are multiple
-class instances and/or multiple threads in play.</p>
 <p>This rule raises an issue each time a <code>static</code> field is updated from a non-static method or property.</p>
-<h3>Noncompliant code example</h3>
+<h2>Why is this an issue?</h2>
+<p>Updating a <code>static</code> field from a non-<code>static</code> method introduces ignificant challenges and potential bugs. Multiple class
+instances and threads can access and modify the <code>static</code> field concurrently, leading to unintended consequences for other instances or
+threads (unexpected behavior, <a href="https://www.c-sharpcorner.com/UploadFile/1d42da/race-conditions-in-threading-C-Sharp/">race conditions</a> and
+synchronization problems).</p>
 <pre>
-public class MyClass
+class MyClass
 {
   private static int count = 0;
 
   public void DoSomething()
   {
     //...
-    count++;  // Noncompliant
+    count++;  // Noncompliant: make the enclosing instance property 'static' or remove this set on the 'static' field.
+  }
+}
+
+interface MyInterface
+{
+  private static int count = 0;
+
+  public void DoSomething()
+  {
+    //...
+    count++;  // Noncompliant: remove this set, which updates a 'static' field from an instance method.
   }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members">Static
+  Classes and Static Class Members</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/threading/using-threads-and-threading">Using threads and threading</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://www.c-sharpcorner.com/UploadFile/1d42da/race-conditions-in-threading-C-Sharp/">Race Conditions in C#</a> </li>
+</ul>
 
