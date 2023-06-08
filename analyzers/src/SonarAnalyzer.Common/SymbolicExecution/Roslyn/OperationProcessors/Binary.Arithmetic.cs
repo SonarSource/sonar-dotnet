@@ -37,6 +37,8 @@ internal sealed partial class Binary
         BinaryOperatorKind.And => NumberConstraint.From(CalculateAndMin(left, right), CalculateAndMax(left, right)),
         BinaryOperatorKind.Or when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value | right.Min.Value),
         BinaryOperatorKind.Or => NumberConstraint.From(CalculateOrMin(left, right), CalculateOrMax(left, right)),
+        BinaryOperatorKind.ExclusiveOr when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value ^ right.Min.Value),
+        BinaryOperatorKind.ExclusiveOr => NumberConstraint.From(CalculateXorMin(left, right), CalculateXorMax(left, right)),
         _ => null
     };
 
@@ -296,6 +298,81 @@ internal sealed partial class Binary
             return -1;
         }
     }
+
+    private static BigInteger? CalculateXorMin(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.IsPositive && right.IsPositive)
+        {
+            return SameSign(left, right);
+        }
+        else if (left.IsNegative && right.IsNegative)
+        {
+            return SameSign(right, left);
+        }
+        // Positive numbers start with Zeroes. Negative numbers start with Ones. XOR them, and the result will start with Ones and thus will be negative.
+        // By taking a look at the number of starting Zeroes and Ones, we can also learn a limit for the number of starting Ones of the result.
+        // Note: When passing a positive limit to NegativeMagnitude, it needs to be increased by 1 and then multiplied by -1 to get the expected result.
+        else if ((left.IsPositive || right.IsNegative) && left.Max.HasValue && right.Min.HasValue)
+        {
+            return NegativeMagnitude(-BigInteger.Max(left.Max.Value + 1, BigInteger.Abs(right.Min.Value)));
+        }
+        else if ((left.IsNegative || right.IsPositive) && left.Min.HasValue && right.Max.HasValue)
+        {
+            return NegativeMagnitude(-BigInteger.Max(BigInteger.Abs(left.Min.Value), right.Max.Value + 1));
+        }
+        else if (left.Min.HasValue && left.Max.HasValue && right.Min.HasValue && right.Max.HasValue)
+        {
+            return NegativeMagnitude(-Max(BigInteger.Abs(left.Min.Value), left.Max.Value + 1, BigInteger.Abs(right.Min.Value), right.Max.Value + 1));
+        }
+        else
+        {
+            return null;
+        }
+
+        static BigInteger? SameSign(NumberConstraint range1, NumberConstraint range2)
+        {
+            // Takes advantage of the property a - b <= a ^ b for all a >= 0 and b >= 0
+            // If ranges overlap => at least 1 value belongs to both ranges => xor can yield 0
+            if (range1.Min > range2.Max)
+            {
+                return range1.Min.Value - range2.Max.Value;
+            }
+            else if (range2.Min > range1.Max)
+            {
+                return range2.Min.Value - range1.Max.Value;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+
+    private static BigInteger? CalculateXorMax(NumberConstraint left, NumberConstraint right)
+    {
+        if ((left.IsPositive && right.IsNegative) || (left.IsNegative && right.IsPositive))
+        {
+            return -1;
+        }
+        else if ((left.IsPositive || right.IsPositive) && left.Max.HasValue && right.Max.HasValue)
+        {
+            return PositiveMagnitude(BigInteger.Max(left.Max.Value, right.Max.Value));
+        }
+        else if ((left.IsNegative || right.IsNegative) && left.Min.HasValue && right.Min.HasValue)
+        {
+            return PositiveMagnitude(BigInteger.Max(BigInteger.Abs(left.Min.Value), BigInteger.Abs(right.Min.Value)));
+        }
+        else if (left.Min.HasValue && left.Max.HasValue && right.Min.HasValue && right.Max.HasValue)
+        {
+            return PositiveMagnitude(Max(BigInteger.Abs(left.Min.Value), left.Max.Value, BigInteger.Abs(right.Min.Value), right.Max.Value));
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private static BigInteger Max(params BigInteger[] values) => values.Max();
 
     private static BigInteger? NegativeMagnitude(BigInteger value)
     {

@@ -76,7 +76,7 @@ Public Class Sample
         __ = i * 2147483600     ' Noncompliant
 
         i = 2 Xor j
-        __ = i * 2147483600     ' FN
+        __ = i * 2147483600     ' Noncompliant
 
         i = 2 Mod j
         __ = i * 2147483600     ' Noncompliant
