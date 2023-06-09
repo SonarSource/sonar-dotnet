@@ -25,12 +25,12 @@ public class Sample
         list = new();
         list.Clear();   // Noncompliant
         list.Add(42);
-        list.Clear();   // Noncompliant FP
+        list.Clear();   // Compliant
 
         list = new(42);
         list.Clear();   // Noncompliant
         list.Add(42);
-        list.Clear();   // Noncompliant FP
+        list.Clear();   // Compliant
 
         list = new(new[] { 42 });
         list.Clear();   // Noncompliant FP

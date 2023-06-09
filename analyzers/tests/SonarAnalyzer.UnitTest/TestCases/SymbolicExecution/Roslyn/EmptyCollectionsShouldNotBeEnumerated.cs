@@ -174,9 +174,10 @@ class CollectionTests
         set.Overlaps(items);            // Noncompliant
         set.Remove(5);                  // Noncompliant
         set.RemoveWhere(Predicate);     // Noncompliant
-        set.SymmetricExceptWith(items); // Noncompliant
+        set.SymmetricExceptWith(items); // FN
+        set = new HashSet<int>();
         set.TryGetValue(5, out i);      // Noncompliant
-        set.UnionWith(items);           // Noncompliant
+        set.UnionWith(items);           // FN
 
         var queue = new Queue<int>();
         queue.Clear();                  // Noncompliant
@@ -313,48 +314,48 @@ class CollectionTests
     {
         var list = new List<int>();
         list.Add(5);
-        list.Clear();                   // Noncompliant FP
+        list.Clear();                   // Compliant
         list = new List<int>();
         list.AddRange(items);
-        list.Clear();                   // Noncompliant FP
+        list.Clear();                   // Compliant
         list = new List<int>();
         list.Insert(1, 5);
-        list.Clear();                   // Noncompliant FP
+        list.Clear();                   // Compliant
         list = new List<int>();
         list.InsertRange(1, items);
-        list.Clear();                   // Noncompliant FP
+        list.Clear();                   // Compliant
 
         var set = new HashSet<int>();
         set.Add(1);
-        set.Clear();                    // Noncompliant FP
+        set.Clear();                    // Compliant
         set = new HashSet<int>();
-        set.SymmetricExceptWith(items); // Noncompliant
-        set.Clear();                    // Noncompliant FP
+        set.SymmetricExceptWith(items); // FN
+        set.Clear();                    // Compliant
         set = new HashSet<int>();
-        set.UnionWith(items);           // Noncompliant
-        set.Clear();                    // Noncompliant FP
+        set.UnionWith(items);           // FN
+        set.Clear();                    // Compliant
 
         var queue = new Queue<int>();
         queue.Enqueue(5);
-        queue.Clear();                  // Noncompliant FP
+        queue.Clear();                  // Compliant
 
         var stack = new Stack<int>();
         stack.Push(5);
-        stack.Clear();                  // Noncompliant FP
+        stack.Clear();                  // Compliant
 
         var obs = new ObservableCollection<int>();
         obs.Add(5);
-        obs.Clear();                    // Noncompliant FP
+        obs.Clear();                    // Compliant
         obs = new ObservableCollection<int>();
         obs.Insert(0, 5);
-        obs.Clear();                    // Noncompliant FP
+        obs.Clear();                    // Compliant
 
         var dict = new Dictionary<int, int>();
         dict.Add(1, 5);
-        dict.Clear();                   // Noncompliant FP
+        dict.Clear();                   // Compliant
         dict = new Dictionary<int, int>();
         dict.TryAdd(1, 5);
-        dict.Clear();                   // Noncompliant FP
+        dict.Clear();                   // Compliant
     }
 }
 
@@ -431,7 +432,7 @@ class Flows
                 break;
             }
         }
-        list.Clear();   // Noncompliant FP
+        list.Clear();   // Compliant
     }
 
     public void AddPassedAsParameter()

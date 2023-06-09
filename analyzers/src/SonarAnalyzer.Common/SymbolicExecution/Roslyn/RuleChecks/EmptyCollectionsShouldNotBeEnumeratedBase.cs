@@ -112,11 +112,18 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         {
             state = state.SetOperationConstraint(operation, CollectionConstraint.Empty);
         }
-        else if (operation.AsInvocation() is { Instance: not null } invocation
-            && state[invocation.Instance]?.HasConstraint(CollectionConstraint.Empty) is true
-            && raisingMethods.Contains(invocation.TargetMethod.Name))
+        else if (operation.AsInvocation() is { Instance: not null } invocation)
         {
-            ReportIssue(operation, operation.Syntax.ToString());
+            if (addMethods.Contains(invocation.TargetMethod.Name)
+                && invocation.Instance.TrackedSymbol() is { } symbol)
+            {
+                state = state.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
+            }
+            else if (raisingMethods.Contains(invocation.TargetMethod.Name)
+                && state[invocation.Instance]?.HasConstraint(CollectionConstraint.Empty) is true)
+            {
+                ReportIssue(operation, operation.Syntax.ToString());
+            }
         }
 
         return state;
