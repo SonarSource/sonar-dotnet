@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
@@ -34,7 +33,7 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var state = context.State;
-        if (context.Operation.Instance.AsInvocation() is { } invocation && DisposeMethods.Any(x => x.Equals(invocation.TargetMethod.Name, Language.NameComparison)))
+        if (context.Operation.Instance.AsInvocation() is { } invocation && Array.Exists(DisposeMethods, x => x.Equals(invocation.TargetMethod.Name, Language.NameComparison)))
         {
             if (state[invocation.Instance]?.HasConstraint(DisposableConstraint.Disposed) is true)
             {
