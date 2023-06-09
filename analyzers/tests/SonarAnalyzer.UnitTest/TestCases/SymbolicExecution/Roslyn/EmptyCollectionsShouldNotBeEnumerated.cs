@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 class CollectionTests
@@ -23,80 +24,80 @@ class CollectionTests
     public void DefaultConstructor()
     {
         var list = new List<int>();
-        list.Clear();   // FIXME Non-compliant {{Remove this call, the collection is known to be empty here.}}
-//      ~~~~~~~~~~~~
+        list.Clear();   // Noncompliant {{Remove this call, the collection is known to be empty here.}}
+//      ^^^^^^^^^^^^
         var set = new HashSet<int>();
-        set.Clear();    // FIXME Non-compliant
+        set.Clear();    // Noncompliant
         var queue = new Queue<int>();
-        queue.Clear();  // FIXME Non-compliant
+        queue.Clear();  // Noncompliant
         var stack = new Stack<int>();
-        stack.Clear();  // FIXME Non-compliant
+        stack.Clear();  // Noncompliant
         var obs = new ObservableCollection<int>();
-        obs.Clear();    // FIXME Non-compliant
+        obs.Clear();    // Noncompliant
         var array = new int[0];
         array.Clone();  // FIXME Non-compliant
         var dict = new Dictionary<int, int>();
-        dict.Clear();   // FIXME Non-compliant
+        dict.Clear();   // Noncompliant
     }
 
     public void ConstructorWithCapacity()
     {
         var list = new List<int>(5);
-        list.Clear();   // FIXME Non-compliant
+        list.Clear();   // Noncompliant
         var set = new HashSet<int>(5);
-        set.Clear();    // FIXME Non-compliant
+        set.Clear();    // Noncompliant
         var queue = new Queue<int>(5);
-        queue.Clear();  // FIXME Non-compliant
+        queue.Clear();  // Noncompliant
         var stack = new Stack<int>(5);
-        stack.Clear();  // FIXME Non-compliant
+        stack.Clear();  // Noncompliant
         var array = new int[5];
         array.Clone();  // Compliant
         var dict = new Dictionary<int, int>(5);
-        dict.Clear();   // FIXME Non-compliant
+        dict.Clear();   // Noncompliant
     }
 
     public void ConstructorWithEnumerable()
     {
         var list = new List<int>(items);
-        list.Clear();   // Compliant
+        list.Clear();   // Noncompliant FP
         var set = new HashSet<int>(items);
-        set.Clear();    // Compliant
+        set.Clear();    // Noncompliant FP
         var queue = new Queue<int>(items);
-        queue.Clear();  // Compliant
+        queue.Clear();  // Noncompliant FP
         var stack = new Stack<int>(items);
-        stack.Clear();  // Compliant
+        stack.Clear();  // Noncompliant FP
         var obs = new ObservableCollection<int>(items);
-        obs.Clear();    // Compliant
+        obs.Clear();    // Noncompliant FP
         var dict = new Dictionary<int, int>(dictionaryItems);
-        dict.Clear();   // Compliant
+        dict.Clear();   // Noncompliant FP
     }
 
     public void ConstructorWithEmptyInitializer()
     {
         var list = new List<int> { };
-        list.Clear();   // FIXME Non-compliant
+        list.Clear();   // Noncompliant
         var set = new HashSet<int> { };
-        set.Clear();    // FIXME Non-compliant
+        set.Clear();    // Noncompliant
         var queue = new Queue<int> { };
-        queue.Clear();  // FIXME Non-compliant
+        queue.Clear();  // Noncompliant
         var stack = new Stack<int> { };
-        stack.Clear();  // FIXME Non-compliant
+        stack.Clear();  // Noncompliant
         var obs = new ObservableCollection<int> { };
-        obs.Clear();    // FIXME Non-compliant
+        obs.Clear();    // Noncompliant
         var array = new int[] { };
         array.Clone();  // FIXME Non-compliant
         var dict = new Dictionary<int, int> { };
-        dict.Clear();   // FIXME Non-compliant
+        dict.Clear();   // Noncompliant
     }
 
     public void ConstructorWithInitializer()
     {
         var list = new List<int> { 1, 2, 3 };
-        list.Clear();   // Compliant
+        list.Clear();   // Noncompliant FP
         var set = new HashSet<int> { 1, 2, 3 };
-        set.Clear();    // Compliant
+        set.Clear();    // Noncompliant FP
         var obs = new ObservableCollection<int> { 1, 2, 3 };
-        obs.Clear();    // Compliant
+        obs.Clear();    // Noncompliant FP
         var array = new int[] { 1, 2, 3 };
         array.Clone();  // Compliant
         var dict = new Dictionary<int, int>
@@ -105,7 +106,7 @@ class CollectionTests
             [2] = 2,
             [3] = 3,
         };
-        dict.Clear();   // Compliant
+        dict.Clear();   // Noncompliant FP
     }
 
     public void Other_Initialization()
@@ -131,81 +132,81 @@ class CollectionTests
         int i;
 
         var list = new List<int>();
-        list.BinarySearch(5);           // FIXME Non-compliant
-        list.Clear();                   // FIXME Non-compliant
-        list.Contains(5);               // FIXME Non-compliant
-        list.ConvertAll(x => x);        // FIXME Non-compliant
-        list.CopyTo(null, 1);           // FIXME Non-compliant
-        list.Exists(Predicate);         // FIXME Non-compliant
-        list.Find(Predicate);           // FIXME Non-compliant
-        list.FindAll(Predicate);        // FIXME Non-compliant
-        list.FindIndex(Predicate);      // FIXME Non-compliant
-        list.FindLast(Predicate);       // FIXME Non-compliant
-        list.FindLastIndex(Predicate);  // FIXME Non-compliant
-        list.ForEach(Action);           // FIXME Non-compliant
-        list.GetEnumerator();           // FIXME Non-compliant
-        list.GetRange(1, 5);            // FIXME Non-compliant
-        list.IndexOf(5);                // FIXME Non-compliant
-        list.LastIndexOf(5);            // FIXME Non-compliant
-        list.Remove(5);                 // FIXME Non-compliant
-        list.RemoveAll(Predicate);      // FIXME Non-compliant
-        list.RemoveAt(1);               // FIXME Non-compliant
-        list.RemoveRange(1, 5);         // FIXME Non-compliant
-        list.Reverse();                 // FIXME Non-compliant
-        list.Sort();                    // FIXME Non-compliant
-        list.TrueForAll(Predicate);     // FIXME Non-compliant
+        list.BinarySearch(5);           // Noncompliant
+        list.Clear();                   // Noncompliant
+        list.Contains(5);               // Noncompliant
+        list.ConvertAll(x => x);        // Noncompliant
+        list.CopyTo(null, 1);           // Noncompliant
+        list.Exists(Predicate);         // Noncompliant
+        list.Find(Predicate);           // Noncompliant
+        list.FindAll(Predicate);        // Noncompliant
+        list.FindIndex(Predicate);      // Noncompliant
+        list.FindLast(Predicate);       // Noncompliant
+        list.FindLastIndex(Predicate);  // Noncompliant
+        list.ForEach(Action);           // Noncompliant
+        list.GetEnumerator();           // Noncompliant
+        list.GetRange(1, 5);            // Noncompliant
+        list.IndexOf(5);                // Noncompliant
+        list.LastIndexOf(5);            // Noncompliant
+        list.Remove(5);                 // Noncompliant
+        list.RemoveAll(Predicate);      // Noncompliant
+        list.RemoveAt(1);               // Noncompliant
+        list.RemoveRange(1, 5);         // Noncompliant
+        list.Reverse();                 // Noncompliant
+        list.Sort();                    // Noncompliant
+        list.TrueForAll(Predicate);     // Noncompliant
         _ = list[1];                    // FIXME Non-compliant
 //          ~~~~~~~
         list[1] = 5;                    // FIXME Non-compliant
 //      ~~~~~~~
 
         var set = new HashSet<int>();
-        set.Clear();                    // FIXME Non-compliant
-        set.Contains(5);                // FIXME Non-compliant
-        set.CopyTo(null, 1);            // FIXME Non-compliant
-        set.ExceptWith(items);          // FIXME Non-compliant
-        set.GetEnumerator();            // FIXME Non-compliant
-        set.IntersectWith(items);       // FIXME Non-compliant
-        set.IsProperSubsetOf(items);    // FIXME Non-compliant
-        set.IsProperSupersetOf(items);  // FIXME Non-compliant
-        set.IsSubsetOf(items);          // FIXME Non-compliant
-        set.IsSupersetOf(items);        // FIXME Non-compliant
-        set.Overlaps(items);            // FIXME Non-compliant
-        set.Remove(5);                  // FIXME Non-compliant
-        set.RemoveWhere(Predicate);     // FIXME Non-compliant
-        set.SymmetricExceptWith(items); // FIXME Non-compliant
-        set.TryGetValue(5, out i);      // FIXME Non-compliant
-        set.UnionWith(items);           // FIXME Non-compliant
+        set.Clear();                    // Noncompliant
+        set.Contains(5);                // Noncompliant
+        set.CopyTo(null, 1);            // Noncompliant
+        set.ExceptWith(items);          // Noncompliant
+        set.GetEnumerator();            // Noncompliant
+        set.IntersectWith(items);       // Noncompliant
+        set.IsProperSubsetOf(items);    // Noncompliant
+        set.IsProperSupersetOf(items);  // Noncompliant
+        set.IsSubsetOf(items);          // Noncompliant
+        set.IsSupersetOf(items);        // Noncompliant
+        set.Overlaps(items);            // Noncompliant
+        set.Remove(5);                  // Noncompliant
+        set.RemoveWhere(Predicate);     // Noncompliant
+        set.SymmetricExceptWith(items); // Noncompliant
+        set.TryGetValue(5, out i);      // Noncompliant
+        set.UnionWith(items);           // Noncompliant
 
         var queue = new Queue<int>();
-        queue.Clear();                  // FIXME Non-compliant
-        queue.Contains(5);              // FIXME Non-compliant
-        queue.CopyTo(null, 1);          // FIXME Non-compliant
-        queue.Dequeue();                // FIXME Non-compliant
-        queue.GetEnumerator();          // FIXME Non-compliant
-        queue.Peek();                   // FIXME Non-compliant
-        queue.TryDequeue(out i);        // FIXME Non-compliant
-        queue.TryPeek(out i);           // FIXME Non-compliant
+        queue.Clear();                  // Noncompliant
+        queue.Contains(5);              // Noncompliant
+        queue.CopyTo(null, 1);          // Noncompliant
+        queue.Dequeue();                // Noncompliant
+        queue.GetEnumerator();          // Noncompliant
+        queue.Peek();                   // Noncompliant
+        queue.TryDequeue(out i);        // Noncompliant
+        queue.TryPeek(out i);           // Noncompliant
 
         var stack = new Stack<int>();
-        stack.Clear();                  // FIXME Non-compliant
-        stack.Contains(5);              // FIXME Non-compliant
-        stack.CopyTo(null, 0);          // FIXME Non-compliant
-        stack.GetEnumerator();          // FIXME Non-compliant
-        stack.Peek();                   // FIXME Non-compliant
-        stack.Pop();                    // FIXME Non-compliant
-        stack.TryPeek(out i);           // FIXME Non-compliant
-        stack.TryPop(out i);            // FIXME Non-compliant
+        stack.Clear();                  // Noncompliant
+        stack.Contains(5);              // Noncompliant
+        stack.CopyTo(null, 0);          // Noncompliant
+        stack.GetEnumerator();          // Noncompliant
+        stack.Peek();                   // Noncompliant
+        stack.Pop();                    // Noncompliant
+        stack.TryPeek(out i);           // Noncompliant
+        stack.TryPop(out i);            // Noncompliant
 
         var obs = new ObservableCollection<int>();
-        obs.Clear();                    // FIXME Non-compliant
-        obs.Contains(5);                // FIXME Non-compliant
-        obs.CopyTo(null, 1);            // FIXME Non-compliant
-        obs.GetEnumerator();            // FIXME Non-compliant
-        obs.IndexOf(5);                 // FIXME Non-compliant
-        obs.Move(1, 2);                 // FIXME Non-compliant
-        obs.Remove(5);                  // FIXME Non-compliant
-        obs.RemoveAt(1);                // FIXME Non-compliant
+        obs.Clear();                    // Noncompliant
+        obs.Contains(5);                // Noncompliant
+        obs.CopyTo(null, 1);            // Noncompliant
+        obs.GetEnumerator();            // Noncompliant
+        obs.IndexOf(5);                 // Noncompliant
+        obs.Move(1, 2);                 // Noncompliant
+        obs.Remove(5);                  // Noncompliant
+        obs.RemoveAt(1);                // Noncompliant
         _ = obs[1];                     // FIXME Non-compliant
         obs[1] = 5;                     // FIXME Non-compliant
 
@@ -224,12 +225,12 @@ class CollectionTests
         array[1] = 5;                   // FIXME Non-compliant
 
         var dict = new Dictionary<int, int>();
-        dict.Clear();                   // FIXME Non-compliant
-        dict.ContainsKey(1);            // FIXME Non-compliant
-        dict.ContainsValue(5);          // FIXME Non-compliant
-        dict.GetEnumerator();           // FIXME Non-compliant
-        dict.Remove(5);                 // FIXME Non-compliant
-        dict.TryGetValue(1, out i);     // FIXME Non-compliant
+        dict.Clear();                   // Noncompliant
+        dict.ContainsKey(1);            // Noncompliant
+        dict.ContainsValue(5);          // Noncompliant
+        dict.GetEnumerator();           // Noncompliant
+        dict.Remove(5);                 // Noncompliant
+        dict.TryGetValue(1, out i);     // Noncompliant
         _ = dict[1];                    // FIXME Non-compliant
     }
 
@@ -251,7 +252,7 @@ class CollectionTests
         set.EnsureCapacity(5);
         set.Equals(items);
         set.GetHashCode();
-        set.GetObjectData(null, default);
+        set.GetObjectData(null, new StreamingContext());
         set.GetType();
         set.OnDeserialization(null);
         set.SetEquals(items);
@@ -298,13 +299,12 @@ class CollectionTests
         var dict = new Dictionary<int, int>();
         dict.EnsureCapacity(5);
         dict.GetHashCode();
-        dict.GetObjectData(null, default);
+        dict.GetObjectData(null, new StreamingContext());
         dict.Equals(items);
         dict.GetType();
         dict.OnDeserialization(null);
         dict.ToString();
         dict.TrimExcess();
-        dict.TryGetValue(5, out i);
         dict[5] = 5;
         (((dict[5]))) = 5;
     }
@@ -313,48 +313,48 @@ class CollectionTests
     {
         var list = new List<int>();
         list.Add(5);
-        list.Clear();   // Compliant
+        list.Clear();                   // Noncompliant FP
         list = new List<int>();
         list.AddRange(items);
-        list.Clear();   // Compliant
+        list.Clear();                   // Noncompliant FP
         list = new List<int>();
         list.Insert(1, 5);
-        list.Clear();   // Compliant
+        list.Clear();                   // Noncompliant FP
         list = new List<int>();
         list.InsertRange(1, items);
-        list.Clear();   // Compliant
+        list.Clear();                   // Noncompliant FP
 
         var set = new HashSet<int>();
         set.Add(1);
-        set.Clear();    // Compliant
+        set.Clear();                    // Noncompliant FP
         set = new HashSet<int>();
-        set.SymmetricExceptWith(items);
-        set.Clear();    // Compliant
+        set.SymmetricExceptWith(items); // Noncompliant
+        set.Clear();                    // Noncompliant FP
         set = new HashSet<int>();
-        set.UnionWith(items);
-        set.Clear();    // Compliant
+        set.UnionWith(items);           // Noncompliant
+        set.Clear();                    // Noncompliant FP
 
         var queue = new Queue<int>();
         queue.Enqueue(5);
-        queue.Clear();  // Compliant
+        queue.Clear();                  // Noncompliant FP
 
         var stack = new Stack<int>();
         stack.Push(5);
-        stack.Clear();  // Compliant
+        stack.Clear();                  // Noncompliant FP
 
         var obs = new ObservableCollection<int>();
         obs.Add(5);
-        obs.Clear();    // Compliant
+        obs.Clear();                    // Noncompliant FP
         obs = new ObservableCollection<int>();
         obs.Insert(0, 5);
-        obs.Clear();    // Compliant
+        obs.Clear();                    // Noncompliant FP
 
         var dict = new Dictionary<int, int>();
         dict.Add(1, 5);
-        dict.Clear();   // Compliant
+        dict.Clear();                   // Noncompliant FP
         dict = new Dictionary<int, int>();
         dict.TryAdd(1, 5);
-        dict.Clear();   // Compliant
+        dict.Clear();                   // Noncompliant FP
     }
 }
 
@@ -363,21 +363,21 @@ class AdvancedTests
     public void ExtensionMethods_Should_Not_Raise()
     {
         var list = new List<int>();
-        list.Any(); // Compliant
+        list.Any();     // Compliant
     }
 
     public void ExtensionMethods_Remove_Constraints()
     {
         var list = new List<int>();
         list.Any();
-        list.Clear(); // Compliant
+        list.Clear();   // Noncompliant FP
     }
 
     public void PassingAsArgument_Removes_Constraints()
     {
         var list = new List<int>();
         Foo(list);
-        list.Clear(); // Compliant
+        list.Clear();   // Noncompliant FP
     }
 
     public void HigherRank_And_Jagged_Array_Is_NotEmpty()
@@ -417,7 +417,7 @@ class Flows
         {
             list.Add(5);
         }
-        list.Clear();   // Compliant
+        list.Clear();   // Noncompliant FP
     }
 
     public void Conditional_Add_With_Loop(bool condition)
@@ -431,7 +431,7 @@ class Flows
                 break;
             }
         }
-        list.Clear();   // Compliant
+        list.Clear();   // Noncompliant FP
     }
 
     public void AddPassedAsParameter()
@@ -440,11 +440,12 @@ class Flows
 
         DoSomething(list.Add);
 
-        list.Clear();   // FIXME Non-compliant - FP, see https://github.com/SonarSource/sonar-dotnet/issues/4261
+        list.Clear();   // Noncompliant FP, see https://github.com/SonarSource/sonar-dotnet/issues/4261
     }
 
     private static void DoSomething(Action<int> callback) => callback(42);
 }
+
 
 class Flows2
 {
@@ -565,7 +566,7 @@ class LargeCfg
 
             if (list.Count > 0)
             {
-                list.Sort();    // Compliant. This used to be a FP
+                list.Sort();    // Noncompliant FP
             }
         }
         catch

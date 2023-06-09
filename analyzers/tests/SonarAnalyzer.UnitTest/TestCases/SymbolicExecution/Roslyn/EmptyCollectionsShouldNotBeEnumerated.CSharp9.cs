@@ -23,20 +23,20 @@ public class Sample
         List<int> list;
 
         list = new();
-        list.Clear();   // FN
+        list.Clear();   // Noncompliant
         list.Add(42);
-        list.Clear();
+        list.Clear();   // Noncompliant FP
 
         list = new(42);
-        list.Clear();   // FN
+        list.Clear();   // Noncompliant
         list.Add(42);
-        list.Clear();
+        list.Clear();   // Noncompliant FP
 
         list = new(new[] { 42 });
-        list.Clear();   // Compliant
+        list.Clear();   // Noncompliant FP
 
         list = new List<int>();
-        list.Clear();   // FN
+        list.Clear();   // Noncompliant
     }
 
     public void StaticLambda()
@@ -44,7 +44,7 @@ public class Sample
         Action a = static () =>
         {
             var list = new List<int>();
-            list.Clear();   // FIXME Non-compliant
+            list.Clear();   // Noncompliant
         };
         a();
     }
@@ -55,7 +55,7 @@ public class Sample
         init
         {
             var list = new List<int>();
-            list.Clear();   // FIXME Non-compliant
+            list.Clear();   // Noncompliant
         }
     }
 
@@ -64,11 +64,11 @@ public class Sample
         var filled = new List<int>() { 1 };
         var empty = new LinkedList<int>();
         ICollection<int> collection = condition ? filled : empty;
-        collection.Clear();     // Compliant
+        collection.Clear();     // Noncompliant FP
 
         var empty2 = new List<int>();
         ICollection<int> collection2 = condition ? empty : empty2;
-        collection2.Clear();    // FN
+        collection2.Clear();    // Noncompliant
     }
 }
 
@@ -77,7 +77,7 @@ public record Record
     public void Method()
     {
         var list = new List<int>();
-        list.Clear();       // FIXME Non-compliant
+        list.Clear();       // Noncompliant
     }
 }
 
@@ -91,6 +91,6 @@ public partial class Partial
     public partial void Method()
     {
         var list = new List<int>();
-        list.Clear();       // FIXME Non-compliant
+        list.Clear();       // Noncompliant
     }
 }

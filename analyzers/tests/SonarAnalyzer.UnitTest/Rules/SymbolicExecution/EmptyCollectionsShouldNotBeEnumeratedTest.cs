@@ -47,7 +47,6 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
             .AddPaths("EmptyCollectionsShouldNotBeEnumerated.cs")
             .Verify();
 
-    [Ignore("Sonar-SE analyzer is still active.")]
     [DataTestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
@@ -62,7 +61,6 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp8() =>
         sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-    [Ignore("Sonar-SE analyzer is still active.")]
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp8() =>
         roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
@@ -71,7 +69,6 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp9() =>
         sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs").WithTopLevelStatements().Verify();
 
-    [Ignore("Sonar-SE analyzer is still active.")]
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp9() =>
         roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -80,7 +77,6 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp10() =>
         sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-    [Ignore("Sonar-SE analyzer is still active.")]
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp10() =>
         roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
@@ -89,7 +85,6 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp11() =>
         sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
-    [Ignore("Sonar-SE analyzer is still active.")]
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp11() =>
         roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
