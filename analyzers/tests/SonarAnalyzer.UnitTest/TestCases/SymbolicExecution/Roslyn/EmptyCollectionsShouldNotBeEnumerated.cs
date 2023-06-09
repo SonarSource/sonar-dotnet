@@ -128,84 +128,152 @@ class CollectionTests
 
     public void Methods_Raise_Issue()
     {
+        int i;
+
         var list = new List<int>();
-        list.Clear();               // FIXME Non-compliant
-        list.Exists(Predicate);     // FIXME Non-compliant
-        list.Find(Predicate);       // FIXME Non-compliant
-        list.FindIndex(Predicate);  // FIXME Non-compliant
-        list.ForEach(Action);       // FIXME Non-compliant
-        list.IndexOf(1);            // FIXME Non-compliant
-        list.Remove(1);             // FIXME Non-compliant
-        list.RemoveAll(Predicate);  // FIXME Non-compliant
-        list.Reverse();             // FIXME Non-compliant
-        list.Sort();                // FIXME Non-compliant
-        _ = list[5];                // FIXME Non-compliant
+        list.BinarySearch(5);           // FIXME Non-compliant
+        list.Clear();                   // FIXME Non-compliant
+        list.Contains(5);               // FIXME Non-compliant
+        list.ConvertAll(x => x);        // FIXME Non-compliant
+        list.CopyTo(null, 1);           // FIXME Non-compliant
+        list.Exists(Predicate);         // FIXME Non-compliant
+        list.Find(Predicate);           // FIXME Non-compliant
+        list.FindAll(Predicate);        // FIXME Non-compliant
+        list.FindIndex(Predicate);      // FIXME Non-compliant
+        list.FindLast(Predicate);       // FIXME Non-compliant
+        list.FindLastIndex(Predicate);  // FIXME Non-compliant
+        list.ForEach(Action);           // FIXME Non-compliant
+        list.GetEnumerator();           // FIXME Non-compliant
+        list.GetRange(1, 5);            // FIXME Non-compliant
+        list.IndexOf(5);                // FIXME Non-compliant
+        list.LastIndexOf(5);            // FIXME Non-compliant
+        list.Remove(5);                 // FIXME Non-compliant
+        list.RemoveAll(Predicate);      // FIXME Non-compliant
+        list.RemoveAt(1);               // FIXME Non-compliant
+        list.RemoveRange(1, 5);         // FIXME Non-compliant
+        list.Reverse();                 // FIXME Non-compliant
+        list.Sort();                    // FIXME Non-compliant
+        list.TrueForAll(Predicate);     // FIXME Non-compliant
+        _ = list[1];                    // FIXME Non-compliant
 //          ~~~~~~~
-        list[5] = 5;                // FIXME Non-compliant
+        list[1] = 5;                    // FIXME Non-compliant
 //      ~~~~~~~
 
         var set = new HashSet<int>();
-        set.Clear();                // FIXME Non-compliant
-        set.Remove(1);              // FIXME Non-compliant
+        set.Clear();                    // FIXME Non-compliant
+        set.Contains(5);                // FIXME Non-compliant
+        set.CopyTo(null, 1);            // FIXME Non-compliant
+        set.ExceptWith(items);          // FIXME Non-compliant
+        set.GetEnumerator();            // FIXME Non-compliant
+        set.IntersectWith(items);       // FIXME Non-compliant
+        set.IsProperSubsetOf(items);    // FIXME Non-compliant
+        set.IsProperSupersetOf(items);  // FIXME Non-compliant
+        set.IsSubsetOf(items);          // FIXME Non-compliant
+        set.IsSupersetOf(items);        // FIXME Non-compliant
+        set.Overlaps(items);            // FIXME Non-compliant
+        set.Remove(5);                  // FIXME Non-compliant
+        set.RemoveWhere(Predicate);     // FIXME Non-compliant
+        set.SymmetricExceptWith(items); // FIXME Non-compliant
+        set.TryGetValue(5, out i);      // FIXME Non-compliant
+        set.UnionWith(items);           // FIXME Non-compliant
 
         var queue = new Queue<int>();
-        queue.Clear();              // FIXME Non-compliant
-        queue.Dequeue();            // FIXME Non-compliant
-        queue.Peek();               // FIXME Non-compliant
+        queue.Clear();                  // FIXME Non-compliant
+        queue.Contains(5);              // FIXME Non-compliant
+        queue.CopyTo(null, 1);          // FIXME Non-compliant
+        queue.Dequeue();                // FIXME Non-compliant
+        queue.GetEnumerator();          // FIXME Non-compliant
+        queue.Peek();                   // FIXME Non-compliant
+        queue.TryDequeue(out i);        // FIXME Non-compliant
+        queue.TryPeek(out i);           // FIXME Non-compliant
 
         var stack = new Stack<int>();
-        stack.Clear();              // FIXME Non-compliant
-        stack.Pop();                // FIXME Non-compliant
-        stack.Peek();               // FIXME Non-compliant
+        stack.Clear();                  // FIXME Non-compliant
+        stack.Contains(5);              // FIXME Non-compliant
+        stack.CopyTo(null, 0);          // FIXME Non-compliant
+        stack.GetEnumerator();          // FIXME Non-compliant
+        stack.Peek();                   // FIXME Non-compliant
+        stack.Pop();                    // FIXME Non-compliant
+        stack.TryPeek(out i);           // FIXME Non-compliant
+        stack.TryPop(out i);            // FIXME Non-compliant
 
         var obs = new ObservableCollection<int>();
-        obs.Clear();                // FIXME Non-compliant
-        obs.IndexOf(1);             // FIXME Non-compliant
-        obs.Move(1, 0);             // FIXME Non-compliant
-        obs.Remove(1);              // FIXME Non-compliant
-        _ = obs[5];                 // FIXME Non-compliant
-        obs[5] = 5;                 // FIXME Non-compliant
+        obs.Clear();                    // FIXME Non-compliant
+        obs.Contains(5);                // FIXME Non-compliant
+        obs.CopyTo(null, 1);            // FIXME Non-compliant
+        obs.GetEnumerator();            // FIXME Non-compliant
+        obs.IndexOf(5);                 // FIXME Non-compliant
+        obs.Move(1, 2);                 // FIXME Non-compliant
+        obs.Remove(5);                  // FIXME Non-compliant
+        obs.RemoveAt(1);                // FIXME Non-compliant
+        _ = obs[1];                     // FIXME Non-compliant
+        obs[1] = 5;                     // FIXME Non-compliant
 
         var array = new int[0];
-        array.Clone();              // FIXME Non-compliant
-        array.CopyTo(null, 0);      // FIXME Non-compliant
-        array.GetValue(5);          // FIXME Non-compliant
-        array.Initialize();         // FIXME Non-compliant
-        array.SetValue(5, 1);       // FIXME Non-compliant
-        _ = array[5];               // FIXME Non-compliant
-        array[5] = 5;               // FIXME Non-compliant
+        array.Clone();                  // FIXME Non-compliant
+        array.CopyTo(null, 1);          // FIXME Non-compliant
+        array.GetEnumerator();          // FIXME Non-compliant
+        array.GetLength(1);             // FIXME Non-compliant
+        array.GetLongLength(1);         // FIXME Non-compliant
+        array.GetLowerBound(1);         // FIXME Non-compliant
+        array.GetUpperBound(1);         // FIXME Non-compliant
+        array.GetValue(1);              // FIXME Non-compliant
+        array.Initialize();             // FIXME Non-compliant
+        array.SetValue(5, 1);           // FIXME Non-compliant
+        _ = array[1];                   // FIXME Non-compliant
+        array[1] = 5;                   // FIXME Non-compliant
 
         var dict = new Dictionary<int, int>();
-        dict.Clear();               // FIXME Non-compliant
-        dict.Remove(1);             // FIXME Non-compliant
-        _ = dict[5];                // FIXME Non-compliant
+        dict.Clear();                   // FIXME Non-compliant
+        dict.ContainsKey(1);            // FIXME Non-compliant
+        dict.ContainsValue(5);          // FIXME Non-compliant
+        dict.GetEnumerator();           // FIXME Non-compliant
+        dict.Remove(5);                 // FIXME Non-compliant
+        dict.TryGetValue(1, out i);     // FIXME Non-compliant
+        _ = dict[1];                    // FIXME Non-compliant
     }
 
     public void Methods_Ignored()
     {
+        int i;
+
         var list = new List<int>();
+        list.AsReadOnly();
         list.GetHashCode();
-        list.Equals(items);
         list.GetType();
+        list.EnsureCapacity(5);
+        list.Equals(items);
         list.ToString();
+        list.TrimExcess();
+        list.ToArray();
 
         var set = new HashSet<int>();
-        set.GetHashCode();
+        set.EnsureCapacity(5);
         set.Equals(items);
+        set.GetHashCode();
+        set.GetObjectData(null, default);
         set.GetType();
-        set.Contains(5);
+        set.OnDeserialization(null);
+        set.SetEquals(items);
+        set.TrimExcess();
 
         var queue = new Queue<int>();
-        queue.GetHashCode();
+        queue.EnsureCapacity(5);
         queue.Equals(items);
+        queue.GetHashCode();
         queue.GetType();
+        queue.ToArray();
         queue.ToString();
+        queue.TrimExcess();
 
         var stack = new Stack<int>();
+        stack.EnsureCapacity(5);
         stack.GetHashCode();
         stack.Equals(items);
         stack.GetType();
+        stack.ToArray();
         stack.ToString();
+        stack.TrimExcess();
 
         var obs = new ObservableCollection<int>();
         obs.GetHashCode();
@@ -216,23 +284,26 @@ class CollectionTests
         obs.CollectionChanged += (s, e) => throw new NotImplementedException();
 
         var array = new int[0];
+        array.AsReadOnly();
+        array.GetHashCode();
         array.GetLength(0);
         array.GetLongLength(0);
         array.GetLowerBound(0);
         array.GetUpperBound(0);
-        array.GetHashCode();
         array.Equals(new object());
         array.GetType();
         array.ToString();
         _ = array.Length;
 
         var dict = new Dictionary<int, int>();
+        dict.EnsureCapacity(5);
         dict.GetHashCode();
+        dict.GetObjectData(null, default);
         dict.Equals(items);
         dict.GetType();
-        dict.ContainsKey(5);
-        dict.ContainsValue(5);
-        int i;
+        dict.OnDeserialization(null);
+        dict.ToString();
+        dict.TrimExcess();
         dict.TryGetValue(5, out i);
         dict[5] = 5;
         (((dict[5]))) = 5;
@@ -241,39 +312,48 @@ class CollectionTests
     public void Methods_Set_NotEmpty()
     {
         var list = new List<int>();
-        list.Add(1);
+        list.Add(5);
         list.Clear();   // Compliant
         list = new List<int>();
         list.AddRange(items);
         list.Clear();   // Compliant
         list = new List<int>();
-        list.Insert(0, 1);
+        list.Insert(1, 5);
         list.Clear();   // Compliant
         list = new List<int>();
-        list.InsertRange(0, items);
+        list.InsertRange(1, items);
         list.Clear();   // Compliant
 
         var set = new HashSet<int>();
         set.Add(1);
         set.Clear();    // Compliant
+        set = new HashSet<int>();
+        set.SymmetricExceptWith(items);
+        set.Clear();    // Compliant
+        set = new HashSet<int>();
+        set.UnionWith(items);
+        set.Clear();    // Compliant
 
         var queue = new Queue<int>();
-        queue.Enqueue(1);
+        queue.Enqueue(5);
         queue.Clear();  // Compliant
 
         var stack = new Stack<int>();
-        stack.Push(1);
+        stack.Push(5);
         stack.Clear();  // Compliant
 
         var obs = new ObservableCollection<int>();
-        obs.Add(1);
+        obs.Add(5);
         obs.Clear();    // Compliant
         obs = new ObservableCollection<int>();
-        obs.Insert(0, 1);
+        obs.Insert(0, 5);
         obs.Clear();    // Compliant
 
         var dict = new Dictionary<int, int>();
-        dict.Add(1, 1);
+        dict.Add(1, 5);
+        dict.Clear();   // Compliant
+        dict = new Dictionary<int, int>();
+        dict.TryAdd(1, 5);
         dict.Clear();   // Compliant
     }
 }
