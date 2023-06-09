@@ -116,6 +116,19 @@
 "endColumn":  80
 }
 }
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object>' instead of 'Nancy.TinyIoc.NamedParameterOverloads'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3783,
+"startColumn":  81,
+"endLine":  3783,
+"endColumn":  91
+}
+}
 }
 ]
 }

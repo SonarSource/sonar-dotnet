@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1944",
+"message":  "Review this cast; in this project there's no type that implements both 'ORDictionary<TKey, LWWRegister<TValue>>.IDeltaOperation' and 'ORDictionary.IDeltaOperation'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  86,
+"endLine":  404,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S1944",
+"message":  "Review this cast; in this project there's no type that implements both 'ORDictionary<TKey, ORSet<TValue>>.IDeltaOperation' and 'ORDictionary.IDeltaOperation'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"region":  {
+"startLine":  371,
+"startColumn":  95,
+"endLine":  371,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S1944",
+"message":  "Review this cast; in this project there's no type that implements both 'ORDictionary<TKey, PNCounter>.IDeltaOperation' and 'ORDictionary.IDeltaOperation'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounterDictionary.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  92,
+"endLine":  276,
+"endColumn":  120
+}
+}
+}
+]
+}

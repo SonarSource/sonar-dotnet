@@ -210,6 +210,19 @@
 },
 {
 "id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<Akka.Actor.Address>' instead of 'System.Collections.Immutable.ImmutableHashSet<Akka.Actor.Address>'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1093,
+"startColumn":  68,
+"endLine":  1093,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, Google.Protobuf.ByteString>' instead of 'System.Collections.Immutable.IImmutableDictionary<string, Google.Protobuf.ByteString>'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",

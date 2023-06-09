@@ -18,115 +18,89 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+using TypeMap = System.Collections.Generic.Dictionary<Microsoft.CodeAnalysis.INamedTypeSymbol, System.Collections.Generic.HashSet<Microsoft.CodeAnalysis.INamedTypeSymbol>>;
+
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class InvalidCastToInterface : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class InvalidCastToInterface : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S1944";
-        private const string MessageFormat = "{0}"; // This format string can be removed after we drop the old SE engine.
-        private const string MessageReviewFormat = "Review this cast; in this project there's no type that {0}.";
+    private const string DiagnosticId = "S1944";
+    private const string MessageFormat = "{0}"; // This format string can be removed after we drop the old SE engine.
+    private const string MessageInterface = "Review this cast; in this project there's no type that implements both '{0}' and '{1}'.";
+    private const string MessageClass = "Review this cast; in this project there's no type that extends '{0}' and implements '{1}'.";
 
-        public static readonly DiagnosticDescriptor S1944 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    public static readonly DiagnosticDescriptor S1944 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S1944);
-        protected override bool EnableConcurrentExecution => false;
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S1944);
+    protected override bool EnableConcurrentExecution => false;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterCompilationStartAction(
-                compilationStartContext =>
-                {
-                    var allNamedTypeSymbols = compilationStartContext.Compilation.GlobalNamespace.GetAllNamedTypes();
-                    var typeInterfaceMappings = allNamedTypeSymbols.Select(type =>
-                        new
-                        {
-                            Type = type.OriginalDefinition,
-                            Interfaces = type.OriginalDefinition.AllInterfaces.Select(i => i.OriginalDefinition)
-                        });
-
-                    var interfaceImplementerMappings = new Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>();
-                    foreach (var typeInterfaceMapping in typeInterfaceMappings)
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterCompilationStartAction(
+            compilationStartContext =>
+            {
+                var interfaceImplementers = BuildTypeMap(compilationStartContext.Compilation.GlobalNamespace.GetAllNamedTypes());
+                compilationStartContext.RegisterNodeAction(
+                    c =>
                     {
-                        if (typeInterfaceMapping.Type.IsInterface())
+                        var cast = (CastExpressionSyntax)c.Node;
+                        var interfaceType = c.SemanticModel.GetTypeInfo(cast.Type).Type as INamedTypeSymbol;
+                        var expressionType = c.SemanticModel.GetTypeInfo(cast.Expression).Type as INamedTypeSymbol;
+                        if (IsImpossibleCast(interfaceImplementers, interfaceType, expressionType))
                         {
-                            if (!interfaceImplementerMappings.ContainsKey(typeInterfaceMapping.Type))
-                            {
-                                interfaceImplementerMappings.Add(typeInterfaceMapping.Type, new HashSet<INamedTypeSymbol>());
-                            }
-
-                            interfaceImplementerMappings[typeInterfaceMapping.Type].Add(typeInterfaceMapping.Type);
+                            var location = cast.Type.GetLocation();
+                            var interfaceTypeName = interfaceType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
+                            var expressionTypeName = expressionType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
+                            var message = expressionType.IsInterface() ? MessageInterface : MessageClass;
+                            c.ReportIssue(Diagnostic.Create(S1944, location, string.Format(message, expressionTypeName, interfaceTypeName)));
                         }
+                    },
+                    SyntaxKind.CastExpression);
+            });
 
-                        foreach (var @interface in typeInterfaceMapping.Interfaces)
-                        {
-                            if (!interfaceImplementerMappings.ContainsKey(@interface))
-                            {
-                                interfaceImplementerMappings.Add(@interface, new HashSet<INamedTypeSymbol>());
-                            }
-
-                            interfaceImplementerMappings[@interface].Add(typeInterfaceMapping.Type);
-                        }
-                    }
-
-                    compilationStartContext.RegisterNodeAction(
-                        c =>
-                        {
-                            var cast = (CastExpressionSyntax)c.Node;
-                            var interfaceType = c.SemanticModel.GetTypeInfo(cast.Type).Type as INamedTypeSymbol;
-                            var expressionType = c.SemanticModel.GetTypeInfo(cast.Expression).Type as INamedTypeSymbol;
-
-                            CheckTypesForInvalidCast(c, interfaceType, expressionType, interfaceImplementerMappings, cast.Type.GetLocation());
-                        },
-                        SyntaxKind.CastExpression);
-                });
-        }
-
-        private static void CheckTypesForInvalidCast(SonarSyntaxNodeReportingContext context, INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType,
-            Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> interfaceImplementerMappings, Location issueLocation)
+    private static TypeMap BuildTypeMap(IEnumerable<INamedTypeSymbol> allTypes)
+    {
+        var ret = new TypeMap();
+        foreach (var type in allTypes)
         {
-            if (interfaceType == null ||
-                expressionType == null ||
-                !interfaceType.IsInterface() ||
-                expressionType.Is(KnownType.System_Object))
+            if (type.IsInterface())
             {
-                return;
+                Add(type, type);
             }
-
-            if (!HasExistingConcreteImplementation(interfaceType, interfaceImplementerMappings))
+            foreach (var @interface in type.AllInterfaces)
             {
-                return;
-            }
-
-            if (expressionType.IsInterface() &&
-                !HasExistingConcreteImplementation(expressionType, interfaceImplementerMappings))
-            {
-                return;
-            }
-
-            if (interfaceImplementerMappings.ContainsKey(interfaceType.OriginalDefinition) &&
-                !interfaceImplementerMappings[interfaceType.OriginalDefinition].Any(t => t.DerivesOrImplements(expressionType.OriginalDefinition)) &&
-                !expressionType.IsSealed)
-            {
-                ReportIssue(context, interfaceType, expressionType, issueLocation);
+                Add(@interface, type);
             }
         }
+        return ret;
 
-        private static bool HasExistingConcreteImplementation(INamedTypeSymbol type,
-            IReadOnlyDictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> interfaceImplementerMappings) =>
-            interfaceImplementerMappings.ContainsKey(type) &&
-            interfaceImplementerMappings[type].Any(t => t.IsClassOrStruct());
-
-        private static void ReportIssue(SonarSyntaxNodeReportingContext context, ISymbol interfaceType, ITypeSymbol expressionType, Location issueLocation)
+        void Add(INamedTypeSymbol key, INamedTypeSymbol value)
         {
-            var interfaceTypeName = interfaceType.ToMinimalDisplayString(context.SemanticModel, issueLocation.SourceSpan.Start);
-            var expressionTypeName = expressionType.ToMinimalDisplayString(context.SemanticModel, issueLocation.SourceSpan.Start);
-
-            var messageReasoning = expressionType.IsInterface()
-                ? $"implements both '{expressionTypeName}' and '{interfaceTypeName}'"
-                : $"extends '{expressionTypeName}' and implements '{interfaceTypeName}'";
-
-            context.ReportIssue(Diagnostic.Create(S1944, issueLocation, string.Format(MessageReviewFormat, messageReasoning)));
+            if (!ret.TryGetValue(key, out var values))
+            {
+                values = new();
+                ret.Add(key, values);
+            }
+            values.Add(value);
         }
+    }
+
+    private static bool IsImpossibleCast(TypeMap interfaceImplementers, INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType)
+    {
+        return interfaceType.IsInterface()
+            && ConcreteImplementationExists(interfaceType)
+            && ExpressionTypeIsRelevant()
+            && !expressionType.DerivesOrImplements(interfaceType)
+            && interfaceImplementers.TryGetValue(interfaceType, out var implementers)
+            && !implementers.Any(x => x.DerivesOrImplements(expressionType));
+
+        bool ExpressionTypeIsRelevant() =>
+            expressionType is not null
+            && !expressionType.IsSealed
+            && !expressionType.Is(KnownType.System_Object)
+            && (!expressionType.IsInterface() || ConcreteImplementationExists(expressionType));
+
+        bool ConcreteImplementationExists(INamedTypeSymbol type) =>
+            interfaceImplementers.TryGetValue(type, out var implementers) && implementers.Any(x => x.IsClassOrStruct());
     }
 }

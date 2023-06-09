@@ -91,6 +91,37 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [DataTestMethod]
+        [DataRow("System.Collections.Generic.IEnumerable<T>", "System.Collections.Generic.IEnumerable<T>", true)]
+        [DataRow("System.Collections.Generic.IEnumerable<T>", "System.IDisposable", false)]
+        [DataRow("System.Collections.Generic.IEnumerable<int>", "System.Collections.Generic.IEnumerable<T>", false)]    // Because it doesn't implement itself
+        [DataRow("System.Collections.Generic.IEnumerable<int>", "System.Collections.Generic.IEnumerable<string>", false)]
+        [DataRow("System.Collections.Generic.IEnumerable<int>", "System.IDisposable", false)]
+        [DataRow("System.Collections.Generic.List<T>", "System.Collections.Generic.IEnumerable<T>", true)]
+        [DataRow("System.Collections.Generic.List<T>", "System.Collections.Generic.IEnumerable<int>", false)]
+        [DataRow("System.Collections.Generic.List<T>", "System.IDisposable", false)]
+        [DataRow("System.Collections.Generic.List<int>", "System.Collections.Generic.IEnumerable<T>", true)]
+        [DataRow("System.Collections.Generic.List<int>", "System.Collections.Generic.IEnumerable<int>", true)]
+        [DataRow("System.Collections.Generic.List<int>", "System.IDisposable", false)]
+        public void Type_DerivesOrImplements_Type(string typeSymbolName, string typeName, bool expected)
+        {
+            var compilation = TestHelper.CompileCS("""
+                using System.Collections.Generic;
+                public class IntList : List<int>, IEnumerable<string>
+                {
+                    IEnumerator<string> IEnumerable<string>.GetEnumerator() => null;
+                }
+                """).Model.Compilation;
+            var allTypes = compilation.GlobalNamespace.GetAllNamedTypes().ToList();
+            var intList = allTypes.Single(x => x.Name == "IntList");
+            allTypes.Add(intList.BaseType);
+            allTypes.AddRange(intList.AllInterfaces);
+            var typeSymbol = allTypes.Single(x => x.ToString() == typeSymbolName);
+            var type = allTypes.Single(x => x.ToString() == typeName);
+
+            typeSymbol.DerivesOrImplements(type).Should().Be(expected);
+        }
+
+        [DataTestMethod]
         [DataRow("int")]
         [DataRow("System.Int32")]
         [DataRow("int?")]

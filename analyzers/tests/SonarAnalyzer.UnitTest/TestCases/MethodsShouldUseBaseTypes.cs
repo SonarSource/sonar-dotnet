@@ -904,3 +904,18 @@ namespace MultiConditionalAccess
         }
     }
 }
+
+namespace WithGenericBase
+{
+    public class Sample
+    {
+        public void CanUseInterface(CustomDictionary arg)   // Noncompliant {{Consider using more general type 'System.Collections.Generic.IDictionary<string, int>' instead of 'WithGenericBase.CustomDictionary'.}}
+        {
+            if (arg.ContainsKey("key"))
+            {
+            }
+        }
+    }
+
+    public class CustomDictionary : Dictionary<string, int> { }
+}
