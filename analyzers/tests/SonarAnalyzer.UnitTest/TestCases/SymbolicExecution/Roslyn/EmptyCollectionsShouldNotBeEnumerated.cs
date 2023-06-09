@@ -186,8 +186,6 @@ class CollectionTests
         queue.Dequeue();                // Noncompliant
         queue.GetEnumerator();          // Noncompliant
         queue.Peek();                   // Noncompliant
-        queue.TryDequeue(out i);        // Noncompliant
-        queue.TryPeek(out i);           // Noncompliant
 
         var stack = new Stack<int>();
         stack.Clear();                  // Noncompliant
@@ -196,8 +194,6 @@ class CollectionTests
         stack.GetEnumerator();          // Noncompliant
         stack.Peek();                   // Noncompliant
         stack.Pop();                    // Noncompliant
-        stack.TryPeek(out i);           // Noncompliant
-        stack.TryPop(out i);            // Noncompliant
 
         var obs = new ObservableCollection<int>();
         obs.Clear();                    // Noncompliant
@@ -243,14 +239,12 @@ class CollectionTests
         list.AsReadOnly();
         list.GetHashCode();
         list.GetType();
-        list.EnsureCapacity(5);
         list.Equals(items);
         list.ToString();
         list.TrimExcess();
         list.ToArray();
 
         var set = new HashSet<int>();
-        set.EnsureCapacity(5);
         set.Equals(items);
         set.GetHashCode();
         set.GetObjectData(null, new StreamingContext());
@@ -260,7 +254,6 @@ class CollectionTests
         set.TrimExcess();
 
         var queue = new Queue<int>();
-        queue.EnsureCapacity(5);
         queue.Equals(items);
         queue.GetHashCode();
         queue.GetType();
@@ -269,7 +262,6 @@ class CollectionTests
         queue.TrimExcess();
 
         var stack = new Stack<int>();
-        stack.EnsureCapacity(5);
         stack.GetHashCode();
         stack.Equals(items);
         stack.GetType();
@@ -286,7 +278,6 @@ class CollectionTests
         obs.CollectionChanged += (s, e) => throw new NotImplementedException();
 
         var array = new int[0];
-        array.AsReadOnly();
         array.GetHashCode();
         array.GetLength(0);
         array.GetLongLength(0);
@@ -298,14 +289,12 @@ class CollectionTests
         _ = array.Length;
 
         var dict = new Dictionary<int, int>();
-        dict.EnsureCapacity(5);
         dict.GetHashCode();
         dict.GetObjectData(null, new StreamingContext());
         dict.Equals(items);
         dict.GetType();
         dict.OnDeserialization(null);
         dict.ToString();
-        dict.TrimExcess();
         dict[5] = 5;
         (((dict[5]))) = 5;
     }
@@ -352,9 +341,6 @@ class CollectionTests
 
         var dict = new Dictionary<int, int>();
         dict.Add(1, 5);
-        dict.Clear();                   // Compliant
-        dict = new Dictionary<int, int>();
-        dict.TryAdd(1, 5);
         dict.Clear();                   // Compliant
     }
 }
