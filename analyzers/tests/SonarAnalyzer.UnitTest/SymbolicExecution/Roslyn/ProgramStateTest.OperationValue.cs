@@ -207,6 +207,21 @@ public partial class ProgramStateTest
     }
 
     [TestMethod]
+    public void SetOperationValue_OnFlowCaptureReferenceOperationWrapper_SetsValueToOperation()
+    {
+        var value = SymbolicValue.Empty;
+        var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
+        var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
+        var captureReference = IFlowCaptureReferenceOperationWrapper.FromOperation(cfg.Blocks[3].Operations[0].Children.First());
+        captureReference.Id.Should().Be(capture.Id);
+        var sut = ProgramState.Empty
+            .SetCapture(capture.Id, capture.Value)
+            .SetOperationValue(captureReference, value);
+        sut[capture.Value].Should().BeNull();
+        sut[captureReference].Should().Be(value);
+    }
+
+    [TestMethod]
     public void ResetOperations_IsImmutable()
     {
         var operation = CreateOperation();
