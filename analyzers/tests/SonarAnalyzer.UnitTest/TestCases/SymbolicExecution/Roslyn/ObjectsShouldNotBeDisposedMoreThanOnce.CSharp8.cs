@@ -47,7 +47,7 @@ public interface IWithDefaultMembers
     {
         var d = new Disposable();
         d.Dispose();
-        d.Dispose(); // Noncompliant
+        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
     }
 }
 
@@ -140,7 +140,7 @@ public class ExplicitDisposeImplementation
 {
     void DisposeTwiceExplicit()
     {
-        IDisposable d = new DisposableAsync();
+        IDisposable d = new DisposableWithExplicitImplementation();
         d.Dispose();
         d.Dispose(); // Noncompliant
     }
@@ -152,7 +152,7 @@ public class ExpressionsTest
     {
         a.Dispose();
         b.Dispose();
-        (a ??= b).Dispose(); // Noncompliant
+        (a ??= b).Dispose(); // Noncompliant {{Resource 'a ??= b' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
 
         (x ??= y).Dispose();
         x.Dispose(); // FN

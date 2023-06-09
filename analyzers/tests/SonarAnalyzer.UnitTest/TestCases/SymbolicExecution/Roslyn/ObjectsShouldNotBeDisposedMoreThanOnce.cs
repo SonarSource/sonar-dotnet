@@ -44,7 +44,7 @@ class Program
         IDisposable d = new Disposable();
         var x = d;
         x.Dispose();
-        d.Dispose(); // FN
+        d.Dispose(); // FN, requires relation support
     }
 
     public void DisposedTwice_Try()
@@ -111,6 +111,20 @@ class Program
     {
         param1.Dispose();
         param1.Dispose(); // Noncompliant
+    }
+
+    public void Close_ParametersOfDifferentTypes(IInterface1 interface1, IDisposable interface2)
+    {
+        // Regression test for https://github.com/SonarSource/sonar-dotnet/issues/1038
+        interface1.Dispose(); // ok, only called once on each parameter
+        interface2.Dispose();
+    }
+
+    public void Close_ParametersOfSameType(IInterface1 instance1, IInterface1 instance2)
+    {
+        // Regression test for https://github.com/SonarSource/sonar-dotnet/issues/1038
+        instance1.Dispose();
+        instance2.Dispose();
     }
 
     public void Close_OneParameterDisposedThrice(IInterface1 instance1, IInterface1 instance2)

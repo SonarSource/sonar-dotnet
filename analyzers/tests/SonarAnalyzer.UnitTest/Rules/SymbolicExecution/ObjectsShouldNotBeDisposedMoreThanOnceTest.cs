@@ -78,6 +78,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithTopLevelStatements()
                 .Verify();
 
+        [TestMethod]
+        public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_CSharp10() =>
+            roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.CSharp10.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .Verify();
+
 #endif
 
     }
