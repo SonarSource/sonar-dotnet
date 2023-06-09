@@ -23,17 +23,16 @@ using TypeMap = System.Collections.Generic.Dictionary<Microsoft.CodeAnalysis.INa
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class InvalidCastToInterface : SonarDiagnosticAnalyzer
+public sealed class InvalidCastToInterface : InvalidCastToInterfaceBase<SyntaxKind>
 {
-    private const string DiagnosticId = "S1944";
-    private const string MessageFormat = "{0}"; // This format string can be removed after we drop the old SE engine.
     private const string MessageInterface = "Review this cast; in this project there's no type that implements both '{0}' and '{1}'.";
     private const string MessageClass = "Review this cast; in this project there's no type that extends '{0}' and implements '{1}'.";
 
-    public static readonly DiagnosticDescriptor S1944 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    public static readonly DiagnosticDescriptor S1944 = DescriptorFactory.Create(DiagnosticId, MessageFormat);  // This indirection is needed only because of the old SE engine, see base class.
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S1944);
     protected override bool EnableConcurrentExecution => false;
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override DiagnosticDescriptor Rule => S1944;
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(
