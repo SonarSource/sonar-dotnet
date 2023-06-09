@@ -40,22 +40,21 @@ public abstract class InvalidCastToInterfaceBase<TSyntaxKind> : SonarDiagnosticA
             compilationStartContext =>
             {
                 var interfaceImplementers = BuildTypeMap(compilationStartContext.Compilation.GlobalNamespace.GetAllNamedTypes());
-                compilationStartContext.RegisterNodeAction(
-                    c =>
+                compilationStartContext.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                     {
-                        var cast = (TCastSyntax)c.Node;
-                        var interfaceType = c.SemanticModel.GetTypeInfo(cast.Type).Type as INamedTypeSymbol;
-                        var expressionType = c.SemanticModel.GetTypeInfo(cast.Expression).Type as INamedTypeSymbol;
+                        var type = Language.Syntax.CastType(c.Node);
+                        var interfaceType = c.SemanticModel.GetTypeInfo(type).Type as INamedTypeSymbol;
+                        var expressionType = c.SemanticModel.GetTypeInfo(Language.Syntax.CastExpression(c.Node)).Type as INamedTypeSymbol;
                         if (IsImpossibleCast(interfaceImplementers, interfaceType, expressionType))
                         {
-                            var location = cast.Type.GetLocation();
+                            var location = type.GetLocation();
                             var interfaceTypeName = interfaceType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
                             var expressionTypeName = expressionType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
                             var message = expressionType.IsInterface() ? MessageInterface : MessageClass;
                             c.ReportIssue(Diagnostic.Create(Rule, location, string.Format(message, expressionTypeName, interfaceTypeName)));
                         }
                     },
-                    SyntaxKind.CastExpression);
+                    Language.SyntaxKind.CastExpressions);
             });
 
     private static TypeMap BuildTypeMap(IEnumerable<INamedTypeSymbol> allTypes)

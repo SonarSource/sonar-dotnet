@@ -78,14 +78,12 @@ Public Class InvalidCastToInterface
 
     Public Sub Main()
         Dim Empty As New EmptyClass(), WithDirect, WithTry, WithCType As IBase
-        WithDirect = DirectCast(Empty, IBase)   ' Noncompliant {{Review this cast in this project there's no type that extends 'EmptyClass' and implements 'IBase'.}}
+        WithDirect = DirectCast(Empty, IBase)   ' Noncompliant {{Review this cast; in this project there's no type that extends 'EmptyClass' and implements 'IBase'.}}
         '                              ^^^^^
-        WithTry = TryCast(Empty, IBase)         ' Noncompliant {{Review this cast in this project there's no type that extends 'EmptyClass' and implements 'IBase'.}}
+        WithCType = CType(Empty, IBase)         ' Noncompliant {{Review this cast; in this project there's no type that extends 'EmptyClass' and implements 'IBase'.}}
         '                        ^^^^^
-        WithCType = CType(Empty, IBase)         ' Noncompliant {{Review this cast in this project there's no type that extends 'EmptyClass' and implements 'IBase'.}}
-        '                        ^^^^^
-        Dim A As IImplemented = DirectCast(WithDirect, IImplemented) ' Noncompliant {{Review this cast in this project there's no type that implements both 'IBase' and 'IImplemented'.}}
-        WithTry = TryCast(Empty, IBase)
+        Dim A As IImplemented = DirectCast(WithDirect, IImplemented) ' Noncompliant {{Review this cast; in this project there's no type that implements both 'IBase' and 'IImplemented'.}}
+        WithTry = TryCast(Empty, IBase)         ' Compliant, will return Nothing
         Dim B As Boolean = TypeOf Empty Is IBase
 
         Dim Arr As EmptyClass() = {}
