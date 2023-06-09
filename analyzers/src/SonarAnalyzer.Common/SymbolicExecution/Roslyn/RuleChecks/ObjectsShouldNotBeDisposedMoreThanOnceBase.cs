@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
@@ -28,11 +29,16 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
     protected const string MessageFormat = "Resource '{0}' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.";
 
     private static readonly string[] DisposeMethods = { "Dispose", "DisposeAsync"};
+    private static readonly ImmutableArray<KnownType> DisposableInterfaces = ImmutableArray.Create(
+        KnownType.System_IDisposable,
+        KnownType.System_IAsyncDisposable);
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var state = context.State;
-        if (context.Operation.Instance.AsInvocation() is { } invocation && DisposeMethods.Contains(invocation.TargetMethod.Name))
+        if (context.Operation.Instance.AsInvocation() is { } invocation
+            && DisposeMethods.Contains(invocation.TargetMethod.Name)
+            && ImplementsDisposable(invocation.Instance))
         {
             if (state[invocation.Instance]?.HasConstraint(DisposableConstraint.Disposed) is true)
             {
@@ -44,5 +50,9 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
             }
         }
         return state;
+
+        static bool ImplementsDisposable(IOperation invocationInstance) =>
+            invocationInstance.TrackedSymbol() is { } symbol
+            && (symbol.GetSymbolType().ImplementsAny(DisposableInterfaces) || symbol.GetSymbolType().IsAny(DisposableInterfaces));
     }
 }

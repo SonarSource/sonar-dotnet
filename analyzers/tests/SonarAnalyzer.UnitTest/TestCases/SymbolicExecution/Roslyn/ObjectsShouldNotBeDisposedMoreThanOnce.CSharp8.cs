@@ -71,7 +71,7 @@ public class LocalStaticFunctions
     }
 }
 
-public ref struct Struct
+public ref struct Struct : IDisposable
 {
     public void Dispose()
     {
