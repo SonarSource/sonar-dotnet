@@ -25,7 +25,5 @@ public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ObjectsShouldNotBeD
     public static readonly DiagnosticDescriptor S3966 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
     protected override DiagnosticDescriptor Rule => S3966;
 
-    protected override ILanguageFacade Language => CSharpFacade.Instance;
-
     public override bool ShouldExecute() => true;
 }
