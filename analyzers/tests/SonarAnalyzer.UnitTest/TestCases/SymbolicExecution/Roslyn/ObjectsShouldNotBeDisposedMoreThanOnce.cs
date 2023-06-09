@@ -61,6 +61,12 @@ class Program
         }
     }
 
+    public void DisposedTwice_DifferentCase(Disposable d)
+    {
+        d.DISPOSE();
+        d.DISPOSE(); // Compliant, has different case than expected dispose method
+    }
+
     public void DisposedTwice_Array()
     {
         var a = new[] { new Disposable() };
@@ -120,6 +126,7 @@ class Program
 public class Disposable : IDisposable
 {
     public void Dispose() { }
+    public void DISPOSE() { }
 }
 
 public class MyClass : IDisposable
