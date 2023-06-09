@@ -121,7 +121,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
             typeSymbol.DerivesOrImplements(type).Should().Be(expected);
         }
 
-
         [DataTestMethod]
         [DataRow("int")]
         [DataRow("System.Int32")]
