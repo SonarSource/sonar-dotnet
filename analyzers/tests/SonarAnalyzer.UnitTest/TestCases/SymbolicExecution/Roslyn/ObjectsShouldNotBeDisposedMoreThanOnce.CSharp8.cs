@@ -14,14 +14,6 @@ class UsingDeclaration
         using var d = new Disposable(); // Noncompliant {{Resource 'd = new Disposable()' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
         d.Dispose();
     }
-
-    public void Disposed_UsingStatement()
-    {
-        using (var d = new Disposable()) // Noncompliant {{Resource 'd = new Disposable()' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
-        {
-            d.Dispose();
-        }
-    }
 }
 
 public class NullCoalescenceAssignment

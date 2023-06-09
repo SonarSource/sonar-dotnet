@@ -2,7 +2,7 @@
 using System.IO;
 using System.Data.Common;
 
-public interface IInterface1 : IDisposable { }
+public interface IWithDispose : IDisposable { }
 
 class Program
 {
@@ -39,7 +39,7 @@ class Program
 //      ^^^^^^^^^^^
     }
 
-    public void DisposedTwice_AssignDisposableObjectToAnotherVariable()
+    public void DisposedTwice_Relations()
     {
         IDisposable d = new Disposable();
         var x = d;
@@ -113,21 +113,21 @@ class Program
         param1.Dispose(); // Noncompliant
     }
 
-    public void Close_ParametersOfDifferentTypes(IInterface1 interface1, IDisposable interface2)
+    public void Close_ParametersOfDifferentTypes(IWithDispose interface1, IDisposable interface2)
     {
         // Regression test for https://github.com/SonarSource/sonar-dotnet/issues/1038
         interface1.Dispose(); // ok, only called once on each parameter
         interface2.Dispose();
     }
 
-    public void Close_ParametersOfSameType(IInterface1 instance1, IInterface1 instance2)
+    public void Close_ParametersOfSameType(IWithDispose instance1, IWithDispose instance2)
     {
         // Regression test for https://github.com/SonarSource/sonar-dotnet/issues/1038
         instance1.Dispose();
         instance2.Dispose();
     }
 
-    public void Close_OneParameterDisposedThrice(IInterface1 instance1, IInterface1 instance2)
+    public void Close_OneParameterDisposedThrice(IWithDispose instance1, IWithDispose instance2)
     {
         instance1.Dispose();
         instance1.Dispose(); // Noncompliant
@@ -162,7 +162,7 @@ public class MyClass : IDisposable
 
 class TestLoops
 {
-    public static void LoopWithBreak(System.Collections.Generic.IEnumerable<string> list, bool condition, IInterface1 instance1)
+    public static void LoopWithBreak(string[] list, bool condition, IWithDispose instance1)
     {
         foreach (string x in list)
         {
@@ -181,7 +181,7 @@ class TestLoops
         }
     }
 
-    public static void Loop(System.Collections.Generic.IEnumerable<string> list, bool condition, IInterface1 instance1)
+    public static void Loop(string[] list, bool condition, IWithDispose instance1)
     {
         foreach (string x in list)
         {
@@ -189,6 +189,17 @@ class TestLoops
             {
                 instance1.Dispose(); // Noncompliant
             }
+        }
+    }
+}
+
+class UsingDeclaration
+{
+    public void Disposed_UsingStatement()
+    {
+        using (var d = new Disposable()) // Noncompliant {{Resource 'd = new Disposable()' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
+        {
+            d.Dispose();
         }
     }
 }
