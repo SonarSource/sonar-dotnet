@@ -33,7 +33,6 @@ public enum ConstraintKind
     CollectionEmpty,
     CollectionNotEmpty,
     DisposableDisposed,
-    DisposableNotDisposed,
     InitializationVectorInitialized,
     InitializationVectorNotInitialized,
     LockHeld,
