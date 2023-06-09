@@ -25,15 +25,5 @@ public sealed class InvalidCastToInterface : InvalidCastToInterfaceBase<SyntaxKi
 {
     protected override DiagnosticDescriptor Rule { get; } = DescriptorFactory.Create(DiagnosticId, MessageFormat);
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+    protected override bool EnableConcurrentExecution => false;
 }
