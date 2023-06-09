@@ -64,11 +64,11 @@ public class Sample
         var filled = new List<int>() { 1 };
         var empty = new LinkedList<int>();
         ICollection<int> collection = condition ? filled : empty;
-        collection.Clear();     // Noncompliant FP
+        collection.Clear();     // Compliant
 
         var empty2 = new List<int>();
         ICollection<int> collection2 = condition ? empty : empty2;
-        collection2.Clear();    // Noncompliant
+        collection2.Clear();    // FN
     }
 }
 

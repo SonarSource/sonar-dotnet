@@ -174,10 +174,10 @@ class CollectionTests
         set.Overlaps(items);            // Noncompliant
         set.Remove(5);                  // Noncompliant
         set.RemoveWhere(Predicate);     // Noncompliant
-        set.SymmetricExceptWith(items); // FN
+        set.SymmetricExceptWith(items); // Noncompliant, also learns NotEmpty
         set = new HashSet<int>();
         set.TryGetValue(5, out i);      // Noncompliant
-        set.UnionWith(items);           // FN
+        set.UnionWith(items);           // Noncompliant, also learns NotEmpty
 
         var queue = new Queue<int>();
         queue.Clear();                  // Noncompliant
@@ -329,10 +329,10 @@ class CollectionTests
         set.Add(1);
         set.Clear();                    // Compliant
         set = new HashSet<int>();
-        set.SymmetricExceptWith(items); // FN
+        set.SymmetricExceptWith(items); // Noncompliant
         set.Clear();                    // Compliant
         set = new HashSet<int>();
-        set.UnionWith(items);           // FN
+        set.UnionWith(items);           // Noncompliant
         set.Clear();                    // Compliant
 
         var queue = new Queue<int>();
@@ -418,7 +418,7 @@ class Flows
         {
             list.Add(5);
         }
-        list.Clear();   // Noncompliant FP
+        list.Clear();   // Compliant
     }
 
     public void Conditional_Add_With_Loop(bool condition)
@@ -567,7 +567,7 @@ class LargeCfg
 
             if (list.Count > 0)
             {
-                list.Sort();    // Noncompliant FP
+                list.Sort();    // Compliant - used to be an FP
             }
         }
         catch

@@ -103,6 +103,9 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         nameof(Collection<int>.Insert),
         "TryAdd");
 
+    private HashSet<IOperation> emptyCollectionAccess = new HashSet<IOperation>();
+    private HashSet<IOperation> notEmptyCollectionAccess = new HashSet<IOperation>();
+
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var state = context.State;
@@ -114,15 +117,21 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         }
         else if (operation.AsInvocation() is { Instance: not null } invocation)
         {
+            if (raisingMethods.Contains(invocation.TargetMethod.Name))
+            {
+                if (state[invocation.Instance]?.HasConstraint(CollectionConstraint.Empty) is true)
+                {
+                    emptyCollectionAccess.Add(operation);
+                }
+                else
+                {
+                    notEmptyCollectionAccess.Add(operation);
+                }
+            }
             if (addMethods.Contains(invocation.TargetMethod.Name)
                 && invocation.Instance.TrackedSymbol() is { } symbol)
             {
                 state = state.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
-            }
-            else if (raisingMethods.Contains(invocation.TargetMethod.Name)
-                && state[invocation.Instance]?.HasConstraint(CollectionConstraint.Empty) is true)
-            {
-                ReportIssue(operation, operation.Syntax.ToString());
             }
         }
 
@@ -131,6 +140,9 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
 
     public override void ExecutionCompleted()
     {
-        base.ExecutionCompleted();
+        foreach (var operation in emptyCollectionAccess.Except(notEmptyCollectionAccess))
+        {
+            ReportIssue(operation, operation.Syntax.ToString());
+        }
     }
 }
