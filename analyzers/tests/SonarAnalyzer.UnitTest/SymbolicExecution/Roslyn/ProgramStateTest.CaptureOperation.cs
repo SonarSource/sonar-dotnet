@@ -92,7 +92,7 @@ public partial class ProgramStateTest
     {
         var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
         var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
-        var captureReference = IFlowCaptureReferenceOperationWrapper.FromOperation(cfg.Blocks[3].Operations[0].Children.First());
+        var captureReference = IFlowCaptureReferenceOperationWrapper.FromOperation(cfg.Blocks[3].Operations[0].ChildOperations.First());
         captureReference.Id.Should().Be(capture.Id);
         var sut = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
         sut.ResolveCapture(captureReference.WrappedOperation).Should().Be(capture.Value);

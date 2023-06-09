@@ -68,7 +68,7 @@ public class Sample
 
             CaptureId FindCapture(ControlFlowRegion region, string expectedName)
             {
-                var flowCapture = (IFlowCaptureReferenceOperation)cfg.Blocks[region.FirstBlockOrdinal].BranchValue.Children.Single();
+                var flowCapture = (IFlowCaptureReferenceOperation)cfg.Blocks[region.FirstBlockOrdinal].BranchValue.ChildOperations.Single();
                 flowCapture.Syntax.ToString().Should().Be(expectedName);
                 return new CaptureId(flowCapture.Id);
             }
