@@ -52,7 +52,6 @@ public class InvalidCastToInterface
         e = (INotImplementedWithBase)o;
 
         var z = (IDisposable)new EmptyClass();
-        var w = (IDisposable)(new Node());
     }
 
     public void Generics()
@@ -85,24 +84,11 @@ public class InvalidCastToInterface
     }
 }
 
-public class DerivedNode : MiddleNode, IDisposable
-{
-    public void Dispose() { }
-}
-
-public class MiddleNode : Node { }
-public class Node { }
-
-public class MyClass
-{
-    public double? D { get; set; } = 1.001;
-}
-
 interface IFoo { }
 interface IBar { }
 
 class Foo : IFoo { }
-class Bar : IBar { public Bar(string foo) { } }
+class Bar : IBar { }
 class FooBar : IFoo, IBar { }
 sealed class FinalBar : IBar { }
 
