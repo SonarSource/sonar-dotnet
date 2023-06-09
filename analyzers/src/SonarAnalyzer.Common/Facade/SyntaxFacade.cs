@@ -37,8 +37,10 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment);
     public abstract SyntaxNode AssignmentLeft(SyntaxNode assignment);
     public abstract SyntaxNode AssignmentRight(SyntaxNode assignment);
-    public abstract SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression);
-    public abstract SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression);
+    public abstract SyntaxNode BinaryExpressionLeft(SyntaxNode binary);
+    public abstract SyntaxNode BinaryExpressionRight(SyntaxNode binary);
+    public abstract SyntaxNode CastType(SyntaxNode cast);
+    public abstract SyntaxNode CastExpression(SyntaxNode cast);
     public abstract IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum);
     public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
     public abstract ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node);

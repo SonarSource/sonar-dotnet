@@ -72,11 +72,17 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override SyntaxNode AssignmentRight(SyntaxNode assignment) =>
         Cast<AssignmentExpressionSyntax>(assignment).Right;
 
-    public override SyntaxNode BinaryExpressionLeft(SyntaxNode binaryExpression) =>
-        Cast<BinaryExpressionSyntax>(binaryExpression).Left;
+    public override SyntaxNode BinaryExpressionLeft(SyntaxNode binary) =>
+        Cast<BinaryExpressionSyntax>(binary).Left;
 
-    public override SyntaxNode BinaryExpressionRight(SyntaxNode binaryExpression) =>
-        Cast<BinaryExpressionSyntax>(binaryExpression).Right;
+    public override SyntaxNode BinaryExpressionRight(SyntaxNode binary) =>
+        Cast<BinaryExpressionSyntax>(binary).Right;
+
+    public override SyntaxNode CastType(SyntaxNode cast) =>
+        Cast<CastExpressionSyntax>(cast).Type;
+
+    public override SyntaxNode CastExpression(SyntaxNode cast) =>
+        Cast<CastExpressionSyntax>(cast).Expression;
 
     public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
         @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumDeclarationSyntax>(@enum).Members;
