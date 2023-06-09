@@ -29,7 +29,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     protected const string DiagnosticId = "S4158";
     protected const string MessageFormat = "Remove this call, the collection is known to be empty here.";
 
-    private ImmutableArray<KnownType> trackedCollectionTypes = ImmutableArray.Create(
+    private static readonly ImmutableArray<KnownType> TrackedCollectionTypes = ImmutableArray.Create(
         KnownType.System_Collections_Generic_List_T,
         KnownType.System_Collections_Generic_HashSet_T,
         KnownType.System_Collections_Generic_Queue_T,
@@ -38,7 +38,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         KnownType.System_Array,
         KnownType.System_Collections_Generic_Dictionary_TKey_TValue);
 
-    private ImmutableArray<string> raisingMethods = ImmutableArray.Create(
+    private static readonly ImmutableArray<string> RaisingMethods = ImmutableArray.Create(
         nameof(IEnumerable<int>.GetEnumerator),
         nameof(ICollection.CopyTo),
         nameof(ICollection<int>.Clear),
@@ -91,7 +91,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         nameof(Dictionary<int, int>.ContainsValue),
         nameof(Dictionary<int, int>.TryGetValue));
 
-    private ImmutableArray<string> addMethods = ImmutableArray.Create(
+    private static readonly ImmutableArray<string> AddMethods = ImmutableArray.Create(
         nameof(ICollection<int>.Add),
         nameof(List<int>.AddRange),
         nameof(List<int>.Insert),
@@ -103,21 +103,21 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         nameof(Collection<int>.Insert),
         "TryAdd");
 
-    private HashSet<IOperation> emptyCollectionAccess = new HashSet<IOperation>();
-    private HashSet<IOperation> notEmptyCollectionAccess = new HashSet<IOperation>();
+    private readonly HashSet<IOperation> emptyCollectionAccess = new HashSet<IOperation>();
+    private readonly HashSet<IOperation> notEmptyCollectionAccess = new HashSet<IOperation>();
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var state = context.State;
 
         var operation = context.Operation.Instance;
-        if (operation.AsObjectCreation()?.Type.IsAny(trackedCollectionTypes) ?? false)
+        if (operation.AsObjectCreation()?.Type.IsAny(TrackedCollectionTypes) ?? false)
         {
             state = state.SetOperationConstraint(operation, CollectionConstraint.Empty);
         }
         else if (operation.AsInvocation() is { Instance: not null } invocation)
         {
-            if (raisingMethods.Contains(invocation.TargetMethod.Name))
+            if (RaisingMethods.Contains(invocation.TargetMethod.Name))
             {
                 if (state[invocation.Instance]?.HasConstraint(CollectionConstraint.Empty) is true)
                 {
@@ -128,7 +128,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                     notEmptyCollectionAccess.Add(operation);
                 }
             }
-            if (addMethods.Contains(invocation.TargetMethod.Name)
+            if (AddMethods.Contains(invocation.TargetMethod.Name)
                 && invocation.Instance.TrackedSymbol() is { } symbol)
             {
                 state = state.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
