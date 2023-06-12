@@ -3,26 +3,37 @@
 <code>public</code> for that to work.</p>
 <p>If a method throws a non-public exception, the best you can do on the caller’s side is to <code>catch</code> the closest <code>public</code> base
 of the class. However, you lose all the information that the new exception type carries.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>This rule will raise an issue if you directly inherit one of the following excpetion types in a non public class:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception">Exception</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.systemexception">SystemException</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.applicationexception">ApplicationException</a> </li>
+</ul>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 internal class MyException : Exception   // Noncompliant
 {
   // ...
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 public class MyException : Exception
 {
   // ...
 }
 </pre>
-<h3>Exceptions</h3>
-<p>This rule ignores Exception types that are not derived directly from <code>System.Exception</code>, <code>System.SystemException</code>, or
-<code>System.ApplicationException</code>.</p>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> <a href="https://owasp.org/www-project-top-ten/2017/A10_2017-Insufficient_Logging%2526Monitoring">OWASP Top 10 2017 Category A10</a> -
   Insufficient Logging &amp; Monitoring </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception">Exception</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.systemexception">SystemException</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.applicationexception">ApplicationException</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers">Access modifiers</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions">Exceptions and Exception Handling</a> </li>
 </ul>
 

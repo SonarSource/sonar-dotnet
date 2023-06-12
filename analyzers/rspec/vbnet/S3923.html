@@ -1,17 +1,16 @@
 <h2>Why is this an issue?</h2>
-<p>Having all branches in a <code>Select Case</code> or <code>If</code> chain with the same implementation is an error. Either a copy-paste error was
-made and something different should be executed, or there shouldn’t be a <code>Select Case</code> / <code>If</code> chain at all.</p>
-<h3>Noncompliant code example</h3>
+<p>Having all branches of a <code>Select Case</code> or <code>If</code> chain with the same implementation indicates a problem.</p>
+<p>In the following code:</p>
 <pre>
-Dim b As Integer = If(a &gt; 12, 4, 4)
+Dim b As Integer = If(a &gt; 12, 4, 4)  // Noncompliant
 
-If b = 0 Then
+If b = 0 Then  // Noncompliant
     DoTheThing()
 Else
     DoTheThing()
 End If
 
-Select Case i
+Select Case i  // Noncompliant
     Case 1
         DoSomething()
     Case 2
@@ -22,9 +21,10 @@ Select Case i
         DoSomething()
 End Select
 </pre>
+<p>Either there is a copy-paste error that needs fixing or an unnecessary <code>Select Case</code> or <code>If</code> chain that needs removing.</p>
 <h3>Exceptions</h3>
-<p>This rule does not apply to <code>If</code> chains without <code>Else</code>-s, or to <code>Select Case</code>-es without <code>Case Else</code>
-clauses.</p>
+<p>This rule does not apply to <code>If</code> chains without <code>Else</code>, nor to <code>Select Case</code> without a <code>Case Else</code>
+clause.</p>
 <pre>
 If b = 0 Then ' No issue, this could have been done on purpose to make the code more readable
     DoTheThing()

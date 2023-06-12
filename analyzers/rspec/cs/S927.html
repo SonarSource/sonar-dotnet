@@ -1,67 +1,44 @@
 <h2>Why is this an issue?</h2>
-<p>The name of a parameter in an externally visible. This rule raises an issue when method override does not match the name of the parameter in the
-base declaration of the method, or the name of the parameter in the interface declaration of the method or the name of any other <code>partial</code>
-definition.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-partial class Point
+<p>Parameters are part of the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods#method-signatures">method signature</a> and its
+identity.</p>
+<p>Implementing a method from an interface, a base class, or a partial method and changing one of its parameters' names will confuse and impact its
+readability.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+interface IBankAccount
 {
-  partial void MoveVertically(int z);
+  void AddMoney(int money);
 }
 
-partial class Point
+class BankAccount : IBankAccount
 {
-  int x = 0;
-  int y = 0;
-  int z = 0;
-
-  partial void MoveVertically(int y)  // Noncompliant
+  void AddMoney(int amount) // Noncompliant: parameter's name differs from base
   {
-    this.y = y;
-  }
-}
-
-interface IFoo
-{
-  void Bar(int i);
-}
-
-class Foo : IFoo
-{
-  void Bar(int z) // Noncompliant, parameter name should be i
-  {
+    // ...
   }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-partial class Point
+<p>To avoid any ambiguity in the code, parameters' names should match the initial declaration, whether its initial declaration is from an interface, a
+base class, or a partial method.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+interface IBankAccount
 {
-  partial void MoveVertically(int z);
+  void AddMoney(int money);
 }
 
-partial class Point
+class BankAccount : IBankAccount
 {
-  int x = 0;
-  int y = 0;
-  int z = 0;
-
-  partial void MoveVertically(int z)
+  void AddMoney(int money) // Compliant: parameter's name match base name
   {
-    this.z = z;
-  }
-}
-
-interface IFoo
-{
-  void Bar(int i);
-}
-
-class Foo : IFoo
-{
-  void Bar(int i)
-  {
+    // ...
   }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods#method-signatures">Method signatures in
+  C#</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Type_signature#Method_signature">Method signatures - Wiki</a> </li>
+</ul>
 

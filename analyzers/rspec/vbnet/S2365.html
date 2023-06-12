@@ -1,31 +1,40 @@
 <h2>Why is this an issue?</h2>
 <p>Most developers expect property access to be as efficient as field access. However, if a property returns a copy of an array or collection, it will
 be much slower than a simple field access, contrary to the caller’s likely expectations. Therefore, such properties should be refactored into methods
-so that callers are not surprised by unexpectedly poor performance.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-Module Module1
-    ' Internal state
-    Dim array = {"apple", "banana", "orange", "pineapple", "strawberry"}
-
-    ReadOnly Property Foo() As String() ' Noncompliant
-        Get
-            Dim copy = array.Clone      ' Expensive call
-            Return copy
-        End Get
-    End Property
-End Module
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-Module Module1
-    ' Internal state
-    Dim array = {"apple", "banana", "orange", "pineapple", "strawberry"}
-
-    Function GetFoo() As String()       ' Compliant
-        Dim copy = array.Clone
+so that callers are not surprised by the unexpectedly poor performance.</p>
+<p>This rule tracks calls to the following methods inside properties:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.tolist">Enumerable.ToList</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.toarray">Enumerable.ToArray</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.clone">Array.Clone</a> </li>
+</ul>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Dim foo = {"a", "b", "c" }
+Property Foo() As String() ' Noncompliant
+    Get
+        Dim copy = foo.Clone      ' Expensive call
         Return copy
-    End Function
-End Module
+    End Get
+End Property
 </pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+Dim foo = {"a", "b", "c" }
+Function GetFoo() As String()
+    Dim copy = foo.Clone
+    Return copy
+End Function
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/properties">Properties (Visual Basic)</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/objects-and-classes/#fields-and-properties">Fields
+  and properties</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/concepts/collections">Collections (Visual Basic)</a> </li>
+</ul>
 

@@ -1,6 +1,19 @@
 <h2>Why is this an issue?</h2>
-<p>When the line immediately after a conditional has neither curly braces nor indentation, the intent of the code is unclear and perhaps not what is
-executed. Additionally, such code is confusing to maintainers.</p>
+<p>When the line immediately after conditional statements has neither curly braces nor indentation, the intent of the code is unclear and perhaps not
+executed as expected. Additionally, such code is confusing to maintainers.</p>
+<p>The rule will check the line indentation after the following conditional statements:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements#the-if-statement">if and if-else
+  statements</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-for-statement">for
+  statement</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-foreach-statement">foreach
+  statement</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-do-statement">do statement</a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-while-statement">while
+  statement</a> </li>
+</ul>
 <pre>
 if (condition)  // Noncompliant
 DoTheThing();
@@ -26,6 +39,4 @@ if (condition)
 }
 DoTheOtherThing(); // Clear intent to call this function unconditionally
 </pre>
-<p>This rule raises an issue if the line controlled by a conditional has the same indentation as the conditional and is not enclosed in curly
-braces.</p>
 

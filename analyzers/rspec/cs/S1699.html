@@ -1,14 +1,14 @@
 <h2>Why is this an issue?</h2>
 <p>Calling an overridable method from a constructor could result in failures or strange behaviors when instantiating a subclass which overrides the
 method.</p>
+<p>When constructing an object of a derived class, the constructor of the parent class is invoked first, and only then the constructor of the derived
+class is called. This sequential construction process applies to multiple levels of inheritance as well, starting from the base class and progressing
+to the most derived class.</p>
+<p>If an overridable method is called within the constructor of the parent class, it may inadvertently invoke an overridden implementation in the
+derived class. This can lead to unexpected failures or strange behaviors because the object’s construction is still in progress and may not have
+reached a fully initialized state. Consequently, the overridden method may rely on uninitialized members or have assumptions about the object’s state
+that are not yet valid.</p>
 <p>For example:</p>
-<ul>
-  <li> The subclass class constructor starts by calling the parent class constructor. </li>
-  <li> The parent class constructor calls the method, which has been overridden in the child class. </li>
-  <li> If the behavior of the child class method depends on fields that are initialized in the child class constructor, unexpected behavior (like a
-  <code>NullReferenceException</code>) can result, because the fields aren’t initialized yet. </li>
-</ul>
-<h3>Noncompliant code example</h3>
 <pre>
 public class Parent
 {
@@ -38,4 +38,21 @@ public class Child : Parent
   }
 }
 </pre>
+<ul>
+  <li> The <code>Child</code> class constructor starts by calling the <code>Parent</code> class constructor. </li>
+  <li> The <code>Parent</code> class constructor calls the method <code>DoSomething</code>, which has been overridden in the <code>Child</code> class.
+  </li>
+  <li> If the behavior of the <code>Child</code> class overridden <code>DoSomething</code> method depends on fields that are initialized in the
+  <code>Child</code> class constructor, unexpected behavior (such as a <code>NullReferenceException</code>) can result, because the fields aren’t
+  initialized yet. </li>
+</ul>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constructors">Constructors</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/inheritance">Inheritance</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/polymorphism#virtual-methods">Polimorphism</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods#method-signatures">Method signatures</a>
+  </li>
+</ul>
 

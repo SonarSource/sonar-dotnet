@@ -1,60 +1,38 @@
 <h2>Why is this an issue?</h2>
-<p>The name of a parameter in an externally visible. This rule raises an issue when method override does not match the name of the parameter in the
-base declaration of the method, or the name of the parameter in the interface declaration of the method.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-Public MustInherit Class Base
-
-    Public MustOverride Sub DoSomething(Name As String)
-
-End Class
-
-Public Interface IContract
-
-    Sub Add(Count As Integer)
-
+<p>Parameters are part of the <a href="https://en.wikipedia.org/wiki/Type_signature#Method_signature">method signature</a> and its identity.</p>
+<p>Implementing a method from an interface, a base class, or a partial method and changing one of its parameters' names will confuse and impact its
+readability.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Interface IBankAccount
+    Sub AddMoney(money As Integer)
 End Interface
 
-Public Class Handler
-    Inherits Base
-    Implements IContract
+Class BankAccount
+    Implements IBankAccount
 
-    Public Overrides Sub DoSomething(Description As String) 'Noncompliant, parameter name should be "Name"
+    Private Sub AddMoney(amount As Integer) ' Noncompliant: parameter's name differs from base
         ' ...
     End Sub
-
-    Public Sub Add(Difference As Integer) Implements IContract.Add  'Noncompliant, parameter name should be "Count"
-        ' ...
-    End Sub
-
 End Class
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-Public MustInherit Class Base
-
-    Public MustOverride Sub DoSomething(Name As String)
-
-End Class
-
-Public Interface IContract
-
-    Sub Add(Count As Integer)
-
+<p>To avoid any ambiguity in the code, parameters' names should match the initial declaration, whether its initial declaration is from an interface, a
+base class, or a partial method.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+Interface IBankAccount
+    Sub AddMoney(money As Integer)
 End Interface
 
-Public Class Handler
-    Inherits Base
-    Implements IContract
+Class BankAccount
+    Implements IBankAccount
 
-    Public Overrides Sub DoSomething(Name As String)
+    Private Sub AddMoney(money As Integer) ' Compliant: parameter's name match base name
         ' ...
     End Sub
-
-    Public Sub Add(Count As Integer) Implements IContract.Add
-        ' ...
-    End Sub
-
 End Class
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://en.wikipedia.org/wiki/Type_signature#Method_signature">Method signatures - Wiki</a> </li>
+</ul>
 
