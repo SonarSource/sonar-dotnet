@@ -104,7 +104,7 @@ namespace Tests.Diagnostics
             throw new Exception("arg1");
         }
 
-        public bool MethodWithSillyParams(int a, int two, int of, int that)
+        public bool MethodWithUnnecessaryParams(int a, int two, int of, int that)
         {
             throw new Exception("of type");
             throw new Exception("I have a car");
