@@ -82,17 +82,19 @@ class CollectionTests
     public void ConstructorWithEnumerable()
     {
         var list = new List<int>(items);
-        list.Clear();                   // Noncompliant FP
+        list.Clear();                   // Compliant
         var set = new HashSet<int>(items);
-        set.Clear();                    // Noncompliant FP
+        set.Clear();                    // Compliant
+        set = new HashSet<int>(items, EqualityComparer<int>.Default);
+        set.Clear();                    // Compliant
         var queue = new Queue<int>(items);
-        queue.Clear();                  // Noncompliant FP
+        queue.Clear();                  // Compliant
         var stack = new Stack<int>(items);
-        stack.Clear();                  // Noncompliant FP
+        stack.Clear();                  // Compliant
         var obs = new ObservableCollection<int>(items);
-        obs.Clear();                    // Noncompliant FP
+        obs.Clear();                    // Compliant
         var dict = new Dictionary<int, int>(dictionaryItems);
-        dict.Clear();                   // Noncompliant FP
+        dict.Clear();                   // Compliant
     }
 
     public void ConstructorWithEmptyInitializer()

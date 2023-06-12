@@ -33,7 +33,7 @@ public class Sample
         list.Clear();   // Compliant
 
         list = new(new[] { 42 });
-        list.Clear();   // Noncompliant FP
+        list.Clear();   // Compliant
 
         list = new List<int>();
         list.Clear();   // Noncompliant
