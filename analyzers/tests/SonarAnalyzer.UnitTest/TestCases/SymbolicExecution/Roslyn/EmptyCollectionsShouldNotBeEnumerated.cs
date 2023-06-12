@@ -42,6 +42,8 @@ class CollectionTests
 
     public void ConstructorWithCapacity()
     {
+        int count = 5;
+
         var list = new List<int>(5);
         list.Clear();                   // Noncompliant
         var set = new HashSet<int>(5);
@@ -51,6 +53,8 @@ class CollectionTests
         var stack = new Stack<int>(5);
         stack.Clear();                  // Noncompliant
         var array = new int[5];
+        array.Clone();                  // Compliant
+        array = new int[count];
         array.Clone();                  // Compliant
         var dict = new Dictionary<int, int>(5);
         dict.Clear();                   // Noncompliant
