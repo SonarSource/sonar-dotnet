@@ -46,6 +46,9 @@ internal static class IOperationExtensions
     internal static IAssignmentOperationWrapper? AsAssignment(this IOperation operation) =>
         operation.As(OperationKindEx.SimpleAssignment, IAssignmentOperationWrapper.FromOperation);
 
+    internal static IArrayCreationOperationWrapper? AsArrayCreation(this IOperation operation) =>
+        operation.As(OperationKindEx.ArrayCreation, IArrayCreationOperationWrapper.FromOperation);
+
     internal static IConversionOperationWrapper? AsConversion(this IOperation operation) =>
         operation.As(OperationKindEx.Conversion, IConversionOperationWrapper.FromOperation);
 
@@ -54,6 +57,9 @@ internal static class IOperationExtensions
 
     internal static IIsPatternOperationWrapper? AsIsPattern(this IOperation operation) =>
         operation.As(OperationKindEx.IsPattern, IIsPatternOperationWrapper.FromOperation);
+
+    internal static ILiteralOperationWrapper? AsLiteral(this IOperation operation) =>
+        operation.As(OperationKindEx.Literal, ILiteralOperationWrapper.FromOperation);
 
     internal static IObjectCreationOperationWrapper? AsObjectCreation(this IOperation operation) =>
         operation.As(OperationKindEx.ObjectCreation, IObjectCreationOperationWrapper.FromOperation);

@@ -35,7 +35,7 @@ class CollectionTests
         var obs = new ObservableCollection<int>();
         obs.Clear();                    // Noncompliant
         var array = new int[0];
-        array.Clone();                  // FIXME Non-compliant
+        array.Clone();                  // Noncompliant
         var dict = new Dictionary<int, int>();
         dict.Clear();                   // Noncompliant
     }
@@ -85,7 +85,7 @@ class CollectionTests
         var obs = new ObservableCollection<int> { };
         obs.Clear();                    // Noncompliant
         var array = new int[] { };
-        array.Clone();                  // FIXME Non-compliant
+        array.Clone();                  // Noncompliant
         var dict = new Dictionary<int, int> { };
         dict.Clear();                   // Noncompliant
     }
@@ -208,16 +208,16 @@ class CollectionTests
         obs[1] = 5;                     // FIXME Non-compliant
 
         var array = new int[0];
-        array.Clone();                  // FIXME Non-compliant
-        array.CopyTo(null, 1);          // FIXME Non-compliant
-        array.GetEnumerator();          // FIXME Non-compliant
-        array.GetLength(1);             // FIXME Non-compliant
-        array.GetLongLength(1);         // FIXME Non-compliant
-        array.GetLowerBound(1);         // FIXME Non-compliant
-        array.GetUpperBound(1);         // FIXME Non-compliant
-        array.GetValue(1);              // FIXME Non-compliant
-        array.Initialize();             // FIXME Non-compliant
-        array.SetValue(5, 1);           // FIXME Non-compliant
+        array.Clone();                  // Noncompliant
+        array.CopyTo(null, 1);          // Noncompliant
+        array.GetEnumerator();          // Noncompliant
+        array.GetLength(1);             // Noncompliant
+        array.GetLongLength(1);         // Noncompliant
+        array.GetLowerBound(1);         // Noncompliant
+        array.GetUpperBound(1);         // Noncompliant
+        array.GetValue(1);              // Noncompliant
+        array.Initialize();             // Noncompliant
+        array.SetValue(5, 1);           // Noncompliant
         _ = array[1];                   // FIXME Non-compliant
         array[1] = 5;                   // FIXME Non-compliant
 
@@ -408,12 +408,18 @@ class AdvancedTests
         list.Clear();   // Noncompliant FP
     }
 
-    public void HigherRank_And_Jagged_Array_Is_NotEmpty()
+    public void HigherRank_And_Jagged_Array()
     {
         var array1 = new int[0, 0];
-        array1.Clone(); // Compliant
-        int[][] array2 = new int[1][];
-        array2.Clone(); // Compliant
+        array1.Clone(); // Noncompliant
+        var array2 = new int[0, 4];
+        array2.Clone(); // Noncompliant
+        var array3 = new int[5, 4];
+        array3.Clone(); // Compliant
+        int[][] array4 = new int[0][];
+        array4.Clone(); // Noncompliant
+        int[][] array5 = new int[1][];
+        array5.Clone(); // Compliant
     }
 
     void Foo(IEnumerable<int> items) { }
