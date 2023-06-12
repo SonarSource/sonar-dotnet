@@ -32,7 +32,7 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var state = context.State;
-        if (context.Operation.Instance.AsInvocation() is { } invocation && Array.Exists(DisposeMethods, x => x.Equals(invocation.TargetMethod.Name)))
+        if (context.Operation.Instance.AsInvocation() is { } invocation && DisposeMethods.Contains(invocation.TargetMethod.Name))
         {
             if (state[invocation.Instance]?.HasConstraint(DisposableConstraint.Disposed) is true)
             {
