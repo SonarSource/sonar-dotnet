@@ -12,23 +12,24 @@ class UsingDeclaration
     public void Disposed_UsingDeclaration()
     {
         using var d = new Disposable(); // Noncompliant {{Resource 'd = new Disposable()' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
+//                ^^^^^^^^^^^^^^^^^^^^
         d.Dispose();
     }
 }
 
 public class NullCoalescenceAssignment
 {
-    public void NullCoalescenceAssignment_Compliant(IDisposable s)
+    public void NullCoalescenceAssignment_Compliant(IDisposable d)
     {
-        s ??= new Disposable();
-        s.Dispose();
+        d ??= new Disposable();
+        d.Dispose();
     }
 
-    public void NullCoalescenceAssignment_NonCompliant(IDisposable s)
+    public void NullCoalescenceAssignment_NonCompliant(IDisposable d)
     {
-        using (s ??= new Disposable()) // FN
+        using (d ??= new Disposable()) // FN
         {
-            s.Dispose();
+            d.Dispose();
         }
     }
 }

@@ -80,7 +80,7 @@ public partial class Partial
     }
 }
 
-namespace TartetTypedConditional
+namespace TargetTypedConditional
 {
     public interface ISomething { }
     public class First : ISomething, IDisposable { public void Dispose() { } }

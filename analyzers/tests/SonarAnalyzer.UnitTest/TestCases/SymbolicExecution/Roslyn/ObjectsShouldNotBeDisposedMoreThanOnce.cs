@@ -6,25 +6,13 @@ public interface IWithDispose : IDisposable { }
 
 class Program
 {
-    private IDisposable disposable;
-
-    public void DisposeField()
-    {
-        disposable.Dispose();
-        disposable.Dispose(); // Noncompliant
-    }
-
-    public void DisposePotentiallyNullField(IDisposable d)
-    {
-        d?.Dispose();
-        d?.Dispose(); // FN
-    }
 
     public void DisposedTwice()
     {
         var d = new Disposable();
         d.Dispose();
         d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
+//      ^^^^^^^^^^^
     }
 
     public void DisposedTwice_Conditional()
@@ -37,6 +25,26 @@ class Program
         }
         d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
 //      ^^^^^^^^^^^
+    }
+
+    private IDisposable disposable;
+
+    public void DisposeField()
+    {
+        disposable.Dispose();
+        disposable.Dispose(); // Noncompliant
+    }
+
+    public void DisposedParameters(IDisposable d)
+    {
+        d.Dispose();
+        d.Dispose(); // Noncompliant
+    }
+
+    public void DisposePotentiallyNullField(IDisposable d)
+    {
+        d?.Dispose();
+        d?.Dispose(); // FN
     }
 
     public void DisposedTwice_Relations()
@@ -77,17 +85,13 @@ class Program
     public void Dispose_Stream_LeaveOpenFalse()
     {
         using (MemoryStream memoryStream = new MemoryStream()) // Compliant
-        using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: false))
-        {
-        }
+        using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: false)) { }
     }
 
     public void Dispose_Stream_LeaveOpenTrue()
     {
         using (MemoryStream memoryStream = new MemoryStream()) // Compliant
-        using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: true))
-        {
-        }
+        using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: true)) { }
     }
 
     public void Disposed_Using_WithDeclaration()
@@ -107,33 +111,25 @@ class Program
         }
     }
 
-    public void Disposed_Using_Parameters(IDisposable param1)
+    public void Close_ParametersOfDifferentTypes(IWithDispose withDispose, IDisposable disposable)
     {
-        param1.Dispose();
-        param1.Dispose(); // Noncompliant
+        withDispose.Dispose();
+        disposable.Dispose();
     }
 
-    public void Close_ParametersOfDifferentTypes(IWithDispose interface1, IDisposable interface2)
+    public void Close_ParametersOfSameType(IWithDispose withDispose1, IWithDispose withDispose2)
     {
-        // Regression test for https://github.com/SonarSource/sonar-dotnet/issues/1038
-        interface1.Dispose(); // ok, only called once on each parameter
-        interface2.Dispose();
+        withDispose1.Dispose();
+        withDispose2.Dispose();
     }
 
-    public void Close_ParametersOfSameType(IWithDispose instance1, IWithDispose instance2)
+    public void Close_OneParameterDisposedThrice(IWithDispose withDispose1, IWithDispose withDispose2)
     {
-        // Regression test for https://github.com/SonarSource/sonar-dotnet/issues/1038
-        instance1.Dispose();
-        instance2.Dispose();
-    }
+        withDispose1.Dispose();
+        withDispose1.Dispose(); // Noncompliant
+        withDispose1.Dispose(); // Noncompliant
 
-    public void Close_OneParameterDisposedThrice(IWithDispose instance1, IWithDispose instance2)
-    {
-        instance1.Dispose();
-        instance1.Dispose(); // Noncompliant
-        instance1.Dispose(); // Noncompliant
-
-        instance2.Dispose(); // ok - only disposed once
+        withDispose2.Dispose(); // ok - only disposed once
     }
 }
 
@@ -162,7 +158,7 @@ public class MyClass : IDisposable
 
 class TestLoops
 {
-    public static void LoopWithBreak(string[] list, bool condition, IWithDispose instance1)
+    public static void LoopWithBreak(string[] list, bool condition, IWithDispose withDispose)
     {
         foreach (string x in list)
         {
@@ -170,7 +166,7 @@ class TestLoops
             {
                 if (condition)
                 {
-                    instance1.Dispose(); // FN
+                    withDispose.Dispose(); // FN
                 }
                 break;
             }
@@ -181,13 +177,13 @@ class TestLoops
         }
     }
 
-    public static void Loop(string[] list, bool condition, IWithDispose instance1)
+    public static void Loop(string[] list, bool condition, IWithDispose withDispose)
     {
         foreach (string x in list)
         {
             if (condition)
             {
-                instance1.Dispose(); // Noncompliant
+                withDispose.Dispose(); // Noncompliant
             }
         }
     }
