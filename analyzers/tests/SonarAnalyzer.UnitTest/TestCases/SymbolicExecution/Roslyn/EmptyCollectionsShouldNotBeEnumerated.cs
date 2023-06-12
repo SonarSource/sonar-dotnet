@@ -43,6 +43,7 @@ class CollectionTests
     public void ConstructorWithCapacity()
     {
         int count = 5;
+        const int constCount = 5;
 
         var list = new List<int>(5);
         list.Clear();                   // Noncompliant
@@ -55,6 +56,8 @@ class CollectionTests
         var array = new int[5];
         array.Clone();                  // Compliant
         array = new int[count];
+        array.Clone();                  // Compliant
+        array = new int[constCount];
         array.Clone();                  // Compliant
         var dict = new Dictionary<int, int>(5);
         dict.Clear();                   // Noncompliant
@@ -159,10 +162,8 @@ class CollectionTests
         list.Reverse();                 // Noncompliant
         list.Sort();                    // Noncompliant
         list.TrueForAll(Predicate);     // Noncompliant
-        _ = list[1];                    // FIXME Non-compliant
-//          ~~~~~~~
-        list[1] = 5;                    // FIXME Non-compliant
-//      ~~~~~~~
+        _ = list[1];                    // Compliant, should be part of S6466
+        list[1] = 5;                    // Compliant, should be part of S6466
 
         var set = new HashSet<int>();
         set.Clear();                    // Noncompliant
@@ -208,8 +209,8 @@ class CollectionTests
         obs.Move(1, 2);                 // Noncompliant
         obs.Remove(5);                  // Noncompliant
         obs.RemoveAt(1);                // Noncompliant
-        _ = obs[1];                     // FIXME Non-compliant
-        obs[1] = 5;                     // FIXME Non-compliant
+        _ = obs[1];                     // Compliant, should be part of S6466
+        obs[1] = 5;                     // Compliant, should be part of S6466
 
         var array = new int[0];
         array.Clone();                  // Noncompliant
@@ -222,8 +223,8 @@ class CollectionTests
         array.GetValue(1);              // Noncompliant
         array.Initialize();             // Noncompliant
         array.SetValue(5, 1);           // Noncompliant
-        _ = array[1];                   // FIXME Non-compliant
-        array[1] = 5;                   // FIXME Non-compliant
+        _ = array[1];                   // Compliant, should be part of S6466
+        array[1] = 5;                   // Compliant, should be part of S6466
 
         var dict = new Dictionary<int, int>();
         dict.Clear();                   // Noncompliant
@@ -232,7 +233,7 @@ class CollectionTests
         dict.GetEnumerator();           // Noncompliant
         dict.Remove(5);                 // Noncompliant
         dict.TryGetValue(1, out i);     // Noncompliant
-        _ = dict[1];                    // FIXME Non-compliant
+        _ = dict[1];                    // Compliant, should be part of S6466
     }
 
     public void Methods_Ignored()

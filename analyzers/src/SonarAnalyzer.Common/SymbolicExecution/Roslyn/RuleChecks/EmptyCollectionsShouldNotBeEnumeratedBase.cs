@@ -150,5 +150,5 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     }
 
     private static bool IsEmptyArray(IOperation operation) =>
-        operation.AsArrayCreation()?.DimensionSizes.Any(x => x.AsLiteral() is { WrappedOperation.ConstantValue.Value: 0 }) ?? false;
+        operation.AsArrayCreation()?.DimensionSizes.Any(x => x.ConstantValue.Value is 0) ?? false;
 }
