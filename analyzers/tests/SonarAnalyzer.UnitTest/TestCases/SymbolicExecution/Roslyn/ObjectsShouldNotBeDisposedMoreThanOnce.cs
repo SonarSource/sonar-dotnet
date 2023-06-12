@@ -11,7 +11,7 @@ class Program
     {
         var d = new Disposable();
         d.Dispose();
-        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
+        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Please remove the redundant disposal.}}
 //      ^^^^^^^^^^^
     }
 
@@ -23,7 +23,7 @@ class Program
         {
             d.Dispose();
         }
-        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
+        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Please remove the redundant disposal.}}
 //      ^^^^^^^^^^^
     }
 
@@ -193,7 +193,7 @@ class UsingDeclaration
 {
     public void Disposed_UsingStatement()
     {
-        using (var d = new Disposable()) // Noncompliant {{Resource 'd = new Disposable()' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
+        using (var d = new Disposable()) // Noncompliant {{Resource 'd = new Disposable()' has already been disposed explicitly or through a using statement implicitly. Please remove the redundant disposal.}}
         {
             d.Dispose();
         }

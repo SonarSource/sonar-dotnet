@@ -11,7 +11,7 @@ class UsingDeclaration
 {
     public void Disposed_UsingDeclaration()
     {
-        using var d = new Disposable(); // Noncompliant {{Resource 'd = new Disposable()' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
+        using var d = new Disposable(); // Noncompliant {{Resource 'd = new Disposable()' has already been disposed explicitly or through a using statement implicitly. Please remove the redundant disposal.}}
 //                ^^^^^^^^^^^^^^^^^^^^
         d.Dispose();
     }
@@ -40,7 +40,7 @@ public interface IWithDefaultMembers
     {
         var d = new Disposable();
         d.Dispose();
-        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
+        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Please remove the redundant disposal.}}
     }
 }
 
@@ -81,7 +81,7 @@ public class Consumer
 
     public void M2()
     {
-        using var s = new Struct(); // Noncompliant {{Resource 's = new Struct()' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
+        using var s = new Struct(); // Noncompliant {{Resource 's = new Struct()' has already been disposed explicitly or through a using statement implicitly. Please remove the redundant disposal.}}
         s.Dispose();
     }
 
@@ -145,7 +145,7 @@ public class ExpressionsTest
     {
         a.Dispose();
         b.Dispose();
-        (a ??= b).Dispose(); // Noncompliant {{Resource 'a ??= b' has already been disposed explicitly or implicitly through a using statement. Please remove the redundant disposal.}}
+        (a ??= b).Dispose(); // Noncompliant {{Resource 'a ??= b' has already been disposed explicitly or through a using statement implicitly. Please remove the redundant disposal.}}
 
         (x ??= y).Dispose();
         x.Dispose(); // FN
