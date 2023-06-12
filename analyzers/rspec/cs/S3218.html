@@ -1,53 +1,61 @@
 <h2>Why is this an issue?</h2>
-<p>It’s possible to name the members of an inner class the same as the <code>static</code> members of its enclosing class - possible, but a bad idea.
-That’s because maintainers may be confused about which members are being used where. Instead the inner class' members should be renamed and all the
-references updated.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>Naming the members of an inner class the same as the static members of its enclosing class is possible but generally considered a bad practice.
+That’s because maintainers may be confused about which members are being used in a given context. Instead the inner class member should be given
+distinct and descriptive name, and all references to it should be updated accordingly.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class Outer
 {
   public static int A;
 
   public class Inner
   {
-    public int A; //Noncompliant
+    public int A; // Noncompliant
+
     public int MyProp
     {
-      get { return A; }  // Returns inner A. Was that intended?
+      get =&gt; A; // Returns inner A. Was that intended?
     }
   }
 }
 </pre>
-<p>After a rename</p>
-<pre>
+<p>Here’s an example of compliant code after renaming the inner class member, this way the property will return the <code>Outer</code> A:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
 class Outer
 {
   public static int A;
 
   public class Inner
   {
-    public int B;
+    public int B; // Compliant
+
     public int MyProp
     {
-      get { return A; }  // Still compiles and runs but functionality has changed
+      get =&gt; A; // Returns outer A
     }
   }
 }
 </pre>
-<h3>Compliant solution</h3>
+<p>Or if you want to reference the <code>Inner</code> A field:</p>
 <pre>
 class Outer
 {
-  public static int A;
+  public static int B;
 
   public class Inner
   {
-    public int InnerA;
+    public int A; // Compliant
+
     public int MyProp
     {
-      get { return InnerA; }
+      get =&gt; A; // Returns inner A
     }
   }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions">Common Coding Conventions</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/nested-types">Nested Types</a> </li>
+</ul>
 

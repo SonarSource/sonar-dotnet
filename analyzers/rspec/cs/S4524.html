@@ -1,21 +1,99 @@
 <h2>Why is this an issue?</h2>
-<p><code>switch</code> can contain a <code>default</code> clause for various reasons: to handle unexpected values, to show that all the cases were
-properly considered, etc.</p>
-<p>For readability purposes, to help a developer quickly spot the default behavior of a <code>switch</code> statement, it is recommended to put the
-<code>default</code> clause at the beginning or the end of the <code>switch</code> statement.</p>
-<p>This rule raises an issue if the <code>default</code> clause is not the first nor the last one of the <code>switch</code>'s cases.</p>
+<p>The <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements#the-switch-statement">switch
+statement</a> is a conditional statement that executes a sequence of instructions based on patterns matching the provided value.</p>
 <pre>
+switch (temperatureInCelsius)
+{
+    case &lt; 35.0:
+        Console.WriteLine("Hypothermia");
+        break;
+    case &gt;= 36.5 and &lt;= 37.5:
+        Console.WriteLine("Normal");
+        break;
+    case &gt; 37.5 and &lt;= 40.0:
+        Console.WriteLine("Fever or hyperthermia");
+        break;
+    case &gt; 40.0:
+        Console.WriteLine("Hyperpyrexia");
+        break;
+}
+</pre>
+<p>The <code>switch</code> statement can optionally contain a <code>default</code> clause, executed when none of the <code>case</code> clauses are
+executed (or in presence of a <code>goto default;</code>).</p>
+<pre>
+switch (gradeLetter)
+{
+    case "A+":
+    case "A":
+    case "A-":
+        Console.WriteLine("Excellent");
+        break;
+    case "B+":
+    case "B":
+        Console.WriteLine("Very Good");
+        break;
+    case "B-":
+    case "C+":
+        Console.WriteLine("Good");
+        break;
+    case "C":
+        Console.WriteLine("Pass");
+        break;
+    case "F":
+        Console.WriteLine("Fail");
+        break;
+    default:
+        Console.WriteLine("Invalid grade letter!");
+        break;
+}
+</pre>
+<p>The <code>default</code> clause can be defined for various reasons:</p>
+<ul>
+  <li> to handle <strong>unexpected values</strong>, as shown in the example above </li>
+  <li> or to show that all the cases were properly considered, making the function explicitely <strong>total</strong> (as opposed to <a
+  href="https://en.wikipedia.org/wiki/Partial_function">partial</a>) </li>
+</ul>
+<p>While C# allows the <code>default</code> clause to appear in any place within a <code>switch</code> statement, and while its position doesn’t alter
+its behavior, it is recommended to put the <code>default</code> clause either at the beginning or at the end of the <code>switch</code> statement.</p>
+<p>That improves readability and helps the developer to quickly find the default behavior of a <code>switch</code> statement.</p>
+<p>This rule raises an issue if the <code>default</code> clause is neither the first nor the last one of the <code>switch</code> statement.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 switch (param)
 {
     case 0:
-      DoSomething();
-      break;
+        DoSomething();
+        break;
     default: // Noncompliant: default clause should be the first or last one
-      Error();
-      break;
+        Error();
+        break;
     case 1:
-      DoSomethingElse();
-      break;
+        DoSomethingElse();
+        break;
 }
 </pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+switch (param)
+{
+    case 0:
+        DoSomething();
+        break;
+    case 1:
+        DoSomethingElse();
+        break;
+    default:
+        Error();
+        break;
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements#the-switch-statement">Switch
+  statement</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Partial_function">Partial function</a> </li>
+</ul>
 

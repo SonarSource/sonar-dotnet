@@ -1,35 +1,52 @@
 <h2>Why is this an issue?</h2>
-<p>Shared resources should not be used for locking as it increases the chance of deadlocks. Any other thread could acquire (or attempt to acquire) the
-same lock for another unrelated purpose.</p>
-<p>Instead, a dedicated <code>object</code> instance should be used for each shared resource, to avoid deadlocks or lock contention.</p>
+<p>A shared resource refers to a resource or data that can be accessed or modified by multiple <a
+href="https://en.wikipedia.org/wiki/Thread_(computing)">threads</a> or concurrent parts of a program. It could be any piece of data, object, file,
+database connection, or system resource that needs to be accessed or manipulated by multiple parts of a program concurrently.</p>
+<p>Shared resources should not be used for <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">locking</a> as it increases the chance of
+<a href="https://en.wikipedia.org/wiki/Deadlock">deadlocks</a>. Any other thread could acquire (or attempt to acquire) the same lock while doing some
+operation, without knowing that the resource is meant to be used for locking purposes.</p>
+<p>One case of this is strings, which are <a href="https://en.wikipedia.org/wiki/Interning_(computer_science)">interned</a> by the runtime. This means
+that each string instance is immutable and stored, and then is reused everywhere it is referenced.</p>
+<p>Instead, a dedicated private <code>object</code> instance should be used for each shared resource. Making the lock-specific object
+<code>private</code> guarantees that the access to it is as minimal as possible, in order to avoid deadlocks or lock contention.</p>
 <p>The following objects are considered as shared resources:</p>
 <ul>
-  <li> <code>Me</code> </li>
-  <li> a <code>Type</code> object </li>
-  <li> a string literal </li>
-  <li> a string instance </li>
+  <li> a reference to <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/program-structure/me-my-mybase-and-myclass#me">Me</a>: if the instance
+  is publicly accessibly, the lock might be shared </li>
+  <li> a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.type">Type</a> object: if the type class is publicly accessibly, the lock might
+  be shared </li>
+  <li> a <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/string-data-type">string</a> literal or
+  instance: if any other part of the program uses the same string, the lock is shared because of interning </li>
 </ul>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Public Sub MyLockingMethod()
     SyncLock Me 'Noncompliant
         ' ...
     End SyncLock
 End Sub
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-Class MyClass
-    Dim lockObj As New Object()
-
-    Public Sub MyLockingMethod()
-        SyncLock lockObj
-            ' ...
-        End SyncLock
-    End Sub
-End Class
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+Private lockObj As New Object()
+Public Sub MyLockingMethod()
+    SyncLock lockObj
+        ' ...
+    End SyncLock
+End Sub
 </pre>
 <h2>Resources</h2>
-<p><a href="https://docs.microsoft.com/en-us/dotnet/standard/threading/managed-threading-best-practices">Microsoft Documentation: Managed Threading
-Best Practices</a></p>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://en.wikipedia.org/wiki/Thread_(computing)">Thread</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">Locking</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Deadlock">Deadlock</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Interning_(computer_science)">Interning</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern#remarks">String interning by the runtime</a> </li>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/standard/threading/managed-threading-best-practices">Managed Threading Best Practices</a>
+  </li>
+</ul>
 

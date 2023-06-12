@@ -14,5 +14,5 @@
   "ruleSpecification": "RSPEC-2365",
   "sqKey": "S2365",
   "scope": "Main",
-  "quickfix": "unknown"
+  "quickfix": "infeasible"
 }

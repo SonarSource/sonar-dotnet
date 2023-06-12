@@ -1,41 +1,63 @@
 <h2>Why is this an issue?</h2>
-<p>A thread acquiring a lock on an object that can be accessed across application domain boundaries runs the risk of being blocked by another thread
-in a different application domain. Objects that can be accessed across application domain boundaries are said to have weak identity. Types with weak
-identity are:</p>
+<p>Objects that can be accessed across <a href="https://learn.microsoft.com/en-us/dotnet/framework/app-domains/application-domains">application
+domain</a> boundaries are said to have weak identity. This means that these objects can be considered shared resources outside of the domain, which
+can be lead to them being accessed or modified by multiple threads or concurrent parts of a program, outside of the domain.</p>
+<p>A <a href="https://en.wikipedia.org/wiki/Thread_(computing)">thread</a> acquiring a <a
+href="https://en.wikipedia.org/wiki/Lock_(computer_science)">lock</a> on such an object runs the risk of being blocked by another thread in a
+different application domain, leading to poor performance and potentially <a
+href="https://stackoverflow.com/questions/1162587/what-is-starvation">thread starvation</a> and <a
+href="https://en.wikipedia.org/wiki/Deadlock">deadlocks</a>.</p>
+<p>Types with weak identity are:</p>
 <ul>
-  <li> <code>MarshalByRefObject</code> </li>
-  <li> <code>ExecutionEngineException</code> </li>
-  <li> <code>OutOfMemoryException</code> </li>
-  <li> <code>StackOverflowException</code> </li>
-  <li> <code>String</code> </li>
-  <li> <code>MemberInfo</code> </li>
-  <li> <code>ParameterInfo</code> </li>
-  <li> <code>Thread</code> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.marshalbyrefobject">MarshalByRefObject</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.executionengineexception">ExecutionEngineException</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.outofmemoryexception">OutOfMemoryException</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.stackoverflowexception">StackOverflowException</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string">String</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.reflection.memberinfo">MemberInfo</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.reflection.parameterinfo">ParameterInfo</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.thread">Thread</a> </li>
 </ul>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Public Class Sample
-
-    Private myString As String = "foo"
+    Private ReadOnly myLock As New StackOverflowException
 
     Public Sub Go()
-        SyncLock myString   ' Noncompliant
+        SyncLock myLock ' Noncompliant
+        ' ...
         End SyncLock
     End Sub
-
 End Class
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 Public Class Sample
-
-    Private Shared ReadOnly fLock As New Object
+    Private ReadOnly myLock As New Object
 
     Public Sub Go()
-        SyncLock fLock
+        SyncLock myLock
+        ' ...
         End SyncLock
     End Sub
-
 End Class
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://en.wikipedia.org/wiki/Thread_(computing)">Thread</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">Locking</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Deadlock">Deadlock</a> </li>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/standard/threading/managed-threading-best-practices">Managed Threading Best Practices</a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/framework/app-domains/application-domains">Application domains</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://stackoverflow.com/questions/1162587/what-is-starvation">What is (thread) starvation?</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Readers%E2%80%93writers_problem">Readers-writers problem</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem">Dining philosophers problem</a> </li>
+</ul>
 

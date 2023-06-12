@@ -1,29 +1,36 @@
 <h2>Why is this an issue?</h2>
-<p>Throwing an exception from within a finally block will mask any exception which was previously thrown in the <code>try</code> or <code>catch</code>
-block, and the masked’s exception message and stack trace will be lost.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>If an exception is already being thrown within the <code>try</code> block or caught in a <code>catch</code> block, throwing another exception in
+the <code>finally</code> block will override the original exception. This means that the original exception’s message and stack trace will be lost,
+potentially making it challenging to diagnose and troubleshoot the root cause of the problem.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 try
 {
-  /* some work which end up throwing an exception */
+  // Some work which end up throwing an exception
   throw new ArgumentException();
 }
 finally
 {
-  /* clean up */
-  throw new InvalidOperationException();       // Noncompliant; will mask the ArgumentException
+  // Cleanup
+  throw new InvalidOperationException(); // Noncompliant: will mask the ArgumentException
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 try
 {
-  /* some work which end up throwing an exception */
+  // Some work which end up throwing an exception
   throw new ArgumentException();
 }
 finally
 {
-  /* clean up */                       // Compliant
+  // Cleanup without throwing
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/exceptions/">Exceptions and Exception Handling</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/exceptions/how-to-use-finally-blocks">Finally blocks</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/how-to-execute-cleanup-code-using-finally">How to execute
+  cleanup code using finally</a> </li>
+</ul>
 
