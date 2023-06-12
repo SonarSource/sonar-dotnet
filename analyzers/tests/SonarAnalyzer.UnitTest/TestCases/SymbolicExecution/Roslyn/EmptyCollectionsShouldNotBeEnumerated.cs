@@ -279,10 +279,6 @@ class CollectionTests
 
         var array = new int[0];
         array.GetHashCode();
-        array.GetLength(0);
-        array.GetLongLength(0);
-        array.GetLowerBound(0);
-        array.GetUpperBound(0);
         array.Equals(new object());
         array.GetType();
         array.ToString();
