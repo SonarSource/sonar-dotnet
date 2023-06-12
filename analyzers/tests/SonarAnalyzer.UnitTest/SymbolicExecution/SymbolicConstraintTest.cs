@@ -55,6 +55,13 @@ public class SymbolicConstraintTest
     }
 
     [TestMethod]
+    public void CollectionConstraint_Opposite()
+    {
+        CollectionConstraint.Empty.Opposite.Should().Be(CollectionConstraint.NotEmpty);
+        CollectionConstraint.NotEmpty.Opposite.Should().Be(CollectionConstraint.Empty);
+    }
+
+    [TestMethod]
     public void InitializationVectorConstraint_ToString()
     {
         InitializationVectorConstraint.Initialized.ToString().Should().Be("InitializationVectorInitialized");

@@ -20,16 +20,15 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
+
+internal sealed class CollectionConstraint : SymbolicConstraint
 {
-    internal sealed class CollectionConstraint : SymbolicConstraint
-    {
-        public static readonly CollectionConstraint Empty = new(ConstraintKind.CollectionEmpty);
-        public static readonly CollectionConstraint NotEmpty = new(ConstraintKind.CollectionNotEmpty);
+    public static readonly CollectionConstraint Empty = new(ConstraintKind.CollectionEmpty);
+    public static readonly CollectionConstraint NotEmpty = new(ConstraintKind.CollectionNotEmpty);
 
-        public override SymbolicConstraint Opposite =>
-            this == Empty ? NotEmpty : Empty;
+    public override SymbolicConstraint Opposite =>
+        this == Empty ? NotEmpty : Empty;
 
-        private CollectionConstraint(ConstraintKind kind) : base(kind) { }
-    }
+    private CollectionConstraint(ConstraintKind kind) : base(kind) { }
 }

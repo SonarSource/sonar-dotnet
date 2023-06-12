@@ -103,44 +103,40 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         nameof(Collection<int>.Insert),
         "TryAdd");
 
-    private readonly HashSet<IOperation> emptyCollectionAccess = new HashSet<IOperation>();
-    private readonly HashSet<IOperation> notEmptyCollectionAccess = new HashSet<IOperation>();
+    private readonly HashSet<IOperation> emptyAccess = new HashSet<IOperation>();
+    private readonly HashSet<IOperation> nonEmptyAccess = new HashSet<IOperation>();
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        var state = context.State;
-
         var operation = context.Operation.Instance;
         if (operation.AsObjectCreation()?.Type.IsAny(TrackedCollectionTypes) ?? false)
         {
-            state = state.SetOperationConstraint(operation, CollectionConstraint.Empty);
+            return context.State.SetOperationConstraint(operation, CollectionConstraint.Empty);
         }
         else if (operation.AsInvocation() is { Instance: not null } invocation)
         {
             if (RaisingMethods.Contains(invocation.TargetMethod.Name))
             {
-                if (state[invocation.Instance]?.HasConstraint(CollectionConstraint.Empty) is true)
+                if (context.State[invocation.Instance]?.HasConstraint(CollectionConstraint.Empty) is true)
                 {
-                    emptyCollectionAccess.Add(operation);
+                    emptyAccess.Add(operation);
                 }
                 else
                 {
-                    notEmptyCollectionAccess.Add(operation);
+                    nonEmptyAccess.Add(operation);
                 }
             }
-            if (AddMethods.Contains(invocation.TargetMethod.Name)
-                && invocation.Instance.TrackedSymbol() is { } symbol)
+            if (AddMethods.Contains(invocation.TargetMethod.Name) && invocation.Instance.TrackedSymbol() is { } symbol)
             {
-                state = state.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
+                return context.State.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
             }
         }
-
-        return state;
+        return context.State;
     }
 
     public override void ExecutionCompleted()
     {
-        foreach (var operation in emptyCollectionAccess.Except(notEmptyCollectionAccess))
+        foreach (var operation in emptyAccess.Except(nonEmptyAccess))
         {
             ReportIssue(operation, operation.Syntax.ToString());
         }
