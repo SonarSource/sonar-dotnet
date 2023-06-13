@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SonarAnalyzer.UnitTest.TestCases
 {
-    internal class SillyMathematicalComparison
+    internal class UnnecessaryMathematicalComparison
     {
         public void IsPatterns()
         {

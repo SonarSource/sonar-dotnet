@@ -23,16 +23,16 @@ using CS = SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class SillyMathematicalComparisonTest
+    public class UnnecessaryMathematicalComparisonTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SillyMathematicalComparison>();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnnecessaryMathematicalComparison>();
 
         [TestMethod]
-        public void SillyMathematicalComparison_CS() =>
-            builderCS.AddPaths("SillyMathematicalComparison.cs").Verify();
+        public void UnnecessaryMathematicalComparison_CS() =>
+            builderCS.AddPaths("UnnecessaryMathematicalComparison.cs").Verify();
 
         [TestMethod]
-        public void SillyMathematicalComparison_CSharp9() =>
-            builderCS.AddPaths("SillyMathematicalComparison.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+        public void UnnecessaryMathematicalComparison_CSharp9() =>
+            builderCS.AddPaths("UnnecessaryMathematicalComparison.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
     }
 }
