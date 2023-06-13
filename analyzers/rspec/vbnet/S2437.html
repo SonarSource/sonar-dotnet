@@ -1,11 +1,12 @@
 <h2>Why is this an issue?</h2>
-<p>Certain <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators">bitwise operations</a>
-are not needed and should not be performed because their results are predictable.</p>
+<p>Certain <a
+href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/logical-and-bitwise-operators#bitwise-operations">bitwise
+operations</a> are not needed and should not be performed because their results are predictable.</p>
 <p>Specifically, using <code>And -1</code> with any value always results in the original value.</p>
 <p>That is because the binary representation of <code>-1</code> on a <a
-href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types">numeric data type</a> supporting
-negative numbers, such as <code>Integer</code> or <code>Long</code>, is based on <a href="https://en.wikipedia.org/wiki/Two%27s_complement">two’s
-complement</a> and made of all 1s: <code>&amp;B111…​111</code>.</p>
+href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/numeric-data-types">numeric data type</a>
+supporting negative numbers, such as <code>Integer</code> or <code>Long</code>, is based on <a
+href="https://en.wikipedia.org/wiki/Two%27s_complement">two’s complement</a> and made of all 1s: <code>&amp;B111…​111</code>.</p>
 <p>Performing <code>And</code> between a value and <code>&amp;B111…​111</code> means applying the <code>And</code> operator to each bit of the value
 and the bit <code>1</code>, resulting in a value equal to the provided one, bit by bit.</p>
 <pre>

@@ -1,6 +1,6 @@
 <h2>Why is this an issue?</h2>
-<p><a href="https://en.wikipedia.org/wiki/Recursion">Recursion</a> is a technique used in computer science to define a problem in terms of the problem
-itself, usually in terms of a simpler version of the problem itself.</p>
+<p><a href="https://en.wikipedia.org/wiki/Recursion">Recursion</a> is a technique used to define a problem in terms of the problem itself, usually in
+terms of a simpler version of the problem itself.</p>
 <p>For example, the implementation of the generator for the n-th value of the <a href="https://en.wikipedia.org/wiki/Fibonacci_sequence">Fibonacci
 sequence</a> comes naturally from its mathematical definition, when recursion is used:</p>
 <pre>
@@ -54,7 +54,7 @@ Class C2(Of T)
     Inherits C2(Of C2(Of T)) ' Error BC31447 C2(Of T) cannot reference itself in Inherits clause
 End Class
 </pre>
-<p>In more complex scenarios, however, the code will compile but execution will result into a <a
+<p>In more complex scenarios, however, the code will compile but execution will result in a <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.typeloadexception">TypeLoadException</a> if you try to instantiate the class.</p>
 <pre>
 Class C1(Of T)
@@ -70,6 +70,13 @@ Dim c2 = New C2(Of Integer) ' This would result into a TypeLoadException
 <h3>Documentation</h3>
 <ul>
   <li> <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">Recursion</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.typeloadexception?view=net-7.0">TypeLoadException</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.typeloadexception">TypeLoadException</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern">Curiously recurring template pattern</a> </li>
+  <li> <a href="https://blog.stephencleary.com/2022/09/modern-csharp-techniques-1-curiously-recurring-generic-pattern.html">Modern C# Techniques, Part
+  1: Curiously Recurring Generic Pattern</a> </li>
+  <li> <a href="https://ericlippert.com/2011/02/02/curiouser-and-curiouser/">Curiouser and curiouser</a> </li>
 </ul>
 

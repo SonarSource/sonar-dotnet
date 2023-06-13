@@ -1,5 +1,5 @@
 {
-  "title": "String offset-based methods should be preferred for finding substrings from offsets",
+  "title": "Seeking characters from a substring should be avoided",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
