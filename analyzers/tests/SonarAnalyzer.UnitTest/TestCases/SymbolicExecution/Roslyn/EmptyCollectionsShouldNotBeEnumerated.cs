@@ -42,9 +42,6 @@ class CollectionTests
 
     public void ConstructorWithCapacity()
     {
-        int count = 5;
-        const int constCount = 5;
-
         var list = new List<int>(5);
         list.Clear();                   // Noncompliant
         var set = new HashSet<int>(5);
@@ -53,14 +50,33 @@ class CollectionTests
         queue.Clear();                  // Noncompliant
         var stack = new Stack<int>(5);
         stack.Clear();                  // Noncompliant
-        var array = new int[5];
-        array.Clone();                  // Compliant
-        array = new int[count];
-        array.Clone();                  // Compliant
-        array = new int[constCount];
-        array.Clone();                  // Compliant
         var dict = new Dictionary<int, int>(5);
         dict.Clear();                   // Noncompliant
+    }
+
+    public void ArrayWithCapacity()
+    {
+        int zero = 0;
+        int five = 5;
+        const int ZERO = 0;
+        const int FIVE = 5;
+
+        var array = new int[5];
+        array.Clone();                  // Compliant
+        array = new int[2 + 3];
+        array.Clone();                  // Compliant
+        array = new int[five];
+        array.Clone();                  // Compliant
+        array = new int[FIVE];
+        array.Clone();                  // Compliant
+        array = new int[0];
+        array.Clone();                  // Noncompliant
+        array = new int[2 - 2];
+        array.Clone();                  // Noncompliant
+        array = new int[zero];
+        array.Clone();                  // FN
+        array = new int[ZERO];
+        array.Clone();                  // Noncompliant
     }
 
     public void ConstructorWithEnumerable()
