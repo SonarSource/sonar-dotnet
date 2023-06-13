@@ -47,6 +47,18 @@ class Program
         d?.Dispose(); // FN
     }
 
+    public void DisposePotentiallyNullField_CheckForNullOnlyOnce_First(IDisposable d)
+    {
+        d?.Dispose();
+        d.Dispose(); // FN
+    }
+
+    public void DisposePotentiallyNullField_CheckForNullOnlyOnce_Second(IDisposable d)
+    {
+        d.Dispose();
+        d?.Dispose(); // Noncompliant
+    }
+
     public void DisposedTwice_Relations()
     {
         IDisposable d = new Disposable();

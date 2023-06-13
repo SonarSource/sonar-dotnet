@@ -27,7 +27,7 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
     protected const string DiagnosticId = "S3966";
     protected const string MessageFormat = "Resource '{0}' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.";
 
-    private static readonly string[] DisposeMethods = { "Dispose", "DisposeAsync"};
+    protected static readonly string[] DisposeMethods = { "Dispose", "DisposeAsync"};
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
