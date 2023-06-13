@@ -45,12 +45,7 @@ public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ObjectsShouldNotBeD
             }
         }
 
-        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
-        {
-            if (node.GetIdentifier().GetValueOrDefault() is { } methodName && Array.Exists(DisposeMethods, x => x.Equals(methodName.ValueText)))
-            {
-                Result = true;
-            }
-        }
+        public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
+            Result = node.GetIdentifier().GetValueOrDefault() is { } methodName && DisposeMethods.Contains(methodName.ValueText);
     }
 }
