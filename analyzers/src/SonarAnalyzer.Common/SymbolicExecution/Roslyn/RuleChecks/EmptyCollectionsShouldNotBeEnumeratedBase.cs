@@ -138,9 +138,11 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                     nonEmptyAccess.Add(operation);
                 }
             }
-            if (AddMethods.Contains(invocation.TargetMethod.Name) && invocation.Instance.TrackedSymbol() is { } symbol)
+            if (AddMethods.Contains(invocation.TargetMethod.Name))
             {
-                return context.State.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
+                return invocation.Instance.TrackedSymbol() is { } symbol
+                    ? context.State.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty)
+                    : context.State.SetOperationConstraint(invocation.Instance, CollectionConstraint.NotEmpty);
             }
         }
         return context.State;

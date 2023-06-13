@@ -140,11 +140,11 @@ class CollectionTests
     public void ConstructorWithInitializer()
     {
         var list = new List<int> { 1, 2, 3 };
-        list.Clear();                   // Noncompliant FP
+        list.Clear();                   // Compliant
         var set = new HashSet<int> { 1, 2, 3 };
-        set.Clear();                    // Noncompliant FP
+        set.Clear();                    // Compliant
         var obs = new ObservableCollection<int> { 1, 2, 3 };
-        obs.Clear();                    // Noncompliant FP
+        obs.Clear();                    // Compliant
         var array = new int[] { 1, 2, 3 };
         array.Clone();                  // Compliant
         var dict = new Dictionary<int, int>
