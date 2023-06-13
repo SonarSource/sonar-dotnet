@@ -87,6 +87,8 @@ class CollectionTests
         set.Clear();                    // Compliant
         set = new HashSet<int>(items, EqualityComparer<int>.Default);
         set.Clear();                    // Compliant
+        set = new HashSet<int>(comparer: EqualityComparer<int>.Default, collection: items);
+        set.Clear();                    // Compliant
         var queue = new Queue<int>(items);
         queue.Clear();                  // Compliant
         var stack = new Stack<int>(items);
@@ -95,6 +97,23 @@ class CollectionTests
         obs.Clear();                    // Compliant
         var dict = new Dictionary<int, int>(dictionaryItems);
         dict.Clear();                   // Compliant
+    }
+
+    public void ConstructorWithEnumerableWithConstraint()
+    {
+        var baseCollection = new List<int>();
+        var set = new HashSet<int>(baseCollection);
+        set.Clear();                    // Noncompliant
+
+        set = new HashSet<int>(baseCollection, EqualityComparer<int>.Default);
+        set.Clear();                    // Noncompliant
+
+        set = new HashSet<int>(comparer: EqualityComparer<int>.Default, collection: baseCollection);
+        set.Clear();                    // Noncompliant
+
+        baseCollection.Add(1);
+        set = new HashSet<int>(baseCollection);
+        set.Clear();                    // Compliant
     }
 
     public void ConstructorWithEmptyInitializer()

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -115,7 +115,11 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        if (IsEmptyObject(operation) || IsEmptyArray(operation))
+        if (operation.AsObjectCreation() is { } objectCreation && objectCreation.Type.IsAny(TrackedCollectionTypes))
+        {
+            return SetConstraintForObjectCreation(context.State, objectCreation);
+        }
+        else if (IsEmptyArray(operation))
         {
             return context.State.SetOperationConstraint(operation, CollectionConstraint.Empty);
         }
@@ -140,11 +144,6 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         return context.State;
     }
 
-    private static bool IsEmptyObject(IOperation operation) =>
-        operation.AsObjectCreation() is { } objectCreation
-        && objectCreation.Type.IsAny(TrackedCollectionTypes)
-        && objectCreation.Constructor.Parameters.All(x => !x.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable));
-
     public override void ExecutionCompleted()
     {
         foreach (var operation in emptyAccess.Except(nonEmptyAccess))
@@ -152,6 +151,25 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             ReportIssue(operation, operation.Syntax.ToString());
         }
     }
+
+    private static ProgramState SetConstraintForObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
+        FirstArgumentAsCollection(objectCreation) switch
+        {
+            { } firstArgument when ConstraintFromArgument(state, firstArgument) is { } constraint => state.SetOperationConstraint(objectCreation, constraint),
+            { } => state,
+            _ => state.SetOperationConstraint(objectCreation, CollectionConstraint.Empty)
+        };
+
+    private static IArgumentOperationWrapper? FirstArgumentAsCollection(IObjectCreationOperationWrapper objectCreation) =>
+        objectCreation.Arguments.Select(x => x.AsArgument()).SingleOrDefault(x => x?.Parameter.Ordinal == 0) is { } firstArgument
+        && firstArgument.Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable)
+        ? firstArgument
+        : null;
+
+    private static CollectionConstraint ConstraintFromArgument(ProgramState state, IArgumentOperationWrapper argument) =>
+        argument.WrappedOperation.TrackedSymbol() is { } symbol
+        ? state[symbol]?.Constraint<CollectionConstraint>()
+        : null;
 
     private static bool IsEmptyArray(IOperation operation) =>
         operation.AsArrayCreation()?.DimensionSizes.Any(x => x.ConstantValue.Value is 0) ?? false;

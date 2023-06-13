@@ -43,6 +43,9 @@ internal static class IOperationExtensions
             conversion.IsTryCast && !conversion.Operand.Type.DerivesOrImplements(conversion.Type);
     }
 
+    internal static IArgumentOperationWrapper? AsArgument(this IOperation operation) =>
+        operation.As(OperationKindEx.Argument, IArgumentOperationWrapper.FromOperation);
+
     internal static IAssignmentOperationWrapper? AsAssignment(this IOperation operation) =>
         operation.As(OperationKindEx.SimpleAssignment, IAssignmentOperationWrapper.FromOperation);
 
