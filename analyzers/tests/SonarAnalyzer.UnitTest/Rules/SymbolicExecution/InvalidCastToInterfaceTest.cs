@@ -32,7 +32,7 @@ public class InvalidCastToInterfaceTest
         .WithBasePath(@"SymbolicExecution\Sonar")
         .WithOnlyDiagnostics(CS.InvalidCastToInterface.S1944);
 
-    // The SE part that is empty and doesn't report anything. It exists to preven the old SE rule from running.
+    // The SE part that is empty and doesn't report anything. It exists to prevent the old SE rule from running.
     // When the old SE engine is removed, the SymbolicExecutionRunner runner should be removed from this class and test cases should be moved out of SymbolicExecution directory.
     private readonly VerifierBuilder roslynCS = new VerifierBuilder()
         .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))

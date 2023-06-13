@@ -25,5 +25,4 @@ public sealed class InvalidCastToInterface : InvalidCastToInterfaceBase<SyntaxKi
 {
     protected override DiagnosticDescriptor Rule { get; } = DescriptorFactory.Create(DiagnosticId, MessageFormat);
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-    protected override bool EnableConcurrentExecution => false;
 }
