@@ -10,7 +10,7 @@
     "cwe",
     "suspicious"
   ],
-  "defaultSeverity": "Critical",
+  "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-1944",
   "sqKey": "S1944",
   "scope": "All",

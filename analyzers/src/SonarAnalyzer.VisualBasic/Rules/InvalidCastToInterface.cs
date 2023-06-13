@@ -18,13 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.Rules.VisualBasic;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class InvalidCastToInterface : InvalidCastToInterfaceBase<SyntaxKind>
 {
-    public static readonly DiagnosticDescriptor S1944 = DescriptorFactory.Create(DiagnosticId, MessageFormat);  // This indirection is needed only because of the old SE engine, see base class.
-
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-    protected override DiagnosticDescriptor Rule => S1944;
+    protected override DiagnosticDescriptor Rule { get; } = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 }

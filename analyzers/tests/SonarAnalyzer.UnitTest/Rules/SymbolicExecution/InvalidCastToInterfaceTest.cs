@@ -19,6 +19,7 @@
  */
 
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
@@ -31,13 +32,15 @@ public class InvalidCastToInterfaceTest
         .WithBasePath(@"SymbolicExecution\Sonar")
         .WithOnlyDiagnostics(CS.InvalidCastToInterface.S1944);
 
-    // The SE part that is empty and doesn't report anything. It exists to preven the old SE rule from running.
+    // The SE part that is empty and doesn't report anything. It exists to prevent the old SE rule from running.
     // When the old SE engine is removed, the SymbolicExecutionRunner runner should be removed from this class and test cases should be moved out of SymbolicExecution directory.
     private readonly VerifierBuilder roslynCS = new VerifierBuilder()
         .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
         .AddAnalyzer(() => new CS.InvalidCastToInterface())                                         // Syntax-based part
         .WithBasePath(@"SymbolicExecution\Roslyn")
         .WithOnlyDiagnostics(CS.InvalidCastToInterface.S1944);
+
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.InvalidCastToInterface>();  // Syntax-based part only
 
     [DataTestMethod]
     [DataRow(ProjectType.Product)]
@@ -53,6 +56,10 @@ public class InvalidCastToInterfaceTest
     [DataRow(ProjectType.Test)]
     public void InvalidCastToInterface_Roslyn_CS(ProjectType projectType) =>
         roslynCS.AddPaths("InvalidCastToInterface.cs").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
+
+    [TestMethod]
+    public void InvalidCastToInterface_VB() =>
+        builderVB.AddPaths("InvalidCastToInterface.vb").Verify();
 
 #if NET
 
