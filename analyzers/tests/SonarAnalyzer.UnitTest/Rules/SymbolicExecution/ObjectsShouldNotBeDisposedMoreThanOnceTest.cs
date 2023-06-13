@@ -20,7 +20,9 @@
 
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,6 +39,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             .WithBasePath(@"SymbolicExecution\Roslyn")
             .WithOnlyDiagnostics(ChecksCS.ObjectsShouldNotBeDisposedMoreThanOnce.S3966);
 
+        private readonly VerifierBuilder roslynVB = new VerifierBuilder<VB.SymbolicExecutionRunner>()
+            .WithBasePath(@"SymbolicExecution\Roslyn")
+            .WithOnlyDiagnostics(ChecksVB.ObjectsShouldNotBeDisposedMoreThanOnce.S3966);
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
@@ -52,6 +58,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_CS(ProjectType projectType) =>
             roslynCS.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.cs")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddReferences(MetadataReferenceFacade.SystemData)
+                .AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives)
+                .Verify();
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_VB(ProjectType projectType) =>
+            roslynVB.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.vb")
                 .AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .AddReferences(MetadataReferenceFacade.SystemData)
                 .AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives)
