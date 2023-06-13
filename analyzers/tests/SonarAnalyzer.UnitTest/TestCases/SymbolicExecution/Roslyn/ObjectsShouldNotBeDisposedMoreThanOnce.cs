@@ -111,12 +111,14 @@ class Program
         }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/1038
     public void Close_ParametersOfDifferentTypes(IWithDispose withDispose, IDisposable disposable)
     {
         withDispose.Dispose();
         disposable.Dispose();
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/1038
     public void Close_ParametersOfSameType(IWithDispose withDispose1, IWithDispose withDispose2)
     {
         withDispose1.Dispose();
