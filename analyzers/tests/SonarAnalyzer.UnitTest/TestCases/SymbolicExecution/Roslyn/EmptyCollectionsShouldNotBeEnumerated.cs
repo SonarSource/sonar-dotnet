@@ -397,12 +397,8 @@ class AdvancedTests
         list.Union(list);                                   // FN
         list.Where(x => true);                              // FN
         list.Zip(list, (x, y) => x);                        // FN
+        Enumerable.Reverse(list);                           // FN
         list.Clear();                                       // Noncompliant
-
-        // Linq.Reverse cannot be called on List because List.Reverse takes precedence => Call it on HashSet
-        var set = new HashSet<int>();
-        set.Reverse();                                      // FN
-        set.Clear();                                        // Noncompliant
     }
 
     public void PassingAsArgument_Removes_Constraints()
@@ -511,6 +507,16 @@ class Flows
             list.Clear();       // Compliant
         else
             list.Clear();       // FN
+
+        if (list.Count > 1)
+            list.Clear();       // Compliant
+        else
+            list.Clear();       // Compliant
+
+        if (list.Count() > 1)
+            list.Clear();       // Compliant
+        else
+            list.Clear();       // Compliant
     }
 
     private static void DoSomething(Action<int> callback) => callback(42);

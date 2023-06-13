@@ -29,16 +29,19 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     protected const string DiagnosticId = "S4158";
     protected const string MessageFormat = "Remove this call, the collection is known to be empty here.";
 
-    private static readonly ImmutableArray<KnownType> TrackedCollectionTypes = ImmutableArray.Create(
+    private static readonly KnownType[] TrackedCollectionTypes = new[]
+    {
         KnownType.System_Collections_Generic_List_T,
         KnownType.System_Collections_Generic_HashSet_T,
         KnownType.System_Collections_Generic_Queue_T,
         KnownType.System_Collections_Generic_Stack_T,
         KnownType.System_Collections_ObjectModel_ObservableCollection_T,
         KnownType.System_Array,
-        KnownType.System_Collections_Generic_Dictionary_TKey_TValue);
+        KnownType.System_Collections_Generic_Dictionary_TKey_TValue
+    };
 
-    private static readonly ImmutableArray<string> RaisingMethods = ImmutableArray.Create(
+    private static readonly HashSet<string> RaisingMethods = new()
+    {
         nameof(IEnumerable<int>.GetEnumerator),
         nameof(ICollection.CopyTo),
         nameof(ICollection<int>.Clear),
@@ -89,9 +92,11 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         nameof(Array.SetValue),
         nameof(Dictionary<int, int>.ContainsKey),
         nameof(Dictionary<int, int>.ContainsValue),
-        nameof(Dictionary<int, int>.TryGetValue));
+        nameof(Dictionary<int, int>.TryGetValue)
+    };
 
-    private static readonly ImmutableArray<string> AddMethods = ImmutableArray.Create(
+    private static readonly HashSet<string> AddMethods = new()
+    {
         nameof(ICollection<int>.Add),
         nameof(List<int>.AddRange),
         nameof(List<int>.Insert),
@@ -101,10 +106,11 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         nameof(Queue<int>.Enqueue),
         nameof(Stack<int>.Push),
         nameof(Collection<int>.Insert),
-        "TryAdd");
+        "TryAdd"
+    };
 
-    private readonly HashSet<IOperation> emptyAccess = new HashSet<IOperation>();
-    private readonly HashSet<IOperation> nonEmptyAccess = new HashSet<IOperation>();
+    private readonly HashSet<IOperation> emptyAccess = new();
+    private readonly HashSet<IOperation> nonEmptyAccess = new();
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
