@@ -20,7 +20,6 @@
 
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 {

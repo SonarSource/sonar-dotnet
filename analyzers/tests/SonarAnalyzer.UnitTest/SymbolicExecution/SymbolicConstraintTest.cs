@@ -62,11 +62,12 @@ public class SymbolicConstraintTest
     }
 
     [TestMethod]
-    public void DisposableConstraint_ToString()
-    {
+    public void DisposableConstraint_ToString() =>
         DisposableConstraint.Disposed.ToString().Should().Be("DisposableDisposed");
-        DisposableConstraint.NotDisposed.ToString().Should().Be("DisposableNotDisposed");
-    }
+
+    [TestMethod]
+    public void DisposableConstraint_Opposite() =>
+        DisposableConstraint.Disposed.Opposite.Should().BeNull();
 
     [TestMethod]
     public void LockConstraint_ToString()

@@ -18,10 +18,31 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
 public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleCheck
 {
     protected const string DiagnosticId = "S3966";
-    protected const string MessageFormat = "Refactor this code to make sure '{0}' is disposed only once.";
+    protected const string MessageFormat = "Resource '{0}' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.";
+
+    private static readonly string[] DisposeMethods = { "Dispose", "DisposeAsync"};
+
+    protected override ProgramState PreProcessSimple(SymbolicContext context)
+    {
+        var state = context.State;
+        if (context.Operation.Instance.AsInvocation() is { } invocation && DisposeMethods.Contains(invocation.TargetMethod.Name))
+        {
+            if (state[invocation.Instance]?.HasConstraint(DisposableConstraint.Disposed) is true)
+            {
+                ReportIssue(context.Operation.Instance, invocation.Instance.Syntax.ToString());
+            }
+            else if (invocation.Instance.TrackedSymbol() is { } instance)
+            {
+                state = state.SetSymbolConstraint(instance, DisposableConstraint.Disposed);
+            }
+        }
+        return state;
+    }
 }

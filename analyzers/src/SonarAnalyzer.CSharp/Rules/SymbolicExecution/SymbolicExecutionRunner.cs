@@ -36,7 +36,6 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 {
     // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
     private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
-        new SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce(),
         new SonarRules.EmptyCollectionsShouldNotBeEnumerated(),
         new SonarRules.ConditionEvaluatesToConstant(),
         new SonarRules.RestrictDeserializedTypes(),
@@ -53,6 +52,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
         .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess, SonarRules.EmptyNullableValueAccess>())
         .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull, SonarRules.PublicMethodArgumentsShouldBeCheckedForNull>())
+        .Add(ObjectsShouldNotBeDisposedMoreThanOnce.S3966, CreateFactory<ObjectsShouldNotBeDisposedMoreThanOnce, SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce>())
         .Add(CalculationsShouldNotOverflow.S3949, CreateFactory<CalculationsShouldNotOverflow>());
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();

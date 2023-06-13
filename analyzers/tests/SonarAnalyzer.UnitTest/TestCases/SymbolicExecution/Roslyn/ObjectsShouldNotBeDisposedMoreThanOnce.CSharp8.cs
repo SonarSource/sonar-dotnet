@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 
 public class Disposable : IDisposable
 {
@@ -10,24 +11,25 @@ class UsingDeclaration
 {
     public void Disposed_UsingDeclaration()
     {
-        using var d = new Disposable();
-        d.Dispose(); // FIXME Non-compliant {{Refactor this code to make sure 'd' is disposed only once.}}
+        using var d = new Disposable(); // Noncompliant {{Resource 'd = new Disposable()' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
+//                ^^^^^^^^^^^^^^^^^^^^
+        d.Dispose();
     }
 }
 
 public class NullCoalescenceAssignment
 {
-    public void NullCoalescenceAssignment_Compliant(IDisposable s)
+    public void NullCoalescenceAssignment_Compliant(IDisposable d)
     {
-        s ??= new Disposable();
-        s.Dispose();
+        d ??= new Disposable();
+        d.Dispose();
     }
 
-    public void NullCoalescenceAssignment_NonCompliant(IDisposable s)
+    public void NullCoalescenceAssignment_NonCompliant(IDisposable d)
     {
-        using (s ??= new Disposable()) // FIXME Non-compliant
+        using (d ??= new Disposable()) // FN
         {
-            s.Dispose();
+            d.Dispose();
         }
     }
 }
@@ -38,7 +40,7 @@ public interface IWithDefaultMembers
     {
         var d = new Disposable();
         d.Dispose();
-        d.Dispose(); // FIXME Non-compliant
+        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
     }
 }
 
@@ -50,23 +52,21 @@ public class LocalStaticFunctions
         {
             var d = new Disposable();
             d.Dispose();
-            d.Dispose(); // FIXME Non-compliant - FN: local functions are not supported by the CFG
+            d.Dispose(); // FN: local functions are not supported
         }
 
         static void LocalStaticFunction()
         {
             var d = new Disposable();
             d.Dispose();
-            d.Dispose(); // FIXME Non-compliant - FN: local functions are not supported by the CFG
+            d.Dispose(); // FN: local functions are not supported
         }
     }
 }
 
 public ref struct Struct
 {
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class Consumer
@@ -76,13 +76,90 @@ public class Consumer
         var s = new Struct();
 
         s.Dispose();
-        s.Dispose(); // FIXME Non-compliant
+        s.Dispose(); // Noncompliant
     }
 
     public void M2()
     {
-        using var s = new Struct();
+        using var s = new Struct(); // Noncompliant {{Resource 's = new Struct()' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
+        s.Dispose();
+    }
 
-        s.Dispose(); // FIXME Non-compliant
+    public void DoesNotDisposeTwiceOnAllPaths(bool condition)
+    {
+        using var s = new Struct(); // Noncompliant
+        if (condition)
+        {
+            s.Dispose();
+        }
+    }
+}
+
+public class DisposableAsync : IDisposable, IAsyncDisposable
+{
+    public void Dispose() { }
+    public async ValueTask DisposeAsync() { }
+}
+
+public class DisposeAsync
+{
+    async Task DisposeAsyncTwiceUsingStatement()
+    {
+        await using var d = new DisposableAsync(); // Noncompliant
+        await d.DisposeAsync();
+    }
+
+    async Task DisposeAsyncTwice()
+    {
+        var d = new DisposableAsync();
+        await d.DisposeAsync();
+        await d.DisposeAsync(); // Noncompliant
+    }
+
+    async Task DisposeTwiceMixed()
+    {
+        var d = new DisposableAsync();
+        await d.DisposeAsync();
+        d.Dispose(); // Noncompliant
+    }
+}
+
+public class DisposableWithExplicitImplementation : IDisposable
+{
+    void IDisposable.Dispose() { }
+}
+
+public class ExplicitDisposeImplementation
+{
+    void DisposeTwiceExplicit()
+    {
+        IDisposable d = new DisposableWithExplicitImplementation();
+        d.Dispose();
+        d.Dispose(); // Noncompliant
+    }
+}
+
+public class ExpressionsTest
+{
+    public void CoalescingAssignment(Disposable a, Disposable b, Disposable x, Disposable y)
+    {
+        a.Dispose();
+        b.Dispose();
+        (a ??= b).Dispose(); // Noncompliant {{Resource 'a ??= b' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
+
+        (x ??= y).Dispose();
+        x.Dispose(); // FN
+        y.Dispose(); // FN
+    }
+
+    public void Ternary(Disposable a, Disposable b, Disposable x, Disposable y, bool condition)
+    {
+        a.Dispose();
+        b.Dispose();
+        (condition ? a : b).Dispose(); // Noncompliant
+
+        (condition ? x : y).Dispose();
+        x.Dispose(); // FN
+        y.Dispose(); // FN
     }
 }

@@ -1,15 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.Data.Common;
 
-public interface IInterface1 : IDisposable { }
+public interface IWithDispose : IDisposable { }
 
 class Program
 {
+
     public void DisposedTwice()
     {
         var d = new Disposable();
         d.Dispose();
-        d.Dispose(); // FIXME Non-compliant
+        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
+//      ^^^^^^^^^^^
     }
 
     public void DisposedTwice_Conditional()
@@ -20,8 +23,36 @@ class Program
         {
             d.Dispose();
         }
-        d.Dispose(); // FIXME Non-compliant {{Refactor this code to make sure 'd' is disposed only once.}}
-//          ^
+        d.Dispose(); // Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
+//      ^^^^^^^^^^^
+    }
+
+    private IDisposable disposable;
+
+    public void DisposeField()
+    {
+        disposable.Dispose();
+        disposable.Dispose(); // Noncompliant
+    }
+
+    public void DisposedParameters(IDisposable d)
+    {
+        d.Dispose();
+        d.Dispose(); // Noncompliant
+    }
+
+    public void DisposePotentiallyNullField(IDisposable d)
+    {
+        d?.Dispose();
+        d?.Dispose(); // FN
+    }
+
+    public void DisposedTwice_Relations()
+    {
+        IDisposable d = new Disposable();
+        var x = d;
+        x.Dispose();
+        d.Dispose(); // FN, requires relation support
     }
 
     public void DisposedTwice_Try()
@@ -30,41 +61,42 @@ class Program
         try
         {
             d = new Disposable();
-            var x = d;
-            x.Dispose();
+            d.Dispose();
         }
         finally
         {
-            d.Dispose(); // FIXME Non-compliant {{Refactor this code to make sure 'd' is disposed only once.}}
+            d.Dispose(); // Noncompliant
         }
+    }
+
+    public void DisposedTwice_DifferentCase(Disposable d)
+    {
+        d.DISPOSE();
+        d.DISPOSE(); // Compliant, has different case than expected dispose method
     }
 
     public void DisposedTwice_Array()
     {
         var a = new[] { new Disposable() };
         a[0].Dispose();
-        a[0].Dispose(); // Compliant, we don't handle arrays
+        a[0].Dispose(); // FN
     }
 
     public void Dispose_Stream_LeaveOpenFalse()
     {
         using (MemoryStream memoryStream = new MemoryStream()) // Compliant
-        using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: false))
-        {
-        }
+        using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: false)) { }
     }
 
     public void Dispose_Stream_LeaveOpenTrue()
     {
         using (MemoryStream memoryStream = new MemoryStream()) // Compliant
-        using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: true))
-        {
-        }
+        using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: true)) { }
     }
 
     public void Disposed_Using_WithDeclaration()
     {
-        using (var d = new Disposable()) // FIXME Non-compliant
+        using (var d = new Disposable()) // Noncompliant
         {
             d.Dispose();
         }
@@ -73,45 +105,40 @@ class Program
     public void Disposed_Using_WithExpressions()
     {
         var d = new Disposable();
-        using (d) // FIXME Non-compliant
+        using (d) // FN
         {
             d.Dispose();
         }
     }
 
-    public void Disposed_Using_Parameters(IDisposable param1)
+    // https://github.com/SonarSource/sonar-dotnet/issues/1038
+    public void Close_ParametersOfDifferentTypes(IWithDispose withDispose, IDisposable disposable)
     {
-        param1.Dispose();
-        param1.Dispose(); // FIXME Non-compliant
+        withDispose.Dispose();
+        disposable.Dispose();
     }
 
-    public void Close_ParametersOfDifferentTypes(IInterface1 interface1, IDisposable interface2)
+    // https://github.com/SonarSource/sonar-dotnet/issues/1038
+    public void Close_ParametersOfSameType(IWithDispose withDispose1, IWithDispose withDispose2)
     {
-        // Regression test for https://github.com/SonarSource/sonar-dotnet/issues/1038
-        interface1.Dispose(); // ok, only called once on each parameter
-        interface2.Dispose();
+        withDispose1.Dispose();
+        withDispose2.Dispose();
     }
 
-    public void Close_ParametersOfSameType(IInterface1 instance1, IInterface1 instance2)
+    public void Close_OneParameterDisposedThrice(IWithDispose withDispose1, IWithDispose withDispose2)
     {
-        // Regression test for https://github.com/SonarSource/sonar-dotnet/issues/1038
-        instance1.Dispose();
-        instance2.Dispose();
-    }
+        withDispose1.Dispose();
+        withDispose1.Dispose(); // Noncompliant
+        withDispose1.Dispose(); // Noncompliant
 
-    public void Close_OneParameterDisposedTwice(IInterface1 instance1, IInterface1 instance2)
-    {
-        instance1.Dispose();
-        instance1.Dispose(); // FIXME Non-compliant
-        instance1.Dispose(); // FIXME Non-compliant
-
-        instance2.Dispose(); // ok - only disposed once
+        withDispose2.Dispose(); // ok - only disposed once
     }
 }
 
 public class Disposable : IDisposable
 {
     public void Dispose() { }
+    public void DISPOSE() { }
 }
 
 public class MyClass : IDisposable
@@ -121,8 +148,8 @@ public class MyClass : IDisposable
     public void DisposeMultipleTimes()
     {
         Dispose();
-        this.Dispose(); // FIXME Non-compliant
-        Dispose(); // FIXME Non-compliant
+        this.Dispose(); // FN
+        Dispose(); // FN
     }
 
     public void DoSomething()
@@ -131,9 +158,9 @@ public class MyClass : IDisposable
     }
 }
 
-class TestLoopWithBreak
+class TestLoops
 {
-    public static void LoopWithBreak(System.Collections.Generic.IEnumerable<string> list, bool condition, IInterface1 instance1)
+    public static void LoopWithBreak(string[] list, bool condition, IWithDispose withDispose)
     {
         foreach (string x in list)
         {
@@ -141,7 +168,7 @@ class TestLoopWithBreak
             {
                 if (condition)
                 {
-                    instance1.Dispose(); // FIXME Non-compliant
+                    withDispose.Dispose(); // FN
                 }
                 break;
             }
@@ -150,5 +177,45 @@ class TestLoopWithBreak
                 continue;
             }
         }
+    }
+
+    public static void Loop(string[] list, bool condition, IWithDispose withDispose)
+    {
+        foreach (string x in list)
+        {
+            if (condition)
+            {
+                withDispose.Dispose(); // Noncompliant
+            }
+        }
+    }
+}
+
+class UsingDeclaration
+{
+    public void Disposed_UsingStatement()
+    {
+        using (var d = new Disposable()) // Noncompliant {{Resource 'd = new Disposable()' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
+        {
+            d.Dispose();
+        }
+    }
+}
+
+public class Close
+{
+    public void CloseStreamTwice()
+    {
+        var fs = new FileStream(@"c:\foo.txt", FileMode.Open);
+        fs.Close();
+        fs.Close(); // FN - Close on streams is disposing resources
+    }
+
+    void CloseTwiceDBConnection(DbConnection connection)
+    {
+        connection.Open();
+        connection.Close();
+        connection.Open();
+        connection.Close(); // Compliant - close() in DB connection does not dispose the connection object.
     }
 }
