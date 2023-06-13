@@ -1,38 +1,69 @@
 <h2>Why is this an issue?</h2>
-<p>When a method in a derived class has the same name as a method in the base class but with a signature that only differs by types that are weakly
-derived (e.g. <code>object</code> vs <code>string</code>), the result is that the base method becomes hidden.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-using System;
-
-namespace MyLibrary
+<p>When a method in a derived class has:</p>
+<ul>
+  <li> the same name as a method in the base class </li>
+  <li> but types of parameters that are ancestors (for example <code>string</code> in the base class and <code>object</code> in the derived class)
+  </li>
+</ul>
+<p>the result is that the base method becomes hidden.</p>
+<p>As shown in the following code snippet, when an instance of the derived class is used, invoking the method with an argument that matches the less
+derived parameter type will invoke the derived class method instead of the base class method:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+class BaseClass
 {
-  class Foo
-  {
-    internal void SomeMethod(string s1, string s2) { }
-  }
-
-  class Bar : Foo
-  {
-    internal void SomeMethod(string s1, object o2) { }  // Noncompliant
-  }
+  internal void MyMethod(string str) =&gt; Console.WriteLine("BaseClass: Method(string)");
 }
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-using System;
 
-namespace MyLibrary
+class DerivedClass : BaseClass
 {
-  class Foo
-  {
-    internal void SomeMethod(string s1, string s2) { }
-  }
-
-  class Bar : Foo
-  {
-    internal void SomeOtherMethod(string s1, object o2) { }
-  }
+  internal void MyMethod(object str) =&gt; Console.WriteLine("DerivedClass: Method(object)"); // Noncompliant
 }
+
+// ...
+BaseClass baseObj = new BaseClass();
+baseObj.MyMethod("Hello"); // Output: BaseClass: Method(string)
+
+DerivedClass derivedObj = new DerivedClass();
+derivedObj.MyMethod("Hello"); // Output: DerivedClass: Method(object) - DerivedClass method is hiding the BaseClass method
+
+BaseClass derivedAsBase = new DerivedClass();
+derivedAsBase.MyMethod("Hello"); // Output: BaseClass: Method(string)
 </pre>
+<pre data-diff-id="1" data-diff-type="compliant">
+class BaseClass
+{
+  internal void MyMethod(string str) =&gt; Console.WriteLine("BaseClass: Method(string)");
+}
+
+class DerivedClass : BaseClass
+{
+  internal void MyOtherMethod(object str) =&gt; Console.WriteLine("DerivedClass: Method(object)"); // Compliant
+}
+
+// ...
+BaseClass baseObj = new BaseClass();
+baseObj.MyMethod("Hello"); // Output: BaseClass: Method(string)
+
+DerivedClass derivedObj = new DerivedClass();
+derivedObj.MyMethod("Hello"); // Output: BaseClass: Method(string)
+
+BaseClass derivedAsBase = new DerivedClass();
+derivedAsBase.MyMethod("Hello"); // Output: BaseClass: Method(string)
+</pre>
+<p>Keep in mind that you cannot fix this issue by using the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/new-modifier">new keyword</a> or by marking the method in the base
+class as <code>virtual</code> and overriding it in the <code>DerivedClass</code> because the parameter types are different.</p>
+<h3>Exceptions</h3>
+<p>The rule is not raised when the two methods have the same parameter types.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/knowing-when-to-use-override-and-new-keywords">Knowing
+  When to Use Override and New Keywords</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/member-overloading">Member overloading</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/new-modifier">'new' modifier</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs0108">CS0108 - Hiding inherited member</a>
+  </li>
+</ul>
 

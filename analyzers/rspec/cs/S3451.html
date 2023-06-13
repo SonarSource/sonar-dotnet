@@ -5,7 +5,7 @@ href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservice
 <p>The <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.defaultparametervalueattribute">DefaultValue</a> attribute
 from the <code>System.ComponentModel</code> namespace, is sometimes used to declare a member’s default value. This can be used, for instance, by the
 reset feature of a visual designer or by a code generator.</p>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre>
 public void DoStuff([DefaultValue(4)] int i)
 {
     // i is not automatically assigned 4
@@ -22,7 +22,7 @@ public void DoStuff([Optional] int i)
 </pre>
 <p>The use of <code>[DefaultValue]</code> with <code>[Optional]</code> has no more effect than <code>[Optional]</code> alone. That’s because
 <code>[DefaultValue]</code> doesn’t actually do anything; it merely indicates the intent for the value.</p>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class MyClass
 {
     public void DoStuff([Optional][DefaultValue(4)] int i, int j = 5)  // Noncompliant

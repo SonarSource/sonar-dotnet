@@ -1,37 +1,105 @@
 <h2>Why is this an issue?</h2>
-<p>Changing an inherited member to <code>private</code> will not prevent access to the base class implementation.</p>
-<p>This rule raises an issue when a <code>private</code> method in an unsealed type has a signature that is identical to a <code>public</code> method
-declared in a base type.</p>
-<h3>Noncompliant code example</h3>
+<p>Decreasing the <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers">accessibility
+level</a> of an inherited method that is not <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/override">overridable</a> to <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/private">private</a> will shadow the name of the base method and can
+lead to confusion.</p>
 <pre>
-using System;
-
-namespace MyLibrary
+public class Base
 {
-  public class Foo
-  {
     public void SomeMethod(int count) { }
-  }
-  public class Bar:Foo
-  {
+}
+public class Derived : Base
+{
     private void SomeMethod(int count) { } // Noncompliant
-  }
+}
+
+class Program
+{
+    public void DoWork()
+    {
+        var derived = new Derived();
+        derived.SomeMethod(42); // Base.SomeMethod is accessed here
+    }
 }
 </pre>
-<h3>Compliant solution</h3>
+<p>Another potential problem is the case of a class deriving from <code>Derived</code> and accessing <code>SomeMethod</code>. In this scenario, the
+method accessed will instead be the <code>Base</code> implementation, which might not be what was expected.</p>
+<pre>
+public class Base
+{
+    public void SomeMethod(int count) { }
+}
+public class Derived : Base
+{
+    private void SomeMethod(int count) { } // Noncompliant
+}
+
+public class SecondDerived : Derived
+{
+    public void DoWork()
+    {
+        SomeMethod(42); // Base.SomeMethod is accessed here
+    }
+}
+</pre>
+<p>One way to mitigate this, is by sealing the <code>Derived</code> class by using the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/sealed">sealed</a> modifier, thus preventing inheritance from this
+point on.</p>
+<pre>
+public class Base
+{
+    public void SomeMethod(int count) { }
+}
+public sealed class Derived : Base
+{
+    private void SomeMethod(int count) { } // Compliant: class is marked as sealed
+}
+</pre>
+<p>Another way to mitigate this, is by having the <code>Derived</code> implementation match the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers">accessibility</a> modifier of the
+<code>Base</code> implementation of <code>SomeMethod</code>. From a caller’s perspective, this is closer to the expected behavior.</p>
 <pre>
 using System;
 
 namespace MyLibrary
 {
-  public class Foo
-  {
-    public void SomeMethod(int count) { }
-  }
-  public sealed class Bar : Foo
-  {
-    private void SomeMethod(int count) { }
-  }
+    public class Base
+    {
+        public void SomeMethod(int count) { }
+    }
+    public class Derived : Base
+    {
+        public void SomeMethod(int count) { } // Compliant: same accessibility as Base.SomeMethod
+    }
+
+    public class Program
+    {
+        public void DoWork()
+        {
+            var derived = new Derived();
+            derived.SomeMethod(42); // Derived.SomeMethod is called
+        }
+    }
 }
 </pre>
+<p>Last but not least, consider using a different name for the <code>Derived</code> method, thus completely eliminating any confusion caused by the
+naming collision.</p>
+<pre>
+public class Base
+{
+    public void SomeMethod(int count) { }
+}
+public class Derived : Base
+{
+    private void SomeOtherMethod(int count) { } // Compliant
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers">Access Modifiers</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/override">override</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/sealed">sealed</a> </li>
+</ul>
 

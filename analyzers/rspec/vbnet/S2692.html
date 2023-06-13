@@ -6,8 +6,8 @@ strings.IndexOf(someString) = -1  ' Test for "index not found"
 strings.IndexOf(someString) &lt; 0   ' Test for "index not found"
 strings.IndexOf(someString) &gt;= 0  ' Test for "index found"
 </pre>
-<p>Any checks which look for values <code>&gt; 0</code> ignore the first element, which is likely a bug. If the intent is merely to check inclusion of
-a value in a <code>String</code>, <code>List</code>, or an array, consider using the <a
+<p>Any checks which look for values <code>&gt; 0</code> ignore the first element, which is likely a bug. If the intent is merely to check the
+inclusion of a value in a <code>String</code>, <code>List</code>, or array, consider using the <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.string.contains">Contains</a> method instead.</p>
 <pre>
 strings.Contains(someString) ' Boolean result
