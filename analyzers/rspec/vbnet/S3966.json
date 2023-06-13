@@ -1,0 +1,18 @@
+{
+  "title": "Objects should not be disposed more than once",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "confusing",
+    "pitfall"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3966",
+  "sqKey": "S3966",
+  "scope": "All",
+  "quickfix": "unknown"
+}
