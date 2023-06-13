@@ -25,7 +25,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleCheck
 {
     protected const string DiagnosticId = "S3966";
-    protected const string MessageFormat = "Resource '{0}' has already been disposed explicitly or through a using statement implicitly. Please remove the redundant disposal.";
+    protected const string MessageFormat = "Resource '{0}' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.";
 
     private static readonly string[] DisposeMethods = { "Dispose", "DisposeAsync"};
 
