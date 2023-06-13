@@ -6,25 +6,44 @@ Interface IWithDispose
     Inherits IDisposable
 End Interface
 
+Public Class Disposable
+    Implements IDisposable
+
+    Public Sub Dispose() Implements IDisposable.Dispose
+    End Sub
+
+End Class
+
+Public Class DisposableAlias
+    Implements IDisposable
+
+    Public Sub CleanUp() Implements IDisposable.Dispose
+    End Sub
+
+End Class
+
+Public Class DoesNotImplementDisposable
+
+    Public Sub Dispose()
+    End Sub
+
+End Class
+
 Class Program
-    Public Sub DisposedTwice()
-        Dim d = New Disposable()
+
+    Public Sub NotReallyDisposable()
+        Dim d = New DoesNotImplementDisposable()
         d.Dispose()
-        d.Dispose() ' Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Please remove the redundant disposal.}}
-        '      ^^^^^^^^^^^
+        d.Dispose() ' Noncompliant - IDisposal interface implementation is not checked
     End Sub
 
     Public Sub DisposedTwice_Conditional()
         Dim d As IDisposable = Nothing
         d = New Disposable()
-
         If d IsNot Nothing Then
             d.Dispose()
         End If
-
-        d.Dispose() ' Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Please remove the redundant disposal.}}
-'      ^^^^^^^^^^^
-    }
+        d.Dispose() ' Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
     End Sub
 
     Private disposable As IDisposable
@@ -32,7 +51,6 @@ Class Program
     Public Sub DisposeField()
         disposable.Dispose()
         disposable.Dispose() ' Noncompliant
-    }
     End Sub
 
     Public Sub DisposedParameters(ByVal d As IDisposable)
@@ -54,7 +72,6 @@ Class Program
 
     Public Sub DisposedTwice_Try()
         Dim d As IDisposable = Nothing
-
         Try
             d = New Disposable()
             d.Dispose()
@@ -76,7 +93,6 @@ Class Program
 
     Public Sub Dispose_Stream_LeaveOpenFalse()
         Using memoryStream As MemoryStream = New MemoryStream() ' Compliant
-
             Using writer As StreamWriter = New StreamWriter(memoryStream, New System.Text.UTF8Encoding(False), 1024, leaveOpen:=False)
             End Using
         End Using
@@ -84,7 +100,6 @@ Class Program
 
     Public Sub Dispose_Stream_LeaveOpenTrue()
         Using memoryStream As MemoryStream = New MemoryStream() ' Compliant
-
             Using writer As StreamWriter = New StreamWriter(memoryStream, New System.Text.UTF8Encoding(False), 1024, leaveOpen:=True)
             End Using
         End Using
@@ -98,7 +113,6 @@ Class Program
 
     Public Sub Disposed_Using_WithExpressions()
         Dim d = New Disposable()
-
         Using d  ' FN
             d.Dispose()
         End Using
@@ -120,41 +134,32 @@ Class Program
         withDispose1.Dispose()  ' Noncompliant
         withDispose2.Dispose()
     End Sub
+
 End Class
 
-Public Class Disposable
+Public Class ClassExample
     Implements IDisposable
 
-    Public Sub Dispose()
-    End Sub
-
-    Public Sub DISPOSE()  ' Noncompliant
-    End Sub
-End Class
-
-Public Class [MyClass]
-    Implements IDisposable
-
-    Public Sub Dispose()
+    Private Sub Dispose() Implements IDisposable.Dispose
     End Sub
 
     Public Sub DisposeMultipleTimes()
         Dispose()
         Me.Dispose() ' FN
-        Dispose()
+        Dispose() ' FN
     End Sub
 
     Public Sub DoSomething()
         Dispose()
     End Sub
+
 End Class
 
 Class TestLoops
+
     Public Shared Sub LoopWithBreak(ByVal list As String(), ByVal condition As Boolean, ByVal withDispose As IWithDispose)
         For Each x As String In list
-
             Try
-
                 If condition Then
                     withDispose.Dispose() ' FN
                 End If
@@ -166,9 +171,8 @@ Class TestLoops
         Next
     End Sub
 
-    Public Shared Sub [Loop](ByVal list As String(), ByVal condition As Boolean, ByVal withDispose As IWithDispose)
+    Public Shared Sub LoopMethod(ByVal list As String(), ByVal condition As Boolean, ByVal withDispose As IWithDispose)
         For Each x As String In list
-
             If condition Then
                 withDispose.Dispose()  ' Noncompliant
             End If
@@ -177,18 +181,21 @@ Class TestLoops
 End Class
 
 Class UsingDeclaration
+
     Public Sub Disposed_UsingStatement()
         Using d = New Disposable()  ' Noncompliant
             d.Dispose()
         End Using
     End Sub
+
 End Class
 
 Public Class Close
+
     Public Sub CloseStreamTwice()
         Dim fs = New FileStream("c:\foo.txt", FileMode.Open)
         fs.Close()
-        fs.Close() ' FN - Close On streams Is disposing resources
+        fs.Close() ' FN - Close On streams is disposing resources
     End Sub
 
     Private Sub CloseTwiceDBConnection(ByVal connection As DbConnection)
@@ -197,4 +204,5 @@ Public Class Close
         connection.Open()
         connection.Close() ' Compliant - close() in DB connection does not dispose the connection object.
     End Sub
+
 End Class
