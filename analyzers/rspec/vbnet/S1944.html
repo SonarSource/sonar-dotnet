@@ -1,48 +1,44 @@
 <h2>Why is this an issue?</h2>
 <p>A cast is an <a
 href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/implicit-and-explicit-conversions">explicit
-conversion</a>, in other words, this is a way to tell the compiler the intent to convert from a type to another.</p>
+conversion</a>, which is a way to tell the compiler the intent to convert from one type to another.</p>
+<p>In Visual Basic, there are two explicit conversion operators:</p>
 <pre>
-Dim x As Single = 0.5F
-Dim i As Integer = CInt(x)                   // Casting (explicit conversion) from float to int
+Public Sub Method(Value As Object)
+    Dim i As Integer
+    i = DirectCast(Value, Integer)  ' Direct casting from object holding an integer type to Integer
+    i = CType(Value, Integer)       ' Conversion from the underlying type to Integer
+End Sub
 </pre>
-<p>In most cases, the compiler will be able to catch inappropriate casts between incompatible value types or reference types.</p>
-<p>However, the compiler will not be able to detect inappropriate casts to interfaces.</p>
-<p>This rule applies also to the <a
-href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast#is-operator"><code>is</code> operator</a>
-when used for type-testing.</p>
-<pre>
-object b = new Base();
-Console.WriteLine(b is Base);     // Type-testing using the is operator
-</pre>
+<p>In most cases, the compiler will be able to catch invalid casts between incompatible value types or reference types.</p>
+<p>However, the compiler will not be able to detect invalid casts to <a
+href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/interfaces/">interfaces</a>.</p>
 <h3>What is the potential impact?</h3>
-<p>Inappropriate casts will lead to unexpected behaviors or runtime errors such as <a
-href="https://learn.microsoft.com/en-us/dotnet/api/system.invalidcastexception"><code>InvalidCastException</code></a>.</p>
+<p>Invalid casts will lead to unexpected behaviors or runtime errors such as <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.invalidcastexception">InvalidCastException</a>.</p>
 <h3>Exceptions</h3>
 <p>No issue is reported if the interface has no implementing class in the assembly.</p>
 <h2>How to fix it</h2>
-<p>To prevent an <a href="https://learn.microsoft.com/en-us/dotnet/api/system.invalidcastexception"><code>InvalidCastException</code></a> from raising
-during an explicit conversion, it is recommended to use the <a
-href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast#as-operator"><code>as</code> operator</a>.
-When the conversion is not possible, the <code>as</code> operator returns <code>null</code> and will never raise an exception.</p>
+<p>To prevent an <code>InvalidCastException</code> from raising during an explicit conversion, it is recommended to use the <a
+href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/trycast-operator"><code>TryCast</code> operator</a>. When the
+conversion is not possible, the <code>TryCast</code> operator returns <code>Nothing</code> and will never raise an exception.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-Interface IMyInterface
+Public Interface IMyInterface
 End Interface
 
 Public Class Implementer
     Implements IMyInterface
 End Class
 
-Public Class OrphanClass
+Public Class AnotherClass
 End Class
 
 Module Program
     Sub Main()
-        Dim orphan = New OrphanClass()
-        Dim x = CType(orphan, IMyInterface)    ' Noncompliant: InvalidCastException is being thrown
-        Dim b = TypeOf orphan Is IMyInterface  ' Noncompliant: always false
+        Dim Another As New AnotherClass
+        Dim x As IMyInterface = DirectCast(Another, IMyInterface)   ' Noncompliant: InvalidCastException is being thrown
     End Sub
 End Module
 </pre>
@@ -55,37 +51,33 @@ Public Class Implementer
     Implements IMyInterface
 End Class
 
-Public Class OrphanClass
+Public Class AnotherClass
 End Class
 
 Module Program
     Sub Main()
-        Dim orphan = New OrphanClass()
-        Dim x = TryCast(orphan, IMyInterface)  ' Compliant: but will always be null
-        Dim b = False
+        Dim Another As New AnotherClass
+        Dim x = TryCast(Another, IMyInterface)                      ' Compliant: but will always be null
     End Sub
 End Module
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/types/casting-and-type-conversions#explicit-conversions">Casting and
-  type conversions - Explicit conversion</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast">Type-testing operators and cast
-  expressions</a>
-    <ul>
-      <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast#is-operator"><code>is</code>
-      operator</a> </li>
-      <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast#as-operator"><code>as</code>
-      operator</a> </li>
-    </ul>  </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions#103-explicit-conversions">Conversions -
-  Explicit conversions in C#</a>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/type-conversions">Type
+  Conversions in Visual Basic</a>
     <ul>
       <li> <a
-      href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions#1035-explicit-reference-conversions">Conversions - Explicit reference conversions in C#</a> </li>
+      href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/implicit-and-explicit-conversions">Implicit and Explicit Conversions in Visual Basic</a> </li>
+      <li> <a
+      href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/how-to-convert-an-object-to-another-type">How to: Convert an Object to Another Type in Visual Basic</a> </li>
     </ul>  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/directcast-operator"><code>DirectCast</code>
+  operator</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/functions/ctype-function"><code>CType</code> function</a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/trycast-operator"><code>TryCast</code> operator</a>
+  </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/588">MITRE, CWE-588 - Attempt to Access Child of a Non-structure Pointer</a> </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/704">MITRE, CWE-704 - Incorrect Type Conversion or Cast</a> </li>
 </ul>

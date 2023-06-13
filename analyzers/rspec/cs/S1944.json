@@ -1,5 +1,5 @@
 {
-  "title": "Inappropriate casts should not be made",
+  "title": "Invalid casts should be avoided",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -20,5 +20,5 @@
       704
     ]
   },
-  "quickfix": "unknown"
+  "quickfix": "targeted"
 }
