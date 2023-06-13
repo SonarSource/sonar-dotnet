@@ -117,7 +117,9 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         var operation = context.Operation.Instance;
         if (operation.AsObjectCreation() is { } objectCreation && objectCreation.Type.IsAny(TrackedCollectionTypes))
         {
-            return SetConstraintForObjectCreation(context.State, objectCreation);
+            return ConstraintFromCollectionCreation(context.State, objectCreation) is { } constraint
+                ? context.State.SetOperationConstraint(objectCreation, constraint)
+                : context.State;
         }
         else if (IsEmptyArray(operation))
         {
@@ -152,19 +154,16 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         }
     }
 
-    private static ProgramState SetConstraintForObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
-        FirstArgumentAsCollection(objectCreation) switch
-        {
-            { } firstArgument when ConstraintFromArgument(state, firstArgument) is { } constraint => state.SetOperationConstraint(objectCreation, constraint),
-            { } => state,
-            _ => state.SetOperationConstraint(objectCreation, CollectionConstraint.Empty)
-        };
+    private static CollectionConstraint ConstraintFromCollectionCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
+        CollectionArgument(objectCreation) is { } collectionArgument
+            ? ConstraintFromArgument(state, collectionArgument)
+            : CollectionConstraint.Empty;
 
-    private static IArgumentOperationWrapper? FirstArgumentAsCollection(IObjectCreationOperationWrapper objectCreation) =>
-        objectCreation.Arguments.Select(x => x.AsArgument()).SingleOrDefault(x => x?.Parameter.Ordinal == 0) is { } firstArgument
-        && firstArgument.Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable)
-        ? firstArgument
-        : null;
+    private static IArgumentOperationWrapper? CollectionArgument(IObjectCreationOperationWrapper objectCreation) =>
+        objectCreation.Arguments.Select(x => x.AsArgument()).SingleOrDefault(x => x?.Parameter.Ordinal == 0) is { } argument
+            && argument.Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable)
+            ? argument
+            : null;
 
     private static CollectionConstraint ConstraintFromArgument(ProgramState state, IArgumentOperationWrapper argument) =>
         argument.WrappedOperation.TrackedSymbol() is { } symbol

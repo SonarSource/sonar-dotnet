@@ -99,7 +99,7 @@ class CollectionTests
         dict.Clear();                   // Compliant
     }
 
-    public void ConstructorWithEnumerableWithConstraint()
+    public void ConstructorWithEnumerableWithConstraint(bool condition)
     {
         var baseCollection = new List<int>();
         var set = new HashSet<int>(baseCollection);
@@ -110,6 +110,9 @@ class CollectionTests
 
         set = new HashSet<int>(comparer: EqualityComparer<int>.Default, collection: baseCollection);
         set.Clear();                    // Noncompliant
+
+        set = new HashSet<int>(condition ? baseCollection : baseCollection);
+        set.Clear();                    // FN
 
         baseCollection.Add(1);
         set = new HashSet<int>(baseCollection);
@@ -169,6 +172,11 @@ class CollectionTests
         array.Clone();                  // Compliant
         var dict = GetDictionary();
         dict.Clear();                   // Compliant
+
+        array = Array.Empty<int>();
+        array.Clone();                  // FN
+        var enumerable = Enumerable.Empty<int>();
+        enumerable.GetEnumerator();     // FN
     }
 
     public void Methods_Raise_Issue()
@@ -380,6 +388,32 @@ class CollectionTests
         var dict = new Dictionary<int, int>();
         dict.Add(1, 5);
         dict.Clear();                   // Compliant
+    }
+
+    public void Method_Set_Empty(List<int> list, HashSet<int> set, Queue<int> queue, Stack<int> stack, ObservableCollection<int> obs, Dictionary<int, int> dict)
+    {
+        list.Clear();                   // Compliant
+        list.Clear();                   // FN
+
+        set.Clear();                    // Compliant
+        set.Clear();                    // FN
+
+        queue.Clear();                  // Compliant
+        queue.Clear();                  // FN
+
+        stack.Clear();                  // Compliant
+        stack.Clear();                  // FN
+
+        obs.Clear();                    // Compliant
+        obs.Clear();                    // FN
+
+        dict.Clear();                   // Compliant
+        dict.Clear();                   // FN
+
+        var empty = new List<int>();
+        list.Add(5);
+        list.Intersect(empty);          // Compliant
+        list.Clear();                   // FN
     }
 }
 
