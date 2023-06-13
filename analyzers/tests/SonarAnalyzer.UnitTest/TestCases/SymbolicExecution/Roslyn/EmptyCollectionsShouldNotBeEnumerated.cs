@@ -112,7 +112,7 @@ class CollectionTests
         set.Clear();                    // Noncompliant
 
         set = new HashSet<int>(condition ? baseCollection : baseCollection);
-        set.Clear();                    // FN
+        set.Clear();                    // Noncompliant
 
         baseCollection.Add(1);
         set = new HashSet<int>(baseCollection);

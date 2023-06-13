@@ -155,20 +155,9 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     }
 
     private static CollectionConstraint ConstraintFromCollectionCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
-        CollectionArgument(objectCreation) is { } collectionArgument
-            ? ConstraintFromArgument(state, collectionArgument)
+        objectCreation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable)) is { } collectionArgument
+            ? state[collectionArgument]?.Constraint<CollectionConstraint>()
             : CollectionConstraint.Empty;
-
-    private static IArgumentOperationWrapper? CollectionArgument(IObjectCreationOperationWrapper objectCreation) =>
-        objectCreation.Arguments.Select(x => x.AsArgument()).SingleOrDefault(x => x?.Parameter.Ordinal == 0) is { } argument
-            && argument.Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable)
-            ? argument
-            : null;
-
-    private static CollectionConstraint ConstraintFromArgument(ProgramState state, IArgumentOperationWrapper argument) =>
-        argument.WrappedOperation.TrackedSymbol() is { } symbol
-        ? state[symbol]?.Constraint<CollectionConstraint>()
-        : null;
 
     private static bool IsEmptyArray(IOperation operation) =>
         operation.AsArrayCreation()?.DimensionSizes.Any(x => x.ConstantValue.Value is 0) ?? false;
