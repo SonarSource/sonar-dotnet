@@ -23,20 +23,20 @@ public class Sample
         List<int> list;
 
         list = new();
-        list.Clear();   // FN
+        list.Clear();   // Noncompliant
         list.Add(42);
-        list.Clear();
-
-        list = new(42);
-        list.Clear();   // FN
-        list.Add(42);
-        list.Clear();
-
-        list = new(new[] { 42 });
         list.Clear();   // Compliant
 
+        list = new(42);
+        list.Clear();   // Noncompliant
+        list.Add(42);
+        list.Clear();   // Compliant
+
+        list = new(new[] { 42 });
+        list.Clear();   // Noncompliant FP
+
         list = new List<int>();
-        list.Clear();   // FN
+        list.Clear();   // Noncompliant
     }
 
     public void StaticLambda()
@@ -44,7 +44,7 @@ public class Sample
         Action a = static () =>
         {
             var list = new List<int>();
-            list.Clear();   // FIXME Non-compliant
+            list.Clear();   // Noncompliant
         };
         a();
     }
@@ -55,7 +55,7 @@ public class Sample
         init
         {
             var list = new List<int>();
-            list.Clear();   // FIXME Non-compliant
+            list.Clear();   // Noncompliant
         }
     }
 
@@ -77,7 +77,7 @@ public record Record
     public void Method()
     {
         var list = new List<int>();
-        list.Clear();       // FIXME Non-compliant
+        list.Clear();       // Noncompliant
     }
 }
 
@@ -91,6 +91,6 @@ public partial class Partial
     public partial void Method()
     {
         var list = new List<int>();
-        list.Clear();       // FIXME Non-compliant
+        list.Clear();       // Noncompliant
     }
 }

@@ -1,13 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 
+public class NewFrameworkMethods
+{
+    public void Methods_Raise_Issue()
+    {
+        int i;
+
+        var queue = new Queue<int>();
+        queue.TryDequeue(out i);        // Noncompliant
+        queue.TryPeek(out i);           // Noncompliant
+
+        var stack = new Stack<int>();
+        stack.TryPeek(out i);           // Noncompliant
+        stack.TryPop(out i);            // Noncompliant
+    }
+
+    public void Methods_Ignored()
+    {
+        var list = new List<int>();
+        list.EnsureCapacity(5);
+
+        var set = new HashSet<int>();
+        set.EnsureCapacity(5);
+
+        var queue = new Queue<int>();
+        queue.EnsureCapacity(5);
+
+        var stack = new Stack<int>();
+        stack.EnsureCapacity(5);
+
+        var dict = new Dictionary<int, int>();
+        dict.EnsureCapacity(5);
+        dict.TrimExcess();
+    }
+
+    public void Methods_Set_NotEmpty()
+    {
+        var dict = new Dictionary<int, int>();
+        dict.TryAdd(1, 5);
+        dict.Clear();                   // Compliant
+    }
+}
+
 public class NullCoalescenceAssignment
 {
     public void Test()
     {
         List<int> list = null;
         list ??= new List<int>();
-        list.Clear(); // FIXME Non-compliant
+        list.Clear(); // Noncompliant
     }
 }
 
@@ -21,7 +63,7 @@ public class SwitchExpression
 
         return type switch
         {
-            1 => list.Exists(Predicate), // FIXME Non-compliant
+            1 => list.Exists(Predicate), // Noncompliant
             _ => false
         };
     }
@@ -33,7 +75,7 @@ public class SwitchExpression
             _ => new List<int>()
         };
 
-        list.Clear(); // FIXME Non-compliant
+        list.Clear(); // Noncompliant
     }
 
     public void UsingSwitchResult_Compliant(bool cond)
@@ -44,7 +86,7 @@ public class SwitchExpression
             _ => new List<int>()
         };
 
-        list.Clear();
+        list.Clear();   // Noncompliant FP
     }
 }
 
@@ -55,13 +97,13 @@ public interface IWithDefaultMembers
     public void Test()
     {
         var list = new List<int>();
-        list.Clear(); // FIXME Non-compliant
+        list.Clear(); // Noncompliant
     }
 
     public void TestWithNestedSwitchExpression()
     {
         var list = new List<int>();
-        Test(list.IndexOf(1), list.Count switch { 1 => 2, _ => 3 }); // FIXME Non-compliant
+        Test(list.IndexOf(1), list.Count switch { 1 => 2, _ => 3 }); // Noncompliant
     }
 }
 

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  22,
+"endLine":  41,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteCacheProvider.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  26,
+"endLine":  83,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Session\CookieBasedSessions.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  21,
+"endLine":  197,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3365,
+"startColumn":  35,
+"endLine":  3365,
+"endColumn":  47
+}
+}
+}
+]
+}

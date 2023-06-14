@@ -26,5 +26,5 @@ public sealed class EmptyCollectionsShouldNotBeEnumerated : EmptyCollectionsShou
 
     protected override DiagnosticDescriptor Rule => S4158;
 
-    public override bool ShouldExecute() => false;
+    public override bool ShouldExecute() => true;
 }

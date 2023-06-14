@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2579,
+"startColumn":  17,
+"endLine":  2579,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  483,
+"startColumn":  72,
+"endLine":  483,
+"endColumn":  118
+}
+}
+}
+]
+}

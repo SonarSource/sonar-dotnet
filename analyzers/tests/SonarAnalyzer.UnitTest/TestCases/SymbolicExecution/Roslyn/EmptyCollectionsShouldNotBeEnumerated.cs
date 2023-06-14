@@ -3,617 +3,441 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
-class ListTests
+class CollectionTests
 {
     private IEnumerable<int> items = new List<int> { 1, 2, 3 };
+    private IDictionary<int, int> dictionaryItems = new Dictionary<int, int>();
 
     private static bool Predicate(int i) => true;
     private static void Action(int i) { }
-    private List<int> Factory() => new List<int>();
+    private List<int> GetList() => null;
+    private HashSet<int> GetSet() => null;
+    private Queue<int> GetQueue() => null;
+    private Stack<int> GetStack() => null;
+    private ObservableCollection<int> GetObservableCollection() => null;
+    private int[] GetArray() => null;
+    private Dictionary<int, int> GetDictionary() => null;
 
-    public void DefaultConstructor_Applies_Empty()
+    public void DefaultConstructor()
     {
         var list = new List<int>();
-        list.Clear(); // FIXME Non-compliant {{Remove this call, the collection is known to be empty here.}}
-//      ~~~~~~~~~~~~
+        list.Clear();                   // Noncompliant {{Remove this call, the collection is known to be empty here.}}
+//      ^^^^^^^^^^^^
+        var set = new HashSet<int>();
+        set.Clear();                    // Noncompliant
+        var queue = new Queue<int>();
+        queue.Clear();                  // Noncompliant
+        var stack = new Stack<int>();
+        stack.Clear();                  // Noncompliant
+        var obs = new ObservableCollection<int>();
+        obs.Clear();                    // Noncompliant
+        var array = new int[0];
+        array.Clone();                  // FIXME Non-compliant
+        var dict = new Dictionary<int, int>();
+        dict.Clear();                   // Noncompliant
     }
 
-    public void ConstructorWithCapacity_Applies_Empty()
+    public void ConstructorWithCapacity()
     {
         var list = new List<int>(5);
-        list.Clear(); // FIXME Non-compliant
+        list.Clear();                   // Noncompliant
+        var set = new HashSet<int>(5);
+        set.Clear();                    // Noncompliant
+        var queue = new Queue<int>(5);
+        queue.Clear();                  // Noncompliant
+        var stack = new Stack<int>(5);
+        stack.Clear();                  // Noncompliant
+        var array = new int[5];
+        array.Clone();                  // Compliant
+        var dict = new Dictionary<int, int>(5);
+        dict.Clear();                   // Noncompliant
     }
 
-    public void ConstructorWithEnumerable_Applies_NonEmpty()
+    public void ConstructorWithEnumerable()
     {
         var list = new List<int>(items);
-        list.Clear(); // Compliant
+        list.Clear();                   // Noncompliant FP
+        var set = new HashSet<int>(items);
+        set.Clear();                    // Noncompliant FP
+        var queue = new Queue<int>(items);
+        queue.Clear();                  // Noncompliant FP
+        var stack = new Stack<int>(items);
+        stack.Clear();                  // Noncompliant FP
+        var obs = new ObservableCollection<int>(items);
+        obs.Clear();                    // Noncompliant FP
+        var dict = new Dictionary<int, int>(dictionaryItems);
+        dict.Clear();                   // Noncompliant FP
     }
 
-    public void ConstructorWithInitializer_Applies_NonEmpty()
-    {
-        var list = new List<int> { 1, 2, 3 };
-        list.Clear(); // Compliant
-    }
-
-    public void ConstructorWithEmptyInitializer_Applies_Empty()
+    public void ConstructorWithEmptyInitializer()
     {
         var list = new List<int> { };
-        list.Clear(); // FIXME Non-compliant
-    }
-
-    public void Other_Initialization_Applies_No_Constraints()
-    {
-        var list = Factory();
-        list.Clear(); // Compliant, we don't know anything about the list
-    }
-
-    public void Methods_Raise_Issue()
-    {
-        var list = new List<int>();
-        list.Clear(); // FIXME Non-compliant
-        list.Exists(Predicate); // FIXME Non-compliant
-        list.Find(Predicate); // FIXME Non-compliant
-        list.FindIndex(Predicate); // FIXME Non-compliant
-        list.ForEach(Action); // FIXME Non-compliant
-        list.IndexOf(1); // FIXME Non-compliant
-        list.Remove(1); // FIXME Non-compliant
-        list.RemoveAll(Predicate); // FIXME Non-compliant
-        list.Reverse(); // FIXME Non-compliant
-        list.Sort(); // FIXME Non-compliant
-        var x = list[5]; // FIXME Non-compliant
-//              ~~~~~~~
-        list[5] = 5; // FIXME Non-compliant
-//      ~~~~~~~
-    }
-
-    public void Methods_Ignored()
-    {
-        var list = new List<int>();
-        list.GetHashCode();
-        list.Equals(items);
-        list.GetType();
-        list.ToString();
-    }
-
-    public void ExtensionMethods_Should_Not_Raise()
-    {
-        var list = new List<int>();
-        list.Any(); // Compliant
-    }
-
-    public void Methods_Set_NotEmpty()
-    {
-        var list = new List<int>();
-        list.Add(1);
-        list.Clear(); // Compliant, will normally raise
-
-        list = new List<int>();
-        list.AddRange(items);
-        list.Clear(); // Compliant
-
-        list = new List<int>();
-        list.Insert(0, 1);
-        list.Clear(); // Compliant
-
-        list = new List<int>();
-        list.InsertRange(0, items);
-        list.Clear(); // Compliant
-    }
-
-    public void ExtensionMethods_Remove_Constraints()
-    {
-        var list = new List<int>();
-        list.Any(); // Compliant
-        list.Clear(); // Compliant, this will normally raise
-    }
-
-    public void PassingToConstructor_Removes_Constraints()
-    {
-        var list = new List<int>();
-        new Foo(1, 2, list); // Compliant
-        list.Clear(); // Compliant, this will normally raise
-    }
-}
-
-class QueueTests
-{
-    private IEnumerable<int> items = new List<int> { 1, 2, 3 };
-
-    private static bool Predicate(int i) => true;
-    private static void Action(int i) { }
-    private Queue<int> Factory() => new Queue<int>();
-
-    public void DefaultConstructor_Applies_Empty()
-    {
-        var list = new Queue<int>();
-        list.Clear(); // FIXME Non-compliant
-    }
-
-    public void ConstructorWithCapacity_Applies_Empty()
-    {
-        var list = new Queue<int>(5);
-        list.Clear(); // FIXME Non-compliant
-    }
-
-    public void ConstructorWithEnumerable_Applies_NonEmpty()
-    {
-        var list = new Queue<int>(items);
-        list.Clear(); // Compliant
-    }
-
-    public void ConstructorWithEmptyInitializer_Applies_Empty()
-    {
-        var list = new Queue<int> { };
-        list.Clear(); // FIXME Non-compliant
-    }
-
-    public void Other_Initialization_Applies_No_Constraints()
-    {
-        var list = Factory();
-        list.Clear(); // Compliant, we don't know anything about the list
-    }
-
-    public void Methods_Raise_Issue()
-    {
-        var list = new Queue<int>();
-        list.Clear(); // FIXME Non-compliant
-        list.Dequeue(); // FIXME Non-compliant
-        list.Peek(); // FIXME Non-compliant
-    }
-
-    public void Methods_Ignored()
-    {
-        var list = new Queue<int>();
-        list.GetHashCode();
-        list.Equals(items);
-        list.GetType();
-        list.ToString();
-    }
-
-    public void Methods_Set_NotEmpty()
-    {
-        var list = new Queue<int>();
-        list.Enqueue(1);
-        list.Clear(); // Compliant, will normally raise
-    }
-
-    public void ExtensionMethods_Remove_Constraints()
-    {
-        var list = new Queue<int>();
-        list.Any(); // Compliant
-        list.Clear(); // Compliant, this will normally raise
-    }
-
-    public void PassingToConstructor_Removes_Constraints()
-    {
-        var list = new Queue<int>();
-        new Foo(1, 2, list); // Compliant
-        list.Clear(); // Compliant, this will normally raise
-    }
-}
-
-class StackTests
-{
-    private IEnumerable<int> items = new List<int> { 1, 2, 3 };
-
-    private static bool Predicate(int i) => true;
-    private static void Action(int i) { }
-    private Stack<int> Factory() => new Stack<int>();
-
-    public void DefaultConstructor_Applies_Empty()
-    {
-        var list = new Stack<int>();
-        list.Clear(); // FIXME Non-compliant
-    }
-
-    public void ConstructorWithCapacity_Applies_Empty()
-    {
-        var list = new Stack<int>(5);
-        list.Clear(); // FIXME Non-compliant
-    }
-
-    public void ConstructorWithEnumerable_Applies_NonEmpty()
-    {
-        var list = new Stack<int>(items);
-        list.Clear(); // Compliant
-    }
-
-    public void ConstructorWithEmptyInitializer_Applies_Empty()
-    {
-        var list = new Stack<int> { };
-        list.Clear(); // FIXME Non-compliant
-    }
-
-    public void Other_Initialization_Applies_No_Constraints()
-    {
-        var list = Factory();
-        list.Clear(); // Compliant, we don't know anything about the list
-    }
-
-    public void Methods_Raise_Issue()
-    {
-        var list = new Stack<int>();
-        list.Clear(); // FIXME Non-compliant
-        list.Pop(); // FIXME Non-compliant
-        list.Peek(); // FIXME Non-compliant
-    }
-
-    public void Methods_Ignored()
-    {
-        var list = new Stack<int>();
-        list.GetHashCode();
-        list.Equals(items);
-        list.GetType();
-        list.ToString();
-    }
-
-    public void Methods_Set_NotEmpty()
-    {
-        var list = new Stack<int>();
-        list.Push(1);
-        list.Clear(); // Compliant, will normally raise
-    }
-
-    public void ExtensionMethods_Remove_Constraints()
-    {
-        var list = new Stack<int>();
-        list.Any(); // Compliant
-        list.Clear(); // Compliant, this will normally raise
-    }
-
-    public void PassingToConstructor_Removes_Constraints()
-    {
-        var list = new Stack<int>();
-        new Foo(1, 2, list); // Compliant
-        list.Clear(); // Compliant, this will normally raise
-    }
-}
-
-class ObservableCollectionTests
-{
-    private IEnumerable<int> items = new ObservableCollection<int> { 1, 2, 3 };
-
-    private static bool Predicate(int i) => true;
-    private static void Action(int i) { }
-    private ObservableCollection<int> Factory() => new ObservableCollection<int>();
-
-    public void DefaultConstructor_Applies_Empty()
-    {
-        var list = new ObservableCollection<int>();
-        list.Clear(); // FIXME Non-compliant
-    }
-
-    public void ConstructorWithEnumerable_Applies_NonEmpty()
-    {
-        var list = new ObservableCollection<int>(items);
-        list.Clear(); // Compliant
-    }
-
-    public void ConstructorWithInitializer_Applies_NonEmpty()
-    {
-        var list = new ObservableCollection<int> { 1, 2, 3 };
-        list.Clear(); // Compliant
-    }
-
-    public void ConstructorWithEmptyInitializer_Applies_Empty()
-    {
-        var list = new ObservableCollection<int> { };
-        list.Clear(); // FIXME Non-compliant
-    }
-
-    public void Other_Initialization_Applies_No_Constraints()
-    {
-        var list = Factory();
-        list.Clear(); // Compliant, we don't know anything about the list
-    }
-
-    public void Methods_Raise_Issue()
-    {
-        var list = new ObservableCollection<int>();
-        list.Clear(); // FIXME Non-compliant
-        list.IndexOf(1); // FIXME Non-compliant
-        list.Move(1, 0); // FIXME Non-compliant
-        list.Remove(1); // FIXME Non-compliant
-        var x = list[5]; // FIXME Non-compliant
-        list[5] = 5; // FIXME Non-compliant
-    }
-
-    public void Methods_Ignored()
-    {
-        var list = new ObservableCollection<int>();
-        list.GetHashCode();
-        list.Equals(items);
-        list.GetType();
-        list.ToString();
-        var a = list.Count;
-        list.CollectionChanged += List_CollectionChanged;
-    }
-
-    private void List_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Methods_Set_NotEmpty()
-    {
-        var list = new ObservableCollection<int>();
-        list.Add(1);
-        list.Clear(); // Compliant, will normally raise
-
-        list = new ObservableCollection<int>();
-        list.Insert(0, 1);
-        list.Clear(); // Compliant
-    }
-
-    public void ExtensionMethods_Remove_Constraints()
-    {
-        var list = new ObservableCollection<int>();
-        list.Any(); // Compliant
-        list.Clear(); // Compliant, this will normally raise
-    }
-
-    public void PassingToConstructor_Removes_Constraints()
-    {
-        var list = new ObservableCollection<int>();
-        new Foo(1, 2, list); // Compliant
-        list.Clear(); // Compliant, this will normally raise
-    }
-}
-
-class ArrayTests
-{
-    public void Zero_Length_Applies_Empty()
-    {
-        var list = new int[0];
-        list.Clone(); // FIXME Non-compliant
-    }
-
-    public void NonZero_Length_Applies_NonEmpty()
-    {
-        var list = new int[5];
-        list.Clone(); // Compliant
-    }
-
-    public void Initializer_Applies_NonEmpty()
-    {
-        var list = new int[] { 1, 2, 3 };
-        list.Clone(); // Compliant
-    }
-
-    public void EmptyInitializer_Applies_Empty()
-    {
-        var list = new int[] { };
-        list.Clone(); // FIXME Non-compliant
-    }
-
-    public void HigherRank_And_Jagged_Array_Is_NotEmpty()
-    {
-        var list1 = new int[0, 0];
-        list1.Clone(); // Compliant
-        int[][] list2 = new int[1][];
-        list2.Clone(); // Compliant
-    }
-
-    public void Methods_Raise_Issue()
-    {
-        var other = new int[] { };
-        var list = new int[] { };
-        list.Clone(); // FIXME Non-compliant
-        list.CopyTo(other, 0); // FIXME Non-compliant
-        list.GetValue(5); // FIXME Non-compliant
-        list.Initialize(); // FIXME Non-compliant
-        list.SetValue(5, 1); // FIXME Non-compliant
-        var x = list[5]; // FIXME Non-compliant
-        list[5] = 5; // FIXME Non-compliant
-    }
-
-    public void Methods_Ignored()
-    {
-        var list = new int[] { };
-        list.GetLength(0);
-        list.GetLongLength(0);
-        list.GetLowerBound(0);
-        list.GetUpperBound(0);
-        list.GetHashCode();
-        list.Equals(new object());
-        list.GetType();
-        list.ToString();
-        var a = list.Length;
-    }
-
-    public void ExtensionMethods_Remove_Constraints()
-    {
-        var list = new int[] { };
-        list.Any(); // Compliant
-        list.Clone(); // Compliant, this will normally raise
-    }
-
-    public void PassingToConstructor_Removes_Constraints()
-    {
-        var list = new int[] { };
-        new Foo(1, 2, list); // Compliant
-        list.Clone(); // Compliant, this will normally raise
-    }
-}
-
-class HashSetTests
-{
-    private IEnumerable<int> items = new HashSet<int> { 1, 2, 3 };
-
-    private static bool Predicate(int i) => true;
-    private HashSet<int> Factory() => new HashSet<int>();
-
-    public void DefaultConstructor_Applies_Empty()
-    {
-        var set = new HashSet<int>();
-        set.Clear(); // FIXME Non-compliant
-    }
-
-    public void ConstructorWithEnumerable_Applies_NonEmpty()
-    {
-        var set = new HashSet<int>(items);
-        set.Clear(); // Compliant
-    }
-
-    public void ConstructorWithInitializer_Applies_NonEmpty()
-    {
-        var set = new HashSet<int> { 1, 2, 3 };
-        set.Clear(); // Compliant
-    }
-
-    public void ConstructorWithEmptyInitializer_Applies_Empty()
-    {
+        list.Clear();                   // Noncompliant
         var set = new HashSet<int> { };
-        set.Clear(); // FIXME Non-compliant
+        set.Clear();                    // Noncompliant
+        var queue = new Queue<int> { };
+        queue.Clear();                  // Noncompliant
+        var stack = new Stack<int> { };
+        stack.Clear();                  // Noncompliant
+        var obs = new ObservableCollection<int> { };
+        obs.Clear();                    // Noncompliant
+        var array = new int[] { };
+        array.Clone();                  // FIXME Non-compliant
+        var dict = new Dictionary<int, int> { };
+        dict.Clear();                   // Noncompliant
     }
 
-    public void Other_Initialization_Applies_No_Constraints()
+    public void ConstructorWithInitializer()
     {
-        var set = Factory();
-        set.Clear(); // Compliant, we don't know anything about the set
-    }
-
-    public void Methods_Raise_Issue()
-    {
-        var set = new HashSet<int>();
-        set.Clear(); // FIXME Non-compliant
-        set.Remove(1); // FIXME Non-compliant
-    }
-
-    public void Methods_Ignored()
-    {
-        var set = new HashSet<int>();
-        set.GetHashCode();
-        set.Equals(items);
-        set.GetType();
-        set.Contains(5);
-    }
-
-    public void ExtensionMethods_Should_Not_Raise()
-    {
-        var set = new HashSet<int>();
-        set.Any(); // Compliant
-    }
-
-    public void ExtensionMethods_Remove_Constraints()
-    {
-        var set = new HashSet<int>();
-        set.Any(); // Compliant
-        set.Clear(); // Compliant, this will normally raise
-    }
-
-    public void PassingToConstructor_Removes_Constraints()
-    {
-        var set = new HashSet<int>();
-        new Foo(1, 2, set); // Compliant
-        set.Clear(); // Compliant, this will normally raise
-    }
-
-    public void Methods_Set_NotEmpty()
-    {
-        var set = new HashSet<int>();
-        set.Add(1);
-        set.Clear(); // Compliant, will normally raise
-    }
-}
-
-class DictionaryTests
-{
-    private IDictionary<int, int> items = new Dictionary<int, int>
-    {
-        [1] = 1,
-        [2] = 2,
-        [3] = 3,
-    };
-
-    private static bool Predicate(int i) => true;
-    private Dictionary<int, int> Factory() => new Dictionary<int, int>();
-
-    public void DefaultConstructor_Applies_Empty()
-    {
-        var dictionary = new Dictionary<int, int>();
-        dictionary.Clear(); // FIXME Non-compliant
-    }
-
-    public void ConstructorWithCapacity_Applies_Empty()
-    {
-        var dictionary = new Dictionary<int, int>(5);
-        dictionary.Clear(); // FIXME Non-compliant
-    }
-
-    public void ConstructorWithEnumerable_Applies_NonEmpty()
-    {
-        var dictionary = new Dictionary<int, int>(items);
-        dictionary.Clear(); // Compliant
-    }
-
-    public void ConstructorWithInitializer_Applies_NonEmpty()
-    {
-        var dictionary = new Dictionary<int, int>
+        var list = new List<int> { 1, 2, 3 };
+        list.Clear();                   // Noncompliant FP
+        var set = new HashSet<int> { 1, 2, 3 };
+        set.Clear();                    // Noncompliant FP
+        var obs = new ObservableCollection<int> { 1, 2, 3 };
+        obs.Clear();                    // Noncompliant FP
+        var array = new int[] { 1, 2, 3 };
+        array.Clone();                  // Compliant
+        var dict = new Dictionary<int, int>
         {
             [1] = 1,
             [2] = 2,
             [3] = 3,
         };
-        dictionary.Clear(); // Compliant
+        dict.Clear();                   // Noncompliant FP
     }
 
-    public void ConstructorWithEmptyInitializer_Applies_Empty()
+    public void Other_Initialization()
     {
-        var dictionary = new Dictionary<int, int> { };
-        dictionary.Clear(); // FIXME Non-compliant
-    }
-
-    public void Other_Initialization_Applies_No_Constraints()
-    {
-        var dictionary = Factory();
-        dictionary.Clear(); // Compliant, we don't know anything about the dictionary
+        var list = GetList();
+        list.Clear();                   // Compliant
+        var set = GetSet();
+        set.Clear();                    // Compliant
+        var queue = GetQueue();
+        queue.Clear();                  // Compliant
+        var stack = GetStack();
+        stack.Clear();                  // Compliant
+        var obs = GetObservableCollection();
+        obs.Clear();                    // Compliant
+        var array = GetArray();
+        array.Clone();                  // Compliant
+        var dict = GetDictionary();
+        dict.Clear();                   // Compliant
     }
 
     public void Methods_Raise_Issue()
     {
-        var dictionary = new Dictionary<int, int>();
-        dictionary.Clear(); // FIXME Non-compliant
-        dictionary.Remove(1); // FIXME Non-compliant
-        var x = dictionary[5]; // FIXME Non-compliant
-        dictionary[5] = 5; // Compliant
-        (((dictionary[5]))) = 5; // Compliant
+        int i;
+
+        var list = new List<int>();
+        list.BinarySearch(5);           // Noncompliant
+        list.Clear();                   // Noncompliant
+        list.Contains(5);               // Noncompliant
+        list.ConvertAll(x => x);        // Noncompliant
+        list.CopyTo(null, 1);           // Noncompliant
+        list.Exists(Predicate);         // Noncompliant
+        list.Find(Predicate);           // Noncompliant
+        list.FindAll(Predicate);        // Noncompliant
+        list.FindIndex(Predicate);      // Noncompliant
+        list.FindLast(Predicate);       // Noncompliant
+        list.FindLastIndex(Predicate);  // Noncompliant
+        list.ForEach(Action);           // Noncompliant
+        list.GetEnumerator();           // Noncompliant
+        list.GetRange(1, 5);            // Noncompliant
+        list.IndexOf(5);                // Noncompliant
+        list.LastIndexOf(5);            // Noncompliant
+        list.Remove(5);                 // Noncompliant
+        list.RemoveAll(Predicate);      // Noncompliant
+        list.RemoveAt(1);               // Noncompliant
+        list.RemoveRange(1, 5);         // Noncompliant
+        list.Reverse();                 // Noncompliant
+        list.Sort();                    // Noncompliant
+        list.TrueForAll(Predicate);     // Noncompliant
+        _ = list[1];                    // FIXME Non-compliant
+//          ~~~~~~~
+        list[1] = 5;                    // FIXME Non-compliant
+//      ~~~~~~~
+
+        var set = new HashSet<int>();
+        set.Clear();                    // Noncompliant
+        set.Contains(5);                // Noncompliant
+        set.CopyTo(null, 1);            // Noncompliant
+        set.ExceptWith(items);          // Noncompliant
+        set.GetEnumerator();            // Noncompliant
+        set.IntersectWith(items);       // Noncompliant
+        set.IsProperSubsetOf(items);    // Noncompliant
+        set.IsProperSupersetOf(items);  // Noncompliant
+        set.IsSubsetOf(items);          // Noncompliant
+        set.IsSupersetOf(items);        // Noncompliant
+        set.Overlaps(items);            // Noncompliant
+        set.Remove(5);                  // Noncompliant
+        set.RemoveWhere(Predicate);     // Noncompliant
+        set.SymmetricExceptWith(items); // Noncompliant, also learns NotEmpty
+        set = new HashSet<int>();
+        set.TryGetValue(5, out i);      // Noncompliant
+        set.UnionWith(items);           // Noncompliant, also learns NotEmpty
+
+        var queue = new Queue<int>();
+        queue.Clear();                  // Noncompliant
+        queue.Contains(5);              // Noncompliant
+        queue.CopyTo(null, 1);          // Noncompliant
+        queue.Dequeue();                // Noncompliant
+        queue.GetEnumerator();          // Noncompliant
+        queue.Peek();                   // Noncompliant
+
+        var stack = new Stack<int>();
+        stack.Clear();                  // Noncompliant
+        stack.Contains(5);              // Noncompliant
+        stack.CopyTo(null, 0);          // Noncompliant
+        stack.GetEnumerator();          // Noncompliant
+        stack.Peek();                   // Noncompliant
+        stack.Pop();                    // Noncompliant
+
+        var obs = new ObservableCollection<int>();
+        obs.Clear();                    // Noncompliant
+        obs.Contains(5);                // Noncompliant
+        obs.CopyTo(null, 1);            // Noncompliant
+        obs.GetEnumerator();            // Noncompliant
+        obs.IndexOf(5);                 // Noncompliant
+        obs.Move(1, 2);                 // Noncompliant
+        obs.Remove(5);                  // Noncompliant
+        obs.RemoveAt(1);                // Noncompliant
+        _ = obs[1];                     // FIXME Non-compliant
+        obs[1] = 5;                     // FIXME Non-compliant
+
+        var array = new int[0];
+        array.Clone();                  // FIXME Non-compliant
+        array.CopyTo(null, 1);          // FIXME Non-compliant
+        array.GetEnumerator();          // FIXME Non-compliant
+        array.GetLength(1);             // FIXME Non-compliant
+        array.GetLongLength(1);         // FIXME Non-compliant
+        array.GetLowerBound(1);         // FIXME Non-compliant
+        array.GetUpperBound(1);         // FIXME Non-compliant
+        array.GetValue(1);              // FIXME Non-compliant
+        array.Initialize();             // FIXME Non-compliant
+        array.SetValue(5, 1);           // FIXME Non-compliant
+        _ = array[1];                   // FIXME Non-compliant
+        array[1] = 5;                   // FIXME Non-compliant
+
+        var dict = new Dictionary<int, int>();
+        dict.Clear();                   // Noncompliant
+        dict.ContainsKey(1);            // Noncompliant
+        dict.ContainsValue(5);          // Noncompliant
+        dict.GetEnumerator();           // Noncompliant
+        dict.Remove(5);                 // Noncompliant
+        dict.TryGetValue(1, out i);     // Noncompliant
+        _ = dict[1];                    // FIXME Non-compliant
     }
 
     public void Methods_Ignored()
     {
-        var dictionary = new Dictionary<int, int>();
-        dictionary.GetHashCode();
-        dictionary.Equals(items);
-        dictionary.GetType();
-        dictionary.ContainsKey(5);
-        dictionary.ContainsValue(5);
-        int vv;
-        dictionary.TryGetValue(5, out vv);
-    }
+        int i;
 
-    public void ExtensionMethods_Should_Not_Raise()
-    {
-        var dictionary = new Dictionary<int, int>();
-        dictionary.Any(); // Compliant
+        var list = new List<int>();
+        list.AsReadOnly();
+        list.GetHashCode();
+        list.GetType();
+        list.Equals(items);
+        list.ToString();
+        list.TrimExcess();
+        list.ToArray();
+
+        var set = new HashSet<int>();
+        set.Equals(items);
+        set.GetHashCode();
+        set.GetObjectData(null, new StreamingContext());
+        set.GetType();
+        set.OnDeserialization(null);
+        set.SetEquals(items);
+        set.TrimExcess();
+
+        var queue = new Queue<int>();
+        queue.Equals(items);
+        queue.GetHashCode();
+        queue.GetType();
+        queue.ToArray();
+        queue.ToString();
+        queue.TrimExcess();
+
+        var stack = new Stack<int>();
+        stack.GetHashCode();
+        stack.Equals(items);
+        stack.GetType();
+        stack.ToArray();
+        stack.ToString();
+        stack.TrimExcess();
+
+        var obs = new ObservableCollection<int>();
+        obs.GetHashCode();
+        obs.Equals(items);
+        obs.GetType();
+        obs.ToString();
+        _ = obs.Count;
+        obs.CollectionChanged += (s, e) => throw new NotImplementedException();
+
+        var array = new int[0];
+        array.GetHashCode();
+        array.Equals(new object());
+        array.GetType();
+        array.ToString();
+        _ = array.Length;
+
+        var dict = new Dictionary<int, int>();
+        dict.GetHashCode();
+        dict.GetObjectData(null, new StreamingContext());
+        dict.Equals(items);
+        dict.GetType();
+        dict.OnDeserialization(null);
+        dict.ToString();
+        dict[5] = 5;
+        (((dict[5]))) = 5;
     }
 
     public void Methods_Set_NotEmpty()
     {
-        var dictionary = new Dictionary<int, int>();
-        dictionary.Add(1, 1);
-        dictionary.Clear(); // Compliant, will normally raise
+        var list = new List<int>();
+        list.Add(5);
+        list.Clear();                   // Compliant
+        list = new List<int>();
+        list.AddRange(items);
+        list.Clear();                   // Compliant
+        list = new List<int>();
+        list.Insert(1, 5);
+        list.Clear();                   // Compliant
+        list = new List<int>();
+        list.InsertRange(1, items);
+        list.Clear();                   // Compliant
+
+        var set = new HashSet<int>();
+        set.Add(1);
+        set.Clear();                    // Compliant
+        set = new HashSet<int>();
+        set.SymmetricExceptWith(items); // Noncompliant
+        set.Clear();                    // Compliant
+        set = new HashSet<int>();
+        set.UnionWith(items);           // Noncompliant
+        set.Clear();                    // Compliant
+
+        var queue = new Queue<int>();
+        queue.Enqueue(5);
+        queue.Clear();                  // Compliant
+
+        var stack = new Stack<int>();
+        stack.Push(5);
+        stack.Clear();                  // Compliant
+
+        var obs = new ObservableCollection<int>();
+        obs.Add(5);
+        obs.Clear();                    // Compliant
+        obs = new ObservableCollection<int>();
+        obs.Insert(0, 5);
+        obs.Clear();                    // Compliant
+
+        var dict = new Dictionary<int, int>();
+        dict.Add(1, 5);
+        dict.Clear();                   // Compliant
+    }
+}
+
+class AdvancedTests
+{
+    public void UnknownExtensionMethods()
+    {
+        var list = new List<int>();
+        list.CustomExtensionMethod();                       // Compliant
+        list.Clear();                                       // Noncompliant FP
     }
 
-    public void TryAdd()
+    public void WellKnownExtensionMethods()
     {
-        var dictionary = new NetCoreDictionary<string, object>();
-        if (dictionary.TryAdd("foo", new object()))
+        var list = new List<int>();
+        list.All(x => true);                                // FN
+        list.Any();                                         // FN
+        list.AsEnumerable();
+        list.AsQueryable();
+        list.AsReadOnly();
+        list.Average();                                     // FN
+        list.Cast<byte>();                                  // FN
+        list.Concat(list);                                  // FN
+        list.Contains(5, EqualityComparer<int>.Default);    // FN
+        list.Count();                                       // FN
+        list.DefaultIfEmpty();                              // FN
+        list.Distinct();                                    // FN
+        list.Except(list);                                  // FN
+        list.First();                                       // FN
+        list.FirstOrDefault();                              // FN
+        list.GroupBy(x => x);
+        list.GroupJoin(list, x => x, x => x, (x, y) => x);  // FN
+        list.Intersect(list);                               // FN
+        list.Join(list, x => x, x => x, (x, y) => x);       // FN
+        list.Last();                                        // FN
+        list.LastOrDefault();                               // FN
+        list.LongCount();                                   // FN
+        list.Max();                                         // FN
+        list.Min();                                         // FN
+        list.OfType<int>();                                 // FN
+        list.OrderBy(x => x);
+        list.OrderByDescending(x => x);
+        list.Select(x => x);                                // FN
+        list.SelectMany(x => new int[5]);                   // FN
+        list.SequenceEqual(list);                           // FN
+        list.Single();                                      // FN
+        list.SingleOrDefault();                             // FN
+        list.Skip(1);                                       // FN
+        list.SkipWhile(x => true);                          // FN
+        list.Sum();                                         // FN
+        list.Take(1);                                       // FN
+        list.TakeWhile(x => true);                          // FN
+        list.ToArray();                                     // FN
+        list.ToDictionary(x => x);                          // FN
+        list.ToList();                                      // FN
+        list.ToLookup(x => x);
+        list.Union(list);                                   // FN
+        list.Where(x => true);                              // FN
+        list.Zip(list, (x, y) => x);                        // FN
+        Enumerable.Reverse(list);                           // FN
+        list.Clear();                                       // Noncompliant
+    }
+
+    public void PassingAsArgument_Removes_Constraints()
+    {
+        var list = new List<int>();
+        Foo(list);
+        list.Clear();   // Noncompliant FP
+    }
+
+    public void HigherRank_And_Jagged_Array_Is_NotEmpty()
+    {
+        var array1 = new int[0, 0];
+        array1.Clone(); // Compliant
+        int[][] array2 = new int[1][];
+        array2.Clone(); // Compliant
+    }
+
+    void Foo(IEnumerable<int> items) { }
+}
+
+static class CustomExtensions
+{
+    public static void CustomExtensionMethod(this List<int> list) { }
+}
+
+// This simulates the Dictionary from .NetCore 2.0+.
+public class NetCoreDictionary<TKey, TValue> : Dictionary<TKey, TValue>
+{
+    public void TestTryAdd()
+    {
+        var dict = new NetCoreDictionary<string, object>();
+        if (dict.TryAdd("foo", new object()))   // Compliant
         {
         }
+    }
+
+    public bool TryAdd(TKey key, TValue value)
+    {
+        return true;
     }
 }
 
@@ -626,7 +450,7 @@ class Flows
         {
             list.Add(5);
         }
-        list.Clear(); // Compliant
+        list.Clear();   // Compliant
     }
 
     public void Conditional_Add_With_Loop(bool condition)
@@ -640,29 +464,64 @@ class Flows
                 break;
             }
         }
-        list.Clear(); // Compliant
+        list.Clear();   // Compliant
     }
-
-    public void Collection_Passed_As_Argument()
-    {
-        var list = new List<int>();
-        DoSomething(list);
-        list.Clear(); // Compliant, DoSomething could be adding items to the list
-    }
-
-    public void DoSomething(IEnumerable<int> items) { }
 
     public void AddPassedAsParameter()
     {
-        var collector = new List<int>();
+        var list = new List<int>();
 
-        DoSomething(collector.Add);
+        DoSomething(list.Add);
 
-        collector.Clear(); // FIXME Non-compliant - FP, see https://github.com/SonarSource/sonar-dotnet/issues/4261
+        list.Clear();   // Noncompliant FP, see https://github.com/SonarSource/sonar-dotnet/issues/4261
+    }
+
+    public void Count(List<int> list)
+    {
+        if (list.Count == 0)
+            list.Clear();       // FN
+        else
+            list.Clear();       // Compliant
+
+        if (list.Count() == 0)
+            list.Clear();       // FN
+        else
+            list.Clear();       // Compliant
+
+        if (list.Count != 0)
+            list.Clear();       // Compliant
+        else
+            list.Clear();       // FN
+
+        if (list.Count() != 0)
+            list.Clear();       // Compliant
+        else
+            list.Clear();       // FN
+
+        if (list.Count > 0)
+            list.Clear();       // Compliant
+        else
+            list.Clear();       // FN
+
+        if (list.Count() > 0)
+            list.Clear();       // Compliant
+        else
+            list.Clear();       // FN
+
+        if (list.Count > 1)
+            list.Clear();       // Compliant
+        else
+            list.Clear();       // Compliant
+
+        if (list.Count() > 1)
+            list.Clear();       // Compliant
+        else
+            list.Clear();       // Compliant
     }
 
     private static void DoSomething(Action<int> callback) => callback(42);
 }
+
 
 class Flows2
 {
@@ -721,14 +580,6 @@ class Flows2
     private static int GetChar(string s, int v1, int v2)
     {
         return 1;
-    }
-}
-
-class Foo
-{
-    // Important to test not only the first argument
-    public Foo(int param, int other, IEnumerable<int> arg)
-    {
     }
 }
 
@@ -791,22 +642,13 @@ class LargeCfg
 
             if (list.Count > 0)
             {
-                list.Sort(); // Compliant. This used to be a FP
+                list.Sort();    // Compliant
             }
         }
         catch
         {
             // silently do nothing
         }
-    }
-}
-
-// This class is here to simulate how the Dictionary from .NetCore 2.0+ behaves.
-public class NetCoreDictionary<TKey, TValue> : Dictionary<TKey, TValue>
-{
-    public bool TryAdd(TKey key, TValue value)
-    {
-        return true;
     }
 }
 
