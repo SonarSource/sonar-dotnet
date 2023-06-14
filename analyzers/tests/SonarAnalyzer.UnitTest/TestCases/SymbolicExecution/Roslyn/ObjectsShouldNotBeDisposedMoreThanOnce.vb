@@ -35,6 +35,7 @@ Class Program
         Dim d = New DoesNotImplementDisposable()
         d.Dispose()
         d.Dispose() ' Noncompliant - IDisposal interface implementation is not checked
+'       ^^^^^^^^^^^
     End Sub
 
     Public Sub DisposedTwice_Conditional()
@@ -44,6 +45,7 @@ Class Program
             d.Dispose()
         End If
         d.Dispose() ' Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
+ '      ^^^^^^^^^^^       
     End Sub
 
     Private disposable As IDisposable
@@ -107,6 +109,7 @@ Class Program
 
     Public Sub Disposed_Using_WithDeclaration()
         Using d = New Disposable()  ' Noncompliant
+        '     ^
             d.Dispose()
         End Using
     End Sub
