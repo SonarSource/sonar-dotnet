@@ -558,43 +558,51 @@ class Flows
         list.Clear();   // Noncompliant FP, see https://github.com/SonarSource/sonar-dotnet/issues/4261
     }
 
-    public void Count(List<int> list)
+    public void Count()
     {
+        var list = GetList();
         if (list.Count == 0)
             list.Clear();       // FN
         else
             list.Clear();       // Compliant
 
+        list = GetList();
         if (list.Count() == 0)
             list.Clear();       // FN
         else
             list.Clear();       // Compliant
 
+        list = GetList();
         if (list.Count != 0)
             list.Clear();       // Compliant
         else
             list.Clear();       // FN
 
+        list = GetList();
         if (list.Count() != 0)
             list.Clear();       // Compliant
         else
             list.Clear();       // FN
 
+        list = GetList();
         if (list.Count > 0)
             list.Clear();       // Compliant
         else
             list.Clear();       // FN
 
+        list = GetList();
         if (list.Count() > 0)
             list.Clear();       // Compliant
         else
             list.Clear();       // FN
 
+        list = GetList();
         if (list.Count > 1)
             list.Clear();       // Compliant
         else
             list.Clear();       // Compliant
 
+        list = GetList();
         if (list.Count() > 1)
             list.Clear();       // Compliant
         else
@@ -602,6 +610,7 @@ class Flows
     }
 
     private static void DoSomething(Action<int> callback) => callback(42);
+    private List<int> GetList() => null;
 }
 
 
