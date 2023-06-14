@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
     {
         public StringOffsetMethods()
         {
-            """Test""".Substring(1).IndexOf('t'); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
+            """Test""".Substring(1).IndexOf('t'); // Noncompliant {{Replace 'IndexOf' with the overload that accepts a startIndex parameter.}}
         }
     }
 }

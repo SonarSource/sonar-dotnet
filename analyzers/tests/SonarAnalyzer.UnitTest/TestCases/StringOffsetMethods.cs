@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
     {
         public StringOffsetMethods()
         {
-            "Test".Substring(1).IndexOf('t'); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
+            "Test".Substring(1).IndexOf('t'); // Noncompliant {{Replace 'IndexOf' with the overload that accepts a startIndex parameter.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         }
 
@@ -34,7 +34,7 @@ namespace Tests.Diagnostics
             "Test".IndexOfAny(new[] { 't' });
             "Test".IndexOfAny(new[] { 't' }, 2);
             "Test".IndexOfAny(new[] { 't' }, 1, 2);
-            "Test".Substring(1).IndexOfAny(new[] { 't' }); // Noncompliant {{Replace 'IndexOfAny' with the overload that accepts an offset parameter.}}
+            "Test".Substring(1).IndexOfAny(new[] { 't' }); // Noncompliant {{Replace 'IndexOfAny' with the overload that accepts a startIndex parameter.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             "Test".LastIndexOf('t');
@@ -42,7 +42,7 @@ namespace Tests.Diagnostics
             "Test".LastIndexOf("t");
             "Test".LastIndexOf("t", 1);
             "Test".LastIndexOf("t", 1, 3);
-            "Test".Substring(1).LastIndexOf('t'); // Noncompliant {{Replace 'LastIndexOf' with the overload that accepts an offset parameter.}}
+            "Test".Substring(1).LastIndexOf('t'); // Noncompliant {{Replace 'LastIndexOf' with the overload that accepts a startIndex parameter.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             "Test".Substring(1).LastIndexOf("t"); // Noncompliant
 
@@ -50,7 +50,7 @@ namespace Tests.Diagnostics
             "Test".LastIndexOfAny(new[] { 't' });
             "Test".LastIndexOfAny(new[] { 't' }, 1);
             "Test".LastIndexOfAny(new[] { 't' }, 1, 3);
-            "Test".Substring(1).LastIndexOfAny(new[] { 't' }); // Noncompliant {{Replace 'LastIndexOfAny' with the overload that accepts an offset parameter.}}
+            "Test".Substring(1).LastIndexOfAny(new[] { 't' }); // Noncompliant {{Replace 'LastIndexOfAny' with the overload that accepts a startIndex parameter.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             x.Substring(1).IndexOf('t'); // Noncompliant
