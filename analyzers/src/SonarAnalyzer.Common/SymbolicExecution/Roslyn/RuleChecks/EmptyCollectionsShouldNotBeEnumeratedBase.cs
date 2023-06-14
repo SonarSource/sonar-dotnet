@@ -115,8 +115,13 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        if ((operation.AsObjectCreation()?.Type.IsAny(TrackedCollectionTypes) ?? false)
-            || IsEmptyArray(operation))
+        if (operation.AsObjectCreation() is { } objectCreation && objectCreation.Type.IsAny(TrackedCollectionTypes))
+        {
+            return CollectionCreationConstraint(context.State, objectCreation) is { } constraint
+                ? context.State.SetOperationConstraint(objectCreation, constraint)
+                : context.State;
+        }
+        else if (IsEmptyArray(operation))
         {
             return context.State.SetOperationConstraint(operation, CollectionConstraint.Empty);
         }
@@ -148,6 +153,11 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             ReportIssue(operation, operation.Syntax.ToString());
         }
     }
+
+    private static CollectionConstraint CollectionCreationConstraint(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
+        objectCreation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable)) is { } collectionArgument
+            ? state[collectionArgument]?.Constraint<CollectionConstraint>()
+            : CollectionConstraint.Empty;
 
     private static bool IsEmptyArray(IOperation operation) =>
         operation.AsArrayCreation()?.DimensionSizes.Any(x => x.ConstantValue.Value is 0) ?? false;

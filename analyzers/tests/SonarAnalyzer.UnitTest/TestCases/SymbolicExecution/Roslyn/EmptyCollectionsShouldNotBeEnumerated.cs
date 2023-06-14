@@ -82,17 +82,41 @@ class CollectionTests
     public void ConstructorWithEnumerable()
     {
         var list = new List<int>(items);
-        list.Clear();                   // Noncompliant FP
+        list.Clear();                   // Compliant
         var set = new HashSet<int>(items);
-        set.Clear();                    // Noncompliant FP
+        set.Clear();                    // Compliant
+        set = new HashSet<int>(items, EqualityComparer<int>.Default);
+        set.Clear();                    // Compliant
+        set = new HashSet<int>(comparer: EqualityComparer<int>.Default, collection: items);
+        set.Clear();                    // Compliant
         var queue = new Queue<int>(items);
-        queue.Clear();                  // Noncompliant FP
+        queue.Clear();                  // Compliant
         var stack = new Stack<int>(items);
-        stack.Clear();                  // Noncompliant FP
+        stack.Clear();                  // Compliant
         var obs = new ObservableCollection<int>(items);
-        obs.Clear();                    // Noncompliant FP
+        obs.Clear();                    // Compliant
         var dict = new Dictionary<int, int>(dictionaryItems);
-        dict.Clear();                   // Noncompliant FP
+        dict.Clear();                   // Compliant
+    }
+
+    public void ConstructorWithEnumerableWithConstraint(bool condition)
+    {
+        var baseCollection = new List<int>();
+        var set = new HashSet<int>(baseCollection);
+        set.Clear();                    // Noncompliant
+
+        set = new HashSet<int>(baseCollection, EqualityComparer<int>.Default);
+        set.Clear();                    // Noncompliant
+
+        set = new HashSet<int>(comparer: EqualityComparer<int>.Default, collection: baseCollection);
+        set.Clear();                    // Noncompliant
+
+        set = new HashSet<int>(condition ? baseCollection : baseCollection);
+        set.Clear();                    // Noncompliant
+
+        baseCollection.Add(1);
+        set = new HashSet<int>(baseCollection);
+        set.Clear();                    // Compliant
     }
 
     public void ConstructorWithEmptyInitializer()
@@ -148,6 +172,11 @@ class CollectionTests
         array.Clone();                  // Compliant
         var dict = GetDictionary();
         dict.Clear();                   // Compliant
+
+        array = Array.Empty<int>();
+        array.Clone();                  // FN
+        var enumerable = Enumerable.Empty<int>();
+        enumerable.GetEnumerator();     // FN
     }
 
     public void Methods_Raise_Issue()
@@ -360,6 +389,32 @@ class CollectionTests
         dict.Add(1, 5);
         dict.Clear();                   // Compliant
     }
+
+    public void Method_Set_Empty(List<int> list, HashSet<int> set, Queue<int> queue, Stack<int> stack, ObservableCollection<int> obs, Dictionary<int, int> dict)
+    {
+        list.Clear();                   // Compliant
+        list.Clear();                   // FN
+
+        set.Clear();                    // Compliant
+        set.Clear();                    // FN
+
+        queue.Clear();                  // Compliant
+        queue.Clear();                  // FN
+
+        stack.Clear();                  // Compliant
+        stack.Clear();                  // FN
+
+        obs.Clear();                    // Compliant
+        obs.Clear();                    // FN
+
+        dict.Clear();                   // Compliant
+        dict.Clear();                   // FN
+
+        var empty = new List<int>();
+        list.Add(5);
+        list.Intersect(empty);          // Compliant
+        list.Clear();                   // FN
+    }
 }
 
 class AdvancedTests
@@ -503,43 +558,51 @@ class Flows
         list.Clear();   // Noncompliant FP, see https://github.com/SonarSource/sonar-dotnet/issues/4261
     }
 
-    public void Count(List<int> list)
+    public void Count()
     {
+        var list = GetList();
         if (list.Count == 0)
             list.Clear();       // FN
         else
             list.Clear();       // Compliant
 
+        list = GetList();
         if (list.Count() == 0)
             list.Clear();       // FN
         else
             list.Clear();       // Compliant
 
+        list = GetList();
         if (list.Count != 0)
             list.Clear();       // Compliant
         else
             list.Clear();       // FN
 
+        list = GetList();
         if (list.Count() != 0)
             list.Clear();       // Compliant
         else
             list.Clear();       // FN
 
+        list = GetList();
         if (list.Count > 0)
             list.Clear();       // Compliant
         else
             list.Clear();       // FN
 
+        list = GetList();
         if (list.Count() > 0)
             list.Clear();       // Compliant
         else
             list.Clear();       // FN
 
+        list = GetList();
         if (list.Count > 1)
             list.Clear();       // Compliant
         else
             list.Clear();       // Compliant
 
+        list = GetList();
         if (list.Count() > 1)
             list.Clear();       // Compliant
         else
@@ -547,6 +610,7 @@ class Flows
     }
 
     private static void DoSomething(Action<int> callback) => callback(42);
+    private List<int> GetList() => null;
 }
 
 
