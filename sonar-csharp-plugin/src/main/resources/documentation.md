@@ -7,6 +7,13 @@ key: csharp
 <!-- update_center:csharp -->
 <!-- /static -->
 
+## Supported Versions
+
+| Version | Status              |
+|---------|---------------------|
+|         | Fully Supported     |
+|         | Partially Supported |
+|         | Not Supported       |
 
 ## Language-Specific Properties
 
