@@ -1,18 +1,35 @@
 <h2>Why is this an issue?</h2>
-<p><code>private</code> or <code>internal</code> types or <code>private</code> members that are never executed or referenced are dead code:
-unnecessary, inoperative code that should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to
-understand the program and preventing bugs from being introduced.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p><code>private</code> or <code>internal</code> types or <code>private</code> members that are never executed or referenced are unused code:
+unnecessary, inoperative code that should be removed.</p>
+<p>Cleaning out the unused code decreases the codebase size, making it easier to understand and preventing bugs from being introduced.</p>
+<p>Redundant code is included in the compilation so it needs to be compiled as well. Due to this, removing it will reduce the compilation time and the
+project maintanace. It will also simplify the onboarding time for new joiners since they will not need to understand what it does and why it’s
+there.</p>
+<h3>Exceptions</h3>
+<p>This rule doesn’t raise issues on:</p>
+<ul>
+  <li> empty constructors </li>
+  <li> members with attributes </li>
+  <li> <code>Main</code> method </li>
+  <li> methods with event handler signature <code>void Foo(object, EventArgs)</code> that are declared in partial class </li>
+  <li> empty serialization constructor on type with <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute">System.SerializableAttribute</a> attribute. </li>
+  <li> internal members in assemblies that have a <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.internalsvisibletoattribute">System.Runtime.CompilerServices.InternalsVisibleToAttribute</a> attribute. </li>
+</ul>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public class Foo
 {
-    private void UnusedPrivateMethod() {...} // Noncompliant
+    private void UnusedPrivateMethod(){...} // Noncompliant, this private method is unused and can be removed.
 
-    private class UnusedClass {...} // Noncompliant
+    private class UnusedClass {...} // Noncompliant, unused private class that can be removed.
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 public class Foo
 {
     public Foo()
@@ -28,14 +45,10 @@ public class Foo
     private class UsedClass {...}
 }
 </pre>
-<h3>Exceptions</h3>
-<p>This rule doesn’t raise issues on:</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> Empty constructors </li>
-  <li> Attributed members </li>
-  <li> <code>Main</code> method </li>
-  <li> Methods with event handler signature <code>void Foo(object, EventArgs)</code> that are declared in partial class </li>
-  <li> Empty serialization constructor on type with <code>System.SerializableAttribute</code> attribute. </li>
-  <li> Internals in assemblies that have a <code>System.Runtime.CompilerServices.InternalsVisibleToAttribute</code> attribute. </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers">Access Modifiers (C#
+  Programming Guide)</a> </li>
 </ul>
 

@@ -57,7 +57,7 @@ End Class
 Module Program
     Sub Main()
         Dim Another As New AnotherClass
-        Dim x = TryCast(Another, IMyInterface)                      ' Compliant: but will always be null
+        Dim x = TryCast(Another, IMyInterface)                      ' Compliant: but will always be Nothing
     End Sub
 End Module
 </pre>

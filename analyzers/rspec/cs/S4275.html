@@ -1,18 +1,29 @@
 <h2>Why is this an issue?</h2>
-<p>Properties provide a way to enforce encapsulation by providing <code>public</code>, <code>protected</code> or <code>internal</code> methods that
-give controlled access to <code>private</code> fields. However in classes with multiple fields it is not unusual that cut and paste is used to quickly
-create the needed properties, which can result in the wrong field being accessed by a getter or setter.</p>
+<p>Properties provide a way to enforce <a href="https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)">encapsulation</a> by providing
+accessors that give controlled access to <code>private</code> fields. However, in classes with multiple fields, it is not unusual that <a
+href="https://en.wikipedia.org/wiki/Copy-and-paste_programming">copy-and-paste</a> is used to quickly create the needed properties, which can result
+in the wrong field being accessed by a getter or setter.</p>
+<pre>
+class C
+{
+    private int x;
+    private int y;
+    public int Y =&gt; x; // Noncompliant: The returned field should be 'y'
+}
+</pre>
 <p>This rule raises an issue in any of these cases:</p>
 <ul>
-  <li> A setter does not update the field with the corresponding name. </li>
   <li> A getter does not access the field with the corresponding name. </li>
+  <li> A setter does not update the field with the corresponding name. </li>
 </ul>
-<p>For simple properties it is better to use <a
+<p>For simple properties, it is better to use <a
 href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/auto-implemented-properties">auto-implemented
 properties</a> (C# 3.0 or later).</p>
 <p>Field and property names are compared as case-insensitive. All underscore characters are ignored.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class A
 {
     private int x;
@@ -31,8 +42,8 @@ class A
     }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 class A
 {
     private int x;
@@ -51,4 +62,9 @@ class A
     }
 }
 </pre>
+<h2>Resources</h2>
+<ul>
+  <li> Microsoft Learn: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties">Properties (C#
+  Programming Guide)</a> </li>
+</ul>
 

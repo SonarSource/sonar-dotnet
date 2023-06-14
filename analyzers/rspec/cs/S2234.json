@@ -1,5 +1,5 @@
 {
-  "title": "Parameters should be passed in the correct order",
+  "title": "Arguments should be passed in the same order as the method parameters",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -11,5 +11,5 @@
   "ruleSpecification": "RSPEC-2234",
   "sqKey": "S2234",
   "scope": "All",
-  "quickfix": "unknown"
+  "quickfix": "targeted"
 }

@@ -31,6 +31,10 @@ class MyTest
 }
 </pre>
 <pre data-diff-id="1" data-diff-type="compliant">
+public class Fruit { }
+public class Orange : Fruit { }
+public class Apple : Fruit { }
+
 class MyTest
 {
   public void Test()
@@ -48,8 +52,8 @@ class MyTest
 }
 </pre>
 <h3>Exceptions</h3>
-<p>The rule ignores iterations on collections of <code>object`s. This includes legacy code that uses `ArrayList</code>. Furthermore, the rule does not
-report on cases when user-defined conversions are being called.</p>
+<p>The rule ignores iterations on collections of <code>objects</code>. This includes legacy code that uses <code>ArrayList</code>. Furthermore, the
+rule does not report on cases when user-defined conversions are being called.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>

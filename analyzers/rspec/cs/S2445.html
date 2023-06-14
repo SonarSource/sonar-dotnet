@@ -1,40 +1,59 @@
 <h2>Why is this an issue?</h2>
-<p>Locking on a class field synchronizes not on the field itself, but on the object assigned to it. Thus, there are some good practices to follow to
-avoid bugs related to thread synchronization.</p>
-<ol>
-  <li> Locking on a non-<code>readonly</code> field makes it possible for the field’s value to change while a thread is in the code block locked on
-  the old value. This allows another thread to lock on the new value and access the same block concurrently. </li>
-  <li> Locking on a new instance of an object undermines synchronization because two different threads running the same method in parallel will lock
-  on different instances of the same object, allowing them to access the synchronized block at the same time. </li>
-  <li> Locking on a string literal is also dangerous since, depending on whether the string is interned or not, different threads may or may not
-  synchronize on the same object instance. </li>
-</ol>
-<h3>Noncompliant code example</h3>
-<pre>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock">Locking</a> on a class field synchronizes not on the
+field itself, but on the object assigned to it. Thus, there are some good practices to follow to avoid problems related to <a
+href="https://learn.microsoft.com/en-us/dotnet/standard/threading/threads-and-threading">thread</a> synchronization.</p>
+<ul>
+  <li> Locking on a non-<code>readonly</code> field makes it possible for the field’s value to change while a thread is in the code block, locked on the old value. This allows another thread to lock on the new value and access the same block concurrently. <pre>
 private Color color = new Color("red");
-private readonly string colorString = "red";
-
 private void DoSomething()
 {
   // Synchronizing access via "color"
-  lock (color) // Noncompliant; lock is actually on object instance "red" referred to by the "color" field
+  lock (color) // Noncompliant: lock is actually on object instance "red" referred to by the "color" field
   {
     //...
     color = new Color("green"); // other threads now allowed into this block
     // ...
   }
-  lock (new object()) // Noncompliant; this is a no-op
-  {
-    // ...
-  }
-  lock (colorString)  // Noncompliant; strings can be interned
+}
+</pre> </li>
+  <li> Locking on a new instance of an object undermines synchronization because two different threads running the same method in parallel will lock on different instances of the same object, allowing them to access the synchronized block at the same time. <pre>
+private void DoSomething()
+{
+  lock (new object()) // Noncompliant: every thread locks on a different new instance
   {
     // ...
   }
 }
+</pre> </li>
+  <li> Locking on a string literal is also dangerous since, depending on whether the string is interned or not, different threads may or may not synchronize on the same object instance. <pre>
+private readonly string colorString = "red";
+private void DoSomething()
+{
+  lock (colorString)  // Noncompliant: strings can be interned
+  {
+    // ...
+  }
+}
+</pre> </li>
+</ul>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+private Color color = new Color("red");
+private void DoSomething()
+{
+  // Synchronizing access via "color"
+  lock (color) // Noncompliant: lock is actually on object instance "red" referred to by the "color" field
+  {
+    //...
+    color = new Color("green"); // other threads now allowed into this block
+    // ...
+  }
+}
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 private Color color = new Color("red");
 private readonly object lockObj = new object();
 
@@ -55,5 +74,6 @@ private void DoSomething()
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern">String.Intern</a> - <code>String.Intern(String)</code> Method </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/412">MITRE, CWE-412</a> - Unrestricted Externally Accessible Lock </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/413">MITRE, CWE-413</a> - Improper Resource Locking </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/threading/threads-and-threading">Threads and threading</a> </li>
 </ul>
 
