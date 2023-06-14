@@ -1,8 +1,10 @@
 <h2>Why is this an issue?</h2>
-<p>Calling <code>ToString()</code> on an object should always return a string. Returning <code>null</code> instead contravenes the method’s implicit
-contract.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>Calling <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.tostring">ToString()</a> on an object should always return a
+<code>string</code>. Thus, <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/how-to-override-the-tostring-method">overriding the
+ToString method</a> should never return <code>null</code>, as it breaks the method’s implicit contract, and as a result the consumer’s
+expectations.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public override string ToString ()
 {
   if (this.collection.Count == 0)
@@ -15,8 +17,8 @@ public override string ToString ()
   }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<p>A better alternative is to use the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.empty">String.Empty</a> built-in field.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
 public override string ToString ()
 {
   if (this.collection.Count == 0)
@@ -30,7 +32,11 @@ public override string ToString ()
 }
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/476">MITRE, CWE-476</a> - NULL Pointer Dereference </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.tostring">Object.ToString Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/how-to-override-the-tostring-method">How to
+  override the ToString method</a> </li>
 </ul>
 

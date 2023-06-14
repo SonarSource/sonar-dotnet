@@ -1,10 +1,15 @@
 <h2>Why is this an issue?</h2>
-<p>Marking a class with <code>PartCreationPolicy(CreationPolicy.Shared)</code>, which is part of Managed Extensibility Framework (MEF), means that a
-single, shared instance of the exported object will be created. Therefore it doesn’t make sense to create new instances using the constructor and it
-will most likely result in unexpected behaviours.</p>
+<p>Marking a class with <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.partcreationpolicyattribute"><code>PartCreationPolicy</code></a>(<a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.creationpolicy"><code>CreationPolicy.Shared</code></a>), which is
+part of <a href="https://learn.microsoft.com/en-us/dotnet/framework/mef">Managed Extensibility Framework (MEF)</a>, means that a single, shared
+instance of the exported object will be created. Therefore it doesn’t make sense to create new instances using the constructor and it will most likely
+result in unexpected behaviours.</p>
 <p>This rule raises an issue when a constructor of a class marked shared with a <code>PartCreationPolicyAttribute</code> is invoked.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant]">
 &lt;Export(GetType(IFooBar))&gt;
 &lt;PartCreationPolicy(CreationPolicy.[Shared])&gt;
 Public Class FooBar
@@ -17,8 +22,8 @@ Public Class Program
     End Sub
 End Class
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 &lt;Export(GetType(IFooBar))&gt;
 &lt;PartCreationPolicy(CreationPolicy.[Shared])&gt;
 Public Class FooBar
@@ -31,4 +36,13 @@ Public Class Program
     End Sub
 End Class
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.partcreationpolicyattribute"><code>PartCreationPolicy</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.creationpolicy"><code>CreationPolicy.Shared</code></a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/framework/mef">Managed Extensibility Framework</a> </li>
+</ul>
 

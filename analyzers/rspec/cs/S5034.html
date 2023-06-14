@@ -1,53 +1,55 @@
 <h2>Why is this an issue?</h2>
-<p><code>ValueTask&lt;TResult&gt;</code> was introduced in .NET Core 2.0 <a
-href="https://devblogs.microsoft.com/dotnet/understanding-the-whys-whats-and-whens-of-valuetask/">to optimize memory allocation</a> when functions
-return their results synchronously.</p>
-<p><code>ValueTask</code> and <code>ValueTask&lt;TResult&gt;</code> should <strong>never</strong> be used in the following ways as it could result in
-a race condition:</p>
+<p><code>ValueTask&lt;TResult&gt;</code> provides a value type that wraps a <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1">Task&lt;TResult&gt;</a> and the corresponding <code>TResult</code>.
+It was introduced in .NET Core 2.0 <a href="https://devblogs.microsoft.com/dotnet/understanding-the-whys-whats-and-whens-of-valuetask">to optimize
+memory allocation</a> when functions return their results synchronously.</p>
+<p>Using <code>ValueTask</code> and <code>ValueTask&lt;TResult&gt;</code> in the following ways is discouraged as it could result in a race
+condition:</p>
 <ul>
-  <li> Calling <code>await</code> multiple times on a <code>ValueTask / ValueTask&lt;TResult&gt;</code>*. The wrapped object may have been reused by
-  another operation. This differs from <code>Task / Task&lt;TResult&gt;</code>, on which you can await multiple times and always get the same result.
-  </li>
-  <li> Calling <code>await</code> concurrently on a <code>ValueTask / ValueTask&lt;TResult&gt;</code>*. The underlying object is not thread safe.
-  What’s more, it has the same effect as awaiting multiple times a <code>ValueTask / ValueTask&lt;TResult&gt;</code>. This again differs from
-  <code>Task / Task&lt;TResult&gt;</code>, which support concurrent <code>await</code>. </li>
-  <li> Using <code>.Result</code> or <code>.GetAwaiter().GetResult()</code> without checking if the operation completed*. <code>IValueTaskSource /
-  IValueTaskSource&lt;TResult&gt;</code> implementations are not required to block until the operation completes. On the other hand, <code>Task /
-  Task&lt;TResult&gt;</code> blocks the call until the task completes. </li>
+  <li> Calling <code>await</code> multiple times on a <code>ValueTask</code>/<code>ValueTask&lt;TResult&gt;</code>. The wrapped object may have been
+  reused by another operation. This differs from <code>Task</code>/<code>Task&lt;TResult&gt;</code>, on which you can await multiple times and always
+  get the same result. </li>
+  <li> Calling <code>await</code> concurrently on a <code>ValueTask</code>/<code>ValueTask&lt;TResult&gt;</code>. The underlying object is not thread
+  safe. What’s more, it has the same effect as awaiting multiple times a <code>ValueTask</code>/<code>ValueTask&lt;TResult&gt;</code>. This again
+  differs from <code>Task</code>/<code>Task&lt;TResult&gt;</code>, which support concurrent <code>await</code>. </li>
+  <li> Using <code>.Result</code> or <code>.GetAwaiter().GetResult()</code> without checking if the operation is completed.
+  <code>IValueTaskSource</code>/<code>IValueTaskSource&lt;TResult&gt;</code> implementations are not required to block until the operation completes.
+  On the other hand, <code>Task</code>/<code>Task&lt;TResult&gt;</code> blocks the call until the task completes. </li>
 </ul>
-<p>It is recommended to use <code>ValueTask / ValueTask&lt;TResult&gt;</code> either by calling "await" on the function returning it, optionally
-calling <code>ConfigureAwait(false)</code> on it, or by calling <code>.AsTask()</code> on it.</p>
-<p>This rule raises an issue when the following operations are performed on a <code>ValueTask / ValueTask&lt;TResult&gt;</code> instance:</p>
+<p>It is recommended to use <code>ValueTask</code>/<code>ValueTask&lt;TResult&gt;</code> either by calling <code>await</code> on the function
+returning it, optionally calling <code>ConfigureAwait(false)</code> on it, or by calling <code>.AsTask()</code> on it.</p>
+<p>This rule raises an issue when the following operations are performed on a <code>ValueTask</code>/<code>ValueTask&lt;TResult&gt;</code> instance
+unless it happens in a loop:</p>
 <ul>
   <li> Awaiting the instance multiple times. </li>
   <li> Calling <code>AsTask</code> multiple times. </li>
   <li> Using <code>.Result</code> or <code>.GetAwaiter().GetResult()</code> multiple times </li>
   <li> Using <code>.Result</code> or <code>.GetAwaiter().GetResult()</code> when the operation has not yet completed </li>
-  <li> Using more than one of these ways to consume the instance. </li>
+  <li> Using of these ways to consume the instance multiple times. </li>
 </ul>
-<h3>Noncompliant code example</h3>
-<pre>
-ValueTask&lt;int&gt; vt = SomeValueTaskReturningMethodAsync();
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+ValueTask&lt;int&gt; vt = ComputeAsync();
 int result = await vt;
-int result2 = await vt; // Noncompliant, variable is awaited multiple times
+result = await vt; // Noncompliant, variable is awaited multiple times
 
-int value = SomeValueTaskReturningMethodAsync().GetAwaiter().GetResult(); // Noncompliant, uses GetAwaiter().GetResult() when it's not known to be done
+int value = ComputeAsync()).GetAwaiter().GetResult(); // Noncompliant, uses GetAwaiter().GetResult() when it's not known to be done
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-int result = await SomeValueTaskReturningMethodAsync();
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+ValueTask&lt;int&gt; vt = ComputeAsync();
+int result = await vt;
 
-int result = await SomeValueTaskReturningMethodAsync().ConfigureAwait(false);
-
-Task&lt;int&gt; t = SomeValueTaskReturningMethodAsync().AsTask();
+int value = await ComputeAsync().AsTask();
 </pre>
-<h3>Exceptions</h3>
-<p>This rule does not raise any issue when a <code>ValueTask / ValueTask&lt;TResult&gt;</code> is awaited multiple time in a loop.</p>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask-1">ValueTask&lt;TResult&gt; official documentation</a>
-  </li>
-  <li> <a href="https://blogs.msdn.microsoft.com/dotnet/2018/11/07/understanding-the-whys-whats-and-whens-of-valuetask/">Understanding the Whys,
-  Whats, and Whens of ValueTask</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask">ValueTask</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask-1">ValueTask&lt;TResult&gt;</a> </li>
+  <li> <a href="https://blogs.msdn.microsoft.com/dotnet/2018/11/07/understanding-the-whys-whats-and-whens-of-valuetask">Understanding the Whys, Whats,
+  and Whens of ValueTask</a> </li>
 </ul>
 

@@ -1,10 +1,8 @@
 <h2>Why is this an issue?</h2>
-<p>When the names of parameters in a procedure call match the names of the procedure arguments, it contributes to a clearer, more readable code.
-However, when the names match but are passed in a different order than the method arguments, it indicates a mistake in the parameter order which will
-likely lead to unexpected results.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-Public Function Divide(ByVal divisor As Integer, ByVal dividend As Integer) As Double
+<p>Calling a procedure with argument variables whose names match the procedure parameter names but in a different order can cause confusion. It could
+indicate a mistake in the arguments' order, leading to unexpected results.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Public Function Divide(divisor As Integer, dividend As Integer) As Double
     Return divisor / dividend
 End Function
 
@@ -12,13 +10,13 @@ Public Sub DoTheThing()
     Dim divisor = 15
     Dim dividend = 5
 
-    Dim result = Divide(dividend, divisor)  ' Noncompliant; operation succeeds, but result is unexpected
+    Dim result = Divide(dividend, divisor)  ' Noncompliant: arguments' order doesn't match their respective parameter names
     '...
 End Sub
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-Public Function Divide(ByVal divisor As Integer, ByVal dividend As Integer) As Double
+<p>However, matching the procedure parameters' order contributes to clearer and more readable code:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+Public Function Divide(divisor As Integer, dividend As Integer) As Double
     Return divisor / dividend
 End Function
 
@@ -26,7 +24,7 @@ Public Sub DoTheThing()
     Dim divisor = 15
     Dim dividend = 5
 
-    Dim result = Divide(divisor, dividend)
+    Dim result = Divide(divisor, dividend) ' Compliant
     '...
 End Sub
 </pre>
