@@ -390,10 +390,10 @@ class CollectionTests
         dict.Clear();                   // Compliant
         dict = new Dictionary<int, int>();
         dict[1] = 5;
-        dict.Clear();                   // Noncompliant FP
+        dict.Clear();                   // Compliant
         IDictionary<int, int> idict = new Dictionary<int, int>();
         idict[1] = 5;
-        idict.Clear();                  // Noncompliant FP
+        idict.Clear();                  // Compliant
     }
 
     public void Method_Set_Empty(List<int> list, HashSet<int> set, Queue<int> queue, Stack<int> stack, ObservableCollection<int> obs, Dictionary<int, int> dict)

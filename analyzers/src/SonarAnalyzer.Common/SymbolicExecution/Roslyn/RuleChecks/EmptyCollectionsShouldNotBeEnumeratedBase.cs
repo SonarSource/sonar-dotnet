@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -129,6 +129,10 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         {
             return ProcessMethod(context, invocation.TargetMethod, invocation.Instance);
         }
+        else if (DictionaryWithAccessedSetter(operation) is { } dictionary)
+        {
+            return context.State.SetSymbolConstraint(dictionary, CollectionConstraint.NotEmpty);
+        }
         else if (operation.AsMethodReference() is { } methodReference)
         {
             return ProcessMethod(context, methodReference.Method, methodReference.Instance);
@@ -198,4 +202,11 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             return null;
         }
     }
+
+    private static ISymbol DictionaryWithAccessedSetter(IOperation operation) =>
+        operation.AsAssignment() is { } assignment
+            && assignment.Target.AsPropertyReference() is { Property.IsIndexer: true } propertyReference
+            && propertyReference.Instance.Type.DerivesOrImplements(KnownType.System_Collections_Generic_IDictionary_TKey_TValue)
+            ? propertyReference.Instance.TrackedSymbol()
+            : null;
 }
