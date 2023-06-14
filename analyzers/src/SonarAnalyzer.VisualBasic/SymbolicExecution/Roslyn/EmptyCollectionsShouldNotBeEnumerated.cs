@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Xml.Serialization;
-
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class EmptyCollectionsShouldNotBeEnumerated : EmptyCollectionsShouldNotBeEnumeratedBase
 {
     public static readonly DiagnosticDescriptor S4158 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly HashSet<string> CaseInsensitiveRaisingMethods = new(RaisingMethods, StringComparer.InvariantCultureIgnoreCase);
 
     protected override DiagnosticDescriptor Rule => S4158;
 
@@ -50,7 +49,7 @@ public sealed class EmptyCollectionsShouldNotBeEnumerated : EmptyCollectionsShou
 
         public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
         {
-            Result = RaisingMethods.Contains(node.Name.GetName());
+            Result = CaseInsensitiveRaisingMethods.Contains(node.Name.GetName());
             base.VisitMemberAccessExpression(node);
         }
 

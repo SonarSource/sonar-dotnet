@@ -189,25 +189,31 @@ Public Class CollectionTests
 
     Public Sub ForEach()
         Dim List As New List(Of Integer)
-        For Each Item As Integer In List    ' Noncompliant
+        For Each i As Integer In List   ' Noncompliant
         Next
     End Sub
+
+    Public Sub Casing()
+        Dim List As New List(Of Integer)
+        List.cLEAR()                    ' Noncompliant
+    End Sub
+
 End Class
 
 Public Class AdvancedTests
 
     Public Sub UnknownExtensionMethods()
         Dim List As New List(Of Integer)
-        List.CustomExtensionMethod()                        ' Compliant
-        List.Clear()                                        ' Noncompliant FP
+        List.CustomExtensionMethod()    ' Compliant
+        List.Clear()                    ' Noncompliant FP
     End Sub
 
     Public Sub WellKnownExtensionMethods()
         Dim List As New List(Of Integer)
-        List.All(Function(X) True)                          ' FN
-        List.Any()                                          ' FN
-        Enumerable.Reverse(List)                            ' FN
-        List.Clear()                                        ' Noncompliant
+        List.All(Function(X) True)      ' FN
+        List.Any()                      ' FN
+        Enumerable.Reverse(List)        ' FN
+        List.Clear()                    ' Noncompliant
     End Sub
 
     Public Sub PassingAsArgument_Removes_Constraints()
