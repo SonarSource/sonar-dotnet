@@ -111,4 +111,30 @@ namespace Tests.Diagnostics
             static int GetNumberStaticExpression() => 42; // Noncompliant
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/7429
+    public class Repro7429
+    {
+        void Method(AnInterface foo)
+        {
+            Func(0);
+            foo?.DoSomething(Func);
+
+            bool Func(int value) => true; // Noncompliant, FP
+        }
+
+        void Method()
+        {
+            Func(0);
+            Func2(Func);
+
+            bool Func(int value) => true; // Noncompliant, FP
+            void Func2(Func<int, bool> method) { }
+        }
+
+        public interface AnInterface
+        {
+            void DoSomething(Func<int, bool> method);
+        }
+    }
 }
