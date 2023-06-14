@@ -758,3 +758,17 @@ public class Repro_4478
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/2147
+public class Repro_2147
+{
+    private List<string> _lines;
+
+    public virtual object Clone()
+    {
+        var clonedEntry = (Repro_2147)MemberwiseClone();
+        clonedEntry._lines = new List<string>();
+        _lines.ForEach(x => { });   // Compliant, different field
+        return clonedEntry;
+    }
+}
