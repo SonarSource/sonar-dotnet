@@ -104,8 +104,8 @@ namespace SonarAnalyzer.Helpers
                 && (methodSymbol.Name == "DisposeAsync" || methodSymbol.Name == explicitNameAsync)
                 && methodSymbol.ReturnType.Is(KnownType.System_Threading_Tasks_ValueTask)
                 && methodSymbol.Parameters.Length == 0
-                && methodSymbol.GetInterfaceMember() is { } interfaceMember
-                && interfaceMember.ContainingType.Is(KnownType.System_IAsyncDisposable);
+                && ContainingInterface(methodSymbol) is { }  containingInterface
+                && containingInterface.Is(KnownType.System_IAsyncDisposable);
         }
 
         public static bool IsIEquatableEquals(this IMethodSymbol methodSymbol)
@@ -238,5 +238,18 @@ namespace SonarAnalyzer.Helpers
         private static bool HasExactlyNParameters(this IMethodSymbol methodSymbol, int parametersCount) =>
             (methodSymbol.MethodKind == MethodKind.Ordinary && methodSymbol.Parameters.Length == parametersCount)
             || (methodSymbol.MethodKind == MethodKind.ReducedExtension && methodSymbol.Parameters.Length == parametersCount - 1);
+
+        private static INamedTypeSymbol ContainingInterface(IMethodSymbol symbol)
+        {
+            if (symbol.GetInterfaceMember() is { } interfaceMember)
+            {
+                return interfaceMember.ContainingType;
+            }
+            else if (symbol.ContainingType.IsInterface())
+            {
+                return symbol.ContainingType;
+            }
+            return null;
+        }
     }
 }
