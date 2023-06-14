@@ -249,6 +249,9 @@ public static class KnownMethods
         {
             return symbol.ContainingType;
         }
-        return null;
+        else
+        {
+            return null;
+        }
     }
 }

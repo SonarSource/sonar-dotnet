@@ -44,6 +44,6 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
         return state;
     }
 
-    private bool IsDisposeMethod(IMethodSymbol method) =>
+    private static bool IsDisposeMethod(IMethodSymbol method) =>
         method.IsIDisposableDispose() || method.IsIAsyncDisposableDisposeAsync();
 }
