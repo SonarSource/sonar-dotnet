@@ -42,6 +42,7 @@ public sealed class EmptyCollectionsShouldNotBeEnumerated : EmptyCollectionsShou
         {
             if (!Result)
             {
+                Result = true;  // FIXME: Not so easy
                 base.Visit(node);
             }
         }
