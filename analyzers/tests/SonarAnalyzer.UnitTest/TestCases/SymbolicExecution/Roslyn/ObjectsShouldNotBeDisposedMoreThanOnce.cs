@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Data.Common;
+using System.Collections.Generic;
 
 public interface IWithDispose : IDisposable { }
 
@@ -81,6 +82,19 @@ class Program
         }
     }
 
+    public void DisposeTwice_CatchFinally(IDisposable d)
+    {
+        try { }
+        catch
+        {
+            d.Dispose();
+        }
+        finally
+        {
+            d.Dispose(); //FN
+        }
+    }
+
     public void DisposedTwice_DifferentCase(Disposable d)
     {
         d.DISPOSE();
@@ -111,6 +125,15 @@ class Program
         using (var d = new Disposable()) // Noncompliant
         {
             d.Dispose();
+        }
+    }
+
+    public void Dispose_NestedUsing()
+    {
+        using (var d = new Disposable()) // FN
+        {
+            using (d)
+            { }
         }
     }
 
@@ -205,6 +228,17 @@ class TestLoops
             if (condition)
             {
                 withDispose.Dispose(); // Noncompliant
+            }
+        }
+    }
+
+    public static void LoopWithCondition(List<Object> toDispose)
+    {
+        for (int i = toDispose.Count; i < toDispose.Count; i++)
+        {
+            if (toDispose[i] is IDisposable disposable)
+            {
+                disposable.Dispose(); // Noncompliant FP
             }
         }
     }
