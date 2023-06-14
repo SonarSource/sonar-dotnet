@@ -549,14 +549,20 @@ class Flows
         list.Clear();   // Compliant
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/4261
     public void AddPassedAsParameter()
     {
         var list = new List<int>();
-
         DoSomething(list.Add);
+        list.Clear();   // Compliant
 
-        list.Clear();   // Noncompliant FP, see https://github.com/SonarSource/sonar-dotnet/issues/4261
+        list = new List<int>();
+        DoSomething(list.Clear); // Noncompliant
+
+        DoSomething(StaticMethodWithoutInstance);
     }
+
+    private static void StaticMethodWithoutInstance() { }
 
     public void Count()
     {
@@ -609,7 +615,8 @@ class Flows
             list.Clear();       // Compliant
     }
 
-    private static void DoSomething(Action<int> callback) => callback(42);
+    private static void DoSomething(Action<int> callback) { }
+    private static void DoSomething(Action callback) { }
     private List<int> GetList() => null;
 }
 
