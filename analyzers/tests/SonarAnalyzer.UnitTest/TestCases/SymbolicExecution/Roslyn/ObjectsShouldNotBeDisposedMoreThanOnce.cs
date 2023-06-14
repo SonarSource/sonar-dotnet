@@ -179,12 +179,19 @@ public class Disposable : IDisposable
 public class MyClass : IDisposable
 {
     public void Dispose() { }
+    public static void Dispose(MyClass myclass) { myclass.Dispose(); }
 
     public void DisposeMultipleTimes()
     {
         Dispose();
         this.Dispose(); // FN
         Dispose(); // FN
+    }
+
+    public static void DisposeMultipleTimes(MyClass myclass)
+    {
+        Dispose(myclass);
+        Dispose(myclass); // FN
     }
 
     public void DoSomething()
