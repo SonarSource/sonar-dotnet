@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Xml.Serialization;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -42,9 +44,17 @@ public sealed class EmptyCollectionsShouldNotBeEnumerated : EmptyCollectionsShou
         {
             if (!Result)
             {
-                Result = true;  // FIXME: Not so easy
                 base.Visit(node);
             }
         }
+
+        public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
+        {
+            Result = RaisingMethods.Contains(node.Name.GetName());
+            base.VisitMemberAccessExpression(node);
+        }
+
+        public override void VisitForEachBlock(ForEachBlockSyntax node) =>
+            Result = true;
     }
 }
