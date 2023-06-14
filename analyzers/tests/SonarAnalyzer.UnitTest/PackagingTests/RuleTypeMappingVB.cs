@@ -4082,7 +4082,7 @@ internal static class RuleTypeMappingVB
         // ["S4155"],
         // ["S4156"],
         // ["S4157"],
-        // ["S4158"],
+        ["S4158"] = "BUG",
         ["S4159"] = "BUG",
         // ["S4160"],
         // ["S4161"],

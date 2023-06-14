@@ -1,0 +1,28 @@
+<h2>Why is this an issue?</h2>
+<p>When a collection is empty it makes no sense to access or iterate it. Doing so anyway is surely an error; either population was accidentally
+omitted or the developer doesn’t understand the situation.</p>
+<h3>Noncompliant code example</h3>
+<pre>
+Public Sub Method()
+    Dim Values As New List(Of String)
+    Values.Remove("bar")                ' Noncompliant
+    If Values.Contains("foo") Then      ' Noncompliant
+    End If
+    For Each Value As String In Values  ' Noncompliant
+    Next
+End Sub
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+---
+Public Sub Method()
+    Dim Values As List(Of String) = LoadValues()
+    Values.Remove("bar")
+    If Values.Contains("foo") Then
+    End If
+    For Each Value As String In Values
+    Next
+End Sub
+---
+</pre>
+

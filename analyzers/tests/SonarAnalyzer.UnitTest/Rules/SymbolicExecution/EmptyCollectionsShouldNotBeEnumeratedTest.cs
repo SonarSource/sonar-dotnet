@@ -18,10 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Common;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
@@ -39,6 +40,10 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
         .WithBasePath(@"SymbolicExecution\Roslyn")
         .WithOnlyDiagnostics(ChecksCS.EmptyCollectionsShouldNotBeEnumerated.S4158);
 
+    private readonly VerifierBuilder roslynVB = new VerifierBuilder<VB.SymbolicExecutionRunner>()
+        .WithBasePath(@"SymbolicExecution\Roslyn")
+        .WithOnlyDiagnostics(ChecksVB.EmptyCollectionsShouldNotBeEnumerated.S4158);
+
     [DataTestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
@@ -53,6 +58,14 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CS(ProjectType projectType) =>
         roslynCS.AddReferences(TestHelper.ProjectTypeReference(projectType))
             .AddPaths("EmptyCollectionsShouldNotBeEnumerated.cs")
+            .Verify();
+
+    [DataTestMethod]
+    [DataRow(ProjectType.Product)]
+    [DataRow(ProjectType.Test)]
+    public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_VB(ProjectType projectType) =>
+        roslynVB.AddReferences(TestHelper.ProjectTypeReference(projectType))
+            .AddPaths("EmptyCollectionsShouldNotBeEnumerated.vb")
             .Verify();
 
 #if NET
