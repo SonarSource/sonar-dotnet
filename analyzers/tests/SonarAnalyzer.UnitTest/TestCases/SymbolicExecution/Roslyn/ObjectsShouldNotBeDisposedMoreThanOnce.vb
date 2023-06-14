@@ -1,6 +1,7 @@
 ﻿Imports System
 Imports System.IO
 Imports System.Data.Common
+Imports System.Threading.Tasks
 
 Interface IWithDispose
     Inherits IDisposable
@@ -34,8 +35,7 @@ Class Program
     Public Sub NotReallyDisposable()
         Dim d = New DoesNotImplementDisposable()
         d.Dispose()
-        d.Dispose() ' Noncompliant - IDisposal interface implementation is not checked
-'       ^^^^^^^^^^^
+        d.Dispose() ' Noncompliant^9#11 - IDisposal interface implementation is not checked
     End Sub
 
     Public Sub DisposedTwice_Conditional()
@@ -45,7 +45,6 @@ Class Program
             d.Dispose()
         End If
         d.Dispose() ' Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
- '      ^^^^^^^^^^^       
     End Sub
 
     Private disposable As IDisposable
@@ -108,8 +107,7 @@ Class Program
     End Sub
 
     Public Sub Disposed_Using_WithDeclaration()
-        Using d = New Disposable()  ' Noncompliant
-        '     ^
+        Using d = New Disposable()  ' Noncompliant^15#1
             d.Dispose()
         End Using
     End Sub
@@ -140,7 +138,40 @@ Class Program
 
 End Class
 
-Public Class ClassExample
+Public Class DisposableAsync
+    Implements IDisposable, IAsyncDisposable
+
+    Public Sub Dispose() Implements IDisposable.Dispose
+    End Sub
+
+    Public Function DisposeAsync() As ValueTask Implements IAsyncDisposable.DisposeAsync
+    End Function
+
+End Class
+
+Public Class DisposeAsync
+
+    Private Async Function DisposeAsyncTwiceUsingStatement(ByVal d As DisposableAsync) As Task
+        Using d ' FN
+        End Using
+        Await d.DisposeAsync()
+    End Function
+
+    Private Async Function DisposeAsyncTwice() As Task
+        Dim d = New DisposableAsync()
+        Await d.DisposeAsync()
+        Await d.DisposeAsync() ' Noncompliant
+    End Function
+
+    Private Async Function DisposeTwiceMixed() As Task
+        Dim d = New DisposableAsync()
+        Await d.DisposeAsync()
+        d.Dispose()  ' Noncompliant
+    End Function
+
+End Class
+
+Public Class Class1
     Implements IDisposable
 
     Private Sub Dispose() Implements IDisposable.Dispose

@@ -63,6 +63,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives)
                 .Verify();
 
+#if NET
+
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
@@ -72,8 +74,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(MetadataReferenceFacade.SystemData)
                 .AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives)
                 .Verify();
-
-#if NET
 
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_CSharp8() =>
