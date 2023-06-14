@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -117,7 +117,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         var operation = context.Operation.Instance;
         if (operation.AsObjectCreation() is { } objectCreation && objectCreation.Type.IsAny(TrackedCollectionTypes))
         {
-            return ConstraintFromCollectionCreation(context.State, objectCreation) is { } constraint
+            return CollectionCreationConstraint(context.State, objectCreation) is { } constraint
                 ? context.State.SetOperationConstraint(objectCreation, constraint)
                 : context.State;
         }
@@ -154,7 +154,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         }
     }
 
-    private static CollectionConstraint ConstraintFromCollectionCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
+    private static CollectionConstraint CollectionCreationConstraint(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
         objectCreation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable)) is { } collectionArgument
             ? state[collectionArgument]?.Constraint<CollectionConstraint>()
             : CollectionConstraint.Empty;
