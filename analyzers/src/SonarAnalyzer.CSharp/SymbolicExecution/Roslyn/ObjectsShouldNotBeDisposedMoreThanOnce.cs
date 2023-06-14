@@ -24,6 +24,7 @@ public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ObjectsShouldNotBeD
 {
     public static readonly DiagnosticDescriptor S3966 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
     protected override DiagnosticDescriptor Rule => S3966;
+    private static readonly string[] DisposeMethods = { "Dispose", "DisposeAsync" };
 
     public override bool ShouldExecute()
     {
