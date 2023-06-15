@@ -151,13 +151,14 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
 
     private ProgramState ProcessMethod(SymbolicContext context, IMethodSymbol method, IOperation instance)
     {
+        var state = context.State;
         if (instance is null)
         {
-            return context.State;
+            return state;
         }
         if (RaisingMethods.Contains(method.Name))
         {
-            if (context.State[instance]?.HasConstraint(CollectionConstraint.Empty) is true)
+            if (state[instance]?.HasConstraint(CollectionConstraint.Empty) is true)
             {
                 emptyAccess.Add(context.Operation.Instance);
             }
@@ -166,7 +167,6 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                 nonEmptyAccess.Add(context.Operation.Instance);
             }
         }
-        var state = context.State;
         if (AddMethods.Contains(method.Name))
         {
             state = state.SetOperationConstraint(instance, CollectionConstraint.NotEmpty);
