@@ -508,7 +508,7 @@ class AdvancedTests
 
         list = new List<int>();
         Foo((condition ? list : null) as List<int>);
-        list.Clear();                                       // Noncompliant FP
+        list.Clear();                                       // Compliant
     }
 
     public void HigherRank_And_Jagged_Array()
