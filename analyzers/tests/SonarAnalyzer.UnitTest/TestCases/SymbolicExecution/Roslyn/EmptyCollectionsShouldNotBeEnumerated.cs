@@ -153,7 +153,7 @@ class CollectionTests
             [2] = 2,
             [3] = 3,
         };
-        dict.Clear();                   // Noncompliant FP
+        dict.Clear();                   // Compliant
     }
 
     public void Other_Initialization()
@@ -345,7 +345,7 @@ class CollectionTests
         (((dict[5]))) = 5;
     }
 
-    public void Methods_Set_NotEmpty()
+    public void Methods_Set_NotEmpty(bool condition)
     {
         var list = new List<int>();
         list.Add(5);
@@ -391,6 +391,15 @@ class CollectionTests
         dict = new Dictionary<int, int>();
         dict[1] = 5;
         dict.Clear();                   // Compliant
+        dict = new Dictionary<int, int>();
+        (condition ? dict : null)[1] = 5;
+        dict.Clear();                   // Compliant
+        dict = new Dictionary<int, int>();
+        ((condition ? dict : null) as Dictionary<int, int>)[1] = 5;
+        dict.Clear();                   // Compliant
+        dict = new Dictionary<int, int>();
+        (condition ? ((condition ? dict : null) as Dictionary<int, int>) : null)[1] = 5;
+        dict.Clear();                   // Noncompliant FP, engine limitation
         IDictionary<int, int> idict = new Dictionary<int, int>();
         idict[1] = 5;
         idict.Clear();                  // Compliant

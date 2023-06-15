@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -129,9 +129,9 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         {
             return ProcessMethod(context, invocation.TargetMethod, invocation.Instance);
         }
-        else if (DictionaryWithAccessedSetter(operation) is { } dictionary)
+        else if (operation.AsPropertyReference() is { Property.IsIndexer: true } indexer)
         {
-            return context.State.SetSymbolConstraint(dictionary, CollectionConstraint.NotEmpty);
+            return ProcessIndexerAccess(context.State, indexer);
         }
         else if (operation.AsMethodReference() is { } methodReference)
         {
@@ -203,10 +203,13 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         }
     }
 
-    private static ISymbol DictionaryWithAccessedSetter(IOperation operation) =>
-        operation.AsAssignment() is { } assignment
-            && assignment.Target.AsPropertyReference() is { Property.IsIndexer: true } propertyReference
-            && propertyReference.Instance.Type.DerivesOrImplements(KnownType.System_Collections_Generic_IDictionary_TKey_TValue)
-            ? propertyReference.Instance.TrackedSymbol()
-            : null;
+    private static ProgramState ProcessIndexerAccess(ProgramState state, IPropertyReferenceOperationWrapper propertyReference)
+    {
+        state = state.SetOperationConstraint(propertyReference.Instance, CollectionConstraint.NotEmpty);
+        if (state.ResolveCaptureAndUnwrapConversion(propertyReference.Instance).TrackedSymbol() is { } symbol)
+        {
+            state = state.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
+        }
+        return state;
+    }
 }

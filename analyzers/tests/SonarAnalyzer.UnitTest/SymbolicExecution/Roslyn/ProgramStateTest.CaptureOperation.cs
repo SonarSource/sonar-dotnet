@@ -106,4 +106,23 @@ public partial class ProgramStateTest
         var sut = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
         sut.ResolveCapture(capture.Value).Should().Be(capture.Value);   // Any other operation
     }
+
+    [TestMethod]
+    public void ResolveCaptureAndUnwrapConversion_CaptureReferenceInConversion_ReturnsCapturedOperation()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS("_ = (condition ? a : null) as string;", "object a, bool condition");
+        var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[2].Operations[0]);
+        var conversion = IConversionOperationWrapper.FromOperation(cfg.Blocks[4].Operations[0].ChildOperations.First().ChildOperations.Skip(1).First());
+        var sut = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
+        sut.ResolveCaptureAndUnwrapConversion(conversion.WrappedOperation).Should().Be(capture.Value);
+    }
+
+    [TestMethod]
+    public void ResolveCaptureAndUnwrapConversion_CaptureNotFound_ReturnsFlowCaptureReference()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS("_ = (condition ? a : null) as string;", "object a, bool condition");
+        var conversion = IConversionOperationWrapper.FromOperation(cfg.Blocks[4].Operations[0].ChildOperations.First().ChildOperations.Skip(1).First());
+        var sut = ProgramState.Empty;
+        sut.ResolveCaptureAndUnwrapConversion(conversion.WrappedOperation).Should().Be(conversion.Operand);
+    }
 }
