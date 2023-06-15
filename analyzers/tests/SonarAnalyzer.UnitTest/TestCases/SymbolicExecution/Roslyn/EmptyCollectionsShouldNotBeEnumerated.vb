@@ -196,6 +196,36 @@ Public Class CollectionTests
         List.cLEAR()                    ' Noncompliant
     End Sub
 
+    Public Sub LearnConditions_Size(Condition As Boolean)
+        Dim IsNull As List(Of Integer) = Nothing
+        Dim Empty As New List(Of Integer)
+        Dim NotEmpty As New List(Of Integer) From {1, 2, 3}
+
+        If If(IsNull, Empty).Count = 0 Then Empty.Clear()  ' Noncompliant
+        If If(IsNull, NotEmpty).Count = 0 Then Empty.Clear()  ' Compliant, unreachable
+        If If(Condition, Empty, Empty).Count = 0 Then
+            Empty.Clear()  ' Noncompliant
+        Else
+            Empty.Clear()  ' Compliant, unreachable
+        End If
+        If Empty.Count = 0 Then
+            Empty.Clear()  ' Noncompliant
+        Else
+            Empty.Clear()  ' Compliant, unreachable
+        End If
+        If Empty.Count() = 0 Then
+            Empty.Clear()  ' Noncompliant
+        Else
+            Empty.Clear()  ' Compliant, unreachable
+        End If
+        If Enumerable.Count(Empty) = 0 Then
+            Empty.Clear()  ' Noncompliant
+        Else
+            Empty.Clear()  ' Compliant, unreachable
+        End If
+        NotEmpty.Clear()   ' Compliant, prevents LVA from throwing notEmpty away during reference capture
+    End Sub
+
 End Class
 
 Public Class AdvancedTests
