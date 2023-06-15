@@ -33,7 +33,7 @@ public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ObjectsShouldNotBeD
         return walker.Result;
     }
 
-    protected override bool IsDisposeMethod(IMethodSymbol method) =>
+    protected override bool IsDispose(IMethodSymbol method) =>
         method.IsIDisposableDispose() || method.IsIAsyncDisposableDisposeAsync();
 
     private sealed class Walker : SafeCSharpSyntaxWalker
