@@ -774,11 +774,11 @@ class LargeCfg
 // https://github.com/SonarSource/sonar-dotnet/issues/4478
 public class Repro_4478
 {
-    public string Main()
+    public void Main()
     {
         var list = new List<String>();
         AddInLocalFunction();
-        return list[0]; // FIXME Non-compliant FP
+        list.Clear();   // Noncompliant FP
 
         void AddInLocalFunction()
         {
