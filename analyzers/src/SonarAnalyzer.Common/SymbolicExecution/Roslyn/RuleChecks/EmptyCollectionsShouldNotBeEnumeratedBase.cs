@@ -121,9 +121,9 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                 ? context.State.SetOperationConstraint(objectCreation, constraint)
                 : context.State;
         }
-        else if (IsEmptyArray(operation))
+        else if (operation.AsArrayCreation() is { } arrayCreation)
         {
-            return context.State.SetOperationConstraint(operation, CollectionConstraint.Empty);
+            return context.State.SetOperationConstraint(operation, arrayCreation.DimensionSizes.Any(x => x.ConstantValue.Value is 0) ? CollectionConstraint.Empty : CollectionConstraint.NotEmpty);
         }
         else if (operation.AsInvocation() is { } invocation)
         {
@@ -132,6 +132,10 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         else if (operation.AsMethodReference() is { } methodReference)
         {
             return ProcessMethod(context, methodReference.Method, methodReference.Instance);
+        }
+        else if (operation.AsPropertyReference() is { } propertyReference && PropertyReferenceConstraint(context.State, propertyReference) is { } constraint)
+        {
+            return context.State.SetOperationConstraint(operation, constraint);
         }
         else
         {
@@ -146,14 +150,6 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             ReportIssue(operation, operation.Syntax.ToString());
         }
     }
-
-    private static CollectionConstraint CollectionCreationConstraint(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
-        objectCreation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable)) is { } collectionArgument
-            ? state[collectionArgument]?.Constraint<CollectionConstraint>()
-            : CollectionConstraint.Empty;
-
-    private static bool IsEmptyArray(IOperation operation) =>
-        operation.AsArrayCreation()?.DimensionSizes.Any(x => x.ConstantValue.Value is 0) ?? false;
 
     private ProgramState ProcessMethod(SymbolicContext context, IMethodSymbol method, IOperation instance)
     {
@@ -182,5 +178,24 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             }
         }
         return state;
+    }
+
+    private static CollectionConstraint CollectionCreationConstraint(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
+        objectCreation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable)) is { } collectionArgument
+            ? state[collectionArgument]?.Constraint<CollectionConstraint>()
+            : CollectionConstraint.Empty;
+
+    private static NumberConstraint PropertyReferenceConstraint(ProgramState state, IPropertyReferenceOperationWrapper propertyReference)
+    {
+        if (propertyReference.Property.Name is nameof(Array.Length) or nameof(List<int>.Count)
+            && propertyReference.Instance.TrackedSymbol() is { } symbol
+            && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
+        {
+            return collection == CollectionConstraint.Empty ? NumberConstraint.From(0) : NumberConstraint.From(1, null);
+        }
+        else
+        {
+            return null;
+        }
     }
 }
