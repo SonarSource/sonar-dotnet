@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Threading.Tasks
 
 Public Class DisposeAsync
 
@@ -20,6 +21,12 @@ Public Class DisposeAsync
         d.Dispose()  ' Noncompliant
     End Function
 
+    Private Async Function DisposeTwiceWithAlias() As Task
+        Dim d As New DisposableAsyncAlias()
+        Await d.CleanAsync()
+        Await d.CleanAsync()  ' Noncompliant
+    End Function
+
 End Class
 
 Public Class DisposableAsync
@@ -30,6 +37,15 @@ Public Class DisposableAsync
     End Sub
 
     Public Function DisposeAsync() As ValueTask Implements IAsyncDisposable.DisposeAsync
+    End Function
+
+End Class
+
+Public Class DisposableAsyncAlias
+
+    Implements IAsyncDisposable
+
+    Public Function CleanAsync() As ValueTask Implements IAsyncDisposable.DisposeAsync
     End Function
 
 End Class
