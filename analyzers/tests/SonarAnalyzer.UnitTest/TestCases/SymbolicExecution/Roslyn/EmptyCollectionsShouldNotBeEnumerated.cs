@@ -549,14 +549,41 @@ class Flows
         list.Clear();   // Compliant
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/4261
     public void AddPassedAsParameter()
     {
         var list = new List<int>();
-
         DoSomething(list.Add);
+        list.Clear();   // Compliant
 
-        list.Clear();   // Noncompliant FP, see https://github.com/SonarSource/sonar-dotnet/issues/4261
+        list = new List<int>();
+        DoSomething(list.Clear); // Noncompliant
+
+        DoSomething(StaticMethodWithoutInstance);
+
+        list = new List<int>();
+        DoSomething(x => list.Add(x));
+        list.Clear();    // Noncompliant FP, we don't analyze sub CFGs for lambdas
+
+        list = new List<int>();
+        Action<int> add = list.Add;
+        list.Clear();    // FN
+        add(5);
+        list.Clear();    // Compliant, but will break when we learn Empty from Clear()
+
+        list = new List<int>();
+        Action clear = list.Clear;  // Noncompliant FP
+        clear();                    // FN
+        clear();                    // FN
+
+        list = new List<int> { 42 };
+        clear = list.Clear;         // Compliant
+        clear();                    // Compliant
+        add(5);                     // Adds to another instance, not the current list
+        clear();                    // FN
     }
+
+    private static void StaticMethodWithoutInstance() { }
 
     public void Count()
     {
@@ -609,7 +636,8 @@ class Flows
             list.Clear();       // Compliant
     }
 
-    private static void DoSomething(Action<int> callback) => callback(42);
+    private static void DoSomething(Action<int> callback) { }
+    private static void DoSomething(Action callback) { }
     private List<int> GetList() => null;
 }
 

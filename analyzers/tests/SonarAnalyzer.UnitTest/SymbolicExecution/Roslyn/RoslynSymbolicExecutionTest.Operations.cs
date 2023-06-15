@@ -380,6 +380,34 @@ public void Method()
         SETestContext.CreateVB(@"Dim B As Boolean = True : Main(BoolParameter, B) : Tag(""B"", B)", "ByRef ByRefParam As Boolean").Validator.TagValue("B").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
 
     [TestMethod]
+    public void Argument_PropagatesState_Existing()
+    {
+        var wasChecked = false;
+        var checker = new PostProcessTestCheck(OperationKind.Argument, x =>
+            {
+                x.State[x.Operation].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+                wasChecked = true;
+                return x.State;
+            });
+        SETestContext.CreateCS("var value = true; InstanceMethod(value);", checker);
+        wasChecked.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Argument_PropagatesState_Null()
+    {
+        var wasChecked = false;
+        var checker = new PostProcessTestCheck(OperationKind.Argument, x =>
+            {
+                x.State[x.Operation].Should().HaveNoConstraints();
+                wasChecked = true;
+                return x.State;
+            });
+        SETestContext.CreateCS("InstanceMethod(Tagger.Unknown<object>());", checker);
+        wasChecked.Should().BeTrue();
+    }
+
+    [TestMethod]
     public void Argument_ArgList_DoesNotThrow()
     {
         const string code = @"

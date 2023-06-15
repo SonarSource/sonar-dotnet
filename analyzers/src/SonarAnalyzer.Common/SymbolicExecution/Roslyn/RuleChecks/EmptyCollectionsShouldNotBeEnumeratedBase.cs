@@ -130,7 +130,14 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         {
             return ProcessMethod(context, invocation.TargetMethod, invocation.Instance);
         }
-        return context.State;
+        else if (operation.AsMethodReference() is { } methodReference)
+        {
+            return ProcessMethod(context, methodReference.Method, methodReference.Instance);
+        }
+        else
+        {
+            return context.State;
+        }
     }
 
     public override void ExecutionCompleted()

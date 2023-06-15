@@ -58,6 +58,9 @@ internal static class IOperationExtensions
     internal static IIsPatternOperationWrapper? AsIsPattern(this IOperation operation) =>
         operation.As(OperationKindEx.IsPattern, IIsPatternOperationWrapper.FromOperation);
 
+    internal static IMethodReferenceOperationWrapper? AsMethodReference(this IOperation operation) =>
+        operation.As(OperationKindEx.MethodReference, IMethodReferenceOperationWrapper.FromOperation);
+
     internal static IObjectCreationOperationWrapper? AsObjectCreation(this IOperation operation) =>
         operation.As(OperationKindEx.ObjectCreation, IObjectCreationOperationWrapper.FromOperation);
 
@@ -85,11 +88,11 @@ internal static class IOperationExtensions
     internal static IConversionOperationWrapper ToConversion(this IOperation operation) =>
         IConversionOperationWrapper.FromOperation(operation);
 
-        internal static IIncrementOrDecrementOperationWrapper ToIncrementOrDecrement(this IOperation operation) =>
-            IIncrementOrDecrementOperationWrapper.FromOperation(operation);
+    internal static IIncrementOrDecrementOperationWrapper ToIncrementOrDecrement(this IOperation operation) =>
+        IIncrementOrDecrementOperationWrapper.FromOperation(operation);
 
-        internal static IInvocationOperationWrapper ToInvocation(this IOperation operation) =>
-            IInvocationOperationWrapper.FromOperation(operation);
+    internal static IInvocationOperationWrapper ToInvocation(this IOperation operation) =>
+        IInvocationOperationWrapper.FromOperation(operation);
 
     internal static IFieldReferenceOperationWrapper ToFieldReference(this IOperation operation) =>
         IFieldReferenceOperationWrapper.FromOperation(operation);
