@@ -97,6 +97,9 @@ internal static class IOperationExtensions
     internal static IFieldReferenceOperationWrapper ToFieldReference(this IOperation operation) =>
         IFieldReferenceOperationWrapper.FromOperation(operation);
 
+    internal static IFlowCaptureReferenceOperationWrapper ToFlowCaptureReference(this IOperation operation) =>
+        IFlowCaptureReferenceOperationWrapper.FromOperation(operation);
+
     internal static ILocalReferenceOperationWrapper ToLocalReference(this IOperation operation) =>
         ILocalReferenceOperationWrapper.FromOperation(operation);
 

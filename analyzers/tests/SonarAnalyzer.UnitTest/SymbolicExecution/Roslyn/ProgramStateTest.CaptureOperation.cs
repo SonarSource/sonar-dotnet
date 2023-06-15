@@ -92,7 +92,7 @@ public partial class ProgramStateTest
     {
         var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
         var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
-        var captureReference = IFlowCaptureReferenceOperationWrapper.FromOperation(cfg.Blocks[3].Operations[0].ChildOperations.First());
+        var captureReference = cfg.Blocks[3].Operations[0].ChildOperations.First().ToFlowCaptureReference();
         captureReference.Id.Should().Be(capture.Id);
         var sut = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
         sut.ResolveCapture(captureReference.WrappedOperation).Should().Be(capture.Value);
@@ -108,21 +108,42 @@ public partial class ProgramStateTest
     }
 
     [TestMethod]
+    public void ResolveCaptureAndUnwrapConversion_CaptureReference_ReturnsCapturedOperation()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
+        var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
+        var captureReference = cfg.Blocks[3].Operations[0].ChildOperations.First();
+        var sut = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
+        sut.ResolveCaptureAndUnwrapConversion(captureReference).Should().Be(capture.Value);
+    }
+
+    [TestMethod]
     public void ResolveCaptureAndUnwrapConversion_CaptureReferenceInConversion_ReturnsCapturedOperation()
     {
         var cfg = TestHelper.CompileCfgBodyCS("_ = (condition ? a : null) as string;", "object a, bool condition");
         var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[2].Operations[0]);
-        var conversion = IConversionOperationWrapper.FromOperation(cfg.Blocks[4].Operations[0].ChildOperations.First().ChildOperations.Skip(1).First());
+        var conversion = cfg.Blocks[4].Operations[0].ChildOperations.First().ChildOperations.Skip(1).First();
         var sut = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
-        sut.ResolveCaptureAndUnwrapConversion(conversion.WrappedOperation).Should().Be(capture.Value);
+        sut.ResolveCaptureAndUnwrapConversion(conversion).Should().Be(capture.Value);
+    }
+
+    [TestMethod]
+    public void ResolveCaptureAndUnwrapConversion_ChainOfConversions_InnerConversionOperand()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS("_ = (string)(object)(int)a;", "object a");
+        var firstConversion = cfg.Blocks[1].Operations[0].ChildOperations.First().ChildOperations.Skip(1).First();
+        var parameterReference = firstConversion.ChildOperations.First().ChildOperations.First().ChildOperations.First();
+        var sut = ProgramState.Empty;
+        sut.ResolveCaptureAndUnwrapConversion(firstConversion).Should().Be(parameterReference);
     }
 
     [TestMethod]
     public void ResolveCaptureAndUnwrapConversion_CaptureNotFound_ReturnsFlowCaptureReference()
     {
         var cfg = TestHelper.CompileCfgBodyCS("_ = (condition ? a : null) as string;", "object a, bool condition");
-        var conversion = IConversionOperationWrapper.FromOperation(cfg.Blocks[4].Operations[0].ChildOperations.First().ChildOperations.Skip(1).First());
+        var conversion = cfg.Blocks[4].Operations[0].ChildOperations.First().ChildOperations.Skip(1).First();
+        var flowCaptureReference = conversion.ChildOperations.First();
         var sut = ProgramState.Empty;
-        sut.ResolveCaptureAndUnwrapConversion(conversion.WrappedOperation).Should().Be(conversion.Operand);
+        sut.ResolveCaptureAndUnwrapConversion(conversion).Should().Be(flowCaptureReference);
     }
 }
