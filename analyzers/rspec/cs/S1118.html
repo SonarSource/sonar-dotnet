@@ -1,11 +1,17 @@
 <h2>Why is this an issue?</h2>
-<p>Utility classes, which are collections of <code>static</code> members, are not meant to be instantiated.</p>
-<p>C# adds an implicit public constructor to every class which does not explicitly define at least one constructor. Hence, at least one
-<code>protected</code> constructor should be defined if you wish to subclass this utility class. Or the <code>static</code> keyword should be added to
-the class declaration to prevent subclassing.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-public class StringUtils // Noncompliant
+<p>Utility classes, which are collections of <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static"><code>static</code></a> members, are not meant to be
+instantiated.</p>
+<p>C# adds an implicit <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/public"><code>public</code></a> <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constructors"><code>constructor</code></a> to every class
+which does not explicitly define at least one constructor. Hence, at least one <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/protected"><code>protected</code></a> constructor should be defined
+if you wish to inherit this utility class. Or the <code>static</code> keyword should be added to the class declaration to prevent inheriting it.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public class StringUtils // Noncompliant: implicit public constructor
 {
   public static string Concatenate(string s1, string s2)
   {
@@ -13,8 +19,22 @@ public class StringUtils // Noncompliant
   }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<p>or</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+public class StringUtils // Noncompliant: explicit public constructor
+{
+  public StringUtils()
+  {
+  }
+
+  public static string Concatenate(string s1, string s2)
+  {
+    return s1 + s2;
+  }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 public static class StringUtils
 {
   public static string Concatenate(string s1, string s2)
@@ -24,16 +44,25 @@ public static class StringUtils
 }
 </pre>
 <p>or</p>
-<pre>
+<pre data-diff-id="2" data-diff-type="compliant">
 public class StringUtils
 {
   protected StringUtils()
   {
   }
+
   public static string Concatenate(string s1, string s2)
   {
     return s1 + s2;
   }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static">Static keyword</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constructors">Constructors</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/using-constructors">Using Constructors</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers">Access Modifiers</a> </li>
+</ul>
 

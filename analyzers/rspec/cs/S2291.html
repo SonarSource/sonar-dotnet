@@ -1,38 +1,12 @@
 <h2>Why is this an issue?</h2>
-<p><code>Enumerable.Sum()</code> always executes addition in a <code>checked</code> context, so an <code>OverflowException</code> will be thrown if
-the value exceeds <code>MaxValue</code> even if an <code>unchecked</code> context was specified. Using an <code>unchecked</code> context anyway
-represents a misunderstanding of how <code>Sum</code> works.</p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.sum">Enumerable.Sum()</a> always executes addition in a
+<code>checked</code> context, so an <a href="https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception">OverflowException</a> will be
+thrown if the value exceeds <code>MaxValue</code>, even if an <code>unchecked</code> context was specified. Therefore, using this method inside an
+<code>unchecked</code> context will only make the code more confusing, since the behavior will still be <code>checked</code>.</p>
 <p>This rule raises an issue when an <code>unchecked</code> context is specified for a <code>Sum</code> on integer types.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-void Add(List&lt;int&gt; list)
-{
-  int d = unchecked(list.Sum());  // Noncompliant
-
-  unchecked
-  {
-    int e = list.Sum();  // Noncompliant
-  }
-}
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-void Add(List&lt;int&gt; list)
-{
-  int d = list.Sum();
-
-  try
-  {
-    int e = list.Sum();
-  }
-  catch (System.OverflowException e)
-  {
-    // exception handling...
-  }
-}
-</pre>
 <h3>Exceptions</h3>
-<p>When the <code>Sum()</code> call is inside a <code>try-catch</code> block, no issues are reported.</p>
+<p>When the <code>Sum</code> call is inside a <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/">try-catch block</a>,
+no issues are reported, since the exception is properly handled.</p>
 <pre>
 void Add(List&lt;int&gt; list)
 {
@@ -40,13 +14,58 @@ void Add(List&lt;int&gt; list)
   {
     try
     {
-      int e = list.Sum();
+      int total = list.Sum();
     }
     catch (System.OverflowException e)
     {
-      // exception handling...
+      // Exception handling
     }
   }
 }
 </pre>
+<h2>How to fix it</h2>
+<p>Remove the <code>unchecked</code> operator/statement, and optionally add some exception handling for the <code>OverflowException</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+void Add(List&lt;int&gt; list)
+{
+  int total1 = unchecked(list.Sum());  // Noncompliant
+
+  unchecked
+  {
+    int total2 = list.Sum();  // Noncompliant
+  }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+void Add(List&lt;int&gt; list)
+{
+  int total1 = list.Sum();
+
+  try
+  {
+    int total2 = list.Sum();
+  }
+  catch (System.OverflowException e)
+  {
+    // Exception handling
+  }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.sum"><code>Enumerable.Sum</code> Method</a> </li>
+  <li> <a
+  href="https://github.com/microsoft/referencesource/blob/51cf7850defa8a17d815b4700b67116e3fa283c2/System.Core/System/Linq/Enumerable.cs#L1408-L1415"><code>Enumerable.Sum</code> implementation</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/checked-and-unchecked"><code>checked</code> and
+  <code>unchecked</code> statements</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12819-the-checked-and-unchecked-operators"><code>checked</code> and <code>unchecked</code> operators</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/">Exceptions and Exception Handling</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.overflowexception"><code>OverflowException</code> Class</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Integer_overflow">Integer overflow</a> </li>
+</ul>
 

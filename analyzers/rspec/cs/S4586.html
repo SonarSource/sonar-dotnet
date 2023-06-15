@@ -1,18 +1,58 @@
 <h2>Why is this an issue?</h2>
-<p>Returning <code>null</code> from a non-<code>async</code> <code>Task</code>/<code>Task&lt;T&gt;</code> method will cause a
-<code>NullReferenceException</code> at runtime. This problem can be avoided by returning <code>Task.FromResult&lt;T&gt;(null)</code> instead.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-public Task&lt;object&gt; GetFooAsync()
+<p>Returning <code>null</code> from a non-<code>async</code> <code>Task</code>/<code>Task&lt;TResult&gt;</code> method will cause a
+<code>NullReferenceException</code> at runtime if the method is awaited. This problem can be avoided by returning <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.completedtask"><code>Task.CompletedTask</code></a> or <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.fromresult"><code>Task.FromResult&lt;TResult&gt;(null)</code></a>
+respectively.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public Task DoFooAsync()
 {
-    return null; // Noncompliant
+    return null;               // Noncompliant: Causes a NullReferenceException if awaited.
+}
+
+public async Task Main()
+{
+    await DoFooAsync();        // NullReferenceException
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-public Task&lt;object&gt; GetFooAsync()
+<pre data-diff-id="1" data-diff-type="compliant">
+public Task DoFooAsync()
 {
-    return Task.FromResult&lt;object&gt;(null);
+    return Task.CompletedTask; // Compliant: Method can be awaited.
+}
+
+public async Task Main()
+{
+    await DoFooAsync();
 }
 </pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+public Task&lt;object&gt; GetFooAsync()
+{
+    return null;                          // Noncompliant: Causes a NullReferenceException if awaited.
+}
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+public Task&lt;object&gt; GetFooAsync()
+{
+    return Task.FromResult&lt;object&gt;(null); // Compliant: Method can be awaited.
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.completedtask"><code>Task.CompletedTask</code> Property</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.fromresult"><code>Task.FromResult&lt;TResult&gt;(TResult)</code>
+  Method</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> StackOverflow - Answer by Stephen Cleary for <a href="https://stackoverflow.com/a/45350108">Is it better to return an empty task or null?</a>
+  </li>
+  <li> StackOverflow - Answer by Stephen Cleary for <a href="https://stackoverflow.com/a/27551261">Best way to handle null task inside async
+  method?</a> </li>
+  <li> C# Language Design Proposal - <a href="https://github.com/dotnet/csharplang/issues/35">Champion "Null-conditional await"</a> </li>
+</ul>
 
