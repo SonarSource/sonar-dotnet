@@ -1,6 +1,4 @@
-﻿Imports System
-Imports System.Collections.Generic
-Imports System.Collections.ObjectModel
+﻿Imports System.Collections.ObjectModel
 
 Public Class CollectionTests
 
