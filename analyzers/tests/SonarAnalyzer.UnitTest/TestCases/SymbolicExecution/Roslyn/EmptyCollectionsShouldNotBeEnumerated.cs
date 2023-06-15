@@ -560,6 +560,27 @@ class Flows
         DoSomething(list.Clear); // Noncompliant
 
         DoSomething(StaticMethodWithoutInstance);
+
+        list = new List<int>();
+        DoSomething(x => list.Add(x));
+        list.Clear();    // Noncompliant FP, we don't analyze sub CFGs for lambdas
+
+        list = new List<int>();
+        Action<int> add = list.Add;
+        list.Clear();    // FN
+        add(5);
+        list.Clear();    // Compliant, but will break when we learn Empty from Clear()
+
+        list = new List<int>();
+        Action clear = list.Clear;  // Noncompliant FP
+        clear();                    // FN
+        clear();                    // FN
+
+        list = new List<int> { 42 };
+        clear = list.Clear;         // Compliant
+        clear();                    // Compliant
+        add(5);                     // Adds to another instance, not the current list
+        clear();                    // FN
     }
 
     private static void StaticMethodWithoutInstance() { }
