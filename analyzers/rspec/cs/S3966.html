@@ -1,25 +1,44 @@
 <h2>Why is this an issue?</h2>
-<p>Disposing an object twice, either with the <code>using</code> keyword or by calling <code>Dispose</code> directly, in the same method is at best
-confusing and at worst error-prone. The next developer might see only one of the <code>Dispose</code>/<code>using</code> and try to use an
-already-disposed object.</p>
-<p>In addition, even if <a href="https://docs.microsoft.com/en-us/dotnet/api/system.idisposable.dispose?view=netcore-3.1">the documentation of
-<code>Disposable</code></a> explicitly states that calling the <code>Dispose</code> method multiple times should not throw an exception, some
-implementation still do it. Thus it is safer to not dispose an object twice when possible.</p>
-<p>This rule raises an issue when, in the same method, the <code>Dispose</code> method is explicitly called twice on the same object, or when
-<code>using</code> is used with a direct call to <code>Dispose()</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-using (var d = new Disposable()) // Noncompliant
+<p>Disposing an object twice in the same method, either with the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/using">using</a> keyword or by calling <code>Dispose</code>
+directly, is confusing and error-prone. For example, another developer might try to use an already-disposed object, or there can be runtime errors for
+specific paths in the code.</p>
+<p>In addition, even if the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose#System_IDisposable_Dispose">documentation</a> explicitly states that
+calling the <code>Dispose</code> method multiple times should not throw an exception, some implementations still do it. Thus it is safer to not
+dispose of an object twice when possible.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+var foo = new Disposable();
+foo.Dispose();
+foo.Dispose(); // Noncompliant
+
+using (var bar = new Disposable()) // Noncompliant
 {
-    d.Dispose();
+    bar.Dispose();
 }
 </pre>
-<pre>
-using var d = new Disposable();
-d.Dispose(); // Noncompliant {{Refactor this code to make sure 'd' is disposed only once.}}
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+var foo = new Disposable();
+foo.Dispose();
+
+using (var bar = new Disposable()) // Compliant
+{
+
+}
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-using var d = new Disposable();
-</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose?redirectedfrom=MSDN#System_IDisposable_Dispose">Dispose
+  method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.iasyncdisposable.disposeasync">DisposeAsync method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose">Implement a Dispose method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-disposeasync">Implement a DisposeAsync method</a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/using">Using statement</a> </li>
+</ul>
 
