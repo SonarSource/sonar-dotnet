@@ -20,8 +20,7 @@
 
 using System.Collections;
 using System.Collections.ObjectModel;
-using System.Linq;
-using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
