@@ -1,19 +1,23 @@
 <h2>Why is this an issue?</h2>
-<p>Nullable value types can hold either a value or <code>Nothing</code>. The value stored in the nullable type can be accessed with the
-<code>Value</code> property or by casting it to the underlying type. Still, both operations throw an <code>InvalidOperationException</code> when the
-value is <code>Nothing</code>. A nullable type should always be tested before the value is accessed to avoid the exception.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1">Nullable value types</a> can hold either a value or
+<code>Nothing</code>.</p>
+<p>The value stored in the nullable type can be accessed with the <code>Value</code> property or by casting it to the underlying type. Still, both
+operations throw an <code>InvalidOperationException</code> when the value is <code>Nothing</code>. A nullable type should always be tested before
+accessing the value to avoid raising exceptions.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Sub Sample(condition As Boolean)
     Dim nullableValue As Integer? = If(condition, 42, Nothing)
-    Console.WriteLine(nullableValue.Value)             ' Noncompliant
+    Console.WriteLine(nullableValue.Value)             ' Noncompliant: InvalidOperationException is raised
 
     Dim nullableCast As Integer? = If(condition, 42, Nothing)
-    Console.WriteLine(CType(nullableCast, Integer))    ' Noncompliant
+    Console.WriteLine(CType(nullableCast, Integer))    ' Noncompliant: InvalidOperationException is raised
 End Sub
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 Sub Sample(condition As Boolean)
     Dim nullableValue As Integer? = If(condition, 42, Nothing)
     If nullableValue.HasValue Then
@@ -27,7 +31,9 @@ Sub Sample(condition As Boolean)
 End Sub
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1">Nullable&lt;T&gt;</a> </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/476">MITRE, CWE-476</a> - NULL Pointer Dereference </li>
 </ul>
 

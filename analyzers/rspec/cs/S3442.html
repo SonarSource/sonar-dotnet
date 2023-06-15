@@ -1,19 +1,25 @@
 <h2>Why is this an issue?</h2>
-<p>Since <code>abstract</code> classes can’t be instantiated, there’s no point in their having <code>public</code> or <code>internal</code>
-constructors. If there is basic initialization logic that should run when an extending class instance is created, you can by all means put it in a
-constructor, but make that constructor <code>private</code>, <code>private protected</code> or <code>protected</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>The <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/abstract">abstract</a> modifier in a class declaration is
+used to indicate that a class is intended only to be a base class of other classes, not instantiated on its own.</p>
+<p>Since <code>abstract</code> classes cannot be instantiated, there is no need for <code>public</code> or <code>internal</code> constructors. If
+there is basic initialization logic that should run when an extending class instance is created, you can add it in a <code>private</code>,
+<code>private protected</code> or <code>protected</code> constructor.</p>
+<h2>How to fix it</h2>
+<p>Restrict the constructor visibility to the minimum: <code>private</code>, <code>private protected</code> or <code>protected</code>, depending on
+the usage.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 abstract class Base
 {
-    public Base() // Noncompliant, should be private, private protected or protected
+    public Base() // Noncompliant: should be private, private protected or protected.
     {
       //...
     }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 abstract class Base
 {
     protected Base()
@@ -22,4 +28,10 @@ abstract class Base
     }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/abstract">abstract keyword</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Abstract_type">abstract type</a> </li>
+</ul>
 

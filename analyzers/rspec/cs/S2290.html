@@ -1,30 +1,34 @@
 <h2>Why is this an issue?</h2>
-<p>Field-like events are events that do not have explicit <code>add</code> and <code>remove</code> methods. The compiler generates a
-<code>private</code> <code>delegate</code> field to back the event, as well as generating the implicit <code>add</code> and <code>remove</code>
-methods.</p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/csharp/event-pattern#define-and-raise-field-like-events">Field-like</a> events are events that do
+not have explicit <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/add"><code>add</code></a> and <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/remove"><code>remove</code></a> accessors.</p>
+<pre>
+public event EventHandler MyEvent; // No add and remove accessors
+</pre>
+<p>The compiler generates a <code>private</code> <code>delegate</code> field to back the event, as well as generating the implicit <code>add</code>
+and <code>remove</code> accessors.</p>
 <p>When a <code>virtual</code> field-like <code>event</code> is overridden by another field-like <code>event</code>, the behavior of the C# compiler
 is to generate a new <code>private</code> <code>delegate</code> field in the derived class, separate from the parent’s field. This results in multiple
 and separate events being created, which is rarely what’s actually intended.</p>
-<p>To prevent this, remove the <code>virtual</code> designation from the parent class event.</p>
 <h3>Noncompliant code example</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 abstract class Car
 {
-  public virtual event EventHandler OnRefueled; // Noncompliant
+  public virtual event EventHandler OnRefuel; // Noncompliant
 
   public void Refuel()
   {
-    // This OnRefueled will always be null
-     if (OnRefueled != null)
+    // This OnRefuel will always be null
+     if (OnRefuel != null)
      {
-       OnRefueled(this, null);
+       OnRefuel(this, EventArgs.Empty);
      }
   }
 }
 
 class R2 : Car
 {
-  public override event EventHandler OnRefueled;
+  public override event EventHandler OnRefuel;
 }
 
 class Program
@@ -32,42 +36,55 @@ class Program
   static void Main(string[] args)
   {
     var r2 = new R2();
-    r2.OnRefueled += new EventHandler((o, a) =&gt;
+    r2.OnRefuel += (o, a) =&gt;
     {
-      Console.WriteLine("This event will never be called");
-    });
+        Console.WriteLine("This event will be called");
+    };
     r2.Refuel();
   }
 }
 </pre>
 <h3>Compliant solution</h3>
-<pre>
+<p>To prevent this, remove the <code>virtual</code> designation from the parent class event.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
 abstract class Car
 {
-  public event EventHandler OnRefueled; // Compliant
+  public event EventHandler OnRefuel; // Compliant
 
   public void Refuel()
   {
-    if (OnRefueled != null)
+    if (OnRefuel != null)
     {
-      OnRefueled(this, null);
+      OnRefuel(this, EventArgs.Empty);
     }
   }
 }
 
-class R2 : Car {}
+class R2 : Car
+{
+
+}
 
 class Program
 {
   static void Main(string[] args)
   {
     var r2 = new R2();
-    r2.OnRefueled += new EventHandler((o, a) =&gt;
+    r2.OnRefuel += (o, a) =&gt;
     {
-      Console.WriteLine("This event will be called");
-    });
+        Console.WriteLine("This event will be called");
+    };
     r2.Refuel();
   }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/add">Add keyword</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/remove">Remove keyword</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/delegate-class">Delegates</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/events-overview">Introduction to events</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/event-pattern#define-and-raise-field-like-events">Field-like events</a> </li>
+</ul>
 
