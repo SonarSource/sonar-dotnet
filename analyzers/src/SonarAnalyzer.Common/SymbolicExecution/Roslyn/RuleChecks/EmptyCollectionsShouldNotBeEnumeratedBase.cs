@@ -188,7 +188,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     private static NumberConstraint PropertyReferenceConstraint(ProgramState state, IPropertyReferenceOperationWrapper propertyReference)
     {
         if (propertyReference.Property.Name is nameof(Array.Length) or nameof(List<int>.Count)
-            && propertyReference.Instance.TrackedSymbol() is { } symbol
+            && state.ResolveCapture(propertyReference.Instance).TrackedSymbol() is { } symbol
             && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
         {
             return collection == CollectionConstraint.Empty ? NumberConstraint.From(0) : NumberConstraint.From(1, null);
