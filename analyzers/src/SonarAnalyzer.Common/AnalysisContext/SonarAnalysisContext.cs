@@ -26,7 +26,7 @@ namespace SonarAnalyzer.AnalysisContext;
 public class SonarAnalysisContext
 {
     private readonly RoslynAnalysisContext analysisContext;
-    private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
+    private readonly ImmutableArray<DiagnosticDescriptor> supportedDiagnostics;
 
     /// <summary>
     /// This delegate is called on all specific contexts, after the registration to the <see cref="RoslynAnalysisContext"/>, to
@@ -57,10 +57,10 @@ public class SonarAnalysisContext
     /// </remarks>
     public static Action<IReportingContext> ReportDiagnostic { get; set; }
 
-    internal SonarAnalysisContext(RoslynAnalysisContext analysisContext, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
+    internal SonarAnalysisContext(RoslynAnalysisContext analysisContext, ImmutableArray<DiagnosticDescriptor> supportedDiagnostics)
     {
         this.analysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
-        this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));
+        this.supportedDiagnostics = supportedDiagnostics;
     }
 
     private protected SonarAnalysisContext(SonarAnalysisContext context) : this(context.analysisContext, context.supportedDiagnostics) { }

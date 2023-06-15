@@ -34,7 +34,7 @@ public partial class SonarAnalysisContextTest
     private const string SnippetFileName = "snippet0.cs";
     private const string AnotherFileName = "Any other file name to make snippet0 considered as changed.cs";
 
-    private static readonly DiagnosticDescriptor[] DummyMainDescriptor = { AnalysisScaffolding.CreateDescriptorMain() };
+    private static readonly ImmutableArray<DiagnosticDescriptor> DummyMainDescriptor = new[] { AnalysisScaffolding.CreateDescriptorMain() }.ToImmutableArray();
 
     [DataTestMethod]
     [DataRow(SnippetFileName, false)]

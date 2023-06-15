@@ -82,7 +82,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_MultipleDiagnostics_WithSingleScope_SonarLint(bool expectedResult, ProjectType projectType, params string[] rulesTag)
     {
-        var diagnostics = rulesTag.Select(x => AnalysisScaffolding.CreateDescriptor(DummyID, x));
+        var diagnostics = rulesTag.Select(x => AnalysisScaffolding.CreateDescriptor(DummyID, x)).ToImmutableArray();
         CreateSut(projectType, false).HasMatchingScope(diagnostics).Should().Be(expectedResult);
     }
 
@@ -95,7 +95,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_MultipleDiagnostics_WithSingleScope_Scanner(bool expectedResult, ProjectType projectType, params string[] rulesTag)
     {
-        var diagnostics = rulesTag.Select(x => AnalysisScaffolding.CreateDescriptor(DummyID, x));
+        var diagnostics = rulesTag.Select(x => AnalysisScaffolding.CreateDescriptor(DummyID, x)).ToImmutableArray();
         CreateSut(projectType, true).HasMatchingScope(diagnostics).Should().Be(expectedResult);
     }
 
