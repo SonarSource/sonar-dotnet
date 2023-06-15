@@ -63,13 +63,21 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives)
                 .Verify();
 
-#if NET
-
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_VB(ProjectType projectType) =>
             roslynVB.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.vb")
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .Verify();
+
+#if NET
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_VB_Net(ProjectType projectType) =>
+            roslynVB.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.Net.vb")
                 .AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .Verify();
 
