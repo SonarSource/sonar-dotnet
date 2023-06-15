@@ -153,7 +153,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
 
     private ProgramState ProcessInvocation(SymbolicContext context, IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
-        && SizeConstraint(context.State, invocation.Arguments[0].ToArgument().Value) is { } constraint
+        && SizeConstraint(context.State, invocation.Instance ?? invocation.Arguments[0].ToArgument().Value) is { } constraint
             ? context.SetOperationConstraint(constraint)
             : ProcessMethod(context, invocation.TargetMethod, invocation.Instance);
 

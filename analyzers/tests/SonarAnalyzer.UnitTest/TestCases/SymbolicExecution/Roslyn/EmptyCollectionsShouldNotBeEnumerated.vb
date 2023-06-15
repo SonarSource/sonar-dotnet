@@ -1,4 +1,5 @@
-﻿Imports System.Collections.ObjectModel
+﻿Imports System.Collections.Generic
+Imports System.Collections.ObjectModel
 
 Public Class CollectionTests
 
@@ -193,7 +194,7 @@ Public Class CollectionTests
 
     Public Sub Casing()
         Dim List As New List(Of Integer)
-        List.cLEAR()                    ' Noncompliant
+        List.Clear()                    ' Noncompliant
     End Sub
 
     Public Sub LearnConditions_Size(Condition As Boolean)
@@ -224,6 +225,16 @@ Public Class CollectionTests
             Empty.Clear()  ' Compliant, unreachable
         End If
         NotEmpty.Clear()   ' Compliant, prevents LVA from throwing notEmpty away during reference capture
+    End Sub
+
+    Public Sub Enumerable_ExtensionIsInstance()
+        Dim Empty As New List(Of Integer)
+        Dim AsIEnumerable As IEnumerable(Of Integer) = Empty
+        If AsIEnumerable.Count = 0 Then ' This is invoked as instance, not as a static call
+            Empty.Clear()   ' Noncompliant
+        Else
+            Empty.Clear()   ' Compliant, unreachable
+        End If
     End Sub
 
 End Class
