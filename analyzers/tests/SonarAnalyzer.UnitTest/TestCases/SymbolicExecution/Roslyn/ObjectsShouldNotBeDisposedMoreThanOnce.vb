@@ -1,3 +1,5 @@
+﻿Imports System.IO
+
 Interface IWithDispose
     Inherits IDisposable
 
