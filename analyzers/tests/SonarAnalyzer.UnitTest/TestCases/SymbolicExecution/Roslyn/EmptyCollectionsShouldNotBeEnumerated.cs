@@ -105,15 +105,19 @@ class CollectionTests
         var set = new HashSet<int>(baseCollection);
         set.Clear();                    // Noncompliant
 
+        baseCollection = new List<int>();
         set = new HashSet<int>(baseCollection, EqualityComparer<int>.Default);
         set.Clear();                    // Noncompliant
 
+        baseCollection = new List<int>();
         set = new HashSet<int>(comparer: EqualityComparer<int>.Default, collection: baseCollection);
         set.Clear();                    // Noncompliant
 
+        baseCollection = new List<int>();
         set = new HashSet<int>(condition ? baseCollection : baseCollection);
         set.Clear();                    // Noncompliant
 
+        baseCollection = new List<int>();
         baseCollection.Add(1);
         set = new HashSet<int>(baseCollection);
         set.Clear();                    // Compliant
@@ -438,7 +442,7 @@ class AdvancedTests
     {
         var list = new List<int>();
         list.CustomExtensionMethod();                       // Compliant
-        list.Clear();                                       // Noncompliant FP
+        list.Clear();                                       // Compliant
     }
 
     public void WellKnownExtensionMethods()
@@ -489,18 +493,18 @@ class AdvancedTests
         list.Where(x => true);                              // FN
         list.Zip(list, (x, y) => x);                        // FN
         Enumerable.Reverse(list);                           // FN
-        list.Clear();                                       // Noncompliant
+        list.Clear();                                       // FN, should raise, because the methods above should not reset the state
     }
 
     public void PassingAsArgument_Removes_Constraints(bool condition)
     {
         var list = new List<int>();
         Foo(list);
-        list.Clear();                                       // Noncompliant FP
+        list.Clear();                                       // Compliant
 
         list = new List<int>();
         Foo(condition ? list : null);
-        list.Clear();                                       // Noncompliant FP
+        list.Clear();                                       // Compliant
 
         list = new List<int>();
         Foo((condition ? list : null) as List<int>);
@@ -566,7 +570,7 @@ class AdvancedTests
 
         if (empty.Count() == 0)
         {
-            empty.Clear();  // Noncompliant
+            empty.Clear();  // FN
         }
         else
         {
@@ -575,7 +579,7 @@ class AdvancedTests
 
         if (empty.Count(x => condition) == 0)
         {
-            empty.Clear();  // Noncompliant
+            empty.Clear();  // FN
         }
         else
         {
@@ -584,16 +588,16 @@ class AdvancedTests
 
         if (notEmpty.Count(x => condition) == 0)
         {
-            empty.Clear();  // Noncompliant
+            empty.Clear();  // FN
         }
         else
         {
-            empty.Clear();  // Noncompliant
+            empty.Clear();  // FN
         }
 
         if (Enumerable.Count(empty) == 0)
         {
-            empty.Clear();  // Noncompliant
+            empty.Clear();  // FN
         }
         else
         {
@@ -629,7 +633,7 @@ class AdvancedTests
 
         if (empty.Count() == 0)
         {
-            empty.Clone();  // Noncompliant
+            empty.Clone();  // FN
         }
         else
         {
@@ -639,7 +643,7 @@ class AdvancedTests
         notEmpty.Clone();   // Compliant, prevents LVA from throwing notEmpty away during reference capture
     }
 
-    void Foo(IEnumerable<int> items) { }
+    void Foo(List<int> items) { }
 }
 
 static class CustomExtensions
