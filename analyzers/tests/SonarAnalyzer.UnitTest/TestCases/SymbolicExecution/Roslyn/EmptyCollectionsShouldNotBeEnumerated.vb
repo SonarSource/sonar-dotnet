@@ -85,7 +85,7 @@ Public Class CollectionTests
 
     Public Sub ConstructorWithInitializer()
         Dim List As New List(Of Integer) From {1, 2, 3}
-        List.Clear()                    ' Noncompliant FP
+        List.Clear()                    ' Compliant
         Dim Array() As Integer = {1, 2, 3}
         Array.Clone()                   ' Compliant
     End Sub
@@ -284,7 +284,7 @@ Public Class Flows
     Public Sub AddPassedAsParameter()
         Dim List As New List(Of Integer)
         DoSomething(AddressOf List.Add)
-        List.Clear()   ' Noncompliant FP
+        List.Clear()   ' Compliant
     End Sub
 
     Public Sub CountZero(List As List(Of Integer))
