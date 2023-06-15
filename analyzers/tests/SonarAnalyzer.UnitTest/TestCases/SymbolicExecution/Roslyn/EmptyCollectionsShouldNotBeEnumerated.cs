@@ -492,11 +492,19 @@ class AdvancedTests
         list.Clear();                                       // Noncompliant
     }
 
-    public void PassingAsArgument_Removes_Constraints()
+    public void PassingAsArgument_Removes_Constraints(bool condition)
     {
         var list = new List<int>();
         Foo(list);
-        list.Clear();   // Noncompliant FP
+        list.Clear();                                       // Noncompliant FP
+
+        list = new List<int>();
+        Foo(condition ? list : null);
+        list.Clear();                                       // Noncompliant FP
+
+        list = new List<int>();
+        Foo((condition ? list : null) as List<int>);
+        list.Clear();                                       // Noncompliant FP
     }
 
     public void HigherRank_And_Jagged_Array()
