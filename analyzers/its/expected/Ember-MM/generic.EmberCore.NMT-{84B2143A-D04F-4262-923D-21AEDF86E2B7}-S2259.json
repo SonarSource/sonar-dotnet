@@ -158,19 +158,6 @@
 },
 {
 "id":  "S2259",
-"message":  "'c.values.FirstOrDefault(Function(y) y.label = saved)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  960,
-"startColumn":  42,
-"endLine":  960,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S2259",
 "message":  "'p' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",

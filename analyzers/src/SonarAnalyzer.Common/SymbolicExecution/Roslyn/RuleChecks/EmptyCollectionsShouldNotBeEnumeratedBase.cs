@@ -41,7 +41,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         KnownType.System_Collections_Generic_Dictionary_TKey_TValue
     };
 
-    private static readonly HashSet<string> RaisingMethods = new()
+    protected static readonly HashSet<string> RaisingMethods = new()
     {
         nameof(IEnumerable<int>.GetEnumerator),
         nameof(ICollection.CopyTo),
