@@ -1,7 +1,4 @@
-﻿Imports System
-Imports System.Threading.Tasks
-
-Public Class DisposeAsync
+﻿Public Class DisposeAsync
 
     Private Async Function DisposeAsyncTwiceUsingStatement(d As DisposableAsync) As Task
         Using d ' FN
@@ -30,7 +27,6 @@ Public Class DisposeAsync
 End Class
 
 Public Class DisposableAsync
-
     Implements IDisposable, IAsyncDisposable
 
     Public Sub Dispose() Implements IDisposable.Dispose
@@ -42,7 +38,6 @@ Public Class DisposableAsync
 End Class
 
 Public Class DisposableAsyncAlias
-
     Implements IAsyncDisposable
 
     Public Function CleanAsync() As ValueTask Implements IAsyncDisposable.DisposeAsync

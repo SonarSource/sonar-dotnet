@@ -1,7 +1,9 @@
-﻿Imports System.IO
+﻿Imports System
+Imports System.IO
 
 Interface IWithDispose
     Inherits IDisposable
+
 End Interface
 
 Public Class Disposable
@@ -58,6 +60,12 @@ Class Program
         Dim d As New DisposablePrivateAlias()
         DirectCast(d, IDisposable).Dispose()
         DirectCast(d, IDisposable).Dispose() ' Noncompliant
+    End Sub
+
+    Public Sub DisposedTwice_PrivateAlias_Using()
+        Using d As New DisposablePrivateAlias()  ' Noncompliant
+            DirectCast(d, IDisposable).Dispose()
+        End Using
     End Sub
 
     Private disposable As IDisposable
@@ -160,10 +168,7 @@ Class TestLoops
     Public Shared Sub LoopWithBreak(list As String(), condition As Boolean, withDispose As IWithDispose)
         For Each x As String In list
             Try
-                If condition Then
-                    withDispose.Dispose() ' FN
-                End If
-
+                If condition Then withDispose.Dispose() ' FN
                 Exit For
             Catch __unusedException1__ As Exception
                 Continue For
@@ -173,9 +178,7 @@ Class TestLoops
 
     Public Shared Sub LoopMethod(list As String(), condition As Boolean, withDispose As IWithDispose)
         For Each x As String In list
-            If condition Then
-                withDispose.Dispose()  ' Noncompliant
-            End If
+            If condition Then withDispose.Dispose() ' Noncompliant
         Next
     End Sub
 End Class

@@ -73,13 +73,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
 #if NET
 
-        [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_VB_Net(ProjectType projectType) =>
-            roslynVB.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.Net.vb")
-                .AddReferences(TestHelper.ProjectTypeReference(projectType))
-                .Verify();
+        [TestMethod]
+        public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_VB_Net() =>
+            roslynVB.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.Net.vb").Verify();
 
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_CSharp8() =>
