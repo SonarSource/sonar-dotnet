@@ -193,8 +193,8 @@ public static class Extensions
         validator.ValidateContainsOperation(OperationKind.Invocation);
         validator.ValidateTag("BeforeField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         validator.ValidateTag("BeforeStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("AfterField", x => x.Constraint<ObjectConstraint>().Should().BeNull());
-        validator.ValidateTag("AfterStaticField", x => x.Constraint<ObjectConstraint>().Should().BeNull());
+        validator.ValidateTag("AfterField", x => x.Should().BeNull());
+        validator.ValidateTag("AfterStaticField", x => x.Should().BeNull());
     }
 
     [DataTestMethod]
@@ -277,8 +277,8 @@ public static class Extensions
             x => // Branch for "this"
             {
                 x[condition].Should().BeNull(); // Should have BoolConstraint.True
-                x[field].AllConstraints.Should().BeEmpty();
-                x[staticField].AllConstraints.Should().BeEmpty();
+                x[field].Should().BeNull();
+                x[staticField].Should().BeNull();
             },
             x => // Branch for "otherInstance"
             {
@@ -387,7 +387,7 @@ Tag(""After"", this.ObjectField);";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValues("After").Should().Equal(
             SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull),
-            SymbolicValue.Empty);
+            null);
     }
 
     [TestMethod]
@@ -398,7 +398,7 @@ this.ObjectField = null;
 this.InstanceMethod(boolParameter ? 1 : 0);
 Tag(""After"", this.ObjectField);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("After", x => x.AllConstraints.Should().BeEmpty());
+        validator.ValidateTag("After", x => x.Should().BeNull());
     }
 
     [TestMethod]
@@ -471,19 +471,19 @@ public class Other
         validator.ValidateTag("Start_Sample_SampleField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
 
         // SampleMethod() resets own field and base class fields, but not other class fields
-        validator.ValidateTag("SampleMethod_Base_BaseField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+        validator.ValidateTag("SampleMethod_Base_BaseField", x => x.Should().BeNull());
         validator.ValidateTag("SampleMethod_Other_OtherField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("SampleMethod_Sample_SampleField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
-        validator.ValidateTag("SampleMethod_Sample_SampleField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+        validator.ValidateTag("SampleMethod_Sample_SampleField1", x => x.Should().BeNull());
+        validator.ValidateTag("SampleMethod_Sample_SampleField2", x => x.Should().BeNull());
 
         // OtherMethod() resets only its own constraints
         validator.ValidateTag("OtherMethod_Base_BaseField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("OtherMethod_Other_OtherField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+        validator.ValidateTag("OtherMethod_Other_OtherField", x => x.Should().BeNull());
         validator.ValidateTag("OtherMethod_Sample_SampleField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         validator.ValidateTag("OtherMethod_Sample_SampleField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
 
         // BaseMethod() called from Sample only resets Base field
-        validator.ValidateTag("BaseMethod_Base_BaseField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+        validator.ValidateTag("BaseMethod_Base_BaseField", x => x.Should().BeNull());
         validator.ValidateTag("BaseMethod_Other_OtherField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         validator.ValidateTag("BaseMethod_Sample_SampleField1", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         validator.ValidateTag("BaseMethod_Sample_SampleField2", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
@@ -507,7 +507,7 @@ Tag(""AfterStaticField"", StaticObjectField);";
         validator.ValidateTag("BeforeField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         validator.ValidateTag("BeforeStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
         validator.ValidateTag("AfterField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("AfterStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
+        validator.ValidateTag("AfterStaticField", x => x.Should().BeNull());
     }
 
     [TestMethod]

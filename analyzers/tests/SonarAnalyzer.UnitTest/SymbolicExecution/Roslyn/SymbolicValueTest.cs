@@ -78,7 +78,7 @@ public class SymbolicValueTest
             .WithoutConstraint(TestConstraint.Second);  // Do nothing
         sut.HasConstraint(TestConstraint.First).Should().BeTrue();
         sut = sut.WithoutConstraint(TestConstraint.First);
-        sut.HasConstraint(TestConstraint.First).Should().BeFalse();
+        sut.Should().BeNull();
     }
 
     [TestMethod]
@@ -242,14 +242,14 @@ public class SymbolicValueTest
     public void SingleCache_RemoveLastEntry_Kind()
     {
         var sut = SymbolicValue.Null;
-        sut.WithoutConstraint(ObjectConstraint.Null).Should().BeSameAs(SymbolicValue.Empty);
+        sut.WithoutConstraint(ObjectConstraint.Null).Should().BeNull();
     }
 
     [TestMethod]
     public void SingleCache_RemoveLastEntry_Type()
     {
         var sut = SymbolicValue.Null;
-        sut.WithoutConstraint<ObjectConstraint>().Should().BeSameAs(SymbolicValue.Empty);
+        sut.WithoutConstraint<ObjectConstraint>().Should().BeNull();
     }
 
     [TestMethod]

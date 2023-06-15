@@ -200,14 +200,14 @@ public bool TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)
         validator.TagStates("End").Should().SatisfyRespectively(
             x =>
             {
-                x[validator.Symbol("ObjectField")].HasConstraint<ObjectConstraint>().Should().BeFalse();
+                x[validator.Symbol("ObjectField")].Should().BeNull();
                 x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
                 x[validator.Symbol("success")].HasConstraint(BoolConstraint.True).Should().BeTrue();
                 x[validator.Symbol("result")].Should().BeNull();
             },
             x =>
             {
-                x[validator.Symbol("ObjectField")].HasConstraint<ObjectConstraint>().Should().BeFalse();
+                x[validator.Symbol("ObjectField")].Should().BeNull();
                 x[validator.Symbol("byteString")].Should().BeNull();
                 x[validator.Symbol("success")].HasConstraint(BoolConstraint.False).Should().BeTrue();
                 x[validator.Symbol("result")].Should().BeNull();
