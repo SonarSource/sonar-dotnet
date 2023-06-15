@@ -86,7 +86,7 @@ public class SwitchExpression
             _ => new List<int>()
         };
 
-        list.Clear();   // Noncompliant FP
+        list.Clear();   // Compliant
     }
 }
 

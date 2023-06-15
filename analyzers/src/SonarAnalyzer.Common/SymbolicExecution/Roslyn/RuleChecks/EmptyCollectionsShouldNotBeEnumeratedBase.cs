@@ -20,6 +20,7 @@
 
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Linq;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
@@ -125,23 +126,9 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         {
             return context.State.SetOperationConstraint(operation, CollectionConstraint.Empty);
         }
-        else if (operation.AsInvocation() is { Instance: not null } invocation)
+        else if (operation.AsInvocation() is { } invocation)
         {
-            if (RaisingMethods.Contains(invocation.TargetMethod.Name))
-            {
-                if (context.State[invocation.Instance]?.HasConstraint(CollectionConstraint.Empty) is true)
-                {
-                    emptyAccess.Add(operation);
-                }
-                else
-                {
-                    nonEmptyAccess.Add(operation);
-                }
-            }
-            if (AddMethods.Contains(invocation.TargetMethod.Name) && invocation.Instance.TrackedSymbol() is { } symbol)
-            {
-                return context.State.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
-            }
+            return ProcessMethod(context, invocation.TargetMethod, invocation.Instance);
         }
         return context.State;
     }
@@ -161,4 +148,33 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
 
     private static bool IsEmptyArray(IOperation operation) =>
         operation.AsArrayCreation()?.DimensionSizes.Any(x => x.ConstantValue.Value is 0) ?? false;
+
+    private ProgramState ProcessMethod(SymbolicContext context, IMethodSymbol method, IOperation instance)
+    {
+        var state = context.State;
+        if (instance is null)
+        {
+            return state;
+        }
+        if (RaisingMethods.Contains(method.Name))
+        {
+            if (state[instance]?.HasConstraint(CollectionConstraint.Empty) is true)
+            {
+                emptyAccess.Add(context.Operation.Instance);
+            }
+            else
+            {
+                nonEmptyAccess.Add(context.Operation.Instance);
+            }
+        }
+        if (AddMethods.Contains(method.Name))
+        {
+            state = state.SetOperationConstraint(instance, CollectionConstraint.NotEmpty);
+            if (instance.TrackedSymbol() is { } symbol)
+            {
+                state = state.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
+            }
+        }
+        return state;
+    }
 }
