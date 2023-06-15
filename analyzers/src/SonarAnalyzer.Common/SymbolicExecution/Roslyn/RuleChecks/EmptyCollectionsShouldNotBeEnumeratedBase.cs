@@ -127,7 +127,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         }
         else if (operation.AsInvocation() is { } invocation)
         {
-            return ProcessMethod(context, invocation.TargetMethod, invocation.Instance);
+            return ProcessInvocation(context, invocation);
         }
         else if (operation.AsMethodReference() is { } methodReference)
         {
@@ -150,6 +150,12 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             ReportIssue(operation, operation.Syntax.ToString());
         }
     }
+
+    private ProgramState ProcessInvocation(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+        invocation.TargetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
+        && SizeConstraint(context.State, invocation.Arguments[0].ToArgument().Value) is { } constraint
+            ? context.SetOperationConstraint(constraint)
+            : ProcessMethod(context, invocation.TargetMethod, invocation.Instance);
 
     private ProgramState ProcessMethod(SymbolicContext context, IMethodSymbol method, IOperation instance)
     {
@@ -185,11 +191,14 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             ? state[collectionArgument]?.Constraint<CollectionConstraint>()
             : CollectionConstraint.Empty;
 
-    private static NumberConstraint PropertyReferenceConstraint(ProgramState state, IPropertyReferenceOperationWrapper propertyReference)
+    private static NumberConstraint PropertyReferenceConstraint(ProgramState state, IPropertyReferenceOperationWrapper propertyReference) =>
+        propertyReference.Property.Name is nameof(Array.Length) or nameof(List<int>.Count)
+            ? SizeConstraint(state, propertyReference.Instance)
+            : null;
+
+    private static NumberConstraint SizeConstraint(ProgramState state, IOperation instance)
     {
-        if (propertyReference.Property.Name is nameof(Array.Length) or nameof(List<int>.Count)
-            && state.ResolveCapture(propertyReference.Instance).TrackedSymbol() is { } symbol
-            && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
+        if (state.ResolveCapture(instance).TrackedSymbol() is { } symbol && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
         {
             return collection == CollectionConstraint.Empty ? NumberConstraint.From(0) : NumberConstraint.From(1, null);
         }

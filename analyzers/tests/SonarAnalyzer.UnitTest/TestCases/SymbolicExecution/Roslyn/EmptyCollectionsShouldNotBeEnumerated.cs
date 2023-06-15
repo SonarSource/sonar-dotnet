@@ -538,7 +538,7 @@ class AdvancedTests
         }
         else
         {
-            empty.Clear();  // Noncompliant FP, Should be Compliant, unreachable
+            empty.Clear();  // Compliant, unreachable
         }
 
         if (Enumerable.Count(empty) == 0)
@@ -547,10 +547,10 @@ class AdvancedTests
         }
         else
         {
-            empty.Clear();  // Noncompliant FP, Should be Compliant, unreachable
+            empty.Clear();  // Compliant, unreachable
         }
 
-        notEmpty.Clear(); // Compliant, prevents LVA from throwing notEmpty away during reference capture
+        notEmpty.Clear();   // Compliant, prevents LVA from throwing notEmpty away during reference capture
     }
 
     public void LearnConditions_Size_Array(bool condition)
@@ -583,10 +583,10 @@ class AdvancedTests
         }
         else
         {
-            empty.Clone();  // Noncompliant FP, Should be Compliant, unreachable
+            empty.Clone();  // Compliant, unreachable
         }
 
-        notEmpty.Clone(); // Compliant, prevents LVA from throwing notEmpty away during reference capture
+        notEmpty.Clone();   // Compliant, prevents LVA from throwing notEmpty away during reference capture
     }
 
     void Foo(IEnumerable<int> items) { }
