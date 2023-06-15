@@ -28,7 +28,7 @@ public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ObjectsShouldNotBeD
     public override bool ShouldExecute() => true;
 
     protected override bool IsDispose(IMethodSymbol method) =>
-        method.ExplicitInterfaceImplementations.Any(x => x.IsIDisposableDispose() || x.IsIAsyncDisposableDisposeAsync())
-        || method.IsIDisposableDispose()
-        || method.IsIAsyncDisposableDisposeAsync();
+        method.IsIDisposableDispose()
+        || method.IsIAsyncDisposableDisposeAsync()
+        || method.ExplicitInterfaceImplementations.Any(x => x.IsIDisposableDispose() || x.IsIAsyncDisposableDisposeAsync());
 }
