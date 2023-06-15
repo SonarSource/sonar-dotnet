@@ -105,8 +105,18 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     public bool IsUnchanged(SyntaxTree tree) =>
         UnchangedFilesCache.GetValue(Compilation, _ => CreateUnchangedFilesHashSet()).Contains(tree.FilePath);
 
-    public bool HasMatchingScope(IEnumerable<DiagnosticDescriptor> descriptors) =>
-        descriptors.Any(HasMatchingScope);
+    public bool HasMatchingScope(IEnumerable<DiagnosticDescriptor> descriptors)
+    {
+        // Performance: Don't use descriptors.Any(HasMatchingScope), it allocates too much memory. https://github.com/SonarSource/sonar-dotnet/issues/7438
+        foreach (var descriptor in descriptors)
+        {
+            if (HasMatchingScope(descriptor))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public bool HasMatchingScope(DiagnosticDescriptor descriptor)
     {
