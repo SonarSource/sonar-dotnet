@@ -1,7 +1,5 @@
 ﻿Imports System
 Imports System.IO
-Imports System.Data.Common
-Imports System.Threading.Tasks
 
 Interface IWithDispose
     Inherits IDisposable
@@ -23,6 +21,14 @@ Public Class DisposableAlias
 
 End Class
 
+Public Class DisposablePrivateAlias
+    Implements IDisposable
+
+    Private Sub IDisposable_Dispose() Implements IDisposable.Dispose
+    End Sub
+
+End Class
+
 Public Class DoesNotImplementDisposable
 
     Public Sub Dispose()
@@ -33,18 +39,26 @@ End Class
 Class Program
 
     Public Sub NotReallyDisposable()
-        Dim d = New DoesNotImplementDisposable()
+        Dim d As New DoesNotImplementDisposable()
         d.Dispose()
         d.Dispose() ' Noncompliant^9#11 - IDisposal interface implementation is not checked
     End Sub
 
-    Public Sub DisposedTwice_Conditional()
-        Dim d As IDisposable = Nothing
-        d = New Disposable()
-        If d IsNot Nothing Then
-            d.Dispose()
-        End If
+    Public Sub DisposedTwice_Conditional(d As IDisposable)
+        If d IsNot Nothing Then d.Dispose()
         d.Dispose() ' Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
+    End Sub
+
+    Public Sub DisposedTwice_Alias()
+        Dim d As New DisposableAlias()
+        d.CleanUp()
+        d.CleanUp() ' Noncompliant
+    End Sub
+
+    Public Sub DisposedTwice_PrivateAlias()
+        Dim d As New DisposablePrivateAlias()
+        DirectCast(d, IDisposable).Dispose()
+        DirectCast(d, IDisposable).Dispose() ' Noncompliant
     End Sub
 
     Private disposable As IDisposable
@@ -54,42 +68,41 @@ Class Program
         disposable.Dispose() ' Noncompliant
     End Sub
 
-    Public Sub DisposedParameters(ByVal d As IDisposable)
+    Public Sub DisposedParameters(d As IDisposable)
         d.Dispose()
         d.Dispose() ' Noncompliant
     End Sub
 
-    Public Sub DisposePotentiallyNullField(ByVal d As IDisposable)
+    Public Sub DisposePotentiallyNullField(d As IDisposable)
         d?.Dispose()
         d?.Dispose() ' FN
     End Sub
 
     Public Sub DisposedTwice_Relations()
         Dim d As IDisposable = New Disposable()
-        Dim x = d
+        Dim x As IDisposable = d
         x.Dispose()
         d.Dispose() ' FN, requires relation support
     End Sub
 
     Public Sub DisposedTwice_Try()
-        Dim d As IDisposable = Nothing
+        Dim d As IDisposable = New Disposable()
         Try
-            d = New Disposable()
             d.Dispose()
         Finally
             d.Dispose() ' Noncompliant
         End Try
     End Sub
 
-    Public Sub DisposedTwice_DifferentCase(ByVal d As Disposable)
+    Public Sub DisposedTwice_DifferentCase(d As Disposable)
         d.Dispose()
         d.Dispose() ' Noncompliant
     End Sub
 
     Public Sub DisposedTwice_Array()
-        Dim a = {New Disposable()}
-        a(0).Dispose()
-        a(0).Dispose() ' FN
+        Dim Arr As IDisposable() = {New Disposable()}
+        Arr(0).Dispose()
+        Arr(0).Dispose() ' FN
     End Sub
 
     Public Sub Dispose_Stream_LeaveOpenFalse()
@@ -106,30 +119,17 @@ Class Program
         End Using
     End Sub
 
-    Public Sub Disposed_Using_WithDeclaration()
-        Using d = New Disposable()  ' Noncompliant^15#1
-            d.Dispose()
-        End Using
-    End Sub
-
-    Public Sub Disposed_Using_WithExpressions()
-        Dim d = New Disposable()
-        Using d  ' FN
-            d.Dispose()
-        End Using
-    End Sub
-
-    Public Sub Close_ParametersOfDifferentTypes(ByVal withDispose As IWithDispose, ByVal disposable As IDisposable)
+    Public Sub Close_ParametersOfDifferentTypes(withDispose As IWithDispose, disposable As IDisposable)
         withDispose.Dispose()
         disposable.Dispose()
     End Sub
 
-    Public Sub Close_ParametersOfSameType(ByVal withDispose1 As IWithDispose, ByVal withDispose2 As IWithDispose)
+    Public Sub Close_ParametersOfSameType(withDispose1 As IWithDispose, withDispose2 As IWithDispose)
         withDispose1.Dispose()
         withDispose2.Dispose()
     End Sub
 
-    Public Sub Close_OneParameterDisposedThrice(ByVal withDispose1 As IWithDispose, ByVal withDispose2 As IWithDispose)
+    Public Sub Close_OneParameterDisposedThrice(withDispose1 As IWithDispose, withDispose2 As IWithDispose)
         withDispose1.Dispose()
         withDispose1.Dispose()  ' Noncompliant
         withDispose1.Dispose()  ' Noncompliant
@@ -151,20 +151,20 @@ End Class
 
 Public Class DisposeAsync
 
-    Private Async Function DisposeAsyncTwiceUsingStatement(ByVal d As DisposableAsync) As Task
+    Private Async Function DisposeAsyncTwiceUsingStatement(d As DisposableAsync) As Task
         Using d ' FN
         End Using
         Await d.DisposeAsync()
     End Function
 
     Private Async Function DisposeAsyncTwice() As Task
-        Dim d = New DisposableAsync()
+        Dim d As New DisposableAsync()
         Await d.DisposeAsync()
         Await d.DisposeAsync() ' Noncompliant
     End Function
 
     Private Async Function DisposeTwiceMixed() As Task
-        Dim d = New DisposableAsync()
+        Dim d As New DisposableAsync()
         Await d.DisposeAsync()
         d.Dispose()  ' Noncompliant
     End Function
@@ -191,7 +191,7 @@ End Class
 
 Class TestLoops
 
-    Public Shared Sub LoopWithBreak(ByVal list As String(), ByVal condition As Boolean, ByVal withDispose As IWithDispose)
+    Public Shared Sub LoopWithBreak(list As String(), condition As Boolean, withDispose As IWithDispose)
         For Each x As String In list
             Try
                 If condition Then
@@ -205,7 +205,7 @@ Class TestLoops
         Next
     End Sub
 
-    Public Shared Sub LoopMethod(ByVal list As String(), ByVal condition As Boolean, ByVal withDispose As IWithDispose)
+    Public Shared Sub LoopMethod(list As String(), condition As Boolean, withDispose As IWithDispose)
         For Each x As String In list
             If condition Then
                 withDispose.Dispose()  ' Noncompliant
@@ -217,26 +217,32 @@ End Class
 Class UsingDeclaration
 
     Public Sub Disposed_UsingStatement()
-        Using d = New Disposable()  ' Noncompliant
+        Using d As New Disposable()  ' Noncompliant^15#1
             d.Dispose()
         End Using
     End Sub
 
-End Class
-
-Public Class Close
-
-    Public Sub CloseStreamTwice()
-        Dim fs = New FileStream("c:\foo.txt", FileMode.Open)
-        fs.Close()
-        fs.Close() ' FN - Close On streams is disposing resources
+    Public Sub Disposed_Using_InitializeBeforeUsingStatement()
+        Dim d As New Disposable()
+        Using d  ' FN
+            d.Dispose()
+        End Using
     End Sub
 
-    Private Sub CloseTwiceDBConnection(ByVal connection As DbConnection)
-        connection.Open()
-        connection.Close()
-        connection.Open()
-        connection.Close() ' Compliant - close() in DB connection does not dispose the connection object.
+    Public Sub Disposed_UsingStatement_MultipleVariables()
+        Using a As New Disposable, b As New Disposable, c As New Disposable ' Noncompliant {{Resource 'a' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
+            ' Noncompliant@-1 {{Resource 'b' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
+            a.Dispose()
+            b.Dispose()
+        End Using
+    End Sub
+
+    Public Sub Disposed_UsingStatement_MultipleVariableInitializer()
+        Using a, b, c As New Disposable ' Noncompliant {{Resource 'a' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
+            ' Noncompliant@-1 {{Resource 'b' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
+            a.Dispose()
+            b.Dispose()
+        End Using
     End Sub
 
 End Class

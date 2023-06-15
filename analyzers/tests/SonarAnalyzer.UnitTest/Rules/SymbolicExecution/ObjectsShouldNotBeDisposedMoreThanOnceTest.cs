@@ -71,8 +71,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_VB(ProjectType projectType) =>
             roslynVB.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.vb")
                 .AddReferences(TestHelper.ProjectTypeReference(projectType))
-                .AddReferences(MetadataReferenceFacade.SystemData)
-                .AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives)
                 .Verify();
 
         [TestMethod]
