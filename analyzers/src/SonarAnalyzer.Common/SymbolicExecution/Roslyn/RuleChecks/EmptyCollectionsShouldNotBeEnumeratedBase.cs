@@ -182,7 +182,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             invocation.Arguments.Any(x => x.ToArgument().Parameter.Type.Is(KnownType.System_Func_T_TResult));
     }
 
-    private ProgramState ProcessAddMethod(ProgramState state, IMethodSymbol method, IOperation instance)
+    private static ProgramState ProcessAddMethod(ProgramState state, IMethodSymbol method, IOperation instance)
     {
         if (instance is not null && AddMethods.Contains(method.Name))
         {
