@@ -153,3 +153,63 @@ public interface IDecoder
 {
     bool Convert(out int i3, out int i4);
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/6179
+public class Repro_6179
+{
+    public void FilledInLoop_FromAnotherCollection_FromArray()
+    {
+        var data = new[] { 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0 };
+        var list = new List<List<int>>();
+        List<int> currentBin = null;
+        for (var i = 0; i < data.Length; i++)
+        {
+            if (data[i] == 0)
+            {
+                if (currentBin != null)
+                {
+                    list.Add(currentBin);
+                    currentBin = null;
+                }
+
+                continue;
+            }
+
+            currentBin ??= new List<int>();
+            currentBin.Add(i);
+        }
+
+        for (var i = 0; i < list.Count; i++)
+        {
+            list.ForEach(x => { }); // Compliant
+        }
+    }
+
+    public void FilledInLoop_FromAnotherCollection_FromList()
+    {
+        var data = new List<int> { 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0 };
+        var list = new List<List<int>>();
+        List<int> currentBin = null;
+        for (var i = 0; i < data.Count; i++)
+        {
+            if (data[i] == 0)
+            {
+                if (currentBin != null)
+                {
+                    list.Add(currentBin);
+                    currentBin = null;
+                }
+
+                continue;
+            }
+
+            currentBin ??= new List<int>();
+            currentBin.Add(i);
+        }
+
+        for (var i = 0; i < list.Count; i++)
+        {
+            list.ForEach(x => { }); // Compliant
+        }
+    }
+}
