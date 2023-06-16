@@ -27,10 +27,12 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
     protected const string DiagnosticId = "S3966";
     protected const string MessageFormat = "Resource '{0}' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.";
 
+    protected abstract bool IsDispose(IMethodSymbol method);
+
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var state = context.State;
-        if (context.Operation.Instance.AsInvocation() is { } invocation && IsDisposeMethod(invocation.TargetMethod))
+        if (context.Operation.Instance.AsInvocation() is { } invocation && IsDispose(invocation.TargetMethod))
         {
             if (state[invocation.Instance]?.HasConstraint(DisposableConstraint.Disposed) is true)
             {
@@ -43,7 +45,4 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
         }
         return state;
     }
-
-    private static bool IsDisposeMethod(IMethodSymbol method) =>
-        method.IsIDisposableDispose() || method.IsIAsyncDisposableDisposeAsync();
 }

@@ -18,37 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
 public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ObjectsShouldNotBeDisposedMoreThanOnceBase
 {
     public static readonly DiagnosticDescriptor S3966 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
     protected override DiagnosticDescriptor Rule => S3966;
-    private static readonly string[] DisposeMethods = { "Dispose", "DisposeAsync" };
 
-    public override bool ShouldExecute()
-    {
-        var walker = new Walker();
-        walker.SafeVisit(Node);
-        return walker.Result;
-    }
+    public override bool ShouldExecute() => true;
 
     protected override bool IsDispose(IMethodSymbol method) =>
-        method.IsIDisposableDispose() || method.IsIAsyncDisposableDisposeAsync();
-
-    private sealed class Walker : SafeCSharpSyntaxWalker
-    {
-        public bool Result { get; private set; }
-
-        public override void Visit(SyntaxNode node)
-        {
-            if (!Result)
-            {
-                base.Visit(node);
-            }
-        }
-
-        public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
-            Result = node.GetIdentifier().GetValueOrDefault() is { } methodName && DisposeMethods.Contains(methodName.ValueText);
-    }
+        method.IsIDisposableDispose()
+        || method.IsIAsyncDisposableDisposeAsync()
+        || method.ExplicitInterfaceImplementations.Any(x => x.IsIDisposableDispose() || x.IsIAsyncDisposableDisposeAsync());
 }
