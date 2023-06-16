@@ -360,7 +360,14 @@ Captures:
         symbolValue.HasConstraint(constraint).Should().BeTrue();
         sut = sut.ResetFieldConstraints();
         symbolValue = sut[field];
-        symbolValue.HasConstraint(constraint).Should().Be(expectIsPreserved);
+        if (expectIsPreserved)
+        {
+            symbolValue.HasConstraint(constraint).Should().BeTrue();
+        }
+        else
+        {
+            symbolValue.Should().BeNull();
+        }
     }
 
     private static ISymbol[] CreateSymbols()

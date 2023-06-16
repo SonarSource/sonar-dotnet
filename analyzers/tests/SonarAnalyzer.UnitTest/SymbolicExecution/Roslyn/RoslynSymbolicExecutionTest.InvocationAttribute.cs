@@ -185,32 +185,32 @@ Tag(""End"", null);";
     [TestMethod]
     public void Invocation_NotNullWhen_Unknown_InstanceMethodResetsFieldConstraints()
     {
-        const string code = @"
-private object ObjectField;
-
-public void Test()
-{
-this.ObjectField = null;
-string byteString = Unknown<string>();
-var success = TryParse(byteString, out var result);
-Tag(""End"", null);
-}
-public bool TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string s, out object o) { o = null; return true; }";
+        const string code = """
+            private object ObjectField;
+            public void Test()
+            {
+                this.ObjectField = null;
+                string byteString = Unknown<string>();
+                var success = TryParse(byteString, out var result);
+                Tag("End", null);
+            }
+            public bool TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string s, out object o) { o = null; return true; }
+            """;
         var validator = SETestContext.CreateCSMethod(code).Validator;
         validator.TagStates("End").Should().SatisfyRespectively(
             x =>
             {
-                x[validator.Symbol("ObjectField")].HasConstraint<ObjectConstraint>().Should().BeFalse();
-                x[validator.Symbol("byteString")].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
-                x[validator.Symbol("success")].HasConstraint(BoolConstraint.True).Should().BeTrue();
-                x[validator.Symbol("result")].Should().BeNull();
+                x[validator.Symbol("ObjectField")].Should().HaveNoConstraints();
+                x[validator.Symbol("byteString")].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+                x[validator.Symbol("success")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+                x[validator.Symbol("result")].Should().HaveNoConstraints();
             },
             x =>
             {
-                x[validator.Symbol("ObjectField")].HasConstraint<ObjectConstraint>().Should().BeFalse();
-                x[validator.Symbol("byteString")].Should().BeNull();
-                x[validator.Symbol("success")].HasConstraint(BoolConstraint.False).Should().BeTrue();
-                x[validator.Symbol("result")].Should().BeNull();
+                x[validator.Symbol("ObjectField")].Should().HaveNoConstraints();
+                x[validator.Symbol("byteString")].Should().HaveNoConstraints();
+                x[validator.Symbol("success")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+                x[validator.Symbol("result")].Should().HaveNoConstraints();
             });
     }
 

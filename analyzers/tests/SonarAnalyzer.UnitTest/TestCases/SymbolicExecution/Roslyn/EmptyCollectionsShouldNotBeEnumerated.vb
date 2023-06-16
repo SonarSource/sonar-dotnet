@@ -63,12 +63,15 @@ Public Class CollectionTests
         Dim HS As New HashSet(Of Integer)(BaseCollection)
         HS.Clear()                      ' Noncompliant
 
+        BaseCollection = New List(Of Integer)
         HS = New HashSet(Of Integer)(BaseCollection, EqualityComparer(Of Integer).Default)
         HS.Clear()                      ' Noncompliant
 
+        BaseCollection = New List(Of Integer)
         HS = New HashSet(Of Integer)(comparer:=EqualityComparer(Of Integer).Default, collection:=BaseCollection)
         HS.Clear()                      ' Noncompliant
 
+        BaseCollection = New List(Of Integer)
         HS = New HashSet(Of Integer)(If(Condition, BaseCollection, BaseCollection))
         HS.Clear()                      ' Noncompliant
 
@@ -230,7 +233,7 @@ Public Class CollectionTests
             Empty.Clear()   ' Noncompliant
         End If
         If Enumerable.Count(Empty) = 0 Then
-            Empty.Clear()  ' Noncompliant
+            Empty.Clear()  ' FN
         Else
             Empty.Clear()  ' Compliant, unreachable
         End If
@@ -262,13 +265,13 @@ Public Class AdvancedTests
         List.All(Function(X) True)      ' FN
         List.Any()                      ' FN
         Enumerable.Reverse(List)        ' FN
-        List.Clear()                    ' Noncompliant
+        List.Clear()                    ' FN, should raise, because the methods above should not reset the state
     End Sub
 
     Public Sub PassingAsArgument_Removes_Constraints()
         Dim List As New List(Of Integer)
         Foo(List)
-        List.Clear()   ' Noncompliant FP
+        List.Clear()   ' Compliant
     End Sub
 
     Public Sub HigherRank_And_Jagged_Array()

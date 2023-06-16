@@ -108,7 +108,7 @@ public sealed record SymbolicValue
     private SymbolicValue RemoveConstraint(Type type) =>
         Constraints.Count switch
         {
-            1 => Empty,
+            1 => null,
             2 => OtherSingle(type),
             3 => OtherPair(type),
             _ => this with { Constraints = Constraints.Remove(type) },

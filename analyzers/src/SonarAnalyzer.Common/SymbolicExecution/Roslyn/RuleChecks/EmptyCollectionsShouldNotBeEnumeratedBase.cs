@@ -141,6 +141,12 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         {
             return context.State.SetOperationConstraint(operation, constraint);
         }
+        else if (operation.AsArgument() is { } argument
+            && context.State.ResolveCaptureAndUnwrapConversion(argument.Value).TrackedSymbol() is { } symbol
+            && context.State[symbol] is { } symbolValue)
+        {
+            return context.State.SetSymbolValue(symbol, symbolValue.WithoutConstraint<CollectionConstraint>());
+        }
         else
         {
             return context.State;
