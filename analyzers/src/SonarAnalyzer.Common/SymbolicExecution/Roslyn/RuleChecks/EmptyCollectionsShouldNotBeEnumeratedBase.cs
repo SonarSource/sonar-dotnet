@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#nullable enable
+
 using System.Collections;
 using System.Collections.ObjectModel;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -115,11 +117,10 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        if (operation.AsObjectCreation() is { } objectCreation && objectCreation.Type.IsAny(TrackedCollectionTypes))
+        if (operation.AsObjectCreation() is { } objectCreation && objectCreation.Type.IsAny(TrackedCollectionTypes)
+            && CollectionCreationConstraint(context.State, objectCreation) is { } objectCreationConstraint)
         {
-            return CollectionCreationConstraint(context.State, objectCreation) is { } constraint
-                ? context.State.SetOperationConstraint(objectCreation, constraint)
-                : context.State;
+            return context.State.SetOperationConstraint(objectCreation, objectCreationConstraint);
         }
         else if (operation.AsArrayCreation() is { } arrayCreation)
         {
@@ -205,19 +206,19 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         return state;
     }
 
-    private static CollectionConstraint CollectionCreationConstraint(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
+    private static CollectionConstraint? CollectionCreationConstraint(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
         objectCreation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable)) is { } collectionArgument
             ? state[collectionArgument]?.Constraint<CollectionConstraint>()
             : CollectionConstraint.Empty;
 
-    private static NumberConstraint PropertyReferenceConstraint(ProgramState state, IPropertyReferenceOperationWrapper propertyReference) =>
+    private static NumberConstraint? PropertyReferenceConstraint(ProgramState state, IPropertyReferenceOperationWrapper propertyReference) =>
         propertyReference.Property.Name is nameof(Array.Length) or nameof(List<int>.Count)
             ? SizeConstraint(state, propertyReference.Instance)
             : null;
 
     private static NumberConstraint SizeConstraint(ProgramState state, IOperation instance, bool hasFilteringPredicate = false)
     {
-        if (state.ResolveCapture(instance).TrackedSymbol() is { } symbol && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
+        if (state.ResolveCaptureAndUnwrapConversion(instance).TrackedSymbol() is { } symbol && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
         {
             if (collection == CollectionConstraint.Empty)
             {
