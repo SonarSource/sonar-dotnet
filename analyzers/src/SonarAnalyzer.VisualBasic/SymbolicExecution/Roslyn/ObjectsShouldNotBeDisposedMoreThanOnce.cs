@@ -25,10 +25,31 @@ public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ObjectsShouldNotBeD
     public static readonly DiagnosticDescriptor S3966 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
     protected override DiagnosticDescriptor Rule => S3966;
 
-    public override bool ShouldExecute() => true;
+    public override bool ShouldExecute()
+    {
+        var walker = new Walker();
+        walker.SafeVisit(Node);
+        return walker.Result;
+    }
 
     protected override bool IsDispose(IMethodSymbol method) =>
         method.IsIDisposableDispose()
         || method.IsIAsyncDisposableDisposeAsync()
         || method.ExplicitInterfaceImplementations.Any(x => x.IsIDisposableDispose() || x.IsIAsyncDisposableDisposeAsync());
+
+    private sealed class Walker : SafeVisualBasicSyntaxWalker
+    {
+        public bool Result { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!Result)
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
+            Result = node.HasExactlyNArguments(0) || node.ArgumentList is null;
+    }
 }

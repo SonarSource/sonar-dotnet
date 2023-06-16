@@ -49,6 +49,11 @@ Class Program
         d.Dispose() ' Noncompliant {{Resource 'd' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
     End Sub
 
+    Public Sub DisposedTwice_MemberAccess(d As IDisposable)
+        d.Dispose
+        d.Dispose ' Noncompliant
+    End Sub
+
     Public Sub DisposedTwice_Alias()
         Dim d As New DisposableAlias()
         d.CleanUp()
