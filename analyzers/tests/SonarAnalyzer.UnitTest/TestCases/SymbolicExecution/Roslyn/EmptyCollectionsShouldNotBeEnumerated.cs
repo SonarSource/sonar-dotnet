@@ -541,6 +541,24 @@ class AdvancedTests
             empty.Clear();  // Compliant, unreachable
         }
 
+        if (empty.Count(x => condition) == 0)
+        {
+            empty.Clear();  // Noncompliant
+        }
+        else
+        {
+            empty.Clear();  // Compliant, unreachable
+        }
+
+        if (notEmpty.Count(x => condition) == 0)
+        {
+            empty.Clear();  // FN
+        }
+        else
+        {
+            empty.Clear();  // Noncompliant
+        }
+
         if (Enumerable.Count(empty) == 0)
         {
             empty.Clear();  // Noncompliant
