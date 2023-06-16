@@ -702,7 +702,7 @@ class Flows
         list.Clear();   // Compliant
 
         list = new List<int>();
-        DoSomething(list.Clear); // Noncompliant
+        DoSomething(list.Clear); // We don't raise here to avoid FPs
 
         DoSomething(StaticMethodWithoutInstance);
 
@@ -717,7 +717,7 @@ class Flows
         list.Clear();    // Compliant, but will break when we learn Empty from Clear()
 
         list = new List<int>();
-        Action clear = list.Clear;  // Noncompliant FP
+        Action clear = list.Clear;  // We don't raise here to avoid FPs
         clear();                    // FN
         clear();                    // FN
 
@@ -726,6 +726,17 @@ class Flows
         clear();                    // Compliant
         add(5);                     // Adds to another instance, not the current list
         clear();                    // FN
+    }
+
+    public void AddPassedAsParameter_Dictionary()   // Reproducer from Peach
+    {
+        var d = new Dictionary<int, int>();
+        AddSomething(
+            d.ContainsKey,  // Compliant
+            (k, v) => d[k] = v);
+
+        void AddSomething(Func<int, bool> containsKey, Action<int, int> add)
+        { }
     }
 
     private static void StaticMethodWithoutInstance() { }

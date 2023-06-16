@@ -129,9 +129,9 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         {
             return ProcessInvocation(context, invocation);
         }
-        else if (operation.AsMethodReference() is { } methodReference)
+        else if (operation.AsMethodReference() is { Instance: not null } methodReference)
         {
-            return ProcessMethod(context, methodReference.Method, methodReference.Instance);
+            return ProcessAddMethod(context.State, methodReference.Method, methodReference.Instance);
         }
         else if (operation.AsPropertyReference() is { Property.IsIndexer: true } indexer)
         {
@@ -163,33 +163,37 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
 
     private ProgramState ProcessInvocation(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
-        return invocation.TargetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
-            && SizeConstraint(context.State, invocation.Instance ?? invocation.Arguments[0].ToArgument().Value, HasFilteringPredicate()) is { } constraint
-                ? context.SetOperationConstraint(constraint)
-                : ProcessMethod(context, invocation.TargetMethod, invocation.Instance);
+        if (invocation.TargetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
+            && SizeConstraint(context.State, invocation.Instance ?? invocation.Arguments[0].ToArgument().Value, HasFilteringPredicate()) is { } constraint)
+        {
+            return context.SetOperationConstraint(constraint);
+        }
+        else if (invocation.Instance is { } instance)
+        {
+            if (RaisingMethods.Contains(invocation.TargetMethod.Name))
+            {
+                if (context.State[instance]?.HasConstraint(CollectionConstraint.Empty) is true)
+                {
+                    emptyAccess.Add(context.Operation.Instance);
+                }
+                else
+                {
+                    nonEmptyAccess.Add(context.Operation.Instance);
+                }
+            }
+            return ProcessAddMethod(context.State, invocation.TargetMethod, instance);
+        }
+        else
+        {
+            return context.State;
+        }
 
         bool HasFilteringPredicate() =>
             invocation.Arguments.Any(x => x.ToArgument().Parameter.Type.Is(KnownType.System_Func_T_TResult));
     }
 
-    private ProgramState ProcessMethod(SymbolicContext context, IMethodSymbol method, IOperation instance)
+    private static ProgramState ProcessAddMethod(ProgramState state, IMethodSymbol method, IOperation instance)
     {
-        var state = context.State;
-        if (instance is null)
-        {
-            return state;
-        }
-        if (RaisingMethods.Contains(method.Name))
-        {
-            if (state[instance]?.HasConstraint(CollectionConstraint.Empty) is true)
-            {
-                emptyAccess.Add(context.Operation.Instance);
-            }
-            else
-            {
-                nonEmptyAccess.Add(context.Operation.Instance);
-            }
-        }
         if (AddMethods.Contains(method.Name))
         {
             state = state.SetOperationConstraint(instance, CollectionConstraint.NotEmpty);
