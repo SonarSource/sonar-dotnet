@@ -1,5 +1,5 @@
 {
-  "title": "Recursion should not be infinite",
+  "title": "Loops and recursions should not be infinite",
   "type": "BUG",
   "status": "ready",
   "remediation": {
@@ -13,5 +13,5 @@
   "ruleSpecification": "RSPEC-2190",
   "sqKey": "S2190",
   "scope": "All",
-  "quickfix": "unknown"
+  "quickfix": "infeasible"
 }

@@ -1,8 +1,10 @@
 <h2>Why is this an issue?</h2>
 <p>When a collection is empty, iterating it has no effect. Doing so anyway is likely a bug; either population was accidentally omitted, or the
 iteration needs to be revised.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Public Sub Method()
     Dim Values As New List(Of String)
     Values.Remove("bar")                ' Noncompliant
@@ -13,7 +15,7 @@ Public Sub Method()
 End Sub
 </pre>
 <h4>Compliant solution</h4>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 ---
 Public Sub Method()
     Dim Values As List(Of String) = LoadValues()

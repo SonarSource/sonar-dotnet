@@ -1,14 +1,22 @@
 <h2>Why is this an issue?</h2>
-<p>When <code>switch</code> statements have large sets of case clauses, it is usually an attempt to map two sets of data. A <code>Dictionary</code>
-should be used instead to make the code more readable and maintainable.</p>
-<h3>Noncompliant code example</h3>
-<p>With a "Maximum number of case" set to 4</p>
-<pre>
+<p>When <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements#the-switch-statement">switch</a>
+statements have large sets of case clauses, it is usually an attempt to map two sets of data. A <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a> should be used instead to make the code
+more readable and maintainable.</p>
+<h3>Exceptions</h3>
+<p>This rule ignores <code>switch</code> statements over <code>Enum</code> arguments and empty, fall-through cases.</p>
+<h2>How to fix it</h2>
+<p>Store all the cases apart from the <code>default</code> one in a dictionary and try to get the matching value by calling the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.trygetvalue">TryGetValue</a> method.</p>
+<h3>Code examples</h3>
+<p>The example below are using the "Maximum number of case" property set to <code>4</code>.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public class TooManyCase
 {
-    public int switchCase(char ch)
+    public int mapValues(char ch)
     {
-        switch(ch) {  // Noncompliant
+        switch(ch) {  // Noncompliant: 5 cases, "default" excluded, more than maximum = 4
             case 'a':
                 return 1;
             case 'b':
@@ -28,19 +36,25 @@ public class TooManyCase
     }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 using System.Collections.Generic;
 
 public class TooManyCase
 {
     Dictionary&lt;char, int&gt; matching = new Dictionary&lt;char, int&gt;()
     {
-        {'a', 1}, {'b', 2}, {'c', 2}, {'d', 3},
-        {'e', 4}, {'f', 5}, {'g', 5}, {'h', 5}
+        { 'a', 1 },
+        { 'b', 2 },
+        { 'c', 2 },
+        { 'd', 3 },
+        { 'e', 4 },
+        { 'f', 5 },
+        { 'g', 5 },
+        { 'h', 5 }
     };
 
-    public int withDictionary(char ch)
+    public int mapValues(char ch)
     {
         int value;
         if (this.matching.TryGetValue(ch, out value)) {
@@ -51,6 +65,13 @@ public class TooManyCase
     }
 }
 </pre>
-<h3>Exceptions</h3>
-<p>This rule ignores <code>switch</code>es over <code>Enum</code>s and empty, fall-through cases.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt; Class</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.trygetvalue">Dictionary&lt;TKey,TValue&gt;.TryGetValue(TKey, TValue) Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements#the-switch-statement">The
+  <code>switch</code> statement</a> </li>
+</ul>
 

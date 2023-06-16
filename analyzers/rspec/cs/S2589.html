@@ -1,58 +1,121 @@
 <h2>Why is this an issue?</h2>
-<p>If a boolean expression doesn’t change the evaluation of the condition, then it is entirely unnecessary, and can be removed. If it is gratuitous
-because it does not match the programmer’s intent, then it’s a bug and the expression should be fixed.</p>
-<h3>Noncompliant code example</h3>
+<p>An operand of a boolean expression that never changes the result of the expression might not match the programmer’s intent and can lead to
+unexpected behavior and potential bugs.</p>
 <pre>
-public void Sample(bool b, bool c, string s)
+var a = true;
+if (a)
+{
+    DoSomething();
+}
+</pre>
+<p>This also applies to the <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator">null
+coalescing operator</a> when one of the operands always evaluates to <code>null</code>.</p>
+<pre>
+string d = null;
+var v1 = d ?? "value";
+</pre>
+<h3>Exceptions</h3>
+<p>This rule will not raise an issue in either of these cases:</p>
+<ul>
+  <li> When the condition is a single <code>const bool</code> <pre>
+const bool debug = false;
+//...
+if (debug)
+{
+  // Print something
+}
+</pre> </li>
+  <li> When the condition is the literal <code>true</code> or <code>false</code>. </li>
+</ul>
+<p>In these cases, it is obvious the code is as intended.</p>
+<h2>How to fix it</h2>
+<p>The conditions should be reviewed to decide whether:</p>
+<ul>
+  <li> to update the unnecessary operand </li>
+  <li> to remove the unnecessary operand </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+public void Sample(bool b, bool c)
 {
     var a = true;
-    if (a) // Noncompliant
+    if (a)                  // Noncompliant: "a" is always "true"
     {
         DoSomething();
     }
 
-    if (b &amp;&amp; a) // Noncompliant; "a" is always "true"
+    if (b &amp;&amp; a)             // Noncompliant: "a" is always "true"
     {
         DoSomething();
     }
 
-    if (c || !a) // Noncompliant; "!a" is always "false"
+    if (c || !a)            // Noncompliant: "!a" is always "false"
     {
         DoSomething();
     }
 
     string d = null;
-    var v1 = d ?? "value"; // Noncompliant, d is always null
-    var v2 = s ?? d; // Noncompliant, d is always null and the produced value is always equal to s. The condition to check the value of s is gratuitous.
+    var v1 = d ?? "value";  // Noncompliant: "d" is always null and v1 is always "value".
+    var v2 = s ?? d;        // Noncompliant: "d" is always null and v2 is always equal to s.
 }
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
+<p>The unnecessary operand is updated:</p>
 <pre>
 public void Sample(bool b, bool c, string s)
 {
-    var a = true;
-    if (Foo(a))
+    var a = IsAllowed();
+    if (a)                  // Compliant
     {
         DoSomething();
     }
 
-    if (b)
+    if (b &amp;&amp; a)             // Compliant
     {
         DoSomething();
     }
 
-    if (c)
+    if (c || !a)            // Compliant
     {
         DoSomething();
     }
 
-    var v1 = "value";
-    var v2 = s;
+    string d = GetStringData();
+    var v1 = d ?? "value";  // Compliant
+    var v2 = s ?? d;        // Compliant
+}
+</pre>
+<p>The unnecessary operand is removed:</p>
+<pre>
+public void Sample(bool b, bool c, string s)
+{
+    DoSomething();
+
+    if (b)                  // Compliant
+    {
+        DoSomething();
+    }
+
+    if (c)                  // Compliant
+    {
+        DoSomething();
+    }
+
+    var v1 = "value";       // Compliant
+    var v2 = s;             // Compliant
 }
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/571">MITRE, CWE-571</a> - Expression is Always True </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/570">MITRE, CWE-570</a> - Expression is Always False </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-">Conditional logical AND operator &amp;&amp;</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-or-operator-">Conditional logical OR operator ||</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator">Null-coalescing operators ??
+  and ??=</a> </li>
 </ul>
 
