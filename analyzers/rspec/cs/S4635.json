@@ -1,5 +1,5 @@
 {
-  "title": "Seeking characters from a substring should be avoided",
+  "title": "Start index should be used instead of calling Substring",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

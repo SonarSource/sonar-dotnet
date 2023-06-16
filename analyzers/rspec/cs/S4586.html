@@ -4,7 +4,7 @@
 href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.completedtask"><code>Task.CompletedTask</code></a> or <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.fromresult"><code>Task.FromResult&lt;TResult&gt;(null)</code></a>
 respectively.</p>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre>
 public Task DoFooAsync()
 {
     return null;               // Noncompliant: Causes a NullReferenceException if awaited.
@@ -15,23 +15,36 @@ public async Task Main()
     await DoFooAsync();        // NullReferenceException
 }
 </pre>
+<h2>How to fix it</h2>
+<p>Instead of <code>null</code> <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.completedtask"><code>Task.CompletedTask</code></a> or <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.fromresult"><code>Task.FromResult&lt;TResult&gt;(null)</code></a>
+should be returned.</p>
+<h3>Code examples</h3>
+<p>A <code>Task</code> returning method can be fixed like so:</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public Task DoFooAsync()
+{
+    return null;               // Noncompliant: Causes a NullReferenceException if awaited.
+}
+</pre>
+<h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 public Task DoFooAsync()
 {
     return Task.CompletedTask; // Compliant: Method can be awaited.
 }
-
-public async Task Main()
-{
-    await DoFooAsync();
-}
 </pre>
+<p>A <code>Task&lt;TResult&gt;</code> returning method can be fixed like so:</p>
+<h4>Noncompliant code example</h4>
 <pre data-diff-id="2" data-diff-type="noncompliant">
 public Task&lt;object&gt; GetFooAsync()
 {
     return null;                          // Noncompliant: Causes a NullReferenceException if awaited.
 }
 </pre>
+<h4>Compliant solution</h4>
 <pre data-diff-id="2" data-diff-type="compliant">
 public Task&lt;object&gt; GetFooAsync()
 {
@@ -53,6 +66,6 @@ public Task&lt;object&gt; GetFooAsync()
   </li>
   <li> StackOverflow - Answer by Stephen Cleary for <a href="https://stackoverflow.com/a/27551261">Best way to handle null task inside async
   method?</a> </li>
-  <li> C# Language Design Proposal - <a href="https://github.com/dotnet/csharplang/issues/35">Champion "Null-conditional await"</a> </li>
+  <li> C# Language Design - <a href="https://github.com/dotnet/csharplang/issues/35">Proposal Champion "Null-conditional await"</a> </li>
 </ul>
 

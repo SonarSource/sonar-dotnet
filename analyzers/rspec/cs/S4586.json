@@ -13,5 +13,5 @@
   "ruleSpecification": "RSPEC-4586",
   "sqKey": "S4586",
   "scope": "All",
-  "quickfix": "unknown"
+  "quickfix": "targeted"
 }

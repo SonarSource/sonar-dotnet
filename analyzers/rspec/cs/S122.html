@@ -1,20 +1,23 @@
 <h2>Why is this an issue?</h2>
-<p>For better readability, do not put more than one statement on a single line.</p>
-<h3>Noncompliant code example</h3>
+<p>Putting multiple statements on a single line lowers the code readability and makes debugging the code more complex.</p>
 <pre>
-if(someCondition) DoSomething();
+if (someCondition) DoSomething(); // Noncompliant
 </pre>
-<h3>Compliant solution</h3>
+<p>Write one statement per line to improve readability.</p>
 <pre>
-if(someCondition)
+if (someCondition)
 {
   DoSomething();
 }
 </pre>
 <h3>Exceptions</h3>
-<p>Anonymous functions containing a single statement are ignored. Block statements are not considered either.</p>
+<p>The rule ignores:</p>
+<ul>
+  <li> block statements </li>
+  <li> anonymous functions containing a single statement </li>
+</ul>
 <pre>
-Func&lt;object, bool&gt; item1 = o =&gt; { return true; }; // Compliant
+Func&lt;object, bool&gt; item1 = o =&gt; { return true; }; // Compliant by exception
 Func&lt;object, bool&gt; item1 = o =&gt; { var r = false; return r; }; // Noncompliant
 </pre>
 

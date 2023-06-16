@@ -13,5 +13,5 @@
   "ruleSpecification": "RSPEC-2198",
   "sqKey": "S2198",
   "scope": "Main",
-  "quickfix": "unknown"
+  "quickfix": "targeted"
 }

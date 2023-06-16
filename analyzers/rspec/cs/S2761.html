@@ -1,21 +1,10 @@
 <h2>Why is this an issue?</h2>
-<p>Calling the <code>!</code> or <code>~</code> prefix operator twice does nothing: the second invocation undoes the first. Such mistakes are
-typically caused by accidentally double-tapping the key in question without noticing.</p>
-<p>Either this is a bug, if the operator was actually meant to be called once, or misleading if done on purpose.</p>
-<h3>Noncompliant code example</h3>
+<p>The repetition of a prefix operator (<code>!</code>, or <code>~</code>) is usually a typo. The second operator invalidates the first one.</p>
 <pre>
 int v1 = 0;
 bool v2 = false;
 
-var v3 = !!v1; // Noncompliant
-var v4 = ~~v2; // Noncompliant
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-int v1 = 0;
-bool v2 = false;
-
-var v3 = !v1;
-var v4 = ~v2;
+var v3 = !!v1; // Noncompliant: equivalent to "v1"
+var v4 = ~~v2; // Noncompliant: equivalent to "v2"
 </pre>
 

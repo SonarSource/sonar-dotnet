@@ -4,7 +4,7 @@
 href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.completedtask"><code>Task.CompletedTask</code></a> or <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.fromresult"><code>Task.FromResult(Of TResult)(Nothing)</code></a>
 respectively.</p>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre>
 Public Function DoFooAsync() As Task
     Return Nothing            ' Noncompliant: Causes a NullReferenceException if awaited.
 End Function
@@ -13,20 +13,33 @@ Public Async Function Main() As Task
     Await DoFooAsync()        ' NullReferenceException
 End Function
 </pre>
+<h2>How to fix it</h2>
+<p>Instead of <code>Nothing</code> <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.completedtask"><code>Task.CompletedTask</code></a> or <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.fromresult"><code>Task.FromResult(Of TResult)(Nothing)</code></a>
+should be returned.</p>
+<h3>Code examples</h3>
+<p>A <code>Task</code> returning procedure can be fixed like so:</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Public Function DoFooAsync() As Task
+    Return Nothing            ' Noncompliant: Causes a NullReferenceException if awaited.
+End Function
+</pre>
+<h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 Public Function DoFooAsync() As Task
     Return Task.CompletedTask ' Compliant: Method can be awaited.
 End Function
-
-Public Async Function Main() As Task
-    Await DoFooAsync()
-End Function
 </pre>
+<p>A <code>Task(Of TResult)</code> returning procedure can be fixed like so:</p>
+<h4>Noncompliant code example</h4>
 <pre data-diff-id="2" data-diff-type="noncompliant">
 Public Function GetFooAsync() As Task(Of Object)
     Return Nothing                             ' Noncompliant: Causes a NullReferenceException if awaited.
 End Function
 </pre>
+<h4>Compliant solution</h4>
 <pre data-diff-id="2" data-diff-type="compliant">
 Public Function GetFooAsync() As Task(Of Object)
     Return Task.FromResult(Of Object)(Nothing) ' Compliant: Method can be awaited.
@@ -47,6 +60,5 @@ End Function
   </li>
   <li> StackOverflow - Answer by Stephen Cleary for <a href="https://stackoverflow.com/a/27551261">Best way to handle null task inside async
   method?</a> </li>
-  <li> C# Language Design Proposal - <a href="https://github.com/dotnet/csharplang/issues/35">Champion "Null-conditional await"</a> </li>
 </ul>
 
