@@ -1,7 +1,47 @@
 <h2>Why is this an issue?</h2>
-<p>Cognitive Complexity is a measure of how hard the control flow of a method is to understand. Methods with high Cognitive Complexity will be
-difficult to maintain.</p>
+<p><a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> Complexity is a measure of how hard the control flow of
+a method is to understand.</p>
+<p>Methods with high Cognitive Complexity will be difficult to maintain.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+int Abs(int n) // Noncompliant: cognitive complexity = 5
+{
+    if (n &gt;= 0)   // +1
+    {
+        return n;
+    }
+    else          // +2, due to nesting
+    {
+        if (n == int.MinValue)  // +1
+        {
+            throw new ArgumentException("The absolute value of int.MinValue is outside of int boundaries");
+        }
+        else                    // +1
+        {
+            return -n;
+        }
+    }
+}
+</pre>
+<p>They should be refactored to have lower complexity:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+int Abs(int n) // Compliant: cognitive complexity = 3
+{
+    if (n == int.MinValue)  // +1
+    {
+        throw new ArgumentException("The absolute value of int.MinValue is outside of int boundaries");
+    }
+    else if (n &gt;= 0)        // +1
+    {
+        return n;
+    }
+    else                    // +1
+    {
+        return -n;
+    }
+}
+</pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> </li>
 </ul>

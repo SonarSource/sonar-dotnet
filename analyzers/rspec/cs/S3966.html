@@ -14,7 +14,8 @@ dispose of an object twice when possible.</p>
 var foo = new Disposable();
 foo.Dispose();
 foo.Dispose(); // Noncompliant
-
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
 using (var bar = new Disposable()) // Noncompliant
 {
     bar.Dispose();
@@ -24,7 +25,8 @@ using (var bar = new Disposable()) // Noncompliant
 <pre data-diff-id="1" data-diff-type="compliant">
 var foo = new Disposable();
 foo.Dispose();
-
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
 using (var bar = new Disposable()) // Compliant
 {
 

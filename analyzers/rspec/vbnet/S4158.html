@@ -16,7 +16,6 @@ End Sub
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
----
 Public Sub Method()
     Dim Values As List(Of String) = LoadValues()
     Values.Remove("bar")
@@ -25,6 +24,5 @@ Public Sub Method()
     For Each Value As String In Values
     Next
 End Sub
----
 </pre>
 

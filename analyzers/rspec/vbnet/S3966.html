@@ -14,7 +14,8 @@ dispose of an object twice when possible.</p>
 Dim foo As New Disposable()
 foo.Dispose()
 foo.Dispose() ' Noncompliant
-
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
 Using bar As New Disposable()  ' Noncompliant
     bar.Dispose()
 End Using
@@ -23,7 +24,8 @@ End Using
 <pre data-diff-id="1" data-diff-type="compliant">
 Dim foo As New Disposable()
 foo.Dispose()
-
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
 Using bar As New Disposable()  ' Compliant
 
 End Using

@@ -1,7 +1,34 @@
 <h2>Why is this an issue?</h2>
-<p>Cognitive Complexity is a measure of how hard the control flow of a function is to understand. Functions with high Cognitive Complexity will be
-difficult to maintain.</p>
+<p><a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> Complexity is a measure of how hard the control flow of
+a method is to understand.</p>
+<p>Methods with high Cognitive Complexity will be difficult to maintain.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Function Abs(ByVal n As Integer) As Integer ' Noncompliant: cognitive complexity = 5
+    If n &gt;= 0 Then    ' +1
+        Return n
+    Else              ' +2, due to nesting
+        If n = Integer.MinValue Then      ' +1
+            Throw New ArgumentException("The absolute value of int.MinValue is outside of int boundaries")
+        Else                              ' +1
+            Return -n
+        End If
+    End If
+End Function
+</pre>
+<p>They should be refactored to have lower complexity:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+Function Abs(ByVal n As Integer) As Integer  ' Compliant: cognitive complexity = 3
+    If n = Integer.MinValue Then    ' +1
+        Throw New ArgumentException("The absolute value of int.MinValue is outside of int boundaries")
+    Else If n &gt;= 0 Then             ' +1
+        Return n
+    Else                            ' +1
+        Return -n
+    End If
+End Function
+</pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> </li>
 </ul>

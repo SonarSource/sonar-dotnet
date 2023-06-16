@@ -2,9 +2,9 @@
 <p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.defaultvalueattribute">DefaultValue</a> does not make the compiler set
 the default value, as its name may suggest. What you probably wanted to use is <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.defaultparametervalueattribute">DefaultParameterValue</a>.</p>
-<p>The <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.defaultparametervalueattribute">DefaultValue</a> attribute
-from the <code>System.ComponentModel</code> namespace, is sometimes used to declare a member’s default value. This can be used, for instance, by the
-reset feature of a visual designer or by a code generator.</p>
+<p>The <a href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.defaultvalueattribute">DefaultValue</a> attribute from the
+<code>System.ComponentModel</code> namespace, is sometimes used to declare a member’s default value. This can be used, for instance, by the reset
+feature of a visual designer or by a code generator.</p>
 <pre>
 public void DoStuff([DefaultValue(4)] int i)
 {

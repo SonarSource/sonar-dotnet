@@ -1,14 +1,7 @@
 <h2>Why is this an issue?</h2>
-<p>Calling the <code>Not</code> operator twice does nothing: the second invocation undoes the first. Either this is a bug, if the operator was
-actually meant to be called once, or misleading if done on purpose.</p>
-<h3>Noncompliant code example</h3>
+<p>The repetition of the <code>Not</code> operator is usually a typo. The second operator invalidates the first one:</p>
 <pre>
 Dim b As Boolean = False
-Dim c As Boolean = Not Not b 'Noncompliant
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-Dim b As Boolean = False
-Dim c As Boolean = b 'Compliant
+Dim c As Boolean = Not Not b 'Noncompliant: equivalent to "b"
 </pre>
 
