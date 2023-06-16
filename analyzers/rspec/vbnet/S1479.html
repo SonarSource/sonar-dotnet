@@ -1,13 +1,20 @@
 <h2>Why is this an issue?</h2>
-<p>When <code>Select Case</code> statements have large sets of case clauses, it is usually an attempt to map two sets of data. A
-<code>Dictionary</code> should be used instead to make the code more readable and maintainable.</p>
-<h3>Noncompliant code example</h3>
-<p>With a "Maximum number of case" set to 4</p>
-<pre>
+<p>When <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/select-case-statement">Select Case</a> statements
+have large sets of case clauses, it is usually an attempt to map two sets of data. A <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a> should be used instead to make the code
+more readable and maintainable.</p>
+<h3>Exceptions</h3>
+<p>This rule ignores <code>Select Case</code> statements over <code>Enum</code> arguments and empty, fall-through cases.</p>
+<h2>How to fix it</h2>
+<p>Store all the cases apart from the <code>Case Else</code> one in a dictionary and try to get the matching value by calling the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.trygetvalue">TryGetValue</a> method.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Public Class TooManyCase
 
-    Public Function SelectCase(Ch As Char) As Integer
-        Select Case Ch
+    Public Function MapValues(Ch As Char) As Integer
+        Select Case Ch ' Noncompliant: 5 cases, "Case Else" excluded, more than maximum = 4
             Case "a"c
                 Return 1
             Case "b"c, "c"c
@@ -25,16 +32,22 @@ Public Class TooManyCase
 
 End Class
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 Public Class TooManyCase
 
     Private fMatching As New Dictionary(Of Char, Integer) From {
-            {"a"c, 1}, {"b"c, 2}, {"c"c, 2}, {"d"c, 3},
-            {"e"c, 4}, {"f"c, 5}, {"g"c, 5}, {"h"c, 5},
+            { "a"c, 1 },
+            { "b"c, 2 },
+            { "c"c, 2 },
+            { "d"c, 3 },
+            { "e"c, 4 },
+            { "f"c, 5 },
+            { "g"c, 5 },
+            { "h"c, 5 },
         }
 
-    Public Function SelectCase(Ch As Char) As Integer
+    Public Function MapValues(Ch As Char) As Integer
         Dim Value As Integer
         If fMatching.TryGetValue(Ch, Value) Then
             Return Value
@@ -45,6 +58,13 @@ Public Class TooManyCase
 
 End Class
 </pre>
-<h3>Exceptions</h3>
-<p>This rule ignores <code>Select Case</code>s over <code>Enum</code>s and empty, fall-through cases.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt; Class</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.trygetvalue">Dictionary&lt;TKey,TValue&gt;.TryGetValue(TKey, TValue) Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/select-case-statement">Select…​Case Statement</a>
+  </li>
+</ul>
 
