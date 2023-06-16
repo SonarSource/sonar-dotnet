@@ -125,9 +125,17 @@ public sealed record ProgramState : IEquatable<ProgramState>
 
     public IOperation ResolveCapture(IOperation operation) =>
         operation?.Kind == OperationKindEx.FlowCaptureReference
-        && this[IFlowCaptureReferenceOperationWrapper.FromOperation(operation).Id] is { } captured
+        && this[operation.ToFlowCaptureReference().Id] is { } captured
             ? captured
             : operation;
+
+    public IOperation ResolveCaptureAndUnwrapConversion(IOperation operation) =>
+        operation.Kind switch
+        {
+            OperationKindEx.FlowCaptureReference => CaptureOperation.ContainsKey(operation.ToFlowCaptureReference().Id) ? ResolveCaptureAndUnwrapConversion(ResolveCapture(operation)) : operation,
+            OperationKindEx.Conversion => ResolveCaptureAndUnwrapConversion(operation.UnwrapConversion()),
+            _ => operation
+        };
 
     public ProgramState RemoveSymbols(Func<ISymbol, bool> remove) =>
         this with { SymbolValue = SymbolValue.Where(kv => PreservedSymbols.Contains(kv.Key) || !remove(kv.Key)).ToImmutableDictionary() };
