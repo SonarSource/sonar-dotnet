@@ -498,7 +498,7 @@ class AdvancedTests
         array5.Clone(); // Compliant
     }
 
-    public void LearnConditions_Size(bool condition)
+    public void LearnConditions_Size(bool condition, List<int> arg)
     {
         List<int> isNull = null;
         var empty = new List<int>();
@@ -523,6 +523,15 @@ class AdvancedTests
             empty.Clear();  // Compliant, unreachable
         }
 
+        if (arg.Count < 0)
+        {
+            empty.Clear();  // Compliant, unreachable
+        }
+        else
+        {
+            empty.Clear();  // Noncompliant
+        }
+
         if (empty.Count == 0)
         {
             empty.Clear();  // Noncompliant
@@ -538,7 +547,25 @@ class AdvancedTests
         }
         else
         {
-            empty.Clear();  // Noncompliant FP, Should be Compliant, unreachable
+            empty.Clear();  // Compliant, unreachable
+        }
+
+        if (empty.Count(x => condition) == 0)
+        {
+            empty.Clear();  // Noncompliant
+        }
+        else
+        {
+            empty.Clear();  // Compliant, unreachable
+        }
+
+        if (notEmpty.Count(x => condition) == 0)
+        {
+            empty.Clear();  // Noncompliant
+        }
+        else
+        {
+            empty.Clear();  // Noncompliant
         }
 
         if (Enumerable.Count(empty) == 0)
@@ -547,10 +574,10 @@ class AdvancedTests
         }
         else
         {
-            empty.Clear();  // Noncompliant FP, Should be Compliant, unreachable
+            empty.Clear();  // Compliant, unreachable
         }
 
-        notEmpty.Clear(); // Compliant, prevents LVA from throwing notEmpty away during reference capture
+        notEmpty.Clear();   // Compliant, prevents LVA from throwing notEmpty away during reference capture
     }
 
     public void LearnConditions_Size_Array(bool condition)
@@ -583,10 +610,10 @@ class AdvancedTests
         }
         else
         {
-            empty.Clone();  // Noncompliant FP, Should be Compliant, unreachable
+            empty.Clone();  // Compliant, unreachable
         }
 
-        notEmpty.Clone(); // Compliant, prevents LVA from throwing notEmpty away during reference capture
+        notEmpty.Clone();   // Compliant, prevents LVA from throwing notEmpty away during reference capture
     }
 
     void Foo(IEnumerable<int> items) { }
