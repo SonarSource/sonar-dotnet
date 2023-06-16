@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class StringOffsetMethods : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4635";
-        private const string MessageFormat = "Replace '{0}' with the overload that accepts an offset parameter.";
+        private const string MessageFormat = "Replace '{0}' with the overload that accepts a startIndex parameter.";
 
         private static readonly DiagnosticDescriptor rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
