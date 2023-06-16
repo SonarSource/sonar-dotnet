@@ -219,6 +219,16 @@ Public Class CollectionTests
         Else
             Empty.Clear()  ' Compliant, unreachable
         End If
+        If DirectCast(Empty, IEnumerable(Of Integer)).Count(Function(X) Condition) = 0 Then
+            Empty.Clear()   ' Noncompliant
+        Else
+            Empty.Clear()   ' Compliant, unreachable
+        End If
+        If DirectCast(NotEmpty, IEnumerable(Of Integer)).Count(Function(X) Condition) = 0 Then
+            Empty.Clear()   ' Noncompliant
+        Else
+            Empty.Clear()   ' Noncompliant
+        End If
         If Enumerable.Count(Empty) = 0 Then
             Empty.Clear()  ' Noncompliant
         Else

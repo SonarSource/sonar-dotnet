@@ -498,7 +498,7 @@ class AdvancedTests
         array5.Clone(); // Compliant
     }
 
-    public void LearnConditions_Size(bool condition)
+    public void LearnConditions_Size(bool condition, List<int> arg)
     {
         List<int> isNull = null;
         var empty = new List<int>();
@@ -521,6 +521,15 @@ class AdvancedTests
         else
         {
             empty.Clear();  // Compliant, unreachable
+        }
+
+        if (arg.Count < 0)
+        {
+            empty.Clear();  // Compliant, unreachable
+        }
+        else
+        {
+            empty.Clear();  // Noncompliant
         }
 
         if (empty.Count == 0)
@@ -552,7 +561,7 @@ class AdvancedTests
 
         if (notEmpty.Count(x => condition) == 0)
         {
-            empty.Clear();  // FN
+            empty.Clear();  // Noncompliant
         }
         else
         {

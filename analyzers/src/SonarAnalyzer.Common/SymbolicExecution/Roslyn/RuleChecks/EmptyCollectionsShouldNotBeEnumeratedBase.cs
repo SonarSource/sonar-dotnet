@@ -151,11 +151,16 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         }
     }
 
-    private ProgramState ProcessInvocation(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-        invocation.TargetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
-        && SizeConstraint(context.State, invocation.Instance ?? invocation.Arguments[0].ToArgument().Value) is { } constraint
-            ? context.SetOperationConstraint(constraint)
-            : ProcessMethod(context, invocation.TargetMethod, invocation.Instance);
+    private ProgramState ProcessInvocation(SymbolicContext context, IInvocationOperationWrapper invocation)
+    {
+        return invocation.TargetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
+            && SizeConstraint(context.State, invocation.Instance ?? invocation.Arguments[0].ToArgument().Value, HasFilteringPredicate()) is { } constraint
+                ? context.SetOperationConstraint(constraint)
+                : ProcessMethod(context, invocation.TargetMethod, invocation.Instance);
+
+        bool HasFilteringPredicate() =>
+            invocation.Arguments.Any(x => x.ToArgument().Parameter.Type.Is(KnownType.System_Func_T_TResult));
+    }
 
     private ProgramState ProcessMethod(SymbolicContext context, IMethodSymbol method, IOperation instance)
     {
@@ -196,15 +201,19 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             ? SizeConstraint(state, propertyReference.Instance)
             : null;
 
-    private static NumberConstraint SizeConstraint(ProgramState state, IOperation instance)
+    private static NumberConstraint SizeConstraint(ProgramState state, IOperation instance, bool hasFilteringPredicate = false)
     {
         if (state.ResolveCapture(instance).TrackedSymbol() is { } symbol && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
         {
-            return collection == CollectionConstraint.Empty ? NumberConstraint.From(0) : NumberConstraint.From(1, null);
+            if (collection == CollectionConstraint.Empty)
+            {
+                return NumberConstraint.From(0);
+            }
+            else if (!hasFilteringPredicate)    // nonEmpty.Count(predicate) can be Empty or NotEmpty
+            {
+                return NumberConstraint.From(1, null);
+            }
         }
-        else
-        {
-            return null;
-        }
+        return NumberConstraint.From(0, null);
     }
 }
