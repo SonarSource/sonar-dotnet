@@ -529,7 +529,7 @@ class AdvancedTests
         }
         else
         {
-            empty.Count();  // Compliant, unreachable
+            empty.Clear();  // Compliant, unreachable
         }
 
         if (empty.Count() == 0)
