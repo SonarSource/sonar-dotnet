@@ -51,7 +51,7 @@ Class Program
 
     Public Sub DisposedTwice_MemberAccess(d As IDisposable)
         d.Dispose
-        d.Dispose ' FN
+        d.Dispose ' Noncompliant
     End Sub
 
     Public Sub DisposedTwice_Alias()
