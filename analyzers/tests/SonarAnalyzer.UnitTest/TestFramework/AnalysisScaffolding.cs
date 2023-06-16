@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
@@ -31,7 +30,7 @@ namespace SonarAnalyzer.UnitTest
     internal static class AnalysisScaffolding
     {
         public static SonarAnalysisContext CreateSonarAnalysisContext() =>
-            new(Mock.Of<RoslynAnalysisContext>(), Enumerable.Empty<DiagnosticDescriptor>());
+            new(Mock.Of<RoslynAnalysisContext>(), ImmutableArray<DiagnosticDescriptor>.Empty);
 
         public static AnalyzerOptions CreateOptions() =>
             new(ImmutableArray<AdditionalText>.Empty);

@@ -90,14 +90,8 @@ public partial class SonarAnalysisContextTest
         });
 
     [TestMethod]
-    public void Constructor_Null()
-    {
-        var supportedDiag = Enumerable.Empty<DiagnosticDescriptor>();
-        var roslynContext = Mock.Of<RoslynAnalysisContext>();
-
-        ((Func<SonarAnalysisContext>)(() => new(null, supportedDiag))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("analysisContext");
-        ((Func<SonarAnalysisContext>)(() => new(roslynContext, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("supportedDiagnostics");
-    }
+    public void Constructor_Null() =>
+        ((Func<SonarAnalysisContext>)(() => new(null, default))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("analysisContext");
 
     [TestMethod]
     public void WhenShouldAnalysisBeDisabledReturnsTrue_NoIssueReported()
