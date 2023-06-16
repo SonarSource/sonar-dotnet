@@ -129,7 +129,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         {
             return ProcessInvocation(context, invocation);
         }
-        else if (operation.AsMethodReference() is { } methodReference)
+        else if (operation.AsMethodReference() is { Instance: not null } methodReference)
         {
             return ProcessAddMethod(context.State, methodReference.Method, methodReference.Instance);
         }
@@ -184,7 +184,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
 
     private static ProgramState ProcessAddMethod(ProgramState state, IMethodSymbol method, IOperation instance)
     {
-        if (instance is not null && AddMethods.Contains(method.Name))
+        if (AddMethods.Contains(method.Name))
         {
             state = state.SetOperationConstraint(instance, CollectionConstraint.NotEmpty);
             if (instance.TrackedSymbol() is { } symbol)
