@@ -50,6 +50,6 @@ public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ObjectsShouldNotBeD
         }
 
         public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
-            Result = node.HasExactlyNArguments(0) || node.ChildNodes().Any(x => x.IsKind(SyntaxKind.SimpleMemberAccessExpression));
+            Result = node.HasExactlyNArguments(0) || node.ArgumentList is null;
     }
 }
