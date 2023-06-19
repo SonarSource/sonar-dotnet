@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using System.Security;
 
 namespace Tests.Diagnostics
