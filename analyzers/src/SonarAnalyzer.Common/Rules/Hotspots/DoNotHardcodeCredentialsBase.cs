@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using System.Security;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using SonarAnalyzer.Json;
@@ -105,6 +106,10 @@ namespace SonarAnalyzer.Rules
                pa.MatchSetter(),
                pa.AssignedValueIsConstant(),
                pa.MatchProperty(new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
+
+            var inv = Language.Tracker.Invocation;
+            inv.Track(input, new object[] { MessageHardcodedPassword },
+                inv.MatchMethod(new MemberDescriptor(KnownType.System_Security_SecureString, nameof(SecureString.AppendChar))));
 
             InitializeActions(context);
             context.RegisterCompilationAction(CheckWebConfig);
