@@ -48,6 +48,8 @@ namespace SonarAnalyzer.Rules
                 KnownType.MySql_Data_MySqlClient_MySqlDataAdapter,
                 KnownType.MySql_Data_MySqlClient_MySqlScript,
                 KnownType.Microsoft_Data_Sqlite_SqliteCommand,
+                KnownType.Mono_Data_Sqlite_SqliteCommand,
+                KnownType.Mono_Data_Sqlite_SqliteDataAdapter,
                 KnownType.Microsoft_EntityFrameworkCore_RawSqlString,
                 KnownType.Dapper_CommandDefinition
             };
