@@ -1,0 +1,17 @@
+{
+  "title": "Use \"DateOnly\" or \"TimeOnly\" instead of setting just date or time for a \"DateTime\" struct",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "pitfall"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6576",
+  "sqKey": "S6576",
+  "scope": "All",
+  "quickfix": "infeasible"
+}

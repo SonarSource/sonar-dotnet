@@ -1,0 +1,40 @@
+<h2>Why is this an issue?</h2>   NET 6 introduced two new structs,
+<code>DateOnly</code> and
+<code>TimeOnly</code>. Before the existence of these types, if users wanted to represent only a date, they had to use the
+<code>DateTime</code> struct, set only the date-related properties and leave the time-related properties with the default values. The
+<code>DateTime</code> structure is pointing by default to midnight of the provided date and observing such an instance of
+<code>DateTime</code> creates confusion about its intention.
+<p>The same applies to the case of time-only usage, with the only difference being that there is no constructor that takes only time-related
+properties so in most cases developers set the date to January the first of year 1.</p>
+<p>This rule will raise only if the <code>DateTime</code> object is not modified later in the same code block, as this scenario can be valid if some
+other types are converted to <code>DateTime</code> by aritmetic operations.</p>
+<h3>What is the potential impact?</h3>
+<p>Creating date-only or time-only <code>DateTime</code> instances may create confusion as the object will point to a time and a date anyway. At later
+consumption of the instance, one will not be able to tell if the intention was to use only the date, only the time or both. Additionally the
+<code>DateTime</code> structure may roll into the previous or next day if it’s offset by a time zone. <code>DateOnly</code> can’t be offset by a time
+zone, and it always represents the date that was set.</p>
+<h2>How to fix it</h2>
+<p>Instead of <code>DateTime</code>, use <code>DateOnly</code> if you need only the date or <code>TimeOnly</code> if you need only the time.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Private Sub CreateNewDateAndTime()
+    Dim date = New DateTime(1994, 7, 5)
+    Dim time = New DateTime(1, 1, 1, 16, 23, 42)
+End Sub
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+Private Sub CreateNewDateAndTime()
+    Dim date = New DateOnly(1994, 7, 5)
+    Dim time = New TimeOnly(16, 23, 42)
+End Sub
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime">DateTime documentation</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly">DateOnly documentation</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeonly">TimeOnly documentation</a> </li>
+</ul>
+
