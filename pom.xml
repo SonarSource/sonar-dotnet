@@ -72,6 +72,8 @@
     <junit.version>4.13.2</junit.version>
     <logback.classic.version>1.4.8</logback.classic.version>
     <mockito.version>5.3.1</mockito.version>
+    <stax2.api.version>4.2.1</stax2.api.version>
+    <staxmate.version>2.0.1</staxmate.version>
   </properties>
 
   <profiles>

@@ -112,7 +112,7 @@
     <dependency>
       <groupId>org.codehaus.woodstox</groupId>
       <artifactId>stax2-api</artifactId>
-      <version>4.2.1</version>
+      <version>${stax2.api.version}</version>
       <exclusions>
         <exclusion>
           <groupId>stax</groupId>
@@ -124,7 +124,7 @@
     <dependency>
       <groupId>org.codehaus.staxmate</groupId>
       <artifactId>staxmate</artifactId>
-      <version>2.0.1</version>
+      <version>${staxmate.version}</version>
       <exclusions>
         <exclusion>
           <groupId>org.codehaus.woodstox</groupId>
