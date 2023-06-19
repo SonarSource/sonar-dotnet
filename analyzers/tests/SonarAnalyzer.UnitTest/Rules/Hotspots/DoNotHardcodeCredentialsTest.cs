@@ -40,6 +40,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotHardcodeCredentials_CSharp8_DefaultValues() =>
             builderCS.AddPaths("DoNotHardcodeCredentials.DefaultValues.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
+        [TestMethod]
+        public void DoNotHardcodeCredentials_SecureString() =>
+            builderCS.AddPaths("DoNotHardcodeCredentials.SecureString.cs").Verify();
+
 #if NET
 
         [TestMethod]
