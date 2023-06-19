@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Drawing;
+using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
+
 namespace SonarAnalyzer.Extensions
 {
     internal static class InvocationExpressionSyntaxExtensions
@@ -30,9 +33,9 @@ namespace SonarAnalyzer.Extensions
             invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
 
         internal static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count) =>
-            count == 0
-                ? invocation?.ArgumentList == null || invocation.ArgumentList.Arguments.Count == 0
-                : invocation?.ArgumentList != null && invocation.ArgumentList.Arguments.Count == count;
+            invocation?.ArgumentList == null
+            ? count == 0
+            : invocation.ArgumentList.Arguments.Count == count;
 
         internal static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
         {
