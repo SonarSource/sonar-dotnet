@@ -27,7 +27,13 @@ public class TemporalTypesShouldNotBeUsedAsPrimaryKeysTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<TemporalTypesShouldNotBeUsedAsPrimaryKeys>();
 
+#if NET
     [TestMethod]
     public void TemporalTypesShouldNotBeUsedAsPrimaryKeys_CS() =>
-        builder.AddPaths("TemporalTypesShouldNotBeUsedAsPrimaryKeys.cs").Verify();
+        builder
+            .AddPaths("TemporalTypesShouldNotBeUsedAsPrimaryKeys.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"))
+            .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
+            .Verify();
+#endif
 }
