@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Permissions;
 using DateTimeAlias = System.DateTime;
 using KeyAttributeAlias = System.ComponentModel.DataAnnotations.KeyAttribute;
 
@@ -113,6 +112,12 @@ class Attributes
             public DateTime AuthorFK { get; set; }      // Compliant - only raise where the key is declared
         }
     }
+}
+
+class NotProperties
+{
+    public DateTime id;                                 // Compliant -
+    public DateTime Id() => DateTime.Now;
 }
 
 class NonClassTypes

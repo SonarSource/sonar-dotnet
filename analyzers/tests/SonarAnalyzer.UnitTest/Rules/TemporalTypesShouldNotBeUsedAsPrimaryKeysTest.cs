@@ -29,11 +29,20 @@ public class TemporalTypesShouldNotBeUsedAsPrimaryKeysTest
 
 #if NET
     [TestMethod]
-    public void TemporalTypesShouldNotBeUsedAsPrimaryKeys_CS() =>
+    public void TemporalTypesShouldNotBeUsedAsPrimaryKeys_CSharp() =>
         builder
             .AddPaths("TemporalTypesShouldNotBeUsedAsPrimaryKeys.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"))
             .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
+            .Verify();
+
+    [TestMethod]
+    public void TemporalTypesShouldNotBeUsedAsPrimaryKeys_CSharp9() =>
+        builder
+            .AddPaths("TemporalTypesShouldNotBeUsedAsPrimaryKeys.CSharp9.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"))
+            .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
             .Verify();
 #endif
 }

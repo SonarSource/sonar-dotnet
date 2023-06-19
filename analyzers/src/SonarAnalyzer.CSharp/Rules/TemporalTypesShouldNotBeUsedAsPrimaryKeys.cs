@@ -41,13 +41,13 @@ public sealed class TemporalTypesShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticA
         {
             var classDeclaration = (ClassDeclarationSyntax)c.Node;
             var className = classDeclaration.Identifier.ValueText;
-            var idProperties = classDeclaration.Members
+            var keyProperties = classDeclaration.Members
                 .OfType<PropertyDeclarationSyntax>()
                 .Where(x => IsKeyProperty(x, className, c.SemanticModel) && IsTemporalType(x, c.SemanticModel));
 
-            foreach (var idProperty in idProperties)
+            foreach (var keyProperty in keyProperties)
             {
-                c.ReportIssue(Diagnostic.Create(Rule, idProperty.Type.GetLocation()));
+                c.ReportIssue(Diagnostic.Create(Rule, keyProperty.Type.GetLocation()));
             }
         },
             SyntaxKind.ClassDeclaration);
