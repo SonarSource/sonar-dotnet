@@ -24,20 +24,47 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class TemporalTypesShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S3363";
-    private const string MessageFormat = "FIXME";
+    private const string MessageFormat = "Temporal types should not be used as primary keys";
 
+    private static readonly KnownType[] TemporalTypes = new[]
+    {
+        KnownType.System_DateTime,
+        KnownType.System_DateTimeOffset,
+        KnownType.System_TimeSpan
+    };
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
+        {
+            var classDeclaration = (ClassDeclarationSyntax)c.Node;
+            var className = classDeclaration.Identifier.ValueText;
+            var idProperties = classDeclaration.Members
+                .OfType<PropertyDeclarationSyntax>()
+                .Where(x => IsKeyProperty(x, className, c.SemanticModel) && IsTemporalType(x, c.SemanticModel));
+
+            foreach (var idProperty in idProperties)
             {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+                c.ReportIssue(Diagnostic.Create(Rule, idProperty.Type.GetLocation()));
+            }
+        },
+            SyntaxKind.ClassDeclaration);
+
+    private static bool IsKeyProperty(PropertyDeclarationSyntax property, string className, SemanticModel semanticModel)
+    {
+        var propertyName = property.Identifier.ValueText;
+        return propertyName.Equals("Id", StringComparison.InvariantCultureIgnoreCase)
+            || propertyName.Equals($"{className}Id", StringComparison.InvariantCultureIgnoreCase)
+            || HasKeyAttribute(property, semanticModel);
+    }
+
+    private static bool HasKeyAttribute(PropertyDeclarationSyntax property, SemanticModel semanticModel) =>
+        property.AttributeLists
+            .SelectMany(x => x.Attributes)
+            .Any(x => semanticModel.GetSymbolInfo(x).Symbol.GetSymbolType().Is(KnownType.System_ComponentModel_DataAnnotations_KeyAttribute));
+
+    private static bool IsTemporalType(PropertyDeclarationSyntax property, SemanticModel model) =>
+        model.GetDeclaredSymbol(property).Type.IsAny(TemporalTypes);
 }

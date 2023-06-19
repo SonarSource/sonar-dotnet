@@ -237,6 +237,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_ComponentModel_Composition_ExportAttribute = new("System.ComponentModel.Composition.ExportAttribute");
         public static readonly KnownType System_ComponentModel_Composition_InheritedExportAttribute = new("System.ComponentModel.Composition.InheritedExportAttribute");
         public static readonly KnownType System_ComponentModel_Composition_PartCreationPolicyAttribute = new("System.ComponentModel.Composition.PartCreationPolicyAttribute");
+        public static readonly KnownType System_ComponentModel_DataAnnotations_KeyAttribute = new("System.ComponentModel.DataAnnotations.KeyAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_RegularExpressionAttribute = new("System.ComponentModel.DataAnnotations.RegularExpressionAttribute");
         public static readonly KnownType System_ComponentModel_DefaultValueAttribute = new("System.ComponentModel.DefaultValueAttribute");
         public static readonly KnownType System_ComponentModel_EditorBrowsableAttribute = new("System.ComponentModel.EditorBrowsableAttribute");
