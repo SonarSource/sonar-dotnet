@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Drawing;
-using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
-
 namespace SonarAnalyzer.Extensions
 {
     internal static class InvocationExpressionSyntaxExtensions
