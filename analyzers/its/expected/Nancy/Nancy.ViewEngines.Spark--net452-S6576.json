@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6576",
+"message":  "Use "DateOnly" instead of just setting the date for a "DateTime" struct",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  49,
+"endLine":  187,
+"endColumn":  80
+}
+}
+}
+]
+}

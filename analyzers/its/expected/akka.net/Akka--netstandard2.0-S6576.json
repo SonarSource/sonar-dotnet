@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6576",
+"message":  "Use "DateOnly" instead of just setting the date for a "DateTime" struct",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Extensions\DateTimeExtensions.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  38,
+"endLine":  22,
+"endColumn":  62
+}
+}
+}
+]
+}

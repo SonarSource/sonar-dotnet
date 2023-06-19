@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6576",
+"message":  "Use "DateOnly" instead of just setting the date for a "DateTime" struct",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  27,
+"endLine":  39,
+"endColumn":  58
+}
+}
+}
+]
+}
