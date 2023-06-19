@@ -20,9 +20,8 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UseDateOnlyTimeOnlyBase<TSyntaxKind, TArgumentNode, TLiteralExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UseDateOnlyTimeOnlyBase<TSyntaxKind, TLiteralExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
-    where TArgumentNode : SyntaxNode
     where TLiteralExpression : SyntaxNode
 {
     private const string DiagnosticId = "S6576";
@@ -52,8 +51,6 @@ public abstract class UseDateOnlyTimeOnlyBase<TSyntaxKind, TArgumentNode, TLiter
     private bool IsCandidateCtor(SyntaxNode ctorNode, SemanticModel model, out string type, out string dateOrTime)
     {
         var argumentCount = Language.Syntax.ArgumentExpressions(ctorNode).Count();
-        type = string.Empty;
-        dateOrTime = string.Empty;
 
         if (argumentCount is 3 && Language.Syntax.ArgumentExpressions(ctorNode).All(x => x is TLiteralExpression))
         {
@@ -72,17 +69,20 @@ public abstract class UseDateOnlyTimeOnlyBase<TSyntaxKind, TArgumentNode, TLiter
                 return true;
             }
         }
+
+        type = string.Empty;
+        dateOrTime = string.Empty;
         return false;
-
-        bool IsYearMonthDayEqualsOne(SyntaxNode node, IMethodSymbol methodSymbol) =>
-            Language.MethodParameterLookup(node, methodSymbol) is var lookup
-            && IsParameterEqualOne("year", lookup)
-            && IsParameterEqualOne("month", lookup)
-            && IsParameterEqualOne("day", lookup);
-
-        bool IsParameterEqualOne(string parameterName, IMethodParameterLookup lookup) =>
-            lookup.TryGetSyntax(parameterName, out var expressions)
-            && expressions[0] is TLiteralExpression literal
-            && IsEqualToOne(literal);
     }
+
+    private bool IsYearMonthDayEqualsOne(SyntaxNode node, IMethodSymbol methodSymbol) =>
+        Language.MethodParameterLookup(node, methodSymbol) is var lookup
+        && IsParameterEqualOne("year", lookup)
+        && IsParameterEqualOne("month", lookup)
+        && IsParameterEqualOne("day", lookup);
+
+    private bool IsParameterEqualOne(string parameterName, IMethodParameterLookup lookup) =>
+        lookup.TryGetSyntax(parameterName, out var expressions)
+        && expressions[0] is TLiteralExpression literal
+        && IsEqualToOne(literal);
 }

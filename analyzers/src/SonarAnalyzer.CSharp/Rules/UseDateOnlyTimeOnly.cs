@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UseDateOnlyTimeOnly : UseDateOnlyTimeOnlyBase<SyntaxKind, ArgumentSyntax, LiteralExpressionSyntax>
+public sealed class UseDateOnlyTimeOnly : UseDateOnlyTimeOnlyBase<SyntaxKind, LiteralExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 

@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class UseDateOnlyTimeOnly : UseDateOnlyTimeOnlyBase<SyntaxKind, ArgumentSyntax, LiteralExpressionSyntax>
+public sealed class UseDateOnlyTimeOnly : UseDateOnlyTimeOnlyBase<SyntaxKind, LiteralExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
