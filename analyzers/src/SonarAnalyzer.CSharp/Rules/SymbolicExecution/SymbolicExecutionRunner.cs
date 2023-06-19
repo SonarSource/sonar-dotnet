@@ -51,8 +51,8 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
         .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess, SonarRules.EmptyNullableValueAccess>())
         .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull, SonarRules.PublicMethodArgumentsShouldBeCheckedForNull>())
-        .Add(ObjectsShouldNotBeDisposedMoreThanOnce.S3966, CreateFactory<ObjectsShouldNotBeDisposedMoreThanOnce, SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce>())
         .Add(CalculationsShouldNotOverflow.S3949, CreateFactory<CalculationsShouldNotOverflow>())
+        .Add(ObjectsShouldNotBeDisposedMoreThanOnce.S3966, CreateFactory<ObjectsShouldNotBeDisposedMoreThanOnce, SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce>())
         .Add(EmptyCollectionsShouldNotBeEnumerated.S4158, CreateFactory<EmptyCollectionsShouldNotBeEnumerated, SonarRules.EmptyCollectionsShouldNotBeEnumerated>());
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
