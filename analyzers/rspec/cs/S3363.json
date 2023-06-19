@@ -1,0 +1,15 @@
+{
+  "title": "\"DateTime\" and \"DateTimeOffset\" types should not be used as primary keys",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-3363",
+  "sqKey": "S3363",
+  "scope": "Main",
+  "quickfix": "infeasible"
+}
