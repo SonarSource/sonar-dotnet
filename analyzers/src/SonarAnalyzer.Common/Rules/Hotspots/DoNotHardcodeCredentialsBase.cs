@@ -49,6 +49,8 @@ namespace SonarAnalyzer.Rules
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract void InitializeActions(SonarParametrizedAnalysisContext context);
 
+        protected abstract bool IsSecureStringAppendCharFromConstant(SyntaxNode argumentNode, SemanticModel model);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("credentialWords", PropertyType.String, "Comma separated list of words identifying potential credentials", DefaultCredentialWords)]
@@ -109,7 +111,9 @@ namespace SonarAnalyzer.Rules
 
             var inv = Language.Tracker.Invocation;
             inv.Track(input, new object[] { MessageHardcodedPassword },
-                inv.MatchMethod(new MemberDescriptor(KnownType.System_Security_SecureString, nameof(SecureString.AppendChar))));
+                inv.MethodNameIs(nameof(SecureString.AppendChar)),
+                inv.MatchMethod(new MemberDescriptor(KnownType.System_Security_SecureString, nameof(SecureString.AppendChar))),
+                inv.ArgumentAtIndexIs(0, IsSecureStringAppendCharFromConstant));
 
             InitializeActions(context);
             context.RegisterCompilationAction(CheckWebConfig);

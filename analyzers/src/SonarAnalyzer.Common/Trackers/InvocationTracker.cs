@@ -25,6 +25,7 @@ namespace SonarAnalyzer.Helpers.Trackers
     {
         public abstract Condition ArgumentAtIndexIsStringConstant(int index);
         public abstract Condition ArgumentAtIndexIsAny(int index, params string[] values);
+        public abstract Condition ArgumentAtIndexIs(int index, Func<SyntaxNode, SemanticModel, bool> predicate);
         public abstract Condition MatchProperty(MemberDescriptor member);
         internal abstract object ConstArgumentForParameter(InvocationContext context, string parameterName);
         protected abstract SyntaxToken? ExpectedExpressionIdentifier(SyntaxNode expression);

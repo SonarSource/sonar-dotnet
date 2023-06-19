@@ -63,6 +63,15 @@ namespace SonarAnalyzer.Rules.CSharp
                         SyntaxKind.InvocationExpression);
                 });
 
+        protected override bool IsSecureStringAppendCharFromConstant(SyntaxNode argumentNode, SemanticModel model) =>
+            argumentNode is ArgumentSyntax { Expression: { } argumentExpression }
+            && argumentExpression switch
+            {
+                ElementAccessExpressionSyntax { Expression: { } accessed } => model.GetConstantValue(accessed) is { HasValue: true, Value: string },
+                LiteralExpressionSyntax { RawKind: (int)SyntaxKind.CharacterLiteralExpression } => true,
+                _ => false,
+            };
+
         private sealed class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
         {
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
