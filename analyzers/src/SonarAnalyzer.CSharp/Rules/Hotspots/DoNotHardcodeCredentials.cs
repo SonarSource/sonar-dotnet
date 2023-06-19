@@ -67,8 +67,13 @@ namespace SonarAnalyzer.Rules.CSharp
             argumentNode is ArgumentSyntax { Expression: { } argumentExpression }
             && argumentExpression switch
             {
-                ElementAccessExpressionSyntax { Expression: { } accessed } => model.GetConstantValue(accessed) is { HasValue: true, Value: string },
-                LiteralExpressionSyntax { RawKind: (int)SyntaxKind.CharacterLiteralExpression } => true,
+                ElementAccessExpressionSyntax { Expression: { } accessed } => model.GetConstantValue(accessed) is { HasValue: true, Value: string }, // AppendChar("AP@ssw0rd"[i])
+                LiteralExpressionSyntax { RawKind: (int)SyntaxKind.CharacterLiteralExpression } => true, // AppendChar('P')
+                IdentifierNameSyntax identifier when model.GetSymbolInfo(identifier) is { Symbol: ILocalSymbol { } local } // foreach (var c in someConstString) AppendChar(c)
+                    && local.DeclaringSyntaxReferences.Length == 1
+                    && local.DeclaringSyntaxReferences[0].GetSyntax() is { } declaration
+                    && declaration is ForEachStatementSyntax { Expression: { } forEachExpression }
+                    && model.GetConstantValue(forEachExpression) is { HasValue: true, Value: string } => true,
                 _ => false,
             };
 
