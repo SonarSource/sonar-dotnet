@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#nullable enable
-
 using System.Collections;
 using System.Collections.ObjectModel;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -206,12 +204,12 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         return state;
     }
 
-    private static CollectionConstraint? CollectionCreationConstraint(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
+    private static CollectionConstraint CollectionCreationConstraint(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
         objectCreation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable)) is { } collectionArgument
             ? state[collectionArgument]?.Constraint<CollectionConstraint>()
             : CollectionConstraint.Empty;
 
-    private static NumberConstraint? PropertyReferenceConstraint(ProgramState state, IPropertyReferenceOperationWrapper propertyReference) =>
+    private static NumberConstraint PropertyReferenceConstraint(ProgramState state, IPropertyReferenceOperationWrapper propertyReference) =>
         propertyReference.Property.Name is nameof(Array.Length) or nameof(List<int>.Count)
             ? SizeConstraint(state, propertyReference.Instance)
             : null;
