@@ -72,7 +72,16 @@ Namespace Tests.Diagnostics
             Dim bytes = New Byte() {80, 97, 115, 115, 119, 111, 114, 100}
             Using securePwd As SecureString = New SecureString()
                 For i As Integer = 0 To bytes.Length - 1
-                    securePwd.AppendChar(Convert.ToChar(bytes(i))) ' Compliant FN.
+                    securePwd.AppendChar(Convert.ToChar(bytes(i))) ' FN.
+                Next
+            End Using
+        End Sub
+
+        Public Sub FromCharArray()
+            Dim chars = New Char() {"P"c, "a"c, "s"c, "s"c, "w"c, "o"c, "r"c, "d"c}
+            Using securePwd As SecureString = New SecureString()
+                For i As Integer = 0 To chars.Length - 1
+                    securePwd.AppendChar(chars(i)) ' FN.
                 Next
             End Using
         End Sub

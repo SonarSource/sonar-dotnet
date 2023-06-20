@@ -104,7 +104,19 @@ namespace Tests.Diagnostics
             {
                 for (int i = 0; i < bytes.Length; i++)
                 {
-                    securePwd.AppendChar(Convert.ToChar(bytes[i])); // Compliant FN.
+                    securePwd.AppendChar(Convert.ToChar(bytes[i])); // FN.
+                }
+            }
+        }
+
+        public void FromCharArray()
+        {
+            var chars = new char[] { 'P', 'a', 's', 's', 'w', 'o', 'r', 'd' };
+            using (SecureString securePwd = new SecureString())
+            {
+                for (int i = 0; i < chars.Length; i++)
+                {
+                    securePwd.AppendChar(chars[i]); // FN.
                 }
             }
         }
