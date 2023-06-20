@@ -86,9 +86,9 @@
       },
       "MSTest.TestAdapter": {
         "type": "Direct",
-        "requested": "[3.0.2, )",
-        "resolved": "3.0.2",
-        "contentHash": "K1hhtevCzbogylmAnCluV/M1/Ajr5EKfxWq3nv+iYxt+gHLN4gSqT6B3tPnNqUbE4aWT1aUHagcRMnARt45NzQ=="
+        "requested": "[3.0.4, )",
+        "resolved": "3.0.4",
+        "contentHash": "18THEGVcU4fbAOZWvRtEyvQCnZ/o+3LFAiFbAkWYh63GC5TmHoJ10IUiF9L02SMmbLbWpH1/PxvO7mcInIY4/Q=="
       },
       "MSTest.TestFramework": {
         "type": "Direct",
@@ -466,9 +466,9 @@
       },
       "MSTest.TestAdapter": {
         "type": "Direct",
-        "requested": "[3.0.2, )",
-        "resolved": "3.0.2",
-        "contentHash": "K1hhtevCzbogylmAnCluV/M1/Ajr5EKfxWq3nv+iYxt+gHLN4gSqT6B3tPnNqUbE4aWT1aUHagcRMnARt45NzQ=="
+        "requested": "[3.0.4, )",
+        "resolved": "3.0.4",
+        "contentHash": "18THEGVcU4fbAOZWvRtEyvQCnZ/o+3LFAiFbAkWYh63GC5TmHoJ10IUiF9L02SMmbLbWpH1/PxvO7mcInIY4/Q=="
       },
       "MSTest.TestFramework": {
         "type": "Direct",
