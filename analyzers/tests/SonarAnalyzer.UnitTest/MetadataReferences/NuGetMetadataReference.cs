@@ -111,6 +111,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") => Create("Microsoft.SqlServer.Compact", packageVersion);
         public static References MicrosoftWebXdt(string packageVersion = "3.0.0") => Create("Microsoft.Web.Xdt", packageVersion);
         public static References MonoPosixNetStandard(string packageVersion = "1.0.0") => Create("Mono.Posix.NETStandard", packageVersion, "linux-x64");
+        public static References MonoDataSqlite(string packageVersion = Constants.NuGetLatestVersion) => Create("Mono.Data.Sqlite", packageVersion);
         public static References Moq(string packageVersion) => Create("Moq", packageVersion);
         public static References MSTestTestFramework(string packageVersion) => Create("MSTest.TestFramework", packageVersion);
         public static References MvvmLightLibs(string packageVersion) => Create("MvvmLightLibs", packageVersion);
