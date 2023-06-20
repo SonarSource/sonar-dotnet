@@ -17,7 +17,7 @@ public class Sample
 
     void LocalFunction()
     {
-        unsafe void Local(byte* pointer) { }                        // FN
+        unsafe void Local(byte* pointer) { }                        // Noncompliant
         void SafeLocal(byte noPointer) { }                          // Compliant
     }
 
