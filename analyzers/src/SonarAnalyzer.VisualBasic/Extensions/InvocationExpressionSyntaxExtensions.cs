@@ -30,7 +30,9 @@ namespace SonarAnalyzer.Extensions
             invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
 
         internal static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count) =>
-            invocation?.ArgumentList != null && invocation.ArgumentList.Arguments.Count == count;
+            invocation?.ArgumentList is null
+                ? count == 0
+                : invocation.ArgumentList.Arguments.Count == count;
 
         internal static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
         {
