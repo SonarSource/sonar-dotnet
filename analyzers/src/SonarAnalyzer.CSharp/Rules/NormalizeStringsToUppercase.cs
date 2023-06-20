@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public NormalizeStringsToUppercase() : base(DiagnosticId) { }
 
-        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor)
+        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor, ISymbol methodCallSymbol)
         {
             var identifier = invocation.GetMethodCallIdentifier().Value.ValueText; // never null when we get here
             if (identifier == "ToLowerInvariant")
