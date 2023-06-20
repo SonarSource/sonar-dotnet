@@ -30,38 +30,30 @@ public class UseDateOnlyTimeOnlyTest
 
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseDateOnlyTimeOnly>();
 
+#if NET6_0_OR_GREATER
+
+    [TestMethod]
+    public void UseDateOnlyTimeOnly_CS_Net6() =>
+        builderCS.AddPaths("UseDateOnlyTimeOnly.Net6.cs").Verify();
+
+    [TestMethod]
+    public void UseDateOnlyTimeOnly_CS_Net6_CSharp9() =>
+        builderCS.AddPaths("UseDateOnlyTimeOnly.Net6.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+    [TestMethod]
+    public void UseDateOnlyTimeOnly_VB_Net6() =>
+        builderVB.AddPaths("UseDateOnlyTimeOnly.Net6.vb").Verify();
+
+#else
+
     [TestMethod]
     public void UseDateOnlyTimeOnly_CS() =>
         builderCS.AddPaths("UseDateOnlyTimeOnly.cs").Verify();
 
-/*
-#if NET
-
-    [TestMethod]
-    public void UseDateOnlyTimeOnly_CSharp9(string expression, bool compliant)
-    {
-        var code = $$"""
-            using System;
-
-            DateTime date1 = new(1993, 1, 6); // Noncompliant
-            DateTime date2 = new(1, 1, 1, 12, 13, 14); // Noncompliant
-            DateTime date3 = new(1993, 1, 6, 1, 1, 1); // Compliant
-            """;
-        var builder = builderCS.AddSnippet(code).WithTopLevelStatements();
-        if (compliant)
-        {
-            builder.VerifyNoIssueReported();
-        }
-        else
-        {
-            builder.Verify();
-        }
-    }
-
-#endif
-*/
-
     [TestMethod]
     public void UseDateOnlyTimeOnly_VB() =>
         builderVB.AddPaths("UseDateOnlyTimeOnly.vb").Verify();
+
+#endif
+
 }

@@ -24,6 +24,4 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class UseDateOnlyTimeOnly : UseDateOnlyTimeOnlyBase<SyntaxKind, LiteralExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-    protected override bool IsEqualToOne(LiteralExpressionSyntax expression) => expression.Token.ValueText == "1";
 }

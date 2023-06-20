@@ -32,23 +32,29 @@ public abstract class UseDateOnlyTimeOnlyBase<TSyntaxKind, TLiteralExpression> :
 
     protected override string MessageFormat => "Use \"{0}\" instead of just setting the {1} for a \"DateTime\" struct"; // DateOnly TimeOnly / date time
 
-    protected abstract bool IsEqualToOne(TLiteralExpression expression);
-
     protected UseDateOnlyTimeOnlyBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(
-            Language.GeneratedCodeRecognizer,
-            c =>
+        context.RegisterCompilationStartAction(start =>
+        {
+            if (!CompilationTargetsValidNetVersion(start.Compilation))
             {
-                if (IsCandidateCtor(c.Node, c.SemanticModel, out var type, out var dateOrTime))
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), type, dateOrTime));
-                }
-            },
-            Language.SyntaxKind.ObjectCreationExpressions);
+                return;
+            }
 
-    private bool IsCandidateCtor(SyntaxNode ctorNode, SemanticModel model, out string type, out string dateOrTime)
+            context.RegisterNodeAction(
+                Language.GeneratedCodeRecognizer,
+                c =>
+                {
+                    if (ShouldRaise(c.Node, c.SemanticModel, out var type, out var dateOrTime))
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), type, dateOrTime));
+                    }
+                },
+                Language.SyntaxKind.ObjectCreationExpressions);
+        });
+
+    private bool ShouldRaise(SyntaxNode ctorNode, SemanticModel model, out string type, out string dateOrTime)
     {
         var argumentCount = Language.Syntax.ArgumentExpressions(ctorNode).Count();
 
@@ -81,8 +87,12 @@ public abstract class UseDateOnlyTimeOnlyBase<TSyntaxKind, TLiteralExpression> :
         && IsParameterEqualOne("month", lookup)
         && IsParameterEqualOne("day", lookup);
 
-    private bool IsParameterEqualOne(string parameterName, IMethodParameterLookup lookup) =>
+    private static bool IsParameterEqualOne(string parameterName, IMethodParameterLookup lookup) =>
         lookup.TryGetSyntax(parameterName, out var expressions)
         && expressions[0] is TLiteralExpression literal
-        && IsEqualToOne(literal);
+        && literal.ChildTokens().First().ValueText == "1";
+
+    private static bool CompilationTargetsValidNetVersion(Compilation compilation) =>
+        compilation.GetTypeByMetadataName(KnownType.System_DateOnly) is not null
+        && compilation.GetTypeByMetadataName(KnownType.System_TimeOnly) is not null;
 }
