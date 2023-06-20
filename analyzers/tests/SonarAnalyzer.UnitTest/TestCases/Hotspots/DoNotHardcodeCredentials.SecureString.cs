@@ -43,6 +43,8 @@ namespace Tests.Diagnostics
                 securePwd.AppendChar('a'); // Noncompliant
                 securePwd.AppendChar('s'); // Noncompliant
                 securePwd.AppendChar('s'); // Noncompliant
+                var w = 'w';
+                securePwd.AppendChar(w);   // FN
             }
         }
 

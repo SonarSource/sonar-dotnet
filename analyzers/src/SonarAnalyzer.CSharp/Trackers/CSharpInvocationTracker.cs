@@ -38,9 +38,9 @@ namespace SonarAnalyzer.Helpers.Trackers
                 predicate(argument, model));
 
         private Condition ArgumentAtIndexConformsTo(int index, Func<ArgumentSyntax, SemanticModel, bool> predicate) => context =>
-            context.Node is InvocationExpressionSyntax { ArgumentList: { } argumentList }
-                && index < argumentList.Arguments.Count
-                && argumentList.Arguments[index] is { } argument
+            context.Node is InvocationExpressionSyntax { ArgumentList.Arguments: { } arguments }
+                && index < arguments.Count
+                && arguments[index] is { } argument
                 && predicate(argument, context.SemanticModel);
 
         public override Condition MatchProperty(MemberDescriptor member) =>
