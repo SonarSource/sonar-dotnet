@@ -288,6 +288,16 @@ namespace Tests.Diagnostics
         public const String NAMESPACE1 = "http://x";
         public const String FOOSPACE1 = "http://x";  // Noncompliant
     }
+
+    [XmlType(Namespace = "http://www.cpandl.com")]
+    public class Serialize
+    {
+        [XmlElement(Namespace = "http://www.cpandl.com")]
+        public string Title;
+
+        [XmlAttribute(Namespace = "http://www.cpandl.com")]
+        public string Currency;
+    }
 }
 
 namespace Company.Telnet
