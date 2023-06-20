@@ -47,5 +47,25 @@ Namespace Tests.Diagnostics
                 Next
             End Using
         End Sub
+
+        Public Sub FromUnmodifiedVariable_ForLoop()
+            Dim keyword = "AP@ssw0rd"
+            Using securePwd As SecureString = New SecureString()
+
+                For i As Integer = 0 To keyword.Length - 1
+                    securePwd.AppendChar(keyword(i)) ' Noncompliant
+                Next
+            End Using
+        End Sub
+
+        Public Sub FromUnmodifiedVariable_ForEachLoop()
+            Dim keyword = "AP@ssw0rd"
+            Using securePwd As SecureString = New SecureString()
+
+                For Each c In keyword
+                    securePwd.AppendChar(c) ' Noncompliant
+                Next
+            End Using
+        End Sub
     End Class
 End Namespace

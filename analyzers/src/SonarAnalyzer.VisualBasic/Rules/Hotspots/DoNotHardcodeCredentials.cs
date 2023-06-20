@@ -69,12 +69,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             && argument.GetExpression() is { } argumentExpression
             && argumentExpression switch
             {
-                InvocationExpressionSyntax { Expression: { } accessed } => model.GetConstantValue(accessed) is { HasValue: true, Value: string },
+                InvocationExpressionSyntax { Expression: { } accessed } => accessed.FindConstantValue(model) is string,
                 LiteralExpressionSyntax { RawKind: (int)SyntaxKind.CharacterLiteralExpression } => true,
                 IdentifierNameSyntax identifier when model.GetSymbolInfo(identifier) is { Symbol: ILocalSymbol { } local }
                     && local.DeclaringSyntaxReferences.Length == 1
                     && local.DeclaringSyntaxReferences[0].GetSyntax() is ForEachStatementSyntax { Expression: { } forEachExpression }
-                    && model.GetConstantValue(forEachExpression) is { HasValue: true, Value: string } => true,
+                    && forEachExpression.FindConstantValue(model) is string => true,
                 _ => false,
             };
 

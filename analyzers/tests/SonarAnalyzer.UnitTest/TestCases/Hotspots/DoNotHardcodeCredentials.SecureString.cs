@@ -72,5 +72,29 @@ namespace Tests.Diagnostics
                 // Do something with securePwd
             }
         }
+
+        public void FromUnmodifiedVariable_ForLoop()
+        {
+            var keyword = "AP@ssw0rd";
+            using (SecureString securePwd = new SecureString())
+            {
+                for (int i = 0; i < keyword.Length; i++)
+                {
+                    securePwd.AppendChar(keyword[i]); // Noncompliant
+                }
+            }
+        }
+
+        public void FromUnmodifiedVariable_ForEachLoop()
+        {
+            var keyword = "AP@ssw0rd";
+            using (SecureString securePwd = new SecureString())
+            {
+                foreach(var c in keyword)
+                {
+                    securePwd.AppendChar(c); // Noncompliant
+                }
+            }
+        }
     }
 }
