@@ -115,11 +115,10 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        if (operation.AsObjectCreation() is { } objectCreation && objectCreation.Type.IsAny(TrackedCollectionTypes))
+        if (operation.AsObjectCreation() is { } objectCreation && objectCreation.Type.IsAny(TrackedCollectionTypes)
+            && CollectionCreationConstraint(context.State, objectCreation) is { } objectCreationConstraint)
         {
-            return CollectionCreationConstraint(context.State, objectCreation) is { } constraint
-                ? context.State.SetOperationConstraint(objectCreation, constraint)
-                : context.State;
+            return context.State.SetOperationConstraint(objectCreation, objectCreationConstraint);
         }
         else if (operation.AsArrayCreation() is { } arrayCreation)
         {
@@ -217,7 +216,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
 
     private static NumberConstraint SizeConstraint(ProgramState state, IOperation instance, bool hasFilteringPredicate = false)
     {
-        if (state.ResolveCapture(instance).TrackedSymbol() is { } symbol && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
+        if (state.ResolveCaptureAndUnwrapConversion(instance).TrackedSymbol() is { } symbol && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
         {
             if (collection == CollectionConstraint.Empty)
             {

@@ -604,6 +604,11 @@ class AdvancedTests
             empty.Clear();  // Compliant, unreachable
         }
 
+        if (((condition ? empty : empty) as IList<int>).Count != 0)
+        {
+            empty.Clear();  // Compliant, unreachable
+        }
+
         notEmpty.Clear();   // Compliant, prevents LVA from throwing notEmpty away during reference capture
     }
 
@@ -641,6 +646,23 @@ class AdvancedTests
         }
 
         notEmpty.Clone();   // Compliant, prevents LVA from throwing notEmpty away during reference capture
+    }
+
+    public void Dynamics(dynamic item)
+    {
+        var list = new List<int>();
+        list.Add(item);
+        list.Clear();       // Noncompliant FP
+    }
+
+    public void Reassignment()
+    {
+        var list = new List<int>();
+        var other = list;
+        other.Clear();      // Noncompliant
+
+        other.Add(5);
+        list.Clear();       // Noncompliant FP
     }
 
     void Foo(List<int> items) { }
