@@ -324,19 +324,11 @@ Method(2);";
         {
             /*    Entry 0
              *      |
-             * +----|- TryAndCatchRegion   --------------+
-             * |+---|- TryRegion -+ +-- CatchRegion ----+|
-             * ||  Block 1        | |  Block 3          ||
-             * ||  (empty)        | |  Method(0)        ||
-             * ||   |             | |   |               ||
-             * |+---|-------------+ +---|---------------+|
-             * +----|-------------------|----------------+
-             *      |                  /
-             *      |    /------------+
-             *    Block 3
+             *    Block 1
+             *    Method(0)
              *    Method(intParameter)
              *      |
-             *    Exit 4
+             *    Exit 2
              */
             var code = @"
 // Error CS1003 Syntax error, 'try' expected
@@ -349,7 +341,7 @@ catch
 Method(intParameter);";
             var context = CreateContextCS(code);
             context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
-            context.Validate("Method(0);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter"));
             context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
@@ -847,19 +839,11 @@ Method(1);";
         {
             /*    Entry 0
              *      |
-             * +----|- TryAndFinallyRegion   ------------+
-             * |+---|- TryRegion -+ +-- FinallyRegion --+|
-             * ||  Block 1        | |  Block 3          ||
-             * ||  (empty)        | |  Method(0)        ||
-             * ||   |             | |   |               ||
-             * |+---|-------------+ |  (null)           ||
-             * |    |               +-------------------+|
-             * +----|------------------------------------+
-             *      |
-             *    Block 3
+             *    Block 1
+             *    Method(0)
              *    Method(intParameter)
              *      |
-             *    Exit 4
+             *    Exit 2
              */
             var code = @"
 // Error CS1003 Syntax error, 'try' expected
@@ -872,7 +856,7 @@ finally
 Method(intParameter);";
             var context = CreateContextCS(code);
             context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
-            context.Validate("Method(0);", LiveIn("intParameter"), LiveOut("intParameter"));
+            context.Validate("Method(0);", LiveIn("intParameter"));
             context.Validate("Method(intParameter);", LiveIn("intParameter"));
             context.ValidateExit();
         }
