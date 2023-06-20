@@ -2,13 +2,13 @@
 
 public class Sample
 {
-    unsafe void MethodScope(byte* pointer) { }                      // FN {{Make sure that using "unsafe" is safe here.}}
-//  ~~~~~~
+    unsafe void MethodScope(byte* pointer) { }                      // Noncompliant {{Make sure that using "unsafe" is safe here.}}
+//  ^^^^^^
 
     void BlockScope()
     {
-        unsafe                                                      // FN
-//      ~~~~~~
+        unsafe                                                      // Noncompliant
+//      ^^^^^^
         {
         }
     }
@@ -49,7 +49,7 @@ public class Sample
     public unsafe static Sample operator +(Sample other) => other;  // FN
 
     // from RSPEC
-    public unsafe int SubarraySum(int[] array, int start, int end)  // FN
+    public unsafe int SubarraySum(int[] array, int start, int end)  // Noncompliant
     {
         var sum = 0;
 
@@ -64,12 +64,12 @@ public class Sample
     }
 
     // from C# docs
-    unsafe static void SquarePtrParam(int* p)                       // FN
+    unsafe static void SquarePtrParam(int* p)                       // Noncompliant
     {
         *p *= *p;
     }
 
-    unsafe static void Main()                                       // FN
+    unsafe static void Main()                                       // Noncompliant
     {
         int i = 5;
         // Unsafe method: uses address-of operator (&).
