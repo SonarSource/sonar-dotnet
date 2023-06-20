@@ -48,6 +48,7 @@ internal static class BuilderExtensions
     public static VerifierBuilder AddEntityFrameworkReference(this VerifierBuilder builder) =>
         builder
             .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
+
 #if NET
             .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"));
 #else
