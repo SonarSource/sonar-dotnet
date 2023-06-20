@@ -24,22 +24,35 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class UnsafeCodeBlocks : HotspotDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6640";
-    private const string MessageFormat = "FIXME";
+    private const string MessageFormat = """Make sure that using "unsafe" is safe here.""";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    public UnsafeCodeBlocks() : this(AnalyzerConfiguration.Hotspot) { }
 
     public UnsafeCodeBlocks(IAnalyzerConfiguration configuration) : base(configuration) { }
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-    protected override void Initialize(SonarAnalysisContext context) =>
+    protected override void Initialize(SonarAnalysisContext context)
+    {
+        context.RegisterNodeAction(c => Report(c, ((UnsafeStatementSyntax)c.Node).UnsafeKeyword), SyntaxKind.UnsafeStatement);
         context.RegisterNodeAction(c =>
             {
-                var node = c.Node;
-                if (false)
+                if (c.Node is BaseMethodDeclarationSyntax { Modifiers: var modifiers }
+                    && modifiers.Find(SyntaxKind.UnsafeKeyword) is { } unsafeModifier)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    Report(c, unsafeModifier);
                 }
             },
-            SyntaxKind.InvocationExpression);
+            SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration, SyntaxKind.DestructorDeclaration, SyntaxKind.OperatorDeclaration);
+    }
+
+    private void Report(SonarSyntaxNodeReportingContext context, SyntaxToken token)
+    {
+        if (IsEnabled(context.Options))
+        {
+            context.ReportIssue(Diagnostic.Create(Rule, token.GetLocation()));
+        }
+    }
 }
