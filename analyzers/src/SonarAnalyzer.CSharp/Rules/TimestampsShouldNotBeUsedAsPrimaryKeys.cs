@@ -66,5 +66,6 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
             .Any(x => x.IsKnownType(KnownType.System_ComponentModel_DataAnnotations_KeyAttribute, semanticModel));
 
     private static bool IsTemporalType(PropertyDeclarationSyntax property, SemanticModel model) =>
-        model.GetDeclaredSymbol(property).Type.IsAny(TemporalTypes);
+        TemporalTypes.Any(x => property.Type.NameIs(x.TypeName) || property.Type.NameIs(x.FullName))
+        || model.GetDeclaredSymbol(property).Type.IsAny(TemporalTypes);
 }

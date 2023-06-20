@@ -38,6 +38,11 @@ class TemporalTypes
         public DateTime ID { get; set; }                // Noncompliant
     }
 
+    class TemporalTypeWithFullName
+    {
+        public System.DateTime Id { get; set; }         // Noncompliant
+    }
+
     class AliasedTemporalType
     {
         public DateTimeAlias Id { get; set; }           // Noncompliant
