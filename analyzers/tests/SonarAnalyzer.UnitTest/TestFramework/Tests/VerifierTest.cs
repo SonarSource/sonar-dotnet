@@ -279,9 +279,9 @@ Line: 1, Type: primary, Id: ''
         {
             var builder = WithSnippetCS("undefined");
             builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
-                .WithMessage("CSharp7: Unexpected build error [CS0116]: A namespace cannot directly contain members such as fields, methods or statements on line 1");
+                .WithMessage("CSharp7: Unexpected build error [CS8805]: Program using top-level statements must be an executable. on line 1");
             builder.WithErrorBehavior(CompilationErrorBehavior.FailTest).Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
-                .WithMessage("CSharp7: Unexpected build error [CS0116]: A namespace cannot directly contain members such as fields, methods or statements on line 1");
+                .WithMessage("CSharp7: Unexpected build error [CS8805]: Program using top-level statements must be an executable. on line 1");
             builder.WithErrorBehavior(CompilationErrorBehavior.Ignore).Invoking(x => x.Verify()).Should().NotThrow();
         }
 
