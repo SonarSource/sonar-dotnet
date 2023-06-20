@@ -27,7 +27,7 @@ public abstract class DateTimeFormatShouldNotBeHardcodedBase<TSyntaxKind, TInvoc
     private const string DiagnosticId = "S6585";
     private const string ToStringLiteral = "ToString";
 
-    protected override string MessageFormat => "Use the CultureInfo class to provide the format for the string.";
+    protected override string MessageFormat => "Use the \"ToString\" overload with an \"IFormatProvider\".";
 
     protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
