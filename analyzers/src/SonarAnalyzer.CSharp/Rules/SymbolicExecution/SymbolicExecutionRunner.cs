@@ -70,6 +70,14 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
             SyntaxKind.MethodDeclaration);
 
         context.RegisterNodeAction(
+            c => Analyze<SyntaxNode>(context, c, x =>
+            {
+                var localFunction = (LocalFunctionStatementSyntaxWrapper)x;
+                return (SyntaxNode)localFunction.Body ?? localFunction.ExpressionBody;
+            }),
+            SyntaxKindEx.LocalFunctionStatement);
+
+        context.RegisterNodeAction(
             c => Analyze<PropertyDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),
             SyntaxKind.PropertyDeclaration);
 
