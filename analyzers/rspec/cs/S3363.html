@@ -1,11 +1,16 @@
-<p>You should only set a property of type <code>DateTime</code> or <code>DateTimeOffset</code> as the primary key of a table if the date values are
-guaranteed to be unique. The rule raises an issue if: * Entity Framework, or Entity Framework Core dependencies are found; * a class contains a
-<code>DateTime</code> or <code>DateTimeOffset</code> property that is either named <code>Id</code>, <code>&lt;type name&gt;Id</code> or decorated by
-the <code>[Key]</code> or <code>[PrimaryKey]</code> attribute.</p>
+<p>You should only set a property of a temporal type (like <code>DateTime</code> or <code>DateTimeOffset</code>) as the primary key of a table if the
+date values are guaranteed to be unique. The rule raises an issue if: * Entity Framework, or Entity Framework Core dependencies are found; * a class
+contains a property either named <code>Id</code>, <code>&lt;type name&gt;Id</code> or decorated by the <code>[Key]</code> or <code>[PrimaryKey]</code>
+attribute. * the key property is of one of the following types: <strong> <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime">System.DateTime</a> </strong> <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset">System.DateTimeOffset</a> <strong> <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.timespan">System.TimeSpan</a> </strong> <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly">System.DateOnly</a> ** <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.timeonly">System.TimeOnly</a></p>
 <h2>Why is this an issue?</h2>
-<p>Using the types <code>DateTime</code> or <code>DateTimeOffset</code> as the primary key of a table is risky. When these types are used as primary
-keys, it usually means that each new key is created with the use of <code>.Now</code> or <code>.UtcNow</code> properties from <code>DateTime</code>
-and <code>DateTimeOffset</code> classes. In those cases, duplicate keys exceptions may occur in many ways:</p>
+<p>Using temporal types like <code>DateTime</code> or <code>DateTimeOffset</code> as the primary key of a table is risky. When these types are used as
+primary keys, it usually means that each new key is created with the use of <code>.Now</code> or <code>.UtcNow</code> properties from
+<code>DateTime</code> and <code>DateTimeOffset</code> classes. In those cases, duplicate keys exceptions may occur in many ways:</p>
 <ul>
   <li> when entries are added consecutively by a machine with low-enough system clock resolution; </li>
   <li> when two different threads are inserting entries in close enough sequence for both to have the same time; </li>

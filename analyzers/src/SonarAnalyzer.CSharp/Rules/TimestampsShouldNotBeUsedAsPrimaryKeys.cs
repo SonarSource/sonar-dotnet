@@ -21,10 +21,10 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class TemporalTypesShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnalyzer
+public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S3363";
-    private const string MessageFormat = "Temporal types should not be used as primary keys";
+    private const string MessageFormat = "Timestamps should not be used as primary keys";
 
     private static readonly KnownType[] TemporalTypes = new[]
     {

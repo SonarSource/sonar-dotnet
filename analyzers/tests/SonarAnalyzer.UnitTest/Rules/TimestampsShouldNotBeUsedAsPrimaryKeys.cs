@@ -23,23 +23,23 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
-public class TemporalTypesShouldNotBeUsedAsPrimaryKeysTest
+public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<TemporalTypesShouldNotBeUsedAsPrimaryKeys>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<TimestampsShouldNotBeUsedAsPrimaryKeys>();
 
 #if NET
     [TestMethod]
-    public void TemporalTypesShouldNotBeUsedAsPrimaryKeys_CSharp() =>
+    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp() =>
         builder
-            .AddPaths("TemporalTypesShouldNotBeUsedAsPrimaryKeys.cs")
+            .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"))
             .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
             .Verify();
 
     [TestMethod]
-    public void TemporalTypesShouldNotBeUsedAsPrimaryKeys_CSharp9() =>
+    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp9() =>
         builder
-            .AddPaths("TemporalTypesShouldNotBeUsedAsPrimaryKeys.CSharp9.cs")
+            .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.CSharp9.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"))
             .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
             .WithOptions(ParseOptionsHelper.FromCSharp9)

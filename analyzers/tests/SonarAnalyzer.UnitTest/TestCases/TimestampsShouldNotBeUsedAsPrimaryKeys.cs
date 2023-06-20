@@ -9,7 +9,7 @@ class TemporalTypes
 {
     class Entity
     {
-        public DateTime EntityId { get; set; }          // Noncompliant {{Temporal types should not be used as primary keys}}
+        public DateTime EntityId { get; set; }          // Noncompliant {{Timestamps should not be used as primary keys}}
         //     ^^^^^^^^
     }
 
