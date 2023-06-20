@@ -90,7 +90,7 @@ Namespace Tests.Diagnostics
             Dim chars = New Char() { "P"c, "a"c, "s"c, "s"c }
             Using securePwd As SecureString = New SecureString()
                 For i As Integer = 0 To chars.Length - 1
-                securePwd.AppendChar("a"c + chars(i)) ' FN.
+                    securePwd.AppendChar("a"c + chars(i)) ' FN.
                 Next
             End Using
         End Sub
