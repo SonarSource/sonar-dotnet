@@ -97,4 +97,19 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    class AppendCharFromOtherType
+    {
+        void AppendChar(char c) { }
+
+        void Test()
+        {
+            var other = new AppendCharFromOtherType();
+            const string keyword = "AP@ssw0rd";
+            for (int i = 0; i < keyword.Length; i++)
+            {
+                other.AppendChar(keyword[i]); // Compliant. Not SecureString.AppendChar
+            }
+        }
+    }
 }
