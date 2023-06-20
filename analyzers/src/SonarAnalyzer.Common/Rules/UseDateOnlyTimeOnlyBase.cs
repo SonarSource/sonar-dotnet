@@ -25,10 +25,8 @@ public abstract class UseDateOnlyTimeOnlyBase<TSyntaxKind, TLiteralExpression> :
     where TLiteralExpression : SyntaxNode
 {
     private const string DiagnosticId = "S6576";
-    private const string DateOnly = nameof(DateOnly);
-    private const string TimeOnly = nameof(TimeOnly);
-    private const string Date = "date";
-    private const string Time = "time";
+    private static readonly (string, string) DateOnly = (nameof(DateOnly), "date");
+    private static readonly (string, string) TimeOnly = (nameof(TimeOnly), "time");
 
     protected override string MessageFormat => "Use \"{0}\" instead of just setting the {1} for a \"DateTime\" struct";
 
@@ -46,22 +44,21 @@ public abstract class UseDateOnlyTimeOnlyBase<TSyntaxKind, TLiteralExpression> :
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (IsDateTime(c.Node, c.SemanticModel) && ShouldRaise(c.Node, c.SemanticModel, out var type, out var dateOrTime))
+                    if (IsDateTime(c.Node, c.SemanticModel) && ShouldRaise(c.Node, c.SemanticModel, out var diagnostic))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), type, dateOrTime));
+                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), diagnostic.Type, diagnostic.Description));
                     }
                 },
                 Language.SyntaxKind.ObjectCreationExpressions);
         });
 
-    private bool ShouldRaise(SyntaxNode ctorNode, SemanticModel model, out string type, out string dateOrTime)
+    private bool ShouldRaise(SyntaxNode ctorNode, SemanticModel model, out (string Type, string Description) diagnostic)
     {
         var argumentCount = Language.Syntax.ArgumentExpressions(ctorNode).Count();
 
         if (argumentCount is 3 && Language.Syntax.ArgumentExpressions(ctorNode).All(x => x is TLiteralExpression))
         {
-            type = DateOnly;
-            dateOrTime = Date;
+            diagnostic = DateOnly;
             return true;
         }
         else if (argumentCount is 6 or 7 or 8)
@@ -70,14 +67,12 @@ public abstract class UseDateOnlyTimeOnlyBase<TSyntaxKind, TLiteralExpression> :
 
             if (methodSymbol.Parameters.All(x => x.Type.Is(KnownType.System_Int32)) && IsYearMonthDayEqualsOne(ctorNode, methodSymbol))
             {
-                type = TimeOnly;
-                dateOrTime = Time;
+                diagnostic = TimeOnly;
                 return true;
             }
         }
 
-        type = string.Empty;
-        dateOrTime = string.Empty;
+        diagnostic = (string.Empty, string.Empty);
         return false;
     }
 
