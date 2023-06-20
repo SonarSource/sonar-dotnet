@@ -30,7 +30,7 @@ public abstract class UseDateOnlyTimeOnlyBase<TSyntaxKind, TLiteralExpression> :
     private const string Date = "date";
     private const string Time = "time";
 
-    protected override string MessageFormat => "Use \"{0}\" instead of just setting the {1} for a \"DateTime\" struct"; // DateOnly TimeOnly / date time
+    protected override string MessageFormat => "Use \"{0}\" instead of just setting the {1} for a \"DateTime\" struct";
 
     protected UseDateOnlyTimeOnlyBase() : base(DiagnosticId) { }
 
@@ -46,7 +46,7 @@ public abstract class UseDateOnlyTimeOnlyBase<TSyntaxKind, TLiteralExpression> :
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (ShouldRaise(c.Node, c.SemanticModel, out var type, out var dateOrTime))
+                    if (IsDateTime(c.Node, c.SemanticModel) && ShouldRaise(c.Node, c.SemanticModel, out var type, out var dateOrTime))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), type, dateOrTime));
                     }
@@ -80,6 +80,9 @@ public abstract class UseDateOnlyTimeOnlyBase<TSyntaxKind, TLiteralExpression> :
         dateOrTime = string.Empty;
         return false;
     }
+
+    protected static bool IsDateTime(SyntaxNode objectCreation, SemanticModel model) =>
+        model.GetTypeInfo(objectCreation) is { } typeInfo && typeInfo.Type.DerivesFrom(KnownType.System_DateTime);
 
     private bool IsYearMonthDayEqualsOne(SyntaxNode node, IMethodSymbol methodSymbol) =>
         Language.MethodParameterLookup(node, methodSymbol) is var lookup

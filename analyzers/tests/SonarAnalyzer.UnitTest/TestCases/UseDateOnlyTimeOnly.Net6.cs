@@ -87,4 +87,10 @@ public class Program
         var ctor14_0 = new DateTime(1, 1, 1, 1, 1, 1, 1, 1, new GregorianCalendar(), DateTimeKind.Utc); // Compliant
         var ctor14_1 = new DateTime(1, 3, 1, 1, 1, 1, 1, 1, new GregorianCalendar(), DateTimeKind.Utc); // Compliant
     }
+
+    void DateOnlyTimeOnlyCompliant()
+    {
+        var dateOnly = new DateOnly(1, 1, 1); // Compliant
+        var timeOnly = new TimeOnly(1, 1, 1); // Compliant
+    }
 }

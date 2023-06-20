@@ -85,4 +85,9 @@ Public Class Program
         Dim ctor14_0 = New DateTime(1, 1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc) ' Compliant
         Dim ctor14_1 = New DateTime(1, 3, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc) ' Compliant
     End Sub
+
+    Private Sub DateOnlyTimeOnlyCompliant()
+        Dim dateOnly = New DateOnly(1, 1, 1) ' Compliant
+        Dim timeOnly = New TimeOnly(1, 1, 1) ' Compliant
+    End Sub
 End Class
