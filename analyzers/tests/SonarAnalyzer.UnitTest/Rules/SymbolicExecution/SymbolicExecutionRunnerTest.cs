@@ -258,24 +258,6 @@ public void Method()
 }");
 
     [TestMethod]
-    public void Initialize_LocalFunctions_CS() =>
-    VerifyClassMainCS(@"
-public void Method()
-{
-    void LocalFunction()
-    {
-        string s = null; // Noncompliant {{Message for SMain}}
-    }
-
-    static void StaticLocalFunction()
-    {
-        string s = null; // Noncompliant {{Message for SMain}}
-    }
-
-    void LocalFunctionWithExpressionBody(string s) => s = null; // Noncompliant {{Message for SMain}}
-}");
-
-    [TestMethod]
     public void Initialize_AnonymousFunction_VB() =>
         VerifyClassMainVB(@"
 Public Sub Method()
@@ -295,6 +277,24 @@ End Sub
 
 Private Sub Use(F As Func(Of Integer))
 End Sub");
+
+    [TestMethod]
+    public void Initialize_LocalFunctions_CS() =>
+        VerifyClassMainCS(@"
+public void Method()
+{
+    void LocalFunction()
+    {
+        string s = null; // Noncompliant {{Message for SMain}}
+    }
+
+    static void StaticLocalFunction()
+    {
+        string s = null; // Noncompliant {{Message for SMain}}
+    }
+
+    void LocalFunctionWithExpressionBody(string s) => s = null; // Noncompliant {{Message for SMain}}
+}");
 
     [TestMethod]
     public void Analyze_DoNotRunWhenContainsDiagnostics() =>
