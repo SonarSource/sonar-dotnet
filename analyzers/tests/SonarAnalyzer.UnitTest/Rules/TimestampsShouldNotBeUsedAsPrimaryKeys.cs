@@ -25,9 +25,9 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
 {
+#if NET
     private readonly VerifierBuilder builder = new VerifierBuilder<TimestampsShouldNotBeUsedAsPrimaryKeys>();
 
-#if NET
     [TestMethod]
     public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp() =>
         builder
