@@ -14,9 +14,11 @@ updates:
     schedule:
       interval: "daily"
     labels: [ ]     # Do not add default "dependency" label
+    open-pull-requests-limit: 20
 
   - package-ecosystem: "nuget"
     directory: "/analyzers"
     schedule:
       interval: "daily"
     labels: [ ]     # Do not add default "dependency" label
+    open-pull-requests-limit: 20
