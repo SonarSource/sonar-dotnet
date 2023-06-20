@@ -45,7 +45,7 @@ class TemporalTypes
 
     class AliasedTemporalType
     {
-        public DateTimeAlias Id { get; set; }           // Noncompliant
+        public DateTimeAlias Id { get; set; }           // FN - the chance of using a type aliased temporal type as a database key is slim, so we don't cover it to improve performance
     }
 }
 

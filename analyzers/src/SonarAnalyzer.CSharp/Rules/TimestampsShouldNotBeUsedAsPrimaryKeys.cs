@@ -43,7 +43,7 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
             var className = classDeclaration.Identifier.ValueText;
             var keyProperties = classDeclaration.Members
                 .OfType<PropertyDeclarationSyntax>()
-                .Where(x => IsKeyProperty(x, className, c.SemanticModel) && IsTemporalType(x, c.SemanticModel));
+                .Where(x => IsKeyProperty(x, className, c.SemanticModel) && IsTemporalType(x));
 
             foreach (var keyProperty in keyProperties)
             {
@@ -65,7 +65,6 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
             .SelectMany(x => x.Attributes)
             .Any(x => x.IsKnownType(KnownType.System_ComponentModel_DataAnnotations_KeyAttribute, semanticModel));
 
-    private static bool IsTemporalType(PropertyDeclarationSyntax property, SemanticModel model) =>
-        TemporalTypes.Any(x => property.Type.NameIs(x.TypeName) || property.Type.NameIs(x.FullName))
-        || model.GetDeclaredSymbol(property).Type.IsAny(TemporalTypes);
+    private static bool IsTemporalType(PropertyDeclarationSyntax property) =>
+        TemporalTypes.Any(x => property.Type.NameIs(x.TypeName) || property.Type.NameIs(x.FullName));
 }
