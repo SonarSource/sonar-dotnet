@@ -116,7 +116,7 @@ class Attributes
 
 class NotProperties
 {
-    public DateTime id;                                 // Compliant -
+    public DateTime id;                                 // Compliant - only properties are validated
     public DateTime Id() => DateTime.Now;
 }
 
