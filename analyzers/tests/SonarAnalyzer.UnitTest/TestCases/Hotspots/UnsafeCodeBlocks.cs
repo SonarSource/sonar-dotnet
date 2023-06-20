@@ -1,0 +1,79 @@
+﻿using System;
+
+public class Sample
+{
+    unsafe void MethodScope(byte* pointer) { }                      // FN {{Make sure that using "unsafe" is safe here.}}
+//  ~~~~~~
+
+    void BlockScope()
+    {
+        unsafe                                                      // FN
+//      ~~~~~~
+        {
+        }
+    }
+
+    void SafeMethod() { }                                           // Compliant
+
+    void LocalFunction()
+    {
+        unsafe void Local(byte* pointer) { }                        // FN
+        void SafeLocal(byte noPointer) { }                          // Compliant
+    }
+
+    unsafe class UnsafeClass { }                                    // FN
+
+    unsafe struct UnsafeStruct                                      // FN
+    {
+        unsafe fixed byte unsafeFixedBuffer[16];                    // FN
+    }
+
+    unsafe interface IUnsafeInterface { }                           // FN
+
+    unsafe Sample(byte* pointer) { }                                // FN
+
+    static unsafe Sample() { }                                      // FN
+
+    unsafe ~Sample() { }                                            // FN
+
+    unsafe byte* unsafeField;                                       // FN
+
+    unsafe byte* UnsafeProperty { get; }                            // FN
+
+    unsafe event EventHandler UnsafeEvent;                          // FN
+
+    unsafe delegate void UnsafeDelegate(byte* pointer);             // FN
+
+    unsafe int this[int i] => 5;                                    // FN
+
+    public unsafe static Sample operator +(Sample other) => other;  // FN
+
+    // from RSPEC
+    public unsafe int SubarraySum(int[] array, int start, int end)  // FN
+    {
+        var sum = 0;
+
+        // Skip array bound checks for extra performance
+        fixed (int* firstNumber = array)
+        {
+            for (int i = start; i < end; i++)
+                sum += *(firstNumber + i);
+        }
+
+        return sum;
+    }
+
+    // from C# docs
+    unsafe static void SquarePtrParam(int* p)                       // FN
+    {
+        *p *= *p;
+    }
+
+    unsafe static void Main()                                       // FN
+    {
+        int i = 5;
+        // Unsafe method: uses address-of operator (&).
+        SquarePtrParam(&i);
+        Console.WriteLine(i);
+    }
+}
