@@ -298,6 +298,16 @@ namespace Tests.Diagnostics
         [XmlAttribute(Namespace = "http://www.cpandl.com")]
         public string Currency;
     }
+
+    public class XmlSerializerTests
+    {
+        public void XmlSerializerNamespacesTest()
+        {
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("books", "http://www.cpandl.com");
+            ns.Add("money", "http://www.cohowinery.com");
+        }
+    }
 }
 
 namespace Company.Telnet

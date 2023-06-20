@@ -216,6 +216,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     || (equalsValueClause.Parent is ParameterSyntax parameter && TokenContainsNamespace(parameter.Identifier)),
                 AssignmentExpressionSyntax assignmentExpression =>
                     assignmentExpression.Left.RemoveParentheses() is IdentifierNameSyntax identifierName && TokenContainsNamespace(identifierName.Identifier),
+                ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax invocation } } argument =>
+                    CSharpFacade.Instance.MethodParameterLookup(invocation, model).TryGetSymbol(argument, out var symbol)
+                        && symbol.Name == "ns"
+                        && symbol.ContainingNamespace is INamespaceSymbol ns
+                        && ns.Is($"global::{nameof(System)}.{nameof(System.Xml)}.{nameof(System.Xml.Serialization)}"),
                 _ => false
             };
 
