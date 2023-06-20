@@ -28,14 +28,14 @@ public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
     private readonly VerifierBuilder builder = new VerifierBuilder<TimestampsShouldNotBeUsedAsPrimaryKeys>();
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp_Core() =>
+    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp() =>
         builder
             .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.cs")
             .AddEntityFrameworkReference()
             .Verify();
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp9_Core() =>
+    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp9() =>
         builder
             .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.CSharp9.cs")
             .AddEntityFrameworkReference()
