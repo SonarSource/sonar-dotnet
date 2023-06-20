@@ -110,7 +110,6 @@ namespace SonarAnalyzer.Rules
 
             var inv = Language.Tracker.Invocation;
             inv.Track(input, new object[] { MessageHardcodedPassword },
-                inv.MethodNameIs(nameof(SecureString.AppendChar)),
                 inv.MatchMethod(new MemberDescriptor(KnownType.System_Security_SecureString, nameof(SecureString.AppendChar))),
                 inv.ArgumentAtIndexIs(0, IsSecureStringAppendCharFromConstant));
 
