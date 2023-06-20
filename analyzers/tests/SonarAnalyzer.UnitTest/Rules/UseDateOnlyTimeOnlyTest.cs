@@ -38,7 +38,7 @@ public class UseDateOnlyTimeOnlyTest
 
     [TestMethod]
     public void UseDateOnlyTimeOnly_CS_Net6_CSharp9() =>
-        builderCS.AddPaths("UseDateOnlyTimeOnly.Net6.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+        builderCS.AddPaths("UseDateOnlyTimeOnly.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
     [TestMethod]
     public void UseDateOnlyTimeOnly_VB_Net6() =>

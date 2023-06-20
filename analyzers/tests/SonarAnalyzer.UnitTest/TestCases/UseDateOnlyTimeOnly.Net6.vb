@@ -84,10 +84,104 @@ Public Class Program
         ' year, month, day, hour, minute, second, millisecond, microsecond calendar and DateTimeKind value
         Dim ctor14_0 = New DateTime(1, 1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc) ' Compliant
         Dim ctor14_1 = New DateTime(1, 3, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc) ' Compliant
+
+        MethodsWithInvocations(New DateTime(1, 1, 1)) ' Noncompliant FP
     End Sub
 
     Private Sub DateOnlyTimeOnlyCompliant()
         Dim dateOnly = New DateOnly(1, 1, 1) ' Compliant
         Dim timeOnly = New TimeOnly(1, 1, 1) ' Compliant
     End Sub
+
+    Private Sub MethodsWithInvocations(ByVal dateTime As Date)
+        dateTime.AddHours(1) ' Compliant
+
+        Dim dateTime1 = New DateTime(1, 1, 1).AddHours(1) ' Noncompliant FP
+
+        Dim dateTime2 = New DateTime(1, 1, 1) ' Noncompliant FP
+        dateTime2.AddHours(1)
+
+        Dim dateTime3 = New DateTime(1, 1, 1) ' Noncompliant FP
+        dateTime3.AddMinutes(1)
+
+        Dim dateTime4 = New DateTime(1, 1, 1) ' Noncompliant FP
+        dateTime4.AddSeconds(1)
+
+        Dim dateTime5 = New DateTime(1, 1, 1) ' Noncompliant FP
+        dateTime5.AddMilliseconds(1)
+
+        Dim dateTime6 = New DateTime(1, 1, 1) ' Noncompliant FP
+        dateTime6.AddMicroseconds(1)
+
+        Dim dateTime7 = New DateTime(1, 1, 1) ' Noncompliant
+        dateTime7.AddDays(1)
+
+        Dim dateTime8 = New DateTime(1, 1, 1) ' Noncompliant
+        dateTime8.AddMonths(1)
+
+        Dim dateTime9 = New DateTime(1, 1, 1) ' Noncompliant
+        dateTime9.AddYears(1)
+    End Sub
+
+    Private Sub MultipleInvokations()
+        Dim dateTime = New DateTime(1, 1, 1) ' Noncompliant
+        dateTime.AddDays(1).AddMonths(1).AddYears(1)
+
+        Dim dateTime1 = New DateTime(1, 1, 1) ' Noncompliant FP
+        dateTime1.AddDays(1).AddDays(1).AddDays(1).AddHours(1)
+    End Sub
+
+    Private dateTimeField As Date = New DateTime(1, 1, 1) ' Noncompliant
+    Private dateTimeField2 As Date = New DateTime(1, 1, 1) ' Noncompliant FP
+    Private dateTimeField3 As Date = New DateTime(1, 1, 1) ' Noncompliant FP
+
+    Private Sub ExpressionBodiedMethod()
+        dateTimeField2.AddHours(1)
+    End Sub
+
+    Private Function ExpressionBodiedMethod(ByVal flag As Boolean) As Date
+        If flag Then
+            If flag Then
+                Return If(flag, dateTimeField3.AddHours(1), New DateTime(1, 1, 1)) ' Noncompliant FP
+            Else
+                Return New DateTime(1, 1, 1) ' Noncompliant FP
+            End If
+        End If
+        Return If(flag, New DateTime(1, 1, 1, New GregorianCalendar()), New DateTime(1, 1, 1).AddHours(1)) ' Noncompliant FP
+    End Function
+
+    Public publicDateTimeField As Date = New DateTime(1, 1, 1) ' Noncompliant FP
+
+    Public Property publicDateTimeProperty As Date = New DateTime(1, 1, 1) ' Noncompliant FP
+
+    Public Property publicDateTimeProperty2 As Date
+
+    Private UnixEpoch As Date = New DateTime(1970, 1, 1) ' Noncompliant FP - Epoch time (can raise twice, is used most of the time to offset a date later)
+
+    Private Sub DateOffset(ByVal timeSpan As TimeSpan)
+        Dim utcDateTime = New DateTime(1, 1, 1) ' Noncompliant - FP
+        Dim secondDate = Date.Now - utcDateTime
+        Dim thirdDate = New DateTime(1, 1, 1) + secondDate ' Noncompliant FP
+
+        Dim logs = $"Total seconds: {Date.UtcNow.Subtract(New DateTime(1970, 1, 1)).TotalSeconds}" ' Noncompliant FP
+
+        Dim pickerDate = New DateTime(1, 1, 1).Add(timeSpan) ' Noncompliant - FP
+    End Sub
+
+    Private Function ToUnixTime(ByVal dateTime As Date) As Long
+        Dim timeSpan = dateTime - New DateTime(1970, 1, 1) ' Noncompliant FP
+        Dim timestamp = CLng(timeSpan.TotalSeconds)
+        Return timestamp
+    End Function
+
+    ' return inside private method with date parsing
+    Private Function TryParse(ByVal [date] As String) As Date?
+        Dim result As Date = Nothing
+
+        If Date.TryParse([date], result) Then
+            Return result
+        End If
+        Dim year As Integer = Nothing
+        Return If(Integer.TryParse([date], year), New DateTime(1, 1, 1), DirectCast(Nothing, Date?)) ' Noncompliant FP
+    End Function
 End Class

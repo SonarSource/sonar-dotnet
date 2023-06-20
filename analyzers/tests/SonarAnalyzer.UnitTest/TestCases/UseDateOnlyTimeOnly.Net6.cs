@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Runtime.InteropServices;
 
 public class Program
 {
@@ -86,11 +87,123 @@ public class Program
         // year, month, day, hour, minute, second, millisecond, microsecond calendar and DateTimeKind value
         var ctor14_0 = new DateTime(1, 1, 1, 1, 1, 1, 1, 1, new GregorianCalendar(), DateTimeKind.Utc); // Compliant
         var ctor14_1 = new DateTime(1, 3, 1, 1, 1, 1, 1, 1, new GregorianCalendar(), DateTimeKind.Utc); // Compliant
+
+        MethodsWithInvocations(new DateTime(1, 1, 1)); // Noncompliant FP
     }
 
     void DateOnlyTimeOnlyCompliant()
     {
         var dateOnly = new DateOnly(1, 1, 1); // Compliant
         var timeOnly = new TimeOnly(1, 1, 1); // Compliant
+    }
+
+    void MethodsWithInvocations(DateTime dateTime)
+    {
+        dateTime.AddHours(1); // Compliant
+
+        var dateTime1 = new DateTime(1, 1, 1).AddHours(1); // Noncompliant FP
+
+        var dateTime2 = new DateTime(1, 1, 1); // Noncompliant FP
+        dateTime2.AddHours(1);
+
+        var dateTime3 = new DateTime(1, 1, 1); // Noncompliant FP
+        dateTime3.AddMinutes(1);
+
+        var dateTime4 = new DateTime(1, 1, 1); // Noncompliant FP
+        dateTime4.AddSeconds(1);
+
+        var dateTime5 = new DateTime(1, 1, 1); // Noncompliant FP
+        dateTime5.AddMilliseconds(1);
+
+        var dateTime6 = new DateTime(1, 1, 1); // Noncompliant FP
+        dateTime6.AddMicroseconds(1);
+
+        var dateTime7 = new DateTime(1, 1, 1); // Noncompliant
+        dateTime7.AddDays(1);
+
+        var dateTime8 = new DateTime(1, 1, 1); // Noncompliant
+        dateTime8.AddMonths(1);
+
+        var dateTime9 = new DateTime(1, 1, 1); // Noncompliant
+        dateTime9.AddYears(1);
+    }
+
+    void MultipleInvokations()
+    {
+        var dateTime = new DateTime(1, 1, 1); // Noncompliant
+        _ = dateTime.AddDays(1).AddMonths(1).AddYears(1);
+
+        var dateTime1 = new DateTime(1, 1, 1); // Noncompliant FP
+        _ = dateTime1.AddDays(1).AddDays(1).AddDays(1).AddHours(1);
+
+        var dateTime2 = new DateTime(1, 1, 1); // Noncompliant
+        _ = dateTime2.AddDays(1).AddDays(1)?.AddDays(1).AddHours(1); // Error [CS0023]
+
+        var dateTime3 = new DateTime(1, 1, 1); // Noncompliant
+        _ = dateTime3.AddHours(1)?.AddDays(1).AddDays(1).AddDays(1); // Error [CS0023]
+    }
+
+    private DateTime dateTimeField = new DateTime(1, 1, 1); // Noncompliant
+    private DateTime dateTimeField2 = new DateTime(1, 1, 1); // Noncompliant FP
+    private DateTime dateTimeField3 = new DateTime(1, 1, 1); // Noncompliant FP
+
+    void ExpressionBodiedMethod() =>
+        dateTimeField2.AddHours(1);
+
+    DateTime ExpressionBodiedMethod(bool flag)
+    {
+        if (flag)
+        {
+            if (flag)
+            {
+                return flag ? dateTimeField3.AddHours(1) : new DateTime(1, 1, 1); // Noncompliant FP
+            }
+            else
+            {
+                return new DateTime(1, 1, 1); // Noncompliant FP
+            }
+        }
+        return flag
+            ? new DateTime(1, 1, 1) // Noncompliant FP
+            : new DateTime(1, 1, 1).AddHours(1); // Noncompliant FP
+    }
+
+    public DateTime publicDateTimeField = new DateTime(1, 1, 1); // Noncompliant FP
+
+    public DateTime publicDateTimeProperty { get; set; } = new DateTime(1, 1, 1); // Noncompliant FP
+
+    public DateTime publicDateTimeProperty2 { get; set; }
+
+    void InitializeProperty() =>
+        publicDateTimeProperty2 = new DateTime(1, 1, 1); // Noncompliant FP
+
+    private DateTime UnixEpoch = new DateTime(1970, 1, 1); // Noncompliant FP - Epoch time (can raise twice, is used most of the time to offset a date later)
+
+    void DateOffset(TimeSpan timeSpan)
+    {
+        var utcDateTime = new DateTime(1, 1, 1); // Noncompliant - FP
+        var secondDate = DateTime.Now - utcDateTime;
+        var thirdDate = new DateTime(1, 1, 1) + secondDate; // Noncompliant FP
+
+        var logs = $"Total seconds: {DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds}"; // Noncompliant FP
+
+        var pickerDate = new DateTime(1, 1, 1).Add(timeSpan); // Noncompliant - FP
+    }
+
+    long ToUnixTime(DateTime dateTime)
+    {
+        var timeSpan = dateTime - new DateTime(1970, 1, 1); // Noncompliant FP
+        var timestamp = (long)timeSpan.TotalSeconds;
+        return timestamp;
+    }
+
+    // return inside private method with date parsing
+    DateTime? TryParse(string date)
+    {
+        if (DateTime.TryParse(date, out var result))
+        {
+            return result;
+        }
+        return int.TryParse(date, out var year) ? new DateTime(1, 1, 1) : default(DateTime?); // Noncompliant FP
     }
 }
