@@ -33,7 +33,7 @@
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
-      <version>3.0.2</version>
+      <version>${findbugs.version}</version>
       <scope>provided</scope>
     </dependency>
 
@@ -51,12 +51,12 @@
     <dependency>
       <groupId>org.sonarsource.analyzer-commons</groupId>
       <artifactId>sonar-analyzer-commons</artifactId>
-      <version>${sonar.analyzer.commons}</version>
+      <version>${sonar.analyzer.commons.version}</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.analyzer-commons</groupId>
       <artifactId>sonar-xml-parsing</artifactId>
-      <version>${sonar.analyzer.commons}</version>
+      <version>${sonar.analyzer.commons.version}</version>
     </dependency>
 
     <!-- unit tests -->
@@ -69,7 +69,7 @@
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
-      <version>2.6</version>
+      <version>${commons.lang.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -93,7 +93,7 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>5.3.1</version>
+      <version>${mockito.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
