@@ -96,6 +96,18 @@ namespace Tests.Diagnostics
                 }
             }
         }
+
+        public void FromBytes()
+        {
+            var bytes = new byte[] { 80, 97, 115, 115, 119, 111, 114, 100 };
+            using (SecureString securePwd = new SecureString())
+            {
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    securePwd.AppendChar(Convert.ToChar(bytes[i])); // Compliant FN.
+                }
+            }
+        }
     }
 
     class AppendCharFromOtherType

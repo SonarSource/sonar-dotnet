@@ -67,5 +67,14 @@ Namespace Tests.Diagnostics
                 Next
             End Using
         End Sub
+
+        Public Sub FromBytes()
+            Dim bytes = New Byte() {80, 97, 115, 115, 119, 111, 114, 100}
+            Using securePwd As SecureString = New SecureString()
+                For i As Integer = 0 To bytes.Length - 1
+                    securePwd.AppendChar(Convert.ToChar(bytes(i))) ' Compliant FN.
+                Next
+            End Using
+        End Sub
     End Class
 End Namespace
