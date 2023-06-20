@@ -25,24 +25,33 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
 {
-#if NET
     private readonly VerifierBuilder builder = new VerifierBuilder<TimestampsShouldNotBeUsedAsPrimaryKeys>();
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp() =>
+    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp_Core() =>
         builder
             .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.cs")
-            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"))
-            .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
+            .AddEntityFrameworkReference()
             .Verify();
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp9() =>
+    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp9_Core() =>
         builder
             .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.CSharp9.cs")
-            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"))
-            .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
+            .AddEntityFrameworkReference()
             .WithOptions(ParseOptionsHelper.FromCSharp9)
             .Verify();
+}
+
+internal static class BuilderExtensions
+{
+    public static VerifierBuilder AddEntityFrameworkReference(this VerifierBuilder builder) =>
+        builder
+            .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
+#if NET
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"));
+#else
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFramework("6.0.0"));
 #endif
+
 }
