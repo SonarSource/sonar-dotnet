@@ -52,14 +52,14 @@ public class LocalStaticFunctions
         {
             var d = new Disposable();
             d.Dispose();
-            d.Dispose(); // FN: local functions are not supported
+            d.Dispose(); // Noncompliant
         }
 
         static void LocalStaticFunction()
         {
             var d = new Disposable();
             d.Dispose();
-            d.Dispose(); // FN: local functions are not supported
+            d.Dispose(); // Noncompliant
         }
     }
 }

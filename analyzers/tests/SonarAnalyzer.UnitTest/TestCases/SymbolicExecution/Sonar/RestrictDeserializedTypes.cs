@@ -131,7 +131,7 @@ namespace Tests.Diagnostics
             {
                 new BinaryFormatter {Binder = new SafeBinderExpressionWithNull()}.Deserialize(stream); // Compliant: safe binder
 
-                new BinaryFormatter {Binder = new UnsafeBinder()}.Deserialize(stream); // Compliant - FN: local functions are not verified by SE
+                new BinaryFormatter {Binder = new UnsafeBinder()}.Deserialize(stream); // Noncompliant [unsafeBinderLocalFunction]: unsafe binder used
             }
 
             Func<UnsafeBinder> binderFactoryUnsafe = () => new UnsafeBinder();
@@ -303,7 +303,7 @@ namespace Tests.Diagnostics
     internal sealed class UnsafeBinder : SerializationBinder
     {
         public override Type BindToType(string assemblyName, string typeName)
-//                           ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder12, unsafeBinder13, unsafeBinder14, unsafeBinder15, unsafeBinder16]
+//                           ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder12, unsafeBinder13, unsafeBinder14, unsafeBinder15, unsafeBinder16, unsafeBinderLocalFunction]
         {
             return Assembly.Load(assemblyName).GetType(typeName);
         }

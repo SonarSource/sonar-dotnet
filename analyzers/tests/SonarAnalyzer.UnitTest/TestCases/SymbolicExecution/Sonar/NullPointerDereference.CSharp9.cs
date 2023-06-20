@@ -13,7 +13,7 @@ void TopLevelLocalFunction()
     local.ToString();
 
     local = null;
-    local.ToString();   // FN
+    local.ToString();   // Noncompliant
 }
 
 public class Sample

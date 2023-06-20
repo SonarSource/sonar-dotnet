@@ -12,7 +12,7 @@ topLevel.Deserialize(ms); // Compliant: safe binder was used
 
 void TopLevelLocalFunction(MemoryStream ms)
 {
-    new BinaryFormatter().Deserialize(ms); // FN
+    new BinaryFormatter().Deserialize(ms); // Noncompliant
 
     var local = new BinaryFormatter();
     local.Binder = new SafeBinder();

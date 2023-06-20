@@ -25,7 +25,7 @@ void TopLevelLocalFunction()
     var i = (int)localnullable;
 
     localnullable = null;
-    i = (int)localnullable; // FN
+    i = (int)localnullable; // Noncompliant
 }
 
 public interface ISomething { }

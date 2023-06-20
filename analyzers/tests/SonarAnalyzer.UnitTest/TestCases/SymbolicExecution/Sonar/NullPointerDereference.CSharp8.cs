@@ -139,10 +139,10 @@ namespace Tests.Diagnostics.CSharp8
         public void Method()
         {
             string LocalFunction(string obj) =>
-                obj != null ? null : obj.ToLower(); //  Compliant - FN: local functions are not supported by the CFG
+                obj != null ? null : obj.ToLower(); //  Noncompliant
 
             static string LocalStaticFunction(string obj) =>
-                obj != null ? null : obj.ToLower(); //  Compliant - FN: local functions are not supported by the CFG
+                obj != null ? null : obj.ToLower(); //  Noncompliant
         }
     }
 }

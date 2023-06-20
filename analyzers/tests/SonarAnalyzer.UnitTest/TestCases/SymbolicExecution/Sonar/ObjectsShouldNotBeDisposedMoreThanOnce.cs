@@ -204,14 +204,14 @@ namespace Tests.Diagnostics
                 {
                     var d = new Disposable();
                     d.Dispose();
-                    d.Dispose(); // Compliant - FN: local functions are not supported by the CFG
+                    d.Dispose(); // Noncompliant
                 }
 
                 static void LocalStaticFunction()
                 {
                     var d = new Disposable();
                     d.Dispose();
-                    d.Dispose(); // Compliant - FN: local functions are not supported by the CFG
+                    d.Dispose(); // Noncompliant
                 }
             }
         }

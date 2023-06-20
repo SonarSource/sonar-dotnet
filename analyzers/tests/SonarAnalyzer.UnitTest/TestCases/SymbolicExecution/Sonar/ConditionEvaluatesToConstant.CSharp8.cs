@@ -138,8 +138,8 @@ namespace Tests.Diagnostics
             static int UseValueInside()
             {
                 var a = false;
-                if (a)  // FN Local static functions are not inspected in CFG
-                {
+                if (a)  // Noncompliant
+                {       // Secondary
                     return 0; // never executed
                 }
                 return 1;
@@ -323,8 +323,8 @@ namespace Tests.Diagnostics
             {
                 int? i = GetNullableInt();
 
-                if (i == null && i == 3) // FN
-                {
+                if (i == null && i == 3) // Noncompliant
+                { // Secondary
 
                 }
             }
@@ -338,8 +338,8 @@ namespace Tests.Diagnostics
             {
                 int? i = GetNullableInt();
 
-                if (i == null && i == 3) // FN
-                {
+                if (i == null && i == 3) // Noncompliant
+                { // Secondary
 
                 }
             }

@@ -138,7 +138,7 @@ class Basics
         static int ExtractValue(int? intOrNull)
         {
             intOrNull = null;
-            return intOrNull.Value;                                       // FN - content of static local function is not inspected by SE
+            return intOrNull.Value;   // Noncompliant
         }
     }
 }

@@ -284,13 +284,13 @@ namespace Tests.Diagnostics
                 void LocalFunction()
                 {
                     int? i1 = null;
-                    var i2 = (int)i1; // Compliant - FN: local functions are not supported by the CFG
+                    var i2 = (int)i1; // Noncompliant
                 }
 
                 static void LocalStaticFunction()
                 {
                     int? i1 = null;
-                    var i2 = (int)i1; // Compliant - FN: local functions are not supported by the CFG
+                    var i2 = (int)i1; // Noncompliant
                 }
             }
         }

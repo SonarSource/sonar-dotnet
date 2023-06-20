@@ -12,7 +12,7 @@ void TopLevelLocalFunction()
     var v = local.Value;
 
     local = null;
-    v = local.Value;   // FN
+    v = local.Value;   // Noncompliant
 }
 
 public class Sample
