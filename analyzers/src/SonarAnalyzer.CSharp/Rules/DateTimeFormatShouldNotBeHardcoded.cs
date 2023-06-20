@@ -24,4 +24,8 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class DateTimeFormatShouldNotBeHardcoded : DateTimeFormatShouldNotBeHardcodedBase<SyntaxKind, InvocationExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override bool IsMultiCharStringLiteral(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+        invocation.ArgumentList.Arguments[0].Expression.StringValue(semanticModel) is { } format
+        && format.Length > 1;
 }

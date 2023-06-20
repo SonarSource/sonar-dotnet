@@ -27,7 +27,9 @@ public abstract class DateTimeFormatShouldNotBeHardcodedBase<TSyntaxKind, TInvoc
     private const string DiagnosticId = "S6585";
     private const string ToStringLiteral = "ToString";
 
-    protected override string MessageFormat => "Use the \"ToString\" overload with an \"IFormatProvider\".";
+    protected abstract bool IsMultiCharStringLiteral(TInvocation invocation, SemanticModel semanticModel);
+
+    protected override string MessageFormat => "Do not hardcode the format specifier.";
 
     protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
@@ -41,6 +43,7 @@ public abstract class DateTimeFormatShouldNotBeHardcodedBase<TSyntaxKind, TInvoc
 
     protected override bool ShouldReportOnMethodCall(TInvocation invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor, ISymbol methodCallSymbol) =>
         methodCallSymbol is IMethodSymbol methodSymbol
-        && methodSymbol.Parameters.Count() == 1
-        && methodSymbol.Parameters[0].IsType(KnownType.System_String);
+        && methodSymbol.Parameters.Count() >= 1
+        && methodSymbol.Parameters[0].IsType(KnownType.System_String)
+        && IsMultiCharStringLiteral(invocation, semanticModel);
 }
