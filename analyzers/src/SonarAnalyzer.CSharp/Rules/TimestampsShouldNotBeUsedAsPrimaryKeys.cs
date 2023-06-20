@@ -56,8 +56,8 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
     {
         var propertyName = property.Identifier.ValueText;
         return propertyName.Equals("Id", StringComparison.InvariantCultureIgnoreCase)
-            || propertyName.Equals($"{className}Id", StringComparison.InvariantCultureIgnoreCase)
-            || HasKeyAttribute(property, semanticModel);
+        || propertyName.Equals($"{className}Id", StringComparison.InvariantCultureIgnoreCase)
+        || HasKeyAttribute(property, semanticModel);
     }
 
     private static bool HasKeyAttribute(PropertyDeclarationSyntax property, SemanticModel semanticModel) =>
