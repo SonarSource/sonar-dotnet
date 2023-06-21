@@ -5,7 +5,7 @@ Public Class DateTimeFormatShouldNotBeHardcoded
     Public Sub DateTimeCases()
         Dim StringRepresentation = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss") ' Noncompliant {{Do not hardcode the format specifier.}}
         '                                                   ^^^^^^^^^^^^^^^^^^^^^
-        StringRepresentation = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.GetCultureInfo("es-MX")) ' Noncompliant
+        StringRepresentation = DateTime.UtcNow.tOsTring("dd/MM/yyyy HH:mm:ss", CultureInfo.GetCultureInfo("es-MX")) ' Noncompliant
 
         StringRepresentation = DateTime.UtcNow.ToString(CultureInfo.GetCultureInfo("es-MX"))
         StringRepresentation = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)

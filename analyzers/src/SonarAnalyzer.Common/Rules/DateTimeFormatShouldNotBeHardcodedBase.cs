@@ -49,7 +49,7 @@ public abstract class DateTimeFormatShouldNotBeHardcodedBase<TSyntaxKind, TInvoc
     {
         if ((TInvocation)analysisContext.Node is var invocation
             && Language.Syntax.InvocationIdentifier(invocation) is { } identifier
-            && CheckedMethods.Where(x => x.Name.Equals(identifier.ValueText)) is var nameMatch
+            && CheckedMethods.Where(x => x.Name.Equals(identifier.ValueText, Language.NameComparison)) is var nameMatch
             && nameMatch.Any()
             && analysisContext.SemanticModel.GetSymbolInfo(identifier.Parent).Symbol is { } methodCallSymbol
             && nameMatch.FirstOrDefault(x => methodCallSymbol.ContainingType.ConstructedFrom.Is(x.ContainingType)) is { }
