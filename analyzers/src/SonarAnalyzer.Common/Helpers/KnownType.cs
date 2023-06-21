@@ -451,6 +451,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Security_Principal_NTAccount = new("System.Security.Principal.NTAccount");
         public static readonly KnownType System_Security_Principal_SecurityIdentifier = new("System.Security.Principal.SecurityIdentifier");
         public static readonly KnownType System_Security_Principal_WindowsIdentity = new("System.Security.Principal.WindowsIdentity");
+        public static readonly KnownType System_Security_SecureString = new("System.Security.SecureString");
         public static readonly KnownType System_Security_SecurityCriticalAttribute = new("System.Security.SecurityCriticalAttribute");
         public static readonly KnownType System_Security_SecuritySafeCriticalAttribute = new("System.Security.SecuritySafeCriticalAttribute");
         public static readonly KnownType System_SerializableAttribute = new("System.SerializableAttribute");

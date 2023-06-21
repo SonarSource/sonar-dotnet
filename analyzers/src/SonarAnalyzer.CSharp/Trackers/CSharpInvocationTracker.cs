@@ -26,14 +26,22 @@ namespace SonarAnalyzer.Helpers.Trackers
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.InvocationExpression };
 
         public override Condition ArgumentAtIndexIsStringConstant(int index) =>
-            context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList
-                       && argumentList.Arguments.Count > index
-                       && argumentList.Arguments[index].Expression.FindStringConstant(context.SemanticModel) is not null;
+            ArgumentAtIndexConformsTo(index, (argument, model) =>
+                argument.Expression.FindStringConstant(model) is not null);
 
         public override Condition ArgumentAtIndexIsAny(int index, params string[] values) =>
-            context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList
-                       && index < argumentList.Arguments.Count
-                       && values.Contains(argumentList.Arguments[index].Expression.FindStringConstant(context.SemanticModel));
+            ArgumentAtIndexConformsTo(index, (argument, model) =>
+                values.Contains(argument.Expression.FindStringConstant(model)));
+
+        public override Condition ArgumentAtIndexIs(int index, Func<SyntaxNode, SemanticModel, bool> predicate) =>
+            ArgumentAtIndexConformsTo(index, (argument, model) =>
+                predicate(argument, model));
+
+        private Condition ArgumentAtIndexConformsTo(int index, Func<ArgumentSyntax, SemanticModel, bool> predicate) => context =>
+            context.Node is InvocationExpressionSyntax { ArgumentList.Arguments: { } arguments }
+                && index < arguments.Count
+                && arguments[index] is { } argument
+                && predicate(argument, context.SemanticModel);
 
         public override Condition MatchProperty(MemberDescriptor member) =>
             context => ((InvocationExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax methodMemberAccess

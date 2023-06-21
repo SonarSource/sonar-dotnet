@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using System.Security;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using SonarAnalyzer.Json;
@@ -47,6 +48,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract void InitializeActions(SonarParametrizedAnalysisContext context);
+        protected abstract bool IsSecureStringAppendCharFromConstant(SyntaxNode argumentNode, SemanticModel model);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -105,6 +107,11 @@ namespace SonarAnalyzer.Rules
                pa.MatchSetter(),
                pa.AssignedValueIsConstant(),
                pa.MatchProperty(new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
+
+            var inv = Language.Tracker.Invocation;
+            inv.Track(input, new object[] { MessageHardcodedPassword },
+                inv.MatchMethod(new MemberDescriptor(KnownType.System_Security_SecureString, nameof(SecureString.AppendChar))),
+                inv.ArgumentAtIndexIs(0, IsSecureStringAppendCharFromConstant));
 
             InitializeActions(context);
             context.RegisterCompilationAction(CheckWebConfig);
