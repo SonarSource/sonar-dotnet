@@ -1,0 +1,59 @@
+<p>Using <code>unsafe</code> code blocks can lead to unintended security or stability risks.</p>
+<p><code>unsafe</code> code blocks allow developers to use features such as pointers, fixed buffers, function calls through pointers and manual memory
+management. Such features may be necessary for interoperability with native libraries, as these often require pointers. It may also increase
+performance in some critical areas, as certain bounds checks are not executed in an unsafe context.</p>
+<p><code>unsafe</code> code blocks aren’t necessarily dangerous, however, the contents of such blocks are not verified by the Common Language Runtime.
+Therefore, it is up to the programmer to ensure that no bugs are introduced through manual memory management or casting. If not done correctly, then
+those bugs can lead to memory corruption vulnerabilities such as stack overflows. <code>unsafe</code> code blocks should be used with caution because
+of these security and stability risks.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> There are any pointers or fixed buffers declared within the <code>unsafe</code> code block. </li>
+</ul>
+<p>There is a risk if you answered yes to the question.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<p>Unless absolutely necessary, do not use <code>unsafe</code> code blocks. If <code>unsafe</code> is used to increase performance, then the <a
+href="https://learn.microsoft.com/en-us/dotnet/standard/memory-and-spans/">Span and Memory APIs</a> may serve a similar purpose in a safe context.</p>
+<p>If it is not possible to remove the code block, then it should be kept as short as possible. Doing so reduces risk, as there is less code that can
+potentially introduce new bugs. Within the <code>unsafe</code> code block, make sure that:</p>
+<ul>
+  <li> All type casts are correct. </li>
+  <li> Memory is correctly allocated and then released. </li>
+  <li> Array accesses can never go out of bounds. </li>
+</ul>
+<h2>Sensitive Code Example</h2>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public unsafe int SubarraySum(int[] array, int start, int end)  // Sensitive
+{
+    var sum = 0;
+
+    // Skip array bound checks for extra performance
+    fixed (int* firstNumber = array)
+    {
+        for (int i = start; i &lt; end; i++)
+            sum += *(firstNumber + i);
+    }
+
+    return sum;
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre data-diff-id="1" data-diff-type="compliant">
+public int SubarraySum(int[] array, int start, int end)
+{
+    var sum = 0;
+
+    Span&lt;int&gt; span = array.AsSpan();
+    for (int i = start; i &lt; end; i++)
+        sum += span[i];
+
+    return sum;
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/787.html">MITRE, CWE-787</a> - Out-of-bounds Write </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code">Microsoft Learn</a> - Unsafe code, pointer types, and
+  function pointers </li>
+</ul>
+

@@ -6564,7 +6564,7 @@ internal static class RuleTypeMappingCS
         // ["S6637"],
         // ["S6638"],
         // ["S6639"],
-        // ["S6640"],
+        ["S6640"] = "SECURITY_HOTSPOT",
         // ["S6641"],
         // ["S6642"],
         // ["S6643"],
