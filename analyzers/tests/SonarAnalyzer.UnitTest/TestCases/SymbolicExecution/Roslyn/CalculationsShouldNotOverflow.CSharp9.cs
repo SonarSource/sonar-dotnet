@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 
 int i = 2147483600;
-i += 100; // FN, Top level statements are not supported
+i += 100; // FN
+
+i = int.MinValue;
+i--; // Noncompliant
 
 public class NativeInt
 {
