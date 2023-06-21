@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S3363";
-    private const string MessageFormat = "Timestamps should not be used as primary keys";
+    private const string MessageFormat = "'{0}' should not be used as a primary key";
 
     private static readonly KnownType[] TemporalTypes = new[]
     {
@@ -52,7 +52,7 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
 
             foreach (var keyProperty in keyProperties)
             {
-                c.ReportIssue(Diagnostic.Create(Rule, keyProperty.Type.GetLocation()));
+                c.ReportIssue(Diagnostic.Create(Rule, keyProperty.Type.GetLocation(), keyProperty.Type.GetName()));
             }
         }, SyntaxKind.ClassDeclaration);
 
