@@ -48,6 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             "www.w3.org",
             "xml.apache.org",
+            "maven.apache.org",
             "schemas.xmlsoap.org",
             "schemas.openxmlformats.org",
             "rdfs.org",
@@ -66,6 +67,9 @@ namespace SonarAnalyzer.Rules.CSharp
             "exslt.org",
             "docs.oasis-open.org",
             "ws-i.org",
+            "schemas.android.com",
+            "www.omg.org",
+            "www.opengis.net",
         };
 
         private static readonly string[] CommonlyUsedExampleDomains = { "example.com", "example.org", "test.com" };

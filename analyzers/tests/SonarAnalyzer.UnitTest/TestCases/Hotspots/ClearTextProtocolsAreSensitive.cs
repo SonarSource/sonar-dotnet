@@ -192,6 +192,10 @@ namespace Tests.Diagnostics
             "http://schemas.microsoft.com/framework/2003/xml/xslt/internal",
             "http://docs.oasis-open.org/wss/2004/01/",
             "http://ws-i.org/",
+            "http://schemas.android.com/apk/res/android",
+            "http://maven.apache.org/POM/4.0.0",
+            "http://www.omg.org/spec/UML/20131001",
+            "http://www.opengis.net/kml/2.2",
             "http://email:password@subdomain.www.w3.org",  // Noncompliant
             "http://domain.com/www.w3.org",                // Noncompliant
             "http://domain.com/path?domain=www.w3.org",    // Noncompliant
