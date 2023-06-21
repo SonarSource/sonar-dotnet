@@ -243,6 +243,7 @@ namespace SonarAnalyzer.Helpers
             {
                 AliasQualifiedNameSyntax { Alias.Identifier: var identifier } => identifier,
                 ArrayTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
+                AttributeSyntax { Name: { } name } => GetIdentifier(name),
                 BaseTypeDeclarationSyntax { Identifier: var identifier } => identifier,
                 ConstructorDeclarationSyntax { Identifier: var identifier } => identifier,
                 ConversionOperatorDeclarationSyntax { Type: { } type } => GetIdentifier(type),

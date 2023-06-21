@@ -32,6 +32,7 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
         KnownType.System_DateTimeOffset,
         KnownType.System_TimeSpan
     };
+    private static readonly string[] KeyAttributeTypeNames = TypeNamesForAttribute(KnownType.System_ComponentModel_DataAnnotations_KeyAttribute);
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -39,11 +40,13 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
         {
+            // To improve performance the attributes and property types are only matched by their names, rather than their actual symbol.
+            // This results in a couple of FNs, but those scenarios are very rare.
             var classDeclaration = (ClassDeclarationSyntax)c.Node;
             var className = classDeclaration.Identifier.ValueText;
             var keyProperties = classDeclaration.Members
                 .OfType<PropertyDeclarationSyntax>()
-                .Where(x => IsKeyProperty(x, className, c.SemanticModel) && IsTemporalType(x));
+                .Where(x => IsTemporalType(x) && IsKeyProperty(x, className));
 
             foreach (var keyProperty in keyProperties)
             {
@@ -51,19 +54,33 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
             }
         }, SyntaxKind.ClassDeclaration);
 
-    private static bool IsKeyProperty(PropertyDeclarationSyntax property, string className, SemanticModel semanticModel)
+    private static bool IsKeyProperty(PropertyDeclarationSyntax property, string className)
     {
         var propertyName = property.Identifier.ValueText;
         return propertyName.Equals("Id", StringComparison.InvariantCultureIgnoreCase)
             || propertyName.Equals($"{className}Id", StringComparison.InvariantCultureIgnoreCase)
-            || HasKeyAttribute(property, semanticModel);
+            || HasKeyAttribute(property);
     }
 
-    private static bool HasKeyAttribute(PropertyDeclarationSyntax property, SemanticModel semanticModel) =>
+    private static bool HasKeyAttribute(PropertyDeclarationSyntax property) =>
         property.AttributeLists
             .SelectMany(x => x.Attributes)
-            .Any(x => x.IsKnownType(KnownType.System_ComponentModel_DataAnnotations_KeyAttribute, semanticModel));
+            .Any(x => MatchesAttributeName(x, KeyAttributeTypeNames));
+
+    private static string[] TypeNamesForAttribute(KnownType attributeType) => new[]
+    {
+        attributeType.TypeName,
+        RemoveFromEnd(attributeType.TypeName, "Attribute"),
+        attributeType.FullName,
+        RemoveFromEnd(attributeType.FullName, "Attribute"),
+    };
+
+    private static string RemoveFromEnd(string text, string subtextFromEnd) =>
+        text.Substring(0, text.LastIndexOf(subtextFromEnd));
 
     private static bool IsTemporalType(PropertyDeclarationSyntax property) =>
         Array.Exists(TemporalTypes, x => property.Type.NameIs(x.TypeName) || property.Type.NameIs(x.FullName));
+
+    private static bool MatchesAttributeName(AttributeSyntax attribute, string[] candidates) =>
+        Array.Exists(candidates, x => attribute.NameIs(x));
 }

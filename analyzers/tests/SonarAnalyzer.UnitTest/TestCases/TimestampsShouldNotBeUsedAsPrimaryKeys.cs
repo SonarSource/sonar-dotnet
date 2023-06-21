@@ -103,7 +103,7 @@ class Attributes
     class AliasedKeyAttribute
     {
         [KeyAttributeAlias]
-        public DateTime KeyProperty { get; set; }       // Noncompliant
+        public DateTime KeyProperty { get; set; }       // FN - we don't cover aliased attributes to improve the analzyer's performance
     }
 
     class NoKeyAttribute
