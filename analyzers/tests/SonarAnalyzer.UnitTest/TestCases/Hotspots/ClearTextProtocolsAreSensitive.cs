@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Windows.Markup;
+using System.Xml;
 using System.Xml.Serialization;
 
 [assembly: XmlnsPrefix("http://schemas.catelproject.com", "catel")]
@@ -301,11 +302,53 @@ namespace Tests.Diagnostics
 
     public class XmlSerializerTests
     {
-        public void XmlSerializerNamespacesTest()
+        public void XmlSerializerTypes()
         {
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            var ns = new XmlSerializerNamespaces();
             ns.Add("books", "http://www.cpandl.com");
             ns.Add("money", "http://www.cohowinery.com");
+        }
+
+        public class TestXmlSerializationWriter : XmlSerializationWriter
+        {
+            public void M()
+            {
+                this.WriteElementStringRaw("name", "http://www.cohowinery.com", "value");
+            }
+
+            protected override void InitCallbacks() { }
+        }
+    }
+
+    public class xmlTests
+    {
+        public void XmlTypes()
+        {
+            var qn = new XmlQualifiedName("books", "http://www.cpandl.com");
+            var nsManager = new XmlNamespaceManager(null);
+            nsManager.AddNamespace("prefix", "http://www.cpandl.com");
+            nsManager.RemoveNamespace("prefix", "http://www.cpandl.com");
+            nsManager.LookupPrefix("http://www.cpandl.com");
+            var doc = new XmlDocument();
+            doc.CreateAttribute("prefix", "localName", "http://www.cpandl.com");
+            doc.CreateElement("prefix", "localName", "http://www.cpandl.com");
+            doc.CreateNode("nodeTypeString", "localName", "http://www.cpandl.com");
+            using (XmlWriter writer = XmlWriter.Create("output.xml"))
+            {
+                writer.WriteStartElement("localName", "http://www.cpandl.com");
+                writer.WriteElementString("localName", "http://www.cpandl.com", "value");
+                writer.WriteElementString("localName", "http://www.cpandl.com"); // Noncompliant. uri is passed to the "value" parameter
+            }
+        }
+    }
+
+    public class XamlTests
+    {
+        public void XmlnsDictionaryTest()
+        {
+            var dict = new XmlnsDictionary();
+            dict.Add("prefix", "http://www.cpandl.com");
+            dict.LookupPrefix("http://www.cpandl.com");
         }
     }
 }
@@ -360,7 +403,7 @@ namespace ClassNames
     public class HotelNetwork { }
 }
 
-// Attribute fakes. This can be removed once the WPF framework and System.Xaml can be referenced
+// Fakes. This can be removed once the WPF framework and System.Xaml can be referenced
 namespace System.Windows.Markup
 {
     public sealed class XmlnsPrefixAttribute : Attribute
@@ -374,5 +417,10 @@ namespace System.Windows.Markup
     public sealed class XmlnsCompatibleWithAttribute : Attribute
     {
         public XmlnsCompatibleWithAttribute(string ns1, string ns2) { }
+    }
+    public class XmlnsDictionary
+    {
+        public void Add(string prefix, string xmlNamespace) => throw new NotImplementedException();
+        public string LookupPrefix(string xmlNamespace) => throw new NotImplementedException();
     }
 }

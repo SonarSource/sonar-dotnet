@@ -216,11 +216,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     || (equalsValueClause.Parent is ParameterSyntax parameter && TokenContainsNamespace(parameter.Identifier)),
                 AssignmentExpressionSyntax assignmentExpression =>
                     assignmentExpression.Left.RemoveParentheses() is IdentifierNameSyntax identifierName && TokenContainsNamespace(identifierName.Identifier),
-                ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax invocation } } argument =>
-                    CSharpFacade.Instance.MethodParameterLookup(invocation, model).TryGetSymbol(argument, out var symbol)
-                        && symbol.Name == "ns"
-                        && symbol.ContainingNamespace is INamespaceSymbol ns
-                        && ns.Is($"global::{nameof(System)}.{nameof(System.Xml)}.{nameof(System.Xml.Serialization)}"),
+                ArgumentSyntax { Parent: ArgumentListSyntax { Parent: { } invocationOrCreation } } argument =>
+                    CSharpFacade.Instance.MethodParameterLookup(invocationOrCreation, model).TryGetSymbol(argument, out var symbol)
+                        && symbol switch
+                        {
+                            { Name: "ns", ContainingNamespace: { } ns } when ns.Is("System.Xml.Serialization") => true,
+                            { Name: "ns" or "uri" or "namespaceURI", ContainingNamespace: { } ns } when ns.Is("System.Xml") => true,
+                            { Name: "xmlNamespace", ContainingType.Name: "XmlnsDictionary", ContainingNamespace: { } ns } when ns.Is("System.Windows.Markup") => true,
+                            _ => false,
+                        },
                 _ => false
             };
 

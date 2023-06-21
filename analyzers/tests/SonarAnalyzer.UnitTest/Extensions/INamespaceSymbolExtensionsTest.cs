@@ -36,6 +36,7 @@ public class INamespaceSymbolExtensionsTest
     // Odd cases but nothing that needs a fix:
     [DataRow("System.Collections.Generic", "global.System.Collections.Generic")]
     [DataRow("System.Collections.Generic", "System::Collections::Generic")]
+    [DataRow("System.Collections.Generic", "System..Collections::::Generic")]
     public void Is_ValidNameSpaces(string code, string test)
     {
         var snippet = $$"""
