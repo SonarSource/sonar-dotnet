@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+public static class SyntaxTokenListExtensions
 {
-    public static class SyntaxTokenListExtensions
-    {
-        public static SyntaxToken? Find(this SyntaxTokenList tokenList, SyntaxKind kind) =>
-            tokenList.IndexOf(kind) is var index && index != -1
-            ? tokenList[index] : null;
-    }
+    public static SyntaxToken? Find(this SyntaxTokenList tokenList, SyntaxKind kind) =>
+        tokenList.IndexOf(kind) is var index and >= 0
+        ? tokenList[index] : null;
 }

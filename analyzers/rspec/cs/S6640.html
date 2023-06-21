@@ -23,7 +23,7 @@ potentially introduce new bugs. Within the <code>unsafe</code> code block, make 
 </ul>
 <h2>Sensitive Code Example</h2>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-public unsafe int subarraySum(int[] array, int start, int end)  // Sensitive
+public unsafe int SubarraySum(int[] array, int start, int end)  // Sensitive
 {
     var sum = 0;
 
@@ -39,7 +39,7 @@ public unsafe int subarraySum(int[] array, int start, int end)  // Sensitive
 </pre>
 <h2>Compliant Solution</h2>
 <pre data-diff-id="1" data-diff-type="compliant">
-public int subarraySum(int[] array, int start, int end)
+public int SubarraySum(int[] array, int start, int end)
 {
     var sum = 0;
 

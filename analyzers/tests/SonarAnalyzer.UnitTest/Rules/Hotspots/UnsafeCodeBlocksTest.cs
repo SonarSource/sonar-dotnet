@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules;
@@ -30,4 +31,18 @@ public class UnsafeCodeBlocksTest
     [TestMethod]
     public void UnsafeCodeBlocks() =>
         builder.AddPaths("UnsafeCodeBlocks.cs").Verify();
+
+#if NET
+
+    [TestMethod]
+    public void UnsafeRecord() =>
+        builder.AddSnippet("""unsafe record MyRecord(byte* Pointer);        // FN""")
+        .WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+    [TestMethod]
+    public void UnsafeRecordStruct() =>
+        builder.AddSnippet("""unsafe record struct MyRecord(byte* Pointer); // FN""")
+        .WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+#endif
 }
