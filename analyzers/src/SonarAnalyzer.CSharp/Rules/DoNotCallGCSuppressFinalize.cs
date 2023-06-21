@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public DoNotCallGCSuppressFinalize() : base(DiagnosticId) { }
 
-        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor, ISymbol methodCallSymbol)
+        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor)
         {
             if (invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>() is not { } methodDeclaration
                 || (methodDeclaration.Identifier.ValueText != "Dispose"

@@ -8,7 +8,7 @@ public class DateTimeFormatShouldNotBeHardcoded
     public void DateTimeCases()
     {
         var stringRepresentation = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss"); // Noncompliant {{Do not hardcode the format specifier.}}
-//                                                 ^^^^^^^^
+//                                                          ^^^^^^^^^^^^^^^^^^^^^
         stringRepresentation = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.GetCultureInfo("es-MX")); // Noncompliant
 
         stringRepresentation = DateTime.UtcNow.ToString(Format); // FN
@@ -49,5 +49,20 @@ public class DateTimeFormatShouldNotBeHardcoded
         stringRepresentation = timeOnly.ToString(CultureInfo.InvariantCulture);
         stringRepresentation = timeOnly.ToString("d");
         stringRepresentation = timeOnly.ToString("d", CultureInfo.GetCultureInfo("es-MX"));
+    }
+
+    public void ExoticCases()
+    {
+        var chainedInvocations = DateTime.UtcNow.AddDays(1).ToString("dd/MM/yyyy").EndsWith("1"); // Noncompliant
+        (true ? new DateTime(1) : new DateTime(1)).ToString("dd/MM/yyyy"); // Noncompliant
+        MyMethod().ToString("dd/MM/yyy");  // Noncompliant
+        DateTime MyMethod() => new DateTime(1);
+        new DateTime(1).ToString("dd/MM/yyy"); // Noncompliant
+        MyDate.ToString("dd/MM/yyy");
+    }
+
+    static class MyDate
+    {
+        public static string ToString(string str) => str;
     }
 }

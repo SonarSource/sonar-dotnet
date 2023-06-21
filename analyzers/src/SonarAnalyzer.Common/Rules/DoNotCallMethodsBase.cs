@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules
     {
         protected abstract IEnumerable<MemberDescriptor> CheckedMethods { get; }
 
-        protected virtual bool ShouldReportOnMethodCall(TInvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor, ISymbol methodCallSymbol) => true;
+        protected virtual bool ShouldReportOnMethodCall(TInvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor) => true;
 
         protected virtual bool IsInValidContext(TInvocationExpressionSyntax invocationSyntax, SemanticModel semanticModel) => true;
 
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules
                 && analysisContext.SemanticModel.GetSymbolInfo(identifier.Parent).Symbol is { } methodCallSymbol
                 && nameMatch.FirstOrDefault(x => methodCallSymbol.ContainingType.ConstructedFrom.Is(x.ContainingType)) is { } disallowedMethodSignature
                 && IsInValidContext(invocation, analysisContext.SemanticModel)
-                && ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel, disallowedMethodSignature, methodCallSymbol))
+                && ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel, disallowedMethodSignature))
             {
                 analysisContext.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(), disallowedMethodSignature.ToString()));
             }

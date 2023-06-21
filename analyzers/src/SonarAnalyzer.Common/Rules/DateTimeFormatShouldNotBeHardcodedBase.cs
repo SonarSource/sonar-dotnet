@@ -20,18 +20,19 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class DateTimeFormatShouldNotBeHardcodedBase<TSyntaxKind, TInvocation> : DoNotCallMethodsBase<TSyntaxKind, TInvocation>
+public abstract class DateTimeFormatShouldNotBeHardcodedBase<TSyntaxKind, TInvocation> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
     where TInvocation : SyntaxNode
 {
     private const string DiagnosticId = "S6585";
     private const string ToStringLiteral = "ToString";
 
+    protected abstract Location InvalidArgumentLocation(TInvocation invocation);
     protected abstract bool IsMultiCharStringLiteral(TInvocation invocation, SemanticModel semanticModel);
 
     protected override string MessageFormat => "Do not hardcode the format specifier.";
 
-    protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
+    protected IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
             new(KnownType.System_DateTime, ToStringLiteral),
             new(KnownType.System_DateTimeOffset, ToStringLiteral),
@@ -41,9 +42,26 @@ public abstract class DateTimeFormatShouldNotBeHardcodedBase<TSyntaxKind, TInvoc
 
     protected DateTimeFormatShouldNotBeHardcodedBase() : base(DiagnosticId) { }
 
-    protected override bool ShouldReportOnMethodCall(TInvocation invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor, ISymbol methodCallSymbol) =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, AnalyzeInvocation, Language.SyntaxKind.InvocationExpression);
+
+    private void AnalyzeInvocation(SonarSyntaxNodeReportingContext analysisContext)
+    {
+        if ((TInvocation)analysisContext.Node is var invocation
+            && Language.Syntax.InvocationIdentifier(invocation) is { } identifier
+            && CheckedMethods.Where(x => x.Name.Equals(identifier.ValueText)) is var nameMatch
+            && nameMatch.Any()
+            && analysisContext.SemanticModel.GetSymbolInfo(identifier.Parent).Symbol is { } methodCallSymbol
+            && nameMatch.FirstOrDefault(x => methodCallSymbol.ContainingType.ConstructedFrom.Is(x.ContainingType)) is { }
+            && ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel, methodCallSymbol))
+        {
+            analysisContext.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], InvalidArgumentLocation(invocation)));
+        }
+    }
+
+    private bool ShouldReportOnMethodCall(TInvocation invocation, SemanticModel semanticModel, ISymbol methodCallSymbol) =>
         methodCallSymbol is IMethodSymbol methodSymbol
-        && methodSymbol.Parameters.Count() >= 1
+        && methodSymbol.Parameters.Any()
         && methodSymbol.Parameters[0].IsType(KnownType.System_String)
         && IsMultiCharStringLiteral(invocation, semanticModel);
 }

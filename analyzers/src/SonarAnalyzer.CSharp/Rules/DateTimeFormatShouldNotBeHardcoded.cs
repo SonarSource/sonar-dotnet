@@ -25,7 +25,9 @@ public sealed class DateTimeFormatShouldNotBeHardcoded : DateTimeFormatShouldNot
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
+    protected override Location InvalidArgumentLocation(InvocationExpressionSyntax invocation) =>
+        invocation.ArgumentList.Arguments[0].Expression.GetLocation();
+
     protected override bool IsMultiCharStringLiteral(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-        invocation.ArgumentList.Arguments[0].Expression.StringValue(semanticModel) is { } format
-        && format.Length > 1;
+        invocation.ArgumentList.Arguments[0].Expression.StringValue(semanticModel) is { Length: > 1 };
 }
