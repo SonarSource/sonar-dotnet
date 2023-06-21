@@ -10,7 +10,7 @@ topLevel.Clear();
 void TopLevelLocalFunction()
 {
     var local = new List<int>();
-    local.Clear();   // FN
+    local.Clear();   // Noncompliant
 
     local.Add(42);
     local.Clear();

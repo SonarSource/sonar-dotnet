@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'e' is null on at least one execution path.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  567,
+"startColumn":  33,
+"endLine":  567,
+"endColumn":  34
+}
+}
+}
+]
+}

@@ -72,13 +72,13 @@ public class LocalStaticFunctions
         void LocalFunction(object o)
         {
             var list = new List<int>();
-            list.Clear(); // Compliant - FN: local functions are not supported by the CFG
+            list.Clear(); // Noncompliant
         }
 
         static void LocalStaticFunction(object o)
         {
             var list = new List<int>();
-            list.Clear(); // Compliant - FN: local functions are not supported by the CFG
+            list.Clear(); // Noncompliant
         }
     }
 }

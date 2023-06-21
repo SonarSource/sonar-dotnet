@@ -51,8 +51,8 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
         .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess, SonarRules.EmptyNullableValueAccess>())
         .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull, SonarRules.PublicMethodArgumentsShouldBeCheckedForNull>())
-        .Add(ObjectsShouldNotBeDisposedMoreThanOnce.S3966, CreateFactory<ObjectsShouldNotBeDisposedMoreThanOnce, SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce>())
         .Add(CalculationsShouldNotOverflow.S3949, CreateFactory<CalculationsShouldNotOverflow>())
+        .Add(ObjectsShouldNotBeDisposedMoreThanOnce.S3966, CreateFactory<ObjectsShouldNotBeDisposedMoreThanOnce, SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce>())
         .Add(EmptyCollectionsShouldNotBeEnumerated.S4158, CreateFactory<EmptyCollectionsShouldNotBeEnumerated, SonarRules.EmptyCollectionsShouldNotBeEnumerated>());
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
@@ -68,6 +68,14 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
             SyntaxKind.ConversionOperatorDeclaration,
             SyntaxKind.OperatorDeclaration,
             SyntaxKind.MethodDeclaration);
+
+        context.RegisterNodeAction(
+            c => Analyze<SyntaxNode>(context, c, x =>
+            {
+                var localFunction = (LocalFunctionStatementSyntaxWrapper)x;
+                return (SyntaxNode)localFunction.Body ?? localFunction.ExpressionBody;
+            }),
+            SyntaxKindEx.LocalFunctionStatement);
 
         context.RegisterNodeAction(
             c => Analyze<PropertyDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),

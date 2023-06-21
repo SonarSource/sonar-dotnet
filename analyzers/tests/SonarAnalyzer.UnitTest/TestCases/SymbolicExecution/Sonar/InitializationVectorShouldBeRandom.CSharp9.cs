@@ -14,7 +14,7 @@ void TopLevelLocalFunction()
 {
     using var aes = new AesCng();
     aes.CreateEncryptor();
-    aes.CreateEncryptor(aes.Key, new byte[16]); // FN
+    aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant
 }
 
 public class Sample

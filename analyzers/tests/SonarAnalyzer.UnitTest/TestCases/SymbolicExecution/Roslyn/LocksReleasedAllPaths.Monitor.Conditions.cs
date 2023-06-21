@@ -399,16 +399,16 @@ namespace Monitor_Conditions
 
             void LocalFunction()
             {
-                Monitor.Enter(other); // FN, local functions are not yet supported
+                Monitor.Enter(other); // Noncompliant
                 if (condition)
                     Monitor.Exit(other);
             }
 
-            static void StaticLocalFunction()
+            static void StaticLocalFunction(bool condition)
             {
                 var l = new object();
-                Monitor.Enter(l); // FN, local functions are not yet supported
-                if (1 == 2)
+                Monitor.Enter(l); // Noncompliant
+                if (condition)
                     Monitor.Exit(l);
             }
 

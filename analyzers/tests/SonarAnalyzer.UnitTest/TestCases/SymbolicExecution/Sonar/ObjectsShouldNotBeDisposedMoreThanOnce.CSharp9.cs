@@ -11,7 +11,7 @@ void TopLevelLocalFunction()
 {
     var local = new MemoryStream();
     local.Dispose();
-    local.Dispose();    // FN
+    local.Dispose();    // Noncompliant
 }
 
 public class Sample
