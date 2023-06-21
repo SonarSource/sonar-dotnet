@@ -1,14 +1,14 @@
-<p>The rule targets the use of multiple <code>DateTime.Now</code> calls, followed by some arithmetic operations, to measure the elapsed time between
-actions.</p>
+<p>The rule targets the use of <code>DateTime.Now</code> call followed by some arithmetic operation.</p>
 <h2>Why is this an issue?</h2>
-<p>Using repeated calls to <code>DateTime.Now</code> to measure elapsed time is not recommended since this property is subject to changes such as
-daylight savings transitions, which can invalidate the calculation if the change occurs during the benchmark session. Moreover,
-<code>DateTime.Now</code> is dependent on the system clock, which may have low resolution on older systems (as low as 15 milliseconds).</p>
+<p>Using <code>DateTime.Now</code> calls within a subtraction operation to measure elapsed time is not recommended. This property is subject to
+changes such as daylight savings transitions, which can invalidate the calculation if the change occurs during the benchmark session, or when updating
+a timer. Moreover, <code>DateTime.Now</code> is dependent on the system clock, which may have low resolution on older systems (as low as 15
+milliseconds).</p>
 <h2>How to fix it</h2>
-<p>Instead of the <code>DateTime.Now</code> property, it’s recommended to use <code>Stopwatch</code>, which is not affected by changes in time such as
-daylight savings (DST) and automatically checks for the existence of high-precision timers. As a bonus, the <code>StopWatch</code> class is also
-lightweight and computationally faster than <code>DateTime</code>.</p>
 <h3>Code examples</h3>
+<p>If the purpose is to benchmark something then, instead of the <code>DateTime.Now</code> property, it’s recommended to use <code>Stopwatch</code>,
+which is not affected by changes in time such as daylight savings (DST) and automatically checks for the existence of high-precision timers. As a
+bonus, the <code>StopWatch</code> class is also lightweight and computationally faster than <code>DateTime</code>.</p>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 Dim start = DateTime.Now ' First call, on March 26th 2:59 am
@@ -23,6 +23,22 @@ Dim stopWatch = Stopwatch.StartNew() ' Compliant
 stopWatch.Stop()
 
 Console.WriteLine($"{stopWatch.ElapsedMilliseconds} ms")
+</pre>
+<p>If, on the other hand, the goal is to refresh a timer prefer using the <code>DateTime.UtcNow</code> property, which guarantees reliable results
+when doing arithmetic operations during DST transitions.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+If (Date.Now - lastRefresh).TotalMilliseconds &gt; MinRefreshInterval Then
+    lastRefresh = Date.Now
+    ' Refresh
+End If
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+If (Date.UtcNow - lastRefresh).TotalMilliseconds &gt; MinRefreshInterval Then
+    lastRefresh = Date.UtcNow
+    ' Refresh
+End If
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
