@@ -21,14 +21,14 @@ public class Sample
         void SafeLocal(byte noPointer) { }                          // Compliant
     }
 
-    unsafe class UnsafeClass { }                                    // FN
+    unsafe class UnsafeClass { }                                    // Noncompliant
 
-    unsafe struct UnsafeStruct                                      // FN
+    unsafe struct UnsafeStruct                                      // Noncompliant
     {
         unsafe fixed byte unsafeFixedBuffer[16];                    // FN
     }
 
-    unsafe interface IUnsafeInterface { }                           // FN
+    unsafe interface IUnsafeInterface { }                           // Noncompliant
 
     unsafe Sample(byte* pointer) { }                                // Noncompliant
 
