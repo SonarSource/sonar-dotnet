@@ -38,13 +38,13 @@ public class Sample
 
     unsafe byte* unsafeField;                                       // Noncompliant
 
-    unsafe byte* UnsafeProperty { get; }                            // FN
+    unsafe byte* UnsafeProperty { get; }                            // Noncompliant
 
     unsafe event EventHandler UnsafeEvent;                          // Noncompliant
 
     unsafe delegate void UnsafeDelegate(byte* pointer);             // FN
 
-    unsafe int this[int i] => 5;                                    // FN
+    unsafe int this[int i] => 5;                                    // Noncompliant
 
     public unsafe static Sample operator +(Sample other) => other;  // Noncompliant
 
