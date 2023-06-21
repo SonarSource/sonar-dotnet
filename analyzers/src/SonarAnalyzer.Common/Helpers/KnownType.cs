@@ -82,6 +82,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableOrchestrationContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationContext");
         public static readonly KnownType Microsoft_Azure_WebJobs_FunctionNameAttribute = new("Microsoft.Azure.WebJobs.FunctionNameAttribute");
         public static readonly KnownType Microsoft_Data_Sqlite_SqliteCommand = new("Microsoft.Data.Sqlite.SqliteCommand");
+        public static readonly KnownType Microsoft_EntityFramework_DbContext = new("System.Data.Entity.DbContext");
+        public static readonly KnownType Microsoft_EntityFrameworkCore_DbContext = new("Microsoft.EntityFrameworkCore.DbContext");
         public static readonly KnownType Microsoft_EntityFrameworkCore_DbContextOptionsBuilder = new("Microsoft.EntityFrameworkCore.DbContextOptionsBuilder");
         public static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new("Microsoft.EntityFrameworkCore.Migrations.Migration");
         public static readonly KnownType Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions");

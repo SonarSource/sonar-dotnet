@@ -28,18 +28,24 @@ public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
 {
     [TestMethod]
     public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp() =>
-        CreateVerifier<TimestampsShouldNotBeUsedAsPrimaryKeys>("TimestampsShouldNotBeUsedAsPrimaryKeys.cs").Verify();
+        CreateVerifier<TimestampsShouldNotBeUsedAsPrimaryKeys>("TimestampsShouldNotBeUsedAsPrimaryKeys.CSharp.cs").Verify();
 
     [TestMethod]
     public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp9() =>
-    CreateVerifier<TimestampsShouldNotBeUsedAsPrimaryKeys>("TimestampsShouldNotBeUsedAsPrimaryKeys.CSharp9.cs")
-        .WithOptions(ParseOptionsHelper.FromCSharp9)
-        .Verify();
+        CreateVerifier<TimestampsShouldNotBeUsedAsPrimaryKeys>("TimestampsShouldNotBeUsedAsPrimaryKeys.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
+
+    [TestMethod]
+    public void TimestampsShouldNotBeUsedAsPrimaryKeys_NoReferenceToEntityFramework_CSharp() =>
+        new VerifierBuilder<TimestampsShouldNotBeUsedAsPrimaryKeys>()
+            .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.NoReferenceToEntityFramework.CSharp.cs")
+            .Verify();
 
 #if NET
     [TestMethod]
     public void TimestampsShouldNotBeUsedAsPrimaryKeys_EntityFrameworkCore_CSharp() =>
-        CreateVerifier<TimestampsShouldNotBeUsedAsPrimaryKeys>("TimestampsShouldNotBeUsedAsPrimaryKeys.EntityFrameworkCore.cs").Verify();
+        CreateVerifier<TimestampsShouldNotBeUsedAsPrimaryKeys>("TimestampsShouldNotBeUsedAsPrimaryKeys.EntityFrameworkCore.CSharp.cs").Verify();
 #endif
 
     private static VerifierBuilder CreateVerifier<TAnalyzer>(string testFileName)

@@ -40,21 +40,33 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(start =>
         {
-            // To improve performance the attributes and property types are only matched by their names, rather than their actual symbol.
-            // This results in a couple of FNs, but those scenarios are very rare.
-            var classDeclaration = (ClassDeclarationSyntax)c.Node;
-            var className = classDeclaration.Identifier.ValueText;
-            var keyProperties = classDeclaration.Members
-                .OfType<PropertyDeclarationSyntax>()
-                .Where(x => IsPublicProperty(x) && IsTemporalType(x) && IsKeyProperty(x, className));
-
-            foreach (var keyProperty in keyProperties)
+            if (!IsReferencingEntityFramework(start.Compilation))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, keyProperty.Type.GetLocation(), keyProperty.Type.GetName()));
+                return;
             }
-        }, SyntaxKind.ClassDeclaration);
+
+            context.RegisterNodeAction(c =>
+            {
+                // To improve performance the attributes and property types are only matched by their names, rather than their actual symbol.
+                // This results in a couple of FNs, but those scenarios are very rare.
+                var classDeclaration = (ClassDeclarationSyntax)c.Node;
+                var className = classDeclaration.Identifier.ValueText;
+                var keyProperties = classDeclaration.Members
+                    .OfType<PropertyDeclarationSyntax>()
+                    .Where(x => IsPublicProperty(x) && IsTemporalType(x) && IsKeyProperty(x, className));
+
+                foreach (var keyProperty in keyProperties)
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, keyProperty.Type.GetLocation(), keyProperty.Type.GetName()));
+                }
+            }, SyntaxKind.ClassDeclaration);
+        });
+
+    private static bool IsReferencingEntityFramework(Compilation compilation) =>
+        compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_DbContext) is not null
+        || compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFramework_DbContext) is not null;
 
     private static bool IsPublicProperty(PropertyDeclarationSyntax property) =>
         property.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword));
