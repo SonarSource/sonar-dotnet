@@ -45,6 +45,14 @@ public sealed class UnsafeCodeBlocks : HotspotDiagnosticAnalyzer
                 }
             },
             SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration, SyntaxKind.DestructorDeclaration, SyntaxKind.OperatorDeclaration);
+        context.RegisterNodeAction(c =>
+            {
+                if (c.Node is BaseTypeDeclarationSyntax { Modifiers: var modifiers }
+                    && modifiers.Find(SyntaxKind.UnsafeKeyword) is { } unsafeModifier)
+                {
+                    Report(c, unsafeModifier);
+                }
+            }, SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration);
     }
 
     private void ReportIfUnsafe(SonarSyntaxNodeReportingContext context, SyntaxTokenList modifiers)
