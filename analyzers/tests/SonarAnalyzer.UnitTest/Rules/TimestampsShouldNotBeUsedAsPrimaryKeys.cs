@@ -47,4 +47,13 @@ public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
             .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.CSharp9.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp9)
             .Verify();
+
+#if NET
+    [TestMethod]
+    public void TimestampsShouldNotBeUsedAsPrimaryKeys_EntityFrameworkCore_CSharp() =>
+        builder
+            .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.EntityFrameworkCore.cs")
+            .Verify();
+#endif
+
 }

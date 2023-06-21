@@ -28,9 +28,11 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
 
     private static readonly KnownType[] TemporalTypes = new[]
     {
+        KnownType.System_DateOnly,
         KnownType.System_DateTime,
         KnownType.System_DateTimeOffset,
-        KnownType.System_TimeSpan
+        KnownType.System_TimeSpan,
+        KnownType.System_TimeOnly
     };
     private static readonly string[] KeyAttributeTypeNames = TypeNamesForAttribute(KnownType.System_ComponentModel_DataAnnotations_KeyAttribute);
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
