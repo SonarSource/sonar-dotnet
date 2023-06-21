@@ -35,7 +35,7 @@ public class UnsafeCodeBlocksTest
 
     [TestMethod]
     public void UnsafeRecords() =>
-        builder.AddSnippet("""unsafe record MyRecord(byte* Pointer);    // FN""")
+        builder.AddSnippet("""unsafe record MyRecord(byte* Pointer);    // Noncompliant""")
         .WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #endif
