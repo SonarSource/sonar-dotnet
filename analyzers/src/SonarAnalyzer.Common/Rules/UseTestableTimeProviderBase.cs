@@ -18,10 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+
 namespace SonarAnalyzer.Rules
 {
     public abstract class UseTestableTimeProviderBase<TSyntaxKind> : SonarDiagnosticAnalyzer
-         where TSyntaxKind : struct
+         where TSyntaxKind : struct, Enum
     {
         private const string DiagnosticId = "S6354";
         private const string MessageFormat = "Use a testable (date) time provider instead.";
@@ -33,6 +35,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
+        protected abstract bool Ignore(SyntaxNode ancestor, SemanticModel semanticModel);
+
         protected UseTestableTimeProviderBase() =>
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
 
@@ -41,7 +45,8 @@ namespace SonarAnalyzer.Rules
             {
                 if (IsDateTimeProviderProperty(Language.Syntax.NodeIdentifier(c.Node).Value.Text)
                     && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IPropertySymbol property
-                    && property.IsInType(trackedTypes))
+                    && property.IsInType(trackedTypes)
+                    && !c.Node.Ancestors().Any(x => Ignore(x, c.SemanticModel)))
                 {
                     c.ReportIssue(Diagnostic.Create(rule, c.Node.Parent.GetLocation()));
                 }

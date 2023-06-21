@@ -18,11 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class UseTestableTimeProvider : UseTestableTimeProviderBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class UseTestableTimeProvider : UseTestableTimeProviderBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-    }
+    private static readonly SyntaxKind[] IgnoreKinds = new[] { SyntaxKind.NameOfKeyword, SyntaxKind.XmlCrefAttribute };
+
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override bool Ignore(SyntaxNode ancestor, SemanticModel semanticModel) =>
+        ancestor.IsAnyKind(IgnoreKinds);
 }
