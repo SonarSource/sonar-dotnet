@@ -137,6 +137,12 @@ class NotProperties
     public DateTime Id() => DateTime.Now;
 }
 
+class PropertyIsNotPublic
+{
+    [Key]
+    internal DateTime Id { get; set; }                  // Compliant - Entity Framework only maps public properties to keys
+}
+
 class NonClassTypes
 {
     struct StructEntity

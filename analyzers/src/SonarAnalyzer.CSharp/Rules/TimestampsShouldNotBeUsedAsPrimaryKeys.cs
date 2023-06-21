@@ -25,8 +25,6 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
 {
     private const string DiagnosticId = "S3363";
     private const string MessageFormat = "Timestamps should not be used as primary keys";
-    // Temporal types should not be used as primary keys
-    // Date and time values should not be used as primary keys
 
     private static readonly KnownType[] TemporalTypes = new[]
     {
@@ -50,13 +48,16 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
             var className = classDeclaration.Identifier.ValueText;
             var keyProperties = classDeclaration.Members
                 .OfType<PropertyDeclarationSyntax>()
-                .Where(x => IsTemporalType(x) && IsKeyProperty(x, className));
+                .Where(x => IsPublicProperty(x) && IsTemporalType(x) && IsKeyProperty(x, className));
 
             foreach (var keyProperty in keyProperties)
             {
                 c.ReportIssue(Diagnostic.Create(Rule, keyProperty.Type.GetLocation()));
             }
         }, SyntaxKind.ClassDeclaration);
+
+    private static bool IsPublicProperty(PropertyDeclarationSyntax property) =>
+        property.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword));
 
     private static bool IsKeyProperty(PropertyDeclarationSyntax property, string className)
     {
