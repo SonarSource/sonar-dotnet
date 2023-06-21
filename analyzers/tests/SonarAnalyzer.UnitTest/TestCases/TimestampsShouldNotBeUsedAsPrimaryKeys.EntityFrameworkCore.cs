@@ -6,12 +6,12 @@ class TemporalTypes
 {
     class DateOnlyKey
     {
-        public DateOnly Id { get; set; }                // Noncompliant
+        public DateOnly Id { get; set; }            // Noncompliant
     }
 
     class TimeOnlyKey
     {
-        public TimeOnly Id { get; set; }                // Noncompliant
+        public TimeOnly Id { get; set; }            // Noncompliant
     }
 }
 
@@ -22,13 +22,13 @@ class ClassWithPrimaryKeyAttribute
     [PrimaryKey(nameof(KeyProperty))]
     class PrimaryKeyWithSingleProperty
     {
-        public DateTime KeyProperty { get; set; } // FN - possible, but unlikely scenario
+        public DateTime KeyProperty { get; set; }   // FN - possible, but unlikely scenario
     }
 
     [PrimaryKey(nameof(DateProperty), nameof(IntProperty))]
     class PrimaryKeyWithSingleProperty
     {
-        public DateTime DateProperty { get; set; } // Compliant - the rule will not raise warnings when a temporal type is part of a composite key
+        public DateTime DateProperty { get; set; }  // Compliant - the rule will not raise warnings when a temporal type is part of a composite key
         public int IntProperty { get; set; }
     }
 }
