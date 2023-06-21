@@ -42,7 +42,7 @@ public class Sample
 
     unsafe event EventHandler UnsafeEvent;                          // Noncompliant
 
-    unsafe delegate void UnsafeDelegate(byte* pointer);             // FN
+    unsafe delegate void UnsafeDelegate(byte* pointer);             // Noncompliant
 
     unsafe int this[int i] => 5;                                    // Noncompliant
 

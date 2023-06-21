@@ -40,30 +40,23 @@ public sealed class UnsafeCodeBlocks : HotspotDiagnosticAnalyzer
             c => Report(c, ((UnsafeStatementSyntax)c.Node).UnsafeKeyword),
             SyntaxKind.UnsafeStatement);
         context.RegisterNodeAction(
-            c => ReportIfUnsafe(c, ((BaseMethodDeclarationSyntax)c.Node).Modifiers),
-            SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration, SyntaxKind.DestructorDeclaration, SyntaxKind.OperatorDeclaration);
-        context.RegisterNodeAction(
             c => ReportIfUnsafe(c, ((BaseTypeDeclarationSyntax)c.Node).Modifiers),
             SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration, SyntaxKindEx.RecordStructDeclaration);
         context.RegisterNodeAction(
+            c => ReportIfUnsafe(c, ((BaseMethodDeclarationSyntax)c.Node).Modifiers),
+            SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration, SyntaxKind.DestructorDeclaration, SyntaxKind.OperatorDeclaration);
+        context.RegisterNodeAction(
             c => ReportIfUnsafe(c, ((LocalFunctionStatementSyntaxWrapper)c.Node).Modifiers),
             SyntaxKindEx.LocalFunctionStatement);
-        context.RegisterNodeAction(c =>
-            {
-                if (c.Node is BaseFieldDeclarationSyntax { Modifiers: var modifiers })
-                {
-                    ReportIfUnsafe(c, modifiers);
-                }
-            },
+        context.RegisterNodeAction(
+            c => ReportIfUnsafe(c, ((BaseFieldDeclarationSyntax)c.Node).Modifiers),
             SyntaxKind.FieldDeclaration, SyntaxKind.EventFieldDeclaration);
-        context.RegisterNodeAction(c =>
-            {
-                if (c.Node is BasePropertyDeclarationSyntax { Modifiers: var modifiers })
-                {
-                    ReportIfUnsafe(c, modifiers);
-                }
-            },
+        context.RegisterNodeAction(
+            c => ReportIfUnsafe(c, ((BasePropertyDeclarationSyntax)c.Node).Modifiers),
             SyntaxKind.PropertyDeclaration, SyntaxKind.IndexerDeclaration);
+        context.RegisterNodeAction(
+            c => ReportIfUnsafe(c, ((DelegateDeclarationSyntax)c.Node).Modifiers),
+            SyntaxKind.DelegateDeclaration);
     }
 
     private void ReportIfUnsafe(SonarSyntaxNodeReportingContext context, SyntaxTokenList modifiers)
