@@ -46,6 +46,7 @@ public class Sample
 }";
             TestHelper.CompileCfgCS(code).Should().NotBeNull();
         }
+
         [TestMethod]
         public void Create_ReturnsCfg_TopLevelStatements()
         {
