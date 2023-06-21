@@ -55,6 +55,7 @@ public interface ISyntaxKindFacade<out TSyntaxKind>
     abstract TSyntaxKind SimpleMemberAccessExpression { get; }
     abstract TSyntaxKind[] StringLiteralExpressions { get; }
     abstract TSyntaxKind StructDeclaration { get; }
+    abstract TSyntaxKind SubtractExpression { get; }
     abstract TSyntaxKind[] TypeDeclaration { get; }
     abstract TSyntaxKind VariableDeclarator { get; }
     abstract TSyntaxKind WhitespaceTrivia { get; }

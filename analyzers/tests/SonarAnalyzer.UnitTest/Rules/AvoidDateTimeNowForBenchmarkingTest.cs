@@ -26,14 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class AvoidDateTimeNowForBenchmarkingTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.AvoidDateTimeNowForBenchmarking>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.AvoidDateTimeNowForBenchmarking>();
-
     [TestMethod]
     public void AvoidDateTimeNowForBenchmarking_CS() =>
-        builderCS.AddPaths("AvoidDateTimeNowForBenchmarking.cs").Verify();
+        new VerifierBuilder<CS.AvoidDateTimeNowForBenchmarking>().AddPaths("AvoidDateTimeNowForBenchmarking.cs").Verify();
 
     [TestMethod]
     public void AvoidDateTimeNowForBenchmarking_VB() =>
-        builderVB.AddPaths("AvoidDateTimeNowForBenchmarking.vb").Verify();
+        new VerifierBuilder<VB.AvoidDateTimeNowForBenchmarking>().AddPaths("AvoidDateTimeNowForBenchmarking.vb").Verify();
 }

@@ -20,12 +20,31 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class AvoidDateTimeNowForBenchmarkingBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TBinaryExpression, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TMemberAccess : SyntaxNode
+    where TBinaryExpression : SyntaxNode
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6561";
-
+    private const string Now = "Now";
     protected override string MessageFormat => "Avoid using \"DateTime.Now\" for benchmarking or timing operations";
 
+    protected abstract SyntaxNode GetLeftNode(TBinaryExpression binaryExpression);
+
     protected AvoidDateTimeNowForBenchmarkingBase() : base(DiagnosticId) { }
+
+    protected sealed override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                var binaryExpression = (TBinaryExpression)c.Node;
+
+                if (GetLeftNode(binaryExpression) is TMemberAccess memberAccess
+                    && Language.Syntax.IsMemberAccessOnKnownType(memberAccess, Now, KnownType.System_DateTime, c.SemanticModel))
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                }
+            },
+            Language.SyntaxKind.SubtractExpression);
 }

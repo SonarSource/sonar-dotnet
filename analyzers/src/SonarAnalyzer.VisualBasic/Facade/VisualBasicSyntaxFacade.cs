@@ -141,4 +141,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool HasExactlyNArguments(SyntaxNode invocation, int count) =>
         Cast<InvocationExpressionSyntax>(invocation).HasExactlyNArguments(count);
+
+    public override bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
+        Cast<MemberAccessExpressionSyntax>(memberAccess).IsMemberAccessOnKnownType(name, knownType, semanticModel);
 }
