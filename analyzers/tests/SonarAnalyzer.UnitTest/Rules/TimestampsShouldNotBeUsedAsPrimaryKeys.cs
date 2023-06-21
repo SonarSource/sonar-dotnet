@@ -30,7 +30,8 @@ public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
             .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
 
 #if NET
-            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"));
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"))
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreAbstractions("7.0.0"));
 #else
             .AddReferences(NuGetMetadataReference.MicrosoftEntityFramework("6.0.0"));
 #endif

@@ -81,6 +81,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftDataSqliteCore(string packageVersion = "2.0.0") => Create("Microsoft.Data.Sqlite.Core", packageVersion);
         public static References MicrosoftEntityFramework(string packageVersion) => Create("EntityFramework", packageVersion);
         public static References MicrosoftEntityFrameworkCore(string packageVersion) => Create("Microsoft.EntityFrameworkCore", packageVersion);
+        public static References MicrosoftEntityFrameworkCoreAbstractions(string packageVersion) => Create("Microsoft.EntityFrameworkCore.Abstractions", packageVersion);
         public static References MicrosoftEntityFrameworkCoreSqliteCore(string packageVersion) => Create("Microsoft.EntityFrameworkCore.Sqlite.Core", packageVersion);
         public static References MicrosoftEntityFrameworkCoreSqlServer(string packageVersion) => Create("Microsoft.EntityFrameworkCore.SqlServer", packageVersion);
         public static References MicrosoftEntityFrameworkCoreRelational(string packageVersion) => Create("Microsoft.EntityFrameworkCore.Relational", packageVersion);

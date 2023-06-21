@@ -1,5 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 
 // DateOnly and TimeOnly types are available in .NET 6+
 class TemporalTypes
@@ -26,7 +26,7 @@ class ClassWithPrimaryKeyAttribute
     }
 
     [PrimaryKey(nameof(DateProperty), nameof(IntProperty))]
-    class PrimaryKeyWithSingleProperty
+    class PrimaryKeyWithMultipleProperties
     {
         public DateTime DateProperty { get; set; }  // Compliant - the rule will not raise warnings when a temporal type is part of a composite key
         public int IntProperty { get; set; }
