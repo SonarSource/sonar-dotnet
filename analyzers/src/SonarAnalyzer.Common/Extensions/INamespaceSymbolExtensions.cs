@@ -18,25 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions;
+
+internal static class INamespaceSymbolExtensions
 {
-    internal static class INamespaceSymbolExtensions
+    public static bool Is(this INamespaceSymbol symbol, string name)
     {
-        public static bool Is(this INamespaceSymbol symbol, string name)
+        var ns = name.Split(new[] { ".", "::" }, StringSplitOptions.RemoveEmptyEntries);
+        for (var i = ns.Length - 1; i >= 0; i--)
         {
-            var ns = name.Split(new[] { ".", "::" }, StringSplitOptions.RemoveEmptyEntries);
-            for (var i = ns.Length - 1; i >= 0; i--)
+            if (symbol is null || symbol.Name != ns[i])
             {
-                if (symbol is null || symbol.Name != ns[i])
-                {
-                    return i == 0 && ns[i] == "global" && symbol?.IsGlobalNamespace is true;
-                }
-                else
-                {
-                    symbol = symbol.ContainingNamespace;
-                }
+                return i == 0 && ns[i] == "global" && symbol?.IsGlobalNamespace is true;
             }
-            return true;
+            else
+            {
+                symbol = symbol.ContainingNamespace;
+            }
         }
+        return symbol is null || symbol.IsGlobalNamespace;
     }
 }
