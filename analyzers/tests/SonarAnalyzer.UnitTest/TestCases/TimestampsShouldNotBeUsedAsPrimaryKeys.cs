@@ -69,7 +69,7 @@ class NonTemporalTypes
 
 class Attributes
 {
-    class ClassWithSingleKeyAttribute
+    class SingleKeyAttribute
     {
         [Key]
         public DateTime KeyProperty { get; set; }       // Noncompliant
@@ -85,6 +85,18 @@ class Attributes
     {
         [Column("KeyColumn")]
         [Key]
+        public DateTime KeyProperty { get; set; }       // Noncompliant
+    }
+
+    class KeyWithAttributeName
+    {
+        [KeyAttribute]
+        public DateTime KeyProperty { get; set; }       // Noncompliant
+    }
+
+    class KeyAttributeWithFullName
+    {
+        [System.ComponentModel.DataAnnotations.KeyAttribute]
         public DateTime KeyProperty { get; set; }       // Noncompliant
     }
 
