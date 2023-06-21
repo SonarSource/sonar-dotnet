@@ -2929,3 +2929,21 @@ public class Repro_4784
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/7489
+public class Repro_7489
+{
+    public void Method()
+    {
+        int? value;
+        var hasValue = true;
+        while (hasValue)    // Noncompliant FP when the tuple deconstruction is in the body
+        {
+            value = null;
+            hasValue = value.HasValue;
+
+            foreach (var (a, b) in new List<(int, int)>())
+            { } // It only reproduces when this is present
+        }
+    }
+}
