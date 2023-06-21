@@ -76,7 +76,10 @@ End Class", AnalyzerLanguage.VisualBasic);
                                                   OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
             var (tree, semanticModel) = Compile(snippet, ignoreErrors, language, outputKind: outputKind);
-            var method = tree.GetRoot().DescendantNodes().First(IsMethod);
+            var root = tree.GetRoot();
+            var method = outputKind == OutputKind.ConsoleApplication && root.ChildNodes().OfType<GlobalStatementSyntax>().Any()
+                ? root                                      // Top level statements
+                : root.DescendantNodes().First(IsMethod);
             var cfg = ControlFlowGraph.Create(method, semanticModel, default);
             if (localFunctionName is not null && anonymousFunctionFragment is not null)
             {
