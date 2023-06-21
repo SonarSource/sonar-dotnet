@@ -46,6 +46,18 @@ public class Sample
 }";
             TestHelper.CompileCfgCS(code).Should().NotBeNull();
         }
+        [TestMethod]
+        public void Create_ReturnsCfg_TopLevelStatements()
+        {
+            const string code = """
+                MethodA();
+                MethodB();
+
+                void MethodA() { }
+                void MethodB() { }
+                """;
+            TestHelper.CompileCfg(code, AnalyzerLanguage.CSharp, outputKind: OutputKind.ConsoleApplication).Should().NotBeNull();
+        }
 
         [TestMethod]
         public void Create_ReturnsCfg_VB()
