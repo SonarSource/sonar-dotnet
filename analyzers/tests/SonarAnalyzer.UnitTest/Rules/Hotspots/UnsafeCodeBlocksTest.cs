@@ -41,7 +41,7 @@ public class UnsafeCodeBlocksTest
 
     [TestMethod]
     public void UnsafeRecordStruct() =>
-        builder.AddSnippet("""unsafe record struct MyRecord(byte* Pointer); // FN""")
+        builder.AddSnippet("""unsafe record struct MyRecord(byte* Pointer); // Noncompliant""")
         .WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif

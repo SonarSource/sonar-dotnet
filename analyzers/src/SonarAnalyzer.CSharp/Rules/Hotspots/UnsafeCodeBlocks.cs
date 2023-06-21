@@ -37,22 +37,12 @@ public sealed class UnsafeCodeBlocks : HotspotDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context)
     {
         context.RegisterNodeAction(c => Report(c, ((UnsafeStatementSyntax)c.Node).UnsafeKeyword), SyntaxKind.UnsafeStatement);
-        context.RegisterNodeAction(c =>
-            {
-                if (c.Node is BaseMethodDeclarationSyntax { Modifiers: var modifiers })
-                {
-                    ReportIfUnsafe(c, modifiers);
-                }
-            },
+        context.RegisterNodeAction(
+            c => ReportIfUnsafe(c, ((BaseMethodDeclarationSyntax)c.Node).Modifiers),
             SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration, SyntaxKind.DestructorDeclaration, SyntaxKind.OperatorDeclaration);
-        context.RegisterNodeAction(c =>
-            {
-                if (c.Node is BaseTypeDeclarationSyntax { Modifiers: var modifiers }
-                    && modifiers.Find(SyntaxKind.UnsafeKeyword) is { } unsafeModifier)
-                {
-                    Report(c, unsafeModifier);
-                }
-            }, SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration);
+        context.RegisterNodeAction(
+            c => ReportIfUnsafe(c, ((BaseTypeDeclarationSyntax)c.Node).Modifiers),
+            SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration, SyntaxKindEx.RecordStructDeclaration);
     }
 
     private void ReportIfUnsafe(SonarSyntaxNodeReportingContext context, SyntaxTokenList modifiers)
