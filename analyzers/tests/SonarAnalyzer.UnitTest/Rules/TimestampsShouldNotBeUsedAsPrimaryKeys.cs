@@ -25,36 +25,34 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
 {
-    private readonly VerifierBuilder builder =
-        new VerifierBuilder<TimestampsShouldNotBeUsedAsPrimaryKeys>()
-            .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
-
-#if NET
-            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"))
-            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreAbstractions("7.0.0"));
-#else
-            .AddReferences(NuGetMetadataReference.MicrosoftEntityFramework("6.0.0"));
-#endif
-
     [TestMethod]
     public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp() =>
-        builder
-            .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.cs")
-            .Verify();
+        CreateVerifier<TimestampsShouldNotBeUsedAsPrimaryKeys>("TimestampsShouldNotBeUsedAsPrimaryKeys.cs").Verify();
 
     [TestMethod]
     public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp9() =>
-        builder
-            .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .Verify();
+    CreateVerifier<TimestampsShouldNotBeUsedAsPrimaryKeys>("TimestampsShouldNotBeUsedAsPrimaryKeys.CSharp9.cs")
+        .WithOptions(ParseOptionsHelper.FromCSharp9)
+        .Verify();
 
 #if NET
     [TestMethod]
     public void TimestampsShouldNotBeUsedAsPrimaryKeys_EntityFrameworkCore_CSharp() =>
-        builder
-            .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.EntityFrameworkCore.cs")
-            .Verify();
+        CreateVerifier<TimestampsShouldNotBeUsedAsPrimaryKeys>("TimestampsShouldNotBeUsedAsPrimaryKeys.EntityFrameworkCore.cs").Verify();
+#endif
+
+    private static VerifierBuilder CreateVerifier<TAnalyzer>(string testFileName)
+        where TAnalyzer : DiagnosticAnalyzer, new() =>
+        new VerifierBuilder<TAnalyzer>()
+            .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
+
+#if NET
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"))
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreAbstractions("7.0.0"))
+            .AddSnippet("using Microsoft.EntityFrameworkCore;", testFileName);
+#else
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFramework("6.0.0"))
+            .AddSnippet("using System.Data;", testFileName);
 #endif
 
 }
