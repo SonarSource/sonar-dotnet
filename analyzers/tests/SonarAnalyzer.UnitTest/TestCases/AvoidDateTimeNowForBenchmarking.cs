@@ -6,13 +6,27 @@ public class Program
     {
         var start = DateTime.Now;
         MethodToBeBenchmarked();
-        Console.WriteLine($"{(DateTime.Now - start).TotalMilliseconds} ms"); // Noncompliant
+        Console.WriteLine($"{(DateTime.Now - start).TotalMilliseconds} ms"); // Noncompliant {{Avoid using "DateTime.Now" for benchmarking or timing operations}}
+        //                    ^^^^^^^^^^^^^^^^^^^^
 
         void LocalMethod()
         {
             var sec = DateTime.Now;
             // something
             Console.WriteLine($"{(DateTime.Now - sec).TotalMilliseconds} ms"); // Noncompliant
+        }
+    }
+
+    private const int MinRefreshInterval = 100;
+
+    void Timing()
+    {
+        var lastRefresh = DateTime.Now;
+        if ((DateTime.Now - lastRefresh).TotalMilliseconds > MinRefreshInterval) // Noncompliant
+        //   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        {
+            lastRefresh = DateTime.Now;
+            // Refresh
         }
     }
 
@@ -29,7 +43,7 @@ public class Program
         }
     }
 
-    void MethodToBeBenchmarked()
+    void SwitchExpression()
     {
         var a = 1;
         switch (a)
@@ -43,4 +57,6 @@ public class Program
                 break;
         }
     }
+
+    bool MethodToBeBenchmarked() => true;
 }
