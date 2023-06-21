@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6640",
+"message":  "Make sure that using "unsafe" is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  13,
+"endLine":  61,
+"endColumn":  19
+}
+}
+}
+]
+}
