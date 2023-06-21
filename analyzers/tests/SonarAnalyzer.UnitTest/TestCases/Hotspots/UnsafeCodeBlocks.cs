@@ -25,7 +25,7 @@ public class Sample
 
     unsafe struct UnsafeStruct                                      // Noncompliant
     {
-        unsafe fixed byte unsafeFixedBuffer[16];                    // FN
+        unsafe fixed byte unsafeFixedBuffer[16];                    // Noncompliant
     }
 
     unsafe interface IUnsafeInterface { }                           // Noncompliant
@@ -36,11 +36,11 @@ public class Sample
 
     unsafe ~Sample() { }                                            // Noncompliant
 
-    unsafe byte* unsafeField;                                       // FN
+    unsafe byte* unsafeField;                                       // Noncompliant
 
     unsafe byte* UnsafeProperty { get; }                            // FN
 
-    unsafe event EventHandler UnsafeEvent;                          // FN
+    unsafe event EventHandler UnsafeEvent;                          // Noncompliant
 
     unsafe delegate void UnsafeDelegate(byte* pointer);             // FN
 

@@ -48,6 +48,14 @@ public sealed class UnsafeCodeBlocks : HotspotDiagnosticAnalyzer
         context.RegisterNodeAction(
             c => ReportIfUnsafe(c, ((LocalFunctionStatementSyntaxWrapper)c.Node).Modifiers),
             SyntaxKindEx.LocalFunctionStatement);
+        context.RegisterNodeAction(c =>
+            {
+                if (c.Node is BaseFieldDeclarationSyntax { Modifiers: var modifiers })
+                {
+                    ReportIfUnsafe(c, modifiers);
+                }
+            },
+            SyntaxKind.FieldDeclaration, SyntaxKind.EventFieldDeclaration);
     }
 
     private void ReportIfUnsafe(SonarSyntaxNodeReportingContext context, SyntaxTokenList modifiers)
