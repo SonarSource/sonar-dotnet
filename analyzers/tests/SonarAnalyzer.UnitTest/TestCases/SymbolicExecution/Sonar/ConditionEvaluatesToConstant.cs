@@ -2937,7 +2937,7 @@ public class Repro_7489
     {
         int? value;
         var hasValue = true;
-        while (hasValue)    // Noncompliant FP when the duple deconstruction is in the body
+        while (hasValue)    // Noncompliant FP when the tuple deconstruction is in the body
         {
             value = null;
             hasValue = value.HasValue;
