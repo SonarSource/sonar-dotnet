@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Windows.Markup;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 [assembly: XmlnsPrefix("http://schemas.catelproject.com", "catel")]
@@ -185,6 +186,12 @@ namespace Tests.Diagnostics
             "http://docbook.org",
             "http://graphml.graphdrawing.org",
             "http://json-schema.org",
+            "http://www.sitemaps.org/schemas/sitemap/0.9",
+            "http://exslt.org/common",
+            "http://collations.microsoft.com",
+            "http://schemas.microsoft.com/framework/2003/xml/xslt/internal",
+            "http://docs.oasis-open.org/wss/2004/01/",
+            "http://ws-i.org/",
             "http://email:password@subdomain.www.w3.org",  // Noncompliant
             "http://domain.com/www.w3.org",                // Noncompliant
             "http://domain.com/path?domain=www.w3.org",    // Noncompliant
@@ -349,6 +356,15 @@ namespace Tests.Diagnostics
             var dict = new XmlnsDictionary();
             dict.Add("prefix", "http://www.cpandl.com");
             dict.LookupPrefix("http://www.cpandl.com");
+        }
+    }
+
+    public class XmlLinqTests
+    {
+        public void XNamespaceTest()
+        {
+            XNamespace.Get("http://www.cpandl.com");
+            XNamespace ns = "http://www.cpandl.com"; // Noncompliant FP. Implicit conversion from string to XNamespace is not supported
         }
     }
 }

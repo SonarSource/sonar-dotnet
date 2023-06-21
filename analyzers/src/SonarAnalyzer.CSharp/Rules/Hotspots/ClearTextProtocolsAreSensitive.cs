@@ -55,12 +55,17 @@ namespace SonarAnalyzer.Rules.CSharp
             "xmlns.com",
             "schemas.google.com",
             "schemas.microsoft.com",
+            "collations.microsoft.com",
             "a9.com",
             "ns.adobe.com",
             "ltsc.ieee.org",
             "docbook.org",
             "graphml.graphdrawing.org",
-            "json-schema.org"
+            "json-schema.org",
+            "www.sitemaps.org",
+            "exslt.org",
+            "docs.oasis-open.org",
+            "ws-i.org",
         };
 
         private static readonly string[] CommonlyUsedExampleDomains = { "example.com", "example.org", "test.com" };
@@ -223,6 +228,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             { Name: "ns", ContainingNamespace: { } ns } when ns.Is("System.Xml.Serialization") => true,
                             { Name: "ns" or "uri" or "namespaceURI", ContainingNamespace: { } ns } when ns.Is("System.Xml") => true,
                             { Name: "xmlNamespace", ContainingType.Name: "XmlnsDictionary", ContainingNamespace: { } ns } when ns.Is("System.Windows.Markup") => true,
+                            { Name: "namespaceName", ContainingSymbol.Name: "Get", ContainingType.Name: "XNamespace", ContainingNamespace: { } ns } when ns.Is("System.Xml.Linq") => true,
                             _ => false,
                         },
                 _ => false
