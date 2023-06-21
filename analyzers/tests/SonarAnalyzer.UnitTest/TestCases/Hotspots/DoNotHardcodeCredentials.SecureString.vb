@@ -27,6 +27,8 @@ Namespace Tests.Diagnostics
                 securePwd.AppendChar("a"c) ' Noncompliant
                 securePwd.AppendChar("s"c) ' Noncompliant
                 securePwd.AppendChar("s"c) ' Noncompliant
+                Dim w = "w"c
+                securePwd.AppendChar(w)    ' FN
             End Using
         End Sub
 
