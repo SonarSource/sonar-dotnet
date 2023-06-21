@@ -71,4 +71,28 @@ public class INamespaceSymbolExtensionsTest
         var ns = symbol.Should().BeAssignableTo<INamespaceSymbol>().Subject;
         ns.Is(test).Should().BeFalse();
     }
+
+    [TestMethod]
+    public void Is_ThrowsArgumentNullExceptionForName()
+    {
+        var snippet = """
+            using System;
+            """;
+        var (tree, model) = TestHelper.CompileCS(snippet);
+        var name = tree.GetRoot().DescendantNodes().OfType<UsingDirectiveSyntax>().Single().Name;
+        var symbol = model.GetSymbolInfo(name).Symbol;
+        var ns = symbol.Should().BeAssignableTo<INamespaceSymbol>().Subject;
+        var action = () => ns.Is(null);
+        action.Should().Throw<ArgumentNullException>().WithMessage("*name*");
+    }
+
+    [DataTestMethod]
+    [DataRow("")]
+    [DataRow("System")]
+    [DataRow("System.Collection")]
+    public void Is_ReturnsFalseForNullSymbol(string nameSpace)
+    {
+        INamespaceSymbol ns = null;
+        ns.Is(nameSpace).Should().BeFalse();
+    }
 }

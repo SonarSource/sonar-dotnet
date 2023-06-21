@@ -18,12 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#nullable enable
+
 namespace SonarAnalyzer.Extensions;
 
 internal static class INamespaceSymbolExtensions
 {
-    public static bool Is(this INamespaceSymbol symbol, string name)
+    /// <summary>
+    /// Checks if the <see cref="INamespaceSymbol"/> fits the <paramref name="name"/>. The format of <paramref name="name"/> is the same as in a <see langword="using"/> directive.
+    /// </summary>
+    /// <param name="symbol">The namespace symbol to test.</param>
+    /// <param name="name">The name in the form <c>System.Collections.Generic</c>. <see langword="global"/> can optionally be used as a prefix like in <c>global::System</c>.</param>
+    /// <returns>Returns <see langword="true"/> if the namespace symbol refers to the string given.</returns>
+    public static bool Is(this INamespaceSymbol? symbol, string name)
     {
+        if (name is null)
+        {
+            throw new ArgumentNullException(nameof(name));
+        }
+        if (symbol is null)
+        {
+            return false;
+        }
+
         var ns = name.Split(new[] { ".", "::" }, StringSplitOptions.RemoveEmptyEntries);
         for (var i = ns.Length - 1; i >= 0; i--)
         {
