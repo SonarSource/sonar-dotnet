@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules;
@@ -42,17 +43,25 @@ public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
 #endif
 
     private static VerifierBuilder CreateVerifier<TAnalyzer>(string testFileName)
-        where TAnalyzer : DiagnosticAnalyzer, new() =>
-        new VerifierBuilder<TAnalyzer>()
+        where TAnalyzer : DiagnosticAnalyzer, new()
+    {
+        var builder = new VerifierBuilder<TAnalyzer>()
             .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
 
 #if NET
             .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"))
-            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreAbstractions("7.0.0"))
-            .AddSnippet("using Microsoft.EntityFrameworkCore;", testFileName);
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreAbstractions("7.0.0"));
+        return AddTestFileWithExtraLinePrepended(builder, testFileName, "using Microsoft.EntityFrameworkCore;");
 #else
-            .AddReferences(NuGetMetadataReference.MicrosoftEntityFramework("6.0.0"))
-            .AddSnippet("using System.Data;", testFileName);
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFramework("6.0.0"));
+        return AddTestFileWithExtraLinePrepended(builder, testFileName, "using System.Data.Entity;using ModelBuilder = System.Data.Entity.DbModelBuilder;");
 #endif
 
+    }
+
+    private static VerifierBuilder AddTestFileWithExtraLinePrepended(VerifierBuilder builder, string testFileName, string extraLine)
+    {
+        var content = File.ReadAllText($@"TestCases\{testFileName}");
+        return builder.AddSnippet($"{extraLine}{Environment.NewLine}{content}", testFileName);
+    }
 }

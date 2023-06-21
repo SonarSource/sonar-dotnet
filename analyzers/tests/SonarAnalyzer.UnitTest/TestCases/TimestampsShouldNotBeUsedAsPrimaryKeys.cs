@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using DateTimeAlias = System.DateTime;
 using KeyAttributeAlias = System.ComponentModel.DataAnnotations.KeyAttribute;
 

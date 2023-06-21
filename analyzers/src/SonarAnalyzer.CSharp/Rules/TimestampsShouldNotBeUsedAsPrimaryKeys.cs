@@ -25,6 +25,8 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
 {
     private const string DiagnosticId = "S3363";
     private const string MessageFormat = "Timestamps should not be used as primary keys";
+    // Temporal types should not be used as primary keys
+    // Date and time values should not be used as primary keys
 
     private static readonly KnownType[] TemporalTypes = new[]
     {
