@@ -59,7 +59,7 @@
     <doclint>none</doclint>
     <sonar.analyzer.commons.version>2.5.0.1358</sonar.analyzer.commons.version>
     <sonar.version>9.17.0.587</sonar.version>
-    <sonar.api.impl.version>10.0.0.68432</sonar.api.impl.version>
+    <sonar.api.impl.version>10.1.0.73491</sonar.api.impl.version>
     <jdk.min.version>11</jdk.min.version>
     <findbugs.version>3.0.2</findbugs.version>
     <maven.compiler.release>${jdk.min.version}</maven.compiler.release>
