@@ -10,7 +10,7 @@ class TemporalTypes
 {
     class Entity
     {
-        public DateTime EntityId { get; set; }          // Noncompliant {{'DateTime' should not be used as primary key}}
+        public DateTime EntityId { get; set; }          // Noncompliant {{'DateTime' should not be used as a type for primary keys}}
         //     ^^^^^^^^
     }
 
@@ -21,12 +21,12 @@ class TemporalTypes
 
     class DateTimeOffsetKey
     {
-        public DateTimeOffset Id { get; set; }          // Noncompliant {{'DateTimeOffset' should not be used as primary key}}
+        public DateTimeOffset Id { get; set; }          // Noncompliant {{'DateTimeOffset' should not be used as a type for primary keys}}
     }
 
     class TimeSpanKey
     {
-        public TimeSpan Id { get; set; }                // Noncompliant {{'TimeSpan' should not be used as primary key}}
+        public TimeSpan Id { get; set; }                // Noncompliant {{'TimeSpan' should not be used as a type for primary keys}}
     }
 
     class DateTimeNoKey
