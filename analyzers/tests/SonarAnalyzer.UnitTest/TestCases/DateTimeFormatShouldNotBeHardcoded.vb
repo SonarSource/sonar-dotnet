@@ -23,6 +23,8 @@ Public Class DateTimeFormatShouldNotBeHardcoded
         stringRepresentation = dateTimeOffset.ToString(CultureInfo.GetCultureInfo("es-MX"))
         stringRepresentation = timeSpan.ToString("d")
         stringRepresentation = dATEtIME.Now.tOsTRING
+        stringRepresentation = dateTimeOffset.ToString()
+
         MyDate.ToString("dd/MM/yyy")
     End Sub
 
