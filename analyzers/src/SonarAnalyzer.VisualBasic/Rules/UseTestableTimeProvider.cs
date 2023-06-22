@@ -23,10 +23,8 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class UseTestableTimeProvider : UseTestableTimeProviderBase<SyntaxKind>
 {
-    private static readonly SyntaxKind[] IgnoreKinds = new[] { SyntaxKind.NameOfKeyword, SyntaxKind.XmlCrefAttribute };
-
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override bool Ignore(SyntaxNode ancestor, SemanticModel semanticModel) =>
-        ancestor.IsAnyKind(IgnoreKinds);
+        ancestor.IsAnyKind(SyntaxKind.NameOfKeyword, SyntaxKind.XmlCrefAttribute);
 }
