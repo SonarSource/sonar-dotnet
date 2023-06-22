@@ -26,7 +26,7 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TSyntax
 {
     private const string DiagnosticId = "S6561";
     protected override string MessageFormat => "Avoid using \"DateTime.Now\" for benchmarking or timing operations";
-    protected abstract SyntaxNode GetExpression(SyntaxNode node);
+    protected abstract SyntaxNode GetExpression(TMemberAccess memberAccess);
 
     protected AvoidDateTimeNowForBenchmarkingBase() : base(DiagnosticId) { }
 

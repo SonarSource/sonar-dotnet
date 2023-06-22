@@ -25,11 +25,5 @@ public sealed class AvoidDateTimeNowForBenchmarking : AvoidDateTimeNowForBenchma
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override SyntaxNode GetExpression(SyntaxNode node) =>
-        node switch
-        {
-            InvocationExpressionSyntax invocation => invocation.Expression,
-            MemberAccessExpressionSyntax memberAccess => memberAccess.Expression,
-            _ => null
-        };
+    protected override SyntaxNode GetExpression(MemberAccessExpressionSyntax memberAccess) => memberAccess.Expression;
 }
