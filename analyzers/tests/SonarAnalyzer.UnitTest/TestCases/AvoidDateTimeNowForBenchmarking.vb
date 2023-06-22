@@ -3,10 +3,14 @@
 Public Class Program
     Private Sub Benchmark()
         Dim start = Date.Now
-        MethodToBeBenchmarked()
-        ' something
+        ' Some method
         Console.WriteLine($"{(Date.Now - start).TotalMilliseconds} ms") ' Noncompliant {{Avoid using "DateTime.Now" for benchmarking or timing operations}}
         '                     ^^^^^^^^^^^^^^^^
+
+        start = Date.Now
+        ' Some method
+        Console.WriteLine($"{Date.Now.Subtract(start).TotalMilliseconds} ms") ' Noncompliant
+        '                    ^^^^^^^^^^^^^^^^^
     End Sub
 
     Private Const MinRefreshInterval As Integer = 100
@@ -14,10 +18,26 @@ Public Class Program
     Private Sub Timing()
         Dim lastRefresh = Date.Now
         If (Date.Now - lastRefresh).TotalMilliseconds > MinRefreshInterval Then ' Noncompliant
-        '   ^^^^^^^^^^^^^^^^^^^^^^
             lastRefresh = Date.Now
             ' Refresh
         End If
+    End Sub
+
+    Private Sub Combinations(ByVal timeSpan As TimeSpan, ByVal dateTime As Date)
+        Dim a1 = (Date.Now - dateTime).Milliseconds ' Noncompliant
+        Dim a2 = Date.Now.Subtract(dateTime).Milliseconds ' Noncompliant
+
+        Dim b1 = (Date.Now - TimeSpan.FromSeconds(1)).Millisecond ' Compliant
+        Dim b2 = Date.Now.Subtract(TimeSpan.FromDays(1)).Millisecond ' Compliant
+
+        Dim c1 = (Date.Now - timeSpan).Millisecond ' Compliant
+        Dim c2 = Date.Now.Subtract(timeSpan).Millisecond ' Compliant
+
+        Dim d1 = (Date.UtcNow - dateTime).Milliseconds ' Compliant
+        Dim d2 = Date.UtcNow.Subtract(dateTime).Milliseconds ' Compliant
+
+        Dim e1 = (New DateTime(1) - dateTime).Milliseconds ' Compliant
+        Dim e2 = New DateTime(1).Subtract(dateTime).Milliseconds ' Compliant
     End Sub
 
     Private timeField As TimeSpan
@@ -28,23 +48,32 @@ Public Class Program
         End Get
         Set(ByVal value As TimeSpan)
             Dim start = Date.Now
-            MethodToBeBenchmarked()
             timeField = Date.Now - start ' Noncompliant
         End Set
     End Property
 
-    Private Sub SwitchExpression()
+    Private Sub SwitchExpression(ByVal start As Date)
         Dim a = 1
         Select Case a
             Case 1
-                Dim start = Date.Now
-                MethodToBeBenchmarked()
                 timeField = Date.Now - start - New TimeSpan(1) ' Noncompliant
-            Case 2
         End Select
     End Sub
 
-    Private Function MethodToBeBenchmarked() As Boolean
-        Return True
-    End Function
+    Private Sub EdgeCases(ByVal dateTime As Date, ByVal timeSpan As TimeSpan)
+        Call (If(True, Date.Now, New DateTime(1))).Subtract(dateTime) ' Compliant
+        Call (If(True, Date.Now, New DateTime(1))).Subtract(timeSpan) ' Compliant
+
+        Date.Now.AddDays(1).Subtract(dateTime) ' Compliant FN
+    End Sub
+End Class
+
+Public Class FakeDateTimeSubtract
+    Private Sub MyMethod(ByVal dateTime As Date)
+        Dim a = FakeDateTimeSubtract.DateTime.Now.Subtract(dateTime).Milliseconds ' Compliant
+    End Sub
+
+    Public NotInheritable Class DateTime
+        Public Shared ReadOnly Property Now As Date
+    End Class
 End Class

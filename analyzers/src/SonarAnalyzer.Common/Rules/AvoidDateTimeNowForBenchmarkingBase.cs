@@ -20,31 +20,50 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TBinaryExpression, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TMemberAccess : SyntaxNode
-    where TBinaryExpression : SyntaxNode
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6561";
-    private const string Now = "Now";
     protected override string MessageFormat => "Avoid using \"DateTime.Now\" for benchmarking or timing operations";
-
-    protected abstract SyntaxNode GetLeftNode(TBinaryExpression binaryExpression);
+    protected abstract SyntaxNode GetExpression(SyntaxNode node);
 
     protected AvoidDateTimeNowForBenchmarkingBase() : base(DiagnosticId) { }
 
-    protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(
-            Language.GeneratedCodeRecognizer,
-            c =>
-            {
-                var binaryExpression = (TBinaryExpression)c.Node;
+    protected sealed override void Initialize(SonarAnalysisContext context)
+    {
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckBinaryExpression, Language.SyntaxKind.SubtractExpression);
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckMemberAccess, Language.SyntaxKind.SimpleMemberAccessExpression);
+    }
+    private void CheckBinaryExpression(SonarSyntaxNodeReportingContext context)
+    {
+        if (Language.Syntax.BinaryExpressionLeft(context.Node) is TMemberAccess memberAccess
+            && IsDateTimeNow(memberAccess, context.SemanticModel)
+            && Language.Syntax.BinaryExpressionRight(context.Node) is var right
+            && context.SemanticModel.GetTypeInfo(right).Type.Is(KnownType.System_DateTime))
+        {
+            context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation()));
+        }
+    }
 
-                if (GetLeftNode(binaryExpression) is TMemberAccess memberAccess
-                    && Language.Syntax.IsMemberAccessOnKnownType(memberAccess, Now, KnownType.System_DateTime, c.SemanticModel))
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                }
-            },
-            Language.SyntaxKind.SubtractExpression);
+    private void CheckMemberAccess(SonarSyntaxNodeReportingContext context)
+    {
+        var memberAccess = (TMemberAccess)context.Node;
+
+        if (IsDateTimeSubtract(memberAccess, context.SemanticModel)
+            && GetExpression(memberAccess) is TMemberAccess childMemberAccess
+            && IsDateTimeNow(childMemberAccess, context.SemanticModel)
+            && context.SemanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol methodSymbol
+            && methodSymbol.Parameters is { Length: 1 } parameters
+            && parameters.First().IsType(KnownType.System_DateTime))
+        {
+            context.ReportIssue(Diagnostic.Create(Rule, memberAccess.GetLocation()));
+        }
+    }
+
+    private bool IsDateTimeNow(TMemberAccess node, SemanticModel model) =>
+        Language.Syntax.IsMemberAccessOnKnownType(node, "Now", KnownType.System_DateTime, model);
+
+    private bool IsDateTimeSubtract(TMemberAccess node, SemanticModel model) =>
+        Language.Syntax.IsMemberAccessOnKnownType(node, "Subtract", KnownType.System_DateTime, model);
 }

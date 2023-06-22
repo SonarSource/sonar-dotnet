@@ -21,8 +21,15 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class AvoidDateTimeNowForBenchmarking : AvoidDateTimeNowForBenchmarkingBase<MemberAccessExpressionSyntax, BinaryExpressionSyntax, SyntaxKind>
+public sealed class AvoidDateTimeNowForBenchmarking : AvoidDateTimeNowForBenchmarkingBase<MemberAccessExpressionSyntax, SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-    protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.RemoveParentheses();
+
+    protected override SyntaxNode GetExpression(SyntaxNode node) =>
+        node switch
+        {
+            InvocationExpressionSyntax invocation => invocation.Expression,
+            MemberAccessExpressionSyntax memberAccess => memberAccess.Expression,
+            _ => null
+        };
 }

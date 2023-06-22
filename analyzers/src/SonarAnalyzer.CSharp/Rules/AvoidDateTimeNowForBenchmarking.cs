@@ -21,8 +21,15 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class AvoidDateTimeNowForBenchmarking : AvoidDateTimeNowForBenchmarkingBase<MemberAccessExpressionSyntax, BinaryExpressionSyntax, SyntaxKind>
+public sealed class AvoidDateTimeNowForBenchmarking : AvoidDateTimeNowForBenchmarkingBase<MemberAccessExpressionSyntax, SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-    protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.RemoveParentheses();
+
+    protected override SyntaxNode GetExpression(SyntaxNode node) =>
+        node switch
+        {
+            InvocationExpressionSyntax invocation => invocation.Expression,
+            MemberAccessExpressionSyntax memberAccess => memberAccess.Expression,
+            _ => null
+        };
 }
