@@ -24,6 +24,4 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 public sealed class AvoidDateTimeNowForBenchmarking : AvoidDateTimeNowForBenchmarkingBase<MemberAccessExpressionSyntax, SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
-    protected override SyntaxNode GetExpression(MemberAccessExpressionSyntax memberAccess) => memberAccess.Expression;
 }

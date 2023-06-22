@@ -26,7 +26,6 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TSyntax
 {
     private const string DiagnosticId = "S6561";
     protected override string MessageFormat => "Avoid using \"DateTime.Now\" for benchmarking or timing operations";
-    protected abstract SyntaxNode GetExpression(TMemberAccess memberAccess);
 
     protected AvoidDateTimeNowForBenchmarkingBase() : base(DiagnosticId) { }
 
@@ -52,7 +51,7 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TSyntax
         var memberAccess = (TMemberAccess)context.Node;
 
         if (IsDateTimeSubtract(memberAccess, context.SemanticModel)
-            && GetExpression(memberAccess) is TMemberAccess childMemberAccess
+            && Language.Syntax.NodeExpression(memberAccess) is TMemberAccess childMemberAccess
             && IsDateTimeNow(childMemberAccess, context.SemanticModel)
             && context.SemanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol methodSymbol
             && methodSymbol.Parameters.First().IsType(KnownType.System_DateTime))

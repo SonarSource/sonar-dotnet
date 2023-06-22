@@ -24,5 +24,4 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class AvoidDateTimeNowForBenchmarking : AvoidDateTimeNowForBenchmarkingBase<MemberAccessExpressionSyntax, SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-    protected override SyntaxNode GetExpression(MemberAccessExpressionSyntax memberAccess) => memberAccess.Expression;
 }

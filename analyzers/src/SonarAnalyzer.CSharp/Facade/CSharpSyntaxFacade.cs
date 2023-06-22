@@ -110,6 +110,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
             InvocationExpressionSyntax x => x.Expression,
             LockStatementSyntax x => x.Expression,
             ReturnStatementSyntax x => x.Expression,
+            MemberAccessExpressionSyntax x => x.Expression,
             null => null,
             _ => throw InvalidOperation(node, nameof(NodeExpression))
         };
