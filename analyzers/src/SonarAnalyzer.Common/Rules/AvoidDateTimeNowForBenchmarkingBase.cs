@@ -50,7 +50,7 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TSyntax
     {
         var memberAccess = (TMemberAccess)context.Node;
 
-        if (IsDateTimeSubtract(memberAccess, context.SemanticModel)
+        if (Language.Syntax.IsMemberAccessOnKnownType(memberAccess, "Subtract", KnownType.System_DateTime, context.SemanticModel)
             && Language.Syntax.NodeExpression(memberAccess) is TMemberAccess childMemberAccess
             && IsDateTimeNow(childMemberAccess, context.SemanticModel)
             && context.SemanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol methodSymbol
@@ -62,7 +62,4 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TSyntax
 
     private bool IsDateTimeNow(TMemberAccess node, SemanticModel model) =>
         Language.Syntax.IsMemberAccessOnKnownType(node, "Now", KnownType.System_DateTime, model);
-
-    private bool IsDateTimeSubtract(TMemberAccess node, SemanticModel model) =>
-        Language.Syntax.IsMemberAccessOnKnownType(node, "Subtract", KnownType.System_DateTime, model);
 }
