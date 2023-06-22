@@ -43,6 +43,7 @@ public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
         new VerifierBuilder<TimestampsShouldNotBeUsedAsPrimaryKeys>().AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.NoReferenceToEntityFramework.CSharp.cs").Verify();
 
 #if NET
+
     [TestMethod]
     public void TimestampsShouldNotBeUsedAsPrimaryKeys_EntityFrameworkCore_CSharp() =>
         verifierCS.AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.EntityFrameworkCore.CSharp.cs").Verify();
@@ -50,6 +51,7 @@ public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
     [TestMethod]
     public void TimestampsShouldNotBeUsedAsPrimaryKeys_FluentApi_CSharp() =>
         verifierCS.AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.FluentApi.CSharp.cs").Verify();
+
 #endif
 
     private static VerifierBuilder CreateVerifier<TAnalyzer>()
@@ -58,10 +60,14 @@ public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
             .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations())
 
 #if NET
+
             .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("7.0.0"))
             .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreAbstractions("7.0.0"));
+
 #else
+
             .AddReferences(NuGetMetadataReference.MicrosoftEntityFramework("6.0.0"));
+
 #endif
 
 }
