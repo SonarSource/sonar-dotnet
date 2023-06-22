@@ -174,3 +174,24 @@ class FluentApi
         public DateTime DateOfBirth { get; set; }       // FN - keys created with the Fluent API are too complex to track
     }
 }
+
+class BuildErrors
+{
+    class AttributeDoesNotExist
+    {
+        []                                              // Error [CS1001]
+        public DateTime Identifier { get; set; }
+    }
+
+    class MissingPropertyType
+    {
+        [Key]
+        public Identifier { get; set; }                 // Error [CS1519, CS1519, CS1519, CS1519, CS1519, CS1519]
+    }
+
+    class MissingPropertyName
+    {
+        [Key]
+        public DateTime { get; set; }                   // Error [CS1519, CS1519, CS1519, CS1519, CS1519, CS1519]
+    }                                                   // Error [CS1022]
+}                                                       // Error [CS1022]
