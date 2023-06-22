@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S3363";
-    private const string MessageFormat = "'{0}' should not be used as a primary key";
+    private const string MessageFormat = "'{0}' should not be used as primary key";
 
     private static readonly KnownType[] TemporalTypes = new[]
     {
@@ -55,7 +55,7 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
                 var className = classDeclaration.Identifier.ValueText;
                 var keyProperties = classDeclaration.Members
                     .OfType<PropertyDeclarationSyntax>()
-                    .Where(x => IsPublicProperty(x) && IsTemporalType(x) && IsKeyProperty(x, className));
+                    .Where(x => IsPublicReadWriteProperty(x) && IsTemporalType(x) && IsKeyProperty(x, className));
 
                 foreach (var keyProperty in keyProperties)
                 {
@@ -68,8 +68,11 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
         compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_DbContext) is not null
         || compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFramework_DbContext) is not null;
 
-    private static bool IsPublicProperty(PropertyDeclarationSyntax property) =>
-        property.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword));
+    private static bool IsPublicReadWriteProperty(PropertyDeclarationSyntax property) =>
+        property.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
+        && property.AccessorList is not null
+        && property.AccessorList.Accessors.Any(x => x.Keyword.IsKind(SyntaxKind.GetKeyword))
+        && property.AccessorList.Accessors.Any(x => x.Keyword.IsKind(SyntaxKind.SetKeyword));
 
     private static bool IsKeyProperty(PropertyDeclarationSyntax property, string className)
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Permissions;
 using DateTimeAlias = System.DateTime;
 using KeyAttributeAlias = System.ComponentModel.DataAnnotations.KeyAttribute;
 
@@ -9,7 +10,7 @@ class TemporalTypes
 {
     class Entity
     {
-        public DateTime EntityId { get; set; }          // Noncompliant {{'DateTime' should not be used as a primary key}}
+        public DateTime EntityId { get; set; }          // Noncompliant {{'DateTime' should not be used as primary key}}
         //     ^^^^^^^^
     }
 
@@ -20,12 +21,12 @@ class TemporalTypes
 
     class DateTimeOffsetKey
     {
-        public DateTimeOffset Id { get; set; }          // Noncompliant {{'DateTimeOffset' should not be used as a primary key}}
+        public DateTimeOffset Id { get; set; }          // Noncompliant {{'DateTimeOffset' should not be used as primary key}}
     }
 
     class TimeSpanKey
     {
-        public TimeSpan Id { get; set; }                // Noncompliant {{'TimeSpan' should not be used as a primary key}}
+        public TimeSpan Id { get; set; }                // Noncompliant {{'TimeSpan' should not be used as primary key}}
     }
 
     class DateTimeNoKey
@@ -131,16 +132,34 @@ class Attributes
     }
 }
 
-class NotProperties
+class PropertyTypes
 {
-    public DateTime id;                                 // Compliant - only properties are validated
-    public DateTime Id() => DateTime.Now;
-}
+    class NotProperties
+    {
+        public DateTime id;                                 // Compliant - only properties are validated
+        public DateTime Id() => DateTime.Now;
+    }
 
-class PropertyIsNotPublic
-{
-    [Key]
-    internal DateTime Id { get; set; }                  // Compliant - Entity Framework only maps public properties to keys
+    class NotPublicProperty
+    {
+        [Key]
+        internal DateTime Identifier { get; set; }          // Compliant - Entity Framework only maps public properties to keys
+    }
+
+    class NotReadWriteProperty
+    {
+        public DateTime Id => DateTime.Now; // Compliant - not a read/write property
+    }
+
+    class FullProperty
+    {
+        private DateTime id;
+        public DateTime Id                                  // Noncompliant
+        {
+            get => id;
+            private set => id = value;                      // Note: private setters are supported by Entity Framework (private getters are not)
+        }
+    }
 }
 
 class NonClassTypes
