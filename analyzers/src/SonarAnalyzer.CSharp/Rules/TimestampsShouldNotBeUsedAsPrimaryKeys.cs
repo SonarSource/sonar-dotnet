@@ -70,9 +70,9 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
 
     private static bool IsPublicReadWriteProperty(PropertyDeclarationSyntax property) =>
         property.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
-        && property.AccessorList is not null
-        && property.AccessorList.Accessors.Any(x => x.Keyword.IsKind(SyntaxKind.GetKeyword))
-        && property.AccessorList.Accessors.Any(x => x.Keyword.IsKind(SyntaxKind.SetKeyword));
+        && property.AccessorList is { } accessorList
+        && accessorList.Accessors.Any(x => x.Keyword.IsKind(SyntaxKind.GetKeyword))
+        && accessorList.Accessors.Any(x => x.Keyword.IsKind(SyntaxKind.SetKeyword));
 
     private static bool IsKeyProperty(PropertyDeclarationSyntax property, string className)
     {
