@@ -55,7 +55,9 @@ public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnal
                 var className = classDeclaration.Identifier.ValueText;
                 var keyProperties = classDeclaration.Members
                     .OfType<PropertyDeclarationSyntax>()
-                    .Where(x => IsPublicReadWriteProperty(x) && IsTemporalType(x) && IsKeyProperty(x, className));
+                    .Where(x => IsPublicReadWriteProperty(x)
+                                && IsTemporalType(x)
+                                && IsKeyProperty(x, className));
 
                 foreach (var propertyType in keyProperties.Select(x => x.Type))
                 {
