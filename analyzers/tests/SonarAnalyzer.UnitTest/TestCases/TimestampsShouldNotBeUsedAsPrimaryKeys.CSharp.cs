@@ -136,28 +136,28 @@ class PropertyTypes
 {
     class NotProperties
     {
-        public DateTime id;                                 // Compliant - only properties are validated
+        public DateTime id;                             // Compliant - only properties are validated
         public DateTime Id() => DateTime.Now;
     }
 
     class NotPublicProperty
     {
         [Key]
-        internal DateTime Identifier { get; set; }          // Compliant - Entity Framework only maps public properties to keys
+        internal DateTime Identifier { get; set; }      // Compliant - Entity Framework only maps public properties to keys
     }
 
     class NotReadWriteProperty
     {
-        public DateTime Id => DateTime.Now;                 // Compliant - not a read/write property
+        public DateTime Id => DateTime.Now;             // Compliant - not a read/write property
     }
 
     class FullProperty
     {
         private DateTime id;
-        public DateTime Id                                  // Noncompliant
+        public DateTime Id                              // Noncompliant
         {
             get => id;
-            private set => id = value;                      // Note: private setters are supported by Entity Framework (private getters are not)
+            private set => id = value;                  // Note: private setters are supported by Entity Framework (private getters are not)
         }
     }
 }
