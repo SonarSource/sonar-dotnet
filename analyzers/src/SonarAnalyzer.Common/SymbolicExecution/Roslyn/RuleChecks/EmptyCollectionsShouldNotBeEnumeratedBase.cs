@@ -136,7 +136,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         {
             return ProcessIndexerAccess(context.State, indexer);
         }
-        else if (operation.AsPropertyReference() is { } propertyReference && PropertyReferenceConstraint(context.State, propertyReference) is { } constraint)
+        else if (operation.AsPropertyReference() is { Instance: not null } propertyReference && PropertyReferenceConstraint(context.State, propertyReference) is { } constraint)
         {
             return context.State.SetOperationConstraint(operation, constraint);
         }
