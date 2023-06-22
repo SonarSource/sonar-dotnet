@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class TimestampsShouldNotBeUsedAsPrimaryKeys : SonarDiagnosticAnalyzer
+public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S3363";
     private const string MessageFormat = "'{0}' should not be used as a type for primary keys";

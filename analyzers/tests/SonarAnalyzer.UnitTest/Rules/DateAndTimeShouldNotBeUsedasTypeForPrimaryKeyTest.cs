@@ -23,34 +23,34 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
-public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
+public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
 {
-    private readonly VerifierBuilder verifierCS = CreateVerifier<TimestampsShouldNotBeUsedAsPrimaryKeys>();
+    private readonly VerifierBuilder verifierCS = CreateVerifier<DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey>();
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CS() =>
-        verifierCS.AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.cs").Verify();
+    public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_CS() =>
+        verifierCS.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.cs").Verify();
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp9() =>
+    public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_CSharp9() =>
         verifierCS
-            .AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.CSharp9.cs")
+            .AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.CSharp9.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp9)
             .Verify();
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_NoReferenceToEntityFramework_CS() =>
-        new VerifierBuilder<TimestampsShouldNotBeUsedAsPrimaryKeys>().AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.NoReferenceToEntityFramework.cs").Verify();
+    public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_NoReferenceToEntityFramework_CS() =>
+        new VerifierBuilder<DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey>().AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.NoReferenceToEntityFramework.cs").Verify();
 
 #if NET
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_EntityFrameworkCore_CS() =>
-        verifierCS.AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.EntityFrameworkCore.cs").Verify();
+    public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_EntityFrameworkCore_CS() =>
+        verifierCS.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.EntityFrameworkCore.cs").Verify();
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_FluentApi_CS() =>
-        verifierCS.AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.FluentApi.cs").Verify();
+    public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_FluentApi_CS() =>
+        verifierCS.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.cs").Verify();
 
 #endif
 
