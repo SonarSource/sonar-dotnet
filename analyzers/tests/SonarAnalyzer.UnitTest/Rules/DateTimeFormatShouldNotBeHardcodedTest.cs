@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#if NET
-
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -35,6 +33,17 @@ public class DateTimeFormatShouldNotBeHardcodedTest
     [TestMethod]
     public void DateTimeFormatShouldNotBeHardcoded_VB() =>
         new VerifierBuilder<VB.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded.vb").Verify();
-}
+
+#if NET
+
+    [TestMethod]
+    public void DateTimeFormatShouldNotBeHardcoded_NET_CS() =>
+    new VerifierBuilder<CS.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded_NET.cs").Verify();
+
+    [TestMethod]
+    public void DateTimeFormatShouldNotBeHardcoded_NET_VB() =>
+        new VerifierBuilder<VB.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded_NET.vb").Verify();
 
 #endif
+
+}

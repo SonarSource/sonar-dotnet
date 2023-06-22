@@ -25,19 +25,19 @@ public abstract class DateTimeFormatShouldNotBeHardcodedBase<TSyntaxKind, TInvoc
     where TInvocation : SyntaxNode
 {
     private const string DiagnosticId = "S6585";
-    private const string ToStringLiteral = "ToString";
 
-    protected abstract Location InvalidArgumentLocation(TInvocation invocation);
-    protected abstract bool IsMultiCharStringLiteral(TInvocation invocation, SemanticModel semanticModel);
+    protected abstract Location HardCodedArgumentLocation(TInvocation invocation);
+    protected abstract bool HasInvalidFirstArgument(TInvocation invocation, SemanticModel semanticModel);
 
     protected override string MessageFormat => "Do not hardcode the format specifier.";
 
-    protected IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
+    protected IEnumerable<KnownType> CheckedTypes { get; } = new List<KnownType>
         {
-            new(KnownType.System_DateTime, ToStringLiteral),
-            new(KnownType.System_DateTimeOffset, ToStringLiteral),
-            new(KnownType.System_DateOnly, ToStringLiteral),
-            new(KnownType.System_TimeOnly, ToStringLiteral),
+            KnownType.System_DateTime,
+            KnownType.System_DateTimeOffset,
+            KnownType.System_DateOnly,
+            KnownType.System_TimeOnly,
+            KnownType.System_TimeSpan,
         };
 
     protected DateTimeFormatShouldNotBeHardcodedBase() : base(DiagnosticId) { }
@@ -49,19 +49,12 @@ public abstract class DateTimeFormatShouldNotBeHardcodedBase<TSyntaxKind, TInvoc
     {
         if ((TInvocation)analysisContext.Node is var invocation
             && Language.Syntax.InvocationIdentifier(invocation) is { } identifier
-            && CheckedMethods.Where(x => x.Name.Equals(identifier.ValueText, Language.NameComparison)) is var nameMatch
-            && nameMatch.Any()
+            && identifier.ValueText.Equals("ToString", Language.NameComparison)
+            && HasInvalidFirstArgument(invocation, analysisContext.SemanticModel) // Standard date and time format strings are 1 char long and they are allowed
             && analysisContext.SemanticModel.GetSymbolInfo(identifier.Parent).Symbol is { } methodCallSymbol
-            && nameMatch.FirstOrDefault(x => methodCallSymbol.ContainingType.ConstructedFrom.Is(x.ContainingType)) is { }
-            && ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel, methodCallSymbol))
+            && CheckedTypes.Any(x => methodCallSymbol.ContainingType.ConstructedFrom.Is(x)))
         {
-            analysisContext.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], InvalidArgumentLocation(invocation)));
+            analysisContext.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], HardCodedArgumentLocation(invocation)));
         }
     }
-
-    private bool ShouldReportOnMethodCall(TInvocation invocation, SemanticModel semanticModel, ISymbol methodCallSymbol) =>
-        methodCallSymbol is IMethodSymbol methodSymbol
-        && methodSymbol.Parameters.Any()
-        && methodSymbol.Parameters[0].IsType(KnownType.System_String)
-        && IsMultiCharStringLiteral(invocation, semanticModel);
 }

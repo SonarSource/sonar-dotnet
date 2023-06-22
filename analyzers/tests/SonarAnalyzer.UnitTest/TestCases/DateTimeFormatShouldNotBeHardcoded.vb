@@ -2,44 +2,32 @@
 Imports System.Globalization
 
 Public Class DateTimeFormatShouldNotBeHardcoded
-    Public Sub DateTimeCases()
-        Dim StringRepresentation = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss") ' Noncompliant {{Do not hardcode the format specifier.}}
+    Private Format As String = $"dd/MM"
+
+    Public Sub Noncompliant(ByVal dateTimeOffset As DateTimeOffset, ByVal timeSpan As TimeSpan)
+        Dim stringRepresentation = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss") ' Noncompliant {{Do not hardcode the format specifier.}}
         '                                                   ^^^^^^^^^^^^^^^^^^^^^
-        StringRepresentation = DateTime.UtcNow.tOsTring("dd/MM/yyyy HH:mm:ss", CultureInfo.GetCultureInfo("es-MX")) ' Noncompliant
-
-        StringRepresentation = DateTime.UtcNow.ToString(CultureInfo.GetCultureInfo("es-MX"))
-        StringRepresentation = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)
-        StringRepresentation = DateTime.UtcNow.ToString("d")
-        StringRepresentation = DateTime.UtcNow.ToString("d", CultureInfo.GetCultureInfo("es-MX"))
+        stringRepresentation = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.GetCultureInfo("es-MX")) ' Noncompliant
+        stringRepresentation = DateTime.UtcNow.ToString(Format) ' FN
+        Dim stringFormat = String.Format("{0:yy/MM/dd}", DateTime.Now) ' FN
+        Console.WriteLine("{0:HH:mm}", DateTime.Now) ' FN
+        stringRepresentation = dateTimeOffset.ToString("dd/MM/yyyy HH:mm:ss") ' Noncompliant
+        stringRepresentation = timeSpan.ToString("dd\.hh\:mm\:ss") ' Noncompliant
     End Sub
 
-    Public Sub DateTimeOffsetCases(ByVal DateTimeOffset As DateTimeOffset)
-        Dim StringRepresentation = DateTimeOffset.ToString("dd/MM/yyyy HH:mm:ss") ' Noncompliant
-        StringRepresentation = DateTimeOffset.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.GetCultureInfo("es-MX")) ' Noncompliant
-
-        StringRepresentation = DateTimeOffset.ToString(CultureInfo.GetCultureInfo("es-MX"))
-        StringRepresentation = DateTimeOffset.ToString(CultureInfo.InvariantCulture)
-        StringRepresentation = DateTimeOffset.ToString("d")
-        StringRepresentation = DateTimeOffset.ToString("d", CultureInfo.GetCultureInfo("es-MX"))
+    Public Sub Compliant(ByVal dateTimeOffset As DateTimeOffset, ByVal timeSpan As TimeSpan)
+        Dim stringRepresentation = DateTime.UtcNow.ToString(CultureInfo.GetCultureInfo("es-MX"))
+        stringRepresentation = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)
+        stringRepresentation = DateTime.UtcNow.ToString("d")
+        stringRepresentation = DateTime.UtcNow.ToString("d", CultureInfo.GetCultureInfo("es-MX"))
+        stringRepresentation = dateTimeOffset.ToString(CultureInfo.GetCultureInfo("es-MX"))
+        stringRepresentation = timeSpan.ToString("d")
+        MyDate.ToString("dd/MM/yyy")
     End Sub
 
-    Public Sub DateOnlyCases(ByVal DateOnly As DateOnly)
-        Dim StringRepresentation = DateOnly.ToString("dd/MM/yyyy HH:mm:ss") ' Noncompliant
-        StringRepresentation = DateOnly.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.GetCultureInfo("es-MX")) ' Noncompliant
-
-        StringRepresentation = DateOnly.ToString(CultureInfo.GetCultureInfo("es-MX"))
-        StringRepresentation = DateOnly.ToString(CultureInfo.InvariantCulture)
-        StringRepresentation = DateOnly.ToString("d")
-        StringRepresentation = DateOnly.ToString("f", CultureInfo.GetCultureInfo("es-MX"))
-    End Sub
-
-    Public Sub TimeOnlyCases(ByVal TimeOnly As TimeOnly)
-        Dim StringRepresentation = TimeOnly.ToString("dd/MM/yyyy HH:mm:ss") ' Noncompliant
-        StringRepresentation = TimeOnly.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.GetCultureInfo("es-MX")) ' Noncompliant
-
-        StringRepresentation = TimeOnly.ToString(CultureInfo.GetCultureInfo("es-MX"))
-        StringRepresentation = TimeOnly.ToString(CultureInfo.InvariantCulture)
-        StringRepresentation = TimeOnly.ToString("d")
-        StringRepresentation = TimeOnly.ToString("d", CultureInfo.GetCultureInfo("es-MX"))
-    End Sub
+    Class MyDate
+        Shared Function ToString(ByVal str As String) As String
+            Return str
+        End Function
+    End Class
 End Class

@@ -25,13 +25,15 @@ public sealed class DateTimeFormatShouldNotBeHardcoded : DateTimeFormatShouldNot
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override Location InvalidArgumentLocation(InvocationExpressionSyntax invocation)
+    protected override Location HardCodedArgumentLocation(InvocationExpressionSyntax invocation)
     {
         var simpleArgument = (SimpleArgumentSyntax)invocation.ArgumentList.Arguments[0];
         return simpleArgument.Expression.GetLocation();
     }
 
-    protected override bool IsMultiCharStringLiteral(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-        invocation.ArgumentList.Arguments[0] is SimpleArgumentSyntax simpleArgument
+    protected override bool HasInvalidFirstArgument(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+        invocation.ArgumentList is { }
+        && invocation.ArgumentList.Arguments.Any()
+        && invocation.ArgumentList.Arguments[0] is SimpleArgumentSyntax simpleArgument
         && simpleArgument.Expression.StringValue(semanticModel) is { Length: > 1 };
 }
