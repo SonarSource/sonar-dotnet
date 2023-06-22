@@ -1,5 +1,5 @@
 {
-  "title": "Timestamps should not be used as primary keys",
+  "title": "Date and time should not be used as a type for primary keys",
   "type": "BUG",
   "status": "ready",
   "remediation": {
