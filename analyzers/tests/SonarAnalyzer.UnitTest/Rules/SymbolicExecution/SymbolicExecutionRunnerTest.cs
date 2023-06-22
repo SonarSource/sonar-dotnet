@@ -297,6 +297,19 @@ public void Method()
 }");
 
     [TestMethod]
+    public void Initialize_LocalFunction_TopLevelStatements() =>
+    VerifyTopLevelStatements(@"
+void LocalMethod(string s)
+{
+    s = null; // Noncompliant {{Message for SMain}}
+}
+");
+
+    [TestMethod]
+    public void Initialize_TopLevelStatements() =>
+        VerifyTopLevelStatements("string s = null; // Noncompliant {{Message for SMain}}");
+
+    [TestMethod]
     public void Analyze_DoNotRunWhenContainsDiagnostics() =>
         Verify(@"string s = null;   // Error CS1525: Invalid expression term '>' - misleading location, duplicate reporting from Roslyn
                      >>;                // Error CS1525: Invalid expression term '>' - this will set body.ContainsDiagnostics",
@@ -336,19 +349,6 @@ End Sub
 
 Private Sub WithFunc(Arg As Func(Of Integer))
 End Sub");
-
-    [TestMethod]
-    public void Analyze_LocalFunction_TopLevelStatements() =>
-        VerifyTopLevelStatements(@"
-void LocalMethod(string s)
-{
-    s = null; // Noncompliant {{Message for SMain}}
-}
-");
-
-    [TestMethod]
-    public void Analyze_TopLevelStatements() =>
-        VerifyTopLevelStatements("""string s = null; // Noncompliant {{Message for SMain}}""");
 
     [TestMethod]
     public void Enabled_MainProject() =>
@@ -565,17 +565,16 @@ End Class";
                                             ImmutableArray<ParseOptions> parseOptions,
                                             string sonarProjectConfigPath,
                                             OutputKind kind,
-                                            params DiagnosticDescriptor[] onlyRules)
-        where TRunner : SymbolicExecutionRunnerBase, new() =>
-            new VerifierBuilder<TRunner>()
-                .AddReferences(TestHelper.ProjectTypeReference(projectType))
-                .AddSnippet(code)
-                .WithSonarProjectConfigPath(sonarProjectConfigPath)
-                .WithOptions(parseOptions)
-                .WithOnlyDiagnostics(onlyRules)
-                .WithConcurrentAnalysis(false)
-                .WithOutputKind(kind)
-                .Verify();
+                                            params DiagnosticDescriptor[] onlyRules) where TRunner : SymbolicExecutionRunnerBase, new() =>
+        new VerifierBuilder<TRunner>()
+            .AddReferences(TestHelper.ProjectTypeReference(projectType))
+            .AddSnippet(code)
+            .WithSonarProjectConfigPath(sonarProjectConfigPath)
+            .WithOptions(parseOptions)
+            .WithOnlyDiagnostics(onlyRules)
+            .WithConcurrentAnalysis(false)
+            .WithOutputKind(kind)
+            .Verify();
 
     private class TestSERunnerCS : CS.SymbolicExecutionRunner
     {
