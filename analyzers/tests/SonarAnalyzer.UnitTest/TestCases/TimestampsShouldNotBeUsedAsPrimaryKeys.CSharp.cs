@@ -148,7 +148,7 @@ class PropertyTypes
 
     class NotReadWriteProperty
     {
-        public DateTime Id => DateTime.Now; // Compliant - not a read/write property
+        public DateTime Id => DateTime.Now;                 // Compliant - not a read/write property
     }
 
     class FullProperty
