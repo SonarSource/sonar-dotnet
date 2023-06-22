@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Net7.features
+namespace NetFramework48
 {
     internal class AvoidDateTimeNowForBenchmarking
     {

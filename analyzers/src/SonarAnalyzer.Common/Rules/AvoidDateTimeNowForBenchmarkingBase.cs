@@ -35,6 +35,7 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TSyntax
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckBinaryExpression, Language.SyntaxKind.SubtractExpression);
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckMemberAccess, Language.SyntaxKind.SimpleMemberAccessExpression);
     }
+
     private void CheckBinaryExpression(SonarSyntaxNodeReportingContext context)
     {
         if (Language.Syntax.BinaryExpressionLeft(context.Node) is TMemberAccess memberAccess
