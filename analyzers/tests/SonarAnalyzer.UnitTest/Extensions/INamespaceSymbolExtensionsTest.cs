@@ -28,15 +28,10 @@ public class INamespaceSymbolExtensionsTest
 {
     [DataTestMethod]
     [DataRow("System", "System")]
-    [DataRow("System", "global::System")]
-    [DataRow("global::System", "System")]
-    [DataRow("global::System", "global::System")]
     [DataRow("System.Collections.Generic", "System.Collections.Generic")]
-    [DataRow("System.Collections.Generic", "global::System.Collections.Generic")]
     // Odd cases but nothing that needs a fix:
-    [DataRow("System.Collections.Generic", "global.System.Collections.Generic")]
-    [DataRow("System.Collections.Generic", "System::Collections::Generic")]
-    [DataRow("System.Collections.Generic", "System..Collections::::Generic")]
+    [DataRow("System.Collections.Generic", "System..Collections..Generic")]
+    [DataRow("System.Collections.Generic", ".System.Collections.Generic.")]
     public void Is_ValidNameSpaces(string code, string test)
     {
         var snippet = $$"""
@@ -50,6 +45,23 @@ public class INamespaceSymbolExtensionsTest
     }
 
     [DataTestMethod]
+    [DataRow("", true)]
+    [DataRow("System", false)]
+    public void Is_Global(string test, bool expected)
+    {
+        var snippet = """
+            using System;
+            """;
+        var (tree, model) = TestHelper.CompileCS(snippet);
+        var name = tree.GetRoot().DescendantNodes().OfType<UsingDirectiveSyntax>().Single().Name;
+        var symbol = model.GetSymbolInfo(name).Symbol;
+        var ns = symbol.Should().BeAssignableTo<INamespaceSymbol>().Subject;
+        var globalNs = ns.ContainingNamespace;
+        globalNs.IsGlobalNamespace.Should().BeTrue();
+        globalNs.Is(test).Should().Be(expected);
+    }
+
+    [DataTestMethod]
     [DataRow("System", "Microsoft")]
     [DataRow("System", "System.Collections")]
     [DataRow("System.Collections", "System")]
@@ -59,8 +71,8 @@ public class INamespaceSymbolExtensionsTest
     [DataRow("System.Collections.Generic", "System.Collections")]
     [DataRow("System.Collections.Generic", "Generic")]
     [DataRow("System.Collections.Generic", "")]
-    [DataRow("System.Collections.Generic", "System.Collections.Generic::global")]
-    [DataRow("System.Collections.Generic", "System.Collections.Generic.global")]
+    [DataRow("System.Collections.Generic", "global::System.Collections.Generic")]
+    [DataRow("System.Collections.Generic", "global.System.Collections.Generic")]
     public void Is_InvalidNameSpaces(string code, string test)
     {
         var snippet = $$"""
