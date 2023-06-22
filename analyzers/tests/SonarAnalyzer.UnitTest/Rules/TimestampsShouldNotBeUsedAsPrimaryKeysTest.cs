@@ -28,8 +28,8 @@ public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
     private readonly VerifierBuilder verifierCS = CreateVerifier<TimestampsShouldNotBeUsedAsPrimaryKeys>();
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp() =>
-        verifierCS.AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.CSharp.cs").Verify();
+    public void TimestampsShouldNotBeUsedAsPrimaryKeys_CS() =>
+        verifierCS.AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.cs").Verify();
 
     [TestMethod]
     public void TimestampsShouldNotBeUsedAsPrimaryKeys_CSharp9() =>
@@ -39,18 +39,18 @@ public class TimestampsShouldNotBeUsedAsPrimaryKeysTest
             .Verify();
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_NoReferenceToEntityFramework_CSharp() =>
-        new VerifierBuilder<TimestampsShouldNotBeUsedAsPrimaryKeys>().AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.NoReferenceToEntityFramework.CSharp.cs").Verify();
+    public void TimestampsShouldNotBeUsedAsPrimaryKeys_NoReferenceToEntityFramework_CS() =>
+        new VerifierBuilder<TimestampsShouldNotBeUsedAsPrimaryKeys>().AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.NoReferenceToEntityFramework.cs").Verify();
 
 #if NET
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_EntityFrameworkCore_CSharp() =>
-        verifierCS.AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.EntityFrameworkCore.CSharp.cs").Verify();
+    public void TimestampsShouldNotBeUsedAsPrimaryKeys_EntityFrameworkCore_CS() =>
+        verifierCS.AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.EntityFrameworkCore.cs").Verify();
 
     [TestMethod]
-    public void TimestampsShouldNotBeUsedAsPrimaryKeys_FluentApi_CSharp() =>
-        verifierCS.AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.FluentApi.CSharp.cs").Verify();
+    public void TimestampsShouldNotBeUsedAsPrimaryKeys_FluentApi_CS() =>
+        verifierCS.AddPaths("TimestampsShouldNotBeUsedAsPrimaryKeys.FluentApi.cs").Verify();
 
 #endif
 
