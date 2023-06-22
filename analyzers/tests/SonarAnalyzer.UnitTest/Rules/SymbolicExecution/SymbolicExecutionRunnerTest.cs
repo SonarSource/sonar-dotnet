@@ -339,7 +339,7 @@ End Sub");
 
     [TestMethod]
     public void Analyze_LocalFunction_TopLevelStatements() =>
-    VerifyTopLevelStatements(@"
+        VerifyTopLevelStatements(@"
 void LocalMethod(string s)
 {
     s = null; // Noncompliant {{Message for SMain}}
@@ -567,15 +567,15 @@ End Class";
                                             OutputKind kind,
                                             params DiagnosticDescriptor[] onlyRules)
         where TRunner : SymbolicExecutionRunnerBase, new() =>
-        new VerifierBuilder<TRunner>()
-            .AddReferences(TestHelper.ProjectTypeReference(projectType))
-            .AddSnippet(code)
-            .WithSonarProjectConfigPath(sonarProjectConfigPath)
-            .WithOptions(parseOptions)
-            .WithOnlyDiagnostics(onlyRules)
-            .WithConcurrentAnalysis(false)
-            .WithOutputKind(kind)
-            .Verify();
+            new VerifierBuilder<TRunner>()
+                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddSnippet(code)
+                .WithSonarProjectConfigPath(sonarProjectConfigPath)
+                .WithOptions(parseOptions)
+                .WithOnlyDiagnostics(onlyRules)
+                .WithConcurrentAnalysis(false)
+                .WithOutputKind(kind)
+                .Verify();
 
     private class TestSERunnerCS : CS.SymbolicExecutionRunner
     {
