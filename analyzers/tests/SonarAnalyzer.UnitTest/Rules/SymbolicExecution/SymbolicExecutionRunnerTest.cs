@@ -298,12 +298,10 @@ public void Method()
 
     [TestMethod]
     public void Initialize_LocalFunction_TopLevelStatements() =>
-    VerifyTopLevelStatements(@"
-void LocalMethod(string s)
-{
-    s = null; // Noncompliant {{Message for SMain}}
-}
-");
+        VerifyTopLevelStatements("""
+            void LocalMethod(string s) =>
+                s = null; // Noncompliant {{Message for SMain}}
+            """);
 
     [TestMethod]
     public void Initialize_TopLevelStatements() =>
@@ -544,10 +542,10 @@ public class Sample
 
     private static void VerifyTopLevelStatements(string members)
     {
-        var code =
-$@"using System;
-{members}
-";
+        var code = $"""
+            using System;
+            {members}
+            """;
         VerifyCode<TestSERunnerCS>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, OutputKind.ConsoleApplication, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
     }
 
