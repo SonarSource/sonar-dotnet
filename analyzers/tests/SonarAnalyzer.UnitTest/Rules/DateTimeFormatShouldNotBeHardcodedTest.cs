@@ -38,11 +38,11 @@ public class DateTimeFormatShouldNotBeHardcodedTest
 
     [TestMethod]
     public void DateTimeFormatShouldNotBeHardcoded_NET_CS() =>
-    new VerifierBuilder<CS.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded_NET.cs").Verify();
+    new VerifierBuilder<CS.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded.Net.cs").Verify();
 
     [TestMethod]
     public void DateTimeFormatShouldNotBeHardcoded_NET_VB() =>
-        new VerifierBuilder<VB.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded_NET.vb").Verify();
+        new VerifierBuilder<VB.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded.Net.vb").Verify();
 
 #endif
 
