@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Extensions
         private static readonly ControlFlowGraphCache CfgCache = new();
 
         public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel model, CancellationToken cancel) =>
-            CfgCache.FindOrCreate(body.Parent, model, cancel);
+            CfgCache.FindOrCreate(body is CompilationUnitSyntax ? body : body.Parent, model, cancel);
 
         public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
             node != null &&

@@ -5,7 +5,7 @@ object topLevel = "Value";
 topLevel.ToString();
 
 topLevel = null;
-topLevel.ToString();   // FN
+topLevel.ToString();   // Noncompliant
 
 void TopLevelLocalFunction()
 {

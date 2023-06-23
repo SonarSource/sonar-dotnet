@@ -4,7 +4,7 @@ int? topLevel = 42;
 var v = topLevel.Value;
 
 topLevel = null;
-v = topLevel.Value;   // FN
+v = topLevel.Value;   // Noncompliant
 
 void TopLevelLocalFunction()
 {

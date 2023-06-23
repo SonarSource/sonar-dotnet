@@ -62,6 +62,17 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     protected override void Initialize(SonarAnalysisContext context)
     {
         context.RegisterNodeAction(
+            c =>
+            {
+                var compilationUnit = (CompilationUnitSyntax)c.Node;
+                if (compilationUnit.IsTopLevelMain() && c.SemanticModel.GetDeclaredSymbol(compilationUnit) is { } symbol)
+                {
+                    Analyze(context, c, compilationUnit, symbol);
+                }
+            },
+            SyntaxKind.CompilationUnit);
+
+        context.RegisterNodeAction(
             c => Analyze<BaseMethodDeclarationSyntax>(context, c, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.DestructorDeclaration,
