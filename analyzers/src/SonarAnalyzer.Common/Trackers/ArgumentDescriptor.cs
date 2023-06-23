@@ -30,23 +30,9 @@ public enum InvokedMemberKind
     Attribute
 }
 
-public readonly struct ArgumentsCount
-{
-    public ArgumentsCount(int minimalNumberOfArguments, int maximalNumberOfArguments)
-    {
-        MinimalNumberOfArguments = minimalNumberOfArguments;
-        MaximalNumberOfArguments = maximalNumberOfArguments;
-    }
-
-    public int MinimalNumberOfArguments { get; }
-    public int MaximalNumberOfArguments { get; }
-
-    public static implicit operator ArgumentsCount(int exact) => new(exact, exact);
-}
-
 public class ArgumentDescriptor
 {
-    private ArgumentDescriptor(InvokedMemberKind memberKind, Func<IReadOnlyCollection<SyntaxNode>, bool> argumentListConstraint, RefKind? refKind,
+    private ArgumentDescriptor(InvokedMemberKind memberKind, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, RefKind? refKind,
         Func<IParameterSymbol, bool> parameterConstraint, Func<string, StringComparison, bool> invokedMemberNameConstraint, Func<ISymbol, bool> invokedMemberConstraint)
     {
         MemberKind = memberKind;
@@ -57,25 +43,25 @@ public class ArgumentDescriptor
         InvokedMemberConstraint = invokedMemberConstraint;
     }
 
-    public static ArgumentDescriptor MethodInvocation(KnownType invokedType, string methodName, string parameterName, int numberOfArguments)
-        => MethodInvocation(invokedType, methodName, parameterName, (ArgumentsCount)numberOfArguments);
+    public static ArgumentDescriptor MethodInvocation(KnownType invokedType, string methodName, string parameterName, int argumentPosition)
+        => MethodInvocation(invokedType, methodName, parameterName, x => x == argumentPosition);
 
-    public static ArgumentDescriptor MethodInvocation(KnownType invokedType, string methodName, string parameterName, ArgumentsCount numberOfArguments)
-        => MethodInvocation(s => invokedType.Matches(s.ContainingType), methodName, parameterName, numberOfArguments, null);
+    public static ArgumentDescriptor MethodInvocation(KnownType invokedType, string methodName, string parameterName, Func<int, bool> argumentPosition)
+        => MethodInvocation(s => invokedType.Matches(s.ContainingType), methodName, parameterName, argumentPosition, null);
 
-    public static ArgumentDescriptor MethodInvocation(KnownType invokedType, string methodName, string parameterName, ArgumentsCount numberOfArguments, RefKind refKind)
-        => MethodInvocation(s => invokedType.Matches(s.ContainingType), methodName, parameterName, numberOfArguments, refKind);
+    public static ArgumentDescriptor MethodInvocation(KnownType invokedType, string methodName, string parameterName, Func<int, bool> argumentPosition, RefKind refKind)
+        => MethodInvocation(s => invokedType.Matches(s.ContainingType), methodName, parameterName, argumentPosition, refKind);
 
-    public static ArgumentDescriptor MethodInvocation(Func<IMethodSymbol, bool> invokedMethodSymbol, string methodName, string parameterName, ArgumentsCount argumentsCount, RefKind? refKind)
+    public static ArgumentDescriptor MethodInvocation(Func<IMethodSymbol, bool> invokedMethodSymbol, string methodName, string parameterName, Func<int, bool> argumentPosition, RefKind? refKind)
         => new(InvokedMemberKind.Method,
-            argumentListConstraint: x => x.Count >= argumentsCount.MinimalNumberOfArguments && x.Count <= argumentsCount.MaximalNumberOfArguments,
+            argumentListConstraint: (_, position) => position is null || argumentPosition is null || argumentPosition(position.Value),
             refKind,
             parameterConstraint: x => x.Name == parameterName,
             invokedMemberNameConstraint: (n, c) => n.Equals(methodName, c),
             invokedMemberConstraint: x => invokedMethodSymbol(x as IMethodSymbol));
 
     public InvokedMemberKind MemberKind { get; }
-    public Func<IReadOnlyCollection<SyntaxNode>, bool> ArgumentListConstraint { get; }
+    public Func<IReadOnlyCollection<SyntaxNode>, int?, bool> ArgumentListConstraint { get; }
     public RefKind? RefKind { get; }
     public Func<IParameterSymbol, bool> ParameterConstraint { get; }
     public Func<string, StringComparison, bool> InvokedMemberNameConstraint { get; }

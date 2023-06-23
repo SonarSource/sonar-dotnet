@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Moq;
 using SonarAnalyzer.Trackers;
 
 namespace SonarAnalyzer.UnitTest.Trackers;
@@ -29,23 +31,143 @@ public class ArgumentTrackerTest
     public void Method_SimpleArgument()
     {
         var snippet = """
-            using System;
+            System.IFormatProvider provider = null;
+            1.ToString($$provider);
+            """;
+        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
 
-            public class C
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", 0);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""1.ToString($$provider);""", 0, true)]
+    [DataRow("""1.ToString($$provider);""", 1, false)]
+    [DataRow("""1.ToString("", $$provider);""", 1, true)]
+    [DataRow("""1.ToString("", $$provider);""", 0, false)]
+    [DataRow("""1.ToString("", $$provider: provider);""", 1, true)]
+    [DataRow("""1.ToString("", $$provider: provider);""", 0, true)]
+    [DataRow("""1.ToString($$provider: provider, format: "");""", 1, true)]
+    [DataRow("""1.ToString($$provider: provider, format: "");""", 0, true)]
+    public void Method_Position(string invocation, int position, bool expected)
+    {
+        var snippet = $$"""
+            System.IFormatProvider provider = null;
+            {{invocation}}
+            """;
+        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", position);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
+    [DataTestMethod]
+    [DataRow("""int.TryParse("", $$out var result);""")]
+    [DataRow("""int.TryParse("", System.Globalization.NumberStyles.HexNumber, null, $$out var result);""")]
+    public void Method_RefOut_True(string invocation)
+    {
+        var snippet = $$"""
+            System.IFormatProvider provider = null;
+            {{invocation}}
+            """;
+        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true, RefKind.Out);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""int.TryParse("", $$out var result);""", RefKind.Ref)]
+    [DataRow("""int.TryParse($$"", out var result);""", RefKind.Out)]
+    [DataRow("""int.TryParse("", System.Globalization.NumberStyles.HexNumber, null, $$out var result);""", RefKind.Ref)]
+    [DataRow("""int.TryParse("", $$System.Globalization.NumberStyles.HexNumber, null, out var result);""", RefKind.Out)]
+    public void Method_RefOut_False(string invocation, RefKind refKind)
+    {
+        var snippet = $$"""
+            System.IFormatProvider provider = null;
+            {{invocation}}
+            """;
+        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true, refKind);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeFalse();
+    }
+
+    [DataTestMethod]
+    [DataRow("""int.TryParse("", $$out var result);""")]
+    [DataRow("""int.TryParse("", System.Globalization.NumberStyles.HexNumber, null, $$out var result);""")]
+    public void Method_RefOut_Unspecified(string invocation)
+    {
+        var snippet = $$"""
+            System.IFormatProvider provider = null;
+            {{invocation}}
+            """;
+        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""new Direct().M($$1);""", true)]
+    [DataRow("""new DirectDifferentParameterName().M($$1);""", false)] // FN. This would require ExplicitOrImplicitInterfaceImplementations from the internal ISymbolExtensions in Roslyn.
+    [DataRow("""(new Explicit() as I).M($$1);""", true)]
+    [DataRow("""(new ExplicitDifferentParameterName() as I).M($$1);""", true)]
+    public void Method_Inheritance_Interface(string invocation, bool expected)
+    {
+        var snippet = $$"""
+            interface I
             {
-                public void M(IFormatProvider provider)
+                void M(int parameter);
+            }
+            public class Direct: I
+            {
+                public void M(int parameter) { }
+            }
+            public class DirectDifferentParameterName: I
+            {
+                public void M(int renamed) { }
+            }
+            public class Explicit: I
+            {
+                void I.M(int parameter) { }
+            }
+            public class ExplicitDifferentParameterName: I
+            {
+                void I.M(int renamed) { }
+            }
+            public class Test
+            {
+                void M()
                 {
-                    1.ToString($$provider);
+                    {{invocation}}
                 }
             }
             """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.MethodInvocation(m => m.Name == "M", "M", "parameter", x => true, null);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
+    private static string WrapInMethod(string snippet) =>
+        $$"""
+        using System;
+        class C
+        {
+            public void M()
+            {
+                {{snippet}}
+            }
+        }
+        """;
+
+    private static (SyntaxNode Node, SemanticModel Model) ArgumentAndModel(string snippet)
+    {
         var pos = snippet.IndexOf("$$");
         snippet = snippet.Replace("$$", string.Empty);
         var (tree, model) = TestHelper.CompileCS(snippet);
-        var node = tree.GetRoot().FindNode(new(pos, 0));
-
-        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", 1);
-        var match = new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model));
-        match.Should().BeTrue();
+        var node = tree.GetRoot().FindNode(new(pos, 0)).AncestorsAndSelf().First(x => x is ArgumentSyntax or AttributeArgumentSyntax);
+        return (node, model);
     }
 }

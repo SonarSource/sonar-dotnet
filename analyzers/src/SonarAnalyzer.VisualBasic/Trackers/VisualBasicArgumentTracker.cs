@@ -34,6 +34,12 @@ namespace SonarAnalyzer.Helpers
                 ArgumentSyntax { Parent: ArgumentListSyntax { Arguments: { } list } } => list,
                 _ => null,
             };
+
+        protected override int? Position(SyntaxNode argumentNode) =>
+            argumentNode is ArgumentSyntax { IsNamed: true }
+            ? null
+            : ArgumentList(argumentNode).IndexOf(x => x == argumentNode);
+
         protected override RefKind ArgumentRefKind(SyntaxNode argumentNode) =>
             RefKind.None;
 

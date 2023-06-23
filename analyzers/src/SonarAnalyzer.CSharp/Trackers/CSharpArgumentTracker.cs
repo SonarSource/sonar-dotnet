@@ -19,12 +19,17 @@
                 _ => null,
             };
 
+        protected override int? Position(SyntaxNode argumentNode) =>
+            argumentNode is ArgumentSyntax { NameColon: not null } or AttributeArgumentSyntax { NameColon: not null } or AttributeArgumentSyntax { NameEquals: not null }
+                ? null
+                : ArgumentList(argumentNode).IndexOf(x => x == argumentNode);
+
         protected override RefKind ArgumentRefKind(SyntaxNode argumentNode)
         {
             return argumentNode switch
             {
                 AttributeArgumentSyntax => RefKind.None,
-                ArgumentSyntax { RefOrOutKeyword: { } refOrOut } => refOrOut.Kind() switch { SyntaxKind.OutKeyword => RefKind.Out, SyntaxKind.RefKeyword => RefKind.Ref, _=> RefKind.None },
+                ArgumentSyntax { RefOrOutKeyword: { } refOrOut } => refOrOut.Kind() switch { SyntaxKind.OutKeyword => RefKind.Out, SyntaxKind.RefKeyword => RefKind.Ref, _ => RefKind.None },
                 _ => RefKind.None,
             };
         }

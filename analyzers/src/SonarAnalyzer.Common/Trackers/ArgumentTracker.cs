@@ -25,6 +25,7 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
 {
     protected abstract RefKind ArgumentRefKind(SyntaxNode argumentNode);
     protected abstract IReadOnlyCollection<SyntaxNode> ArgumentList(SyntaxNode argumentNode);
+    protected abstract int? Position(SyntaxNode argumentNode);
     protected abstract bool InvocationFitsMemberKind(SyntaxNode argumentNode, InvokedMemberKind memberKind);
     protected abstract bool InvokedMemberFits(SemanticModel model, SyntaxNode argumentNode, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint);
     protected abstract SyntaxNode InvokedExpression(SyntaxNode argumentNode);
@@ -32,22 +33,23 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
     public Condition MatchArgument(ArgumentDescriptor argument) =>
         context =>
         {
-            if (argument.RefKind is { } refKind && ArgumentRefKind(context.Node) == refKind)
+            var argumentNode = context.Node;
+            if (argument.RefKind is null || ArgumentRefKind(argumentNode) == argument.RefKind.Value)
             {
-                var argList = ArgumentList(context.Node);
+                var argList = ArgumentList(argumentNode);
                 if (argList == null)
                 {
                     return false;
                 }
-                if (argument.ArgumentListConstraint?.Invoke(argList) is null or true)
+                if (argument.ArgumentListConstraint?.Invoke(argList, Position(argumentNode)) is null or true)
                 {
-                    if (InvocationFitsMemberKind(context.Node, argument.MemberKind))
+                    if (InvocationFitsMemberKind(argumentNode, argument.MemberKind))
                     {
                         if (argument.InvokedMemberNameConstraint != null
-                            && InvokedMemberFits(context.SemanticModel, context.Node, argument.MemberKind, x => argument.InvokedMemberNameConstraint(x, Language.NameComparison)))
+                            && this.InvokedMemberFits(context.SemanticModel, argumentNode, argument.MemberKind, x => argument.InvokedMemberNameConstraint(x, Language.NameComparison)))
                         {
-                            var parameterLookup = Language.MethodParameterLookup(InvokedExpression(context.Node), context.SemanticModel);
-                            if (parameterLookup.TryGetSymbol(context.Node, out var parameter))
+                            var parameterLookup = Language.MethodParameterLookup(InvokedExpression(argumentNode), context.SemanticModel);
+                            if (parameterLookup.TryGetSymbol(argumentNode, out var parameter))
                             {
                                 if (argument.ParameterConstraint?.Invoke(parameter) is null or true)
                                 {
