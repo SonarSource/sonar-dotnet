@@ -162,6 +162,7 @@ internal static class VisualBasicSyntaxHelper
     public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
         node?.RemoveParentheses() switch
         {
+            AttributeSyntax x => x.Name?.GetIdentifier(),
             ClassBlockSyntax x => x.ClassStatement.Identifier,
             ClassStatementSyntax x => x.Identifier,
             IdentifierNameSyntax x => x.Identifier,

@@ -1,0 +1,15 @@
+{
+  "title": "Date and time should not be used as a type for primary keys",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-3363",
+  "sqKey": "S3363",
+  "scope": "Main",
+  "quickfix": "infeasible"
+}
