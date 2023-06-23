@@ -28,7 +28,7 @@ internal static class INamespaceSymbolExtensions
     /// <param name="symbol">The namespace symbol to test.</param>
     /// <param name="name">The name in the form <c>System.Collections.Generic</c>.</param>
     /// <returns>Returns <see langword="true"/> if the namespace symbol refers to the string given.</returns>
-    public static bool Is(this INamespaceSymbol? symbol, string name)
+    public static bool Is(this INamespaceSymbol symbol, string name)
     {
         if (name is null)
         {
