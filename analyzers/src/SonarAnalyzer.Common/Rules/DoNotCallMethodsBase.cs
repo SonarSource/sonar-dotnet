@@ -30,10 +30,19 @@ namespace SonarAnalyzer.Rules
 
         protected virtual bool IsInValidContext(TInvocationExpressionSyntax invocationSyntax, SemanticModel semanticModel) => true;
 
+        protected virtual bool ShouldRegisterAction(Compilation compilation) => true;
+
         protected DoNotCallMethodsBase(string diagnosticId) : base(diagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, AnalyzeInvocation, Language.SyntaxKind.InvocationExpression);
+             context.RegisterCompilationStartAction(start =>
+             {
+                 if (!ShouldRegisterAction(start.Compilation))
+                 {
+                     return;
+                 }
+                 context.RegisterNodeAction(Language.GeneratedCodeRecognizer, AnalyzeInvocation, Language.SyntaxKind.InvocationExpression);
+             });
 
         private void AnalyzeInvocation(SonarSyntaxNodeReportingContext analysisContext)
         {
