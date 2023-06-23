@@ -1,5 +1,5 @@
 {
-  "title": "Don\u0027t hardcode the format provider when turning dates and times to strings",
+  "title": "Don\u0027t hardcode the format when turning dates and times to strings",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
