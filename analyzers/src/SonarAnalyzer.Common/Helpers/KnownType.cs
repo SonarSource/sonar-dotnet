@@ -262,6 +262,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Data_Sqlite_SQLiteDataAdapter = new("System.Data.SQLite.SQLiteDataAdapter");
         public static readonly KnownType System_Data_SqlServerCe_SqlCeCommand = new("System.Data.SqlServerCe.SqlCeCommand");
         public static readonly KnownType System_Data_SqlServerCe_SqlCeDataAdapter = new("System.Data.SqlServerCe.SqlCeDataAdapter");
+        public static readonly KnownType System_DateOnly = new("System.DateOnly");
         public static readonly KnownType System_DateTime = new("System.DateTime");
         public static readonly KnownType System_DateTimeOffset = new("System.DateTimeOffset");
         public static readonly KnownType System_Decimal = new("System.Decimal");
@@ -480,6 +481,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Threading_Thread = new("System.Threading.Thread");
         public static readonly KnownType System_Threading_WaitHandle = new("System.Threading.WaitHandle");
         public static readonly KnownType System_ThreadStaticAttribute = new("System.ThreadStaticAttribute");
+        public static readonly KnownType System_TimeOnly = new("System.TimeOnly");
         public static readonly KnownType System_TimeSpan = new("System.TimeSpan");
         public static readonly KnownType System_Type = new("System.Type");
         public static readonly KnownType System_UInt16 = new("System.UInt16");

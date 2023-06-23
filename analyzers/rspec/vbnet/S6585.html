@@ -1,0 +1,41 @@
+<h2>Why is this an issue?</h2>
+<p>Hardcoding the date and time format strings can lead to formats that consumers misunderstand. Also, if the same format is meant to be used in
+multiple places, it is easier to make a mistake when it’s hardcoded instead of using a format provided by an <code>IFormatProvider</code> or using one
+of the standard format strings.</p>
+<h3>What is the potential impact?</h3>
+<p>If a non-conventional format is used, the formatted date and time can be misunderstood. Also, if a mistake is made in the format, the formatted
+date can be incomplete. For example, you might switch the place of the minutes and month parts of a date or simply forget to print the year.</p>
+<h2>How to fix it</h2>
+<p>Instead of hardcoding the format, provide one from the available formats through an <code>IFormatProvider</code> or use one of the standard format
+strings.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Private Sub PrintTime()
+    Console.WriteLine(DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss"))
+
+    Console.WriteLine(DateTime.UtcNow.ToString("dd/mm/yyyy HH:MM:ss")) ' Months and minutes have changed their places
+End Sub
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+Private Sub PrintTime()
+    Console.WriteLine(DateTime.UtcNow.ToString(CultureInfo.GetCultureInfo("es-MX")))
+
+    Console.WriteLine(DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)) ' Better provide a well known culture, so this kind of issues do not pop up
+End Sub
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider">IFormatProvider documentation</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo">CultureInfo documentation</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings">Standard date and time format
+  strings</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings">Custom date and time format
+  strings</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings">Standard TimeSpan format strings</a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings">Custom TimeSpan format strings</a> </li>
+</ul>
+

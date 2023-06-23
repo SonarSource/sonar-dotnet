@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6585",
+"message":  "Do not hardcode the format specifier.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cookies\NancyCookie.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  68,
+"endLine":  152,
+"endColumn":  95
+}
+}
+}
+]
+}

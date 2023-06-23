@@ -1,0 +1,15 @@
+{
+  "title": "Don\u0027t hardcode the format when turning dates and times to strings",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6585",
+  "sqKey": "S6585",
+  "scope": "All",
+  "quickfix": "infeasible"
+}

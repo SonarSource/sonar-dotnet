@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6585",
+"message":  "Do not hardcode the format specifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  550,
+"startColumn":  82,
+"endLine":  550,
+"endColumn":  94
+}
+}
+}
+]
+}
