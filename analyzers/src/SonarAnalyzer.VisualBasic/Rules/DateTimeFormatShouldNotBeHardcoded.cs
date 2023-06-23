@@ -35,5 +35,5 @@ public sealed class DateTimeFormatShouldNotBeHardcoded : DateTimeFormatShouldNot
         invocation.ArgumentList is { }
         && invocation.ArgumentList.Arguments.Any()
         && invocation.ArgumentList.Arguments[0] is SimpleArgumentSyntax simpleArgument
-        && simpleArgument.Expression.StringValue(semanticModel) is { Length: > 1 };
+        && simpleArgument.Expression.FindConstantValue(semanticModel) is string { Length: > 1 };
 }

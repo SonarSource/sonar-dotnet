@@ -10,10 +10,9 @@ public class DateTimeFormatShouldNotBeHardcoded
         var stringRepresentation = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss"); // Noncompliant {{Do not hardcode the format specifier.}}
 //                                                          ^^^^^^^^^^^^^^^^^^^^^
         stringRepresentation = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.GetCultureInfo("es-MX")); // Noncompliant
-
         stringRepresentation = DateTime.Now.ToString(provider: CultureInfo.GetCultureInfo("es-MX"), format: "dd/MM/yyyy HH:mm:ss"); // Noncompliant
+        stringRepresentation = DateTime.UtcNow.ToString(Format); // Noncompliant
 
-        stringRepresentation = DateTime.UtcNow.ToString(Format); // FN
         var stringFormat = string.Format("{0:yy/MM/dd}", DateTime.Now); // FN
         Console.WriteLine("{0:HH:mm}", DateTime.Now); // FN
 

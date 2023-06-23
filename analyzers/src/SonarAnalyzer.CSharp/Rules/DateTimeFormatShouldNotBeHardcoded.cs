@@ -32,7 +32,7 @@ public sealed class DateTimeFormatShouldNotBeHardcoded : DateTimeFormatShouldNot
         invocation.ArgumentList is { }
         && invocation.ArgumentList.Arguments.Any()
         && GetFormatArgumentExpression(invocation.ArgumentList) is { } argumentExpression
-        && argumentExpression.StringValue(semanticModel) is { Length: > 1 };
+        && argumentExpression.FindConstantValue(semanticModel) is string { Length: > 1 };
 
     private static ExpressionSyntax GetFormatArgumentExpression(ArgumentListSyntax argumentList) =>
         (argumentList.GetArgumentByName("format") ?? argumentList.Arguments[0]).Expression;
