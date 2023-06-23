@@ -30,14 +30,7 @@ internal static class INamespaceSymbolExtensions
     /// <returns>Returns <see langword="true"/> if the namespace symbol refers to the string given.</returns>
     public static bool Is(this INamespaceSymbol symbol, string name)
     {
-        if (name is null)
-        {
-            throw new ArgumentNullException(nameof(name));
-        }
-        if (symbol is null)
-        {
-            return false;
-        }
+        _ = name ?? throw new ArgumentNullException(nameof(name));
 
         var ns = name.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
         for (var i = ns.Length - 1; i >= 0; i--)
