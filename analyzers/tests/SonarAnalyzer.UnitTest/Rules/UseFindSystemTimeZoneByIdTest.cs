@@ -26,6 +26,23 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class UseFindSystemTimeZoneByIdTest
 {
+
+#if NET
+
+    [TestMethod]
+    public void UseFindSystemTimeZoneById_Net_CS() =>
+    new VerifierBuilder<CS.UseFindSystemTimeZoneById>()
+        .AddReferences(NuGetMetadataReference.TimeZoneConverter())
+        .AddPaths("UseFindSystemTimeZoneById.Net.cs").Verify();
+
+    [TestMethod]
+    public void UseFindSystemTimeZoneById_Net_VB() =>
+        new VerifierBuilder<VB.UseFindSystemTimeZoneById>()
+            .AddReferences(NuGetMetadataReference.TimeZoneConverter())
+            .AddPaths("UseFindSystemTimeZoneById.Net.vb").Verify();
+
+#else
+
     [TestMethod]
     public void UseFindSystemTimeZoneById_CS() =>
         new VerifierBuilder<CS.UseFindSystemTimeZoneById>()
@@ -37,4 +54,7 @@ public class UseFindSystemTimeZoneByIdTest
         new VerifierBuilder<VB.UseFindSystemTimeZoneById>()
             .AddReferences(NuGetMetadataReference.TimeZoneConverter())
             .AddPaths("UseFindSystemTimeZoneById.vb").Verify();
+
+#endif
+
 }

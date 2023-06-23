@@ -26,7 +26,7 @@ public abstract class UseFindSystemTimeZoneByIdBase<TSyntaxKind, TInvocation> : 
 {
     private const string DiagnosticId = "S6575";
 
-    protected override string MessageFormat => "Use \"TimeZoneInfo.FindSystemTimeZoneById\" instead of \"{0}\"";
+    protected override string MessageFormat => "Use \"TimeZoneInfo.FindSystemTimeZoneById\" directly instead of \"{0}\"";
 
     protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
         {
