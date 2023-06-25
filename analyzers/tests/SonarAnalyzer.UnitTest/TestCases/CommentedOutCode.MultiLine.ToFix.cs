@@ -18,6 +18,8 @@ class Fixes
     int SeperateLine() { return 42; }
     /* return 42;*/
 
+    int /* return 17; */ WithinLine() { return 42; }
+
     int MultipleLines() { return 42; }
     /* 
      {

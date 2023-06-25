@@ -98,6 +98,12 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
                     || (t.IsKind(SyntaxKind.EndOfLineTrivia) && ShareLine(t, Comment))).ToList()
                 : Trailing;
 
+            // this can happen for multi line comments within an expression.
+            if (trailing.Count == 0 && ShareLine(Token.GetNextToken(), Comment))
+            {
+                trailing.Add(SyntaxFactory.Space);
+            }
+
             return Token
                 .WithLeadingTrivia(Leading)
                 .WithTrailingTrivia(trailing);

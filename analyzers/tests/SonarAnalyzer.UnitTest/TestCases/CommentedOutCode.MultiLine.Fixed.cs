@@ -11,5 +11,7 @@
 
     int SeperateLine() { return 42; }
 
+    int WithinLine() { return 42; }
+
     int MultipleLines() { return 42; }
 }
