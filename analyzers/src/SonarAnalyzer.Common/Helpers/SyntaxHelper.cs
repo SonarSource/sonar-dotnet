@@ -25,6 +25,9 @@ internal static class SyntaxHelper
     public static IEnumerable<int> GetLineNumbers(this SyntaxToken token, bool isZeroBasedCount = true)
         => token.GetLocation().GetLineSpan().GetLineNumbers(isZeroBasedCount);
 
+    public static IEnumerable<int> GetLineNumbers(this SyntaxTrivia trivia, bool isZeroBasedCount = true)
+        => trivia.GetLocation().GetLineSpan().GetLineNumbers(isZeroBasedCount);
+
     public static IEnumerable<int> GetLineNumbers(this FileLinePositionSpan lineSpan, bool isZeroBasedCount = true)
     {
         var offset = isZeroBasedCount ? 0 : 1;

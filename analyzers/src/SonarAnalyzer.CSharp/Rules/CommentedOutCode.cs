@@ -93,7 +93,7 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
         }
     }
 
-    private static bool IsCode(string line)
+    internal static bool IsCode(string line)
     {
         var checkedLine = line.Replace(" ", string.Empty).Replace("\t", string.Empty);
 

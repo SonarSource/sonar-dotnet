@@ -44,9 +44,16 @@ public class CommentedOutCodeTest
             .Verify();
 
     [TestMethod]
-    public void CommentedOutCode_CodeFix() =>
-        builder.AddPaths("CommentedOutCode.ToFix.cs")
+    public void CommentedOutCode_CodeFix_SingleLine() =>
+        builder.AddPaths("CommentedOutCode.SingleLine.ToFix.cs")
             .WithCodeFix<CommentedOutCodeCodeFix>()
-            .WithCodeFixedPaths("CommentedOutCode.Fixed.cs")
+            .WithCodeFixedPaths("CommentedOutCode.SingleLine.Fixed.cs")
             .VerifyCodeFix();
+
+    [TestMethod]
+    public void CommentedOutCode_CodeFix_MultiLine() =>
+       builder.AddPaths("CommentedOutCode.MultiLine.ToFix.cs")
+           .WithCodeFix<CommentedOutCodeCodeFix>()
+           .WithCodeFixedPaths("CommentedOutCode.MultiLine.Fixed.cs")
+           .VerifyCodeFix();
 }
