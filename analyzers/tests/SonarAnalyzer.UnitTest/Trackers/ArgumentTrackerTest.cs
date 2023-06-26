@@ -293,6 +293,27 @@ public class ArgumentTrackerTest
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeFalse();
     }
 
+    [DataTestMethod]
+    [DataRow("""new NumberList($$1)""", "capacity", 0, false)] // FN. Syntactic checks bail out before the semantic model can resolve the alias
+    [DataRow("""new($$1)""", "capacity", 0, true)] // Target typed new resolves the alias
+    public void Constructor_TypeAlias(string constructor, string parameterName, int argumentPosition, bool expected)
+    {
+        var snippet = $$"""
+            using NumberList = System.Collections.Generic.List<int>;
+            class C
+            {
+                public void M()
+                {
+                    NumberList nl = {{constructor}};
+                }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_List_T, parameterName, argumentPosition);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
     private static string WrapInMethod(string snippet) =>
         $$"""
         using System;
