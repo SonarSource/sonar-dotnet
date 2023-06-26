@@ -243,6 +243,30 @@ public class ArgumentTrackerTest
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
     }
 
+    [DataTestMethod]
+    [DataRow("""new Dictionary<TKey, TValue>($$1)""", "capacity", 0, true)]
+    [DataRow("""new Dictionary<int, TValue>($$1)""", "capacity", 0, true)]
+    [DataRow("""new Dictionary<int, string>($$1)""", "capacity", 0, true)]
+    [DataRow("""new Dictionary<TKey, TValue>($$1, EqualityComparer<TKey>.Default)""", "capacity", 0, true)]
+    [DataRow("""new Dictionary<TKey, TValue>(1, $$EqualityComparer<TKey>.Default)""", "comparer", 1, true)]
+    public void Constructor_Generic(string constructor, string parameterName, int argumentPosition, bool expected)
+    {
+        var snippet = $$"""
+            using System.Collections.Generic;
+            class C
+            {
+                public void M<TKey, TValue>() where TKey : notnull
+                {
+                    _ = {{constructor}};
+                }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_Dictionary_TKey_TValue, parameterName, argumentPosition);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
     private static string WrapInMethod(string snippet) =>
         $$"""
         using System;
