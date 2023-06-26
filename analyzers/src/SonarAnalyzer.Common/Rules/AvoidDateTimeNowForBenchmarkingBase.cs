@@ -57,6 +57,7 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TInvoca
             && Language.Syntax.NodeExpression(subtract) is TMemberAccess now
             && Language.Syntax.IsMemberAccessOnKnownType(subtract, "Subtract", KnownType.System_DateTime, context.SemanticModel)
             && IsDateTimeNow(now, context.SemanticModel)
+            && Language.Syntax.HasExactlyNArguments(invocation, 1)
             && ContainsDateTimeArgument(invocation, context.SemanticModel))
         {
             context.ReportIssue(Diagnostic.Create(Rule, subtract.GetLocation()));
