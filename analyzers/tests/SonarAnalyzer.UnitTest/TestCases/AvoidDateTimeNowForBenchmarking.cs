@@ -6,7 +6,7 @@ public class Program
     {
         var start = DateTime.Now;
         // Some method
-        Console.WriteLine($"{(DateTime.Now - start).TotalMilliseconds} ms"); // Noncompliant {{Avoid using "DateTime.Now" for benchmarking or timing operations}}
+        Console.WriteLine($"{(DateTime.Now - start).TotalMilliseconds} ms"); // Noncompliant {{Avoid using "DateTime.Now" for benchmarking or timespan calculation operations.}}
         //                    ^^^^^^^^^^^^^^^^^^^^
 
         start = DateTime.Now;

@@ -26,7 +26,7 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TInvoca
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6561";
-    protected override string MessageFormat => "Avoid using \"DateTime.Now\" for benchmarking or timing operations";
+    protected override string MessageFormat => "Avoid using \"DateTime.Now\" for benchmarking or timespan calculation operations.";
 
     protected abstract bool ContainsDateTimeArgument(TInvocationExpression invocation, SemanticModel model);
 

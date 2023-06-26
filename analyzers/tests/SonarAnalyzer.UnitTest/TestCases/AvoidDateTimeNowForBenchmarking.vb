@@ -4,7 +4,7 @@ Public Class Program
     Private Sub Benchmark()
         Dim start = Date.Now
         ' Some method
-        Console.WriteLine($"{(Date.Now - start).TotalMilliseconds} ms") ' Noncompliant {{Avoid using "DateTime.Now" for benchmarking or timing operations}}
+        Console.WriteLine($"{(Date.Now - start).TotalMilliseconds} ms") ' Noncompliant {{Avoid using "DateTime.Now" for benchmarking or timespan calculation operations.}}
         '                     ^^^^^^^^^^^^^^^^
 
         start = Date.Now
@@ -74,6 +74,7 @@ Public Class Program
         Date.Now.AddDays(1).Subtract(dateTime) ' FN
 
         Date.Now.SUBTRACT(dateTime) ' Noncompliant
+        Dim span = DATE.NOW - dateTime ' Noncompliant
     End Sub
 End Class
 
