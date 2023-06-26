@@ -24,4 +24,8 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 public sealed class AvoidDateTimeNowForBenchmarking : AvoidDateTimeNowForBenchmarkingBase<MemberAccessExpressionSyntax, SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override bool ContainsDateTimeArgument(SyntaxNode invocation, SemanticModel model) =>
+        invocation is InvocationExpressionSyntax invocationSyntax
+        && invocationSyntax.ArgumentList.Arguments[0].GetExpression().IsKnownType(KnownType.System_DateTime, model);
 }

@@ -27,12 +27,14 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TSyntax
     private const string DiagnosticId = "S6561";
     protected override string MessageFormat => "Avoid using \"DateTime.Now\" for benchmarking or timing operations";
 
+    protected abstract bool ContainsDateTimeArgument(SyntaxNode invocation, SemanticModel model);
+
     protected AvoidDateTimeNowForBenchmarkingBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context)
     {
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckBinaryExpression, Language.SyntaxKind.SubtractExpression);
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckMemberAccess, Language.SyntaxKind.SimpleMemberAccessExpression);
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckInvocation, Language.SyntaxKind.InvocationExpression);
     }
 
     private void CheckBinaryExpression(SonarSyntaxNodeReportingContext context)
@@ -46,17 +48,15 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TSyntax
         }
     }
 
-    private void CheckMemberAccess(SonarSyntaxNodeReportingContext context)
+    private void CheckInvocation(SonarSyntaxNodeReportingContext context)
     {
-        var memberAccess = (TMemberAccess)context.Node;
-
-        if (Language.Syntax.IsMemberAccessOnKnownType(memberAccess, "Subtract", KnownType.System_DateTime, context.SemanticModel)
-            && Language.Syntax.NodeExpression(memberAccess) is TMemberAccess childMemberAccess
-            && IsDateTimeNow(childMemberAccess, context.SemanticModel)
-            && context.SemanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol methodSymbol
-            && methodSymbol.Parameters[0].IsType(KnownType.System_DateTime))
+        if (Language.Syntax.NodeExpression(context.Node) is TMemberAccess subtract
+            && Language.Syntax.NodeExpression(subtract) is TMemberAccess now
+            && Language.Syntax.IsMemberAccessOnKnownType(subtract, "Subtract", KnownType.System_DateTime, context.SemanticModel)
+            && IsDateTimeNow(now, context.SemanticModel)
+            && ContainsDateTimeArgument(context.Node, context.SemanticModel))
         {
-            context.ReportIssue(Diagnostic.Create(Rule, memberAccess.GetLocation()));
+            context.ReportIssue(Diagnostic.Create(Rule, subtract.GetLocation()));
         }
     }
 
