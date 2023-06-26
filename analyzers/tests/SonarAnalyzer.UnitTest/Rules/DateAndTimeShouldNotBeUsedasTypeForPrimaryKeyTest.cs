@@ -18,14 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
 public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
 {
-    private readonly VerifierBuilder verifierCS = CreateVerifier<DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey>();
+    private readonly VerifierBuilder verifierCS = CreateVerifier<CS.DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey>();
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_CS() =>
@@ -40,7 +41,7 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_NoReferenceToEntityFramework_CS() =>
-        new VerifierBuilder<DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey>().AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.NoReferenceToEntityFramework.cs").Verify();
+        new VerifierBuilder<CS.DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey>().AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.NoReferenceToEntityFramework.cs").Verify();
 
 #if NET
 
@@ -70,4 +71,10 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
 
 #endif
 
+
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DateAndTimeShouldNotBeUsedasTypeForPrimaryKey>();    // FIXME: Move this up
+
+    [TestMethod]
+    public void DateAndTimeShouldNotBeUsedasTypeForPrimaryKey_VB() =>
+        builderVB.AddPaths("DateAndTimeShouldNotBeUsedasTypeForPrimaryKey.vb").Verify();
 }

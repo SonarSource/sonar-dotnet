@@ -21,54 +21,29 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : SonarDiagnosticAnalyzer
+public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<SyntaxKind>
 {
-    private const string DiagnosticId = "S3363";
-    private const string MessageFormat = "'{0}' should not be used as a type for primary keys";
-
-    private static readonly KnownType[] TemporalTypes = new[]
-    {
-        KnownType.System_DateOnly,
-        KnownType.System_DateTime,
-        KnownType.System_DateTimeOffset,
-        KnownType.System_TimeSpan,
-        KnownType.System_TimeOnly
-    };
     private static readonly string[] KeyAttributeTypeNames = TypeNamesForAttribute(KnownType.System_ComponentModel_DataAnnotations_KeyAttribute);
-    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterCompilationStartAction(start =>
+    protected override void AnalyzeClass(SonarSyntaxNodeReportingContext context)
+    {
+        // To improve performance the attributes and property types are only matched by their names, rather than their actual symbol.
+        // This results in a couple of FNs, but those scenarios are very rare.
+        var classDeclaration = (ClassDeclarationSyntax)context.Node;
+        var className = classDeclaration.Identifier.ValueText;
+        var keyProperties = classDeclaration.Members
+            .OfType<PropertyDeclarationSyntax>()
+            .Where(x => IsPublicReadWriteProperty(x)
+                        && IsTemporalType(x)
+                        && IsKeyProperty(x, className));
+
+        foreach (var propertyType in keyProperties.Select(x => x.Type))
         {
-            if (!IsReferencingEntityFramework(start.Compilation))
-            {
-                return;
-            }
-
-            context.RegisterNodeAction(c =>
-            {
-                // To improve performance the attributes and property types are only matched by their names, rather than their actual symbol.
-                // This results in a couple of FNs, but those scenarios are very rare.
-                var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                var className = classDeclaration.Identifier.ValueText;
-                var keyProperties = classDeclaration.Members
-                    .OfType<PropertyDeclarationSyntax>()
-                    .Where(x => IsPublicReadWriteProperty(x)
-                                && IsTemporalType(x)
-                                && IsKeyProperty(x, className));
-
-                foreach (var propertyType in keyProperties.Select(x => x.Type))
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), propertyType.GetName()));
-                }
-            }, SyntaxKind.ClassDeclaration);
-        });
-
-    private static bool IsReferencingEntityFramework(Compilation compilation) =>
-        compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_DbContext) is not null
-        || compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFramework_DbContext) is not null;
+            context.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), propertyType.GetName()));
+        }
+    }
 
     private static bool IsPublicReadWriteProperty(PropertyDeclarationSyntax property) =>
         property.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
@@ -88,17 +63,6 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : SonarDiagnos
         property.AttributeLists
             .SelectMany(x => x.Attributes)
             .Any(x => MatchesAttributeName(x, KeyAttributeTypeNames));
-
-    private static string[] TypeNamesForAttribute(KnownType attributeType) => new[]
-    {
-        attributeType.TypeName,
-        RemoveFromEnd(attributeType.TypeName, "Attribute"),
-        attributeType.FullName,
-        RemoveFromEnd(attributeType.FullName, "Attribute"),
-    };
-
-    private static string RemoveFromEnd(string text, string subtextFromEnd) =>
-        text.Substring(0, text.LastIndexOf(subtextFromEnd));
 
     private static bool IsTemporalType(PropertyDeclarationSyntax property) =>
         Array.Exists(TemporalTypes, x => property.Type.NameIs(x.TypeName) || property.Type.NameIs(x.FullName));
