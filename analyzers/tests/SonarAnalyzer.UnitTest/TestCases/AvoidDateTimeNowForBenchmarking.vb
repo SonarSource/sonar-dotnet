@@ -73,6 +73,7 @@ Public Class Program
 
         Date.Now.AddDays(1).Subtract(dateTime) ' FN
         Date.Now.Subtract() ' Error [BC30516]
+        Date.Now.Subtract ' Error [BC30516]
 
         Date.Now.Subtract(dateTime) ' Noncompliant
         Dim span = Date.Now - dateTime ' Noncompliant
