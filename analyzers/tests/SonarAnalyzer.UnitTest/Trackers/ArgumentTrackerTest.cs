@@ -208,11 +208,34 @@ public class ArgumentTrackerTest
     [DataRow("""ProcessStartInfo("fileName", $$"arguments")""", "arguments", 0, false)]
     [DataRow("""ProcessStartInfo($$"fileName", "arguments")""", "arguments", 1, false)]
     [DataRow("""ProcessStartInfo(arguments: $$"arguments", fileName: "fileName")""", "arguments", 1, true)]
+    [DataRow("""ProcessStartInfo(arguments: $$"arguments", fileName: "fileName")""", "fileName", 0, false)]
     [DataRow("""ProcessStartInfo(arguments: "arguments", $$fileName: "fileName")""", "fileName", 0, true)]
+    [DataRow("""ProcessStartInfo(arguments: "arguments", $$fileName: "fileName")""", "arguments", 1, false)]
     public void Constructor_SimpleArgument(string constructor, string parameterName, int argumentPosition, bool expected)
     {
         var snippet = $$"""
             _ = new System.Diagnostics.{{constructor}};
+            """;
+        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Diagnostics_ProcessStartInfo, parameterName, argumentPosition);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
+    [DataTestMethod]
+    [DataRow("""($$"fileName")""", "fileName", 0, true)]
+    [DataRow("""($$"fileName")""", "arguments", 1, false)]
+    [DataRow("""("fileName", $$"arguments")""", "arguments", 1, true)]
+    [DataRow("""("fileName", $$"arguments")""", "arguments", 0, false)]
+    [DataRow("""($$"fileName", "arguments")""", "arguments", 1, false)]
+    [DataRow("""(arguments: $$"arguments", fileName: "fileName")""", "arguments", 1, true)]
+    [DataRow("""(arguments: $$"arguments", fileName: "fileName")""", "fileName", 0, false)]
+    [DataRow("""(arguments: "arguments", $$fileName: "fileName")""", "fileName", 0, true)]
+    [DataRow("""(arguments: "arguments", $$fileName: "fileName")""", "arguments", 1, false)]
+    public void Constructor_TargetTyped(string constructor, string parameterName, int argumentPosition, bool expected)
+    {
+        var snippet = $$"""
+            System.Diagnostics.ProcessStartInfo psi = new{{constructor}};
             """;
         var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
 
