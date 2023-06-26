@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Moq;
+using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 using SonarAnalyzer.Trackers;
+using SonarAnalyzer.UnitTest.Trackers;
 
 namespace SonarAnalyzer.UnitTest.Trackers;
 
@@ -146,7 +148,56 @@ public class ArgumentTrackerTest
             """;
         var (node, model) = ArgumentAndModel(snippet);
 
-        var argument = ArgumentDescriptor.MethodInvocation(m => m.Name == "M", "M", "parameter", x => true, null);
+        var argument = ArgumentDescriptor.MethodInvocation(m => true, (m, c) => m.Equals("M", c), p => p.Name == "parameter", x => true, null);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
+    [DataTestMethod]
+    [DataRow("""comparer.Compare($$default, default);""", true)]
+    [DataRow("""new MyComparer<int>().Compare($$1, 2);""", true)]
+    public void Method_Inheritance_BaseClasses_Generics(string invocation, bool expected)
+    {
+        var snippet = $$"""
+            using System.Collections.Generic;
+            public class MyComparer<T> : Comparer<T>
+            {
+                public MyComparer() { }
+                public override int Compare(T a, T b) => 1;
+            }
+            public class Test
+            {
+                void M<T>(MyComparer<T> comparer)
+                {
+                    {{invocation}}
+                }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Collections_Generic_Comparer_T, "Compare", "x", 0);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
+    [DataTestMethod]
+    [DataRow("""OnInsert($$1, null);""", true)]
+    [DataRow("""OnInsert(position: $$1, null);""", true)]
+    public void Method_Inheritance_BaseClasses_Overrides(string invocation, bool expected)
+    {
+        var snippet = $$"""
+            using System.Collections;
+            public class Collection<T> : CollectionBase
+            {
+                protected override void OnInsert(int position, object value) { }
+
+                void M(T arg)
+                {
+                    {{invocation}}
+                }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Collections_CollectionBase, "OnInsert", "index", 0);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
     }
 
@@ -166,7 +217,7 @@ public class ArgumentTrackerTest
     {
         var pos = snippet.IndexOf("$$");
         snippet = snippet.Replace("$$", string.Empty);
-        var (tree, model) = TestHelper.CompileCS(snippet);
+        var (tree, model) = TestHelper.CompileCS(snippet, MetadataReferenceFacade.SystemCollections.ToArray());
         var node = tree.GetRoot().FindNode(new(pos, 0)).AncestorsAndSelf().First(x => x is ArgumentSyntax or AttributeArgumentSyntax);
         return (node, model);
     }

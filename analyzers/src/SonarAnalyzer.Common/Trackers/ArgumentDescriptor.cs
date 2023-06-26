@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.Trackers;
 
 public enum InvokedMemberKind
@@ -47,17 +45,33 @@ public class ArgumentDescriptor
         => MethodInvocation(invokedType, methodName, parameterName, x => x == argumentPosition);
 
     public static ArgumentDescriptor MethodInvocation(KnownType invokedType, string methodName, string parameterName, Func<int, bool> argumentPosition)
-        => MethodInvocation(s => invokedType.Matches(s.ContainingType), methodName, parameterName, argumentPosition, null);
+        => MethodInvocation(invokedType, methodName, p => p.Name == parameterName, argumentPosition, null);
 
     public static ArgumentDescriptor MethodInvocation(KnownType invokedType, string methodName, string parameterName, Func<int, bool> argumentPosition, RefKind refKind)
-        => MethodInvocation(s => invokedType.Matches(s.ContainingType), methodName, parameterName, argumentPosition, refKind);
+        => MethodInvocation(invokedType, methodName, p => p.Name == parameterName, argumentPosition, refKind);
 
-    public static ArgumentDescriptor MethodInvocation(Func<IMethodSymbol, bool> invokedMethodSymbol, string methodName, string parameterName, Func<int, bool> argumentPosition, RefKind? refKind)
+    public static ArgumentDescriptor MethodInvocation(KnownType invokedType, string methodName, Func<IParameterSymbol, bool> parameterConstraint, Func<int, bool> argumentPosition, RefKind? refKind)
+        => MethodInvocation(invokedType, (n, c) => n.Equals(methodName, c), parameterConstraint, argumentPosition, refKind);
+
+    public static ArgumentDescriptor MethodInvocation(KnownType invokedType, Func<string, StringComparison, bool> invokedMemberNameConstraint, Func<IParameterSymbol, bool> parameterConstraint,
+        Func<int, bool> argumentPosition, RefKind? refKind)
+        => MethodInvocation(s => invokedType.Matches(s.ContainingType), invokedMemberNameConstraint, parameterConstraint, argumentPosition, refKind);
+
+    public static ArgumentDescriptor MethodInvocation(Func<IMethodSymbol, bool> invokedMethodSymbol, Func<string, StringComparison, bool> invokedMemberNameConstraint,
+        Func<IParameterSymbol, bool> parameterConstraint, Func<int, bool> argumentPosition, RefKind? refKind)
+        => MethodInvocation(invokedMethodSymbol,
+            invokedMemberNameConstraint,
+            parameterConstraint,
+            (_, position) => position is null || argumentPosition is null || argumentPosition(position.Value),
+            refKind);
+
+    public static ArgumentDescriptor MethodInvocation(Func<IMethodSymbol, bool> invokedMethodSymbol, Func<string, StringComparison, bool> invokedMemberNameConstraint,
+        Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, RefKind? refKind)
         => new(InvokedMemberKind.Method,
             invokedMemberConstraint: x => invokedMethodSymbol(x as IMethodSymbol),
-            invokedMemberNameConstraint: (n, c) => n.Equals(methodName, c),
-            argumentListConstraint: (_, position) => position is null || argumentPosition is null || argumentPosition(position.Value),
-            parameterConstraint: x => x.Name == parameterName,
+            invokedMemberNameConstraint: invokedMemberNameConstraint,
+            argumentListConstraint: argumentListConstraint,
+            parameterConstraint: parameterConstraint,
             refKind: refKind);
 
     public InvokedMemberKind MemberKind { get; }

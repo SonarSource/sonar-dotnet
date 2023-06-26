@@ -51,10 +51,7 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
                             var parameterLookup = Language.MethodParameterLookup(InvokedExpression(argumentNode), context.SemanticModel);
                             if (parameterLookup.TryGetSymbol(argumentNode, out var parameter))
                             {
-                                if (argument.ParameterConstraint?.Invoke(parameter) is null or true)
-                                {
-                                    return argument.InvokedMemberConstraint?.Invoke(parameter.ContainingSymbol) is null or true;
-                                }
+                                return ParameterFits(parameter, argument.ParameterConstraint, argument.InvokedMemberConstraint);
                             }
                         }
                     }
@@ -62,4 +59,21 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
             }
             return false;
         };
+
+    private static bool ParameterFits(IParameterSymbol parameter, Func<IParameterSymbol, bool> parameterConstraint, Func<ISymbol, bool> invokedMemberConstraint)
+    {
+        if ((parameter.ContainingSymbol is IMethodSymbol method)
+            && method.Parameters.IndexOf(parameter) is >= 0 and int position)
+        {
+            do
+            {
+                if (invokedMemberConstraint?.Invoke(method) is null or true && parameterConstraint?.Invoke(method.Parameters[position]) is null or true)
+                {
+                    return true;
+                }
+            }
+            while ((method = method.OverriddenMethod) != null);
+        }
+        return false;
+    }
 }
