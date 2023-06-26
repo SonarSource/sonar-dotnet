@@ -74,6 +74,23 @@ public class ArgumentDescriptor
             parameterConstraint: parameterConstraint,
             refKind: refKind);
 
+    public static ArgumentDescriptor ConstructorInvocation(KnownType constructedType, string parameterName, int argumentPosition)
+        => ConstructorInvocation(
+            x => constructedType.Matches(x.ContainingType),
+            (x, c) => x.Equals(constructedType.TypeName, c),
+            x => x.Name == parameterName,
+            (_, x) => x is null || x == argumentPosition,
+            null);
+
+    public static ArgumentDescriptor ConstructorInvocation(Func<IMethodSymbol, bool> invokedMethodSymbol, Func<string, StringComparison, bool> invokedMemberNameConstraint,
+        Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, RefKind? refKind)
+        => new(InvokedMemberKind.Constructor,
+            invokedMemberConstraint: x => invokedMethodSymbol(x as IMethodSymbol),
+            invokedMemberNameConstraint: invokedMemberNameConstraint,
+            argumentListConstraint: argumentListConstraint,
+            parameterConstraint: parameterConstraint,
+            refKind: refKind);
+
     public InvokedMemberKind MemberKind { get; }
     public Func<IReadOnlyCollection<SyntaxNode>, int?, bool> ArgumentListConstraint { get; }
     public RefKind? RefKind { get; }

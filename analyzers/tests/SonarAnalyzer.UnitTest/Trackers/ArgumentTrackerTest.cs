@@ -153,9 +153,9 @@ public class ArgumentTrackerTest
     }
 
     [DataTestMethod]
-    [DataRow("""comparer.Compare($$default, default);""", true)]
-    [DataRow("""new MyComparer<int>().Compare($$1, 2);""", true)]
-    public void Method_Inheritance_BaseClasses_Generics(string invocation, bool expected)
+    [DataRow("""comparer.Compare($$default, default);""")]
+    [DataRow("""new MyComparer<int>().Compare($$1, 2);""")]
+    public void Method_Inheritance_BaseClasses_Generics(string invocation)
     {
         var snippet = $$"""
             using System.Collections.Generic;
@@ -175,13 +175,13 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModel(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Collections_Generic_Comparer_T, "Compare", "x", 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
     }
 
     [DataTestMethod]
-    [DataRow("""OnInsert($$1, null);""", true)]
-    [DataRow("""OnInsert(position: $$1, null);""", true)]
-    public void Method_Inheritance_BaseClasses_Overrides(string invocation, bool expected)
+    [DataRow("""OnInsert($$1, null);""")]
+    [DataRow("""OnInsert(position: $$1, null);""")]
+    public void Method_Inheritance_BaseClasses_Overrides(string invocation)
     {
         var snippet = $$"""
             using System.Collections;
@@ -198,6 +198,25 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModel(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Collections_CollectionBase, "OnInsert", "index", 0);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""ProcessStartInfo($$"")""", "fileName", 0, true)]
+    [DataRow("""ProcessStartInfo($$"")""", "arguments", 1, false)]
+    [DataRow("""ProcessStartInfo("", $$"")""", "arguments", 1, true)]
+    [DataRow("""ProcessStartInfo("", $$"")""", "arguments", 0, false)]
+    [DataRow("""ProcessStartInfo($$"", "")""", "arguments", 1, false)]
+    [DataRow("""ProcessStartInfo(arguments: $$"", fileName: "")""", "arguments", 1, true)]
+    [DataRow("""ProcessStartInfo(arguments: "", $$fileName: "")""", "fileName", 0, true)]
+    public void Constructor_SimpleArgument(string constructor, string parameterName, int argumentPosition, bool expected)
+    {
+        var snippet = $$"""
+            _ = new System.Diagnostics.{{constructor}};
+            """;
+        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Diagnostics_ProcessStartInfo, parameterName, argumentPosition);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
     }
 
@@ -217,7 +236,7 @@ public class ArgumentTrackerTest
     {
         var pos = snippet.IndexOf("$$");
         snippet = snippet.Replace("$$", string.Empty);
-        var (tree, model) = TestHelper.CompileCS(snippet, MetadataReferenceFacade.SystemCollections.ToArray());
+        var (tree, model) = TestHelper.CompileCS(snippet, MetadataReferenceFacade.SystemCollections.Concat(MetadataReferenceFacade.SystemDiagnosticsProcess).ToArray());
         var node = tree.GetRoot().FindNode(new(pos, 0)).AncestorsAndSelf().First(x => x is ArgumentSyntax or AttributeArgumentSyntax);
         return (node, model);
     }
