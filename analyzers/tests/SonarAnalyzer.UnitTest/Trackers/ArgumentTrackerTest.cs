@@ -202,13 +202,13 @@ public class ArgumentTrackerTest
     }
 
     [DataTestMethod]
-    [DataRow("""ProcessStartInfo($$"")""", "fileName", 0, true)]
-    [DataRow("""ProcessStartInfo($$"")""", "arguments", 1, false)]
-    [DataRow("""ProcessStartInfo("", $$"")""", "arguments", 1, true)]
-    [DataRow("""ProcessStartInfo("", $$"")""", "arguments", 0, false)]
-    [DataRow("""ProcessStartInfo($$"", "")""", "arguments", 1, false)]
-    [DataRow("""ProcessStartInfo(arguments: $$"", fileName: "")""", "arguments", 1, true)]
-    [DataRow("""ProcessStartInfo(arguments: "", $$fileName: "")""", "fileName", 0, true)]
+    [DataRow("""ProcessStartInfo($$"fileName")""", "fileName", 0, true)]
+    [DataRow("""ProcessStartInfo($$"fileName")""", "arguments", 1, false)]
+    [DataRow("""ProcessStartInfo("fileName", $$"arguments")""", "arguments", 1, true)]
+    [DataRow("""ProcessStartInfo("fileName", $$"arguments")""", "arguments", 0, false)]
+    [DataRow("""ProcessStartInfo($$"fileName", "arguments")""", "arguments", 1, false)]
+    [DataRow("""ProcessStartInfo(arguments: $$"arguments", fileName: "fileName")""", "arguments", 1, true)]
+    [DataRow("""ProcessStartInfo(arguments: "arguments", $$fileName: "fileName")""", "fileName", 0, true)]
     public void Constructor_SimpleArgument(string constructor, string parameterName, int argumentPosition, bool expected)
     {
         var snippet = $$"""
