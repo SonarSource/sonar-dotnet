@@ -8,7 +8,7 @@ namespace NetFramework48
         {
             var start = DateTime.Now;
             MethodToBeBenchmarked();
-            Console.WriteLine($"{(DateTime.Now - start).TotalMilliseconds} ms");
+            Console.WriteLine($"{(DateTime.Now - start).TotalMilliseconds} ms"); // Noncompliant (S6561)
         }
 
         void MethodToBeBenchmarked() { }

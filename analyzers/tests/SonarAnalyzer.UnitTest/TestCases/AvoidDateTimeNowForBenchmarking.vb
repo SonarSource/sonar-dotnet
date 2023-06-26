@@ -60,11 +60,18 @@ Public Class Program
         End Select
     End Sub
 
+    Private Sub NonInLineDateTimeNow()
+        Dim start = Date.Now
+        ' Some method
+        Dim [end] = Date.Now
+        Dim elapsedTime = [end] - start ' FN
+    End Sub
+
     Private Sub EdgeCases(ByVal dateTime As Date, ByVal timeSpan As TimeSpan)
         Call (If(True, Date.Now, New DateTime(1))).Subtract(dateTime) ' Compliant
         Call (If(True, Date.Now, New DateTime(1))).Subtract(timeSpan) ' Compliant
 
-        Date.Now.AddDays(1).Subtract(dateTime) ' Compliant FN
+        Date.Now.AddDays(1).Subtract(dateTime) ' FN
 
         Date.Now.SUBTRACT(dateTime) ' Noncompliant
     End Sub

@@ -75,12 +75,20 @@ public class Program
         }
     }
 
+    void NonInLineDateTimeNow()
+    {
+        var start = DateTime.Now;
+        // Some method
+        var end = DateTime.Now;
+        var elapsedTime = end - start; // FN
+    }
+
     void EdgeCases(DateTime dateTime, TimeSpan timeSpan)
     {
         (true ? DateTime.Now : new DateTime(1)).Subtract(dateTime); // Compliant
         (true ? DateTime.Now : new DateTime(1)).Subtract(timeSpan); // Compliant
 
-        DateTime.Now.AddDays(1).Subtract(dateTime); // Compliant FN
+        DateTime.Now.AddDays(1).Subtract(dateTime); // FN
     }
 }
 
