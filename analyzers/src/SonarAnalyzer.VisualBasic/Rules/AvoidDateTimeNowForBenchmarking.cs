@@ -21,11 +21,10 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class AvoidDateTimeNowForBenchmarking : AvoidDateTimeNowForBenchmarkingBase<MemberAccessExpressionSyntax, SyntaxKind>
+public sealed class AvoidDateTimeNowForBenchmarking : AvoidDateTimeNowForBenchmarkingBase<MemberAccessExpressionSyntax, InvocationExpressionSyntax, SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override bool ContainsDateTimeArgument(SyntaxNode invocation, SemanticModel model) =>
-        invocation is InvocationExpressionSyntax invocationSyntax
-        && invocationSyntax.ArgumentList.Arguments[0].GetExpression().IsKnownType(KnownType.System_DateTime, model);
+    protected override bool ContainsDateTimeArgument(InvocationExpressionSyntax invocation, SemanticModel model) =>
+        invocation.ArgumentList.Arguments[0].GetExpression().IsKnownType(KnownType.System_DateTime, model);
 }

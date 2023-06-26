@@ -20,14 +20,15 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TInvocationExpression, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TMemberAccess : SyntaxNode
+    where TInvocationExpression : SyntaxNode
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6561";
     protected override string MessageFormat => "Avoid using \"DateTime.Now\" for benchmarking or timing operations";
 
-    protected abstract bool ContainsDateTimeArgument(SyntaxNode invocation, SemanticModel model);
+    protected abstract bool ContainsDateTimeArgument(TInvocationExpression invocation, SemanticModel model);
 
     protected AvoidDateTimeNowForBenchmarkingBase() : base(DiagnosticId) { }
 
@@ -50,11 +51,13 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TSyntax
 
     private void CheckInvocation(SonarSyntaxNodeReportingContext context)
     {
-        if (Language.Syntax.NodeExpression(context.Node) is TMemberAccess subtract
+        var invocation = (TInvocationExpression)context.Node;
+
+        if (Language.Syntax.NodeExpression(invocation) is TMemberAccess subtract
             && Language.Syntax.NodeExpression(subtract) is TMemberAccess now
             && Language.Syntax.IsMemberAccessOnKnownType(subtract, "Subtract", KnownType.System_DateTime, context.SemanticModel)
             && IsDateTimeNow(now, context.SemanticModel)
-            && ContainsDateTimeArgument(context.Node, context.SemanticModel))
+            && ContainsDateTimeArgument(invocation, context.SemanticModel))
         {
             context.ReportIssue(Diagnostic.Create(Rule, subtract.GetLocation()));
         }
