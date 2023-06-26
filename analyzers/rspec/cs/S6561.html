@@ -1,0 +1,52 @@
+<p>The rule targets the use of <code>DateTime.Now</code> call followed by some arithmetic operation.</p>
+<h2>Why is this an issue?</h2>
+<p>Using <code>DateTime.Now</code> calls within a subtraction operation to measure elapsed time is not recommended. This property is subject to
+changes such as daylight savings transitions, which can invalidate the calculation if the change occurs during the benchmark session, or when updating
+a timer. Moreover, <code>DateTime.Now</code> is dependent on the system clock, which may have low resolution on older systems (as low as 15
+milliseconds).</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<p>If the purpose is to benchmark something then, instead of the <code>DateTime.Now</code> property, it’s recommended to use <code>Stopwatch</code>,
+which is not affected by changes in time such as daylight savings (DST) and automatically checks for the existence of high-precision timers. As a
+bonus, the <code>StopWatch</code> class is also lightweight and computationally faster than <code>DateTime</code>.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+var start = DateTime.Now; // First call, on March 26th 2:59 am
+MethodToBeBenchmarked();
+
+Console.WriteLine($"{(DateTime.Now - start).TotalMilliseconds} ms"); // Second call happens 2 minutes later but `Now` is March 26th, 4:01 am as there's a shift to summer time
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+var stopWatch = Stopwatch.StartNew(); // Compliant
+MethodToBeBenchmarked();
+stopWatch.Stop();
+
+Console.WriteLine($"{stopWatch.ElapsedMilliseconds} ms");
+</pre>
+<p>If, on the other hand, the goal is to refresh a timer prefer using the <code>DateTime.UtcNow</code> property, which guarantees reliable results
+when doing arithmetic operations during DST transitions.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+if ((DateTime.Now - lastRefresh).TotalMilliseconds &gt; MinRefreshInterval)
+{
+    lastRefresh = DateTime.Now;
+    // Refresh
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+if ((DateTime.UtcNow - lastRefresh).TotalMilliseconds &gt; MinRefreshInterval)
+{
+    lastRefresh = DateTime.UtcNow;
+    // Refresh
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime?#datetime-resolution">DateTime resolution</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.now">DateTime.Now</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.stopwatch?">Stopwatch class documentation</a> </li>
+</ul>
+

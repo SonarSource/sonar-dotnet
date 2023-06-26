@@ -107,6 +107,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
             InvocationExpressionSyntax x => x.Expression,
             SyncLockStatementSyntax x => x.Expression,
             ReturnStatementSyntax x => x.Expression,
+            MemberAccessExpressionSyntax x => x.Expression,
             null => null,
             _ => throw InvalidOperation(node, nameof(NodeExpression)),
         };
@@ -141,4 +142,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool HasExactlyNArguments(SyntaxNode invocation, int count) =>
         Cast<InvocationExpressionSyntax>(invocation).HasExactlyNArguments(count);
+
+    public override bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
+        Cast<MemberAccessExpressionSyntax>(memberAccess).IsMemberAccessOnKnownType(name, knownType, semanticModel);
 }
