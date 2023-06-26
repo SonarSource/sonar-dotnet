@@ -156,6 +156,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References SystemTextRegularExpressions(string packageVersion = "4.3.1") => Create("System.Text.RegularExpressions", packageVersion);
         public static References SystemThreadingTasksExtensions(string packageVersion) => Create("System.Threading.Tasks.Extensions", packageVersion);
         public static References SystemValueTuple(string packageVersion) => Create("System.ValueTuple", packageVersion);
+        public static References TimeZoneConverter(string packageVersion = Constants.NuGetLatestVersion) => Create("TimeZoneConverter", packageVersion);
         public static References XunitFramework(string packageVersion) =>
             Create("xunit.assert", packageVersion)
             .Concat(Create("xunit.extensibility.core", packageVersion));

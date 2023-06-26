@@ -573,6 +573,7 @@ namespace SonarAnalyzer.Helpers
                 System_Threading_Tasks_Task_T,
                 System_Threading_Tasks_ValueTask_TResult);
         public static readonly KnownType System_Resources_ResourceManager = new("System.Resources.ResourceManager");
+        public static readonly KnownType TimeZoneConverter_TZConvert = new("TimeZoneConverter.TZConvert");
         public static readonly KnownType UnityEditor_AssetModificationProcessor = new("UnityEditor.AssetModificationProcessor");
         public static readonly KnownType UnityEditor_AssetPostprocessor = new("UnityEditor.AssetPostprocessor");
         public static readonly KnownType UnityEngine_MonoBehaviour = new("UnityEngine.MonoBehaviour");
