@@ -48,6 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             "www.w3.org",
             "xml.apache.org",
+            "maven.apache.org",
             "schemas.xmlsoap.org",
             "schemas.openxmlformats.org",
             "rdfs.org",
@@ -55,12 +56,20 @@ namespace SonarAnalyzer.Rules.CSharp
             "xmlns.com",
             "schemas.google.com",
             "schemas.microsoft.com",
+            "collations.microsoft.com",
             "a9.com",
             "ns.adobe.com",
             "ltsc.ieee.org",
             "docbook.org",
             "graphml.graphdrawing.org",
-            "json-schema.org"
+            "json-schema.org",
+            "www.sitemaps.org",
+            "exslt.org",
+            "docs.oasis-open.org",
+            "ws-i.org",
+            "schemas.android.com",
+            "www.omg.org",
+            "www.opengis.net",
         };
 
         private static readonly string[] CommonlyUsedExampleDomains = { "example.com", "example.org", "test.com" };
@@ -216,6 +225,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     || (equalsValueClause.Parent is ParameterSyntax parameter && TokenContainsNamespace(parameter.Identifier)),
                 AssignmentExpressionSyntax assignmentExpression =>
                     assignmentExpression.Left.RemoveParentheses() is IdentifierNameSyntax identifierName && TokenContainsNamespace(identifierName.Identifier),
+                ArgumentSyntax { Parent: ArgumentListSyntax { Parent: { } invocationOrCreation } } argument =>
+                    CSharpFacade.Instance.MethodParameterLookup(invocationOrCreation, model).TryGetSymbol(argument, out var symbol)
+                        && symbol switch
+                        {
+                            { Name: "ns", ContainingNamespace: { } ns } when ns.Is("System.Xml.Serialization") => true,
+                            { Name: "ns" or "uri" or "namespaceURI", ContainingNamespace: { } ns } when ns.Is("System.Xml") => true,
+                            { Name: "xmlNamespace", ContainingType.Name: "XmlnsDictionary", ContainingNamespace: { } ns } when ns.Is("System.Windows.Markup") => true,
+                            { Name: "namespaceName", ContainingSymbol.Name: "Get", ContainingType.Name: "XNamespace", ContainingNamespace: { } ns } when ns.Is("System.Xml.Linq") => true,
+                            _ => false,
+                        },
                 _ => false
             };
 
