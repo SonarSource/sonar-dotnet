@@ -20,6 +20,7 @@
 
 using System.Collections;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Newtonsoft.Json.Linq;
 using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 using SonarAnalyzer.Trackers;
 using SonarAnalyzer.UnitTest.Trackers;
@@ -265,6 +266,31 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_Dictionary_TKey_TValue, parameterName, argumentPosition);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void Constructor_BaseCall()
+    {
+        var snippet = $$"""
+            using System.Collections.Generic;
+            class MyList: List<int>
+            {
+                public MyList(int capacity) : base(capacity) // Unsupported
+                {
+                }
+            }
+            public class Test
+            {
+                public void M()
+                {
+                    _ = new MyList($$1); // Requires tracking of the parameter to the base constructor
+                }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_List_T, "capacity", 0);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeFalse();
     }
 
     private static string WrapInMethod(string snippet) =>
