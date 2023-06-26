@@ -24,7 +24,8 @@ public abstract class UseCharOverloadOfStringMethodsBase<TSyntaxKind, TInvocatio
     where TSyntaxKind : struct
     where TInvocation : SyntaxNode
 {
-    private const string DiagnosticId = "S6610";
+    internal const string DiagnosticId = "S6610";
+
     protected override string MessageFormat => "\"{0}\" overloads that take a \"char\" should be used";
 
     protected abstract bool HasCorrectArguments(TInvocation invocation);
