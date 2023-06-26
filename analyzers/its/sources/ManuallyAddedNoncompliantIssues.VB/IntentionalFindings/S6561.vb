@@ -1,7 +1,7 @@
 ﻿Imports System
 
-Friend Class AvoidDateTimeNowForBenchmarking
-    Public Sub S6561()
+Friend Class S6561
+    Public Sub Benchmark()
         Dim start = Date.Now
         MethodToBeBenchmarked()
         Console.WriteLine($"{(Date.Now - start).TotalMilliseconds} ms") ' Noncompliant (S6561)

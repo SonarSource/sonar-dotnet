@@ -89,6 +89,7 @@ public class Program
         (true ? DateTime.Now : new DateTime(1)).Subtract(timeSpan); // Compliant
 
         DateTime.Now.AddDays(1).Subtract(dateTime); // FN
+        DateTime.Now.Subtract(); // Error [CS1501]
     }
 }
 

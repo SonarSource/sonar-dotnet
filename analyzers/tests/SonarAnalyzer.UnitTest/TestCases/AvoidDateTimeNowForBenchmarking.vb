@@ -72,9 +72,10 @@ Public Class Program
         Call (If(True, Date.Now, New DateTime(1))).Subtract(timeSpan) ' Compliant
 
         Date.Now.AddDays(1).Subtract(dateTime) ' FN
+        Date.Now.Subtract() ' Error [BC30516]
 
-        Date.Now.SUBTRACT(dateTime) ' Noncompliant
-        Dim span = DATE.NOW - dateTime ' Noncompliant
+        Date.Now.Subtract(dateTime) ' Noncompliant
+        Dim span = Date.Now - dateTime ' Noncompliant
     End Sub
 End Class
 

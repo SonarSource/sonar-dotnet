@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace NetFramework48
+namespace IntentionalFindings
 {
-    internal class AvoidDateTimeNowForBenchmarking
+    internal class S6561
     {
-        public void S6561()
+        public void Benchmark()
         {
             var start = DateTime.Now;
             MethodToBeBenchmarked();
