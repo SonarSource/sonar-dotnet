@@ -32,8 +32,8 @@ public enum InvokedMemberKind
 
 public class ArgumentDescriptor
 {
-    private ArgumentDescriptor(InvokedMemberKind memberKind, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, RefKind? refKind,
-        Func<IParameterSymbol, bool> parameterConstraint, Func<string, StringComparison, bool> invokedMemberNameConstraint, Func<ISymbol, bool> invokedMemberConstraint)
+    private ArgumentDescriptor(InvokedMemberKind memberKind, Func<ISymbol, bool> invokedMemberConstraint, Func<string, StringComparison, bool> invokedMemberNameConstraint,
+        Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, Func<IParameterSymbol, bool> parameterConstraint, RefKind? refKind)
     {
         MemberKind = memberKind;
         ArgumentListConstraint = argumentListConstraint;
@@ -54,11 +54,11 @@ public class ArgumentDescriptor
 
     public static ArgumentDescriptor MethodInvocation(Func<IMethodSymbol, bool> invokedMethodSymbol, string methodName, string parameterName, Func<int, bool> argumentPosition, RefKind? refKind)
         => new(InvokedMemberKind.Method,
-            argumentListConstraint: (_, position) => position is null || argumentPosition is null || argumentPosition(position.Value),
-            refKind,
-            parameterConstraint: x => x.Name == parameterName,
+            invokedMemberConstraint: x => invokedMethodSymbol(x as IMethodSymbol),
             invokedMemberNameConstraint: (n, c) => n.Equals(methodName, c),
-            invokedMemberConstraint: x => invokedMethodSymbol(x as IMethodSymbol));
+            argumentListConstraint: (_, position) => position is null || argumentPosition is null || argumentPosition(position.Value),
+            parameterConstraint: x => x.Name == parameterName,
+            refKind: refKind);
 
     public InvokedMemberKind MemberKind { get; }
     public Func<IReadOnlyCollection<SyntaxNode>, int?, bool> ArgumentListConstraint { get; }
