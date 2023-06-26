@@ -68,7 +68,7 @@ Public Class Program
     End Sub
 
     Private Sub EdgeCases(ByVal dateTime As Date, ByVal timeSpan As TimeSpan)
-        Call (If(True, Date.Now, New DateTime(1))).Subtract(dateTime) ' Compliant
+        Call (If(True, Date.Now, New DateTime(1))).Subtract(dateTime) ' FN
         Call (If(True, Date.Now, New DateTime(1))).Subtract(timeSpan) ' Compliant
 
         Date.Now.AddDays(1).Subtract(dateTime) ' FN
