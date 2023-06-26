@@ -39,5 +39,6 @@ public abstract class UseFindSystemTimeZoneByIdBase<TSyntaxKind, TInvocation> : 
     protected UseFindSystemTimeZoneByIdBase() : base(DiagnosticId) { }
 
     protected override bool ShouldRegisterAction(Compilation compilation) =>
-        compilation.GetTypeByMetadataName(KnownType.System_TimeOnly) is not null;
+        compilation.GetTypeByMetadataName(KnownType.System_TimeOnly) is not null
+        && compilation.GetTypeByMetadataName(KnownType.TimeZoneConverter_TZConvert) is not null;
 }

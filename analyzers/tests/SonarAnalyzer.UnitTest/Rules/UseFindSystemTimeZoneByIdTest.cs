@@ -26,33 +26,45 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class UseFindSystemTimeZoneByIdTest
 {
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseFindSystemTimeZoneById>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseFindSystemTimeZoneById>();
 
 #if NET
 
     [TestMethod]
     public void UseFindSystemTimeZoneById_Net_CS() =>
-    new VerifierBuilder<CS.UseFindSystemTimeZoneById>()
-        .AddReferences(NuGetMetadataReference.TimeZoneConverter())
-        .AddPaths("UseFindSystemTimeZoneById.Net.cs").Verify();
+        builderCS.AddReferences(NuGetMetadataReference.TimeZoneConverter())
+            .AddPaths("UseFindSystemTimeZoneById.Net.cs")
+            .Verify();
 
     [TestMethod]
     public void UseFindSystemTimeZoneById_Net_VB() =>
-        new VerifierBuilder<VB.UseFindSystemTimeZoneById>()
-            .AddReferences(NuGetMetadataReference.TimeZoneConverter())
-            .AddPaths("UseFindSystemTimeZoneById.Net.vb").Verify();
+        builderVB.AddReferences(NuGetMetadataReference.TimeZoneConverter())
+            .AddPaths("UseFindSystemTimeZoneById.Net.vb")
+            .Verify();
+
+    [TestMethod]
+    public void UseFindSystemTimeZoneById_Net_WithoutReference_DoesNotRaise_CS() =>
+        builderCS.AddPaths("UseFindSystemTimeZoneById.Net.cs")
+            .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+            .VerifyNoIssueReported();
+
+    [TestMethod]
+    public void UseFindSystemTimeZoneById_Net_WithoutReference_DoesNotRaise_VB() =>
+        builderVB.AddPaths("UseFindSystemTimeZoneById.Net.vb")
+            .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+            .VerifyNoIssueReported();
 
 #else
 
     [TestMethod]
     public void UseFindSystemTimeZoneById_CS() =>
-        new VerifierBuilder<CS.UseFindSystemTimeZoneById>()
-            .AddReferences(NuGetMetadataReference.TimeZoneConverter())
+        builderCS.AddReferences(NuGetMetadataReference.TimeZoneConverter())
             .AddPaths("UseFindSystemTimeZoneById.cs").Verify();
 
     [TestMethod]
     public void UseFindSystemTimeZoneById_VB() =>
-        new VerifierBuilder<VB.UseFindSystemTimeZoneById>()
-            .AddReferences(NuGetMetadataReference.TimeZoneConverter())
+        builderVB.AddReferences(NuGetMetadataReference.TimeZoneConverter())
             .AddPaths("UseFindSystemTimeZoneById.vb").Verify();
 
 #endif
