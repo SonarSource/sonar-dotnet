@@ -65,6 +65,8 @@ Public Class Program
         Call (If(True, Date.Now, New DateTime(1))).Subtract(timeSpan) ' Compliant
 
         Date.Now.AddDays(1).Subtract(dateTime) ' Compliant FN
+
+        Date.Now.SUBTRACT(dateTime) ' Noncompliant
     End Sub
 End Class
 

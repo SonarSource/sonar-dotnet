@@ -54,7 +54,7 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TSyntax
             && Language.Syntax.NodeExpression(memberAccess) is TMemberAccess childMemberAccess
             && IsDateTimeNow(childMemberAccess, context.SemanticModel)
             && context.SemanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol methodSymbol
-            && methodSymbol.Parameters.First().IsType(KnownType.System_DateTime))
+            && methodSymbol.Parameters[0].IsType(KnownType.System_DateTime))
         {
             context.ReportIssue(Diagnostic.Create(Rule, memberAccess.GetLocation()));
         }
