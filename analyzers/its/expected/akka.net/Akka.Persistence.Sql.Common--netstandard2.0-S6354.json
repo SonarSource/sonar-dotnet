@@ -19,19 +19,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\ITimestampProvider.cs",
 "region":  {
-"startLine":  26,
-"startColumn":  83,
-"endLine":  26,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\ITimestampProvider.cs",
-"region":  {
 "startLine":  35,
 "startColumn":  77,
 "endLine":  35,
