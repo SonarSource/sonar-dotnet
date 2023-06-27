@@ -18,12 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Newtonsoft.Json.Linq;
-using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 using SonarAnalyzer.Trackers;
-using SonarAnalyzer.UnitTest.Trackers;
 
 namespace SonarAnalyzer.UnitTest.Trackers;
 
@@ -295,7 +291,7 @@ public class ArgumentTrackerTest
 
     [DataTestMethod]
     [DataRow("""new NumberList($$1)""", "capacity", 0, false)] // FN. Syntactic checks bail out before the semantic model can resolve the alias
-    [DataRow("""new($$1)""", "capacity", 0, true)] // Target typed new resolves the alias
+    [DataRow("""new($$1)""", "capacity", 0, true)]             // Target typed new resolves the alias
     public void Constructor_TypeAlias(string constructor, string parameterName, int argumentPosition, bool expected)
     {
         var snippet = $$"""
@@ -311,6 +307,39 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModel(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_List_T, parameterName, argumentPosition);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
+    [DataTestMethod]
+    [DataRow("""new($$1, 2)""", true)]
+    [DataRow("""new C(1, $$2)""", true)]
+    [DataRow("""new CAlias(1, $$2)""", true)]
+    [DataRow("""new C($$1)""", false)]              // Count constraint fails
+    [DataRow("""new C(1, 2, $$3)""", false)]        // Parameter name constraint fails
+    [DataRow("""new C($$k: 1, j:2, i:3)""", false)] // Parameter name constraint fails
+    public void Constructor_CustomLogic(string constructor, bool expected)
+    {
+        var snippet = $$"""
+            using CAlias = C;
+            class C
+            {
+                public C(int i) { }
+                public C(int j, int i) { }
+                public C(int j, int i, int k) { }
+
+                public void M()
+                {
+                    C c = {{constructor}};
+                }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "C" },
+                                                                invokedMemberNameConstraint: (c, n) => c.Equals("C", n) || c.Equals("CAlias"),
+                                                                parameterConstraint: p => p.Name is "i" or "j",
+                                                                argumentListConstraint: (n, i) => i is null or 0 or 1 && n.Count > 1,
+                                                                refKind: null);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
     }
 
