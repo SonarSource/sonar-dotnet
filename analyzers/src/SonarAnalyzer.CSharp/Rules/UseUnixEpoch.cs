@@ -18,10 +18,31 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Drawing;
+using SonarAnalyzer.Helpers.Facade;
+using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UseUnixEpoch : UseUnixEpochBase<SyntaxKind>
+public sealed class UseUnixEpoch : UseUnixEpochBase<SyntaxKind, LiteralExpressionSyntax, MemberAccessExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override bool IsDateTimeKindUtc(MemberAccessExpressionSyntax memberAccess) =>
+        memberAccess.NameIs("Utc") && memberAccess.Expression.NameIs("DateTimeKind");
+
+    protected override bool IsGregorianCalendar(SyntaxNode node) =>
+        node is ObjectCreationExpressionSyntax objectCreation && objectCreation.Type.NameIs("GregorianCalendar");
+
+    protected override bool IsZeroTimeOffset(SyntaxNode node) =>
+        node switch
+        {
+            MemberAccessExpressionSyntax memberAccess => memberAccess.NameIs("Zero") && memberAccess.Expression.NameIs("TimeSpan"),
+            ObjectCreationExpressionSyntax objectCreation => objectCreation.Type.NameIs("TimeSpan")
+                                                             && objectCreation?.ArgumentList != null && objectCreation.ArgumentList.Arguments.Count is 1
+                                                             && objectCreation.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax literal
+                                                             && IsValueEqualsTo(literal, 0),
+            _ => false
+        };
 }
