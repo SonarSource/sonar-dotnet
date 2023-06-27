@@ -371,6 +371,22 @@ namespace Tests.Diagnostics
             XNamespace ns = "http://www.cpandl.com"; // Noncompliant FP. Implicit conversion from string to XNamespace is not supported
         }
     }
+
+    public class ConstructorInitializerTest
+    {
+        public class Base
+        {
+            public Base(): this("http://www.cpandl.com") // Noncompliant
+            { }
+            public Base(string name) {  }
+        }
+
+        public class Derived: Base
+        {
+            public Derived(): base("http://www.cpandl.com") // Noncompliant
+            { }
+        }
+    }
 }
 
 namespace Company.Telnet
