@@ -110,6 +110,7 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
     private bool IsOffsetNonExistingOrZero(IMethodParameterLookup lookup) =>
         !lookup.TryGetSyntax("offset", out var expressions) || IsZeroTimeOffset(expressions[0]);
 
+    // DateTime.UnixEpoch introduced at .NET Core 2.1/.NET Standard 2.1
     private static bool CompilationTargetsValidNetVersion(Compilation compilation) =>
         compilation.GetTypeByMetadataName(KnownType.System_DateTime) is var dateType && dateType.GetMembers("UnixEpoch").Any();
 }

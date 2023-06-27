@@ -29,6 +29,18 @@ public class UseUnixEpochTest
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseUnixEpoch>();
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseUnixEpoch>();
 
+#if NETFRAMEWORK
+
+    [TestMethod]
+    public void UseUnixEpoch_Framework_CS() =>
+        builderCS.AddPaths("UseUnixEpoch.Framework.cs").Verify();
+
+    [TestMethod]
+    public void UseUnixEpoch_Framework_VB() =>
+        builderVB.AddPaths("UseUnixEpoch.Framework.vb").Verify();
+
+#else
+
     [TestMethod]
     public void UseUnixEpoch_CS() =>
         builderCS.AddPaths("UseUnixEpoch.cs").Verify();
@@ -36,4 +48,7 @@ public class UseUnixEpochTest
     [TestMethod]
     public void UseUnixEpoch_VB() =>
         builderVB.AddPaths("UseUnixEpoch.vb").Verify();
+
+#endif
+
 }
