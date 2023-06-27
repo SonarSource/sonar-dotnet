@@ -55,6 +55,10 @@ public abstract class DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<TSyntaxK
         RemoveFromEnd(attributeType.FullName, "Attribute"),
     };
 
+    protected static bool IsKeyPropertyBasedOnName(string propertyName, string className) =>
+        propertyName.Equals("Id", StringComparison.InvariantCultureIgnoreCase)
+        || propertyName.Equals($"{className}Id", StringComparison.InvariantCultureIgnoreCase);
+
     protected abstract void AnalyzeClass(SonarSyntaxNodeReportingContext context);
         //if (Language.Syntax.NodeIdentifier(context.Node) is { IsMissing: false } className)
         //{

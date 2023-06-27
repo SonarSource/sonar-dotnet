@@ -32,10 +32,15 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeS
         // To improve performance the attributes and property types are only matched by their names, rather than their actual symbol.
         // This results in a couple of FNs, but those scenarios are very rare.
         var classDeclaration = (ClassDeclarationSyntax)context.Node;
+        if (classDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword)))
+        {
+            return;
+        }
+
         var className = classDeclaration.Identifier.ValueText;
         var keyProperties = classDeclaration.Members
             .OfType<PropertyDeclarationSyntax>()
-            .Where(x => IsPublicReadWriteProperty(x)
+            .Where(x => IsCandidateProperty(x)
                         && IsTemporalType(x)
                         && IsKeyProperty(x, className));
 
@@ -45,8 +50,9 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeS
         }
     }
 
-    private static bool IsPublicReadWriteProperty(PropertyDeclarationSyntax property) =>
+    private static bool IsCandidateProperty(PropertyDeclarationSyntax property) =>
         property.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
+        && !property.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword))
         && property.AccessorList is { } accessorList
         && accessorList.Accessors.Any(x => x.Keyword.IsKind(SyntaxKind.GetKeyword))
         && accessorList.Accessors.Any(x => x.Keyword.IsKind(SyntaxKind.SetKeyword));
@@ -54,8 +60,7 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeS
     private static bool IsKeyProperty(PropertyDeclarationSyntax property, string className)
     {
         var propertyName = property.Identifier.ValueText;
-        return propertyName.Equals("Id", StringComparison.InvariantCultureIgnoreCase)
-            || propertyName.Equals($"{className}Id", StringComparison.InvariantCultureIgnoreCase)
+        return IsKeyPropertyBasedOnName(propertyName, className)
             || HasKeyAttribute(property);
     }
 
