@@ -44,8 +44,6 @@ public class Program
         var ctor1_1 = new DateTime(ticks); // Compliant
         var ctor1_2 = new DateTime(ticks: ticks); // Compliant
 
-        // Fixme: new DateTime(UnixEpochTicks, DateTimeKind.Utc)
-
         // year, month, and day
         var ctor2_0 = new DateTime(1970, 1, 1); // Noncompliant
         var ctor2_1 = new DateTime(year, month, day); // Compliant
