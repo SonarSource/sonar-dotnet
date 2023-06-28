@@ -48,18 +48,9 @@ internal static class CSharpSyntaxHelper
     public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
         (ExpressionSyntax)RemoveParentheses((SyntaxNode)expression);
 
-    public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel)
-    {
-        if (semanticModel.GetSymbolOrCandidateSymbol(expression) is IMethodSymbol)
-        {
-            return false;
-        }
-
-        var nameofIdentifier = (expression?.Expression as IdentifierNameSyntax)?.Identifier;
-
-        return nameofIdentifier.HasValue &&
-            (nameofIdentifier.Value.ToString() == NameOfKeywordText);
-    }
+    public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel) =>
+        (expression?.Expression as IdentifierNameSyntax)?.Identifier.ToString() == NameOfKeywordText
+        && semanticModel.GetSymbolOrCandidateSymbol(expression) is not IMethodSymbol;
 
     public static bool IsCatchingAllExceptions(this CatchClauseSyntax catchClause)
     {
