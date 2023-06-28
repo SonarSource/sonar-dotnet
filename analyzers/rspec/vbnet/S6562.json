@@ -1,0 +1,18 @@
+{
+  "title": "Always set the \"DateTimeKind\" when creating new \"DateTime\" instances",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "localisation",
+    "pitfall"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6562",
+  "sqKey": "S6562",
+  "scope": "All",
+  "quickfix": "infeasible"
+}
