@@ -73,7 +73,7 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
         });
 
     protected static bool IsValueEqualsTo(TLiteralExpression literal, int value) =>
-        literal.ChildTokens().First().ValueText == value.ToString();
+        int.TryParse(literal.ChildTokens().First().ValueText, out var parsedValue) && parsedValue == value;
 
     private bool IsEpochCtor(SyntaxNode node, SemanticModel model)
     {
