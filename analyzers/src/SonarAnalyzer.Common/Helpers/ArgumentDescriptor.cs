@@ -126,6 +126,15 @@ public class ArgumentDescriptor
             parameterConstraint: parameterConstraint,
             refKind: null);
 
+    public static ArgumentDescriptor AttributeArgument(Func<IMethodSymbol, bool> invokedIndexerPropertyMethod, Func<string, StringComparison, bool> invokedIndexerExpression,
+        Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint)
+        => new(InvokedMemberKind.Attribute,
+            invokedMemberConstraint: x => invokedIndexerPropertyMethod(x as IMethodSymbol),
+            invokedMemberNameConstraint: invokedIndexerExpression,
+            argumentListConstraint: argumentListConstraint,
+            parameterConstraint: parameterConstraint,
+            refKind: null);
+
     public InvokedMemberKind MemberKind { get; }
     public Func<IReadOnlyCollection<SyntaxNode>, int?, bool> ArgumentListConstraint { get; }
     public RefKind? RefKind { get; }

@@ -482,6 +482,28 @@ public class ArgumentTrackerTest
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
     }
 
+    [DataTestMethod]
+    [DataRow("""[Obsolete($$"message", UrlFormat = "")]""", "message")]
+    [DataRow("""[Obsolete("message", $$UrlFormat = "")]""", "UrlFormat")]
+    public void Attribute(string attribute, string expectedParameterName)
+    {
+        var snippet = $$"""
+            using System;
+            public class Test
+            {
+                {{attribute}}
+                public void M()
+                {
+                }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.AttributeArgument(x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: "ObsoleteAttribute" },
+            (s, c) => s.StartsWith("Obsolete", c), p => p.Name == expectedParameterName, (l, i) => i == 0);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
     private static string WrapInMethod(string snippet) =>
         $$"""
         using System;
