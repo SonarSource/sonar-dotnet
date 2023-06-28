@@ -31,17 +31,21 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeS
         // This results in a couple of FNs, but those scenarios are very rare.
         var classDeclaration = (ClassBlockSyntax)context.Node;
         var className = classDeclaration.ClassStatement.Identifier.ValueText;
-        var keyProperties = classDeclaration.Members
-            .OfType<PropertyStatementSyntax>()
-            .Where(x => IsCandidateProperty(x)
-                        && IsTemporalType(x.AsClause.Type().GetName())
-                        && IsKeyProperty(x, className));
+        var keyProperties = PropertyDeclarationsInClass(classDeclaration).Where(x =>
+            IsCandidateProperty(x)
+            && IsTemporalType(x.AsClause.Type().GetName())
+            && IsKeyProperty(x, className));
 
         foreach (var propertyType in keyProperties.Select(x => x.AsClause.Type()))
         {
             context.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), propertyType.GetName()));
         }
     }
+
+    private static IEnumerable<PropertyStatementSyntax> PropertyDeclarationsInClass(ClassBlockSyntax classDeclaration) =>
+        classDeclaration.Members
+            .OfType<PropertyStatementSyntax>()
+            .Concat(classDeclaration.Members.OfType<PropertyBlockSyntax>().Select(x => x.PropertyStatement));
 
     private static bool IsCandidateProperty(PropertyStatementSyntax property) =>
         property.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
