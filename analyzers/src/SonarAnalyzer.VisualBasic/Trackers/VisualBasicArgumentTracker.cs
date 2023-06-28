@@ -20,51 +20,50 @@
 
 using SonarAnalyzer.Trackers;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers.Trackers;
+
+public class VisualBasicArgumentTracker : ArgumentTracker<SyntaxKind>
 {
-    public class VisualBasicArgumentTracker : ArgumentTracker<SyntaxKind>
+    protected override SyntaxKind[] TrackedSyntaxKinds => new[] { SyntaxKind.SimpleArgument };
+
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override IReadOnlyCollection<SyntaxNode> ArgumentList(SyntaxNode argumentNode) =>
+        argumentNode switch
+        {
+            ArgumentSyntax { Parent: ArgumentListSyntax { Arguments: { } list } } => list,
+            _ => null,
+        };
+
+    protected override int? Position(SyntaxNode argumentNode) =>
+        argumentNode is ArgumentSyntax { IsNamed: true }
+        ? null
+        : ArgumentList(argumentNode).IndexOf(x => x == argumentNode);
+
+    protected override RefKind ArgumentRefKind(SyntaxNode argumentNode) =>
+        RefKind.None;
+
+    protected override bool InvocationFitsMemberKind(SyntaxNode argumentNode, InvokedMemberKind memberKind)
     {
-        protected override SyntaxKind[] TrackedSyntaxKinds => new[] { SyntaxKind.SimpleArgument };
-
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
-        protected override IReadOnlyCollection<SyntaxNode> ArgumentList(SyntaxNode argumentNode) =>
-            argumentNode switch
-            {
-                ArgumentSyntax { Parent: ArgumentListSyntax { Arguments: { } list } } => list,
-                _ => null,
-            };
-
-        protected override int? Position(SyntaxNode argumentNode) =>
-            argumentNode is ArgumentSyntax { IsNamed: true }
-            ? null
-            : ArgumentList(argumentNode).IndexOf(x => x == argumentNode);
-
-        protected override RefKind ArgumentRefKind(SyntaxNode argumentNode) =>
-            RefKind.None;
-
-        protected override bool InvocationFitsMemberKind(SyntaxNode argumentNode, InvokedMemberKind memberKind)
+        var invocationExpression = argumentNode?.Parent?.Parent;
+        return memberKind switch
         {
-            var invocationExpression = argumentNode?.Parent?.Parent;
-            return memberKind switch
-            {
-                InvokedMemberKind.Method => invocationExpression is InvocationExpressionSyntax,
-                InvokedMemberKind.Constructor => invocationExpression is ObjectCreationExpressionSyntax,
-                InvokedMemberKind.Indexer => invocationExpression is InvocationExpressionSyntax,
-                InvokedMemberKind.Attribute => invocationExpression is AttributeSyntax,
-                _ => false,
-            };
-        }
-        protected override bool InvokedMemberFits(SemanticModel model, SyntaxNode argumentNode, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint)
-        {
-            var expression = InvokedExpression(argumentNode);
-            var name = expression.GetName();
-            return invokedMemberNameConstraint(name);
-        }
-
-        protected override SyntaxNode InvokedExpression(SyntaxNode argumentNode) =>
-            argumentNode?.Parent?.Parent;
-
-        protected override SyntaxBaseContext CreateContext(SonarSyntaxNodeReportingContext context) => new(context);
+            InvokedMemberKind.Method => invocationExpression is InvocationExpressionSyntax,
+            InvokedMemberKind.Constructor => invocationExpression is ObjectCreationExpressionSyntax,
+            InvokedMemberKind.Indexer => invocationExpression is InvocationExpressionSyntax,
+            InvokedMemberKind.Attribute => invocationExpression is AttributeSyntax,
+            _ => false,
+        };
     }
+    protected override bool InvokedMemberFits(SemanticModel model, SyntaxNode argumentNode, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint)
+    {
+        var expression = InvokedExpression(argumentNode);
+        var name = expression.GetName();
+        return invokedMemberNameConstraint(name);
+    }
+
+    protected override SyntaxNode InvokedExpression(SyntaxNode argumentNode) =>
+        argumentNode?.Parent?.Parent;
+
+    protected override SyntaxBaseContext CreateContext(SonarSyntaxNodeReportingContext context) => new(context);
 }
