@@ -18,11 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class UseTestableTimeProvider : UseTestableTimeProviderBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class UseTestableTimeProvider : UseTestableTimeProviderBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-    }
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override bool Ignore(SyntaxNode ancestor, SemanticModel semanticModel) =>
+        ancestor is XmlCrefAttributeSyntax
+        || (ancestor is InvocationExpressionSyntax invocation && invocation.IsNameof(semanticModel));
 }

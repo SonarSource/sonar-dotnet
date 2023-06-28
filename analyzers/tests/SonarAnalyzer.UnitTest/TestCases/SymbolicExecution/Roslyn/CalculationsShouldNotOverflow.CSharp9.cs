@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 int i = 2147483600;
-i += 100; // FN, Top level statements are not supported
+_ = i + 100; // Noncompliant
 
 public class NativeInt
 {
@@ -28,16 +28,16 @@ public class NativeInt
     public void PositiveOverflowNativeInt()
     {
         nint i = 2147483600;
-        i += 100; // Compliant, we can't tell what's the native MaxValue on the run machine
+        _ = i + 100; // Compliant, we can't tell what's the native MaxValue on the run machine
 
         nuint ui = (nuint)18446744073709551615;
-        ui += 100; // Compliant, we can't tell what's the native MaxValue on the run machine
+        _ = ui + 100; // Compliant, we can't tell what's the native MaxValue on the run machine
     }
 
     public void NegativeOverflowNativeInt()
     {
         nint i = -2147483600;
-        i -= 100;  // Compliant, we can't tell what's the native MinValue for the run machine
+        _ = i - 100;  // Compliant, we can't tell what's the native MinValue for the run machine
     }
 
     public void StaticLambda()
@@ -45,7 +45,7 @@ public class NativeInt
         Action a = static () =>
         {
             int i = -2147483600;
-            i -= 100; // FN, lambdas are not supported
+            _ = i - 100; // Noncompliant
         };
     }
 
@@ -54,7 +54,7 @@ public class NativeInt
         var result = items.Select((_, _) =>
         {
             int i = -2147483600;
-            i -= 100; // FN, lambdas are not supported
+            _ = i - 100; // Noncompliant
             return i;
         });
     }
@@ -67,13 +67,13 @@ public class Properties
         get
         {
             int i = 2147483600;
-            i += 100; // FN, properties are not supported
+            _ = i + 100; // // Noncompliant
             return i;
         }
         init
         {
             int i = 2147483600;
-            i += 100; // FN, properties are not supported
+            _ = i + 100; // Noncompliant
         }
     }
 }
@@ -83,7 +83,7 @@ public record SampleRecord(int I)
     public void Inc()
     {
         int i = 2147483600;
-        i += 100; // FN
+        _ = i + 100; // Noncompliant
     }
 
     public void With()
@@ -104,6 +104,6 @@ public partial class Partial
     public partial void Method()
     {
         int i = 2147483600;
-        i += 100; // FN
+        _ = i + 100; // Noncompliant
     }
 }

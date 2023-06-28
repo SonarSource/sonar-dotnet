@@ -82,6 +82,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableOrchestrationContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationContext");
         public static readonly KnownType Microsoft_Azure_WebJobs_FunctionNameAttribute = new("Microsoft.Azure.WebJobs.FunctionNameAttribute");
         public static readonly KnownType Microsoft_Data_Sqlite_SqliteCommand = new("Microsoft.Data.Sqlite.SqliteCommand");
+        public static readonly KnownType Microsoft_EntityFramework_DbContext = new("System.Data.Entity.DbContext");
+        public static readonly KnownType Microsoft_EntityFrameworkCore_DbContext = new("Microsoft.EntityFrameworkCore.DbContext");
         public static readonly KnownType Microsoft_EntityFrameworkCore_DbContextOptionsBuilder = new("Microsoft.EntityFrameworkCore.DbContextOptionsBuilder");
         public static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new("Microsoft.EntityFrameworkCore.Migrations.Migration");
         public static readonly KnownType Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions");
@@ -239,6 +241,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_ComponentModel_Composition_ExportAttribute = new("System.ComponentModel.Composition.ExportAttribute");
         public static readonly KnownType System_ComponentModel_Composition_InheritedExportAttribute = new("System.ComponentModel.Composition.InheritedExportAttribute");
         public static readonly KnownType System_ComponentModel_Composition_PartCreationPolicyAttribute = new("System.ComponentModel.Composition.PartCreationPolicyAttribute");
+        public static readonly KnownType System_ComponentModel_DataAnnotations_KeyAttribute = new("System.ComponentModel.DataAnnotations.KeyAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_RegularExpressionAttribute = new("System.ComponentModel.DataAnnotations.RegularExpressionAttribute");
         public static readonly KnownType System_ComponentModel_DefaultValueAttribute = new("System.ComponentModel.DefaultValueAttribute");
         public static readonly KnownType System_ComponentModel_EditorBrowsableAttribute = new("System.ComponentModel.EditorBrowsableAttribute");
@@ -262,6 +265,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Data_Sqlite_SQLiteDataAdapter = new("System.Data.SQLite.SQLiteDataAdapter");
         public static readonly KnownType System_Data_SqlServerCe_SqlCeCommand = new("System.Data.SqlServerCe.SqlCeCommand");
         public static readonly KnownType System_Data_SqlServerCe_SqlCeDataAdapter = new("System.Data.SqlServerCe.SqlCeDataAdapter");
+        public static readonly KnownType System_DateOnly = new("System.DateOnly");
         public static readonly KnownType System_DateTime = new("System.DateTime");
         public static readonly KnownType System_DateTimeOffset = new("System.DateTimeOffset");
         public static readonly KnownType System_Decimal = new("System.Decimal");
@@ -451,6 +455,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Security_Principal_NTAccount = new("System.Security.Principal.NTAccount");
         public static readonly KnownType System_Security_Principal_SecurityIdentifier = new("System.Security.Principal.SecurityIdentifier");
         public static readonly KnownType System_Security_Principal_WindowsIdentity = new("System.Security.Principal.WindowsIdentity");
+        public static readonly KnownType System_Security_SecureString = new("System.Security.SecureString");
         public static readonly KnownType System_Security_SecurityCriticalAttribute = new("System.Security.SecurityCriticalAttribute");
         public static readonly KnownType System_Security_SecuritySafeCriticalAttribute = new("System.Security.SecuritySafeCriticalAttribute");
         public static readonly KnownType System_SerializableAttribute = new("System.SerializableAttribute");
@@ -479,6 +484,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Threading_Thread = new("System.Threading.Thread");
         public static readonly KnownType System_Threading_WaitHandle = new("System.Threading.WaitHandle");
         public static readonly KnownType System_ThreadStaticAttribute = new("System.ThreadStaticAttribute");
+        public static readonly KnownType System_TimeOnly = new("System.TimeOnly");
         public static readonly KnownType System_TimeSpan = new("System.TimeSpan");
         public static readonly KnownType System_Type = new("System.Type");
         public static readonly KnownType System_UInt16 = new("System.UInt16");
@@ -567,6 +573,7 @@ namespace SonarAnalyzer.Helpers
                 System_Threading_Tasks_Task_T,
                 System_Threading_Tasks_ValueTask_TResult);
         public static readonly KnownType System_Resources_ResourceManager = new("System.Resources.ResourceManager");
+        public static readonly KnownType TimeZoneConverter_TZConvert = new("TimeZoneConverter.TZConvert");
         public static readonly KnownType UnityEditor_AssetModificationProcessor = new("UnityEditor.AssetModificationProcessor");
         public static readonly KnownType UnityEditor_AssetPostprocessor = new("UnityEditor.AssetPostprocessor");
         public static readonly KnownType UnityEngine_MonoBehaviour = new("UnityEngine.MonoBehaviour");

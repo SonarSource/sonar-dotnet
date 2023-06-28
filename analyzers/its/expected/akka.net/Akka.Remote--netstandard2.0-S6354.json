@@ -45,19 +45,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
 "region":  {
-"startLine":  83,
-"startColumn":  56,
-"endLine":  83,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
-"region":  {
 "startLine":  89,
 "startColumn":  37,
 "endLine":  89,

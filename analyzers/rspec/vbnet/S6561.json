@@ -1,0 +1,15 @@
+{
+  "title": "Avoid using \"DateTime.Now\" for benchmarking or timing operations",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6561",
+  "sqKey": "S6561",
+  "scope": "All",
+  "quickfix": "infeasible"
+}

@@ -3,7 +3,7 @@ using System.IO;
 
 var topLevel = new MemoryStream();
 topLevel.Dispose();
-topLevel.Dispose(); //  FN, Top level statements are not supported
+topLevel.Dispose(); // Noncompliant
 
 using var top = new MemoryStream(); // Compliant
 

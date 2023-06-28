@@ -72,6 +72,7 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
     public SyntaxKind[] StringLiteralExpressions => new[] { SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression };
     public SyntaxKind StructDeclaration => SyntaxKind.StructDeclaration;
+    public SyntaxKind SubtractExpression => SyntaxKind.SubtractExpression;
     public SyntaxKind[] TypeDeclaration => new[]
     {
         SyntaxKind.ClassDeclaration,

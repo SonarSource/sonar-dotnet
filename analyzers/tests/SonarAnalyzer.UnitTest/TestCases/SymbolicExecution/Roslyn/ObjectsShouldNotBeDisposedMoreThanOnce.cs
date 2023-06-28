@@ -242,6 +242,16 @@ class TestLoops
             }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/7497
+    public static void LoopOfTuples(List<IDisposable> disposables, List<(int I, IDisposable Disposable)> tuples)
+    {
+        foreach (var disposable in disposables)
+            disposable.Dispose();       // Compliant
+
+        foreach (var (_, disposable) in tuples)
+            disposable.Dispose();       // Noncompliant FP
+    }
 }
 
 class UsingDeclaration

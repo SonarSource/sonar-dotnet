@@ -297,6 +297,17 @@ public void Method()
 }");
 
     [TestMethod]
+    public void Initialize_LocalFunction_TopLevelStatements() =>
+        VerifyTopLevelStatements("""
+            void LocalMethod(string s) =>
+                s = null; // Noncompliant {{Message for SMain}}
+            """);
+
+    [TestMethod]
+    public void Initialize_TopLevelStatements() =>
+        VerifyTopLevelStatements("string s = null; // Noncompliant {{Message for SMain}}");
+
+    [TestMethod]
     public void Analyze_DoNotRunWhenContainsDiagnostics() =>
         Verify(@"string s = null;   // Error CS1525: Invalid expression term '>' - misleading location, duplicate reporting from Roslyn
                      >>;                // Error CS1525: Invalid expression term '>' - this will set body.ContainsDiagnostics",
@@ -514,7 +525,7 @@ public class Sample
         {body}
     }}
 }}";
-        VerifyCode<TestSERunnerCS>(code, projectType, ParseOptionsHelper.FromCSharp9, sonarProjectConfigPath, onlyRules);
+        VerifyCode<TestSERunnerCS>(code, projectType, ParseOptionsHelper.FromCSharp9, sonarProjectConfigPath, OutputKind.DynamicallyLinkedLibrary, onlyRules);
     }
 
     private static void VerifyClassMainCS(string members)
@@ -526,7 +537,16 @@ public class Sample
 {{
     {members}
 }}";
-        VerifyCode<TestSERunnerCS>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
+        VerifyCode<TestSERunnerCS>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, OutputKind.DynamicallyLinkedLibrary, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
+    }
+
+    private static void VerifyTopLevelStatements(string members)
+    {
+        var code = $"""
+            using System;
+            {members}
+            """;
+        VerifyCode<TestSERunnerCS>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, OutputKind.ConsoleApplication, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
     }
 
     private static void VerifyClassMainVB(string members)
@@ -535,17 +555,23 @@ public class Sample
 $@"Public Class Sample
     {members}
 End Class";
-        VerifyCode<TestSERunnerVB>(code, ProjectType.Product, ImmutableArray<ParseOptions>.Empty, null, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
+        VerifyCode<TestSERunnerVB>(code, ProjectType.Product, ImmutableArray<ParseOptions>.Empty, null, OutputKind.DynamicallyLinkedLibrary, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
     }
 
-    private static void VerifyCode<TRunner>(string code, ProjectType projectType, ImmutableArray<ParseOptions> parseOptions, string sonarProjectConfigPath, params DiagnosticDescriptor[] onlyRules)
-        where TRunner : SymbolicExecutionRunnerBase, new() =>
+    private static void VerifyCode<TRunner>(string code,
+                                            ProjectType projectType,
+                                            ImmutableArray<ParseOptions> parseOptions,
+                                            string sonarProjectConfigPath,
+                                            OutputKind kind,
+                                            params DiagnosticDescriptor[] onlyRules) where TRunner : SymbolicExecutionRunnerBase, new() =>
         new VerifierBuilder<TRunner>()
             .AddReferences(TestHelper.ProjectTypeReference(projectType))
             .AddSnippet(code)
             .WithSonarProjectConfigPath(sonarProjectConfigPath)
             .WithOptions(parseOptions)
             .WithOnlyDiagnostics(onlyRules)
+            .WithConcurrentAnalysis(false)
+            .WithOutputKind(kind)
             .Verify();
 
     private class TestSERunnerCS : CS.SymbolicExecutionRunner

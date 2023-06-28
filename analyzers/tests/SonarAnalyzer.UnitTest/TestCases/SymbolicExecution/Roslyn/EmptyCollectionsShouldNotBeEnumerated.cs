@@ -978,3 +978,15 @@ public class Repro_2147
         return clonedEntry;
     }
 }
+
+public class ReproAD0001
+{
+    List<string> list;
+    public static int Count => 0;
+
+    public void ThrowingAD0001()
+    {
+        var c = ReproAD0001.Count; // Reproducer to avoid AD0001
+        list.Clear(); // This forces ShouldExecute to become true
+    }
+}

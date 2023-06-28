@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 var topLevel = new List<int>();
-topLevel.Clear();   // FN
+topLevel.Clear();   // Noncompliant
 
 topLevel.Add(42);
 topLevel.Clear();
