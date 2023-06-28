@@ -24,6 +24,7 @@ public abstract class DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<TSyntaxK
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S3363";
+    protected static readonly string[] KeyAttributeTypeNames = TypeNamesForAttribute(KnownType.System_ComponentModel_DataAnnotations_KeyAttribute);
 
     protected override string MessageFormat => "'{0}' should not be used as a type for primary keys";
 
@@ -58,6 +59,12 @@ public abstract class DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<TSyntaxK
     protected static bool IsKeyPropertyBasedOnName(string propertyName, string className) =>
         propertyName.Equals("Id", StringComparison.InvariantCultureIgnoreCase)
         || propertyName.Equals($"{className}Id", StringComparison.InvariantCultureIgnoreCase);
+
+    protected static bool IsTemporalType(string propertyTypeName) =>
+        Array.Exists(TemporalTypes, x => propertyTypeName.Equals(x.TypeName) || propertyTypeName.Equals(x.FullName));
+
+    protected static bool MatchesAttributeName(string attributeName, string[] candidates) =>
+        Array.Exists(candidates, x => attributeName.Equals(x));
 
     protected abstract void AnalyzeClass(SonarSyntaxNodeReportingContext context);
         //if (Language.Syntax.NodeIdentifier(context.Node) is { IsMissing: false } className)

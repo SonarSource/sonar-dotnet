@@ -23,8 +23,6 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<SyntaxKind>
 {
-    private static readonly string[] KeyAttributeTypeNames = TypeNamesForAttribute(KnownType.System_ComponentModel_DataAnnotations_KeyAttribute);
-
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
     protected override void AnalyzeClass(SonarSyntaxNodeReportingContext context)
@@ -41,7 +39,7 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeS
         var keyProperties = classDeclaration.Members
             .OfType<PropertyDeclarationSyntax>()
             .Where(x => IsCandidateProperty(x)
-                        && IsTemporalType(x)
+                        && IsTemporalType(x.Type.GetName())
                         && IsKeyProperty(x, className));
 
         foreach (var propertyType in keyProperties.Select(x => x.Type))
@@ -67,11 +65,5 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeS
     private static bool HasKeyAttribute(PropertyDeclarationSyntax property) =>
         property.AttributeLists
             .SelectMany(x => x.Attributes)
-            .Any(x => MatchesAttributeName(x, KeyAttributeTypeNames));
-
-    private static bool IsTemporalType(PropertyDeclarationSyntax property) =>
-        Array.Exists(TemporalTypes, x => property.Type.NameIs(x.TypeName) || property.Type.NameIs(x.FullName));
-
-    private static bool MatchesAttributeName(AttributeSyntax attribute, string[] candidates) =>
-        Array.Exists(candidates, x => attribute.NameIs(x));
+            .Any(x => MatchesAttributeName(x.GetName(), KeyAttributeTypeNames));
 }
