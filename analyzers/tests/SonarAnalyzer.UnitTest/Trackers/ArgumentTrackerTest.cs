@@ -386,6 +386,40 @@ public class ArgumentTrackerTest
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
     }
 
+    [TestMethod]
+    public void Indexer_Array()
+    {
+        var snippet = $$"""
+            var arr = new int[10,1];
+            _ = arr[$$1,1];
+            """;
+        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+
+        var argument = ArgumentDescriptor.ElementAccess(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "Base" },
+                                                        invokedMemberNameConstraint: (c, n) => c.Equals("arr", n),
+                                                        parameterConstraint: p => p.Name is "i",
+                                                        argumentListConstraint: (_, _) => true,
+                                                        refKind: null);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Indexer_List()
+    {
+        var snippet = $$"""
+            var list = new System.Collections.Generic.List<int>();
+            _ = list[$$1];
+            """;
+        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+
+        var argument = ArgumentDescriptor.ElementAccess(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "Base" },
+                                                        invokedMemberNameConstraint: (c, n) => c.Equals("list", n),
+                                                        parameterConstraint: p => p.Name is "i",
+                                                        argumentListConstraint: (_, _) => true,
+                                                        refKind: null);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
     private static string WrapInMethod(string snippet) =>
         $$"""
         using System;

@@ -91,6 +91,15 @@ public class ArgumentDescriptor
             parameterConstraint: parameterConstraint,
             refKind: refKind);
 
+    public static ArgumentDescriptor ElementAccess(Func<IMethodSymbol, bool> invokedMethodSymbol, Func<string, StringComparison, bool> invokedMemberNameConstraint,
+        Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, RefKind? refKind)
+        => new(InvokedMemberKind.Indexer,
+            invokedMemberConstraint: x => invokedMethodSymbol(x as IMethodSymbol),
+            invokedMemberNameConstraint: invokedMemberNameConstraint,
+            argumentListConstraint: argumentListConstraint,
+            parameterConstraint: parameterConstraint,
+            refKind: refKind);
+
     public InvokedMemberKind MemberKind { get; }
     public Func<IReadOnlyCollection<SyntaxNode>, int?, bool> ArgumentListConstraint { get; }
     public RefKind? RefKind { get; }
