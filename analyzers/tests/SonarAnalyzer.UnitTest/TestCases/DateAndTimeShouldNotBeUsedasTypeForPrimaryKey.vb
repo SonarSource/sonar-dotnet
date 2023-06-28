@@ -132,6 +132,10 @@ Class PropertyTypes
         Public Shared Property Id As Date
     End Class
 
+    Class ImplicitPublicProperty
+        Property Id As Date                           ' Noncompliant
+    End Class
+
     Class NotPublicProperty
         <Key>
         Friend Property Identifier As Date            ' Compliant - Entity Framework only maps public properties to keys

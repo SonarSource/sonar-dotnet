@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using static Microsoft.CodeAnalysis.VisualBasic.SyntaxKind;
+
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -48,10 +50,13 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeS
             .Concat(classDeclaration.Members.OfType<PropertyBlockSyntax>().Select(x => x.PropertyStatement));
 
     private static bool IsCandidateProperty(PropertyStatementSyntax property) =>
-        property.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
-        && !property.Modifiers.Any(x => x.IsKind(SyntaxKind.SharedKeyword))
-        && !property.Modifiers.Any(x => x.IsKind(SyntaxKind.ReadOnlyKeyword))
-        && !property.Modifiers.Any(x => x.IsKind(SyntaxKind.WriteOnlyKeyword));
+        (property.Modifiers.Any(x => x.IsKind(PublicKeyword))
+         || property.Modifiers.All(x => !x.IsKind(PrivateKeyword)
+                                        && !x.IsKind(ProtectedKeyword)
+                                        && !x.IsKind(FriendKeyword)))
+        && !property.Modifiers.Any(x => x.IsKind(SharedKeyword))
+        && !property.Modifiers.Any(x => x.IsKind(ReadOnlyKeyword))
+        && !property.Modifiers.Any(x => x.IsKind(WriteOnlyKeyword));
 
     private bool IsKeyProperty(PropertyStatementSyntax property, string className)
     {
