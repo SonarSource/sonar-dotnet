@@ -31,6 +31,8 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
     private const int EpochMonth = 1;
     private const int EpochDay = 1;
 
+    private static readonly ImmutableArray<KnownType> TypesWithUnixEpochField = ImmutableArray.Create(KnownType.System_DateTime, KnownType.System_DateTimeOffset);
+
     protected override string MessageFormat => "Use \"{0}.UnixEpoch\" instead of creating {0} instances that point to the unix epoch time";
 
     protected abstract bool IsDateTimeKindUtc(TMemberAccessExpression memberAccess);
@@ -51,28 +53,22 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var literalsArguments = Language.Syntax.ArgumentExpressions(c.Node).Where(x => x is TLiteralExpression);
-
-                    if (!literalsArguments.Any(x => IsValueEqualsTo((TLiteralExpression)x, EpochYear)
-                        || literalsArguments.Count(x => IsValueEqualsTo((TLiteralExpression)x, EpochMonth)) < 2))
+                    var literalsArguments = Language.Syntax.ArgumentExpressions(c.Node).OfType<TLiteralExpression>();
+                    if (!literalsArguments.Any(x => IsValueEqualTo(x, EpochYear) || literalsArguments.Count(x => IsValueEqualTo(x, EpochMonth)) < 2))
                     {
                         return;
                     }
 
                     var type = c.SemanticModel.GetTypeInfo(c.Node).Type;
-                    if (type.DerivesFrom(KnownType.System_DateTime) && IsEpochCtor(c.Node, c.SemanticModel))
+                    if (type.DerivesFromAny(TypesWithUnixEpochField) && IsEpochCtor(c.Node, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), "DateTime"));
-                    }
-                    else if (type.DerivesFrom(KnownType.System_DateTimeOffset) && IsEpochCtor(c.Node, c.SemanticModel))
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), "DateTimeOffset"));
+                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), type.Name));
                     }
                 },
                 Language.SyntaxKind.ObjectCreationExpressions);
         });
 
-    protected static bool IsValueEqualsTo(TLiteralExpression literal, int value) =>
+    protected static bool IsValueEqualTo(TLiteralExpression literal, int value) =>
         int.TryParse(literal.ChildTokens().First().ValueText, out var parsedValue) && parsedValue == value;
 
     private bool IsEpochCtor(SyntaxNode node, SemanticModel model)
@@ -80,7 +76,7 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
         var methodSymbol = (IMethodSymbol)model.GetSymbolInfo(node).Symbol;
         var lookup = Language.MethodParameterLookup(node, methodSymbol);
 
-        if (IsParameterExistingAndLiteralEqualTo("year", EpochYear, lookup)
+        return IsParameterExistingAndLiteralEqualTo("year", EpochYear, lookup)
             && IsParameterExistingAndLiteralEqualTo("month", EpochMonth, lookup)
             && IsParameterExistingAndLiteralEqualTo("day", EpochDay, lookup)
             && IsParameterNonExistingOrLiteralEqualTo("hour", 0, lookup)
@@ -90,11 +86,7 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
             && IsParameterNonExistingOrLiteralEqualTo("microsecond", 0, lookup)
             && IsDateTimeKindNonExistingOrUtc(lookup)
             && IsCalendarNonExistingOrGregorian(lookup)
-            && IsOffsetNonExistingOrZero(lookup))
-        {
-            return true;
-        }
-        return false;
+            && IsOffsetNonExistingOrZero(lookup);
     }
 
     private static bool IsParameterExistingAndLiteralEqualTo(string parameterName, int value, IMethodParameterLookup lookup) =>
@@ -104,7 +96,7 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
         !lookup.TryGetSyntax(parameterName, out var expressions) || IsLiteralAndEqualTo(expressions[0], value);
 
     private static bool IsLiteralAndEqualTo(SyntaxNode node, int value) =>
-        node is TLiteralExpression literal && IsValueEqualsTo(literal, value);
+        node is TLiteralExpression literal && IsValueEqualTo(literal, value);
 
     private bool IsDateTimeKindNonExistingOrUtc(IMethodParameterLookup lookup) =>
         !lookup.TryGetSyntax("kind", out var expressions)

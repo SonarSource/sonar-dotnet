@@ -1,5 +1,4 @@
-﻿Imports System
-Imports System.Globalization
+﻿Imports System.Globalization
 
 Public Class Program
     Private ReadOnly Epoch As Date = New DateTime(1970, 1, 1) ' Compliant

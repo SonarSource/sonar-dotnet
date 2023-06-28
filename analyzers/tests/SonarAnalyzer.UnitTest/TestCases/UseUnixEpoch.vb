@@ -1,5 +1,4 @@
-﻿Imports System
-Imports System.Globalization
+﻿Imports System.Globalization
 
 Public Class Program
     Private ReadOnly Epoch As Date = New DateTime(1970, 1, 1) ' Noncompliant {{Use "DateTime.UnixEpoch" instead of creating DateTime instances that point to the unix epoch time}}
@@ -8,7 +7,7 @@ Public Class Program
     Private ReadOnly EpochOff As DateTimeOffset = New DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero) ' Noncompliant {{Use "DateTimeOffset.UnixEpoch" instead of creating DateTimeOffset instances that point to the unix epoch time}}
     '                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    Private Sub MyMethod(ByVal dateTime As Date)
+    Private Sub BasicCases(ByVal dateTime As Date)
         Dim timeSpan = dateTime - New DateTime(1970, 1, 1) ' Noncompliant
 
         If dateTime < New DateTime(1970, 1, 1) Then ' Noncompliant
@@ -28,6 +27,7 @@ Public Class Program
     Private Sub EdgeCases()
         Dim dateTimeOffset = New DateTimeOffset(New DateTime(1970, 1, 1), New TimeSpan(0, 0, 0)) ' Noncompliant
         Dim dateTime = New DateTime(If(True, 1970, 1971), 1, 1) ' FN
+        dateTime = New DATETIME(1970, 1, 1) ' Noncompliant
     End Sub
 
     Private Sub DateTimeConstructors(ByVal ticks As Integer, ByVal year As Integer, ByVal month As Integer, ByVal day As Integer, ByVal hour As Integer, ByVal minute As Integer, ByVal second As Integer, ByVal millisecond As Integer, ByVal calendar As Calendar, ByVal kind As DateTimeKind)

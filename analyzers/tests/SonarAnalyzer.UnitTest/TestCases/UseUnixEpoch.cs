@@ -9,7 +9,7 @@ public class Program
     private readonly DateTimeOffset EpochOff = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero); // Noncompliant {{Use "DateTimeOffset.UnixEpoch" instead of creating DateTimeOffset instances that point to the unix epoch time}}
     //                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    void MyMethod(DateTime dateTime)
+    void BasicCases(DateTime dateTime)
     {
         var timeSpan = dateTime - new DateTime(1970, 1, 1); // Noncompliant
 
@@ -34,6 +34,7 @@ public class Program
         var dateTime = new DateTime(true ? 1970 : 1971, 1, 1); // FN
         dateTime = new DateTime(1970, 01, 01); // Noncompliant
         dateTime = new DateTime(1970, 0x1, 0x1); // Noncompliant
+        dateTime = new System.DateTime(1970, 1, 1); // Noncompliant
     }
 
     void DateTimeConstructors(int ticks, int year, int month, int day, int hour, int minute, int second, int millisecond, Calendar calendar, DateTimeKind kind)
