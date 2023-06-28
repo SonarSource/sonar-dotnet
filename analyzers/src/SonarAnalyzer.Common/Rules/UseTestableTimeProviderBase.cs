@@ -18,39 +18,35 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Rules;
+
+public abstract class UseTestableTimeProviderBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+     where TSyntaxKind : struct
 {
-    public abstract class UseTestableTimeProviderBase<TSyntaxKind> : SonarDiagnosticAnalyzer
-         where TSyntaxKind : struct
-    {
-        private const string DiagnosticId = "S6354";
-        private const string MessageFormat = "Use a testable (date) time provider instead.";
+    private const string DiagnosticId = "S6354";
 
-        private readonly DiagnosticDescriptor rule;
-        private readonly ImmutableArray<KnownType> trackedTypes = ImmutableArray.Create(KnownType.System_DateTime, KnownType.System_DateTimeOffset);
+    protected override string MessageFormat => "Use a testable (date) time provider instead.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+    private readonly ImmutableArray<KnownType> trackedTypes = ImmutableArray.Create(KnownType.System_DateTime, KnownType.System_DateTimeOffset);
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+    protected abstract bool Ignore(SyntaxNode ancestor, SemanticModel semanticModel);
 
-        protected UseTestableTimeProviderBase() =>
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
-
-        protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+    protected UseTestableTimeProviderBase() : base(DiagnosticId) { }
+    protected sealed override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+        {
+            if (IsDateTimeProviderProperty(Language.Syntax.NodeIdentifier(c.Node).Value.Text)
+                && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IPropertySymbol property
+                && property.IsInType(trackedTypes)
+                && !c.Node.Ancestors().Any(x => Ignore(x, c.SemanticModel)))
             {
-                if (IsDateTimeProviderProperty(Language.Syntax.NodeIdentifier(c.Node).Value.Text)
-                    && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IPropertySymbol property
-                    && property.IsInType(trackedTypes))
-                {
-                    c.ReportIssue(Diagnostic.Create(rule, c.Node.Parent.GetLocation()));
-                }
-            },
-            Language.SyntaxKind.IdentifierName);
+                c.ReportIssue(Diagnostic.Create(Rule, c.Node.Parent.GetLocation()));
+            }
+        },
+        Language.SyntaxKind.IdentifierName);
 
-        private bool IsDateTimeProviderProperty(string name) =>
-            nameof(DateTime.Now).Equals(name, Language.NameComparison)
-            || nameof(DateTime.UtcNow).Equals(name, Language.NameComparison)
-            || nameof(DateTime.Today).Equals(name, Language.NameComparison);
-    }
+    private bool IsDateTimeProviderProperty(string name) =>
+        nameof(DateTime.Now).Equals(name, Language.NameComparison)
+        || nameof(DateTime.UtcNow).Equals(name, Language.NameComparison)
+        || nameof(DateTime.Today).Equals(name, Language.NameComparison);
 }

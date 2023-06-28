@@ -21,57 +21,56 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.CFG.Helpers
+namespace SonarAnalyzer.CFG.Helpers;
+
+internal static class CSharpSyntaxHelper
 {
-    internal static class CSharpSyntaxHelper
+    private static readonly string NameOfKeywordText = SyntaxFacts.GetText(SyntaxKind.NameOfKeyword);
+    private static readonly ISet<SyntaxKind> ParenthesizedExpressionKinds = new HashSet<SyntaxKind> {SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern};
+
+    public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
     {
-        private static readonly string NameOfKeywordText = SyntaxFacts.GetText(SyntaxKind.NameOfKeyword);
-        private static readonly ISet<SyntaxKind> ParenthesizedExpressionKinds = new HashSet<SyntaxKind> {SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern};
-
-        public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
+        var currentExpression = expression;
+        while (currentExpression != null && ParenthesizedExpressionKinds.Contains(currentExpression.Kind()))
         {
-            var currentExpression = expression;
-            while (currentExpression != null && ParenthesizedExpressionKinds.Contains(currentExpression.Kind()))
+            if (currentExpression.IsKind(SyntaxKind.ParenthesizedExpression))
             {
-                if (currentExpression.IsKind(SyntaxKind.ParenthesizedExpression))
-                {
-                    currentExpression = ((ParenthesizedExpressionSyntax)currentExpression).Expression;
-                }
-                else
-                {
-                    currentExpression = ((ParenthesizedPatternSyntaxWrapper)currentExpression).Pattern;
-                }
+                currentExpression = ((ParenthesizedExpressionSyntax)currentExpression).Expression;
             }
-            return currentExpression;
+            else
+            {
+                currentExpression = ((ParenthesizedPatternSyntaxWrapper)currentExpression).Pattern;
+            }
+        }
+        return currentExpression;
+    }
+
+    public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
+        (ExpressionSyntax)RemoveParentheses((SyntaxNode)expression);
+
+    public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel)
+    {
+        if (semanticModel.GetSymbolOrCandidateSymbol(expression) is IMethodSymbol)
+        {
+            return false;
         }
 
-        public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
-            (ExpressionSyntax)RemoveParentheses((SyntaxNode)expression);
+        var nameofIdentifier = (expression?.Expression as IdentifierNameSyntax)?.Identifier;
 
-        public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel)
+        return nameofIdentifier.HasValue &&
+            (nameofIdentifier.Value.ToString() == NameOfKeywordText);
+    }
+
+    public static bool IsCatchingAllExceptions(this CatchClauseSyntax catchClause)
+    {
+        if (catchClause.Declaration == null)
         {
-            if (semanticModel.GetSymbolOrCandidateSymbol(expression) is IMethodSymbol calledSymbol)
-            {
-                return false;
-            }
-
-            var nameofIdentifier = (expression?.Expression as IdentifierNameSyntax)?.Identifier;
-
-            return nameofIdentifier.HasValue &&
-                (nameofIdentifier.Value.ToString() == NameOfKeywordText);
+            return true;
         }
 
-        public static bool IsCatchingAllExceptions(this CatchClauseSyntax catchClause)
-        {
-            if (catchClause.Declaration == null)
-            {
-                return true;
-            }
+        var exceptionTypeName = catchClause.Declaration.Type.GetText().ToString().Trim();
 
-            var exceptionTypeName = catchClause.Declaration.Type.GetText().ToString().Trim();
-
-            return catchClause.Filter == null &&
-                (exceptionTypeName == "Exception" || exceptionTypeName == "System.Exception");
-        }
+        return catchClause.Filter == null &&
+            (exceptionTypeName == "Exception" || exceptionTypeName == "System.Exception");
     }
 }

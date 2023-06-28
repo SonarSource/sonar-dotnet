@@ -13,9 +13,7 @@ public class DateTimeAsProvider
         var offsetUTC = DateTimeOffset.UtcNow; // Noncompliant
     }
 
-    /// <see cref="DateTimeOffset.UtcNow"/>
-    // Noncompliant@-1
-
+    /// <see cref="DateTimeOffset.UtcNow"/> Compliant
     public void CompliantAre()
     {
         var other = DateTime.DaysInMonth(2000, 2); // Compliant
@@ -23,6 +21,8 @@ public class DateTimeAsProvider
 
         var otherOffset = DateTimeOffset.MaxValue; // Compliant
         var noSystemDateTimeOffset = NotSystem.DateTimeOffset.Now; // Compliant
+
+        var str = nameof(DateTime.Now); // Compliant
     }
 }
 
