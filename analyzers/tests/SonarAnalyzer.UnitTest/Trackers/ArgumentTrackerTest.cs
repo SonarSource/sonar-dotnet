@@ -343,6 +343,49 @@ public class ArgumentTrackerTest
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
     }
 
+    [TestMethod]
+    public void Constructor_InitializerCalls_This()
+    {
+        var snippet = $$"""
+            class Base
+            {
+                public Base(int i) : this($$i, 1) { }
+                public Base(int i, int j) { }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "Base" },
+                                                                invokedMemberNameConstraint: (c, n) => c.Equals("Base", n),
+                                                                parameterConstraint: p => p.Name is "i",
+                                                                argumentListConstraint: (_, _) => true,
+                                                                refKind: null);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Constructor_InitializerCalls_Base()
+    {
+        var snippet = $$"""
+            class Base
+            {
+                public Base(int i) { }
+            }
+            class Derived: Base
+            {
+                public Derived() : base($$1) { }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "Base" },
+                                                                invokedMemberNameConstraint: (c, n) => c.Equals("Base", n),
+                                                                parameterConstraint: p => p.Name is "i",
+                                                                argumentListConstraint: (_, _) => true,
+                                                                refKind: null);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
     private static string WrapInMethod(string snippet) =>
         $$"""
         using System;

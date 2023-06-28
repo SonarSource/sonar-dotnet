@@ -60,7 +60,9 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
         return memberKind switch
         {
             InvokedMemberKind.Method => invocationExpression is InvocationExpressionSyntax,
-            InvokedMemberKind.Constructor => invocationExpression is ObjectCreationExpressionSyntax || ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(invocationExpression),
+            InvokedMemberKind.Constructor => invocationExpression is ObjectCreationExpressionSyntax
+                or ConstructorInitializerSyntax
+                || ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(invocationExpression),
             InvokedMemberKind.Indexer => invocationExpression is ElementAccessExpressionSyntax or ElementBindingExpressionSyntax,
             InvokedMemberKind.Attribute => invocationExpression is AttributeSyntax,
             _ => false,
@@ -76,6 +78,9 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
             InvokedMemberKind.Constructor => expression switch
             {
                 ObjectCreationExpressionSyntax { Type: { } typeName } => invokedMemberNameConstraint(typeName.GetName()),
+                ConstructorInitializerSyntax x => FindClassNameFromConstructorInitializerSyntax(x) is string name
+                    ? invokedMemberNameConstraint(name)
+                    : true,
                 { } ex when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(ex) => invokedMemberNameConstraint(model.GetSymbolInfo(ex).Symbol?.ContainingType?.Name),
                 _ => false,
             },
@@ -84,6 +89,16 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
             _ => false,
         };
     }
+
+    private string FindClassNameFromConstructorInitializerSyntax(ConstructorInitializerSyntax initializerSyntax) =>
+        initializerSyntax.ThisOrBaseKeyword.Kind() switch
+        {
+            SyntaxKind.ThisKeyword => initializerSyntax is { Parent: ConstructorDeclarationSyntax { Identifier.ValueText: { } typeName } } ? typeName : null,
+            SyntaxKind.BaseKeyword => initializerSyntax is { Parent: ConstructorDeclarationSyntax { Parent: BaseTypeDeclarationSyntax { BaseList.Types: { Count: > 0 } baseListTypes } } }
+                ? baseListTypes[0].GetName() // Get the class name of the called constructor from the base types list of the type declaration
+                : null,
+            _ => null,
+        };
 
     protected override SyntaxNode InvokedExpression(SyntaxNode argumentNode) =>
         argumentNode?.Parent?.Parent;
