@@ -34,8 +34,7 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
         argumentNode switch
         {
             AttributeArgumentSyntax { Parent: AttributeArgumentListSyntax { Arguments: { } list } } => list,
-            ArgumentSyntax { Parent: ArgumentListSyntax { Arguments: { } list } } => list,
-            ArgumentSyntax { Parent: BracketedArgumentListSyntax { Arguments: { } list } } => list,
+            ArgumentSyntax { Parent: BaseArgumentListSyntax { Arguments: { } list } } => list,
             _ => null,
         };
 
