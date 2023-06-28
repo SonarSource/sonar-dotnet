@@ -58,6 +58,7 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract bool HasExactlyNArguments(SyntaxNode invocation, int count);
     public abstract bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel semanticModel);
     public abstract bool IsInExpressionTree(SemanticModel model, SyntaxNode node);
+    public abstract bool IsWrittenTo(SyntaxNode expression, SemanticModel semanticModel, CancellationToken cancellationToken);
 
     protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>
         node as T ?? throw new InvalidCastException($"A {node.GetType().Name} node can not be cast to a {typeof(T).Name} node.");

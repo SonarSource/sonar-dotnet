@@ -48,7 +48,17 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
                         if (argument.InvokedMemberNameConstraint != null
                             && this.InvokedMemberFits(context.SemanticModel, argumentNode, argument.MemberKind, x => argument.InvokedMemberNameConstraint(x, Language.NameComparison)))
                         {
-                            var parameterLookup = Language.MethodParameterLookup(InvokedExpression(argumentNode), context.SemanticModel);
+                            var invoked = InvokedExpression(argumentNode);
+                            var symbol = context.SemanticModel.GetSymbolInfo(invoked).Symbol;
+                            var methodSymbol = symbol switch
+                            {
+                                IMethodSymbol x => x,
+                                IPropertySymbol propertySymbol => Language.Syntax.IsWrittenTo(invoked, context.SemanticModel, CancellationToken.None)
+                                    ? propertySymbol.SetMethod
+                                    : propertySymbol.GetMethod,
+                                _ => null,
+                            };
+                            var parameterLookup = Language.MethodParameterLookup(invoked, methodSymbol);
                             if (parameterLookup.TryGetSymbol(argumentNode, out var parameter))
                             {
                                 return ParameterFits(parameter, argument.ParameterConstraint, argument.InvokedMemberConstraint);

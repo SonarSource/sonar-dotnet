@@ -76,4 +76,7 @@ internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
 
     public string GetName(SyntaxNode expression) =>
         expression.GetName();
+
+    public bool IsWrittenTo(SyntaxNode expression, SemanticModel semanticModel, CancellationToken cancellationToken)
+        => expression is ExpressionSyntax ex && ex.IsWrittenTo(semanticModel, cancellationToken);
 }
