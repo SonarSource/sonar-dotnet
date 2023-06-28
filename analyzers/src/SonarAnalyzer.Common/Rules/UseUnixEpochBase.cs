@@ -42,7 +42,7 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(start =>
         {
-            if (!CompilationTargetsValidNetVersion(start.Compilation))
+            if (!IsUnixEpochSupported(start.Compilation))
             {
                 return;
             }
@@ -117,6 +117,6 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
         !lookup.TryGetSyntax("offset", out var expressions) || IsZeroTimeOffset(expressions[0]);
 
     // DateTime.UnixEpoch introduced at .NET Core 2.1/.NET Standard 2.1
-    private static bool CompilationTargetsValidNetVersion(Compilation compilation) =>
+    private static bool IsUnixEpochSupported(Compilation compilation) =>
         compilation.GetTypeByMetadataName(KnownType.System_DateTime) is var dateType && dateType.GetMembers("UnixEpoch").Any();
 }
