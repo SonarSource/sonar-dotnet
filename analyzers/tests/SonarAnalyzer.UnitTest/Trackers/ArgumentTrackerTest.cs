@@ -19,7 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Trackers;
+using SonarAnalyzer.Helpers.Trackers;
 
 namespace SonarAnalyzer.UnitTest.Trackers;
 

@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Trackers;
+namespace SonarAnalyzer.Helpers.Trackers;
 
 public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, SyntaxBaseContext>
     where TSyntaxKind : struct
