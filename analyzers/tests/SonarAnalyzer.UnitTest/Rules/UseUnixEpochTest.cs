@@ -46,6 +46,18 @@ public class UseUnixEpochTest
         builderCS.AddPaths("UseUnixEpoch.cs").Verify();
 
     [TestMethod]
+    public void UseUnixEpoch_CSharp9() =>
+        builderCS.AddSnippet(
+            """
+            using System;
+
+            DateTime dateTime = new(1970, 1, 1); // Noncompliant
+            DateTimeOffset dateTimeOffset = new(1970, 1, 1, 0, 0, 0, TimeSpan.Zero); // Noncompliant
+            """)
+                 .WithTopLevelStatements()
+                 .Verify();
+
+    [TestMethod]
     public void UseUnixEpoch_VB() =>
         builderVB.AddPaths("UseUnixEpoch.vb").Verify();
 

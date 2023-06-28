@@ -27,6 +27,10 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
 {
     private const string DiagnosticId = "S6588";
 
+    private const int EpochYear = 1970;
+    private const int EpochMonth = 1;
+    private const int EpochDay = 1;
+
     protected override string MessageFormat => "Use \"{0}.UnixEpoch\" instead of creating {0} instances that point to the unix epoch time";
 
     protected abstract bool IsDateTimeKindUtc(TMemberAccessExpression memberAccess);
@@ -47,8 +51,10 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var argumentCount = Language.Syntax.ArgumentExpressions(c.Node).Count();
-                    if (argumentCount < 3)
+                    var literalsArguments = Language.Syntax.ArgumentExpressions(c.Node).Where(x => x is TLiteralExpression);
+
+                    if (!literalsArguments.Any(x => IsValueEqualsTo((TLiteralExpression)x, EpochYear)
+                        || literalsArguments.Count(x => IsValueEqualsTo((TLiteralExpression)x, EpochMonth)) < 2))
                     {
                         return;
                     }
@@ -74,9 +80,9 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
         var methodSymbol = (IMethodSymbol)model.GetSymbolInfo(node).Symbol;
         var lookup = Language.MethodParameterLookup(node, methodSymbol);
 
-        if (IsParameterExistingAndLiteralEqualTo("year", 1970, lookup)
-            && IsParameterExistingAndLiteralEqualTo("month", 1, lookup)
-            && IsParameterExistingAndLiteralEqualTo("day", 1, lookup)
+        if (IsParameterExistingAndLiteralEqualTo("year", EpochYear, lookup)
+            && IsParameterExistingAndLiteralEqualTo("month", EpochMonth, lookup)
+            && IsParameterExistingAndLiteralEqualTo("day", EpochDay, lookup)
             && IsParameterNonExistingOrLiteralEqualTo("hour", 0, lookup)
             && IsParameterNonExistingOrLiteralEqualTo("minute", 0, lookup)
             && IsParameterNonExistingOrLiteralEqualTo("second", 0, lookup)
