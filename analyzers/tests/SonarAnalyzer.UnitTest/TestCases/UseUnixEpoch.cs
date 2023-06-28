@@ -33,6 +33,7 @@ public class Program
         var dateTimeOffset = new DateTimeOffset(new DateTime(1970, 1, 1), new TimeSpan(0, 0, 0)); // Noncompliant
         var dateTime = new DateTime(true ? 1970 : 1971, 1, 1); // FN
         dateTime = new DateTime(1970, 01, 01); // Noncompliant
+        dateTime = new DateTime(1970, 0x1, 0x1); // Noncompliant
     }
 
     void DateTimeConstructors(int ticks, int year, int month, int day, int hour, int minute, int second, int millisecond, Calendar calendar, DateTimeKind kind)
