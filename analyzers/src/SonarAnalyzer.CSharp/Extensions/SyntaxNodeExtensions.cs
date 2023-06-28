@@ -437,6 +437,31 @@ namespace SonarAnalyzer.Extensions
             return current;
         }
 
+        // Copy of
+        // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L347
+        public static bool IsLeftSideOfAssignExpression(this SyntaxNode node)
+            => node?.Parent is AssignmentExpressionSyntax { RawKind: (int)SyntaxKind.SimpleAssignmentExpression } assignment &&
+               assignment.Left == node;
+
+        // Copy of
+        // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L43C1-L45C1
+        public static bool IsParentKind(this SyntaxNode node, SyntaxKind kind)
+            => Microsoft.CodeAnalysis.CSharpExtensions.IsKind(node?.Parent, kind);
+
+        // Copy of
+        // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L351
+        public static bool IsLeftSideOfAnyAssignExpression(this SyntaxNode node)
+        {
+            return node?.Parent != null &&
+                node.Parent.IsAnyAssignExpression() &&
+                ((AssignmentExpressionSyntax)node.Parent).Left == node;
+        }
+
+        // Copy of
+        // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L323
+        public static bool IsAnyAssignExpression(this SyntaxNode node)
+            => SyntaxFacts.IsAssignmentExpression(node.Kind());
+
         private static string GetUnknownType(SyntaxKind kind) =>
 
 #if DEBUG
