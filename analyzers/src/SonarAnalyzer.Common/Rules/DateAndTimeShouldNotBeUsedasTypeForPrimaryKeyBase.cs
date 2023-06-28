@@ -37,6 +37,8 @@ public abstract class DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<TSyntaxK
         KnownType.System_TimeOnly
     };
 
+    protected abstract void AnalyzeClass(SonarSyntaxNodeReportingContext context);
+
     protected DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -61,16 +63,11 @@ public abstract class DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<TSyntaxK
         || propertyName.Equals($"{className}Id", StringComparison.InvariantCultureIgnoreCase);
 
     protected static bool IsTemporalType(string propertyTypeName) =>
-        Array.Exists(TemporalTypes, x => propertyTypeName.Equals(x.TypeName) || propertyTypeName.Equals(x.FullName));
+        propertyTypeName.Equals("Date", StringComparison.InvariantCultureIgnoreCase)
+        || Array.Exists(TemporalTypes, x => propertyTypeName.Equals(x.TypeName) || propertyTypeName.Equals(x.FullName));
 
-    protected static bool MatchesAttributeName(string attributeName, string[] candidates) =>
-        Array.Exists(candidates, x => attributeName.Equals(x));
-
-    protected abstract void AnalyzeClass(SonarSyntaxNodeReportingContext context);
-        //if (Language.Syntax.NodeIdentifier(context.Node) is { IsMissing: false } className)
-        //{
-
-        //}
+    protected bool MatchesAttributeName(string attributeName, string[] candidates) =>
+        Array.Exists(candidates, x => attributeName.Equals(x, Language.NameComparison));
 
     private static string RemoveFromEnd(string text, string subtextFromEnd) =>
         text.Substring(0, text.LastIndexOf(subtextFromEnd));

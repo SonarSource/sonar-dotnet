@@ -88,9 +88,4 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
 
 #endif
 
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey>();    // FIXME: Move this up
-
-    [TestMethod]
-    public void DateAndTimeShouldNotBeUsedasTypeForPrimaryKey_VB() =>
-        builderVB.AddPaths("DateAndTimeShouldNotBeUsedasTypeForPrimaryKey.vb").Verify();
 }

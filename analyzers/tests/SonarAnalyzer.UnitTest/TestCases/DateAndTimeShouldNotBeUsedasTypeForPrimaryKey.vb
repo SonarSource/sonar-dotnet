@@ -7,7 +7,7 @@ Imports KeyAttributeAlias = System.ComponentModel.DataAnnotations.KeyAttribute
 
 Class TemporalTypes
     Class Entity
-        Public Property EntityId As Date              ' Noncompliant {{'DateTime' should not be used as a type for primary keys}}
+        Public Property EntityId As Date              ' Noncompliant {{'Date' should not be used as a type for primary keys}}
         '                           ^^^^
     End Class
 
@@ -125,7 +125,7 @@ Class PropertyTypes
     End Class
 
     Class StaticProperty
-        Public Shared Property Id As Date             ' Compliant - static properties cannot be keys
+        Public Shared Property Id As Date             ' Compliant - shared properties cannot be keys
     End Class
 
     NotInheritable Class StaticPropertyInStaticClass

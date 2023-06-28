@@ -55,14 +55,14 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeS
         && accessorList.Accessors.Any(x => x.Keyword.IsKind(SyntaxKind.GetKeyword))
         && accessorList.Accessors.Any(x => x.Keyword.IsKind(SyntaxKind.SetKeyword));
 
-    private static bool IsKeyProperty(PropertyDeclarationSyntax property, string className)
+    private bool IsKeyProperty(PropertyDeclarationSyntax property, string className)
     {
         var propertyName = property.Identifier.ValueText;
         return IsKeyPropertyBasedOnName(propertyName, className)
             || HasKeyAttribute(property);
     }
 
-    private static bool HasKeyAttribute(PropertyDeclarationSyntax property) =>
+    private bool HasKeyAttribute(PropertyDeclarationSyntax property) =>
         property.AttributeLists
             .SelectMany(x => x.Attributes)
             .Any(x => MatchesAttributeName(x.GetName(), KeyAttributeTypeNames));

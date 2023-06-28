@@ -25,5 +25,39 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeS
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override void AnalyzeClass(SonarSyntaxNodeReportingContext context) => throw new NotImplementedException();
+    protected override void AnalyzeClass(SonarSyntaxNodeReportingContext context)
+    {
+        // To improve performance the attributes and property types are only matched by their names, rather than their actual symbol.
+        // This results in a couple of FNs, but those scenarios are very rare.
+        var classDeclaration = (ClassBlockSyntax)context.Node;
+        var className = classDeclaration.ClassStatement.Identifier.ValueText;
+        var keyProperties = classDeclaration.Members
+            .OfType<PropertyStatementSyntax>()
+            .Where(x => IsCandidateProperty(x)
+                        && IsTemporalType(x.AsClause.Type().GetName())
+                        && IsKeyProperty(x, className));
+
+        foreach (var propertyType in keyProperties.Select(x => x.AsClause.Type()))
+        {
+            context.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), propertyType.GetName()));
+        }
+    }
+
+    private static bool IsCandidateProperty(PropertyStatementSyntax property) =>
+        property.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
+        && !property.Modifiers.Any(x => x.IsKind(SyntaxKind.SharedKeyword))
+        && !property.Modifiers.Any(x => x.IsKind(SyntaxKind.ReadOnlyKeyword))
+        && !property.Modifiers.Any(x => x.IsKind(SyntaxKind.WriteOnlyKeyword));
+
+    private bool IsKeyProperty(PropertyStatementSyntax property, string className)
+    {
+        var propertyName = property.Identifier.ValueText;
+        return IsKeyPropertyBasedOnName(propertyName, className)
+            || HasKeyAttribute(property);
+    }
+
+    private bool HasKeyAttribute(PropertyStatementSyntax property) =>
+        property.AttributeLists
+            .SelectMany(x => x.Attributes)
+            .Any(x => MatchesAttributeName(x.GetName(), KeyAttributeTypeNames));
 }
