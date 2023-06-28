@@ -91,14 +91,40 @@ public class ArgumentDescriptor
             parameterConstraint: parameterConstraint,
             refKind: refKind);
 
-    public static ArgumentDescriptor ElementAccess(Func<IMethodSymbol, bool> invokedMethodSymbol, Func<string, StringComparison, bool> invokedMemberNameConstraint,
-        Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, RefKind? refKind)
+    public static ArgumentDescriptor ElementAccess(KnownType invokedIndexerContainer, Func<IParameterSymbol, bool> parameterConstraint, int argumentPosition)
+        => ElementAccess(
+            invokedIndexerContainer,
+            null,
+            parameterConstraint,
+            x => x == argumentPosition);
+
+    public static ArgumentDescriptor ElementAccess(KnownType invokedIndexerContainer, string invokedIndexerExpression, Func<IParameterSymbol, bool> parameterConstraint, int argumentPosition)
+        => ElementAccess(invokedIndexerContainer, invokedIndexerExpression, parameterConstraint, x => x == argumentPosition);
+
+    public static ArgumentDescriptor ElementAccess(KnownType invokedIndexerContainer,
+        Func<IParameterSymbol, bool> parameterConstraint, Func<int, bool> argumentPositionConstraint)
+        => ElementAccess(
+            invokedIndexerContainer,
+            null,
+            parameterConstraint,
+            argumentPositionConstraint);
+
+    public static ArgumentDescriptor ElementAccess(KnownType invokedIndexerContainer, string invokedIndexerExpression,
+        Func<IParameterSymbol, bool> parameterConstraint, Func<int, bool> argumentPositionConstraint)
+        => ElementAccess(
+            x => x is { ContainingSymbol: INamedTypeSymbol { } container } && invokedIndexerContainer.Matches(container),
+            (s, c) => invokedIndexerExpression is null || s.Equals(invokedIndexerExpression, c),
+            argumentListConstraint: (_, p) => argumentPositionConstraint is null || p is null || argumentPositionConstraint(p.Value),
+            parameterConstraint: parameterConstraint);
+
+    public static ArgumentDescriptor ElementAccess(Func<IMethodSymbol, bool> invokedIndexerPropertyMethod, Func<string, StringComparison, bool> invokedIndexerExpression,
+        Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint)
         => new(InvokedMemberKind.Indexer,
-            invokedMemberConstraint: x => invokedMethodSymbol(x as IMethodSymbol),
-            invokedMemberNameConstraint: invokedMemberNameConstraint,
+            invokedMemberConstraint: x => invokedIndexerPropertyMethod(x as IMethodSymbol),
+            invokedMemberNameConstraint: invokedIndexerExpression,
             argumentListConstraint: argumentListConstraint,
             parameterConstraint: parameterConstraint,
-            refKind: refKind);
+            refKind: null);
 
     public InvokedMemberKind MemberKind { get; }
     public Func<IReadOnlyCollection<SyntaxNode>, int?, bool> ArgumentListConstraint { get; }

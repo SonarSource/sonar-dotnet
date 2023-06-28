@@ -387,24 +387,7 @@ public class ArgumentTrackerTest
     }
 
     [TestMethod]
-    public void Indexer_Array()
-    {
-        var snippet = $$"""
-            var arr = new int[10,1];
-            _ = arr[$$1,1];
-            """;
-        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
-
-        var argument = ArgumentDescriptor.ElementAccess(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "Base" },
-                                                        invokedMemberNameConstraint: (c, n) => c.Equals("arr", n),
-                                                        parameterConstraint: p => p.Name is "i",
-                                                        argumentListConstraint: (_, _) => true,
-                                                        refKind: null);
-        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
-    }
-
-    [TestMethod]
-    public void Indexer_List()
+    public void Indexer_List_Get()
     {
         var snippet = $$"""
             var list = new System.Collections.Generic.List<int>();
@@ -412,11 +395,90 @@ public class ArgumentTrackerTest
             """;
         var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
 
-        var argument = ArgumentDescriptor.ElementAccess(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "Base" },
-                                                        invokedMemberNameConstraint: (c, n) => c.Equals("list", n),
-                                                        parameterConstraint: p => p.Name is "i",
-                                                        argumentListConstraint: (_, _) => true,
-                                                        refKind: null);
+        var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T, "list",
+            p => p is { Name: "index", Type.SpecialType: SpecialType.System_Int32, ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertyGet } }, 0);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("list[$$1] = 1;")]
+    [DataRow("(list[$$1], list[2]) = (1, 2);")]
+    [DataRow("list[$$1]++;")]
+    [DataRow("list[$$1]--;")]
+    public void Indexer_List_Set(string writeExpression)
+    {
+        var snippet = $$"""
+            var list = new System.Collections.Generic.List<int>();
+            {{writeExpression}};
+            """;
+        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+
+        var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T,
+            p => p is { Name: "index", ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertySet } }, 0);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""Environment.GetEnvironmentVariables()[$$"TEMP"]""")]
+    [DataRow("""Environment.GetEnvironmentVariables()?[$$"TEMP"]""")]
+    public void Indexer_DictionaryGet(string environmentVariableAccess)
+    {
+        var snippet = $$"""
+            _ = {{environmentVariableAccess}};
+            """;
+        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+
+        var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "IDictionary",
+            (n, c) => n.Equals("GetEnvironmentVariables", c), p => p.Name == "key", (_, p) => p is null or 0);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""process.Modules[$$0]""")]
+    [DataRow("""process?.Modules[$$0]""")]
+    [DataRow("""process.Modules?[$$0]""")]
+    [DataRow("""process?.Modules?[$$0]""")]
+    [DataRow("""process.Modules[index: $$0]""")]
+    [DataRow("""process?.Modules?[index: $$0]""")]
+    public void Indexer_ModuleAccess(string modulesAccess)
+    {
+        var snippet = $$"""
+            public class Test
+            {
+                public void M(System.Diagnostics.Process process)
+                {
+                    _ = {{modulesAccess}};
+                }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "ProcessModuleCollection",
+            (n, c) => n.Equals("Modules", c), p => p.Name == "index", (_, p) => p is null or 0);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""processStartInfo.Environment[$$"TEMP"]""")]
+    [DataRow("""processStartInfo?.Environment[$$"TEMP"]""")]
+    [DataRow("""processStartInfo.Environment?[$$"TEMP"]""")]
+    [DataRow("""processStartInfo?.Environment?[$$"TEMP"]""")]
+    [DataRow("""processStartInfo.Environment[key: $$"TEMP"]""")]
+    [DataRow("""processStartInfo?.Environment?[key: $$"TEMP"]""")]
+    public void Indexer_Environment(string environmentAccess)
+    {
+        var snippet = $$"""
+            public class Test
+            {
+                public void M(System.Diagnostics.ProcessStartInfo processStartInfo)
+                {
+                    _ = {{environmentAccess}};
+                }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Environment", p => p.Name == "key", 0);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
     }
 

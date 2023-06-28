@@ -71,6 +71,7 @@ internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
                 ((ImplicitObjectCreationExpressionSyntaxWrapper)invocation).ArgumentList,
             ConstructorInitializerSyntax x => x.ArgumentList,
             ElementAccessExpressionSyntax x => x.ArgumentList,
+            ElementBindingExpressionSyntax x => x.ArgumentList,
             _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
         };
 
