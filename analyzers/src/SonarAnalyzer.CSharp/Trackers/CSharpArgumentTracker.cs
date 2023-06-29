@@ -43,15 +43,13 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
             ? null
             : ArgumentList(argumentNode).IndexOf(x => x == argumentNode);
 
-    protected override RefKind ArgumentRefKind(SyntaxNode argumentNode)
-    {
-        return argumentNode switch
+    protected override RefKind ArgumentRefKind(SyntaxNode argumentNode) =>
+        argumentNode switch
         {
             AttributeArgumentSyntax => RefKind.None,
             ArgumentSyntax { RefOrOutKeyword: { } refOrOut } => refOrOut.Kind() switch { SyntaxKind.OutKeyword => RefKind.Out, SyntaxKind.RefKeyword => RefKind.Ref, _ => RefKind.None },
             _ => RefKind.None,
         };
-    }
 
     protected override bool InvocationFitsMemberKind(SyntaxNode argumentNode, InvokedMemberKind memberKind)
     {
@@ -77,13 +75,11 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
             InvokedMemberKind.Constructor => expression switch
             {
                 ObjectCreationExpressionSyntax { Type: { } typeName } => invokedMemberNameConstraint(typeName.GetName()),
-                ConstructorInitializerSyntax x => FindClassNameFromConstructorInitializerSyntax(x) is string name
-                    ? invokedMemberNameConstraint(name)
-                    : true,
+                ConstructorInitializerSyntax x => FindClassNameFromConstructorInitializerSyntax(x) is not string name || invokedMemberNameConstraint(name),
                 { } ex when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(ex) => invokedMemberNameConstraint(model.GetSymbolInfo(ex).Symbol?.ContainingType?.Name),
                 _ => false,
             },
-            InvokedMemberKind.Indexer => expression is ElementAccessExpressionSyntax { Expression: { } accessedExpression }  ? invokedMemberNameConstraint(accessedExpression.GetName()) : true,
+            InvokedMemberKind.Indexer => expression is ElementAccessExpressionSyntax { Expression: { } accessedExpression } ? invokedMemberNameConstraint(accessedExpression.GetName()) : true,
             InvokedMemberKind.Attribute => expression is AttributeSyntax { Name: { } typeName } && invokedMemberNameConstraint(typeName.GetName()),
             _ => false,
         };

@@ -34,37 +34,25 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
         context =>
         {
             var argumentNode = context.Node;
-            if (argument.RefKind is null || ArgumentRefKind(argumentNode) == argument.RefKind.Value)
+            if ((argument.RefKind is null || ArgumentRefKind(argumentNode) == argument.RefKind.Value)
+                && ArgumentList(argumentNode) is { } argList && argument.ArgumentListConstraint?.Invoke(argList, Position(argumentNode)) is null or true
+                && InvocationFitsMemberKind(argumentNode, argument.MemberKind)
+                && argument.InvokedMemberNameConstraint != null
+                && InvokedMemberFits(context.SemanticModel, argumentNode, argument.MemberKind, x => argument.InvokedMemberNameConstraint(x, Language.NameComparison)))
             {
-                var argList = ArgumentList(argumentNode);
-                if (argList == null)
+                var invoked = InvokedExpression(argumentNode);
+                var symbol = context.SemanticModel.GetSymbolInfo(invoked).Symbol;
+                var methodSymbol = symbol switch
                 {
-                    return false;
-                }
-                if (argument.ArgumentListConstraint?.Invoke(argList, Position(argumentNode)) is null or true)
+                    IMethodSymbol x => x,
+                    IPropertySymbol propertySymbol => Language.Syntax.IsWrittenTo(invoked, context.SemanticModel, CancellationToken.None)
+                        ? propertySymbol.SetMethod
+                        : propertySymbol.GetMethod,
+                    _ => null,
+                };
+                if (Language.MethodParameterLookup(invoked, methodSymbol).TryGetSymbol(argumentNode, out var parameter))
                 {
-                    if (InvocationFitsMemberKind(argumentNode, argument.MemberKind))
-                    {
-                        if (argument.InvokedMemberNameConstraint != null
-                            && this.InvokedMemberFits(context.SemanticModel, argumentNode, argument.MemberKind, x => argument.InvokedMemberNameConstraint(x, Language.NameComparison)))
-                        {
-                            var invoked = InvokedExpression(argumentNode);
-                            var symbol = context.SemanticModel.GetSymbolInfo(invoked).Symbol;
-                            var methodSymbol = symbol switch
-                            {
-                                IMethodSymbol x => x,
-                                IPropertySymbol propertySymbol => Language.Syntax.IsWrittenTo(invoked, context.SemanticModel, CancellationToken.None)
-                                    ? propertySymbol.SetMethod
-                                    : propertySymbol.GetMethod,
-                                _ => null,
-                            };
-                            var parameterLookup = Language.MethodParameterLookup(invoked, methodSymbol);
-                            if (parameterLookup.TryGetSymbol(argumentNode, out var parameter))
-                            {
-                                return ParameterFits(parameter, argument.ParameterConstraint, argument.InvokedMemberConstraint);
-                            }
-                        }
-                    }
+                    return ParameterFits(parameter, argument.ParameterConstraint, argument.InvokedMemberConstraint);
                 }
             }
             return false;
