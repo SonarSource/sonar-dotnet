@@ -114,6 +114,20 @@ function GetActualIssues([string]$sarifReportPath){
         if ($_.uri) {
             $_.uri = $_.uri.replace(' ', '%20')
             $_.uri = [System.Text.RegularExpressions.Regex]::Replace($_.uri, $tempFileNameRegex, 'Replaced-Temporary-Path\.$1,Version=')
+
+            if ($_.region.startLine) {
+                $startLine = $_.region.startLine
+                $endLine = $_.region.endLine
+                if ($startLine -eq $endLine) {
+                    $lineNumberSuffix = "#L${startLine}"
+                } else {
+                    $lineNumberSuffix = "#L${startLine}-L${endLine}"
+                }
+            }
+            $uri = $_.uri -replace "\\", "/"
+            $_.uri = $uri
+
+            $_.fullUri = "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/${uri}${lineNumberSuffix}"
         }
     }
 
@@ -160,7 +174,7 @@ function New-IssueReports([string]$sarifReportPath) {
                 (ConvertTo-Json $object -Depth 42 |
                     ForEach-Object { [System.Text.RegularExpressions.Regex]::Unescape($_) }  # Unescape powershell to json automatic escape
                 ) -split "`r`n"                                                              # Convert JSON to String and split lines
-            ) | Foreach-Object { $_.TrimStart() }                                            # Remove leading spaces
+            )
 
         $content = $lines -join "`n"        # Use unix-like EOL to avoid "git diff" warnings
         Set-Content $path "$content`n" -NoNewLine
