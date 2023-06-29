@@ -49,13 +49,13 @@ public class UseCharOverloadOfStringMethodsTest
     public void UseCharOverloadOfStringMethods_VB() =>
         builderVB.AddPaths("UseCharOverloadOfStringMethods.vb").Verify();
 
-#endif
-
-    [TestMethod]
+        [TestMethod]
     public void UseCharOverloadOfStringMethods_CS_Fix() =>
         builderCS
         .WithCodeFix<CS.UseCharOverloadOfStringMethodsCodeFix>()
         .AddPaths("UseCharOverloadOfStringMethods.ToFix.cs")
         .WithCodeFixedPaths("UseCharOverloadOfStringMethods.Fixed.cs")
         .VerifyCodeFix();
+
+#endif
 }
