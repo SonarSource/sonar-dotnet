@@ -33,7 +33,7 @@ public sealed class UseCharOverloadOfStringMethodsCodeFix : SonarCodeFix
     protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
     {
         var diagnostic = context.Diagnostics.First();
-        if (root.FindNode(diagnostic.Location.SourceSpan).FirstAncestorOrSelf<InvocationExpressionSyntax>() is { } invocation
+        if (root.FindNode(diagnostic.Location.SourceSpan) is { Parent: { Parent: InvocationExpressionSyntax invocation } }
             && invocation.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax node)
         {
             context.RegisterCodeFix(
