@@ -1,0 +1,29 @@
+<h2>Why is this an issue?</h2>
+<p>With .NET core the <code>UnixEpoch</code> field was introduced to <code>DateTime</code> and <code>DateTimeOffset</code> types. Using this field
+clearly states that the intention is to use the beginning of the Unix epoch.</p>
+<h3>What is the potential impact?</h3>
+<p>You should not use the <code>DateTime</code> or <code>DateTimeOffset</code> constructors to set the time to the 1st of January 1970 to represent
+the beginning of the Unix epoch. Not everyone is familiar with what this particular date is representing and it can be misleading.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, use the <code>UnixEpoch</code> field of <code>DateTime</code> or <code>DateTimeOffset</code> instead of the constructor.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Private Sub GetEpochTime()
+    Dim epochTime = New DateTime(1970, 1, 1)
+End Sub
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+Private Sub GetEpochTime()
+    Dim epochTime = DateTime.UnixEpoch
+End Sub
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.unixepoch">DateTime.UnixEpoch documentation</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset.unixepoch">DateTimeOffset.UnixEpoch documentation</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a> </li>
+</ul>
+
