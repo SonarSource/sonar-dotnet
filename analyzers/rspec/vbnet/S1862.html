@@ -1,20 +1,23 @@
 <h2>Why is this an issue?</h2>
-<p>A chain of <code>If</code>/<code>ElseIf</code> statements is evaluated from top to bottom. At most, only one branch will be executed: the first one
-with a condition that evaluates to <code>True</code>.</p>
-<p>Therefore, duplicating a condition automatically leads to dead code. Usually, this is due to a copy/paste error. At best, it’s simply dead code and
-at worst, it’s a bug that is likely to induce further bugs as the code is maintained, and obviously it could lead to unexpected behavior.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>A chain of <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/if-then-else-statement">If/ElseIf</a>
+statements is evaluated from top to bottom. At most, only one branch will be executed: the first statement with a condition that evaluates to
+<code>True</code>. Therefore, duplicating a condition leads to unreachable code inside the duplicated condition block. Usually, this is due to a
+copy/paste error.</p>
+<p>The result of such duplication can lead to unreachable code or even to unexpected behavior.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 If param = 1 Then
   OpenWindow()
 ElseIf param = 2 Then
   CloseWindow()
-ElseIf param = 1 Then ' Noncompliant
-  MoveWindowToTheBackground()
+ElseIf param = 1 Then ' Noncompliant: condition has already been checked
+  MoveWindowToTheBackground() ' unreachable code
 End If
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 If param = 1 Then
   OpenWindow()
 ElseIf param = 2 Then
@@ -23,4 +26,10 @@ ElseIf param = 3 Then
   MoveWindowToTheBackground()
 End If
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/if-then-else-statement">If…​Then…​Else
+  Statement</a> </li>
+</ul>
 

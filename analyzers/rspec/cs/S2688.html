@@ -1,26 +1,42 @@
 <h2>Why is this an issue?</h2>
-<p><code>NaN</code> is not equal to anything, even itself. Testing for equality or inequality against <code>NaN</code> will yield predictable results,
-but probably not the ones you want.</p>
-<p>Instead, the best way to see whether a variable is equal to <code>NaN</code> is to use <code>Number.isNaN()</code>, since ES2015, or (perhaps
-counter-intuitively) to compare it to itself. Since <code>NaN !== NaN</code>, when <code>a !== a</code>, you know it must equal <code>NaN</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.double.nan">double.NaN</a> and <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.single.nan">float.NaN</a> are not equal to anything, not even themselves.</p>
+<p>When anything is compared with <code>NaN</code> using one of the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/comparison-operators">comparison operators</a> <code>&gt;</code>,
+<code>&gt;=</code>, <code>&lt;</code>, <code>⇐</code> or the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/equality-operators#equality-operator-">equality operator</a>
+<code>==</code>, the result will always be <code>false</code>. In contrast, when anything is compared with <code>NaN</code> using the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/equality-operators#inequality-operator-">inequality operator</a>
+<code>!=</code>, the result will always be <code>true</code>.</p>
+<p>Instead, the best way to see whether a variable is equal to <code>NaN</code> is to use the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.single.isnan">float.IsNaN</a> and <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.single.isnan">double.IsNaN</a> methods, which work as expected.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 var a = double.NaN;
 
-if (a == double.NaN) // Noncompliant; always false
+if (a == double.NaN) // Noncompliant: always false
 {
-  Console.WriteLine("a is not a number");  // this is dead code
+  Console.WriteLine("a is not a number");
 }
-if (a != double.NaN)  // Noncompliant; always true
+if (a != double.NaN)  // Noncompliant: always true
 {
-  Console.WriteLine("a is not NaN"); // this statement is not necessarily true
+  Console.WriteLine("a is not NaN");
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+var a = double.NaN;
+
 if (double.IsNaN(a))
 {
-  console.log("a is not a number");
+  Console.log("a is not a number");
+}
+if (!double.IsNaN(a))
+{
+  Console.WriteLine("a is not NaN");
 }
 </pre>
 

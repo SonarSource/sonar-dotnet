@@ -15,9 +15,9 @@ values are guaranteed to be unique.</p>
     </ul>  </li>
 </ul>
 <h2>Why is this an issue?</h2>
-<p>Using temporal types like <code>DateTime</code> or <code>DateTimeOffset</code> as the primary key of a table is risky. When these types are used as
-primary keys, it usually means that each new key is created with the use of <code>.Now</code> or <code>.UtcNow</code> properties from
-<code>DateTime</code> and <code>DateTimeOffset</code> classes. In those cases, duplicate keys exceptions may occur in many ways:</p>
+<p>Using temporal types as the primary key of a table is risky. When these types are used as primary keys, it usually means that each new key is
+created with the use of <code>.Now</code> or <code>.UtcNow</code> properties from <code>DateTime</code> and <code>DateTimeOffset</code> classes. In
+those cases, duplicate keys exceptions may occur in many ways:</p>
 <ul>
   <li> when entries are added consecutively by a machine with low-enough system clock resolution; </li>
   <li> when two different threads are inserting entries in close enough sequence for both to have the same time; </li>

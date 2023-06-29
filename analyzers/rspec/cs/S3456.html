@@ -1,11 +1,15 @@
 <h2>Why is this an issue?</h2>
-<p><code>ToCharArray</code> can be omitted when the operation on the array could have been done directly on the string, such as when iterating over
-the characters in a string, and when accessing a character in a string via an array index. In those cases, explicit <code>ToCharArray</code> calls
-should be omitted.</p>
-<p>C#11 introduced support for UTF-8 string literals, which are stored as <code>ReadOnlySpan&lt;byte&gt;</code> objects. For that reason, the rule
-also raises on <code>ToArray</code> invocations of <code>ReadOnlySpan&lt;T&gt;</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>The <code>string</code> type offers an indexer property that allows you to treat it as a <code>char</code> array. Therefore, if you just need to
+access a specific character or iterate over all of them, the <code>ToCharArray</code> call should be omitted. For these cases, not omitting makes the
+code harder to read and less performant as <code>ToCharArray</code> copies the characters from the <code>string</code> object into a new Unicode
+character array.</p>
+<p>The same principle applies to <a href="https://devblogs.microsoft.com/dotnet/csharp-11-preview-updates/#utf-8-string-literals">utf-8 literals
+types</a> (<code>ReadOnlySpan&lt;byte&gt;</code>, <code>Span&lt;byte&gt;</code>) and the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.span-1.toarray?view=net-7.0"><code>ToArray</code></a> method.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 string str = "some string";
 foreach (var c in str.ToCharArray()) // Noncompliant
 {
@@ -18,8 +22,8 @@ foreach (var c in span.ToArray()) // Noncompliant
   // ...
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 string str = "some string";
 foreach (var c in str)
 {
@@ -32,4 +36,13 @@ foreach (var b in span) // Compliant
   // ...
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.tochararray">String.ToCharArray Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/#accessing-individual-characters">Accessing individual
+  characters</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-11.0/utf8-string-literals">UTF-8 Strings
+  literals</a> </li>
+</ul>
 

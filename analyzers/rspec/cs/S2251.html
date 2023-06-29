@@ -1,26 +1,44 @@
 <h2>Why is this an issue?</h2>
-<p>A <code>for</code> loop with a counter that moves in the wrong direction is not an infinite loop. Because of wraparound, the loop will eventually
-reach its stop condition, but in doing so, it will run many, many more times than anticipated, potentially causing unexpected behavior.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-public void DoSomething(string[] strings)
+<p>A <code>for</code> loop with a counter that moves in the wrong direction, away from the stop condition, is not an infinite loop. Because of <a
+href="https://en.wikipedia.org/wiki/Integer_overflow#:~:text=The%20most%20common%20result%20of%20an%20overflow%20is%20that%20the%20least%20significant%20representable%20digits%20of%20the%20result%20are%20stored%3B%20the%20result%20is%20said%20to%20wrap%20around%20the%20maximum">wraparound</a>,
+the loop will eventually reach its stop condition, but in doing so, it will probably run more times than anticipated, potentially causing unexpected
+behavior.</p>
+<h2>How to fix it</h2>
+<p>If your <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-for-statement:~:text=The%20condition%20section%20that%20determines%20if%20the%20next%20iteration%20in%20the%20loop%20should%20be%20executed">stop
+condition</a> indicates a <strong>maximum</strong> value, the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-for-statement:~:text=The%20iterator%20section%20that%20defines%20what%20happens%20after%20each%20execution%20of%20the%20body%20of%20the%20loop">iterator</a>
+should <strong>increase</strong> towards it. Conversely, if your stop condition indicates a <strong>minimum</strong> value, the iterator should
+<strong>decrease</strong> towards it.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+for (int i = 0; i &lt; maximum; i--)  // Noncompliant: runs until it underflows to int.MaxValue
 {
-  for (int i = 0; i &lt; strings.Length; i--)  // Noncompliant
-  {
-    string s = strings[i];  // IndexOutOfRangeException  when i reaches -1
-    // do stuff
-  }
+    // ...
+}
+
+for (int i = maximum; i &gt;= maximum; i++)  // Noncompliant: runs until it overflows to int.MinValue
+{
+    // ...
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-public void DoSomething(string[] strings)
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+for (int i = 0; i &lt; maximum; i++) // Compliant: Increment towards the maximum value
 {
-  for (int i = 0; i &lt; strings.Length; i++)
-  {
-    string s = strings[i];
-    // do stuff
-  }
+}
+
+for (int i = maximum; i &gt;= 0; i--) // Compliant: Decrement towards the minimum value
+{
+    // ...
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://en.wikipedia.org/wiki/Integer_overflow">Integer overflow</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-for-statement">The
+  <code>for</code> statement</a> </li>
+</ul>
 

@@ -1,12 +1,18 @@
 <h2>Why is this an issue?</h2>
-<p>There is a contract between <code>Equals(object)</code> and <code>GetHashCode()</code>: If two objects are equal according to the
-<code>Equals(object)</code> method, then calling <code>GetHashCode()</code> on each of them must yield the same result. If this is not the case, many
-collections won’t handle class instances correctly.</p>
-<p>In order to comply with the contract, <code>Equals(object)</code> and <code>GetHashCode()</code> should be either both inherited, or both
+<p>Suppose you override <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.equals">Object.Equals</a> in a type, you must also
+override <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.gethashcode">Object.GetHashCode</a>. If two objects are equal according
+to the <code>Equals</code> method, then calling <code>GetHashCode</code> on each of them must yield the same integer. If this is not the case, many
+collections, such as a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.hashtable">Hashtable</a> or a <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a> won’t handle class instances correctly.</p>
+<p>In order to not have unpredictable behavior, <code>Equals</code> and <code>GetHashCode</code> should be either both inherited, or both
 overridden.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-class MyClass   // Noncompliant - should also override "GetHashCode()"
+<h2>How to fix it</h2>
+<p>When you override <code>Equals</code> then you have to also override <code>GetHashCode</code>. You have to override both of them, or simply inherit
+them.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+class MyClass   // Noncompliant: should also override GetHashCode
 {
     public override bool Equals(object obj)
     {
@@ -14,8 +20,8 @@ class MyClass   // Noncompliant - should also override "GetHashCode()"
     }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 class MyClass
 {
     public override bool Equals(object obj)
@@ -30,7 +36,12 @@ class MyClass
 }
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/581">MITRE, CWE-581</a> - Object Model Violation: Just One of Equals and Hashcode Defined </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.equals">Object.Equals Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.gethashcode">Object.GetHashCode Method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.hashtable">Hashtable class</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt; Class</a> </li>
 </ul>
 
