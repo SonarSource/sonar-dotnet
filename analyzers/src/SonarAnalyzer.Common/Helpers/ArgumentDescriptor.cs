@@ -135,7 +135,7 @@ public class ArgumentDescriptor
 
     public static ArgumentDescriptor AttributeProperty(string attributeName, string propertyName) =>
         AttributeArgument(
-            attributeConstructorConstraint: x => true,
+            attributeConstructorConstraint: x => x is { MethodKind: MethodKind.PropertySet, AssociatedSymbol.Name: { } name } && name == propertyName,
             attributeNameConstraint: (s, c) => AttributeClassNameConstraint(attributeName, s, c),
             parameterConstraint: p => true,
             argumentListConstraint: (l, i) => true);

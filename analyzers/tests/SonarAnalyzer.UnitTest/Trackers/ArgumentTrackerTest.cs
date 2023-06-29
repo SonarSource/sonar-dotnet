@@ -530,24 +530,24 @@ public class ArgumentTrackerTest
     }
 
     [DataTestMethod]
-    [DataRow("""[Obsolete($$UrlFormat = "UrlFormat")]""")]
-    public void Attribute_Property(string attribute)
+    [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true)]""", "AllowMultiple", true)]
+    [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true, Inherited = true)]""", "AllowMultiple", true)]
+    [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true, Inherited = true)]""", "Inherited", false)]
+    [DataRow("""[AttributeUsage(AttributeTargets.All,  AllowMultiple = true, $$Inherited = true)]""", "Inherited", true)]
+    public void Attribute_Property(string attribute, string propertyName, bool expected)
     {
         var snippet = $$"""
             using System;
 
             {{attribute}}
-            public class Test
+            public sealed class TestAttribute: Attribute
             {
-                public void M()
-                {
-                }
             }
             """;
         var (node, model) = ArgumentAndModel(snippet);
 
-        var argument = ArgumentDescriptor.AttributeProperty("Obsolete", "UrlFormat");
-        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+        var argument = ArgumentDescriptor.AttributeProperty("AttributeUsage", propertyName);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
     }
 
     private static string WrapInMethod(string snippet) =>
