@@ -39,4 +39,7 @@ internal class VisualBasicMethodParameterLookup : MethodParameterLookupBase<Argu
 
     protected override SyntaxNode Expression(ArgumentSyntax argument) =>
         argument.GetExpression();
+
+    protected override SyntaxToken? GetNameEqualsArgumentIdentifier(ArgumentSyntax argument) =>
+        null;
 }

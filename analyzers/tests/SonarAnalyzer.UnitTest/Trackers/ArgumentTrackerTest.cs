@@ -440,7 +440,7 @@ public class ArgumentTrackerTest
     [DataRow("""process?.Modules?[$$0]""")]
     [DataRow("""process.Modules[index: $$0]""")]
     [DataRow("""process?.Modules?[index: $$0]""")]
-    public void Indexer_ModuleAccess(string modulesAccess)
+    public void Indexer_ModulesAccess(string modulesAccess)
     {
         var snippet = $$"""
             public class Test
@@ -482,16 +482,14 @@ public class ArgumentTrackerTest
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
     }
 
-    [DataTestMethod]
-    [DataRow("""[Obsolete($$"message", UrlFormat = "")]""", "message")]
-    [DataRow("""[Obsolete("message", $$UrlFormat = "")]""", "UrlFormat")]
-    public void Attribute(string attribute, string expectedParameterName)
+    [TestMethod]
+    public void Attribute_Obsolete()
     {
         var snippet = $$"""
             using System;
             public class Test
             {
-                {{attribute}}
+                [Obsolete($$"message", UrlFormat = "")]
                 public void M()
                 {
                 }
@@ -500,7 +498,55 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModel(snippet);
 
         var argument = ArgumentDescriptor.AttributeArgument(x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: "ObsoleteAttribute" },
-            (s, c) => s.StartsWith("Obsolete", c), p => p.Name == expectedParameterName, (l, i) => i == 0);
+            (s, c) => s.StartsWith("Obsolete", c), p => p.Name == "message", (_, i) => i is 0);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""[Designer($$"designerTypeName")]""", "designerTypeName", 0)]
+    [DataRow("""[DesignerAttribute($$"designerTypeName")]""", "designerTypeName", 0)]
+    [DataRow("""[DesignerAttribute($$"designerTypeName", "designerBaseTypeName")]""", "designerTypeName", 0)]
+    [DataRow("""[DesignerAttribute("designerTypeName", $$"designerBaseTypeName")]""", "designerBaseTypeName", 1)]
+    [DataRow("""[Designer($$designerBaseTypeName: "designerBaseTypeName", designerTypeName: "designerTypeName")]""", "designerBaseTypeName", 1)]
+    [DataRow("""[Designer(designerBaseTypeName: "designerBaseTypeName", $$designerTypeName: "designerTypeName")]""", "designerTypeName", 0)]
+    [DataRow("""[Designer(designerBaseTypeName: "designerBaseTypeName", $$designerTypeName: "designerTypeName")]""", "designerTypeName", 1)]
+    public void Attribute_Designer(string attribute, string parameterName, int argumentPosition)
+    {
+        var snippet = $$"""
+            using System.ComponentModel;
+
+            {{attribute}}
+            public class Test
+            {
+                public void M()
+                {
+                }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.AttributeArgument("Designer", parameterName, argumentPosition);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""[Obsolete($$UrlFormat = "UrlFormat")]""")]
+    public void Attribute_Property(string attribute)
+    {
+        var snippet = $$"""
+            using System;
+
+            {{attribute}}
+            public class Test
+            {
+                public void M()
+                {
+                }
+            }
+            """;
+        var (node, model) = ArgumentAndModel(snippet);
+
+        var argument = ArgumentDescriptor.AttributeProperty("Obsolete", "UrlFormat");
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
     }
 

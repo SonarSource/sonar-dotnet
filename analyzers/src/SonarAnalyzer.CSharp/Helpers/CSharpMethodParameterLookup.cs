@@ -39,4 +39,6 @@ internal class CSharpMethodParameterLookup : MethodParameterLookupBase<ArgumentS
 
     protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
         argument.NameColon?.Name.Identifier;
+    protected override SyntaxToken? GetNameEqualsArgumentIdentifier(ArgumentSyntax argument) =>
+        null;
 }

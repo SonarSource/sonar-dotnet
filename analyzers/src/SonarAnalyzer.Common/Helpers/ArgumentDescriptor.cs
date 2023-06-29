@@ -126,11 +126,28 @@ public class ArgumentDescriptor
             parameterConstraint: parameterConstraint,
             refKind: null);
 
-    public static ArgumentDescriptor AttributeArgument(Func<IMethodSymbol, bool> invokedIndexerPropertyMethod, Func<string, StringComparison, bool> invokedIndexerExpression,
+    public static ArgumentDescriptor AttributeArgument(string attributeName, string parameterName, int argumentPosition) =>
+        ArgumentDescriptor.AttributeArgument(
+            x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: { } name } && (name == attributeName || name == $"{attributeName}Attribute"),
+            (x, c) => AttributeClassNameConstraint(attributeName, x, c),
+            p => p.Name == parameterName,
+            (_, i) => i is null || i.Value == argumentPosition);
+
+    public static ArgumentDescriptor AttributeProperty(string attributeName, string propertyName) =>
+        AttributeArgument(
+            attributeConstructorConstraint: x => true,
+            attributeNameConstraint: (s, c) => AttributeClassNameConstraint(attributeName, s, c),
+            parameterConstraint: p => true,
+            argumentListConstraint: (l, i) => true);
+
+    private static bool AttributeClassNameConstraint(string expectedAttributeName, string nodeClassName, StringComparison c) =>
+        nodeClassName.Equals(expectedAttributeName, c) || nodeClassName.Equals($"{expectedAttributeName}Attribute");
+
+    public static ArgumentDescriptor AttributeArgument(Func<IMethodSymbol, bool> attributeConstructorConstraint, Func<string, StringComparison, bool> attributeNameConstraint,
         Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint)
         => new(InvokedMemberKind.Attribute,
-            invokedMemberConstraint: x => invokedIndexerPropertyMethod(x as IMethodSymbol),
-            invokedMemberNameConstraint: invokedIndexerExpression,
+            invokedMemberConstraint: x => attributeConstructorConstraint(x as IMethodSymbol),
+            invokedMemberNameConstraint: attributeNameConstraint,
             argumentListConstraint: argumentListConstraint,
             parameterConstraint: parameterConstraint,
             refKind: null);

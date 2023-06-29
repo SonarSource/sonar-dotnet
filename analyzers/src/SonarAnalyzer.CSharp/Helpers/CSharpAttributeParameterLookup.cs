@@ -30,4 +30,7 @@ internal class CSharpAttributeParameterLookup : MethodParameterLookupBase<Attrib
 
     protected override SyntaxToken? GetNameColonArgumentIdentifier(AttributeArgumentSyntax argument) =>
         argument.NameColon?.Name.Identifier;
+
+    protected override SyntaxToken? GetNameEqualsArgumentIdentifier(AttributeArgumentSyntax argument) =>
+        argument.NameEquals?.Name.Identifier;
 }
