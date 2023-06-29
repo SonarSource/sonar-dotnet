@@ -31,7 +31,6 @@ those cases, duplicate keys exceptions may occur in many ways:</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 Public Class Account
     Public Property Id As DateTime
-
     Public Property Name As String
     Public Property Surname As String
 End Class
@@ -40,7 +39,6 @@ End Class
 <pre data-diff-id="1" data-diff-type="compliant">
 Public Class Account
     Public Property Id As Guid
-
     Public Property Name As String
     Public Property Surname As String
 End Class
@@ -51,7 +49,6 @@ End Class
 Public Class Person
     &lt;Key&gt;
     Public Property BirthDate As DateTime
-
     Public Property Name As String
     Public Property Surname As String
 End Class
@@ -59,8 +56,8 @@ End Class
 <h4>Compliant solution</h4>
 <pre data-diff-id="2" data-diff-type="compliant">
 Public Class Person
+    &lt;Key&gt;
     Public Property Id As Guid
-
     Public Property BirthDate As DateTime
     Public Property Name As String
     Public Property Surname As String
