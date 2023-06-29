@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using MyAlias = System.DateTime;
 
 public class Program
 {
@@ -35,6 +36,7 @@ public class Program
         dateTime = new DateTime(1970, 01, 01); // Noncompliant
         dateTime = new DateTime(1970, 0x1, 0x1); // Noncompliant
         dateTime = new System.DateTime(1970, 1, 1); // Noncompliant
+        dateTime = new MyAlias(1970, 1, 1); // Noncompliant
     }
 
     void DateTimeConstructors(int ticks, int year, int month, int day, int hour, int minute, int second, int millisecond, Calendar calendar, DateTimeKind kind)

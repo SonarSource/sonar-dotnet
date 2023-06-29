@@ -28,6 +28,7 @@ Public Class Program
         Dim dateTimeOffset = New DateTimeOffset(New DateTime(1970, 1, 1), New TimeSpan(0, 0, 0)) ' Noncompliant
         Dim dateTime = New DateTime(If(True, 1970, 1971), 1, 1) ' FN
         dateTime = New DATETIME(1970, 1, 1) ' Noncompliant
+        Dim dateTime2 As Date = New Date(1970, 1, 1) ' Noncompliant
     End Sub
 
     Private Sub DateTimeConstructors(ByVal ticks As Integer, ByVal year As Integer, ByVal month As Integer, ByVal day As Integer, ByVal hour As Integer, ByVal minute As Integer, ByVal second As Integer, ByVal millisecond As Integer, ByVal calendar As Calendar, ByVal kind As DateTimeKind)

@@ -33,11 +33,11 @@ public class UseUnixEpochTest
 
     [TestMethod]
     public void UseUnixEpoch_Framework_CS() =>
-        builderCS.AddPaths("UseUnixEpoch.Framework.cs").Verify();
+        builderCS.AddPaths("UseUnixEpoch.Framework.cs").VerifyNoIssueReported();
 
     [TestMethod]
     public void UseUnixEpoch_Framework_VB() =>
-        builderVB.AddPaths("UseUnixEpoch.Framework.vb").Verify();
+        builderVB.AddPaths("UseUnixEpoch.Framework.vb").VerifyNoIssueReported();
 
 #else
 
