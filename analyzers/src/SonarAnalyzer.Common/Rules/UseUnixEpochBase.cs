@@ -54,13 +54,13 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
                 c =>
                 {
                     var literalsArguments = Language.Syntax.ArgumentExpressions(c.Node).OfType<TLiteralExpression>();
-                    if (!literalsArguments.Any(x => IsValueEqualTo(x, EpochYear) || literalsArguments.Count(x => IsValueEqualTo(x, EpochMonth)) < 2))
+                    if (!literalsArguments.Any(x => IsValueEqualTo(x, EpochYear) || literalsArguments.Count(x => IsValueEqualTo(x, EpochMonth)) != 2))
                     {
                         return;
                     }
 
                     var type = c.SemanticModel.GetTypeInfo(c.Node).Type;
-                    if (type.DerivesFromAny(TypesWithUnixEpochField) && IsEpochCtor(c.Node, c.SemanticModel))
+                    if (type.IsAny(TypesWithUnixEpochField) && IsEpochCtor(c.Node, c.SemanticModel))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), type.Name));
                     }
