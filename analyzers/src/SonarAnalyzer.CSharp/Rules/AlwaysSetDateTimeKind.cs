@@ -29,11 +29,13 @@ public sealed class AlwaysSetDateTimeKind : AlwaysSetDateTimeKindBase<SyntaxKind
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var node = c.Node;
-                if (true)
+                if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol ctor
+                    && ctor.IsInType(KnownType.System_DateTime)
+                    && !ctor.Parameters.Any(x => x.IsType(KnownType.System_DateTimeKind)))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                 }
             },
-            SyntaxKind.InvocationExpression);
+            SyntaxKind.ObjectCreationExpression,
+            SyntaxKindEx.ImplicitObjectCreationExpression);
 }

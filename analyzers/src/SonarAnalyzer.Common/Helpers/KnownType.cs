@@ -267,6 +267,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Data_SqlServerCe_SqlCeDataAdapter = new("System.Data.SqlServerCe.SqlCeDataAdapter");
         public static readonly KnownType System_DateOnly = new("System.DateOnly");
         public static readonly KnownType System_DateTime = new("System.DateTime");
+        public static readonly KnownType System_DateTimeKind = new("System.DateTimeKind");
         public static readonly KnownType System_DateTimeOffset = new("System.DateTimeOffset");
         public static readonly KnownType System_Decimal = new("System.Decimal");
         public static readonly KnownType System_Delegate = new("System.Delegate");
