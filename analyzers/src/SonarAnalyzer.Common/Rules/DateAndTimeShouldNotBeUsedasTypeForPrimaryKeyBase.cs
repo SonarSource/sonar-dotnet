@@ -24,20 +24,20 @@ public abstract class DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<TSyntaxK
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S3363";
+
     protected static readonly string[] KeyAttributeTypeNames = TypeNamesForAttribute(KnownType.System_ComponentModel_DataAnnotations_KeyAttribute);
-
-    protected override string MessageFormat => "'{0}' should not be used as a type for primary keys";
-
     protected static readonly KnownType[] TemporalTypes = new[]
     {
         KnownType.System_DateOnly,
         KnownType.System_DateTime,
         KnownType.System_DateTimeOffset,
-        KnownType.System_TimeSpan,
-        KnownType.System_TimeOnly
+        KnownType.System_TimeOnly,
+        KnownType.System_TimeSpan
     };
 
-    protected abstract void AnalyzeClass(SonarSyntaxNodeReportingContext context);
+    protected abstract IEnumerable<SyntaxNode> TypeNodesOfTemporalKeyProperties(SonarSyntaxNodeReportingContext context);
+
+    protected override string MessageFormat => "'{0}' should not be used as a type for primary keys";
 
     protected DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase() : base(DiagnosticId) { }
 
@@ -46,33 +46,39 @@ public abstract class DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<TSyntaxK
         {
             if (ShouldRegisterAction(c.Compilation))
             {
-                context.RegisterNodeAction(Language.GeneratedCodeRecognizer, AnalyzeClass, Language.SyntaxKind.ClassDeclaration);
+                context.RegisterNodeAction(Language.GeneratedCodeRecognizer, context =>
+                {
+                    foreach (var propertyType in TypeNodesOfTemporalKeyProperties(context))
+                    {
+                        context.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), Language.Syntax.NodeIdentifier(propertyType)));
+                    }
+                }, Language.SyntaxKind.ClassDeclaration);
             }
         });
-
-    protected static string[] TypeNamesForAttribute(KnownType attributeType) => new[]
-    {
-        attributeType.TypeName,
-        RemoveFromEnd(attributeType.TypeName, "Attribute"),
-        attributeType.FullName,
-        RemoveFromEnd(attributeType.FullName, "Attribute"),
-    };
 
     protected static bool IsKeyPropertyBasedOnName(string propertyName, string className) =>
         propertyName.Equals("Id", StringComparison.InvariantCultureIgnoreCase)
         || propertyName.Equals($"{className}Id", StringComparison.InvariantCultureIgnoreCase);
 
-    protected static bool IsTemporalType(string propertyTypeName) =>
-        propertyTypeName.Equals("Date", StringComparison.InvariantCultureIgnoreCase)
-        || Array.Exists(TemporalTypes, x => propertyTypeName.Equals(x.TypeName) || propertyTypeName.Equals(x.FullName));
+    protected virtual bool IsTemporalType(string propertyTypeName) =>
+        Array.Exists(TemporalTypes, x => propertyTypeName.Equals(x.TypeName, Language.NameComparison)
+                                         || propertyTypeName.Equals(x.FullName, Language.NameComparison));
 
     protected bool MatchesAttributeName(string attributeName, string[] candidates) =>
         Array.Exists(candidates, x => attributeName.Equals(x, Language.NameComparison));
 
-    private static string RemoveFromEnd(string text, string subtextFromEnd) =>
-        text.Substring(0, text.LastIndexOf(subtextFromEnd));
-
     private static bool ShouldRegisterAction(Compilation compilation) =>
         compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_DbContext) is not null
         || compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFramework_DbContext) is not null;
+
+    private static string[] TypeNamesForAttribute(KnownType attributeType) => new[]
+    {
+        attributeType.TypeName,
+        attributeType.FullName,
+        RemoveFromEnd(attributeType.TypeName, "Attribute"),
+        RemoveFromEnd(attributeType.FullName, "Attribute"),
+    };
+
+    private static string RemoveFromEnd(string text, string subtextFromEnd) =>
+        text.Substring(0, text.LastIndexOf(subtextFromEnd));
 }

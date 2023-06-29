@@ -25,27 +25,21 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeS
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override void AnalyzeClass(SonarSyntaxNodeReportingContext context)
+    protected override IEnumerable<SyntaxNode> TypeNodesOfTemporalKeyProperties(SonarSyntaxNodeReportingContext context)
     {
-        // To improve performance the attributes and property types are only matched by their names, rather than their actual symbol.
-        // This results in a couple of FNs, but those scenarios are very rare.
         var classDeclaration = (ClassDeclarationSyntax)context.Node;
         if (classDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword)))
         {
-            return;
+            return Enumerable.Empty<SyntaxNode>();
         }
 
         var className = classDeclaration.Identifier.ValueText;
-        var keyProperties = classDeclaration.Members
+        return classDeclaration.Members
             .OfType<PropertyDeclarationSyntax>()
             .Where(x => IsCandidateProperty(x)
                         && IsTemporalType(x.Type.GetName())
-                        && IsKeyProperty(x, className));
-
-        foreach (var propertyType in keyProperties.Select(x => x.Type))
-        {
-            context.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), propertyType.GetName()));
-        }
+                        && IsKeyProperty(x, className))
+            .Select(x => x.Type);
     }
 
     private static bool IsCandidateProperty(PropertyDeclarationSyntax property) =>

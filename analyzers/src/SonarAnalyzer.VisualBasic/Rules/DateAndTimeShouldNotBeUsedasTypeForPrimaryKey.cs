@@ -27,22 +27,20 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeS
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override void AnalyzeClass(SonarSyntaxNodeReportingContext context)
+    protected override IEnumerable<SyntaxNode> TypeNodesOfTemporalKeyProperties(SonarSyntaxNodeReportingContext context)
     {
-        // To improve performance the attributes and property types are only matched by their names, rather than their actual symbol.
-        // This results in a couple of FNs, but those scenarios are very rare.
         var classDeclaration = (ClassBlockSyntax)context.Node;
         var className = classDeclaration.ClassStatement.Identifier.ValueText;
-        var keyProperties = PropertyDeclarationsInClass(classDeclaration).Where(x =>
-            IsCandidateProperty(x)
-            && IsTemporalType(x.AsClause.Type().GetName())
-            && IsKeyProperty(x, className));
-
-        foreach (var propertyType in keyProperties.Select(x => x.AsClause.Type()))
-        {
-            context.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), propertyType.GetName()));
-        }
+        return PropertyDeclarationsInClass(classDeclaration)
+            .Where(x => IsCandidateProperty(x)
+                        && IsTemporalType(x.AsClause.Type().GetName())
+                        && IsKeyProperty(x, className))
+            .Select(x => x.AsClause.Type());
     }
+
+    protected override bool IsTemporalType(string propertyTypeName) =>
+        propertyTypeName.Equals("Date", Language.NameComparison)
+        || base.IsTemporalType(propertyTypeName);
 
     private static IEnumerable<PropertyStatementSyntax> PropertyDeclarationsInClass(ClassBlockSyntax classDeclaration) =>
         classDeclaration.Members
