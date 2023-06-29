@@ -18,4 +18,13 @@
     {
         return str.EndsWith('\t');
     }
+
+    void Chained(string str)
+    {
+        var first = str.EndsWith('a').ToString().ToString();
+        var middle = str.Substring(1).EndsWith('a').ToString();
+        var end = str.Substring(1).Substring(1).EndsWith('a');
+
+        var nullConditionalOperator = str.Substring(1)?.EndsWith('a').ToString();
+    }
 }
