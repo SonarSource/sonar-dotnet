@@ -1,5 +1,5 @@
 {
-  "title": "Identical expressions should not be used on both sides of a binary operator",
+  "title": "Identical expressions should not be used on both sides of operators",
   "type": "BUG",
   "status": "ready",
   "remediation": {
@@ -11,5 +11,5 @@
   "ruleSpecification": "RSPEC-1764",
   "sqKey": "S1764",
   "scope": "Main",
-  "quickfix": "unknown"
+  "quickfix": "targeted"
 }

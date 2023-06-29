@@ -1,5 +1,5 @@
 <h2>Why is this an issue?</h2>
-<p>Using <code>Thread.Sleep</code> in a test might introduce unpredictable and incosistent results depending on the environment. Furthermore, it will
+<p>Using <code>Thread.Sleep</code> in a test might introduce unpredictable and inconsistent results depending on the environment. Furthermore, it will
 block the <a href="https://en.wikipedia.org/wiki/Thread_(computing)">thread</a>, which means the system resources are not being fully used.</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 [TestMethod]
@@ -16,7 +16,7 @@ used, because of the following advantages:</p>
 <ul>
   <li> It is <strong>asynchronous</strong>: The thread will not be blocked, but instead will be reused by other operations </li>
   <li> It is more <strong>precise</strong> in timing the delay than <code>Thread.Sleep</code> </li>
-  <li> It can be <strong>cancelled and continued</strong>, which gives more flexibility and control in the timing of your code </li>
+  <li> It can be <strong>canceled and continued</strong>, which gives more flexibility and control in the timing of your code </li>
 </ul>
 <pre data-diff-id="1" data-diff-type="compliant">
 [TestMethod]

@@ -1,21 +1,35 @@
 <h2>Why is this an issue?</h2>
-<p>Caller information attributes (<code>CallerFilePathAttribute</code>, <code>CallerLineNumberAttribute</code>,
-<code>CallerMemberNameAttribute</code>, and <code>CallerArgumentExpressionAttribute</code>) provide a way to get information about the caller of a
-method through optional parameters. But they only work right if their values aren’t provided explicitly. So if you define a method with caller info
-attributes in the middle of the parameter list, you put your callers in a bad position: they are forced to use named arguments if they want to use the
-method properly.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/caller-information">Caller information attributes</a>
+provide a way to get information about the caller of a method through <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments#optional-arguments">optional</a>
+parameters. But they only work right if their values aren’t provided explicitly. So if you define a method with caller info attributes in the middle
+of the parameter list, the caller is forced to use named arguments if they want to use the method properly.</p>
+<p>This rule raises an issue when the following attributes are used on parameters before the end of the parameter list:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerfilepathattribute">CallerFilePathAttribute</a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerlinenumberattribute">CallerLineNumberAttribute</a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callermembernameattribute">CallerMemberNameAttribute</a>
+  </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerargumentexpressionattribute">CallerArgumentExpressionAttribute</a> </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Move the decorated parameters to the end of the parameter list.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 void TraceMessage([CallerMemberName] string memberName = "",
   [CallerFilePath] string filePath = "",
   [CallerLineNumber] int lineNumber = 0,
-  string message = null)  // Noncompliant
+  string message = null)  // Noncompliant: decorated parameters appear before "message" parameter
 {
   /* ... */
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 void TraceMessage(string message = null,
   [CallerMemberName] string memberName = "",
   [CallerFilePath] string filePath = "",
@@ -24,4 +38,21 @@ void TraceMessage(string message = null,
   /* ... */
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/caller-information">Determine caller information using
+  attributes interpreted by the C# compiler</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerfilepathattribute">CallerFilePathAttribute
+  Class</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerlinenumberattribute">CallerLineNumberAttribute
+  Class</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callermembernameattribute">CallerMemberNameAttribute
+  Class</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerargumentexpressionattribute">CallerArgumentExpressionAttribute Class</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments#optional-arguments">Named
+  and Optional Arguments</a> </li>
+</ul>
 

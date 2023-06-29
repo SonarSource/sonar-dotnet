@@ -1,20 +1,46 @@
 <h2>Why is this an issue?</h2>
-<p>An assertion is a piece of code that’s used during development when the compilation debug mode is activated. It allows a program to check itself as
-it runs. When an assertion is true, that means everything is operating as expected.</p>
-<p>In non-debug mode, all <code>Debug.Assert</code> are automatically left out. So, by contract, the boolean expressions that are evaluated by those
-assertions must absolutely not contain any side effects. Otherwise, when leaving the Debug mode, the functional behavior of the application is not the
-same anymore.</p>
+<p>An assertion is a piece of code that’s used during development when the <a
+href="https://learn.microsoft.com/en-us/visualstudio/debugger/how-to-set-debug-and-release-configurations">compilation debug mode is activated</a>. It
+allows a program to check itself as it runs. When an assertion is <code>true</code>, that means everything is operating as expected.</p>
+<p>In non-debug mode, all <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.debug.assert"><code>Debug.Assert</code></a> calls
+are automatically left out (via the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.conditionalattribute"><code>Conditional("DEBUG")</code></a> mechanism). So, by
+contract, the boolean expressions that are evaluated by those assertions must not contain any <a
+href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)">side effects</a>. Otherwise, when leaving the debug mode, the functional behavior
+of the application is not the same anymore.</p>
 <p>The rule will raise if the method name starts with any of the following <code>remove</code>, <code>delete</code>, <code>add</code>,
 <code>pop</code>, <code>update</code>, <code>retain</code>, <code>insert</code>, <code>push</code>, <code>append</code>, <code>clear</code>,
 <code>dequeue</code>, <code>enqueue</code>, <code>dispose</code>, <code>put</code>, or <code>set</code>, although <code>SetEquals</code> will be
 ignored.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<p>In the following example, the assertion checks the return value of the remove method in the argument. Because the whole line is skipped in
+non-debug builds, the call to <code>Remove</code> never happens in such builds.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Debug.Assert(list.Remove("dog"));
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<p>The <code>Remove</code> call must be extracted and the return value needs to be asserted instead.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
 bool result = list.Remove("dog");
 Debug.Assert(result);
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.debug.assert/"><code>Debug.Assert</code> Method</a>
+  </li>
+  <li> Microsoft Learn <a href="https://learn.microsoft.com/en-us/dotnet/framework/debug-trace-profile/">Debugging, tracing, and profiling</a> </li>
+  <li> Microsoft Learn <a
+  href="https://learn.microsoft.com/en-us/dotnet/framework/debug-trace-profile/how-to-compile-conditionally-with-trace-and-debug">How to: Compile
+  Conditionally with Trace and Debug</a> </li>
+  <li> Microsoft Learn <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/general#conditional-attribute">Miscellaneous attributes
+  interpreted by the C# compiler - <code>Conditional</code> attribute</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> Wikipedia <a href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)">Side effect (computer science)</a> </li>
+</ul>
 

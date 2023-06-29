@@ -1,5 +1,5 @@
 {
-  "title": "Return values from functions without side effects should not be ignored",
+  "title": "Methods without side effects should not have their return values ignored",
   "type": "BUG",
   "status": "ready",
   "remediation": {
@@ -11,5 +11,5 @@
   "ruleSpecification": "RSPEC-2201",
   "sqKey": "S2201",
   "scope": "Main",
-  "quickfix": "unknown"
+  "quickfix": "infeasible"
 }

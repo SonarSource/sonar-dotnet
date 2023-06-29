@@ -1,5 +1,5 @@
 {
-  "title": "Silly mathematical comparisons should not be made",
+  "title": "Unnecessary mathematical comparisons should not be made",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
