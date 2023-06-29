@@ -29,43 +29,39 @@ those cases, duplicate keys exceptions may occur in many ways:</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-internal class Account
-{
-    public DateTime Id { get; set; }
-    public string Name { get; set; }
-    public string Surname { get; set; }
-}
+Public Class Account
+    Public Property Id As DateTime
+    Public Property Name As String
+    Public Property Surname As String
+End Class
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-internal class Account
-{
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public string Surname { get; set; }
-}
+Public Class Account
+    Public Property Id As Guid
+    Public Property Name As String
+    Public Property Surname As String
+End Class
 </pre>
 <p>or</p>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="2" data-diff-type="noncompliant">
-internal class Person
-{
-    [Key]
-    public DateTime BirthDate { get; set; }
-    public string Name { get; set; }
-    public string Surname { get; set; }
-}
+Public Class Person
+    &lt;Key&gt;
+    Public Property BirthDate As DateTime
+    Public Property Name As String
+    Public Property Surname As String
+End Class
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="2" data-diff-type="compliant">
-internal class Person
-{
-    [Key]
-    public Guid Id { get; set; }
-    public DateTime BirthDate { get; set; }
-    public string Name { get; set; }
-    public string Surname { get; set; }
-}
+Public Class Person
+    &lt;Key&gt;
+    Public Property Id As Guid
+    Public Property BirthDate As DateTime
+    Public Property Name As String
+    Public Property Surname As String
+End Class
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>

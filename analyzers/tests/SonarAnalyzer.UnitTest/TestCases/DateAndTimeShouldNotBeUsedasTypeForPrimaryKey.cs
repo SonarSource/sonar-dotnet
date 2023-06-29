@@ -140,6 +140,16 @@ class PropertyTypes
         public DateTime Id() => DateTime.Now;
     }
 
+    class StaticProperty
+    {
+        public static DateTime Id { get; set; }         // Compliant - static properties cannot be keys
+    }
+
+    static class StaticPropertyInStaticClass
+    {
+        public static DateTime Id { get; set; }
+    }
+
     class NotPublicProperty
     {
         [Key]

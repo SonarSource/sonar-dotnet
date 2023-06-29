@@ -18,45 +18,48 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp;
+using static Microsoft.CodeAnalysis.VisualBasic.SyntaxKind;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<SyntaxKind>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override IEnumerable<SyntaxNode> TypeNodesOfTemporalKeyProperties(SonarSyntaxNodeReportingContext context)
     {
-        var classDeclaration = (ClassDeclarationSyntax)context.Node;
-        if (classDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword)))
-        {
-            return Enumerable.Empty<SyntaxNode>();
-        }
-
-        var className = classDeclaration.Identifier.ValueText;
-        return classDeclaration.Members
-            .OfType<PropertyDeclarationSyntax>()
+        var classDeclaration = (ClassBlockSyntax)context.Node;
+        var className = classDeclaration.ClassStatement.Identifier.ValueText;
+        return PropertyDeclarationsInClass(classDeclaration)
             .Where(x => IsCandidateProperty(x)
-                        && IsTemporalType(x.Type.GetName())
+                        && IsTemporalType(x.AsClause.Type().GetName())
                         && IsKeyProperty(x, className))
-            .Select(x => x.Type);
+            .Select(x => x.AsClause.Type());
     }
 
-    private static bool IsCandidateProperty(PropertyDeclarationSyntax property) =>
-        property.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword))
-        && !property.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword))
-        && property.AccessorList is { } accessorList
-        && accessorList.Accessors.Any(x => x.Keyword.IsKind(SyntaxKind.GetKeyword))
-        && accessorList.Accessors.Any(x => x.Keyword.IsKind(SyntaxKind.SetKeyword));
+    protected override bool IsTemporalType(string propertyTypeName) =>
+        propertyTypeName.Equals("Date", Language.NameComparison)
+        || base.IsTemporalType(propertyTypeName);
 
-    private bool IsKeyProperty(PropertyDeclarationSyntax property, string className)
+    private static IEnumerable<PropertyStatementSyntax> PropertyDeclarationsInClass(ClassBlockSyntax classDeclaration) =>
+        classDeclaration.Members
+            .OfType<PropertyStatementSyntax>()
+            .Concat(classDeclaration.Members.OfType<PropertyBlockSyntax>().Select(x => x.PropertyStatement));
+
+    private static bool IsCandidateProperty(PropertyStatementSyntax property) =>
+        (property.Modifiers.Any(x => x.IsKind(PublicKeyword))
+         || property.Modifiers.All(x => !x.IsAnyKind(PrivateKeyword, ProtectedKeyword, FriendKeyword)))
+        && property.Modifiers.All(x => !x.IsAnyKind(SharedKeyword, ReadOnlyKeyword, WriteOnlyKeyword));
+
+    private bool IsKeyProperty(PropertyStatementSyntax property, string className)
     {
         var propertyName = property.Identifier.ValueText;
         return IsKeyPropertyBasedOnName(propertyName, className)
             || HasKeyAttribute(property);
     }
 
-    private bool HasKeyAttribute(PropertyDeclarationSyntax property) =>
+    private bool HasKeyAttribute(PropertyStatementSyntax property) =>
         property.AttributeLists
             .SelectMany(x => x.Attributes)
             .Any(x => MatchesAttributeName(x.GetName(), KeyAttributeTypeNames));
