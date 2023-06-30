@@ -32,9 +32,23 @@ public class AlwaysSetDateTimeKindTest
     public void AlwaysSetDateTimeKind_CS() =>
         builderCS.AddPaths("AlwaysSetDateTimeKind.cs").Verify();
 
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.AlwaysSetDateTimeKind>();    // FIXME: Move this up
-
     [TestMethod]
     public void AlwaysSetDateTimeKind_VB() =>
-        builderVB.AddPaths("AlwaysSetDateTimeKind.vb").Verify();
+        new VerifierBuilder<VB.AlwaysSetDateTimeKind>().AddPaths("AlwaysSetDateTimeKind.vb").Verify();
+
+#if NET
+
+    [TestMethod]
+    public void AlwaysSetDateTimeKind_CSharp9() =>
+        builderCS.AddSnippet(
+            """
+                using System;
+
+                DateTime dateTime = new(1994, 07, 05, 16, 23, 00, 42, 42); // Noncompliant
+                """)
+            .WithTopLevelStatements()
+            .Verify();
+
+#endif
+
 }

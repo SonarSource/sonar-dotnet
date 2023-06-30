@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
+
 namespace SonarAnalyzer.Rules;
 
 public abstract class AlwaysSetDateTimeKindBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -25,7 +27,19 @@ public abstract class AlwaysSetDateTimeKindBase<TSyntaxKind> : SonarDiagnosticAn
 {
     private const string DiagnosticId = "S6562";
 
-    protected override string MessageFormat => "FIXME";
+    protected override string MessageFormat => "Provide the \"DateTimeKind\" when creating this object.";
 
     protected AlwaysSetDateTimeKindBase() : base(DiagnosticId) { }
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+        {
+            if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol ctor
+                && ctor.IsInType(KnownType.System_DateTime)
+                && !ctor.Parameters.Any(x => x.IsType(KnownType.System_DateTimeKind)))
+            {
+                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+            }
+        },
+        Language.SyntaxKind.ObjectCreationExpressions);
 }

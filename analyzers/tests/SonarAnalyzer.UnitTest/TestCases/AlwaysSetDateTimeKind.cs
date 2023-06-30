@@ -5,7 +5,7 @@ public class Program
 {
     public void Noncompliant()
     {
-        var dt = new DateTime(); // Noncompliant
+        var dt = new DateTime(); // Noncompliant {{Provide the "DateTimeKind" when creating this object.}}
         dt = new DateTime(1623); // Noncompliant
         dt = new DateTime(1994, 07, 05); // Noncompliant
         dt = new DateTime(1994, 07, 05, new GregorianCalendar()); // Noncompliant
@@ -13,7 +13,6 @@ public class Program
         dt = new DateTime(1994, 07, 05, 16, 23, 00, new GregorianCalendar()); // Noncompliant
         dt = new DateTime(1994, 07, 05, 16, 23, 00, 42); // Noncompliant
         dt = new DateTime(1994, 07, 05, 16, 23, 00, 42, new GregorianCalendar()); // Noncompliant
-        dt = new DateTime(1994, 07, 05, 16, 23, 00, 42, 42); // Noncompliant
         dt = new DateTime(1994, 07, 05, 16, 23, 00, 42, new GregorianCalendar()); // Noncompliant
     }
 
