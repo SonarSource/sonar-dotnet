@@ -34,11 +34,12 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
         context =>
         {
             var argumentNode = context.Node;
-            if ((argument.RefKind is null || ArgumentRefKind(argumentNode) == argument.RefKind.Value)
-                && ArgumentList(argumentNode) is { } argList && argument.ArgumentListConstraint?.Invoke(argList, Position(argumentNode)) is null or true
-                && InvocationFitsMemberKind(argumentNode, argument.MemberKind)
-                && argument.InvokedMemberNameConstraint != null
-                && InvokedMemberFits(context.SemanticModel, argumentNode, argument.MemberKind, x => argument.InvokedMemberNameConstraint(x, Language.NameComparison)))
+            if (InvocationFitsMemberKind(argumentNode, argument.MemberKind)
+                && (argument.RefKind is null || ArgumentRefKind(argumentNode) == argument.RefKind.Value)
+                && (argument.ArgumentListConstraint == null
+                    || (ArgumentList(argumentNode) is { } argList && argument.ArgumentListConstraint(argList, Position(argumentNode))))
+                && (argument.InvokedMemberNameConstraint == null
+                    || InvokedMemberFits(context.SemanticModel, argumentNode, argument.MemberKind, x => argument.InvokedMemberNameConstraint(x, Language.NameComparison))))
             {
                 var invoked = InvokedExpression(argumentNode);
                 var symbol = context.SemanticModel.GetSymbolInfo(invoked).Symbol;
