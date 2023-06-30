@@ -24,8 +24,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class InsecureTemporaryFilesCreation : InsecureTemporaryFilesCreationBase<MemberAccessExpressionSyntax, SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
-
-        internal override bool IsMemberAccessOnKnownType(MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel model) =>
-            memberAccess.IsMemberAccessOnKnownType(name, knownType, model);
     }
 }

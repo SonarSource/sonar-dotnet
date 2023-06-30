@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S5445";
         private const string VulnerableApiName = "GetTempFileName";
 
-        internal abstract bool IsMemberAccessOnKnownType(TMemberAccessSyntax memberAccess, string name, KnownType knownType, SemanticModel model);
-
         protected override string MessageFormat => "'Path.GetTempFileName()' is insecure. Use 'Path.GetRandomFileName()' instead.";
 
         protected InsecureTemporaryFilesCreationBase() : base(DiagnosticId) { }
@@ -39,7 +37,7 @@ namespace SonarAnalyzer.Rules
         private void Visit(SonarSyntaxNodeReportingContext context)
         {
             var memberAccess = (TMemberAccessSyntax)context.Node;
-            if (IsMemberAccessOnKnownType(memberAccess, VulnerableApiName, KnownType.System_IO_Path, context.SemanticModel))
+            if (Language.Syntax.IsMemberAccessOnKnownType(memberAccess, VulnerableApiName, KnownType.System_IO_Path, context.SemanticModel))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, memberAccess.GetLocation()));
             }
