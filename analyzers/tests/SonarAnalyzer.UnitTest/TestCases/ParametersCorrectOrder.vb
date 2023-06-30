@@ -99,7 +99,11 @@ Public Class NotOnlyNullableParam
     Sub NullableParamCastVoid(ByVal a As Integer, ByVal b As Integer?)
         If b.HasValue Then
             NotNullableParamVoid(CInt(b), a) ' Noncompliant
+            NotNullableParamVoid(CType(b, Integer), a) ' Noncompliant
+            NotNullableParamVoid(DirectCast(b, Integer), a) ' Error [BC30311]
             NotNullableParamVoid(a, CInt(b)) ' Compliant
+            NotNullableParamVoid(b? As Integer, a) ' Error [CS0077]
+            '                                        Noncompliant@-1
         End If
     End Sub
 

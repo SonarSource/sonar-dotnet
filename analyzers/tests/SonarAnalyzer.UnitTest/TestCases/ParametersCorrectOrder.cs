@@ -42,7 +42,6 @@ public static class Extensions
         Ex(self, v1, v2);
         self.Ex(v1, v2);
         Extensions.Ex(self, v1, v2);
-        Tests.Diagnostics.Extensions.Ex(self, v1, v2);
     }
 }
 
@@ -211,6 +210,7 @@ class NotOnlyNullableParam
 
     internal class C
     {
+        public int a { get; set; }
         public int b { get; set; }
     }
 
@@ -239,25 +239,25 @@ class NotOnlyNullableParam
         {
             NotNullableParamVoid((int)b, q); // Noncompliant [E]
             NotNullableParamVoid(q, (int)b); // Compliant
-            NotNullableParamVoid(b as int, q);   
         }
     }
 
-    void InnerPropertyParamVoid(int q, A c)
+    void InnerPropertyParamVoid(int q, A c, A b)
     {
         NotNullableParamVoid(c.Something.b, q); // Noncompliant [F]
         NotNullableParamVoid(q, c.Something.b); // Compliant
+        NotNullableParamVoid(b.Something.a, q); // Compliant
     }
 
     void InnerPropertyValueParamVoid(int q, A c)
     {
-        NotNullableParamVoid(c.b.Value, q); // Compliant Value is real propery
+        NotNullableParamVoid(c.b.Value, q); // Compliant Value is real property
     }
 
     void InnerPropertyValueParamVoid(int c, WithValueProperty b)
     {
-        NotNullableParamVoid(b.Value, c); // Compliant Value is real propery
-        NotNullableParamVoid(c, b.Value); // Compliant Value is real propery
+        NotNullableParamVoid(b.Value, c); // Compliant Value is real property
+        NotNullableParamVoid(c, b.Value); // Compliant Value is real property
     }
 
     void ObjectParamCastVoid(int q, object b)
