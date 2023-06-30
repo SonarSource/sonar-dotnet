@@ -49,7 +49,7 @@ public class UseCharOverloadOfStringMethodsTest
     public void UseCharOverloadOfStringMethods_VB() =>
         builderVB.AddPaths("UseCharOverloadOfStringMethods.vb").Verify();
 
-        [TestMethod]
+    [TestMethod]
     public void UseCharOverloadOfStringMethods_CS_Fix() =>
         builderCS
         .WithCodeFix<CS.UseCharOverloadOfStringMethodsCodeFix>()
