@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers.Trackers;
+
+using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.UnitTest.Trackers;
 
@@ -33,10 +35,24 @@ public class ArgumentTrackerTest
             System.IFormatProvider provider = null;
             1.ToString($$provider);
             """;
-        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", 0);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void VB_Method_SimpleArgument()
+    {
+        var snippet = """
+            Dim provider As System.IFormatProvider = Nothing
+            Dim i As Integer
+            i.ToString($$provider)
+            """;
+        var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", 0);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -54,7 +70,7 @@ public class ArgumentTrackerTest
             System.IFormatProvider provider = null;
             {{invocation}}
             """;
-        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", position);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
@@ -69,7 +85,7 @@ public class ArgumentTrackerTest
             System.IFormatProvider provider = null;
             {{invocation}}
             """;
-        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true, RefKind.Out);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
@@ -86,7 +102,7 @@ public class ArgumentTrackerTest
             System.IFormatProvider provider = null;
             {{invocation}}
             """;
-        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true, refKind);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeFalse();
@@ -101,7 +117,7 @@ public class ArgumentTrackerTest
             System.IFormatProvider provider = null;
             {{invocation}}
             """;
-        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
@@ -143,7 +159,7 @@ public class ArgumentTrackerTest
                 }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(m => true, (m, c) => m.Equals("M", c), p => p.Name == "parameter", x => true, null);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
@@ -169,7 +185,7 @@ public class ArgumentTrackerTest
                 }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Collections_Generic_Comparer_T, "Compare", "x", 0);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
@@ -192,7 +208,7 @@ public class ArgumentTrackerTest
                 }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Collections_CollectionBase, "OnInsert", "index", 0);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
@@ -213,7 +229,7 @@ public class ArgumentTrackerTest
         var snippet = $$"""
             _ = new System.Diagnostics.{{constructor}};
             """;
-        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Diagnostics_ProcessStartInfo, parameterName, argumentPosition);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
@@ -234,7 +250,7 @@ public class ArgumentTrackerTest
         var snippet = $$"""
             System.Diagnostics.ProcessStartInfo psi = new{{constructor}};
             """;
-        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Diagnostics_ProcessStartInfo, parameterName, argumentPosition);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
@@ -258,7 +274,7 @@ public class ArgumentTrackerTest
                 }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_Dictionary_TKey_TValue, parameterName, argumentPosition);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
@@ -283,7 +299,7 @@ public class ArgumentTrackerTest
                 }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_List_T, "capacity", 0);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeFalse();
@@ -304,7 +320,7 @@ public class ArgumentTrackerTest
                 }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_List_T, parameterName, argumentPosition);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
@@ -333,7 +349,7 @@ public class ArgumentTrackerTest
                 }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "C" },
                                                                 invokedMemberNameConstraint: (c, n) => c.Equals("C", n) || c.Equals("CAlias"),
@@ -353,7 +369,7 @@ public class ArgumentTrackerTest
                 public Base(int i, int j) { }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "Base" },
                                                                 invokedMemberNameConstraint: (c, n) => c.Equals("Base", n),
@@ -376,7 +392,7 @@ public class ArgumentTrackerTest
                 public Derived() : base($$1) { }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "Base" },
                                                                 invokedMemberNameConstraint: (c, n) => c.Equals("Base", n),
@@ -393,7 +409,7 @@ public class ArgumentTrackerTest
             var list = new System.Collections.Generic.List<int>();
             _ = list[$$1];
             """;
-        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
 
         var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T, "list",
             p => p is { Name: "index", Type.SpecialType: SpecialType.System_Int32, ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertyGet } }, 0);
@@ -411,7 +427,7 @@ public class ArgumentTrackerTest
             var list = new System.Collections.Generic.List<int>();
             {{writeExpression}};
             """;
-        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
 
         var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T,
             p => p is { Name: "index", ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertySet } }, 0);
@@ -426,7 +442,7 @@ public class ArgumentTrackerTest
         var snippet = $$"""
             _ = {{environmentVariableAccess}};
             """;
-        var (node, model) = ArgumentAndModel(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
 
         var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "IDictionary",
             (n, c) => n.Equals("GetEnvironmentVariables", c), p => p.Name == "key", (_, p) => p is null or 0);
@@ -451,7 +467,7 @@ public class ArgumentTrackerTest
                 }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "ProcessModuleCollection",
             (n, c) => n.Equals("Modules", c), p => p.Name == "index", (_, p) => p is null or 0);
@@ -476,7 +492,7 @@ public class ArgumentTrackerTest
                 }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Environment", p => p.Name == "key", 0);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
@@ -495,7 +511,7 @@ public class ArgumentTrackerTest
                 }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.AttributeArgument(x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: "ObsoleteAttribute" },
             (s, c) => s.StartsWith("Obsolete", c), p => p.Name == "message", (_, i) => i is 0);
@@ -523,7 +539,7 @@ public class ArgumentTrackerTest
                 }
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.AttributeArgument("Designer", parameterName, argumentPosition);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
@@ -544,7 +560,7 @@ public class ArgumentTrackerTest
             {
             }
             """;
-        var (node, model) = ArgumentAndModel(snippet);
+        var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.AttributeProperty("AttributeUsage", propertyName);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
@@ -562,12 +578,28 @@ public class ArgumentTrackerTest
         }
         """;
 
-    private static (SyntaxNode Node, SemanticModel Model) ArgumentAndModel(string snippet)
+    private static string WrapInMethodVB(string snippet) =>
+        $$"""
+        Imports System
+        Class C
+            Public Sub M()
+                {{snippet}}
+            End Sub
+        End Class
+        """;
+
+    private static (SyntaxNode Node, SemanticModel Model) ArgumentAndModel(string snippet, Func<string, MetadataReference[], (SyntaxTree, SemanticModel)> compile, params Type[] argumentNodeTypes)
     {
         var pos = snippet.IndexOf("$$");
         snippet = snippet.Replace("$$", string.Empty);
-        var (tree, model) = TestHelper.CompileCS(snippet, MetadataReferenceFacade.SystemCollections.Concat(MetadataReferenceFacade.SystemDiagnosticsProcess).ToArray());
-        var node = tree.GetRoot().FindNode(new(pos, 0)).AncestorsAndSelf().First(x => x is ArgumentSyntax or AttributeArgumentSyntax);
+        var (tree, model) = compile(snippet, MetadataReferenceFacade.SystemCollections.Concat(MetadataReferenceFacade.SystemDiagnosticsProcess).ToArray());
+        var node = tree.GetRoot().FindNode(new(pos, 0)).AncestorsAndSelf().First(x => argumentNodeTypes.Any(t => t.IsAssignableFrom(x.GetType())));
         return (node, model);
     }
+
+    private static (SyntaxNode Node, SemanticModel Model) ArgumentAndModelCS(string snippet) =>
+        ArgumentAndModel(snippet, TestHelper.CompileCS, typeof(CS.ArgumentSyntax), typeof(CS.AttributeArgumentSyntax));
+
+    private static (SyntaxNode Node, SemanticModel Model) ArgumentAndModelVB(string snippet) =>
+        ArgumentAndModel(snippet, TestHelper.CompileVB, typeof(VB.ArgumentSyntax));
 }
