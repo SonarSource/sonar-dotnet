@@ -58,4 +58,5 @@ public class UseCharOverloadOfStringMethodsTest
         .VerifyCodeFix();
 
 #endif
+
 }
