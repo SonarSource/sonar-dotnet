@@ -25,7 +25,7 @@ public abstract class UseIFormatProviderForParsingDateAndTimeBase<TSyntaxKind> :
 {
     private const string DiagnosticId = "S6580";
 
-    protected override string MessageFormat => "Pass an IFormatProvider to the '{0}' method.";
+    protected override string MessageFormat => "Pass an 'IFormatProvider' to the '{0}' method.";
 
     protected UseIFormatProviderForParsingDateAndTimeBase() : base(DiagnosticId) { }
 

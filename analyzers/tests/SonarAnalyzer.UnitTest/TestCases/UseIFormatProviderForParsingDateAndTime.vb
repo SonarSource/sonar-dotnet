@@ -10,6 +10,7 @@ Class Test
         Date.Parse("01/02/2000")                                            ' Noncompliant
 
         Parse("01/02/2000")                                                 ' Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
+        System.DateTime.Parse("01/02/2000")                                 ' Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
 
         Dim parsedDate As Date = Nothing
 

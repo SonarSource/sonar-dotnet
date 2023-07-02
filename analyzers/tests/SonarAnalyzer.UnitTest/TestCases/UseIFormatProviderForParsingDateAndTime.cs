@@ -17,6 +17,7 @@ class Test
         // using static and using alias
         Parse("01/02/2000");                                        // Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
         AliasedDateTime.Parse("01/02/2000");                        // Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
+        System.DateTime.Parse("01/02/2000");                        // Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
 
         if (DateTime.TryParse("01/02/2000", out var parsedDate))    // Noncompliant
         {
