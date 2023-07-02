@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Globalization;
+
 namespace SonarAnalyzer.Rules;
 
 public abstract class UseIFormatProviderForParsingDateAndTimeBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -25,16 +27,53 @@ public abstract class UseIFormatProviderForParsingDateAndTimeBase<TSyntaxKind> :
 {
     private const string DiagnosticId = "S6580";
 
+    private static readonly string[] parseMethodNames = new[]
+    {
+        nameof(DateTime.Parse),
+        nameof(DateTime.ParseExact),
+        nameof(DateTime.TryParse),
+        nameof(DateTime.TryParseExact)
+    };
+    private static readonly string[] nonDeterministicFormatProviders = new[]
+    {
+        nameof(CultureInfo.CurrentCulture),
+        nameof(CultureInfo.CurrentUICulture),
+        nameof(CultureInfo.DefaultThreadCurrentCulture),
+        nameof(CultureInfo.DefaultThreadCurrentUICulture)
+    };
+    private static readonly KnownType[] temporalTypes = new[]
+    {
+        KnownType.System_DateOnly,
+        KnownType.System_DateTime,
+        KnownType.System_DateTimeOffset,
+        KnownType.System_TimeOnly,
+        KnownType.System_TimeSpan
+    };
+
     protected override string MessageFormat => "Pass an 'IFormatProvider' to the '{0}' method.";
 
     protected UseIFormatProviderForParsingDateAndTimeBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, context =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            if (true)
+            if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } identifier
+                && parseMethodNames.Any(x => identifier.ValueText.Equals(x, Language.NameComparison))
+                && c.SemanticModel.GetSymbolInfo(c.Node) is { Symbol: IMethodSymbol methodSymbol }
+                && temporalTypes.Any(x => x.Matches(methodSymbol.ReceiverType))
+                && NotUsingFormatProvider(methodSymbol, c.Node, c.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation(), "DateTime.Parse"));
+                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), $"{methodSymbol.ReceiverType.Name}.{methodSymbol.Name}"));
             }
         }, Language.SyntaxKind.InvocationExpression);
+
+    private bool NotUsingFormatProvider(IMethodSymbol methodSymbol, SyntaxNode node, SemanticModel semanticModel)
+    {
+        var parameterLookup = Language.MethodParameterLookup(node, methodSymbol);
+        return (!parameterLookup.TryGetSyntax("provider", out var parameter) && !parameterLookup.TryGetSyntax("formatProvider", out parameter))
+               || Language.Syntax.IsNullLiteral(parameter[0])
+               || (Language.Syntax.NodeIdentifier(parameter[0]) is { } parameterName
+               && nonDeterministicFormatProviders.Any(x => parameterName.ValueText.Equals(x, Language.NameComparison))
+               && semanticModel.GetSymbolInfo(parameter[0]) is { Symbol.ContainingType.Name: "CultureInfo" });
+    }
 }

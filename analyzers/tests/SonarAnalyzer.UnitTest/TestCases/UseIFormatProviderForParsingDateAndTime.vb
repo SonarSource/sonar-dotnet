@@ -5,28 +5,31 @@ Class Test
     ReadOnly formatProviderField As IFormatProvider = New CultureInfo("en-US")
 
     Sub DifferentSyntaxScenarios()
-        Dim dt = Date.Parse("01/02/2000")                                   ' Noncompliant
+        Dim dt = Date.Parse("01/02/2000")                                           ' Noncompliant
         '        ^^^^^^^^^^^^^^^^^^^^^^^^
-        Date.Parse("01/02/2000")                                            ' Noncompliant
+        Date.Parse("01/02/2000")                                                    ' Noncompliant
 
-        Parse("01/02/2000")                                                 ' Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
-        System.DateTime.Parse("01/02/2000")                                 ' Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
+        Parse("01/02/2000")                                                         ' Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
+        System.DateTime.Parse("01/02/2000")                                         ' Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
+        DATETIME.PARSE("01/02/2000")                                                ' Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
 
         Dim parsedDate As Date = Nothing
 
-        If Date.TryParse("01/02/2000", parsedDate) Then                     ' Noncompliant
+        If Date.TryParse("01/02/2000", parsedDate) Then                             ' Noncompliant
         End If
 
-        dt = Date.Parse("01/02/2000").AddDays(1)                            ' Noncompliant
+        Date.Parse(provider:=Nothing, s:="02/03/2000", styles:=DateTimeStyles.None) ' Noncompliant
 
-        Dim parsedDates = {"01/02/2000"}.Select(Function(x) Date.Parse(x))  ' Noncompliant
+        dt = Date.Parse("01/02/2000").AddDays(1)                                    ' Noncompliant
+
+        Dim parsedDates = {"01/02/2000"}.Select(Function(x) Date.Parse(x))          ' Noncompliant
     End Sub
 
     Sub CallWithNullIFormatProvider()
         Date.Parse("01/02/2000", Nothing)                                               ' Noncompliant
         Date.Parse("01/02/2000", Nothing, DateTimeStyles.None)                          ' Noncompliant
 
-        Date.Parse("01/02/2000", Nothing)                                               ' FN
+        Date.Parse("01/02/2000", (Nothing))                                             ' FN
         Date.Parse("01/02/2000", If(True, CType(Nothing, IFormatProvider), Nothing))    ' FN
 
         Dim nullFormatProvider As IFormatProvider = Nothing

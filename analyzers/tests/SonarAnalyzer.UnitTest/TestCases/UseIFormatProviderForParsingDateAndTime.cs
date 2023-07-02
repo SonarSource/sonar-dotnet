@@ -10,26 +10,28 @@ class Test
 
     void DifferentSyntaxScenarios()
     {
-        _ = DateTime.Parse("01/02/2000");                           // Noncompliant
+        _ = DateTime.Parse("01/02/2000");                                               // Noncompliant
         //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        DateTime.Parse("01/02/2000");                               // Noncompliant
+        DateTime.Parse("01/02/2000");                                                   // Noncompliant
 
         // using static and using alias
-        Parse("01/02/2000");                                        // Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
-        AliasedDateTime.Parse("01/02/2000");                        // Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
-        System.DateTime.Parse("01/02/2000");                        // Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
+        Parse("01/02/2000");                                                            // Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
+        AliasedDateTime.Parse("01/02/2000");                                            // Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
+        System.DateTime.Parse("01/02/2000");                                            // Noncompliant {{Pass an 'IFormatProvider' to the 'DateTime.Parse' method.}}
 
-        if (DateTime.TryParse("01/02/2000", out var parsedDate))    // Noncompliant
+        if (DateTime.TryParse("01/02/2000", out var parsedDate))                        // Noncompliant
         {
         }
 
-        _ = DateTime.Parse("01/02/2000").AddDays(1);                // Noncompliant
+        DateTime.Parse(provider: null, s: "02/03/2000", styles: DateTimeStyles.None);   // Noncompliant
 
-        _ = new[] { "01/02/2000" }.Select(x => DateTime.Parse(x));  // Noncompliant
+        _ = DateTime.Parse("01/02/2000").AddDays(1);                                    // Noncompliant
+
+        _ = new[] { "01/02/2000" }.Select(x => DateTime.Parse(x));                      // Noncompliant
 
         void InnerMethod()
         {
-            DateTime.Parse("01/02/2000");                           // Noncompliant
+            DateTime.Parse("01/02/2000");                                               // Noncompliant
         }
     }
 

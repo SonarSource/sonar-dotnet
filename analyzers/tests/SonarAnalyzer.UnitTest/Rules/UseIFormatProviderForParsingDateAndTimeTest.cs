@@ -72,11 +72,11 @@ class Test
 
     void ParseExactOverloads()
     {
-        {{{temporalTypeName}}}.ParseExact("01/02/2000", "dd/MM/yyyy", null);                                                                      // Noncompliant {{Pass an 'IFormatProvider' to the '{{{temporalTypeName}}}.ParseExact' method.}}
-        {{{temporalTypeName}}}.ParseExact("01/02/2000", "dd/MM/yyyy", CultureInfo.InvariantCulture);                                              // Compliant
+        {{{temporalTypeName}}}.ParseExact("01/02/2000", "dd/MM/yyyy", null);                            // Noncompliant {{Pass an 'IFormatProvider' to the '{{{temporalTypeName}}}.ParseExact' method.}}
+        {{{temporalTypeName}}}.ParseExact("01/02/2000", "dd/MM/yyyy", CultureInfo.InvariantCulture);    // Compliant
 
-        {{{temporalTypeName}}}.ParseExact("01/02/2000".AsSpan(), "dd/MM/yyyy".AsSpan(), null);                                                    // Noncompliant
-        {{{temporalTypeName}}}.ParseExact("01/02/2000".AsSpan(), "dd/MM/yyyy".AsSpan(), CultureInfo.InvariantCulture);                            // Compliant
+        {{{temporalTypeName}}}.ParseExact("01/02/2000".AsSpan(), "dd/MM/yyyy".AsSpan(), null);                                                         // Noncompliant
+        {{{temporalTypeName}}}.ParseExact("01/02/2000".AsSpan(), "dd/MM/yyyy".AsSpan(), CultureInfo.InvariantCulture);                                 // Compliant
 
         {{{temporalTypeName}}}.ParseExact("01/02/2000", "dd/MM/yyyy", null, {{{styleTypeName}}}.None);                                                 // Noncompliant
         {{{temporalTypeName}}}.ParseExact("01/02/2000", "dd/MM/yyyy", CultureInfo.InvariantCulture, {{{styleTypeName}}}.None);                         // Compliant
@@ -89,8 +89,8 @@ class Test
     {
         {{{temporalTypeName}}} parsedDate;
 
-        {{{temporalTypeName}}}.TryParse("01/02/2000", out parsedDate);                                                                // Noncompliant {{Pass an 'IFormatProvider' to the '{{{temporalTypeName}}}.TryParse' method.}}
-        {{{temporalTypeName}}}.TryParse("01/02/2000".AsSpan(), out parsedDate);                                                       // Noncompliant
+        {{{temporalTypeName}}}.TryParse("01/02/2000", out parsedDate);          // Noncompliant {{Pass an 'IFormatProvider' to the '{{{temporalTypeName}}}.TryParse' method.}}
+        {{{temporalTypeName}}}.TryParse("01/02/2000".AsSpan(), out parsedDate); // Noncompliant
 
         {{{temporalTypeName}}}.TryParse("01/02/2000", null, out parsedDate);                                                          // Noncompliant
         {{{temporalTypeName}}}.TryParse("01/02/2000", CultureInfo.InvariantCulture, out parsedDate);                                  // Compliant
@@ -103,7 +103,13 @@ class Test
     {
         {{{temporalTypeName}}} parsedDate;
 
-        {{{temporalTypeName}}}.TryParseExact("01/02/2000", "dd/MM/yyyy", null, {{{styleTypeName}}}.None, out parsedDate);                                                              // Noncompliant {{Pass an 'IFormatProvider' to the '{{{temporalTypeName}}}.TryParseExact' method.}}
+        {{{temporalTypeName}}}.TryParseExact(   // Noncompliant {{Pass an 'IFormatProvider' to the '{{{temporalTypeName}}}.TryParseExact' method.}}
+            "01/02/2000",
+            "dd/MM/yyyy",
+            null,
+            {{{styleTypeName}}}.None,
+            out parsedDate);
+
         {{{temporalTypeName}}}.TryParseExact("01/02/2000", "dd/MM/yyyy", CultureInfo.InvariantCulture, {{{styleTypeName}}}.None, out parsedDate);                                      // Compliant
 
         {{{temporalTypeName}}}.TryParseExact("01/02/2000".AsSpan(), "dd/MM/yyyy", null, {{{styleTypeName}}}.None, out parsedDate);                                                     // Noncompliant
@@ -146,8 +152,8 @@ Class Test
     End Sub
 
     Sub ParseExactOverloads()
-        {{{temporalTypeName}}}.ParseExact("01/02/2000", "dd/MM/yyyy", Nothing)                                                           ' Noncompliant {{Pass an 'IFormatProvider' to the '{{{temporalTypeName}}}.ParseExact' method.}}
-        {{{temporalTypeName}}}.ParseExact("01/02/2000", "dd/MM/yyyy", CultureInfo.InvariantCulture)                                      ' Compliant
+        {{{temporalTypeName}}}.ParseExact("01/02/2000", "dd/MM/yyyy", Nothing)                      ' Noncompliant {{Pass an 'IFormatProvider' to the '{{{temporalTypeName}}}.ParseExact' method.}}
+        {{{temporalTypeName}}}.ParseExact("01/02/2000", "dd/MM/yyyy", CultureInfo.InvariantCulture) ' Compliant
 
         {{{temporalTypeName}}}.ParseExact("01/02/2000".AsSpan(), "dd/MM/yyyy".AsSpan(), Nothing)                                         ' Noncompliant
         {{{temporalTypeName}}}.ParseExact("01/02/2000".AsSpan(), "dd/MM/yyyy".AsSpan(), CultureInfo.InvariantCulture)                    ' Compliant
@@ -175,7 +181,7 @@ Class Test
     Sub TryParseExactOverloads()
         Dim parsedDate As {{{temporalTypeName}}}
 
-        {{{temporalTypeName}}}.TryParseExact("01/02/2000", "dd/MM/yyyy", Nothing, {{{styleTypeName}}}.None, parsedDate)                                                ' Noncompliant {{Pass an 'IFormatProvider' to the '{{{temporalTypeName}}}.TryParseExact' method.}}
+        {{{temporalTypeName}}}.TryParseExact("01/02/2000", "dd/MM/yyyy", Nothing, {{{styleTypeName}}}.None, parsedDate) ' Noncompliant {{Pass an 'IFormatProvider' to the '{{{temporalTypeName}}}.TryParseExact' method.}}
         {{{temporalTypeName}}}.TryParseExact("01/02/2000", "dd/MM/yyyy", CultureInfo.InvariantCulture, {{{styleTypeName}}}.None, parsedDate)                           ' Compliant
 
         {{{temporalTypeName}}}.TryParseExact("01/02/2000".AsSpan(), "dd/MM/yyyy", Nothing, {{{styleTypeName}}}.None, parsedDate)                                       ' Noncompliant
