@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6580",
+"message":  "Pass an 'IFormatProvider' to the 'DateTime.Parse' method.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  286,
+"startColumn":  43,
+"endLine":  286,
+"endColumn":  66
+}
+}
+}
+]
+}

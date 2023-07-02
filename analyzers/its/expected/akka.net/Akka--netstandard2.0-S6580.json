@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6580",
+"message":  "Pass an 'IFormatProvider' to the 'TimeSpan.Parse' method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\OpenCircuitException.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  33,
+"endLine":  94,
+"endColumn":  57
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6580",
+"message":  "Pass an 'IFormatProvider' to the 'DateTime.TryParse' method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  25,
+"endLine":  109,
+"endColumn":  128
+}
+}
+}
+]
+}
