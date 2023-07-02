@@ -1,0 +1,18 @@
+{
+  "title": "When parsing \"DateTime\" strings, always use overloads with an \"IFormatProvider\" parameter",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "pitfall",
+    "bug"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6580",
+  "sqKey": "S6580",
+  "scope": "All",
+  "quickfix": "infeasible"
+}
