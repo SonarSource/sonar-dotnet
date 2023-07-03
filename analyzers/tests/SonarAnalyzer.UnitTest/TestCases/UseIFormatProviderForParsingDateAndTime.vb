@@ -59,14 +59,12 @@ End Class
 
 Class CustomTypeCalledDateTime
     Public Structure DateTime
-        Public Shared ReadOnly Property Now As DateTime
-            Get
-                Return New DateTime()
-            End Get
-        End Property
+        Public Shared Function Parse(s As String) As DateTime
+            Return New DateTime()
+        End Function
     End Structure
 
     Sub New()
-        Dim currentTime = DateTime.Now                                          ' Compliant - this is not System.DateTime
+        Dim currentTime = DateTime.Parse("01/02/2000")                          ' Compliant - this is not System.DateTime
     End Sub
 End Class

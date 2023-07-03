@@ -74,11 +74,11 @@ class CustomTypeCalledDateTime
 {
     public struct DateTime
     {
-        public static DateTime Now => new DateTime();
+        public static DateTime Parse(string s) => new DateTime();
     }
 
     CustomTypeCalledDateTime()
     {
-        _ = DateTime.Now;                               // Compliant - this is not System.DateTime
+        _ = DateTime.Parse("01/02/2000");               // Compliant - this is not System.DateTime
     }
 }
