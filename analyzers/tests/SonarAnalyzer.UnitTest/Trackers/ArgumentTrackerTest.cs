@@ -432,6 +432,29 @@ public class ArgumentTrackerTest
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
     }
 
+    [DataTestMethod]
+    [DataRow("""Dim a = new Dictionary(Of TKey, TValue)($$1)""", "capacity", 0, true)]
+    [DataRow("""Dim a = new Dictionary(Of Integer, TValue)($$1)""", "capacity", 0, true)]
+    [DataRow("""Dim a = new Dictionary(Of Integer, String)($$1)""", "capacity", 0, true)]
+    [DataRow("""Dim a = New Dictionary(Of TKey, TValue)($$1, EqualityComparer(Of TKey).Default)""", "capacity", 0, true)]
+    [DataRow("""Dim a = new Dictionary(Of TKey, TValue)(1, $$EqualityComparer(Of TKey).Default)""", "comparer", 1, true)]
+    public void Constructor_Generic_VB(string constructor, string parameterName, int argumentPosition, bool expected)
+    {
+        var snippet = $$"""
+            Imports System.Collections.Generic
+
+            Class C
+                Public Sub M(Of TKey, TValue)()
+                    {{constructor}}
+                End Sub
+            End Class
+            """;
+        var (node, model) = ArgumentAndModelVB(snippet);
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_Dictionary_TKey_TValue, parameterName, argumentPosition);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
     [TestMethod]
     public void Constructor_BaseCall()
     {
@@ -455,6 +478,32 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_List_T, "capacity", 0);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void Constructor_BaseCall_VB()
+    {
+        var snippet = $$"""
+            Imports System.Collections.Generic
+
+            Class MyList
+                Inherits List(Of Integer)
+
+                Public Sub New(ByVal capacity As Integer)
+                    MyBase.New(capacity) ' Passing of the parameter to the base constructor is not followed
+                End Sub
+            End Class
+
+            Public Class Test
+                Public Sub M()
+                    Dim a = New MyList($$1) ' Requires tracking of the parameter to the base constructor
+                End Sub
+            End Class
+            """;
+        var (node, model) = ArgumentAndModelVB(snippet);
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_List_T, "capacity", 0);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeFalse();
     }
 
     [DataTestMethod]
