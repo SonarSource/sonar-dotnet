@@ -28,13 +28,19 @@ public class UseDateTimeInsteadOfDateTimeOffsetTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseDateTimeInsteadOfDateTimeOffset>();
 
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseDateTimeInsteadOfDateTimeOffset>();
-
     [TestMethod]
     public void UseDateTimeInsteadOfDateTimeOffset_CS() =>
         builderCS.AddPaths("UseDateTimeInsteadOfDateTimeOffset.cs").Verify();
 
+#if NET
+
+    [TestMethod]
+    public void UseDateTimeInsteadOfDateTimeOffset_CSharp9() =>
+        builderCS.AddPaths("UseDateTimeInsteadOfDateTimeOffset.CSharp9.cs").WithTopLevelStatements().Verify();
+
+#endif
+
     [TestMethod]
     public void UseDateTimeInsteadOfDateTimeOffset_VB() =>
-        builderVB.AddPaths("UseDateTimeInsteadOfDateTimeOffset.vb").Verify();
+        new VerifierBuilder<VB.UseDateTimeInsteadOfDateTimeOffset>().AddPaths("UseDateTimeInsteadOfDateTimeOffset.vb").Verify();
 }
