@@ -472,19 +472,6 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
-"region":  {
-"startLine":  109,
-"startColumn":  25,
-"endLine":  109,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\Times.cs",
 "region":  {
 "startLine":  18,

@@ -32,19 +32,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {
-"startLine":  286,
-"startColumn":  43,
-"endLine":  286,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
-"region":  {
 "startLine":  290,
 "startColumn":  35,
 "endLine":  290,

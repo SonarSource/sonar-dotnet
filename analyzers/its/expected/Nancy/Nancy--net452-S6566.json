@@ -43,32 +43,6 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  115,
-"startColumn":  29,
-"endLine":  115,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  546,
-"startColumn":  20,
-"endLine":  546,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
 "region":  {
 "startLine":  208,
@@ -88,45 +62,6 @@
 "startColumn":  27,
 "endLine":  215,
 "endColumn":  39
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
-"region":  {
-"startLine":  457,
-"startColumn":  17,
-"endLine":  457,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\CustomDateTimeRouteSegmentConstraint.cs",
-"region":  {
-"startLine":  31,
-"startColumn":  20,
-"endLine":  31,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\DateTimeRouteSegmentConstraint.cs",
-"region":  {
-"startLine":  30,
-"startColumn":  20,
-"endLine":  30,
-"endColumn":  37
 }
 }
 }
