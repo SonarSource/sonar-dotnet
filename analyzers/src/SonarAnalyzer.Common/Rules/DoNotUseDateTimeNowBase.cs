@@ -25,16 +25,30 @@ public abstract class DoNotUseDateTimeNowBase<TSyntaxKind> : SonarDiagnosticAnal
 {
     private const string DiagnosticId = "S6563";
 
-    protected override string MessageFormat => "Do not use 'DateTime.Now' for recording DateTime instants";
+    protected override string MessageFormat => "Do not use 'DateTime.Now' for recording instants";
 
     protected DoNotUseDateTimeNowBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, context =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            if (true)
-            {
-                context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation()));
-            }
+            if (IsDateTimeNowOrToday(c.Node, c.SemanticModel)
+                || IsDateTimeOffsetNowDateTime(c.Node, c.SemanticModel))
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                }
         }, Language.SyntaxKind.SimpleMemberAccessExpression);
+
+    private bool IsDateTimeNowOrToday(SyntaxNode node, SemanticModel semanticModel) =>
+        MatchesAnyProperty(node, semanticModel, KnownType.System_DateTime, nameof(DateTime.Now), nameof(DateTime.Today));
+
+    private bool IsDateTimeOffsetNowDateTime(SyntaxNode node, SemanticModel semanticModel) =>
+        MatchesAnyProperty(node, semanticModel, KnownType.System_DateTimeOffset, nameof(DateTimeOffset.DateTime), nameof(DateTimeOffset.Date))
+        && MatchesAnyProperty(Language.Syntax.NodeExpression(node), semanticModel, KnownType.System_DateTimeOffset, nameof(DateTimeOffset.Now));
+
+    private bool MatchesAnyProperty(SyntaxNode node, SemanticModel semanticModel, KnownType containingType, params string[] propertyNames) =>
+        Language.Syntax.NodeIdentifier(node) is { IsMissing: false } identifier
+        && propertyNames.Any(x => identifier.ValueText.Equals(x, Language.NameComparison))
+        && semanticModel.GetSymbolInfo(node) is { Symbol: IPropertySymbol propertySymbol }
+        && containingType.Matches(propertySymbol.ContainingType);
 }

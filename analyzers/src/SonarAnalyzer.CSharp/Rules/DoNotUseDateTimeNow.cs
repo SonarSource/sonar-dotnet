@@ -24,15 +24,4 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class DoNotUseDateTimeNow : DoNotUseDateTimeNowBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.SimpleMemberAccessExpression);
 }
