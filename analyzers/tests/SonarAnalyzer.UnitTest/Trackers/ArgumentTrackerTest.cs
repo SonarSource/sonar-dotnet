@@ -288,6 +288,37 @@ public class ArgumentTrackerTest
     }
 
     [DataTestMethod]
+    [DataRow("""comparer.Compare($$Nothing, Nothing)""")]
+    [DataRow("""Call New MyComparer(Of Integer)().Compare($$1, 2)""")]
+    public void Method_Inheritance_BaseClasses_Generics_VB(string invocation)
+    {
+        var snippet = $$"""
+            Imports System.Collections.Generic
+
+            Public Class MyComparer(Of T)
+                Inherits Comparer(Of T)
+
+                Public Sub New()
+                End Sub
+
+                Public Overrides Function Compare(ByVal a As T, ByVal b As T) As Integer
+                    Return 1
+                End Function
+            End Class
+
+            Public Class Test
+                Private Sub M(Of T)(ByVal comparer As MyComparer(Of T))
+                    {{invocation}}
+                End Sub
+            End Class
+            """;
+        var (node, model) = ArgumentAndModelVB(snippet);
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Collections_Generic_Comparer_T, "Compare", "x", 0);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
     [DataRow("""OnInsert($$1, null);""")]
     [DataRow("""OnInsert(position: $$1, null);""")]
     public void Method_Inheritance_BaseClasses_Overrides(string invocation)
@@ -311,24 +342,49 @@ public class ArgumentTrackerTest
     }
 
     [DataTestMethod]
+    [DataRow("""OnInsert($$1, Nothing)""")]
+    [DataRow("""OnInsert(position:= $$1, Nothing)""")]
+    public void Method_Inheritance_BaseClasses_Overrides_VB(string invocation)
+    {
+        var snippet = $$"""
+            Imports System.Collections
+
+            Public Class Collection(Of T)
+                Inherits CollectionBase
+
+                Protected Overrides Sub OnInsert(ByVal position As Integer, ByVal value As Object)
+                End Sub
+
+                Private Sub M(ByVal arg As T)
+                    {{invocation}}
+                End Sub
+            End Class
+            """;
+        var (node, model) = ArgumentAndModelVB(snippet);
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Collections_CollectionBase, "OnInsert", "index", 0);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
     [DataRow("""ProcessStartInfo($$"fileName")""", "fileName", 0, true)]
     [DataRow("""ProcessStartInfo($$"fileName")""", "arguments", 1, false)]
     [DataRow("""ProcessStartInfo("fileName", $$"arguments")""", "arguments", 1, true)]
     [DataRow("""ProcessStartInfo("fileName", $$"arguments")""", "arguments", 0, false)]
     [DataRow("""ProcessStartInfo($$"fileName", "arguments")""", "arguments", 1, false)]
-    [DataRow("""ProcessStartInfo(arguments: $$"arguments", fileName: "fileName")""", "arguments", 1, true)]
-    [DataRow("""ProcessStartInfo(arguments: $$"arguments", fileName: "fileName")""", "fileName", 0, false)]
-    [DataRow("""ProcessStartInfo(arguments: "arguments", $$fileName: "fileName")""", "fileName", 0, true)]
-    [DataRow("""ProcessStartInfo(arguments: "arguments", $$fileName: "fileName")""", "arguments", 1, false)]
+    [DataRow("""ProcessStartInfo(arguments:= $$"arguments", fileName:= "fileName")""", "arguments", 1, true)]
+    [DataRow("""ProcessStartInfo(arguments:= $$"arguments", fileName:= "fileName")""", "fileName", 0, false)]
+    [DataRow("""ProcessStartInfo(arguments:= "arguments", $$fileName:= "fileName")""", "fileName", 0, true)]
+    [DataRow("""ProcessStartInfo(arguments:= "arguments", $$fileName:= "fileName")""", "arguments", 1, false)]
     public void Constructor_SimpleArgument(string constructor, string parameterName, int argumentPosition, bool expected)
     {
         var snippet = $$"""
-            _ = new System.Diagnostics.{{constructor}};
+            Dim a = New System.Diagnostics.{{constructor}}
             """;
-        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Diagnostics_ProcessStartInfo, parameterName, argumentPosition);
-        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
     }
 
     [DataTestMethod]
