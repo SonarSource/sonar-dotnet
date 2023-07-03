@@ -1,10 +1,13 @@
 <h2>Why is this an issue?</h2>
-<p>When a non-<code>static</code> class field is annotated with <code>ThreadStatic</code>, the code seems to show that the field can have different
-values for different calling threads, but that’s not the case, since the <code>ThreadStatic</code> attribute is simply ignored on
-non-<code>static</code> fields.</p>
-<p>So <code>ThreadStatic</code> should either be removed or replaced with a use of the <code>ThreadLocal&lt;T&gt;</code> class, which gives a similar
-behavior for non-<code>static</code> fields.</p>
-<h3>Noncompliant code example</h3>
+<p>When you annotate a field with the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threadstaticattribute"><code>ThreadStatic</code>
+attribute</a>, it is an indication that the value of this field is unique for each thread. But if you don’t mark the field as <code>static</code>,
+then the <code>ThreadStatic</code> attribute is ignored.</p>
+<p>The <code>ThreadStatic</code> attribute should either be removed or replaced with the use of <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadlocal-1"><code>ThreadLocal&lt;T&gt;</code></a> class, which gives a similar
+behavior for non-static fields.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <pre>
 public class MyClass
 {
@@ -14,7 +17,7 @@ public class MyClass
   // ...
 }
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <pre>
 public class MyClass
 {
@@ -36,4 +39,10 @@ public class MyClass
   // ...
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threadstaticattribute">ThreadStaticAttribute Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadlocal-1">ThreadLocal&lt;T&gt; Class</a> </li>
+</ul>
 

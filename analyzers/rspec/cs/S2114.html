@@ -1,6 +1,10 @@
 <h2>Why is this an issue?</h2>
-<p>Passing a collection as an argument to the collection’s own method is either an error - some other argument was intended - or simply nonsensical
-code.</p>
+<p>Passing a collection as an argument to the collection’s own method is a code defect. Doing so might either have unexpected side effects or always
+have the same result.</p>
+<p>Another case is using set-like operations. For example, using <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.union">Union</a> between a list and itself will always return the same list.
+Conversely, using <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.except">Except</a> between a list and itself will
+always return an empty list.</p>
 <pre>
 var list = new List&lt;int&gt;();
 
@@ -8,20 +12,25 @@ list.AddRange(list);          // Noncompliant
 list.Concat(list);            // Noncompliant
 
 list.Union(list);             // Noncompliant: always returns list
-list.Except(list);            // Noncompliant: always empty
-list.Intersect(list);         // Noncompliant: always list
-list.SequenceEqual(list);     // Noncompliant: always true
+list.Intersect(list);         // Noncompliant: always returns list
+list.Except(list);            // Noncompliant: always returns empty
+list.SequenceEqual(list);     // Noncompliant: always returns true
 
 var set = new HashSet&lt;int&gt;();
 set.UnionWith(set);           // Noncompliant: no changes
-set.ExceptWith(set);          // Noncompliant: always empty
 set.IntersectWith(set);       // Noncompliant: no changes
-set.IsProperSubsetOf(set);    // Noncompliant: always false
-set.IsProperSupersetOf(set);  // Noncompliant: always false
-set.IsSubsetOf(set);          // Noncompliant: always true
-set.IsSupersetOf(set);        // Noncompliant: always true
-set.Overlaps(set);            // Noncompliant: always true
-set.SetEquals(set);           // Noncompliant: always true
-set.SymmetricExceptWith(set); // Noncompliant: always empty
+set.ExceptWith(set);          // Noncompliant: always returns empty
+set.SymmetricExceptWith(set); // Noncompliant: always returns empty
+set.IsProperSubsetOf(set);    // Noncompliant: always returns false
+set.IsProperSupersetOf(set);  // Noncompliant: always returns false
+set.IsSubsetOf(set);          // Noncompliant: always returns true
+set.IsSupersetOf(set);        // Noncompliant: always returns true
+set.Overlaps(set);            // Noncompliant: always returns true
+set.SetEquals(set);           // Noncompliant: always returns true
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/collections">Collections</a> </li>
+</ul>
 

@@ -11,5 +11,5 @@
   "ruleSpecification": "RSPEC-2345",
   "sqKey": "S2345",
   "scope": "All",
-  "quickfix": "unknown"
+  "quickfix": "targeted"
 }

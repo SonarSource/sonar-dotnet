@@ -1,9 +1,18 @@
 <h2>Why is this an issue?</h2>
-<p>When declaring a Windows Communication Foundation (WCF) <code>OperationContract</code> method one-way, that service method won’t return any result,
-not even an underlying empty confirmation message. These are fire-and-forget methods that are useful in event-like communication. Specifying a return
-type therefore does not make sense.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>When declaring a Windows Communication Foundation (WCF) <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.servicemodel.operationcontractattribute?view=dotnet-plat-ext-7.0"><code>OperationContract</code></a>
+method as <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.servicemodel.operationcontractattribute.isoneway?view=dotnet-plat-ext-7.0"><code>one-way</code></a>,
+that service method won’t return any result, not even an underlying empty confirmation message. These are fire-and-forget methods that are useful in
+event-like communication. Therefore, specifying a return type has no effect and can confuse readers.</p>
+<h3>Exceptions</h3>
+<p>The rule doesn’t report if <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.servicemodel.operationcontractattribute.asyncpattern"><code>OperationContractAttribute.AsyncPattern</code></a>
+is set to <code>true</code>.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 [ServiceContract]
 interface IMyService
 {
@@ -11,8 +20,8 @@ interface IMyService
   int SomethingHappened(int parameter); // Noncompliant
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 [ServiceContract]
 interface IMyService
 {
@@ -20,6 +29,8 @@ interface IMyService
   void SomethingHappened(int parameter);
 }
 </pre>
-<h3>Exceptions</h3>
-<p>The rule doesn’t report if <code>OperationContractAttribute.AsyncPattern</code> is set to <code>true</code>.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<p>Microsoft Learn - <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.servicemodel.operationcontractattribute">OperationContractAttribute</a></p>
 
