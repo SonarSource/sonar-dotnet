@@ -18,9 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias csharp;
+extern alias vbnet;
+
 using Moq;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
+using CSharpSyntaxNodeExtensions = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using VBSyntaxNodeExtensions = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -408,11 +413,11 @@ End Namespace
 
             IEnumerable<(SyntaxNode node, string name)> GetCSharpNodes() =>
                 snippet.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, CSharpSyntaxHelper.GetIdentifier(n.Expression)?.ValueText));
+                    .Select(n => ((SyntaxNode)n, CSharpSyntaxNodeExtensions.GetIdentifier(n.Expression)?.ValueText));
 
             IEnumerable<(SyntaxNode node, string name)> GetVbNodes() =>
                 snippet.GetNodes<VBSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.ValueText));
+                    .Select(n => ((SyntaxNode)n, VBSyntaxNodeExtensions.GetIdentifier(n.Expression)?.ValueText));
         }
 
         private static void CheckExactMatchOnly_OverridesAreNotMatched(SnippetCompiler snippet)

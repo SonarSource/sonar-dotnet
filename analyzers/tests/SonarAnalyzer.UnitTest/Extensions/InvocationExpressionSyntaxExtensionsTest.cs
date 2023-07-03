@@ -132,6 +132,14 @@ namespace SonarAnalyzer.UnitTest.Extensions
             right.Should().BeNull();
         }
 
+        [TestMethod]
+        public void GetMethodCallIdentifier_Null_CS() =>
+            SyntaxNodeExtensionsCS.GetMethodCallIdentifier(null).Should().BeNull();
+
+        [TestMethod]
+        public void GetMethodCallIdentifier_Null_VB() =>
+            SyntaxNodeExtensionsVB.GetMethodCallIdentifier(null).Should().BeNull();
+
         private static SyntaxNode NodeBetweenMarkers(string code, string language)
         {
             var position = code.IndexOf("$$");

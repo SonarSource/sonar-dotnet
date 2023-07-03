@@ -18,9 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+extern alias csharp;
+extern alias vbnet;
+
 using SonarAnalyzer.Extensions;
+using CS = Microsoft.CodeAnalysis.CSharp;
+using CSSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
+using SyntaxNodeExtensionsCS = csharp::SonarAnalyzer.Extensions.ObjectCreationExpressionSyntaxExtensions;
+using SyntaxNodeExtensionsVB = vbnet::SonarAnalyzer.Extensions.ObjectCreationExpressionSyntaxExtensions;
 
 namespace SonarAnalyzer.UnitTest.Extensions
 {
@@ -36,15 +41,23 @@ namespace SonarAnalyzer.UnitTest.Extensions
         {
             var compilation = CreateCompilation(code);
             var syntaxTree = compilation.SyntaxTrees.First();
-            var objectCreation = syntaxTree.First<ObjectCreationExpressionSyntax>();
+            var objectCreation = syntaxTree.First<CSSyntax.ObjectCreationExpressionSyntax>();
 
             objectCreation.IsKnownType(KnownType.System_DateTime, compilation.GetSemanticModel(syntaxTree)).Should().Be(expectedResult);
         }
 
-        private static CSharpCompilation CreateCompilation(string code) =>
-            CSharpCompilation.Create("TempAssembly.dll")
-                             .AddSyntaxTrees(CSharpSyntaxTree.ParseText(code))
+        [TestMethod]
+        public void GetObjectCreationTypeIdentifier_Null_CS() =>
+            SyntaxNodeExtensionsCS.GetObjectCreationTypeIdentifier(null).Should().BeNull();
+
+        [TestMethod]
+        public void GetObjectCreationTypeIdentifier_Null_VB() =>
+            SyntaxNodeExtensionsVB.GetObjectCreationTypeIdentifier(null).Should().BeNull();
+
+        private static CS.CSharpCompilation CreateCompilation(string code) =>
+            CS.CSharpCompilation.Create("TempAssembly.dll")
+                             .AddSyntaxTrees(CS.CSharpSyntaxTree.ParseText(code))
                              .AddReferences(MetadataReferenceFacade.ProjectDefaultReferences)
-                             .WithOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+                             .WithOptions(new CS.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
     }
 }
