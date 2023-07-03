@@ -24,4 +24,9 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 public sealed class DoNotUseDateTimeNow : DoNotUseDateTimeNowBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override bool IsInsideNameOf(SyntaxNode node) =>
+        node.Ancestors()
+            .OfType<NameOfExpressionSyntax>()
+            .Any();
 }

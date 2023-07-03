@@ -24,4 +24,9 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class DoNotUseDateTimeNow : DoNotUseDateTimeNowBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override bool IsInsideNameOf(SyntaxNode node) =>
+        node.Ancestors()
+            .OfType<InvocationExpressionSyntax>()
+            .Any(x => x.Expression is IdentifierNameSyntax { Identifier.ValueText: "nameof" });
 }

@@ -28,12 +28,11 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class DoNotUseDateTimeNowTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotUseDateTimeNow>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotUseDateTimeNow>();
 
     [TestMethod]
     public void DoNotUseDateTimeNow_CS() =>
         builderCS.AddPaths("DoNotUseDateTimeNow.cs").Verify();
-
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotUseDateTimeNow>();    // FIXME: Move this up
 
     [TestMethod]
     public void DoNotUseDateTimeNow_VB() =>

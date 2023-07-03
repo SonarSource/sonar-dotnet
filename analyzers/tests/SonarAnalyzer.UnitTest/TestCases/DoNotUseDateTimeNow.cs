@@ -38,6 +38,8 @@ class Test
         {
             var now = DateTime.Now;                                                 // Noncompliant
         }
+
+        var propertyName = nameof(DateTime.Now);
     }
 }
 

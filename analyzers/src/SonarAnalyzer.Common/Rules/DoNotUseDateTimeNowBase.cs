@@ -27,13 +27,15 @@ public abstract class DoNotUseDateTimeNowBase<TSyntaxKind> : SonarDiagnosticAnal
 
     protected override string MessageFormat => "Do not use 'DateTime.Now' for recording instants";
 
+    protected abstract bool IsInsideNameOf(SyntaxNode node);
+
     protected DoNotUseDateTimeNowBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            if (IsDateTimeNowOrToday(c.Node, c.SemanticModel)
-                || IsDateTimeOffsetNowDateTime(c.Node, c.SemanticModel))
+            if ((IsDateTimeNowOrToday(c.Node, c.SemanticModel) || IsDateTimeOffsetNowDateTime(c.Node, c.SemanticModel))
+                && !IsInsideNameOf(c.Node))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                 }
