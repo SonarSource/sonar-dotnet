@@ -33,12 +33,7 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind> : Sona
             "UnixEpoch",
             "Now",
             "Today",
-            "UtcNow",
-            "Parse",
-            "ParseExact",
-            "SpecifyKind",
-            "TryParse",
-            "TryParseExact");
+            "UtcNow");
 
     protected abstract bool IsNamedDateTime(SyntaxNode node);
 

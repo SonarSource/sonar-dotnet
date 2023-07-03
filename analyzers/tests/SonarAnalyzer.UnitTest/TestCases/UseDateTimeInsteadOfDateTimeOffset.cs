@@ -58,10 +58,9 @@ public class Program
         date.GetTypeCode();
         date.IsDaylightSavingTime();
         DateTime.IsLeapYear(1);
-        DateTime.Parse("06/01/1993");                          // Noncompliant
-//      ^^^^^^^^^^^^^^
-        DateTime.ParseExact("06/01/1993", "dd/MM/yyyy", null); // Noncompliant
-        DateTime.SpecifyKind(date, DateTimeKind.Local);        // Noncompliant
+        DateTime.Parse("06/01/1993");
+        DateTime.ParseExact("06/01/1993", "dd/MM/yyyy", null);
+        DateTime.SpecifyKind(date, DateTimeKind.Local);
         date.Subtract(date);
         date.ToBinary();
         date.ToFileTime();
@@ -73,13 +72,14 @@ public class Program
         date.ToShortTimeString();
         date.ToString();
         date.ToUniversalTime();
-        DateTime.TryParse("06/01/1993", out date);                                                                                    // Noncompliant
-        DateTime.TryParseExact("06/01/1993", "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date); // Noncompliant
+        DateTime.TryParse("06/01/1993", out date);
+        DateTime.TryParseExact("06/01/1993", "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date);
     }
 
     void EdgeCases()
     {
         var a = DateTime.Now.AddDays(-1).Ticks; // Noncompliant
+        var b = new DateTimeOffset(DateTime.Now); // Noncompliant
     }
 }
 

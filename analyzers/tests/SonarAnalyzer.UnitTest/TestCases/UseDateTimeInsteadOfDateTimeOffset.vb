@@ -69,10 +69,9 @@ Public Class Program
         [date].GetTypeCode()
         [date].IsDaylightSavingTime()
         Date.IsLeapYear(1)
-        Date.Parse("06/01/1993")                          ' Noncompliant
-'       ^^^^^^^^^^
-        Date.ParseExact("06/01/1993", "dd/MM/yyyy", Nothing) ' Noncompliant
-        Date.SpecifyKind([date], DateTimeKind.Local)        ' Noncompliant
+        Date.Parse("06/01/1993")
+        Date.ParseExact("06/01/1993", "dd/MM/yyyy", Nothing)
+        Date.SpecifyKind([date], DateTimeKind.Local)
         [date].Subtract([date])
         [date].ToBinary()
         [date].ToFileTime()
@@ -85,7 +84,7 @@ Public Class Program
         [date].ToString()
         [date].ToUniversalTime()
         Dim myInt As Integer = Nothing
-        Date.TryParse("06/01/1993", [date])                                                                                    ' Noncompliant
-        Date.TryParseExact("06/01/1993", "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, [date]) ' Noncompliant
+        Date.TryParse("06/01/1993", [date])
+        Date.TryParseExact("06/01/1993", "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, [date])
     End Sub
 End Class
