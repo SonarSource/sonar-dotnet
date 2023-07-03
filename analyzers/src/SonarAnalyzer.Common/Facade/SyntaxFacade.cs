@@ -43,6 +43,7 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract SyntaxNode CastExpression(SyntaxNode cast);
     public abstract IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum);
     public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
+    public abstract SyntaxToken? ObjectCreationTypeIdentifier(SyntaxNode objectCreation);
     public abstract ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node);
     public abstract ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node);
     public abstract TSyntaxKind[] ModifierKinds(SyntaxNode node);

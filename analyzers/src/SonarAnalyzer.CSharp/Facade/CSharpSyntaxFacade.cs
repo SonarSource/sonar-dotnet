@@ -90,6 +90,9 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
         invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
 
+    public override SyntaxToken? ObjectCreationTypeIdentifier(SyntaxNode objectCreation) =>
+        objectCreation == null ? null : Cast<ObjectCreationExpressionSyntax>(objectCreation).GetObjectCreationTypeIdentifier();
+
     public override ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node) =>
         Cast<LocalDeclarationStatementSyntax>(node).Declaration.Variables.Select(x => x.Identifier).ToImmutableArray();
 

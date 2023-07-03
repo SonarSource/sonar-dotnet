@@ -24,4 +24,21 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class AlwaysSetDateTimeKind : AlwaysSetDateTimeKindBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override SyntaxKind ObjectCreationExpression => SyntaxKind.ObjectCreationExpression;
+
+    protected override string[] ValidNames { get; } = new[] { "DateTime" };
+
+    protected override void Initialize(SonarAnalysisContext context)
+    {
+        base.Initialize(context);
+        context.RegisterNodeAction(c =>
+        {
+            if (IsDateTimeConstructorWithoutKindParameter(c.Node, c.SemanticModel))
+            {
+                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+            }
+        },
+        SyntaxKindEx.ImplicitObjectCreationExpression);
+    }
 }

@@ -24,4 +24,8 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 public sealed class AlwaysSetDateTimeKind : AlwaysSetDateTimeKindBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override SyntaxKind ObjectCreationExpression => SyntaxKind.ObjectCreationExpression;
+
+    protected override string[] ValidNames { get; } = new[] { "DateTime", "Date" };
 }

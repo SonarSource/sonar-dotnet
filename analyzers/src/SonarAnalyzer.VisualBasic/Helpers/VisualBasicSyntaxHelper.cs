@@ -104,32 +104,23 @@ internal static class VisualBasicSyntaxHelper
     public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
         nodes.Any(n => n.RawKind == (int)kind);
 
-    public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation)
-    {
-        if (invocation == null ||
-            invocation.Expression == null)
-        {
-            return null;
-        }
+    public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation) =>
+        invocation == null
+        || invocation.Expression == null
+            ? null
+            : GetIdentifier(invocation.Expression);
 
-        var expressionType = invocation.Expression.Kind();
-        // in vb.net when using the null - conditional operator (e.g.handle?.IsClosed), the parser
-        // will generate a SimpleMemberAccessExpression and not a MemberBindingExpressionSyntax like for C#
-        switch (expressionType)
-        {
-            case SyntaxKind.IdentifierName:
-                return ((IdentifierNameSyntax)invocation.Expression).Identifier;
-            case SyntaxKind.SimpleMemberAccessExpression:
-                return ((MemberAccessExpressionSyntax)invocation.Expression).Name.Identifier;
-            default:
-                return null;
-        }
-    }
+    public static SyntaxToken? GetObjectCreationTypeIdentifier(this ObjectCreationExpressionSyntax objectCreation) =>
+        objectCreation == null
+        || objectCreation.Type == null
+            ? null
+            : GetIdentifier(objectCreation.Type);
+
     public static bool IsMethodInvocation(this InvocationExpressionSyntax expression, KnownType type, string methodName, SemanticModel semanticModel) =>
         semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
         methodSymbol.IsInType(type) &&
         // vbnet is case insensitive
-        methodName.Equals(methodSymbol.Name, System.StringComparison.InvariantCultureIgnoreCase);
+        methodName.Equals(methodSymbol.Name, StringComparison.InvariantCultureIgnoreCase);
 
     public static bool IsOnBase(this ExpressionSyntax expression) =>
         IsOn(expression, SyntaxKind.MyBaseExpression);

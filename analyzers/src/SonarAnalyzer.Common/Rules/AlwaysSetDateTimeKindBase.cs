@@ -25,6 +25,9 @@ public abstract class AlwaysSetDateTimeKindBase<TSyntaxKind> : SonarDiagnosticAn
 {
     private const string DiagnosticId = "S6562";
 
+    protected abstract TSyntaxKind ObjectCreationExpression { get; }
+    protected abstract string[] ValidNames { get; }
+
     protected override string MessageFormat => "Provide the \"DateTimeKind\" when creating this object.";
 
     protected AlwaysSetDateTimeKindBase() : base(DiagnosticId) { }
@@ -32,12 +35,17 @@ public abstract class AlwaysSetDateTimeKindBase<TSyntaxKind> : SonarDiagnosticAn
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol ctor
-                && ctor.IsInType(KnownType.System_DateTime)
-                && !ctor.Parameters.Any(x => x.IsType(KnownType.System_DateTimeKind)))
+            if (Language.Syntax.ObjectCreationTypeIdentifier(c.Node) is { } identifier
+                && ValidNames.Any(x => x.Equals(identifier.ValueText, Language.NameComparison))
+                && IsDateTimeConstructorWithoutKindParameter(c.Node, c.SemanticModel))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
             }
         },
-        Language.SyntaxKind.ObjectCreationExpressions);
+        ObjectCreationExpression);
+
+    protected static bool IsDateTimeConstructorWithoutKindParameter(SyntaxNode objectCreation, SemanticModel semanticModel) =>
+        semanticModel.GetSymbolInfo(objectCreation).Symbol is IMethodSymbol ctor
+        && ctor.IsInType(KnownType.System_DateTime)
+        && !ctor.Parameters.Any(x => x.IsType(KnownType.System_DateTimeKind));
 }

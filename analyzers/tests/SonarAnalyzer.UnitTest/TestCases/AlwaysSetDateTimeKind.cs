@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using MyAlias = System.DateTime;
 
 public class Program
 {
@@ -14,6 +15,8 @@ public class Program
         dt = new DateTime(1994, 07, 05, 16, 23, 00, 42); // Noncompliant
         dt = new DateTime(1994, 07, 05, 16, 23, 00, 42, new GregorianCalendar()); // Noncompliant
         dt = new DateTime(1994, 07, 05, 16, 23, 00, 42, new GregorianCalendar()); // Noncompliant
+        dt = new MyAlias(); // FN
+        dt = new System.DateTime(); // Noncompliant
     }
 
     public void Compliant()
@@ -24,5 +27,18 @@ public class Program
         dt = new DateTime(1994, 07, 05, 16, 23, 00, 42, DateTimeKind.Utc);
         dt = new DateTime(1994, 07, 05, 16, 23, 00, 42, new GregorianCalendar(), DateTimeKind.Unspecified);
         dt = new DateTime(1994, 07, 05, 16, 23, 00, 42, DateTimeKind.Unspecified);
+    }
+}
+
+public class FakeDateTime
+{
+    private class DateTime
+    {
+
+    }
+
+    private void Compliant()
+    {
+        var dt = new DateTime();
     }
 }

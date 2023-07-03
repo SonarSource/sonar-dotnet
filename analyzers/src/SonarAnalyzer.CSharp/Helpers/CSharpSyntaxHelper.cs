@@ -185,31 +185,11 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation)
-        {
-            if (invocation == null)
-            {
-                return null;
-            }
-            var expression = invocation.Expression;
-            switch (expression.Kind())
-            {
-                case SyntaxKind.IdentifierName:
-                    // method()
-                    return ((IdentifierNameSyntax)expression).Identifier;
+        public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation) =>
+            invocation == null ? null : GetIdentifier(invocation.Expression);
 
-                case SyntaxKind.SimpleMemberAccessExpression:
-                    // foo.method()
-                    return ((MemberAccessExpressionSyntax)expression).Name.Identifier;
-
-                case SyntaxKind.MemberBindingExpression:
-                    // foo?.method()
-                    return ((MemberBindingExpressionSyntax)expression).Name.Identifier;
-
-                default:
-                    return null;
-            }
-        }
+        public static SyntaxToken? GetObjectCreationTypeIdentifier(this ObjectCreationExpressionSyntax objectCreation) =>
+            objectCreation == null ? null : GetIdentifier(objectCreation.Type);
 
         public static bool IsMethodInvocation(this InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
             invocation.Expression.NameIs(methodName) &&
@@ -250,6 +230,7 @@ namespace SonarAnalyzer.Helpers
                 DelegateDeclarationSyntax { Identifier: var identifier } => identifier,
                 DestructorDeclarationSyntax { Identifier: var identifier } => identifier,
                 EnumMemberDeclarationSyntax { Identifier: var identifier } => identifier,
+                IdentifierNameSyntax { Identifier: var identifier } => identifier,
                 IndexerDeclarationSyntax { ThisKeyword: var thisKeyword } => thisKeyword,
                 InvocationExpressionSyntax
                 {
