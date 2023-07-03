@@ -36,7 +36,7 @@ public abstract class AlwaysSetDateTimeKindBase<TSyntaxKind> : SonarDiagnosticAn
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
             if (Language.Syntax.ObjectCreationTypeIdentifier(c.Node) is { } identifier
-                && ValidNames.Any(x => x.Equals(identifier.ValueText, Language.NameComparison))
+                && Array.Exists(ValidNames, x => x.Equals(identifier.ValueText, Language.NameComparison))
                 && IsDateTimeConstructorWithoutKindParameter(c.Node, c.SemanticModel))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
