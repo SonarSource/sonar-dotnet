@@ -10,7 +10,7 @@ href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operato
 <code>!=</code>, the result will always be <code>true</code>.</p>
 <p>Instead, the best way to see whether a variable is equal to <code>NaN</code> is to use the <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.single.isnan">float.IsNaN</a> and <a
-href="https://learn.microsoft.com/en-us/dotnet/api/system.single.isnan">double.IsNaN</a> methods, which work as expected.</p>
+href="https://learn.microsoft.com/en-us/dotnet/api/system.double.isnan">double.IsNaN</a> methods, which work as expected.</p>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -32,7 +32,7 @@ var a = double.NaN;
 
 if (double.IsNaN(a))
 {
-  Console.log("a is not a number");
+  Console.WriteLine("a is not a number");
 }
 if (!double.IsNaN(a))
 {

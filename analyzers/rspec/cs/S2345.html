@@ -1,10 +1,20 @@
 <h2>Why is this an issue?</h2>
-<p>Flags enumerations should not rely on the language to initialize the values of their members. Implicit initialization will set the first member to
-0, and increment the value by one for each subsequent member. This implicit behavior does not allow members to be combined using the bitwise or
-operator in a useful way.</p>
-<p>Instead, 0 and powers of two (i.e. 1, 2, 4, 8, 16, …​) should be used to explicitly initialize all the members.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>When you annotate an <a href="https://learn.microsoft.com/en-us/dotnet/api/system.enum">Enum</a> with the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.flagsattribute">Flags attribute</a>, you must not rely on the values that are automatically
+set by the language to the <code>Enum</code> members, but you should define the enumeration constants in powers of two (1, 2, 4, 8, and so on).
+Automatic value initialization will set the first member to zero and increment the value by one for each subsequent member. As a result, you won’t be
+able to use the enum members with bitwise operators.</p>
+<h3>Exceptions</h3>
+<p>The default initialization of <code>0, 1, 2, 3, 4, …​</code> matches <code>0, 1, 2, 4, 8 …​</code> in the first three values, so no issue is
+reported if the first three members of the enumeration are not initialized.</p>
+<h2>How to fix it</h2>
+<p>Define enumeration constants in powers of two, that is, 1, 2, 4, 8, and so on.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+var bananaAndStrawberry = FruitType.Banana | FruitType.Strawberry;
+Console.WriteLine(bananaAndStrawberry.ToString());  // Will display only "Strawberry"
+
 [Flags]
 enum FruitType    // Noncompliant
 {
@@ -13,18 +23,12 @@ enum FruitType    // Noncompliant
   Orange,
   Strawberry
 }
-class Program
-{
-    static void Main()
-    {
-        var bananaAndStrawberry = FruitType.Banana | FruitType.Strawberry;
-        // Will display only Strawberry!
-        Console.WriteLine(bananaAndStrawberry.ToString());
-    }
-}
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+var bananaAndStrawberry = FruitType.Banana | FruitType.Strawberry;
+Console.WriteLine(bananaAndStrawberry.ToString()); // Will display "Banana, Strawberry"
+
 [Flags]
 enum FruitType
 {
@@ -33,17 +37,11 @@ enum FruitType
   Orange = 2,
   Strawberry = 4
 }
-class Program
-{
-    static void Main()
-    {
-        var bananaAndStrawberry = FruitType.Banana | FruitType.Strawberry;
-        // Will display Banana and Strawberry, as expected.
-        Console.WriteLine(bananaAndStrawberry.ToString());
-    }
-}
 </pre>
-<h3>Exceptions</h3>
-<p>The default initialization of 0, 1, 2, 3, 4, …​ matches 0, 1, 2, 4, 8 …​ in the first three values, so no issue is reported if the first three
-members of the enumeration is not initialized.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.enum">Enum Class</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.flagsattribute">FlagsAttribute Class</a> </li>
+</ul>
 

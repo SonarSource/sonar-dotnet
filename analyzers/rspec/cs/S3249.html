@@ -1,50 +1,72 @@
 <h2>Why is this an issue?</h2>
-<p>Making a <code>base</code> call in an overriding method is generally a good idea, but not in <code>GetHashCode</code> and <code>Equals</code> for
-classes that directly extend <code>object</code> because those methods are based on the object reference. Meaning that no two <code>objects</code>
-that use those <code>base</code> methods will ever be equal or have the same hash.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-public class Point
-{
-  private readonly int x;
-  public MyClass(int x)
-  {
-    this.x = x;
-  }
-  public override int GetHashCode()
-  {
-    return x.GetHashCode() ^ base.GetHashCode(); //Noncompliant
-  }
-}
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-public class Point
-{
-  private readonly int x;
-  public MyClass(int x)
-  {
-    this.x = x;
-  }
-  public override int GetHashCode()
-  {
-    return x.GetHashCode();
-  }
-}
-</pre>
+<p>Making a <code>base</code> call when overriding a method is generally a good idea, but not in the case of <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.object.gethashcode"><code>GetHashCode</code></a> and <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.object.equals"><code>Equals</code></a> for classes that directly extend <code>Object</code>.
+These methods are based on the object’s reference, meaning that no two objects that use those <code>base</code> methods can be equal or have the same
+hash.</p>
 <h3>Exceptions</h3>
-<p>This rule doesn’t report on guard conditions checking for reference equality.</p>
+<p>This rule doesn’t report on guard conditions checking for reference equality. For example:</p>
 <pre>
-public class Point
+public override bool Equals(object obj)
 {
-  public override bool Equals(object obj)
+  if (base.Equals(obj)) // Compliant, it's a guard condition.
   {
-    if (base.Equals(obj)) // Compliant, although it could be replaced with object.ReferenceEquals(obj, this), which is clearer
-    {
-      return true;
-    }
-    ...
+    return true;
   }
+  ...
 }
 </pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+var m1 = new MyClass(2);
+var m2 = new MyClass(2);
+
+m1.Equals(m2) // False
+m1.GetHashCode(); // 43942919
+m2.GetHashCode(); // 59941935
+
+class MyClass
+{
+    private readonly int x;
+    public MyClass(int x) =&gt;
+        this.x = x;
+
+    public override bool Equals(Object obj) =&gt;
+        base.Equals();
+
+    public override int GetHashCode() =&gt;
+        x.GetHashCode() ^ base.GetHashCode(); // Noncompliant, base.GetHashCode returns a code based on the objects reference
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+var m1 = new MyClass(2);
+var m2 = new MyClass(2);
+
+m1.Equals(m2) // True
+m1.GetHashCode(); // 2
+m2.GetHashCode(); // 2
+
+class MyClass
+{
+    private readonly int x;
+    public MyClass(int x) =&gt;
+        this.x = x;
+
+    public override bool Equals(Object obj) =&gt;
+        this.x == ((MyClass)obj).x;
+
+    public override int GetHashCode() =&gt;
+        x.GetHashCode()
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.gethashcode?view=net-7.0">Object.GetHashCode Method</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.equals">Object.Equals Method</a> </li>
+</ul>
 

@@ -1,9 +1,10 @@
 <h2>Why is this an issue?</h2>
-<p>Generally, writing the least code that will <em>readably</em> do the job is a good thing, so omitting default parameter values seems to make sense.
-Unfortunately, when you omit them from the <code>base</code> call in an override, you’re not actually getting the job done thoroughly, because you’re
-ignoring the value the caller passed in. The result will likely not be what the caller expected.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>When optional parameter values are not passed to base method calls, the value passed in by the caller is ignored. This can cause the function to
+behave differently than expected, leading to errors and making the code difficult to debug.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant]">
 Public Class BaseClass
     Public Overridable Sub MyMethod(ByVal Optional i As Integer = 1)
         Console.WriteLine(i)
@@ -15,7 +16,7 @@ Public Class DerivedClass
 
     Public Overrides Sub MyMethod(ByVal Optional i As Integer = 1)
         ' ...
-        MyBase.MyMethod() ' Noncompliant; caller's value is ignored
+        MyBase.MyMethod() ' Noncompliant: caller's value is ignored
     End Sub
 
     Private Shared Function Main(ByVal args As String()) As Integer
@@ -24,8 +25,8 @@ Public Class DerivedClass
     End Function
 End Class
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant]">
 Public Class BaseClass
     Public Overridable Sub MyMethod(ByVal Optional i As Integer = 1)
         Console.WriteLine(i)
@@ -46,4 +47,9 @@ Public Class DerivedClass
     End Function
 End Class
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<p>Microsoft Learn - <a
+href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/procedures/optional-parameters">Optional Arguments
+(Visual Basic)</a></p>
 

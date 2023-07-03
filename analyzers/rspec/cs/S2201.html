@@ -1,13 +1,13 @@
 <h2>Why is this an issue?</h2>
 <p>When you do not use the return value of a method with no side effects, it indicates that something is wrong. Either this method is unnecessary, or
 the source code does not behave as expected and could lead to code defects. For example, there are methods, such as <a
-href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.addyears">DateTime.AddYears</a> that do not change the value of the input object,
-but instead, they return a new object whose value is the result of this operation. This means that you will have unexpected effects if you do not use
-the return value.</p>
+href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.addyears">DateTime.AddYears</a>, that don’t change the value of the input object,
+but instead, they return a new object whose value is the result of this operation, and as a result that you will have unexpected effects if you do not
+use the return value.</p>
 <p>This rule raises an issue when the results of the following methods are ignored:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">LINQ</a>, </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.contracts.pureattribute"><code>Pure</code> methods</a>, </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">LINQ</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.contracts.pureattribute"><code>Pure</code> methods</a> </li>
   <li> Any method on <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types">build-in types</a>
   </li>
   <li> Any method on <a href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework-immutable-collections">Immutable
@@ -59,15 +59,18 @@ foreach (var x in data)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.contracts.pureattribute">PureAttribute Class</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/out-parameter-modifier"><code>out</code> parameter
-  modifier</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/ref"><code>ref</code> keyword</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern">String.Intern(String) Method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">LINQ</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types">build-in types</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework-immutable-collections">Immutable collections</a>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.contracts.pureattribute"><code>PureAttribute</code>
+  Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/out-parameter-modifier"><code>out</code>
+  parameter modifier</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/ref"><code>ref</code> keyword</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern"><code>String.Intern(String)</code> Method</a>
   </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">LINQ</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types">build-in types</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework-immutable-collections">Immutable
+  collections</a> </li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
