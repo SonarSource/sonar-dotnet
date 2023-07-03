@@ -39,15 +39,9 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind> : Sona
 
     protected UseDateTimeInsteadOfDateTimeOffsetBase() : base(DiagnosticId) { }
 
-    protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterCompilationStartAction(start =>
-        {
-            if (!IsDateTimeOffsetSupported(start.Compilation))
-            {
-                return;
-            }
-
-            context.RegisterNodeAction(
+    protected sealed override void Initialize(SonarAnalysisContext context)
+    {
+        context.RegisterNodeAction(
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
@@ -58,24 +52,21 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind> : Sona
                 },
                 Language.SyntaxKind.ObjectCreationExpressions);
 
-            context.RegisterNodeAction(
-                Language.GeneratedCodeRecognizer,
-                c =>
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                if (Language.Syntax.NodeExpression(c.Node) is var expression
+                    && IsNamedDateTime(expression)
+                    && TargetMemberAccess.Contains(Language.GetName(c.Node))
+                    && IsDateTimeType(expression, c.SemanticModel))
                 {
-                    if (Language.Syntax.NodeExpression(c.Node) is var expression
-                        && IsNamedDateTime(expression)
-                        && TargetMemberAccess.Contains(Language.GetName(c.Node))
-                        && IsDateTimeType(expression, c.SemanticModel))
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                    }
-                },
-                Language.SyntaxKind.SimpleMemberAccessExpression);
-        });
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                }
+            },
+            Language.SyntaxKind.SimpleMemberAccessExpression);
+    }
 
     private static bool IsDateTimeType(SyntaxNode node, SemanticModel model) =>
         model.GetTypeInfo(node).Type.Is(KnownType.System_DateTime);
-
-    private static bool IsDateTimeOffsetSupported(Compilation compilation) =>
-        compilation.GetTypeByMetadataName(KnownType.System_DateTimeOffset) is not null;
 }
