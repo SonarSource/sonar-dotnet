@@ -14,16 +14,12 @@ Public Class Program
         a = New DateTime(1, 1, 1, 1, 1, 1, 1, New GregorianCalendar())                      ' Noncompliant
         a = New DateTime(1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc)                             ' Noncompliant
         a = New DateTime(1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc)    ' Noncompliant
-        a = New DateTime(1, 1, 1, 1, 1, 1, 1, 1, New GregorianCalendar())                   ' Noncompliant
-        a = New DateTime(1, 1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc)                          ' Noncompliant
-        a = New DateTime(1, 1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc) ' Noncompliant
     End Sub
 
     Private Sub Fields()
         Dim a = Date.MaxValue  ' Noncompliant
 '               ^^^^^^^^^^^^^
         a = Date.MinValue  ' Noncompliant
-        a = Date.UnixEpoch ' Noncompliant
     End Sub
 
     Private Sub Properties(ByVal [date] As Date)
@@ -33,15 +29,13 @@ Public Class Program
         Dim d = [date].DayOfYear
         Dim e = [date].Hour
         Dim f = [date].Kind
-        Dim g = [date].Microsecond
-        Dim h = [date].Millisecond
-        Dim i = [date].Minute
-        Dim l = [date].Month
-        Dim m = [date].Nanosecond
-        Dim n = [date].Second
-        Dim o = [date].Ticks
-        Dim p = [date].TimeOfDay
-        Dim q = [date].Year
+        Dim g = [date].Millisecond
+        Dim h = [date].Minute
+        Dim i = [date].Month
+        Dim l = [date].Second
+        Dim m = [date].Ticks
+        Dim n = [date].TimeOfDay
+        Dim o = [date].Year
     End Sub
 
     Private Sub StaticProperties()
@@ -55,7 +49,6 @@ Public Class Program
         [date].Add(TimeSpan.Zero)
         [date].AddDays(0)
         [date].AddHours(0)
-        [date].AddMicroseconds(0)
         [date].AddMilliseconds(0)
         [date].AddMinutes(0)
         [date].AddMonths(0)

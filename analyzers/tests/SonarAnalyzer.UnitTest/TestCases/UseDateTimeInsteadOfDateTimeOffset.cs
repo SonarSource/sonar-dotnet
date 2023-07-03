@@ -16,9 +16,6 @@ public class Program
         _ = new DateTime(1, 1, 1, 1, 1, 1, 1, new GregorianCalendar());                      // Noncompliant
         _ = new DateTime(1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc);                             // Noncompliant
         _ = new DateTime(1, 1, 1, 1, 1, 1, 1, new GregorianCalendar(), DateTimeKind.Utc);    // Noncompliant
-        _ = new DateTime(1, 1, 1, 1, 1, 1, 1, 1, new GregorianCalendar());                   // Noncompliant
-        _ = new DateTime(1, 1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc);                          // Noncompliant
-        _ = new DateTime(1, 1, 1, 1, 1, 1, 1, 1, new GregorianCalendar(), DateTimeKind.Utc); // Noncompliant
     }
 
     void Fields()
@@ -26,7 +23,6 @@ public class Program
         _ = DateTime.MaxValue;  // Noncompliant
 //          ^^^^^^^^^^^^^^^^^
         _ = DateTime.MinValue;  // Noncompliant
-        _ = DateTime.UnixEpoch; // Noncompliant
     }
 
     void StaticProperties()
@@ -37,12 +33,11 @@ public class Program
         _ = DateTime.UtcNow; // Noncompliant
     }
 
-    void Methods(DateTime date, Span<char> span)
+    void Methods(DateTime date)
     {
         date.Add(TimeSpan.Zero);
         date.AddDays(0);
         date.AddHours(0);
-        date.AddMicroseconds(0);
         date.AddMilliseconds(0);
         date.AddMinutes(0);
         date.AddMonths(0);
@@ -78,7 +73,6 @@ public class Program
         date.ToShortTimeString();
         date.ToString();
         date.ToUniversalTime();
-        date.TryFormat(span, out int myInt);
         DateTime.TryParse("06/01/1993", out date);                                                                                    // Noncompliant
         DateTime.TryParseExact("06/01/1993", "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date); // Noncompliant
     }

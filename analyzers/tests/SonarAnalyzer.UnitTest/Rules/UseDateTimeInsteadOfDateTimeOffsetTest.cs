@@ -27,6 +27,7 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class UseDateTimeInsteadOfDateTimeOffsetTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseDateTimeInsteadOfDateTimeOffset>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseDateTimeInsteadOfDateTimeOffset>();
 
     [TestMethod]
     public void UseDateTimeInsteadOfDateTimeOffset_CS() =>
@@ -38,9 +39,13 @@ public class UseDateTimeInsteadOfDateTimeOffsetTest
     public void UseDateTimeInsteadOfDateTimeOffset_CSharp9() =>
         builderCS.AddPaths("UseDateTimeInsteadOfDateTimeOffset.CSharp9.cs").WithTopLevelStatements().Verify();
 
+    [TestMethod]
+    public void UseDateTimeInsteadOfDateTimeOffset_VB_Net() =>
+        builderVB.AddPaths("UseDateTimeInsteadOfDateTimeOffset.Net.vb").Verify();
+
 #endif
 
     [TestMethod]
     public void UseDateTimeInsteadOfDateTimeOffset_VB() =>
-        new VerifierBuilder<VB.UseDateTimeInsteadOfDateTimeOffset>().AddPaths("UseDateTimeInsteadOfDateTimeOffset.vb").Verify();
+        builderVB.AddPaths("UseDateTimeInsteadOfDateTimeOffset.vb").Verify();
 }

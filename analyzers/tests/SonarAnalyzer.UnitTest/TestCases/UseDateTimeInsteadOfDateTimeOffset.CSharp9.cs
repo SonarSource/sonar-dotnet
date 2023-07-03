@@ -3,8 +3,11 @@ using System.Globalization;
 
 DateTime myDate = new(1); // Noncompliant {{Prefer using "DateTimeOffset" struct instead of "DateTime"}}
 //                ^^^^^^
-_ = DateTime.MaxValue;    // Noncompliant
-_ = DateTime.Now;         // Noncompliant
+_ = new DateTime(1, 1, 1, 1, 1, 1, 1, 1, new GregorianCalendar());                   // Noncompliant
+_ = new DateTime(1, 1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc);                          // Noncompliant
+_ = new DateTime(1, 1, 1, 1, 1, 1, 1, 1, new GregorianCalendar(), DateTimeKind.Utc); // Noncompliant
 
-_ = myDate.AddDays(1);
-DateTime.Parse("06/01/1993"); // Noncompliant
+_ = DateTime.UnixEpoch; // Noncompliant
+Span<char> span = new();
+myDate.TryFormat(span, out int myInt);
+myDate.AddMicroseconds(0);
