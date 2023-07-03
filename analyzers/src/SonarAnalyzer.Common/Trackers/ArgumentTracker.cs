@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Helpers.Trackers;
 public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, SyntaxBaseContext>
     where TSyntaxKind : struct
 {
-    protected abstract RefKind ArgumentRefKind(SyntaxNode argumentNode);
+    protected abstract RefKind? ArgumentRefKind(SyntaxNode argumentNode);
     protected abstract IReadOnlyCollection<SyntaxNode> ArgumentList(SyntaxNode argumentNode);
     protected abstract int? Position(SyntaxNode argumentNode);
     protected abstract bool InvocationFitsMemberKind(SyntaxNode argumentNode, InvokedMemberKind memberKind);
@@ -35,7 +35,7 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
         {
             var argumentNode = context.Node;
             if (InvocationFitsMemberKind(argumentNode, argument.MemberKind)
-                && (argument.RefKind is null || ArgumentRefKind(argumentNode) == argument.RefKind.Value)
+                && (argument.RefKind is null || (ArgumentRefKind(argumentNode) is { } refKind ? refKind == argument.RefKind.Value : true))
                 && (argument.ArgumentListConstraint == null
                     || (ArgumentList(argumentNode) is { } argList && argument.ArgumentListConstraint(argList, Position(argumentNode))))
                 && (argument.InvokedMemberNameConstraint == null

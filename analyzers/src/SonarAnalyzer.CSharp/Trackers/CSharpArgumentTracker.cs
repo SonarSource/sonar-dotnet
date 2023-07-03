@@ -43,12 +43,12 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
             ? null
             : ArgumentList(argumentNode).IndexOf(x => x == argumentNode);
 
-    protected override RefKind ArgumentRefKind(SyntaxNode argumentNode) =>
+    protected override RefKind? ArgumentRefKind(SyntaxNode argumentNode) =>
         argumentNode switch
         {
-            AttributeArgumentSyntax => RefKind.None,
+            AttributeArgumentSyntax => null,
             ArgumentSyntax { RefOrOutKeyword: { } refOrOut } => refOrOut.Kind() switch { SyntaxKind.OutKeyword => RefKind.Out, SyntaxKind.RefKeyword => RefKind.Ref, _ => RefKind.None },
-            _ => RefKind.None,
+            _ => null,
         };
 
     protected override bool InvocationFitsMemberKind(SyntaxNode argumentNode, InvokedMemberKind memberKind)

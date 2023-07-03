@@ -42,7 +42,7 @@ public class ArgumentTrackerTest
     }
 
     [TestMethod]
-    public void VB_Method_SimpleArgument()
+    public void Method_SimpleArgument_VB()
     {
         var snippet = """
             Dim provider As System.IFormatProvider = Nothing
@@ -77,6 +77,28 @@ public class ArgumentTrackerTest
     }
 
     [DataTestMethod]
+    [DataRow("""i.ToString($$provider)""", 0, true)]
+    [DataRow("""i.ToString($$provider)""", 1, false)]
+    [DataRow("""i.ToString("", $$provider)""", 1, true)]
+    [DataRow("""i.ToString("", $$provider)""", 0, false)]
+    [DataRow("""i.ToString("", $$provider:= provider)""", 1, true)]
+    [DataRow("""i.ToString("", $$provider:= provider)""", 0, true)]
+    [DataRow("""i.ToString($$provider:= provider, format:= "")""", 1, true)]
+    [DataRow("""i.ToString($$provider:= provider, format:= "")""", 0, true)]
+    public void Method_Position_VB(string invocation, int position, bool expected)
+    {
+        var snippet = $$"""
+            Dim provider As System.IFormatProvider = Nothing
+            Dim i As Integer
+            {{invocation}}
+            """;
+        var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", position);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
+    [DataTestMethod]
     [DataRow("""int.TryParse("", $$out var result);""")]
     [DataRow("""int.TryParse("", System.Globalization.NumberStyles.HexNumber, null, $$out var result);""")]
     public void Method_RefOut_True(string invocation)
@@ -89,6 +111,22 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true, RefKind.Out);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""Integer.TryParse("", $$result)""")]
+    [DataRow("""Integer.TryParse("", System.Globalization.NumberStyles.HexNumber, Nothing, $$result)""")]
+    public void Method_RefOut_True_VB(string invocation)
+    {
+        var snippet = $$"""
+            Dim provider As System.IFormatProvider = Nothing
+            Dim result As Integer
+            {{invocation}}
+            """;
+        var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true, RefKind.Out);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -163,6 +201,64 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.MethodInvocation(m => true, (m, c) => m.Equals("M", c), p => p.Name == "parameter", x => true, null);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
+    [DataTestMethod]
+    [DataRow("""Dim a = New Direct().M($$1)""", true)]
+    [DataRow("""Dim a = New DirectDifferentParameterName().M($$1)""", false)] // FN. This would require ExplicitOrImplicitInterfaceImplementations from the internal ISymbolExtensions in Roslyn.
+    [DataRow("""
+        Dim i As I = New Explicit()
+        i.M($$1)
+        """, true)]
+    [DataRow("""
+        Dim i As I = New ExplicitDifferentParameterName()
+        i.M($$1)
+        """, true)]
+    public void Method_Inheritance_Interface_VB(string invocation, bool expected)
+    {
+        var snippet = $$"""
+            Interface I
+                Function M(ByVal parameter As Integer) As Boolean
+            End Interface
+
+            Public Class Direct
+                Implements I
+
+                Public Function M(parameter As Integer) As Boolean Implements I.M
+                End Function
+            End Class
+
+            Public Class DirectDifferentParameterName
+                Implements I
+
+                Public Function M(ByVal renamed As Integer) As Boolean Implements I.M
+                End Function
+            End Class
+
+            Public Class Explicit
+                Implements I
+
+                Private Function M(ByVal parameter As Integer) As Boolean Implements I.M
+                End Function
+            End Class
+
+            Public Class ExplicitDifferentParameterName
+                Implements I
+
+                Private Function M(ByVal renamed As Integer) As Boolean Implements I.M
+                End Function
+            End Class
+
+            Public Class Test
+                Private Sub M()
+                    {{invocation}}
+                End Sub
+            End Class
+            """;
+        var (node, model) = ArgumentAndModelVB(snippet);
+
+        var argument = ArgumentDescriptor.MethodInvocation(m => true, (m, c) => m.Equals("M", c), p => p.Name == "parameter", x => true, null);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
     }
 
     [DataTestMethod]

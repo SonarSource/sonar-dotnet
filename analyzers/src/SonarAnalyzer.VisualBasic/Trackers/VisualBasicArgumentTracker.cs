@@ -38,8 +38,8 @@ public class VisualBasicArgumentTracker : ArgumentTracker<SyntaxKind>
         ? null
         : ArgumentList(argumentNode).IndexOf(x => x == argumentNode);
 
-    protected override RefKind ArgumentRefKind(SyntaxNode argumentNode) =>
-        RefKind.None;
+    protected override RefKind? ArgumentRefKind(SyntaxNode argumentNode) =>
+        null;
 
     protected override bool InvocationFitsMemberKind(SyntaxNode argumentNode, InvokedMemberKind memberKind)
     {
