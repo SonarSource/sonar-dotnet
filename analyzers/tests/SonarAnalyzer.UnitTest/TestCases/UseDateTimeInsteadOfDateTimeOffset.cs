@@ -76,4 +76,19 @@ public class Program
         DateTime.TryParse("06/01/1993", out date);                                                                                    // Noncompliant
         DateTime.TryParseExact("06/01/1993", "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out date); // Noncompliant
     }
+
+    void EdgeCases()
+    {
+        var a = DateTime.Now.AddDays(-1).Ticks; // Noncompliant
+    }
+}
+
+public class FakeDateTime
+{
+    void MyMethod() => new DateTime(1); // Compliant
+
+    public class DateTime
+    {
+        public DateTime(int ticks) { }
+    }
 }
