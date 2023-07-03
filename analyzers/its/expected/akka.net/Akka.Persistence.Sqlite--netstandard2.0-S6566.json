@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Snapshot\SqliteSnapshotStore.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  29,
+"endLine":  88,
+"endColumn":  61
+}
+}
+}
+]
+}

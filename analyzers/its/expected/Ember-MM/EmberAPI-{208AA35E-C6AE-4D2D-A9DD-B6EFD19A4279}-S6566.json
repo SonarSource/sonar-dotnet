@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  711,
+"startColumn":  34,
+"endLine":  711,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  716,
+"startColumn":  34,
+"endLine":  716,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIErrorLog.vb",
+"region":  {
+"startLine":  60,
+"startColumn":  63,
+"endLine":  60,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  32,
+"startColumn":  30,
+"endLine":  32,
+"endColumn":  42
+}
+}
+}
+]
+}
