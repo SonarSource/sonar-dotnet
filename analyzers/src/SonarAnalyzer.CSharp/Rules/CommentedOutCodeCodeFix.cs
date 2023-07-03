@@ -50,9 +50,6 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
         trivia.GetLineNumbers().Count() == 1
         || Array.TrueForAll(Lines(trivia), IsCode);
 
-    private static string[] Lines(SyntaxTrivia trivia) =>
-        trivia.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None);
-
     private static bool IsCode(string line)
     {
         var trimmed = line.Trim();
@@ -61,6 +58,9 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
             || string.IsNullOrEmpty(trimmed)
             || CommentedOutCode.IsCode(line);
     }
+
+    private static string[] Lines(SyntaxTrivia trivia) =>
+        trivia.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None);
 
     internal sealed class Context
     {
