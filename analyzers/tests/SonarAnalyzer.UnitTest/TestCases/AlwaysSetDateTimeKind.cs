@@ -27,6 +27,7 @@ public class Program
         dt = new DateTime(1994, 07, 05, 16, 23, 00, 42, DateTimeKind.Utc);
         dt = new DateTime(1994, 07, 05, 16, 23, 00, 42, new GregorianCalendar(), DateTimeKind.Unspecified);
         dt = new DateTime(1994, 07, 05, 16, 23, 00, 42, DateTimeKind.Unspecified);
+        dt = new System.(1623) // Error [CS1001, CS1002]
     }
 }
 

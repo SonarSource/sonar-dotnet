@@ -19,7 +19,7 @@ Public Class Program
         dt = New System.DateTime() ' Noncompliant
     End Sub
 
-    Public Sub Compiant()
+    Public Sub Compliant()
         Dim dt = New DateTime(1623, DateTimeKind.Unspecified)
         dt = New DateTime(1994, 7, 5, 16, 23, 0, DateTimeKind.Local)
         dt = New DateTime(1994, 7, 5, 16, 23, 0, 42, New GregorianCalendar(), DateTimeKind.Unspecified)
