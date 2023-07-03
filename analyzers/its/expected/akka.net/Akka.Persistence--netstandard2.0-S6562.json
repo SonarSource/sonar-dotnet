@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  66,
+"endLine":  295,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  101,
+"endLine":  102,
+"endColumn":  130
+}
+}
+}
+]
+}

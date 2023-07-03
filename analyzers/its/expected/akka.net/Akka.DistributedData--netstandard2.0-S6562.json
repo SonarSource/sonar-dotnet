@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"region":  {
+"startLine":  578,
+"startColumn":  67,
+"endLine":  578,
+"endColumn":  99
+}
+}
+}
+]
+}
