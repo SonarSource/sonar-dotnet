@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6563",
+"message":  "Do not use 'DateTime.Now' for recording instants",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIErrorLog.vb",
+"region":  {
+"startLine":  60,
+"startColumn":  63,
+"endLine":  60,
+"endColumn":  75
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6563",
+"message":  "Do not use 'DateTime.Now' for recording instants",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Timed.cs",
+"region":  {
+"startLine":  296,
+"startColumn":  36,
+"endLine":  296,
+"endColumn":  48
+}
+}
+}
+]
+}

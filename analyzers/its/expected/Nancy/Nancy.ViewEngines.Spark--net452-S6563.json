@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6563",
+"message":  "Do not use 'DateTime.Now' for recording instants",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  40,
+"endLine":  242,
+"endColumn":  52
+}
+}
+}
+]
+}

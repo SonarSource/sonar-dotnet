@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S6563",
+"message":  "Do not use 'DateTime.Now' for recording instants",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  70,
+"endLine":  535,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Do not use 'DateTime.Now' for recording instants",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsCache.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  26,
+"endLine":  40,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Do not use 'DateTime.Now' for recording instants",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsCache.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  23,
+"endLine":  59,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Do not use 'DateTime.Now' for recording instants",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\TokenBucket.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  45,
+"endLine":  139,
+"endColumn":  57
+}
+}
+}
+]
+}
