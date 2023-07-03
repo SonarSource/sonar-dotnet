@@ -24,4 +24,6 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 public sealed class UseDateTimeInsteadOfDateTimeOffset : UseDateTimeInsteadOfDateTimeOffsetBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override bool IsNamedDateTime(SyntaxNode node) => true; // Can't do any SyntaxCehck on VB
 }

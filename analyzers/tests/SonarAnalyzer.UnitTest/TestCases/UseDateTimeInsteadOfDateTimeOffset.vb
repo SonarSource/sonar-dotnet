@@ -3,52 +3,55 @@ Imports System.Globalization
 
 Public Class Program
     Private Sub Constructors()
-        __ = New DateTime(1)                                                                 ' Noncompliant
-        __ = New DateTime(1, 1, 1)                                                           ' Noncompliant
-        __ = New DateTime(1, 1, 1, New GregorianCalendar())                                  ' Noncompliant
-        __ = New DateTime(1, 1, 1, 1, 1, 1)                                                  ' Noncompliant
-        __ = New DateTime(1, 1, 1, 1, 1, 1, New GregorianCalendar())                         ' Noncompliant
-        __ = New DateTime(1, 1, 1, 1, 1, 1, DateTimeKind.Utc)                                ' Noncompliant
-        __ = New DateTime(1, 1, 1, 1, 1, 1, 1)                                               ' Noncompliant
-        __ = New DateTime(1, 1, 1, 1, 1, 1, 1, New GregorianCalendar())                      ' Noncompliant
-        __ = New DateTime(1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc)                             ' Noncompliant
-        __ = New DateTime(1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc)    ' Noncompliant
-        __ = New DateTime(1, 1, 1, 1, 1, 1, 1, 1, New GregorianCalendar())                   ' Noncompliant
-        __ = New DateTime(1, 1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc)                          ' Noncompliant
-        __ = New DateTime(1, 1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc) ' Noncompliant
+        Dim a = New DateTime(1)                                                             ' Noncompliant
+'               ^^^^^^^^^^^^^^^
+        a = New DateTime(1, 1, 1)                                                           ' Noncompliant
+        a = New DateTime(1, 1, 1, New GregorianCalendar())                                  ' Noncompliant
+        a = New DateTime(1, 1, 1, 1, 1, 1)                                                  ' Noncompliant
+        a = New DateTime(1, 1, 1, 1, 1, 1, New GregorianCalendar())                         ' Noncompliant
+        a = New DateTime(1, 1, 1, 1, 1, 1, DateTimeKind.Utc)                                ' Noncompliant
+        a = New DateTime(1, 1, 1, 1, 1, 1, 1)                                               ' Noncompliant
+        a = New DateTime(1, 1, 1, 1, 1, 1, 1, New GregorianCalendar())                      ' Noncompliant
+        a = New DateTime(1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc)                             ' Noncompliant
+        a = New DateTime(1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc)    ' Noncompliant
+        a = New DateTime(1, 1, 1, 1, 1, 1, 1, 1, New GregorianCalendar())                   ' Noncompliant
+        a = New DateTime(1, 1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc)                          ' Noncompliant
+        a = New DateTime(1, 1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc) ' Noncompliant
     End Sub
 
     Private Sub Fields()
-        __ = Date.MaxValue  ' Noncompliant
-        __ = Date.MinValue  ' Noncompliant
-        __ = Date.UnixEpoch ' Noncompliant
+        Dim a = Date.MaxValue  ' Noncompliant
+'               ^^^^^^^^^^^^^
+        a = Date.MinValue  ' Noncompliant
+        a = Date.UnixEpoch ' Noncompliant
     End Sub
 
     Private Sub Properties(ByVal [date] As Date)
-        __ = [date].Date
-        __ = [date].Day
-        __ = [date].DayOfWeek
-        __ = [date].DayOfYear
-        __ = [date].Hour
-        __ = [date].Kind
-        __ = [date].Microsecond
-        __ = [date].Millisecond
-        __ = [date].Minute
-        __ = [date].Month
-        __ = [date].Nanosecond
-        __ = [date].Second
-        __ = [date].Ticks
-        __ = [date].TimeOfDay
-        __ = [date].Year
+        Dim a = [date].Date
+        Dim b = [date].Day
+        Dim c = [date].DayOfWeek
+        Dim d = [date].DayOfYear
+        Dim e = [date].Hour
+        Dim f = [date].Kind
+        Dim g = [date].Microsecond
+        Dim h = [date].Millisecond
+        Dim i = [date].Minute
+        Dim l = [date].Month
+        Dim m = [date].Nanosecond
+        Dim n = [date].Second
+        Dim o = [date].Ticks
+        Dim p = [date].TimeOfDay
+        Dim q = [date].Year
     End Sub
 
     Private Sub StaticProperties()
-        __ = Date.Now ' Noncompliant
-        __ = Date.Today ' Noncompliant
-        __ = Date.UtcNow ' Noncompliant
+        Dim a = Date.Now ' Noncompliant
+'               ^^^^^^^^
+        a = Date.Today ' Noncompliant
+        a = Date.UtcNow ' Noncompliant
     End Sub
 
-    Private Sub Methods(ByVal [date] As Date, ByVal span As Span(Of Char))
+    Private Sub Methods(ByVal [date] As Date)
         [date].Add(TimeSpan.Zero)
         [date].AddDays(0)
         [date].AddHours(0)
@@ -74,6 +77,7 @@ Public Class Program
         [date].IsDaylightSavingTime()
         Date.IsLeapYear(1)
         Date.Parse("06/01/1993")                          ' Noncompliant
+'       ^^^^^^^^^^
         Date.ParseExact("06/01/1993", "dd/MM/yyyy", Nothing) ' Noncompliant
         Date.SpecifyKind([date], DateTimeKind.Local)        ' Noncompliant
         [date].Subtract([date])
@@ -88,7 +92,6 @@ Public Class Program
         [date].ToString()
         [date].ToUniversalTime()
         Dim myInt As Integer = Nothing
-        [date].TryFormat(span, myInt)
         Date.TryParse("06/01/1993", [date])                                                                                    ' Noncompliant
         Date.TryParseExact("06/01/1993", "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, [date]) ' Noncompliant
     End Sub

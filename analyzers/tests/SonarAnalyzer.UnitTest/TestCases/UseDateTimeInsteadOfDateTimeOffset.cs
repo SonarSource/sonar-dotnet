@@ -5,7 +5,8 @@ public class Program
 {
     void Constructors()
     {
-        _ = new DateTime(1);                                                                 // Noncompliant
+        _ = new DateTime(1);                                                                 // Noncompliant {{Prefer using "DateTimeOffset" struct instead of "DateTime"}}
+//          ^^^^^^^^^^^^^^^
         _ = new DateTime(1, 1, 1);                                                           // Noncompliant
         _ = new DateTime(1, 1, 1, new GregorianCalendar());                                  // Noncompliant
         _ = new DateTime(1, 1, 1, 1, 1, 1);                                                  // Noncompliant
@@ -23,32 +24,15 @@ public class Program
     void Fields()
     {
         _ = DateTime.MaxValue;  // Noncompliant
+//          ^^^^^^^^^^^^^^^^^
         _ = DateTime.MinValue;  // Noncompliant
         _ = DateTime.UnixEpoch; // Noncompliant
-    }
-
-    void Properties(DateTime date)
-    {
-        _ = date.Date;
-        _ = date.Day;
-        _ = date.DayOfWeek;
-        _ = date.DayOfYear;
-        _ = date.Hour;
-        _ = date.Kind;
-        _ = date.Microsecond;
-        _ = date.Millisecond;
-        _ = date.Minute;
-        _ = date.Month;
-        _ = date.Nanosecond;
-        _ = date.Second;
-        _ = date.Ticks;
-        _ = date.TimeOfDay;
-        _ = date.Year;
     }
 
     void StaticProperties()
     {
         _ = DateTime.Now; // Noncompliant
+//          ^^^^^^^^^^^^
         _ = DateTime.Today; // Noncompliant
         _ = DateTime.UtcNow; // Noncompliant
     }
@@ -80,6 +64,7 @@ public class Program
         date.IsDaylightSavingTime();
         DateTime.IsLeapYear(1);
         DateTime.Parse("06/01/1993");                          // Noncompliant
+//      ^^^^^^^^^^^^^^
         DateTime.ParseExact("06/01/1993", "dd/MM/yyyy", null); // Noncompliant
         DateTime.SpecifyKind(date, DateTimeKind.Local);        // Noncompliant
         date.Subtract(date);

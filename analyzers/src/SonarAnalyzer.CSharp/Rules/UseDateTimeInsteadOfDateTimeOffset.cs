@@ -18,10 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq.Expressions;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UseDateTimeInsteadOfDateTimeOffset : UseDateTimeInsteadOfDateTimeOffsetBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override bool IsNamedDateTime(SyntaxNode node) =>
+        Language.GetName(node).Equals("DateTime", Language.NameComparison);
 }

@@ -25,16 +25,54 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind> : Sona
 {
     private const string DiagnosticId = "S6566";
 
-    protected override string MessageFormat => "FIXME";
+    protected override string MessageFormat => "Prefer using \"DateTimeOffset\" struct instead of \"DateTime\"";
+
+    private static readonly ImmutableArray<string> TargetMemberAccess = ImmutableArray.Create(
+            "MaxValue",
+            "MinValue",
+            "UnixEpoch",
+            "Now",
+            "Today",
+            "UtcNow",
+            "Parse",
+            "ParseExact",
+            "SpecifyKind",
+            "TryParse",
+            "TryParseExact"
+        );
+
+    protected abstract bool IsNamedDateTime(SyntaxNode node);
 
     protected UseDateTimeInsteadOfDateTimeOffsetBase() : base(DiagnosticId) { }
 
-    protected sealed override void Initialize(SonarAnalysisContext context) =>
+    protected sealed override void Initialize(SonarAnalysisContext context)
+    {
         context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
             c =>
             {
-
+                if (IsDateTimeType(c.Node, c.SemanticModel))
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                }
             },
             Language.SyntaxKind.ObjectCreationExpressions);
+
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                if (Language.Syntax.NodeExpression(c.Node) is var expression
+                    && IsNamedDateTime(expression)
+                    && TargetMemberAccess.Contains(Language.GetName(c.Node))
+                    && IsDateTimeType(expression, c.SemanticModel))
+                {
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                }
+            },
+            Language.SyntaxKind.SimpleMemberAccessExpression);
+    }
+
+    private static bool IsDateTimeType(SyntaxNode node, SemanticModel model) =>
+        model.GetTypeInfo(node).Type.Is(KnownType.System_DateTime);
 }
