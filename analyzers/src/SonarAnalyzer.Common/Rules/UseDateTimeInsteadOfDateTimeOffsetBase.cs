@@ -38,8 +38,7 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind> : Sona
             "ParseExact",
             "SpecifyKind",
             "TryParse",
-            "TryParseExact"
-        );
+            "TryParseExact");
 
     protected abstract bool IsNamedDateTime(SyntaxNode node);
 
