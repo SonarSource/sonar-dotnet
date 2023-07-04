@@ -20,9 +20,8 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind, TMemberAccess> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
-    where TMemberAccess : SyntaxNode
 {
     private const string DiagnosticId = "S6566";
 
@@ -36,9 +35,8 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind, TMembe
             nameof(DateTime.UtcNow),
             "UnixEpoch");
 
-    protected abstract bool IsNamedDateTime(SyntaxNode node);
+    protected abstract string[] ValidNames { get; }
     protected abstract SyntaxNode GetType(SyntaxNode node);
-    protected abstract Location GetExpressionLocation(TMemberAccess node);
 
     protected UseDateTimeInsteadOfDateTimeOffsetBase() : base(DiagnosticId) { }
 
@@ -65,7 +63,7 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind, TMembe
                     && TargetMemberAccess.Contains(Language.GetName(c.Node))
                     && IsDateTimeType(expression, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, GetExpressionLocation((TMemberAccess)c.Node)));
+                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeExpression(c.Node).GetLocation()));
                 }
             },
             Language.SyntaxKind.SimpleMemberAccessExpression);
@@ -73,4 +71,7 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind, TMembe
 
     private static bool IsDateTimeType(SyntaxNode node, SemanticModel model) =>
         model.GetTypeInfo(node).Type.Is(KnownType.System_DateTime);
+
+    private bool IsNamedDateTime(SyntaxNode node) =>
+        Array.Exists(ValidNames, x => x.Equals(Language.GetName(node), Language.NameComparison));
 }

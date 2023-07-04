@@ -21,18 +21,12 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class UseDateTimeInsteadOfDateTimeOffset : UseDateTimeInsteadOfDateTimeOffsetBase<SyntaxKind, MemberAccessExpressionSyntax>
+public sealed class UseDateTimeInsteadOfDateTimeOffset : UseDateTimeInsteadOfDateTimeOffsetBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    private ImmutableArray<string> validNames = ImmutableArray.Create("DateTime", "Date");
-
-    protected override bool IsNamedDateTime(SyntaxNode node) =>
-        validNames.Contains(Language.GetName(node));
+    protected override string[] ValidNames { get; } = new[] { "DateTime", "Date" };
 
     protected override SyntaxNode GetType(SyntaxNode node) =>
         ((ObjectCreationExpressionSyntax)node).Type;
-
-    protected override Location GetExpressionLocation(MemberAccessExpressionSyntax node) =>
-        node.Expression.GetLocation();
 }
