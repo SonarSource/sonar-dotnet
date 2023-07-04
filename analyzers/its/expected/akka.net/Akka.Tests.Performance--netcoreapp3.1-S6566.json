@@ -2,27 +2,27 @@
 "issues":  [
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpHorizontalScaleSpec.cs",
 "region":  {
 "startLine":  147,
 "startColumn":  27,
 "endLine":  147,
-"endColumn":  42
+"endColumn":  35
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpHorizontalScaleSpec.cs",
 "region":  {
 "startLine":  148,
 "startColumn":  20,
 "endLine":  148,
-"endColumn":  35
+"endColumn":  28
 }
 }
 }

@@ -2,53 +2,53 @@
 "issues":  [
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MediaTag.vb",
 "region":  {
 "startLine":  59,
 "startColumn":  34,
 "endLine":  59,
-"endColumn":  46
+"endColumn":  42
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {
 "startLine":  69,
 "startColumn":  31,
 "endLine":  69,
-"endColumn":  43
+"endColumn":  39
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {
 "startLine":  290,
 "startColumn":  35,
 "endLine":  290,
-"endColumn":  47
+"endColumn":  43
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {
 "startLine":  511,
 "startColumn":  34,
 "endLine":  511,
-"endColumn":  46
+"endColumn":  42
 }
 }
 }

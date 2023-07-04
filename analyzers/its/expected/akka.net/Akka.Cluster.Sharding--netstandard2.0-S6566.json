@@ -2,40 +2,40 @@
 "issues":  [
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShard.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  77,
 "endLine":  125,
-"endColumn":  94
+"endColumn":  85
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
 "region":  {
 "startLine":  832,
 "startColumn":  85,
 "endLine":  832,
-"endColumn":  97
+"endColumn":  93
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
 "region":  {
 "startLine":  839,
 "startColumn":  28,
 "endLine":  839,
-"endColumn":  40
+"endColumn":  36
 }
 }
 }

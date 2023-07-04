@@ -2,189 +2,189 @@
 "issues":  [
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
 "region":  {
 "startLine":  481,
 "startColumn":  31,
 "endLine":  481,
-"endColumn":  46
+"endColumn":  39
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  44,
 "endLine":  91,
-"endColumn":  59
+"endColumn":  52
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
 "region":  {
 "startLine":  98,
 "startColumn":  45,
 "endLine":  98,
-"endColumn":  60
+"endColumn":  53
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
 "region":  {
 "startLine":  383,
 "startColumn":  34,
 "endLine":  383,
-"endColumn":  49
+"endColumn":  42
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
 "region":  {
 "startLine":  416,
 "startColumn":  30,
 "endLine":  416,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
-"region":  {
-"startLine":  474,
-"startColumn":  26,
-"endLine":  474,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
-"region":  {
-"startLine":  1331,
-"startColumn":  23,
-"endLine":  1331,
 "endColumn":  38
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  26,
+"endLine":  474,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"region":  {
+"startLine":  1331,
+"startColumn":  23,
+"endLine":  1331,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
 "region":  {
 "startLine":  1420,
 "startColumn":  58,
 "endLine":  1420,
-"endColumn":  73
+"endColumn":  66
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
 "region":  {
 "startLine":  1421,
 "startColumn":  65,
 "endLine":  1421,
-"endColumn":  80
+"endColumn":  73
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
 "region":  {
 "startLine":  1450,
 "startColumn":  31,
 "endLine":  1450,
-"endColumn":  46
+"endColumn":  39
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  29,
 "endLine":  53,
-"endColumn":  44
+"endColumn":  37
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  29,
 "endLine":  74,
-"endColumn":  44
+"endColumn":  37
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  21,
 "endLine":  108,
-"endColumn":  36
+"endColumn":  29
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
 "region":  {
 "startLine":  117,
 "startColumn":  29,
 "endLine":  117,
-"endColumn":  44
+"endColumn":  37
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
 "region":  {

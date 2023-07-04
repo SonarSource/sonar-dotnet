@@ -2,59 +2,59 @@
 "issues":  [
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  408,
 "startColumn":  43,
 "endLine":  408,
-"endColumn":  58
+"endColumn":  51
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  408,
 "startColumn":  81,
 "endLine":  408,
-"endColumn":  96
+"endColumn":  89
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  437,
 "startColumn":  28,
 "endLine":  437,
-"endColumn":  43
+"endColumn":  36
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  501,
 "startColumn":  23,
 "endLine":  501,
-"endColumn":  38
+"endColumn":  31
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
 "region":  {
@@ -67,59 +67,59 @@
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  111,
 "endLine":  31,
-"endColumn":  128
+"endColumn":  119
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  154,
 "endLine":  31,
-"endColumn":  171
+"endColumn":  162
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  39,
 "endLine":  85,
-"endColumn":  56
+"endColumn":  47
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  85,
 "endLine":  85,
-"endColumn":  102
+"endColumn":  93
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
 "region":  {
@@ -132,79 +132,79 @@
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  78,
 "startColumn":  124,
 "endLine":  78,
-"endColumn":  139
+"endColumn":  132
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  56,
 "endLine":  62,
-"endColumn":  73
+"endColumn":  64
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
 "region":  {
 "startLine":  481,
 "startColumn":  112,
 "endLine":  481,
-"endColumn":  129
+"endColumn":  120
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
 "region":  {
 "startLine":  486,
 "startColumn":  99,
 "endLine":  486,
-"endColumn":  116
+"endColumn":  107
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
 "region":  {
 "startLine":  501,
 "startColumn":  44,
 "endLine":  501,
-"endColumn":  61
+"endColumn":  52
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
 "region":  {
 "startLine":  508,
 "startColumn":  84,
 "endLine":  508,
-"endColumn":  101
+"endColumn":  92
 }
 }
 }

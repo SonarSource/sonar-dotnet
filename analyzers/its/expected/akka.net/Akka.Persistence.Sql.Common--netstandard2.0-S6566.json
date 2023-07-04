@@ -2,53 +2,53 @@
 "issues":  [
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
 "region":  {
 "startLine":  1279,
 "startColumn":  66,
 "endLine":  1279,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\ITimestampProvider.cs",
-"region":  {
-"startLine":  35,
-"startColumn":  77,
-"endLine":  35,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
-"region":  {
-"startLine":  687,
-"startColumn":  59,
-"endLine":  687,
 "endColumn":  74
 }
 }
 },
 {
 "id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" struct instead of "DateTime"",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\ITimestampProvider.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  77,
+"endLine":  35,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"region":  {
+"startLine":  687,
+"startColumn":  59,
+"endLine":  687,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
 "region":  {
 "startLine":  203,
 "startColumn":  61,
 "endLine":  203,
-"endColumn":  78
+"endColumn":  69
 }
 }
 }
