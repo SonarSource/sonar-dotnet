@@ -61,6 +61,21 @@ public class UseUnixEpochTest
     public void UseUnixEpoch_VB() =>
         builderVB.AddPaths("UseUnixEpoch.vb").Verify();
 
-#endif
+    [TestMethod]
+    public void UseUnixEpoch_CodeFix_CS() =>
+    new VerifierBuilder<CS.UseUnixEpoch>()
+        .AddPaths("UseUnixEpoch.cs")
+        .WithCodeFix<CS.UseUnixEpochCodeFix>()
+        .WithCodeFixedPaths("UseUnixEpoch.Fixed.cs")
+        .VerifyCodeFix();
 
+    [TestMethod]
+    public void UseUnixEpoch_CodeFix_VB() =>
+    new VerifierBuilder<VB.UseUnixEpoch>()
+        .AddPaths("UseUnixEpoch.vb")
+        .WithCodeFix<VB.UseUnixEpochCodeFix>()
+        .WithCodeFixedPaths("UseUnixEpoch.Fixed.vb")
+        .VerifyCodeFix();
+
+#endif
 }

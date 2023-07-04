@@ -20,13 +20,19 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberAccessExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UseUnixEpochBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
+{
+    public const string DiagnosticId = "S6588";
+
+    protected UseUnixEpochBase() : base(DiagnosticId) { }
+}
+
+public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberAccessExpression> : UseUnixEpochBase<TSyntaxKind>
     where TSyntaxKind : struct
     where TLiteralExpression : SyntaxNode
     where TMemberAccessExpression : SyntaxNode
 {
-    private const string DiagnosticId = "S6588";
-
     private const int EpochYear = 1970;
     private const int EpochMonth = 1;
     private const int EpochDay = 1;
@@ -38,8 +44,6 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
     protected abstract bool IsDateTimeKindUtc(TMemberAccessExpression memberAccess);
     protected abstract bool IsGregorianCalendar(SyntaxNode node);
     protected abstract bool IsZeroTimeOffset(SyntaxNode node);
-
-    protected UseUnixEpochBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(start =>
