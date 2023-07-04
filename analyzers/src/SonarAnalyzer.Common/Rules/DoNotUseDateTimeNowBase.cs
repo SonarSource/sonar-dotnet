@@ -25,6 +25,12 @@ public abstract class DoNotUseDateTimeNowBase<TSyntaxKind> : SonarDiagnosticAnal
 {
     private const string DiagnosticId = "S6563";
 
+    private static readonly MemberDescriptor DateTimeNow = new(KnownType.System_DateTime, nameof(DateTime.Now));
+    private static readonly MemberDescriptor DateTimeToday = new(KnownType.System_DateTime, nameof(DateTime.Today));
+    private static readonly MemberDescriptor DateTimeOffsetNow = new(KnownType.System_DateTimeOffset, nameof(DateTimeOffset.Now));
+    private static readonly MemberDescriptor DateTimeOffsetDate = new(KnownType.System_DateTimeOffset, nameof(DateTimeOffset.Date));
+    private static readonly MemberDescriptor DateTimeOffsetDateTime = new(KnownType.System_DateTimeOffset, nameof(DateTimeOffset.DateTime));
+
     protected override string MessageFormat => "Do not use 'DateTime.Now' for recording instants";
 
     protected abstract bool IsInsideNameOf(SyntaxNode node);
@@ -42,15 +48,13 @@ public abstract class DoNotUseDateTimeNowBase<TSyntaxKind> : SonarDiagnosticAnal
         }, Language.SyntaxKind.SimpleMemberAccessExpression);
 
     private bool IsDateTimeNowOrToday(SyntaxNode node, SemanticModel semanticModel) =>
-        MatchesAnyProperty(node, semanticModel, KnownType.System_DateTime, nameof(DateTime.Now), nameof(DateTime.Today));
+        MatchesAnyProperty(node, semanticModel, DateTimeNow, DateTimeToday);
 
     private bool IsDateTimeOffsetNowDateTime(SyntaxNode node, SemanticModel semanticModel) =>
-        MatchesAnyProperty(node, semanticModel, KnownType.System_DateTimeOffset, nameof(DateTimeOffset.DateTime), nameof(DateTimeOffset.Date))
-        && MatchesAnyProperty(Language.Syntax.NodeExpression(node), semanticModel, KnownType.System_DateTimeOffset, nameof(DateTimeOffset.Now));
+        MatchesAnyProperty(node, semanticModel, DateTimeOffsetDateTime, DateTimeOffsetDate)
+        && MatchesAnyProperty(Language.Syntax.NodeExpression(node), semanticModel, DateTimeOffsetNow);
 
-    private bool MatchesAnyProperty(SyntaxNode node, SemanticModel semanticModel, KnownType containingType, params string[] propertyNames) =>
+    private bool MatchesAnyProperty(SyntaxNode node, SemanticModel semanticModel, params MemberDescriptor[] members) =>
         Language.Syntax.NodeIdentifier(node) is { IsMissing: false } identifier
-        && propertyNames.Any(x => identifier.ValueText.Equals(x, Language.NameComparison))
-        && semanticModel.GetSymbolInfo(node) is { Symbol: IPropertySymbol propertySymbol }
-        && containingType.Matches(propertySymbol.ContainingType);
+        && members.Any(x => MemberDescriptor.MatchesAny(identifier.ValueText, new Lazy<ISymbol>(() => semanticModel.GetSymbolInfo(node).Symbol), false, Language.NameComparison, members));
 }
