@@ -7,7 +7,7 @@ class Test
 {
     void TestCases()
     {
-        var currentTime = DateTime.Now;                                             // Noncompliant {{Do not use 'DateTime.Now' for recording instants}}
+        var currentTime = DateTime.Now;                                             // Noncompliant {{Use UTC when recoding DateTime instants}}
         //                ^^^^^^^^^^^^
         currentTime = System.DateTime.Now;                                          // Noncompliant
         currentTime = Now;                                                          // FN
