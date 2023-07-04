@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             var leadingTrivia = node.GetLeadingTrivia();
             var trailingTrivia = node.GetTrailingTrivia();
-            return  root.ReplaceNode(node,
+            return root.ReplaceNode(node,
                 SyntaxFactory.MemberAccessExpression(
                     SyntaxKind.SimpleMemberAccessExpression,
                     ((ObjectCreationExpressionSyntax)node).Type,

@@ -38,11 +38,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 typeNode = ((ObjectCreationExpressionSyntax)node).Type;
             }
 
+            var leadingTrivia = node.GetLeadingTrivia();
+            var trailingTrivia = node.GetTrailingTrivia();
             return root.ReplaceNode(node,
                 SyntaxFactory.MemberAccessExpression(
                     SyntaxKind.SimpleMemberAccessExpression,
                     typeNode,
-                    SyntaxFactory.IdentifierName("UnixEpoch")));
+                    SyntaxFactory.IdentifierName("UnixEpoch")).WithLeadingTrivia(leadingTrivia).WithTrailingTrivia(trailingTrivia));
         }
     }
 }

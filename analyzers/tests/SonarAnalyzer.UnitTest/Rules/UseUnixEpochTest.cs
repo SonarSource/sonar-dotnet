@@ -47,15 +47,10 @@ public class UseUnixEpochTest
 
     [TestMethod]
     public void UseUnixEpoch_CSharp9() =>
-        builderCS.AddSnippet(
-            """
-            using System;
-
-            DateTime dateTime = new(1970, 1, 1); // Noncompliant
-            DateTimeOffset dateTimeOffset = new(1970, 1, 1, 0, 0, 0, TimeSpan.Zero); // Noncompliant
-            """)
-                 .WithTopLevelStatements()
-                 .Verify();
+        builderCS
+            .AddPaths("UseUnixEpoch.CSharp9.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
     [TestMethod]
     public void UseUnixEpoch_VB() =>
@@ -63,19 +58,32 @@ public class UseUnixEpochTest
 
     [TestMethod]
     public void UseUnixEpoch_CodeFix_CS() =>
-    new VerifierBuilder<CS.UseUnixEpoch>()
-        .AddPaths("UseUnixEpoch.cs")
-        .WithCodeFix<CS.UseUnixEpochCodeFix>()
-        .WithCodeFixedPaths("UseUnixEpoch.Fixed.cs")
-        .VerifyCodeFix();
+        builderCS
+            .AddPaths("UseUnixEpoch.cs")
+            .WithCodeFix<CS.UseUnixEpochCodeFix>()
+            .WithCodeFixedPaths("UseUnixEpoch.Fixed.cs")
+            .WithCodeFixTitle(CS.UseUnixEpochCodeFix.Title)
+            .VerifyCodeFix();
+
+    [TestMethod]
+    public void UseUnixEpoch_CodeFix_CSharp9() =>
+        builderCS
+            .AddPaths("UseUnixEpoch.CSharp9.cs")
+            .WithCodeFix<CS.UseUnixEpochCodeFix>()
+            .WithCodeFixedPaths("UseUnixEpoch.CSharp9.Fixed.cs")
+            .WithCodeFixTitle(CS.UseUnixEpochCodeFix.Title)
+            .WithTopLevelStatements()
+            .VerifyCodeFix();
 
     [TestMethod]
     public void UseUnixEpoch_CodeFix_VB() =>
-    new VerifierBuilder<VB.UseUnixEpoch>()
-        .AddPaths("UseUnixEpoch.vb")
-        .WithCodeFix<VB.UseUnixEpochCodeFix>()
-        .WithCodeFixedPaths("UseUnixEpoch.Fixed.vb")
-        .VerifyCodeFix();
+        builderVB
+            .AddPaths("UseUnixEpoch.vb")
+            .WithCodeFix<VB.UseUnixEpochCodeFix>()
+            .WithCodeFixedPaths("UseUnixEpoch.Fixed.vb")
+            .WithCodeFixTitle(VB.UseUnixEpochCodeFix.Title)
+            .VerifyCodeFix();
 
 #endif
+
 }
