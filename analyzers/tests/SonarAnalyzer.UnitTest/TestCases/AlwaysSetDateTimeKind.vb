@@ -5,6 +5,7 @@ Public Class Program
 
     Public Sub Noncompliant()
         Dim dt = New DateTime() ' Noncompliant {{Provide the "DateTimeKind" when creating this object.}}
+        '        ^^^^^^^^^^^^^^
         dt = New Date() ' Noncompliant
         dt = New dATEtIME() ' Noncompliant
         dt = New DateTime(1623) ' Noncompliant

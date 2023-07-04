@@ -45,6 +45,7 @@ public class AlwaysSetDateTimeKindTest
                 using System;
 
                 DateTime dateTime = new(1994, 07, 05, 16, 23, 00, 42, 42); // Noncompliant
+                //                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                 dateTime = new(1623, DateTimeKind.Unspecified); // Compliant
                 """)
             .WithTopLevelStatements()
