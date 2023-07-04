@@ -6,6 +6,8 @@ computations in another machine placed in a different time zone, you won’t be 
 knowing the origin’s offset. This will likely lead to confusion and potential bugs.</p>
 <p>Instead, you should record the <code>DateTime</code> instants in UTC, which gives you the date and time as it is in the Coordinated Universal Time.
 UTC is a time standard for all time zones and is not subjected to Daylight Saving Time (DST).</p>
+<p>Similarly, the use of the <code>DateTime.Today</code> property should also be avoided, as it can return different date values depending on the time
+zone.</p>
 <p>Generally, unless the purpose is to only display the Date and Time to a user on their local machine, you should always use UTC (for example, when
 storing dates in a datebase or using them for calculations).</p>
 <h3>What is the potential impact?</h3>
@@ -13,8 +15,17 @@ storing dates in a datebase or using them for calculations).</p>
 unambiguous representation of an instant, and this UTC instant can be transformed into any equivalent local time. This operation isn’t reversible as
 some local times are ambiguous and can be matched to more than one UTC instant (for example, due to daylight savings).</p>
 <h2>How to fix it</h2>
-<p>The fix is to use <code>DateTime.UtcNow</code>, <code>DateTimeOffSet.Now</code> (as it contains offset information) or,
-<code>DateTimeOffSet.UtcNow</code>.</p>
+<p>Instead of <code>DateTime.Now</code> use any of the following:</p>
+<ul>
+  <li> <code>DateTime.UtcNow</code>, </li>
+  <li> <code>DateTimeOffSet.Now</code> (as it contains offset information) </li>
+  <li> <code>DateTimeOffSet.UtcNow</code> </li>
+</ul>
+<p>Instead of <code>DateTime.Today</code> use any of the following:</p>
+<ul>
+  <li> <code>DateTime.UtcNow.Date</code>, </li>
+  <li> <code>DateOnly.FromDateTime(DateTime.UtcNow)</code> (.NET 6.0+) </li>
+</ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -39,6 +50,7 @@ End Sub
 <ul>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.now">DateTime.Now documentation</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.utcnow">DateTime.UtcNow documentation</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.today">DateTime.Today documentation</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset">DateTimeOffset documentation</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/resolve-ambiguous-times">Ambiguous times</a> </li>
   <li> <a href="https://www.timeanddate.com/time/zone/timezone/utc">UTC standard</a> </li>
