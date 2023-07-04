@@ -1,13 +1,17 @@
 <h2>Why is this an issue?</h2>
-<p>Typically you want to use <code>using</code> to create a local <code>IDisposable</code> variable; it will trigger disposal of the object when
-control passes out of the block’s scope. The exception to this rule is when your method returns that <code>IDisposable</code>. In that case
-<code>using</code> disposes of the object before the caller can make use of it, likely causing exceptions at runtime. So you should either remove
-<code>using</code> or avoid returning the <code>IDisposable</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>When you use a <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/using"><code>using</code> statement</a>, the
+goal is to ensure the correct disposal of an <a href="https://learn.microsoft.com/en-us/dotnet/api/system.idisposable"><code>IDisposable</code></a>
+instance when the control leaves the <code>using</code> statement block.</p>
+<p>If you return that <code>IDisposable</code> instance inside the block, <code>using</code> will dispose it before the caller can use it, likely
+causing exceptions at runtime. You should either remove <code>using</code> statement or avoid returning the <code>IDisposable</code> in the
+<code>using</code> statement block.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public FileStream WriteToFile(string path, string text)
 {
-  using (var fs = File.Create(path)) // Noncompliant
+  using (var fs = File.Create(path)) // Noncompliant: 'fs' is disposed at the end of the using scope
   {
     var bytes = Encoding.UTF8.GetBytes(text);
     fs.Write(bytes, 0, bytes.Length);
@@ -15,14 +19,21 @@ public FileStream WriteToFile(string path, string text)
   }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 public FileStream WriteToFile(string path, string text)
 {
   var fs = File.Create(path);
   var bytes = Encoding.UTF8.GetBytes(text);
   fs.Write(bytes, 0, bytes.Length);
-  return fs;
+  return fs; // Compliant: 'fs' is not disposed once the end of the scope is reached and the caller can use it
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/using">using statement - ensure the
+  correct use of disposable objects</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.idisposable">IDisposable</a> </li>
+</ul>
 

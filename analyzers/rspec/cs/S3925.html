@@ -1,59 +1,101 @@
 <h2>Why is this an issue?</h2>
-<p>The <code>ISerializable</code> interface is the mechanism to control the type serialization process. If not implemented correctly this could result
-in an invalid serialization and hard to detect bugs.</p>
-<p>This rules raises an issue on types that implement <code>ISerializable</code> without following the serialization pattern recommended by
-Microsoft.</p>
-<p>Specifically this rule checks for these problems:</p>
+<p>The <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable"><code>ISerializable</code></a> interface is
+the mechanism to control the type serialization process. If not implemented correctly this could result in an invalid serialization and hard-to-detect
+bugs.</p>
+<p>This rule raises an issue on types that implement <code>ISerializable</code> without following the <a
+href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/serialization">serialization pattern recommended by Microsoft</a>.</p>
+<p>Specifically, this rule checks for these problems:</p>
 <ul>
-  <li> The <code>System.SerializableAttribute</code> attribute is missing. </li>
-  <li> Non-serializable fields are not marked with the <code>System.NonSerializedAttribute</code> attribute. </li>
+  <li> The <a href="https://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute"><code>SerializableAttribute</code></a> attribute is
+  missing. </li>
+  <li> Non-serializable fields are not marked with the <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.nonserializedattribute"><code>NonSerializedAttribute</code></a> attribute. </li>
   <li> There is no serialization constructor. </li>
   <li> An unsealed type has a serialization constructor that is not <code>protected</code>. </li>
   <li> A sealed type has a serialization constructor that is not <code>private</code>. </li>
-  <li> An unsealed type has a <code>ISerializable.GetObjectData</code> that is not both <code>public</code> and <code>virtual</code>. </li>
+  <li> An unsealed type has an <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable.getobjectdata"><code>ISerializable.GetObjectData</code></a> that is not both <code>public</code> and <code>virtual</code>. </li>
   <li> A derived type has a serialization constructor that does not call the <code>base</code> constructor. </li>
-  <li> A derived type has a <code>ISerializable.GetObjectData</code> method that does not call the <code>base</code> method. </li>
+  <li> A derived type has an <code>ISerializable.GetObjectData</code> method that does not call the <code>base</code> method. </li>
   <li> A derived type has serializable fields but the <code>ISerializable.GetObjectData</code> method is not overridden. </li>
 </ul>
-<p>Classes which inherit from <code>Exception</code> are implementing <code>ISerializable</code>. Make sure <code>[Serializable]</code> attribute is
-used and that <code>ISerializable</code>&nbsp;is correctly implemented.&nbsp;Even it you don’t plan to explicitly serialize the object yourself, it
-might still require serialization, for instance when crossing the boundary of an <code>AppDomain</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-public class Foo : ISerializable // Noncompliant the [Serializable] attribute is missing
+<p>Classes that inherit from <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception"><code>Exception</code></a> are implementing
+<code>ISerializable</code>. Make sure the <code>[Serializable]</code> attribute is used and that <code>ISerializable</code> is correctly implemented.
+Even if you don’t plan to explicitly serialize the object yourself, it might still require serialization, for instance when crossing the boundary of
+an <code>AppDomain</code>.</p>
+<h3>Exceptions</h3>
+<ul>
+  <li> Classes in test projects are not checked. </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Make sure to follow the <a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/serialization">recommended guidelines</a> when
+implementing <code>ISerializable</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public class Bar
 {
 }
+
+public class Foo : ISerializable // Noncompliant: serialization constructor is missing
+                                 // Noncompliant: the [Serializable] attribute is missing
+{
+    private readonly Bar bar; // Noncompliant: the field is not marked with [NonSerialized]
+}
+
+public sealed class SealedFoo : Foo
+{
+    private int val; // Noncompliant: 'val' is serializable and GetObjectData is not overridden
+
+    public SealedFoo()
+    {
+        // ...
+    }
+
+    public SealedFoo(SerializationInfo info, StreamingContext context) // Noncompliant: serialization constructor is not `private`
+                                                                       // Noncompliant: serialization constructor does not call base constructor
+    {
+        // ...
+    }
+}
+
+public class UnsealedFoo : Foo
+{
+    public UnsealedFoo()
+    {
+        // ...
+    }
+
+    public UnsealedFoo(SerializationInfo info, StreamingContext context) // Noncompliant: serialization constructor is not `protected`
+        : base(info, context)
+    {
+        // ...
+    }
+
+    protected void GetObjectData(SerializationInfo info, StreamingContext context) // Noncompliant: GetObjectData is not public virtual
+    {
+        // Noncompliant: does not call base.GetObjectData(info, context)
+    }
+}
 </pre>
-<p>or</p>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 public class Bar
 {
 }
 
 [Serializable]
-public class Foo : ISerializable // Noncompliant the serialization constructor is missing
-{
-    private readonly Bar bar; // Noncompliant the field is not marked with [NonSerialized]
-}
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-public class Bar
-{
-}
-
-[Serializable]
-public class Foo : ISerializable
+public class Foo : ISerializable // Compliant: the class is marked with [Serializable]
 {
     [NonSerialized]
-    private readonly Bar bar;
+    private readonly Bar bar; // Compliant: the field is marked with [NonSerialized]
 
     public Foo()
     {
         // ...
     }
 
-    protected Foo(SerializationInfo info, StreamingContext context)
+    protected Foo(SerializationInfo info, StreamingContext context) // Compliant: serialization constructor is present
     {
         // ...
     }
@@ -65,17 +107,17 @@ public class Foo : ISerializable
 }
 
 [Serializable]
-public sealed class SubFoo : Foo
+public sealed class SealedFoo : Foo
 {
-    private int val;
+    private int val; // Compliant: 'val' is serializable and GetObjectData is overridden
 
-    public SubFoo()
+    public SealedFoo()
     {
         // ...
     }
 
-    private SubFoo(SerializationInfo info, StreamingContext context)
-        : base(info, context)
+    private SealedFoo(SerializationInfo info, StreamingContext context) // Compliant: serialization constructor is `private`
+        : base(info, context) // Compliant: serialization constructor calls base constructor
     {
         // ...
     }
@@ -86,9 +128,41 @@ public sealed class SubFoo : Foo
         // ...
     }
 }
+
+[Serializable]
+public class UnsealedFoo : Foo
+{
+    public UnsealedFoo()
+    {
+        // ...
+    }
+
+    protected UnsealedFoo(SerializationInfo info, StreamingContext context) // Compliant: serialization constructor is `protected`
+        : base(info, context)
+    {
+        // ...
+    }
+
+    public virtual void GetObjectData(SerializationInfo info, StreamingContext context) // Compliant: GetObjectData is public virtual
+    {
+        base.GetObjectData(info, context); // Compliant: calls base.GetObjectData(info, context)
+        // ...
+
+    }
+}
 </pre>
-<h3>Exceptions</h3>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> Classes in test projects are not checked. </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/serialization">Serialization</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable"><code>ISerializable</code>
+  Interface</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute"><code>SerializableAttribute</code>
+  Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.nonserializedattribute"><code>NonSerializedAttribute</code>
+  Class</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable.getobjectdata"><code>ISerializable.GetObjectData</code> Method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception"><code>Exception</code> Class</a> </li>
 </ul>
 

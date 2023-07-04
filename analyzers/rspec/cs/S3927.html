@@ -1,16 +1,25 @@
 <h2>Why is this an issue?</h2>
-<p>Serialization event handlers that don’t have the correct signature will simply not be called, thus bypassing any attempts to augment the automated
+<p>Serialization event handlers that don’t have the correct signature will not be called, bypassing augmentations to the automated
 de/serialization.</p>
-<p>This rule raises an issue when a method marked with one of the following attributes is <code>public</code>, <code>static</code>, does not return
-<code>void</code>, has type parameters, or does not have a single parameter of type <code>System.Runtime.Serialization.StreamingContext</code>:</p>
+<p>A method is designated a serialization event handler by applying one of the following serialization event attributes:</p>
 <ul>
-  <li> <code>System.Runtime.Serialization.OnSerializingAttribute</code> </li>
-  <li> <code>System.Runtime.Serialization.OnSerializedAttribute</code> </li>
-  <li> <code>System.Runtime.Serialization.OnDeserializingAttribute</code> </li>
-  <li> <code>System.Runtime.Serialization.OnDeserializedAttribute</code> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.onserializingattribute"><code>System.Runtime.Serialization.OnSerializingAttribute</code></a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.onserializedattribute"><code>System.Runtime.Serialization.OnSerializedAttribute</code></a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.ondeserializingattribute"><code>System.Runtime.Serialization.OnDeserializingAttribute</code></a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.ondeserializedattribute"><code>System.Runtime.Serialization.OnDeserializedAttribute</code></a> </li>
 </ul>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>Serialization event handlers take a single parameter of type <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.streamingcontext"><code>System.Runtime.Serialization.StreamingContext</code></a>,
+return <code>void`</code>, and have <code>private</code> visibility.</p>
+<p>This rule raises an issue when any of these constraints are not respected.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 [Serializable]
 public class Foo
 {
@@ -30,8 +39,8 @@ public class Foo
     void OnDeserialized(StreamingContext context, string str) {} // Noncompliant should have a single parameter of type StreamingContext
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 [Serializable]
 public class Foo
 {
@@ -48,4 +57,10 @@ public class Foo
     private void OnDeserialized(StreamingContext context) {}
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/visualstudio/code-quality/ca2238">CA2238: Implement serialization methods
+  correctly</a> </li>
+</ul>
 

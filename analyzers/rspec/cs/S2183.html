@@ -1,47 +1,31 @@
 <h2>Why is this an issue?</h2>
-<p>Shifting an integral number by 0 is equivalent to doing nothing but makes the code confusing for maintainers.</p>
-<p>If the first operand is an <code>int</code> or <code>uint</code> (32-bit quantity), the shift count is given by the low-order five bits of the
-second operand. That is, the actual shift count is 0 to 31 bits.</p>
-<p>Note that integral number with a less than 32-bit quantity (e.g. <code>short</code>, <code>ushort</code>…​) are implicitly converted to
+<p>The <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators#left-shift-operator-">shifting</a>
+operators are used to do an <a href="https://en.wikipedia.org/wiki/Arithmetic_shift">arithmetic shift</a> to the bits of an <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types">integral numeric</a> value, either to
+the left or the right.</p>
+<pre>
+var number = 14;         // ...01110 (14)
+var left = number &lt;&lt; 1;  // ...11100 (28)
+var right = number &gt;&gt; 1; // ...00111 (7)
+</pre>
+<p>Therefore, shifting an integral number by 0 is equivalent to doing nothing, since the bits do not move any positions to the left or the right.</p>
+<p>On the other hand, shifting an integral number by a value greater than their count of bits minus one (<code>n_bits-1</code>) is equivalent to
+shifting by the value <a href="https://en.wikipedia.org/wiki/Modulo">modulo</a> the bit count of the number (<code>value % n_bits</code>).</p>
+<p>In the case of <code>int</code> and <code>uint</code>, which take 32 bits in the memory, the shift count is given by the five low-order bits of the
+second operand, which can represent numbers from 0 to 31. This means that numbers having the same five low-order bits are treated the same by the
+shift operators.</p>
+<pre>
+var one =         0b0_00001;
+var thirtyThree = 0b1_00001; // Same five low-order bits, 33 % 32 = 1
+
+var shifted1 = 42 &lt;&lt; one;           // Results in 84
+var shifted2 = 42 &lt;&lt; thirtyThree;   // Results in 84
+</pre>
+<p>Note that integral number with a less than 32-bit quantity (e.g. <code>short</code>, <code>ushort</code>) are implicitly converted to
 <code>int</code> before the shifting operation and so the rule for <code>int</code>/<code>uint</code> applies.</p>
-<p>If the first operand is a <code>long</code> or <code>ulong</code> (64-bit quantity), the shift count is given by the low-order six bits of the
+<p>If the first operand is a <code>long</code> or <code>ulong</code> (64-bit quantity), the shift count is given by the six low-order bits of the
 second operand. That is, the actual shift count is 0 to 63 bits.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-public void Main()
-{
-    short s = 1;
-    short shortShift1 = (short)(s &lt;&lt; 0); // Noncompliant
-    short shortShift1 = (short)(s &lt;&lt; 16); // Compliant as short will be cast to int (16 is between 0 and 31)
-    short shortShift3 = (short)(s &lt;&lt; 32); // Noncompliant, this is equivalent to shifting by 1
-
-    int i = 1;
-    int intShift1 = i &lt;&lt; 0; // Noncompliant
-    int intShift2 = i &lt;&lt; 32; // Noncompliant, this is equivalent to shifting by 1
-
-    long lg = 1;
-    long longShift1 = lg &lt;&lt; 0; // Noncompliant
-    long longShift2 = lg &lt;&lt; 64; // Noncompliant, this is equivalent to shifting by 1
-}
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-public void Main()
-{
-    short s = 1;
-    short shortShift1 = s;
-    short shortShift1 = (short)(s &lt;&lt; 16);
-    short shortShift3 = (short)(s &lt;&lt; 1);
-
-    int i = 1;
-    var intShift1 = i;
-    var intShift2 = i &lt;&lt; 1;
-
-    long lg = 1;
-    var longShift1 = lg;
-    var longShift2 = lg &lt;&lt; 1;
-}
-</pre>
 <h3>Exceptions</h3>
 <p>This rule doesn’t raise an issue when the shift by zero is obviously for cosmetic reasons:</p>
 <ul>
@@ -52,10 +36,41 @@ public void Main()
 bytes[loc+0] = (byte)(value &gt;&gt; 8);
 bytes[loc+1] = (byte)(value &gt;&gt; 0);
 </pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+short s = 1;
+short shortShift1 = (short)(s &lt;&lt; 0); // Noncompliant: the value does not change
+short shortShift2 = (short)(s &lt;&lt; 33); // Noncompliant: this is equivalent to shifting by 1
+
+int i = 1;
+int intShift = i &lt;&lt; 33; // Noncompliant: this is equivalent to shifting by 1
+
+long lg = 1;
+long longShift1 = lg &lt;&lt; 0; // Noncompliant: the value does not change
+long longShift2 = lg &lt;&lt; 65; // Noncompliant: this is equivalent to shifting by 1
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+short s = 1;
+short shortShift1 = s;
+short shortShift2 = (short)(s &lt;&lt; 1);
+
+int i = 1;
+var intShift = i &lt;&lt; 1;
+
+long lg = 1;
+var longShift1 = lg;
+var longShift2 = lg &lt;&lt; 1;
+</pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a
-  href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators#left-shift-operator-">Microsoft
-  documentation - Bitwise and shift operators</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators#left-shift-operator-">Bitwise and
+  shift operators (C# reference)</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Arithmetic_shift">Arithmetic shift</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Modulo">Modulo</a> </li>
 </ul>
 

@@ -1,22 +1,51 @@
 <h2>Why is this an issue?</h2>
-<p>The <code>PartCreationPolicyAttribute</code> attribute, which is part of the Managed Extensibility Framework (MEF), is used to specify how the
-exported object will be created. Therefore it doesn’t make sense not to export this a class with this attribute using the <code>ExportAttribute</code>
-attribute.</p>
-<p>This rule raises an issue when a class is marked as shared with a <code>PartCreationPolicyAttribute</code> but lacks a
+<p>To customize the default behavior for an export in the <a href="https://learn.microsoft.com/en-us/dotnet/framework/mef/">Managed Extensibility
+Framework</a> (MEF), applying the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.partcreationpolicyattribute"><code>PartCreationPolicyAttribute</code></a>
+is necessary. For the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.partcreationpolicyattribute"><code>PartCreationPolicyAttribute</code></a>
+to be meaningful in the context of an export, it is required to also annotate the class with the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.exportattribute"><code>ExportAttribute</code></a>.</p>
+<p>This rule raises an issue when a class is annotated with the <code>PartCreationPolicyAttribute</code> but not with the
 <code>ExportAttribute</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+using System.ComponentModel.Composition;
+
 [PartCreationPolicy(CreationPolicy.Any)] // Noncompliant
-public class FooBar : IFooBar
-{
-}
+public class FooBar : IFooBar { }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+using System.ComponentModel.Composition;
+
 [Export(typeof(IFooBar))]
 [PartCreationPolicy(CreationPolicy.Any)]
-public class FooBar : IFooBar
-{
-}
+public class FooBar : IFooBar { }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/framework/mef/">Managed Extensibility Framework (MEF)</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/framework/mef/attributed-programming-model-overview-mef">Attributed
+  programming model overview (MEF)</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.partcreationpolicyattribute">PartCreationPolicyAttribute
+  Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.exportattribute">ExportAttribute
+  Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.creationpolicy">CreationPolicy
+  Enum</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> Stefan Henneken - <a href="https://stefanhenneken.net/2015/11/08/mef-part-1-fundamentals-imports-and-exports/">MEF Part 1 – Fundamentals,
+  Imports and Exports</a> </li>
+  <li> Stefan Henneken - <a href="https://stefanhenneken.net/2019/01/26/mef-part-2-metadata-and-creation-policies/">MEF Part 2 – Metadata and creation
+  policies</a> </li>
+  <li> Stefan Henneken - <a href="https://stefanhenneken.net/2019/03/06/mef-part-3-life-cycle-management-and-monitoring/">MEF Part 3 – Life cycle
+  management and monitoring</a> </li>
+</ul>
 

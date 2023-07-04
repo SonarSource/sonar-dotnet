@@ -1,17 +1,23 @@
 <h2>Why is this an issue?</h2>
-<p>Marking a method with the <code>Pure</code> attribute specifies that the method doesn’t make any visible changes; thus, the method should return a
-result, otherwise the call to the method should be equal to no-operation. So <code>Pure</code> on a <code>void</code> method is either a mistake, or
-the method doesn’t do any meaningful task.</p>
+<p>Marking a method with the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.contracts.pureattribute"><code>Pure</code></a>
+attribute indicates that the method doesn’t make any visible state changes. Therefore, a <code>Pure</code> method should return a result otherwise it
+indicates a no-operation call.</p>
+<p>Using <code>Pure</code> on a <code>void</code> method is either by mistake or the method is not doing a meaningful task.</p>
 <h3>Noncompliant code example</h3>
 <pre>
 Class Person
     Private age As Integer
 
-    &lt;Pure&gt; ' Noncompliant. In this case the method makes a possibly visible state change
+    &lt;Pure&gt; ' Noncompliant. The method makes a state change
     Private Sub ConfigureAge(ByVal age As Integer)
-        ...
         Me.age = age
     End Sub
+
+    &lt;Pure&gt;
+    Private Sub WriteAge() ' Noncompliant
+        Console.WriteLine(Me.age)
+    End Sub
+
 End Class
 </pre>
 <h3>Compliant solution</h3>
@@ -22,6 +28,24 @@ Class Person
     Private Sub ConfigureAge(ByVal age As Integer)
         Me.age = age
     End Sub
+
+    &lt;Pure&gt;
+    Private Function Age() As Integer
+        Return Me.age
+    End Function
+
+    ' or remove Pure attribute from the method
+
+    Private Sub WriteAge()
+        Console.WriteLine(Me.age)
+    End Sub
+
 End Class
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.contracts.pureattribute">PureAttribute Class</a>
+  </li>
+</ul>
 

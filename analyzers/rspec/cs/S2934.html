@@ -1,74 +1,83 @@
 <h2>Why is this an issue?</h2>
-<p>While the properties of a <code>readonly</code> reference type field can still be changed after initialization, those of a <code>readonly</code>
-value field, such as a <code>struct</code>, cannot.</p>
+<p>While the properties of a <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/readonly"><code>readonly</code></a>
+<a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/reference-types">reference type</a> field can still be changed
+after initialization, those of a <code>readonly</code> <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types">value type</a> field, such as a <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct"><code>struct</code></a>, cannot.</p>
 <p>If the member could be either a <code>class</code> or a <code>struct</code> then assignment to its properties could be unreliable, working
 sometimes but not others.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<p>There are two ways to fix this issue:</p>
+<ul>
+  <li> Restrict the type of the field to a <code>class</code> </li>
+  <li> Remove the assignment entirely, if it is not possible to restrict the type of the field </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 interface IPoint
 {
-  int X { get; set; }
-  int Y { get; set; }
+    int X { get; set; }
+    int Y { get; set; }
 }
 
-class PointManager&lt;T&gt; where T: IPoint
+class PointManager&lt;T1, T2&gt;
+    where T1 : IPoint
+    where T2 : IPoint
 {
-  readonly T point;  // this could be a struct
-  public PointManager(T point)
-  {
-    this.point = point;
-  }
+    readonly T1 point1;  // this could be a struct
+    readonly T2 point2;  // this could be a struct
 
-  public void MovePointVertically(int newX)
-  {
-    point.X = newX; //Noncompliant; if point is a struct, then nothing happened
-    Console.WriteLine(point.X);
-  }
+    public PointManager(T1 point1, T2 point2)
+    {
+        this.point1 = point1;
+        this.point2 = point2;
+    }
+
+    public void MovePoints(int newX)
+    {
+        point1.X = newX; //Noncompliant: if point is a struct, then nothing happened
+        point2.X = newX; //Noncompliant: if point is a struct, then nothing happened
+    }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 interface IPoint
 {
-  int X { get; set; }
-  int Y { get; set; }
+    int X { get; set; }
+    int Y { get; set; }
 }
 
-class PointManager&lt;T&gt; where T : IPoint
+class PointManager&lt;T1, T2&gt;
+    where T1 : IPoint
+    where T2 : class, IPoint
 {
-  readonly T point;  // this could be a struct
-  public PointManager(T point)
-  {
-    this.point = point;
-  }
+    readonly T1 point1;  // this could be a struct
+    readonly T2 point2;  // this is a class
 
-  public void MovePointVertically(int newX) // assignment has been removed
-  {
-    Console.WriteLine(point.X);
-  }
+    public PointManager(T1 point1, T2 point2)
+    {
+        this.point1 = point1;
+        this.point2 = point2;
+    }
+
+    public void MovePoints(int newX) // assignment to point1 has been removed
+    {
+        point2.X = newX; // Compliant: point2 is a class
+    }
 }
 </pre>
-<p>or</p>
-<pre>
-interface IPoint
-{
-  int X { get; set; }
-  int Y { get; set; }
-}
-
-class PointManager&lt;T&gt; where T : class, IPoint
-{
-  readonly T point;  // this can only be a class
-  public PointManager(T point)
-  {
-    this.point = point;
-  }
-
-  public void MovePointVertically(int newX)
-  {
-    point.X = newX;  // this assignment is guaranteed to work
-    Console.WriteLine(point.X);
-  }
-}
-</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/readonly">readonly (C# Reference)</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/reference-types">Reference types (C#
+  reference)</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types">Value types (C#
+  reference)</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct">Structure types (C#
+  reference)</a> </li>
+</ul>
 

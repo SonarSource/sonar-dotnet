@@ -1,27 +1,59 @@
 <h2>Why is this an issue?</h2>
-<p>It is possible to subscribe to events with anonymous delegates, but having done so, it is impossible to unsubscribe from them. That’s because the
-process of subscribing adds the delegate to a list. The process of unsubscribing essentially says: remove <em>this item</em> from the subscription
-list. But because an anonymous delegate was used in both cases, the unsubscribe attempt tries to remove a different item from the list than was added.
-The result: <code>NOOP</code>.</p>
-<p>Instead, save the delegate to a variable and use the variable to subscribe and unsubscribe.</p>
-<h3>Noncompliant code example</h3>
+<p>When working with <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions">anonymous
+functions</a>, it is important to keep in mind that each time you create one, it is a completely new instance.</p>
+<p>In this example, even though the same lambda expression is used, the expressions are stored separately in the memory and are therefore not equal or
+the same.</p>
 <pre>
-listView.PreviewTextInput += (obj,args) =&gt;
-        listView_PreviewTextInput(obj,args,listView);
+Func&lt;int, int&gt; lambda1 = x =&gt; x + 1;
+Func&lt;int, int&gt; lambda2 = x =&gt; x + 1;
 
-// ...
-
-listView.PreviewTextInput -= (obj, args) =&gt;
-        listView_PreviewTextInput(obj, args, listView); // Noncompliant; this delegate was never subscribed
+var result = lambda1 == lambda2; // result is false here
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-EventHandler func = (obj,args) =&gt; listView_PreviewTextInput(obj,args,listView);
+<p>This is even more true when working with <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/">events</a> since they
+are <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/how-to-combine-delegates-multicast-delegates">multicast
+delegates</a> that offer ways of <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/how-to-subscribe-to-and-unsubscribe-from-events">subscribing and
+unsubscribing</a> to them. If an anonymous function is used to subscribe to an event, it is impossible to unsubscribe from it. This happens because to
+remove the entry from the subscription list, a reference to the original method is needed, but if the anonymous function has not been stored before
+subscribing, there is no way to find a reference to it.</p>
+<p>Instead, store the callback to a variable or a named method and use the variable or method to subscribe and unsubscribe.</p>
+<h2>How to fix it</h2>
+<p>Store the callback to a variable or a named method and use the variable or method to subscribe and unsubscribe.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+event EventHandler myEvent;
 
-listView.PreviewTextInput += func;
-
-// ...
-
-listView.PreviewTextInput -= func;
+void DoWork()
+{
+        myEvent += (s, e) =&gt; Console.WriteLine($"Event raised with sender {s} and arguments {e}!");
+        // ...
+        myEvent -= (s, e) =&gt; Console.WriteLine($"Event raised with sender {s} and arguments {e}!"); // Noncompliant: this callback was never subscribed
+}
 </pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+event EventHandler myEvent;
+void LogEvent(object s, EventArgs e) =&gt; Console.WriteLine($"Event raised with sender {s} and arguments {e}!");
+
+void DoWork()
+{
+        myEvent += LogEvent;
+        // ...
+        myEvent -= LogEvent; // Compliant: LogEvent points to the same callback used for subscribing
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/">Events (C# Programming Guide)</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions">Lambda expressions
+  and anonymous functions</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/how-to-subscribe-to-and-unsubscribe-from-events">How to subscribe to
+  and unsubscribe from events (C# Programming Guide)</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/how-to-combine-delegates-multicast-delegates">How to combine
+  delegates (Multicast Delegates) (C# Programming Guide)</a> </li>
+</ul>
 
