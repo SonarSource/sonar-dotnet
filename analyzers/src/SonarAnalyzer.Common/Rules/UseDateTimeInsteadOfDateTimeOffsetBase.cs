@@ -37,6 +37,7 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind, TMembe
             "UnixEpoch");
 
     protected abstract bool IsNamedDateTime(SyntaxNode node);
+    protected abstract SyntaxNode GetType(SyntaxNode node);
     protected abstract Location GetExpressionLocation(TMemberAccess node);
 
     protected UseDateTimeInsteadOfDateTimeOffsetBase() : base(DiagnosticId) { }
@@ -47,7 +48,8 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind, TMembe
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (IsDateTimeType(c.Node, c.SemanticModel))
+                    if ((c.Node.RawKind == (int)SyntaxKindEx.ImplicitObjectCreationExpression || IsNamedDateTime(GetType(c.Node)))
+                        && IsDateTimeType(c.Node, c.SemanticModel))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
                     }

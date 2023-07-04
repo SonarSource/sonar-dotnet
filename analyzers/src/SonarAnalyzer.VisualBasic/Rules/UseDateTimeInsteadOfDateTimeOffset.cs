@@ -27,9 +27,12 @@ public sealed class UseDateTimeInsteadOfDateTimeOffset : UseDateTimeInsteadOfDat
 
     private ImmutableArray<string> validNames = ImmutableArray.Create("DateTime", "Date");
 
+    protected override bool IsNamedDateTime(SyntaxNode node) =>
+        node is not null && validNames.Contains(Language.GetName(node));
+
+    protected override SyntaxNode GetType(SyntaxNode node) =>
+        node is ObjectCreationExpressionSyntax { } objectCreation ? objectCreation.Type : null;
+
     protected override Location GetExpressionLocation(MemberAccessExpressionSyntax node) =>
         node.Expression.GetLocation();
-
-    protected override bool IsNamedDateTime(SyntaxNode node) =>
-        validNames.Contains(Language.GetName(node));
 }

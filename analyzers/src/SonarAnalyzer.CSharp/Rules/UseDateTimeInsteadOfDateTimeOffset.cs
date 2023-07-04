@@ -25,9 +25,12 @@ public sealed class UseDateTimeInsteadOfDateTimeOffset : UseDateTimeInsteadOfDat
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
+    protected override bool IsNamedDateTime(SyntaxNode node) =>
+        node is not null && Language.GetName(node).Equals("DateTime", Language.NameComparison);
+
+    protected override SyntaxNode GetType(SyntaxNode node) =>
+        node is ObjectCreationExpressionSyntax { } objectCreation ? objectCreation.Type : null;
+
     protected override Location GetExpressionLocation(MemberAccessExpressionSyntax node) =>
         node.Expression.GetLocation();
-
-    protected override bool IsNamedDateTime(SyntaxNode node) =>
-        Language.GetName(node).Equals("DateTime", Language.NameComparison);
 }
