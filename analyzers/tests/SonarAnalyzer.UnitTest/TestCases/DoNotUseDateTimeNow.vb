@@ -3,7 +3,7 @@ Imports System.Linq
 Imports System.DateTime
 Imports AliasedDateTime = System.DateTime
 
-Friend Class Test
+Class Test
     Private Sub TestCases()
         Dim currentTime = DateTime.Now                                                      ' Noncompliant {{Do not use 'DateTime.Now' for recording instants}}
         '                 ^^^^^^^^^^^^
@@ -33,11 +33,11 @@ Friend Class Test
 
         Dim hours = Enumerable.Range(0, 10).Select(Function(x) DateTime.Now.AddHours(x))    ' Noncompliant
 
-        Dim propertyName = NameOf(DateTime.Now)                                      ' Compliant
+        Dim propertyName = NameOf(DateTime.Now)                                             ' Compliant
     End Sub
 End Class
 
-Friend Class CustomTypeCalledDateTime
+Class CustomTypeCalledDateTime
     Public Structure DateTime
         Public Shared ReadOnly Property Now As DateTime
             Get
@@ -47,6 +47,16 @@ Friend Class CustomTypeCalledDateTime
     End Structure
 
     Private Sub New()
-        Dim instant = DateTime.Now                                                           ' Compliant - this is not System.DateTime
+        Dim instant = DateTime.Now                                                          ' Compliant - this is not System.DateTime
+    End Sub
+End Class
+
+Class FakeNameOf
+    Private Function [nameof](o As Object) As String
+        Return ""
+    End Function
+
+    Private Sub UsesFakeNameOfMethod()
+        [nameof](Date.Now)                                                                  ' Noncompliant
     End Sub
 End Class

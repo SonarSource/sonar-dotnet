@@ -39,7 +39,7 @@ class Test
             var now = DateTime.Now;                                                 // Noncompliant
         }
 
-        var propertyName = nameof(DateTime.Now);
+        var propertyName = nameof(DateTime.Now);                                    // Compliant - the value of the property is not used
     }
 }
 
@@ -53,5 +53,15 @@ class CustomTypeCalledDateTime
     CustomTypeCalledDateTime()
     {
         _ = DateTime.Now;                                                           // Compliant - this is not System.DateTime
+    }
+}
+
+class FakeNameOf
+{
+    string nameof(object o) => "";
+
+    void UsesFakeNameOfMethod()
+    {
+        nameof(DateTime.Now);                                                       // FN
     }
 }
