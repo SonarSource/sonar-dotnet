@@ -153,5 +153,5 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         node.IsInExpressionTree(model);
 
     public override bool IsWrittenTo(SyntaxNode expression, SemanticModel semanticModel, CancellationToken cancellationToken) =>
-        throw new NotImplementedException();
+        expression is ExpressionSyntax ex && ex.IsWrittenTo(semanticModel, cancellationToken);
 }
