@@ -1,56 +1,213 @@
 <h2>Why is this an issue?</h2>
-<p>A reference to <code>null</code> should never be dereferenced/accessed. Doing so will cause a <code>NullReferenceException</code> to be thrown. At
-best, such an exception will cause abrupt program termination. At worst, it could expose debugging information that would be useful to an attacker, or
-it could allow an attacker to bypass security measures.</p>
-<h3>Noncompliant code example</h3>
+<p>Accessing a <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null">null</a> value will always throw a <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.nullreferenceexception">NullReferenceException</a> most likely causing an abrupt program
+termination.</p>
+<p>Such termination might expose sensitive information that a malicious third party could exploit to, for instance, bypass security measures.</p>
+<h3>Exceptions</h3>
+<p>In the following cases, the rule does not raise:</p>
+<h4>Extensions Methods</h4>
+<p>Calls to extension methods can still operate on <code>null</code> values.</p>
+<pre>
+using System;
+using System.Text.RegularExpressions;
+
+public static class Program
+{
+    public static string RemoveVowels(this string value)
+    {
+        if (value == null)
+        {
+            return null;
+        }
+        return Regex.Replace(value, "[aeoui]*","", RegexOptions.IgnoreCase);
+    }
+
+    public static void Main()
+    {
+        Console.WriteLine(((string?)null).RemoveVowels());  // Compliant: 'RemoveVowels' is an extension method
+    }
+}
+</pre>
+<h4>Unreachable code</h4>
+<p>Unreachable code is not executed, thus <code>null</code> values will never be accessed.</p>
 <pre>
 public void Method()
 {
     object o = null;
-    Console.WriteLine(o.ToString()); // Noncompliant, always null
+    if (false)
+    {
+        o.ToString();    // Compliant: code is unreachable
+    }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-public void Method()
-{
-    var o = new object();
-    Console.WriteLine(o.ToString());
-}
-</pre>
-<h3>Exceptions</h3>
-<p>Calls to extension methods are not reported because they can still operate on <code>null</code> values.</p>
-<p>To create a custom null validation method declare an attribute with name <code>ValidatedNotNullAttribute</code> and mark the parameter that is
-validated for null in your method declaration with it:</p>
+<h4>Validated value by analysis attributes</h4>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis">Nullable analysis attributes</a> enable
+the developer to annotate methods with information about the null-state of its arguments. Thus, potential <code>null</code> values validated by one of
+the following attributes will not raise:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullattribute">NotNullAttribute</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullwhenattribute">NotNullWhenAttribute</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnattribute">DoesNotReturnAttribute</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnifattribute">DoesNotReturnIfAttribute</a>
+  </li>
+</ul>
+<p>It is important to note those attributes are only available starting .NET Core 3. As a workaround, it is possible to define those attributes
+manually in a custom class:</p>
 <pre>
 using System;
 
-public sealed class ValidatedNotNullAttribute : Attribute { }
+public sealed class NotNullAttribute : Attribute { } // The alternative name 'ValidatedNotNullAttribute' is also supported
 
 public static class Guard
 {
-    public static void NotNull&lt;T&gt;([ValidatedNotNull] this T value, string name) where T : class
+    public static void NotNull&lt;T&gt;([NotNull] T value, string name) where T : class
     {
         if (value == null)
+        {
             throw new ArgumentNullException(name);
+        }
     }
 }
 
 public static class Utils
 {
-    public static string ToUpper(string value)
+    public static string Normalize(string value)
     {
-        Guard.NotNull(value, nameof(value));
-        if (value == null)
-        {
-            return value.ToString(); // Compliant, this code is not reachable
-        }
-        return value.ToUpper();
+        Guard.NotNull(value, nameof(value)); // Will throw if value is null
+        return value.ToUpper(); // Compliant: value is known to be not null here.
     }
 }
 </pre>
-<h2>Resources</h2>
+<h4>Validated value by Debug.Assert</h4>
+<p>A value validated with <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.debug.assert">Debug.Assert</a> to not be
+<code>null</code> is safe to access.</p>
+<pre>
+using System.Diagnostics;
+
+public void Method(object myObject)
+{
+    Debug.Assert(myObject != null);
+    myObject.ToString(); // Compliant: 'myObject' is known to be not null here.
+}
+</pre>
+<h4>Validated value by IDE-specific attributes</h4>
+<p>Like with <a href="#null-analysis-attribute">nullable analysis attributes</a>, potential <code>null</code> values validated by one of the following
+IDE-specific attributes will not raise</p>
+<h5>Visual Studio</h5>
 <ul>
-  <li> <a href="https://cwe.mitre.org/data/definitions/476">MITRE, CWE-476</a> - NULL Pointer Dereference </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.validatednotnullattribute">ValidatedNotNullAttribute</a>  (The attribute is
+  interpreted the same as the <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullattribute">NotNullAttribute</a>)  </li>
+</ul>
+<h5>JetBrains Rider</h5>
+<ul>
+  <li> <a href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute">NotNullAttribute</a> </li>
+  <li> <a href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#TerminatesProgramAttribute">TerminatesProgramAttribute</a> <pre>
+using System;
+using JetBrains.Annotations;
+
+public class Utils
+{
+    [TerminatesProgram]
+    public void TerminateProgram()
+    {
+        Environment.FailFast("A catastrophic failure has occurred.")
+    }
+
+    public void TerminatesProgramIsRespected()
+    {
+        object myObject = null;
+        TerminateProgram();
+        myObject.ToString(); // Compliant: unreachable
+    }
+}
+</pre> </li>
+</ul>
+<h4>Null forgiving operator</h4>
+<p>Expression marked with the <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-forgiving">null forgiving
+operator</a></p>
+<pre>
+public void Method()
+{
+    object o = null;
+    o!.ToString();    // Compliant: the null forgiving operator suppresses the nullable warning
+}
+</pre>
+<h2>How to fix it</h2>
+<p>To fix the issue the access of the <code>null</code> value needs to be prevented by either:</p>
+<ul>
+  <li> ensuring the variable has a value, or </li>
+  <li> by checking if the value is not <code>null</code> </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>The variable <code>myObject</code> is equal to <code>null</code>, meaning it has no value:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public void Method()
+{
+    object myObject = null;
+    Console.WriteLine(o.ToString()); // Noncompliant: 'myObject' is always null
+}
+</pre>
+<p>The parameter <code>input</code> might be <code>null</code> as suggested by the <code>if</code> condition:</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+public void Method(object input)
+{
+    if (input is null)
+    {
+        // ...
+    }
+    Console.WriteLine(input.ToString()); // Noncompliant: the if condition suggests 'input' might be null
+}
+</pre>
+<h4>Compliant solution</h4>
+<p>Ensuring the variable <code>myObject</code> has a value resolves the issue:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+public void Method()
+{
+    var myObject = new object();
+    Console.WriteLine(myObject.ToString()); // Compliant: 'myObject' is not null
+}
+</pre>
+<p>Preventing the non-compliant code to be executed by returning early:</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+public void Method(object input)
+{
+    if (input is null)
+    {
+        return;
+    }
+    Console.WriteLine(input.ToString()); // Compliant: if 'input' is null, this is unreachable
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> CVE - <a href="https://cwe.mitre.org/data/definitions/476">CWE-476: - NULL Pointer Dereference</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.nullreferenceexception">NullReferenceException Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis">Attributes for
+  null-state static analysis interpreted by the C# compiler</a>
+    <ul>
+      <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullattribute">NotNullAttribute
+      Class</a> </li>
+      <li> Microsoft Learn - <a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullwhenattribute">NotNullWhenAttribute Class</a> </li>
+      <li> Microsoft Learn - <a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnattribute">DoesNotReturnAttribute Class</a>
+      </li>
+      <li> Microsoft Learn - <a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnifattribute">DoesNotReturnIfAttribute Class</a>
+      </li>
+    </ul>  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.validatednotnullattribute">ValidatedNotNullAttribute
+  Class</a> in Visual Studio </li>
+  <li> JetBrains Resharper - <a
+  href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute">NotNullAttribute</a> </li>
+  <li> JetBrains Resharper - <a
+  href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#TerminatesProgramAttribute">TerminatesProgramAttribute</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null">null (C# Reference)</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-forgiving">! (null-forgiving)
+  operator (C# reference)</a> </li>
 </ul>
 

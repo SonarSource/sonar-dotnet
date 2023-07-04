@@ -1,54 +1,87 @@
 <h2>Why is this an issue?</h2>
-<p>An <code>async</code> method with a <code>void</code> return type is a "fire and forget" method best reserved for event handlers because there’s no
-way to wait for the method’s execution to complete and respond accordingly. There’s also no way to <code>catch</code> exceptions thrown from the
-method.</p>
-<p>Having an <code>async void</code> method that is not an event handler could mean your program works some times and not others because of timing
-issues. Instead, <code>async</code> methods should return <code>Task</code>.</p>
-<p>This rule raises an issue when non-event handler methods are both <code>async</code> and <code>void</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-class HttpPrinter
-{
-  private string content;
-
-  public async void CallNetwork(string url) //Noncompliant
-  {
-    var client = new HttpClient();
-    var response = await client.GetAsync(url);
-    content = await response.Content.ReadAsStringAsync();
-  }
-
-  public async Task PrintContent(string url)  // works correctly if web request finishes in under 1 second, otherwise content will be null
-  {
-    CallNetwork(url);
-    await Task.Delay(1000);
-    Console.Write(content);
-  }
-}
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-class HttpPrinter
-{
-  private string content;
-
-  public async Task CallNetwork(string url)
-  {
-    var client = new HttpClient();
-    var response = await client.GetAsync(url);
-    content = await response.Content.ReadAsStringAsync();
-  }
-
-  public async Task PrintContent(string url)
-  {
-    await CallNetwork(url); // &lt;----- call changed here. If await is not added warning CS4014 will be triggered
-    await Task.Delay(1000);
-    Console.Write(content);
-  }
-}
-</pre>
+<p>An <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/async"><code>async</code></a> method with a
+<code>void</code> return type does not follow the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/task-asynchronous-programming-model">task asynchronous programming
+(TAP)</a> model since the return type should be <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task"><code>Task</code></a> or <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1"><code>Task&lt;TResult&gt;</code></a></p>
+<p>Doing so prevents control over the <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-scenarios">asynchronous
+execution</a>, such as:</p>
+<ul>
+  <li> waiting for the execution to complete </li>
+  <li> catching any exception that might occur during execution </li>
+  <li> testing execution behavior </li>
+</ul>
 <h3>Exceptions</h3>
-<p>Event handlers, i.e. methods with two arguments, first one matching type <code>object</code> or name <code>sender</code> and the second being or
-inheriting from <code>EventArgs</code>, are ignored.</p>
-<p>Methods named as <code>OnSomething</code> are also ignored.</p>
+<ul>
+  <li> Methods with the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.eventhandler"><code>EventHandler</code></a> delegate signature.  Using <code>void</code> for <code>EventHandler</code> is compliant with the TAP model.  <pre>
+public async void button1_Click(object sender, EventArgs e)
+{
+  await DoSomethingAsync();
+}
+</pre> </li>
+  <li> Methods name matching <code>On[A-Z]\w*</code> pattern.  Some frameworks may not use the same <code>EventHandler</code> method signature  <pre>
+public async void OnClick(EventContext data)
+{
+  await DoSomethingAsync();
+}
+</pre> </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Update the return type of the method from <code>void</code> to <code>Task</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+private async void ThrowExceptionAsync() // Noncompliant: async method return type is 'void'
+{
+  throw new InvalidOperationException();
+}
+
+public void Method()
+{
+  try
+  {
+    ThrowExceptionAsync();
+  }
+  catch (Exception)
+  {
+    // The exception is never caught here
+    throw;
+  }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+private async Task ThrowExceptionAsync() // Compliant: async method return type is 'Task'
+{
+  throw new InvalidOperationException();
+}
+
+public void Method()
+{
+  try
+  {
+    await ThrowExceptionAsync();
+  }
+  catch (Exception)
+  {
+    // The exception is caught here
+    throw;
+  }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/async"><code>async</code> (C#
+  Reference)</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-scenarios">Asynchronous
+  programming</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/task-asynchronous-programming-model">Task
+  asynchronous programming model</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task"><code>Task</code> Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1"><code>Task&lt;TResult&gt;</code>
+  Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.eventhandler"><code>EventHandler</code> Delegate</a> </li>
+</ul>
 

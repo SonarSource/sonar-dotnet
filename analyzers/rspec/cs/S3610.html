@@ -1,14 +1,41 @@
 <h2>Why is this an issue?</h2>
-<p>Calling <code>GetType()</code> on a nullable object returns the underlying value type. Thus, comparing the returned <code>Type</code> object to
-<code>typeof(Nullable&lt;SomeType&gt;)</code> doesn’t make sense. The comparison either throws an exception or the result can be known at compile
-time.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-int? nullable = 42;
-bool comparison = nullable.GetType() == typeof(Nullable&lt;int&gt;); // Noncompliant, always false
-comparison = nullable.GetType() != typeof(Nullable&lt;int&gt;); // Noncompliant, always true
+<p>Calling <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.gettype">GetType()</a> on a <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">nullable value type</a> object returns
+the underlying value type. Therefore, comparing the returned <a href="https://learn.microsoft.com/en-us/dotnet/api/system.type"><code>Type</code></a>
+object to <code>typeof(Nullable&lt;SomeType&gt;)</code> will either throw an <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.nullreferenceexception">NullReferenceException</a> or the result will always be
+<code>true</code> or <code>false</code> and can be known at compile time.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+void DoChecks&lt;T&gt;(Nullable&lt;T&gt; value) where T : struct
+{
+    bool areEqual = value.GetType() == typeof(Nullable&lt;int&gt;); // Noncompliant: always false
+    bool areNotEqual = value.GetType() != typeof(Nullable&lt;int&gt;); // Noncompliant: always true
 
-nullable = null;
-comparison = nullable.GetType() != typeof(Nullable&lt;int&gt;); // Noncompliant, calling GetType on a null always throws an exception
+    Nullable&lt;int&gt; nullable = null;
+    bool nullComparison = nullable.GetType() != typeof(Nullable&lt;int&gt;); // Noncompliant: throws NullReferenceException
+}
 </pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+void DoChecks&lt;T&gt;(Nullable&lt;T&gt; value) where T : struct
+{
+    bool areEqual = value.GetType() == typeof(int); // Compliant: can be true or false
+    bool areNotEqual = value.GetType() != typeof(int); // Compliant: can be true or false
+
+    Nullable&lt;int&gt; nullable = null;
+    bool nullComparison = nullable is not null &amp;&amp; nullable.GetType() == typeof(int); // Compliant: does not throw NullReferenceException
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.gettype">Object.GetType Method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">Nullable
+  value types (C# reference)</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.type">Type Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.nullreferenceexception">NullReferenceException Class</a> </li>
+</ul>
 
