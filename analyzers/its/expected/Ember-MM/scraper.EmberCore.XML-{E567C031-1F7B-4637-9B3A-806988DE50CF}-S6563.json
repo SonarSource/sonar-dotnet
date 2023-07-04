@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S6563",
-"message":  "Do not use 'DateTime.Now' for recording instants",
+"message":  "Use UTC when recoding DateTime instants",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MediaTag.vb",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Do not use 'DateTime.Now' for recording instants",
+"message":  "Use UTC when recoding DateTime instants",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Do not use 'DateTime.Now' for recording instants",
+"message":  "Use UTC when recoding DateTime instants",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Do not use 'DateTime.Now' for recording instants",
+"message":  "Use UTC when recoding DateTime instants",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {

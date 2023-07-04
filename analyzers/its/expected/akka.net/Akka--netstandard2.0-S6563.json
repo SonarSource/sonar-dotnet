@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S6563",
-"message":  "Do not use 'DateTime.Now' for recording instants",
+"message":  "Use UTC when recoding DateTime instants",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Do not use 'DateTime.Now' for recording instants",
+"message":  "Use UTC when recoding DateTime instants",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsCache.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Do not use 'DateTime.Now' for recording instants",
+"message":  "Use UTC when recoding DateTime instants",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsCache.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Do not use 'DateTime.Now' for recording instants",
+"message":  "Use UTC when recoding DateTime instants",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Util\TokenBucket.cs",
 "region":  {

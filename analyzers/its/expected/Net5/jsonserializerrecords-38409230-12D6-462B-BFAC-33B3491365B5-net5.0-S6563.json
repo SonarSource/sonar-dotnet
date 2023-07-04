@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S6563",
-"message":  "Do not use 'DateTime.Now' for recording instants",
+"message":  "Use UTC when recoding DateTime instants",
 "location":  {
 "uri":  "sources\Net5\Net5Samples\JsonSerializerRecords\Program.cs",
 "region":  {

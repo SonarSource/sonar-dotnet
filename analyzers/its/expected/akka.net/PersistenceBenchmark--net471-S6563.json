@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S6563",
-"message":  "Do not use 'DateTime.Now' for recording instants",
+"message":  "Use UTC when recoding DateTime instants",
 "location":  {
 "uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Do not use 'DateTime.Now' for recording instants",
+"message":  "Use UTC when recoding DateTime instants",
 "location":  {
 "uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
 "region":  {
