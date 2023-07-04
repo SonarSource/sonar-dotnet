@@ -21,9 +21,12 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UseDateTimeInsteadOfDateTimeOffset : UseDateTimeInsteadOfDateTimeOffsetBase<SyntaxKind>
+public sealed class UseDateTimeInsteadOfDateTimeOffset : UseDateTimeInsteadOfDateTimeOffsetBase<SyntaxKind, MemberAccessExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override Location GetExpressionLocation(MemberAccessExpressionSyntax node) =>
+        node.Expression.GetLocation();
 
     protected override bool IsNamedDateTime(SyntaxNode node) =>
         Language.GetName(node).Equals("DateTime", Language.NameComparison);

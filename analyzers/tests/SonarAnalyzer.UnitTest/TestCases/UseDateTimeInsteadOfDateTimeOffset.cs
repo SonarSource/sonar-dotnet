@@ -5,7 +5,7 @@ public class Program
 {
     void Constructors()
     {
-        _ = new DateTime(1);                                                                 // Noncompliant {{Prefer using "DateTimeOffset" struct instead of "DateTime"}}
+        _ = new DateTime(1);                                                                 // Noncompliant {{Prefer using "DateTimeOffset" instead of "DateTime"}}
 //          ^^^^^^^^^^^^^^^
         _ = new DateTime(1, 1, 1);                                                           // Noncompliant
         _ = new DateTime(1, 1, 1, new GregorianCalendar());                                  // Noncompliant
@@ -21,14 +21,14 @@ public class Program
     void Fields()
     {
         _ = DateTime.MaxValue;  // Noncompliant
-//          ^^^^^^^^^^^^^^^^^
+//          ^^^^^^^^
         _ = DateTime.MinValue;  // Noncompliant
     }
 
     void StaticProperties()
     {
         _ = DateTime.Now; // Noncompliant
-//          ^^^^^^^^^^^^
+//          ^^^^^^^^
         _ = DateTime.Today; // Noncompliant
         _ = DateTime.UtcNow; // Noncompliant
     }
@@ -80,6 +80,7 @@ public class Program
     {
         var a = DateTime.Now.AddDays(-1).Ticks; // Noncompliant
         var b = new DateTimeOffset(DateTime.Now); // Noncompliant
+        var typeName = nameof(DateTime); // Compliant
     }
 }
 

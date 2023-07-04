@@ -3,7 +3,7 @@ Imports System.Globalization
 
 Public Class Program
     Private Sub Constructors()
-        Dim a = New DateTime(1)                                                             ' Noncompliant
+        Dim a = New DateTime(1)                                                             ' Noncompliant {{Prefer using "DateTimeOffset" instead of "DateTime"}}
 '               ^^^^^^^^^^^^^^^
         a = New DateTime(1, 1, 1)                                                           ' Noncompliant
         a = New DateTime(1, 1, 1, New GregorianCalendar())                                  ' Noncompliant
@@ -14,15 +14,17 @@ Public Class Program
         a = New DateTime(1, 1, 1, 1, 1, 1, 1, New GregorianCalendar())                      ' Noncompliant
         a = New DateTime(1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc)                             ' Noncompliant
         a = New DateTime(1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc)    ' Noncompliant
+        a = New Date(1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc)        ' Noncompliant
     End Sub
 
     Private Sub Fields()
         Dim a = Date.MaxValue  ' Noncompliant
-'               ^^^^^^^^^^^^^
+'               ^^^^
         a = Date.MinValue  ' Noncompliant
+        a = DateTime.MinValue ' Noncompliant
     End Sub
 
-    Private Sub Properties(ByVal [date] As Date)
+    Private Sub Properties([date] As Date)
         Dim a = [date].Date
         Dim b = [date].Day
         Dim c = [date].DayOfWeek
@@ -40,12 +42,12 @@ Public Class Program
 
     Private Sub StaticProperties()
         Dim a = Date.Now ' Noncompliant
-'               ^^^^^^^^
+'               ^^^^
         a = Date.Today ' Noncompliant
         a = Date.UtcNow ' Noncompliant
     End Sub
 
-    Private Sub Methods(ByVal [date] As Date)
+    Private Sub Methods([date] As Date)
         [date].Add(TimeSpan.Zero)
         [date].AddDays(0)
         [date].AddHours(0)

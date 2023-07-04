@@ -20,22 +20,24 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind, TMemberAccess> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
+    where TMemberAccess : SyntaxNode
 {
     private const string DiagnosticId = "S6566";
 
-    protected override string MessageFormat => "Prefer using \"DateTimeOffset\" struct instead of \"DateTime\"";
+    protected override string MessageFormat => "Prefer using \"DateTimeOffset\" instead of \"DateTime\"";
 
     private static readonly ImmutableArray<string> TargetMemberAccess = ImmutableArray.Create(
-            "MaxValue",
-            "MinValue",
-            "UnixEpoch",
-            "Now",
-            "Today",
-            "UtcNow");
+            nameof(DateTime.MaxValue),
+            nameof(DateTime.MinValue),
+            nameof(DateTime.Now),
+            nameof(DateTime.Today),
+            nameof(DateTime.UtcNow),
+            "UnixEpoch");
 
     protected abstract bool IsNamedDateTime(SyntaxNode node);
+    protected abstract Location GetExpressionLocation(TMemberAccess node);
 
     protected UseDateTimeInsteadOfDateTimeOffsetBase() : base(DiagnosticId) { }
 
@@ -61,7 +63,7 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind> : Sona
                     && TargetMemberAccess.Contains(Language.GetName(c.Node))
                     && IsDateTimeType(expression, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(Rule, GetExpressionLocation((TMemberAccess)c.Node)));
                 }
             },
             Language.SyntaxKind.SimpleMemberAccessExpression);

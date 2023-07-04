@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-DateTime myDate = new(1); // Noncompliant {{Prefer using "DateTimeOffset" struct instead of "DateTime"}}
+DateTime myDate = new(1); // Noncompliant {{Prefer using "DateTimeOffset" instead of "DateTime"}}
 //                ^^^^^^
 _ = new DateTime(1, 1, 1, 1, 1, 1, 1, 1, new GregorianCalendar());                   // Noncompliant
 _ = new DateTime(1, 1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc);                          // Noncompliant

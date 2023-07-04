@@ -8,13 +8,13 @@ Public Class Program
         a = New DateTime(1, 1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc) ' Noncompliant
     End Sub
 
-    Private Sub Fields(ByVal [date] As Date)
+    Private Sub Fields([date] As Date)
         Dim a = Date.UnixEpoch ' Noncompliant
         Dim b = [date].Microsecond
         Dim c = [date].Nanosecond
     End Sub
 
-    Private Sub Methods(ByVal [date] As Date)
+    Private Sub Methods([date] As Date)
         [date].AddMicroseconds(0)
     End Sub
 End Class
