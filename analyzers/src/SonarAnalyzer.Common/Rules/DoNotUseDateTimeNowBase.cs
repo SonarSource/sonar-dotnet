@@ -56,5 +56,5 @@ public abstract class DoNotUseDateTimeNowBase<TSyntaxKind> : SonarDiagnosticAnal
 
     private bool MatchesAnyProperty(SyntaxNode node, SemanticModel semanticModel, params MemberDescriptor[] members) =>
         Language.Syntax.NodeIdentifier(node) is { IsMissing: false } identifier
-        && members.Any(x => MemberDescriptor.MatchesAny(identifier.ValueText, new Lazy<ISymbol>(() => semanticModel.GetSymbolInfo(node).Symbol), false, Language.NameComparison, members));
+        && Array.Exists(members, x => MemberDescriptor.MatchesAny(identifier.ValueText, new Lazy<ISymbol>(() => semanticModel.GetSymbolInfo(node).Symbol), false, Language.NameComparison, members));
 }
