@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Extensions\DateTimeExtensions.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  38,
+"endLine":  22,
+"endColumn":  62
+}
+}
+}
+]
+}

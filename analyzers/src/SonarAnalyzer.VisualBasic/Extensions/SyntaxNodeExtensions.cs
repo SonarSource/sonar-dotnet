@@ -74,6 +74,31 @@ namespace SonarAnalyzer.Extensions
             }
         }
 
+        public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
+            node?.RemoveParentheses() switch
+            {
+                AttributeSyntax x => x.Name?.GetIdentifier(),
+                ClassBlockSyntax x => x.ClassStatement.Identifier,
+                ClassStatementSyntax x => x.Identifier,
+                IdentifierNameSyntax x => x.Identifier,
+                MemberAccessExpressionSyntax x => x.Name.Identifier,
+                MethodBlockSyntax x => x.SubOrFunctionStatement?.GetIdentifier(),
+                MethodStatementSyntax x => x.Identifier,
+                ModuleBlockSyntax x => x.ModuleStatement.Identifier,
+                EnumStatementSyntax x => x.Identifier,
+                EnumMemberDeclarationSyntax x => x.Identifier,
+                InvocationExpressionSyntax x => x.Expression?.GetIdentifier(),
+                ModifiedIdentifierSyntax x => x.Identifier,
+                PredefinedTypeSyntax x => x.Keyword,
+                ParameterSyntax x => x.Identifier?.GetIdentifier(),
+                PropertyStatementSyntax x => x.Identifier,
+                SimpleArgumentSyntax x => x.NameColonEquals?.Name.Identifier,
+                SimpleNameSyntax x => x.Identifier,
+                StructureBlockSyntax x => x.StructureStatement.Identifier,
+                QualifiedNameSyntax x => x.Right.Identifier,
+                _ => null,
+            };
+
         /// <summary>
         /// Returns the left hand side of a conditional access expression. Returns c in case like a?.b?[0].c?.d.e?.f if d is passed.
         /// </summary>

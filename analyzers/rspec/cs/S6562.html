@@ -1,0 +1,39 @@
+<h2>Why is this an issue?</h2>
+<p>Not knowing the <code>Kind</code> of the <code>DateTime</code> object that an application is using can lead to misunderstandings when displaying or
+comparing them. Explicitly setting the <code>Kind</code> property helps the application to stay consistent, and its maintainers understand what kind
+of date is being managed. To achieve this, when instantiating a new <code>DateTime</code> object you should always use a constructor overload that
+allows you to define the <code>Kind</code> property.</p>
+<h3>What is the potential impact?</h3>
+<p>Creating the <code>DateTime</code> object without specifying the property <code>Kind</code> will set it to the default value of
+<code>DateTimeKind.Unspecified</code>. In this case, calling the method <code>ToUniversalTime</code> will assume that <code>Kind</code> is
+<code>DateTimeKind.Local</code> and calling the method <code>ToLocalTime</code> will assume that it’s <code>DateTimeKind.Utc</code>. As a result, you
+might have mismatched <code>DateTime</code> objects in your application.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue use a constructor overload that allows specifying the <code>DateTimeKind</code> when creating the <code>DateTime</code>
+object.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+void CreateNewTime()
+{
+    var birthDate = new DateTime(1994, 7, 5, 16, 23, 42);
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+void CreateNewTime()
+{
+    var birthDate = new DateTime(1994, 7, 5, 16, 23, 42, DateTimeKind.Utc);
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimekind">DateTimeKind documentation</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.-ctor">DateTime documentation</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/how-to-round-trip-date-and-time-values">How to round trip date and time
+  values</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/member-overloading">https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/member-overloading</a> [Member overloading] </li>
+</ul>
+

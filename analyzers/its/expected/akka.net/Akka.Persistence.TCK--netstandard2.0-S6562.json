@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  99,
+"endLine":  119,
+"endColumn":  119
+}
+}
+}
+]
+}

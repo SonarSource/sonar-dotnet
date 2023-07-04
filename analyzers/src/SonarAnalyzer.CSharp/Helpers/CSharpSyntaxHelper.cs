@@ -185,32 +185,6 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation)
-        {
-            if (invocation == null)
-            {
-                return null;
-            }
-            var expression = invocation.Expression;
-            switch (expression.Kind())
-            {
-                case SyntaxKind.IdentifierName:
-                    // method()
-                    return ((IdentifierNameSyntax)expression).Identifier;
-
-                case SyntaxKind.SimpleMemberAccessExpression:
-                    // foo.method()
-                    return ((MemberAccessExpressionSyntax)expression).Name.Identifier;
-
-                case SyntaxKind.MemberBindingExpression:
-                    // foo?.method()
-                    return ((MemberBindingExpressionSyntax)expression).Name.Identifier;
-
-                default:
-                    return null;
-            }
-        }
-
         public static bool IsMethodInvocation(this InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
             invocation.Expression.NameIs(methodName) &&
             semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
@@ -237,43 +211,6 @@ namespace SonarAnalyzer.Helpers
 
         public static bool HasBodyOrExpressionBody(this AccessorDeclarationSyntax node) =>
             node.Body != null || node.ExpressionBody() != null;
-
-        public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
-            node switch
-            {
-                AliasQualifiedNameSyntax { Alias.Identifier: var identifier } => identifier,
-                ArrayTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
-                AttributeSyntax { Name: { } name } => GetIdentifier(name),
-                BaseTypeDeclarationSyntax { Identifier: var identifier } => identifier,
-                ConstructorDeclarationSyntax { Identifier: var identifier } => identifier,
-                ConversionOperatorDeclarationSyntax { Type: { } type } => GetIdentifier(type),
-                DelegateDeclarationSyntax { Identifier: var identifier } => identifier,
-                DestructorDeclarationSyntax { Identifier: var identifier } => identifier,
-                EnumMemberDeclarationSyntax { Identifier: var identifier } => identifier,
-                IndexerDeclarationSyntax { ThisKeyword: var thisKeyword } => thisKeyword,
-                InvocationExpressionSyntax
-                {
-                    Expression: not InvocationExpressionSyntax // We don't want to recurse into nested invocations like: fun()()
-                } invocation => GetIdentifier(invocation.Expression),
-                MethodDeclarationSyntax { Identifier: var identifier } => identifier,
-                MemberBindingExpressionSyntax { Name.Identifier: var identifier } => identifier,
-                MemberAccessExpressionSyntax { Name.Identifier: var identifier } => identifier,
-                NamespaceDeclarationSyntax { Name: { } name } => GetIdentifier(name),
-                NullableTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
-                OperatorDeclarationSyntax { OperatorToken: var operatorToken } => operatorToken,
-                ParameterSyntax { Identifier: var identifier } => identifier,
-                PropertyDeclarationSyntax { Identifier: var identifier } => identifier,
-                PointerTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
-                PredefinedTypeSyntax { Keyword: var keyword } => keyword,
-                QualifiedNameSyntax { Right.Identifier: var identifier } => identifier,
-                SimpleNameSyntax { Identifier: var identifier } => identifier,
-                TypeParameterConstraintClauseSyntax { Name.Identifier: var identifier } => identifier,
-                TypeParameterSyntax { Identifier: var identifier } => identifier,
-                UsingDirectiveSyntax { Alias.Name: { } name } => GetIdentifier(name),
-                VariableDeclaratorSyntax { Identifier: var identifier } => identifier,
-                { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
-                _ => null
-            };
 
         public static string GetName(this SyntaxNode node) =>
             node.GetIdentifier()?.ValueText ?? string.Empty;

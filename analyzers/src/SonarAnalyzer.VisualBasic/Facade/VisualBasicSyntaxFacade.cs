@@ -88,6 +88,9 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
         invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
 
+    public override SyntaxToken? ObjectCreationTypeIdentifier(SyntaxNode objectCreation) =>
+        objectCreation == null ? null : Cast<ObjectCreationExpressionSyntax>(objectCreation).GetObjectCreationTypeIdentifier();
+
     public override ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node) =>
         Cast<LocalDeclarationStatementSyntax>(node).Declarators.SelectMany(d => d.Names.Select(n => n.Identifier)).ToImmutableArray();
 

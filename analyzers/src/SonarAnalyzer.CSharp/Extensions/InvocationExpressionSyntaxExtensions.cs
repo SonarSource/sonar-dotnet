@@ -53,5 +53,8 @@ namespace SonarAnalyzer.Extensions
 
             return left is not null && right is not null;
         }
+
+        internal static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation) =>
+            invocation?.Expression.GetIdentifier();
     }
 }

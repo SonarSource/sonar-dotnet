@@ -18,15 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
-{
-    internal static class ObjectCreationExpressionSyntaxExtensions
-    {
-        public static bool IsKnownType(this ObjectCreationExpressionSyntax objectCreation, KnownType knownType, SemanticModel semanticModel) =>
-            objectCreation.Type.GetName().EndsWith(knownType.TypeName)
-            && SymbolHelper.IsKnownType(objectCreation, knownType, semanticModel);
+namespace SonarAnalyzer.Rules.VisualBasic;
 
-        public static SyntaxToken? GetObjectCreationTypeIdentifier(this ObjectCreationExpressionSyntax objectCreation) =>
-            objectCreation?.Type.GetIdentifier();
-    }
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class AlwaysSetDateTimeKind : AlwaysSetDateTimeKindBase<SyntaxKind>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override SyntaxKind ObjectCreationExpression => SyntaxKind.ObjectCreationExpression;
+
+    protected override string[] ValidNames { get; } = new[] { nameof(DateTime), "Date" };
 }

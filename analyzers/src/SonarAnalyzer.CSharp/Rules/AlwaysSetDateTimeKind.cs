@@ -18,15 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
-{
-    internal static class ObjectCreationExpressionSyntaxExtensions
-    {
-        public static bool IsKnownType(this ObjectCreationExpressionSyntax objectCreation, KnownType knownType, SemanticModel semanticModel) =>
-            objectCreation.Type.GetName().EndsWith(knownType.TypeName)
-            && SymbolHelper.IsKnownType(objectCreation, knownType, semanticModel);
+namespace SonarAnalyzer.Rules.CSharp;
 
-        public static SyntaxToken? GetObjectCreationTypeIdentifier(this ObjectCreationExpressionSyntax objectCreation) =>
-            objectCreation?.Type.GetIdentifier();
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class AlwaysSetDateTimeKind : AlwaysSetDateTimeKindBase<SyntaxKind>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override SyntaxKind ObjectCreationExpression => SyntaxKind.ObjectCreationExpression;
+
+    protected override string[] ValidNames { get; } = new[] { nameof(DateTime) };
+
+    protected override void Initialize(SonarAnalysisContext context)
+    {
+        base.Initialize(context);
+        context.RegisterNodeAction(c =>
+        {
+            if (IsDateTimeConstructorWithoutKindParameter(c.Node, c.SemanticModel))
+            {
+                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+            }
+        },
+        SyntaxKindEx.ImplicitObjectCreationExpression);
     }
 }

@@ -47,6 +47,14 @@ public class SyntaxFacadeTest
         vb.InvocationIdentifier(null).Should().BeNull();
 
     [TestMethod]
+    public void ObjectCreationTypeIdentifier_Null_CS() =>
+        cs.ObjectCreationTypeIdentifier(null).Should().BeNull();
+
+    [TestMethod]
+    public void ObjectCreationTypeIdentifier_Null_VB() =>
+        vb.ObjectCreationTypeIdentifier(null).Should().BeNull();
+
+    [TestMethod]
     public void InvocationIdentifier_UnexpectedTypeThrows_CS() =>
         cs.Invoking(x => x.InvocationIdentifier(CS.SyntaxFactory.IdentifierName("ThisIsNotInvocation"))).Should().Throw<InvalidCastException>();
 

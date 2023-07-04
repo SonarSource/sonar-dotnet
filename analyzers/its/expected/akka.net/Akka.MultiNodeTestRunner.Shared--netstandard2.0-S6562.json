@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  73,
+"endLine":  38,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  84,
+"endLine":  48,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  38,
+"endLine":  100,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  38,
+"endLine":  101,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  45,
+"endLine":  61,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  94,
+"endLine":  61,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  45,
+"endLine":  196,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  94,
+"endLine":  196,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  45,
+"endLine":  350,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  94,
+"endLine":  350,
+"endColumn":  117
+}
+}
+}
+]
+}
