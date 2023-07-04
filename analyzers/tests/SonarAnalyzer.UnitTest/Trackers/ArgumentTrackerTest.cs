@@ -527,6 +527,24 @@ public class ArgumentTrackerTest
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
     }
 
+    [TestMethod]
+    public void Constructor_TypeAlias_VB()
+    {
+        var snippet = $$"""
+            Imports NumberList = System.Collections.Generic.List(Of Integer)
+
+            Class C
+                Public Sub M()
+                    Dim nl As NumberList = New NumberList($$1)
+                End Sub
+            End Class
+            """;
+        var (node, model) = ArgumentAndModelVB(snippet);
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_List_T, "capacity", 0);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeFalse("FN. Syntactic check does not respect aliases.");
+    }
+
     [DataTestMethod]
     [DataRow("""new($$1, 2)""", true)]
     [DataRow("""new C(1, $$2)""", true)]
@@ -604,6 +622,44 @@ public class ArgumentTrackerTest
     }
 
     [TestMethod]
+    public void Constructor_InitializerCalls_Base_MyException()
+    {
+        var snippet = """
+            using System;
+
+            class MyException: Exception
+            {
+                public MyException(string message) : base($$message)
+                { }
+            }
+            """;
+        var (node, model) = ArgumentAndModelCS(snippet);
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Exception, "message", 0);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Constructor_InitializerCalls_Base_MyException_VB()
+    {
+        var snippet = $$"""
+            Imports System
+
+            Public Class MyException
+                Inherits Exception
+
+                Public Sub New(ByVal message As String)
+                    MyBase.New($$message)
+                End Sub
+            End Class
+            """;
+        var (node, model) = ArgumentAndModelVB(snippet);
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Exception, "message", 0);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeFalse("FN. MyBase.New and Me.New are not supported.");
+    }
+
+    [TestMethod]
     public void Indexer_List_Get()
     {
         var snippet = $$"""
@@ -615,6 +671,20 @@ public class ArgumentTrackerTest
         var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T, "list",
             p => p is { Name: "index", Type.SpecialType: SpecialType.System_Int32, ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertyGet } }, 0);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Indexer_List_Get_VB()
+    {
+        var snippet = $$"""
+            Dim list = New System.Collections.Generic.List(Of Integer)()
+            Dim a = list($$1)
+            """;
+        var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
+
+        var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T, "list",
+            p => p is { Name: "index", Type.SpecialType: SpecialType.System_Int32, ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertyGet } }, 0);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
     }
 
     [DataTestMethod]
