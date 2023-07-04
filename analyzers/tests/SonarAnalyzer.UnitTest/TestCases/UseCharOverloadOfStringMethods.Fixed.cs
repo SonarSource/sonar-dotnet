@@ -29,7 +29,7 @@
     }
 }
 
-class Compliant
+class Unchanged
 {
     public bool EndsWith(string str)
     {
