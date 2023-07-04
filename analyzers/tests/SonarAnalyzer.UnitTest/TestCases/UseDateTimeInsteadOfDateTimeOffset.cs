@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using MyAlias = System.DateTime;
 
 public class Program
 {
@@ -16,6 +17,8 @@ public class Program
         _ = new DateTime(1, 1, 1, 1, 1, 1, 1, new GregorianCalendar());                      // Noncompliant
         _ = new DateTime(1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc);                             // Noncompliant
         _ = new DateTime(1, 1, 1, 1, 1, 1, 1, new GregorianCalendar(), DateTimeKind.Utc);    // Noncompliant
+        _ = new MyAlias(1);                                                                  // FN
+        _ = new System.DateTime(1);                                                          // Noncompliant
     }
 
     void Fields()

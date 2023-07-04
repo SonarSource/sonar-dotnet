@@ -1,5 +1,6 @@
 ﻿Imports System
 Imports System.Globalization
+Imports MyAlias = System.DateTime
 
 Public Class Program
     Private Sub Constructors()
@@ -15,6 +16,9 @@ Public Class Program
         a = New DateTime(1, 1, 1, 1, 1, 1, 1, DateTimeKind.Utc)                             ' Noncompliant
         a = New DateTime(1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc)    ' Noncompliant
         a = New Date(1, 1, 1, 1, 1, 1, 1, New GregorianCalendar(), DateTimeKind.Utc)        ' Noncompliant
+        a = New DateTime(1) ' Noncompliant
+        a = New MyAlias(1) ' FN
+        a = New System.DateTime(1) ' Noncompliant
     End Sub
 
     Private Sub Fields()
