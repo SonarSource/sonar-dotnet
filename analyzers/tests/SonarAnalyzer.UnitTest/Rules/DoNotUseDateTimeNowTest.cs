@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -27,14 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class DoNotUseDateTimeNowTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotUseDateTimeNow>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotUseDateTimeNow>();
-
     [TestMethod]
     public void DoNotUseDateTimeNow_CS() =>
-        builderCS.AddPaths("DoNotUseDateTimeNow.cs").Verify();
+        new VerifierBuilder<CS.DoNotUseDateTimeNow>().AddPaths("DoNotUseDateTimeNow.cs").Verify();
 
     [TestMethod]
     public void DoNotUseDateTimeNow_VB() =>
-        builderVB.AddPaths("DoNotUseDateTimeNow.vb").Verify();
+        new VerifierBuilder<VB.DoNotUseDateTimeNow>().AddPaths("DoNotUseDateTimeNow.vb").Verify();
 }
