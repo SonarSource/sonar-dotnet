@@ -27,5 +27,5 @@ public sealed class AlwaysSetDateTimeKind : AlwaysSetDateTimeKindBase<SyntaxKind
 
     protected override SyntaxKind ObjectCreationExpression => SyntaxKind.ObjectCreationExpression;
 
-    protected override string[] ValidNames { get; } = new[] { "DateTime", "Date" };
+    protected override string[] ValidNames { get; } = new[] { nameof(DateTime), "Date" };
 }
