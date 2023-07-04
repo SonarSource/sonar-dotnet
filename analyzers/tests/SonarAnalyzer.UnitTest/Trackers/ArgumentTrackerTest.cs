@@ -706,6 +706,23 @@ public class ArgumentTrackerTest
     }
 
     [DataTestMethod]
+    [DataRow("list($$1) = 1")]
+    [DataRow("list($$1) += 1")]
+    [DataRow("list($$1) -= 1")]
+    public void Indexer_List_Set_VB(string writeExpression)
+    {
+        var snippet = $$"""
+            Dim list = New System.Collections.Generic.List(Of Integer)()
+            {{writeExpression}}
+            """;
+        var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
+
+        var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T,
+            p => p is { Name: "index", ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertySet } }, 0);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
     [DataRow("""Environment.GetEnvironmentVariables()[$$"TEMP"]""")]
     [DataRow("""Environment.GetEnvironmentVariables()?[$$"TEMP"]""")]
     public void Indexer_DictionaryGet(string environmentVariableAccess)
@@ -718,6 +735,19 @@ public class ArgumentTrackerTest
         var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "IDictionary",
             (n, c) => n.Equals("GetEnvironmentVariables", c), p => p.Name == "key", (_, p) => p is null or 0);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Indexer_DictionaryGet_VB()
+    {
+        var snippet = """
+            Dim a = Environment.GetEnvironmentVariables()($$"TEMP")
+            """;
+        var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
+
+        var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "IDictionary",
+            (n, c) => n.Equals("GetEnvironmentVariables", c), p => p.Name == "key", (_, p) => p is null or 0);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -789,6 +819,25 @@ public class ArgumentTrackerTest
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
     }
 
+    [TestMethod]
+    public void Attribute_Obsolete_VB()
+    {
+        var snippet = $$"""
+            Imports System
+
+            Public Class Test
+                <Obsolete($$"message", UrlFormat:="")>
+                Public Sub M()
+                End Sub
+            End Class
+            """;
+        var (node, model) = ArgumentAndModelVB(snippet);
+
+        var argument = ArgumentDescriptor.AttributeArgument(x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: "ObsoleteAttribute" },
+            (s, c) => s.StartsWith("Obsolete", c), p => p.Name == "message", (_, i) => i is 0);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
     [DataTestMethod]
     [DataRow("""[Designer($$"designerTypeName")]""", "designerTypeName", 0)]
     [DataRow("""[DesignerAttribute($$"designerTypeName")]""", "designerTypeName", 0)]
@@ -817,6 +866,26 @@ public class ArgumentTrackerTest
     }
 
     [DataTestMethod]
+    [DataRow("""<Designer($$"designerTypeName")>""", "designerTypeName", 0)]
+    [DataRow("""<DesignerAttribute($$"designerTypeName")>""", "designerTypeName", 0)]
+    [DataRow("""<DesignerAttribute($$"designerTypeName", "designerBaseTypeName")>""", "designerTypeName", 0)]
+    [DataRow("""<DesignerAttribute("designerTypeName", $$"designerBaseTypeName")>""", "designerBaseTypeName", 1)]
+    public void Attribute_Designer_VB(string attribute, string parameterName, int argumentPosition)
+    {
+        var snippet = $$"""
+            Imports System.ComponentModel
+
+            {{attribute}}
+            Public Class Test
+            End Class
+            """;
+        var (node, model) = ArgumentAndModelVB(snippet);
+
+        var argument = ArgumentDescriptor.AttributeArgument("Designer", parameterName, argumentPosition);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
     [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true)]""", "AllowMultiple", true)]
     [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true, Inherited = true)]""", "AllowMultiple", true)]
     [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true, Inherited = true)]""", "Inherited", false)]
@@ -835,6 +904,27 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.AttributeProperty("AttributeUsage", propertyName);
         new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
+    }
+
+    [DataTestMethod]
+    [DataRow("""<AttributeUsage(AttributeTargets.All,  $$AllowMultiple := true)>""", "AllowMultiple", true)]
+    [DataRow("""<AttributeUsage(AttributeTargets.All,  $$AllowMultiple := true, Inherited := true)>""", "AllowMultiple", true)]
+    [DataRow("""<AttributeUsage(AttributeTargets.All,  $$AllowMultiple := true, Inherited := true)>""", "Inherited", false)]
+    [DataRow("""<AttributeUsage(AttributeTargets.All,  AllowMultiple := true, $$Inherited := true)>""", "Inherited", true)]
+    public void Attribute_Property_VB(string attribute, string propertyName, bool expected)
+    {
+        var snippet = $$"""
+            Imports System
+
+            {{attribute}}
+            Public NotInheritable Class TestAttribute
+                Inherits Attribute
+            End Class
+            """;
+        var (node, model) = ArgumentAndModelVB(snippet);
+
+        var argument = ArgumentDescriptor.AttributeProperty("AttributeUsage", propertyName);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().Be(expected);
     }
 
     private static string WrapInMethod(string snippet) =>
