@@ -28,3 +28,12 @@
         var nullConditionalOperator = str.Substring(1)?.EndsWith("a").ToString();
     }
 }
+
+class Unchanged
+{
+    public bool EndsWith(string str)
+    {
+        return str.EndsWith("12")
+            || "ABC".EndsWith(str);
+    }
+}
