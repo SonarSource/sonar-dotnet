@@ -41,7 +41,7 @@ public abstract class UseIFormatProviderForParsingDateAndTimeBase<TSyntaxKind> :
         KnownType.System_TimeSpan
     };
 
-    protected override string MessageFormat => "Pass an 'IFormatProvider' to the '{0}' method.";
+    protected override string MessageFormat => "Use a format provider when parsing date and time.";
 
     protected UseIFormatProviderForParsingDateAndTimeBase() : base(DiagnosticId) { }
 
@@ -54,7 +54,7 @@ public abstract class UseIFormatProviderForParsingDateAndTimeBase<TSyntaxKind> :
                 && TemporalTypes.Any(x => x.Matches(methodSymbol.ReceiverType))
                 && NotUsingFormatProvider(methodSymbol, c.Node))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), $"{methodSymbol.ReceiverType.Name}.{methodSymbol.Name}"));
+                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
             }
         }, Language.SyntaxKind.InvocationExpression);
 
