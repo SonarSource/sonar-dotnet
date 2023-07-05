@@ -1,38 +1,54 @@
 <h2>Why is this an issue?</h2>
-<p>Finalizers (historically referred to as destructors) are used to perform any necessary final clean-up when the garbage collector is collecting a
-class instance. The programmer has no control over when the destructor is called; the garbage collector decides when to call it, and the destructor
-implicitly calls <code>Finalize</code> on the object’s base class.</p>
-<p>When you create a destructor, you should never throw an exception in it, as you are risking having your application terminated without a graceful
-cleanup.</p>
-<p>If a destructor throws an exception, and the runtime is not hosted by an application that overrides the default policy and the behavior of the
-<code>UnhandledExceptionEventHandler</code>, then the runtime terminates the process immediately without graceful cleanup (<code>finally</code> blocks
-and <code>Finalizer</code> methods are not executed).</p>
-<p>The rule raises an issue on <code>throw</code> statements used in destructors.</p>
-<h3>Noncompliant code example</h3>
+<p>The <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/finalizers">finalizers</a> are used to perform
+<a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals#unmanaged-resources">any necessary final clean-up</a> when
+the garbage collector is collecting a class instance. The programmer has no control over when the finalizer is called; the garbage collector decides
+when to call it.</p>
+<p>When creating a finalizer, it should never throw an exception, as there is a high risk of having the application terminated leaving unmanaged
+resources without a graceful cleanup.</p>
+<p>The rule raises an issue on <code>throw</code> statements used in a finalizer.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 class MyClass
 {
     ~MyClass()
     {
-        throw new NotImplementedException(); // Noncompliant
+        throw new NotImplementedException(); // Noncompliant: finalizer throws an exception
     }
 }
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 class MyClass
 {
     ~MyClass()
     {
-
+        // Compliant: finalizer does not throw an exception
     }
 }
 </pre>
+<h3>Going the extra mile</h3>
+<p>In general object finalization can be a complex and error-prone operation and should not be implemented except within the <a
+href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose">dispose pattern</a>.</p>
+<p>When <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/unmanaged">cleaning up unmanaged resources</a>, it is
+recommended to implement the dispose pattern or, to cover uncalled <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose"><code>Dispose</code></a> method by the consumer, implement <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle"><code>SafeHandle</code></a>.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/finalizers">Finalizers (destructors)</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.appdomain">App Domain</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.appdomain.unhandledexception">AppDomain.UnhandledException Event</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals">Fundamentals of garbage
+  collection</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/unmanaged">Cleaning up unmanaged resources</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose">Implement a Dispose
+  method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle"><code>SafeHandle</code>
+  Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose"><code>IDisposable.Dispose</code> Method</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/finalizers">Finalizers
+  (destructors)</a> </li>
 </ul>
 

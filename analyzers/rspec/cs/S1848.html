@@ -1,16 +1,40 @@
 <h2>Why is this an issue?</h2>
-<p>There is no good reason to create a new object to not do anything with it. Most of the time, this is due to a missing piece of code and so could
-lead to an unexpected behavior in production.</p>
-<p>If it was done on purpose because the constructor has side-effects, then that side-effect code should be moved into a separate, static method and
-called directly.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-if (x &lt; 0)
-  new ArgumentException("x must be nonnegative");
+<p>Creating objects that are not used is a vulnerability that can lead to unexpected behavior.</p>
+<p>If this was done intentionally due to side effects in the object’s constructor, the code should be moved to a dedicated method.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public void Method(MyObject myObject)
+{
+    if (myObject is null)
+    {
+        new MyObject(); // Noncompliant
+    }
+
+    if (myObject.IsCorrupted)
+    {
+        new ArgumentException($"{nameof(myObject)} is corrupted"); // Noncompliant
+    }
+
+    // ...
+}
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-if (x &lt; 0)
-  throw new ArgumentException("x must be nonnegative");
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public void Method(MyObject myObject)
+{
+    if (myObject is null)
+    {
+        myObject = new MyObject(); // Compliant
+    }
+
+    if (myObject.IsCorrupted)
+    {
+        throw new ArgumentException($"{nameof(myObject)} is corrupted"); // Compliant
+    }
+
+    // ...
+}
 </pre>
 

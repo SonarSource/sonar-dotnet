@@ -11,5 +11,5 @@
   "ruleSpecification": "RSPEC-6588",
   "sqKey": "S6588",
   "scope": "All",
-  "quickfix": "targeted"
+  "quickfix": "covered"
 }
