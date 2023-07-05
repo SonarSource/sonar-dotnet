@@ -25,14 +25,14 @@ public abstract class UseIFormatProviderForParsingDateAndTimeBase<TSyntaxKind> :
 {
     private const string DiagnosticId = "S6580";
 
-    private static readonly string[] parseMethodNames = new[]
+    private static readonly string[] ParseMethodNames = new[]
     {
         nameof(DateTime.Parse),
         nameof(DateTime.ParseExact),
         nameof(DateTime.TryParse),
         nameof(DateTime.TryParseExact)
     };
-    private static readonly KnownType[] temporalTypes = new[]
+    private static readonly KnownType[] TemporalTypes = new[]
     {
         KnownType.System_DateOnly,
         KnownType.System_DateTime,
@@ -49,9 +49,9 @@ public abstract class UseIFormatProviderForParsingDateAndTimeBase<TSyntaxKind> :
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
             if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } identifier
-                && parseMethodNames.Any(x => identifier.ValueText.Equals(x, Language.NameComparison))
+                && ParseMethodNames.Any(x => identifier.ValueText.Equals(x, Language.NameComparison))
                 && c.SemanticModel.GetSymbolInfo(c.Node) is { Symbol: IMethodSymbol methodSymbol }
-                && temporalTypes.Any(x => x.Matches(methodSymbol.ReceiverType))
+                && TemporalTypes.Any(x => x.Matches(methodSymbol.ReceiverType))
                 && NotUsingFormatProvider(methodSymbol, c.Node))
             {
                 c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), $"{methodSymbol.ReceiverType.Name}.{methodSymbol.Name}"));
