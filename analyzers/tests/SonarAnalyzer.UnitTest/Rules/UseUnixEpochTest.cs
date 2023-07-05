@@ -62,7 +62,6 @@ public class UseUnixEpochTest
             .AddPaths("UseUnixEpoch.cs")
             .WithCodeFix<CS.UseUnixEpochCodeFix>()
             .WithCodeFixedPaths("UseUnixEpoch.Fixed.cs")
-            .WithCodeFixTitle(CS.UseUnixEpochCodeFix.Title)
             .VerifyCodeFix();
 
     [TestMethod]
@@ -71,7 +70,6 @@ public class UseUnixEpochTest
             .AddPaths("UseUnixEpoch.CSharp9.cs")
             .WithCodeFix<CS.UseUnixEpochCodeFix>()
             .WithCodeFixedPaths("UseUnixEpoch.CSharp9.Fixed.cs")
-            .WithCodeFixTitle(CS.UseUnixEpochCodeFix.Title)
             .WithTopLevelStatements()
             .VerifyCodeFix();
 
@@ -81,7 +79,6 @@ public class UseUnixEpochTest
             .AddPaths("UseUnixEpoch.vb")
             .WithCodeFix<VB.UseUnixEpochCodeFix>()
             .WithCodeFixedPaths("UseUnixEpoch.Fixed.vb")
-            .WithCodeFixTitle(VB.UseUnixEpochCodeFix.Title)
             .VerifyCodeFix();
 
 #endif

@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Rules;
 public abstract class UseUnixEpochBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
 {
-    public const string DiagnosticId = "S6588";
+    internal const string DiagnosticId = "S6588";
 
     protected UseUnixEpochBase() : base(DiagnosticId) { }
 }

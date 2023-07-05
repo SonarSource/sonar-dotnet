@@ -42,12 +42,11 @@ namespace SonarAnalyzer.Rules
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Title,
-                    c =>
+                    _ =>
                     {
                         var newRoot = ReplaceConstructorWithField(root, node, context);
                         return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    },
-                    Title),
+                    }),
                 context.Diagnostics);
 
             return Task.CompletedTask;
