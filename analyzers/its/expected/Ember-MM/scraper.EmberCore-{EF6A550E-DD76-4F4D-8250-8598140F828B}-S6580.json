@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S6580",
-"message":  "Pass an 'IFormatProvider' to the 'DateTime.TryParse' method.",
+"message":  "Use a format provider when parsing date and time.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
 "region":  {

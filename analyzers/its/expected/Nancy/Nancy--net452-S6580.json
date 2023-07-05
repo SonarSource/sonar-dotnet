@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S6580",
-"message":  "Pass an 'IFormatProvider' to the 'TimeSpan.TryParse' method.",
+"message":  "Use a format provider when parsing date and time.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S6580",
-"message":  "Pass an 'IFormatProvider' to the 'TimeSpan.Parse' method.",
+"message":  "Use a format provider when parsing date and time.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S6580",
-"message":  "Pass an 'IFormatProvider' to the 'DateTime.TryParse' method.",
+"message":  "Use a format provider when parsing date and time.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\DateTimeRouteSegmentConstraint.cs",
 "region":  {

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S6580",
-"message":  "Pass an 'IFormatProvider' to the 'TimeSpan.Parse' method.",
+"message":  "Use a format provider when parsing date and time.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Pattern\OpenCircuitException.cs",
 "region":  {
