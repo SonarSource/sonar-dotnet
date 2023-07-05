@@ -89,6 +89,7 @@ namespace SonarAnalyzer.Extensions
                 EnumMemberDeclarationSyntax x => x.Identifier,
                 InvocationExpressionSyntax x => x.Expression?.GetIdentifier(),
                 ModifiedIdentifierSyntax x => x.Identifier,
+                ObjectCreationExpressionSyntax x => x.Type?.GetIdentifier(),
                 PredefinedTypeSyntax x => x.Keyword,
                 ParameterSyntax x => x.Identifier?.GetIdentifier(),
                 PropertyStatementSyntax x => x.Identifier,

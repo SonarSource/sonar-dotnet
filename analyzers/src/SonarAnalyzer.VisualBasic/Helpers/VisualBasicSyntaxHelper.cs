@@ -138,32 +138,6 @@ internal static class VisualBasicSyntaxHelper
         }
     }
 
-    public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
-        node?.RemoveParentheses() switch
-        {
-            AttributeSyntax x => x.Name?.GetIdentifier(),
-            ClassBlockSyntax x => x.ClassStatement.Identifier,
-            ClassStatementSyntax x => x.Identifier,
-            IdentifierNameSyntax x => x.Identifier,
-            MemberAccessExpressionSyntax x => x.Name.Identifier,
-            MethodBlockSyntax x => x.SubOrFunctionStatement?.GetIdentifier(),
-            MethodStatementSyntax x => x.Identifier,
-            ModuleBlockSyntax x => x.ModuleStatement.Identifier,
-            EnumStatementSyntax x => x.Identifier,
-            EnumMemberDeclarationSyntax x => x.Identifier,
-            InvocationExpressionSyntax x => x.Expression?.GetIdentifier(),
-            ModifiedIdentifierSyntax x => x.Identifier,
-            ObjectCreationExpressionSyntax x => x.Type?.GetIdentifier(),
-            PredefinedTypeSyntax x => x.Keyword,
-            ParameterSyntax x => x.Identifier?.GetIdentifier(),
-            PropertyStatementSyntax x => x.Identifier,
-            SimpleArgumentSyntax x => x.NameColonEquals?.Name.Identifier,
-            SimpleNameSyntax x => x.Identifier,
-            StructureBlockSyntax x => x.StructureStatement.Identifier,
-            QualifiedNameSyntax x => x.Right.Identifier,
-            _ => null,
-        };
-
     public static string GetName(this SyntaxNode expression) =>
         expression.GetIdentifier()?.ValueText ?? string.Empty;
 
