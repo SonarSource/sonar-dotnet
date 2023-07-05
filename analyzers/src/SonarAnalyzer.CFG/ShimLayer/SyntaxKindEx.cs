@@ -11,6 +11,7 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind QuestionQuestionEqualsToken = (SyntaxKind)8284;
         public const SyntaxKind GreaterThanGreaterThanGreaterThanToken = (SyntaxKind)8286;
         public const SyntaxKind GreaterThanGreaterThanGreaterThanEqualsToken = (SyntaxKind)8287;
+        public const SyntaxKind NameOfKeyword = (SyntaxKind)8434;
         public const SyntaxKind InitKeyword = (SyntaxKind)8443;
         public const SyntaxKind ManagedKeyword = (SyntaxKind)8445;
         public const SyntaxKind UnmanagedKeyword = (SyntaxKind)8446;

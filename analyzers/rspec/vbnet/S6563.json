@@ -1,0 +1,17 @@
+{
+  "title": "Use UTC when recoding DateTime instants",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "pitfall"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6563",
+  "sqKey": "S6563",
+  "scope": "All",
+  "quickfix": "targeted"
+}

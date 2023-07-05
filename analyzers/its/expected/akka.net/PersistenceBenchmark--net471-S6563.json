@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  25,
+"endLine":  49,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  25,
+"endLine":  54,
+"endColumn":  37
+}
+}
+}
+]
+}
