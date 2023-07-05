@@ -147,7 +147,6 @@ namespace SonarAnalyzer.Extensions
                 DelegateDeclarationSyntax { Identifier: var identifier } => identifier,
                 DestructorDeclarationSyntax { Identifier: var identifier } => identifier,
                 EnumMemberDeclarationSyntax { Identifier: var identifier } => identifier,
-                IdentifierNameSyntax { Identifier: var identifier } => identifier,
                 IndexerDeclarationSyntax { ThisKeyword: var thisKeyword } => thisKeyword,
                 InvocationExpressionSyntax
                 {
@@ -169,6 +168,7 @@ namespace SonarAnalyzer.Extensions
                 TypeParameterSyntax { Identifier: var identifier } => identifier,
                 UsingDirectiveSyntax { Alias.Name: { } name } => GetIdentifier(name),
                 VariableDeclaratorSyntax { Identifier: var identifier } => identifier,
+                SimpleBaseTypeSyntax { Type: { } type } => GetIdentifier(type),
                 { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
                 _ => null
             };
