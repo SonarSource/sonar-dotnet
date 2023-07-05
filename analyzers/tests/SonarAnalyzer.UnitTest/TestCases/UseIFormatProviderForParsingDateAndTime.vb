@@ -36,18 +36,12 @@ Class Test
         Date.Parse("01/02/2000", nullFormatProvider)                                    ' FN
     End Sub
 
-    Sub CallWithDeterministicFormatProviders()
+    Sub CallWithFormatProvider()
         Date.Parse("01/02/2000", CultureInfo.InvariantCulture)                 ' Compliant
+        Date.Parse("01/02/2000", CultureInfo.CurrentCulture)                   ' Compliant
         Date.Parse("01/02/2000", CultureInfo.GetCultureInfo("en-US"))          ' Compliant
         Date.Parse("01/02/2000", formatProviderField)                          ' Compliant
         Date.Parse("01/02/2000", formatProviderField)                          ' Compliant
-    End Sub
-
-    Sub CallWithNonDeterministicFormatProviders()
-        Date.Parse("01/02/2000", CultureInfo.CurrentCulture)                   ' Noncompliant
-        Date.Parse("01/02/2000", CultureInfo.CurrentUICulture)                 ' Noncompliant
-        Date.Parse("01/02/2000", CultureInfo.DefaultThreadCurrentCulture)      ' Noncompliant
-        Date.Parse("01/02/2000", CultureInfo.DefaultThreadCurrentUICulture)    ' Noncompliant
     End Sub
 
     Sub ParseMethodsOfNonTemporalTypes()

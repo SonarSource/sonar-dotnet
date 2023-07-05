@@ -47,20 +47,13 @@ class Test
         DateTime.Parse("01/02/2000", nullFormatProvider);                           // FN
     }
 
-    void CallWithDeterministicFormatProviders()
+    void CallWithFormatProvider()
     {
         DateTime.Parse("01/02/2000", CultureInfo.InvariantCulture);                 // Compliant
+        DateTime.Parse("01/02/2000", CultureInfo.CurrentCulture);                   // Compliant
         DateTime.Parse("01/02/2000", CultureInfo.GetCultureInfo("en-US"));          // Compliant
         DateTime.Parse("01/02/2000", formatProviderField);                          // Compliant
         DateTime.Parse("01/02/2000", this.formatProviderField);                     // Compliant
-    }
-
-    void CallWithNonDeterministicFormatProviders()
-    {
-        DateTime.Parse("01/02/2000", CultureInfo.CurrentCulture);                   // Noncompliant
-        DateTime.Parse("01/02/2000", CultureInfo.CurrentUICulture);                 // Noncompliant
-        DateTime.Parse("01/02/2000", CultureInfo.DefaultThreadCurrentCulture);      // Noncompliant
-        DateTime.Parse("01/02/2000", CultureInfo.DefaultThreadCurrentUICulture);    // Noncompliant
     }
 
     void ParseMethodsOfNonTemporalTypes()
