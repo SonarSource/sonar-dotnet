@@ -14,4 +14,9 @@
     int WithinLine() { return 42; }
 
     int MultipleLines() { return 42; }
+
+    int MultipleLinesWithSpace()
+    {
+        return 42;
+    }
 }

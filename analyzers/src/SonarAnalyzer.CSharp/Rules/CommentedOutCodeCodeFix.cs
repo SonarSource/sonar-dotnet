@@ -55,6 +55,7 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
         var trimmed = line.Trim();
         return trimmed == "/*"
             || trimmed == "*/"
+            || trimmed == "*"
             || string.IsNullOrEmpty(trimmed)
             || CommentedOutCode.IsCode(line);
     }

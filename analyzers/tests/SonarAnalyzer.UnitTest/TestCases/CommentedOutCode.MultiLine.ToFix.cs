@@ -26,5 +26,15 @@ class Fixes
          return 42;
      }
      */
+
+    int MultipleLinesWithSpace()
+    {
+        /*
+         * 
+         * return 17;
+         * 
+         */
+        return 42;
+    }
 }
 /* Console.WriteLine("End Of file"); */
