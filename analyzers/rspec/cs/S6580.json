@@ -1,5 +1,5 @@
 {
-  "title": "When parsing \"DateTime\" strings, always use overloads with an \"IFormatProvider\" parameter",
+  "title": "Use a format provider when parsing date and time",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

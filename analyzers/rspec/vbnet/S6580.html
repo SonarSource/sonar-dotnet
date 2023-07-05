@@ -3,18 +3,18 @@ should always provide an <code>IFormatProvider</code> parameter. If not provided
 given string does not follow it, you’ll have an object that does not match the string representation or an unexpected runtime error.</p>
 <p>This rule raises an issue for the following date and time string representation parsing methods:</p>
 <ul>
-  <li> <code>DateTime.Parse</code> </li>
-  <li> <code>DateTimeOffset.Parse</code> </li>
-  <li> <code>DateOnly.Parse</code> </li>
-  <li> <code>TimeOnly.Parse</code> </li>
-  <li> <code>DateTime.TryParse</code> </li>
-  <li> <code>DateTimeOffset.TryParse</code> </li>
-  <li> <code>DateOnly.TryParse</code> </li>
-  <li> <code>TimeOnly.TryParse</code> </li>
-  <li> <code>DateTime.TryParseExact</code> </li>
-  <li> <code>DateTimeOffset.TryParseExact</code> </li>
-  <li> <code>DateOnly.TryParseExact</code> </li>
-  <li> <code>TimeOnly.TryParseExact</code> </li>
+  <li> <code>Parse</code> </li>
+  <li> <code>ParseExact</code> </li>
+  <li> <code>TryParse</code> </li>
+  <li> <code>TryParseExact</code> </li>
+</ul>
+<p>Of the following classes:</p>
+<ul>
+  <li> <code>System.DateOnly</code> </li>
+  <li> <code>System.DateTime</code> </li>
+  <li> <code>System.DateTimeOffset</code> </li>
+  <li> <code>System.TimeOnly</code> </li>
+  <li> <code>System.TimeSpan</code> </li>
 </ul>
 <h2>Why is this an issue?</h2>
 <p>If you try to parse a string representation of date and time that does not have the expected format based on the machine’s culture you’ll get
@@ -48,17 +48,14 @@ Dim timeObject = TimeOnly.Parse(timeInSaudiArabia, New CultureInfo("ar-SA"))
 <h3>Documentation</h3>
 <ul>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parse">DateTime.Parse method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parseexact">DateTime.ParseExact method</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.tryparse">DateTime.TryParse method</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.tryparseexact">DateTime.TryParseExact method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset.parse">DateTimeOffset.Parse method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset.tryparse">DateTimeOffset.TryParse method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset.tryparseexact">DateTimeOffset.TryParseExact method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly.parse">DateOnly.Parse method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly.tryparse">DateOnly.TryParse method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly.tryparseexact">DateOnly.TryParseExact method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeonly.parse">TimeOnly.Parse method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeonly.tryparse">TimeOnly.TryParse method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeonly.tryparseexact">TimeOnly.TryParseExact method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly">DateOnly type</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime">DateTime type</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset">DateTimeOffset type</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeonly">TimeOnly type</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timespan">TimeSpan type</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo">Culture Info class documentation</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings">Standard date and time format
   strings</a> </li>
