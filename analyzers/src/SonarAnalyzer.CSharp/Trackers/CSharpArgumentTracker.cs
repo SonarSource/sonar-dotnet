@@ -79,7 +79,13 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
                 { } ex when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(ex) => invokedMemberNameConstraint(model.GetSymbolInfo(ex).Symbol?.ContainingType?.Name),
                 _ => false,
             },
-            InvokedMemberKind.Indexer => expression is ElementAccessExpressionSyntax { Expression: { } accessedExpression } ? invokedMemberNameConstraint(accessedExpression.GetName()) : true,
+            InvokedMemberKind.Indexer => expression switch
+            {
+                ElementAccessExpressionSyntax { Expression: { } accessedExpression } => invokedMemberNameConstraint(accessedExpression.GetName()),
+                ElementBindingExpressionSyntax { } binding => binding.GetParentConditionalAccessExpression() is
+                    { Expression: { } accessedExpression } && invokedMemberNameConstraint(accessedExpression.GetName()),
+                _ => false,
+            },
             InvokedMemberKind.Attribute => expression is AttributeSyntax { Name: { } typeName } && invokedMemberNameConstraint(typeName.GetName()),
             _ => false,
         };
