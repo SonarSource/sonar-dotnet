@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  99,
+"endLine":  119,
+"endColumn":  119
+}
+}
+}
+]
+}

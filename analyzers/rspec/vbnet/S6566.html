@@ -1,0 +1,48 @@
+<p>This rule recommends using <code>DateTimeOffset</code> instead of <code>DateTime</code> for projects targeting .NET Framework 2.0 or later.</p>
+<h2>Why is this an issue?</h2>
+<p>You should use <code>DateTimeOffset</code> instead of <code>DateTime</code> as it provides all the information that the <code>DateTime</code>
+struct has, and additionally, the offset from Coordinated Universal Time (UTC). This way you can avoid potential problems created by the lack of
+timezone awareness (see the "Pitfalls" section below for more information).</p>
+<p>However, it’s important to note that although <code>DateTimeOffset</code> contains more information than <code>DateTime</code> by storing the
+offset to UTC, it isn’t tied to a specific time zone. This information must be stored separately to have a full picture of the moment in time with the
+use of <code>TimeZoneInfo</code>.</p>
+<h2>How to fix it</h2>
+<p>In most cases, you can directly replace <code>DateTime</code> with <code>DateTimeOffset</code>. When hardcoding dates with local kind, remember
+that the offset is timezone dependent, so it should be set according to which timezone that data represents. For more information, refer to
+<code>DateTime</code> and <code>DateTimeOffset</code> documentation from Microsoft (see the "Resources" section below).</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Dim myDate As DateTime = New DateTime(2008, 6, 19, 7, 0, 0, DateTimeKind.Local) ' Noncompliant
+
+Dim now = DateTime.Now ' Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+Dim myDate As DateTimeOffset = New DateTimeOffset(2008, 6, 19, 7, 0, 0, TimeSpan.FromHours(-7)) ' Compliant
+
+Dim now = DateTimeOffset.Now ' Compliant
+</pre>
+<h3>Pitfalls</h3>
+<p>Common <code>DateTime</code> pitfalls include:</p>
+<ul>
+  <li> when working with <code>DateTime</code> of kind <code>Local</code> consider the time offset of the machine where the program is running. Not
+  storing the offset from UTC separately can result in meaningless data when retrieved from a different location. </li>
+  <li> when working with <code>DateTime</code> of kind <code>Unknown</code>, calling <code>ToUniversalTime()</code> presumes the
+  <code>DateTime.Kind</code> is local and converts to UTC, if you call the method <code>ToLocalTime()</code>, it assumes the
+  <code>DateTime.Kind</code> is UTC and converts it to local. </li>
+  <li> when comparing <code>DateTimes</code> objects, the user must ensure they are within the same time zone. <code>DateTime</code> doesn’t consider
+  UTC/Local when comparing; it only cares about the number of <code>Ticks</code> on the objects. </li>
+</ul>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset?redirectedfrom=MSDN">Converting
+  between DateTime and DateTimeOffset</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/choosing-between-datetime">Choose between DateTime, DateOnly,
+  DateTimeOffset, TimeSpan, TimeOnly, and TimeZoneInfo</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/performing-arithmetic-operations">Performing arithmetic operations with
+  dates and times</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timezoneinfo">TimeZoneInfo documentation</a> </li>
+</ul>
+
