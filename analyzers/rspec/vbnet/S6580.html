@@ -1,0 +1,63 @@
+<p>When converting a string representation of a date and time to a <code>DateTime</code> object with one of the available system parsing methods, you
+should always provide an <code>IFormatProvider</code> parameter. If not provided, the method will use the machine’s <code>CultureInfo</code>; if the
+given string does not follow it, you’ll have an object that does not match the string representation or an unexpected runtime error.</p>
+<p>This rule raises an issue for the following date and time string representation parsing methods:</p>
+<ul>
+  <li> <code>Parse</code> </li>
+  <li> <code>ParseExact</code> </li>
+  <li> <code>TryParse</code> </li>
+  <li> <code>TryParseExact</code> </li>
+</ul>
+<p>Of the following classes:</p>
+<ul>
+  <li> <code>System.DateOnly</code> </li>
+  <li> <code>System.DateTime</code> </li>
+  <li> <code>System.DateTimeOffset</code> </li>
+  <li> <code>System.TimeOnly</code> </li>
+  <li> <code>System.TimeSpan</code> </li>
+</ul>
+<h2>Why is this an issue?</h2>
+<p>If you try to parse a string representation of date and time that does not have the expected format based on the machine’s culture you’ll get
+<code>DateTime</code> or <code>DateTimeOffset</code> object that does not match the input or a runtime error.</p>
+<h2>How to fix it</h2>
+<p>Alway use an overload of the parse method, where you can provide an <code>IFormatProvider</code> parameter.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Dim dateTimeString = "4/12/2023 4:05:48 PM" ' This is an en-US format string - 12 of April 2023
+Dim dateTimeObject = DateTime.Parse(dateTimeString) ' This is wrongly parsed as 4th of December, when it's read in a machine with "CultureInfo.CurrentCulture" en-150 (English Europe)
+
+Dim dateTimeString2 = "4/13/2023 4:05:48 PM" ' This is an en-US format string - 13 of April 2023
+Dim dateTimeObject2 = DateTime.Parse(dateTimeString2) ' Runtime Error, when it's parsed in a machine with "CultureInfo.CurrentCulture" en-150 (English Europe).
+
+Dim timeInSaudiArabia = New TimeOnly(16, 23).ToString(New CultureInfo("ar-SA"))
+Dim timeObject = TimeOnly.Parse(timeInSaudiArabia) ' Runtime Error, when it's parsed in a machine with "CultureInfo.CurrentCulture" en-150 (English Europe).
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+Dim dateTimeString = "4/12/2023 4:05:48 PM" ' This is an en-US format string - 12 of April 2023
+Dim dateTimeObject = DateTime.Parse(dateTimeString, New CultureInfo("en-US"))
+
+Dim dateTimeString2 = "4/13/2023 4:05:48 PM" ' This is an en-US format string - 13 of April 2023
+Dim dateTimeObject2 = DateTime.Parse(dateTimeString2, New CultureInfo("en-US"))
+
+Dim timeInSaudiArabia = New TimeOnly(16, 23).ToString(New CultureInfo("ar-SA"))
+Dim timeObject = TimeOnly.Parse(timeInSaudiArabia, New CultureInfo("ar-SA"))
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parse">DateTime.Parse method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parseexact">DateTime.ParseExact method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.tryparse">DateTime.TryParse method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.tryparseexact">DateTime.TryParseExact method</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly">DateOnly type</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime">DateTime type</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset">DateTimeOffset type</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeonly">TimeOnly type</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timespan">TimeSpan type</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo">Culture Info class documentation</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings">Standard date and time format
+  strings</a> </li>
+</ul>
+

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  21,
+"endLine":  288,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  588,
+"startColumn":  20,
+"endLine":  588,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\DateTimeRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  20,
+"endLine":  30,
+"endColumn":  64
+}
+}
+}
+]
+}

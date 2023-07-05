@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  28,
+"endLine":  250,
+"endColumn":  60
+}
+}
+}
+]
+}
