@@ -49,7 +49,7 @@ public abstract class UseIFormatProviderForParsingDateAndTimeBase<TSyntaxKind> :
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
             if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } identifier
-                && ParseMethodNames.Any(x => identifier.ValueText.Equals(x, Language.NameComparison))
+                && Array.Exists(ParseMethodNames, x => identifier.ValueText.Equals(x, Language.NameComparison))
                 && c.SemanticModel.GetSymbolInfo(c.Node) is { Symbol: IMethodSymbol methodSymbol }
                 && TemporalTypes.Any(x => x.Matches(methodSymbol.ReceiverType))
                 && NotUsingFormatProvider(methodSymbol, c.Node))
