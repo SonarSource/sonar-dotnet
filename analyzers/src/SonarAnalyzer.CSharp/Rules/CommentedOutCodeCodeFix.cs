@@ -63,14 +63,19 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
     private static string[] Lines(SyntaxTrivia trivia) =>
         trivia.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None);
 
-    internal sealed class Context
+    private sealed class Context
     {
+        private bool IsTrailing { get; }
+        private SyntaxTrivia Comment { get; }
+        private List<SyntaxTrivia> Leading { get; }
+        private List<SyntaxTrivia> Trailing { get; }
+        private SyntaxToken Token => Comment.Token;
+
         public Context(SyntaxTrivia comment)
         {
             Comment = comment;
             Leading = Token.LeadingTrivia.ToList();
             Trailing = Token.TrailingTrivia.ToList();
-
             IsTrailing = Trailing.Remove(comment);
 
             if (!IsTrailing)
@@ -79,27 +84,20 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
             }
         }
 
-        public bool IsTrailing { get; }
-        public SyntaxTrivia Comment { get; }
-        public List<SyntaxTrivia> Leading { get; }
-        public List<SyntaxTrivia> Trailing { get; }
-        public SyntaxToken Token => Comment.Token;
-
         public Task<Document> ChangeDocument(Document document, SyntaxNode root) =>
-            Task.FromResult(document.WithSyntaxRoot(root.ReplaceToken(Token, NewToken)));
+            Task.FromResult(document.WithSyntaxRoot(root.ReplaceToken(Token, NewToken())));
 
-        public SyntaxToken NewToken =>
+        private SyntaxToken NewToken() =>
             IsTrailing ? NewTrailing() : NewLeading();
 
         private SyntaxToken NewTrailing()
         {
             var trailing = ShareLine(Token, Comment)
-                ? Trailing.Where(t
-                    => !ShareLine(t, Comment)
-                    || (t.IsKind(SyntaxKind.EndOfLineTrivia) && ShareLine(t, Comment))).ToList()
-                : Trailing;
+                 ? Trailing.Where(KeepTrailing).ToList()
+                 : Trailing;
 
-            // this can happen for multi line comments within an expression.
+            // this can happen for multi line comments within an expression. Like:
+            // int /* commented code */ MethodCall()
             if (trailing.Count == 0 && ShareLine(Token.GetNextToken(), Comment))
             {
                 trailing.Add(SyntaxFactory.Space);
@@ -109,9 +107,14 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
                 .WithLeadingTrivia(Leading)
                 .WithTrailingTrivia(trailing);
         }
-        private SyntaxToken NewLeading() => Token
-            .WithLeadingTrivia(Leading.Where(t => !ShareLine(t, Comment)))
-            .WithTrailingTrivia(Trailing);
+
+        private bool KeepTrailing(SyntaxTrivia trivia) =>
+            !ShareLine(trivia, Comment) ^ trivia.IsKind(SyntaxKind.EndOfLineTrivia);
+
+        private SyntaxToken NewLeading() =>
+            Token
+                .WithLeadingTrivia(Leading.Where(t => !ShareLine(t, Comment)))
+                .WithTrailingTrivia(Trailing);
 
         private static bool ShareLine(SyntaxToken token, SyntaxTrivia trivia) =>
             ShareLine(token.GetLineNumbers(), trivia.GetLineNumbers());
