@@ -20,7 +20,6 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
-[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflowBase
 {
     public static readonly DiagnosticDescriptor S3949 = DescriptorFactory.Create(DiagnosticId, MessageFormat);

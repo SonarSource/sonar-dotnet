@@ -27,6 +27,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     internal static class RuleFinder
     {
         public static IEnumerable<Type> AllAnalyzerTypes { get; }       // Rules and Utility analyzers
+        public static IEnumerable<Type> AllTypesWithDiagnosticAnalyzerAttribute { get; }
         public static IEnumerable<Type> RuleAnalyzerTypes { get; }      // Rules-only, without Utility analyzers
         public static IEnumerable<Type> UtilityAnalyzerTypes { get; }
         public static IEnumerable<Type> CodeFixTypes { get; }
@@ -43,6 +44,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .ToArray();
             CodeFixTypes = allTypes.Where(x => typeof(CodeFixProvider).IsAssignableFrom(x) && x.GetCustomAttributes<ExportCodeFixProviderAttribute>().Any()).ToArray();
             AllAnalyzerTypes = allTypes.Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any()).ToArray();
+            AllTypesWithDiagnosticAnalyzerAttribute = allTypes.Where(x => x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any()).ToArray();
             UtilityAnalyzerTypes = AllAnalyzerTypes.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
             RuleAnalyzerTypes = AllAnalyzerTypes.Except(UtilityAnalyzerTypes).ToList();
         }
