@@ -1,26 +1,57 @@
 <h2>Why is this an issue?</h2>
-<p>A value that is incremented or decremented and then not stored is at best wasted code and at worst a bug.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-public int PickNumber()
+<p>When using the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators#postfix-increment-operator">postfix
+increment</a> operator, it is important to know that the result of the expression <code>x++</code> is the value <strong>before</strong> the operation
+<code>x</code>.</p>
+<p>This means that in some cases, the result might not be what you expect:</p>
+<ul>
+  <li> When assigning <code>x++</code> to <code>x</code>, it’s the same as assigning <code>x</code> to itself, since the value is assigned before the
+  increment takes place </li>
+  <li> When returning <code>x++</code>, the returning value is <code>x</code>, not <code>x+1</code> </li>
+</ul>
+<p>The same applies to the postfix and prefix <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators#decrement-operator---">decrement</a>
+operators.</p>
+<h2>How to fix it</h2>
+<p>To solve the issue in assignments, eliminate the assignment, since <code>x\++</code> mutates <code>x</code> anyways.</p>
+<p>To solve the issue in return statements, consider using the <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators#prefix-increment-operator">prefix
+increment</a> operator, since it works in reverse: the result of the expression <code>++x</code> is the value <strong>after</strong> the operation,
+which is <code>x+1</code>, as one might expect.</p>
+<p>The same applies to the postfix and prefix <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators#decrement-operator---">decrement</a>
+operators.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+int PickNumber()
 {
   int i = 0;
   int j = 0;
 
-  i = i++; // Noncompliant; i is still zero
-
-  return j++; // Noncompliant; 0 returned
+  i = i++;      // Noncompliant: i is still 0
+  return j--;   // Noncompliant: returns 0
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-public int PickNumber()
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+int PickNumber()
 {
   int i = 0;
   int j = 0;
 
-  i++;
-  return ++j;
+  i++;          // Compliant: i is incremented to 1
+  return --j;   // Compliant: returns -1
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators">Arithmetic
+  operators (C# reference)</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> StackOverflow - <a href="https://stackoverflow.com/a/3346729">"What is the difference between i and i in C#?" - Eric Lippert’s answer</a> </li>
+</ul>
 
