@@ -1,12 +1,17 @@
 <h2>Why is this an issue?</h2>
-<p>When creating a custom Markup Extension that accepts parameters in WPF, the <code>ConstructorArgument</code> markup must be used to identify the
-discrete properties that match these parameters. However since this is done via a string, the compiler will not notice if there are typos.</p>
+<p>When creating a custom <a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/advanced/markup-extensions-and-wpf-xaml">Markup Extension</a>
+that accepts parameters in WPF, the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.markup.constructorargumentattribute"><code>ConstructorArgument</code></a> markup
+must be used to identify the discrete properties that match these parameters. However since this is done via a string, the compiler won’t give you any
+warning in case there are typos.</p>
 <p>This rule raises an issue when the string argument to <code>ConstructorArgumentAttribute</code> doesn’t match any parameter of any constructor.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Imports System
 
-Namespace myLibrary
+Namespace MyLibrary
     Public Class MyExtension
         Inherits MarkupExtension
 
@@ -22,8 +27,8 @@ Namespace myLibrary
     End Class
 End Namespace
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 Imports System
 
 Namespace MyLibrary
@@ -42,4 +47,13 @@ Namespace MyLibrary
     End Class
 End Namespace
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/advanced/markup-extensions-and-wpf-xaml">Markup Extensions and
+  WPF XAML</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.markup.markupextension">MarkupExtension Class</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.markup.constructorargumentattribute">ConstructorArgumentAttribute Class</a> </li>
+</ul>
 
