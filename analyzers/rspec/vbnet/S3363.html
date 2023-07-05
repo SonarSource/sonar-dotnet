@@ -1,5 +1,15 @@
 <p>You should only set a property of a temporal type (like <code>DateTime</code> or <code>DateTimeOffset</code>) as the primary key of a table if the
 values are guaranteed to be unique.</p>
+<h2>Why is this an issue?</h2>
+<p>Using temporal types as the primary key of a table is risky. When these types are used as primary keys, it usually means that each new key is
+created with the use of <code>.Now</code> or <code>.UtcNow</code> properties from <code>DateTime</code> and <code>DateTimeOffset</code> classes. In
+those cases, duplicate keys exceptions may occur in many ways:</p>
+<ul>
+  <li> when entries are added consecutively by a machine with low-enough system clock resolution; </li>
+  <li> when two different threads are inserting entries in close enough sequence for both to have the same time; </li>
+  <li> when changes such as daylight saving time (DST) transitions occur, where values can be repeated the following hour (only for
+  <code>DateTime</code> type); </li>
+</ul>
 <p>The rule raises an issue if:</p>
 <ul>
   <li> Entity Framework, or Entity Framework Core dependencies are found; </li>
@@ -14,16 +24,6 @@ values are guaranteed to be unique.</p>
       <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeonly">System.TimeOnly</a> </li>
     </ul>  </li>
 </ul>
-<h2>Why is this an issue?</h2>
-<p>Using temporal types as the primary key of a table is risky. When these types are used as primary keys, it usually means that each new key is
-created with the use of <code>.Now</code> or <code>.UtcNow</code> properties from <code>DateTime</code> and <code>DateTimeOffset</code> classes. In
-those cases, duplicate keys exceptions may occur in many ways:</p>
-<ul>
-  <li> when entries are added consecutively by a machine with low-enough system clock resolution; </li>
-  <li> when two different threads are inserting entries in close enough sequence for both to have the same time; </li>
-  <li> when changes such as daylight saving time (DST) transitions occur, where values can be repeated the following hour (only for
-  <code>DateTime</code> type); </li>
-</ul>
 <h2>How to fix it</h2>
 <p>Either use a GUID or the auto generated ID as a primary key.</p>
 <h3>Code examples</h3>
@@ -31,6 +31,7 @@ those cases, duplicate keys exceptions may occur in many ways:</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 Public Class Account
     Public Property Id As DateTime
+
     Public Property Name As String
     Public Property Surname As String
 End Class
@@ -39,6 +40,7 @@ End Class
 <pre data-diff-id="1" data-diff-type="compliant">
 Public Class Account
     Public Property Id As Guid
+
     Public Property Name As String
     Public Property Surname As String
 End Class
@@ -48,7 +50,8 @@ End Class
 <pre data-diff-id="2" data-diff-type="noncompliant">
 Public Class Person
     &lt;Key&gt;
-    Public Property BirthDate As DateTime
+    Public Property PersonIdentifier As DateTime
+
     Public Property Name As String
     Public Property Surname As String
 End Class
@@ -57,8 +60,8 @@ End Class
 <pre data-diff-id="2" data-diff-type="compliant">
 Public Class Person
     &lt;Key&gt;
-    Public Property Id As Guid
-    Public Property BirthDate As DateTime
+    Public Property PersonIdentifier As Guid
+
     Public Property Name As String
     Public Property Surname As String
 End Class
