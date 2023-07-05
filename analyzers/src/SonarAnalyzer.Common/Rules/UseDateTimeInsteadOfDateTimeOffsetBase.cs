@@ -36,30 +36,29 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind> : Sona
             "UnixEpoch");
 
     protected abstract string[] ValidNames { get; }
-    protected abstract SyntaxNode GetType(SyntaxNode node);
 
     protected UseDateTimeInsteadOfDateTimeOffsetBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context)
     {
         context.RegisterNodeAction(
-                Language.GeneratedCodeRecognizer,
-                c =>
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                if ((c.Node.RawKind == (int)SyntaxKindEx.ImplicitObjectCreationExpression || IsNamedDateTime(GetTypeName(c.Node)))
+                    && IsDateTimeType(c.Node, c.SemanticModel))
                 {
-                    if ((c.Node.RawKind == (int)SyntaxKindEx.ImplicitObjectCreationExpression || IsNamedDateTime(GetType(c.Node)))
-                        && IsDateTimeType(c.Node, c.SemanticModel))
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                    }
-                },
-                Language.SyntaxKind.ObjectCreationExpressions);
+                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                }
+            },
+            Language.SyntaxKind.ObjectCreationExpressions);
 
         context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
             c =>
             {
                 if (Language.Syntax.NodeExpression(c.Node) is var expression
-                    && IsNamedDateTime(expression)
+                    && IsNamedDateTime(Language.GetName(expression))
                     && TargetMemberAccess.Contains(Language.GetName(c.Node))
                     && IsDateTimeType(expression, c.SemanticModel))
                 {
@@ -72,6 +71,11 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind> : Sona
     private static bool IsDateTimeType(SyntaxNode node, SemanticModel model) =>
         model.GetTypeInfo(node).Type.Is(KnownType.System_DateTime);
 
-    private bool IsNamedDateTime(SyntaxNode node) =>
-        Array.Exists(ValidNames, x => x.Equals(Language.GetName(node), Language.NameComparison));
+    private bool IsNamedDateTime(string name) =>
+        Array.Exists(ValidNames, x => x.Equals(name, Language.NameComparison));
+
+    private string GetTypeName(SyntaxNode node) =>
+        Language.Syntax.ObjectCreationTypeIdentifier(node) is { IsMissing: false } identifier
+            ? identifier.ValueText
+            : string.Empty;
 }

@@ -26,7 +26,4 @@ public sealed class UseDateTimeInsteadOfDateTimeOffset : UseDateTimeInsteadOfDat
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override string[] ValidNames { get; } = new[] { "DateTime", "Date" };
-
-    protected override SyntaxNode GetType(SyntaxNode node) =>
-        ((ObjectCreationExpressionSyntax)node).Type;
 }
