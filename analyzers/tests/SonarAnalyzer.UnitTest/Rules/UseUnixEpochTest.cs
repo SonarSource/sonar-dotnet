@@ -47,19 +47,39 @@ public class UseUnixEpochTest
 
     [TestMethod]
     public void UseUnixEpoch_CSharp9() =>
-        builderCS.AddSnippet(
-            """
-            using System;
-
-            DateTime dateTime = new(1970, 1, 1); // Noncompliant
-            DateTimeOffset dateTimeOffset = new(1970, 1, 1, 0, 0, 0, TimeSpan.Zero); // Noncompliant
-            """)
-                 .WithTopLevelStatements()
-                 .Verify();
+        builderCS
+            .AddPaths("UseUnixEpoch.CSharp9.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
     [TestMethod]
     public void UseUnixEpoch_VB() =>
         builderVB.AddPaths("UseUnixEpoch.vb").Verify();
+
+    [TestMethod]
+    public void UseUnixEpoch_CodeFix_CS() =>
+        builderCS
+            .AddPaths("UseUnixEpoch.cs")
+            .WithCodeFix<CS.UseUnixEpochCodeFix>()
+            .WithCodeFixedPaths("UseUnixEpoch.Fixed.cs")
+            .VerifyCodeFix();
+
+    [TestMethod]
+    public void UseUnixEpoch_CodeFix_CSharp9() =>
+        builderCS
+            .AddPaths("UseUnixEpoch.CSharp9.cs")
+            .WithCodeFix<CS.UseUnixEpochCodeFix>()
+            .WithCodeFixedPaths("UseUnixEpoch.CSharp9.Fixed.cs")
+            .WithTopLevelStatements()
+            .VerifyCodeFix();
+
+    [TestMethod]
+    public void UseUnixEpoch_CodeFix_VB() =>
+        builderVB
+            .AddPaths("UseUnixEpoch.vb")
+            .WithCodeFix<VB.UseUnixEpochCodeFix>()
+            .WithCodeFixedPaths("UseUnixEpoch.Fixed.vb")
+            .VerifyCodeFix();
 
 #endif
 
