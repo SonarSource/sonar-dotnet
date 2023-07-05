@@ -10,6 +10,7 @@ Class Test
         currentTime = Date.Now                                                              ' Noncompliant
         currentTime = Date.Now                                                              ' Noncompliant
         currentTime = System.DateTime.Now                                                   ' Noncompliant
+        currentTime = DateTime.Now                                                          ' Noncompliant
         currentTime = Now                                                                   ' FN
         currentTime = AliasedDateTime.Now                                                   ' Noncompliant
 
