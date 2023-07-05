@@ -73,6 +73,15 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
+        public void AllClassesWithDiagnosticAnalyzerAttribute_InheritSonarDiagnosticAnalyzer()
+        {
+            foreach (var analyzer in RuleFinder.AllTypesWithDiagnosticAnalyzerAttribute)
+            {
+                analyzer.Should().BeAssignableTo<SonarDiagnosticAnalyzer>($"{analyzer.Name} is not a subclass of SonarDiagnosticAnalyzer");
+            }
+        }
+
+        [TestMethod]
         public void CodeFixes_InheritSonarCodeFix()
         {
             foreach (var codeFix in RuleFinder.CodeFixTypes)
