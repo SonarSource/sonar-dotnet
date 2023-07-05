@@ -1,17 +1,27 @@
 <h2>Why is this an issue?</h2>
-<p>Creating a new <code>Exception</code> without actually throwing it is useless and is probably due to a mistake.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>Creating a new <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception"><code>Exception</code></a> without actually throwing does
+not achieve the intended purpose.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 if (x &lt; 0)
 {
-  new ArgumentException("x must be nonnegative");
+    new ArgumentException("x must be nonnegative");
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<p>Ensure to throw the <code>Exception</code> with a <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements#the-throw-statement"><code>throw</code>
+statement</a>.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
 if (x &lt; 0)
 {
-  throw new ArgumentException("x must be nonnegative");
+    throw new ArgumentException("x must be nonnegative");
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception"><code>Exception</code> Class</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements">Exception-handling statements -
+  <code>throw</code>, <code>try-catch</code>, <code>try-finally</code>, and <code>try-catch-finally</code></a> </li>
+</ul>
 

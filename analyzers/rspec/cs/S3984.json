@@ -13,5 +13,5 @@
   "ruleSpecification": "RSPEC-3984",
   "sqKey": "S3984",
   "scope": "All",
-  "quickfix": "unknown"
+  "quickfix": "targeted"
 }

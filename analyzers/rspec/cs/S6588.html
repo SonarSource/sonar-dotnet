@@ -1,5 +1,5 @@
 <h2>Why is this an issue?</h2>
-<p>With .NET core the <code>UnixEpoch</code> field was introduced to <code>DateTime</code> and <code>DateTimeOffset</code> types. Using this field
+<p>With .NET Core the <code>UnixEpoch</code> field was introduced to <code>DateTime</code> and <code>DateTimeOffset</code> types. Using this field
 clearly states that the intention is to use the beginning of the Unix epoch.</p>
 <h3>What is the potential impact?</h3>
 <p>You should not use the <code>DateTime</code> or <code>DateTimeOffset</code> constructors to set the time to the 1st of January 1970 to represent
