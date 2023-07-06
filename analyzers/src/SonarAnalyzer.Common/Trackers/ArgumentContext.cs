@@ -23,4 +23,6 @@ namespace SonarAnalyzer.Helpers;
 public class ArgumentContext : SyntaxBaseContext
 {
     public ArgumentContext(SonarSyntaxNodeReportingContext context) : base(context) { }
+
+    public ArgumentContext(SyntaxNode node, SemanticModel semanticModel) : base(node, semanticModel) { }
 }

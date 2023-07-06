@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Helpers.Trackers;
 
-public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, SyntaxBaseContext>
+public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ArgumentContext>
     where TSyntaxKind : struct
 {
     protected abstract RefKind? ArgumentRefKind(SyntaxNode argumentNode);

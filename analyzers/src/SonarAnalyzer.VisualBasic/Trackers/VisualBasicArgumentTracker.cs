@@ -70,5 +70,5 @@ public class VisualBasicArgumentTracker : ArgumentTracker<SyntaxKind>
             var x => x,
         };
 
-    protected override SyntaxBaseContext CreateContext(SonarSyntaxNodeReportingContext context) => new(context);
+    protected override ArgumentContext CreateContext(SonarSyntaxNodeReportingContext context) => new(context);
 }

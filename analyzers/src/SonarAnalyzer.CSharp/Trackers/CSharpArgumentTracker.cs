@@ -104,6 +104,6 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
     protected override SyntaxNode InvokedExpression(SyntaxNode argumentNode) =>
         argumentNode?.Parent?.Parent;
 
-    protected override SyntaxBaseContext CreateContext(SonarSyntaxNodeReportingContext context) =>
+    protected override ArgumentContext CreateContext(SonarSyntaxNodeReportingContext context) =>
         new(context);
 }
