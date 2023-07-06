@@ -9,6 +9,7 @@ public class Program
     private readonly DateTimeOffset EpochOff = DateTimeOffset.UnixEpoch; // Fixed
 
     private const long EpochTicks = 621355968000000000;
+    private const long SomeLongConst = 6213;
 
     void BasicCases(DateTime dateTime)
     {
@@ -50,6 +51,7 @@ public class Program
         var ctor1_2 = new DateTime(ticks: ticks); // Compliant
         var ctor1_3 = DateTime.UnixEpoch; // Fixed
         var ctor1_4 = DateTime.UnixEpoch; // Fixed
+        var ctor1_5 = new DateTime(SomeLongConst); // Compliant
 
         // year, month, and day
         var ctor2_0 = DateTime.UnixEpoch; // Fixed
