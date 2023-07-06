@@ -17,19 +17,6 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  22,
-"endLine":  104,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4040",
-"message":  "Change this normalization to 'ToUpperInvariant()'.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L63",
 "region":  {
 "startLine":  63,
@@ -62,6 +49,19 @@
 "startColumn":  36,
 "endLine":  65,
 "endColumn":  52
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  22,
+"endLine":  104,
+"endColumn":  38
 }
 }
 },

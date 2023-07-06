@@ -95,6 +95,32 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  113,
+"endLine":  58,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  113,
+"endLine":  70,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L115",
 "region":  {
 "startLine":  115,
@@ -147,12 +173,12 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L58",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L81",
 "region":  {
-"startLine":  58,
-"startColumn":  113,
-"endLine":  58,
-"endColumn":  117
+"startLine":  81,
+"startColumn":  70,
+"endLine":  81,
+"endColumn":  74
 }
 }
 },
@@ -160,12 +186,12 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L70",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L88",
 "region":  {
-"startLine":  70,
-"startColumn":  113,
-"endLine":  70,
-"endColumn":  117
+"startLine":  88,
+"startColumn":  77,
+"endLine":  88,
+"endColumn":  81
 }
 }
 },
@@ -322,32 +348,6 @@
 "startColumn":  126,
 "endLine":  503,
 "endColumn":  131
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L81",
-"region":  {
-"startLine":  81,
-"startColumn":  70,
-"endLine":  81,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  77,
-"endLine":  88,
-"endColumn":  81
 }
 }
 },

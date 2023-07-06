@@ -264,6 +264,84 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  56,
+"endLine":  71,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  80,
+"endLine":  71,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  35,
+"endLine":  83,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  59,
+"endLine":  83,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  44,
+"endLine":  87,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  68,
+"endLine":  87,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L126",
 "region":  {
 "startLine":  126,
@@ -498,12 +576,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L71",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L36",
 "region":  {
-"startLine":  71,
-"startColumn":  56,
-"endLine":  71,
-"endColumn":  61
+"startLine":  36,
+"startColumn":  36,
+"endLine":  36,
+"endColumn":  41
 }
 }
 },
@@ -511,12 +589,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L71",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L36",
 "region":  {
-"startLine":  71,
-"startColumn":  80,
-"endLine":  71,
-"endColumn":  85
+"startLine":  36,
+"startColumn":  67,
+"endLine":  36,
+"endColumn":  72
 }
 }
 },
@@ -524,12 +602,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L83",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L43",
 "region":  {
-"startLine":  83,
-"startColumn":  35,
-"endLine":  83,
-"endColumn":  40
+"startLine":  43,
+"startColumn":  39,
+"endLine":  43,
+"endColumn":  44
 }
 }
 },
@@ -537,12 +615,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L83",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L43",
 "region":  {
-"startLine":  83,
-"startColumn":  59,
-"endLine":  83,
-"endColumn":  64
+"startLine":  43,
+"startColumn":  70,
+"endLine":  43,
+"endColumn":  75
 }
 }
 },
@@ -550,12 +628,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L87",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L49",
 "region":  {
-"startLine":  87,
-"startColumn":  44,
-"endLine":  87,
-"endColumn":  49
+"startLine":  49,
+"startColumn":  57,
+"endLine":  49,
+"endColumn":  62
 }
 }
 },
@@ -563,12 +641,90 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L87",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L49",
 "region":  {
-"startLine":  87,
-"startColumn":  68,
-"endLine":  87,
-"endColumn":  73
+"startLine":  49,
+"startColumn":  81,
+"endLine":  49,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  45,
+"endLine":  54,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  69,
+"endLine":  54,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  36,
+"endLine":  62,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  60,
+"endLine":  62,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  34,
+"endLine":  66,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  58,
+"endLine":  66,
+"endColumn":  63
 }
 }
 },
@@ -738,162 +894,6 @@
 "startColumn":  68,
 "endLine":  146,
 "endColumn":  73
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  36,
-"endLine":  36,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  67,
-"endLine":  36,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  39,
-"endLine":  43,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  70,
-"endLine":  43,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  57,
-"endLine":  49,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  81,
-"endLine":  49,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  45,
-"endLine":  54,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  69,
-"endLine":  54,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  36,
-"endLine":  62,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  60,
-"endLine":  62,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  34,
-"endLine":  66,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  58,
-"endLine":  66,
-"endColumn":  63
 }
 }
 },
@@ -1252,45 +1252,6 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L105",
-"region":  {
-"startLine":  105,
-"startColumn":  76,
-"endLine":  105,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L105",
-"region":  {
-"startLine":  105,
-"startColumn":  159,
-"endLine":  105,
-"endColumn":  164
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L105",
-"region":  {
-"startLine":  105,
-"startColumn":  202,
-"endLine":  105,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L18",
 "region":  {
 "startLine":  18,
@@ -1479,6 +1440,45 @@
 "startColumn":  33,
 "endLine":  99,
 "endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  76,
+"endLine":  105,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  159,
+"endLine":  105,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  202,
+"endLine":  105,
+"endColumn":  207
 }
 }
 }

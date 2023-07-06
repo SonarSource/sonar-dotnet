@@ -15,19 +15,6 @@
 },
 {
 "id":  "S1067",
-"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L122-L129",
-"region":  {
-"startLine":  122,
-"startColumn":  13,
-"endLine":  129,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L73-L74",
@@ -36,6 +23,19 @@
 "startColumn":  46,
 "endLine":  74,
 "endColumn":  91
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L122-L129",
+"region":  {
+"startLine":  122,
+"startColumn":  13,
+"endLine":  129,
+"endColumn":  105
 }
 }
 }

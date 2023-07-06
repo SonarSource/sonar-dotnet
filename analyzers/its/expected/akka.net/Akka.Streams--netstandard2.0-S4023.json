@@ -17,19 +17,6 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L240",
-"region":  {
-"startLine":  240,
-"startColumn":  30,
-"endLine":  240,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L32",
 "region":  {
 "startLine":  32,
@@ -49,6 +36,19 @@
 "startColumn":  26,
 "endLine":  39,
 "endColumn":  45
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L240",
+"region":  {
+"startLine":  240,
+"startColumn":  30,
+"endLine":  240,
+"endColumn":  39
 }
 }
 },

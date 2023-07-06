@@ -4,6 +4,32 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  16,
+"endLine":  74,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  20,
+"endLine":  96,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L128",
 "region":  {
 "startLine":  128,
@@ -36,32 +62,6 @@
 "startColumn":  55,
 "endLine":  187,
 "endColumn":  103
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  16,
-"endLine":  74,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L96",
-"region":  {
-"startLine":  96,
-"startColumn":  20,
-"endLine":  96,
-"endColumn":  36
 }
 }
 },

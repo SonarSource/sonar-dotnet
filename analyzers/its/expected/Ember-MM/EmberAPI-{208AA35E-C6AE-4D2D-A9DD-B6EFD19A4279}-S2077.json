@@ -4,12 +4,12 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1011",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L77",
 "region":  {
-"startLine":  1011,
-"startColumn":  17,
-"endLine":  1011,
-"endColumn":  39
+"startLine":  77,
+"startColumn":  29,
+"endLine":  77,
+"endColumn":  51
 }
 }
 },
@@ -17,64 +17,12 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1245",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L90",
 "region":  {
-"startLine":  1245,
-"startColumn":  25,
-"endLine":  1245,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1268",
-"region":  {
-"startLine":  1268,
-"startColumn":  25,
-"endLine":  1268,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1300",
-"region":  {
-"startLine":  1300,
-"startColumn":  25,
-"endLine":  1300,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1323",
-"region":  {
-"startLine":  1323,
-"startColumn":  25,
-"endLine":  1323,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1347",
-"region":  {
-"startLine":  1347,
-"startColumn":  25,
-"endLine":  1347,
-"endColumn":  60
+"startLine":  90,
+"startColumn":  29,
+"endLine":  90,
+"endColumn":  51
 }
 }
 },
@@ -88,201 +36,6 @@
 "startColumn":  29,
 "endLine":  135,
 "endColumn":  51
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1364",
-"region":  {
-"startLine":  1364,
-"startColumn":  25,
-"endLine":  1364,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1393",
-"region":  {
-"startLine":  1393,
-"startColumn":  25,
-"endLine":  1393,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1438",
-"region":  {
-"startLine":  1438,
-"startColumn":  21,
-"endLine":  1438,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1556",
-"region":  {
-"startLine":  1556,
-"startColumn":  25,
-"endLine":  1556,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1579",
-"region":  {
-"startLine":  1579,
-"startColumn":  25,
-"endLine":  1579,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1611",
-"region":  {
-"startLine":  1611,
-"startColumn":  25,
-"endLine":  1611,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1634",
-"region":  {
-"startLine":  1634,
-"startColumn":  25,
-"endLine":  1634,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1668",
-"region":  {
-"startLine":  1668,
-"startColumn":  13,
-"endLine":  1668,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1802",
-"region":  {
-"startLine":  1802,
-"startColumn":  25,
-"endLine":  1802,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1872",
-"region":  {
-"startLine":  1872,
-"startColumn":  13,
-"endLine":  1872,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1917",
-"region":  {
-"startLine":  1917,
-"startColumn":  17,
-"endLine":  1917,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1937",
-"region":  {
-"startLine":  1937,
-"startColumn":  17,
-"endLine":  1937,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1949",
-"region":  {
-"startLine":  1949,
-"startColumn":  17,
-"endLine":  1949,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1951",
-"region":  {
-"startLine":  1951,
-"startColumn":  17,
-"endLine":  1951,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1973",
-"region":  {
-"startLine":  1973,
-"startColumn":  17,
-"endLine":  1973,
-"endColumn":  39
 }
 }
 },
@@ -849,19 +602,6 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  29,
-"endLine":  77,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L771",
 "region":  {
 "startLine":  771,
@@ -953,19 +693,6 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  29,
-"endLine":  90,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L916",
 "region":  {
 "startLine":  916,
@@ -997,6 +724,279 @@
 "startLine":  981,
 "startColumn":  17,
 "endLine":  981,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1011",
+"region":  {
+"startLine":  1011,
+"startColumn":  17,
+"endLine":  1011,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1245",
+"region":  {
+"startLine":  1245,
+"startColumn":  25,
+"endLine":  1245,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1268",
+"region":  {
+"startLine":  1268,
+"startColumn":  25,
+"endLine":  1268,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1300",
+"region":  {
+"startLine":  1300,
+"startColumn":  25,
+"endLine":  1300,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1323",
+"region":  {
+"startLine":  1323,
+"startColumn":  25,
+"endLine":  1323,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1347",
+"region":  {
+"startLine":  1347,
+"startColumn":  25,
+"endLine":  1347,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1364",
+"region":  {
+"startLine":  1364,
+"startColumn":  25,
+"endLine":  1364,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1393",
+"region":  {
+"startLine":  1393,
+"startColumn":  25,
+"endLine":  1393,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1438",
+"region":  {
+"startLine":  1438,
+"startColumn":  21,
+"endLine":  1438,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1556",
+"region":  {
+"startLine":  1556,
+"startColumn":  25,
+"endLine":  1556,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1579",
+"region":  {
+"startLine":  1579,
+"startColumn":  25,
+"endLine":  1579,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1611",
+"region":  {
+"startLine":  1611,
+"startColumn":  25,
+"endLine":  1611,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1634",
+"region":  {
+"startLine":  1634,
+"startColumn":  25,
+"endLine":  1634,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1668",
+"region":  {
+"startLine":  1668,
+"startColumn":  13,
+"endLine":  1668,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1802",
+"region":  {
+"startLine":  1802,
+"startColumn":  25,
+"endLine":  1802,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1872",
+"region":  {
+"startLine":  1872,
+"startColumn":  13,
+"endLine":  1872,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1917",
+"region":  {
+"startLine":  1917,
+"startColumn":  17,
+"endLine":  1917,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1937",
+"region":  {
+"startLine":  1937,
+"startColumn":  17,
+"endLine":  1937,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1949",
+"region":  {
+"startLine":  1949,
+"startColumn":  17,
+"endLine":  1949,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1951",
+"region":  {
+"startLine":  1951,
+"startColumn":  17,
+"endLine":  1951,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1973",
+"region":  {
+"startLine":  1973,
+"startColumn":  17,
+"endLine":  1973,
 "endColumn":  39
 }
 }

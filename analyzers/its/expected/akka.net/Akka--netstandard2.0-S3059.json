@@ -29,6 +29,57 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L943",
+"region":  {
+"startLine":  943,
+"startColumn":  27,
+"endLine":  943,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L951",
+"region":  {
+"startLine":  951,
+"startColumn":  9,
+"endLine":  951,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L971",
+"region":  {
+"startLine":  971,
+"startColumn":  9,
+"endLine":  971,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L983",
+"region":  {
+"startLine":  983,
+"startColumn":  9,
+"endLine":  983,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L996",
+"region":  {
+"startLine":  996,
+"startColumn":  9,
+"endLine":  996,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L576",
 "region":  {
 "startLine":  576,
@@ -167,57 +218,6 @@
 "startColumn":  13,
 "endLine":  910,
 "endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L943",
-"region":  {
-"startLine":  943,
-"startColumn":  27,
-"endLine":  943,
-"endColumn":  38
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L951",
-"region":  {
-"startLine":  951,
-"startColumn":  9,
-"endLine":  951,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L971",
-"region":  {
-"startLine":  971,
-"startColumn":  9,
-"endLine":  971,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L983",
-"region":  {
-"startLine":  983,
-"startColumn":  9,
-"endLine":  983,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L996",
-"region":  {
-"startLine":  996,
-"startColumn":  9,
-"endLine":  996,
-"endColumn":  15
 }
 }
 ]
@@ -452,38 +452,44 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L121",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L317",
 "region":  {
-"startLine":  121,
+"startLine":  317,
+"startColumn":  20,
+"endLine":  317,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L324",
+"region":  {
+"startLine":  324,
+"startColumn":  9,
+"endLine":  324,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L43",
+"region":  {
+"startLine":  43,
 "startColumn":  21,
-"endLine":  121,
-"endColumn":  31
+"endLine":  43,
+"endColumn":  24
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L128",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L50",
 "region":  {
-"startLine":  128,
+"startLine":  50,
 "startColumn":  9,
-"endLine":  128,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  9,
-"endLine":  138,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L143",
-"region":  {
-"startLine":  143,
-"startColumn":  9,
-"endLine":  143,
+"endLine":  50,
 "endColumn":  15
 }
 }
@@ -517,6 +523,81 @@
 "startLine":  164,
 "startColumn":  9,
 "endLine":  164,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  21,
+"endLine":  79,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  9,
+"endLine":  87,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  9,
+"endLine":  102,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  21,
+"endLine":  121,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  9,
+"endLine":  128,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  9,
+"endLine":  138,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  9,
+"endLine":  143,
 "endColumn":  15
 }
 }
@@ -568,87 +649,6 @@
 "startLine":  286,
 "startColumn":  9,
 "endLine":  286,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L317",
-"region":  {
-"startLine":  317,
-"startColumn":  20,
-"endLine":  317,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L324",
-"region":  {
-"startLine":  324,
-"startColumn":  9,
-"endLine":  324,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  21,
-"endLine":  43,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  9,
-"endLine":  50,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  21,
-"endLine":  79,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L87",
-"region":  {
-"startLine":  87,
-"startColumn":  9,
-"endLine":  87,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L102",
-"region":  {
-"startLine":  102,
-"startColumn":  9,
-"endLine":  102,
 "endColumn":  15
 }
 }
@@ -887,6 +887,54 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L144",
+"region":  {
+"startLine":  144,
+"startColumn":  27,
+"endLine":  144,
+"endColumn":  67
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  9,
+"endLine":  161,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L243",
+"region":  {
+"startLine":  243,
+"startColumn":  27,
+"endLine":  243,
+"endColumn":  59
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L265",
+"region":  {
+"startLine":  265,
+"startColumn":  9,
+"endLine":  265,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L119",
 "region":  {
 "startLine":  119,
@@ -920,30 +968,6 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L144",
-"region":  {
-"startLine":  144,
-"startColumn":  27,
-"endLine":  144,
-"endColumn":  67
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L161",
-"region":  {
-"startLine":  161,
-"startColumn":  9,
-"endLine":  161,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L170",
 "region":  {
 "startLine":  170,
@@ -967,30 +991,6 @@
 "startLine":  192,
 "startColumn":  9,
 "endLine":  192,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L243",
-"region":  {
-"startLine":  243,
-"startColumn":  27,
-"endLine":  243,
-"endColumn":  59
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L265",
-"region":  {
-"startLine":  265,
-"startColumn":  9,
-"endLine":  265,
 "endColumn":  15
 }
 }
@@ -1039,39 +1039,6 @@
 "startLine":  63,
 "startColumn":  9,
 "endLine":  63,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L100",
-"region":  {
-"startLine":  100,
-"startColumn":  27,
-"endLine":  100,
-"endColumn":  56
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L109",
-"region":  {
-"startLine":  109,
-"startColumn":  9,
-"endLine":  109,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L152",
-"region":  {
-"startLine":  152,
-"startColumn":  9,
-"endLine":  152,
 "endColumn":  15
 }
 }
@@ -1178,6 +1145,39 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  27,
+"endLine":  100,
+"endColumn":  56
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  9,
+"endLine":  109,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L152",
+"region":  {
+"startLine":  152,
+"startColumn":  9,
+"endLine":  152,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/PinnedDispatcher.cs#L23",
 "region":  {
 "startLine":  23,
@@ -1192,84 +1192,6 @@
 "startLine":  32,
 "startColumn":  9,
 "endLine":  32,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L157",
-"region":  {
-"startLine":  157,
-"startColumn":  21,
-"endLine":  157,
-"endColumn":  51
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L162",
-"region":  {
-"startLine":  162,
-"startColumn":  9,
-"endLine":  162,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L168",
-"region":  {
-"startLine":  168,
-"startColumn":  9,
-"endLine":  168,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L176",
-"region":  {
-"startLine":  176,
-"startColumn":  9,
-"endLine":  176,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L181",
-"region":  {
-"startLine":  181,
-"startColumn":  9,
-"endLine":  181,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L186",
-"region":  {
-"startLine":  186,
-"startColumn":  9,
-"endLine":  186,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  9,
-"endLine":  195,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L202",
-"region":  {
-"startLine":  202,
-"startColumn":  9,
-"endLine":  202,
 "endColumn":  15
 }
 }
@@ -1363,6 +1285,84 @@
 "startLine":  633,
 "startColumn":  9,
 "endLine":  633,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L157",
+"region":  {
+"startLine":  157,
+"startColumn":  21,
+"endLine":  157,
+"endColumn":  51
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  9,
+"endLine":  162,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L168",
+"region":  {
+"startLine":  168,
+"startColumn":  9,
+"endLine":  168,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  9,
+"endLine":  176,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L181",
+"region":  {
+"startLine":  181,
+"startColumn":  9,
+"endLine":  181,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L186",
+"region":  {
+"startLine":  186,
+"startColumn":  9,
+"endLine":  186,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  9,
+"endLine":  195,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L202",
+"region":  {
+"startLine":  202,
+"startColumn":  9,
+"endLine":  202,
 "endColumn":  15
 }
 }
@@ -1549,6 +1549,126 @@
 "startLine":  26,
 "startColumn":  9,
 "endLine":  26,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  20,
+"endLine":  99,
+"endColumn":  52
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  9,
+"endLine":  118,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  20,
+"endLine":  35,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  9,
+"endLine":  40,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  9,
+"endLine":  42,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  9,
+"endLine":  46,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  9,
+"endLine":  65,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  9,
+"endLine":  70,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  9,
+"endLine":  78,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  9,
+"endLine":  83,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  9,
+"endLine":  88,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  9,
+"endLine":  93,
 "endColumn":  15
 }
 }
@@ -1763,126 +1883,6 @@
 "startColumn":  13,
 "endLine":  675,
 "endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  20,
-"endLine":  35,
-"endColumn":  47
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  9,
-"endLine":  40,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  9,
-"endLine":  42,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  9,
-"endLine":  46,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L65",
-"region":  {
-"startLine":  65,
-"startColumn":  9,
-"endLine":  65,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  9,
-"endLine":  70,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  9,
-"endLine":  78,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L83",
-"region":  {
-"startLine":  83,
-"startColumn":  9,
-"endLine":  83,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  9,
-"endLine":  88,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  9,
-"endLine":  93,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L99",
-"region":  {
-"startLine":  99,
-"startColumn":  20,
-"endLine":  99,
-"endColumn":  52
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  9,
-"endLine":  118,
-"endColumn":  15
 }
 }
 ]
@@ -2477,39 +2477,6 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L125",
-"region":  {
-"startLine":  125,
-"startColumn":  27,
-"endLine":  125,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  9,
-"endLine":  138,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L143",
-"region":  {
-"startLine":  143,
-"startColumn":  9,
-"endLine":  143,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L227",
 "region":  {
 "startLine":  227,
@@ -2548,6 +2515,39 @@
 "startLine":  235,
 "startColumn":  9,
 "endLine":  235,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  27,
+"endLine":  125,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  9,
+"endLine":  138,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  9,
+"endLine":  143,
 "endColumn":  15
 }
 }
@@ -3581,6 +3581,30 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchBuilder.cs#L250",
+"region":  {
+"startLine":  250,
+"startColumn":  20,
+"endLine":  250,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchBuilder.cs#L256",
+"region":  {
+"startLine":  256,
+"startColumn":  9,
+"endLine":  256,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchBuilder.cs#L19",
 "region":  {
 "startLine":  19,
@@ -3649,30 +3673,6 @@
 "startLine":  167,
 "startColumn":  9,
 "endLine":  167,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchBuilder.cs#L250",
-"region":  {
-"startLine":  250,
-"startColumn":  20,
-"endLine":  250,
-"endColumn":  32
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchBuilder.cs#L256",
-"region":  {
-"startLine":  256,
-"startColumn":  9,
-"endLine":  256,
 "endColumn":  15
 }
 }

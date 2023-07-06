@@ -4,6 +4,19 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  50,
+"endLine":  83,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L142",
 "region":  {
 "startLine":  142,
@@ -30,12 +43,12 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L83",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L89",
 "region":  {
-"startLine":  83,
-"startColumn":  50,
-"endLine":  83,
-"endColumn":  56
+"startLine":  89,
+"startColumn":  20,
+"endLine":  89,
+"endColumn":  26
 }
 }
 },
@@ -62,19 +75,6 @@
 "startColumn":  22,
 "endLine":  376,
 "endColumn":  27
-}
-}
-},
-{
-"id":  "S1125",
-"message":  "Remove the unnecessary Boolean literal(s).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  20,
-"endLine":  89,
-"endColumn":  26
 }
 }
 },

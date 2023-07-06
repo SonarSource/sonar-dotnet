@@ -145,19 +145,6 @@
 },
 {
 "id":  "S2375",
-"message":  "Wrap this and the following 6 statements that use 'Me.chkNoFilterEpisode' in a 'With' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1503",
-"region":  {
-"startLine":  1503,
-"startColumn":  9,
-"endLine":  1503,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S2375",
 "message":  "Wrap this and the following 11 statements that use 'Me.SettingsPanels' in a 'With' statement.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L155",
@@ -166,6 +153,19 @@
 "startColumn":  9,
 "endLine":  155,
 "endColumn":  34
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 6 statements that use 'Me.chkNoFilterEpisode' in a 'With' statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1503",
+"region":  {
+"startLine":  1503,
+"startColumn":  9,
+"endLine":  1503,
+"endColumn":  71
 }
 }
 },

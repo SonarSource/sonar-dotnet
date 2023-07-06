@@ -30,32 +30,6 @@
 "id":  "S3358",
 "message":  "Extract this nested ternary operation into an independent statement.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L120-L122",
-"region":  {
-"startLine":  120,
-"startColumn":  37,
-"endLine":  122,
-"endColumn":  126
-}
-}
-},
-{
-"id":  "S3358",
-"message":  "Extract this nested ternary operation into an independent statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L160-L162",
-"region":  {
-"startLine":  160,
-"startColumn":  37,
-"endLine":  162,
-"endColumn":  126
-}
-}
-},
-{
-"id":  "S3358",
-"message":  "Extract this nested ternary operation into an independent statement.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L69-L71",
 "region":  {
 "startLine":  69,
@@ -75,6 +49,32 @@
 "startColumn":  29,
 "endLine":  86,
 "endColumn":  116
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L120-L122",
+"region":  {
+"startLine":  120,
+"startColumn":  37,
+"endLine":  122,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L160-L162",
+"region":  {
+"startLine":  160,
+"startColumn":  37,
+"endLine":  162,
+"endColumn":  126
 }
 }
 }

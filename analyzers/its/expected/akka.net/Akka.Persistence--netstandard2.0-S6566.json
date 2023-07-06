@@ -69,19 +69,6 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L102",
-"region":  {
-"startLine":  102,
-"startColumn":  101,
-"endLine":  102,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L31",
 "region":  {
 "startLine":  31,
@@ -134,12 +121,38 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  101,
+"endLine":  102,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  124,
 "endLine":  78,
 "endColumn":  132
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  56,
+"endLine":  62,
+"endColumn":  64
 }
 }
 },
@@ -192,19 +205,6 @@
 "startColumn":  84,
 "endLine":  508,
 "endColumn":  92
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  56,
-"endLine":  62,
-"endColumn":  64
 }
 }
 }

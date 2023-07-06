@@ -67,6 +67,19 @@
 },
 {
 "id":  "S103",
+"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  1,
+"endLine":  47,
+"endColumn":  263
+}
+}
+},
+{
+"id":  "S103",
 "message":  "Split this 208 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L224",
@@ -80,14 +93,14 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
+"message":  "Split this 238 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L47",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L90",
 "region":  {
-"startLine":  47,
+"startLine":  90,
 "startColumn":  1,
-"endLine":  47,
-"endColumn":  263
+"endLine":  90,
+"endColumn":  239
 }
 }
 },
@@ -114,19 +127,6 @@
 "startColumn":  1,
 "endLine":  172,
 "endColumn":  235
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 238 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  1,
-"endLine":  90,
-"endColumn":  239
 }
 }
 },

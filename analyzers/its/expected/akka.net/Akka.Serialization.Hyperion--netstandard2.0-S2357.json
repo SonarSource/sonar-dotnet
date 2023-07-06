@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S2357",
+"message":  "Make 'Settings' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  52,
+"endLine":  33,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2357",
 "message":  "Make 'PreserveObjectReferences' private.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L234",
@@ -49,19 +62,6 @@
 "startColumn":  59,
 "endLine":  256,
 "endColumn":  79
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Settings' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  52,
-"endLine":  33,
-"endColumn":  60
 }
 }
 }

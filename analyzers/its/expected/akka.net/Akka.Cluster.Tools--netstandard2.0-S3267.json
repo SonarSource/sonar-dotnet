@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S3267",
+"message":  "Loop should be simplified by calling Select(entry => entry.Value))",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L462",
+"region":  {
+"startLine":  462,
+"startColumn":  35,
+"endLine":  462,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
@@ -23,19 +36,6 @@
 }
 }
 ]
-},
-{
-"id":  "S3267",
-"message":  "Loop should be simplified by calling Select(entry => entry.Value))",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L462",
-"region":  {
-"startLine":  462,
-"startColumn":  35,
-"endLine":  462,
-"endColumn":  44
-}
-}
 }
 ]
 }

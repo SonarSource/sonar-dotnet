@@ -15,19 +15,6 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'pointMessage'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  17,
-"endLine":  19,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S1481",
 "message":  "Remove the unused local variable 'message'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L7",
@@ -36,6 +23,19 @@
 "startColumn":  20,
 "endLine":  7,
 "endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'pointMessage'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  17,
+"endLine":  19,
+"endColumn":  29
 }
 }
 },

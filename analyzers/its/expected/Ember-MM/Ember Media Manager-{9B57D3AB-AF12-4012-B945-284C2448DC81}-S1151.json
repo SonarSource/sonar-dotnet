@@ -67,32 +67,6 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'Case' block number of statements from 13 to at most 8, for example by extracting code into a procedure.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1303",
-"region":  {
-"startLine":  1303,
-"startColumn":  25,
-"endLine":  1303,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this 'Case' block number of statements from 31 to at most 8, for example by extracting code into a procedure.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1324",
-"region":  {
-"startLine":  1324,
-"startColumn":  25,
-"endLine":  1324,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 23 to at most 8, for example by extracting code into a procedure.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L436",
@@ -114,6 +88,32 @@
 "startColumn":  13,
 "endLine":  463,
 "endColumn":  19
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 13 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1303",
+"region":  {
+"startLine":  1303,
+"startColumn":  25,
+"endLine":  1303,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 31 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1324",
+"region":  {
+"startLine":  1324,
+"startColumn":  25,
+"endLine":  1324,
+"endColumn":  53
 }
 }
 },

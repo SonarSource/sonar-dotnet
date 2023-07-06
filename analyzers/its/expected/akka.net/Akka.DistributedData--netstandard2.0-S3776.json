@@ -425,120 +425,6 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1219",
-"region":  {
-"startLine":  1219,
-"startColumn":  22,
-"endLine":  1219,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1221",
-"region":  {
-"startLine":  1221,
-"startColumn":  13,
-"endLine":  1221,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1226",
-"region":  {
-"startLine":  1226,
-"startColumn":  13,
-"endLine":  1226,
-"endColumn":  17
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1232",
-"region":  {
-"startLine":  1232,
-"startColumn":  17,
-"endLine":  1232,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1235",
-"region":  {
-"startLine":  1235,
-"startColumn":  21,
-"endLine":  1235,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1235",
-"region":  {
-"startLine":  1235,
-"startColumn":  62,
-"endLine":  1235,
-"endColumn":  64
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1243",
-"region":  {
-"startLine":  1243,
-"startColumn":  17,
-"endLine":  1243,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1246",
-"region":  {
-"startLine":  1246,
-"startColumn":  21,
-"endLine":  1246,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1246",
-"region":  {
-"startLine":  1246,
-"startColumn":  65,
-"endLine":  1246,
-"endColumn":  67
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1251",
-"region":  {
-"startLine":  1251,
-"startColumn":  17,
-"endLine":  1251,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1253",
-"region":  {
-"startLine":  1253,
-"startColumn":  21,
-"endLine":  1253,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1253",
-"region":  {
-"startLine":  1253,
-"startColumn":  54,
-"endLine":  1253,
-"endColumn":  56
-}
-}
-]
-},
-{
-"id":  "S3776",
 "message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
 "location":  [
 {
@@ -731,6 +617,243 @@
 },
 {
 "id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1219",
+"region":  {
+"startLine":  1219,
+"startColumn":  22,
+"endLine":  1219,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1221",
+"region":  {
+"startLine":  1221,
+"startColumn":  13,
+"endLine":  1221,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1226",
+"region":  {
+"startLine":  1226,
+"startColumn":  13,
+"endLine":  1226,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1232",
+"region":  {
+"startLine":  1232,
+"startColumn":  17,
+"endLine":  1232,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1235",
+"region":  {
+"startLine":  1235,
+"startColumn":  21,
+"endLine":  1235,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1235",
+"region":  {
+"startLine":  1235,
+"startColumn":  62,
+"endLine":  1235,
+"endColumn":  64
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1243",
+"region":  {
+"startLine":  1243,
+"startColumn":  17,
+"endLine":  1243,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1246",
+"region":  {
+"startLine":  1246,
+"startColumn":  21,
+"endLine":  1246,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1246",
+"region":  {
+"startLine":  1246,
+"startColumn":  65,
+"endLine":  1246,
+"endColumn":  67
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1251",
+"region":  {
+"startLine":  1251,
+"startColumn":  17,
+"endLine":  1251,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1253",
+"region":  {
+"startLine":  1253,
+"startColumn":  21,
+"endLine":  1253,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1253",
+"region":  {
+"startLine":  1253,
+"startColumn":  54,
+"endLine":  1253,
+"endColumn":  56
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L992",
+"region":  {
+"startLine":  992,
+"startColumn":  22,
+"endLine":  992,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L997",
+"region":  {
+"startLine":  997,
+"startColumn":  17,
+"endLine":  997,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1001",
+"region":  {
+"startLine":  1001,
+"startColumn":  17,
+"endLine":  1001,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1007",
+"region":  {
+"startLine":  1007,
+"startColumn":  17,
+"endLine":  1007,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1009",
+"region":  {
+"startLine":  1009,
+"startColumn":  21,
+"endLine":  1009,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1014",
+"region":  {
+"startLine":  1014,
+"startColumn":  25,
+"endLine":  1014,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1017",
+"region":  {
+"startLine":  1017,
+"startColumn":  29,
+"endLine":  1017,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1020",
+"region":  {
+"startLine":  1020,
+"startColumn":  33,
+"endLine":  1020,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1023",
+"region":  {
+"startLine":  1023,
+"startColumn":  29,
+"endLine":  1023,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1026",
+"region":  {
+"startLine":  1026,
+"startColumn":  33,
+"endLine":  1026,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1029",
+"region":  {
+"startLine":  1029,
+"startColumn":  29,
+"endLine":  1029,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1036",
+"region":  {
+"startLine":  1036,
+"startColumn":  25,
+"endLine":  1036,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1044",
+"region":  {
+"startLine":  1044,
+"startColumn":  13,
+"endLine":  1044,
+"endColumn":  18
+}
+}
+]
+},
+{
+"id":  "S3776",
 "message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
 "location":  [
 {
@@ -901,129 +1024,6 @@
 "startLine":  727,
 "startColumn":  13,
 "endLine":  727,
-"endColumn":  18
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L992",
-"region":  {
-"startLine":  992,
-"startColumn":  22,
-"endLine":  992,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L997",
-"region":  {
-"startLine":  997,
-"startColumn":  17,
-"endLine":  997,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1001",
-"region":  {
-"startLine":  1001,
-"startColumn":  17,
-"endLine":  1001,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1007",
-"region":  {
-"startLine":  1007,
-"startColumn":  17,
-"endLine":  1007,
-"endColumn":  21
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1009",
-"region":  {
-"startLine":  1009,
-"startColumn":  21,
-"endLine":  1009,
-"endColumn":  28
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1014",
-"region":  {
-"startLine":  1014,
-"startColumn":  25,
-"endLine":  1014,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1017",
-"region":  {
-"startLine":  1017,
-"startColumn":  29,
-"endLine":  1017,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1020",
-"region":  {
-"startLine":  1020,
-"startColumn":  33,
-"endLine":  1020,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1023",
-"region":  {
-"startLine":  1023,
-"startColumn":  29,
-"endLine":  1023,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1026",
-"region":  {
-"startLine":  1026,
-"startColumn":  33,
-"endLine":  1026,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1029",
-"region":  {
-"startLine":  1029,
-"startColumn":  29,
-"endLine":  1029,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1036",
-"region":  {
-"startLine":  1036,
-"startColumn":  25,
-"endLine":  1036,
-"endColumn":  29
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1044",
-"region":  {
-"startLine":  1044,
-"startColumn":  13,
-"endLine":  1044,
 "endColumn":  18
 }
 }

@@ -86,6 +86,339 @@
 },
 {
 "id":  "S1192",
+"message":  "Define a constant instead of using this literal 'backdrop' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L429",
+"region":  {
+"startLine":  429,
+"startColumn":  49,
+"endLine":  429,
+"endColumn":  59
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L506",
+"region":  {
+"startLine":  506,
+"startColumn":  48,
+"endLine":  506,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L714",
+"region":  {
+"startLine":  714,
+"startColumn":  47,
+"endLine":  714,
+"endColumn":  57
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L754",
+"region":  {
+"startLine":  754,
+"startColumn":  46,
+"endLine":  754,
+"endColumn":  56
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '_thumb.' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L465",
+"region":  {
+"startLine":  465,
+"startColumn":  41,
+"endLine":  465,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L468",
+"region":  {
+"startLine":  468,
+"startColumn":  56,
+"endLine":  468,
+"endColumn":  65
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L516",
+"region":  {
+"startLine":  516,
+"startColumn":  39,
+"endLine":  516,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L519",
+"region":  {
+"startLine":  519,
+"startColumn":  54,
+"endLine":  519,
+"endColumn":  63
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '_poster.' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L467",
+"region":  {
+"startLine":  467,
+"startColumn":  35,
+"endLine":  467,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L468",
+"region":  {
+"startLine":  468,
+"startColumn":  44,
+"endLine":  468,
+"endColumn":  54
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L518",
+"region":  {
+"startLine":  518,
+"startColumn":  33,
+"endLine":  518,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L519",
+"region":  {
+"startLine":  519,
+"startColumn":  42,
+"endLine":  519,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'http://images.themoviedb.org' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L435",
+"region":  {
+"startLine":  435,
+"startColumn":  32,
+"endLine":  435,
+"endColumn":  62
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L466",
+"region":  {
+"startLine":  466,
+"startColumn":  46,
+"endLine":  466,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L472",
+"region":  {
+"startLine":  472,
+"startColumn":  123,
+"endLine":  472,
+"endColumn":  153
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L514",
+"region":  {
+"startLine":  514,
+"startColumn":  32,
+"endLine":  514,
+"endColumn":  62
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L517",
+"region":  {
+"startLine":  517,
+"startColumn":  44,
+"endLine":  517,
+"endColumn":  74
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L523",
+"region":  {
+"startLine":  523,
+"startColumn":  121,
+"endLine":  523,
+"endColumn":  151
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'UseTMDB' 7 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  45,
+"endLine":  96,
+"endColumn":  54
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  44,
+"endLine":  141,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L282",
+"region":  {
+"startLine":  282,
+"startColumn":  45,
+"endLine":  282,
+"endColumn":  54
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L374",
+"region":  {
+"startLine":  374,
+"startColumn":  43,
+"endLine":  374,
+"endColumn":  52
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L664",
+"region":  {
+"startLine":  664,
+"startColumn":  41,
+"endLine":  664,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L819",
+"region":  {
+"startLine":  819,
+"startColumn":  41,
+"endLine":  819,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L828",
+"region":  {
+"startLine":  828,
+"startColumn":  163,
+"endLine":  828,
+"endColumn":  172
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'fanart_(' 8 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L440",
+"region":  {
+"startLine":  440,
+"startColumn":  74,
+"endLine":  440,
+"endColumn":  84
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L542",
+"region":  {
+"startLine":  542,
+"startColumn":  63,
+"endLine":  542,
+"endColumn":  73
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L554",
+"region":  {
+"startLine":  554,
+"startColumn":  63,
+"endLine":  554,
+"endColumn":  73
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L566",
+"region":  {
+"startLine":  566,
+"startColumn":  63,
+"endLine":  566,
+"endColumn":  73
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L724",
+"region":  {
+"startLine":  724,
+"startColumn":  72,
+"endLine":  724,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L770",
+"region":  {
+"startLine":  770,
+"startColumn":  60,
+"endLine":  770,
+"endColumn":  70
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L782",
+"region":  {
+"startLine":  782,
+"startColumn":  60,
+"endLine":  782,
+"endColumn":  70
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L794",
+"region":  {
+"startLine":  794,
+"startColumn":  60,
+"endLine":  794,
+"endColumn":  70
+}
+}
+]
+},
+{
+"id":  "S1192",
 "message":  "Define a constant instead of using this literal ').jpg' 9 times.",
 "location":  [
 {
@@ -254,270 +587,6 @@
 "startColumn":  94,
 "endLine":  794,
 "endColumn":  103
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'backdrop' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L429",
-"region":  {
-"startLine":  429,
-"startColumn":  49,
-"endLine":  429,
-"endColumn":  59
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L506",
-"region":  {
-"startLine":  506,
-"startColumn":  48,
-"endLine":  506,
-"endColumn":  58
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L714",
-"region":  {
-"startLine":  714,
-"startColumn":  47,
-"endLine":  714,
-"endColumn":  57
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L754",
-"region":  {
-"startLine":  754,
-"startColumn":  46,
-"endLine":  754,
-"endColumn":  56
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'http://images.themoviedb.org' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L435",
-"region":  {
-"startLine":  435,
-"startColumn":  32,
-"endLine":  435,
-"endColumn":  62
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L466",
-"region":  {
-"startLine":  466,
-"startColumn":  46,
-"endLine":  466,
-"endColumn":  76
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L472",
-"region":  {
-"startLine":  472,
-"startColumn":  123,
-"endLine":  472,
-"endColumn":  153
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L514",
-"region":  {
-"startLine":  514,
-"startColumn":  32,
-"endLine":  514,
-"endColumn":  62
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L517",
-"region":  {
-"startLine":  517,
-"startColumn":  44,
-"endLine":  517,
-"endColumn":  74
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L523",
-"region":  {
-"startLine":  523,
-"startColumn":  121,
-"endLine":  523,
-"endColumn":  151
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'fanart_(' 8 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L440",
-"region":  {
-"startLine":  440,
-"startColumn":  74,
-"endLine":  440,
-"endColumn":  84
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L542",
-"region":  {
-"startLine":  542,
-"startColumn":  63,
-"endLine":  542,
-"endColumn":  73
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L554",
-"region":  {
-"startLine":  554,
-"startColumn":  63,
-"endLine":  554,
-"endColumn":  73
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L566",
-"region":  {
-"startLine":  566,
-"startColumn":  63,
-"endLine":  566,
-"endColumn":  73
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L724",
-"region":  {
-"startLine":  724,
-"startColumn":  72,
-"endLine":  724,
-"endColumn":  82
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L770",
-"region":  {
-"startLine":  770,
-"startColumn":  60,
-"endLine":  770,
-"endColumn":  70
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L782",
-"region":  {
-"startLine":  782,
-"startColumn":  60,
-"endLine":  782,
-"endColumn":  70
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L794",
-"region":  {
-"startLine":  794,
-"startColumn":  60,
-"endLine":  794,
-"endColumn":  70
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal '_thumb.' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L465",
-"region":  {
-"startLine":  465,
-"startColumn":  41,
-"endLine":  465,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L468",
-"region":  {
-"startLine":  468,
-"startColumn":  56,
-"endLine":  468,
-"endColumn":  65
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L516",
-"region":  {
-"startLine":  516,
-"startColumn":  39,
-"endLine":  516,
-"endColumn":  48
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L519",
-"region":  {
-"startLine":  519,
-"startColumn":  54,
-"endLine":  519,
-"endColumn":  63
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal '_poster.' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L467",
-"region":  {
-"startLine":  467,
-"startColumn":  35,
-"endLine":  467,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L468",
-"region":  {
-"startLine":  468,
-"startColumn":  44,
-"endLine":  468,
-"endColumn":  54
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L518",
-"region":  {
-"startLine":  518,
-"startColumn":  33,
-"endLine":  518,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L519",
-"region":  {
-"startLine":  519,
-"startColumn":  42,
-"endLine":  519,
-"endColumn":  52
 }
 }
 ]
@@ -734,174 +803,93 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'UseTMDB' 7 times.",
+"message":  "Define a constant instead of using this literal '<h5>Tagline:</h5>' 4 times.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L96",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L347",
 "region":  {
-"startLine":  96,
+"startLine":  347,
 "startColumn":  45,
-"endLine":  96,
-"endColumn":  54
+"endLine":  347,
+"endColumn":  64
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L141",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L347",
 "region":  {
-"startLine":  141,
-"startColumn":  44,
-"endLine":  141,
-"endColumn":  53
+"startLine":  347,
+"startColumn":  84,
+"endLine":  347,
+"endColumn":  103
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L282",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L355",
 "region":  {
-"startLine":  282,
-"startColumn":  45,
-"endLine":  282,
-"endColumn":  54
+"startLine":  355,
+"startColumn":  125,
+"endLine":  355,
+"endColumn":  144
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L374",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L436",
 "region":  {
-"startLine":  374,
-"startColumn":  43,
-"endLine":  374,
-"endColumn":  52
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L664",
-"region":  {
-"startLine":  664,
-"startColumn":  41,
-"endLine":  664,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L819",
-"region":  {
-"startLine":  819,
-"startColumn":  41,
-"endLine":  819,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L828",
-"region":  {
-"startLine":  828,
-"startColumn":  163,
-"endLine":  828,
-"endColumn":  172
+"startLine":  436,
+"startColumn":  137,
+"endLine":  436,
+"endColumn":  156
 }
 }
 ]
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'http://' 11 times.",
+"message":  "Define a constant instead of using this literal '</table>' 5 times.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L159",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L815",
 "region":  {
-"startLine":  159,
-"startColumn":  71,
-"endLine":  159,
-"endColumn":  80
+"startLine":  815,
+"startColumn":  38,
+"endLine":  815,
+"endColumn":  48
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L165",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L863",
 "region":  {
-"startLine":  165,
-"startColumn":  75,
-"endLine":  165,
-"endColumn":  84
+"startLine":  863,
+"startColumn":  34,
+"endLine":  863,
+"endColumn":  44
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L566",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L877",
 "region":  {
-"startLine":  566,
-"startColumn":  78,
-"endLine":  566,
-"endColumn":  87
+"startLine":  877,
+"startColumn":  35,
+"endLine":  877,
+"endColumn":  45
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L618",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L891",
 "region":  {
-"startLine":  618,
-"startColumn":  67,
-"endLine":  618,
-"endColumn":  76
+"startLine":  891,
+"startColumn":  34,
+"endLine":  891,
+"endColumn":  44
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L807",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L910",
 "region":  {
-"startLine":  807,
-"startColumn":  71,
-"endLine":  807,
-"endColumn":  80
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L847",
-"region":  {
-"startLine":  847,
-"startColumn":  71,
-"endLine":  847,
-"endColumn":  80
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L848",
-"region":  {
-"startLine":  848,
-"startColumn":  72,
-"endLine":  848,
-"endColumn":  81
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L849",
-"region":  {
-"startLine":  849,
-"startColumn":  72,
-"endLine":  849,
-"endColumn":  81
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L942",
-"region":  {
-"startLine":  942,
-"startColumn":  67,
-"endLine":  942,
-"endColumn":  76
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L958",
-"region":  {
-"startLine":  958,
-"startColumn":  87,
-"endLine":  958,
-"endColumn":  96
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L969",
-"region":  {
-"startLine":  969,
-"startColumn":  86,
-"endLine":  969,
-"endColumn":  95
+"startLine":  910,
+"startColumn":  35,
+"endLine":  910,
+"endColumn":  45
 }
 }
 ]
@@ -1055,48 +1043,6 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal '<h5>Tagline:</h5>' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L347",
-"region":  {
-"startLine":  347,
-"startColumn":  45,
-"endLine":  347,
-"endColumn":  64
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L347",
-"region":  {
-"startLine":  347,
-"startColumn":  84,
-"endLine":  347,
-"endColumn":  103
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L355",
-"region":  {
-"startLine":  355,
-"startColumn":  125,
-"endLine":  355,
-"endColumn":  144
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L436",
-"region":  {
-"startLine":  436,
-"startColumn":  137,
-"endLine":  436,
-"endColumn":  156
-}
-}
-]
-},
-{
-"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'Error' 9 times.",
 "location":  [
 {
@@ -1184,51 +1130,105 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal '</table>' 5 times.",
+"message":  "Define a constant instead of using this literal 'http://' 11 times.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L815",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L159",
 "region":  {
-"startLine":  815,
-"startColumn":  38,
-"endLine":  815,
-"endColumn":  48
+"startLine":  159,
+"startColumn":  71,
+"endLine":  159,
+"endColumn":  80
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L863",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L165",
 "region":  {
-"startLine":  863,
-"startColumn":  34,
-"endLine":  863,
-"endColumn":  44
+"startLine":  165,
+"startColumn":  75,
+"endLine":  165,
+"endColumn":  84
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L877",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L566",
 "region":  {
-"startLine":  877,
-"startColumn":  35,
-"endLine":  877,
-"endColumn":  45
+"startLine":  566,
+"startColumn":  78,
+"endLine":  566,
+"endColumn":  87
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L891",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L618",
 "region":  {
-"startLine":  891,
-"startColumn":  34,
-"endLine":  891,
-"endColumn":  44
+"startLine":  618,
+"startColumn":  67,
+"endLine":  618,
+"endColumn":  76
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L910",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L807",
 "region":  {
-"startLine":  910,
-"startColumn":  35,
-"endLine":  910,
-"endColumn":  45
+"startLine":  807,
+"startColumn":  71,
+"endLine":  807,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L847",
+"region":  {
+"startLine":  847,
+"startColumn":  71,
+"endLine":  847,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L848",
+"region":  {
+"startLine":  848,
+"startColumn":  72,
+"endLine":  848,
+"endColumn":  81
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L849",
+"region":  {
+"startLine":  849,
+"startColumn":  72,
+"endLine":  849,
+"endColumn":  81
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L942",
+"region":  {
+"startLine":  942,
+"startColumn":  67,
+"endLine":  942,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L958",
+"region":  {
+"startLine":  958,
+"startColumn":  87,
+"endLine":  958,
+"endColumn":  96
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L969",
+"region":  {
+"startLine":  969,
+"startColumn":  86,
+"endLine":  969,
+"endColumn":  95
 }
 }
 ]
@@ -1592,6 +1592,351 @@
 },
 {
 "id":  "S1192",
+"message":  "Define a constant instead of using this literal 'cover' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L375",
+"region":  {
+"startLine":  375,
+"startColumn":  69,
+"endLine":  375,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  125,
+"endLine":  381,
+"endColumn":  132
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L739",
+"region":  {
+"startLine":  739,
+"startColumn":  54,
+"endLine":  739,
+"endColumn":  61
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1057",
+"region":  {
+"startLine":  1057,
+"startColumn":  175,
+"endLine":  1057,
+"endColumn":  182
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1199",
+"region":  {
+"startLine":  1199,
+"startColumn":  26,
+"endLine":  1199,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'original' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L418",
+"region":  {
+"startLine":  418,
+"startColumn":  46,
+"endLine":  418,
+"endColumn":  56
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L647",
+"region":  {
+"startLine":  647,
+"startColumn":  58,
+"endLine":  647,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L735",
+"region":  {
+"startLine":  735,
+"startColumn":  54,
+"endLine":  735,
+"endColumn":  64
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L921",
+"region":  {
+"startLine":  921,
+"startColumn":  49,
+"endLine":  921,
+"endColumn":  59
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1191",
+"region":  {
+"startLine":  1191,
+"startColumn":  26,
+"endLine":  1191,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'poster' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L656",
+"region":  {
+"startLine":  656,
+"startColumn":  58,
+"endLine":  656,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L743",
+"region":  {
+"startLine":  743,
+"startColumn":  54,
+"endLine":  743,
+"endColumn":  62
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L767",
+"region":  {
+"startLine":  767,
+"startColumn":  65,
+"endLine":  767,
+"endColumn":  73
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L938",
+"region":  {
+"startLine":  938,
+"startColumn":  45,
+"endLine":  938,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1181",
+"region":  {
+"startLine":  1181,
+"startColumn":  33,
+"endLine":  1181,
+"endColumn":  41
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1227",
+"region":  {
+"startLine":  1227,
+"startColumn":  26,
+"endLine":  1227,
+"endColumn":  34
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'thumb' 9 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L368",
+"region":  {
+"startLine":  368,
+"startColumn":  70,
+"endLine":  368,
+"endColumn":  77
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L422",
+"region":  {
+"startLine":  422,
+"startColumn":  46,
+"endLine":  422,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L664",
+"region":  {
+"startLine":  664,
+"startColumn":  58,
+"endLine":  664,
+"endColumn":  65
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L741",
+"region":  {
+"startLine":  741,
+"startColumn":  54,
+"endLine":  741,
+"endColumn":  61
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L892",
+"region":  {
+"startLine":  892,
+"startColumn":  74,
+"endLine":  892,
+"endColumn":  81
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L947",
+"region":  {
+"startLine":  947,
+"startColumn":  49,
+"endLine":  947,
+"endColumn":  56
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1006",
+"region":  {
+"startLine":  1006,
+"startColumn":  89,
+"endLine":  1006,
+"endColumn":  96
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1182",
+"region":  {
+"startLine":  1182,
+"startColumn":  32,
+"endLine":  1182,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1215",
+"region":  {
+"startLine":  1215,
+"startColumn":  26,
+"endLine":  1215,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal ').jpg' 10 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  123,
+"endLine":  214,
+"endColumn":  130
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  117,
+"endLine":  220,
+"endColumn":  124
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L226",
+"region":  {
+"startLine":  226,
+"startColumn":  120,
+"endLine":  226,
+"endColumn":  127
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  119,
+"endLine":  232,
+"endColumn":  126
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  187,
+"endLine":  273,
+"endColumn":  194
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L324",
+"region":  {
+"startLine":  324,
+"startColumn":  191,
+"endLine":  324,
+"endColumn":  198
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L412",
+"region":  {
+"startLine":  412,
+"startColumn":  197,
+"endLine":  412,
+"endColumn":  204
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L919",
+"region":  {
+"startLine":  919,
+"startColumn":  129,
+"endLine":  919,
+"endColumn":  136
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L929",
+"region":  {
+"startLine":  929,
+"startColumn":  126,
+"endLine":  929,
+"endColumn":  133
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L945",
+"region":  {
+"startLine":  945,
+"startColumn":  128,
+"endLine":  945,
+"endColumn":  135
+}
+}
+]
+},
+{
+"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'Error' 20 times.",
 "location":  [
 {
@@ -1778,351 +2123,6 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal ').jpg' 10 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L214",
-"region":  {
-"startLine":  214,
-"startColumn":  123,
-"endLine":  214,
-"endColumn":  130
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L220",
-"region":  {
-"startLine":  220,
-"startColumn":  117,
-"endLine":  220,
-"endColumn":  124
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L226",
-"region":  {
-"startLine":  226,
-"startColumn":  120,
-"endLine":  226,
-"endColumn":  127
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L232",
-"region":  {
-"startLine":  232,
-"startColumn":  119,
-"endLine":  232,
-"endColumn":  126
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L273",
-"region":  {
-"startLine":  273,
-"startColumn":  187,
-"endLine":  273,
-"endColumn":  194
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L324",
-"region":  {
-"startLine":  324,
-"startColumn":  191,
-"endLine":  324,
-"endColumn":  198
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L412",
-"region":  {
-"startLine":  412,
-"startColumn":  197,
-"endLine":  412,
-"endColumn":  204
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L919",
-"region":  {
-"startLine":  919,
-"startColumn":  129,
-"endLine":  919,
-"endColumn":  136
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L929",
-"region":  {
-"startLine":  929,
-"startColumn":  126,
-"endLine":  929,
-"endColumn":  133
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L945",
-"region":  {
-"startLine":  945,
-"startColumn":  128,
-"endLine":  945,
-"endColumn":  135
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'thumb' 9 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L368",
-"region":  {
-"startLine":  368,
-"startColumn":  70,
-"endLine":  368,
-"endColumn":  77
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L422",
-"region":  {
-"startLine":  422,
-"startColumn":  46,
-"endLine":  422,
-"endColumn":  53
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L664",
-"region":  {
-"startLine":  664,
-"startColumn":  58,
-"endLine":  664,
-"endColumn":  65
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L741",
-"region":  {
-"startLine":  741,
-"startColumn":  54,
-"endLine":  741,
-"endColumn":  61
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L892",
-"region":  {
-"startLine":  892,
-"startColumn":  74,
-"endLine":  892,
-"endColumn":  81
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L947",
-"region":  {
-"startLine":  947,
-"startColumn":  49,
-"endLine":  947,
-"endColumn":  56
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1006",
-"region":  {
-"startLine":  1006,
-"startColumn":  89,
-"endLine":  1006,
-"endColumn":  96
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1182",
-"region":  {
-"startLine":  1182,
-"startColumn":  32,
-"endLine":  1182,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1215",
-"region":  {
-"startLine":  1215,
-"startColumn":  26,
-"endLine":  1215,
-"endColumn":  33
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'cover' 5 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L375",
-"region":  {
-"startLine":  375,
-"startColumn":  69,
-"endLine":  375,
-"endColumn":  76
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L381",
-"region":  {
-"startLine":  381,
-"startColumn":  125,
-"endLine":  381,
-"endColumn":  132
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L739",
-"region":  {
-"startLine":  739,
-"startColumn":  54,
-"endLine":  739,
-"endColumn":  61
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1057",
-"region":  {
-"startLine":  1057,
-"startColumn":  175,
-"endLine":  1057,
-"endColumn":  182
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1199",
-"region":  {
-"startLine":  1199,
-"startColumn":  26,
-"endLine":  1199,
-"endColumn":  33
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'original' 5 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L418",
-"region":  {
-"startLine":  418,
-"startColumn":  46,
-"endLine":  418,
-"endColumn":  56
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L647",
-"region":  {
-"startLine":  647,
-"startColumn":  58,
-"endLine":  647,
-"endColumn":  68
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L735",
-"region":  {
-"startLine":  735,
-"startColumn":  54,
-"endLine":  735,
-"endColumn":  64
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L921",
-"region":  {
-"startLine":  921,
-"startColumn":  49,
-"endLine":  921,
-"endColumn":  59
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1191",
-"region":  {
-"startLine":  1191,
-"startColumn":  26,
-"endLine":  1191,
-"endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'poster' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L656",
-"region":  {
-"startLine":  656,
-"startColumn":  58,
-"endLine":  656,
-"endColumn":  66
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L743",
-"region":  {
-"startLine":  743,
-"startColumn":  54,
-"endLine":  743,
-"endColumn":  62
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L767",
-"region":  {
-"startLine":  767,
-"startColumn":  65,
-"endLine":  767,
-"endColumn":  73
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L938",
-"region":  {
-"startLine":  938,
-"startColumn":  45,
-"endLine":  938,
-"endColumn":  53
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1181",
-"region":  {
-"startLine":  1181,
-"startColumn":  33,
-"endLine":  1181,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1227",
-"region":  {
-"startLine":  1227,
-"startColumn":  26,
-"endLine":  1227,
-"endColumn":  34
-}
-}
-]
-},
-{
-"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'banner' 4 times.",
 "location":  [
 {
@@ -2159,6 +2159,732 @@
 "startColumn":  93,
 "endLine":  1036,
 "endColumn":  101
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'ThumbnailPath' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1200",
+"region":  {
+"startLine":  1200,
+"startColumn":  106,
+"endLine":  1200,
+"endColumn":  121
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1200",
+"region":  {
+"startLine":  1200,
+"startColumn":  167,
+"endLine":  1200,
+"endColumn":  182
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1200",
+"region":  {
+"startLine":  1200,
+"startColumn":  290,
+"endLine":  1200,
+"endColumn":  305
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1203",
+"region":  {
+"startLine":  1203,
+"startColumn":  246,
+"endLine":  1203,
+"endColumn":  261
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal ' AND Missing = 0;' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  126,
+"endLine":  193,
+"endColumn":  145
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  156,
+"endLine":  195,
+"endColumn":  175
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L201",
+"region":  {
+"startLine":  201,
+"startColumn":  129,
+"endLine":  201,
+"endColumn":  148
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L203",
+"region":  {
+"startLine":  203,
+"startColumn":  159,
+"endLine":  203,
+"endColumn":  178
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Director' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L378",
+"region":  {
+"startLine":  378,
+"startColumn":  82,
+"endLine":  378,
+"endColumn":  92
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L378",
+"region":  {
+"startLine":  378,
+"startColumn":  139,
+"endLine":  378,
+"endColumn":  149
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1170",
+"region":  {
+"startLine":  1170,
+"startColumn":  111,
+"endLine":  1170,
+"endColumn":  121
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1170",
+"region":  {
+"startLine":  1170,
+"startColumn":  160,
+"endLine":  1170,
+"endColumn":  170
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'GuestStars' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
+"region":  {
+"startLine":  379,
+"startColumn":  95,
+"endLine":  379,
+"endColumn":  107
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
+"region":  {
+"startLine":  379,
+"startColumn":  141,
+"endLine":  379,
+"endColumn":  153
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1171",
+"region":  {
+"startLine":  1171,
+"startColumn":  123,
+"endLine":  1171,
+"endColumn":  135
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1171",
+"region":  {
+"startLine":  1171,
+"startColumn":  164,
+"endLine":  1171,
+"endColumn":  176
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'seriesid' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L979",
+"region":  {
+"startLine":  979,
+"startColumn":  82,
+"endLine":  979,
+"endColumn":  92
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L981",
+"region":  {
+"startLine":  981,
+"startColumn":  61,
+"endLine":  981,
+"endColumn":  71
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1009",
+"region":  {
+"startLine":  1009,
+"startColumn":  160,
+"endLine":  1009,
+"endColumn":  170
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1022",
+"region":  {
+"startLine":  1022,
+"startColumn":  65,
+"endLine":  1022,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Writer' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
+"region":  {
+"startLine":  379,
+"startColumn":  192,
+"endLine":  379,
+"endColumn":  200
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
+"region":  {
+"startLine":  379,
+"startColumn":  234,
+"endLine":  379,
+"endColumn":  242
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L794",
+"region":  {
+"startLine":  794,
+"startColumn":  65,
+"endLine":  794,
+"endColumn":  73
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1171",
+"region":  {
+"startLine":  1171,
+"startColumn":  210,
+"endLine":  1171,
+"endColumn":  218
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1171",
+"region":  {
+"startLine":  1171,
+"startColumn":  247,
+"endLine":  1171,
+"endColumn":  255
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Image' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  247,
+"endLine":  320,
+"endColumn":  254
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  299,
+"endLine":  320,
+"endColumn":  306
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  413,
+"endLine":  320,
+"endColumn":  420
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1072",
+"region":  {
+"startLine":  1072,
+"startColumn":  191,
+"endLine":  1072,
+"endColumn":  198
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1072",
+"region":  {
+"startLine":  1072,
+"startColumn":  243,
+"endLine":  1072,
+"endColumn":  250
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1072",
+"region":  {
+"startLine":  1072,
+"startColumn":  357,
+"endLine":  1072,
+"endColumn":  364
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'EpisodeName' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L332",
+"region":  {
+"startLine":  332,
+"startColumn":  66,
+"endLine":  332,
+"endColumn":  79
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L332",
+"region":  {
+"startLine":  332,
+"startColumn":  137,
+"endLine":  332,
+"endColumn":  150
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L364",
+"region":  {
+"startLine":  364,
+"startColumn":  66,
+"endLine":  364,
+"endColumn":  79
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1147",
+"region":  {
+"startLine":  1147,
+"startColumn":  140,
+"endLine":  1147,
+"endColumn":  153
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1153",
+"region":  {
+"startLine":  1153,
+"startColumn":  190,
+"endLine":  1153,
+"endColumn":  203
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1153",
+"region":  {
+"startLine":  1153,
+"startColumn":  237,
+"endLine":  1153,
+"endColumn":  250
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Rating' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L376",
+"region":  {
+"startLine":  376,
+"startColumn":  80,
+"endLine":  376,
+"endColumn":  88
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L376",
+"region":  {
+"startLine":  376,
+"startColumn":  122,
+"endLine":  376,
+"endColumn":  130
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1098",
+"region":  {
+"startLine":  1098,
+"startColumn":  191,
+"endLine":  1098,
+"endColumn":  199
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1098",
+"region":  {
+"startLine":  1098,
+"startColumn":  226,
+"endLine":  1098,
+"endColumn":  234
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1167",
+"region":  {
+"startLine":  1167,
+"startColumn":  188,
+"endLine":  1167,
+"endColumn":  196
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1167",
+"region":  {
+"startLine":  1167,
+"startColumn":  220,
+"endLine":  1167,
+"endColumn":  228
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'language' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L981",
+"region":  {
+"startLine":  981,
+"startColumn":  114,
+"endLine":  981,
+"endColumn":  124
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1009",
+"region":  {
+"startLine":  1009,
+"startColumn":  227,
+"endLine":  1009,
+"endColumn":  237
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1024",
+"region":  {
+"startLine":  1024,
+"startColumn":  53,
+"endLine":  1024,
+"endColumn":  63
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1025",
+"region":  {
+"startLine":  1025,
+"startColumn":  48,
+"endLine":  1025,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1027",
+"region":  {
+"startLine":  1027,
+"startColumn":  57,
+"endLine":  1027,
+"endColumn":  67
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1028",
+"region":  {
+"startLine":  1028,
+"startColumn":  48,
+"endLine":  1028,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'SeriesName' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L995",
+"region":  {
+"startLine":  995,
+"startColumn":  82,
+"endLine":  995,
+"endColumn":  94
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L995",
+"region":  {
+"startLine":  995,
+"startColumn":  111,
+"endLine":  995,
+"endColumn":  123
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1023",
+"region":  {
+"startLine":  1023,
+"startColumn":  68,
+"endLine":  1023,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1023",
+"region":  {
+"startLine":  1023,
+"startColumn":  95,
+"endLine":  1023,
+"endColumn":  107
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1092",
+"region":  {
+"startLine":  1092,
+"startColumn":  187,
+"endLine":  1092,
+"endColumn":  199
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1092",
+"region":  {
+"startLine":  1092,
+"startColumn":  225,
+"endLine":  1092,
+"endColumn":  237
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'EpisodeNumber' 8 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L373",
+"region":  {
+"startLine":  373,
+"startColumn":  85,
+"endLine":  373,
+"endColumn":  100
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L373",
+"region":  {
+"startLine":  373,
+"startColumn":  147,
+"endLine":  373,
+"endColumn":  162
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L373",
+"region":  {
+"startLine":  373,
+"startColumn":  207,
+"endLine":  373,
+"endColumn":  222
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1140",
+"region":  {
+"startLine":  1140,
+"startColumn":  259,
+"endLine":  1140,
+"endColumn":  274
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1143",
+"region":  {
+"startLine":  1143,
+"startColumn":  125,
+"endLine":  1143,
+"endColumn":  140
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1163",
+"region":  {
+"startLine":  1163,
+"startColumn":  117,
+"endLine":  1163,
+"endColumn":  132
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1163",
+"region":  {
+"startLine":  1163,
+"startColumn":  174,
+"endLine":  1163,
+"endColumn":  189
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1163",
+"region":  {
+"startLine":  1163,
+"startColumn":  229,
+"endLine":  1163,
+"endColumn":  244
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'http://{0}/banners/{1}' 9 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  344,
+"endLine":  320,
+"endColumn":  368
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  125,
+"endLine":  381,
+"endColumn":  149
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1072",
+"region":  {
+"startLine":  1072,
+"startColumn":  288,
+"endLine":  1072,
+"endColumn":  312
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1173",
+"region":  {
+"startLine":  1173,
+"startColumn":  178,
+"endLine":  1173,
+"endColumn":  202
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1199",
+"region":  {
+"startLine":  1199,
+"startColumn":  83,
+"endLine":  1199,
+"endColumn":  107
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1200",
+"region":  {
+"startLine":  1200,
+"startColumn":  220,
+"endLine":  1200,
+"endColumn":  244
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1207",
+"region":  {
+"startLine":  1207,
+"startColumn":  84,
+"endLine":  1207,
+"endColumn":  108
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1213",
+"region":  {
+"startLine":  1213,
+"startColumn":  86,
+"endLine":  1213,
+"endColumn":  110
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1220",
+"region":  {
+"startLine":  1220,
+"startColumn":  84,
+"endLine":  1220,
+"endColumn":  108
 }
 }
 ]
@@ -2261,42 +2987,489 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'ThumbnailPath' 4 times.",
+"message":  "Define a constant instead of using this literal 'Shows' 10 times.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1200",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L242",
 "region":  {
-"startLine":  1200,
-"startColumn":  106,
-"endLine":  1200,
-"endColumn":  121
+"startLine":  242,
+"startColumn":  83,
+"endLine":  242,
+"endColumn":  90
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1200",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L304",
 "region":  {
-"startLine":  1200,
-"startColumn":  167,
-"endLine":  1200,
-"endColumn":  182
+"startLine":  304,
+"startColumn":  79,
+"endLine":  304,
+"endColumn":  86
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1200",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L382",
 "region":  {
-"startLine":  1200,
-"startColumn":  290,
-"endLine":  1200,
-"endColumn":  305
+"startLine":  382,
+"startColumn":  155,
+"endLine":  382,
+"endColumn":  162
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L950",
+"region":  {
+"startLine":  950,
+"startColumn":  73,
+"endLine":  950,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1174",
+"region":  {
+"startLine":  1174,
+"startColumn":  208,
+"endLine":  1174,
+"endColumn":  215
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1202",
+"region":  {
+"startLine":  1202,
+"startColumn":  119,
+"endLine":  1202,
+"endColumn":  126
 }
 },
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1203",
 "region":  {
 "startLine":  1203,
-"startColumn":  246,
+"startColumn":  120,
 "endLine":  1203,
-"endColumn":  261
+"endColumn":  127
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1209",
+"region":  {
+"startLine":  1209,
+"startColumn":  120,
+"endLine":  1209,
+"endColumn":  127
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1216",
+"region":  {
+"startLine":  1216,
+"startColumn":  122,
+"endLine":  1216,
+"endColumn":  129
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1222",
+"region":  {
+"startLine":  1222,
+"startColumn":  120,
+"endLine":  1222,
+"endColumn":  127
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'FirstAired' 10 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L375",
+"region":  {
+"startLine":  375,
+"startColumn":  79,
+"endLine":  375,
+"endColumn":  91
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L375",
+"region":  {
+"startLine":  375,
+"startColumn":  125,
+"endLine":  375,
+"endColumn":  137
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1006",
+"region":  {
+"startLine":  1006,
+"startColumn":  83,
+"endLine":  1006,
+"endColumn":  95
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1006",
+"region":  {
+"startLine":  1006,
+"startColumn":  112,
+"endLine":  1006,
+"endColumn":  124
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1034",
+"region":  {
+"startLine":  1034,
+"startColumn":  69,
+"endLine":  1034,
+"endColumn":  81
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1034",
+"region":  {
+"startLine":  1034,
+"startColumn":  96,
+"endLine":  1034,
+"endColumn":  108
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1097",
+"region":  {
+"startLine":  1097,
+"startColumn":  114,
+"endLine":  1097,
+"endColumn":  126
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1097",
+"region":  {
+"startLine":  1097,
+"startColumn":  156,
+"endLine":  1097,
+"endColumn":  168
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1166",
+"region":  {
+"startLine":  1166,
+"startColumn":  105,
+"endLine":  1166,
+"endColumn":  117
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1166",
+"region":  {
+"startLine":  1166,
+"startColumn":  140,
+"endLine":  1166,
+"endColumn":  152
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Overview' 10 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L377",
+"region":  {
+"startLine":  377,
+"startColumn":  78,
+"endLine":  377,
+"endColumn":  88
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L377",
+"region":  {
+"startLine":  377,
+"startColumn":  122,
+"endLine":  377,
+"endColumn":  132
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1007",
+"region":  {
+"startLine":  1007,
+"startColumn":  86,
+"endLine":  1007,
+"endColumn":  96
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1007",
+"region":  {
+"startLine":  1007,
+"startColumn":  113,
+"endLine":  1007,
+"endColumn":  123
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1035",
+"region":  {
+"startLine":  1035,
+"startColumn":  72,
+"endLine":  1035,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1035",
+"region":  {
+"startLine":  1035,
+"startColumn":  97,
+"endLine":  1035,
+"endColumn":  107
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1096",
+"region":  {
+"startLine":  1096,
+"startColumn":  183,
+"endLine":  1096,
+"endColumn":  193
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1096",
+"region":  {
+"startLine":  1096,
+"startColumn":  218,
+"endLine":  1096,
+"endColumn":  228
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1168",
+"region":  {
+"startLine":  1168,
+"startColumn":  180,
+"endLine":  1168,
+"endColumn":  190
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1168",
+"region":  {
+"startLine":  1168,
+"startColumn":  212,
+"endLine":  1168,
+"endColumn":  222
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'filename' 10 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  83,
+"endLine":  381,
+"endColumn":  93
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  196,
+"endLine":  381,
+"endColumn":  206
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L382",
+"region":  {
+"startLine":  382,
+"startColumn":  83,
+"endLine":  382,
+"endColumn":  93
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L382",
+"region":  {
+"startLine":  382,
+"startColumn":  299,
+"endLine":  382,
+"endColumn":  309
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1173",
+"region":  {
+"startLine":  1173,
+"startColumn":  78,
+"endLine":  1173,
+"endColumn":  88
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1173",
+"region":  {
+"startLine":  1173,
+"startColumn":  130,
+"endLine":  1173,
+"endColumn":  140
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1173",
+"region":  {
+"startLine":  1173,
+"startColumn":  244,
+"endLine":  1173,
+"endColumn":  254
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1174",
+"region":  {
+"startLine":  1174,
+"startColumn":  78,
+"endLine":  1174,
+"endColumn":  88
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1174",
+"region":  {
+"startLine":  1174,
+"startColumn":  130,
+"endLine":  1174,
+"endColumn":  140
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1174",
+"region":  {
+"startLine":  1174,
+"startColumn":  338,
+"endLine":  1174,
+"endColumn":  348
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Episode' 11 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L331",
+"region":  {
+"startLine":  331,
+"startColumn":  79,
+"endLine":  331,
+"endColumn":  88
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L343",
+"region":  {
+"startLine":  343,
+"startColumn":  66,
+"endLine":  343,
+"endColumn":  75
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L349",
+"region":  {
+"startLine":  349,
+"startColumn":  66,
+"endLine":  349,
+"endColumn":  75
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L355",
+"region":  {
+"startLine":  355,
+"startColumn":  66,
+"endLine":  355,
+"endColumn":  75
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1125",
+"region":  {
+"startLine":  1125,
+"startColumn":  59,
+"endLine":  1125,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1129",
+"region":  {
+"startLine":  1129,
+"startColumn":  59,
+"endLine":  1129,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1135",
+"region":  {
+"startLine":  1135,
+"startColumn":  61,
+"endLine":  1135,
+"endColumn":  70
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1138",
+"region":  {
+"startLine":  1138,
+"startColumn":  65,
+"endLine":  1138,
+"endColumn":  74
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1140",
+"region":  {
+"startLine":  1140,
+"startColumn":  65,
+"endLine":  1140,
+"endColumn":  74
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1143",
+"region":  {
+"startLine":  1143,
+"startColumn":  61,
+"endLine":  1143,
+"endColumn":  70
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1147",
+"region":  {
+"startLine":  1147,
+"startColumn":  61,
+"endLine":  1147,
+"endColumn":  70
 }
 }
 ]
@@ -2417,635 +3590,140 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Error' 20 times.",
+"message":  "Define a constant instead of using this literal 'absolute_number' 15 times.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L154",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L354",
 "region":  {
-"startLine":  154,
-"startColumn":  72,
-"endLine":  154,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L215",
-"region":  {
-"startLine":  215,
-"startColumn":  72,
-"endLine":  215,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L234",
-"region":  {
-"startLine":  234,
-"startColumn":  72,
-"endLine":  234,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L283",
-"region":  {
-"startLine":  283,
-"startColumn":  72,
-"endLine":  283,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L296",
-"region":  {
-"startLine":  296,
-"startColumn":  72,
-"endLine":  296,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L325",
-"region":  {
-"startLine":  325,
-"startColumn":  84,
-"endLine":  325,
+"startLine":  354,
+"startColumn":  74,
+"endLine":  354,
 "endColumn":  91
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L393",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L354",
 "region":  {
-"startLine":  393,
-"startColumn":  72,
-"endLine":  393,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L407",
-"region":  {
-"startLine":  407,
-"startColumn":  72,
-"endLine":  407,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L421",
-"region":  {
-"startLine":  421,
-"startColumn":  72,
-"endLine":  421,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L560",
-"region":  {
-"startLine":  560,
-"startColumn":  72,
-"endLine":  560,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L642",
-"region":  {
-"startLine":  642,
-"startColumn":  72,
-"endLine":  642,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L734",
-"region":  {
-"startLine":  734,
-"startColumn":  72,
-"endLine":  734,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L760",
-"region":  {
-"startLine":  760,
-"startColumn":  72,
-"endLine":  760,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L787",
-"region":  {
-"startLine":  787,
-"startColumn":  72,
-"endLine":  787,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L901",
-"region":  {
-"startLine":  901,
-"startColumn":  84,
-"endLine":  901,
-"endColumn":  91
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L930",
-"region":  {
-"startLine":  930,
-"startColumn":  76,
-"endLine":  930,
-"endColumn":  83
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1045",
-"region":  {
-"startLine":  1045,
-"startColumn":  72,
-"endLine":  1045,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1078",
-"region":  {
-"startLine":  1078,
-"startColumn":  76,
-"endLine":  1078,
-"endColumn":  83
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1182",
-"region":  {
-"startLine":  1182,
-"startColumn":  76,
-"endLine":  1182,
-"endColumn":  83
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1230",
-"region":  {
-"startLine":  1230,
-"startColumn":  72,
-"endLine":  1230,
-"endColumn":  79
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal ' AND Missing = 0;' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L193",
-"region":  {
-"startLine":  193,
-"startColumn":  126,
-"endLine":  193,
-"endColumn":  145
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  156,
-"endLine":  195,
-"endColumn":  175
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L201",
-"region":  {
-"startLine":  201,
-"startColumn":  129,
-"endLine":  201,
-"endColumn":  148
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L203",
-"region":  {
-"startLine":  203,
-"startColumn":  159,
-"endLine":  203,
-"endColumn":  178
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Shows' 10 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L242",
-"region":  {
-"startLine":  242,
-"startColumn":  83,
-"endLine":  242,
-"endColumn":  90
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L304",
-"region":  {
-"startLine":  304,
-"startColumn":  79,
-"endLine":  304,
-"endColumn":  86
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L382",
-"region":  {
-"startLine":  382,
-"startColumn":  155,
-"endLine":  382,
-"endColumn":  162
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L950",
-"region":  {
-"startLine":  950,
-"startColumn":  73,
-"endLine":  950,
-"endColumn":  80
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1174",
-"region":  {
-"startLine":  1174,
-"startColumn":  208,
-"endLine":  1174,
-"endColumn":  215
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1202",
-"region":  {
-"startLine":  1202,
-"startColumn":  119,
-"endLine":  1202,
-"endColumn":  126
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1203",
-"region":  {
-"startLine":  1203,
-"startColumn":  120,
-"endLine":  1203,
-"endColumn":  127
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1209",
-"region":  {
-"startLine":  1209,
-"startColumn":  120,
-"endLine":  1209,
-"endColumn":  127
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1216",
-"region":  {
-"startLine":  1216,
-"startColumn":  122,
-"endLine":  1216,
-"endColumn":  129
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1222",
-"region":  {
-"startLine":  1222,
-"startColumn":  120,
-"endLine":  1222,
-"endColumn":  127
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Image' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L320",
-"region":  {
-"startLine":  320,
-"startColumn":  247,
-"endLine":  320,
-"endColumn":  254
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L320",
-"region":  {
-"startLine":  320,
-"startColumn":  299,
-"endLine":  320,
-"endColumn":  306
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L320",
-"region":  {
-"startLine":  320,
-"startColumn":  413,
-"endLine":  320,
-"endColumn":  420
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1072",
-"region":  {
-"startLine":  1072,
-"startColumn":  191,
-"endLine":  1072,
-"endColumn":  198
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1072",
-"region":  {
-"startLine":  1072,
-"startColumn":  243,
-"endLine":  1072,
-"endColumn":  250
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1072",
-"region":  {
-"startLine":  1072,
-"startColumn":  357,
-"endLine":  1072,
-"endColumn":  364
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'http://{0}/banners/{1}' 9 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L320",
-"region":  {
-"startLine":  320,
-"startColumn":  344,
-"endLine":  320,
-"endColumn":  368
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L381",
-"region":  {
-"startLine":  381,
-"startColumn":  125,
-"endLine":  381,
-"endColumn":  149
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1072",
-"region":  {
-"startLine":  1072,
-"startColumn":  288,
-"endLine":  1072,
-"endColumn":  312
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1173",
-"region":  {
-"startLine":  1173,
-"startColumn":  178,
-"endLine":  1173,
-"endColumn":  202
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1199",
-"region":  {
-"startLine":  1199,
-"startColumn":  83,
-"endLine":  1199,
-"endColumn":  107
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1200",
-"region":  {
-"startLine":  1200,
-"startColumn":  220,
-"endLine":  1200,
-"endColumn":  244
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1207",
-"region":  {
-"startLine":  1207,
-"startColumn":  84,
-"endLine":  1207,
-"endColumn":  108
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1213",
-"region":  {
-"startLine":  1213,
-"startColumn":  86,
-"endLine":  1213,
-"endColumn":  110
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1220",
-"region":  {
-"startLine":  1220,
-"startColumn":  84,
-"endLine":  1220,
-"endColumn":  108
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Episode' 11 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L331",
-"region":  {
-"startLine":  331,
-"startColumn":  79,
-"endLine":  331,
-"endColumn":  88
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L343",
-"region":  {
-"startLine":  343,
-"startColumn":  66,
-"endLine":  343,
-"endColumn":  75
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L349",
-"region":  {
-"startLine":  349,
-"startColumn":  66,
-"endLine":  349,
-"endColumn":  75
+"startLine":  354,
+"startColumn":  143,
+"endLine":  354,
+"endColumn":  160
 }
 },
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L355",
 "region":  {
 "startLine":  355,
-"startColumn":  66,
+"startColumn":  177,
 "endLine":  355,
-"endColumn":  75
+"endColumn":  194
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1125",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L355",
 "region":  {
-"startLine":  1125,
-"startColumn":  59,
-"endLine":  1125,
-"endColumn":  68
+"startLine":  355,
+"startColumn":  235,
+"endLine":  355,
+"endColumn":  252
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L370",
+"region":  {
+"startLine":  370,
+"startColumn":  88,
+"endLine":  370,
+"endColumn":  105
 }
 },
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1129",
 "region":  {
 "startLine":  1129,
-"startColumn":  59,
+"startColumn":  170,
 "endLine":  1129,
-"endColumn":  68
+"endColumn":  187
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1135",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1129",
 "region":  {
-"startLine":  1135,
-"startColumn":  61,
-"endLine":  1135,
-"endColumn":  70
+"startLine":  1129,
+"startColumn":  228,
+"endLine":  1129,
+"endColumn":  245
 }
 },
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1138",
 "region":  {
 "startLine":  1138,
-"startColumn":  65,
+"startColumn":  127,
 "endLine":  1138,
-"endColumn":  74
+"endColumn":  144
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1138",
+"region":  {
+"startLine":  1138,
+"startColumn":  190,
+"endLine":  1138,
+"endColumn":  207
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1138",
+"region":  {
+"startLine":  1138,
+"startColumn":  259,
+"endLine":  1138,
+"endColumn":  276
 }
 },
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1140",
 "region":  {
 "startLine":  1140,
-"startColumn":  65,
+"startColumn":  127,
 "endLine":  1140,
-"endColumn":  74
+"endColumn":  144
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1143",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1140",
 "region":  {
-"startLine":  1143,
-"startColumn":  61,
-"endLine":  1143,
-"endColumn":  70
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1147",
-"region":  {
-"startLine":  1147,
-"startColumn":  61,
-"endLine":  1147,
-"endColumn":  70
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'EpisodeName' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L332",
-"region":  {
-"startLine":  332,
-"startColumn":  66,
-"endLine":  332,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L332",
-"region":  {
-"startLine":  332,
-"startColumn":  137,
-"endLine":  332,
-"endColumn":  150
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L364",
-"region":  {
-"startLine":  364,
-"startColumn":  66,
-"endLine":  364,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1147",
-"region":  {
-"startLine":  1147,
-"startColumn":  140,
-"endLine":  1147,
-"endColumn":  153
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1153",
-"region":  {
-"startLine":  1153,
+"startLine":  1140,
 "startColumn":  190,
-"endLine":  1153,
-"endColumn":  203
+"endLine":  1140,
+"endColumn":  207
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1153",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1160",
 "region":  {
-"startLine":  1153,
-"startColumn":  237,
-"endLine":  1153,
+"startLine":  1160,
+"startColumn":  117,
+"endLine":  1160,
+"endColumn":  134
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1160",
+"region":  {
+"startLine":  1160,
+"startColumn":  176,
+"endLine":  1160,
+"endColumn":  193
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1160",
+"region":  {
+"startLine":  1160,
+"startColumn":  233,
+"endLine":  1160,
 "endColumn":  250
 }
 }
@@ -3530,702 +4208,186 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'absolute_number' 15 times.",
+"message":  "Define a constant instead of using this literal 'Error' 20 times.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L354",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L154",
 "region":  {
-"startLine":  354,
-"startColumn":  74,
-"endLine":  354,
-"endColumn":  91
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L354",
-"region":  {
-"startLine":  354,
-"startColumn":  143,
-"endLine":  354,
-"endColumn":  160
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L355",
-"region":  {
-"startLine":  355,
-"startColumn":  177,
-"endLine":  355,
-"endColumn":  194
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L355",
-"region":  {
-"startLine":  355,
-"startColumn":  235,
-"endLine":  355,
-"endColumn":  252
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L370",
-"region":  {
-"startLine":  370,
-"startColumn":  88,
-"endLine":  370,
-"endColumn":  105
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1129",
-"region":  {
-"startLine":  1129,
-"startColumn":  170,
-"endLine":  1129,
-"endColumn":  187
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1129",
-"region":  {
-"startLine":  1129,
-"startColumn":  228,
-"endLine":  1129,
-"endColumn":  245
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1138",
-"region":  {
-"startLine":  1138,
-"startColumn":  127,
-"endLine":  1138,
-"endColumn":  144
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1138",
-"region":  {
-"startLine":  1138,
-"startColumn":  190,
-"endLine":  1138,
-"endColumn":  207
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1138",
-"region":  {
-"startLine":  1138,
-"startColumn":  259,
-"endLine":  1138,
-"endColumn":  276
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1140",
-"region":  {
-"startLine":  1140,
-"startColumn":  127,
-"endLine":  1140,
-"endColumn":  144
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1140",
-"region":  {
-"startLine":  1140,
-"startColumn":  190,
-"endLine":  1140,
-"endColumn":  207
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1160",
-"region":  {
-"startLine":  1160,
-"startColumn":  117,
-"endLine":  1160,
-"endColumn":  134
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1160",
-"region":  {
-"startLine":  1160,
-"startColumn":  176,
-"endLine":  1160,
-"endColumn":  193
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1160",
-"region":  {
-"startLine":  1160,
-"startColumn":  233,
-"endLine":  1160,
-"endColumn":  250
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'EpisodeNumber' 8 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L373",
-"region":  {
-"startLine":  373,
-"startColumn":  85,
-"endLine":  373,
-"endColumn":  100
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L373",
-"region":  {
-"startLine":  373,
-"startColumn":  147,
-"endLine":  373,
-"endColumn":  162
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L373",
-"region":  {
-"startLine":  373,
-"startColumn":  207,
-"endLine":  373,
-"endColumn":  222
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1140",
-"region":  {
-"startLine":  1140,
-"startColumn":  259,
-"endLine":  1140,
-"endColumn":  274
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1143",
-"region":  {
-"startLine":  1143,
-"startColumn":  125,
-"endLine":  1143,
-"endColumn":  140
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1163",
-"region":  {
-"startLine":  1163,
-"startColumn":  117,
-"endLine":  1163,
-"endColumn":  132
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1163",
-"region":  {
-"startLine":  1163,
-"startColumn":  174,
-"endLine":  1163,
-"endColumn":  189
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1163",
-"region":  {
-"startLine":  1163,
-"startColumn":  229,
-"endLine":  1163,
-"endColumn":  244
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'FirstAired' 10 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L375",
-"region":  {
-"startLine":  375,
-"startColumn":  79,
-"endLine":  375,
-"endColumn":  91
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L375",
-"region":  {
-"startLine":  375,
-"startColumn":  125,
-"endLine":  375,
-"endColumn":  137
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1006",
-"region":  {
-"startLine":  1006,
-"startColumn":  83,
-"endLine":  1006,
-"endColumn":  95
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1006",
-"region":  {
-"startLine":  1006,
-"startColumn":  112,
-"endLine":  1006,
-"endColumn":  124
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1034",
-"region":  {
-"startLine":  1034,
-"startColumn":  69,
-"endLine":  1034,
-"endColumn":  81
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1034",
-"region":  {
-"startLine":  1034,
-"startColumn":  96,
-"endLine":  1034,
-"endColumn":  108
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1097",
-"region":  {
-"startLine":  1097,
-"startColumn":  114,
-"endLine":  1097,
-"endColumn":  126
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1097",
-"region":  {
-"startLine":  1097,
-"startColumn":  156,
-"endLine":  1097,
-"endColumn":  168
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1166",
-"region":  {
-"startLine":  1166,
-"startColumn":  105,
-"endLine":  1166,
-"endColumn":  117
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1166",
-"region":  {
-"startLine":  1166,
-"startColumn":  140,
-"endLine":  1166,
-"endColumn":  152
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Rating' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L376",
-"region":  {
-"startLine":  376,
-"startColumn":  80,
-"endLine":  376,
-"endColumn":  88
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L376",
-"region":  {
-"startLine":  376,
-"startColumn":  122,
-"endLine":  376,
-"endColumn":  130
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1098",
-"region":  {
-"startLine":  1098,
-"startColumn":  191,
-"endLine":  1098,
-"endColumn":  199
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1098",
-"region":  {
-"startLine":  1098,
-"startColumn":  226,
-"endLine":  1098,
-"endColumn":  234
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1167",
-"region":  {
-"startLine":  1167,
-"startColumn":  188,
-"endLine":  1167,
-"endColumn":  196
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1167",
-"region":  {
-"startLine":  1167,
-"startColumn":  220,
-"endLine":  1167,
-"endColumn":  228
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Overview' 10 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L377",
-"region":  {
-"startLine":  377,
-"startColumn":  78,
-"endLine":  377,
-"endColumn":  88
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L377",
-"region":  {
-"startLine":  377,
-"startColumn":  122,
-"endLine":  377,
-"endColumn":  132
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1007",
-"region":  {
-"startLine":  1007,
-"startColumn":  86,
-"endLine":  1007,
-"endColumn":  96
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1007",
-"region":  {
-"startLine":  1007,
-"startColumn":  113,
-"endLine":  1007,
-"endColumn":  123
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1035",
-"region":  {
-"startLine":  1035,
+"startLine":  154,
 "startColumn":  72,
-"endLine":  1035,
-"endColumn":  82
+"endLine":  154,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1035",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L215",
 "region":  {
-"startLine":  1035,
-"startColumn":  97,
-"endLine":  1035,
-"endColumn":  107
+"startLine":  215,
+"startColumn":  72,
+"endLine":  215,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1096",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L234",
 "region":  {
-"startLine":  1096,
-"startColumn":  183,
-"endLine":  1096,
-"endColumn":  193
+"startLine":  234,
+"startColumn":  72,
+"endLine":  234,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1096",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L283",
 "region":  {
-"startLine":  1096,
-"startColumn":  218,
-"endLine":  1096,
-"endColumn":  228
+"startLine":  283,
+"startColumn":  72,
+"endLine":  283,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1168",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L296",
 "region":  {
-"startLine":  1168,
-"startColumn":  180,
-"endLine":  1168,
-"endColumn":  190
+"startLine":  296,
+"startColumn":  72,
+"endLine":  296,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1168",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L325",
 "region":  {
-"startLine":  1168,
-"startColumn":  212,
-"endLine":  1168,
-"endColumn":  222
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Director' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L378",
-"region":  {
-"startLine":  378,
-"startColumn":  82,
-"endLine":  378,
-"endColumn":  92
+"startLine":  325,
+"startColumn":  84,
+"endLine":  325,
+"endColumn":  91
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L378",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L393",
 "region":  {
-"startLine":  378,
-"startColumn":  139,
-"endLine":  378,
-"endColumn":  149
+"startLine":  393,
+"startColumn":  72,
+"endLine":  393,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1170",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L407",
 "region":  {
-"startLine":  1170,
-"startColumn":  111,
-"endLine":  1170,
-"endColumn":  121
+"startLine":  407,
+"startColumn":  72,
+"endLine":  407,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1170",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L421",
 "region":  {
-"startLine":  1170,
-"startColumn":  160,
-"endLine":  1170,
-"endColumn":  170
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'GuestStars' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
-"region":  {
-"startLine":  379,
-"startColumn":  95,
-"endLine":  379,
-"endColumn":  107
+"startLine":  421,
+"startColumn":  72,
+"endLine":  421,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L560",
 "region":  {
-"startLine":  379,
-"startColumn":  141,
-"endLine":  379,
-"endColumn":  153
+"startLine":  560,
+"startColumn":  72,
+"endLine":  560,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1171",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L642",
 "region":  {
-"startLine":  1171,
-"startColumn":  123,
-"endLine":  1171,
-"endColumn":  135
+"startLine":  642,
+"startColumn":  72,
+"endLine":  642,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1171",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L734",
 "region":  {
-"startLine":  1171,
-"startColumn":  164,
-"endLine":  1171,
-"endColumn":  176
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Writer' 5 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
-"region":  {
-"startLine":  379,
-"startColumn":  192,
-"endLine":  379,
-"endColumn":  200
+"startLine":  734,
+"startColumn":  72,
+"endLine":  734,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L760",
 "region":  {
-"startLine":  379,
-"startColumn":  234,
-"endLine":  379,
-"endColumn":  242
+"startLine":  760,
+"startColumn":  72,
+"endLine":  760,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L794",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L787",
 "region":  {
-"startLine":  794,
-"startColumn":  65,
-"endLine":  794,
-"endColumn":  73
+"startLine":  787,
+"startColumn":  72,
+"endLine":  787,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1171",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L901",
 "region":  {
-"startLine":  1171,
-"startColumn":  210,
-"endLine":  1171,
-"endColumn":  218
+"startLine":  901,
+"startColumn":  84,
+"endLine":  901,
+"endColumn":  91
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1171",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L930",
 "region":  {
-"startLine":  1171,
-"startColumn":  247,
-"endLine":  1171,
-"endColumn":  255
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'filename' 10 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L381",
-"region":  {
-"startLine":  381,
-"startColumn":  83,
-"endLine":  381,
-"endColumn":  93
+"startLine":  930,
+"startColumn":  76,
+"endLine":  930,
+"endColumn":  83
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L381",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1045",
 "region":  {
-"startLine":  381,
-"startColumn":  196,
-"endLine":  381,
-"endColumn":  206
+"startLine":  1045,
+"startColumn":  72,
+"endLine":  1045,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L382",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1078",
 "region":  {
-"startLine":  382,
-"startColumn":  83,
-"endLine":  382,
-"endColumn":  93
+"startLine":  1078,
+"startColumn":  76,
+"endLine":  1078,
+"endColumn":  83
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L382",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1182",
 "region":  {
-"startLine":  382,
-"startColumn":  299,
-"endLine":  382,
-"endColumn":  309
+"startLine":  1182,
+"startColumn":  76,
+"endLine":  1182,
+"endColumn":  83
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1173",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1230",
 "region":  {
-"startLine":  1173,
-"startColumn":  78,
-"endLine":  1173,
-"endColumn":  88
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1173",
-"region":  {
-"startLine":  1173,
-"startColumn":  130,
-"endLine":  1173,
-"endColumn":  140
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1173",
-"region":  {
-"startLine":  1173,
-"startColumn":  244,
-"endLine":  1173,
-"endColumn":  254
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1174",
-"region":  {
-"startLine":  1174,
-"startColumn":  78,
-"endLine":  1174,
-"endColumn":  88
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1174",
-"region":  {
-"startLine":  1174,
-"startColumn":  130,
-"endLine":  1174,
-"endColumn":  140
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1174",
-"region":  {
-"startLine":  1174,
-"startColumn":  338,
-"endLine":  1174,
-"endColumn":  348
+"startLine":  1230,
+"startColumn":  72,
+"endLine":  1230,
+"endColumn":  79
 }
 }
 ]
@@ -4427,168 +4589,6 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'seriesid' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L979",
-"region":  {
-"startLine":  979,
-"startColumn":  82,
-"endLine":  979,
-"endColumn":  92
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L981",
-"region":  {
-"startLine":  981,
-"startColumn":  61,
-"endLine":  981,
-"endColumn":  71
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1009",
-"region":  {
-"startLine":  1009,
-"startColumn":  160,
-"endLine":  1009,
-"endColumn":  170
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1022",
-"region":  {
-"startLine":  1022,
-"startColumn":  65,
-"endLine":  1022,
-"endColumn":  75
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'language' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L981",
-"region":  {
-"startLine":  981,
-"startColumn":  114,
-"endLine":  981,
-"endColumn":  124
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1009",
-"region":  {
-"startLine":  1009,
-"startColumn":  227,
-"endLine":  1009,
-"endColumn":  237
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1024",
-"region":  {
-"startLine":  1024,
-"startColumn":  53,
-"endLine":  1024,
-"endColumn":  63
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1025",
-"region":  {
-"startLine":  1025,
-"startColumn":  48,
-"endLine":  1025,
-"endColumn":  58
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1027",
-"region":  {
-"startLine":  1027,
-"startColumn":  57,
-"endLine":  1027,
-"endColumn":  67
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1028",
-"region":  {
-"startLine":  1028,
-"startColumn":  48,
-"endLine":  1028,
-"endColumn":  58
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'SeriesName' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L995",
-"region":  {
-"startLine":  995,
-"startColumn":  82,
-"endLine":  995,
-"endColumn":  94
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L995",
-"region":  {
-"startLine":  995,
-"startColumn":  111,
-"endLine":  995,
-"endColumn":  123
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1023",
-"region":  {
-"startLine":  1023,
-"startColumn":  68,
-"endLine":  1023,
-"endColumn":  80
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1023",
-"region":  {
-"startLine":  1023,
-"startColumn":  95,
-"endLine":  1023,
-"endColumn":  107
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1092",
-"region":  {
-"startLine":  1092,
-"startColumn":  187,
-"endLine":  1092,
-"endColumn":  199
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1092",
-"region":  {
-"startLine":  1092,
-"startColumn":  225,
-"endLine":  1092,
-"endColumn":  237
-}
-}
-]
-},
-{
-"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'Language' 5 times.",
 "location":  [
 {
@@ -4634,6 +4634,48 @@
 "startColumn":  74,
 "endLine":  307,
 "endColumn":  84
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Downloading Fullsize Fanart Image...' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L378",
+"region":  {
+"startLine":  378,
+"startColumn":  60,
+"endLine":  378,
+"endColumn":  98
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L398",
+"region":  {
+"startLine":  398,
+"startColumn":  60,
+"endLine":  398,
+"endColumn":  98
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L414",
+"region":  {
+"startLine":  414,
+"startColumn":  60,
+"endLine":  414,
+"endColumn":  98
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L871",
+"region":  {
+"startLine":  871,
+"startColumn":  64,
+"endLine":  871,
+"endColumn":  102
 }
 }
 ]
@@ -5030,48 +5072,6 @@
 "startColumn":  68,
 "endLine":  1188,
 "endColumn":  75
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Downloading Fullsize Fanart Image...' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L378",
-"region":  {
-"startLine":  378,
-"startColumn":  60,
-"endLine":  378,
-"endColumn":  98
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L398",
-"region":  {
-"startLine":  398,
-"startColumn":  60,
-"endLine":  398,
-"endColumn":  98
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L414",
-"region":  {
-"startLine":  414,
-"startColumn":  60,
-"endLine":  414,
-"endColumn":  98
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L871",
-"region":  {
-"startLine":  871,
-"startColumn":  64,
-"endLine":  871,
-"endColumn":  102
 }
 }
 ]

@@ -17,11 +17,11 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L128",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L88",
 "region":  {
-"startLine":  128,
+"startLine":  88,
 "startColumn":  13,
-"endLine":  128,
+"endLine":  88,
 "endColumn":  15
 }
 }
@@ -30,11 +30,11 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L88",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L128",
 "region":  {
-"startLine":  88,
+"startLine":  128,
 "startColumn":  13,
-"endLine":  88,
+"endLine":  128,
 "endColumn":  15
 }
 }

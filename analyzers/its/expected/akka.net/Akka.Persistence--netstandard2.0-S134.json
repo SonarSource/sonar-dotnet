@@ -4,6 +4,19 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  33,
+"endLine":  99,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L197",
 "region":  {
 "startLine":  197,
@@ -22,19 +35,6 @@
 "startLine":  242,
 "startColumn":  33,
 "endLine":  242,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L99",
-"region":  {
-"startLine":  99,
-"startColumn":  33,
-"endLine":  99,
 "endColumn":  36
 }
 }

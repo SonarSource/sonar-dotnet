@@ -56,12 +56,12 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L177",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L32",
 "region":  {
-"startLine":  177,
-"startColumn":  60,
-"endLine":  177,
-"endColumn":  71
+"startLine":  32,
+"startColumn":  69,
+"endLine":  32,
+"endColumn":  80
 }
 }
 },
@@ -69,12 +69,12 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L32",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L177",
 "region":  {
-"startLine":  32,
-"startColumn":  69,
-"endLine":  32,
-"endColumn":  80
+"startLine":  177,
+"startColumn":  60,
+"endLine":  177,
+"endColumn":  71
 }
 }
 },
@@ -316,12 +316,12 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L219",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L60",
 "region":  {
-"startLine":  219,
-"startColumn":  40,
-"endLine":  219,
-"endColumn":  53
+"startLine":  60,
+"startColumn":  25,
+"endLine":  60,
+"endColumn":  31
 }
 }
 },
@@ -329,12 +329,12 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L60",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L219",
 "region":  {
-"startLine":  60,
-"startColumn":  25,
-"endLine":  60,
-"endColumn":  31
+"startLine":  219,
+"startColumn":  40,
+"endLine":  219,
+"endColumn":  53
 }
 }
 },

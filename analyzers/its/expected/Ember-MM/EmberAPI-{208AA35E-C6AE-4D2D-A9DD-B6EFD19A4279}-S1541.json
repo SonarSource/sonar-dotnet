@@ -15,6 +15,19 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 25 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L981",
+"region":  {
+"startLine":  981,
+"startColumn":  5,
+"endLine":  981,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1010",
@@ -28,14 +41,53 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 25 which is greater than 10 authorized.",
+"message":  "The Cyclomatic Complexity of this procedure is 26 which is greater than 10 authorized.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L981",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L58",
 "region":  {
-"startLine":  981,
+"startLine":  58,
 "startColumn":  5,
-"endLine":  981,
-"endColumn":  163
+"endLine":  58,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 67 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L574",
+"region":  {
+"startLine":  574,
+"startColumn":  5,
+"endLine":  574,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 38 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L792",
+"region":  {
+"startLine":  792,
+"startColumn":  5,
+"endLine":  792,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 19 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L976",
+"region":  {
+"startLine":  976,
+"startColumn":  5,
+"endLine":  976,
+"endColumn":  78
 }
 }
 },
@@ -75,58 +127,6 @@
 "startColumn":  5,
 "endLine":  1704,
 "endColumn":  176
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 67 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L574",
-"region":  {
-"startLine":  574,
-"startColumn":  5,
-"endLine":  574,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 26 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  5,
-"endLine":  58,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 38 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L792",
-"region":  {
-"startLine":  792,
-"startColumn":  5,
-"endLine":  792,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 19 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L976",
-"region":  {
-"startLine":  976,
-"startColumn":  5,
-"endLine":  976,
-"endColumn":  78
 }
 }
 },
@@ -197,40 +197,14 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 54 which is greater than 10 authorized.",
+"message":  "The Cyclomatic Complexity of this function is 14 which is greater than 10 authorized.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1061",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L95",
 "region":  {
-"startLine":  1061,
+"startLine":  95,
 "startColumn":  5,
-"endLine":  1061,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 24 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1182",
-"region":  {
-"startLine":  1182,
-"startColumn":  5,
-"endLine":  1182,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 32 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1238",
-"region":  {
-"startLine":  1238,
-"startColumn":  5,
-"endLine":  1238,
-"endColumn":  79
+"endLine":  95,
+"endColumn":  86
 }
 }
 },
@@ -327,19 +301,6 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 14 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L95",
-"region":  {
-"startLine":  95,
-"startColumn":  5,
-"endLine":  95,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 40 which is greater than 10 authorized.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L969",
@@ -353,6 +314,45 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 54 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1061",
+"region":  {
+"startLine":  1061,
+"startColumn":  5,
+"endLine":  1061,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 24 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1182",
+"region":  {
+"startLine":  1182,
+"startColumn":  5,
+"endLine":  1182,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 32 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1238",
+"region":  {
+"startLine":  1238,
+"startColumn":  5,
+"endLine":  1238,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L193",
@@ -361,6 +361,19 @@
 "startColumn":  5,
 "endLine":  193,
 "endColumn":  136
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  5,
+"endLine":  76,
+"endColumn":  75
 }
 }
 },
@@ -418,19 +431,6 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  5,
-"endLine":  76,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 13 which is greater than 10 authorized.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L130",
@@ -470,6 +470,19 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 23 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  5,
+"endLine":  31,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 15 which is greater than 10 authorized.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L216",
@@ -491,19 +504,6 @@
 "startColumn":  5,
 "endLine":  277,
 "endColumn":  98
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 23 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  5,
-"endLine":  31,
-"endColumn":  105
 }
 }
 },
@@ -587,27 +587,14 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 22 which is greater than 10 authorized.",
+"message":  "The Cyclomatic Complexity of this function is 33 which is greater than 10 authorized.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1070",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L49",
 "region":  {
-"startLine":  1070,
+"startLine":  49,
 "startColumn":  5,
-"endLine":  1070,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 32 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1210",
-"region":  {
-"startLine":  1210,
-"startColumn":  5,
-"endLine":  1210,
-"endColumn":  63
+"endLine":  49,
+"endColumn":  127
 }
 }
 },
@@ -647,19 +634,6 @@
 "startColumn":  5,
 "endLine":  378,
 "endColumn":  88
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 33 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  5,
-"endLine":  49,
-"endColumn":  127
 }
 }
 },
@@ -730,6 +704,32 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 22 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1070",
+"region":  {
+"startLine":  1070,
+"startColumn":  5,
+"endLine":  1070,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 32 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1210",
+"region":  {
+"startLine":  1210,
+"startColumn":  5,
+"endLine":  1210,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 27 which is greater than 10 authorized.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3585",
@@ -769,6 +769,19 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  5,
+"endLine":  45,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 27 which is greater than 10 authorized.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L110",
@@ -803,19 +816,6 @@
 "startColumn":  5,
 "endLine":  309,
 "endColumn":  78
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  5,
-"endLine":  45,
-"endColumn":  34
 }
 }
 }

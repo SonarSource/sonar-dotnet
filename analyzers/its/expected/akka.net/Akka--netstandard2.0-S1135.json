@@ -134,12 +134,12 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cell.cs#L132",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cell.cs#L93",
 "region":  {
-"startLine":  132,
-"startColumn":  12,
-"endLine":  132,
-"endColumn":  16
+"startLine":  93,
+"startColumn":  60,
+"endLine":  93,
+"endColumn":  64
 }
 }
 },
@@ -147,12 +147,12 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cell.cs#L93",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cell.cs#L132",
 "region":  {
-"startLine":  93,
-"startColumn":  60,
-"endLine":  93,
-"endColumn":  64
+"startLine":  132,
+"startColumn":  12,
+"endLine":  132,
+"endColumn":  16
 }
 }
 },
@@ -615,11 +615,11 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L243",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L57",
 "region":  {
-"startLine":  243,
+"startLine":  57,
 "startColumn":  12,
-"endLine":  243,
+"endLine":  57,
 "endColumn":  16
 }
 }
@@ -628,11 +628,11 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L57",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L243",
 "region":  {
-"startLine":  57,
+"startLine":  243,
 "startColumn":  12,
-"endLine":  57,
+"endLine":  243,
 "endColumn":  16
 }
 }

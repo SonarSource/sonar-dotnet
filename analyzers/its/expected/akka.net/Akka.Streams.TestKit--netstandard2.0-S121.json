@@ -30,11 +30,11 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestPublisher.cs#L195",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestPublisher.cs#L87",
 "region":  {
-"startLine":  195,
+"startLine":  87,
 "startColumn":  17,
-"endLine":  195,
+"endLine":  87,
 "endColumn":  19
 }
 }
@@ -43,11 +43,11 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestPublisher.cs#L87",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestPublisher.cs#L195",
 "region":  {
-"startLine":  87,
+"startLine":  195,
 "startColumn":  17,
-"endLine":  87,
+"endLine":  195,
 "endColumn":  19
 }
 }

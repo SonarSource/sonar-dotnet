@@ -197,19 +197,6 @@
 },
 {
 "id":  "S4035",
-"message":  "Seal class 'ActorSelectionRoutee' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Router.cs#L139",
-"region":  {
-"startLine":  139,
-"startColumn":  18,
-"endLine":  139,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4035",
 "message":  "Seal class 'ActorRefRoutee' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Router.cs#L83",
@@ -223,14 +210,14 @@
 },
 {
 "id":  "S4035",
-"message":  "Seal class 'Group' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ActorSelectionRoutee' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L139",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Router.cs#L139",
 "region":  {
 "startLine":  139,
-"startColumn":  27,
+"startColumn":  18,
 "endLine":  139,
-"endColumn":  32
+"endColumn":  38
 }
 }
 },
@@ -244,6 +231,19 @@
 "startColumn":  27,
 "endLine":  22,
 "endColumn":  39
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'Group' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L139",
+"region":  {
+"startLine":  139,
+"startColumn":  27,
+"endLine":  139,
+"endColumn":  32
 }
 }
 },

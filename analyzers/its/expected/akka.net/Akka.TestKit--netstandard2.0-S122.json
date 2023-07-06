@@ -433,19 +433,6 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L115",
-"region":  {
-"startLine":  115,
-"startColumn":  13,
-"endLine":  115,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L37",
 "region":  {
 "startLine":  37,
@@ -464,6 +451,19 @@
 "startLine":  76,
 "startColumn":  13,
 "endLine":  76,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  13,
+"endLine":  115,
 "endColumn":  93
 }
 }

@@ -17,11 +17,11 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L129",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L58",
 "region":  {
-"startLine":  129,
+"startLine":  58,
 "startColumn":  7,
-"endLine":  129,
+"endLine":  58,
 "endColumn":  11
 }
 }
@@ -30,11 +30,11 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L58",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L129",
 "region":  {
-"startLine":  58,
+"startLine":  129,
 "startColumn":  7,
-"endLine":  58,
+"endLine":  129,
 "endColumn":  11
 }
 }
@@ -134,6 +134,19 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  15,
+"endLine":  62,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L177",
 "region":  {
 "startLine":  177,
@@ -153,19 +166,6 @@
 "startColumn":  72,
 "endLine":  550,
 "endColumn":  76
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  15,
-"endLine":  62,
-"endColumn":  19
 }
 }
 },

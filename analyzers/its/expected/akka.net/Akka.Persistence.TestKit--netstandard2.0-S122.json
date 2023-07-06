@@ -4,6 +4,32 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  13,
+"endLine":  32,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L118",
 "region":  {
 "startLine":  118,
@@ -160,19 +186,6 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  13,
-"endLine":  32,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L347",
 "region":  {
 "startLine":  347,
@@ -225,12 +238,12 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L56",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L80",
 "region":  {
-"startLine":  56,
+"startLine":  80,
 "startColumn":  13,
-"endLine":  56,
-"endColumn":  119
+"endLine":  80,
+"endColumn":  91
 }
 }
 },
@@ -433,12 +446,38 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L80",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L35",
 "region":  {
-"startLine":  80,
+"startLine":  35,
 "startColumn":  13,
-"endLine":  80,
+"endLine":  35,
 "endColumn":  91
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  13,
+"endLine":  59,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  13,
+"endLine":  96,
+"endColumn":  87
 }
 }
 },
@@ -594,45 +633,6 @@
 "startLine":  293,
 "startColumn":  13,
 "endLine":  293,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  13,
-"endLine":  35,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  13,
-"endLine":  59,
-"endColumn":  119
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L96",
-"region":  {
-"startLine":  96,
-"startColumn":  13,
-"endLine":  96,
 "endColumn":  87
 }
 }

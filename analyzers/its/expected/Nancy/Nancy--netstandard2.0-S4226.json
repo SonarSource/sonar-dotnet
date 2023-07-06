@@ -30,6 +30,71 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  32,
+"endLine":  22,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  32,
+"endLine":  51,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  32,
+"endLine":  64,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  32,
+"endLine":  79,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  32,
+"endLine":  90,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L103",
 "region":  {
 "startLine":  103,
@@ -101,71 +166,6 @@
 "startColumn":  32,
 "endLine":  176,
 "endColumn":  46
-}
-}
-},
-{
-"id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the class itself.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  32,
-"endLine":  22,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the class itself.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  32,
-"endLine":  51,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the class itself.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  32,
-"endLine":  64,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the class itself.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  32,
-"endLine":  79,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the class itself.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  32,
-"endLine":  90,
-"endColumn":  42
 }
 }
 },

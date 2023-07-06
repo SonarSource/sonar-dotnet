@@ -4,19 +4,6 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1030",
-"region":  {
-"startLine":  1030,
-"startColumn":  77,
-"endLine":  1030,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S1125",
-"message":  "Remove the unnecessary Boolean literal(s).",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L893",
 "region":  {
 "startLine":  893,
@@ -43,12 +30,12 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L112",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1030",
 "region":  {
-"startLine":  112,
-"startColumn":  64,
-"endLine":  112,
-"endColumn":  69
+"startLine":  1030,
+"startColumn":  77,
+"endLine":  1030,
+"endColumn":  82
 }
 }
 },
@@ -56,12 +43,12 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L641",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L112",
 "region":  {
-"startLine":  641,
-"startColumn":  119,
-"endLine":  641,
-"endColumn":  124
+"startLine":  112,
+"startColumn":  64,
+"endLine":  112,
+"endColumn":  69
 }
 }
 },
@@ -88,6 +75,19 @@
 "startColumn":  142,
 "endLine":  78,
 "endColumn":  148
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L641",
+"region":  {
+"startLine":  641,
+"startColumn":  119,
+"endLine":  641,
+"endColumn":  124
 }
 }
 },

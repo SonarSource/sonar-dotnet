@@ -67,6 +67,32 @@
 },
 {
 "id":  "S3257",
+"message":  "'destMember' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  113,
+"endLine":  93,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'ctxt' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  125,
+"endLine":  93,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S3257",
 "message":  "'ctxt' is not used. Use discard parameter instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L103",
@@ -270,32 +296,6 @@
 "startColumn":  27,
 "endLine":  218,
 "endColumn":  31
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "'destMember' is not used. Use discard parameter instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  113,
-"endLine":  93,
-"endColumn":  123
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "'ctxt' is not used. Use discard parameter instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  125,
-"endLine":  93,
-"endColumn":  129
 }
 }
 }

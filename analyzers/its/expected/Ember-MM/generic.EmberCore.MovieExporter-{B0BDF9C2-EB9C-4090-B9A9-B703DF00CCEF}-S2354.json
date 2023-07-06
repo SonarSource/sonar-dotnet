@@ -4,6 +4,19 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  54,
+"endLine":  90,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L118",
 "region":  {
 "startLine":  118,
@@ -49,19 +62,6 @@
 "startColumn":  158,
 "endLine":  227,
 "endColumn":  159
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  54,
-"endLine":  90,
-"endColumn":  55
 }
 }
 }

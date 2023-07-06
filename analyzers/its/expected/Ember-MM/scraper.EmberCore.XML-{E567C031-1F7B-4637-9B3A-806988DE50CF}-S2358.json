@@ -4,6 +4,19 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  16,
+"endLine":  91,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L110",
 "region":  {
 "startLine":  110,
@@ -49,19 +62,6 @@
 "startColumn":  20,
 "endLine":  126,
 "endColumn":  43
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  16,
-"endLine":  91,
-"endColumn":  47
 }
 }
 },

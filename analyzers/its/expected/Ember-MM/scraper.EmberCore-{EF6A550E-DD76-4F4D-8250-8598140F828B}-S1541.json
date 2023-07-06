@@ -119,19 +119,6 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 18 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L127",
-"region":  {
-"startLine":  127,
-"startColumn":  9,
-"endLine":  127,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 16 which is greater than 10 authorized.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L68",
@@ -140,6 +127,19 @@
 "startColumn":  9,
 "endLine":  68,
 "endColumn":  119
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 18 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  9,
+"endLine":  127,
+"endColumn":  70
 }
 }
 },
@@ -179,32 +179,6 @@
 "startColumn":  5,
 "endLine":  296,
 "endColumn":  76
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1042",
-"region":  {
-"startLine":  1042,
-"startColumn":  5,
-"endLine":  1042,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 22 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1169",
-"region":  {
-"startLine":  1169,
-"startColumn":  5,
-"endLine":  1169,
-"endColumn":  53
 }
 }
 },
@@ -275,6 +249,32 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1042",
+"region":  {
+"startLine":  1042,
+"startColumn":  5,
+"endLine":  1042,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 22 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1169",
+"region":  {
+"startLine":  1169,
+"startColumn":  5,
+"endLine":  1169,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L65",
@@ -309,19 +309,6 @@
 "startColumn":  5,
 "endLine":  540,
 "endColumn":  220
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 149 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1051",
-"region":  {
-"startLine":  1051,
-"startColumn":  9,
-"endLine":  1051,
-"endColumn":  99
 }
 }
 },
@@ -418,14 +405,14 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 24 which is greater than 10 authorized.",
+"message":  "The Cyclomatic Complexity of this procedure is 149 which is greater than 10 authorized.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L313",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1051",
 "region":  {
-"startLine":  313,
-"startColumn":  5,
-"endLine":  313,
-"endColumn":  127
+"startLine":  1051,
+"startColumn":  9,
+"endLine":  1051,
+"endColumn":  99
 }
 }
 },
@@ -444,14 +431,27 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 50 which is greater than 10 authorized.",
+"message":  "The Cyclomatic Complexity of this procedure is 24 which is greater than 10 authorized.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1077",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L313",
 "region":  {
-"startLine":  1077,
+"startLine":  313,
 "startColumn":  5,
-"endLine":  1077,
-"endColumn":  144
+"endLine":  313,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 100 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  5,
+"endLine":  60,
+"endColumn":  45
 }
 }
 },
@@ -478,19 +478,6 @@
 "startColumn":  5,
 "endLine":  436,
 "endColumn":  134
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 100 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  5,
-"endLine":  60,
-"endColumn":  45
 }
 }
 },
@@ -530,6 +517,19 @@
 "startColumn":  5,
 "endLine":  937,
 "endColumn":  76
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 50 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1077",
+"region":  {
+"startLine":  1077,
+"startColumn":  5,
+"endLine":  1077,
+"endColumn":  144
 }
 }
 }

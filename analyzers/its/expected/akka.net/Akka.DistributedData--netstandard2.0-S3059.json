@@ -110,38 +110,68 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L102",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L351",
 "region":  {
-"startLine":  102,
+"startLine":  351,
 "startColumn":  27,
-"endLine":  102,
-"endColumn":  32
+"endLine":  351,
+"endColumn":  40
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L107",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L356",
 "region":  {
-"startLine":  107,
+"startLine":  356,
 "startColumn":  9,
-"endLine":  107,
+"endLine":  356,
 "endColumn":  15
 }
+}
+]
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L111",
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L42",
 "region":  {
-"startLine":  111,
-"startColumn":  9,
-"endLine":  111,
-"endColumn":  15
+"startLine":  42,
+"startColumn":  27,
+"endLine":  42,
+"endColumn":  47
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L123",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L47",
 "region":  {
-"startLine":  123,
+"startLine":  47,
 "startColumn":  9,
-"endLine":  123,
+"endLine":  47,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L636",
+"region":  {
+"startLine":  636,
+"startColumn":  27,
+"endLine":  636,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L638",
+"region":  {
+"startLine":  638,
+"startColumn":  9,
+"endLine":  638,
 "endColumn":  15
 }
 }
@@ -218,6 +248,48 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  27,
+"endLine":  102,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  9,
+"endLine":  107,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  9,
+"endLine":  111,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  9,
+"endLine":  123,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L300",
 "region":  {
 "startLine":  300,
@@ -260,68 +332,47 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L351",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L751",
 "region":  {
-"startLine":  351,
+"startLine":  751,
 "startColumn":  27,
-"endLine":  351,
-"endColumn":  40
+"endLine":  751,
+"endColumn":  33
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L356",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L756",
 "region":  {
-"startLine":  356,
+"startLine":  756,
 "startColumn":  9,
-"endLine":  356,
+"endLine":  756,
 "endColumn":  15
 }
-}
-]
 },
 {
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L42",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L760",
 "region":  {
-"startLine":  42,
-"startColumn":  27,
-"endLine":  42,
-"endColumn":  47
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L47",
-"region":  {
-"startLine":  47,
+"startLine":  760,
 "startColumn":  9,
-"endLine":  47,
+"endLine":  760,
 "endColumn":  15
 }
-}
-]
 },
 {
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L636",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L768",
 "region":  {
-"startLine":  636,
-"startColumn":  27,
-"endLine":  636,
-"endColumn":  38
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L638",
-"region":  {
-"startLine":  638,
+"startLine":  768,
 "startColumn":  9,
-"endLine":  638,
+"endLine":  768,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L777",
+"region":  {
+"startLine":  777,
+"startColumn":  9,
+"endLine":  777,
 "endColumn":  15
 }
 }
@@ -392,47 +443,38 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L751",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L77",
 "region":  {
-"startLine":  751,
+"startLine":  77,
 "startColumn":  27,
-"endLine":  751,
-"endColumn":  33
+"endLine":  77,
+"endColumn":  43
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L756",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L79",
 "region":  {
-"startLine":  756,
+"startLine":  79,
 "startColumn":  9,
-"endLine":  756,
+"endLine":  79,
 "endColumn":  15
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L760",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L84",
 "region":  {
-"startLine":  760,
+"startLine":  84,
 "startColumn":  9,
-"endLine":  760,
+"endLine":  84,
 "endColumn":  15
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L768",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L86",
 "region":  {
-"startLine":  768,
+"startLine":  86,
 "startColumn":  9,
-"endLine":  768,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L777",
-"region":  {
-"startLine":  777,
-"startColumn":  9,
-"endLine":  777,
+"endLine":  86,
 "endColumn":  15
 }
 }
@@ -484,48 +526,6 @@
 "startLine":  23,
 "startColumn":  9,
 "endLine":  23,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  27,
-"endLine":  77,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  9,
-"endLine":  79,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  9,
-"endLine":  84,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  9,
-"endLine":  86,
 "endColumn":  15
 }
 }

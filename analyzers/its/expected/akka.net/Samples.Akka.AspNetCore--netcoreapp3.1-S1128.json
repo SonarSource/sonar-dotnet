@@ -4,6 +4,19 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Actors/AkkaService.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Actors/AkkaService.cs#L11",
 "region":  {
 "startLine":  11,
@@ -17,7 +30,20 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Actors/AkkaService.cs#L9",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Messages/HashReply.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Messages/HashReply.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
@@ -56,25 +82,12 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Messages/HashReply.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  1,
-"endLine":  8,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Messages/HashReply.cs#L9",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Program.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
 "endLine":  9,
-"endColumn":  34
+"endColumn":  42
 }
 }
 },
@@ -147,12 +160,12 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Program.cs#L9",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Services/IHashService.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
 "endLine":  9,
-"endColumn":  42
+"endColumn":  34
 }
 }
 },
@@ -166,19 +179,6 @@
 "startColumn":  1,
 "endLine":  10,
 "endColumn":  19
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Services/IHashService.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  1,
-"endLine":  9,
-"endColumn":  34
 }
 }
 },

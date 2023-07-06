@@ -4,6 +4,19 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L942",
+"region":  {
+"startLine":  942,
+"startColumn":  43,
+"endLine":  942,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1042",
 "region":  {
 "startLine":  1042,
@@ -101,19 +114,6 @@
 "startColumn":  49,
 "endLine":  1247,
 "endColumn":  68
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L942",
-"region":  {
-"startLine":  942,
-"startColumn":  43,
-"endLine":  942,
-"endColumn":  55
 }
 }
 },

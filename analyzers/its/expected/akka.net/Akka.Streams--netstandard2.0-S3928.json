@@ -4,32 +4,6 @@
 "id":  "S3928",
 "message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2023",
-"region":  {
-"startLine":  2023,
-"startColumn":  31,
-"endLine":  2023,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L3757",
-"region":  {
-"startLine":  3757,
-"startColumn":  35,
-"endLine":  3757,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L427",
 "region":  {
 "startLine":  427,
@@ -49,6 +23,32 @@
 "startColumn":  39,
 "endLine":  923,
 "endColumn":  72
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2023",
+"region":  {
+"startLine":  2023,
+"startColumn":  31,
+"endLine":  2023,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L3757",
+"region":  {
+"startLine":  3757,
+"startColumn":  35,
+"endLine":  3757,
+"endColumn":  68
 }
 }
 },
@@ -80,32 +80,6 @@
 },
 {
 "id":  "S3928",
-"message":  "The parameter name 'subscriber' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L103",
-"region":  {
-"startLine":  103,
-"startColumn":  77,
-"endLine":  103,
-"endColumn":  144
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "The parameter name 'exception' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L108",
-"region":  {
-"startLine":  108,
-"startColumn":  76,
-"endLine":  108,
-"endColumn":  141
-}
-}
-},
-{
-"id":  "S3928",
 "message":  "The parameter name 'element' is not declared in the argument list.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L93",
@@ -127,6 +101,32 @@
 "startColumn":  13,
 "endLine":  98,
 "endColumn":  84
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'subscriber' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  77,
+"endLine":  103,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'exception' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  76,
+"endLine":  108,
+"endColumn":  141
 }
 }
 },

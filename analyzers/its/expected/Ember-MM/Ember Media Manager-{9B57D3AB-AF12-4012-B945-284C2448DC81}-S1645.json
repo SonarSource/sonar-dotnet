@@ -4,6 +4,45 @@
 "id":  "S1645",
 "message":  "Switch this use of the '+' operator to the '&'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  55,
+"endLine":  68,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1645",
+"message":  "Switch this use of the '+' operator to the '&'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  61,
+"endLine":  68,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1645",
+"message":  "Switch this use of the '+' operator to the '&'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  81,
+"endLine":  68,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1645",
+"message":  "Switch this use of the '+' operator to the '&'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L128",
 "region":  {
 "startLine":  128,
@@ -153,45 +192,6 @@
 "startColumn":  91,
 "endLine":  398,
 "endColumn":  92
-}
-}
-},
-{
-"id":  "S1645",
-"message":  "Switch this use of the '+' operator to the '&'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  55,
-"endLine":  68,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S1645",
-"message":  "Switch this use of the '+' operator to the '&'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  61,
-"endLine":  68,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S1645",
-"message":  "Switch this use of the '+' operator to the '&'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  81,
-"endLine":  68,
-"endColumn":  82
 }
 }
 }

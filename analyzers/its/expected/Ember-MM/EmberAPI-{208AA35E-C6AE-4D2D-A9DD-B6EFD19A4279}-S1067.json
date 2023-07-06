@@ -28,19 +28,6 @@
 },
 {
 "id":  "S1067",
-"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1086-L1087",
-"region":  {
-"startLine":  1086,
-"startColumn":  16,
-"endLine":  1087,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L405-L407",
@@ -62,6 +49,32 @@
 "startColumn":  24,
 "endLine":  416,
 "endColumn":  195
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1086-L1087",
+"region":  {
+"startLine":  1086,
+"startColumn":  16,
+"endLine":  1087,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L82-L83",
+"region":  {
+"startLine":  82,
+"startColumn":  16,
+"endLine":  83,
+"endColumn":  94
 }
 }
 },
@@ -127,19 +140,6 @@
 "startColumn":  24,
 "endLine":  674,
 "endColumn":  99
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L82-L83",
-"region":  {
-"startLine":  82,
-"startColumn":  16,
-"endLine":  83,
-"endColumn":  94
 }
 }
 },
@@ -314,19 +314,6 @@
 },
 {
 "id":  "S1067",
-"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L322",
-"region":  {
-"startLine":  322,
-"startColumn":  12,
-"endLine":  322,
-"endColumn":  139
-}
-}
-},
-{
-"id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L32-L33",
@@ -335,6 +322,19 @@
 "startColumn":  12,
 "endLine":  33,
 "endColumn":  137
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L322",
+"region":  {
+"startLine":  322,
+"startColumn":  12,
+"endLine":  322,
+"endColumn":  139
 }
 }
 }

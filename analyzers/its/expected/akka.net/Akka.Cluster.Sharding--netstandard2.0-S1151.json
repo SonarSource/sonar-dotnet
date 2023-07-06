@@ -15,6 +15,19 @@
 },
 {
 "id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  17,
+"endLine":  66,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1151",
 "message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L191",
@@ -30,12 +43,25 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L66",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L865",
 "region":  {
-"startLine":  66,
+"startLine":  865,
 "startColumn":  17,
-"endLine":  66,
-"endColumn":  66
+"endLine":  865,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L986",
+"region":  {
+"startLine":  986,
+"startColumn":  17,
+"endLine":  986,
+"endColumn":  62
 }
 }
 },
@@ -75,32 +101,6 @@
 "startColumn":  17,
 "endLine":  1065,
 "endColumn":  60
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L865",
-"region":  {
-"startLine":  865,
-"startColumn":  17,
-"endLine":  865,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L986",
-"region":  {
-"startLine":  986,
-"startColumn":  17,
-"endLine":  986,
-"endColumn":  62
 }
 }
 }

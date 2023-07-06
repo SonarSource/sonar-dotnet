@@ -4,6 +4,19 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  34,
+"endLine":  151,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1341",
 "region":  {
 "startLine":  1341,
@@ -23,19 +36,6 @@
 "startColumn":  25,
 "endLine":  1482,
 "endColumn":  40
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L151",
-"region":  {
-"startLine":  151,
-"startColumn":  34,
-"endLine":  151,
-"endColumn":  136
 }
 }
 },
@@ -75,6 +75,19 @@
 "startColumn":  68,
 "endLine":  404,
 "endColumn":  80
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  20,
+"endLine":  61,
+"endColumn":  112
 }
 }
 },
@@ -140,19 +153,6 @@
 "startColumn":  20,
 "endLine":  388,
 "endColumn":  120
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  20,
-"endLine":  61,
-"endColumn":  112
 }
 }
 },

@@ -4,12 +4,12 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L142",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L93",
 "region":  {
-"startLine":  142,
+"startLine":  93,
 "startColumn":  20,
-"endLine":  142,
-"endColumn":  30
+"endLine":  93,
+"endColumn":  25
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L93",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L142",
 "region":  {
-"startLine":  93,
+"startLine":  142,
 "startColumn":  20,
-"endLine":  93,
-"endColumn":  25
+"endLine":  142,
+"endColumn":  30
 }
 }
 },

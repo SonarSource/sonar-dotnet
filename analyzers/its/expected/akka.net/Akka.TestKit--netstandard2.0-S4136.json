@@ -2,6 +2,30 @@
 "issues":  [
 {
 "id":  "S4136",
+"message":  "All 'MuteAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L242",
+"region":  {
+"startLine":  242,
+"startColumn":  17,
+"endLine":  242,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L256",
+"region":  {
+"startLine":  256,
+"startColumn":  14,
+"endLine":  256,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S4136",
 "message":  "All 'Mute' method overloads should be adjacent.",
 "location":  [
 {
@@ -29,30 +53,6 @@
 "startColumn":  26,
 "endLine":  279,
 "endColumn":  30
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'MuteAsync' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L242",
-"region":  {
-"startLine":  242,
-"startColumn":  17,
-"endLine":  242,
-"endColumn":  26
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L256",
-"region":  {
-"startLine":  256,
-"startColumn":  14,
-"endLine":  256,
-"endColumn":  23
 }
 }
 ]
@@ -227,6 +227,30 @@
 },
 {
 "id":  "S4136",
+"message":  "All 'MuteAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  30,
+"endLine":  221,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  27,
+"endLine":  238,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
 "message":  "All 'Mute' method overloads should be adjacent.",
 "location":  [
 {
@@ -254,30 +278,6 @@
 "startColumn":  33,
 "endLine":  247,
 "endColumn":  37
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'MuteAsync' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L221",
-"region":  {
-"startLine":  221,
-"startColumn":  30,
-"endLine":  221,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L238",
-"region":  {
-"startLine":  238,
-"startColumn":  27,
-"endLine":  238,
-"endColumn":  36
 }
 }
 ]

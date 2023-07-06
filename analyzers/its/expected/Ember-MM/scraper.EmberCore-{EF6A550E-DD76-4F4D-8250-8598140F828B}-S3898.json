@@ -145,6 +145,19 @@
 },
 {
 "id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'TVImages'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  22,
+"endLine":  130,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1262",
@@ -166,19 +179,6 @@
 "startColumn":  27,
 "endLine":  1269,
 "endColumn":  34
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'TVImages'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L130",
-"region":  {
-"startLine":  130,
-"startColumn":  22,
-"endLine":  130,
-"endColumn":  30
 }
 }
 },

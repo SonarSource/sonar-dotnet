@@ -17,6 +17,45 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/Registrations.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  21,
+"endLine":  57,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/Registrations.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  21,
+"endLine":  71,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/Registrations.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  21,
+"endLine":  89,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/Registrations.cs#L101",
 "region":  {
 "startLine":  101,
@@ -69,45 +108,6 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/Registrations.cs#L57",
-"region":  {
-"startLine":  57,
-"startColumn":  21,
-"endLine":  57,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/Registrations.cs#L71",
-"region":  {
-"startLine":  71,
-"startColumn":  21,
-"endLine":  71,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/Registrations.cs#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  21,
-"endLine":  89,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/INancyEnvironmentExtensions.cs#L27",
 "region":  {
 "startLine":  27,
@@ -147,12 +147,12 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L149",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L18",
 "region":  {
-"startLine":  149,
-"startColumn":  41,
-"endLine":  149,
-"endColumn":  50
+"startLine":  18,
+"startColumn":  25,
+"endLine":  18,
+"endColumn":  39
 }
 }
 },
@@ -160,12 +160,12 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L18",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L149",
 "region":  {
-"startLine":  18,
-"startColumn":  25,
-"endLine":  18,
-"endColumn":  39
+"startLine":  149,
+"startColumn":  41,
+"endLine":  149,
+"endColumn":  50
 }
 }
 },
@@ -218,6 +218,45 @@
 "startColumn":  54,
 "endLine":  156,
 "endColumn":  61
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  30,
+"endLine":  57,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  30,
+"endLine":  69,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  30,
+"endLine":  95,
+"endColumn":  45
 }
 }
 },
@@ -282,45 +321,6 @@
 "startLine":  226,
 "startColumn":  30,
 "endLine":  226,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L57",
-"region":  {
-"startLine":  57,
-"startColumn":  30,
-"endLine":  57,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  30,
-"endLine":  69,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L95",
-"region":  {
-"startLine":  95,
-"startColumn":  30,
-"endLine":  95,
 "endColumn":  45
 }
 }

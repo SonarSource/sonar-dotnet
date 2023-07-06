@@ -28,19 +28,6 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'system2Address'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  17,
-"endLine":  131,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1481",
 "message":  "Remove the unused local variable 'a'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L55",
@@ -49,6 +36,19 @@
 "startColumn":  37,
 "endLine":  55,
 "endColumn":  38
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'system2Address'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  17,
+"endLine":  131,
+"endColumn":  31
 }
 }
 }

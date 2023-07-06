@@ -86,6 +86,126 @@
 },
 {
 "id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Langs' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  70,
+"endLine":  68,
+"endColumn":  77
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L147",
+"region":  {
+"startLine":  147,
+"startColumn":  71,
+"endLine":  147,
+"endColumn":  78
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  61,
+"endLine":  153,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L495",
+"region":  {
+"startLine":  495,
+"startColumn":  86,
+"endLine":  495,
+"endColumn":  93
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L756",
+"region":  {
+"startLine":  756,
+"startColumn":  74,
+"endLine":  756,
+"endColumn":  81
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 7 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  68,
+"endLine":  71,
+"endColumn":  75
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L287",
+"region":  {
+"startLine":  287,
+"startColumn":  68,
+"endLine":  287,
+"endColumn":  75
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L345",
+"region":  {
+"startLine":  345,
+"startColumn":  68,
+"endLine":  345,
+"endColumn":  75
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L422",
+"region":  {
+"startLine":  422,
+"startColumn":  68,
+"endLine":  422,
+"endColumn":  75
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L561",
+"region":  {
+"startLine":  561,
+"startColumn":  68,
+"endLine":  561,
+"endColumn":  75
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L593",
+"region":  {
+"startLine":  593,
+"startColumn":  68,
+"endLine":  593,
+"endColumn":  75
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L656",
+"region":  {
+"startLine":  656,
+"startColumn":  72,
+"endLine":  656,
+"endColumn":  79
+}
+}
+]
+},
+{
+"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'Source Folder' 8 times.",
 "location":  [
 {
@@ -281,126 +401,6 @@
 "startColumn":  76,
 "endLine":  651,
 "endColumn":  83
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Langs' 5 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  70,
-"endLine":  68,
-"endColumn":  77
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L147",
-"region":  {
-"startLine":  147,
-"startColumn":  71,
-"endLine":  147,
-"endColumn":  78
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  61,
-"endLine":  153,
-"endColumn":  68
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L495",
-"region":  {
-"startLine":  495,
-"startColumn":  86,
-"endLine":  495,
-"endColumn":  93
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L756",
-"region":  {
-"startLine":  756,
-"startColumn":  74,
-"endLine":  756,
-"endColumn":  81
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Error' 7 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L71",
-"region":  {
-"startLine":  71,
-"startColumn":  68,
-"endLine":  71,
-"endColumn":  75
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L287",
-"region":  {
-"startLine":  287,
-"startColumn":  68,
-"endLine":  287,
-"endColumn":  75
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L345",
-"region":  {
-"startLine":  345,
-"startColumn":  68,
-"endLine":  345,
-"endColumn":  75
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L422",
-"region":  {
-"startLine":  422,
-"startColumn":  68,
-"endLine":  422,
-"endColumn":  75
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L561",
-"region":  {
-"startLine":  561,
-"startColumn":  68,
-"endLine":  561,
-"endColumn":  75
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L593",
-"region":  {
-"startLine":  593,
-"startColumn":  68,
-"endLine":  593,
-"endColumn":  75
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L656",
-"region":  {
-"startLine":  656,
-"startColumn":  72,
-"endLine":  656,
-"endColumn":  79
 }
 }
 ]

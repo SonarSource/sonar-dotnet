@@ -4,6 +4,32 @@
 "id":  "S6608",
 "message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  42,
+"endLine":  85,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  42,
+"endLine":  92,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L104",
 "region":  {
 "startLine":  104,
@@ -101,32 +127,6 @@
 "startColumn":  58,
 "endLine":  335,
 "endColumn":  62
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  42,
-"endLine":  85,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  42,
-"endLine":  92,
-"endColumn":  46
 }
 }
 }

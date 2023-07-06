@@ -4,19 +4,6 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'timeout'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L105",
-"region":  {
-"startLine":  105,
-"startColumn":  76,
-"endLine":  105,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'timeout'.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L89",
 "region":  {
 "startLine":  89,
@@ -36,6 +23,19 @@
 "startColumn":  82,
 "endLine":  97,
 "endColumn":  86
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  76,
+"endLine":  105,
+"endColumn":  80
 }
 }
 },

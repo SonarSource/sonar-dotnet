@@ -41,19 +41,6 @@
 },
 {
 "id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'ConcurrentDictionaryWrapper'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/LockingConcurrentDictionary.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  28,
-"endLine":  13,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'LockingConcurrentDictionary'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/LockingConcurrentDictionary.cs#L6",
@@ -61,6 +48,19 @@
 "startLine":  6,
 "startColumn":  28,
 "endLine":  6,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ConcurrentDictionaryWrapper'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/LockingConcurrentDictionary.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  28,
+"endLine":  13,
 "endColumn":  55
 }
 }

@@ -43,6 +43,45 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L383",
+"region":  {
+"startLine":  383,
+"startColumn":  34,
+"endLine":  383,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L416",
+"region":  {
+"startLine":  416,
+"startColumn":  30,
+"endLine":  416,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L474",
+"region":  {
+"startLine":  474,
+"startColumn":  26,
+"endLine":  474,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1331",
 "region":  {
 "startLine":  1331,
@@ -95,12 +134,12 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L383",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L53",
 "region":  {
-"startLine":  383,
-"startColumn":  34,
-"endLine":  383,
-"endColumn":  49
+"startLine":  53,
+"startColumn":  29,
+"endLine":  53,
+"endColumn":  44
 }
 }
 },
@@ -108,25 +147,12 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L416",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L74",
 "region":  {
-"startLine":  416,
-"startColumn":  30,
-"endLine":  416,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L474",
-"region":  {
-"startLine":  474,
-"startColumn":  26,
-"endLine":  474,
-"endColumn":  41
+"startLine":  74,
+"startColumn":  29,
+"endLine":  74,
+"endColumn":  44
 }
 }
 },
@@ -152,32 +178,6 @@
 "startLine":  117,
 "startColumn":  29,
 "endLine":  117,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  29,
-"endLine":  53,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  29,
-"endLine":  74,
 "endColumn":  44
 }
 }

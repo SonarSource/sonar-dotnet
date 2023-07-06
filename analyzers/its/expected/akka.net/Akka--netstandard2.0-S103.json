@@ -93,19 +93,6 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L106",
-"region":  {
-"startLine":  106,
-"startColumn":  1,
-"endLine":  106,
-"endColumn":  203
-}
-}
-},
-{
-"id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L42",
@@ -114,6 +101,19 @@
 "startColumn":  1,
 "endLine":  42,
 "endColumn":  221
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  1,
+"endLine":  106,
+"endColumn":  203
 }
 }
 },
@@ -236,110 +236,6 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 287 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L102",
-"region":  {
-"startLine":  102,
-"startColumn":  1,
-"endLine":  102,
-"endColumn":  288
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 243 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L108",
-"region":  {
-"startLine":  108,
-"startColumn":  1,
-"endLine":  108,
-"endColumn":  244
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 327 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L115",
-"region":  {
-"startLine":  115,
-"startColumn":  1,
-"endLine":  115,
-"endColumn":  328
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 284 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L143",
-"region":  {
-"startLine":  143,
-"startColumn":  1,
-"endLine":  143,
-"endColumn":  285
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L159",
-"region":  {
-"startLine":  159,
-"startColumn":  1,
-"endLine":  159,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 273 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L174",
-"region":  {
-"startLine":  174,
-"startColumn":  1,
-"endLine":  174,
-"endColumn":  274
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L184",
-"region":  {
-"startLine":  184,
-"startColumn":  1,
-"endLine":  184,
-"endColumn":  216
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L213",
-"region":  {
-"startLine":  213,
-"startColumn":  1,
-"endLine":  213,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L25",
@@ -457,6 +353,110 @@
 },
 {
 "id":  "S103",
+"message":  "Split this 287 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  1,
+"endLine":  102,
+"endColumn":  288
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 243 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  1,
+"endLine":  108,
+"endColumn":  244
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 327 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  1,
+"endLine":  115,
+"endColumn":  328
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 284 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  1,
+"endLine":  143,
+"endColumn":  285
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  1,
+"endLine":  159,
+"endColumn":  202
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 273 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  1,
+"endLine":  174,
+"endColumn":  274
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L184",
+"region":  {
+"startLine":  184,
+"startColumn":  1,
+"endLine":  184,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  1,
+"endLine":  213,
+"endColumn":  207
+}
+}
+},
+{
+"id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffSupervisor.cs#L185",
@@ -561,19 +561,6 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializer.cs#L180",
-"region":  {
-"startLine":  180,
-"startColumn":  1,
-"endLine":  180,
-"endColumn":  206
-}
-}
-},
-{
-"id":  "S103",
 "message":  "Split this 246 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializer.cs#L43",
@@ -587,14 +574,14 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
+"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L136",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializer.cs#L180",
 "region":  {
-"startLine":  136,
+"startLine":  180,
 "startColumn":  1,
-"endLine":  136,
-"endColumn":  203
+"endLine":  180,
+"endColumn":  206
 }
 }
 },
@@ -608,6 +595,19 @@
 "startColumn":  1,
 "endLine":  71,
 "endColumn":  211
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  1,
+"endLine":  136,
+"endColumn":  203
 }
 }
 },

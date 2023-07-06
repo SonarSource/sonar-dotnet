@@ -17,11 +17,11 @@
 "id":  "S2302",
 "message":  "Replace the string 'context' with 'nameof(context)'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L110",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L70",
 "region":  {
-"startLine":  110,
+"startLine":  70,
 "startColumn":  49,
-"endLine":  110,
+"endLine":  70,
 "endColumn":  58
 }
 }
@@ -30,11 +30,11 @@
 "id":  "S2302",
 "message":  "Replace the string 'context' with 'nameof(context)'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L70",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L110",
 "region":  {
-"startLine":  70,
+"startLine":  110,
 "startColumn":  49,
-"endLine":  70,
+"endLine":  110,
 "endColumn":  58
 }
 }

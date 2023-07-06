@@ -173,6 +173,19 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  28,
+"endLine":  87,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L105",
 "region":  {
 "startLine":  105,
@@ -205,19 +218,6 @@
 "startColumn":  22,
 "endLine":  148,
 "endColumn":  37
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L87",
-"region":  {
-"startLine":  87,
-"startColumn":  28,
-"endLine":  87,
-"endColumn":  43
 }
 }
 },

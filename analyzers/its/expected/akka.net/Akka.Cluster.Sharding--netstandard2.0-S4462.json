@@ -43,12 +43,12 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L300",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L80",
 "region":  {
-"startLine":  300,
-"startColumn":  52,
-"endLine":  300,
-"endColumn":  69
+"startLine":  80,
+"startColumn":  78,
+"endLine":  80,
+"endColumn":  95
 }
 }
 },
@@ -56,12 +56,12 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L80",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L300",
 "region":  {
-"startLine":  80,
-"startColumn":  78,
-"endLine":  80,
-"endColumn":  95
+"startLine":  300,
+"startColumn":  52,
+"endLine":  300,
+"endColumn":  69
 }
 }
 }

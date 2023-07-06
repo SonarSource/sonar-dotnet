@@ -147,6 +147,19 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L474",
+"region":  {
+"startLine":  474,
+"startColumn":  72,
+"endLine":  474,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1083",
 "region":  {
 "startLine":  1083,
@@ -225,12 +238,12 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L474",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L82",
 "region":  {
-"startLine":  474,
-"startColumn":  72,
-"endLine":  474,
-"endColumn":  127
+"startLine":  82,
+"startColumn":  16,
+"endLine":  82,
+"endColumn":  33
 }
 }
 },
@@ -243,19 +256,6 @@
 "startLine":  115,
 "startColumn":  16,
 "endLine":  115,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L82",
-"region":  {
-"startLine":  82,
-"startColumn":  16,
-"endLine":  82,
 "endColumn":  33
 }
 }
@@ -316,6 +316,19 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  32,
+"endLine":  56,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L322",
 "region":  {
 "startLine":  322,
@@ -348,19 +361,6 @@
 "startColumn":  16,
 "endLine":  434,
 "endColumn":  61
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  32,
-"endLine":  56,
-"endColumn":  60
 }
 }
 }

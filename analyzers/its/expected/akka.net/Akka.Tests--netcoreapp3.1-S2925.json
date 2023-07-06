@@ -147,6 +147,19 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Pattern/CircuitBreakerSpec.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  61,
+"endLine":  62,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2925",
+"message":  "Do not use 'Thread.Sleep()' in a test.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Pattern/CircuitBreakerSpec.cs#L278",
 "region":  {
 "startLine":  278,
@@ -166,19 +179,6 @@
 "startColumn":  13,
 "endLine":  360,
 "endColumn":  31
-}
-}
-},
-{
-"id":  "S2925",
-"message":  "Do not use 'Thread.Sleep()' in a test.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Pattern/CircuitBreakerSpec.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  61,
-"endLine":  62,
-"endColumn":  80
 }
 }
 },

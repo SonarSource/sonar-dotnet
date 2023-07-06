@@ -2,87 +2,84 @@
 "issues":  [
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Error' 9 times.",
+"message":  "Define a constant instead of using this literal '.$emm' 4 times.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L236",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L440",
 "region":  {
-"startLine":  236,
-"startColumn":  68,
-"endLine":  236,
-"endColumn":  75
+"startLine":  440,
+"startColumn":  87,
+"endLine":  440,
+"endColumn":  94
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L386",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L441",
 "region":  {
-"startLine":  386,
-"startColumn":  72,
-"endLine":  386,
-"endColumn":  79
+"startLine":  441,
+"startColumn":  79,
+"endLine":  441,
+"endColumn":  86
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L449",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L685",
 "region":  {
-"startLine":  449,
-"startColumn":  107,
-"endLine":  449,
-"endColumn":  114
+"startLine":  685,
+"startColumn":  79,
+"endLine":  685,
+"endColumn":  86
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L496",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L686",
 "region":  {
-"startLine":  496,
-"startColumn":  124,
-"endLine":  496,
-"endColumn":  131
+"startLine":  686,
+"startColumn":  71,
+"endLine":  686,
+"endColumn":  78
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '.$emm$' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L486",
+"region":  {
+"startLine":  486,
+"startColumn":  95,
+"endLine":  486,
+"endColumn":  103
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L535",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L487",
 "region":  {
-"startLine":  535,
-"startColumn":  68,
-"endLine":  535,
-"endColumn":  75
+"startLine":  487,
+"startColumn":  86,
+"endLine":  487,
+"endColumn":  94
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L614",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L726",
 "region":  {
-"startLine":  614,
-"startColumn":  68,
-"endLine":  614,
-"endColumn":  75
+"startLine":  726,
+"startColumn":  87,
+"endLine":  726,
+"endColumn":  95
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L696",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L727",
 "region":  {
-"startLine":  696,
-"startColumn":  103,
-"endLine":  696,
-"endColumn":  110
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L738",
-"region":  {
-"startLine":  738,
-"startColumn":  120,
-"endLine":  738,
-"endColumn":  127
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L774",
-"region":  {
-"startLine":  774,
-"startColumn":  68,
-"endLine":  774,
-"endColumn":  75
+"startLine":  727,
+"startColumn":  78,
+"endLine":  727,
+"endColumn":  86
 }
 }
 ]
@@ -209,84 +206,87 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal '.$emm' 4 times.",
+"message":  "Define a constant instead of using this literal 'Error' 9 times.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L440",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L236",
 "region":  {
-"startLine":  440,
-"startColumn":  87,
-"endLine":  440,
-"endColumn":  94
+"startLine":  236,
+"startColumn":  68,
+"endLine":  236,
+"endColumn":  75
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L441",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L386",
 "region":  {
-"startLine":  441,
-"startColumn":  79,
-"endLine":  441,
-"endColumn":  86
+"startLine":  386,
+"startColumn":  72,
+"endLine":  386,
+"endColumn":  79
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L685",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L449",
 "region":  {
-"startLine":  685,
-"startColumn":  79,
-"endLine":  685,
-"endColumn":  86
+"startLine":  449,
+"startColumn":  107,
+"endLine":  449,
+"endColumn":  114
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L686",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L496",
 "region":  {
-"startLine":  686,
-"startColumn":  71,
-"endLine":  686,
-"endColumn":  78
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal '.$emm$' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L486",
-"region":  {
-"startLine":  486,
-"startColumn":  95,
-"endLine":  486,
-"endColumn":  103
+"startLine":  496,
+"startColumn":  124,
+"endLine":  496,
+"endColumn":  131
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L487",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L535",
 "region":  {
-"startLine":  487,
-"startColumn":  86,
-"endLine":  487,
-"endColumn":  94
+"startLine":  535,
+"startColumn":  68,
+"endLine":  535,
+"endColumn":  75
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L726",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L614",
 "region":  {
-"startLine":  726,
-"startColumn":  87,
-"endLine":  726,
-"endColumn":  95
+"startLine":  614,
+"startColumn":  68,
+"endLine":  614,
+"endColumn":  75
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L727",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L696",
 "region":  {
-"startLine":  727,
-"startColumn":  78,
-"endLine":  727,
-"endColumn":  86
+"startLine":  696,
+"startColumn":  103,
+"endLine":  696,
+"endColumn":  110
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L738",
+"region":  {
+"startLine":  738,
+"startColumn":  120,
+"endLine":  738,
+"endColumn":  127
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L774",
+"region":  {
+"startLine":  774,
+"startColumn":  68,
+"endLine":  774,
+"endColumn":  75
 }
 }
 ]

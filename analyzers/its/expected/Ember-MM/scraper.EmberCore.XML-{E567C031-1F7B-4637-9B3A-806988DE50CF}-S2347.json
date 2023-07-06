@@ -132,19 +132,6 @@
 },
 {
 "id":  "S2347",
-"message":  "Rename event handler 'chkMPAA_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L154",
-"region":  {
-"startLine":  154,
-"startColumn":  17,
-"endLine":  154,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2347",
 "message":  "Rename event handler 'frmXMLSettingsHolder_Load' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L55",
@@ -153,6 +140,19 @@
 "startColumn":  17,
 "endLine":  55,
 "endColumn":  42
+}
+}
+},
+{
+"id":  "S2347",
+"message":  "Rename event handler 'chkMPAA_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  17,
+"endLine":  154,
+"endColumn":  39
 }
 }
 },

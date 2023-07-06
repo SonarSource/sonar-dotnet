@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S3267",
+"message":  "Loop should be simplified by calling Select(element => element.Length))",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  37,
+"endLine":  27,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3267",
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
@@ -23,19 +36,6 @@
 }
 }
 ]
-},
-{
-"id":  "S3267",
-"message":  "Loop should be simplified by calling Select(element => element.Length))",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  37,
-"endLine":  27,
-"endColumn":  47
-}
-}
 }
 ]
 }

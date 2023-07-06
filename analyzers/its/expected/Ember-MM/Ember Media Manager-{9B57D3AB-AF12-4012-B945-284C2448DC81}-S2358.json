@@ -4,6 +4,19 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  24,
+"endLine":  66,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L175",
 "region":  {
 "startLine":  175,
@@ -56,12 +69,64 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L66",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L48",
 "region":  {
-"startLine":  66,
+"startLine":  48,
+"startColumn":  20,
+"endLine":  48,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  20,
+"endLine":  68,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  20,
+"endLine":  78,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L97",
+"region":  {
+"startLine":  97,
 "startColumn":  24,
-"endLine":  66,
-"endColumn":  45
+"endLine":  97,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  24,
+"endLine":  98,
+"endColumn":  67
 }
 }
 },
@@ -147,116 +212,12 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  20,
-"endLine":  48,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  20,
-"endLine":  68,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  20,
-"endLine":  78,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L97",
-"region":  {
-"startLine":  97,
-"startColumn":  24,
-"endLine":  97,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L98",
-"region":  {
-"startLine":  98,
-"startColumn":  24,
-"endLine":  98,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  20,
 "endLine":  109,
 "endColumn":  39
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2629",
-"region":  {
-"startLine":  2629,
-"startColumn":  50,
-"endLine":  2629,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2633",
-"region":  {
-"startLine":  2633,
-"startColumn":  50,
-"endLine":  2633,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2800",
-"region":  {
-"startLine":  2800,
-"startColumn":  28,
-"endLine":  2800,
-"endColumn":  45
 }
 }
 },
@@ -283,19 +244,6 @@
 "startColumn":  51,
 "endLine":  284,
 "endColumn":  78
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2855",
-"region":  {
-"startLine":  2855,
-"startColumn":  28,
-"endLine":  2855,
-"endColumn":  45
 }
 }
 },
@@ -348,6 +296,58 @@
 "startColumn":  16,
 "endLine":  619,
 "endColumn":  33
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2629",
+"region":  {
+"startLine":  2629,
+"startColumn":  50,
+"endLine":  2629,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2633",
+"region":  {
+"startLine":  2633,
+"startColumn":  50,
+"endLine":  2633,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2800",
+"region":  {
+"startLine":  2800,
+"startColumn":  28,
+"endLine":  2800,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2855",
+"region":  {
+"startLine":  2855,
+"startColumn":  28,
+"endLine":  2855,
+"endColumn":  45
 }
 }
 },

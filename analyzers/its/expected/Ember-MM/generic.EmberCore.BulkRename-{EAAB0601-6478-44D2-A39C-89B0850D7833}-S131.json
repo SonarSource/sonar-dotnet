@@ -4,6 +4,19 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  9,
+"endLine":  92,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L131",
 "region":  {
 "startLine":  131,
@@ -22,19 +35,6 @@
 "startLine":  222,
 "startColumn":  9,
 "endLine":  222,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  9,
-"endLine":  92,
 "endColumn":  15
 }
 }

@@ -197,19 +197,6 @@
 },
 {
 "id":  "S2302",
-"message":  "Replace the string 'attributes' with 'nameof(attributes)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1001",
-"region":  {
-"startLine":  1001,
-"startColumn":  45,
-"endLine":  1001,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S2302",
 "message":  "Replace the string 'module' with 'nameof(module)'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L292",
@@ -218,6 +205,19 @@
 "startColumn":  23,
 "endLine":  292,
 "endColumn":  50
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'attributes' with 'nameof(attributes)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1001",
+"region":  {
+"startLine":  1001,
+"startColumn":  45,
+"endLine":  1001,
+"endColumn":  82
 }
 }
 },

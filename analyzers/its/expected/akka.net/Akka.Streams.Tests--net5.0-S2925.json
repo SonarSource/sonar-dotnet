@@ -459,12 +459,12 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests/Dsl/SubstreamSubscriptionTimeoutSpec.cs#L141",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests/Dsl/SubstreamSubscriptionTimeoutSpec.cs#L80",
 "region":  {
-"startLine":  141,
-"startColumn":  13,
-"endLine":  141,
-"endColumn":  31
+"startLine":  80,
+"startColumn":  17,
+"endLine":  80,
+"endColumn":  35
 }
 }
 },
@@ -472,12 +472,12 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests/Dsl/SubstreamSubscriptionTimeoutSpec.cs#L80",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests/Dsl/SubstreamSubscriptionTimeoutSpec.cs#L141",
 "region":  {
-"startLine":  80,
-"startColumn":  17,
-"endLine":  80,
-"endColumn":  35
+"startLine":  141,
+"startColumn":  13,
+"endLine":  141,
+"endColumn":  31
 }
 }
 },

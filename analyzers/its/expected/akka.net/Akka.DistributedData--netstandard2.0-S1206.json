@@ -106,19 +106,6 @@
 },
 {
 "id":  "S1206",
-"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L215",
-"region":  {
-"startLine":  215,
-"startColumn":  25,
-"endLine":  215,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L26",
@@ -127,6 +114,19 @@
 "startColumn":  27,
 "endLine":  26,
 "endColumn":  40
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  25,
+"endLine":  215,
+"endColumn":  44
 }
 }
 },

@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3897",
-"message":  "Implement 'IEquatable<Persistent>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L297",
-"region":  {
-"startLine":  297,
-"startColumn":  18,
-"endLine":  297,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S3897",
 "message":  "Implement 'IEquatable<AtomicWrite>'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L90",
@@ -23,6 +10,19 @@
 "startColumn":  25,
 "endLine":  90,
 "endColumn":  36
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Persistent>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  18,
+"endLine":  297,
+"endColumn":  28
 }
 }
 }

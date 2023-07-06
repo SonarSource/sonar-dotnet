@@ -17,11 +17,11 @@
 "id":  "S6608",
 "message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L103",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L91",
 "region":  {
-"startLine":  103,
+"startLine":  91,
 "startColumn":  66,
-"endLine":  103,
+"endLine":  91,
 "endColumn":  70
 }
 }
@@ -30,11 +30,11 @@
 "id":  "S6608",
 "message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L91",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L103",
 "region":  {
-"startLine":  91,
+"startLine":  103,
 "startColumn":  66,
-"endLine":  91,
+"endLine":  103,
 "endColumn":  70
 }
 }
@@ -95,11 +95,11 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultConverters/CollectionConverter.cs#L113",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultConverters/CollectionConverter.cs#L66",
 "region":  {
-"startLine":  113,
+"startLine":  66,
 "startColumn":  69,
-"endLine":  113,
+"endLine":  66,
 "endColumn":  74
 }
 }
@@ -108,11 +108,11 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultConverters/CollectionConverter.cs#L66",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultConverters/CollectionConverter.cs#L113",
 "region":  {
-"startLine":  66,
+"startLine":  113,
 "startColumn":  69,
-"endLine":  66,
+"endLine":  113,
 "endColumn":  74
 }
 }

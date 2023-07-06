@@ -43,6 +43,32 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L348",
+"region":  {
+"startLine":  348,
+"startColumn":  17,
+"endLine":  348,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L947",
+"region":  {
+"startLine":  947,
+"startColumn":  29,
+"endLine":  947,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1098",
 "region":  {
 "startLine":  1098,
@@ -108,45 +134,6 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L348",
-"region":  {
-"startLine":  348,
-"startColumn":  17,
-"endLine":  348,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L947",
-"region":  {
-"startLine":  947,
-"startColumn":  29,
-"endLine":  947,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1673",
-"region":  {
-"startLine":  1673,
-"startColumn":  17,
-"endLine":  1673,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L769",
 "region":  {
 "startLine":  769,
@@ -166,6 +153,19 @@
 "startColumn":  21,
 "endLine":  868,
 "endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1673",
+"region":  {
+"startLine":  1673,
+"startColumn":  17,
+"endLine":  1673,
+"endColumn":  24
 }
 }
 },
@@ -251,6 +251,32 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L388",
+"region":  {
+"startLine":  388,
+"startColumn":  17,
+"endLine":  388,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L925",
+"region":  {
+"startLine":  925,
+"startColumn":  21,
+"endLine":  925,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1153",
 "region":  {
 "startLine":  1153,
@@ -303,37 +329,24 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L388",
-"region":  {
-"startLine":  388,
-"startColumn":  17,
-"endLine":  388,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L925",
-"region":  {
-"startLine":  925,
-"startColumn":  21,
-"endLine":  925,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L821",
 "region":  {
 "startLine":  821,
 "startColumn":  13,
 "endLine":  821,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L850",
+"region":  {
+"startLine":  850,
+"startColumn":  13,
+"endLine":  850,
 "endColumn":  20
 }
 }
@@ -387,19 +400,6 @@
 "startColumn":  17,
 "endLine":  1120,
 "endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L850",
-"region":  {
-"startLine":  850,
-"startColumn":  13,
-"endLine":  850,
-"endColumn":  20
 }
 }
 },
@@ -589,71 +589,6 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1115",
-"region":  {
-"startLine":  1115,
-"startColumn":  21,
-"endLine":  1115,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1272",
-"region":  {
-"startLine":  1272,
-"startColumn":  17,
-"endLine":  1272,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1284",
-"region":  {
-"startLine":  1284,
-"startColumn":  21,
-"endLine":  1284,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1351",
-"region":  {
-"startLine":  1351,
-"startColumn":  13,
-"endLine":  1351,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1367",
-"region":  {
-"startLine":  1367,
-"startColumn":  13,
-"endLine":  1367,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L427",
 "region":  {
 "startLine":  427,
@@ -738,6 +673,71 @@
 "startColumn":  17,
 "endLine":  879,
 "endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1115",
+"region":  {
+"startLine":  1115,
+"startColumn":  21,
+"endLine":  1115,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1272",
+"region":  {
+"startLine":  1272,
+"startColumn":  17,
+"endLine":  1272,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1284",
+"region":  {
+"startLine":  1284,
+"startColumn":  21,
+"endLine":  1284,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1351",
+"region":  {
+"startLine":  1351,
+"startColumn":  13,
+"endLine":  1351,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1367",
+"region":  {
+"startLine":  1367,
+"startColumn":  13,
+"endLine":  1367,
+"endColumn":  20
 }
 }
 },

@@ -145,32 +145,6 @@
 },
 {
 "id":  "S2302",
-"message":  "Replace the string 'maxAttempts' with 'nameof(maxAttempts)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L109",
-"region":  {
-"startLine":  109,
-"startColumn":  62,
-"endLine":  109,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'delayFunction' with 'nameof(delayFunction)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L128",
-"region":  {
-"startLine":  128,
-"startColumn":  69,
-"endLine":  128,
-"endColumn":  121
-}
-}
-},
-{
-"id":  "S2302",
 "message":  "Replace the string 'attempt' with 'nameof(attempt)'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L50",
@@ -205,6 +179,32 @@
 "startColumn":  70,
 "endLine":  52,
 "endColumn":  114
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'maxAttempts' with 'nameof(maxAttempts)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  62,
+"endLine":  109,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'delayFunction' with 'nameof(delayFunction)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  69,
+"endLine":  128,
+"endColumn":  121
 }
 }
 },

@@ -4,6 +4,19 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  30,
+"endLine":  85,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L155",
 "region":  {
 "startLine":  155,
@@ -43,12 +56,25 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L85",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L85",
 "region":  {
 "startLine":  85,
-"startColumn":  30,
+"startColumn":  42,
 "endLine":  85,
-"endColumn":  45
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  59,
+"endLine":  85,
+"endColumn":  74
 }
 }
 },
@@ -114,32 +140,6 @@
 "startColumn":  27,
 "endLine":  732,
 "endColumn":  42
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  42,
-"endLine":  85,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  59,
-"endLine":  85,
-"endColumn":  74
 }
 }
 }

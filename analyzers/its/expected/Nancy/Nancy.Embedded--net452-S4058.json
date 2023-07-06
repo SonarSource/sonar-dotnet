@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S4058",
+"message":  "Change this call to 'requestedPath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  18,
+"endLine":  32,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4058",
 "message":  "Change this call to 'contentPath.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L136",
@@ -49,19 +62,6 @@
 "startColumn":  21,
 "endLine":  167,
 "endColumn":  52
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'requestedPath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  18,
-"endLine":  32,
-"endColumn":  47
 }
 }
 }

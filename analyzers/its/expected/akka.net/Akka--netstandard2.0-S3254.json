@@ -186,6 +186,32 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  68,
+"endLine":  87,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  62,
+"endLine":  91,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L101",
 "region":  {
 "startLine":  101,
@@ -530,32 +556,6 @@
 "startColumn":  94,
 "endLine":  152,
 "endColumn":  98
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L87",
-"region":  {
-"startLine":  87,
-"startColumn":  68,
-"endLine":  87,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  62,
-"endLine":  91,
-"endColumn":  66
 }
 }
 },
@@ -1200,6 +1200,19 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  101,
+"endLine":  59,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L137",
 "region":  {
 "startLine":  137,
@@ -1258,19 +1271,6 @@
 "startColumn":  63,
 "endLine":  157,
 "endColumn":  64
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  101,
-"endLine":  59,
-"endColumn":  106
 }
 }
 },

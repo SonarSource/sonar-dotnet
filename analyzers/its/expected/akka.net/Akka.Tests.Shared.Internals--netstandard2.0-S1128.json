@@ -30,12 +30,12 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/BoundAction.cs#L10",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/BoundAction.cs#L9",
 "region":  {
-"startLine":  10,
+"startLine":  9,
 "startColumn":  1,
-"endLine":  10,
-"endColumn":  19
+"endLine":  9,
+"endColumn":  34
 }
 }
 },
@@ -43,12 +43,12 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/BoundAction.cs#L9",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/BoundAction.cs#L10",
 "region":  {
-"startLine":  9,
+"startLine":  10,
 "startColumn":  1,
-"endLine":  9,
-"endColumn":  34
+"endLine":  10,
+"endColumn":  19
 }
 }
 },

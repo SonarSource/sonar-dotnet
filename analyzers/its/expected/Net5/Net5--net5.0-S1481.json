@@ -147,11 +147,11 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'x'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1144.cs#L12",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1144.cs#L7",
 "region":  {
-"startLine":  12,
+"startLine":  7,
 "startColumn":  17,
-"endLine":  12,
+"endLine":  7,
 "endColumn":  18
 }
 }
@@ -160,11 +160,11 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'x'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1144.cs#L7",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1144.cs#L12",
 "region":  {
-"startLine":  7,
+"startLine":  12,
 "startColumn":  17,
-"endLine":  7,
+"endLine":  12,
 "endColumn":  18
 }
 }

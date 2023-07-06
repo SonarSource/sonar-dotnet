@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'oFile'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1283",
-"region":  {
-"startLine":  1283,
-"startColumn":  21,
-"endLine":  1283,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S1481",
 "message":  "Remove the unused local variable 'destPathShort'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L295",
@@ -270,6 +257,19 @@
 "startColumn":  17,
 "endLine":  726,
 "endColumn":  20
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'oFile'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1283",
+"region":  {
+"startLine":  1283,
+"startColumn":  21,
+"endLine":  1283,
+"endColumn":  26
 }
 }
 }

@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S138",
-"message":  "This method 'Recovering' has 93 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L174",
-"region":  {
-"startLine":  174,
-"startColumn":  35,
-"endLine":  174,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S138",
 "message":  "This method 'RecoveryStarted' has 92 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L64",
@@ -23,6 +10,19 @@
 "startColumn":  35,
 "endLine":  64,
 "endColumn":  50
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Recovering' has 93 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  35,
+"endLine":  174,
+"endColumn":  45
 }
 }
 },

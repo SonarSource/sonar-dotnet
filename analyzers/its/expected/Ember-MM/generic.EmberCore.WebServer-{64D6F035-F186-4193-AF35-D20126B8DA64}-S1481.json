@@ -15,19 +15,6 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'uni'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L124",
-"region":  {
-"startLine":  124,
-"startColumn":  21,
-"endLine":  124,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1481",
 "message":  "Remove the unused local variable 'MovieTag'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L32",
@@ -36,6 +23,19 @@
 "startColumn":  17,
 "endLine":  32,
 "endColumn":  25
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'uni'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  21,
+"endLine":  124,
+"endColumn":  24
 }
 }
 },

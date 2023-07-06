@@ -4,6 +4,19 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  29,
+"endLine":  68,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L182",
 "region":  {
 "startLine":  182,
@@ -62,19 +75,6 @@
 "startColumn":  41,
 "endLine":  230,
 "endColumn":  54
-}
-}
-},
-{
-"id":  "S1643",
-"message":  "Use a StringBuilder instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  29,
-"endLine":  68,
-"endColumn":  91
 }
 }
 }

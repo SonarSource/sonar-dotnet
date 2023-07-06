@@ -2,32 +2,6 @@
 "issues":  [
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 's'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L129",
-"region":  {
-"startLine":  129,
-"startColumn":  12,
-"endLine":  129,
-"endColumn":  13
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 's'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L134",
-"region":  {
-"startLine":  134,
-"startColumn":  12,
-"endLine":  134,
-"endColumn":  13
-}
-}
-},
-{
-"id":  "S3353",
 "message":  "Add the 'const' modifier to 'a'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L27",
@@ -132,14 +106,27 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'i2'.",
+"message":  "Add the 'const' modifier to 's'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/NativeInts.cs#L10",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L129",
 "region":  {
-"startLine":  10,
-"startColumn":  19,
-"endLine":  10,
-"endColumn":  21
+"startLine":  129,
+"startColumn":  12,
+"endLine":  129,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 's'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  12,
+"endLine":  134,
+"endColumn":  13
 }
 }
 },
@@ -153,6 +140,19 @@
 "startColumn":  18,
 "endLine":  9,
 "endColumn":  19
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'i2'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/NativeInts.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  19,
+"endLine":  10,
+"endColumn":  21
 }
 }
 },

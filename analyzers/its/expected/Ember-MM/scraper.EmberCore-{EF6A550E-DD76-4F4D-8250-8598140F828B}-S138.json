@@ -132,19 +132,6 @@
 },
 {
 "id":  "S138",
-"message":  "This method 'ShowFromXML' has 157 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1051",
-"region":  {
-"startLine":  1051,
-"startColumn":  21,
-"endLine":  1051,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S138",
 "message":  "This function 'GetListOfKnownEpisodes' has 85 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L300",
@@ -184,27 +171,14 @@
 },
 {
 "id":  "S138",
-"message":  "This method 'tvList_AfterSelect' has 102 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"message":  "This method 'ShowFromXML' has 157 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1077",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1051",
 "region":  {
-"startLine":  1077,
-"startColumn":  17,
-"endLine":  1077,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'bwLoadData_DoWork' has 118 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L436",
-"region":  {
-"startLine":  436,
-"startColumn":  17,
-"endLine":  436,
-"endColumn":  34
+"startLine":  1051,
+"startColumn":  21,
+"endLine":  1051,
+"endColumn":  32
 }
 }
 },
@@ -223,6 +197,19 @@
 },
 {
 "id":  "S138",
+"message":  "This method 'bwLoadData_DoWork' has 118 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L436",
+"region":  {
+"startLine":  436,
+"startColumn":  17,
+"endLine":  436,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S138",
 "message":  "This function 'DownloadAllImages' has 136 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L707",
@@ -231,6 +218,19 @@
 "startColumn":  22,
 "endLine":  707,
 "endColumn":  39
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'tvList_AfterSelect' has 102 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1077",
+"region":  {
+"startLine":  1077,
+"startColumn":  17,
+"endLine":  1077,
+"endColumn":  35
 }
 }
 }

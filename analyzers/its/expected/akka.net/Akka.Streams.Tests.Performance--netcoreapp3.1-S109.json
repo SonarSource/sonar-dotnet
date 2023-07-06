@@ -329,45 +329,6 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/GraphBuilderBenchmark.cs#L112",
-"region":  {
-"startLine":  112,
-"startColumn":  109,
-"endLine":  112,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/GraphBuilderBenchmark.cs#L119",
-"region":  {
-"startLine":  119,
-"startColumn":  110,
-"endLine":  119,
-"endColumn":  113
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/GraphBuilderBenchmark.cs#L126",
-"region":  {
-"startLine":  126,
-"startColumn":  111,
-"endLine":  126,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/GraphBuilderBenchmark.cs#L25",
 "region":  {
 "startLine":  25,
@@ -483,6 +444,45 @@
 },
 {
 "id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/GraphBuilderBenchmark.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  109,
+"endLine":  112,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/GraphBuilderBenchmark.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  110,
+"endLine":  119,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/GraphBuilderBenchmark.cs#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  111,
+"endLine":  126,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/InterpreterBenchmark.cs#L32",
@@ -563,84 +563,6 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L106",
-"region":  {
-"startLine":  106,
-"startColumn":  85,
-"endLine":  106,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  86,
-"endLine":  113,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  87,
-"endLine":  121,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L136",
-"region":  {
-"startLine":  136,
-"startColumn":  84,
-"endLine":  136,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L143",
-"region":  {
-"startLine":  143,
-"startColumn":  85,
-"endLine":  143,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L150",
-"region":  {
-"startLine":  150,
-"startColumn":  86,
-"endLine":  150,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L48",
 "region":  {
 "startLine":  48,
@@ -712,6 +634,84 @@
 "startColumn":  77,
 "endLine":  91,
 "endColumn":  81
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  85,
+"endLine":  106,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  86,
+"endLine":  113,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  87,
+"endLine":  121,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  84,
+"endLine":  136,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  85,
+"endLine":  143,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  86,
+"endLine":  150,
+"endColumn":  90
 }
 }
 }

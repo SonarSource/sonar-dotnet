@@ -15,19 +15,6 @@
 },
 {
 "id":  "S2259",
-"message":  "'Me.SettingsPanels.FirstOrDefault(Function(p) p.Name = tvSettings.SelectedNode.Name)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4315",
-"region":  {
-"startLine":  4315,
-"startColumn":  24,
-"endLine":  4315,
-"endColumn":  107
-}
-}
-},
-{
-"id":  "S2259",
 "message":  "'Me.tLangList.FirstOrDefault(Function(l) l.ShortLang = Master.eSettings.TVDBLanguage)' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L836",
@@ -36,6 +23,19 @@
 "startColumn":  36,
 "endLine":  836,
 "endColumn":  120
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'Me.SettingsPanels.FirstOrDefault(Function(p) p.Name = tvSettings.SelectedNode.Name)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4315",
+"region":  {
+"startLine":  4315,
+"startColumn":  24,
+"endLine":  4315,
+"endColumn":  107
 }
 }
 },

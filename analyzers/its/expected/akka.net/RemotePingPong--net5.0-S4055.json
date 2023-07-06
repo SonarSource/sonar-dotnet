@@ -4,71 +4,6 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L100",
-"region":  {
-"startLine":  100,
-"startColumn":  31,
-"endLine":  100,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  31,
-"endLine":  104,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L126",
-"region":  {
-"startLine":  126,
-"startColumn":  31,
-"endLine":  126,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  28,
-"endLine":  195,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L220",
-"region":  {
-"startLine":  220,
-"startColumn":  31,
-"endLine":  220,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L90",
 "region":  {
 "startLine":  90,
@@ -153,6 +88,71 @@
 "startColumn":  31,
 "endLine":  99,
 "endColumn":  71
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  31,
+"endLine":  100,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  31,
+"endLine":  104,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  31,
+"endLine":  126,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  28,
+"endLine":  195,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  31,
+"endLine":  220,
+"endColumn":  59
 }
 }
 }

@@ -54,19 +54,6 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L106",
-"region":  {
-"startLine":  106,
-"startColumn":  1,
-"endLine":  106,
-"endColumn":  215
-}
-}
-},
-{
-"id":  "S103",
 "message":  "Split this 212 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L48",
@@ -80,14 +67,14 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 263 characters long line (which is greater than 200 authorized).",
+"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L113",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L106",
 "region":  {
-"startLine":  113,
+"startLine":  106,
 "startColumn":  1,
-"endLine":  113,
-"endColumn":  264
+"endLine":  106,
+"endColumn":  215
 }
 }
 },
@@ -114,6 +101,19 @@
 "startColumn":  1,
 "endLine":  78,
 "endColumn":  208
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 263 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  1,
+"endLine":  113,
+"endColumn":  264
 }
 }
 }

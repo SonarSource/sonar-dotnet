@@ -67,19 +67,6 @@
 },
 {
 "id":  "S1067",
-"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1438",
-"region":  {
-"startLine":  1438,
-"startColumn":  19,
-"endLine":  1438,
-"endColumn":  217
-}
-}
-},
-{
-"id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L218-L219",
@@ -88,6 +75,19 @@
 "startColumn":  23,
 "endLine":  219,
 "endColumn":  77
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1438",
+"region":  {
+"startLine":  1438,
+"startColumn":  19,
+"endLine":  1438,
+"endColumn":  217
 }
 }
 },

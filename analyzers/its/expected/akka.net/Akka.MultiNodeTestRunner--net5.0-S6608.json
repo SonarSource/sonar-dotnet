@@ -4,6 +4,19 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  47,
+"endLine":  52,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L101",
 "region":  {
 "startLine":  101,
@@ -23,19 +36,6 @@
 "startColumn":  25,
 "endLine":  131,
 "endColumn":  30
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  47,
-"endLine":  52,
-"endColumn":  52
 }
 }
 },

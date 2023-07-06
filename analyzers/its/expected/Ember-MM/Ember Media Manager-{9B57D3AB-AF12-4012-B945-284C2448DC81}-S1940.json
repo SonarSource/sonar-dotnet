@@ -264,19 +264,6 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2626",
-"region":  {
-"startLine":  2626,
-"startColumn":  24,
-"endLine":  2626,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L342",
 "region":  {
 "startLine":  342,
@@ -322,6 +309,32 @@
 "startColumn":  102,
 "endLine":  642,
 "endColumn":  147
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2626",
+"region":  {
+"startLine":  2626,
+"startColumn":  24,
+"endLine":  2626,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L577",
+"region":  {
+"startLine":  577,
+"startColumn":  38,
+"endLine":  577,
+"endColumn":  101
 }
 }
 },
@@ -855,19 +868,6 @@
 "startColumn":  58,
 "endLine":  5534,
 "endColumn":  106
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L577",
-"region":  {
-"startLine":  577,
-"startColumn":  38,
-"endLine":  577,
-"endColumn":  101
 }
 }
 },

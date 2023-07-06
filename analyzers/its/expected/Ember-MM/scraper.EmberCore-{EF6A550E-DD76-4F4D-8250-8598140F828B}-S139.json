@@ -95,19 +95,6 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1272",
-"region":  {
-"startLine":  1272,
-"startColumn":  33,
-"endLine":  1272,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L745",
 "region":  {
 "startLine":  745,
@@ -153,6 +140,19 @@
 "startColumn":  28,
 "endLine":  777,
 "endColumn":  42
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1272",
+"region":  {
+"startLine":  1272,
+"startColumn":  33,
+"endLine":  1272,
+"endColumn":  87
 }
 }
 }

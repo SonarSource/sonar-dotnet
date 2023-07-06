@@ -4,12 +4,12 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1418",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L73",
 "region":  {
-"startLine":  1418,
-"startColumn":  21,
-"endLine":  1418,
-"endColumn":  23
+"startLine":  73,
+"startColumn":  13,
+"endLine":  73,
+"endColumn":  15
 }
 }
 },
@@ -23,19 +23,6 @@
 "startColumn":  13,
 "endLine":  142,
 "endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1427",
-"region":  {
-"startLine":  1427,
-"startColumn":  21,
-"endLine":  1427,
-"endColumn":  23
 }
 }
 },
@@ -61,19 +48,6 @@
 "startLine":  268,
 "startColumn":  13,
 "endLine":  268,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  13,
-"endLine":  73,
 "endColumn":  15
 }
 }
@@ -140,6 +114,32 @@
 "startColumn":  17,
 "endLine":  891,
 "endColumn":  21
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1418",
+"region":  {
+"startLine":  1418,
+"startColumn":  21,
+"endLine":  1418,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1427",
+"region":  {
+"startLine":  1427,
+"startColumn":  21,
+"endLine":  1427,
+"endColumn":  23
 }
 }
 },
@@ -472,11 +472,11 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L131",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L68",
 "region":  {
-"startLine":  131,
+"startLine":  68,
 "startColumn":  13,
-"endLine":  131,
+"endLine":  68,
 "endColumn":  15
 }
 }
@@ -485,11 +485,11 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L68",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L131",
 "region":  {
-"startLine":  68,
+"startLine":  131,
 "startColumn":  13,
-"endLine":  68,
+"endLine":  131,
 "endColumn":  15
 }
 }

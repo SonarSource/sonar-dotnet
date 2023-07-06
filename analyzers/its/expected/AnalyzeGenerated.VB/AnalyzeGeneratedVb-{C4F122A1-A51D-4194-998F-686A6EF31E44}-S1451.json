@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Replaced-Temporary-Path\.NETFramework,Version=v4.5.2.AssemblyAttributes.vb#L1",
+"uri":  "Replaced-Temporary-Path/.NETFramework,Version=v4.5.2.AssemblyAttributes.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

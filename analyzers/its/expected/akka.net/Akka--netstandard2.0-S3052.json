@@ -251,32 +251,6 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_created', the compiler will do that for you.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/FastLazy.cs#L100",
-"region":  {
-"startLine":  100,
-"startColumn":  31,
-"endLine":  100,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_creating', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/FastLazy.cs#L101",
-"region":  {
-"startLine":  101,
-"startColumn":  32,
-"endLine":  101,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_created', the compiler will do that for you.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/FastLazy.cs#L27",
 "region":  {
 "startLine":  27,
@@ -295,6 +269,32 @@
 "startLine":  28,
 "startColumn":  32,
 "endLine":  28,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_created', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/FastLazy.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  31,
+"endLine":  100,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_creating', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/FastLazy.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  32,
+"endLine":  101,
 "endColumn":  35
 }
 }

@@ -147,12 +147,12 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L121",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L51",
 "region":  {
-"startLine":  121,
-"startColumn":  22,
-"endLine":  121,
-"endColumn":  28
+"startLine":  51,
+"startColumn":  21,
+"endLine":  51,
+"endColumn":  27
 }
 }
 },
@@ -160,12 +160,12 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L51",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L121",
 "region":  {
-"startLine":  51,
-"startColumn":  21,
-"endLine":  51,
-"endColumn":  27
+"startLine":  121,
+"startColumn":  22,
+"endLine":  121,
+"endColumn":  28
 }
 }
 },
@@ -379,19 +379,6 @@
 },
 {
 "id":  "S2325",
-"message":  "Make 'SuggestSelectAndWhere' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  26,
-"endLine":  23,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S2325",
 "message":  "Make 'SuggestWhere' a static method.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L8",
@@ -400,6 +387,19 @@
 "startColumn":  29,
 "endLine":  8,
 "endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SuggestSelectAndWhere' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  26,
+"endLine":  23,
+"endColumn":  47
 }
 }
 },
@@ -433,11 +433,11 @@
 "id":  "S2325",
 "message":  "Make 'IsActive' a static property.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3453.cs#L18",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3453.cs#L9",
 "region":  {
-"startLine":  18,
+"startLine":  9,
 "startColumn":  25,
-"endLine":  18,
+"endLine":  9,
 "endColumn":  33
 }
 }
@@ -446,11 +446,11 @@
 "id":  "S2325",
 "message":  "Make 'IsActive' a static property.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3453.cs#L9",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3453.cs#L18",
 "region":  {
-"startLine":  9,
+"startLine":  18,
 "startColumn":  25,
-"endLine":  9,
+"endLine":  18,
 "endColumn":  33
 }
 }

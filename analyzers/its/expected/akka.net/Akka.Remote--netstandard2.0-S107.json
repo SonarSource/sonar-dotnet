@@ -2,32 +2,6 @@
 "issues":  [
 {
 "id":  "S107",
-"message":  "Method has 9 parameters, which is greater than the 7 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1639-L1641",
-"region":  {
-"startLine":  1639,
-"startColumn":  48,
-"endLine":  1641,
-"endColumn":  173
-}
-}
-},
-{
-"id":  "S107",
-"message":  "Method has 10 parameters, which is greater than the 7 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L2098-L2108",
-"region":  {
-"startLine":  2098,
-"startColumn":  40,
-"endLine":  2108,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S107",
 "message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L464-L472",
@@ -49,6 +23,32 @@
 "startColumn":  60,
 "endLine":  850,
 "endColumn":  39
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1639-L1641",
+"region":  {
+"startLine":  1639,
+"startColumn":  48,
+"endLine":  1641,
+"endColumn":  173
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 10 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L2098-L2108",
+"region":  {
+"startLine":  2098,
+"startColumn":  40,
+"endLine":  2108,
+"endColumn":  65
 }
 }
 },

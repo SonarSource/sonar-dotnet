@@ -4,12 +4,12 @@
 "id":  "S3358",
 "message":  "Extract this nested ternary operation into an independent statement.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L366",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L79",
 "region":  {
-"startLine":  366,
-"startColumn":  14,
-"endLine":  366,
-"endColumn":  132
+"startLine":  79,
+"startColumn":  17,
+"endLine":  79,
+"endColumn":  89
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S3358",
 "message":  "Extract this nested ternary operation into an independent statement.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L79",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L366",
 "region":  {
-"startLine":  79,
-"startColumn":  17,
-"endLine":  79,
-"endColumn":  89
+"startLine":  366,
+"startColumn":  14,
+"endLine":  366,
+"endColumn":  132
 }
 }
 },

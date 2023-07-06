@@ -28,19 +28,6 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private method 'Foo'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/handwritten.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  22,
-"endLine":  14,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private method 'Method'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/handwritten.cs#L8",
@@ -49,6 +36,19 @@
 "startColumn":  21,
 "endLine":  8,
 "endColumn":  27
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Foo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/handwritten.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  22,
+"endLine":  14,
+"endColumn":  25
 }
 }
 }

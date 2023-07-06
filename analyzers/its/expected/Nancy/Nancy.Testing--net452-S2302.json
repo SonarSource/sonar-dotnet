@@ -2,45 +2,6 @@
 "issues":  [
 {
 "id":  "S2302",
-"message":  "Replace the string 'actual' with 'nameof(actual)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L103",
-"region":  {
-"startLine":  103,
-"startColumn":  57,
-"endLine":  103,
-"endColumn":  122
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'values' with 'nameof(values)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L116",
-"region":  {
-"startLine":  116,
-"startColumn":  43,
-"endLine":  116,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'condition' with 'nameof(condition)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L151",
-"region":  {
-"startLine":  151,
-"startColumn":  43,
-"endLine":  151,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S2302",
 "message":  "Replace the string 'expected' with 'nameof(expected)'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L29",
@@ -114,6 +75,45 @@
 "startColumn":  43,
 "endLine":  76,
 "endColumn":  73
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'actual' with 'nameof(actual)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  57,
+"endLine":  103,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'values' with 'nameof(values)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  43,
+"endLine":  116,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'condition' with 'nameof(condition)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  43,
+"endLine":  151,
+"endColumn":  71
 }
 }
 },

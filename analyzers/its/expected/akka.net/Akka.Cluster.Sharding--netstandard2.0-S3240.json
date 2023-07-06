@@ -4,12 +4,12 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1343",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L97",
 "region":  {
-"startLine":  1343,
-"startColumn":  21,
-"endLine":  1343,
-"endColumn":  23
+"startLine":  97,
+"startColumn":  13,
+"endLine":  97,
+"endColumn":  15
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L97",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1343",
 "region":  {
-"startLine":  97,
-"startColumn":  13,
-"endLine":  97,
-"endColumn":  15
+"startLine":  1343,
+"startColumn":  21,
+"endLine":  1343,
+"endColumn":  23
 }
 }
 },
@@ -56,6 +56,19 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  17,
+"endLine":  89,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1294",
 "region":  {
 "startLine":  1294,
@@ -75,19 +88,6 @@
 "startColumn":  13,
 "endLine":  1427,
 "endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  17,
-"endLine":  89,
-"endColumn":  19
 }
 }
 }

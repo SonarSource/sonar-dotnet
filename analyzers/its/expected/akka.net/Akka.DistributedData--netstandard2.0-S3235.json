@@ -4,19 +4,6 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1356",
-"region":  {
-"startLine":  1356,
-"startColumn":  40,
-"endLine":  1356,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L419",
 "region":  {
 "startLine":  419,
@@ -114,6 +101,19 @@
 "startColumn":  84,
 "endLine":  960,
 "endColumn":  86
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1356",
+"region":  {
+"startLine":  1356,
+"startColumn":  40,
+"endLine":  1356,
+"endColumn":  42
 }
 }
 },

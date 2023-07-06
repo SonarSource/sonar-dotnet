@@ -30,12 +30,12 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L110",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L88",
 "region":  {
-"startLine":  110,
+"startLine":  88,
 "startColumn":  23,
-"endLine":  110,
-"endColumn":  52
+"endLine":  88,
+"endColumn":  48
 }
 }
 },
@@ -43,12 +43,12 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L88",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L110",
 "region":  {
-"startLine":  88,
+"startLine":  110,
 "startColumn":  23,
-"endLine":  88,
-"endColumn":  48
+"endLine":  110,
+"endColumn":  52
 }
 }
 },
@@ -82,12 +82,12 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2527",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L526",
 "region":  {
-"startLine":  2527,
+"startLine":  526,
 "startColumn":  27,
-"endLine":  2527,
-"endColumn":  33
+"endLine":  526,
+"endColumn":  37
 }
 }
 },
@@ -95,12 +95,12 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L526",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2527",
 "region":  {
-"startLine":  526,
+"startLine":  2527,
 "startColumn":  27,
-"endLine":  526,
-"endColumn":  37
+"endLine":  2527,
+"endColumn":  33
 }
 }
 },

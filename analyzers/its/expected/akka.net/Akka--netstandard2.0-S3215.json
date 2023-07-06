@@ -264,12 +264,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L104",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L55",
 "region":  {
-"startLine":  104,
-"startColumn":  21,
-"endLine":  104,
-"endColumn":  39
+"startLine":  55,
+"startColumn":  29,
+"endLine":  55,
+"endColumn":  53
 }
 }
 },
@@ -277,12 +277,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L55",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L104",
 "region":  {
-"startLine":  55,
-"startColumn":  29,
-"endLine":  55,
-"endColumn":  53
+"startLine":  104,
+"startColumn":  21,
+"endLine":  104,
+"endColumn":  39
 }
 }
 }

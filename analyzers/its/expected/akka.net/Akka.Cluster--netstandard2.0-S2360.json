@@ -95,12 +95,12 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L146",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L65",
 "region":  {
-"startLine":  146,
-"startColumn":  126,
-"endLine":  146,
-"endColumn":  132
+"startLine":  65,
+"startColumn":  136,
+"endLine":  65,
+"endColumn":  142
 }
 }
 },
@@ -108,12 +108,12 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L65",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L146",
 "region":  {
-"startLine":  65,
-"startColumn":  136,
-"endLine":  65,
-"endColumn":  142
+"startLine":  146,
+"startColumn":  126,
+"endLine":  146,
+"endColumn":  132
 }
 }
 }

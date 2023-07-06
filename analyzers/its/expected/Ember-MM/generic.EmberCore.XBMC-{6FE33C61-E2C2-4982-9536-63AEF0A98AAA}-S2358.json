@@ -4,6 +4,19 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  80,
+"endLine":  37,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L122",
 "region":  {
 "startLine":  122,
@@ -62,19 +75,6 @@
 "startColumn":  12,
 "endLine":  146,
 "endColumn":  31
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  80,
-"endLine":  37,
-"endColumn":  100
 }
 }
 },

@@ -54,19 +54,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1073",
-"region":  {
-"startLine":  1073,
-"startColumn":  58,
-"endLine":  1073,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L381",
@@ -88,6 +75,19 @@
 "startColumn":  58,
 "endLine":  383,
 "endColumn":  61
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1073",
+"region":  {
+"startLine":  1073,
+"startColumn":  58,
+"endLine":  1073,
+"endColumn":  60
 }
 }
 },
@@ -119,6 +119,19 @@
 },
 {
 "id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  32,
+"endLine":  48,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L164",
@@ -140,19 +153,6 @@
 "startColumn":  34,
 "endLine":  373,
 "endColumn":  45
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  32,
-"endLine":  48,
-"endColumn":  34
 }
 }
 },

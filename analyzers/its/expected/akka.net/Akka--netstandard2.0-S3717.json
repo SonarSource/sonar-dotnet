@@ -43,11 +43,11 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconObject.cs#L109",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconObject.cs#L88",
 "region":  {
-"startLine":  109,
+"startLine":  88,
 "startColumn":  13,
-"endLine":  109,
+"endLine":  88,
 "endColumn":  94
 }
 }
@@ -56,11 +56,11 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconObject.cs#L88",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconObject.cs#L109",
 "region":  {
-"startLine":  88,
+"startLine":  109,
 "startColumn":  13,
-"endLine":  88,
+"endLine":  109,
 "endColumn":  94
 }
 }

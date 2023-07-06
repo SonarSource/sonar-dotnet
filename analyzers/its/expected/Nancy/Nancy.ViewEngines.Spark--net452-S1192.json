@@ -2,6 +2,90 @@
 "issues":  [
 {
 "id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Application.spark' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L188",
+"region":  {
+"startLine":  188,
+"startColumn":  65,
+"endLine":  188,
+"endColumn":  84
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L190",
+"region":  {
+"startLine":  190,
+"startColumn":  64,
+"endLine":  190,
+"endColumn":  83
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L192",
+"region":  {
+"startLine":  192,
+"startColumn":  74,
+"endLine":  192,
+"endColumn":  93
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  73,
+"endLine":  194,
+"endColumn":  92
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Application.shade' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L189",
+"region":  {
+"startLine":  189,
+"startColumn":  65,
+"endLine":  189,
+"endColumn":  84
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L191",
+"region":  {
+"startLine":  191,
+"startColumn":  64,
+"endLine":  191,
+"endColumn":  83
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  74,
+"endLine":  193,
+"endColumn":  93
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  73,
+"endLine":  195,
+"endColumn":  92
+}
+}
+]
+},
+{
+"id":  "S1192",
 "message":  "Define a constant instead of using this literal '.spark' 7 times.",
 "location":  [
 {
@@ -140,6 +224,84 @@
 },
 {
 "id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Layouts' 8 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L171",
+"region":  {
+"startLine":  171,
+"startColumn":  54,
+"endLine":  171,
+"endColumn":  63
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L172",
+"region":  {
+"startLine":  172,
+"startColumn":  54,
+"endLine":  172,
+"endColumn":  63
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L177",
+"region":  {
+"startLine":  177,
+"startColumn":  63,
+"endLine":  177,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  63,
+"endLine":  178,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L188",
+"region":  {
+"startLine":  188,
+"startColumn":  54,
+"endLine":  188,
+"endColumn":  63
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L189",
+"region":  {
+"startLine":  189,
+"startColumn":  54,
+"endLine":  189,
+"endColumn":  63
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L192",
+"region":  {
+"startLine":  192,
+"startColumn":  63,
+"endLine":  192,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  63,
+"endLine":  193,
+"endColumn":  72
+}
+}
+]
+},
+{
+"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'Shared' 10 times.",
 "location":  [
 {
@@ -236,84 +398,6 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Layouts' 8 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L171",
-"region":  {
-"startLine":  171,
-"startColumn":  54,
-"endLine":  171,
-"endColumn":  63
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L172",
-"region":  {
-"startLine":  172,
-"startColumn":  54,
-"endLine":  172,
-"endColumn":  63
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L177",
-"region":  {
-"startLine":  177,
-"startColumn":  63,
-"endLine":  177,
-"endColumn":  72
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L178",
-"region":  {
-"startLine":  178,
-"startColumn":  63,
-"endLine":  178,
-"endColumn":  72
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L188",
-"region":  {
-"startLine":  188,
-"startColumn":  54,
-"endLine":  188,
-"endColumn":  63
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L189",
-"region":  {
-"startLine":  189,
-"startColumn":  54,
-"endLine":  189,
-"endColumn":  63
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L192",
-"region":  {
-"startLine":  192,
-"startColumn":  63,
-"endLine":  192,
-"endColumn":  72
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L193",
-"region":  {
-"startLine":  193,
-"startColumn":  63,
-"endLine":  193,
-"endColumn":  72
-}
-}
-]
-},
-{
-"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'Views' 10 times.",
 "location":  [
 {
@@ -404,90 +488,6 @@
 "startColumn":  54,
 "endLine":  195,
 "endColumn":  61
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Application.spark' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L188",
-"region":  {
-"startLine":  188,
-"startColumn":  65,
-"endLine":  188,
-"endColumn":  84
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  64,
-"endLine":  190,
-"endColumn":  83
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L192",
-"region":  {
-"startLine":  192,
-"startColumn":  74,
-"endLine":  192,
-"endColumn":  93
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L194",
-"region":  {
-"startLine":  194,
-"startColumn":  73,
-"endLine":  194,
-"endColumn":  92
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Application.shade' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L189",
-"region":  {
-"startLine":  189,
-"startColumn":  65,
-"endLine":  189,
-"endColumn":  84
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L191",
-"region":  {
-"startLine":  191,
-"startColumn":  64,
-"endLine":  191,
-"endColumn":  83
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L193",
-"region":  {
-"startLine":  193,
-"startColumn":  74,
-"endLine":  193,
-"endColumn":  93
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  73,
-"endLine":  195,
-"endColumn":  92
 }
 }
 ]

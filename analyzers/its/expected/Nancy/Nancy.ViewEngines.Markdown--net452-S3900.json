@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'viewLocationResult' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Markdown/MarkDownViewEngine.cs#L101",
-"region":  {
-"startLine":  101,
-"startColumn":  33,
-"endLine":  101,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'renderContext' before using it.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Markdown/MarkDownViewEngine.cs#L70",
@@ -23,6 +10,19 @@
 "startColumn":  24,
 "endLine":  70,
 "endColumn":  37
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'viewLocationResult' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Markdown/MarkDownViewEngine.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  33,
+"endLine":  101,
+"endColumn":  51
 }
 }
 },

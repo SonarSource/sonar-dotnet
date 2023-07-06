@@ -4,12 +4,12 @@
 "id":  "S3603",
 "message":  "Remove the 'Pure' attribute or change the method to return a value.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3603.cs#L12",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3603.cs#L9",
 "region":  {
-"startLine":  12,
-"startColumn":  18,
-"endLine":  12,
-"endColumn":  22
+"startLine":  9,
+"startColumn":  14,
+"endLine":  9,
+"endColumn":  18
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S3603",
 "message":  "Remove the 'Pure' attribute or change the method to return a value.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3603.cs#L9",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3603.cs#L12",
 "region":  {
-"startLine":  9,
-"startColumn":  14,
-"endLine":  9,
-"endColumn":  18
+"startLine":  12,
+"startColumn":  18,
+"endLine":  12,
+"endColumn":  22
 }
 }
 }

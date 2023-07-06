@@ -17,32 +17,6 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1444",
-"region":  {
-"startLine":  1444,
-"startColumn":  12,
-"endLine":  1444,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1641",
-"region":  {
-"startLine":  1641,
-"startColumn":  47,
-"endLine":  1641,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L970",
 "region":  {
 "startLine":  970,
@@ -82,12 +56,25 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L129",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1444",
 "region":  {
-"startLine":  129,
+"startLine":  1444,
 "startColumn":  12,
-"endLine":  129,
-"endColumn":  31
+"endLine":  1444,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1641",
+"region":  {
+"startLine":  1641,
+"startColumn":  47,
+"endLine":  1641,
+"endColumn":  66
 }
 }
 },
@@ -114,6 +101,19 @@
 "startColumn":  24,
 "endLine":  87,
 "endColumn":  43
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  12,
+"endLine":  129,
+"endColumn":  31
 }
 }
 },

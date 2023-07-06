@@ -93,71 +93,6 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'h'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1013",
-"region":  {
-"startLine":  1013,
-"startColumn":  48,
-"endLine":  1013,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'ht'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1039",
-"region":  {
-"startLine":  1039,
-"startColumn":  41,
-"endLine":  1039,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'ht'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1041",
-"region":  {
-"startLine":  1041,
-"startColumn":  41,
-"endLine":  1041,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'n'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1173",
-"region":  {
-"startLine":  1173,
-"startColumn":  29,
-"endLine":  1173,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 's'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1175",
-"region":  {
-"startLine":  1175,
-"startColumn":  31,
-"endLine":  1175,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S1481",
 "message":  "Remove the unused local variable 'du'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L879",
@@ -218,6 +153,71 @@
 "startColumn":  41,
 "endLine":  986,
 "endColumn":  42
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'h'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1013",
+"region":  {
+"startLine":  1013,
+"startColumn":  48,
+"endLine":  1013,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'ht'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1039",
+"region":  {
+"startLine":  1039,
+"startColumn":  41,
+"endLine":  1039,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'ht'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1041",
+"region":  {
+"startLine":  1041,
+"startColumn":  41,
+"endLine":  1041,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'n'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1173",
+"region":  {
+"startLine":  1173,
+"startColumn":  29,
+"endLine":  1173,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 's'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1175",
+"region":  {
+"startLine":  1175,
+"startColumn":  31,
+"endLine":  1175,
+"endColumn":  32
 }
 }
 }

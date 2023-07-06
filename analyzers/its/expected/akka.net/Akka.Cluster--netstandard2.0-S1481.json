@@ -15,19 +15,6 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'poolSize'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L1004",
-"region":  {
-"startLine":  1004,
-"startColumn":  37,
-"endLine":  1004,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S1481",
 "message":  "Remove the unused local variable 'member'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L780",
@@ -36,6 +23,19 @@
 "startColumn":  51,
 "endLine":  780,
 "endColumn":  57
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'poolSize'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L1004",
+"region":  {
+"startLine":  1004,
+"startColumn":  37,
+"endLine":  1004,
+"endColumn":  45
 }
 }
 },

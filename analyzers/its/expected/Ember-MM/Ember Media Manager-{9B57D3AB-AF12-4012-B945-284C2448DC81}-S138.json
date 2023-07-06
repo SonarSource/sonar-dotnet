@@ -28,19 +28,6 @@
 },
 {
 "id":  "S138",
-"message":  "This method 'SetInfo' has 103 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1182",
-"region":  {
-"startLine":  1182,
-"startColumn":  17,
-"endLine":  1182,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S138",
 "message":  "This method 'FillInfo' has 156 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L595",
@@ -49,6 +36,19 @@
 "startColumn":  17,
 "endLine":  595,
 "endColumn":  25
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SetInfo' has 103 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1182",
+"region":  {
+"startLine":  1182,
+"startColumn":  17,
+"endLine":  1182,
+"endColumn":  24
 }
 }
 },

@@ -2,6 +2,32 @@
 "issues":  [
 {
 "id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Get'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  21,
+"endLine":  43,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Select'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  21,
+"endLine":  79,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'StartWatch'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L121",
@@ -36,32 +62,6 @@
 "startColumn":  21,
 "endLine":  167,
 "endColumn":  25
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Get'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  21,
-"endLine":  43,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Select'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  21,
-"endLine":  79,
-"endColumn":  27
 }
 }
 },
@@ -119,19 +119,6 @@
 },
 {
 "id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'EarliestFirstSystemMessageList'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L157",
-"region":  {
-"startLine":  157,
-"startColumn":  21,
-"endLine":  157,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'LatestFirstSystemMessageList'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L83",
@@ -140,6 +127,19 @@
 "startColumn":  21,
 "endLine":  83,
 "endColumn":  49
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'EarliestFirstSystemMessageList'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L157",
+"region":  {
+"startLine":  157,
+"startColumn":  21,
+"endLine":  157,
+"endColumn":  51
 }
 }
 },

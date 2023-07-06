@@ -17,6 +17,32 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tests/Streams/HubsDocTests.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  21,
+"endLine":  61,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tests/Streams/HubsDocTests.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  21,
+"endLine":  84,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tests/Streams/HubsDocTests.cs#L126",
 "region":  {
 "startLine":  126,
@@ -49,32 +75,6 @@
 "startColumn":  21,
 "endLine":  197,
 "endColumn":  103
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tests/Streams/HubsDocTests.cs#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  21,
-"endLine":  61,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tests/Streams/HubsDocTests.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  21,
-"endLine":  84,
-"endColumn":  54
 }
 }
 },

@@ -86,6 +86,57 @@
 },
 {
 "id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  59,
+"endLine":  61,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  59,
+"endLine":  85,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  59,
+"endLine":  133,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  59,
+"endLine":  161,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L183",
+"region":  {
+"startLine":  183,
+"startColumn":  59,
+"endLine":  183,
+"endColumn":  66
+}
+}
+]
+},
+{
+"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'frame.jpg' 7 times.",
 "location":  [
 {
@@ -149,57 +200,6 @@
 "startColumn":  59,
 "endLine":  156,
 "endColumn":  70
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Error' 5 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  59,
-"endLine":  61,
-"endColumn":  66
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  59,
-"endLine":  85,
-"endColumn":  66
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L133",
-"region":  {
-"startLine":  133,
-"startColumn":  59,
-"endLine":  133,
-"endColumn":  66
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L161",
-"region":  {
-"startLine":  161,
-"startColumn":  59,
-"endLine":  161,
-"endColumn":  66
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L183",
-"region":  {
-"startLine":  183,
-"startColumn":  59,
-"endLine":  183,
-"endColumn":  66
 }
 }
 ]

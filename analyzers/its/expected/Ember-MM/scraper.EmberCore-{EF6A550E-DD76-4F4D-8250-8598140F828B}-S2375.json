@@ -54,19 +54,6 @@
 },
 {
 "id":  "S2375",
-"message":  "Wrap this and the following 7 statements that use 'Master.eLang' in a 'With' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1137",
-"region":  {
-"startLine":  1137,
-"startColumn":  13,
-"endLine":  1137,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S2375",
 "message":  "Wrap this and the following 8 statements that use 'Me.chkImage(iIndex)' in a 'With' statement.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L144",
@@ -75,6 +62,19 @@
 "startColumn":  17,
 "endLine":  144,
 "endColumn":  59
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 7 statements that use 'Master.eLang' in a 'With' statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1137",
+"region":  {
+"startLine":  1137,
+"startColumn":  13,
+"endLine":  1137,
+"endColumn":  72
 }
 }
 },

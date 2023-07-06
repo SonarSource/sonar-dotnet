@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'cKey', and replace 'var' with 'string'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L102",
-"region":  {
-"startLine":  102,
-"startColumn":  21,
-"endLine":  102,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S3353",
 "message":  "Add the 'const' modifier to 'key', and replace 'var' with 'string'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L59",
@@ -23,6 +10,19 @@
 "startColumn":  17,
 "endLine":  59,
 "endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'cKey', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  21,
+"endLine":  102,
+"endColumn":  25
 }
 }
 },

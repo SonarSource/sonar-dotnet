@@ -314,6 +314,19 @@
 },
 {
 "id":  "S2325",
+"message":  "Make 'HasRequiredType' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  21,
+"endLine":  85,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
 "message":  "Make 'ProducesMessageQueue' a static method.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L105",
@@ -361,19 +374,6 @@
 "startColumn":  22,
 "endLine":  246,
 "endColumn":  43
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'HasRequiredType' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  21,
-"endLine":  85,
-"endColumn":  36
 }
 }
 },

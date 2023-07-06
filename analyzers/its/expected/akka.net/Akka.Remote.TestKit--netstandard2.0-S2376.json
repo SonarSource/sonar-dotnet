@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S2376",
-"message":  "Provide a getter for 'TestTransport' or replace the property with a 'SetTestTransport' method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  21,
-"endLine":  110,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2376",
 "message":  "Provide a getter for 'CommonConfig' or replace the property with a 'SetCommonConfig' method.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L48",
@@ -23,6 +10,19 @@
 "startColumn":  23,
 "endLine":  48,
 "endColumn":  35
+}
+}
+},
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'TestTransport' or replace the property with a 'SetTestTransport' method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  21,
+"endLine":  110,
+"endColumn":  34
 }
 }
 }

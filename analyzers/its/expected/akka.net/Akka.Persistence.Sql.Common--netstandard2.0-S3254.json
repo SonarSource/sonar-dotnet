@@ -4,6 +4,19 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  50,
+"endLine":  90,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L260",
 "region":  {
 "startLine":  260,
@@ -43,12 +56,12 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L90",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L74",
 "region":  {
-"startLine":  90,
-"startColumn":  50,
-"endLine":  90,
-"endColumn":  55
+"startLine":  74,
+"startColumn":  58,
+"endLine":  74,
+"endColumn":  62
 }
 }
 },
@@ -75,19 +88,6 @@
 "startColumn":  64,
 "endLine":  140,
 "endColumn":  68
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  58,
-"endLine":  74,
-"endColumn":  62
 }
 }
 }

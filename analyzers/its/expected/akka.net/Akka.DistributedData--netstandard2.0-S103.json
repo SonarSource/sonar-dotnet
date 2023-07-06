@@ -106,19 +106,6 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1031",
-"region":  {
-"startLine":  1031,
-"startColumn":  1,
-"endLine":  1031,
-"endColumn":  210
-}
-}
-},
-{
-"id":  "S103",
 "message":  "Split this 216 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L57",
@@ -127,6 +114,19 @@
 "startColumn":  1,
 "endLine":  57,
 "endColumn":  217
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1031",
+"region":  {
+"startLine":  1031,
+"startColumn":  1,
+"endLine":  1031,
+"endColumn":  210
 }
 }
 },

@@ -4,12 +4,12 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L118",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L47",
 "region":  {
-"startLine":  118,
-"startColumn":  17,
-"endLine":  118,
-"endColumn":  67
+"startLine":  47,
+"startColumn":  21,
+"endLine":  47,
+"endColumn":  59
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L47",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L118",
 "region":  {
-"startLine":  47,
-"startColumn":  21,
-"endLine":  47,
-"endColumn":  59
+"startLine":  118,
+"startColumn":  17,
+"endLine":  118,
+"endColumn":  67
 }
 }
 }

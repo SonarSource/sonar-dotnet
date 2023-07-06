@@ -472,11 +472,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Index.cs#L177",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Index.cs#L73",
 "region":  {
-"startLine":  177,
+"startLine":  73,
 "startColumn":  25,
-"endLine":  177,
+"endLine":  73,
 "endColumn":  27
 }
 }
@@ -485,11 +485,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Index.cs#L73",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Index.cs#L177",
 "region":  {
-"startLine":  73,
+"startLine":  177,
 "startColumn":  25,
-"endLine":  73,
+"endLine":  177,
 "endColumn":  27
 }
 }
@@ -511,11 +511,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L102",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L78",
 "region":  {
-"startLine":  102,
+"startLine":  78,
 "startColumn":  25,
-"endLine":  102,
+"endLine":  78,
 "endColumn":  27
 }
 }
@@ -524,11 +524,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L78",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L102",
 "region":  {
-"startLine":  78,
+"startLine":  102,
 "startColumn":  25,
-"endLine":  78,
+"endLine":  102,
 "endColumn":  27
 }
 }

@@ -4,19 +4,6 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L188",
-"region":  {
-"startLine":  188,
-"startColumn":  32,
-"endLine":  188,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L37",
 "region":  {
 "startLine":  37,
@@ -95,11 +82,11 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L120",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L188",
 "region":  {
-"startLine":  120,
+"startLine":  188,
 "startColumn":  32,
-"endLine":  120,
+"endLine":  188,
 "endColumn":  163
 }
 }
@@ -179,6 +166,19 @@
 "startColumn":  13,
 "endLine":  50,
 "endColumn":  144
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  32,
+"endLine":  120,
+"endColumn":  163
 }
 }
 },

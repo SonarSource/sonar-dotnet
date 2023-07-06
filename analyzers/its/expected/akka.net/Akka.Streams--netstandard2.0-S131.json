@@ -108,6 +108,19 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L500",
+"region":  {
+"startLine":  500,
+"startColumn":  21,
+"endLine":  500,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1084",
 "region":  {
 "startLine":  1084,
@@ -179,19 +192,6 @@
 "startColumn":  25,
 "endLine":  2316,
 "endColumn":  31
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'default' clause to this 'switch' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L500",
-"region":  {
-"startLine":  500,
-"startColumn":  21,
-"endLine":  500,
-"endColumn":  27
 }
 }
 },

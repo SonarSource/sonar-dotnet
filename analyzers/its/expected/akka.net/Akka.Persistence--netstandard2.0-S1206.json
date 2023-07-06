@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S1206",
-"message":  "This struct overrides 'Equals' and should therefore also override 'GetHashCode'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L100",
-"region":  {
-"startLine":  100,
-"startColumn":  19,
-"endLine":  100,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L34",
@@ -36,6 +23,19 @@
 "startColumn":  18,
 "endLine":  66,
 "endColumn":  31
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This struct overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  19,
+"endLine":  100,
+"endColumn":  38
 }
 }
 }

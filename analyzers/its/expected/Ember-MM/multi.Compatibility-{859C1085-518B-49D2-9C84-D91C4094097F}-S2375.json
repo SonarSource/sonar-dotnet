@@ -28,19 +28,6 @@
 },
 {
 "id":  "S2375",
-"message":  "Wrap this and the following 9 statements that use 'Me.fYAMJ' in a 'With' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L105",
-"region":  {
-"startLine":  105,
-"startColumn":  3,
-"endLine":  105,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2375",
 "message":  "Wrap this and the following 10 statements that use 'Me.fYAMJ' in a 'With' statement.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L70",
@@ -49,6 +36,19 @@
 "startColumn":  3,
 "endLine":  70,
 "endColumn":  44
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 9 statements that use 'Me.fYAMJ' in a 'With' statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  3,
+"endLine":  105,
+"endColumn":  43
 }
 }
 }

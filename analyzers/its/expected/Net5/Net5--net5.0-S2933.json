@@ -28,6 +28,19 @@
 },
 {
 "id":  "S2933",
+"message":  "Make 'doc' 'readonly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2755.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  21,
+"endLine":  9,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2933",
 "message":  "Make 'reader' 'readonly'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2755.cs#L10",
@@ -49,19 +62,6 @@
 "startColumn":  23,
 "endLine":  11,
 "endColumn":  36
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'doc' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2755.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  21,
-"endLine":  9,
-"endColumn":  24
 }
 }
 },

@@ -186,12 +186,12 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L154",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L90",
 "region":  {
-"startLine":  154,
-"startColumn":  28,
-"endLine":  154,
-"endColumn":  91
+"startLine":  90,
+"startColumn":  24,
+"endLine":  90,
+"endColumn":  97
 }
 }
 },
@@ -199,12 +199,12 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L90",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L154",
 "region":  {
-"startLine":  90,
-"startColumn":  24,
-"endLine":  90,
-"endColumn":  97
+"startLine":  154,
+"startColumn":  28,
+"endLine":  154,
+"endColumn":  91
 }
 }
 },
@@ -277,12 +277,12 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1057",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L931",
 "region":  {
-"startLine":  1057,
-"startColumn":  149,
-"endLine":  1057,
-"endColumn":  182
+"startLine":  931,
+"startColumn":  96,
+"endLine":  931,
+"endColumn":  131
 }
 }
 },
@@ -290,12 +290,12 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L931",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1057",
 "region":  {
-"startLine":  931,
-"startColumn":  96,
-"endLine":  931,
-"endColumn":  131
+"startLine":  1057,
+"startColumn":  149,
+"endLine":  1057,
+"endColumn":  182
 }
 }
 },

@@ -17,32 +17,6 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1226",
-"region":  {
-"startLine":  1226,
-"startColumn":  29,
-"endLine":  1226,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1312",
-"region":  {
-"startLine":  1312,
-"startColumn":  13,
-"endLine":  1312,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L671",
 "region":  {
 "startLine":  671,
@@ -62,6 +36,32 @@
 "startColumn":  25,
 "endLine":  704,
 "endColumn":  37
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1226",
+"region":  {
+"startLine":  1226,
+"startColumn":  29,
+"endLine":  1226,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1312",
+"region":  {
+"startLine":  1312,
+"startColumn":  13,
+"endLine":  1312,
+"endColumn":  26
 }
 }
 },
@@ -108,6 +108,32 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  13,
+"endLine":  70,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  71,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L186",
 "region":  {
 "startLine":  186,
@@ -139,32 +165,6 @@
 "startLine":  5296,
 "startColumn":  17,
 "endLine":  5296,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  13,
-"endLine":  70,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L71",
-"region":  {
-"startLine":  71,
-"startColumn":  13,
-"endLine":  71,
 "endColumn":  23
 }
 }

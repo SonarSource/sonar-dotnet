@@ -15,19 +15,6 @@
 },
 {
 "id":  "S4049",
-"message":  "Consider making method 'GetMappers' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/InternalApi.cs#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  36,
-"endLine":  118,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S4049",
 "message":  "Consider making method 'GetAllTypeMaps' a property.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/InternalApi.cs#L65",
@@ -36,6 +23,19 @@
 "startColumn":  38,
 "endLine":  65,
 "endColumn":  52
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMappers' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/InternalApi.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  36,
+"endLine":  118,
+"endColumn":  46
 }
 }
 },

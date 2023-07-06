@@ -2,32 +2,6 @@
 "issues":  [
 {
 "id":  "S2325",
-"message":  "Make 'AllUnreachable' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L101",
-"region":  {
-"startLine":  101,
-"startColumn":  22,
-"endLine":  101,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'RecordsFrom' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L106",
-"region":  {
-"startLine":  106,
-"startColumn":  22,
-"endLine":  106,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2325",
 "message":  "Make 'AddUnreachable' a static method.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L37",
@@ -101,6 +75,32 @@
 "startColumn":  22,
 "endLine":  96,
 "endColumn":  48
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AllUnreachable' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  22,
+"endLine":  101,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'RecordsFrom' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  22,
+"endLine":  106,
+"endColumn":  33
 }
 }
 },

@@ -80,19 +80,6 @@
 },
 {
 "id":  "S3956",
-"message":  "Refactor this method to use a generic collection designed for inheritance.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  153,
-"endLine":  104,
-"endColumn":  169
-}
-}
-},
-{
-"id":  "S3956",
 "message":  "Refactor this property to use a generic collection designed for inheritance.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L15",
@@ -165,6 +152,19 @@
 "startLine":  86,
 "startColumn":  153,
 "endLine":  86,
+"endColumn":  169
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  153,
+"endLine":  104,
 "endColumn":  169
 }
 }

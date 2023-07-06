@@ -43,11 +43,11 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L125",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L85",
 "region":  {
-"startLine":  125,
+"startLine":  85,
 "startColumn":  17,
-"endLine":  125,
+"endLine":  85,
 "endColumn":  64
 }
 }
@@ -56,11 +56,11 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L85",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L125",
 "region":  {
-"startLine":  85,
+"startLine":  125,
 "startColumn":  17,
-"endLine":  85,
+"endLine":  125,
 "endColumn":  64
 }
 }

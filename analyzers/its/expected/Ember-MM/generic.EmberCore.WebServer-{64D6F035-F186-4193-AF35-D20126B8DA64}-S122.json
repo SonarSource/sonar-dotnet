@@ -30,12 +30,12 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L184",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L57",
 "region":  {
-"startLine":  184,
+"startLine":  57,
 "startColumn":  9,
-"endLine":  184,
-"endColumn":  67
+"endLine":  57,
+"endColumn":  37
 }
 }
 },
@@ -43,12 +43,12 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L57",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L184",
 "region":  {
-"startLine":  57,
+"startLine":  184,
 "startColumn":  9,
-"endLine":  57,
-"endColumn":  37
+"endLine":  184,
+"endColumn":  67
 }
 }
 },

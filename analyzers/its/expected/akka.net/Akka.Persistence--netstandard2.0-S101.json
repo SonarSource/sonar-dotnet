@@ -4,6 +4,19 @@
 "id":  "S101",
 "message":  "Rename class 'PersistentFSM' to match pascal case naming rules, consider using 'PersistentFsm'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  27,
+"endLine":  24,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'PersistentFSM' to match pascal case naming rules, consider using 'PersistentFsm'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L163",
 "region":  {
 "startLine":  163,
@@ -23,19 +36,6 @@
 "startColumn":  22,
 "endLine":  203,
 "endColumn":  43
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'PersistentFSM' to match pascal case naming rules, consider using 'PersistentFsm'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  27,
-"endLine":  24,
-"endColumn":  40
 }
 }
 },

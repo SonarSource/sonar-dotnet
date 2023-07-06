@@ -584,6 +584,120 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L629",
+"region":  {
+"startLine":  629,
+"startColumn":  30,
+"endLine":  629,
+"endColumn":  59
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L629",
+"region":  {
+"startLine":  629,
+"startColumn":  30,
+"endLine":  629,
+"endColumn":  59
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L633",
+"region":  {
+"startLine":  633,
+"startColumn":  13,
+"endLine":  633,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L633",
+"region":  {
+"startLine":  633,
+"startColumn":  38,
+"endLine":  633,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L637",
+"region":  {
+"startLine":  637,
+"startColumn":  21,
+"endLine":  637,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L637",
+"region":  {
+"startLine":  637,
+"startColumn":  33,
+"endLine":  637,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L647",
+"region":  {
+"startLine":  647,
+"startColumn":  29,
+"endLine":  647,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L647",
+"region":  {
+"startLine":  647,
+"startColumn":  70,
+"endLine":  647,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L654",
+"region":  {
+"startLine":  654,
+"startColumn":  21,
+"endLine":  654,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L659",
+"region":  {
+"startLine":  659,
+"startColumn":  29,
+"endLine":  659,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L659",
+"region":  {
+"startLine":  659,
+"startColumn":  41,
+"endLine":  659,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L666",
+"region":  {
+"startLine":  666,
+"startColumn":  26,
+"endLine":  666,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
 "location":  [
 {
@@ -764,120 +878,6 @@
 "startColumn":  39,
 "endLine":  518,
 "endColumn":  41
-}
-}
-]
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L629",
-"region":  {
-"startLine":  629,
-"startColumn":  30,
-"endLine":  629,
-"endColumn":  59
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L629",
-"region":  {
-"startLine":  629,
-"startColumn":  30,
-"endLine":  629,
-"endColumn":  59
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L633",
-"region":  {
-"startLine":  633,
-"startColumn":  13,
-"endLine":  633,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L633",
-"region":  {
-"startLine":  633,
-"startColumn":  38,
-"endLine":  633,
-"endColumn":  40
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L637",
-"region":  {
-"startLine":  637,
-"startColumn":  21,
-"endLine":  637,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L637",
-"region":  {
-"startLine":  637,
-"startColumn":  33,
-"endLine":  637,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L647",
-"region":  {
-"startLine":  647,
-"startColumn":  29,
-"endLine":  647,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L647",
-"region":  {
-"startLine":  647,
-"startColumn":  70,
-"endLine":  647,
-"endColumn":  72
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L654",
-"region":  {
-"startLine":  654,
-"startColumn":  21,
-"endLine":  654,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L659",
-"region":  {
-"startLine":  659,
-"startColumn":  29,
-"endLine":  659,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L659",
-"region":  {
-"startLine":  659,
-"startColumn":  41,
-"endLine":  659,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L666",
-"region":  {
-"startLine":  666,
-"startColumn":  26,
-"endLine":  666,
-"endColumn":  28
 }
 }
 ]
@@ -2261,6 +2261,129 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L545",
+"region":  {
+"startLine":  545,
+"startColumn":  22,
+"endLine":  545,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L545",
+"region":  {
+"startLine":  545,
+"startColumn":  22,
+"endLine":  545,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L549",
+"region":  {
+"startLine":  549,
+"startColumn":  13,
+"endLine":  549,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L551",
+"region":  {
+"startLine":  551,
+"startColumn":  17,
+"endLine":  551,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L554",
+"region":  {
+"startLine":  554,
+"startColumn":  18,
+"endLine":  554,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L554",
+"region":  {
+"startLine":  554,
+"startColumn":  48,
+"endLine":  554,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L562",
+"region":  {
+"startLine":  562,
+"startColumn":  18,
+"endLine":  562,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L565",
+"region":  {
+"startLine":  565,
+"startColumn":  17,
+"endLine":  565,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L568",
+"region":  {
+"startLine":  568,
+"startColumn":  18,
+"endLine":  568,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L570",
+"region":  {
+"startLine":  570,
+"startColumn":  17,
+"endLine":  570,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L575",
+"region":  {
+"startLine":  575,
+"startColumn":  17,
+"endLine":  575,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L575",
+"region":  {
+"startLine":  575,
+"startColumn":  33,
+"endLine":  575,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L582",
+"region":  {
+"startLine":  582,
+"startColumn":  17,
+"endLine":  582,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
 "location":  [
 {
@@ -2396,129 +2519,6 @@
 "startColumn":  25,
 "endLine":  399,
 "endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L545",
-"region":  {
-"startLine":  545,
-"startColumn":  22,
-"endLine":  545,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L545",
-"region":  {
-"startLine":  545,
-"startColumn":  22,
-"endLine":  545,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L549",
-"region":  {
-"startLine":  549,
-"startColumn":  13,
-"endLine":  549,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L551",
-"region":  {
-"startLine":  551,
-"startColumn":  17,
-"endLine":  551,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L554",
-"region":  {
-"startLine":  554,
-"startColumn":  18,
-"endLine":  554,
-"endColumn":  20
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L554",
-"region":  {
-"startLine":  554,
-"startColumn":  48,
-"endLine":  554,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L562",
-"region":  {
-"startLine":  562,
-"startColumn":  18,
-"endLine":  562,
-"endColumn":  20
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L565",
-"region":  {
-"startLine":  565,
-"startColumn":  17,
-"endLine":  565,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L568",
-"region":  {
-"startLine":  568,
-"startColumn":  18,
-"endLine":  568,
-"endColumn":  20
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L570",
-"region":  {
-"startLine":  570,
-"startColumn":  17,
-"endLine":  570,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L575",
-"region":  {
-"startLine":  575,
-"startColumn":  17,
-"endLine":  575,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L575",
-"region":  {
-"startLine":  575,
-"startColumn":  33,
-"endLine":  575,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L582",
-"region":  {
-"startLine":  582,
-"startColumn":  17,
-"endLine":  582,
-"endColumn":  19
 }
 }
 ]

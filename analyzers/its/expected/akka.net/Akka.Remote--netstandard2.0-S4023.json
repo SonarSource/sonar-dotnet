@@ -17,12 +17,12 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L134",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L82",
 "region":  {
-"startLine":  134,
+"startLine":  82,
 "startColumn":  26,
-"endLine":  134,
-"endColumn":  38
+"endLine":  82,
+"endColumn":  49
 }
 }
 },
@@ -30,12 +30,12 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L82",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L134",
 "region":  {
-"startLine":  82,
+"startLine":  134,
 "startColumn":  26,
-"endLine":  82,
-"endColumn":  49
+"endLine":  134,
+"endColumn":  38
 }
 }
 },

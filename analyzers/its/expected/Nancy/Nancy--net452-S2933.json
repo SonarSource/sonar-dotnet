@@ -67,6 +67,32 @@
 },
 {
 "id":  "S2933",
+"message":  "Make '_Container' 'readonly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L995",
+"region":  {
+"startLine":  995,
+"startColumn":  38,
+"endLine":  995,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_Registration' 'readonly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L996",
+"region":  {
+"startLine":  996,
+"startColumn":  38,
+"endLine":  996,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2933",
 "message":  "Make '_factory' 'readonly'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2756",
@@ -127,32 +153,6 @@
 "startColumn":  26,
 "endLine":  3272,
 "endColumn":  33
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make '_Container' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L995",
-"region":  {
-"startLine":  995,
-"startColumn":  38,
-"endLine":  995,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make '_Registration' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L996",
-"region":  {
-"startLine":  996,
-"startColumn":  38,
-"endLine":  996,
-"endColumn":  51
 }
 }
 },

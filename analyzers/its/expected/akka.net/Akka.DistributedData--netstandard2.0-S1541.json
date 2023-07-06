@@ -275,6 +275,120 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1417",
+"region":  {
+"startLine":  1417,
+"startColumn":  22,
+"endLine":  1417,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1417",
+"region":  {
+"startLine":  1417,
+"startColumn":  22,
+"endLine":  1417,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1423",
+"region":  {
+"startLine":  1423,
+"startColumn":  13,
+"endLine":  1423,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1427",
+"region":  {
+"startLine":  1427,
+"startColumn":  17,
+"endLine":  1427,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1429",
+"region":  {
+"startLine":  1429,
+"startColumn":  21,
+"endLine":  1429,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1431",
+"region":  {
+"startLine":  1431,
+"startColumn":  25,
+"endLine":  1431,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1431",
+"region":  {
+"startLine":  1431,
+"startColumn":  105,
+"endLine":  1431,
+"endColumn":  107
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1431",
+"region":  {
+"startLine":  1431,
+"startColumn":  69,
+"endLine":  1431,
+"endColumn":  71
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1431",
+"region":  {
+"startLine":  1431,
+"startColumn":  126,
+"endLine":  1431,
+"endColumn":  128
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1435",
+"region":  {
+"startLine":  1435,
+"startColumn":  81,
+"endLine":  1435,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1438",
+"region":  {
+"startLine":  1438,
+"startColumn":  29,
+"endLine":  1438,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1438",
+"region":  {
+"startLine":  1438,
+"startColumn":  64,
+"endLine":  1438,
+"endColumn":  66
+}
+}
+]
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
@@ -401,120 +515,6 @@
 "startColumn":  54,
 "endLine":  1253,
 "endColumn":  56
-}
-}
-]
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1417",
-"region":  {
-"startLine":  1417,
-"startColumn":  22,
-"endLine":  1417,
-"endColumn":  47
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1417",
-"region":  {
-"startLine":  1417,
-"startColumn":  22,
-"endLine":  1417,
-"endColumn":  47
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1423",
-"region":  {
-"startLine":  1423,
-"startColumn":  13,
-"endLine":  1423,
-"endColumn":  20
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1427",
-"region":  {
-"startLine":  1427,
-"startColumn":  17,
-"endLine":  1427,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1429",
-"region":  {
-"startLine":  1429,
-"startColumn":  21,
-"endLine":  1429,
-"endColumn":  28
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1431",
-"region":  {
-"startLine":  1431,
-"startColumn":  25,
-"endLine":  1431,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1431",
-"region":  {
-"startLine":  1431,
-"startColumn":  105,
-"endLine":  1431,
-"endColumn":  107
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1431",
-"region":  {
-"startLine":  1431,
-"startColumn":  69,
-"endLine":  1431,
-"endColumn":  71
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1431",
-"region":  {
-"startLine":  1431,
-"startColumn":  126,
-"endLine":  1431,
-"endColumn":  128
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1435",
-"region":  {
-"startLine":  1435,
-"startColumn":  81,
-"endLine":  1435,
-"endColumn":  82
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1438",
-"region":  {
-"startLine":  1438,
-"startColumn":  29,
-"endLine":  1438,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1438",
-"region":  {
-"startLine":  1438,
-"startColumn":  64,
-"endLine":  1438,
-"endColumn":  66
 }
 }
 ]
@@ -788,6 +788,129 @@
 "startColumn":  44,
 "endLine":  205,
 "endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L975",
+"region":  {
+"startLine":  975,
+"startColumn":  44,
+"endLine":  975,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L975",
+"region":  {
+"startLine":  975,
+"startColumn":  44,
+"endLine":  975,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L984",
+"region":  {
+"startLine":  984,
+"startColumn":  21,
+"endLine":  984,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L987",
+"region":  {
+"startLine":  987,
+"startColumn":  21,
+"endLine":  987,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L990",
+"region":  {
+"startLine":  990,
+"startColumn":  21,
+"endLine":  990,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L998",
+"region":  {
+"startLine":  998,
+"startColumn":  17,
+"endLine":  998,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1007",
+"region":  {
+"startLine":  1007,
+"startColumn":  13,
+"endLine":  1007,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1012",
+"region":  {
+"startLine":  1012,
+"startColumn":  21,
+"endLine":  1012,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1014",
+"region":  {
+"startLine":  1014,
+"startColumn":  29,
+"endLine":  1014,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1022",
+"region":  {
+"startLine":  1022,
+"startColumn":  21,
+"endLine":  1022,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1027",
+"region":  {
+"startLine":  1027,
+"startColumn":  21,
+"endLine":  1027,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1029",
+"region":  {
+"startLine":  1029,
+"startColumn":  29,
+"endLine":  1029,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1036",
+"region":  {
+"startLine":  1036,
+"startColumn":  21,
+"endLine":  1036,
+"endColumn":  25
 }
 }
 ]
@@ -1118,129 +1241,6 @@
 "startColumn":  17,
 "endLine":  149,
 "endColumn":  21
-}
-}
-]
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L975",
-"region":  {
-"startLine":  975,
-"startColumn":  44,
-"endLine":  975,
-"endColumn":  82
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L975",
-"region":  {
-"startLine":  975,
-"startColumn":  44,
-"endLine":  975,
-"endColumn":  82
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L984",
-"region":  {
-"startLine":  984,
-"startColumn":  21,
-"endLine":  984,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L987",
-"region":  {
-"startLine":  987,
-"startColumn":  21,
-"endLine":  987,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L990",
-"region":  {
-"startLine":  990,
-"startColumn":  21,
-"endLine":  990,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L998",
-"region":  {
-"startLine":  998,
-"startColumn":  17,
-"endLine":  998,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1007",
-"region":  {
-"startLine":  1007,
-"startColumn":  13,
-"endLine":  1007,
-"endColumn":  20
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1012",
-"region":  {
-"startLine":  1012,
-"startColumn":  21,
-"endLine":  1012,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1014",
-"region":  {
-"startLine":  1014,
-"startColumn":  29,
-"endLine":  1014,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1022",
-"region":  {
-"startLine":  1022,
-"startColumn":  21,
-"endLine":  1022,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1027",
-"region":  {
-"startLine":  1027,
-"startColumn":  21,
-"endLine":  1027,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1029",
-"region":  {
-"startLine":  1029,
-"startColumn":  29,
-"endLine":  1029,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1036",
-"region":  {
-"startLine":  1036,
-"startColumn":  21,
-"endLine":  1036,
-"endColumn":  25
 }
 }
 ]

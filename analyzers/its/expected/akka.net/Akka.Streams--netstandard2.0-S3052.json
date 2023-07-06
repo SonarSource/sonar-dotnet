@@ -54,6 +54,19 @@
 },
 {
 "id":  "S3052",
+"message":  "Remove this initialization to 'IsDebug', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  45,
+"endLine":  32,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3052",
 "message":  "Remove this initialization to 'IsFused', the compiler will do that for you.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1279",
@@ -87,19 +100,6 @@
 "startLine":  2129,
 "startColumn":  45,
 "endLine":  2129,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to 'IsDebug', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  45,
-"endLine":  32,
 "endColumn":  52
 }
 }
@@ -158,6 +158,19 @@
 },
 {
 "id":  "S3052",
+"message":  "Remove this initialization to '_partnerRef', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  43,
+"endLine":  88,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3052",
 "message":  "Remove this initialization to '_completed', the compiler will do that for you.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L108",
@@ -205,19 +218,6 @@
 "startColumn":  51,
 "endLine":  111,
 "endColumn":  55
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_partnerRef', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  43,
-"endLine":  88,
-"endColumn":  49
 }
 }
 }

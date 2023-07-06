@@ -43,6 +43,32 @@
 "id":  "S2156",
 "message":  "Remove this 'protected' modifier.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  9,
+"endLine":  69,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  9,
+"endLine":  86,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2156",
+"message":  "Remove this 'protected' modifier.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L106",
 "region":  {
 "startLine":  106,
@@ -74,32 +100,6 @@
 "startLine":  163,
 "startColumn":  9,
 "endLine":  163,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2156",
-"message":  "Remove this 'protected' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  9,
-"endLine":  69,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2156",
-"message":  "Remove this 'protected' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  9,
-"endLine":  86,
 "endColumn":  18
 }
 }

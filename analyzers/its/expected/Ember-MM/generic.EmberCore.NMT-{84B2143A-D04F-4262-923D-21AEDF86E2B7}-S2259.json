@@ -2,58 +2,6 @@
 "issues":  [
 {
 "id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movieindex")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
-"region":  {
-"startLine":  1498,
-"startColumn":  71,
-"endLine":  1498,
-"endColumn":  156
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movieindex")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
-"region":  {
-"startLine":  1498,
-"startColumn":  168,
-"endLine":  1498,
-"endColumn":  253
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvindex")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
-"region":  {
-"startLine":  1561,
-"startColumn":  71,
-"endLine":  1561,
-"endColumn":  153
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvindex")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
-"region":  {
-"startLine":  1561,
-"startColumn":  165,
-"endLine":  1561,
-"endColumn":  247
-}
-}
-},
-{
-"id":  "S2259",
 "message":  "'r.values.FirstOrDefault(Function(y) y.value = v)' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L166",
@@ -62,32 +10,6 @@
 "startColumn":  97,
 "endLine":  166,
 "endColumn":  145
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Params.FirstOrDefault(Function(y) y.name = dgvSettings.Rows(e.RowIndex).Cells(0).Value.ToString)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1695",
-"region":  {
-"startLine":  1695,
-"startColumn":  29,
-"endLine":  1695,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Properties.FirstOrDefault(Function(y) y.name = dgvProperties.Rows(e.RowIndex).Tag.ToString)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1706",
-"region":  {
-"startLine":  1706,
-"startColumn":  29,
-"endLine":  1706,
-"endColumn":  125
 }
 }
 },
@@ -257,6 +179,84 @@
 "startColumn":  23,
 "endLine":  998,
 "endColumn":  71
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movieindex")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
+"region":  {
+"startLine":  1498,
+"startColumn":  71,
+"endLine":  1498,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movieindex")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
+"region":  {
+"startLine":  1498,
+"startColumn":  168,
+"endLine":  1498,
+"endColumn":  253
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvindex")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
+"region":  {
+"startLine":  1561,
+"startColumn":  71,
+"endLine":  1561,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvindex")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
+"region":  {
+"startLine":  1561,
+"startColumn":  165,
+"endLine":  1561,
+"endColumn":  247
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Params.FirstOrDefault(Function(y) y.name = dgvSettings.Rows(e.RowIndex).Cells(0).Value.ToString)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1695",
+"region":  {
+"startLine":  1695,
+"startColumn":  29,
+"endLine":  1695,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Properties.FirstOrDefault(Function(y) y.name = dgvProperties.Rows(e.RowIndex).Tag.ToString)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1706",
+"region":  {
+"startLine":  1706,
+"startColumn":  29,
+"endLine":  1706,
+"endColumn":  125
 }
 }
 }

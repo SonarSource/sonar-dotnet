@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S1542",
-"message":  "Rename function 'ToStringNMT' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1453",
-"region":  {
-"startLine":  1453,
-"startColumn":  22,
-"endLine":  1453,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S1542",
 "message":  "Rename procedure 'BuildMovieHTML' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L292",
@@ -36,6 +23,19 @@
 "startColumn":  17,
 "endLine":  374,
 "endColumn":  28
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'ToStringNMT' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1453",
+"region":  {
+"startLine":  1453,
+"startColumn":  22,
+"endLine":  1453,
+"endColumn":  33
 }
 }
 },

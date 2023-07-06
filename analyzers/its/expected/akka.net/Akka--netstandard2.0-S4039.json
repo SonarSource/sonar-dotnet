@@ -28,19 +28,6 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'FSM' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalSupportsTestFSMRef<TState, TData>.ApplyState'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L1213",
-"region":  {
-"startLine":  1213,
-"startColumn":  57,
-"endLine":  1213,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S4039",
 "message":  "Make 'FSM' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalSupportsTestFSMRef<TState, TData>.IsStateTimerActive'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L886",
@@ -49,6 +36,19 @@
 "startColumn":  57,
 "endLine":  886,
 "endColumn":  75
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'FSM' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalSupportsTestFSMRef<TState, TData>.ApplyState'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L1213",
+"region":  {
+"startLine":  1213,
+"startColumn":  57,
+"endLine":  1213,
+"endColumn":  67
 }
 }
 },

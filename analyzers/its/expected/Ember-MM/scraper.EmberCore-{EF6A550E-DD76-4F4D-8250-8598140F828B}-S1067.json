@@ -69,6 +69,32 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L338-L340",
+"region":  {
+"startLine":  338,
+"startColumn":  44,
+"endLine":  340,
+"endColumn":  178
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L343",
+"region":  {
+"startLine":  343,
+"startColumn":  95,
+"endLine":  343,
+"endColumn":  388
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1125",
 "region":  {
 "startLine":  1125,
@@ -101,32 +127,6 @@
 "startColumn":  32,
 "endLine":  1195,
 "endColumn":  172
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L338-L340",
-"region":  {
-"startLine":  338,
-"startColumn":  44,
-"endLine":  340,
-"endColumn":  178
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L343",
-"region":  {
-"startLine":  343,
-"startColumn":  95,
-"endLine":  343,
-"endColumn":  388
 }
 }
 },

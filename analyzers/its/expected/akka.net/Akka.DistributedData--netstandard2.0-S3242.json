@@ -4,6 +4,32 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  48,
+"endLine":  63,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  48,
+"endLine":  81,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L100",
 "region":  {
 "startLine":  100,
@@ -75,32 +101,6 @@
 "startColumn":  58,
 "endLine":  191,
 "endColumn":  61
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  48,
-"endLine":  63,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L81",
-"region":  {
-"startLine":  81,
-"startColumn":  48,
-"endLine":  81,
-"endColumn":  51
 }
 }
 },
@@ -197,6 +197,19 @@
 },
 {
 "id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, Akka.DistributedData.Internal.Delta>' instead of 'System.Collections.Immutable.ImmutableDictionary<string, Akka.DistributedData.Internal.Delta>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L992",
+"region":  {
+"startLine":  992,
+"startColumn":  113,
+"endLine":  992,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<Akka.Actor.Address>' instead of 'System.Collections.Immutable.ImmutableHashSet<Akka.Actor.Address>'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1093",
@@ -231,19 +244,6 @@
 "startColumn":  79,
 "endLine":  1159,
 "endColumn":  90
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, Akka.DistributedData.Internal.Delta>' instead of 'System.Collections.Immutable.ImmutableDictionary<string, Akka.DistributedData.Internal.Delta>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L992",
-"region":  {
-"startLine":  992,
-"startColumn":  113,
-"endLine":  992,
-"endColumn":  119
 }
 }
 },

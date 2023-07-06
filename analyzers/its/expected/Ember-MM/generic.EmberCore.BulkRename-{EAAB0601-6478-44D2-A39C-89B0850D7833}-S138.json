@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S138",
+"message":  "This function 'ProccessPattern' has 154 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  28,
+"endLine":  76,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S138",
 "message":  "This method 'RenameSingle' has 105 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L241",
@@ -36,19 +49,6 @@
 "startColumn":  24,
 "endLine":  662,
 "endColumn":  38
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This function 'ProccessPattern' has 154 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  28,
-"endLine":  76,
-"endColumn":  43
 }
 }
 },

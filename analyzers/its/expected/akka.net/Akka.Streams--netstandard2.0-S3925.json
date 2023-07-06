@@ -518,6 +518,54 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  18,
+"endLine":  64,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  12,
+"endLine":  64,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  18,
+"endLine":  88,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  12,
+"endLine":  88,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L49",
 "region":  {
 "startLine":  49,
@@ -541,54 +589,6 @@
 "startLine":  49,
 "startColumn":  12,
 "endLine":  49,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  18,
-"endLine":  64,
-"endColumn":  37
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  12,
-"endLine":  64,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  18,
-"endLine":  88,
-"endColumn":  37
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  12,
-"endLine":  88,
 "endColumn":  17
 }
 }

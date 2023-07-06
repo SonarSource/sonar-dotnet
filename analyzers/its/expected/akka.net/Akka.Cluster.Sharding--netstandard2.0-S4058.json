@@ -43,32 +43,6 @@
 "id":  "S4058",
 "message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1153",
-"region":  {
-"startLine":  1153,
-"startColumn":  24,
-"endLine":  1153,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1204",
-"region":  {
-"startLine":  1204,
-"startColumn":  24,
-"endLine":  1204,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L441",
 "region":  {
 "startLine":  441,
@@ -165,6 +139,32 @@
 "startLine":  794,
 "startColumn":  24,
 "endLine":  794,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1153",
+"region":  {
+"startLine":  1153,
+"startColumn":  24,
+"endLine":  1153,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Shard.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1204",
+"region":  {
+"startLine":  1204,
+"startColumn":  24,
+"endLine":  1204,
 "endColumn":  49
 }
 }

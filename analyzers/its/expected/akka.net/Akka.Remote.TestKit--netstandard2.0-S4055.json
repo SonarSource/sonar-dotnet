@@ -4,12 +4,12 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L105",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L42",
 "region":  {
-"startLine":  105,
+"startLine":  42,
 "startColumn":  30,
-"endLine":  105,
-"endColumn":  43
+"endLine":  42,
+"endColumn":  44
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L42",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L105",
 "region":  {
-"startLine":  42,
+"startLine":  105,
 "startColumn":  30,
-"endLine":  42,
-"endColumn":  44
+"endLine":  105,
+"endColumn":  43
 }
 }
 },

@@ -82,12 +82,12 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1196",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L91",
 "region":  {
-"startLine":  1196,
-"startColumn":  9,
-"endLine":  1196,
-"endColumn":  15
+"startLine":  91,
+"startColumn":  25,
+"endLine":  91,
+"endColumn":  31
 }
 }
 },
@@ -108,12 +108,12 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L91",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1196",
 "region":  {
-"startLine":  91,
-"startColumn":  25,
-"endLine":  91,
-"endColumn":  31
+"startLine":  1196,
+"startColumn":  9,
+"endLine":  1196,
+"endColumn":  15
 }
 }
 },

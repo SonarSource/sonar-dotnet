@@ -4,6 +4,19 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  63,
+"endLine":  93,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L101",
 "region":  {
 "startLine":  101,
@@ -36,19 +49,6 @@
 "startColumn":  64,
 "endLine":  110,
 "endColumn":  101
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  63,
-"endLine":  93,
-"endColumn":  99
 }
 }
 }

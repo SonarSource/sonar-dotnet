@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'tPath'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L289",
-"region":  {
-"startLine":  289,
-"startColumn":  13,
-"endLine":  289,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S1481",
 "message":  "Remove the unused local variable 'mePath'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L38",
@@ -23,6 +10,19 @@
 "startColumn":  13,
 "endLine":  38,
 "endColumn":  19
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tPath'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L289",
+"region":  {
+"startLine":  289,
+"startColumn":  13,
+"endLine":  289,
+"endColumn":  18
 }
 }
 },

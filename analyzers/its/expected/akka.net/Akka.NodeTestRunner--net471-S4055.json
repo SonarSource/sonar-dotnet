@@ -4,12 +4,12 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.NodeTestRunner/Program.cs#L157",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.NodeTestRunner/Program.cs#L75",
 "region":  {
-"startLine":  157,
+"startLine":  75,
 "startColumn":  35,
-"endLine":  157,
-"endColumn":  135
+"endLine":  75,
+"endColumn":  64
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.NodeTestRunner/Program.cs#L75",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.NodeTestRunner/Program.cs#L157",
 "region":  {
-"startLine":  75,
+"startLine":  157,
 "startColumn":  35,
-"endLine":  75,
-"endColumn":  64
+"endLine":  157,
+"endColumn":  135
 }
 }
 }

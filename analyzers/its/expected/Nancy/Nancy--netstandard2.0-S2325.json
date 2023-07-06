@@ -41,19 +41,6 @@
 },
 {
 "id":  "S2325",
-"message":  "Make 'SayHelloWithAge' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L108",
-"region":  {
-"startLine":  108,
-"startColumn":  27,
-"endLine":  108,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S2325",
 "message":  "Make 'StringReturnValue' a static method.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L63",
@@ -101,6 +88,19 @@
 "startColumn":  27,
 "endLine":  94,
 "endColumn":  53
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SayHelloWithAge' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  27,
+"endLine":  108,
+"endColumn":  42
 }
 }
 },

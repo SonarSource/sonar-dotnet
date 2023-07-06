@@ -145,71 +145,6 @@
 },
 {
 "id":  "S1542",
-"message":  "Rename function 'GetServerURL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1153",
-"region":  {
-"startLine":  1153,
-"startColumn":  22,
-"endLine":  1153,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S1542",
-"message":  "Rename function 'RemoveServerURL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1161",
-"region":  {
-"startLine":  1161,
-"startColumn":  22,
-"endLine":  1161,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S1542",
-"message":  "Rename procedure 'TMDBDoneDownloading' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1266",
-"region":  {
-"startLine":  1266,
-"startColumn":  17,
-"endLine":  1266,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1542",
-"message":  "Rename procedure 'TMDBPostersDownloaded' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1284",
-"region":  {
-"startLine":  1284,
-"startColumn":  17,
-"endLine":  1284,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1542",
-"message":  "Rename procedure 'TMDBProgressUpdated' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1302",
-"region":  {
-"startLine":  1302,
-"startColumn":  17,
-"endLine":  1302,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1542",
 "message":  "Rename function 'IsTMDBURL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L600",
@@ -308,6 +243,71 @@
 "startLine":  883,
 "startColumn":  17,
 "endLine":  883,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'GetServerURL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1153",
+"region":  {
+"startLine":  1153,
+"startColumn":  22,
+"endLine":  1153,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'RemoveServerURL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1161",
+"region":  {
+"startLine":  1161,
+"startColumn":  22,
+"endLine":  1161,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'TMDBDoneDownloading' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1266",
+"region":  {
+"startLine":  1266,
+"startColumn":  17,
+"endLine":  1266,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'TMDBPostersDownloaded' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1284",
+"region":  {
+"startLine":  1284,
+"startColumn":  17,
+"endLine":  1284,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'TMDBProgressUpdated' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1302",
+"region":  {
+"startLine":  1302,
+"startColumn":  17,
+"endLine":  1302,
 "endColumn":  36
 }
 }
@@ -431,19 +431,6 @@
 },
 {
 "id":  "S1542",
-"message":  "Rename procedure 'ShowFromXML' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1051",
-"region":  {
-"startLine":  1051,
-"startColumn":  21,
-"endLine":  1051,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S1542",
 "message":  "Rename procedure 'ProcessTVDBZip' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L535",
@@ -452,6 +439,19 @@
 "startColumn":  20,
 "endLine":  535,
 "endColumn":  34
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'ShowFromXML' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1051",
+"region":  {
+"startLine":  1051,
+"startColumn":  21,
+"endLine":  1051,
+"endColumn":  32
 }
 }
 }

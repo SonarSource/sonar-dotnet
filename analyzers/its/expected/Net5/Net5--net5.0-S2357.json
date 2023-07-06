@@ -41,32 +41,6 @@
 },
 {
 "id":  "S2357",
-"message":  "Make 'Property' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L115",
-"region":  {
-"startLine":  115,
-"startColumn":  27,
-"endLine":  115,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Property' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L120",
-"region":  {
-"startLine":  120,
-"startColumn":  27,
-"endLine":  120,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2357",
 "message":  "Make 'FirstName' private.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L29",
@@ -114,6 +88,32 @@
 "startColumn":  55,
 "endLine":  67,
 "endColumn":  59
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Property' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  27,
+"endLine":  115,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Property' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  27,
+"endLine":  120,
+"endColumn":  35
 }
 }
 },

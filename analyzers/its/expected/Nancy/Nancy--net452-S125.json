@@ -17,6 +17,19 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L380",
+"region":  {
+"startLine":  380,
+"startColumn":  9,
+"endLine":  380,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2703",
 "region":  {
 "startLine":  2703,
@@ -127,19 +140,6 @@
 "startColumn":  13,
 "endLine":  3775,
 "endColumn":  145
-}
-}
-},
-{
-"id":  "S125",
-"message":  "Remove this commented out code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L380",
-"region":  {
-"startLine":  380,
-"startColumn":  9,
-"endLine":  380,
-"endColumn":  14
 }
 }
 },

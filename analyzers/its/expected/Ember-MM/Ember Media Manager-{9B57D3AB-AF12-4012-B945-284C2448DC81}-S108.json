@@ -4,11 +4,11 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1418",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L831",
 "region":  {
-"startLine":  1418,
+"startLine":  831,
 "startColumn":  17,
-"endLine":  1418,
+"endLine":  831,
 "endColumn":  22
 }
 }
@@ -17,11 +17,11 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L831",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1418",
 "region":  {
-"startLine":  831,
+"startLine":  1418,
 "startColumn":  17,
-"endLine":  831,
+"endLine":  1418,
 "endColumn":  22
 }
 }
@@ -114,6 +114,19 @@
 "startColumn":  4,
 "endLine":  185,
 "endColumn":  9
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L252",
+"region":  {
+"startLine":  252,
+"startColumn":  17,
+"endLine":  252,
+"endColumn":  22
 }
 }
 },
@@ -231,19 +244,6 @@
 "startColumn":  9,
 "endLine":  1659,
 "endColumn":  14
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L252",
-"region":  {
-"startLine":  252,
-"startColumn":  17,
-"endLine":  252,
-"endColumn":  22
 }
 }
 },

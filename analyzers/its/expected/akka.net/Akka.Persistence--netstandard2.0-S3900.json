@@ -145,19 +145,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'persistent' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/MemoryJournal.cs#L150",
-"region":  {
-"startLine":  150,
-"startColumn":  42,
-"endLine":  150,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'messages' before using it.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/MemoryJournal.cs#L84",
@@ -171,14 +158,14 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"message":  "Refactor this method to add validation of parameter 'persistent' before using it.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L115",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/MemoryJournal.cs#L150",
 "region":  {
-"startLine":  115,
-"startColumn":  28,
-"endLine":  115,
-"endColumn":  34
+"startLine":  150,
+"startColumn":  42,
+"endLine":  150,
+"endColumn":  52
 }
 }
 },
@@ -210,6 +197,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  28,
+"endLine":  115,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'representation' before using it.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/WriteJournal.cs#L51",
@@ -231,6 +231,19 @@
 "startColumn":  27,
 "endLine":  62,
 "endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  23,
+"endLine":  73,
+"endColumn":  29
 }
 }
 },
@@ -283,19 +296,6 @@
 "startColumn":  41,
 "endLine":  502,
 "endColumn":  47
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'system' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  23,
-"endLine":  73,
-"endColumn":  29
 }
 }
 },

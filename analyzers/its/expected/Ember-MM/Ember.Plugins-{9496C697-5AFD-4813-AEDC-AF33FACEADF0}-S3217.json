@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3217",
-"message":  "Either change the type of 'plugin' to 'IPlugin' or iterate on a generic collection of type 'IMovieImageScraper'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L119",
-"region":  {
-"startLine":  119,
-"startColumn":  22,
-"endLine":  119,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S3217",
 "message":  "Either change the type of 'plugin' to 'IPlugin' or iterate on a generic collection of type 'IMovieInfoScraper'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L79",
@@ -23,6 +10,19 @@
 "startColumn":  22,
 "endLine":  79,
 "endColumn":  39
+}
+}
+},
+{
+"id":  "S3217",
+"message":  "Either change the type of 'plugin' to 'IPlugin' or iterate on a generic collection of type 'IMovieImageScraper'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  22,
+"endLine":  119,
+"endColumn":  40
 }
 }
 }

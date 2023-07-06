@@ -56,12 +56,12 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1496",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L981",
 "region":  {
-"startLine":  1496,
-"startColumn":  16,
-"endLine":  1496,
-"endColumn":  20
+"startLine":  981,
+"startColumn":  20,
+"endLine":  981,
+"endColumn":  24
 }
 }
 },
@@ -69,12 +69,12 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L981",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1496",
 "region":  {
-"startLine":  981,
-"startColumn":  20,
-"endLine":  981,
-"endColumn":  24
+"startLine":  1496,
+"startColumn":  16,
+"endLine":  1496,
+"endColumn":  20
 }
 }
 }

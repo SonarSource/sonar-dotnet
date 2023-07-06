@@ -212,6 +212,19 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  43,
+"endLine":  93,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L103",
 "region":  {
 "startLine":  103,
@@ -244,71 +257,6 @@
 "startColumn":  49,
 "endLine":  179,
 "endColumn":  54
-}
-}
-},
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  43,
-"endLine":  93,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1009",
-"region":  {
-"startLine":  1009,
-"startColumn":  263,
-"endLine":  1009,
-"endColumn":  268
-}
-}
-},
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1086",
-"region":  {
-"startLine":  1086,
-"startColumn":  31,
-"endLine":  1086,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1125",
-"region":  {
-"startLine":  1125,
-"startColumn":  432,
-"endLine":  1125,
-"endColumn":  437
-}
-}
-},
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1129",
-"region":  {
-"startLine":  1129,
-"startColumn":  265,
-"endLine":  1129,
-"endColumn":  270
 }
 }
 },
@@ -374,6 +322,58 @@
 "startColumn":  174,
 "endLine":  981,
 "endColumn":  179
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1009",
+"region":  {
+"startLine":  1009,
+"startColumn":  263,
+"endLine":  1009,
+"endColumn":  268
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1086",
+"region":  {
+"startLine":  1086,
+"startColumn":  31,
+"endLine":  1086,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1125",
+"region":  {
+"startLine":  1125,
+"startColumn":  432,
+"endLine":  1125,
+"endColumn":  437
+}
+}
+},
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1129",
+"region":  {
+"startLine":  1129,
+"startColumn":  265,
+"endLine":  1129,
+"endColumn":  270
 }
 }
 },

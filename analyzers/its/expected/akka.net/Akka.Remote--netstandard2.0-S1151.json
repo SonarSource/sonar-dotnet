@@ -15,19 +15,6 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this switch section number of statements from 14 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1006",
-"region":  {
-"startLine":  1006,
-"startColumn":  21,
-"endLine":  1006,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S1151",
 "message":  "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L847",
@@ -75,6 +62,19 @@
 "startColumn":  21,
 "endLine":  945,
 "endColumn":  91
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 14 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1006",
+"region":  {
+"startLine":  1006,
+"startColumn":  21,
+"endLine":  1006,
+"endColumn":  44
 }
 }
 }

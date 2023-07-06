@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S138",
-"message":  "This constructor 'UnzipWithStageLogic' has 100 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1159",
-"region":  {
-"startLine":  1159,
-"startColumn":  20,
-"endLine":  1159,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S138",
 "message":  "This constructor 'UnzipWithStageLogic' has 86 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L927",
@@ -22,6 +9,19 @@
 "startLine":  927,
 "startColumn":  20,
 "endLine":  927,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This constructor 'UnzipWithStageLogic' has 100 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1159",
+"region":  {
+"startLine":  1159,
+"startColumn":  20,
+"endLine":  1159,
 "endColumn":  39
 }
 }

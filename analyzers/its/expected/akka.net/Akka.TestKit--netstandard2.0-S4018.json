@@ -4,6 +4,19 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  36,
+"endLine":  74,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L124",
 "region":  {
 "startLine":  124,
@@ -23,19 +36,6 @@
 "startColumn":  36,
 "endLine":  270,
 "endColumn":  46
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  36,
-"endLine":  74,
-"endColumn":  45
 }
 }
 },
@@ -75,6 +75,32 @@
 "startColumn":  21,
 "endLine":  314,
 "endColumn":  35
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  26,
+"endLine":  48,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  26,
+"endLine":  59,
+"endColumn":  33
 }
 }
 },
@@ -205,32 +231,6 @@
 "startColumn":  53,
 "endLine":  354,
 "endColumn":  72
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  26,
-"endLine":  48,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  26,
-"endLine":  59,
-"endColumn":  33
 }
 }
 },

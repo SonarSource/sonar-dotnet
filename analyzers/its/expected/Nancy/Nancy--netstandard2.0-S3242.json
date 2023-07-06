@@ -171,6 +171,19 @@
 },
 {
 "id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.IReflect' instead of 'System.Type'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L444",
+"region":  {
+"startLine":  444,
+"startColumn":  50,
+"endLine":  444,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3242",
 "message":  "Consider using more general type 'System.Reflection.MethodBase' instead of 'System.Reflection.ConstructorInfo'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3783",
@@ -192,19 +205,6 @@
 "startColumn":  81,
 "endLine":  3783,
 "endColumn":  91
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Reflection.IReflect' instead of 'System.Type'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L444",
-"region":  {
-"startLine":  444,
-"startColumn":  50,
-"endLine":  444,
-"endColumn":  60
 }
 }
 }

@@ -4,19 +4,6 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ActorRefSpec.cs#L215",
-"region":  {
-"startLine":  215,
-"startColumn":  21,
-"endLine":  215,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ActorRefSpec.cs#L74",
 "region":  {
 "startLine":  74,
@@ -36,6 +23,19 @@
 "startColumn":  21,
 "endLine":  97,
 "endColumn":  95
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ActorRefSpec.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  21,
+"endLine":  215,
+"endColumn":  64
 }
 }
 },
@@ -355,19 +355,6 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Stash/ActorWithStashSpec.cs#L332",
-"region":  {
-"startLine":  332,
-"startColumn":  21,
-"endLine":  332,
-"endColumn":  116
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Stash/ActorWithStashSpec.cs#L53",
 "region":  {
 "startLine":  53,
@@ -394,12 +381,12 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Dispatch/DispatchersSpec.cs#L101",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Stash/ActorWithStashSpec.cs#L332",
 "region":  {
-"startLine":  101,
+"startLine":  332,
 "startColumn":  21,
-"endLine":  101,
-"endColumn":  87
+"endLine":  332,
+"endColumn":  116
 }
 }
 },
@@ -413,6 +400,19 @@
 "startColumn":  21,
 "endLine":  87,
 "endColumn":  67
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Dispatch/DispatchersSpec.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  21,
+"endLine":  101,
+"endColumn":  87
 }
 }
 },

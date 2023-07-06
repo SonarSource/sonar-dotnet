@@ -452,345 +452,6 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this constructor is 36 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1159",
-"region":  {
-"startLine":  1159,
-"startColumn":  20,
-"endLine":  1159,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1159",
-"region":  {
-"startLine":  1159,
-"startColumn":  20,
-"endLine":  1159,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1168",
-"region":  {
-"startLine":  1168,
-"startColumn":  21,
-"endLine":  1168,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1172",
-"region":  {
-"startLine":  1172,
-"startColumn":  21,
-"endLine":  1172,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1175",
-"region":  {
-"startLine":  1175,
-"startColumn":  25,
-"endLine":  1175,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1176",
-"region":  {
-"startLine":  1176,
-"startColumn":  25,
-"endLine":  1176,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1176",
-"region":  {
-"startLine":  1176,
-"startColumn":  48,
-"endLine":  1176,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1183",
-"region":  {
-"startLine":  1183,
-"startColumn":  21,
-"endLine":  1183,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1187",
-"region":  {
-"startLine":  1187,
-"startColumn":  21,
-"endLine":  1187,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1190",
-"region":  {
-"startLine":  1190,
-"startColumn":  25,
-"endLine":  1190,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1191",
-"region":  {
-"startLine":  1191,
-"startColumn":  25,
-"endLine":  1191,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1191",
-"region":  {
-"startLine":  1191,
-"startColumn":  48,
-"endLine":  1191,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1198",
-"region":  {
-"startLine":  1198,
-"startColumn":  21,
-"endLine":  1198,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1202",
-"region":  {
-"startLine":  1202,
-"startColumn":  21,
-"endLine":  1202,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1205",
-"region":  {
-"startLine":  1205,
-"startColumn":  25,
-"endLine":  1205,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1206",
-"region":  {
-"startLine":  1206,
-"startColumn":  25,
-"endLine":  1206,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1206",
-"region":  {
-"startLine":  1206,
-"startColumn":  48,
-"endLine":  1206,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1213",
-"region":  {
-"startLine":  1213,
-"startColumn":  21,
-"endLine":  1213,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1217",
-"region":  {
-"startLine":  1217,
-"startColumn":  21,
-"endLine":  1217,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1220",
-"region":  {
-"startLine":  1220,
-"startColumn":  25,
-"endLine":  1220,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1221",
-"region":  {
-"startLine":  1221,
-"startColumn":  25,
-"endLine":  1221,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1221",
-"region":  {
-"startLine":  1221,
-"startColumn":  48,
-"endLine":  1221,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1228",
-"region":  {
-"startLine":  1228,
-"startColumn":  21,
-"endLine":  1228,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1232",
-"region":  {
-"startLine":  1232,
-"startColumn":  21,
-"endLine":  1232,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1235",
-"region":  {
-"startLine":  1235,
-"startColumn":  25,
-"endLine":  1235,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1236",
-"region":  {
-"startLine":  1236,
-"startColumn":  25,
-"endLine":  1236,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1236",
-"region":  {
-"startLine":  1236,
-"startColumn":  48,
-"endLine":  1236,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1243",
-"region":  {
-"startLine":  1243,
-"startColumn":  21,
-"endLine":  1243,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1247",
-"region":  {
-"startLine":  1247,
-"startColumn":  21,
-"endLine":  1247,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1250",
-"region":  {
-"startLine":  1250,
-"startColumn":  25,
-"endLine":  1250,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1251",
-"region":  {
-"startLine":  1251,
-"startColumn":  25,
-"endLine":  1251,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1251",
-"region":  {
-"startLine":  1251,
-"startColumn":  48,
-"endLine":  1251,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1258",
-"region":  {
-"startLine":  1258,
-"startColumn":  21,
-"endLine":  1258,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1262",
-"region":  {
-"startLine":  1262,
-"startColumn":  21,
-"endLine":  1262,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1265",
-"region":  {
-"startLine":  1265,
-"startColumn":  25,
-"endLine":  1265,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1266",
-"region":  {
-"startLine":  1266,
-"startColumn":  25,
-"endLine":  1266,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1266",
-"region":  {
-"startLine":  1266,
-"startColumn":  48,
-"endLine":  1266,
-"endColumn":  50
-}
-}
-]
-},
-{
-"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this constructor is 11 which is greater than 10 authorized.",
 "location":  [
 {
@@ -1811,354 +1472,339 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this constructor is 17 which is greater than 10 authorized.",
+"message":  "The Cyclomatic Complexity of this constructor is 36 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1146",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1159",
 "region":  {
-"startLine":  1146,
+"startLine":  1159,
 "startColumn":  20,
-"endLine":  1146,
-"endColumn":  25
+"endLine":  1159,
+"endColumn":  39
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1146",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1159",
 "region":  {
-"startLine":  1146,
+"startLine":  1159,
 "startColumn":  20,
-"endLine":  1146,
-"endColumn":  25
+"endLine":  1159,
+"endColumn":  39
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1152",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1168",
 "region":  {
-"startLine":  1152,
+"startLine":  1168,
 "startColumn":  21,
-"endLine":  1152,
+"endLine":  1168,
 "endColumn":  23
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1155",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1172",
 "region":  {
-"startLine":  1155,
+"startLine":  1172,
 "startColumn":  21,
-"endLine":  1155,
+"endLine":  1172,
 "endColumn":  23
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1161",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1175",
 "region":  {
-"startLine":  1161,
+"startLine":  1175,
+"startColumn":  25,
+"endLine":  1175,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1176",
+"region":  {
+"startLine":  1176,
+"startColumn":  25,
+"endLine":  1176,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1176",
+"region":  {
+"startLine":  1176,
+"startColumn":  48,
+"endLine":  1176,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1183",
+"region":  {
+"startLine":  1183,
 "startColumn":  21,
-"endLine":  1161,
+"endLine":  1183,
 "endColumn":  23
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1164",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1187",
 "region":  {
-"startLine":  1164,
+"startLine":  1187,
 "startColumn":  21,
-"endLine":  1164,
+"endLine":  1187,
 "endColumn":  23
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1170",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1190",
 "region":  {
-"startLine":  1170,
-"startColumn":  21,
-"endLine":  1170,
-"endColumn":  23
+"startLine":  1190,
+"startColumn":  25,
+"endLine":  1190,
+"endColumn":  27
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1173",
-"region":  {
-"startLine":  1173,
-"startColumn":  21,
-"endLine":  1173,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1179",
-"region":  {
-"startLine":  1179,
-"startColumn":  21,
-"endLine":  1179,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1182",
-"region":  {
-"startLine":  1182,
-"startColumn":  21,
-"endLine":  1182,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1188",
-"region":  {
-"startLine":  1188,
-"startColumn":  21,
-"endLine":  1188,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1191",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1191",
 "region":  {
 "startLine":  1191,
-"startColumn":  21,
+"startColumn":  25,
 "endLine":  1191,
-"endColumn":  23
+"endColumn":  27
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1197",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1191",
 "region":  {
-"startLine":  1197,
-"startColumn":  21,
-"endLine":  1197,
-"endColumn":  23
+"startLine":  1191,
+"startColumn":  48,
+"endLine":  1191,
+"endColumn":  50
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1200",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1198",
 "region":  {
-"startLine":  1200,
+"startLine":  1198,
 "startColumn":  21,
-"endLine":  1200,
+"endLine":  1198,
 "endColumn":  23
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1206",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1202",
+"region":  {
+"startLine":  1202,
+"startColumn":  21,
+"endLine":  1202,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1205",
+"region":  {
+"startLine":  1205,
+"startColumn":  25,
+"endLine":  1205,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1206",
 "region":  {
 "startLine":  1206,
-"startColumn":  21,
+"startColumn":  25,
 "endLine":  1206,
-"endColumn":  23
+"endColumn":  27
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1209",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1206",
 "region":  {
-"startLine":  1209,
+"startLine":  1206,
+"startColumn":  48,
+"endLine":  1206,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1213",
+"region":  {
+"startLine":  1213,
 "startColumn":  21,
-"endLine":  1209,
+"endLine":  1213,
 "endColumn":  23
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1215",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1217",
 "region":  {
-"startLine":  1215,
+"startLine":  1217,
 "startColumn":  21,
-"endLine":  1215,
+"endLine":  1217,
 "endColumn":  23
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1218",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1220",
 "region":  {
-"startLine":  1218,
+"startLine":  1220,
+"startColumn":  25,
+"endLine":  1220,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1221",
+"region":  {
+"startLine":  1221,
+"startColumn":  25,
+"endLine":  1221,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1221",
+"region":  {
+"startLine":  1221,
+"startColumn":  48,
+"endLine":  1221,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1228",
+"region":  {
+"startLine":  1228,
 "startColumn":  21,
-"endLine":  1218,
+"endLine":  1228,
 "endColumn":  23
 }
-}
-]
 },
 {
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this constructor is 19 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1370",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1232",
 "region":  {
-"startLine":  1370,
-"startColumn":  20,
-"endLine":  1370,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1370",
-"region":  {
-"startLine":  1370,
-"startColumn":  20,
-"endLine":  1370,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1376",
-"region":  {
-"startLine":  1376,
+"startLine":  1232,
 "startColumn":  21,
-"endLine":  1376,
+"endLine":  1232,
 "endColumn":  23
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1379",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1235",
 "region":  {
-"startLine":  1379,
+"startLine":  1235,
+"startColumn":  25,
+"endLine":  1235,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1236",
+"region":  {
+"startLine":  1236,
+"startColumn":  25,
+"endLine":  1236,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1236",
+"region":  {
+"startLine":  1236,
+"startColumn":  48,
+"endLine":  1236,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1243",
+"region":  {
+"startLine":  1243,
 "startColumn":  21,
-"endLine":  1379,
+"endLine":  1243,
 "endColumn":  23
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1385",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1247",
 "region":  {
-"startLine":  1385,
+"startLine":  1247,
 "startColumn":  21,
-"endLine":  1385,
+"endLine":  1247,
 "endColumn":  23
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1388",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1250",
 "region":  {
-"startLine":  1388,
+"startLine":  1250,
+"startColumn":  25,
+"endLine":  1250,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1251",
+"region":  {
+"startLine":  1251,
+"startColumn":  25,
+"endLine":  1251,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1251",
+"region":  {
+"startLine":  1251,
+"startColumn":  48,
+"endLine":  1251,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1258",
+"region":  {
+"startLine":  1258,
 "startColumn":  21,
-"endLine":  1388,
+"endLine":  1258,
 "endColumn":  23
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1394",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1262",
 "region":  {
-"startLine":  1394,
+"startLine":  1262,
 "startColumn":  21,
-"endLine":  1394,
+"endLine":  1262,
 "endColumn":  23
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1397",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1265",
 "region":  {
-"startLine":  1397,
-"startColumn":  21,
-"endLine":  1397,
-"endColumn":  23
+"startLine":  1265,
+"startColumn":  25,
+"endLine":  1265,
+"endColumn":  27
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1403",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1266",
 "region":  {
-"startLine":  1403,
-"startColumn":  21,
-"endLine":  1403,
-"endColumn":  23
+"startLine":  1266,
+"startColumn":  25,
+"endLine":  1266,
+"endColumn":  27
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1406",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1266",
 "region":  {
-"startLine":  1406,
-"startColumn":  21,
-"endLine":  1406,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1412",
-"region":  {
-"startLine":  1412,
-"startColumn":  21,
-"endLine":  1412,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1415",
-"region":  {
-"startLine":  1415,
-"startColumn":  21,
-"endLine":  1415,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1421",
-"region":  {
-"startLine":  1421,
-"startColumn":  21,
-"endLine":  1421,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1424",
-"region":  {
-"startLine":  1424,
-"startColumn":  21,
-"endLine":  1424,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1430",
-"region":  {
-"startLine":  1430,
-"startColumn":  21,
-"endLine":  1430,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1433",
-"region":  {
-"startLine":  1433,
-"startColumn":  21,
-"endLine":  1433,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1439",
-"region":  {
-"startLine":  1439,
-"startColumn":  21,
-"endLine":  1439,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1442",
-"region":  {
-"startLine":  1442,
-"startColumn":  21,
-"endLine":  1442,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1448",
-"region":  {
-"startLine":  1448,
-"startColumn":  21,
-"endLine":  1448,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1451",
-"region":  {
-"startLine":  1451,
-"startColumn":  21,
-"endLine":  1451,
-"endColumn":  23
+"startLine":  1266,
+"startColumn":  48,
+"endLine":  1266,
+"endColumn":  50
 }
 }
 ]
@@ -2561,6 +2207,360 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 17 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1146",
+"region":  {
+"startLine":  1146,
+"startColumn":  20,
+"endLine":  1146,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1146",
+"region":  {
+"startLine":  1146,
+"startColumn":  20,
+"endLine":  1146,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1152",
+"region":  {
+"startLine":  1152,
+"startColumn":  21,
+"endLine":  1152,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1155",
+"region":  {
+"startLine":  1155,
+"startColumn":  21,
+"endLine":  1155,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1161",
+"region":  {
+"startLine":  1161,
+"startColumn":  21,
+"endLine":  1161,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1164",
+"region":  {
+"startLine":  1164,
+"startColumn":  21,
+"endLine":  1164,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1170",
+"region":  {
+"startLine":  1170,
+"startColumn":  21,
+"endLine":  1170,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1173",
+"region":  {
+"startLine":  1173,
+"startColumn":  21,
+"endLine":  1173,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1179",
+"region":  {
+"startLine":  1179,
+"startColumn":  21,
+"endLine":  1179,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1182",
+"region":  {
+"startLine":  1182,
+"startColumn":  21,
+"endLine":  1182,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1188",
+"region":  {
+"startLine":  1188,
+"startColumn":  21,
+"endLine":  1188,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1191",
+"region":  {
+"startLine":  1191,
+"startColumn":  21,
+"endLine":  1191,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1197",
+"region":  {
+"startLine":  1197,
+"startColumn":  21,
+"endLine":  1197,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1200",
+"region":  {
+"startLine":  1200,
+"startColumn":  21,
+"endLine":  1200,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1206",
+"region":  {
+"startLine":  1206,
+"startColumn":  21,
+"endLine":  1206,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1209",
+"region":  {
+"startLine":  1209,
+"startColumn":  21,
+"endLine":  1209,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1215",
+"region":  {
+"startLine":  1215,
+"startColumn":  21,
+"endLine":  1215,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1218",
+"region":  {
+"startLine":  1218,
+"startColumn":  21,
+"endLine":  1218,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1370",
+"region":  {
+"startLine":  1370,
+"startColumn":  20,
+"endLine":  1370,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1370",
+"region":  {
+"startLine":  1370,
+"startColumn":  20,
+"endLine":  1370,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1376",
+"region":  {
+"startLine":  1376,
+"startColumn":  21,
+"endLine":  1376,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1379",
+"region":  {
+"startLine":  1379,
+"startColumn":  21,
+"endLine":  1379,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1385",
+"region":  {
+"startLine":  1385,
+"startColumn":  21,
+"endLine":  1385,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1388",
+"region":  {
+"startLine":  1388,
+"startColumn":  21,
+"endLine":  1388,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1394",
+"region":  {
+"startLine":  1394,
+"startColumn":  21,
+"endLine":  1394,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1397",
+"region":  {
+"startLine":  1397,
+"startColumn":  21,
+"endLine":  1397,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1403",
+"region":  {
+"startLine":  1403,
+"startColumn":  21,
+"endLine":  1403,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1406",
+"region":  {
+"startLine":  1406,
+"startColumn":  21,
+"endLine":  1406,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1412",
+"region":  {
+"startLine":  1412,
+"startColumn":  21,
+"endLine":  1412,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1415",
+"region":  {
+"startLine":  1415,
+"startColumn":  21,
+"endLine":  1415,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1421",
+"region":  {
+"startLine":  1421,
+"startColumn":  21,
+"endLine":  1421,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1424",
+"region":  {
+"startLine":  1424,
+"startColumn":  21,
+"endLine":  1424,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1430",
+"region":  {
+"startLine":  1430,
+"startColumn":  21,
+"endLine":  1430,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1433",
+"region":  {
+"startLine":  1433,
+"startColumn":  21,
+"endLine":  1433,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1439",
+"region":  {
+"startLine":  1439,
+"startColumn":  21,
+"endLine":  1439,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1442",
+"region":  {
+"startLine":  1442,
+"startColumn":  21,
+"endLine":  1442,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1448",
+"region":  {
+"startLine":  1448,
+"startColumn":  21,
+"endLine":  1448,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1451",
+"region":  {
+"startLine":  1451,
+"startColumn":  21,
+"endLine":  1451,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this constructor is 11 which is greater than 10 authorized.",
 "location":  [
 {
@@ -2816,6 +2816,120 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L745",
+"region":  {
+"startLine":  745,
+"startColumn":  26,
+"endLine":  745,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L745",
+"region":  {
+"startLine":  745,
+"startColumn":  26,
+"endLine":  745,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L747",
+"region":  {
+"startLine":  747,
+"startColumn":  17,
+"endLine":  747,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L750",
+"region":  {
+"startLine":  750,
+"startColumn":  21,
+"endLine":  750,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L761",
+"region":  {
+"startLine":  761,
+"startColumn":  17,
+"endLine":  761,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L765",
+"region":  {
+"startLine":  765,
+"startColumn":  21,
+"endLine":  765,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L767",
+"region":  {
+"startLine":  767,
+"startColumn":  25,
+"endLine":  767,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L769",
+"region":  {
+"startLine":  769,
+"startColumn":  30,
+"endLine":  769,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L774",
+"region":  {
+"startLine":  774,
+"startColumn":  29,
+"endLine":  774,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L781",
+"region":  {
+"startLine":  781,
+"startColumn":  29,
+"endLine":  781,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L790",
+"region":  {
+"startLine":  790,
+"startColumn":  17,
+"endLine":  790,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L807",
+"region":  {
+"startLine":  807,
+"startColumn":  17,
+"endLine":  807,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
@@ -2942,120 +3056,6 @@
 "startColumn":  25,
 "endLine":  1680,
 "endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L745",
-"region":  {
-"startLine":  745,
-"startColumn":  26,
-"endLine":  745,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L745",
-"region":  {
-"startLine":  745,
-"startColumn":  26,
-"endLine":  745,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L747",
-"region":  {
-"startLine":  747,
-"startColumn":  17,
-"endLine":  747,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L750",
-"region":  {
-"startLine":  750,
-"startColumn":  21,
-"endLine":  750,
-"endColumn":  28
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L761",
-"region":  {
-"startLine":  761,
-"startColumn":  17,
-"endLine":  761,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L765",
-"region":  {
-"startLine":  765,
-"startColumn":  21,
-"endLine":  765,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L767",
-"region":  {
-"startLine":  767,
-"startColumn":  25,
-"endLine":  767,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L769",
-"region":  {
-"startLine":  769,
-"startColumn":  30,
-"endLine":  769,
-"endColumn":  32
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L774",
-"region":  {
-"startLine":  774,
-"startColumn":  29,
-"endLine":  774,
-"endColumn":  34
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L781",
-"region":  {
-"startLine":  781,
-"startColumn":  29,
-"endLine":  781,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L790",
-"region":  {
-"startLine":  790,
-"startColumn":  17,
-"endLine":  790,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L807",
-"region":  {
-"startLine":  807,
-"startColumn":  17,
-"endLine":  807,
-"endColumn":  19
 }
 }
 ]
@@ -3890,6 +3890,156 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L776",
+"region":  {
+"startLine":  776,
+"startColumn":  23,
+"endLine":  776,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L776",
+"region":  {
+"startLine":  776,
+"startColumn":  23,
+"endLine":  776,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L779",
+"region":  {
+"startLine":  779,
+"startColumn":  17,
+"endLine":  779,
+"endColumn":  18
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L781",
+"region":  {
+"startLine":  781,
+"startColumn":  33,
+"endLine":  781,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L782",
+"region":  {
+"startLine":  782,
+"startColumn":  13,
+"endLine":  782,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L786",
+"region":  {
+"startLine":  786,
+"startColumn":  13,
+"endLine":  786,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L791",
+"region":  {
+"startLine":  791,
+"startColumn":  13,
+"endLine":  791,
+"endColumn":  18
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L791",
+"region":  {
+"startLine":  791,
+"startColumn":  37,
+"endLine":  791,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L801",
+"region":  {
+"startLine":  801,
+"startColumn":  13,
+"endLine":  801,
+"endColumn":  18
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L801",
+"region":  {
+"startLine":  801,
+"startColumn":  37,
+"endLine":  801,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L815",
+"region":  {
+"startLine":  815,
+"startColumn":  13,
+"endLine":  815,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L816",
+"region":  {
+"startLine":  816,
+"startColumn":  17,
+"endLine":  816,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L819",
+"region":  {
+"startLine":  819,
+"startColumn":  13,
+"endLine":  819,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L821",
+"region":  {
+"startLine":  821,
+"startColumn":  18,
+"endLine":  821,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L824",
+"region":  {
+"startLine":  824,
+"startColumn":  17,
+"endLine":  824,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L826",
+"region":  {
+"startLine":  826,
+"startColumn":  21,
+"endLine":  826,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this method is 20 which is greater than 10 authorized.",
 "location":  [
 {
@@ -4370,156 +4520,6 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L776",
-"region":  {
-"startLine":  776,
-"startColumn":  23,
-"endLine":  776,
-"endColumn":  32
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L776",
-"region":  {
-"startLine":  776,
-"startColumn":  23,
-"endLine":  776,
-"endColumn":  32
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L779",
-"region":  {
-"startLine":  779,
-"startColumn":  17,
-"endLine":  779,
-"endColumn":  18
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L781",
-"region":  {
-"startLine":  781,
-"startColumn":  33,
-"endLine":  781,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L782",
-"region":  {
-"startLine":  782,
-"startColumn":  13,
-"endLine":  782,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L786",
-"region":  {
-"startLine":  786,
-"startColumn":  13,
-"endLine":  786,
-"endColumn":  20
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L791",
-"region":  {
-"startLine":  791,
-"startColumn":  13,
-"endLine":  791,
-"endColumn":  18
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L791",
-"region":  {
-"startLine":  791,
-"startColumn":  37,
-"endLine":  791,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L801",
-"region":  {
-"startLine":  801,
-"startColumn":  13,
-"endLine":  801,
-"endColumn":  18
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L801",
-"region":  {
-"startLine":  801,
-"startColumn":  37,
-"endLine":  801,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L815",
-"region":  {
-"startLine":  815,
-"startColumn":  13,
-"endLine":  815,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L816",
-"region":  {
-"startLine":  816,
-"startColumn":  17,
-"endLine":  816,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L819",
-"region":  {
-"startLine":  819,
-"startColumn":  13,
-"endLine":  819,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L821",
-"region":  {
-"startLine":  821,
-"startColumn":  18,
-"endLine":  821,
-"endColumn":  20
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L824",
-"region":  {
-"startLine":  824,
-"startColumn":  17,
-"endLine":  824,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L826",
-"region":  {
-"startLine":  826,
-"startColumn":  21,
-"endLine":  826,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this method is 16 which is greater than 10 authorized.",
 "location":  [
 {
@@ -4673,270 +4673,6 @@
 "startColumn":  21,
 "endLine":  247,
 "endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this constructor is 13 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1336",
-"region":  {
-"startLine":  1336,
-"startColumn":  20,
-"endLine":  1336,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1336",
-"region":  {
-"startLine":  1336,
-"startColumn":  20,
-"endLine":  1336,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1343",
-"region":  {
-"startLine":  1343,
-"startColumn":  41,
-"endLine":  1343,
-"endColumn":  42
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1347",
-"region":  {
-"startLine":  1347,
-"startColumn":  21,
-"endLine":  1347,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1347",
-"region":  {
-"startLine":  1347,
-"startColumn":  42,
-"endLine":  1347,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1352",
-"region":  {
-"startLine":  1352,
-"startColumn":  25,
-"endLine":  1352,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1357",
-"region":  {
-"startLine":  1357,
-"startColumn":  30,
-"endLine":  1357,
-"endColumn":  32
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1357",
-"region":  {
-"startLine":  1357,
-"startColumn":  57,
-"endLine":  1357,
-"endColumn":  59
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1363",
-"region":  {
-"startLine":  1363,
-"startColumn":  29,
-"endLine":  1363,
-"endColumn":  30
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1367",
-"region":  {
-"startLine":  1367,
-"startColumn":  25,
-"endLine":  1367,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1371",
-"region":  {
-"startLine":  1371,
-"startColumn":  29,
-"endLine":  1371,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1374",
-"region":  {
-"startLine":  1374,
-"startColumn":  29,
-"endLine":  1374,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1379",
-"region":  {
-"startLine":  1379,
-"startColumn":  34,
-"endLine":  1379,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1379",
-"region":  {
-"startLine":  1379,
-"startColumn":  61,
-"endLine":  1379,
-"endColumn":  63
-}
-}
-]
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this constructor is 13 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1957",
-"region":  {
-"startLine":  1957,
-"startColumn":  20,
-"endLine":  1957,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1957",
-"region":  {
-"startLine":  1957,
-"startColumn":  20,
-"endLine":  1957,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1964",
-"region":  {
-"startLine":  1964,
-"startColumn":  21,
-"endLine":  1964,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1967",
-"region":  {
-"startLine":  1967,
-"startColumn":  29,
-"endLine":  1967,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1973",
-"region":  {
-"startLine":  1973,
-"startColumn":  21,
-"endLine":  1973,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1976",
-"region":  {
-"startLine":  1976,
-"startColumn":  29,
-"endLine":  1976,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1982",
-"region":  {
-"startLine":  1982,
-"startColumn":  21,
-"endLine":  1982,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1985",
-"region":  {
-"startLine":  1985,
-"startColumn":  29,
-"endLine":  1985,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1991",
-"region":  {
-"startLine":  1991,
-"startColumn":  21,
-"endLine":  1991,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1994",
-"region":  {
-"startLine":  1994,
-"startColumn":  29,
-"endLine":  1994,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2000",
-"region":  {
-"startLine":  2000,
-"startColumn":  21,
-"endLine":  2000,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2005",
-"region":  {
-"startLine":  2005,
-"startColumn":  29,
-"endLine":  2005,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2009",
-"region":  {
-"startLine":  2009,
-"startColumn":  21,
-"endLine":  2009,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2012",
-"region":  {
-"startLine":  2012,
-"startColumn":  29,
-"endLine":  2012,
-"endColumn":  31
 }
 }
 ]
@@ -5279,6 +5015,270 @@
 "startColumn":  56,
 "endLine":  2635,
 "endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1336",
+"region":  {
+"startLine":  1336,
+"startColumn":  20,
+"endLine":  1336,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1336",
+"region":  {
+"startLine":  1336,
+"startColumn":  20,
+"endLine":  1336,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1343",
+"region":  {
+"startLine":  1343,
+"startColumn":  41,
+"endLine":  1343,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1347",
+"region":  {
+"startLine":  1347,
+"startColumn":  21,
+"endLine":  1347,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1347",
+"region":  {
+"startLine":  1347,
+"startColumn":  42,
+"endLine":  1347,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1352",
+"region":  {
+"startLine":  1352,
+"startColumn":  25,
+"endLine":  1352,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1357",
+"region":  {
+"startLine":  1357,
+"startColumn":  30,
+"endLine":  1357,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1357",
+"region":  {
+"startLine":  1357,
+"startColumn":  57,
+"endLine":  1357,
+"endColumn":  59
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1363",
+"region":  {
+"startLine":  1363,
+"startColumn":  29,
+"endLine":  1363,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1367",
+"region":  {
+"startLine":  1367,
+"startColumn":  25,
+"endLine":  1367,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1371",
+"region":  {
+"startLine":  1371,
+"startColumn":  29,
+"endLine":  1371,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1374",
+"region":  {
+"startLine":  1374,
+"startColumn":  29,
+"endLine":  1374,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1379",
+"region":  {
+"startLine":  1379,
+"startColumn":  34,
+"endLine":  1379,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1379",
+"region":  {
+"startLine":  1379,
+"startColumn":  61,
+"endLine":  1379,
+"endColumn":  63
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1957",
+"region":  {
+"startLine":  1957,
+"startColumn":  20,
+"endLine":  1957,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1957",
+"region":  {
+"startLine":  1957,
+"startColumn":  20,
+"endLine":  1957,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1964",
+"region":  {
+"startLine":  1964,
+"startColumn":  21,
+"endLine":  1964,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1967",
+"region":  {
+"startLine":  1967,
+"startColumn":  29,
+"endLine":  1967,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1973",
+"region":  {
+"startLine":  1973,
+"startColumn":  21,
+"endLine":  1973,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1976",
+"region":  {
+"startLine":  1976,
+"startColumn":  29,
+"endLine":  1976,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1982",
+"region":  {
+"startLine":  1982,
+"startColumn":  21,
+"endLine":  1982,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1985",
+"region":  {
+"startLine":  1985,
+"startColumn":  29,
+"endLine":  1985,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1991",
+"region":  {
+"startLine":  1991,
+"startColumn":  21,
+"endLine":  1991,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1994",
+"region":  {
+"startLine":  1994,
+"startColumn":  29,
+"endLine":  1994,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2000",
+"region":  {
+"startLine":  2000,
+"startColumn":  21,
+"endLine":  2000,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2005",
+"region":  {
+"startLine":  2005,
+"startColumn":  29,
+"endLine":  2005,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2009",
+"region":  {
+"startLine":  2009,
+"startColumn":  21,
+"endLine":  2009,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2012",
+"region":  {
+"startLine":  2012,
+"startColumn":  29,
+"endLine":  2012,
+"endColumn":  31
 }
 }
 ]
@@ -5990,6 +5990,243 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2350",
+"region":  {
+"startLine":  2350,
+"startColumn":  26,
+"endLine":  2350,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2350",
+"region":  {
+"startLine":  2350,
+"startColumn":  26,
+"endLine":  2350,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2354",
+"region":  {
+"startLine":  2354,
+"startColumn":  13,
+"endLine":  2354,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2357",
+"region":  {
+"startLine":  2357,
+"startColumn":  13,
+"endLine":  2357,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2362",
+"region":  {
+"startLine":  2362,
+"startColumn":  17,
+"endLine":  2362,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2364",
+"region":  {
+"startLine":  2364,
+"startColumn":  22,
+"endLine":  2364,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2371",
+"region":  {
+"startLine":  2371,
+"startColumn":  22,
+"endLine":  2371,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2371",
+"region":  {
+"startLine":  2371,
+"startColumn":  54,
+"endLine":  2371,
+"endColumn":  56
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2377",
+"region":  {
+"startLine":  2377,
+"startColumn":  13,
+"endLine":  2377,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2385",
+"region":  {
+"startLine":  2385,
+"startColumn":  13,
+"endLine":  2385,
+"endColumn":  18
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2388",
+"region":  {
+"startLine":  2388,
+"startColumn":  17,
+"endLine":  2388,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2392",
+"region":  {
+"startLine":  2392,
+"startColumn":  13,
+"endLine":  2392,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L708",
+"region":  {
+"startLine":  708,
+"startColumn":  32,
+"endLine":  708,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L708",
+"region":  {
+"startLine":  708,
+"startColumn":  32,
+"endLine":  708,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L710",
+"region":  {
+"startLine":  710,
+"startColumn":  13,
+"endLine":  710,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L713",
+"region":  {
+"startLine":  713,
+"startColumn":  13,
+"endLine":  713,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L716",
+"region":  {
+"startLine":  716,
+"startColumn":  13,
+"endLine":  716,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L720",
+"region":  {
+"startLine":  720,
+"startColumn":  40,
+"endLine":  720,
+"endColumn":  41
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L721",
+"region":  {
+"startLine":  721,
+"startColumn":  47,
+"endLine":  721,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L723",
+"region":  {
+"startLine":  723,
+"startColumn":  47,
+"endLine":  723,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L725",
+"region":  {
+"startLine":  725,
+"startColumn":  17,
+"endLine":  725,
+"endColumn":  18
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L730",
+"region":  {
+"startLine":  730,
+"startColumn":  13,
+"endLine":  730,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L730",
+"region":  {
+"startLine":  730,
+"startColumn":  38,
+"endLine":  730,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L731",
+"region":  {
+"startLine":  731,
+"startColumn":  18,
+"endLine":  731,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L731",
+"region":  {
+"startLine":  731,
+"startColumn":  44,
+"endLine":  731,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
@@ -6116,6 +6353,156 @@
 "startColumn":  21,
 "endLine":  1763,
 "endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1826",
+"region":  {
+"startLine":  1826,
+"startColumn":  21,
+"endLine":  1826,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1826",
+"region":  {
+"startLine":  1826,
+"startColumn":  21,
+"endLine":  1826,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1828",
+"region":  {
+"startLine":  1828,
+"startColumn":  13,
+"endLine":  1828,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1832",
+"region":  {
+"startLine":  1832,
+"startColumn":  17,
+"endLine":  1832,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1834",
+"region":  {
+"startLine":  1834,
+"startColumn":  21,
+"endLine":  1834,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1834",
+"region":  {
+"startLine":  1834,
+"startColumn":  39,
+"endLine":  1834,
+"endColumn":  41
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1836",
+"region":  {
+"startLine":  1836,
+"startColumn":  25,
+"endLine":  1836,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1843",
+"region":  {
+"startLine":  1843,
+"startColumn":  21,
+"endLine":  1843,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1857",
+"region":  {
+"startLine":  1857,
+"startColumn":  21,
+"endLine":  1857,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1877",
+"region":  {
+"startLine":  1877,
+"startColumn":  13,
+"endLine":  1877,
+"endColumn":  18
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1880",
+"region":  {
+"startLine":  1880,
+"startColumn":  17,
+"endLine":  1880,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1896",
+"region":  {
+"startLine":  1896,
+"startColumn":  17,
+"endLine":  1896,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1901",
+"region":  {
+"startLine":  1901,
+"startColumn":  21,
+"endLine":  1901,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1906",
+"region":  {
+"startLine":  1906,
+"startColumn":  17,
+"endLine":  1906,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1906",
+"region":  {
+"startLine":  1906,
+"startColumn":  45,
+"endLine":  1906,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1913",
+"region":  {
+"startLine":  1913,
+"startColumn":  17,
+"endLine":  1913,
+"endColumn":  19
 }
 }
 ]
@@ -6401,393 +6788,6 @@
 "startColumn":  32,
 "endLine":  290,
 "endColumn":  34
-}
-}
-]
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1826",
-"region":  {
-"startLine":  1826,
-"startColumn":  21,
-"endLine":  1826,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1826",
-"region":  {
-"startLine":  1826,
-"startColumn":  21,
-"endLine":  1826,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1828",
-"region":  {
-"startLine":  1828,
-"startColumn":  13,
-"endLine":  1828,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1832",
-"region":  {
-"startLine":  1832,
-"startColumn":  17,
-"endLine":  1832,
-"endColumn":  22
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1834",
-"region":  {
-"startLine":  1834,
-"startColumn":  21,
-"endLine":  1834,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1834",
-"region":  {
-"startLine":  1834,
-"startColumn":  39,
-"endLine":  1834,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1836",
-"region":  {
-"startLine":  1836,
-"startColumn":  25,
-"endLine":  1836,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1843",
-"region":  {
-"startLine":  1843,
-"startColumn":  21,
-"endLine":  1843,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1857",
-"region":  {
-"startLine":  1857,
-"startColumn":  21,
-"endLine":  1857,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1877",
-"region":  {
-"startLine":  1877,
-"startColumn":  13,
-"endLine":  1877,
-"endColumn":  18
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1880",
-"region":  {
-"startLine":  1880,
-"startColumn":  17,
-"endLine":  1880,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1896",
-"region":  {
-"startLine":  1896,
-"startColumn":  17,
-"endLine":  1896,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1901",
-"region":  {
-"startLine":  1901,
-"startColumn":  21,
-"endLine":  1901,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1906",
-"region":  {
-"startLine":  1906,
-"startColumn":  17,
-"endLine":  1906,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1906",
-"region":  {
-"startLine":  1906,
-"startColumn":  45,
-"endLine":  1906,
-"endColumn":  47
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1913",
-"region":  {
-"startLine":  1913,
-"startColumn":  17,
-"endLine":  1913,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2350",
-"region":  {
-"startLine":  2350,
-"startColumn":  26,
-"endLine":  2350,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2350",
-"region":  {
-"startLine":  2350,
-"startColumn":  26,
-"endLine":  2350,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2354",
-"region":  {
-"startLine":  2354,
-"startColumn":  13,
-"endLine":  2354,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2357",
-"region":  {
-"startLine":  2357,
-"startColumn":  13,
-"endLine":  2357,
-"endColumn":  20
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2362",
-"region":  {
-"startLine":  2362,
-"startColumn":  17,
-"endLine":  2362,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2364",
-"region":  {
-"startLine":  2364,
-"startColumn":  22,
-"endLine":  2364,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2371",
-"region":  {
-"startLine":  2371,
-"startColumn":  22,
-"endLine":  2371,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2371",
-"region":  {
-"startLine":  2371,
-"startColumn":  54,
-"endLine":  2371,
-"endColumn":  56
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2377",
-"region":  {
-"startLine":  2377,
-"startColumn":  13,
-"endLine":  2377,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2385",
-"region":  {
-"startLine":  2385,
-"startColumn":  13,
-"endLine":  2385,
-"endColumn":  18
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2388",
-"region":  {
-"startLine":  2388,
-"startColumn":  17,
-"endLine":  2388,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2392",
-"region":  {
-"startLine":  2392,
-"startColumn":  13,
-"endLine":  2392,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L708",
-"region":  {
-"startLine":  708,
-"startColumn":  32,
-"endLine":  708,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L708",
-"region":  {
-"startLine":  708,
-"startColumn":  32,
-"endLine":  708,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L710",
-"region":  {
-"startLine":  710,
-"startColumn":  13,
-"endLine":  710,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L713",
-"region":  {
-"startLine":  713,
-"startColumn":  13,
-"endLine":  713,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L716",
-"region":  {
-"startLine":  716,
-"startColumn":  13,
-"endLine":  716,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L720",
-"region":  {
-"startLine":  720,
-"startColumn":  40,
-"endLine":  720,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L721",
-"region":  {
-"startLine":  721,
-"startColumn":  47,
-"endLine":  721,
-"endColumn":  48
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L723",
-"region":  {
-"startLine":  723,
-"startColumn":  47,
-"endLine":  723,
-"endColumn":  48
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L725",
-"region":  {
-"startLine":  725,
-"startColumn":  17,
-"endLine":  725,
-"endColumn":  18
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L730",
-"region":  {
-"startLine":  730,
-"startColumn":  13,
-"endLine":  730,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L730",
-"region":  {
-"startLine":  730,
-"startColumn":  38,
-"endLine":  730,
-"endColumn":  40
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L731",
-"region":  {
-"startLine":  731,
-"startColumn":  18,
-"endLine":  731,
-"endColumn":  20
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L731",
-"region":  {
-"startLine":  731,
-"startColumn":  44,
-"endLine":  731,
-"endColumn":  46
 }
 }
 ]

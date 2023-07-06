@@ -301,19 +301,6 @@
 },
 {
 "id":  "S2364",
-"message":  "Rename '_AssemblyName' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  10,
-"endLine":  11,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2364",
 "message":  "Rename 'fYAMJ' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L8",
@@ -322,6 +309,19 @@
 "startColumn":  10,
 "endLine":  8,
 "endColumn":  15
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_AssemblyName' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  10,
+"endLine":  11,
+"endColumn":  23
 }
 }
 }

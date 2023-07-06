@@ -15,19 +15,6 @@
 },
 {
 "id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SynchronousTaskExtensions.cs.cs#L116",
-"region":  {
-"startLine":  116,
-"startColumn":  17,
-"endLine":  116,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S4462",
 "message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SynchronousTaskExtensions.cs.cs#L28",
@@ -87,6 +74,19 @@
 "startLine":  97,
 "startColumn":  17,
 "endLine":  97,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SynchronousTaskExtensions.cs.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  17,
+"endLine":  116,
 "endColumn":  26
 }
 }

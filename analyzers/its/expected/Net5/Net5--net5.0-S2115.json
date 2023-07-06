@@ -4,6 +4,19 @@
 "id":  "S2115",
 "message":  "Use a secure password when connecting to this database.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2115.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  13,
+"endLine":  9,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2115",
+"message":  "Use a secure password when connecting to this database.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2115.cs#L10",
 "region":  {
 "startLine":  10,
@@ -49,19 +62,6 @@
 "startColumn":  13,
 "endLine":  13,
 "endColumn":  112
-}
-}
-},
-{
-"id":  "S2115",
-"message":  "Use a secure password when connecting to this database.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2115.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  13,
-"endLine":  9,
-"endColumn":  115
 }
 }
 }

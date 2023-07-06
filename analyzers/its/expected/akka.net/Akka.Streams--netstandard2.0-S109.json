@@ -67,6 +67,19 @@
 },
 {
 "id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/RequestStrategies.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  56,
+"endLine":  90,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/RequestStrategies.cs#L147",
@@ -80,14 +93,14 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/RequestStrategies.cs#L90",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L64",
 "region":  {
-"startLine":  90,
-"startColumn":  56,
-"endLine":  90,
-"endColumn":  57
+"startLine":  64,
+"startColumn":  50,
+"endLine":  64,
+"endColumn":  51
 }
 }
 },
@@ -132,14 +145,66 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L64",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L67",
 "region":  {
-"startLine":  64,
-"startColumn":  50,
-"endLine":  64,
-"endColumn":  51
+"startLine":  67,
+"startColumn":  76,
+"endLine":  67,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L438",
+"region":  {
+"startLine":  438,
+"startColumn":  55,
+"endLine":  438,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L438",
+"region":  {
+"startLine":  438,
+"startColumn":  83,
+"endLine":  438,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '256' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L523",
+"region":  {
+"startLine":  523,
+"startColumn":  72,
+"endLine":  523,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L717",
+"region":  {
+"startLine":  717,
+"startColumn":  75,
+"endLine":  717,
+"endColumn":  76
 }
 }
 },
@@ -218,71 +283,6 @@
 "startColumn":  76,
 "endLine":  1556,
 "endColumn":  77
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L438",
-"region":  {
-"startLine":  438,
-"startColumn":  55,
-"endLine":  438,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L438",
-"region":  {
-"startLine":  438,
-"startColumn":  83,
-"endLine":  438,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '256' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L523",
-"region":  {
-"startLine":  523,
-"startColumn":  72,
-"endLine":  523,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  76,
-"endLine":  67,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L717",
-"region":  {
-"startLine":  717,
-"startColumn":  75,
-"endLine":  717,
-"endColumn":  76
 }
 }
 },
@@ -673,292 +673,6 @@
 "startColumn":  113,
 "endLine":  36,
 "endColumn":  114
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L115",
-"region":  {
-"startLine":  115,
-"startColumn":  20,
-"endLine":  115,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  31,
-"endLine":  131,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L132",
-"region":  {
-"startLine":  132,
-"startColumn":  31,
-"endLine":  132,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L133",
-"region":  {
-"startLine":  133,
-"startColumn":  31,
-"endLine":  133,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L134",
-"region":  {
-"startLine":  134,
-"startColumn":  31,
-"endLine":  134,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '130329821' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L141",
-"region":  {
-"startLine":  141,
-"startColumn":  40,
-"endLine":  141,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '27' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L141",
-"region":  {
-"startLine":  141,
-"startColumn":  56,
-"endLine":  141,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L158",
-"region":  {
-"startLine":  158,
-"startColumn":  47,
-"endLine":  158,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L159",
-"region":  {
-"startLine":  159,
-"startColumn":  42,
-"endLine":  159,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L159",
-"region":  {
-"startLine":  159,
-"startColumn":  61,
-"endLine":  159,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L178",
-"region":  {
-"startLine":  178,
-"startColumn":  47,
-"endLine":  178,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L179",
-"region":  {
-"startLine":  179,
-"startColumn":  42,
-"endLine":  179,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '56' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L179",
-"region":  {
-"startLine":  179,
-"startColumn":  61,
-"endLine":  179,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L203",
-"region":  {
-"startLine":  203,
-"startColumn":  24,
-"endLine":  203,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '125613361' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L210",
-"region":  {
-"startLine":  210,
-"startColumn":  62,
-"endLine":  210,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '27' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L210",
-"region":  {
-"startLine":  210,
-"startColumn":  78,
-"endLine":  210,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L233",
-"region":  {
-"startLine":  233,
-"startColumn":  24,
-"endLine":  233,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L233",
-"region":  {
-"startLine":  233,
-"startColumn":  63,
-"endLine":  233,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L248",
-"region":  {
-"startLine":  248,
-"startColumn":  47,
-"endLine":  248,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '64' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L260",
-"region":  {
-"startLine":  260,
-"startColumn":  47,
-"endLine":  260,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L272",
-"region":  {
-"startLine":  272,
-"startColumn":  47,
-"endLine":  272,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '64' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L284",
-"region":  {
-"startLine":  284,
-"startColumn":  47,
-"endLine":  284,
-"endColumn":  49
 }
 }
 },
@@ -1804,6 +1518,292 @@
 "startColumn":  24,
 "endLine":  72,
 "endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  20,
+"endLine":  115,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  31,
+"endLine":  131,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  31,
+"endLine":  132,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  31,
+"endLine":  133,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  31,
+"endLine":  134,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '130329821' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  40,
+"endLine":  141,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '27' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  56,
+"endLine":  141,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L158",
+"region":  {
+"startLine":  158,
+"startColumn":  47,
+"endLine":  158,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  42,
+"endLine":  159,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  61,
+"endLine":  159,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  47,
+"endLine":  178,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L179",
+"region":  {
+"startLine":  179,
+"startColumn":  42,
+"endLine":  179,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '56' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L179",
+"region":  {
+"startLine":  179,
+"startColumn":  61,
+"endLine":  179,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L203",
+"region":  {
+"startLine":  203,
+"startColumn":  24,
+"endLine":  203,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '125613361' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L210",
+"region":  {
+"startLine":  210,
+"startColumn":  62,
+"endLine":  210,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '27' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L210",
+"region":  {
+"startLine":  210,
+"startColumn":  78,
+"endLine":  210,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L233",
+"region":  {
+"startLine":  233,
+"startColumn":  24,
+"endLine":  233,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L233",
+"region":  {
+"startLine":  233,
+"startColumn":  63,
+"endLine":  233,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L248",
+"region":  {
+"startLine":  248,
+"startColumn":  47,
+"endLine":  248,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '64' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L260",
+"region":  {
+"startLine":  260,
+"startColumn":  47,
+"endLine":  260,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L272",
+"region":  {
+"startLine":  272,
+"startColumn":  47,
+"endLine":  272,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '64' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L284",
+"region":  {
+"startLine":  284,
+"startColumn":  47,
+"endLine":  284,
+"endColumn":  49
 }
 }
 },

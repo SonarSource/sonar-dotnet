@@ -95,11 +95,11 @@
 "id":  "S927",
 "message":  "Rename parameter 'ex' to 'e' to match the base class declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2911",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L613",
 "region":  {
-"startLine":  2911,
+"startLine":  613,
 "startColumn":  62,
-"endLine":  2911,
+"endLine":  613,
 "endColumn":  64
 }
 }
@@ -108,11 +108,11 @@
 "id":  "S927",
 "message":  "Rename parameter 'ex' to 'e' to match the base class declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L613",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2911",
 "region":  {
-"startLine":  613,
+"startLine":  2911,
 "startColumn":  62,
-"endLine":  613,
+"endLine":  2911,
 "endColumn":  64
 }
 }

@@ -56,32 +56,6 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L160",
-"region":  {
-"startLine":  160,
-"startColumn":  47,
-"endLine":  160,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L173",
-"region":  {
-"startLine":  173,
-"startColumn":  45,
-"endLine":  173,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L34",
 "region":  {
 "startLine":  34,
@@ -121,12 +95,25 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L127",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L160",
 "region":  {
-"startLine":  127,
+"startLine":  160,
 "startColumn":  47,
-"endLine":  127,
-"endColumn":  88
+"endLine":  160,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  45,
+"endLine":  173,
+"endColumn":  68
 }
 }
 },
@@ -166,6 +153,19 @@
 "startColumn":  48,
 "endLine":  37,
 "endColumn":  89
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  47,
+"endLine":  127,
+"endColumn":  88
 }
 }
 }

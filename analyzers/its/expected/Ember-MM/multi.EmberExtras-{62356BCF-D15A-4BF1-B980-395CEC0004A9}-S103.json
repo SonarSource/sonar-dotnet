@@ -41,6 +41,19 @@
 },
 {
 "id":  "S103",
+"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  1,
+"endLine":  79,
+"endColumn":  221
+}
+}
+},
+{
+"id":  "S103",
 "message":  "Split this 226 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L102",
@@ -62,19 +75,6 @@
 "startColumn":  1,
 "endLine":  105,
 "endColumn":  326
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  1,
-"endLine":  79,
-"endColumn":  221
 }
 }
 }

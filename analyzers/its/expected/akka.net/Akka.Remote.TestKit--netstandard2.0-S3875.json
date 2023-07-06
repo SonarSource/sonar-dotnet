@@ -108,32 +108,6 @@
 "id":  "S3875",
 "message":  "Remove this overload of 'operator =='.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L1012",
-"region":  {
-"startLine":  1012,
-"startColumn":  37,
-"endLine":  1012,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S3875",
-"message":  "Remove this overload of 'operator =='.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L1082",
-"region":  {
-"startLine":  1082,
-"startColumn":  37,
-"endLine":  1082,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S3875",
-"message":  "Remove this overload of 'operator =='.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L112",
 "region":  {
 "startLine":  112,
@@ -295,6 +269,32 @@
 "startLine":  946,
 "startColumn":  37,
 "endLine":  946,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L1012",
+"region":  {
+"startLine":  1012,
+"startColumn":  37,
+"endLine":  1012,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L1082",
+"region":  {
+"startLine":  1082,
+"startColumn":  37,
+"endLine":  1082,
 "endColumn":  39
 }
 }

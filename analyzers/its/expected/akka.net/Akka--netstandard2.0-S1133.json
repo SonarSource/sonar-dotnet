@@ -30,37 +30,11 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  6,
-"endLine":  121,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  6,
 "endLine":  21,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L237",
-"region":  {
-"startLine":  237,
-"startColumn":  6,
-"endLine":  237,
 "endColumn":  70
 }
 }
@@ -87,6 +61,32 @@
 "startLine":  80,
 "startColumn":  6,
 "endLine":  80,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  6,
+"endLine":  121,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L237",
+"region":  {
+"startLine":  237,
+"startColumn":  6,
+"endLine":  237,
 "endColumn":  70
 }
 }
@@ -407,12 +407,12 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L160",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L47",
 "region":  {
-"startLine":  160,
+"startLine":  47,
 "startColumn":  10,
-"endLine":  160,
-"endColumn":  85
+"endLine":  47,
+"endColumn":  59
 }
 }
 },
@@ -420,12 +420,12 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L47",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L160",
 "region":  {
-"startLine":  47,
+"startLine":  160,
 "startColumn":  10,
-"endLine":  47,
-"endColumn":  59
+"endLine":  160,
+"endColumn":  85
 }
 }
 },

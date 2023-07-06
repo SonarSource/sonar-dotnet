@@ -355,6 +355,19 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  68,
+"endLine":  86,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S1227",
+"message":  "Refactor the code in order to remove this break statement.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L109",
 "region":  {
 "startLine":  109,
@@ -373,19 +386,6 @@
 "startLine":  113,
 "startColumn":  68,
 "endLine":  113,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  68,
-"endLine":  86,
 "endColumn":  74
 }
 }

@@ -4,12 +4,12 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L126",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L34",
 "region":  {
-"startLine":  126,
-"startColumn":  25,
-"endLine":  126,
-"endColumn":  36
+"startLine":  34,
+"startColumn":  9,
+"endLine":  34,
+"endColumn":  29
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L34",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L126",
 "region":  {
-"startLine":  34,
-"startColumn":  9,
-"endLine":  34,
-"endColumn":  29
+"startLine":  126,
+"startColumn":  25,
+"endLine":  126,
+"endColumn":  36
 }
 }
 },
@@ -108,19 +108,6 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1334",
-"region":  {
-"startLine":  1334,
-"startColumn":  13,
-"endLine":  1334,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L467",
 "region":  {
 "startLine":  467,
@@ -140,6 +127,19 @@
 "startColumn":  11,
 "endLine":  481,
 "endColumn":  20
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1334",
+"region":  {
+"startLine":  1334,
+"startColumn":  13,
+"endLine":  1334,
+"endColumn":  23
 }
 }
 },

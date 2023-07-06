@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename interface 'ILoggingFSM' to match pascal case naming rules, consider using 'ILoggingFsm'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L1331",
-"region":  {
-"startLine":  1331,
-"startColumn":  22,
-"endLine":  1331,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S101",
 "message":  "Rename class 'FSMBase' to match pascal case naming rules, consider using 'FsmBase'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L23",
@@ -36,6 +23,19 @@
 "startColumn":  27,
 "endLine":  668,
 "endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'ILoggingFSM' to match pascal case naming rules, consider using 'ILoggingFsm'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L1331",
+"region":  {
+"startLine":  1331,
+"startColumn":  22,
+"endLine":  1331,
+"endColumn":  33
 }
 }
 },

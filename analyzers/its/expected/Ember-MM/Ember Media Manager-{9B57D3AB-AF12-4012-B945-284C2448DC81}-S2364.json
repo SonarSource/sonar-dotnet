@@ -561,32 +561,6 @@
 },
 {
 "id":  "S2364",
-"message":  "Rename 'CloseApp' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L111",
-"region":  {
-"startLine":  111,
-"startColumn":  13,
-"endLine":  111,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'KeyBuffer' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L115",
-"region":  {
-"startLine":  115,
-"startColumn":  13,
-"endLine":  115,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S2364",
 "message":  "Rename 'GenreImage' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L63",
@@ -738,6 +712,32 @@
 "startColumn":  13,
 "endLine":  97,
 "endColumn":  24
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'CloseApp' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  13,
+"endLine":  111,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'KeyBuffer' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  13,
+"endLine":  115,
+"endColumn":  22
 }
 }
 }

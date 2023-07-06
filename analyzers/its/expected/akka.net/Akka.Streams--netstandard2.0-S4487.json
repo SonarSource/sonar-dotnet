@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S4487",
+"message":  "Remove this unread private field '_producerCount' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  48,
+"endLine":  176,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4487",
 "message":  "Remove this unread private field '_callbackCount' or refactor the code to use its value.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1550",
@@ -23,19 +36,6 @@
 "startColumn":  30,
 "endLine":  1742,
 "endColumn":  44
-}
-}
-},
-{
-"id":  "S4487",
-"message":  "Remove this unread private field '_producerCount' or refactor the code to use its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L176",
-"region":  {
-"startLine":  176,
-"startColumn":  48,
-"endLine":  176,
-"endColumn":  62
 }
 }
 },

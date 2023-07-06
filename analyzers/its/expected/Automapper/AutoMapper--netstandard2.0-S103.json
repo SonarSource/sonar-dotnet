@@ -15,19 +15,6 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 227 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  1,
-"endLine":  104,
-"endColumn":  228
-}
-}
-},
-{
-"id":  "S103",
 "message":  "Split this 221 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L28",
@@ -49,6 +36,19 @@
 "startColumn":  1,
 "endLine":  35,
 "endColumn":  250
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 227 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  1,
+"endLine":  104,
+"endColumn":  228
 }
 }
 },

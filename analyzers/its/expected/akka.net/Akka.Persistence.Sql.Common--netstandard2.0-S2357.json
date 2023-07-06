@@ -54,32 +54,6 @@
 },
 {
 "id":  "S2357",
-"message":  "Make 'EntryTags' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  87,
-"endLine":  107,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Ids' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L127",
-"region":  {
-"startLine":  127,
-"startColumn":  48,
-"endLine":  127,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S2357",
 "message":  "Make 'PersistenceId' private.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L23",
@@ -153,6 +127,84 @@
 "startColumn":  32,
 "endLine":  43,
 "endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'EntryTags' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  87,
+"endLine":  107,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Ids' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  48,
+"endLine":  127,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'PersistenceId' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  32,
+"endLine":  34,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'PersistenceId' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  32,
+"endLine":  55,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'AllPersistenceIds' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  45,
+"endLine":  89,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'HighestOrderingNumber' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  30,
+"endLine":  91,
+"endColumn":  51
 }
 }
 },
@@ -301,19 +353,6 @@
 },
 {
 "id":  "S2357",
-"message":  "Make 'PersistenceId' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  32,
-"endLine":  34,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S2357",
 "message":  "Make 'Tag' private.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L340",
@@ -374,45 +413,6 @@
 "startColumn":  30,
 "endLine":  397,
 "endColumn":  36
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'PersistenceId' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  32,
-"endLine":  55,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'AllPersistenceIds' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  45,
-"endLine":  89,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'HighestOrderingNumber' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  30,
-"endLine":  91,
-"endColumn":  51
 }
 }
 },
@@ -587,45 +587,6 @@
 },
 {
 "id":  "S2357",
-"message":  "Make 'SerializerIdColumnName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L103",
-"region":  {
-"startLine":  103,
-"startColumn":  32,
-"endLine":  103,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Timeout' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L108",
-"region":  {
-"startLine":  108,
-"startColumn":  34,
-"endLine":  108,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'DefaultSerializer' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  32,
-"endLine":  113,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S2357",
 "message":  "Make 'PersistenceId' private.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L27",
@@ -777,6 +738,45 @@
 "startColumn":  32,
 "endLine":  99,
 "endColumn":  51
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'SerializerIdColumnName' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  32,
+"endLine":  103,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Timeout' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  34,
+"endLine":  108,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'DefaultSerializer' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  32,
+"endLine":  113,
+"endColumn":  49
 }
 }
 }

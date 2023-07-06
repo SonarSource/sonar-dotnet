@@ -4,19 +4,6 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L381",
-"region":  {
-"startLine":  381,
-"startColumn":  21,
-"endLine":  381,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L94",
 "region":  {
 "startLine":  94,
@@ -30,12 +17,12 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L353",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L381",
 "region":  {
-"startLine":  353,
+"startLine":  381,
 "startColumn":  21,
-"endLine":  353,
-"endColumn":  42
+"endLine":  381,
+"endColumn":  40
 }
 }
 },
@@ -49,6 +36,19 @@
 "startColumn":  21,
 "endLine":  55,
 "endColumn":  33
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L353",
+"region":  {
+"startLine":  353,
+"startColumn":  21,
+"endLine":  353,
+"endColumn":  42
 }
 }
 }

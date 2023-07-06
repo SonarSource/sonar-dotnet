@@ -41,19 +41,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'Addon' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1968",
-"region":  {
-"startLine":  1968,
-"startColumn":  36,
-"endLine":  1968,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'dTable' before using it.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L508",
@@ -62,6 +49,19 @@
 "startColumn":  13,
 "endLine":  508,
 "endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'Addon' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1968",
+"region":  {
+"startLine":  1968,
+"startColumn":  36,
+"endLine":  1968,
+"endColumn":  41
 }
 }
 },
@@ -93,19 +93,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'bytes' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHashing.vb#L108",
-"region":  {
-"startLine":  108,
-"startColumn":  33,
-"endLine":  108,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'input' before using it.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHashing.vb#L42",
@@ -119,6 +106,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'bytes' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHashing.vb#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  33,
+"endLine":  108,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'postDataList' before using it.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L150",
@@ -127,6 +127,19 @@
 "startColumn":  39,
 "endLine":  150,
 "endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imgImage' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  28,
+"endLine":  78,
+"endColumn":  36
 }
 }
 },
@@ -158,19 +171,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'imgImage' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  28,
-"endLine":  78,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actor' before using it.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L962",
@@ -179,6 +179,32 @@
 "startColumn":  76,
 "endLine":  962,
 "endColumn":  81
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'oImage' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  49,
+"endLine":  55,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'graphics' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  13,
+"endLine":  74,
+"endColumn":  21
 }
 }
 },
@@ -288,27 +314,27 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'oImage' before using it.",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L55",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L115",
 "region":  {
-"startLine":  55,
-"startColumn":  49,
-"endLine":  55,
-"endColumn":  55
+"startLine":  115,
+"startColumn":  30,
+"endLine":  115,
+"endColumn":  35
 }
 }
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'graphics' before using it.",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L74",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L610",
 "region":  {
-"startLine":  74,
-"startColumn":  13,
-"endLine":  74,
-"endColumn":  21
+"startLine":  610,
+"startColumn":  30,
+"endLine":  610,
+"endColumn":  35
 }
 }
 },
@@ -322,19 +348,6 @@
 "startColumn":  65,
 "endLine":  1086,
 "endColumn":  70
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'value' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L115",
-"region":  {
-"startLine":  115,
-"startColumn":  30,
-"endLine":  115,
-"endColumn":  35
 }
 }
 },
@@ -360,19 +373,6 @@
 "startLine":  1518,
 "startColumn":  30,
 "endLine":  1518,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'value' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L610",
-"region":  {
-"startLine":  610,
-"startColumn":  30,
-"endLine":  610,
 "endColumn":  35
 }
 }
@@ -452,19 +452,6 @@
 "startColumn":  37,
 "endLine":  413,
 "endColumn":  42
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'MovieDir' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1053",
-"region":  {
-"startLine":  1053,
-"startColumn":  33,
-"endLine":  1053,
-"endColumn":  41
 }
 }
 },
@@ -613,6 +600,58 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'MovieDir' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1053",
+"region":  {
+"startLine":  1053,
+"startColumn":  33,
+"endLine":  1053,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sURL' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  12,
+"endLine":  52,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 's' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  28,
+"endLine":  69,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 't' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  28,
+"endLine":  70,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'decText' before using it.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L116",
@@ -751,45 +790,6 @@
 "startColumn":  28,
 "endLine":  424,
 "endColumn":  45
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'sURL' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  12,
-"endLine":  52,
-"endColumn":  16
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 's' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  28,
-"endLine":  69,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 't' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  28,
-"endLine":  70,
-"endColumn":  29
 }
 }
 },

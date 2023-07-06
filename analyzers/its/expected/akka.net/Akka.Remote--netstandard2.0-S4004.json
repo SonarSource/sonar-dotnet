@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S4004",
+"message":  "Make the 'TrustedSelectionPaths' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  32,
+"endLine":  98,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4004",
 "message":  "Make the 'TransportNames' property read-only by removing the property setter or making it private.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L143",
@@ -36,19 +49,6 @@
 "startColumn":  34,
 "endLine":  268,
 "endColumn":  42
-}
-}
-},
-{
-"id":  "S4004",
-"message":  "Make the 'TrustedSelectionPaths' property read-only by removing the property setter or making it private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L98",
-"region":  {
-"startLine":  98,
-"startColumn":  32,
-"endLine":  98,
-"endColumn":  53
 }
 }
 }

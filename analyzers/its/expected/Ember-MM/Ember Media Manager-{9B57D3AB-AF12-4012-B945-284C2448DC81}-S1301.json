@@ -43,12 +43,12 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1302",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L184",
 "region":  {
-"startLine":  1302,
-"startColumn":  21,
-"endLine":  1302,
-"endColumn":  27
+"startLine":  184,
+"startColumn":  17,
+"endLine":  184,
+"endColumn":  23
 }
 }
 },
@@ -56,12 +56,12 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L184",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1302",
 "region":  {
-"startLine":  184,
-"startColumn":  17,
-"endLine":  184,
-"endColumn":  23
+"startLine":  1302,
+"startColumn":  21,
+"endLine":  1302,
+"endColumn":  27
 }
 }
 },

@@ -4,6 +4,19 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L227",
+"region":  {
+"startLine":  227,
+"startColumn":  1,
+"endLine":  227,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1223",
 "region":  {
 "startLine":  1223,
@@ -22,32 +35,6 @@
 "startLine":  1357,
 "startColumn":  1,
 "endLine":  1357,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1309",
-"message":  "Do not suppress issues.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L227",
-"region":  {
-"startLine":  227,
-"startColumn":  1,
-"endLine":  227,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1309",
-"message":  "Do not suppress issues.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1013",
-"region":  {
-"startLine":  1013,
-"startColumn":  1,
-"endLine":  1013,
 "endColumn":  24
 }
 }
@@ -87,6 +74,19 @@
 "startLine":  785,
 "startColumn":  1,
 "endLine":  785,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1013",
+"region":  {
+"startLine":  1013,
+"startColumn":  1,
+"endLine":  1013,
 "endColumn":  24
 }
 }

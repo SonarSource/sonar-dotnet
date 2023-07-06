@@ -43,6 +43,19 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  16,
+"endLine":  83,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L142",
 "region":  {
 "startLine":  142,
@@ -113,19 +126,6 @@
 "startLine":  767,
 "startColumn":  16,
 "endLine":  767,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L83",
-"region":  {
-"startLine":  83,
-"startColumn":  16,
-"endLine":  83,
 "endColumn":  37
 }
 }

@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L149",
-"region":  {
-"startLine":  149,
-"startColumn":  5,
-"endLine":  149,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 30 which is greater than 10 authorized.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L29",
@@ -23,6 +10,19 @@
 "startColumn":  5,
 "endLine":  29,
 "endColumn":  145
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  5,
+"endLine":  149,
+"endColumn":  110
 }
 }
 },

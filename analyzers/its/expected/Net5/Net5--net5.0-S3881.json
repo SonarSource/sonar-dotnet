@@ -38,6 +38,30 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2952.Part1.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  26,
+"endLine":  6,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2952.Part1.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  26,
+"endLine":  6,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2952.Part1.cs#L19",
 "region":  {
 "startLine":  19,
@@ -95,30 +119,6 @@
 "startColumn":  29,
 "endLine":  33,
 "endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S3881",
-"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2952.Part1.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  26,
-"endLine":  6,
-"endColumn":  40
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2952.Part1.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  26,
-"endLine":  6,
-"endColumn":  40
 }
 }
 ]

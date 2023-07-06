@@ -17,6 +17,19 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(TOut)' instead or add a constraint to 'TOut' so that it can't be a value type.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L488",
+"region":  {
+"startLine":  488,
+"startColumn":  37,
+"endLine":  488,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(TOut)' instead or add a constraint to 'TOut' so that it can't be a value type.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1038",
 "region":  {
 "startLine":  1038,
@@ -62,19 +75,6 @@
 "startColumn":  57,
 "endLine":  2774,
 "endColumn":  61
-}
-}
-},
-{
-"id":  "S2955",
-"message":  "Use a comparison to 'default(TOut)' instead or add a constraint to 'TOut' so that it can't be a value type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L488",
-"region":  {
-"startLine":  488,
-"startColumn":  37,
-"endLine":  488,
-"endColumn":  41
 }
 }
 },

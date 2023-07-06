@@ -17,32 +17,6 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L126",
-"region":  {
-"startLine":  126,
-"startColumn":  43,
-"endLine":  126,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L160",
-"region":  {
-"startLine":  160,
-"startColumn":  43,
-"endLine":  160,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L26",
 "region":  {
 "startLine":  26,
@@ -61,6 +35,32 @@
 "startLine":  71,
 "startColumn":  43,
 "endLine":  71,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  43,
+"endLine":  126,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L160",
+"region":  {
+"startLine":  160,
+"startColumn":  43,
+"endLine":  160,
 "endColumn":  46
 }
 }

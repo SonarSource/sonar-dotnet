@@ -30,12 +30,12 @@
 "id":  "S3994",
 "message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L270",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L38",
 "region":  {
-"startLine":  270,
-"startColumn":  37,
-"endLine":  270,
-"endColumn":  43
+"startLine":  38,
+"startColumn":  25,
+"endLine":  38,
+"endColumn":  31
 }
 }
 },
@@ -43,12 +43,12 @@
 "id":  "S3994",
 "message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L38",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L270",
 "region":  {
-"startLine":  38,
-"startColumn":  25,
-"endLine":  38,
-"endColumn":  31
+"startLine":  270,
+"startColumn":  37,
+"endLine":  270,
+"endColumn":  43
 }
 }
 },

@@ -4,12 +4,12 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientReceptionist.cs#L135",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientReceptionist.cs#L56",
 "region":  {
-"startLine":  135,
-"startColumn":  70,
-"endLine":  135,
-"endColumn":  74
+"startLine":  56,
+"startColumn":  47,
+"endLine":  56,
+"endColumn":  51
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientReceptionist.cs#L56",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientReceptionist.cs#L135",
 "region":  {
-"startLine":  56,
-"startColumn":  47,
-"endLine":  56,
-"endColumn":  51
+"startLine":  135,
+"startColumn":  70,
+"endLine":  135,
+"endColumn":  74
 }
 }
 },
@@ -67,45 +67,6 @@
 },
 {
 "id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'repeat'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1116",
-"region":  {
-"startLine":  1116,
-"startColumn":  92,
-"endLine":  1116,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'repeat'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1132",
-"region":  {
-"startLine":  1132,
-"startColumn":  88,
-"endLine":  1132,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'repeat'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1255",
-"region":  {
-"startLine":  1255,
-"startColumn":  131,
-"endLine":  1255,
-"endColumn":  136
-}
-}
-},
-{
-"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L673",
@@ -140,6 +101,45 @@
 "startColumn":  105,
 "endLine":  828,
 "endColumn":  118
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'repeat'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1116",
+"region":  {
+"startLine":  1116,
+"startColumn":  92,
+"endLine":  1116,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'repeat'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1132",
+"region":  {
+"startLine":  1132,
+"startColumn":  88,
+"endLine":  1132,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'repeat'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1255",
+"region":  {
+"startLine":  1255,
+"startColumn":  131,
+"endLine":  1255,
+"endColumn":  136
 }
 }
 },

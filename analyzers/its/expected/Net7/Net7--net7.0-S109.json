@@ -186,6 +186,45 @@
 "id":  "S109",
 "message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  47,
+"endLine":  8,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  60,
+"endLine":  8,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  106,
+"endLine":  8,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L11",
 "region":  {
 "startLine":  11,
@@ -270,45 +309,6 @@
 "startColumn":  123,
 "endLine":  14,
 "endColumn":  125
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  47,
-"endLine":  8,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  60,
-"endLine":  8,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  106,
-"endLine":  8,
-"endColumn":  108
 }
 }
 }

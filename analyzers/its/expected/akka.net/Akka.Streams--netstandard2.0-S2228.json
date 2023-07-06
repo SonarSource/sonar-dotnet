@@ -17,45 +17,6 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1236",
-"region":  {
-"startLine":  1236,
-"startColumn":  29,
-"endLine":  1236,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S2228",
-"message":  "Remove this logging statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1364",
-"region":  {
-"startLine":  1364,
-"startColumn":  21,
-"endLine":  1364,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2228",
-"message":  "Remove this logging statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1503",
-"region":  {
-"startLine":  1503,
-"startColumn":  21,
-"endLine":  1503,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2228",
-"message":  "Remove this logging statement.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L268",
 "region":  {
 "startLine":  268,
@@ -147,12 +108,38 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L570",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1236",
 "region":  {
-"startLine":  570,
-"startColumn":  61,
-"endLine":  570,
-"endColumn":  78
+"startLine":  1236,
+"startColumn":  29,
+"endLine":  1236,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1364",
+"region":  {
+"startLine":  1364,
+"startColumn":  21,
+"endLine":  1364,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1503",
+"region":  {
+"startLine":  1503,
+"startColumn":  21,
+"endLine":  1503,
+"endColumn":  38
 }
 }
 },
@@ -166,6 +153,19 @@
 "startColumn":  26,
 "endLine":  89,
 "endColumn":  43
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L570",
+"region":  {
+"startLine":  570,
+"startColumn":  61,
+"endLine":  570,
+"endColumn":  78
 }
 }
 },
@@ -231,58 +231,6 @@
 "startColumn":  38,
 "endLine":  954,
 "endColumn":  55
-}
-}
-},
-{
-"id":  "S2228",
-"message":  "Remove this logging statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1021",
-"region":  {
-"startLine":  1021,
-"startColumn":  26,
-"endLine":  1021,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2228",
-"message":  "Remove this logging statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1045",
-"region":  {
-"startLine":  1045,
-"startColumn":  26,
-"endLine":  1045,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2228",
-"message":  "Remove this logging statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1073",
-"region":  {
-"startLine":  1073,
-"startColumn":  26,
-"endLine":  1073,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2228",
-"message":  "Remove this logging statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1100",
-"region":  {
-"startLine":  1100,
-"startColumn":  36,
-"endLine":  1100,
-"endColumn":  53
 }
 }
 },
@@ -374,6 +322,58 @@
 "startColumn":  34,
 "endLine":  856,
 "endColumn":  51
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1021",
+"region":  {
+"startLine":  1021,
+"startColumn":  26,
+"endLine":  1021,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1045",
+"region":  {
+"startLine":  1045,
+"startColumn":  26,
+"endLine":  1045,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1073",
+"region":  {
+"startLine":  1073,
+"startColumn":  26,
+"endLine":  1073,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1100",
+"region":  {
+"startLine":  1100,
+"startColumn":  36,
+"endLine":  1100,
+"endColumn":  53
 }
 }
 },

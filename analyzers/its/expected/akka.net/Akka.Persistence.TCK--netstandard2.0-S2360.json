@@ -4,19 +4,6 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L119",
-"region":  {
-"startLine":  119,
-"startColumn":  94,
-"endLine":  119,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L53",
 "region":  {
 "startLine":  53,
@@ -127,6 +114,19 @@
 "startColumn":  105,
 "endLine":  83,
 "endColumn":  111
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  94,
+"endLine":  119,
+"endColumn":  101
 }
 }
 },

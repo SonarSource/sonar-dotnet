@@ -4,45 +4,6 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1543",
-"region":  {
-"startLine":  1543,
-"startColumn":  10,
-"endLine":  1543,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1554",
-"region":  {
-"startLine":  1554,
-"startColumn":  10,
-"endLine":  1554,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1562",
-"region":  {
-"startLine":  1562,
-"startColumn":  10,
-"endLine":  1562,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L572",
 "region":  {
 "startLine":  572,
@@ -166,6 +127,45 @@
 "startColumn":  10,
 "endLine":  794,
 "endColumn":  90
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1543",
+"region":  {
+"startLine":  1543,
+"startColumn":  10,
+"endLine":  1543,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1554",
+"region":  {
+"startLine":  1554,
+"startColumn":  10,
+"endLine":  1554,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1562",
+"region":  {
+"startLine":  1562,
+"startColumn":  10,
+"endLine":  1562,
+"endColumn":  96
 }
 }
 }

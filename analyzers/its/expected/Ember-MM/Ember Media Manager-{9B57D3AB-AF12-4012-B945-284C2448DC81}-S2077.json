@@ -43,19 +43,6 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L132",
-"region":  {
-"startLine":  132,
-"startColumn":  25,
-"endLine":  132,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L78",
 "region":  {
 "startLine":  78,
@@ -69,11 +56,11 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L120",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L132",
 "region":  {
-"startLine":  120,
+"startLine":  132,
 "startColumn":  25,
-"endLine":  120,
+"endLine":  132,
 "endColumn":  47
 }
 }
@@ -108,24 +95,11 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2027",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L120",
 "region":  {
-"startLine":  2027,
+"startLine":  120,
 "startColumn":  25,
-"endLine":  2027,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2575",
-"region":  {
-"startLine":  2575,
-"startColumn":  25,
-"endLine":  2575,
+"endLine":  120,
 "endColumn":  47
 }
 }
@@ -153,6 +127,32 @@
 "startColumn":  17,
 "endLine":  375,
 "endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2027",
+"region":  {
+"startLine":  2027,
+"startColumn":  25,
+"endLine":  2027,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2575",
+"region":  {
+"startLine":  2575,
+"startColumn":  25,
+"endLine":  2575,
+"endColumn":  47
 }
 }
 },

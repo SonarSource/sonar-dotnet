@@ -17,6 +17,19 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  27,
+"endLine":  90,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L120",
 "region":  {
 "startLine":  120,
@@ -178,19 +191,6 @@
 "startLine":  714,
 "startColumn":  27,
 "endLine":  714,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2436",
-"message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  27,
-"endLine":  90,
 "endColumn":  57
 }
 }

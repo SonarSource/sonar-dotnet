@@ -17,12 +17,12 @@
 "id":  "S3400",
 "message":  "Remove this method and declare a constant for this value.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L13",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L8",
 "region":  {
-"startLine":  13,
-"startColumn":  27,
-"endLine":  13,
-"endColumn":  33
+"startLine":  8,
+"startColumn":  23,
+"endLine":  8,
+"endColumn":  29
 }
 }
 },
@@ -30,12 +30,12 @@
 "id":  "S3400",
 "message":  "Remove this method and declare a constant for this value.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L8",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L13",
 "region":  {
-"startLine":  8,
-"startColumn":  23,
-"endLine":  8,
-"endColumn":  29
+"startLine":  13,
+"startColumn":  27,
+"endLine":  13,
+"endColumn":  33
 }
 }
 }

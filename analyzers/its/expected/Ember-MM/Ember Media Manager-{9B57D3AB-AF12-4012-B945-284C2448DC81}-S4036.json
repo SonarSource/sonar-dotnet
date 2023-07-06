@@ -160,6 +160,19 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L653",
+"region":  {
+"startLine":  653,
+"startColumn":  29,
+"endLine":  653,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4036",
+"message":  "Make sure the "PATH" used to find this command includes only what you intend.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1798",
 "region":  {
 "startLine":  1798,
@@ -244,19 +257,6 @@
 "startColumn":  17,
 "endLine":  4140,
 "endColumn":  44
-}
-}
-},
-{
-"id":  "S4036",
-"message":  "Make sure the "PATH" used to find this command includes only what you intend.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L653",
-"region":  {
-"startLine":  653,
-"startColumn":  29,
-"endLine":  653,
-"endColumn":  56
 }
 }
 },

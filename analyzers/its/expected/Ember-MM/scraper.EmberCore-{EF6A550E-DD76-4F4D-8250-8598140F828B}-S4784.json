@@ -433,12 +433,12 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L135",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L85",
 "region":  {
-"startLine":  135,
-"startColumn":  49,
-"endLine":  135,
-"endColumn":  109
+"startLine":  85,
+"startColumn":  55,
+"endLine":  85,
+"endColumn":  135
 }
 }
 },
@@ -446,12 +446,12 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L85",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L135",
 "region":  {
-"startLine":  85,
-"startColumn":  55,
-"endLine":  85,
-"endColumn":  135
+"startLine":  135,
+"startColumn":  49,
+"endLine":  135,
+"endColumn":  109
 }
 }
 },

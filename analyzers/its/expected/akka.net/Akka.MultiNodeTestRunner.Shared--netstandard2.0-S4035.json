@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Seal class 'FactData' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L133",
-"region":  {
-"startLine":  133,
-"startColumn":  18,
-"endLine":  133,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S4035",
 "message":  "Seal class 'TestRunTree' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L18",
@@ -23,6 +10,19 @@
 "startColumn":  18,
 "endLine":  18,
 "endColumn":  29
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'FactData' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  18,
+"endLine":  133,
+"endColumn":  26
 }
 }
 },

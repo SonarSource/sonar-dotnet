@@ -4,11 +4,11 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L318",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L89",
 "region":  {
-"startLine":  318,
+"startLine":  89,
 "startColumn":  24,
-"endLine":  318,
+"endLine":  89,
 "endColumn":  61
 }
 }
@@ -17,11 +17,11 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L89",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L318",
 "region":  {
-"startLine":  89,
+"startLine":  318,
 "startColumn":  24,
-"endLine":  89,
+"endLine":  318,
 "endColumn":  61
 }
 }
@@ -121,12 +121,12 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L236",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L27",
 "region":  {
-"startLine":  236,
+"startLine":  27,
 "startColumn":  20,
-"endLine":  236,
-"endColumn":  53
+"endLine":  27,
+"endColumn":  51
 }
 }
 },
@@ -134,12 +134,12 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L27",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L236",
 "region":  {
-"startLine":  27,
+"startLine":  236,
 "startColumn":  20,
-"endLine":  27,
-"endColumn":  51
+"endLine":  236,
+"endColumn":  53
 }
 }
 },

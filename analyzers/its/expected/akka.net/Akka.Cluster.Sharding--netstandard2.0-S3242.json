@@ -82,19 +82,6 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1132",
-"region":  {
-"startLine":  1132,
-"startColumn":  72,
-"endLine":  1132,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L926",
 "region":  {
 "startLine":  926,
@@ -114,6 +101,19 @@
 "startColumn":  56,
 "endLine":  941,
 "endColumn":  62
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1132",
+"region":  {
+"startLine":  1132,
+"startColumn":  72,
+"endLine":  1132,
+"endColumn":  80
 }
 }
 }

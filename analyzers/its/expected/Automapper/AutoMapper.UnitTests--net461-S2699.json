@@ -147,19 +147,6 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/UnitTests/Bug/MultiThreadingIssues.cs#L1159",
-"region":  {
-"startLine":  1159,
-"startColumn":  21,
-"endLine":  1159,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/UnitTests/Bug/MultiThreadingIssues.cs#L54",
 "region":  {
 "startLine":  54,
@@ -178,6 +165,19 @@
 "startLine":  628,
 "startColumn":  21,
 "endLine":  628,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/UnitTests/Bug/MultiThreadingIssues.cs#L1159",
+"region":  {
+"startLine":  1159,
+"startColumn":  21,
+"endLine":  1159,
 "endColumn":  32
 }
 }

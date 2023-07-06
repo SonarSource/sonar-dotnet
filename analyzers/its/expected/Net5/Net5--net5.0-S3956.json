@@ -17,12 +17,12 @@
 "id":  "S3956",
 "message":  "Refactor this method to use a generic collection designed for inheritance.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L23",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L8",
 "region":  {
-"startLine":  23,
+"startLine":  8,
 "startColumn":  16,
-"endLine":  23,
-"endColumn":  25
+"endLine":  8,
+"endColumn":  28
 }
 }
 },
@@ -30,12 +30,12 @@
 "id":  "S3956",
 "message":  "Refactor this method to use a generic collection designed for inheritance.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L8",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L23",
 "region":  {
-"startLine":  8,
+"startLine":  23,
 "startColumn":  16,
-"endLine":  8,
-"endColumn":  28
+"endLine":  23,
+"endColumn":  25
 }
 }
 }

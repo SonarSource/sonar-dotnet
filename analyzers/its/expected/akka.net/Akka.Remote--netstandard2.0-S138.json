@@ -28,19 +28,6 @@
 },
 {
 "id":  "S138",
-"message":  "This method 'InitializeFSM' has 162 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1102",
-"region":  {
-"startLine":  1102,
-"startColumn":  22,
-"endLine":  1102,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S138",
 "message":  "This method 'Ready' has 85 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L359",
@@ -49,6 +36,19 @@
 "startColumn":  33,
 "endLine":  359,
 "endColumn":  38
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'InitializeFSM' has 162 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1102",
+"region":  {
+"startLine":  1102,
+"startColumn":  22,
+"endLine":  1102,
+"endColumn":  35
 }
 }
 }

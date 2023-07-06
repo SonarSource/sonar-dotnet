@@ -41,6 +41,19 @@
 },
 {
 "id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  79,
+"endLine":  80,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L154",
@@ -153,19 +166,6 @@
 "startColumn":  38,
 "endLine":  245,
 "endColumn":  39
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  79,
-"endLine":  80,
-"endColumn":  80
 }
 }
 }

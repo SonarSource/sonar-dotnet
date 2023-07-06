@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  24,
+"endLine":  77,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4058",
 "message":  "Change this call to 's.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L124",
@@ -23,19 +36,6 @@
 "startColumn":  17,
 "endLine":  336,
 "endColumn":  45
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  24,
-"endLine":  77,
-"endColumn":  55
 }
 }
 },

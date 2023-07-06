@@ -2,6 +2,537 @@
 "issues":  [
 {
 "id":  "S1192",
+"message":  "Define a constant instead of using this literal 'movieindex' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L298",
+"region":  {
+"startLine":  298,
+"startColumn":  133,
+"endLine":  298,
+"endColumn":  145
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L339",
+"region":  {
+"startLine":  339,
+"startColumn":  136,
+"endLine":  339,
+"endColumn":  148
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
+"region":  {
+"startLine":  1498,
+"startColumn":  143,
+"endLine":  1498,
+"endColumn":  155
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
+"region":  {
+"startLine":  1498,
+"startColumn":  240,
+"endLine":  1498,
+"endColumn":  252
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'tvindex' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L380",
+"region":  {
+"startLine":  380,
+"startColumn":  133,
+"endLine":  380,
+"endColumn":  142
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L413",
+"region":  {
+"startLine":  413,
+"startColumn":  136,
+"endLine":  413,
+"endColumn":  145
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
+"region":  {
+"startLine":  1561,
+"startColumn":  143,
+"endLine":  1561,
+"endColumn":  152
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
+"region":  {
+"startLine":  1561,
+"startColumn":  237,
+"endLine":  1561,
+"endColumn":  246
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'RelativePathToBase' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L428",
+"region":  {
+"startLine":  428,
+"startColumn":  158,
+"endLine":  428,
+"endColumn":  178
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L437",
+"region":  {
+"startLine":  437,
+"startColumn":  201,
+"endLine":  437,
+"endColumn":  221
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L456",
+"region":  {
+"startLine":  456,
+"startColumn":  245,
+"endLine":  456,
+"endColumn":  265
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L728",
+"region":  {
+"startLine":  728,
+"startColumn":  152,
+"endLine":  728,
+"endColumn":  172
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '../../' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L428",
+"region":  {
+"startLine":  428,
+"startColumn":  180,
+"endLine":  428,
+"endColumn":  188
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L437",
+"region":  {
+"startLine":  437,
+"startColumn":  223,
+"endLine":  437,
+"endColumn":  231
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L456",
+"region":  {
+"startLine":  456,
+"startColumn":  267,
+"endLine":  456,
+"endColumn":  275
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L728",
+"region":  {
+"startLine":  728,
+"startColumn":  174,
+"endLine":  728,
+"endColumn":  182
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Thumb' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L555",
+"region":  {
+"startLine":  555,
+"startColumn":  114,
+"endLine":  555,
+"endColumn":  121
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1034",
+"region":  {
+"startLine":  1034,
+"startColumn":  137,
+"endLine":  1034,
+"endColumn":  144
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1112",
+"region":  {
+"startLine":  1112,
+"startColumn":  45,
+"endLine":  1112,
+"endColumn":  52
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1113",
+"region":  {
+"startLine":  1113,
+"startColumn":  137,
+"endLine":  1113,
+"endColumn":  144
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Title' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L559",
+"region":  {
+"startLine":  559,
+"startColumn":  56,
+"endLine":  559,
+"endColumn":  63
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L560",
+"region":  {
+"startLine":  560,
+"startColumn":  67,
+"endLine":  560,
+"endColumn":  74
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L647",
+"region":  {
+"startLine":  647,
+"startColumn":  61,
+"endLine":  647,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L733",
+"region":  {
+"startLine":  733,
+"startColumn":  67,
+"endLine":  733,
+"endColumn":  74
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Genre' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L586",
+"region":  {
+"startLine":  586,
+"startColumn":  60,
+"endLine":  586,
+"endColumn":  67
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L587",
+"region":  {
+"startLine":  587,
+"startColumn":  52,
+"endLine":  587,
+"endColumn":  59
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L652",
+"region":  {
+"startLine":  652,
+"startColumn":  63,
+"endLine":  652,
+"endColumn":  70
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L660",
+"region":  {
+"startLine":  660,
+"startColumn":  51,
+"endLine":  660,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Unknown' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L612",
+"region":  {
+"startLine":  612,
+"startColumn":  129,
+"endLine":  612,
+"endColumn":  138
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L612",
+"region":  {
+"startLine":  612,
+"startColumn":  219,
+"endLine":  612,
+"endColumn":  228
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L622",
+"region":  {
+"startLine":  622,
+"startColumn":  133,
+"endLine":  622,
+"endColumn":  142
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L622",
+"region":  {
+"startLine":  622,
+"startColumn":  232,
+"endLine":  622,
+"endColumn":  241
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'TVThumbsPath' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L640",
+"region":  {
+"startLine":  640,
+"startColumn":  53,
+"endLine":  640,
+"endColumn":  67
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L693",
+"region":  {
+"startLine":  693,
+"startColumn":  53,
+"endLine":  693,
+"endColumn":  67
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L724",
+"region":  {
+"startLine":  724,
+"startColumn":  53,
+"endLine":  724,
+"endColumn":  67
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1024",
+"region":  {
+"startLine":  1024,
+"startColumn":  72,
+"endLine":  1024,
+"endColumn":  86
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Thumbs/' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L545",
+"region":  {
+"startLine":  545,
+"startColumn":  67,
+"endLine":  545,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L546",
+"region":  {
+"startLine":  546,
+"startColumn":  71,
+"endLine":  546,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1024",
+"region":  {
+"startLine":  1024,
+"startColumn":  88,
+"endLine":  1024,
+"endColumn":  97
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1103",
+"region":  {
+"startLine":  1103,
+"startColumn":  86,
+"endLine":  1103,
+"endColumn":  95
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1183",
+"region":  {
+"startLine":  1183,
+"startColumn":  88,
+"endLine":  1183,
+"endColumn":  97
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'MoviePath' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L554",
+"region":  {
+"startLine":  554,
+"startColumn":  79,
+"endLine":  554,
+"endColumn":  90
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L577",
+"region":  {
+"startLine":  577,
+"startColumn":  79,
+"endLine":  577,
+"endColumn":  90
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L578",
+"region":  {
+"startLine":  578,
+"startColumn":  83,
+"endLine":  578,
+"endColumn":  94
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L590",
+"region":  {
+"startLine":  590,
+"startColumn":  68,
+"endLine":  590,
+"endColumn":  79
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L627",
+"region":  {
+"startLine":  627,
+"startColumn":  57,
+"endLine":  627,
+"endColumn":  68
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'FanartPath' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L558",
+"region":  {
+"startLine":  558,
+"startColumn":  80,
+"endLine":  558,
+"endColumn":  92
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L654",
+"region":  {
+"startLine":  654,
+"startColumn":  81,
+"endLine":  654,
+"endColumn":  93
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1189",
+"region":  {
+"startLine":  1189,
+"startColumn":  51,
+"endLine":  1189,
+"endColumn":  63
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1192",
+"region":  {
+"startLine":  1192,
+"startColumn":  56,
+"endLine":  1192,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1196",
+"region":  {
+"startLine":  1196,
+"startColumn":  54,
+"endLine":  1196,
+"endColumn":  66
+}
+}
+]
+},
+{
+"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'movie' 6 times.",
 "location":  [
 {
@@ -56,6 +587,126 @@
 "startColumn":  62,
 "endLine":  1631,
 "endColumn":  69
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Season' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L433",
+"region":  {
+"startLine":  433,
+"startColumn":  137,
+"endLine":  433,
+"endColumn":  145
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L437",
+"region":  {
+"startLine":  437,
+"startColumn":  157,
+"endLine":  437,
+"endColumn":  165
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L440",
+"region":  {
+"startLine":  440,
+"startColumn":  111,
+"endLine":  440,
+"endColumn":  119
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L443",
+"region":  {
+"startLine":  443,
+"startColumn":  236,
+"endLine":  443,
+"endColumn":  244
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L453",
+"region":  {
+"startLine":  453,
+"startColumn":  164,
+"endLine":  453,
+"endColumn":  172
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L456",
+"region":  {
+"startLine":  456,
+"startColumn":  167,
+"endLine":  456,
+"endColumn":  175
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'TVThumbs/' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L640",
+"region":  {
+"startLine":  640,
+"startColumn":  69,
+"endLine":  640,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L641",
+"region":  {
+"startLine":  641,
+"startColumn":  73,
+"endLine":  641,
+"endColumn":  84
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L693",
+"region":  {
+"startLine":  693,
+"startColumn":  69,
+"endLine":  693,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L694",
+"region":  {
+"startLine":  694,
+"startColumn":  73,
+"endLine":  694,
+"endColumn":  84
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L724",
+"region":  {
+"startLine":  724,
+"startColumn":  69,
+"endLine":  724,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L725",
+"region":  {
+"startLine":  725,
+"startColumn":  73,
+"endLine":  725,
+"endColumn":  84
 }
 }
 ]
@@ -203,48 +854,6 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'movieindex' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L298",
-"region":  {
-"startLine":  298,
-"startColumn":  133,
-"endLine":  298,
-"endColumn":  145
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L339",
-"region":  {
-"startLine":  339,
-"startColumn":  136,
-"endLine":  339,
-"endColumn":  148
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
-"region":  {
-"startLine":  1498,
-"startColumn":  143,
-"endLine":  1498,
-"endColumn":  155
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
-"region":  {
-"startLine":  1498,
-"startColumn":  240,
-"endLine":  1498,
-"endColumn":  252
-}
-}
-]
-},
-{
-"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'Source' 15 times.",
 "location":  [
 {
@@ -386,336 +995,6 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'tvindex' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L380",
-"region":  {
-"startLine":  380,
-"startColumn":  133,
-"endLine":  380,
-"endColumn":  142
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L413",
-"region":  {
-"startLine":  413,
-"startColumn":  136,
-"endLine":  413,
-"endColumn":  145
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
-"region":  {
-"startLine":  1561,
-"startColumn":  143,
-"endLine":  1561,
-"endColumn":  152
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
-"region":  {
-"startLine":  1561,
-"startColumn":  237,
-"endLine":  1561,
-"endColumn":  246
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'RelativePathToBase' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L428",
-"region":  {
-"startLine":  428,
-"startColumn":  158,
-"endLine":  428,
-"endColumn":  178
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L437",
-"region":  {
-"startLine":  437,
-"startColumn":  201,
-"endLine":  437,
-"endColumn":  221
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L456",
-"region":  {
-"startLine":  456,
-"startColumn":  245,
-"endLine":  456,
-"endColumn":  265
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L728",
-"region":  {
-"startLine":  728,
-"startColumn":  152,
-"endLine":  728,
-"endColumn":  172
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal '../../' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L428",
-"region":  {
-"startLine":  428,
-"startColumn":  180,
-"endLine":  428,
-"endColumn":  188
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L437",
-"region":  {
-"startLine":  437,
-"startColumn":  223,
-"endLine":  437,
-"endColumn":  231
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L456",
-"region":  {
-"startLine":  456,
-"startColumn":  267,
-"endLine":  456,
-"endColumn":  275
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L728",
-"region":  {
-"startLine":  728,
-"startColumn":  174,
-"endLine":  728,
-"endColumn":  182
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Season' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L433",
-"region":  {
-"startLine":  433,
-"startColumn":  137,
-"endLine":  433,
-"endColumn":  145
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L437",
-"region":  {
-"startLine":  437,
-"startColumn":  157,
-"endLine":  437,
-"endColumn":  165
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L440",
-"region":  {
-"startLine":  440,
-"startColumn":  111,
-"endLine":  440,
-"endColumn":  119
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L443",
-"region":  {
-"startLine":  443,
-"startColumn":  236,
-"endLine":  443,
-"endColumn":  244
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L453",
-"region":  {
-"startLine":  453,
-"startColumn":  164,
-"endLine":  453,
-"endColumn":  172
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L456",
-"region":  {
-"startLine":  456,
-"startColumn":  167,
-"endLine":  456,
-"endColumn":  175
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Thumbs/' 5 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L545",
-"region":  {
-"startLine":  545,
-"startColumn":  67,
-"endLine":  545,
-"endColumn":  76
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L546",
-"region":  {
-"startLine":  546,
-"startColumn":  71,
-"endLine":  546,
-"endColumn":  80
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1024",
-"region":  {
-"startLine":  1024,
-"startColumn":  88,
-"endLine":  1024,
-"endColumn":  97
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1103",
-"region":  {
-"startLine":  1103,
-"startColumn":  86,
-"endLine":  1103,
-"endColumn":  95
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1183",
-"region":  {
-"startLine":  1183,
-"startColumn":  88,
-"endLine":  1183,
-"endColumn":  97
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'MoviePath' 5 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L554",
-"region":  {
-"startLine":  554,
-"startColumn":  79,
-"endLine":  554,
-"endColumn":  90
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L577",
-"region":  {
-"startLine":  577,
-"startColumn":  79,
-"endLine":  577,
-"endColumn":  90
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L578",
-"region":  {
-"startLine":  578,
-"startColumn":  83,
-"endLine":  578,
-"endColumn":  94
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L590",
-"region":  {
-"startLine":  590,
-"startColumn":  68,
-"endLine":  590,
-"endColumn":  79
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L627",
-"region":  {
-"startLine":  627,
-"startColumn":  57,
-"endLine":  627,
-"endColumn":  68
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Thumb' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L555",
-"region":  {
-"startLine":  555,
-"startColumn":  114,
-"endLine":  555,
-"endColumn":  121
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1034",
-"region":  {
-"startLine":  1034,
-"startColumn":  137,
-"endLine":  1034,
-"endColumn":  144
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1112",
-"region":  {
-"startLine":  1112,
-"startColumn":  45,
-"endLine":  1112,
-"endColumn":  52
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1113",
-"region":  {
-"startLine":  1113,
-"startColumn":  137,
-"endLine":  1113,
-"endColumn":  144
-}
-}
-]
-},
-{
-"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'PosterPath' 15 times.",
 "location":  [
 {
@@ -851,285 +1130,6 @@
 "startColumn":  118,
 "endLine":  1149,
 "endColumn":  130
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'FanartPath' 5 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L558",
-"region":  {
-"startLine":  558,
-"startColumn":  80,
-"endLine":  558,
-"endColumn":  92
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L654",
-"region":  {
-"startLine":  654,
-"startColumn":  81,
-"endLine":  654,
-"endColumn":  93
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1189",
-"region":  {
-"startLine":  1189,
-"startColumn":  51,
-"endLine":  1189,
-"endColumn":  63
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1192",
-"region":  {
-"startLine":  1192,
-"startColumn":  56,
-"endLine":  1192,
-"endColumn":  68
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1196",
-"region":  {
-"startLine":  1196,
-"startColumn":  54,
-"endLine":  1196,
-"endColumn":  66
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Title' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L559",
-"region":  {
-"startLine":  559,
-"startColumn":  56,
-"endLine":  559,
-"endColumn":  63
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L560",
-"region":  {
-"startLine":  560,
-"startColumn":  67,
-"endLine":  560,
-"endColumn":  74
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L647",
-"region":  {
-"startLine":  647,
-"startColumn":  61,
-"endLine":  647,
-"endColumn":  68
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L733",
-"region":  {
-"startLine":  733,
-"startColumn":  67,
-"endLine":  733,
-"endColumn":  74
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Genre' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L586",
-"region":  {
-"startLine":  586,
-"startColumn":  60,
-"endLine":  586,
-"endColumn":  67
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L587",
-"region":  {
-"startLine":  587,
-"startColumn":  52,
-"endLine":  587,
-"endColumn":  59
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L652",
-"region":  {
-"startLine":  652,
-"startColumn":  63,
-"endLine":  652,
-"endColumn":  70
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L660",
-"region":  {
-"startLine":  660,
-"startColumn":  51,
-"endLine":  660,
-"endColumn":  58
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Unknown' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L612",
-"region":  {
-"startLine":  612,
-"startColumn":  129,
-"endLine":  612,
-"endColumn":  138
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L612",
-"region":  {
-"startLine":  612,
-"startColumn":  219,
-"endLine":  612,
-"endColumn":  228
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L622",
-"region":  {
-"startLine":  622,
-"startColumn":  133,
-"endLine":  622,
-"endColumn":  142
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L622",
-"region":  {
-"startLine":  622,
-"startColumn":  232,
-"endLine":  622,
-"endColumn":  241
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'TVThumbs/' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L640",
-"region":  {
-"startLine":  640,
-"startColumn":  69,
-"endLine":  640,
-"endColumn":  80
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L641",
-"region":  {
-"startLine":  641,
-"startColumn":  73,
-"endLine":  641,
-"endColumn":  84
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L693",
-"region":  {
-"startLine":  693,
-"startColumn":  69,
-"endLine":  693,
-"endColumn":  80
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L694",
-"region":  {
-"startLine":  694,
-"startColumn":  73,
-"endLine":  694,
-"endColumn":  84
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L724",
-"region":  {
-"startLine":  724,
-"startColumn":  69,
-"endLine":  724,
-"endColumn":  80
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L725",
-"region":  {
-"startLine":  725,
-"startColumn":  73,
-"endLine":  725,
-"endColumn":  84
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'TVThumbsPath' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L640",
-"region":  {
-"startLine":  640,
-"startColumn":  53,
-"endLine":  640,
-"endColumn":  67
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L693",
-"region":  {
-"startLine":  693,
-"startColumn":  53,
-"endLine":  693,
-"endColumn":  67
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L724",
-"region":  {
-"startLine":  724,
-"startColumn":  53,
-"endLine":  724,
-"endColumn":  67
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1024",
-"region":  {
-"startLine":  1024,
-"startColumn":  72,
-"endLine":  1024,
-"endColumn":  86
 }
 }
 ]

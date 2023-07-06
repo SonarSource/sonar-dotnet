@@ -17,11 +17,11 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L102",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L88",
 "region":  {
-"startLine":  102,
+"startLine":  88,
 "startColumn":  19,
-"endLine":  102,
+"endLine":  88,
 "endColumn":  20
 }
 }
@@ -30,11 +30,11 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L88",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L102",
 "region":  {
-"startLine":  88,
+"startLine":  102,
 "startColumn":  19,
-"endLine":  88,
+"endLine":  102,
 "endColumn":  20
 }
 }
@@ -108,11 +108,11 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L118",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L82",
 "region":  {
-"startLine":  118,
+"startLine":  82,
 "startColumn":  19,
-"endLine":  118,
+"endLine":  82,
 "endColumn":  20
 }
 }
@@ -121,11 +121,11 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L82",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L118",
 "region":  {
-"startLine":  82,
+"startLine":  118,
 "startColumn":  19,
-"endLine":  82,
+"endLine":  118,
 "endColumn":  20
 }
 }

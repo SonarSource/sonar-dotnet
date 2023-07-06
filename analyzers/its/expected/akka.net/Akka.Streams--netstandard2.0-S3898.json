@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'OutgoingConnection'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  23,
-"endLine":  113,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ServerBinding'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L36",
@@ -35,6 +22,19 @@
 "startLine":  66,
 "startColumn":  23,
 "endLine":  66,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'OutgoingConnection'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  23,
+"endLine":  113,
 "endColumn":  41
 }
 }
@@ -340,19 +340,6 @@
 },
 {
 "id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Failed'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L127",
-"region":  {
-"startLine":  127,
-"startColumn":  25,
-"endLine":  127,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Data'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L75",
@@ -361,6 +348,19 @@
 "startColumn":  25,
 "endLine":  75,
 "endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Failed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  25,
+"endLine":  127,
+"endColumn":  31
 }
 }
 },

@@ -95,6 +95,19 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  17,
+"endLine":  74,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L110",
 "region":  {
 "startLine":  110,
@@ -113,19 +126,6 @@
 "startLine":  149,
 "startColumn":  17,
 "endLine":  149,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'default' clause to this 'switch' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  17,
-"endLine":  74,
 "endColumn":  23
 }
 }

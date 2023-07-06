@@ -56,6 +56,32 @@
 "id":  "S6562",
 "message":  "Provide the "DateTimeKind" when creating this object.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  45,
+"endLine":  61,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  94,
+"endLine":  61,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L196",
 "region":  {
 "startLine":  196,
@@ -100,32 +126,6 @@
 "startLine":  350,
 "startColumn":  94,
 "endLine":  350,
-"endColumn":  117
-}
-}
-},
-{
-"id":  "S6562",
-"message":  "Provide the "DateTimeKind" when creating this object.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  45,
-"endLine":  61,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S6562",
-"message":  "Provide the "DateTimeKind" when creating this object.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  94,
-"endLine":  61,
 "endColumn":  117
 }
 }

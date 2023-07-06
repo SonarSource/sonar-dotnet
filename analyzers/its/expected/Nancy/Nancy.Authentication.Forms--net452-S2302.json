@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S2302",
-"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L199",
-"region":  {
-"startLine":  199,
-"startColumn":  49,
-"endLine":  199,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S2302",
 "message":  "Replace the string 'pipelines' with 'nameof(pipelines)'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L46",
@@ -61,6 +48,19 @@
 "startLine":  79,
 "startColumn":  49,
 "endLine":  79,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  49,
+"endLine":  199,
 "endColumn":  64
 }
 }

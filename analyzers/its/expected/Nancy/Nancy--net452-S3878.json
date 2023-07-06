@@ -17,19 +17,6 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  153,
-"endLine":  104,
-"endColumn":  166
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L49",
 "region":  {
 "startLine":  49,
@@ -113,6 +100,19 @@
 "startLine":  99,
 "startColumn":  153,
 "endLine":  99,
+"endColumn":  166
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  153,
+"endLine":  104,
 "endColumn":  166
 }
 }

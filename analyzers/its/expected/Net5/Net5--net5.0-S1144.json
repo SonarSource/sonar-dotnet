@@ -119,6 +119,19 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private field 'doc'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2755.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  9,
+"endLine":  9,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private field 'reader'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2755.cs#L10",
@@ -140,19 +153,6 @@
 "startColumn":  9,
 "endLine":  11,
 "endColumn":  55
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'doc'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2755.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  9,
-"endLine":  9,
-"endColumn":  79
 }
 }
 },
@@ -275,19 +275,6 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private method 'ChainedSimilarConditionsWithParentheses'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  14,
-"endLine":  23,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private property 'Property'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L8",
@@ -296,6 +283,19 @@
 "startColumn":  16,
 "endLine":  8,
 "endColumn":  24
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'ChainedSimilarConditionsWithParentheses'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  53
 }
 }
 },
@@ -327,6 +327,19 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private property 'Property'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4015.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  24,
+"endLine":  7,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private class 'B'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4015.cs#L10",
@@ -347,19 +360,6 @@
 "startLine":  12,
 "startColumn":  24,
 "endLine":  12,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private property 'Property'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4015.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  24,
-"endLine":  7,
 "endColumn":  32
 }
 }
@@ -418,6 +418,19 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private method 'BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod1'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  29,
+"endLine":  9,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private method 'BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod2'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L17",
@@ -451,19 +464,6 @@
 "startLine":  33,
 "startColumn":  29,
 "endLine":  33,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private method 'BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod1'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  29,
-"endLine":  9,
 "endColumn":  97
 }
 }

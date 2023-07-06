@@ -4,11 +4,11 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Deadline.cs#L110",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Deadline.cs#L99",
 "region":  {
-"startLine":  110,
+"startLine":  99,
 "startColumn":  41,
-"endLine":  110,
+"endLine":  99,
 "endColumn":  42
 }
 }
@@ -17,11 +17,11 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Deadline.cs#L99",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Deadline.cs#L110",
 "region":  {
-"startLine":  99,
+"startLine":  110,
 "startColumn":  41,
-"endLine":  99,
+"endLine":  110,
 "endColumn":  42
 }
 }

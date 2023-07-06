@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S103",
+"message":  "Split this 244 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  245
+}
+}
+},
+{
+"id":  "S103",
 "message":  "Split this 216 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L282",
@@ -28,14 +41,27 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 244 characters long line (which is greater than 200 authorized).",
+"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L38",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L47",
 "region":  {
-"startLine":  38,
+"startLine":  47,
 "startColumn":  1,
-"endLine":  38,
-"endColumn":  245
+"endLine":  47,
+"endColumn":  202
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  1,
+"endLine":  80,
+"endColumn":  223
 }
 }
 },
@@ -101,32 +127,6 @@
 "startColumn":  1,
 "endLine":  340,
 "endColumn":  236
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  1,
-"endLine":  47,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  1,
-"endLine":  80,
-"endColumn":  223
 }
 }
 }

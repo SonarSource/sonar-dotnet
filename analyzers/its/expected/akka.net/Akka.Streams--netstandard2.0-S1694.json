@@ -4,32 +4,6 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L117",
-"region":  {
-"startLine":  117,
-"startColumn":  27,
-"endLine":  117,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L140",
-"region":  {
-"startLine":  140,
-"startColumn":  27,
-"endLine":  140,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L35",
 "region":  {
 "startLine":  35,
@@ -82,6 +56,32 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  27,
+"endLine":  117,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  27,
+"endLine":  140,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/UnfoldFlow.cs#L15",
 "region":  {
 "startLine":  15,
@@ -108,12 +108,12 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L557",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L99",
 "region":  {
-"startLine":  557,
-"startColumn":  29,
-"endLine":  557,
-"endColumn":  47
+"startLine":  99,
+"startColumn":  27,
+"endLine":  99,
+"endColumn":  46
 }
 }
 },
@@ -121,12 +121,12 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L99",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L557",
 "region":  {
-"startLine":  99,
-"startColumn":  27,
-"endLine":  99,
-"endColumn":  46
+"startLine":  557,
+"startColumn":  29,
+"endLine":  557,
+"endColumn":  47
 }
 }
 },

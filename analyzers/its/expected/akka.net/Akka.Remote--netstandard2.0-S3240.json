@@ -43,12 +43,12 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L1146",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L492",
 "region":  {
-"startLine":  1146,
-"startColumn":  13,
-"endLine":  1146,
-"endColumn":  15
+"startLine":  492,
+"startColumn":  17,
+"endLine":  492,
+"endColumn":  19
 }
 }
 },
@@ -56,12 +56,12 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L492",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L1146",
 "region":  {
-"startLine":  492,
-"startColumn":  17,
-"endLine":  492,
-"endColumn":  19
+"startLine":  1146,
+"startColumn":  13,
+"endLine":  1146,
+"endColumn":  15
 }
 }
 },

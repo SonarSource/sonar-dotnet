@@ -134,12 +134,12 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultRequestDispatcher.cs#L110",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultRequestDispatcher.cs#L87",
 "region":  {
-"startLine":  110,
-"startColumn":  39,
-"endLine":  110,
-"endColumn":  57
+"startLine":  87,
+"startColumn":  28,
+"endLine":  87,
+"endColumn":  39
 }
 }
 },
@@ -147,12 +147,12 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultRequestDispatcher.cs#L87",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultRequestDispatcher.cs#L110",
 "region":  {
-"startLine":  87,
-"startColumn":  28,
-"endLine":  87,
-"endColumn":  39
+"startLine":  110,
+"startColumn":  39,
+"endLine":  110,
+"endColumn":  57
 }
 }
 },

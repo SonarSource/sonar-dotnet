@@ -1904,6 +1904,237 @@
 },
 {
 "id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 39 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3584",
+"region":  {
+"startLine":  3584,
+"startColumn":  24,
+"endLine":  3584,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3589",
+"region":  {
+"startLine":  3589,
+"startColumn":  13,
+"endLine":  3589,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3595",
+"region":  {
+"startLine":  3595,
+"startColumn":  17,
+"endLine":  3595,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3599",
+"region":  {
+"startLine":  3599,
+"startColumn":  17,
+"endLine":  3599,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3607",
+"region":  {
+"startLine":  3607,
+"startColumn":  13,
+"endLine":  3607,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3612",
+"region":  {
+"startLine":  3612,
+"startColumn":  17,
+"endLine":  3612,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3618",
+"region":  {
+"startLine":  3618,
+"startColumn":  21,
+"endLine":  3618,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3622",
+"region":  {
+"startLine":  3622,
+"startColumn":  21,
+"endLine":  3622,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3632",
+"region":  {
+"startLine":  3632,
+"startColumn":  13,
+"endLine":  3632,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3638",
+"region":  {
+"startLine":  3638,
+"startColumn":  17,
+"endLine":  3638,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3642",
+"region":  {
+"startLine":  3642,
+"startColumn":  17,
+"endLine":  3642,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3649",
+"region":  {
+"startLine":  3649,
+"startColumn":  13,
+"endLine":  3649,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3649",
+"region":  {
+"startLine":  3649,
+"startColumn":  58,
+"endLine":  3649,
+"endColumn":  60
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3653",
+"region":  {
+"startLine":  3653,
+"startColumn":  13,
+"endLine":  3653,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3653",
+"region":  {
+"startLine":  3653,
+"startColumn":  58,
+"endLine":  3653,
+"endColumn":  60
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3655",
+"region":  {
+"startLine":  3655,
+"startColumn":  17,
+"endLine":  3655,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3661",
+"region":  {
+"startLine":  3661,
+"startColumn":  21,
+"endLine":  3661,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3665",
+"region":  {
+"startLine":  3665,
+"startColumn":  21,
+"endLine":  3665,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3674",
+"region":  {
+"startLine":  3674,
+"startColumn":  13,
+"endLine":  3674,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3677",
+"region":  {
+"startLine":  3677,
+"startColumn":  13,
+"endLine":  3677,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3681",
+"region":  {
+"startLine":  3681,
+"startColumn":  13,
+"endLine":  3681,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3681",
+"region":  {
+"startLine":  3681,
+"startColumn":  104,
+"endLine":  3681,
+"endColumn":  106
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3681",
+"region":  {
+"startLine":  3681,
+"startColumn":  142,
+"endLine":  3681,
+"endColumn":  144
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3683",
+"region":  {
+"startLine":  3683,
+"startColumn":  17,
+"endLine":  3683,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3683",
+"region":  {
+"startLine":  3683,
+"startColumn":  53,
+"endLine":  3683,
+"endColumn":  55
+}
+}
+]
+},
+{
+"id":  "S3776",
 "message":  "Refactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.",
 "location":  [
 {
@@ -2174,237 +2405,6 @@
 "startColumn":  13,
 "endLine":  3521,
 "endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 39 to the 15 allowed.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3584",
-"region":  {
-"startLine":  3584,
-"startColumn":  24,
-"endLine":  3584,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3589",
-"region":  {
-"startLine":  3589,
-"startColumn":  13,
-"endLine":  3589,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3595",
-"region":  {
-"startLine":  3595,
-"startColumn":  17,
-"endLine":  3595,
-"endColumn":  22
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3599",
-"region":  {
-"startLine":  3599,
-"startColumn":  17,
-"endLine":  3599,
-"endColumn":  22
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3607",
-"region":  {
-"startLine":  3607,
-"startColumn":  13,
-"endLine":  3607,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3612",
-"region":  {
-"startLine":  3612,
-"startColumn":  17,
-"endLine":  3612,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3618",
-"region":  {
-"startLine":  3618,
-"startColumn":  21,
-"endLine":  3618,
-"endColumn":  26
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3622",
-"region":  {
-"startLine":  3622,
-"startColumn":  21,
-"endLine":  3622,
-"endColumn":  26
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3632",
-"region":  {
-"startLine":  3632,
-"startColumn":  13,
-"endLine":  3632,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3638",
-"region":  {
-"startLine":  3638,
-"startColumn":  17,
-"endLine":  3638,
-"endColumn":  22
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3642",
-"region":  {
-"startLine":  3642,
-"startColumn":  17,
-"endLine":  3642,
-"endColumn":  22
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3649",
-"region":  {
-"startLine":  3649,
-"startColumn":  13,
-"endLine":  3649,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3649",
-"region":  {
-"startLine":  3649,
-"startColumn":  58,
-"endLine":  3649,
-"endColumn":  60
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3653",
-"region":  {
-"startLine":  3653,
-"startColumn":  13,
-"endLine":  3653,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3653",
-"region":  {
-"startLine":  3653,
-"startColumn":  58,
-"endLine":  3653,
-"endColumn":  60
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3655",
-"region":  {
-"startLine":  3655,
-"startColumn":  17,
-"endLine":  3655,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3661",
-"region":  {
-"startLine":  3661,
-"startColumn":  21,
-"endLine":  3661,
-"endColumn":  26
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3665",
-"region":  {
-"startLine":  3665,
-"startColumn":  21,
-"endLine":  3665,
-"endColumn":  26
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3674",
-"region":  {
-"startLine":  3674,
-"startColumn":  13,
-"endLine":  3674,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3677",
-"region":  {
-"startLine":  3677,
-"startColumn":  13,
-"endLine":  3677,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3681",
-"region":  {
-"startLine":  3681,
-"startColumn":  13,
-"endLine":  3681,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3681",
-"region":  {
-"startLine":  3681,
-"startColumn":  104,
-"endLine":  3681,
-"endColumn":  106
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3681",
-"region":  {
-"startLine":  3681,
-"startColumn":  142,
-"endLine":  3681,
-"endColumn":  144
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3683",
-"region":  {
-"startLine":  3683,
-"startColumn":  17,
-"endLine":  3683,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3683",
-"region":  {
-"startLine":  3683,
-"startColumn":  53,
-"endLine":  3683,
-"endColumn":  55
 }
 }
 ]

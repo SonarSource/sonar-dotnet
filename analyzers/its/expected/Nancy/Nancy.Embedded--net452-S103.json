@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S103",
-"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L111",
-"region":  {
-"startLine":  111,
-"startColumn":  1,
-"endLine":  111,
-"endColumn":  232
-}
-}
-},
-{
-"id":  "S103",
 "message":  "Split this 225 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L27",
@@ -62,6 +49,19 @@
 "startColumn":  1,
 "endLine":  99,
 "endColumn":  234
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  1,
+"endLine":  111,
+"endColumn":  232
 }
 }
 }

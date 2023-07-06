@@ -186,11 +186,11 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L138",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L83",
 "region":  {
-"startLine":  138,
+"startLine":  83,
 "startColumn":  47,
-"endLine":  138,
+"endLine":  83,
 "endColumn":  66
 }
 }
@@ -199,11 +199,11 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L83",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L138",
 "region":  {
-"startLine":  83,
+"startLine":  138,
 "startColumn":  47,
-"endLine":  83,
+"endLine":  138,
 "endColumn":  66
 }
 }

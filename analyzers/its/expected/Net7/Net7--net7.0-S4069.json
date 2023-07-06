@@ -30,12 +30,12 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Increment' for the operator '++'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L16",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L5",
 "region":  {
-"startLine":  16,
-"startColumn":  47,
-"endLine":  16,
-"endColumn":  49
+"startLine":  5,
+"startColumn":  36,
+"endLine":  5,
+"endColumn":  38
 }
 }
 },
@@ -43,12 +43,12 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Increment' for the operator '++'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L5",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L16",
 "region":  {
-"startLine":  5,
-"startColumn":  36,
-"endLine":  5,
-"endColumn":  38
+"startLine":  16,
+"startColumn":  47,
+"endLine":  16,
+"endColumn":  49
 }
 }
 }

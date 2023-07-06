@@ -223,32 +223,6 @@
 },
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Type'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L252",
-"region":  {
-"startLine":  252,
-"startColumn":  58,
-"endLine":  252,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Type'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L252",
-"region":  {
-"startLine":  252,
-"startColumn":  75,
-"endLine":  252,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'System.Linq.IQueryable' instead of 'System.Linq.IQueryable<TSource>'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L33",
@@ -270,6 +244,32 @@
 "startColumn":  133,
 "endLine":  33,
 "endColumn":  142
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Type'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L252",
+"region":  {
+"startLine":  252,
+"startColumn":  58,
+"endLine":  252,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Type'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L252",
+"region":  {
+"startLine":  252,
+"startColumn":  75,
+"endLine":  252,
+"endColumn":  90
 }
 }
 },

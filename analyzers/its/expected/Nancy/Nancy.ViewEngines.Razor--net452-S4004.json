@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S4004",
-"message":  "Make the 'Sections' property read-only by removing the property setter or making it private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L102",
-"region":  {
-"startLine":  102,
-"startColumn":  44,
-"endLine":  102,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S4004",
 "message":  "Make the 'SectionContents' property read-only by removing the property setter or making it private.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L59",
@@ -23,6 +10,19 @@
 "startColumn":  44,
 "endLine":  59,
 "endColumn":  59
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Sections' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  44,
+"endLine":  102,
+"endColumn":  52
 }
 }
 },
