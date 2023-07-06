@@ -789,6 +789,74 @@ public class ArgumentTrackerTest
     }
 
     [DataTestMethod]
+    [DataRow("""_ = this[$$0,0];""", "x", true)]
+    [DataRow("""_ = this[0,$$0];""", "y", true)]
+    [DataRow("""_ = this[$$y: 0,x: 0];""", "y", true)]
+    [DataRow("""_ = this[y: 0,$$x: 0];""", "x", true)]
+    [DataRow("""this[$$0, 0] = 1;""", "x", false)]
+    [DataRow("""this[0, $$0] = 1;""", "y", false)]
+    [DataRow("""this[y: $$0, x: 0] = 1;""", "y", false)]
+    [DataRow("""this[y: 0, $$x: 0] = 1;""", "x", false)]
+    public void Indexer_MultiDimensional(string access, string parameterName, bool isGetter)
+    {
+        var snippet = $$"""
+            public class C {
+                public int this[int x, int y]
+                {
+                    get => 1;
+                    set { }
+                }
+
+                public void M() {
+                    {{access}}
+                }
+            }
+            """;
+        var (node, model) = ArgumentAndModelCS(snippet);
+
+        var argument = ArgumentDescriptor.ElementAccess(
+            m => m is { MethodKind: var kind, ContainingType: { } type } && type.Name == "C" && (isGetter ? kind == MethodKind.PropertyGet : kind == MethodKind.PropertySet),
+            (n, c) => true,
+            p => p.Name == parameterName, (_, _) => true);
+        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""Dim a = Me($$0, 0)""", "x", true)]
+    [DataRow("""Dim a = Me(0, $$0)""", "y", true)]
+    [DataRow("""Dim a = Me(y := $$0, x := 0)""", "y", true)]
+    [DataRow("""Dim a = Me(y := 0, $$x := 0)""", "x", true)]
+    [DataRow("""Me($$0, 0) = 1""", "x", false)]
+    [DataRow("""Me(0, $$0) = 1""", "y", false)]
+    [DataRow("""Me(y := $$0, x := 0) = 1""", "y", false)]
+    [DataRow("""Me(y := 0, $$x := 0) = 1""", "x", false)]
+    public void Indexer_MultiDimensional_VB(string access, string parameterName, bool isGetter)
+    {
+        var snippet = $$"""
+            Public Class C
+                Default Public Property Item(ByVal x As Integer, ByVal y As Integer) As Integer
+                    Get
+                        Return 1
+                    End Get
+                    Set(ByVal value As Integer)
+                    End Set
+                End Property
+
+                Public Sub M()
+                    {{access}}
+                End Sub
+            End Class
+            """;
+        var (node, model) = ArgumentAndModelVB(snippet);
+
+        var argument = ArgumentDescriptor.ElementAccess(
+            m => m is { MethodKind: var kind, ContainingType: { } type } && type.Name == "C" && (isGetter ? kind == MethodKind.PropertyGet : kind == MethodKind.PropertySet),
+            (n, c) => true,
+            p => p.Name == parameterName, (_, _) => true);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
     [DataRow("""process.Modules[$$0]""")]
     [DataRow("""process?.Modules[$$0]""")]
     [DataRow("""process.Modules?[$$0]""")]
@@ -837,6 +905,8 @@ public class ArgumentTrackerTest
         new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
     }
 
+#if NET5_0_OR_GREATER
+
     [TestMethod]
     public void Attribute_Obsolete()
     {
@@ -875,6 +945,8 @@ public class ArgumentTrackerTest
             (s, c) => s.StartsWith("Obsolete", c), p => p.Name == "message", (_, i) => i is 0);
         new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
     }
+
+#endif
 
     [DataTestMethod]
     [DataRow("""[Designer($$"designerTypeName")]""", "designerTypeName", 0)]
