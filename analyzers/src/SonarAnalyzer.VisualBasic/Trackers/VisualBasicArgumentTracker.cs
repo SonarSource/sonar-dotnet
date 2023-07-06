@@ -55,13 +55,20 @@ public class VisualBasicArgumentTracker : ArgumentTracker<SyntaxKind>
     }
     protected override bool InvokedMemberFits(SemanticModel model, SyntaxNode argumentNode, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint)
     {
-        var expression = InvokedExpression(argumentNode);
+        var expression = ArgumentListParent(argumentNode);
         var name = expression.GetName();
         return invokedMemberNameConstraint(name);
     }
 
-    protected override SyntaxNode InvokedExpression(SyntaxNode argumentNode) =>
+    private static SyntaxNode ArgumentListParent(SyntaxNode argumentNode) =>
         argumentNode?.Parent?.Parent;
+
+    protected override SyntaxNode InvokedExpression(SyntaxNode argumentNode) =>
+        argumentNode?.Parent?.Parent switch
+        {
+            AttributeSyntax when argumentNode is SimpleArgumentSyntax { IsNamed: true, NameColonEquals.Name: { } name } => name,
+            var x => x,
+        };
 
     protected override SyntaxBaseContext CreateContext(SonarSyntaxNodeReportingContext context) => new(context);
 }
