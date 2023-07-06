@@ -2,22 +2,9 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Seal class 'TestRunTree' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
-"region":  {
-"startLine":  18,
-"startColumn":  18,
-"endLine":  18,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S4035",
 "message":  "Seal class 'FactData' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  18,
@@ -28,9 +15,22 @@
 },
 {
 "id":  "S4035",
+"message":  "Seal class 'TestRunTree' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  18,
+"endLine":  18,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4035",
 "message":  "Seal class 'NodeData' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  18,
@@ -43,7 +43,7 @@
 "id":  "S4035",
 "message":  "Seal class 'NodeInfo' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TimelineLogCollectorActor.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  22,

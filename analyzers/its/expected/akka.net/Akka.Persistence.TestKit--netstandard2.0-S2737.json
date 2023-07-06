@@ -4,7 +4,7 @@
 "id":  "S2737",
 "message":  "Add logic to this catch clause or eliminate it and rethrow the exception automatically.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\TestJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/TestJournal.cs#L64-L68",
 "region":  {
 "startLine":  64,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S2737",
 "message":  "Add logic to this catch clause or eliminate it and rethrow the exception automatically.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\TestJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/TestJournal.cs#L88-L93",
 "region":  {
 "startLine":  88,
 "startColumn":  21,

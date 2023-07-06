@@ -4,7 +4,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ValidationContext'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\ConfigurationValidator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/ConfigurationValidator.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  28,
@@ -17,7 +17,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ConditionParameters'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\PathConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/PathConfigurationExpression.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Member'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  28,
@@ -41,22 +41,9 @@
 },
 {
 "id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'LockingConcurrentDictionary'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\LockingConcurrentDictionary.cs",
-"region":  {
-"startLine":  6,
-"startColumn":  28,
-"endLine":  6,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ConcurrentDictionaryWrapper'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\LockingConcurrentDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/LockingConcurrentDictionary.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  28,
@@ -67,9 +54,22 @@
 },
 {
 "id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'LockingConcurrentDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/LockingConcurrentDictionary.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  28,
+"endLine":  6,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ConstructorParameters'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypeDetails.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  28,
@@ -82,7 +82,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Match'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  16,
@@ -95,7 +95,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ValueTransformerConfiguration'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\MemberMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/MemberMap.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  28,
@@ -108,7 +108,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ProjectionExpression'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  25,
@@ -121,7 +121,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'SubQueryPath'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  29,
@@ -134,7 +134,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'QueryExpressions'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L344",
 "region":  {
 "startLine":  344,
 "startColumn":  28,

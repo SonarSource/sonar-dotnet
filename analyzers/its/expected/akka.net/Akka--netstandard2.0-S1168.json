@@ -5,7 +5,7 @@
 "message":  "Return an empty collection instead of null.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L371",
 "region":  {
 "startLine":  371,
 "startColumn":  41,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  24,
@@ -28,7 +28,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ActorTaskScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ActorTaskScheduler.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  20,
@@ -41,7 +41,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  45,
@@ -54,7 +54,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\ByteArraySerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/ByteArraySerializer.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  24,

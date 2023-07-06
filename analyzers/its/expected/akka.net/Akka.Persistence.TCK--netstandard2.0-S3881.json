@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\PluginSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/PluginSpec.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\PluginSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/PluginSpec.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  69,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\PluginSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/PluginSpec.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  32,

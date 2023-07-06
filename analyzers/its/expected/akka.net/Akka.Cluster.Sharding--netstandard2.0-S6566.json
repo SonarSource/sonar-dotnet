@@ -4,7 +4,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShard.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  77,
@@ -17,7 +17,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L832",
 "region":  {
 "startLine":  832,
 "startColumn":  85,
@@ -30,7 +30,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L839",
 "region":  {
 "startLine":  839,
 "startColumn":  28,

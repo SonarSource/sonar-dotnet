@@ -4,7 +4,7 @@
 "id":  "S1117",
 "message":  "Rename 'assemblies' which hides the field with the same name.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AppDomainAssemblyCatalog.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1117",
 "message":  "Rename 'assemblies' which hides the field with the same name.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AppDomainAssemblyCatalog.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1117",
 "message":  "Rename 'assemblies' which hides the field with the same name.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AppDomainAssemblyCatalog.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1117",
 "message":  "Rename 'parameters' which hides the field with the same name.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpLink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S1117",
 "message":  "Rename 'prefix' which hides the field with the same name.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S1117",
 "message":  "Rename 'value' which hides the field with the same name.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  21,

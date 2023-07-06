@@ -4,7 +4,7 @@
 "id":  "S1123",
 "message":  "Add an explanation.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  10,

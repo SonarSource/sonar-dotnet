@@ -4,7 +4,7 @@
 "id":  "S6603",
 "message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L719",
 "region":  {
 "startLine":  719,
 "startColumn":  70,
@@ -17,7 +17,7 @@
 "id":  "S6603",
 "message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L899",
 "region":  {
 "startLine":  899,
 "startColumn":  50,
@@ -30,7 +30,7 @@
 "id":  "S6603",
 "message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L911",
 "region":  {
 "startLine":  911,
 "startColumn":  52,
@@ -43,7 +43,7 @@
 "id":  "S6603",
 "message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L672",
 "region":  {
 "startLine":  672,
 "startColumn":  30,

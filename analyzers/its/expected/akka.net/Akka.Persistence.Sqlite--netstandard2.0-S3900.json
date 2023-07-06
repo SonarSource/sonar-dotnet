@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Extension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Extension.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\BatchingSqliteJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  45,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'journalConfig' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  59,
@@ -41,9 +41,22 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'snapshotConfig' because it could be null.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Snapshot/SqliteSnapshotStore.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  18,
+"endLine":  112,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Snapshot\SqliteSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Snapshot/SqliteSnapshotStore.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  45,
@@ -56,25 +69,12 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'reader' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Snapshot\SqliteSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Snapshot/SqliteSnapshotStore.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  33,
 "endLine":  86,
 "endColumn":  39
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'snapshotConfig' because it could be null.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Snapshot\SqliteSnapshotStore.cs",
-"region":  {
-"startLine":  112,
-"startColumn":  18,
-"endLine":  112,
-"endColumn":  32
 }
 }
 }

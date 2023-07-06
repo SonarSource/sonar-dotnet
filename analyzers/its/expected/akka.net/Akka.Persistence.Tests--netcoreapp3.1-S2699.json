@@ -4,7 +4,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Tests/EndToEndEventAdapterSpec.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  21,

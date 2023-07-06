@@ -4,7 +4,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\Automapper\src\IntegrationTests\BuiltInTypes\ProjectUsing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/IntegrationTests/BuiltInTypes/ProjectUsing.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\Automapper\src\IntegrationTests\ProjectionOrderTest.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/IntegrationTests/ProjectionOrderTest.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  21,

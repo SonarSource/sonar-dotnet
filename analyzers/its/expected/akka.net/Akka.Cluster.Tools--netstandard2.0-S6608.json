@@ -4,7 +4,7 @@
 "id":  "S6608",
 "message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L630",
 "region":  {
 "startLine":  630,
 "startColumn":  89,
@@ -17,7 +17,7 @@
 "id":  "S6608",
 "message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  69,

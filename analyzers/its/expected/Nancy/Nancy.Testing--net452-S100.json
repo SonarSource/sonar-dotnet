@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'XMLBody' to match pascal case naming rules, consider using 'XmlBody'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  28,

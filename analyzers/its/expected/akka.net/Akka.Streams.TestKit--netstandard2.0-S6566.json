@@ -4,7 +4,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L490",
 "region":  {
 "startLine":  490,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L498",
 "region":  {
 "startLine":  498,
 "startColumn":  86,

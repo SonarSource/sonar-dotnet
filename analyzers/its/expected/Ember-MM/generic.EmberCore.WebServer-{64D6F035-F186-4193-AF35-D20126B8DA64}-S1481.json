@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'i'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  17,
@@ -15,22 +15,9 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'MovieTag'.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  32,
-"startColumn":  17,
-"endLine":  32,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1481",
 "message":  "Remove the unused local variable 'uni'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  21,
@@ -41,9 +28,22 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'MovieTag'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  17,
+"endLine":  32,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'oFile'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L396",
 "region":  {
 "startLine":  396,
 "startColumn":  21,

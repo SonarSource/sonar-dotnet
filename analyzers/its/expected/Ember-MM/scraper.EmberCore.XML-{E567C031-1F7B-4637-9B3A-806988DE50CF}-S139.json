@@ -4,7 +4,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  48,
@@ -17,7 +17,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  48,

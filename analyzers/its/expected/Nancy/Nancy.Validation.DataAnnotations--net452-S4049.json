@@ -4,7 +4,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetRules' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\IPropertyValidator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/IPropertyValidator.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  42,

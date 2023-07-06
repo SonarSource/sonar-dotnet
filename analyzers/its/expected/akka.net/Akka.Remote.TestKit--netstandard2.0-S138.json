@@ -4,7 +4,7 @@
 "id":  "S138",
 "message":  "This method 'InitFSM' has 118 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L495",
 "region":  {
 "startLine":  495,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S138",
 "message":  "This method 'InitFSM' has 81 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L355",
 "region":  {
 "startLine":  355,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S138",
 "message":  "This method 'OnReceive' has 113 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S138",
 "message":  "This method 'Encode' has 108 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  33,
@@ -56,7 +56,7 @@
 "id":  "S138",
 "message":  "This method 'InitFSM' has 199 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  21,

@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'DefaultValue' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  16,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'Section' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  16,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'Value' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  16,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L411",
 "region":  {
 "startLine":  411,
 "startColumn":  16,
@@ -69,7 +69,7 @@
 "id":  "S2357",
 "message":  "Make 'Section' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  16,
@@ -82,7 +82,7 @@
 "id":  "S2357",
 "message":  "Make 'TableItem' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L413",
 "region":  {
 "startLine":  413,
 "startColumn":  16,
@@ -95,7 +95,7 @@
 "id":  "S2357",
 "message":  "Make 'Command' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  16,
@@ -108,7 +108,7 @@
 "id":  "S2357",
 "message":  "Make 'CommandDescription' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  16,
@@ -121,7 +121,7 @@
 "id":  "S2357",
 "message":  "Make 'CommandExecute' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  16,
@@ -134,7 +134,7 @@
 "id":  "S2357",
 "message":  "Make 'CommandType' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  16,
@@ -147,7 +147,7 @@
 "id":  "S2357",
 "message":  "Make 'Saved' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  12,
@@ -160,7 +160,7 @@
 "id":  "S2357",
 "message":  "Make 'MediaType' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  12,
@@ -173,7 +173,7 @@
 "id":  "S2357",
 "message":  "Make 'MediaID' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  12,
@@ -186,7 +186,7 @@
 "id":  "S2357",
 "message":  "Make 'ID' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  12,
@@ -199,7 +199,7 @@
 "id":  "S2357",
 "message":  "Make 'LastDateAdd' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  12,
@@ -212,7 +212,7 @@
 "id":  "S2357",
 "message":  "Make 'LogItems' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  12,
@@ -225,7 +225,7 @@
 "id":  "S2357",
 "message":  "Make 'Saved' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  16,
@@ -238,7 +238,7 @@
 "id":  "S2357",
 "message":  "Make 'ID' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  16,
@@ -251,7 +251,7 @@
 "id":  "S2357",
 "message":  "Make 'ItemType' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  16,
@@ -264,7 +264,7 @@
 "id":  "S2357",
 "message":  "Make 'Message' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  16,
@@ -277,7 +277,7 @@
 "id":  "S2357",
 "message":  "Make 'Details' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  16,
@@ -290,7 +290,7 @@
 "id":  "S2357",
 "message":  "Make 'DateAdd' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  16,
@@ -303,7 +303,7 @@
 "id":  "S2357",
 "message":  "Make 'MovieID' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L425",
 "region":  {
 "startLine":  425,
 "startColumn":  16,
@@ -316,7 +316,7 @@
 "id":  "S2357",
 "message":  "Make 'externalProcessorModules' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  12,
@@ -329,7 +329,7 @@
 "id":  "S2357",
 "message":  "Make 'externalScrapersModules' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  12,
@@ -342,7 +342,7 @@
 "id":  "S2357",
 "message":  "Make 'externalTVScrapersModules' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  12,
@@ -355,7 +355,7 @@
 "id":  "S2357",
 "message":  "Make 'RuntimeObjects' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  12,
@@ -368,7 +368,7 @@
 "id":  "S2357",
 "message":  "Make 'AssemblyFileName' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L777",
 "region":  {
 "startLine":  777,
 "startColumn":  16,
@@ -381,7 +381,7 @@
 "id":  "S2357",
 "message":  "Make 'AssemblyName' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L780",
 "region":  {
 "startLine":  780,
 "startColumn":  16,
@@ -394,7 +394,7 @@
 "id":  "S2357",
 "message":  "Make 'ModuleOrder' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L781",
 "region":  {
 "startLine":  781,
 "startColumn":  16,
@@ -407,7 +407,7 @@
 "id":  "S2357",
 "message":  "Make 'ProcessorModule' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L782",
 "region":  {
 "startLine":  782,
 "startColumn":  16,
@@ -420,7 +420,7 @@
 "id":  "S2357",
 "message":  "Make 'Type' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L783",
 "region":  {
 "startLine":  783,
 "startColumn":  16,
@@ -433,7 +433,7 @@
 "id":  "S2357",
 "message":  "Make 'AssemblyFileName' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L793",
 "region":  {
 "startLine":  793,
 "startColumn":  16,
@@ -446,7 +446,7 @@
 "id":  "S2357",
 "message":  "Make 'AssemblyName' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L794",
 "region":  {
 "startLine":  794,
 "startColumn":  16,
@@ -459,7 +459,7 @@
 "id":  "S2357",
 "message":  "Make 'PostScraperOrder' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L795",
 "region":  {
 "startLine":  795,
 "startColumn":  16,
@@ -472,7 +472,7 @@
 "id":  "S2357",
 "message":  "Make 'ProcessorModule' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L796",
 "region":  {
 "startLine":  796,
 "startColumn":  16,
@@ -485,7 +485,7 @@
 "id":  "S2357",
 "message":  "Make 'ScraperOrder' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L797",
 "region":  {
 "startLine":  797,
 "startColumn":  16,
@@ -498,7 +498,7 @@
 "id":  "S2357",
 "message":  "Make 'AssemblyFileName' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L807",
 "region":  {
 "startLine":  807,
 "startColumn":  16,
@@ -511,7 +511,7 @@
 "id":  "S2357",
 "message":  "Make 'AssemblyName' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L808",
 "region":  {
 "startLine":  808,
 "startColumn":  16,
@@ -524,7 +524,7 @@
 "id":  "S2357",
 "message":  "Make 'PostScraperOrder' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L809",
 "region":  {
 "startLine":  809,
 "startColumn":  16,
@@ -537,7 +537,7 @@
 "id":  "S2357",
 "message":  "Make 'ProcessorModule' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L810",
 "region":  {
 "startLine":  810,
 "startColumn":  16,
@@ -550,7 +550,7 @@
 "id":  "S2357",
 "message":  "Make 'ScraperOrder' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L811",
 "region":  {
 "startLine":  811,
 "startColumn":  16,
@@ -563,7 +563,7 @@
 "id":  "S2357",
 "message":  "Make 'AssemblyFileName' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L822",
 "region":  {
 "startLine":  822,
 "startColumn":  16,
@@ -576,7 +576,7 @@
 "id":  "S2357",
 "message":  "Make 'AssemblyName' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L823",
 "region":  {
 "startLine":  823,
 "startColumn":  16,
@@ -589,7 +589,7 @@
 "id":  "S2357",
 "message":  "Make 'Enabled' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L824",
 "region":  {
 "startLine":  824,
 "startColumn":  16,
@@ -602,7 +602,7 @@
 "id":  "S2357",
 "message":  "Make 'PostScraperEnabled' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L825",
 "region":  {
 "startLine":  825,
 "startColumn":  16,
@@ -615,7 +615,7 @@
 "id":  "S2357",
 "message":  "Make 'PostScraperOrder' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L826",
 "region":  {
 "startLine":  826,
 "startColumn":  16,
@@ -628,7 +628,7 @@
 "id":  "S2357",
 "message":  "Make 'ScraperEnabled' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L827",
 "region":  {
 "startLine":  827,
 "startColumn":  16,
@@ -641,7 +641,7 @@
 "id":  "S2357",
 "message":  "Make 'ScraperOrder' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L828",
 "region":  {
 "startLine":  828,
 "startColumn":  16,
@@ -654,7 +654,7 @@
 "id":  "S2357",
 "message":  "Make 'htTVShows' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  12,
@@ -667,7 +667,7 @@
 "id":  "S2357",
 "message":  "Make 'MoviePaths' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  12,
@@ -680,7 +680,7 @@
 "id":  "S2357",
 "message":  "Make 'ShowPath' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  12,
@@ -693,7 +693,7 @@
 "id":  "S2357",
 "message":  "Make 'SourceLastScan' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  12,
@@ -706,7 +706,7 @@
 "id":  "S2357",
 "message":  "Make 'TVPaths' private.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  12,

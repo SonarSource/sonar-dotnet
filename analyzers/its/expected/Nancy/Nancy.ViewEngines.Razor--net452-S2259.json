@@ -4,7 +4,7 @@
 "id":  "S2259",
 "message":  "'modelType' is null on at least one execution path.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\NancyCSharpRazorCodeParser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/CSharp/NancyCSharpRazorCodeParser.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  58,

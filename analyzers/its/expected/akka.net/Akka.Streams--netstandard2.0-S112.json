@@ -4,7 +4,7 @@
 "id":  "S112",
 "message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  51,
@@ -17,7 +17,7 @@
 "id":  "S112",
 "message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  51,
@@ -30,7 +30,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L918",
 "region":  {
 "startLine":  918,
 "startColumn":  67,
@@ -43,7 +43,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2949-L2951",
 "region":  {
 "startLine":  2949,
 "startColumn":  31,

@@ -4,7 +4,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'args'.",
 "location":  {
-"uri":  "sources\GeneratedCode.CS\generated_region.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  28,
@@ -17,7 +17,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'args'.",
 "location":  {
-"uri":  "sources\GeneratedCode.CS\generated_region_2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region_2.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'args'.",
 "location":  {
-"uri":  "sources\GeneratedCode.CS\handwritten.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/handwritten.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  28,

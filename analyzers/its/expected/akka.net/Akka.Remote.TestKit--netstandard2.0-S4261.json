@@ -4,33 +4,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
-"region":  {
-"startLine":  64,
-"startColumn":  39,
-"endLine":  64,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
-"region":  {
-"startLine":  97,
-"startColumn":  27,
-"endLine":  97,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  27,
@@ -43,7 +17,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  27,
@@ -56,7 +30,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  27,
@@ -69,7 +43,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  27,
@@ -82,7 +56,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  27,
@@ -95,7 +69,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  27,
@@ -108,7 +82,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  44,
@@ -121,7 +95,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  27,
@@ -134,12 +108,12 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L64",
 "region":  {
-"startLine":  56,
-"startColumn":  27,
-"endLine":  56,
-"endColumn":  38
+"startLine":  64,
+"startColumn":  39,
+"endLine":  64,
+"endColumn":  54
 }
 }
 },
@@ -147,7 +121,20 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  27,
+"endLine":  97,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  30,
@@ -160,12 +147,12 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\RemoteConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L56",
 "region":  {
-"startLine":  88,
-"startColumn":  38,
-"endLine":  88,
-"endColumn":  54
+"startLine":  56,
+"startColumn":  27,
+"endLine":  56,
+"endColumn":  38
 }
 }
 },
@@ -173,12 +160,25 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\RemoteConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/RemoteConnection.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  34,
 "endLine":  127,
 "endColumn":  44
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/RemoteConnection.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  38,
+"endLine":  88,
+"endColumn":  54
 }
 }
 }

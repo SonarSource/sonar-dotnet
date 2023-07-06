@@ -4,7 +4,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'TestAssemblySuffixes' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  37,

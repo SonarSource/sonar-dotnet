@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'title.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/TimelineItemFactory.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'title.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/TimelineItemFactory.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  43,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  20,
@@ -82,7 +82,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'matchStatus.Groups["status"].Value.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  24,
@@ -95,7 +95,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'matchStatus.Groups["status"].Value.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  18,
@@ -108,7 +108,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'matchStatus.Groups["status"].Value.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  18,

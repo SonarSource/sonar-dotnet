@@ -4,7 +4,7 @@
 "id":  "S4035",
 "message":  "Seal class 'ActorPath' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Surrogate' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S4035",
 "message":  "Seal class 'ActorRefBase' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S4035",
 "message":  "Seal class 'ActorSelection' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  18,
@@ -56,7 +56,7 @@
 "id":  "S4035",
 "message":  "Seal class 'SelectChildName' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L395",
 "region":  {
 "startLine":  395,
 "startColumn":  18,
@@ -69,7 +69,7 @@
 "id":  "S4035",
 "message":  "Seal class 'SelectChildPattern' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  18,
@@ -82,7 +82,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Deploy' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deploy.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  18,
@@ -95,7 +95,7 @@
 "id":  "S4035",
 "message":  "Seal class 'State' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L425",
 "region":  {
 "startLine":  425,
 "startColumn":  22,
@@ -108,7 +108,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Props' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  18,
@@ -121,7 +121,7 @@
 "id":  "S4035",
 "message":  "Seal class 'RemoteScope' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RemoteScope.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RemoteScope.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  18,
@@ -134,7 +134,7 @@
 "id":  "S4035",
 "message":  "Seal class 'OneForOneStrategy' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  18,
@@ -147,7 +147,7 @@
 "id":  "S4035",
 "message":  "Seal class 'AllForOneStrategy' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L488",
 "region":  {
 "startLine":  488,
 "startColumn":  18,
@@ -160,7 +160,7 @@
 "id":  "S4035",
 "message":  "Seal class 'DeployableDecider' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L914",
 "region":  {
 "startLine":  914,
 "startColumn":  18,
@@ -173,7 +173,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Watch' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  18,
@@ -186,7 +186,7 @@
 "id":  "S4035",
 "message":  "Seal class 'DefaultResizer' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  18,
@@ -197,22 +197,9 @@
 },
 {
 "id":  "S4035",
-"message":  "Seal class 'ActorRefRoutee' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
-"region":  {
-"startLine":  83,
-"startColumn":  18,
-"endLine":  83,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S4035",
 "message":  "Seal class 'ActorSelectionRoutee' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Router.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  18,
@@ -223,14 +210,14 @@
 },
 {
 "id":  "S4035",
-"message":  "Seal class 'RouterConfig' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ActorRefRoutee' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Router.cs#L83",
 "region":  {
-"startLine":  22,
-"startColumn":  27,
-"endLine":  22,
-"endColumn":  39
+"startLine":  83,
+"startColumn":  18,
+"endLine":  83,
+"endColumn":  32
 }
 }
 },
@@ -238,7 +225,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Group' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  27,
@@ -249,9 +236,22 @@
 },
 {
 "id":  "S4035",
+"message":  "Seal class 'RouterConfig' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  27,
+"endLine":  22,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4035",
 "message":  "Seal class 'Pool' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  27,
@@ -264,7 +264,7 @@
 "id":  "S4035",
 "message":  "Seal class 'AppVersion' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  18,

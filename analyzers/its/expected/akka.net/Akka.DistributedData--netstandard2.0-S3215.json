@@ -4,7 +4,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Flag.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Flag.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  79,
@@ -17,7 +17,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GCounter.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  95,
@@ -30,7 +30,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GSet.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  95,
@@ -43,7 +43,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L487",
 "region":  {
 "startLine":  487,
 "startColumn":  41,
@@ -56,7 +56,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L646",
 "region":  {
 "startLine":  646,
 "startColumn":  70,
@@ -69,7 +69,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L272",
 "region":  {
 "startLine":  272,
 "startColumn":  19,
@@ -82,7 +82,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  70,
@@ -95,7 +95,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L353",
 "region":  {
 "startLine":  353,
 "startColumn":  70,
@@ -108,7 +108,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L461",
 "region":  {
 "startLine":  461,
 "startColumn":  39,
@@ -121,7 +121,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L505",
 "region":  {
 "startLine":  505,
 "startColumn":  36,
@@ -134,7 +134,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L528",
 "region":  {
 "startLine":  528,
 "startColumn":  39,
@@ -147,7 +147,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L588",
 "region":  {
 "startLine":  588,
 "startColumn":  33,
@@ -160,7 +160,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L600",
 "region":  {
 "startLine":  600,
 "startColumn":  39,
@@ -173,7 +173,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L714",
 "region":  {
 "startLine":  714,
 "startColumn":  47,
@@ -186,7 +186,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L725",
 "region":  {
 "startLine":  725,
 "startColumn":  33,
@@ -199,7 +199,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  19,
@@ -212,7 +212,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L523",
 "region":  {
 "startLine":  523,
 "startColumn":  30,
@@ -225,7 +225,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  35,
@@ -238,7 +238,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L572",
 "region":  {
 "startLine":  572,
 "startColumn":  35,
@@ -251,7 +251,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L595",
 "region":  {
 "startLine":  595,
 "startColumn":  35,
@@ -264,7 +264,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounter.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  70,
@@ -277,7 +277,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounter.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  90,
@@ -290,7 +290,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounterDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  19,
@@ -303,7 +303,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  24,
@@ -316,7 +316,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  66,
@@ -329,7 +329,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  59,
@@ -342,7 +342,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1458",
 "region":  {
 "startLine":  1458,
 "startColumn":  41,
@@ -355,111 +355,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  373,
-"startColumn":  25,
-"endLine":  373,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  496,
-"startColumn":  24,
-"endLine":  496,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  684,
-"startColumn":  28,
-"endLine":  684,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  759,
-"startColumn":  25,
-"endLine":  759,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  821,
-"startColumn":  62,
-"endLine":  821,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  827,
-"startColumn":  63,
-"endLine":  827,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  833,
-"startColumn":  65,
-"endLine":  833,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  840,
-"startColumn":  63,
-"endLine":  840,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1019",
 "region":  {
 "startLine":  1019,
 "startColumn":  125,
@@ -472,7 +368,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1024",
 "region":  {
 "startLine":  1024,
 "startColumn":  131,
@@ -485,7 +381,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1033",
 "region":  {
 "startLine":  1033,
 "startColumn":  134,
@@ -498,7 +394,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1040",
 "region":  {
 "startLine":  1040,
 "startColumn":  128,
@@ -511,7 +407,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1108",
 "region":  {
 "startLine":  1108,
 "startColumn":  26,
@@ -524,7 +420,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1166",
 "region":  {
 "startLine":  1166,
 "startColumn":  81,
@@ -537,7 +433,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1173",
 "region":  {
 "startLine":  1173,
 "startColumn":  82,
@@ -550,7 +446,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1180",
 "region":  {
 "startLine":  1180,
 "startColumn":  84,
@@ -563,7 +459,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1187",
 "region":  {
 "startLine":  1187,
 "startColumn":  82,
@@ -576,7 +472,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1235",
 "region":  {
 "startLine":  1235,
 "startColumn":  26,
@@ -589,7 +485,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1296",
 "region":  {
 "startLine":  1296,
 "startColumn":  71,
@@ -602,7 +498,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1303",
 "region":  {
 "startLine":  1303,
 "startColumn":  72,
@@ -615,7 +511,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1310",
 "region":  {
 "startLine":  1310,
 "startColumn":  74,
@@ -628,7 +524,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1317",
 "region":  {
 "startLine":  1317,
 "startColumn":  72,
@@ -641,7 +537,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1363",
 "region":  {
 "startLine":  1363,
 "startColumn":  24,
@@ -654,7 +550,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1431",
 "region":  {
 "startLine":  1431,
 "startColumn":  34,
@@ -667,7 +563,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1432",
 "region":  {
 "startLine":  1432,
 "startColumn":  75,
@@ -680,7 +576,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1438",
 "region":  {
 "startLine":  1438,
 "startColumn":  34,
@@ -693,7 +589,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1439",
 "region":  {
 "startLine":  1439,
 "startColumn":  76,
@@ -706,7 +602,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1445",
 "region":  {
 "startLine":  1445,
 "startColumn":  34,
@@ -719,7 +615,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1446",
 "region":  {
 "startLine":  1446,
 "startColumn":  78,
@@ -732,7 +628,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1452",
 "region":  {
 "startLine":  1452,
 "startColumn":  34,
@@ -745,7 +641,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1453",
 "region":  {
 "startLine":  1453,
 "startColumn":  76,
@@ -758,7 +654,111 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L373",
+"region":  {
+"startLine":  373,
+"startColumn":  25,
+"endLine":  373,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L496",
+"region":  {
+"startLine":  496,
+"startColumn":  24,
+"endLine":  496,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L684",
+"region":  {
+"startLine":  684,
+"startColumn":  28,
+"endLine":  684,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L759",
+"region":  {
+"startLine":  759,
+"startColumn":  25,
+"endLine":  759,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L821",
+"region":  {
+"startLine":  821,
+"startColumn":  62,
+"endLine":  821,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L827",
+"region":  {
+"startLine":  827,
+"startColumn":  63,
+"endLine":  827,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L833",
+"region":  {
+"startLine":  833,
+"startColumn":  65,
+"endLine":  833,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L840",
+"region":  {
+"startLine":  840,
+"startColumn":  63,
+"endLine":  840,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  70,

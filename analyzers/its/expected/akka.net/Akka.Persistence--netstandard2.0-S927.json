@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'reason' to 'cause' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  58,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'newTimestamp' to 'timestamp' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L352",
 "region":  {
 "startLine":  352,
 "startColumn":  61,

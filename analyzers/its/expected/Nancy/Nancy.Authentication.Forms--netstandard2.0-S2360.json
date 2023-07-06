@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  127,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  162,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  97,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/ModuleExtensions.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  108,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/ModuleExtensions.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  143,
@@ -69,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/ModuleExtensions.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  119,
@@ -82,7 +82,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/ModuleExtensions.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  154,
@@ -95,7 +95,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/ModuleExtensions.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  123,

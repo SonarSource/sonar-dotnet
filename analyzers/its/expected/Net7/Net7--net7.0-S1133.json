@@ -4,12 +4,12 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ExtendedNameofScope.cs#L11",
 "region":  {
-"startLine":  5,
+"startLine":  11,
 "startColumn":  10,
-"endLine":  5,
-"endColumn":  35
+"endLine":  11,
+"endColumn":  38
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ExtendedNameofScope.cs#L5",
 "region":  {
-"startLine":  11,
+"startLine":  5,
 "startColumn":  10,
-"endLine":  11,
-"endColumn":  38
+"endLine":  5,
+"endColumn":  35
 }
 }
 }

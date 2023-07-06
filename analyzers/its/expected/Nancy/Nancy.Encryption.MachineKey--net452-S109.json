@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Encryption.MachineKey\MachineKeyHmacProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Encryption.MachineKey/MachineKeyHmacProvider.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  61,
@@ -17,7 +17,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Encryption.MachineKey\MachineKeyHmacProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Encryption.MachineKey/MachineKeyHmacProvider.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  47,

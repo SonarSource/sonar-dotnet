@@ -4,7 +4,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'redCount'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  17,

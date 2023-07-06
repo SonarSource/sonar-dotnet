@@ -4,7 +4,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancyViewFolder.cs#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  40,

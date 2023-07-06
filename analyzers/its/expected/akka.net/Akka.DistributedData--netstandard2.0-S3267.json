@@ -5,7 +5,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1389",
 "region":  {
 "startLine":  1389,
 "startColumn":  45,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1391",
 "region":  {
 "startLine":  1391,
 "startColumn":  29,
@@ -29,7 +29,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  31,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  21,

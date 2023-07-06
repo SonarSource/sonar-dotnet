@@ -4,7 +4,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/CheckedAndUncheckedUserDefinedOperators.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'RightShift' for the operator '>>'.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\RelaxedShiftOperator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RelaxedShiftOperator.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  53,
@@ -30,12 +30,12 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Increment' for the operator '++'.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L16",
 "region":  {
-"startLine":  5,
-"startColumn":  36,
-"endLine":  5,
-"endColumn":  38
+"startLine":  16,
+"startColumn":  47,
+"endLine":  16,
+"endColumn":  49
 }
 }
 },
@@ -43,12 +43,12 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Increment' for the operator '++'.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L5",
 "region":  {
-"startLine":  16,
-"startColumn":  47,
-"endLine":  16,
-"endColumn":  49
+"startLine":  5,
+"startColumn":  36,
+"endLine":  5,
+"endColumn":  38
 }
 }
 }

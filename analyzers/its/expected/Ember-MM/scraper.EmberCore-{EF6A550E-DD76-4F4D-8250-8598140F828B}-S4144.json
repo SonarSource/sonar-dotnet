@@ -5,7 +5,7 @@
 "message":  "Update this method so that its implementation is not identical to 'rbLarge_CheckedChanged'.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1088",
 "region":  {
 "startLine":  1088,
 "startColumn":  17,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1083",
 "region":  {
 "startLine":  1083,
 "startColumn":  17,
@@ -29,7 +29,7 @@
 "message":  "Update this method so that its implementation is not identical to 'rbLarge_CheckedChanged'.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1093",
 "region":  {
 "startLine":  1093,
 "startColumn":  17,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1083",
 "region":  {
 "startLine":  1083,
 "startColumn":  17,
@@ -53,7 +53,7 @@
 "message":  "Update this method so that its implementation is not identical to 'rbLarge_CheckedChanged'.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1098",
 "region":  {
 "startLine":  1098,
 "startColumn":  17,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1083",
 "region":  {
 "startLine":  1083,
 "startColumn":  17,

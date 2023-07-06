@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  21,
@@ -29,7 +29,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  18,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  52,
@@ -47,7 +47,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L319",
 "region":  {
 "startLine":  319,
 "startColumn":  33,
@@ -62,7 +62,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  18,
@@ -71,7 +71,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  18,
@@ -80,7 +80,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  29,
@@ -89,7 +89,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  16,
@@ -104,7 +104,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Request.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  18,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Request.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  18,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Request.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  21,
@@ -137,7 +137,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Response.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Response.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  18,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Response.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Response.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  18,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Response.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Response.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  29,
@@ -164,7 +164,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Response.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Response.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  16,
@@ -179,7 +179,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  11,
@@ -188,7 +188,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  11,
@@ -197,7 +197,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  21,
@@ -212,7 +212,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2877",
 "region":  {
 "startLine":  2877,
 "startColumn":  23,
@@ -221,7 +221,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2877",
 "region":  {
 "startLine":  2877,
 "startColumn":  23,
@@ -230,7 +230,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2931",
 "region":  {
 "startLine":  2931,
 "startColumn":  25,
@@ -245,7 +245,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2945",
 "region":  {
 "startLine":  2945,
 "startColumn":  23,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2945",
 "region":  {
 "startLine":  2945,
 "startColumn":  23,
@@ -263,7 +263,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3010",
 "region":  {
 "startLine":  3010,
 "startColumn":  25,
@@ -278,7 +278,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3022",
 "region":  {
 "startLine":  3022,
 "startColumn":  23,
@@ -287,7 +287,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3022",
 "region":  {
 "startLine":  3022,
 "startColumn":  23,
@@ -296,7 +296,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3092",
 "region":  {
 "startLine":  3092,
 "startColumn":  25,
@@ -311,7 +311,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3107",
 "region":  {
 "startLine":  3107,
 "startColumn":  23,
@@ -320,7 +320,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3107",
 "region":  {
 "startLine":  3107,
 "startColumn":  23,
@@ -329,7 +329,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3189",
 "region":  {
 "startLine":  3189,
 "startColumn":  25,

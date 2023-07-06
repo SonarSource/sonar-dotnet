@@ -4,20 +4,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  20,
-"endLine":  93,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  20,
@@ -30,7 +17,20 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  20,
+"endLine":  93,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  16,

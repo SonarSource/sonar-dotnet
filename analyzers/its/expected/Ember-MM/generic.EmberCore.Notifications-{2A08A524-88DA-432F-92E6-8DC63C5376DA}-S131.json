@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  17,

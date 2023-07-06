@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '422' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Nancy\samples\Nancy.Demo.Hosting.Kestrel\HomeModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/samples/Nancy.Demo.Hosting.Kestrel/HomeModule.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  28,

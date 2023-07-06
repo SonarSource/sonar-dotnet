@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'Uid' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AddressUidExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AddressUidExtension.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'AssociateBehavior' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  78,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'DisassociateBehavior' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  79,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'ListenBehavior' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'LocalAddress' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  33,
@@ -69,7 +69,7 @@
 "id":  "S2357",
 "message":  "Make 'ShutdownBehavior' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  62,
@@ -82,7 +82,7 @@
 "id":  "S2357",
 "message":  "Make 'WriteBehavior' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  93,
@@ -95,7 +95,7 @@
 "id":  "S2357",
 "message":  "Make 'Inbound' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L770",
 "region":  {
 "startLine":  770,
 "startColumn":  30,
@@ -108,7 +108,7 @@
 "id":  "S2357",
 "message":  "Make 'Actor' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  35,
@@ -121,7 +121,7 @@
 "id":  "S2357",
 "message":  "Make 'AddedSchemeIdentifier' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  32,

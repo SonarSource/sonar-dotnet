@@ -4,7 +4,20 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L312",
+"region":  {
+"startLine":  312,
+"startColumn":  28,
+"endLine":  312,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  100,
@@ -17,7 +30,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  16,
@@ -30,25 +43,12 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  16,
 "endLine":  80,
 "endColumn":  20
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
-"region":  {
-"startLine":  312,
-"startColumn":  28,
-"endLine":  312,
-"endColumn":  32
 }
 }
 }

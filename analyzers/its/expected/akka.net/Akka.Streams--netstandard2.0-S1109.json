@@ -4,7 +4,7 @@
 "id":  "S1109",
 "message":  "Move this closing curly brace to the next line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1132",
 "region":  {
 "startLine":  1132,
 "startColumn":  113,

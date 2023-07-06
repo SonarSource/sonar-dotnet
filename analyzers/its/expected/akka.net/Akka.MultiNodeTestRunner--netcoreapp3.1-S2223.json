@@ -4,7 +4,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'TestRunSystem' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'SinkCoordinator' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  36,
@@ -30,7 +30,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'OutputDirectory' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'FailedSpecsDirectory' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  33,
@@ -56,7 +56,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'TeamCityFormattingOn' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  31,
@@ -69,7 +69,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'MultiPlatform' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  31,

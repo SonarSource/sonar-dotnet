@@ -4,12 +4,12 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/obj/Debug/netcoreapp3.1/Razor/Views/Home/Index.cshtml.g.cs#L10",
 "region":  {
-"startLine":  9,
+"startLine":  10,
 "startColumn":  5,
-"endLine":  9,
-"endColumn":  38
+"endLine":  10,
+"endColumn":  23
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/obj/Debug/netcoreapp3.1/Razor/Views/Home/Index.cshtml.g.cs#L9",
 "region":  {
-"startLine":  10,
+"startLine":  9,
 "startColumn":  5,
-"endLine":  10,
-"endColumn":  23
+"endLine":  9,
+"endColumn":  38
 }
 }
 }

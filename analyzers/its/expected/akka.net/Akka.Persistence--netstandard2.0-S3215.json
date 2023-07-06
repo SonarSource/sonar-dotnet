@@ -4,7 +4,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L633",
 "region":  {
 "startLine":  633,
 "startColumn":  34,
@@ -17,7 +17,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteJournal.cs#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  34,

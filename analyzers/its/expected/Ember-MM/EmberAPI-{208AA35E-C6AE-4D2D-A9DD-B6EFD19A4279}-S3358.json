@@ -4,7 +4,7 @@
 "id":  "S3358",
 "message":  "Extract this nested If operator into independent If...Then...Else statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1083",
 "region":  {
 "startLine":  1083,
 "startColumn":  64,
@@ -17,7 +17,7 @@
 "id":  "S3358",
 "message":  "Extract this nested If operator into independent If...Then...Else statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1083",
 "region":  {
 "startLine":  1083,
 "startColumn":  185,

@@ -5,7 +5,7 @@
 "message":  "Define a constant instead of using this literal '*EmberAPP' 6 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  105,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  87,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  46,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  69,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  93,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  142,

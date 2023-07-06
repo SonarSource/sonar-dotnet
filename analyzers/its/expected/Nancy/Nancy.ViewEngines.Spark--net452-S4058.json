@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  18,

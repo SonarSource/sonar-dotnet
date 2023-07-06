@@ -4,33 +4,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
-"region":  {
-"startLine":  70,
-"startColumn":  20,
-"endLine":  70,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
-"region":  {
-"startLine":  92,
-"startColumn":  20,
-"endLine":  92,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L309",
 "region":  {
 "startLine":  309,
 "startColumn":  16,
@@ -43,7 +17,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  24,
@@ -56,11 +30,37 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L381",
 "region":  {
 "startLine":  381,
 "startColumn":  16,
 "endLine":  381,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  20,
+"endLine":  70,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  20,
+"endLine":  92,
 "endColumn":  40
 }
 }

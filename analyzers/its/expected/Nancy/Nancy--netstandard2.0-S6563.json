@@ -4,7 +4,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  106,
@@ -17,7 +17,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  30,
@@ -30,7 +30,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  26,
@@ -43,7 +43,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  27,

@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Data.IDataRecord' instead of 'System.Data.Common.DbDataReader'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L588",
 "region":  {
 "startLine":  588,
 "startColumn":  51,

@@ -4,7 +4,7 @@
 "id":  "S2115",
 "message":  "Use a secure password when connecting to this database.",
 "location":  {
-"uri":  "sources\WebConfig\Views\appsettings.json",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Views/appsettings.json#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S2115",
 "message":  "Use a secure password when connecting to this database.",
 "location":  {
-"uri":  "sources\WebConfig\Views\Web.config",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Views/Web.config#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S2115",
 "message":  "Use a secure password when connecting to this database.",
 "location":  {
-"uri":  "sources\WebConfig\Web.config",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Web.config#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  31,

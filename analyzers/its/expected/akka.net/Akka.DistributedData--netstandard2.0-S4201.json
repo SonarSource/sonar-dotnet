@@ -4,7 +4,7 @@
 "id":  "S4201",
 "message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  52,
@@ -17,7 +17,7 @@
 "id":  "S4201",
 "message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  20,

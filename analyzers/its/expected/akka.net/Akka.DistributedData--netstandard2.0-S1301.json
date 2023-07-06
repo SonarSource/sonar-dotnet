@@ -4,7 +4,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounterDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounterDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L533",
 "region":  {
 "startLine":  533,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L328",
 "region":  {
 "startLine":  328,
 "startColumn":  13,

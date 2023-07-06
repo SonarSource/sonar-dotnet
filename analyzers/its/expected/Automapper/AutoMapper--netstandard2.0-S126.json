@@ -4,7 +4,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\TypePair.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypePair.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  17,

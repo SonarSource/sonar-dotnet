@@ -4,7 +4,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 488.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L491",
 "region":  {
 "startLine":  491,
 "startColumn":  17,

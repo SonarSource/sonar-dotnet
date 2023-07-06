@@ -4,7 +4,7 @@
 "id":  "S2374",
 "message":  "Change this unsigned type to 'Integer'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  195,

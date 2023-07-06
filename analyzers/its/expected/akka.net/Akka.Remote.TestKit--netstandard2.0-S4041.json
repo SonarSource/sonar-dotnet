@@ -4,7 +4,7 @@
 "id":  "S4041",
 "message":  "Change the name of type 'Data' to be different from an existing framework namespace.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  29,

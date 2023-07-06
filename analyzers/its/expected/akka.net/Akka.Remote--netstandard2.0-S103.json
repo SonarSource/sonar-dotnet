@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\DefaultFailureDetectorRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/DefaultFailureDetectorRegistry.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 203 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 216 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L581",
 "region":  {
 "startLine":  581,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 214 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteWatcher.cs#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S103",
 "message":  "Split this 201 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteWatcher.cs#L362",
 "region":  {
 "startLine":  362,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S103",
 "message":  "Split this 231 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L770",
 "region":  {
 "startLine":  770,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S103",
 "message":  "Split this 208 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L818",
 "region":  {
 "startLine":  818,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S103",
 "message":  "Split this 206 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L982",
 "region":  {
 "startLine":  982,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S103",
 "message":  "Split this 204 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L988",
 "region":  {
 "startLine":  988,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S103",
 "message":  "Split this 225 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S103",
 "message":  "Split this 291 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S103",
 "message":  "Split this 215 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S103",
 "message":  "Split this 224 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  1,

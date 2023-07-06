@@ -4,7 +4,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\DelegatingSupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/DelegatingSupervisorStrategy.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\DelegatingSupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/DelegatingSupervisorStrategy.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\BlockingQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/BlockingQueue.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  44,
@@ -43,7 +43,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  14,
@@ -56,7 +56,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  14,
@@ -69,7 +69,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L328",
 "region":  {
 "startLine":  328,
 "startColumn":  14,
@@ -82,7 +82,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L333",
 "region":  {
 "startLine":  333,
 "startColumn":  14,

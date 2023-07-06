@@ -4,7 +4,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\CurrentSynchronizationContextDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/CurrentSynchronizationContextDispatcher.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L200",
 "region":  {
 "startLine":  200,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  21,
@@ -173,7 +173,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILoggingAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  21,

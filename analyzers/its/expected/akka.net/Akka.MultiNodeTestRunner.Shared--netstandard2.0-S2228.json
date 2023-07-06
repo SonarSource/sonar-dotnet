@@ -4,7 +4,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TeamCityLoggerActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TeamCityLoggerActor.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\FileSystemMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/FileSystemMessageSinkActor.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\FileSystemMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/FileSystemMessageSinkActor.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\FileSystemMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/FileSystemMessageSinkActor.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TeamCityMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TeamCityMessageSinkActor.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TimelineLogCollectorActor.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TimelineLogCollectorActor.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TimelineLogCollectorActor.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  21,
@@ -186,7 +186,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxMessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxMessageSink.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  13,

@@ -4,7 +4,7 @@
 "id":  "S2364",
 "message":  "Rename 'CredList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S2364",
 "message":  "Rename 'PicY' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S2364",
 "message":  "Rename 'sHTTP' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAddEditActor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAddEditActor.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S2364",
 "message":  "Rename 'PropogatingDown' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2364",
 "message":  "Rename 'PropogatingUp' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S2364",
 "message":  "Rename 'Fanart' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S2364",
 "message":  "Rename 'Poster' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S2364",
 "message":  "Rename 'PreviousFrameValue' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S2364",
 "message":  "Rename 'MainForm' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S2364",
 "message":  "Rename 'CachePath' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S2364",
 "message":  "Rename 'DeleteList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S2364",
 "message":  "Rename 'ExtraIndex' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S2364",
 "message":  "Rename 'Fanart' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S2364",
 "message":  "Rename 'Poster' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S2364",
 "message":  "Rename 'PreviousFrameValue' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S2364",
 "message":  "Rename 'Thumbs' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S2364",
 "message":  "Rename 'Fanart' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditSeason.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S2364",
 "message":  "Rename 'Poster' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditSeason.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S2364",
 "message":  "Rename 'ASPoster' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S2364",
 "message":  "Rename 'Fanart' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S2364",
 "message":  "Rename 'Poster' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S2364",
 "message":  "Rename 'NeedToRefresh' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S2364",
 "message":  "Rename 'SettingDefaults' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S2364",
 "message":  "Rename '_FileInfo' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S2364",
 "message":  "Rename 'stream_a' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S2364",
 "message":  "Rename 'stream_s' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  13,
@@ -342,7 +342,7 @@
 "id":  "S2364",
 "message":  "Rename 'stream_v' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S2364",
 "message":  "Rename 'DLType' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgManual.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgImgManual.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  9,
@@ -368,7 +368,7 @@
 "id":  "S2364",
 "message":  "Rename 'PanStartPoint' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgView.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgImgView.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S2364",
 "message":  "Rename 'Changed' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  13,
@@ -394,7 +394,7 @@
 "id":  "S2364",
 "message":  "Rename 'DtdDt' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -407,7 +407,7 @@
 "id":  "S2364",
 "message":  "Rename 'ErrStr' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -420,7 +420,7 @@
 "id":  "S2364",
 "message":  "Rename 'IsValid' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  13,
@@ -433,7 +433,7 @@
 "id":  "S2364",
 "message":  "Rename 'ReturnOK' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 "id":  "S2364",
 "message":  "Rename 'TagStack' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S2364",
 "message":  "Rename 'Meta' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S2364",
 "message":  "Rename 'NoUpdate' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  13,
@@ -485,7 +485,7 @@
 "id":  "S2364",
 "message":  "Rename 'SettingsPanels' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -498,7 +498,7 @@
 "id":  "S2364",
 "message":  "Rename 'ShowRegex' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  13,
@@ -511,7 +511,7 @@
 "id":  "S2364",
 "message":  "Rename 'TVMeta' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  13,
@@ -524,7 +524,7 @@
 "id":  "S2364",
 "message":  "Rename '_CurrMovie' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgStudioSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgStudioSelect.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  13,
@@ -537,7 +537,7 @@
 "id":  "S2364",
 "message":  "Rename 'MyTVShowRegExProfiles' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVRegExProfiles.vb#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  13,
@@ -550,7 +550,7 @@
 "id":  "S2364",
 "message":  "Rename 'CustomUpdater' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  13,
@@ -561,165 +561,9 @@
 },
 {
 "id":  "S2364",
-"message":  "Rename 'GenreImage' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  63,
-"startColumn":  13,
-"endLine":  63,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'InfoCleared' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  64,
-"startColumn":  13,
-"endLine":  64,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'LoadingDone' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  66,
-"startColumn":  13,
-"endLine":  66,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'MainAllSeason' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  67,
-"startColumn":  13,
-"endLine":  67,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'MainFanart' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  68,
-"startColumn":  13,
-"endLine":  68,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'MainPoster' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  69,
-"startColumn":  13,
-"endLine":  69,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'ReportDownloadPercent' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  73,
-"startColumn":  13,
-"endLine":  73,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'ScrapeList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  74,
-"startColumn":  13,
-"endLine":  74,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'ScraperDone' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  75,
-"startColumn":  13,
-"endLine":  75,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'sHTTP' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  76,
-"startColumn":  13,
-"endLine":  76,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'tmpTVDB' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  79,
-"startColumn":  13,
-"endLine":  79,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'FilterArray' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  97,
-"startColumn":  13,
-"endLine":  97,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2364",
 "message":  "Rename 'CloseApp' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  13,
@@ -732,12 +576,168 @@
 "id":  "S2364",
 "message":  "Rename 'KeyBuffer' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  13,
 "endLine":  115,
 "endColumn":  22
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'GenreImage' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  13,
+"endLine":  63,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'InfoCleared' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  13,
+"endLine":  64,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'LoadingDone' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  13,
+"endLine":  66,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'MainAllSeason' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  13,
+"endLine":  67,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'MainFanart' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  13,
+"endLine":  68,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'MainPoster' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  13,
+"endLine":  69,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'ReportDownloadPercent' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  13,
+"endLine":  73,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'ScrapeList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  13,
+"endLine":  74,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'ScraperDone' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  13,
+"endLine":  75,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'sHTTP' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  13,
+"endLine":  76,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'tmpTVDB' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  13,
+"endLine":  79,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'FilterArray' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  13,
+"endLine":  97,
+"endColumn":  24
 }
 }
 }

@@ -4,7 +4,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  29,
@@ -17,20 +17,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
-"region":  {
-"startLine":  503,
-"startColumn":  51,
-"endLine":  503,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S6605",
-"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1131",
 "region":  {
 "startLine":  1131,
 "startColumn":  45,
@@ -43,12 +30,25 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1140",
 "region":  {
 "startLine":  1140,
 "startColumn":  42,
 "endLine":  1140,
 "endColumn":  45
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L503",
+"region":  {
+"startLine":  503,
+"startColumn":  51,
+"endLine":  503,
+"endColumn":  54
 }
 }
 }

@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Controllers\HomeController.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Controllers/HomeController.cs#L4",
 "region":  {
 "startLine":  4,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Controllers\HomeController.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Controllers/HomeController.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Controllers\HomeController.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Controllers/HomeController.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Controllers\HomeController.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Controllers/HomeController.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Program.cs#L2",
 "region":  {
 "startLine":  2,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Program.cs#L4",
 "region":  {
 "startLine":  4,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Program.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Program.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Program.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Program.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -134,7 +134,20 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Startup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Startup.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Startup.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  1,
@@ -147,7 +160,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Startup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Startup.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  1,
@@ -160,7 +173,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Startup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Startup.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -173,25 +186,12 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Startup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Startup.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
 "endLine":  9,
 "endColumn":  19
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Startup.cs",
-"region":  {
-"startLine":  10,
-"startColumn":  1,
-"endLine":  10,
-"endColumn":  30
 }
 }
 }

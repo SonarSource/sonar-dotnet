@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'FolderPath' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L395",
 "region":  {
 "startLine":  395,
 "startColumn":  16,

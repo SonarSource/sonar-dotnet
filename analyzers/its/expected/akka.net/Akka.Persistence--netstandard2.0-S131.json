@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L275",
 "region":  {
 "startLine":  275,
 "startColumn":  13,

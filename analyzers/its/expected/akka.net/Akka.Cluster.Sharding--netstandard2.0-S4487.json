@@ -4,7 +4,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field 'system' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\AbstractLeastShardAllocationStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_typeName' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L1008",
 "region":  {
 "startLine":  1008,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_shardId' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L1009",
 "region":  {
 "startLine":  1009,
 "startColumn":  34,
@@ -43,7 +43,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_ids' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L1010",
 "region":  {
 "startLine":  1010,
 "startColumn":  50,
@@ -56,7 +56,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_settings' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L1011",
 "region":  {
 "startLine":  1011,
 "startColumn":  50,

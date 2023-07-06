@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make '_props' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActor.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make '_name' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActor.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  44,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make '_supervisorStrategy' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActor.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  56,

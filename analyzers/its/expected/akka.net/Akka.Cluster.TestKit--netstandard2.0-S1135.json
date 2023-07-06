@@ -4,12 +4,12 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L176",
 "region":  {
-"startLine":  27,
-"startColumn":  7,
-"endLine":  27,
-"endColumn":  11
+"startLine":  176,
+"startColumn":  11,
+"endLine":  176,
+"endColumn":  15
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L27",
 "region":  {
-"startLine":  176,
-"startColumn":  11,
-"endLine":  176,
-"endColumn":  15
+"startLine":  27,
+"startColumn":  7,
+"endLine":  27,
+"endColumn":  11
 }
 }
 }

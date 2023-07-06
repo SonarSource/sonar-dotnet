@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'segment.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\UriExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Self/UriExtensions.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  18,

@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'M1'.",
 "location":  {
-"uri":  "sources\Net5\Net5\ExtendingPartial.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ExtendingPartial.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'M2'.",
 "location":  {
-"uri":  "sources\Net5\Net5\ExtendingPartial.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ExtendingPartial.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  30,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'a'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  5,
@@ -43,7 +43,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Method'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Records.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  22,
@@ -56,7 +56,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'S1144'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1144.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1144.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private record 'Derived'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1185.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1185.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  16,
@@ -82,7 +82,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Foo'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2077.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2077.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  14,
@@ -95,7 +95,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'cookie'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2092.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2092.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -108,7 +108,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Foo'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2612.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2612.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  14,
@@ -119,22 +119,9 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private field 'doc'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S2755.cs",
-"region":  {
-"startLine":  9,
-"startColumn":  9,
-"endLine":  9,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private field 'reader'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2755.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2755.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  9,
@@ -147,7 +134,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'xPathDocument'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2755.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2755.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  9,
@@ -158,9 +145,22 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private field 'doc'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2755.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  9,
+"endLine":  9,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private field 'Prop'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3247.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3247.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  23,
@@ -173,7 +173,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Method'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3251.Part1.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  22,
@@ -186,7 +186,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Method2'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3251.Part1.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  22,
@@ -199,7 +199,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Method3'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3251.Part2.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  22,
@@ -212,7 +212,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'r'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3254.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3254.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -225,7 +225,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'handler'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3257.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3257.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -238,7 +238,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'cookie'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3330.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3330.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -251,7 +251,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'Record'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3603.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3603.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -264,7 +264,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'Prop'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3626.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3626.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  13,
@@ -275,22 +275,9 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private property 'Property'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
-"region":  {
-"startLine":  8,
-"startColumn":  16,
-"endLine":  8,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private method 'ChainedSimilarConditionsWithParentheses'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  14,
@@ -301,9 +288,22 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private property 'Property'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  16,
+"endLine":  8,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private field 'exception'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3928.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3928.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -316,7 +316,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'foo'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4005.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4005.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -327,22 +327,9 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private property 'Property'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S4015.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  24,
-"endLine":  7,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private class 'B'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4015.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4015.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  15,
@@ -355,7 +342,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'Property'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4015.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4015.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  24,
@@ -366,9 +353,22 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private property 'Property'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4015.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  24,
+"endLine":  7,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private field 'dataSet'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4057.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4057.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -381,7 +381,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'dataTable'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4057.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4057.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  9,
@@ -394,7 +394,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'provider'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4426.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4426.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -407,7 +407,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'field'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4433.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4433.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -418,22 +418,9 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private method 'BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod1'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S4583.Part1.cs",
-"region":  {
-"startLine":  9,
-"startColumn":  29,
-"endLine":  9,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private method 'BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod2'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  29,
@@ -446,7 +433,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod4'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  29,
@@ -459,7 +446,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod5'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  29,
@@ -470,9 +457,22 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused private method 'BeginInvokeAndEndInvokeOnDelegateWithWrapperCallbackAsPartialMethod1'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  29,
+"endLine":  9,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private method 'Foo'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4830.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4830.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  14,
@@ -485,7 +485,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'builder'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S5122.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S5122.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -498,7 +498,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'dict'.",
 "location":  {
-"uri":  "sources\Net5\Net5\TargetTypedNew.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedNew.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  9,

@@ -4,7 +4,7 @@
 "id":  "S4158",
 "message":  "Remove this call, the collection is known to be empty here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L615",
 "region":  {
 "startLine":  615,
 "startColumn":  13,

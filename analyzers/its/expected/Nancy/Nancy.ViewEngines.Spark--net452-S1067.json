@@ -4,7 +4,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L82-L86",
 "region":  {
 "startLine":  82,
 "startColumn":  17,

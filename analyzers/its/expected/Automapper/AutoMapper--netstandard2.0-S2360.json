@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  89,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  83,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpression.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  73,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  95,
@@ -56,33 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
-"region":  {
-"startLine":  39,
-"startColumn":  35,
-"endLine":  39,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
-"region":  {
-"startLine":  39,
-"startColumn":  75,
-"endLine":  39,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  93,
@@ -95,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  125,
@@ -108,7 +82,33 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  35,
+"endLine":  39,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  75,
+"endLine":  39,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ProxyGenerator.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  74,
@@ -121,20 +121,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\LockingConcurrentDictionary.cs",
-"region":  {
-"startLine":  9,
-"startColumn":  90,
-"endLine":  9,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\LockingConcurrentDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/LockingConcurrentDictionary.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  90,
@@ -147,7 +134,20 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/LockingConcurrentDictionary.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  90,
+"endLine":  9,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/ReflectionHelper.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  125,
@@ -160,7 +160,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\TypePair.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypePair.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  101,
@@ -173,7 +173,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mapper.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  95,
@@ -186,7 +186,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mapper.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  110,
@@ -199,7 +199,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  103,
@@ -212,7 +212,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  72,
@@ -225,7 +225,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  66,
@@ -238,7 +238,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  90,
@@ -251,12 +251,12 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L262",
 "region":  {
-"startLine":  35,
-"startColumn":  101,
-"endLine":  35,
-"endColumn":  108
+"startLine":  262,
+"startColumn":  100,
+"endLine":  262,
+"endColumn":  106
 }
 }
 },
@@ -264,12 +264,12 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L35",
 "region":  {
-"startLine":  262,
-"startColumn":  100,
-"endLine":  262,
-"endColumn":  106
+"startLine":  35,
+"startColumn":  101,
+"endLine":  35,
+"endColumn":  108
 }
 }
 }

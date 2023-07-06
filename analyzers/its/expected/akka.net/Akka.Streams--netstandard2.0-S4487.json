@@ -2,22 +2,9 @@
 "issues":  [
 {
 "id":  "S4487",
-"message":  "Remove this unread private field '_producerCount' or refactor the code to use its value.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  176,
-"startColumn":  48,
-"endLine":  176,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S4487",
 "message":  "Remove this unread private field '_callbackCount' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1550",
 "region":  {
 "startLine":  1550,
 "startColumn":  26,
@@ -30,7 +17,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_callbackCount' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1742",
 "region":  {
 "startLine":  1742,
 "startColumn":  30,
@@ -41,9 +28,22 @@
 },
 {
 "id":  "S4487",
+"message":  "Remove this unread private field '_producerCount' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  48,
+"endLine":  176,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4487",
 "message":  "Remove this unread private field '_charsInObject' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\JsonObjectParser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/JsonObjectParser.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_enumerator' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L447",
 "region":  {
 "startLine":  447,
 "startColumn":  44,
@@ -69,7 +69,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_onPull' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  63,
@@ -82,7 +82,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_andThen' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L449",
 "region":  {
 "startLine":  449,
 "startColumn":  49,

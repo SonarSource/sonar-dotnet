@@ -4,7 +4,7 @@
 "id":  "S4829",
 "message":  "Make sure that reading the standard input is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  33,

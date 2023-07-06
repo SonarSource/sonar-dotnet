@@ -4,7 +4,7 @@
 "id":  "S2148",
 "message":  "Add underscores to this numeric value for readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathEqualitySpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathEqualitySpec.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  69,
@@ -17,7 +17,7 @@
 "id":  "S2148",
 "message":  "Add underscores to this numeric value for readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  69,
@@ -30,7 +30,7 @@
 "id":  "S2148",
 "message":  "Add underscores to this numeric value for readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L200",
 "region":  {
 "startLine":  200,
 "startColumn":  50,
@@ -43,7 +43,7 @@
 "id":  "S2148",
 "message":  "Add underscores to this numeric value for readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/AddressSpec.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  69,
@@ -56,7 +56,7 @@
 "id":  "S2148",
 "message":  "Add underscores to this numeric value for readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  44,
@@ -69,7 +69,7 @@
 "id":  "S2148",
 "message":  "Add underscores to this numeric value for readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\GetMailboxTypeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/GetMailboxTypeSpec.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  50,
@@ -82,7 +82,7 @@
 "id":  "S2148",
 "message":  "Add underscores to this numeric value for readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Event\EventStreamThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Event/EventStreamThroughputSpec.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  50,
@@ -95,7 +95,7 @@
 "id":  "S2148",
 "message":  "Add underscores to this numeric value for readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpHorizontalScaleSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  40,
@@ -108,7 +108,7 @@
 "id":  "S2148",
 "message":  "Add underscores to this numeric value for readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpHorizontalScaleSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  46,
@@ -121,7 +121,7 @@
 "id":  "S2148",
 "message":  "Add underscores to this numeric value for readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Util\SerializationBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Util/SerializationBenchmarks.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  33,

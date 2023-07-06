@@ -4,7 +4,7 @@
 "id":  "S5122",
 "message":  "Make sure this permissive CORS policy is safe here.",
 "location":  {
-"uri":  "sources\Net5\Net5\S5122.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S5122.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  37,

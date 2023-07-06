@@ -5,7 +5,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Extensions\DateTimeExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Extensions/DateTimeExtension.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Extensions\DateTimeExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Extensions/DateTimeExtension.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  9,
@@ -29,7 +29,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Extensions\TypeExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Extensions/TypeExtension.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  27,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Extensions\TypeExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Extensions/TypeExtension.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  9,
@@ -53,7 +53,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/XmlHelper.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  27,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/XmlHelper.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  9,
@@ -71,7 +71,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/XmlHelper.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  9,
@@ -80,7 +80,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/XmlHelper.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  9,
@@ -89,7 +89,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/XmlHelper.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  9,
@@ -98,7 +98,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/XmlHelper.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  9,
@@ -107,7 +107,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/XmlHelper.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  9,
@@ -116,7 +116,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\Models\XmlHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/XmlHelper.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  9,

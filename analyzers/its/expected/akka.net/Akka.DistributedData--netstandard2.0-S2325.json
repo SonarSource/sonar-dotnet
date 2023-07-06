@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'DeltaEntriesAfter' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DeltaPropagationSelector.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  66,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Cleaned' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L528",
 "region":  {
 "startLine":  528,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'MergeValue' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L876",
 "region":  {
 "startLine":  876,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'SelectRandomNode' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1093",
 "region":  {
 "startLine":  1093,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'ModifyWithInitial' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  33,
@@ -67,48 +67,9 @@
 },
 {
 "id":  "S2325",
-"message":  "Make 'GSetToProto' a static method.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  487,
-"startColumn":  32,
-"endLine":  487,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'ToProto' a static method.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  652,
-"startColumn":  32,
-"endLine":  652,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'FlagFromProto' a static method.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
-"region":  {
-"startLine":  659,
-"startColumn":  22,
-"endLine":  659,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2325",
 "message":  "Make 'LWWDictionaryDeltaFromProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1213",
 "region":  {
 "startLine":  1213,
 "startColumn":  46,
@@ -121,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'PNCounterDeltaFromProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1335",
 "region":  {
 "startLine":  1335,
 "startColumn":  52,
@@ -134,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'ORMultiDictionaryDeltaFromProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1472",
 "region":  {
 "startLine":  1472,
 "startColumn":  55,
@@ -147,7 +108,7 @@
 "id":  "S2325",
 "message":  "Make 'ToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1482",
 "region":  {
 "startLine":  1482,
 "startColumn":  31,
@@ -160,7 +121,7 @@
 "id":  "S2325",
 "message":  "Make 'KeyFromBinary' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1553",
 "region":  {
 "startLine":  1553,
 "startColumn":  31,
@@ -171,9 +132,48 @@
 },
 {
 "id":  "S2325",
+"message":  "Make 'GSetToProto' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L487",
+"region":  {
+"startLine":  487,
+"startColumn":  32,
+"endLine":  487,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ToProto' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L652",
+"region":  {
+"startLine":  652,
+"startColumn":  32,
+"endLine":  652,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FlagFromProto' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L659",
+"region":  {
+"startLine":  659,
+"startColumn":  22,
+"endLine":  659,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
 "message":  "Make 'StatusFromBinary' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L686",
 "region":  {
 "startLine":  686,
 "startColumn":  24,
@@ -186,7 +186,7 @@
 "id":  "S2325",
 "message":  "Make 'NextOrElse' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  19,

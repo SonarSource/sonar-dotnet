@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'Assert' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L511",
 "region":  {
 "startLine":  511,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Assert' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L516",
 "region":  {
 "startLine":  516,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'AssertEquals' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L521",
 "region":  {
 "startLine":  521,
 "startColumn":  26,

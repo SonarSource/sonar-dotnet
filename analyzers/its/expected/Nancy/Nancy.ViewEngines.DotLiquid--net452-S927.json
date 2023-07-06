@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'propertyName' to 'method' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DynamicDrop.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DynamicDrop.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  52,

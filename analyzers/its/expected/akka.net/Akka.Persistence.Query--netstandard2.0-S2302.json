@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'config' with 'nameof(config)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\PersistenceQuery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Query/PersistenceQuery.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  45,

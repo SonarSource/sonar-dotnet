@@ -5,7 +5,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Messages.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  18,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Messages.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  12,

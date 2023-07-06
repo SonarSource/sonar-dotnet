@@ -4,7 +4,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Docs.Tutorials\Tutorial1\ActorHierarchyExperiments.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tutorials/Tutorial1/ActorHierarchyExperiments.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Docs.Tutorials\Tutorial1\ActorHierarchyExperiments.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tutorials/Tutorial1/ActorHierarchyExperiments.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Docs.Tutorials\Tutorial1\ActorHierarchyExperiments.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tutorials/Tutorial1/ActorHierarchyExperiments.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  21,

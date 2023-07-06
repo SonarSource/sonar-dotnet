@@ -4,7 +4,7 @@
 "id":  "S2219",
 "message":  "Use the 'is' operator instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2219.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2219.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  17,

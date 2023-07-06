@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\Serialization\ClusterClientMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/Serialization/ClusterClientMessageSerializer.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  48,
@@ -17,7 +17,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  48,
@@ -30,7 +30,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\Serialization\ClusterSingletonMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/Serialization/ClusterSingletonMessageSerializer.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  48,

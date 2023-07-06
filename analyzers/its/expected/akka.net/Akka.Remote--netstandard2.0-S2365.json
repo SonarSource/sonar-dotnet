@@ -4,7 +4,7 @@
 "id":  "S2365",
 "message":  "Refactor 'AllEndpoints' into a method, properties should not copy collections.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  26,

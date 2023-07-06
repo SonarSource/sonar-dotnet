@@ -5,7 +5,7 @@
 "message":  "Define a constant instead of using this literal 'This stream can only read' 7 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  73,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  13,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  87,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L312",
 "region":  {
 "startLine":  312,
 "startColumn":  13,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  72,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  52,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  52,
@@ -74,7 +74,7 @@
 "message":  "Define a constant instead of using this literal 'This stream can only write' 6 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSourceStage.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  102,
@@ -83,7 +83,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSourceStage.cs#L325",
 "region":  {
 "startLine":  325,
 "startColumn":  87,
@@ -92,7 +92,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSourceStage.cs#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  107,
@@ -101,7 +101,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSourceStage.cs#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  72,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSourceStage.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  52,
@@ -119,7 +119,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSourceStage.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  52,
@@ -134,7 +134,7 @@
 "message":  "Define a constant instead of using this literal 'failed-VirtualProcessor' 6 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1636",
 "region":  {
 "startLine":  1636,
 "startColumn":  62,
@@ -143,7 +143,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1723",
 "region":  {
 "startLine":  1723,
 "startColumn":  72,
@@ -152,7 +152,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1733",
 "region":  {
 "startLine":  1733,
 "startColumn":  80,
@@ -161,7 +161,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1764",
 "region":  {
 "startLine":  1764,
 "startColumn":  51,
@@ -170,7 +170,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1836",
 "region":  {
 "startLine":  1836,
 "startColumn":  77,
@@ -179,7 +179,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1902",
 "region":  {
 "startLine":  1902,
 "startColumn":  51,

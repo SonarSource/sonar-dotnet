@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_collectorInstance', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\ClusterMetricsSupervisor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsSupervisor.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  40,

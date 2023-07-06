@@ -4,7 +4,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  58,
@@ -17,7 +17,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/SettingsModule.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  43,
@@ -43,7 +43,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\StringExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/StringExtensions.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartBoundary.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  33,
@@ -69,7 +69,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartBoundary.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  37,
@@ -82,7 +82,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  54,
@@ -95,7 +95,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  57,
@@ -108,7 +108,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Request.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L262",
 "region":  {
 "startLine":  262,
 "startColumn":  28,
@@ -121,7 +121,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/EmbeddedFileResponse.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  20,
@@ -134,7 +134,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/CaptureNodeWithMultipleParameters.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  52,
@@ -147,7 +147,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/CaptureNodeWithMultipleParameters.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  25,
@@ -160,7 +160,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyRegExCaptureNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/GreedyRegExCaptureNode.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  31,
@@ -173,7 +173,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RegExNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/RegExNode.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  31,
@@ -186,7 +186,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  20,
@@ -199,7 +199,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  67,
@@ -212,7 +212,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  66,
@@ -225,7 +225,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  67,
@@ -238,7 +238,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  63,
@@ -251,7 +251,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  67,
@@ -264,7 +264,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  70,
@@ -277,7 +277,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  66,
@@ -290,7 +290,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  65,
@@ -303,7 +303,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  62,
@@ -316,7 +316,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  63,
@@ -329,7 +329,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  60,
@@ -342,7 +342,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  74,
@@ -355,7 +355,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  63,

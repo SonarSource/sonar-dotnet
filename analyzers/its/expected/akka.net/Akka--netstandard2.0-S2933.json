@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make '_log' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  39,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make '_mcn' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S2933",
 "message":  "Make '_stateDoNotCallMeDirectly' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L254",
 "region":  {
 "startLine":  254,
 "startColumn":  41,
@@ -43,7 +43,7 @@
 "id":  "S2933",
 "message":  "Make '_cell' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\LocalActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/LocalActorRef.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S2933",
 "message":  "Make '_shouldUnhandle' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  22,
@@ -69,7 +69,7 @@
 "id":  "S2933",
 "message":  "Make '_stopped' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  91,
@@ -82,7 +82,7 @@
 "id":  "S2933",
 "message":  "Make 'timerGen' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/TimerScheduler.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  31,
@@ -95,7 +95,7 @@
 "id":  "S2933",
 "message":  "Make '_tasks' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  39,
@@ -108,7 +108,7 @@
 "id":  "S2933",
 "message":  "Make 'respondTo' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\FutureActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/FutureActor.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  27,
@@ -121,7 +121,7 @@
 "id":  "S2933",
 "message":  "Make 'result' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\FutureActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/FutureActor.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  46,
@@ -134,7 +134,7 @@
 "id":  "S2933",
 "message":  "Make '_mailboxNonZeroPushTimeoutWarningIssued' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  22,
@@ -147,7 +147,7 @@
 "id":  "S2933",
 "message":  "Make '_cacheCleanup' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SimpleDnsManager.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  39,
@@ -160,7 +160,7 @@
 "id":  "S2933",
 "message":  "Make '_cleanupTimer' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SimpleDnsManager.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S2933",
 "message":  "Make '_hashMapping' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  39,
@@ -186,7 +186,7 @@
 "id":  "S2933",
 "message":  "Make 'resizer' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ResizablePoolCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ResizablePoolCell.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  25,
@@ -199,7 +199,7 @@
 "id":  "S2933",
 "message":  "Make '_resizeInProgress' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ResizablePoolCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ResizablePoolCell.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  31,
@@ -212,7 +212,7 @@
 "id":  "S2933",
 "message":  "Make '_resizeCounter' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ResizablePoolCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ResizablePoolCell.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  35,
@@ -225,7 +225,7 @@
 "id":  "S2933",
 "message":  "Make '_pool' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ResizablePoolCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ResizablePoolCell.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  22,
@@ -238,7 +238,7 @@
 "id":  "S2933",
 "message":  "Make '_routees' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  26,
@@ -251,7 +251,7 @@
 "id":  "S2933",
 "message":  "Make '_priorityCalculator' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ListPriorityQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ListPriorityQueue.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  35,

@@ -4,7 +4,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('>') instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  17,

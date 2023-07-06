@@ -4,7 +4,7 @@
 "id":  "S4004",
 "message":  "Make the 'Filters' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  41,

@@ -4,7 +4,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  7,
@@ -17,20 +17,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
-"region":  {
-"startLine":  58,
-"startColumn":  7,
-"endLine":  58,
-"endColumn":  11
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  7,
@@ -43,7 +30,20 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Extension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  7,
+"endLine":  58,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  11,
@@ -56,7 +56,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Extension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  11,
@@ -69,7 +69,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  7,
@@ -82,7 +82,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  11,
@@ -95,7 +95,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L542",
 "region":  {
 "startLine":  542,
 "startColumn":  15,
@@ -108,7 +108,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  19,
@@ -121,7 +121,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L695",
 "region":  {
 "startLine":  695,
 "startColumn":  7,
@@ -134,20 +134,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
-"region":  {
-"startLine":  62,
-"startColumn":  15,
-"endLine":  62,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  11,
@@ -160,7 +147,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L550",
 "region":  {
 "startLine":  550,
 "startColumn":  72,
@@ -173,7 +160,20 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\RemoteConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  15,
+"endLine":  62,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/RemoteConnection.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  64,

@@ -4,12 +4,12 @@
 "id":  "S1645",
 "message":  "Switch this use of the '+' operator to the '&'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L122",
 "region":  {
-"startLine":  91,
-"startColumn":  63,
-"endLine":  91,
-"endColumn":  64
+"startLine":  122,
+"startColumn":  86,
+"endLine":  122,
+"endColumn":  87
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S1645",
 "message":  "Switch this use of the '+' operator to the '&'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L91",
 "region":  {
-"startLine":  122,
-"startColumn":  86,
-"endLine":  122,
-"endColumn":  87
+"startLine":  91,
+"startColumn":  63,
+"endLine":  91,
+"endColumn":  64
 }
 }
 }

@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  9,

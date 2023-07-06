@@ -4,33 +4,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
-"region":  {
-"startLine":  79,
-"startColumn":  23,
-"endLine":  79,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
-"location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
-"region":  {
-"startLine":  94,
-"startColumn":  23,
-"endLine":  94,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
-"location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  23,
@@ -43,12 +17,38 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  23,
 "endLine":  135,
 "endColumn":  29
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  23,
+"endLine":  79,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  23,
+"endLine":  94,
+"endColumn":  37
 }
 }
 }

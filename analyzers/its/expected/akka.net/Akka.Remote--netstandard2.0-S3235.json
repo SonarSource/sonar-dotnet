@@ -4,7 +4,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L371",
 "region":  {
 "startLine":  371,
 "startColumn":  47,
@@ -30,7 +30,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  43,
@@ -43,7 +43,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  54,
@@ -56,7 +56,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L484",
 "region":  {
 "startLine":  484,
 "startColumn":  46,
@@ -69,7 +69,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L501",
 "region":  {
 "startLine":  501,
 "startColumn":  47,
@@ -82,7 +82,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L548",
 "region":  {
 "startLine":  548,
 "startColumn":  56,
@@ -95,7 +95,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L554",
 "region":  {
 "startLine":  554,
 "startColumn":  43,
@@ -108,7 +108,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L564",
 "region":  {
 "startLine":  564,
 "startColumn":  36,
@@ -121,7 +121,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L576",
 "region":  {
 "startLine":  576,
 "startColumn":  35,
@@ -134,7 +134,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  59,

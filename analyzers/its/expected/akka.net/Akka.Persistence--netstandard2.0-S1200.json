@@ -4,7 +4,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 48 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 38 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSMBase.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 44 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteJournal.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 49 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  18,
@@ -56,7 +56,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 34 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  18,

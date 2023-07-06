@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Streams.TestKit.TestSubscriber.ManualProbe<Akka.Persistence.Query.EventEnvelope>' instead of 'Akka.Streams.TestKit.TestSubscriber.Probe<Akka.Persistence.Query.EventEnvelope>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  82,

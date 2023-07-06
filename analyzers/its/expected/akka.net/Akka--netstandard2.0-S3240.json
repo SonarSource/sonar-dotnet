@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deployer.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deployer.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Extensions.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Extensions.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L1185",
 "region":  {
 "startLine":  1185,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/TimerScheduler.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/CachingConfig.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/CachingConfig.cs#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  17,
@@ -212,7 +212,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffSupervisorBase.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Broadcast.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  17,
@@ -277,7 +277,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHash.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L525",
 "region":  {
 "startLine":  525,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Random.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Random.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoundRobin.cs#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L260",
 "region":  {
 "startLine":  260,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\SmallestMailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/SmallestMailbox.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  17,
@@ -368,7 +368,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/TailChopping.cs#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  17,
@@ -381,7 +381,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L484",
 "region":  {
 "startLine":  484,
 "startColumn":  13,
@@ -394,7 +394,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  21,
@@ -407,7 +407,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  33,
@@ -420,7 +420,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\StringBuilderExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/StringBuilderExtensions.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  13,
@@ -433,7 +433,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\StringBuilderExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/StringBuilderExtensions.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\CachedMatchCompiler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/CachedMatchCompiler.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Try.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Try.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  13,
@@ -485,7 +485,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\WildcardTree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/WildcardTree.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  13,

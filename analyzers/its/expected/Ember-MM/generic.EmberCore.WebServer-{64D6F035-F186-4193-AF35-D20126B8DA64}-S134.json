@@ -4,33 +4,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  51,
-"startColumn":  21,
-"endLine":  51,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  87,
-"startColumn":  21,
-"endLine":  87,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  21,
@@ -43,7 +17,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  21,
@@ -56,7 +30,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  21,
@@ -69,7 +43,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  21,
@@ -82,7 +56,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L410",
 "region":  {
 "startLine":  410,
 "startColumn":  21,
@@ -95,12 +69,38 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L415",
 "region":  {
 "startLine":  415,
 "startColumn":  21,
 "endLine":  415,
 "endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  21,
+"endLine":  51,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  21,
+"endLine":  87,
+"endColumn":  23
 }
 }
 }

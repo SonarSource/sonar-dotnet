@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'ConfigureServices' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\AspNetCore\Samples.Akka.AspNetCore\Startup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Startup.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Configure' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\AspNetCore\Samples.Akka.AspNetCore\Startup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Startup.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  21,

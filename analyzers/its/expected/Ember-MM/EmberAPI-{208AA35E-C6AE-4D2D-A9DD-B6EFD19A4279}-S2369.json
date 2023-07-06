@@ -4,7 +4,7 @@
 "id":  "S2369",
 "message":  "Rename 'id' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1092",
 "region":  {
 "startLine":  1092,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S2369",
 "message":  "Rename 'id' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1100",
 "region":  {
 "startLine":  1100,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S2369",
 "message":  "Rename 'isSingle' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1118",
 "region":  {
 "startLine":  1118,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S2369",
 "message":  "Rename 'iEpisode' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1186",
 "region":  {
 "startLine":  1186,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2369",
 "message":  "Rename 'iSeason' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1188",
 "region":  {
 "startLine":  1188,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S2369",
 "message":  "Rename 'TVDBID' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1193",
 "region":  {
 "startLine":  1193,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S2369",
 "message":  "Rename 'NFO' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1209",
 "region":  {
 "startLine":  1209,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S2369",
 "message":  "Rename 'bCast' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1221",
 "region":  {
 "startLine":  1221,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S2369",
 "message":  "Rename 'bCert' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1222",
 "region":  {
 "startLine":  1222,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S2369",
 "message":  "Rename 'bDirector' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1223",
 "region":  {
 "startLine":  1223,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S2369",
 "message":  "Rename 'bFullCast' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1224",
 "region":  {
 "startLine":  1224,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S2369",
 "message":  "Rename 'bFullCrew' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1227",
 "region":  {
 "startLine":  1227,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S2369",
 "message":  "Rename 'bGenre' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1228",
 "region":  {
 "startLine":  1228,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S2369",
 "message":  "Rename 'bMPAA' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1229",
 "region":  {
 "startLine":  1229,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S2369",
 "message":  "Rename 'bMusicBy' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1230",
 "region":  {
 "startLine":  1230,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S2369",
 "message":  "Rename 'bOtherCrew' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1231",
 "region":  {
 "startLine":  1231,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S2369",
 "message":  "Rename 'bOutline' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1232",
 "region":  {
 "startLine":  1232,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S2369",
 "message":  "Rename 'bPlot' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1233",
 "region":  {
 "startLine":  1233,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S2369",
 "message":  "Rename 'bProducers' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1234",
 "region":  {
 "startLine":  1234,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S2369",
 "message":  "Rename 'bRating' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1235",
 "region":  {
 "startLine":  1235,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S2369",
 "message":  "Rename 'bRelease' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1236",
 "region":  {
 "startLine":  1236,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S2369",
 "message":  "Rename 'bRuntime' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1237",
 "region":  {
 "startLine":  1237,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S2369",
 "message":  "Rename 'bStudio' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1238",
 "region":  {
 "startLine":  1238,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S2369",
 "message":  "Rename 'bTagline' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1239",
 "region":  {
 "startLine":  1239,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S2369",
 "message":  "Rename 'bTitle' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1240",
 "region":  {
 "startLine":  1240,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S2369",
 "message":  "Rename 'bTop250' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1241",
 "region":  {
 "startLine":  1241,
 "startColumn":  13,
@@ -342,7 +342,7 @@
 "id":  "S2369",
 "message":  "Rename 'bCountry' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1242",
 "region":  {
 "startLine":  1242,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S2369",
 "message":  "Rename 'bTrailer' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1243",
 "region":  {
 "startLine":  1243,
 "startColumn":  13,
@@ -368,7 +368,7 @@
 "id":  "S2369",
 "message":  "Rename 'bVotes' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1244",
 "region":  {
 "startLine":  1244,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S2369",
 "message":  "Rename 'bWriters' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1245",
 "region":  {
 "startLine":  1245,
 "startColumn":  13,
@@ -394,7 +394,7 @@
 "id":  "S2369",
 "message":  "Rename 'bYear' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1246",
 "region":  {
 "startLine":  1246,
 "startColumn":  13,
@@ -407,7 +407,7 @@
 "id":  "S2369",
 "message":  "Rename 'bEpActors' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1268",
 "region":  {
 "startLine":  1268,
 "startColumn":  13,
@@ -420,7 +420,7 @@
 "id":  "S2369",
 "message":  "Rename 'bEpAired' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1269",
 "region":  {
 "startLine":  1269,
 "startColumn":  13,
@@ -433,7 +433,7 @@
 "id":  "S2369",
 "message":  "Rename 'bEpCredits' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1270",
 "region":  {
 "startLine":  1270,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 "id":  "S2369",
 "message":  "Rename 'bEpDirector' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1271",
 "region":  {
 "startLine":  1271,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S2369",
 "message":  "Rename 'bEpEpisode' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1272",
 "region":  {
 "startLine":  1272,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S2369",
 "message":  "Rename 'bEpPlot' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1273",
 "region":  {
 "startLine":  1273,
 "startColumn":  13,
@@ -485,7 +485,7 @@
 "id":  "S2369",
 "message":  "Rename 'bEpRating' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1274",
 "region":  {
 "startLine":  1274,
 "startColumn":  13,
@@ -498,7 +498,7 @@
 "id":  "S2369",
 "message":  "Rename 'bEpSeason' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1275",
 "region":  {
 "startLine":  1275,
 "startColumn":  13,
@@ -511,7 +511,7 @@
 "id":  "S2369",
 "message":  "Rename 'bEpTitle' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1276",
 "region":  {
 "startLine":  1276,
 "startColumn":  13,
@@ -524,7 +524,7 @@
 "id":  "S2369",
 "message":  "Rename 'bShowActors' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1277",
 "region":  {
 "startLine":  1277,
 "startColumn":  13,
@@ -537,7 +537,7 @@
 "id":  "S2369",
 "message":  "Rename 'bShowEpisodeGuide' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1278",
 "region":  {
 "startLine":  1278,
 "startColumn":  13,
@@ -550,7 +550,7 @@
 "id":  "S2369",
 "message":  "Rename 'bShowGenre' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1279",
 "region":  {
 "startLine":  1279,
 "startColumn":  13,
@@ -563,7 +563,7 @@
 "id":  "S2369",
 "message":  "Rename 'bShowMPAA' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1280",
 "region":  {
 "startLine":  1280,
 "startColumn":  13,
@@ -576,7 +576,7 @@
 "id":  "S2369",
 "message":  "Rename 'bShowPlot' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1281",
 "region":  {
 "startLine":  1281,
 "startColumn":  13,
@@ -589,7 +589,7 @@
 "id":  "S2369",
 "message":  "Rename 'bShowPremiered' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1282",
 "region":  {
 "startLine":  1282,
 "startColumn":  13,
@@ -602,7 +602,7 @@
 "id":  "S2369",
 "message":  "Rename 'bShowRating' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1283",
 "region":  {
 "startLine":  1283,
 "startColumn":  13,
@@ -615,7 +615,7 @@
 "id":  "S2369",
 "message":  "Rename 'bShowStudio' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1284",
 "region":  {
 "startLine":  1284,
 "startColumn":  13,
@@ -628,7 +628,7 @@
 "id":  "S2369",
 "message":  "Rename 'bShowTitle' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1285",
 "region":  {
 "startLine":  1285,
 "startColumn":  13,
@@ -641,7 +641,7 @@
 "id":  "S2369",
 "message":  "Rename '_mediaDBConn' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  15,
@@ -654,7 +654,7 @@
 "id":  "S2369",
 "message":  "Rename '_jobsDBConn' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  15,
@@ -667,7 +667,7 @@
 "id":  "S2369",
 "message":  "Rename 'frame' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L526",
 "region":  {
 "startLine":  526,
 "startColumn":  13,
@@ -680,7 +680,7 @@
 "id":  "S2369",
 "message":  "Rename 'hours' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L527",
 "region":  {
 "startLine":  527,
 "startColumn":  13,
@@ -693,7 +693,7 @@
 "id":  "S2369",
 "message":  "Rename 'minutes' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L528",
 "region":  {
 "startLine":  528,
 "startColumn":  13,
@@ -706,7 +706,7 @@
 "id":  "S2369",
 "message":  "Rename 'seconds' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L529",
 "region":  {
 "startLine":  529,
 "startColumn":  13,
@@ -719,7 +719,7 @@
 "id":  "S2369",
 "message":  "Rename 'AudioAtt_VTSM_VOBS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L564",
 "region":  {
 "startLine":  564,
 "startColumn":  13,
@@ -732,7 +732,7 @@
 "id":  "S2369",
 "message":  "Rename 'AudioAtt_VTS_VOBS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  13,
@@ -745,7 +745,7 @@
 "id":  "S2369",
 "message":  "Rename 'EndByteAddress_VTS_MAT' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L566",
 "region":  {
 "startLine":  566,
 "startColumn":  13,
@@ -758,7 +758,7 @@
 "id":  "S2369",
 "message":  "Rename 'FileType_Header' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L567",
 "region":  {
 "startLine":  567,
 "startColumn":  13,
@@ -771,7 +771,7 @@
 "id":  "S2369",
 "message":  "Rename 'IFO_FileName' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  13,
@@ -784,7 +784,7 @@
 "id":  "S2369",
 "message":  "Rename 'LastSectorOfIFO' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L569",
 "region":  {
 "startLine":  569,
 "startColumn":  13,
@@ -797,7 +797,7 @@
 "id":  "S2369",
 "message":  "Rename 'NumAudioStreams_VTS_VOBS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L571",
 "region":  {
 "startLine":  571,
 "startColumn":  13,
@@ -810,7 +810,7 @@
 "id":  "S2369",
 "message":  "Rename 'NumOfAudioStreamsIn_VTSM_VOBS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L573",
 "region":  {
 "startLine":  573,
 "startColumn":  13,
@@ -823,7 +823,7 @@
 "id":  "S2369",
 "message":  "Rename 'NumSubPictureStreams_VTSM_VOBS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L574",
 "region":  {
 "startLine":  574,
 "startColumn":  13,
@@ -836,7 +836,7 @@
 "id":  "S2369",
 "message":  "Rename 'NumSubPictureStreams_VTS_VOBS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L575",
 "region":  {
 "startLine":  575,
 "startColumn":  13,
@@ -849,7 +849,7 @@
 "id":  "S2369",
 "message":  "Rename 'SectorPointer_VSTM_C_ADT' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L577",
 "region":  {
 "startLine":  577,
 "startColumn":  13,
@@ -862,7 +862,7 @@
 "id":  "S2369",
 "message":  "Rename 'SectorPointer_VSTM_VOBU_ADMAP' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L578",
 "region":  {
 "startLine":  578,
 "startColumn":  13,
@@ -875,7 +875,7 @@
 "id":  "S2369",
 "message":  "Rename 'SectorPointer_VST_C_ADT' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L579",
 "region":  {
 "startLine":  579,
 "startColumn":  13,
@@ -888,7 +888,7 @@
 "id":  "S2369",
 "message":  "Rename 'SectorPointer_VTSM_PGCI_UT' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L580",
 "region":  {
 "startLine":  580,
 "startColumn":  13,
@@ -901,7 +901,7 @@
 "id":  "S2369",
 "message":  "Rename 'SectorPointer_VTS_PGCI' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L581",
 "region":  {
 "startLine":  581,
 "startColumn":  13,
@@ -914,7 +914,7 @@
 "id":  "S2369",
 "message":  "Rename 'SectorPointer_VTS_PTT_SRPT' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L582",
 "region":  {
 "startLine":  582,
 "startColumn":  13,
@@ -927,7 +927,7 @@
 "id":  "S2369",
 "message":  "Rename 'SectorPointer_VTS_TMAPTI' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L583",
 "region":  {
 "startLine":  583,
 "startColumn":  13,
@@ -940,7 +940,7 @@
 "id":  "S2369",
 "message":  "Rename 'SectorPointer_VTS_VOBU_ADMAP' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L584",
 "region":  {
 "startLine":  584,
 "startColumn":  13,
@@ -953,7 +953,7 @@
 "id":  "S2369",
 "message":  "Rename 'StartSector_MenuVOB' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L585",
 "region":  {
 "startLine":  585,
 "startColumn":  13,
@@ -966,7 +966,7 @@
 "id":  "S2369",
 "message":  "Rename 'StartSector_TitleVOB' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L586",
 "region":  {
 "startLine":  586,
 "startColumn":  13,
@@ -979,7 +979,7 @@
 "id":  "S2369",
 "message":  "Rename 'SubPictureAtt_VTSM_VOBS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L587",
 "region":  {
 "startLine":  587,
 "startColumn":  13,
@@ -992,7 +992,7 @@
 "id":  "S2369",
 "message":  "Rename 'SubPictureAtt_VTS_VOBS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L588",
 "region":  {
 "startLine":  588,
 "startColumn":  13,
@@ -1005,7 +1005,7 @@
 "id":  "S2369",
 "message":  "Rename 'VideoAtt_VSTM_VOBS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L590",
 "region":  {
 "startLine":  590,
 "startColumn":  13,
@@ -1018,7 +1018,7 @@
 "id":  "S2369",
 "message":  "Rename 'VideoAtt_VTS_VOBS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L591",
 "region":  {
 "startLine":  591,
 "startColumn":  13,
@@ -1031,7 +1031,7 @@
 "id":  "S2369",
 "message":  "Rename 'VSTCategory' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L592",
 "region":  {
 "startLine":  592,
 "startColumn":  13,
@@ -1044,7 +1044,7 @@
 "id":  "S2369",
 "message":  "Rename 'Aspect_Ratio' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L621",
 "region":  {
 "startLine":  621,
 "startColumn":  13,
@@ -1057,7 +1057,7 @@
 "id":  "S2369",
 "message":  "Rename 'Coding_Mode' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L622",
 "region":  {
 "startLine":  622,
 "startColumn":  13,
@@ -1070,7 +1070,7 @@
 "id":  "S2369",
 "message":  "Rename 'Aspect_Ratio' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L634",
 "region":  {
 "startLine":  634,
 "startColumn":  13,
@@ -1083,7 +1083,7 @@
 "id":  "S2369",
 "message":  "Rename 'Coding_Mode' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L635",
 "region":  {
 "startLine":  635,
 "startColumn":  13,
@@ -1096,7 +1096,7 @@
 "id":  "S2369",
 "message":  "Rename 'Video_Standard' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L638",
 "region":  {
 "startLine":  638,
 "startColumn":  13,
@@ -1109,7 +1109,7 @@
 "id":  "S2369",
 "message":  "Rename 'EndAddress_VST_PTT' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L662",
 "region":  {
 "startLine":  662,
 "startColumn":  13,
@@ -1122,7 +1122,7 @@
 "id":  "S2369",
 "message":  "Rename 'OffsetTo_PPT' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L664",
 "region":  {
 "startLine":  664,
 "startColumn":  13,
@@ -1135,7 +1135,7 @@
 "id":  "S2369",
 "message":  "Rename 'breakChain' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  16,
@@ -1148,7 +1148,7 @@
 "id":  "S2369",
 "message":  "Rename 'htStrings' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  13,
@@ -1161,7 +1161,7 @@
 "id":  "S2369",
 "message":  "Rename 'currMovie' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMaster.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMaster.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  19,
@@ -1174,7 +1174,7 @@
 "id":  "S2369",
 "message":  "Rename 'currShow' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMaster.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMaster.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  19,
@@ -1187,7 +1187,7 @@
 "id":  "S2369",
 "message":  "Rename 'eLang' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMaster.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMaster.vb#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  19,
@@ -1200,7 +1200,7 @@
 "id":  "S2369",
 "message":  "Rename 'eLog' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMaster.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMaster.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  19,
@@ -1213,7 +1213,7 @@
 "id":  "S2369",
 "message":  "Rename 'eSettings' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMaster.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMaster.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  19,
@@ -1226,7 +1226,7 @@
 "id":  "S2369",
 "message":  "Rename 'isWindows' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMaster.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMaster.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  19,
@@ -1239,7 +1239,7 @@
 "id":  "S2369",
 "message":  "Rename 'tmpMovie' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMaster.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMaster.vb#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  19,
@@ -1252,7 +1252,7 @@
 "id":  "S2369",
 "message":  "Rename 'externalProcessorModules' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  12,
@@ -1265,7 +1265,7 @@
 "id":  "S2369",
 "message":  "Rename 'externalScrapersModules' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  12,
@@ -1278,7 +1278,7 @@
 "id":  "S2369",
 "message":  "Rename 'externalTVScrapersModules' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  12,
@@ -1291,7 +1291,7 @@
 "id":  "S2369",
 "message":  "Rename 'htTVShows' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  12,
@@ -1304,7 +1304,7 @@
 "id":  "S2369",
 "message":  "Rename 'lFlags' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  19,
@@ -1317,7 +1317,7 @@
 "id":  "S2369",
 "message":  "Rename 'alGenres' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  19,
@@ -1330,7 +1330,7 @@
 "id":  "S2369",
 "message":  "Rename 'dStudios' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  19,
@@ -1343,7 +1343,7 @@
 "id":  "S2369",
 "message":  "Rename 'GenreXML' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  19,
@@ -1356,7 +1356,7 @@
 "id":  "S2369",
 "message":  "Rename 'RatingXML' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  19,

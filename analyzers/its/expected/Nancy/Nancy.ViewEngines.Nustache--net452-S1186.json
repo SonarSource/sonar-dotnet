@@ -4,7 +4,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Nustache\NustacheViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Nustache/NustacheViewEngine.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  21,

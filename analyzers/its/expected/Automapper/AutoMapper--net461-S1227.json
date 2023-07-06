@@ -4,7 +4,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\Mappers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/Mappers.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  21,

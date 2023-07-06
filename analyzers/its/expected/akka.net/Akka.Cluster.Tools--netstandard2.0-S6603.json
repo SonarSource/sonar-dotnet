@@ -4,20 +4,7 @@
 "id":  "S6603",
 "message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
-"region":  {
-"startLine":  914,
-"startColumn":  48,
-"endLine":  914,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S6603",
-"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1031",
 "region":  {
 "startLine":  1031,
 "startColumn":  120,
@@ -30,12 +17,25 @@
 "id":  "S6603",
 "message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1085",
 "region":  {
 "startLine":  1085,
 "startColumn":  101,
 "endLine":  1085,
 "endColumn":  104
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L914",
+"region":  {
+"startLine":  914,
+"startColumn":  48,
+"endLine":  914,
+"endColumn":  51
 }
 }
 }

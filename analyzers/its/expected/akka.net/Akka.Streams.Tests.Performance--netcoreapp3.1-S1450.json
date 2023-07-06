@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_testElements' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\FusedGraphsBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FusedGraphsBenchmark.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  34,
@@ -17,7 +17,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_materializerSettings' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\MaterializationBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  43,
@@ -30,7 +30,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_materializerSettings' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\MergeManyBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MergeManyBenchmark.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  43,

@@ -5,7 +5,7 @@
 "message":  "Update this method so that its implementation is not identical to 'Command'.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L685",
 "region":  {
 "startLine":  685,
 "startColumn":  24,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L675",
 "region":  {
 "startLine":  675,
 "startColumn":  24,

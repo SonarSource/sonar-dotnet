@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'InitializeFSM' to match pascal case naming rules, consider using 'InitializeFsm'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L875",
 "region":  {
 "startLine":  875,
 "startColumn":  22,

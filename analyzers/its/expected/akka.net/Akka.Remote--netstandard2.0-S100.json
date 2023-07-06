@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename property 'state' to match pascal case naming rules, consider using 'State'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S100",
 "message":  "Rename method 'InitFSM' to match pascal case naming rules, consider using 'InitFsm'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L712",
 "region":  {
 "startLine":  712,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S100",
 "message":  "Rename property 'logRemoteLifeCycleEvents' to match pascal case naming rules, consider using 'LogRemoteLifeCycleEvents'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteTransport.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S100",
 "message":  "Rename property 'DISASSOCIATE' to match pascal case naming rules, consider using 'Disassociate'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L531",
 "region":  {
 "startLine":  531,
 "startColumn":  28,
@@ -56,7 +56,7 @@
 "id":  "S100",
 "message":  "Rename method 'InitializeFSM' to match pascal case naming rules, consider using 'InitializeFsm'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L832",
 "region":  {
 "startLine":  832,
 "startColumn":  22,
@@ -69,7 +69,7 @@
 "id":  "S100",
 "message":  "Rename method 'InitializeFSM' to match pascal case naming rules, consider using 'InitializeFsm'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1102",
 "region":  {
 "startLine":  1102,
 "startColumn":  22,

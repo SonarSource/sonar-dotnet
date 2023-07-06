@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'sFormula' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  74,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  74,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  83,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  83,
@@ -69,7 +69,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  83,
@@ -82,7 +82,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  82,
@@ -95,7 +95,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  81,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  82,
@@ -121,7 +121,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L257",
 "region":  {
 "startLine":  257,
 "startColumn":  72,
@@ -134,7 +134,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L258",
 "region":  {
 "startLine":  258,
 "startColumn":  67,
@@ -147,7 +147,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  68,
@@ -160,7 +160,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tTheme' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L262",
 "region":  {
 "startLine":  262,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter '_params' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  42,
@@ -186,7 +186,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'x' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4597",
 "region":  {
 "startLine":  4597,
 "startColumn":  43,
@@ -199,7 +199,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'y' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4597",
 "region":  {
 "startLine":  4597,
 "startColumn":  86,
@@ -212,7 +212,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'drow' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4196",
 "region":  {
 "startLine":  4196,
 "startColumn":  9,
@@ -225,7 +225,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'args' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6607",
 "region":  {
 "startLine":  6607,
 "startColumn":  30,
@@ -238,7 +238,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'dlg' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7918",
 "region":  {
 "startLine":  7918,
 "startColumn":  20,

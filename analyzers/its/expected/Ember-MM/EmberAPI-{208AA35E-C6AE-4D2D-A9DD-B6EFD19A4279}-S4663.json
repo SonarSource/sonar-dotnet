@@ -4,7 +4,7 @@
 "id":  "S4663",
 "message":  "Remove this empty comment",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L577",
 "region":  {
 "startLine":  577,
 "startColumn":  19,

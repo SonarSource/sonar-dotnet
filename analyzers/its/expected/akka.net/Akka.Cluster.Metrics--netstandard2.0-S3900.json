@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\ClusterMetricsStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsStrategy.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Configuration\ClusterMetricsSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Configuration/ClusterMetricsSettings.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\MetricsCollectorBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/MetricsCollectorBuilder.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  58,
@@ -41,35 +41,9 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter '@event' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  42,
-"endLine":  66,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'routees' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
-"region":  {
-"startLine":  76,
-"startColumn":  17,
-"endLine":  76,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  39,
@@ -82,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  75,
@@ -93,9 +67,35 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter '@event' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  42,
+"endLine":  66,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'routees' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  17,
+"endLine":  76,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\MetricSelectors.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/MetricSelectors.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  36,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'capacity' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\MetricSelectors.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/MetricSelectors.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  17,
@@ -119,22 +119,9 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
-"region":  {
-"startLine":  60,
-"startColumn":  84,
-"endLine":  60,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'o' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  83,
@@ -145,9 +132,22 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  84,
+"endLine":  60,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'current' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\EWMA.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  37,
@@ -158,35 +158,9 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'value' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
-"region":  {
-"startLine":  54,
-"startColumn":  24,
-"endLine":  54,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'm1' before using it.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
-"region":  {
-"startLine":  91,
-"startColumn":  28,
-"endLine":  91,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'latest' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  48,
@@ -199,7 +173,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'latest' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  25,
@@ -212,7 +186,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'that' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  60,
@@ -223,9 +197,35 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  24,
+"endLine":  54,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'm1' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  28,
+"endLine":  91,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'otherGossip' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\MetricsGossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  20,
@@ -238,7 +238,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'gossip' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\MetricsGossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  35,
@@ -251,7 +251,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'newNodeMetrics' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\MetricsGossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  57,
@@ -264,7 +264,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'that' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\NodeMetrics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/NodeMetrics.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  33,
@@ -277,7 +277,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'that' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\NodeMetrics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/NodeMetrics.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  33,
@@ -290,7 +290,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'that' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\NodeMetrics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/NodeMetrics.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  64,
@@ -303,7 +303,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nodeMetrics' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\StandardMetrics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/StandardMetrics.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  28,
@@ -316,7 +316,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nodeMetrics' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\StandardMetrics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/StandardMetrics.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  34,

@@ -4,7 +4,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1004",
 "region":  {
 "startLine":  1004,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1145",
 "region":  {
 "startLine":  1145,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1519",
 "region":  {
 "startLine":  1519,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L1055",
 "region":  {
 "startLine":  1055,
 "startColumn":  32,
@@ -56,7 +56,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  20,
@@ -69,7 +69,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  61,
@@ -82,7 +82,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L569",
 "region":  {
 "startLine":  569,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L590",
 "region":  {
 "startLine":  590,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1305",
 "region":  {
 "startLine":  1305,
 "startColumn":  13,

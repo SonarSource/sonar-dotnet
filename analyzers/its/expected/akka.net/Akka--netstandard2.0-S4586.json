@@ -4,7 +4,7 @@
 "id":  "S4586",
 "message":  "Do not return null from this method, instead return 'Task.FromResult<T>(null)', 'Task.CompletedTask' or 'Task.Delay(0)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Router.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  20,

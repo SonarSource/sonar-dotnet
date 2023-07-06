@@ -4,7 +4,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  3,

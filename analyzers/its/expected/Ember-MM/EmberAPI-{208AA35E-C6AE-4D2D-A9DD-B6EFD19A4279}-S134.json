@@ -4,7 +4,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L272",
 "region":  {
 "startLine":  272,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L699",
 "region":  {
 "startLine":  699,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L851",
 "region":  {
 "startLine":  851,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L894",
 "region":  {
 "startLine":  894,
 "startColumn":  21,
@@ -95,46 +95,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
-"region":  {
-"startLine":  94,
-"startColumn":  33,
-"endLine":  94,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
-"region":  {
-"startLine":  140,
-"startColumn":  33,
-"endLine":  140,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
-"region":  {
-"startLine":  391,
-"startColumn":  41,
-"endLine":  391,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1356",
 "region":  {
 "startLine":  1356,
 "startColumn":  29,
@@ -147,7 +108,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1374",
 "region":  {
 "startLine":  1374,
 "startColumn":  29,
@@ -160,7 +121,46 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  33,
+"endLine":  140,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L391",
+"region":  {
+"startLine":  391,
+"startColumn":  41,
+"endLine":  391,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  33,
+"endLine":  94,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  21,
@@ -173,7 +173,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  25,
@@ -186,7 +186,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  25,
@@ -199,7 +199,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  25,
@@ -212,7 +212,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  25,
@@ -225,7 +225,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  25,
@@ -238,7 +238,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  25,
@@ -251,7 +251,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  25,
@@ -264,7 +264,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L366",
 "region":  {
 "startLine":  366,
 "startColumn":  25,
@@ -277,7 +277,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L430",
 "region":  {
 "startLine":  430,
 "startColumn":  25,
@@ -290,7 +290,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  21,
@@ -303,7 +303,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  33,
@@ -316,7 +316,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  21,
@@ -329,345 +329,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  450,
-"startColumn":  6,
-"endLine":  450,
-"endColumn":  9
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  463,
-"startColumn":  6,
-"endLine":  463,
-"endColumn":  8
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  487,
-"startColumn":  7,
-"endLine":  487,
-"endColumn":  9
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  497,
-"startColumn":  7,
-"endLine":  497,
-"endColumn":  9
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  528,
-"startColumn":  21,
-"endLine":  528,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  583,
-"startColumn":  21,
-"endLine":  583,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  630,
-"startColumn":  21,
-"endLine":  630,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  702,
-"startColumn":  21,
-"endLine":  702,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  720,
-"startColumn":  21,
-"endLine":  720,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  729,
-"startColumn":  21,
-"endLine":  729,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  736,
-"startColumn":  21,
-"endLine":  736,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  752,
-"startColumn":  21,
-"endLine":  752,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  760,
-"startColumn":  21,
-"endLine":  760,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  777,
-"startColumn":  21,
-"endLine":  777,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  874,
-"startColumn":  21,
-"endLine":  874,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  882,
-"startColumn":  21,
-"endLine":  882,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  890,
-"startColumn":  21,
-"endLine":  890,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  897,
-"startColumn":  21,
-"endLine":  897,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  904,
-"startColumn":  21,
-"endLine":  904,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  911,
-"startColumn":  21,
-"endLine":  911,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  918,
-"startColumn":  21,
-"endLine":  918,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  926,
-"startColumn":  21,
-"endLine":  926,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  933,
-"startColumn":  21,
-"endLine":  933,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  940,
-"startColumn":  21,
-"endLine":  940,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  948,
-"startColumn":  21,
-"endLine":  948,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  983,
-"startColumn":  21,
-"endLine":  983,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1003",
 "region":  {
 "startLine":  1003,
 "startColumn":  21,
@@ -680,7 +342,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1011",
 "region":  {
 "startLine":  1011,
 "startColumn":  21,
@@ -693,7 +355,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1019",
 "region":  {
 "startLine":  1019,
 "startColumn":  21,
@@ -706,7 +368,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1027",
 "region":  {
 "startLine":  1027,
 "startColumn":  21,
@@ -719,7 +381,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1040",
 "region":  {
 "startLine":  1040,
 "startColumn":  21,
@@ -732,7 +394,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1076",
 "region":  {
 "startLine":  1076,
 "startColumn":  21,
@@ -745,7 +407,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1097",
 "region":  {
 "startLine":  1097,
 "startColumn":  21,
@@ -758,7 +420,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1105",
 "region":  {
 "startLine":  1105,
 "startColumn":  21,
@@ -771,7 +433,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1113",
 "region":  {
 "startLine":  1113,
 "startColumn":  21,
@@ -784,7 +446,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1121",
 "region":  {
 "startLine":  1121,
 "startColumn":  21,
@@ -797,7 +459,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1129",
 "region":  {
 "startLine":  1129,
 "startColumn":  21,
@@ -810,7 +472,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1197",
 "region":  {
 "startLine":  1197,
 "startColumn":  21,
@@ -823,7 +485,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1253",
 "region":  {
 "startLine":  1253,
 "startColumn":  21,
@@ -836,12 +498,12 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L450",
 "region":  {
-"startLine":  183,
-"startColumn":  21,
-"endLine":  183,
-"endColumn":  24
+"startLine":  450,
+"startColumn":  6,
+"endLine":  450,
+"endColumn":  9
 }
 }
 },
@@ -849,12 +511,12 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L463",
 "region":  {
-"startLine":  215,
-"startColumn":  21,
-"endLine":  215,
-"endColumn":  23
+"startLine":  463,
+"startColumn":  6,
+"endLine":  463,
+"endColumn":  8
 }
 }
 },
@@ -862,154 +524,37 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
-"region":  {
-"startLine":  231,
-"startColumn":  21,
-"endLine":  231,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
-"region":  {
-"startLine":  93,
-"startColumn":  21,
-"endLine":  93,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
-"region":  {
-"startLine":  158,
-"startColumn":  25,
-"endLine":  158,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
-"region":  {
-"startLine":  165,
-"startColumn":  21,
-"endLine":  165,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
-"region":  {
-"startLine":  183,
-"startColumn":  21,
-"endLine":  183,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
-"region":  {
-"startLine":  209,
-"startColumn":  21,
-"endLine":  209,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
-"region":  {
-"startLine":  213,
-"startColumn":  21,
-"endLine":  213,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
-"region":  {
-"startLine":  238,
-"startColumn":  21,
-"endLine":  238,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
-"region":  {
-"startLine":  456,
-"startColumn":  21,
-"endLine":  456,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
-"region":  {
-"startLine":  469,
-"startColumn":  25,
-"endLine":  469,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
-"region":  {
-"startLine":  475,
-"startColumn":  21,
-"endLine":  475,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L487",
 "region":  {
 "startLine":  487,
-"startColumn":  21,
+"startColumn":  7,
 "endLine":  487,
+"endColumn":  9
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L497",
+"region":  {
+"startLine":  497,
+"startColumn":  7,
+"endLine":  497,
+"endColumn":  9
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L528",
+"region":  {
+"startLine":  528,
+"startColumn":  21,
+"endLine":  528,
 "endColumn":  23
 }
 }
@@ -1018,11 +563,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L583",
 "region":  {
-"startLine":  493,
+"startLine":  583,
 "startColumn":  21,
-"endLine":  493,
+"endLine":  583,
 "endColumn":  23
 }
 }
@@ -1031,24 +576,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L630",
 "region":  {
-"startLine":  498,
-"startColumn":  25,
-"endLine":  498,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
-"region":  {
-"startLine":  508,
+"startLine":  630,
 "startColumn":  21,
-"endLine":  508,
+"endLine":  630,
 "endColumn":  23
 }
 }
@@ -1057,11 +589,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L702",
 "region":  {
-"startLine":  513,
+"startLine":  702,
 "startColumn":  21,
-"endLine":  513,
+"endLine":  702,
 "endColumn":  23
 }
 }
@@ -1070,254 +602,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
-"region":  {
-"startLine":  140,
-"startColumn":  21,
-"endLine":  140,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
-"region":  {
-"startLine":  203,
-"startColumn":  21,
-"endLine":  203,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
-"region":  {
-"startLine":  274,
-"startColumn":  21,
-"endLine":  274,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  45,
-"startColumn":  21,
-"endLine":  45,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  49,
-"startColumn":  21,
-"endLine":  49,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  53,
-"startColumn":  21,
-"endLine":  53,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  57,
-"startColumn":  21,
-"endLine":  57,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  72,
-"startColumn":  21,
-"endLine":  72,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  83,
-"startColumn":  21,
-"endLine":  83,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  123,
-"startColumn":  21,
-"endLine":  123,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  166,
-"startColumn":  21,
-"endLine":  166,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  451,
-"startColumn":  25,
-"endLine":  451,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  461,
-"startColumn":  25,
-"endLine":  461,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  550,
-"startColumn":  21,
-"endLine":  550,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  575,
-"startColumn":  21,
-"endLine":  575,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  582,
-"startColumn":  21,
-"endLine":  582,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  617,
-"startColumn":  25,
-"endLine":  617,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  639,
-"startColumn":  21,
-"endLine":  639,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  669,
-"startColumn":  21,
-"endLine":  669,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L720",
 "region":  {
 "startLine":  720,
 "startColumn":  21,
@@ -1330,11 +615,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L729",
 "region":  {
-"startLine":  728,
+"startLine":  729,
 "startColumn":  21,
-"endLine":  728,
+"endLine":  729,
 "endColumn":  23
 }
 }
@@ -1343,11 +628,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L736",
 "region":  {
-"startLine":  733,
+"startLine":  736,
 "startColumn":  21,
-"endLine":  733,
+"endLine":  736,
 "endColumn":  23
 }
 }
@@ -1356,7 +641,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L752",
 "region":  {
 "startLine":  752,
 "startColumn":  21,
@@ -1369,7 +654,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L760",
 "region":  {
 "startLine":  760,
 "startColumn":  21,
@@ -1382,11 +667,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L777",
 "region":  {
-"startLine":  765,
+"startLine":  777,
 "startColumn":  21,
-"endLine":  765,
+"endLine":  777,
 "endColumn":  23
 }
 }
@@ -1395,11 +680,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L874",
 "region":  {
-"startLine":  787,
+"startLine":  874,
 "startColumn":  21,
-"endLine":  787,
+"endLine":  874,
 "endColumn":  23
 }
 }
@@ -1408,11 +693,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L882",
 "region":  {
-"startLine":  821,
+"startLine":  882,
 "startColumn":  21,
-"endLine":  821,
+"endLine":  882,
 "endColumn":  23
 }
 }
@@ -1421,11 +706,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L890",
 "region":  {
-"startLine":  913,
+"startLine":  890,
 "startColumn":  21,
-"endLine":  913,
+"endLine":  890,
 "endColumn":  23
 }
 }
@@ -1434,12 +719,12 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L897",
 "region":  {
-"startLine":  931,
-"startColumn":  29,
-"endLine":  931,
-"endColumn":  34
+"startLine":  897,
+"startColumn":  21,
+"endLine":  897,
+"endColumn":  23
 }
 }
 },
@@ -1447,24 +732,154 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L904",
 "region":  {
-"startLine":  941,
+"startLine":  904,
+"startColumn":  21,
+"endLine":  904,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L911",
+"region":  {
+"startLine":  911,
+"startColumn":  21,
+"endLine":  911,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L918",
+"region":  {
+"startLine":  918,
+"startColumn":  21,
+"endLine":  918,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L926",
+"region":  {
+"startLine":  926,
+"startColumn":  21,
+"endLine":  926,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L933",
+"region":  {
+"startLine":  933,
+"startColumn":  21,
+"endLine":  933,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L940",
+"region":  {
+"startLine":  940,
+"startColumn":  21,
+"endLine":  940,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L948",
+"region":  {
+"startLine":  948,
+"startColumn":  21,
+"endLine":  948,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L983",
+"region":  {
+"startLine":  983,
+"startColumn":  21,
+"endLine":  983,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L183",
+"region":  {
+"startLine":  183,
+"startColumn":  21,
+"endLine":  183,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  21,
+"endLine":  215,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L231",
+"region":  {
+"startLine":  231,
+"startColumn":  21,
+"endLine":  231,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L158",
+"region":  {
+"startLine":  158,
 "startColumn":  25,
-"endLine":  941,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  954,
-"startColumn":  25,
-"endLine":  954,
+"endLine":  158,
 "endColumn":  27
 }
 }
@@ -1473,24 +888,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L165",
 "region":  {
-"startLine":  1000,
+"startLine":  165,
 "startColumn":  21,
-"endLine":  1000,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  56,
-"startColumn":  21,
-"endLine":  56,
+"endLine":  165,
 "endColumn":  24
 }
 }
@@ -1499,24 +901,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L183",
 "region":  {
-"startLine":  124,
+"startLine":  183,
 "startColumn":  21,
-"endLine":  124,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  257,
-"startColumn":  21,
-"endLine":  257,
+"endLine":  183,
 "endColumn":  24
 }
 }
@@ -1525,11 +914,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L209",
 "region":  {
-"startLine":  276,
+"startLine":  209,
 "startColumn":  21,
-"endLine":  276,
+"endLine":  209,
 "endColumn":  23
 }
 }
@@ -1538,11 +927,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L213",
 "region":  {
-"startLine":  293,
+"startLine":  213,
 "startColumn":  21,
-"endLine":  293,
+"endLine":  213,
 "endColumn":  23
 }
 }
@@ -1551,37 +940,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L238",
 "region":  {
-"startLine":  320,
+"startLine":  238,
 "startColumn":  21,
-"endLine":  320,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  332,
-"startColumn":  21,
-"endLine":  332,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  340,
-"startColumn":  21,
-"endLine":  340,
+"endLine":  238,
 "endColumn":  24
 }
 }
@@ -1590,59 +953,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  405,
-"startColumn":  21,
-"endLine":  405,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  420,
-"startColumn":  21,
-"endLine":  420,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  446,
-"startColumn":  21,
-"endLine":  446,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  451,
-"startColumn":  21,
-"endLine":  451,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L456",
 "region":  {
 "startLine":  456,
 "startColumn":  21,
@@ -1655,11 +966,24 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L469",
 "region":  {
-"startLine":  461,
+"startLine":  469,
+"startColumn":  25,
+"endLine":  469,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L475",
+"region":  {
+"startLine":  475,
 "startColumn":  21,
-"endLine":  461,
+"endLine":  475,
 "endColumn":  23
 }
 }
@@ -1668,11 +992,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L487",
 "region":  {
-"startLine":  466,
+"startLine":  487,
 "startColumn":  21,
-"endLine":  466,
+"endLine":  487,
 "endColumn":  23
 }
 }
@@ -1681,11 +1005,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L493",
 "region":  {
-"startLine":  473,
+"startLine":  493,
 "startColumn":  21,
-"endLine":  473,
+"endLine":  493,
 "endColumn":  23
 }
 }
@@ -1694,11 +1018,24 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L498",
 "region":  {
-"startLine":  478,
+"startLine":  498,
+"startColumn":  25,
+"endLine":  498,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L508",
+"region":  {
+"startLine":  508,
 "startColumn":  21,
-"endLine":  478,
+"endLine":  508,
 "endColumn":  23
 }
 }
@@ -1707,11 +1044,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L513",
 "region":  {
-"startLine":  483,
+"startLine":  513,
 "startColumn":  21,
-"endLine":  483,
+"endLine":  513,
 "endColumn":  23
 }
 }
@@ -1720,11 +1057,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L93",
 "region":  {
-"startLine":  502,
+"startLine":  93,
 "startColumn":  21,
-"endLine":  502,
+"endLine":  93,
 "endColumn":  23
 }
 }
@@ -1733,63 +1070,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L140",
 "region":  {
-"startLine":  683,
+"startLine":  140,
 "startColumn":  21,
-"endLine":  683,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  690,
-"startColumn":  21,
-"endLine":  690,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  695,
-"startColumn":  21,
-"endLine":  695,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  791,
-"startColumn":  21,
-"endLine":  791,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  802,
-"startColumn":  21,
-"endLine":  802,
+"endLine":  140,
 "endColumn":  24
 }
 }
@@ -1798,310 +1083,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  820,
-"startColumn":  21,
-"endLine":  820,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  835,
-"startColumn":  21,
-"endLine":  835,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  842,
-"startColumn":  21,
-"endLine":  842,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  859,
-"startColumn":  21,
-"endLine":  859,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  915,
-"startColumn":  21,
-"endLine":  915,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  920,
-"startColumn":  21,
-"endLine":  920,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  930,
-"startColumn":  21,
-"endLine":  930,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  983,
-"startColumn":  21,
-"endLine":  983,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  995,
-"startColumn":  21,
-"endLine":  995,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  1001,
-"startColumn":  21,
-"endLine":  1001,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  1056,
-"startColumn":  21,
-"endLine":  1056,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  1092,
-"startColumn":  37,
-"endLine":  1092,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  1108,
-"startColumn":  37,
-"endLine":  1108,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  1129,
-"startColumn":  29,
-"endLine":  1129,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  1143,
-"startColumn":  29,
-"endLine":  1143,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  1171,
-"startColumn":  37,
-"endLine":  1171,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  1221,
-"startColumn":  21,
-"endLine":  1221,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  1227,
-"startColumn":  21,
-"endLine":  1227,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
-"region":  {
-"startLine":  1252,
-"startColumn":  21,
-"endLine":  1252,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
-"region":  {
-"startLine":  136,
-"startColumn":  21,
-"endLine":  136,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  21,
 "endLine":  203,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
-"region":  {
-"startLine":  248,
-"startColumn":  21,
-"endLine":  248,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
-"region":  {
-"startLine":  371,
-"startColumn":  21,
-"endLine":  371,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
-"region":  {
-"startLine":  52,
-"startColumn":  21,
-"endLine":  52,
 "endColumn":  24
 }
 }
@@ -2110,11 +1096,11 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L274",
 "region":  {
-"startLine":  85,
+"startLine":  274,
 "startColumn":  21,
-"endLine":  85,
+"endLine":  274,
 "endColumn":  24
 }
 }
@@ -2123,12 +1109,12 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L1000",
 "region":  {
-"startLine":  90,
+"startLine":  1000,
 "startColumn":  21,
-"endLine":  90,
-"endColumn":  24
+"endLine":  1000,
+"endColumn":  23
 }
 }
 },
@@ -2136,7 +1122,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  21,
@@ -2149,7 +1135,982 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  21,
+"endLine":  166,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  21,
+"endLine":  45,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L451",
+"region":  {
+"startLine":  451,
+"startColumn":  25,
+"endLine":  451,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L461",
+"region":  {
+"startLine":  461,
+"startColumn":  25,
+"endLine":  461,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  21,
+"endLine":  49,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  21,
+"endLine":  53,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L550",
+"region":  {
+"startLine":  550,
+"startColumn":  21,
+"endLine":  550,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  21,
+"endLine":  57,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L575",
+"region":  {
+"startLine":  575,
+"startColumn":  21,
+"endLine":  575,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L582",
+"region":  {
+"startLine":  582,
+"startColumn":  21,
+"endLine":  582,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L617",
+"region":  {
+"startLine":  617,
+"startColumn":  25,
+"endLine":  617,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L639",
+"region":  {
+"startLine":  639,
+"startColumn":  21,
+"endLine":  639,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L669",
+"region":  {
+"startLine":  669,
+"startColumn":  21,
+"endLine":  669,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  21,
+"endLine":  72,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L720",
+"region":  {
+"startLine":  720,
+"startColumn":  21,
+"endLine":  720,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L728",
+"region":  {
+"startLine":  728,
+"startColumn":  21,
+"endLine":  728,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L733",
+"region":  {
+"startLine":  733,
+"startColumn":  21,
+"endLine":  733,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L752",
+"region":  {
+"startLine":  752,
+"startColumn":  21,
+"endLine":  752,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L760",
+"region":  {
+"startLine":  760,
+"startColumn":  21,
+"endLine":  760,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L765",
+"region":  {
+"startLine":  765,
+"startColumn":  21,
+"endLine":  765,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L787",
+"region":  {
+"startLine":  787,
+"startColumn":  21,
+"endLine":  787,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L821",
+"region":  {
+"startLine":  821,
+"startColumn":  21,
+"endLine":  821,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  21,
+"endLine":  83,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L913",
+"region":  {
+"startLine":  913,
+"startColumn":  21,
+"endLine":  913,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L931",
+"region":  {
+"startLine":  931,
+"startColumn":  29,
+"endLine":  931,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L941",
+"region":  {
+"startLine":  941,
+"startColumn":  25,
+"endLine":  941,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L954",
+"region":  {
+"startLine":  954,
+"startColumn":  25,
+"endLine":  954,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1001",
+"region":  {
+"startLine":  1001,
+"startColumn":  21,
+"endLine":  1001,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1056",
+"region":  {
+"startLine":  1056,
+"startColumn":  21,
+"endLine":  1056,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1092",
+"region":  {
+"startLine":  1092,
+"startColumn":  37,
+"endLine":  1092,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1108",
+"region":  {
+"startLine":  1108,
+"startColumn":  37,
+"endLine":  1108,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1129",
+"region":  {
+"startLine":  1129,
+"startColumn":  29,
+"endLine":  1129,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1143",
+"region":  {
+"startLine":  1143,
+"startColumn":  29,
+"endLine":  1143,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1171",
+"region":  {
+"startLine":  1171,
+"startColumn":  37,
+"endLine":  1171,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1221",
+"region":  {
+"startLine":  1221,
+"startColumn":  21,
+"endLine":  1221,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1227",
+"region":  {
+"startLine":  1227,
+"startColumn":  21,
+"endLine":  1227,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  21,
+"endLine":  124,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1252",
+"region":  {
+"startLine":  1252,
+"startColumn":  21,
+"endLine":  1252,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L257",
+"region":  {
+"startLine":  257,
+"startColumn":  21,
+"endLine":  257,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L276",
+"region":  {
+"startLine":  276,
+"startColumn":  21,
+"endLine":  276,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  21,
+"endLine":  293,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  21,
+"endLine":  320,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L332",
+"region":  {
+"startLine":  332,
+"startColumn":  21,
+"endLine":  332,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L340",
+"region":  {
+"startLine":  340,
+"startColumn":  21,
+"endLine":  340,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L405",
+"region":  {
+"startLine":  405,
+"startColumn":  21,
+"endLine":  405,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L420",
+"region":  {
+"startLine":  420,
+"startColumn":  21,
+"endLine":  420,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L446",
+"region":  {
+"startLine":  446,
+"startColumn":  21,
+"endLine":  446,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L451",
+"region":  {
+"startLine":  451,
+"startColumn":  21,
+"endLine":  451,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L456",
+"region":  {
+"startLine":  456,
+"startColumn":  21,
+"endLine":  456,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L461",
+"region":  {
+"startLine":  461,
+"startColumn":  21,
+"endLine":  461,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L466",
+"region":  {
+"startLine":  466,
+"startColumn":  21,
+"endLine":  466,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L473",
+"region":  {
+"startLine":  473,
+"startColumn":  21,
+"endLine":  473,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L478",
+"region":  {
+"startLine":  478,
+"startColumn":  21,
+"endLine":  478,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L483",
+"region":  {
+"startLine":  483,
+"startColumn":  21,
+"endLine":  483,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L502",
+"region":  {
+"startLine":  502,
+"startColumn":  21,
+"endLine":  502,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  21,
+"endLine":  56,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L683",
+"region":  {
+"startLine":  683,
+"startColumn":  21,
+"endLine":  683,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L690",
+"region":  {
+"startLine":  690,
+"startColumn":  21,
+"endLine":  690,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L695",
+"region":  {
+"startLine":  695,
+"startColumn":  21,
+"endLine":  695,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L791",
+"region":  {
+"startLine":  791,
+"startColumn":  21,
+"endLine":  791,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L802",
+"region":  {
+"startLine":  802,
+"startColumn":  21,
+"endLine":  802,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L820",
+"region":  {
+"startLine":  820,
+"startColumn":  21,
+"endLine":  820,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L835",
+"region":  {
+"startLine":  835,
+"startColumn":  21,
+"endLine":  835,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L842",
+"region":  {
+"startLine":  842,
+"startColumn":  21,
+"endLine":  842,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L859",
+"region":  {
+"startLine":  859,
+"startColumn":  21,
+"endLine":  859,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L915",
+"region":  {
+"startLine":  915,
+"startColumn":  21,
+"endLine":  915,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L920",
+"region":  {
+"startLine":  920,
+"startColumn":  21,
+"endLine":  920,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L930",
+"region":  {
+"startLine":  930,
+"startColumn":  21,
+"endLine":  930,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L983",
+"region":  {
+"startLine":  983,
+"startColumn":  21,
+"endLine":  983,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L995",
+"region":  {
+"startLine":  995,
+"startColumn":  21,
+"endLine":  995,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  21,
+"endLine":  136,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L203",
+"region":  {
+"startLine":  203,
+"startColumn":  21,
+"endLine":  203,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L248",
+"region":  {
+"startLine":  248,
+"startColumn":  21,
+"endLine":  248,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L371",
+"region":  {
+"startLine":  371,
+"startColumn":  21,
+"endLine":  371,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  21,
+"endLine":  123,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  21,
@@ -2162,7 +2123,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  21,
@@ -2175,7 +2136,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  21,
@@ -2188,7 +2149,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  21,
@@ -2201,7 +2162,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  21,
@@ -2214,7 +2175,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  21,
@@ -2227,7 +2188,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  21,
@@ -2240,7 +2201,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  21,
@@ -2253,7 +2214,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  21,
@@ -2266,7 +2227,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  21,
@@ -2279,12 +2240,51 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  21,
 "endLine":  412,
 "endColumn":  23
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  21,
+"endLine":  52,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  21,
+"endLine":  85,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  21,
+"endLine":  90,
+"endColumn":  24
 }
 }
 }

@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'HTML' to match pascal case naming rules, consider using 'Html'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancySparkView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancySparkView.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  23,

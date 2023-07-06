@@ -4,7 +4,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\EWMA.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  45,
@@ -17,7 +17,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\MetricsGossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  46,

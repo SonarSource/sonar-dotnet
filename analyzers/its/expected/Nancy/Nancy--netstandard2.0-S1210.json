@@ -4,7 +4,7 @@
 "id":  "S1210",
 "message":  "When implementing IComparable<T>, you should also override Equals, ==, !=, <, <=, >, and >=.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/MatchResult.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  18,

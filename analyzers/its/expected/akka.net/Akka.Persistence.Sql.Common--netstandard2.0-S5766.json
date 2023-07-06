@@ -4,7 +4,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  16,

@@ -4,11 +4,11 @@
 "id":  "S3626",
 "message":  "Remove this redundant jump.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3626.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3626.cs#L11",
 "region":  {
-"startLine":  9,
+"startLine":  11,
 "startColumn":  17,
-"endLine":  9,
+"endLine":  11,
 "endColumn":  24
 }
 }
@@ -17,11 +17,11 @@
 "id":  "S3626",
 "message":  "Remove this redundant jump.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3626.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3626.cs#L9",
 "region":  {
-"startLine":  11,
+"startLine":  9,
 "startColumn":  17,
-"endLine":  11,
+"endLine":  9,
 "endColumn":  24
 }
 }

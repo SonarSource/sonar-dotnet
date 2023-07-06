@@ -4,7 +4,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L815",
 "region":  {
 "startLine":  815,
 "startColumn":  4,
@@ -17,7 +17,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L759",
 "region":  {
 "startLine":  759,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L776",
 "region":  {
 "startLine":  776,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1255",
 "region":  {
 "startLine":  1255,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L314",
 "region":  {
 "startLine":  314,
 "startColumn":  9,

@@ -4,7 +4,7 @@
 "id":  "S3903",
 "message":  "Move 'Person' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\ShouldRichGoToTheDoctor\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/ShouldRichGoToTheDoctor/Program.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  15,

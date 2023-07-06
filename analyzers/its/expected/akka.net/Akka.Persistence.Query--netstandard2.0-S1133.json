@@ -4,7 +4,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\EventEnvelope.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Query/EventEnvelope.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  10,

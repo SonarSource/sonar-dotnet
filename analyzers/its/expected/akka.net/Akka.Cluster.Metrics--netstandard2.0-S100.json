@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'CreateEWMA' to match pascal case naming rules, consider using 'CreateEwma'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  44,

@@ -4,7 +4,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L362",
 "region":  {
 "startLine":  362,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  1,
@@ -30,20 +30,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
-"region":  {
-"startLine":  96,
-"startColumn":  1,
-"endLine":  96,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1309",
-"message":  "Do not suppress issues.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  1,
@@ -56,7 +43,20 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  1,
+"endLine":  96,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L363",
 "region":  {
 "startLine":  363,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L362",
 "region":  {
 "startLine":  362,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L679",
 "region":  {
 "startLine":  679,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L736",
 "region":  {
 "startLine":  736,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L566",
 "region":  {
 "startLine":  566,
 "startColumn":  1,

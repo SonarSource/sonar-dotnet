@@ -5,7 +5,7 @@
 "message":  "Parameters to 'Equals' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertEqualityComparer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertEqualityComparer.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  21,

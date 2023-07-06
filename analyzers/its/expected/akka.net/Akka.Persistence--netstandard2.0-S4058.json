@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'useSnapshot.ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L462",
 "region":  {
 "startLine":  462,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'useSnapshot.ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L463",
 "region":  {
 "startLine":  463,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'useSnapshot.ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L464",
 "region":  {
 "startLine":  464,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'pluginId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'pluginId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  22,
@@ -82,7 +82,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'r.Persistent.WriterGuid.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  20,
@@ -108,7 +108,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'm.PersistenceId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  64,
@@ -121,7 +121,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  23,
@@ -134,7 +134,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L383",
 "region":  {
 "startLine":  383,
 "startColumn":  23,
@@ -147,7 +147,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  23,
@@ -160,7 +160,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  23,
@@ -173,7 +173,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  23,
@@ -186,7 +186,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L402",
 "region":  {
 "startLine":  402,
 "startColumn":  23,
@@ -199,7 +199,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  23,
@@ -212,7 +212,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'pid.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  28,
@@ -225,7 +225,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  20,

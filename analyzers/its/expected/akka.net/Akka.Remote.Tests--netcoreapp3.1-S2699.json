@@ -4,7 +4,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteDeployerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests/RemoteDeployerSpec.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests/RemotingSpec.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests/RemotingSpec.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests/Transport/AkkaProtocolSpec.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests/Transport/AkkaProtocolSpec.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  21,

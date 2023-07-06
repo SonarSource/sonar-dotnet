@@ -4,7 +4,7 @@
 "id":  "S1116",
 "message":  "Remove this empty statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1040",
 "region":  {
 "startLine":  1040,
 "startColumn":  14,
@@ -17,7 +17,7 @@
 "id":  "S1116",
 "message":  "Remove this empty statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1067",
 "region":  {
 "startLine":  1067,
 "startColumn":  14,
@@ -30,7 +30,7 @@
 "id":  "S1116",
 "message":  "Remove this empty statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L715",
 "region":  {
 "startLine":  715,
 "startColumn":  14,

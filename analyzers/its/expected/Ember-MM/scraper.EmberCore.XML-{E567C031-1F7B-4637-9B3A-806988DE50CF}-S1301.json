@@ -4,7 +4,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L883",
 "region":  {
 "startLine":  883,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/VisualizerRuntimeTemplate.Tree.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  25,

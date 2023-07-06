@@ -4,7 +4,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  28,
@@ -17,7 +17,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L519",
 "region":  {
 "startLine":  519,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/BidiFlow.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  19,
@@ -43,7 +43,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L477",
 "region":  {
 "startLine":  477,
 "startColumn":  16,
@@ -56,371 +56,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  54,
-"startColumn":  20,
-"endLine":  54,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  121,
-"startColumn":  20,
-"endLine":  121,
-"endColumn":  113
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  148,
-"startColumn":  20,
-"endLine":  148,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  177,
-"startColumn":  20,
-"endLine":  177,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  210,
-"startColumn":  20,
-"endLine":  210,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  251,
-"startColumn":  20,
-"endLine":  251,
-"endColumn":  109
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  294,
-"startColumn":  20,
-"endLine":  294,
-"endColumn":  107
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  339,
-"startColumn":  20,
-"endLine":  339,
-"endColumn":  116
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  366,
-"startColumn":  20,
-"endLine":  366,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  393,
-"startColumn":  20,
-"endLine":  393,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  427,
-"startColumn":  20,
-"endLine":  427,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  450,
-"startColumn":  20,
-"endLine":  450,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  476,
-"startColumn":  20,
-"endLine":  476,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  505,
-"startColumn":  20,
-"endLine":  505,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  530,
-"startColumn":  20,
-"endLine":  530,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  603,
-"startColumn":  20,
-"endLine":  603,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  631,
-"startColumn":  20,
-"endLine":  631,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  665,
-"startColumn":  20,
-"endLine":  665,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  703,
-"startColumn":  20,
-"endLine":  703,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  736,
-"startColumn":  20,
-"endLine":  736,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  772,
-"startColumn":  20,
-"endLine":  772,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  803,
-"startColumn":  20,
-"endLine":  803,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  835,
-"startColumn":  20,
-"endLine":  835,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  865,
-"startColumn":  20,
-"endLine":  865,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  896,
-"startColumn":  20,
-"endLine":  896,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  930,
-"startColumn":  20,
-"endLine":  930,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  953,
-"startColumn":  20,
-"endLine":  953,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  975,
-"startColumn":  20,
-"endLine":  975,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1003",
 "region":  {
 "startLine":  1003,
 "startColumn":  20,
@@ -433,7 +69,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1031",
 "region":  {
 "startLine":  1031,
 "startColumn":  20,
@@ -446,7 +82,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1066",
 "region":  {
 "startLine":  1066,
 "startColumn":  20,
@@ -459,7 +95,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1099",
 "region":  {
 "startLine":  1099,
 "startColumn":  20,
@@ -472,7 +108,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1138",
 "region":  {
 "startLine":  1138,
 "startColumn":  20,
@@ -485,7 +121,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1177",
 "region":  {
 "startLine":  1177,
 "startColumn":  20,
@@ -498,7 +134,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1209",
 "region":  {
 "startLine":  1209,
 "startColumn":  20,
@@ -511,7 +147,20 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  20,
+"endLine":  121,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1237",
 "region":  {
 "startLine":  1237,
 "startColumn":  20,
@@ -524,7 +173,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1255",
 "region":  {
 "startLine":  1255,
 "startColumn":  20,
@@ -537,7 +186,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1280",
 "region":  {
 "startLine":  1280,
 "startColumn":  20,
@@ -550,7 +199,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1327",
 "region":  {
 "startLine":  1327,
 "startColumn":  28,
@@ -563,7 +212,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1392",
 "region":  {
 "startLine":  1392,
 "startColumn":  82,
@@ -576,7 +225,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1463",
 "region":  {
 "startLine":  1463,
 "startColumn":  83,
@@ -589,7 +238,20 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  20,
+"endLine":  148,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1504",
 "region":  {
 "startLine":  1504,
 "startColumn":  20,
@@ -602,7 +264,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1530",
 "region":  {
 "startLine":  1530,
 "startColumn":  20,
@@ -615,7 +277,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1548",
 "region":  {
 "startLine":  1548,
 "startColumn":  20,
@@ -628,7 +290,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1571",
 "region":  {
 "startLine":  1571,
 "startColumn":  20,
@@ -641,7 +303,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1594",
 "region":  {
 "startLine":  1594,
 "startColumn":  20,
@@ -654,7 +316,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1618",
 "region":  {
 "startLine":  1618,
 "startColumn":  20,
@@ -667,7 +329,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1642",
 "region":  {
 "startLine":  1642,
 "startColumn":  20,
@@ -680,7 +342,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1672",
 "region":  {
 "startLine":  1672,
 "startColumn":  20,
@@ -693,7 +355,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1712",
 "region":  {
 "startLine":  1712,
 "startColumn":  20,
@@ -706,7 +368,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1753",
 "region":  {
 "startLine":  1753,
 "startColumn":  20,
@@ -719,7 +381,20 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L177",
+"region":  {
+"startLine":  177,
+"startColumn":  20,
+"endLine":  177,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1778",
 "region":  {
 "startLine":  1778,
 "startColumn":  20,
@@ -732,7 +407,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1801",
 "region":  {
 "startLine":  1801,
 "startColumn":  20,
@@ -745,7 +420,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1822",
 "region":  {
 "startLine":  1822,
 "startColumn":  20,
@@ -758,7 +433,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1841",
 "region":  {
 "startLine":  1841,
 "startColumn":  20,
@@ -771,7 +446,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1863",
 "region":  {
 "startLine":  1863,
 "startColumn":  20,
@@ -784,7 +459,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1885",
 "region":  {
 "startLine":  1885,
 "startColumn":  20,
@@ -797,7 +472,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1915",
 "region":  {
 "startLine":  1915,
 "startColumn":  20,
@@ -810,7 +485,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1938",
 "region":  {
 "startLine":  1938,
 "startColumn":  20,
@@ -823,7 +498,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1964",
 "region":  {
 "startLine":  1964,
 "startColumn":  20,
@@ -836,7 +511,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2000",
 "region":  {
 "startLine":  2000,
 "startColumn":  20,
@@ -849,7 +524,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2031",
 "region":  {
 "startLine":  2031,
 "startColumn":  20,
@@ -862,7 +537,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2056",
 "region":  {
 "startLine":  2056,
 "startColumn":  20,
@@ -875,7 +550,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2082",
 "region":  {
 "startLine":  2082,
 "startColumn":  20,
@@ -888,7 +563,20 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L210",
+"region":  {
+"startLine":  210,
+"startColumn":  20,
+"endLine":  210,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2109",
 "region":  {
 "startLine":  2109,
 "startColumn":  20,
@@ -901,7 +589,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2136",
 "region":  {
 "startLine":  2136,
 "startColumn":  20,
@@ -914,7 +602,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2163",
 "region":  {
 "startLine":  2163,
 "startColumn":  20,
@@ -927,7 +615,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2192",
 "region":  {
 "startLine":  2192,
 "startColumn":  20,
@@ -940,7 +628,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2223",
 "region":  {
 "startLine":  2223,
 "startColumn":  20,
@@ -953,7 +641,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2255",
 "region":  {
 "startLine":  2255,
 "startColumn":  16,
@@ -966,7 +654,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2277",
 "region":  {
 "startLine":  2277,
 "startColumn":  16,
@@ -979,7 +667,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2289",
 "region":  {
 "startLine":  2289,
 "startColumn":  13,
@@ -992,7 +680,319 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L251",
+"region":  {
+"startLine":  251,
+"startColumn":  20,
+"endLine":  251,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L294",
+"region":  {
+"startLine":  294,
+"startColumn":  20,
+"endLine":  294,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L339",
+"region":  {
+"startLine":  339,
+"startColumn":  20,
+"endLine":  339,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L366",
+"region":  {
+"startLine":  366,
+"startColumn":  20,
+"endLine":  366,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L393",
+"region":  {
+"startLine":  393,
+"startColumn":  20,
+"endLine":  393,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L427",
+"region":  {
+"startLine":  427,
+"startColumn":  20,
+"endLine":  427,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L450",
+"region":  {
+"startLine":  450,
+"startColumn":  20,
+"endLine":  450,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L476",
+"region":  {
+"startLine":  476,
+"startColumn":  20,
+"endLine":  476,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L505",
+"region":  {
+"startLine":  505,
+"startColumn":  20,
+"endLine":  505,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L530",
+"region":  {
+"startLine":  530,
+"startColumn":  20,
+"endLine":  530,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  20,
+"endLine":  54,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L603",
+"region":  {
+"startLine":  603,
+"startColumn":  20,
+"endLine":  603,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L631",
+"region":  {
+"startLine":  631,
+"startColumn":  20,
+"endLine":  631,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L665",
+"region":  {
+"startLine":  665,
+"startColumn":  20,
+"endLine":  665,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L703",
+"region":  {
+"startLine":  703,
+"startColumn":  20,
+"endLine":  703,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L736",
+"region":  {
+"startLine":  736,
+"startColumn":  20,
+"endLine":  736,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L772",
+"region":  {
+"startLine":  772,
+"startColumn":  20,
+"endLine":  772,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L803",
+"region":  {
+"startLine":  803,
+"startColumn":  20,
+"endLine":  803,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L835",
+"region":  {
+"startLine":  835,
+"startColumn":  20,
+"endLine":  835,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L865",
+"region":  {
+"startLine":  865,
+"startColumn":  20,
+"endLine":  865,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L896",
+"region":  {
+"startLine":  896,
+"startColumn":  20,
+"endLine":  896,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L930",
+"region":  {
+"startLine":  930,
+"startColumn":  20,
+"endLine":  930,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L953",
+"region":  {
+"startLine":  953,
+"startColumn":  20,
+"endLine":  953,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L975",
+"region":  {
+"startLine":  975,
+"startColumn":  20,
+"endLine":  975,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  68,
@@ -1005,59 +1005,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  204,
-"startColumn":  36,
-"endLine":  204,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  749,
-"startColumn":  32,
-"endLine":  749,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  801,
-"startColumn":  30,
-"endLine":  801,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
-"region":  {
-"startLine":  822,
-"startColumn":  28,
-"endLine":  822,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1090",
 "region":  {
 "startLine":  1090,
 "startColumn":  41,
@@ -1070,7 +1018,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1651",
 "region":  {
 "startLine":  1651,
 "startColumn":  29,
@@ -1083,7 +1031,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1693",
 "region":  {
 "startLine":  1693,
 "startColumn":  25,
@@ -1096,7 +1044,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1782",
 "region":  {
 "startLine":  1782,
 "startColumn":  33,
@@ -1109,7 +1057,59 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\RunnableGraph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  36,
+"endLine":  204,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L749",
+"region":  {
+"startLine":  749,
+"startColumn":  32,
+"endLine":  749,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L801",
+"region":  {
+"startLine":  801,
+"startColumn":  30,
+"endLine":  801,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L822",
+"region":  {
+"startLine":  822,
+"startColumn":  28,
+"endLine":  822,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/RunnableGraph.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  16,
@@ -1122,7 +1122,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  19,
@@ -1135,7 +1135,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L563",
 "region":  {
 "startLine":  563,
 "startColumn":  19,
@@ -1148,7 +1148,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L518",
 "region":  {
 "startLine":  518,
 "startColumn":  16,
@@ -1161,397 +1161,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  53,
-"startColumn":  20,
-"endLine":  53,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  118,
-"startColumn":  20,
-"endLine":  118,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  145,
-"startColumn":  20,
-"endLine":  145,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  170,
-"startColumn":  20,
-"endLine":  170,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  202,
-"startColumn":  20,
-"endLine":  202,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  240,
-"startColumn":  20,
-"endLine":  240,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  282,
-"startColumn":  20,
-"endLine":  282,
-"endColumn":  106
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  324,
-"startColumn":  20,
-"endLine":  324,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  347,
-"startColumn":  20,
-"endLine":  347,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  370,
-"startColumn":  20,
-"endLine":  370,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  403,
-"startColumn":  20,
-"endLine":  403,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  425,
-"startColumn":  20,
-"endLine":  425,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  450,
-"startColumn":  20,
-"endLine":  450,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  478,
-"startColumn":  20,
-"endLine":  478,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  502,
-"startColumn":  20,
-"endLine":  502,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  570,
-"startColumn":  20,
-"endLine":  570,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  597,
-"startColumn":  20,
-"endLine":  597,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  627,
-"startColumn":  20,
-"endLine":  627,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  661,
-"startColumn":  20,
-"endLine":  661,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  690,
-"startColumn":  20,
-"endLine":  690,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  722,
-"startColumn":  20,
-"endLine":  722,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  749,
-"startColumn":  20,
-"endLine":  749,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  780,
-"startColumn":  20,
-"endLine":  780,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  809,
-"startColumn":  20,
-"endLine":  809,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  839,
-"startColumn":  20,
-"endLine":  839,
-"endColumn":  107
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  872,
-"startColumn":  20,
-"endLine":  872,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  894,
-"startColumn":  20,
-"endLine":  894,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  915,
-"startColumn":  20,
-"endLine":  915,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  942,
-"startColumn":  20,
-"endLine":  942,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  969,
-"startColumn":  20,
-"endLine":  969,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1000",
 "region":  {
 "startLine":  1000,
 "startColumn":  20,
@@ -1564,7 +1174,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1029",
 "region":  {
 "startLine":  1029,
 "startColumn":  20,
@@ -1577,7 +1187,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1061",
 "region":  {
 "startLine":  1061,
 "startColumn":  20,
@@ -1590,7 +1200,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1099",
 "region":  {
 "startLine":  1099,
 "startColumn":  20,
@@ -1603,7 +1213,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1130",
 "region":  {
 "startLine":  1130,
 "startColumn":  20,
@@ -1616,7 +1226,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1157",
 "region":  {
 "startLine":  1157,
 "startColumn":  20,
@@ -1629,7 +1239,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1174",
 "region":  {
 "startLine":  1174,
 "startColumn":  20,
@@ -1642,7 +1252,20 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  20,
+"endLine":  118,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1198",
 "region":  {
 "startLine":  1198,
 "startColumn":  20,
@@ -1655,7 +1278,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1238",
 "region":  {
 "startLine":  1238,
 "startColumn":  73,
@@ -1668,7 +1291,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1302",
 "region":  {
 "startLine":  1302,
 "startColumn":  82,
@@ -1681,7 +1304,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1370",
 "region":  {
 "startLine":  1370,
 "startColumn":  83,
@@ -1694,7 +1317,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1409",
 "region":  {
 "startLine":  1409,
 "startColumn":  20,
@@ -1707,7 +1330,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1434",
 "region":  {
 "startLine":  1434,
 "startColumn":  20,
@@ -1720,7 +1343,20 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  20,
+"endLine":  145,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1453",
 "region":  {
 "startLine":  1453,
 "startColumn":  20,
@@ -1733,7 +1369,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1475",
 "region":  {
 "startLine":  1475,
 "startColumn":  20,
@@ -1746,7 +1382,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1497",
 "region":  {
 "startLine":  1497,
 "startColumn":  20,
@@ -1759,7 +1395,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1520",
 "region":  {
 "startLine":  1520,
 "startColumn":  20,
@@ -1772,7 +1408,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1543",
 "region":  {
 "startLine":  1543,
 "startColumn":  20,
@@ -1785,7 +1421,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1572",
 "region":  {
 "startLine":  1572,
 "startColumn":  20,
@@ -1798,7 +1434,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1611",
 "region":  {
 "startLine":  1611,
 "startColumn":  20,
@@ -1811,7 +1447,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1651",
 "region":  {
 "startLine":  1651,
 "startColumn":  20,
@@ -1824,7 +1460,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1675",
 "region":  {
 "startLine":  1675,
 "startColumn":  20,
@@ -1837,7 +1473,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1697",
 "region":  {
 "startLine":  1697,
 "startColumn":  20,
@@ -1850,7 +1486,20 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L170",
+"region":  {
+"startLine":  170,
+"startColumn":  20,
+"endLine":  170,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1717",
 "region":  {
 "startLine":  1717,
 "startColumn":  20,
@@ -1863,7 +1512,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1735",
 "region":  {
 "startLine":  1735,
 "startColumn":  20,
@@ -1876,7 +1525,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1756",
 "region":  {
 "startLine":  1756,
 "startColumn":  20,
@@ -1889,7 +1538,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1777",
 "region":  {
 "startLine":  1777,
 "startColumn":  20,
@@ -1902,7 +1551,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1803",
 "region":  {
 "startLine":  1803,
 "startColumn":  20,
@@ -1915,7 +1564,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1825",
 "region":  {
 "startLine":  1825,
 "startColumn":  20,
@@ -1928,7 +1577,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1850",
 "region":  {
 "startLine":  1850,
 "startColumn":  20,
@@ -1941,7 +1590,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1885",
 "region":  {
 "startLine":  1885,
 "startColumn":  20,
@@ -1954,7 +1603,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1915",
 "region":  {
 "startLine":  1915,
 "startColumn":  20,
@@ -1967,7 +1616,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1939",
 "region":  {
 "startLine":  1939,
 "startColumn":  20,
@@ -1980,7 +1629,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1965",
 "region":  {
 "startLine":  1965,
 "startColumn":  20,
@@ -1993,7 +1642,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1991",
 "region":  {
 "startLine":  1991,
 "startColumn":  20,
@@ -2006,7 +1655,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2017",
 "region":  {
 "startLine":  2017,
 "startColumn":  20,
@@ -2019,7 +1668,20 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L202",
+"region":  {
+"startLine":  202,
+"startColumn":  20,
+"endLine":  202,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2043",
 "region":  {
 "startLine":  2043,
 "startColumn":  20,
@@ -2032,7 +1694,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2071",
 "region":  {
 "startLine":  2071,
 "startColumn":  20,
@@ -2045,7 +1707,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2119",
 "region":  {
 "startLine":  2119,
 "startColumn":  20,
@@ -2058,7 +1720,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2150",
 "region":  {
 "startLine":  2150,
 "startColumn":  16,
@@ -2071,7 +1733,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2173",
 "region":  {
 "startLine":  2173,
 "startColumn":  16,
@@ -2084,7 +1746,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2199",
 "region":  {
 "startLine":  2199,
 "startColumn":  13,
@@ -2097,206 +1759,11 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L240",
 "region":  {
-"startLine":  54,
+"startLine":  240,
 "startColumn":  20,
-"endLine":  54,
-"endColumn":  107
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  121,
-"startColumn":  20,
-"endLine":  121,
-"endColumn":  120
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  148,
-"startColumn":  20,
-"endLine":  148,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  174,
-"startColumn":  20,
-"endLine":  174,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  207,
-"startColumn":  20,
-"endLine":  207,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  246,
-"startColumn":  20,
-"endLine":  246,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  289,
-"startColumn":  20,
-"endLine":  289,
-"endColumn":  116
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  332,
-"startColumn":  20,
-"endLine":  332,
-"endColumn":  125
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  356,
-"startColumn":  20,
-"endLine":  356,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  380,
-"startColumn":  20,
-"endLine":  380,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  414,
-"startColumn":  20,
-"endLine":  414,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  437,
-"startColumn":  20,
-"endLine":  437,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  462,
-"startColumn":  20,
-"endLine":  462,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  487,
-"startColumn":  20,
-"endLine":  487,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  557,
-"startColumn":  20,
-"endLine":  557,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  585,
-"startColumn":  20,
-"endLine":  585,
+"endLine":  240,
 "endColumn":  108
 }
 }
@@ -2305,11 +1772,206 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L282",
 "region":  {
-"startLine":  616,
+"startLine":  282,
 "startColumn":  20,
-"endLine":  616,
+"endLine":  282,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L324",
+"region":  {
+"startLine":  324,
+"startColumn":  20,
+"endLine":  324,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L347",
+"region":  {
+"startLine":  347,
+"startColumn":  20,
+"endLine":  347,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L370",
+"region":  {
+"startLine":  370,
+"startColumn":  20,
+"endLine":  370,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L403",
+"region":  {
+"startLine":  403,
+"startColumn":  20,
+"endLine":  403,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L425",
+"region":  {
+"startLine":  425,
+"startColumn":  20,
+"endLine":  425,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L450",
+"region":  {
+"startLine":  450,
+"startColumn":  20,
+"endLine":  450,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L478",
+"region":  {
+"startLine":  478,
+"startColumn":  20,
+"endLine":  478,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L502",
+"region":  {
+"startLine":  502,
+"startColumn":  20,
+"endLine":  502,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  20,
+"endLine":  53,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L570",
+"region":  {
+"startLine":  570,
+"startColumn":  20,
+"endLine":  570,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L597",
+"region":  {
+"startLine":  597,
+"startColumn":  20,
+"endLine":  597,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L627",
+"region":  {
+"startLine":  627,
+"startColumn":  20,
+"endLine":  627,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L661",
+"region":  {
+"startLine":  661,
+"startColumn":  20,
+"endLine":  661,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L690",
+"region":  {
+"startLine":  690,
+"startColumn":  20,
+"endLine":  690,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L722",
+"region":  {
+"startLine":  722,
+"startColumn":  20,
+"endLine":  722,
 "endColumn":  96
 }
 }
@@ -2318,12 +1980,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L749",
 "region":  {
-"startLine":  651,
+"startLine":  749,
 "startColumn":  20,
-"endLine":  651,
-"endColumn":  101
+"endLine":  749,
+"endColumn":  80
 }
 }
 },
@@ -2331,12 +1993,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L780",
 "region":  {
-"startLine":  681,
+"startLine":  780,
 "startColumn":  20,
-"endLine":  681,
-"endColumn":  101
+"endLine":  780,
+"endColumn":  100
 }
 }
 },
@@ -2344,12 +2006,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L809",
 "region":  {
-"startLine":  714,
+"startLine":  809,
 "startColumn":  20,
-"endLine":  714,
-"endColumn":  105
+"endLine":  809,
+"endColumn":  88
 }
 }
 },
@@ -2357,12 +2019,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L839",
 "region":  {
-"startLine":  742,
+"startLine":  839,
 "startColumn":  20,
-"endLine":  742,
-"endColumn":  90
+"endLine":  839,
+"endColumn":  107
 }
 }
 },
@@ -2370,12 +2032,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L872",
 "region":  {
-"startLine":  774,
+"startLine":  872,
 "startColumn":  20,
-"endLine":  774,
-"endColumn":  110
+"endLine":  872,
+"endColumn":  88
 }
 }
 },
@@ -2383,12 +2045,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L894",
 "region":  {
-"startLine":  804,
+"startLine":  894,
 "startColumn":  20,
-"endLine":  804,
-"endColumn":  98
+"endLine":  894,
+"endColumn":  76
 }
 }
 },
@@ -2396,12 +2058,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L915",
 "region":  {
-"startLine":  835,
+"startLine":  915,
 "startColumn":  20,
-"endLine":  835,
-"endColumn":  117
+"endLine":  915,
+"endColumn":  89
 }
 }
 },
@@ -2409,51 +2071,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  869,
-"startColumn":  20,
-"endLine":  869,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  892,
-"startColumn":  20,
-"endLine":  892,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  914,
-"startColumn":  20,
-"endLine":  914,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L942",
 "region":  {
 "startLine":  942,
 "startColumn":  20,
 "endLine":  942,
-"endColumn":  86
+"endColumn":  76
 }
 }
 },
@@ -2461,12 +2084,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L969",
 "region":  {
-"startLine":  970,
+"startLine":  969,
 "startColumn":  20,
-"endLine":  970,
-"endColumn":  99
+"endLine":  969,
+"endColumn":  89
 }
 }
 },
@@ -2474,7 +2097,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1002",
 "region":  {
 "startLine":  1002,
 "startColumn":  20,
@@ -2487,7 +2110,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1032",
 "region":  {
 "startLine":  1032,
 "startColumn":  20,
@@ -2500,7 +2123,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1065",
 "region":  {
 "startLine":  1065,
 "startColumn":  20,
@@ -2513,7 +2136,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1104",
 "region":  {
 "startLine":  1104,
 "startColumn":  20,
@@ -2526,7 +2149,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1136",
 "region":  {
 "startLine":  1136,
 "startColumn":  20,
@@ -2539,7 +2162,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1164",
 "region":  {
 "startLine":  1164,
 "startColumn":  20,
@@ -2552,7 +2175,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1182",
 "region":  {
 "startLine":  1182,
 "startColumn":  20,
@@ -2565,7 +2188,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1207",
 "region":  {
 "startLine":  1207,
 "startColumn":  20,
@@ -2578,7 +2201,20 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  20,
+"endLine":  121,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1232",
 "region":  {
 "startLine":  1232,
 "startColumn":  20,
@@ -2591,7 +2227,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1258",
 "region":  {
 "startLine":  1258,
 "startColumn":  20,
@@ -2604,7 +2240,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1276",
 "region":  {
 "startLine":  1276,
 "startColumn":  20,
@@ -2617,7 +2253,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1299",
 "region":  {
 "startLine":  1299,
 "startColumn":  20,
@@ -2630,7 +2266,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1322",
 "region":  {
 "startLine":  1322,
 "startColumn":  20,
@@ -2643,7 +2279,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1346",
 "region":  {
 "startLine":  1346,
 "startColumn":  20,
@@ -2656,7 +2292,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1370",
 "region":  {
 "startLine":  1370,
 "startColumn":  20,
@@ -2669,7 +2305,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1400",
 "region":  {
 "startLine":  1400,
 "startColumn":  20,
@@ -2682,7 +2318,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1440",
 "region":  {
 "startLine":  1440,
 "startColumn":  20,
@@ -2695,7 +2331,20 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  20,
+"endLine":  148,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1481",
 "region":  {
 "startLine":  1481,
 "startColumn":  20,
@@ -2708,7 +2357,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1506",
 "region":  {
 "startLine":  1506,
 "startColumn":  20,
@@ -2721,7 +2370,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1529",
 "region":  {
 "startLine":  1529,
 "startColumn":  20,
@@ -2734,7 +2383,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1550",
 "region":  {
 "startLine":  1550,
 "startColumn":  20,
@@ -2747,7 +2396,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1572",
 "region":  {
 "startLine":  1572,
 "startColumn":  20,
@@ -2760,7 +2409,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1594",
 "region":  {
 "startLine":  1594,
 "startColumn":  20,
@@ -2773,7 +2422,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1621",
 "region":  {
 "startLine":  1621,
 "startColumn":  20,
@@ -2786,7 +2435,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1644",
 "region":  {
 "startLine":  1644,
 "startColumn":  20,
@@ -2799,7 +2448,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1670",
 "region":  {
 "startLine":  1670,
 "startColumn":  20,
@@ -2812,7 +2461,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1706",
 "region":  {
 "startLine":  1706,
 "startColumn":  20,
@@ -2825,7 +2474,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1737",
 "region":  {
 "startLine":  1737,
 "startColumn":  20,
@@ -2838,7 +2487,20 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  20,
+"endLine":  174,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1762",
 "region":  {
 "startLine":  1762,
 "startColumn":  20,
@@ -2851,7 +2513,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1789",
 "region":  {
 "startLine":  1789,
 "startColumn":  20,
@@ -2864,7 +2526,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1816",
 "region":  {
 "startLine":  1816,
 "startColumn":  20,
@@ -2877,7 +2539,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1843",
 "region":  {
 "startLine":  1843,
 "startColumn":  20,
@@ -2890,7 +2552,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1870",
 "region":  {
 "startLine":  1870,
 "startColumn":  20,
@@ -2903,7 +2565,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1899",
 "region":  {
 "startLine":  1899,
 "startColumn":  20,
@@ -2916,7 +2578,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1930",
 "region":  {
 "startLine":  1930,
 "startColumn":  20,
@@ -2929,7 +2591,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1962",
 "region":  {
 "startLine":  1962,
 "startColumn":  16,
@@ -2942,7 +2604,345 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Implicits.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L207",
+"region":  {
+"startLine":  207,
+"startColumn":  20,
+"endLine":  207,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L246",
+"region":  {
+"startLine":  246,
+"startColumn":  20,
+"endLine":  246,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L289",
+"region":  {
+"startLine":  289,
+"startColumn":  20,
+"endLine":  289,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L332",
+"region":  {
+"startLine":  332,
+"startColumn":  20,
+"endLine":  332,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L356",
+"region":  {
+"startLine":  356,
+"startColumn":  20,
+"endLine":  356,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L380",
+"region":  {
+"startLine":  380,
+"startColumn":  20,
+"endLine":  380,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L414",
+"region":  {
+"startLine":  414,
+"startColumn":  20,
+"endLine":  414,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L437",
+"region":  {
+"startLine":  437,
+"startColumn":  20,
+"endLine":  437,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L462",
+"region":  {
+"startLine":  462,
+"startColumn":  20,
+"endLine":  462,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L487",
+"region":  {
+"startLine":  487,
+"startColumn":  20,
+"endLine":  487,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  20,
+"endLine":  54,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L557",
+"region":  {
+"startLine":  557,
+"startColumn":  20,
+"endLine":  557,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L585",
+"region":  {
+"startLine":  585,
+"startColumn":  20,
+"endLine":  585,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L616",
+"region":  {
+"startLine":  616,
+"startColumn":  20,
+"endLine":  616,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L651",
+"region":  {
+"startLine":  651,
+"startColumn":  20,
+"endLine":  651,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L681",
+"region":  {
+"startLine":  681,
+"startColumn":  20,
+"endLine":  681,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L714",
+"region":  {
+"startLine":  714,
+"startColumn":  20,
+"endLine":  714,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L742",
+"region":  {
+"startLine":  742,
+"startColumn":  20,
+"endLine":  742,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L774",
+"region":  {
+"startLine":  774,
+"startColumn":  20,
+"endLine":  774,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L804",
+"region":  {
+"startLine":  804,
+"startColumn":  20,
+"endLine":  804,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L835",
+"region":  {
+"startLine":  835,
+"startColumn":  20,
+"endLine":  835,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L869",
+"region":  {
+"startLine":  869,
+"startColumn":  20,
+"endLine":  869,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L892",
+"region":  {
+"startLine":  892,
+"startColumn":  20,
+"endLine":  892,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L914",
+"region":  {
+"startLine":  914,
+"startColumn":  20,
+"endLine":  914,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L942",
+"region":  {
+"startLine":  942,
+"startColumn":  20,
+"endLine":  942,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L970",
+"region":  {
+"startLine":  970,
+"startColumn":  20,
+"endLine":  970,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Extra/Implicits.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  16,
@@ -2955,7 +2955,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Implicits.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Extra/Implicits.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  16,
@@ -2968,7 +2968,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Fusing.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  111,
@@ -2981,7 +2981,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  30,
@@ -2994,7 +2994,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L312",
 "region":  {
 "startLine":  312,
 "startColumn":  34,
@@ -3007,7 +3007,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L316",
 "region":  {
 "startLine":  316,
 "startColumn":  32,
@@ -3020,7 +3020,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L450",
 "region":  {
 "startLine":  450,
 "startColumn":  51,
@@ -3033,7 +3033,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Buffers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Buffers.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  21,
@@ -3046,7 +3046,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanoutProcessorImpl.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  35,
@@ -3059,7 +3059,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanoutProcessorImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanoutProcessorImpl.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  44,
@@ -3072,20 +3072,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
-"region":  {
-"startLine":  220,
-"startColumn":  80,
-"endLine":  220,
-"endColumn":  117
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1243",
 "region":  {
 "startLine":  1243,
 "startColumn":  103,
@@ -3098,7 +3085,20 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  80,
+"endLine":  220,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  29,
@@ -3111,7 +3111,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  96,
@@ -3124,7 +3124,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  29,
@@ -3137,7 +3137,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  96,
@@ -3150,7 +3150,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  38,
@@ -3163,7 +3163,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  36,
@@ -3176,7 +3176,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L471",
 "region":  {
 "startLine":  471,
 "startColumn":  26,
@@ -3189,7 +3189,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L488",
 "region":  {
 "startLine":  488,
 "startColumn":  62,
@@ -3202,7 +3202,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L557",
 "region":  {
 "startLine":  557,
 "startColumn":  27,
@@ -3215,7 +3215,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L820",
 "region":  {
 "startLine":  820,
 "startColumn":  43,
@@ -3228,7 +3228,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L823",
 "region":  {
 "startLine":  823,
 "startColumn":  30,
@@ -3241,7 +3241,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L827",
 "region":  {
 "startLine":  827,
 "startColumn":  51,
@@ -3254,7 +3254,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L902",
 "region":  {
 "startLine":  902,
 "startColumn":  32,
@@ -3267,7 +3267,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L906",
 "region":  {
 "startLine":  906,
 "startColumn":  40,
@@ -3280,7 +3280,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1214",
 "region":  {
 "startLine":  1214,
 "startColumn":  26,
@@ -3293,7 +3293,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1217",
 "region":  {
 "startLine":  1217,
 "startColumn":  18,
@@ -3306,7 +3306,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1221",
 "region":  {
 "startLine":  1221,
 "startColumn":  23,
@@ -3319,7 +3319,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1283",
 "region":  {
 "startLine":  1283,
 "startColumn":  36,
@@ -3332,7 +3332,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1285",
 "region":  {
 "startLine":  1285,
 "startColumn":  48,
@@ -3345,7 +3345,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\IOSinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/IOSinks.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  30,
@@ -3358,7 +3358,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  37,
@@ -3371,7 +3371,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L282",
 "region":  {
 "startLine":  282,
 "startColumn":  42,
@@ -3384,7 +3384,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  39,
@@ -3397,163 +3397,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  269,
-"startColumn":  46,
-"endLine":  269,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  300,
-"startColumn":  33,
-"endLine":  300,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  302,
-"startColumn":  49,
-"endLine":  302,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  305,
-"startColumn":  22,
-"endLine":  305,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  328,
-"startColumn":  26,
-"endLine":  328,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  341,
-"startColumn":  26,
-"endLine":  341,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  345,
-"startColumn":  29,
-"endLine":  345,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  349,
-"startColumn":  25,
-"endLine":  349,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  748,
-"startColumn":  37,
-"endLine":  748,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  759,
-"startColumn":  61,
-"endLine":  759,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  760,
-"startColumn":  64,
-"endLine":  760,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
-"region":  {
-"startLine":  761,
-"startColumn":  60,
-"endLine":  761,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3215",
-"message":  "Remove this cast and edit the interface to add the missing functionality.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2361",
 "region":  {
 "startLine":  2361,
 "startColumn":  30,
@@ -3566,7 +3410,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2366",
 "region":  {
 "startLine":  2366,
 "startColumn":  34,
@@ -3579,7 +3423,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2425",
 "region":  {
 "startLine":  2425,
 "startColumn":  30,
@@ -3592,7 +3436,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2430",
 "region":  {
 "startLine":  2430,
 "startColumn":  31,
@@ -3605,7 +3449,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2436",
 "region":  {
 "startLine":  2436,
 "startColumn":  33,
@@ -3618,7 +3462,163 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L269",
+"region":  {
+"startLine":  269,
+"startColumn":  46,
+"endLine":  269,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L300",
+"region":  {
+"startLine":  300,
+"startColumn":  33,
+"endLine":  300,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L302",
+"region":  {
+"startLine":  302,
+"startColumn":  49,
+"endLine":  302,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L305",
+"region":  {
+"startLine":  305,
+"startColumn":  22,
+"endLine":  305,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L328",
+"region":  {
+"startLine":  328,
+"startColumn":  26,
+"endLine":  328,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L341",
+"region":  {
+"startLine":  341,
+"startColumn":  26,
+"endLine":  341,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L345",
+"region":  {
+"startLine":  345,
+"startColumn":  29,
+"endLine":  345,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L349",
+"region":  {
+"startLine":  349,
+"startColumn":  25,
+"endLine":  349,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L748",
+"region":  {
+"startLine":  748,
+"startColumn":  37,
+"endLine":  748,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L759",
+"region":  {
+"startLine":  759,
+"startColumn":  61,
+"endLine":  759,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L760",
+"region":  {
+"startLine":  760,
+"startColumn":  64,
+"endLine":  760,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L761",
+"region":  {
+"startLine":  761,
+"startColumn":  60,
+"endLine":  761,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/UntypedPublisher.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  25,
@@ -3631,7 +3631,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/UntypedSubscriber.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  25,
@@ -3644,7 +3644,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedVirtualPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/UntypedVirtualPublisher.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  25,
@@ -3657,7 +3657,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  37,
@@ -3670,7 +3670,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  25,
@@ -3683,7 +3683,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L2528",
 "region":  {
 "startLine":  2528,
 "startColumn":  14,
@@ -3696,7 +3696,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L423",
 "region":  {
 "startLine":  423,
 "startColumn":  42,

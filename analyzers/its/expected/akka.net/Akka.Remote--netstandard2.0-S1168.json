@@ -4,7 +4,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  28,

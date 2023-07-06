@@ -4,7 +4,7 @@
 "id":  "S101",
 "message":  "Rename record 'S3604_Record' to match pascal case naming rules, consider using 'S3604Record'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3604.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3604.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S101",
 "message":  "Rename record 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataRecord'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S101",
 "message":  "Rename record 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataRecord'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S101",
 "message":  "Rename class 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataSeparateFilesClass'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  26,
@@ -56,7 +56,7 @@
 "id":  "S101",
 "message":  "Rename class 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataSeparateFilesClass'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3925.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part2.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  26,

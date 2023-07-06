@@ -4,7 +4,7 @@
 "id":  "S2971",
 "message":  "Use 'Count' property here instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteWatcher.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  52,

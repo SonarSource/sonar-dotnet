@@ -4,33 +4,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
-"region":  {
-"startLine":  767,
-"startColumn":  29,
-"endLine":  767,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
-"region":  {
-"startLine":  771,
-"startColumn":  29,
-"endLine":  771,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1229",
 "region":  {
 "startLine":  1229,
 "startColumn":  29,
@@ -43,12 +17,38 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1267",
 "region":  {
 "startLine":  1267,
 "startColumn":  25,
 "endLine":  1267,
 "endColumn":  27
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L767",
+"region":  {
+"startLine":  767,
+"startColumn":  29,
+"endLine":  767,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L771",
+"region":  {
+"startLine":  771,
+"startColumn":  29,
+"endLine":  771,
+"endColumn":  36
 }
 }
 }

@@ -4,7 +4,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  47,
@@ -30,7 +30,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  47,
@@ -43,7 +43,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  47,
@@ -56,7 +56,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  47,
@@ -69,7 +69,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  12,
@@ -82,7 +82,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  12,
@@ -95,7 +95,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L288",
 "region":  {
 "startLine":  288,
 "startColumn":  45,
@@ -108,7 +108,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  45,
@@ -121,7 +121,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  45,
@@ -134,7 +134,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L306",
 "region":  {
 "startLine":  306,
 "startColumn":  45,
@@ -147,7 +147,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  10,
@@ -160,7 +160,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  10,
@@ -173,7 +173,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  10,
@@ -186,7 +186,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L330",
 "region":  {
 "startLine":  330,
 "startColumn":  10,
@@ -199,7 +199,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L334",
 "region":  {
 "startLine":  334,
 "startColumn":  10,
@@ -212,7 +212,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  10,
@@ -225,7 +225,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  10,
@@ -238,7 +238,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L353",
 "region":  {
 "startLine":  353,
 "startColumn":  10,
@@ -251,7 +251,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L357",
 "region":  {
 "startLine":  357,
 "startColumn":  10,
@@ -264,7 +264,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  10,
@@ -277,7 +277,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L493",
 "region":  {
 "startLine":  493,
 "startColumn":  10,
@@ -290,7 +290,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L589",
 "region":  {
 "startLine":  589,
 "startColumn":  12,
@@ -303,7 +303,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L598",
 "region":  {
 "startLine":  598,
 "startColumn":  12,
@@ -316,7 +316,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L607",
 "region":  {
 "startLine":  607,
 "startColumn":  12,
@@ -329,7 +329,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L621",
 "region":  {
 "startLine":  621,
 "startColumn":  10,
@@ -342,7 +342,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L627",
 "region":  {
 "startLine":  627,
 "startColumn":  10,
@@ -355,7 +355,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L633",
 "region":  {
 "startLine":  633,
 "startColumn":  10,
@@ -368,7 +368,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  41,
@@ -381,7 +381,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L452",
 "region":  {
 "startLine":  452,
 "startColumn":  37,
@@ -394,7 +394,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L862",
 "region":  {
 "startLine":  862,
 "startColumn":  32,
@@ -407,7 +407,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L876",
 "region":  {
 "startLine":  876,
 "startColumn":  32,
@@ -420,7 +420,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L890",
 "region":  {
 "startLine":  890,
 "startColumn":  32,
@@ -433,7 +433,7 @@
 "id":  "S907",
 "message":  "Remove this use of 'GoTo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L909",
 "region":  {
 "startLine":  909,
 "startColumn":  32,

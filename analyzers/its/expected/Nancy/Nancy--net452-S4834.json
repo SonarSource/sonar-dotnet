@@ -4,7 +4,7 @@
 "id":  "S4834",
 "message":  "Make sure controlling this permission is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Owin\NancyMiddleware.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Owin/NancyMiddleware.cs#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  57,
@@ -17,7 +17,7 @@
 "id":  "S4834",
 "message":  "Make sure controlling this permission is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S4834",
 "message":  "Make sure controlling this permission is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  28,
@@ -43,7 +43,7 @@
 "id":  "S4834",
 "message":  "Make sure controlling this permission is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  28,
@@ -56,7 +56,7 @@
 "id":  "S4834",
 "message":  "Make sure controlling this permission is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  28,
@@ -69,7 +69,7 @@
 "id":  "S4834",
 "message":  "Make sure controlling this permission is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  28,
@@ -82,7 +82,7 @@
 "id":  "S4834",
 "message":  "Make sure controlling this permission is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  28,

@@ -4,7 +4,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L225-L228",
 "region":  {
 "startLine":  225,
 "startColumn":  28,

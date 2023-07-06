@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'echo'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/AssociationStressSpecBase.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'remoteActor'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/AssociationStressSpecBase.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  20,
@@ -28,27 +28,27 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'a'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
-"region":  {
-"startLine":  55,
-"startColumn":  37,
-"endLine":  55,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1481",
 "message":  "Remove the unused local variable 'system2Address'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  17,
 "endLine":  131,
 "endColumn":  31
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'a'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  37,
+"endLine":  55,
+"endColumn":  38
 }
 }
 }

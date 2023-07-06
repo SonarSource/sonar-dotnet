@@ -4,7 +4,7 @@
 "id":  "S6562",
 "message":  "Provide the "DateTimeKind" when creating this object.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L711",
 "region":  {
 "startLine":  711,
 "startColumn":  34,
@@ -17,7 +17,7 @@
 "id":  "S6562",
 "message":  "Provide the "DateTimeKind" when creating this object.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L716",
 "region":  {
 "startLine":  716,
 "startColumn":  34,
@@ -30,7 +30,7 @@
 "id":  "S6562",
 "message":  "Provide the "DateTimeKind" when creating this object.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  30,

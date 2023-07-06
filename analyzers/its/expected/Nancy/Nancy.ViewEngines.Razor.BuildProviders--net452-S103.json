@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 241 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyCSharpRazorBuildProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor.BuildProviders/NancyCSharpRazorBuildProvider.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  1,

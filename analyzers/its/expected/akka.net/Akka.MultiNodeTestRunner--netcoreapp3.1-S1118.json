@@ -4,7 +4,7 @@
 "id":  "S1118",
 "message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  11,

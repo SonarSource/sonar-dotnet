@@ -4,7 +4,7 @@
 "id":  "S5693",
 "message":  "Make sure the content length limit is safe here.",
 "location":  {
-"uri":  "sources\WebConfig\Views\Web.config",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Views/Web.config#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S5693",
 "message":  "Make sure the content length limit is safe here.",
 "location":  {
-"uri":  "sources\WebConfig\Views\Web.config",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Views/Web.config#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  46,

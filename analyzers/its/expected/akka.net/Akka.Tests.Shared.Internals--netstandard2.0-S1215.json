@@ -4,7 +4,7 @@
 "id":  "S1215",
 "message":  "Refactor the code to remove this use of 'GC.Collect'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  16,

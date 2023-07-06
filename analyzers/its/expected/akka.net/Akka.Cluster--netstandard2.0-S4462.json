@@ -4,7 +4,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  28,
@@ -17,7 +17,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L576",
 "region":  {
 "startLine":  576,
 "startColumn":  36,

@@ -4,7 +4,7 @@
 "id":  "S2369",
 "message":  "Rename 'pURL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L306",
 "region":  {
 "startLine":  306,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S2369",
 "message":  "Rename 'bType' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L340",
 "region":  {
 "startLine":  340,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S2369",
 "message":  "Rename 'parentRunning' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLMediaSettingsHolder.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  12,
@@ -43,7 +43,7 @@
 "id":  "S2369",
 "message":  "Rename 'parentRunning' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  12,
@@ -56,7 +56,7 @@
 "id":  "S2369",
 "message":  "Rename '_AssemblyName' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  19,
@@ -69,7 +69,7 @@
 "id":  "S2369",
 "message":  "Rename 'pContent' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  20,
@@ -82,7 +82,7 @@
 "id":  "S2369",
 "message":  "Rename 'indent' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperNode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperNode.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  30,
@@ -95,7 +95,7 @@
 "id":  "S2369",
 "message":  "Rename 'strHTML' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  23,

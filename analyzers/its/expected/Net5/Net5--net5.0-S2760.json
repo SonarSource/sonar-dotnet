@@ -2,35 +2,9 @@
 "issues":  [
 {
 "id":  "S2760",
-"message":  "This condition was just checked on line 28.",
-"location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
-"region":  {
-"startLine":  29,
-"startColumn":  5,
-"endLine":  29,
-"endColumn":  11
-}
-}
-},
-{
-"id":  "S2760",
-"message":  "This condition was just checked on line 30.",
-"location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
-"region":  {
-"startLine":  35,
-"startColumn":  9,
-"endLine":  35,
-"endColumn":  10
-}
-}
-},
-{
-"id":  "S2760",
 "message":  "This condition was just checked on line 109.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  9,
@@ -43,7 +17,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 110.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  9,
@@ -56,7 +30,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 111.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  9,
@@ -69,7 +43,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 112.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  9,
@@ -82,7 +56,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 113.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  9,
@@ -95,7 +69,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 114.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  9,
@@ -108,7 +82,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 115.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  9,
@@ -121,7 +95,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 116.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  9,
@@ -134,7 +108,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 117.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  9,
@@ -147,7 +121,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 118.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  9,
@@ -160,7 +134,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 119.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  9,
@@ -171,9 +145,35 @@
 },
 {
 "id":  "S2760",
+"message":  "This condition was just checked on line 28.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  5,
+"endLine":  29,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 30.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  9,
+"endLine":  35,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S2760",
 "message":  "This condition was just checked on line 13.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  21,
@@ -186,7 +186,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 14.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  21,
@@ -199,7 +199,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 15.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  21,
@@ -212,7 +212,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 16.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  21,
@@ -225,7 +225,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 17.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  21,
@@ -238,7 +238,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 18.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  21,
@@ -251,7 +251,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 19.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  21,
@@ -264,7 +264,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 20.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  21,
@@ -277,7 +277,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 21.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  21,
@@ -290,7 +290,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 22.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  21,
@@ -303,7 +303,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 23.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  21,
@@ -316,7 +316,7 @@
 "id":  "S2760",
 "message":  "This condition was just checked on line 8.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2760.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2760.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  17,

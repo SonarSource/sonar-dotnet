@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '40' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  12,
@@ -30,7 +30,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  12,
@@ -43,7 +43,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  18,
@@ -56,7 +56,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  32,
@@ -69,7 +69,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  37,
@@ -82,7 +82,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  51,
@@ -95,7 +95,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  56,
@@ -108,7 +108,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  70,
@@ -121,7 +121,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  75,
@@ -134,7 +134,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  16,
@@ -147,7 +147,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  35,
@@ -173,7 +173,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  40,
@@ -186,7 +186,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  54,
@@ -199,7 +199,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  59,
@@ -212,7 +212,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  73,
@@ -225,7 +225,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  78,
@@ -238,7 +238,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  16,
@@ -251,7 +251,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  21,
@@ -264,7 +264,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  35,
@@ -277,7 +277,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  40,
@@ -290,7 +290,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  54,
@@ -303,7 +303,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  59,
@@ -316,7 +316,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  73,
@@ -329,7 +329,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  78,
@@ -342,7 +342,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  16,
@@ -355,7 +355,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  21,
@@ -368,7 +368,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  35,
@@ -381,7 +381,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  40,
@@ -394,7 +394,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  54,
@@ -407,7 +407,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  59,
@@ -420,7 +420,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  73,
@@ -433,7 +433,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  78,
@@ -446,7 +446,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  16,
@@ -459,7 +459,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  21,
@@ -472,7 +472,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  35,
@@ -485,7 +485,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  40,
@@ -498,7 +498,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  54,
@@ -511,7 +511,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  59,
@@ -524,7 +524,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  73,
@@ -537,7 +537,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  78,
@@ -550,7 +550,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  13,
@@ -563,7 +563,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  25,
@@ -576,7 +576,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  20,
@@ -589,7 +589,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3.50' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  21,
@@ -602,7 +602,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  20,
@@ -615,7 +615,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  30,
@@ -628,7 +628,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  15,
@@ -641,7 +641,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  23,
@@ -654,7 +654,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  32,
@@ -667,7 +667,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  15,
@@ -680,7 +680,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  23,
@@ -693,7 +693,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  32,
@@ -706,7 +706,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  18,
@@ -719,7 +719,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  16,
@@ -732,7 +732,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  28,
@@ -745,7 +745,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  36,
@@ -758,7 +758,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  22,
@@ -771,7 +771,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  31,
@@ -784,7 +784,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  40,
@@ -797,7 +797,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  20,
@@ -810,7 +810,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  28,
@@ -823,7 +823,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  37,
@@ -836,7 +836,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1144.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1144.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  18,
@@ -849,7 +849,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S134.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S134.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  20,
@@ -862,7 +862,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1854.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  21,
@@ -875,7 +875,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2259.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2259.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  20,
@@ -888,7 +888,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3060.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3060.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  49,
@@ -901,7 +901,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3237.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3237.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  28,
@@ -914,7 +914,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3251.Part2.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  20,
@@ -927,7 +927,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3440.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  17,
@@ -940,7 +940,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3440.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  22,
@@ -953,7 +953,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3440.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  17,
@@ -966,7 +966,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3440.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  22,
@@ -979,7 +979,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  34,
@@ -992,7 +992,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  48,
@@ -1005,7 +1005,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  53,
@@ -1018,7 +1018,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  67,
@@ -1031,7 +1031,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  72,
@@ -1044,7 +1044,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  86,
@@ -1057,7 +1057,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  91,
@@ -1070,7 +1070,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  32,
@@ -1083,7 +1083,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  37,
@@ -1096,7 +1096,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  51,
@@ -1109,7 +1109,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  56,
@@ -1122,7 +1122,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  70,
@@ -1135,7 +1135,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  75,
@@ -1148,7 +1148,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  89,
@@ -1161,7 +1161,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  94,
@@ -1174,7 +1174,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  32,
@@ -1187,7 +1187,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  37,
@@ -1200,7 +1200,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  51,
@@ -1213,7 +1213,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  56,
@@ -1226,7 +1226,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  70,
@@ -1239,7 +1239,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  75,
@@ -1252,7 +1252,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  89,
@@ -1265,7 +1265,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  94,
@@ -1278,7 +1278,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  32,
@@ -1291,7 +1291,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  37,
@@ -1304,7 +1304,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  51,
@@ -1317,7 +1317,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  56,
@@ -1330,7 +1330,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  70,
@@ -1343,7 +1343,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  75,
@@ -1356,7 +1356,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  89,
@@ -1369,7 +1369,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  94,
@@ -1382,7 +1382,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  32,
@@ -1395,7 +1395,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  37,
@@ -1408,7 +1408,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  51,
@@ -1421,7 +1421,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  56,
@@ -1434,7 +1434,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  70,
@@ -1447,7 +1447,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  75,
@@ -1460,7 +1460,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  89,
@@ -1473,7 +1473,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  94,
@@ -1486,7 +1486,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  26,
@@ -1499,7 +1499,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  40,
@@ -1512,7 +1512,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  45,
@@ -1525,7 +1525,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  59,
@@ -1538,7 +1538,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  64,
@@ -1551,7 +1551,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  78,
@@ -1564,7 +1564,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  83,
@@ -1577,7 +1577,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  24,
@@ -1590,7 +1590,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  29,
@@ -1603,7 +1603,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  43,
@@ -1616,7 +1616,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  48,
@@ -1629,7 +1629,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  62,
@@ -1642,7 +1642,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  67,
@@ -1655,7 +1655,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  81,
@@ -1668,7 +1668,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  86,
@@ -1681,7 +1681,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  24,
@@ -1694,7 +1694,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  29,
@@ -1707,7 +1707,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  43,
@@ -1720,7 +1720,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  48,
@@ -1733,7 +1733,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  62,
@@ -1746,7 +1746,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  67,
@@ -1759,7 +1759,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  81,
@@ -1772,7 +1772,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  86,
@@ -1785,7 +1785,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  24,
@@ -1798,7 +1798,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  29,
@@ -1811,7 +1811,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  43,
@@ -1824,7 +1824,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  48,
@@ -1837,7 +1837,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  62,
@@ -1850,7 +1850,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  67,
@@ -1863,7 +1863,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  81,
@@ -1876,7 +1876,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  86,
@@ -1889,7 +1889,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  24,
@@ -1902,7 +1902,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  29,
@@ -1915,7 +1915,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  43,
@@ -1928,7 +1928,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  48,
@@ -1941,7 +1941,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  62,
@@ -1954,7 +1954,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  67,
@@ -1967,7 +1967,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  81,
@@ -1980,7 +1980,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  86,

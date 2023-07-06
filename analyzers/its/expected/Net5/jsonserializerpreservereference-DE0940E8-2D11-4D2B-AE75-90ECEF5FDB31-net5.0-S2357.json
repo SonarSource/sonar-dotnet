@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'Reports' private.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\JsonSerializerPreserveReference\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerPreserveReference/Program.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  27,

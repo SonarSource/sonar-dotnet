@@ -4,7 +4,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'httpsPort'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  88,

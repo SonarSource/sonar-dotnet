@@ -4,7 +4,7 @@
 "id":  "S138",
 "message":  "This method 'Accepting' has 179 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L705",
 "region":  {
 "startLine":  705,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S138",
 "message":  "This method 'InitializeFSM' has 280 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L832",
 "region":  {
 "startLine":  832,
 "startColumn":  22,
@@ -28,27 +28,27 @@
 },
 {
 "id":  "S138",
-"message":  "This method 'Ready' has 85 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
-"region":  {
-"startLine":  359,
-"startColumn":  33,
-"endLine":  359,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S138",
 "message":  "This method 'InitializeFSM' has 162 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1102",
 "region":  {
 "startLine":  1102,
 "startColumn":  22,
 "endLine":  1102,
 "endColumn":  35
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Ready' has 85 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L359",
+"region":  {
+"startLine":  359,
+"startColumn":  33,
+"endLine":  359,
+"endColumn":  38
 }
 }
 }

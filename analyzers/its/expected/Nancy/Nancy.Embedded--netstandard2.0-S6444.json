@@ -4,12 +4,12 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L144",
 "region":  {
-"startLine":  16,
-"startColumn":  58,
-"endLine":  16,
-"endColumn":  100
+"startLine":  144,
+"startColumn":  17,
+"endLine":  144,
+"endColumn":  80
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L16",
 "region":  {
-"startLine":  144,
-"startColumn":  17,
-"endLine":  144,
-"endColumn":  80
+"startLine":  16,
+"startColumn":  58,
+"endLine":  16,
+"endColumn":  100
 }
 }
 }

@@ -4,7 +4,7 @@
 "id":  "S2971",
 "message":  "Drop this useless call to 'ToList' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  65,

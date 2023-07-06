@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Serialization\ClusterMessageSerializerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Serialization/ClusterMessageSerializerSpec.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  40,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,

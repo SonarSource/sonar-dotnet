@@ -4,7 +4,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  70,
@@ -17,7 +17,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SimpleDnsCache.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SimpleDnsCache.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\TokenBucket.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/TokenBucket.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  45,

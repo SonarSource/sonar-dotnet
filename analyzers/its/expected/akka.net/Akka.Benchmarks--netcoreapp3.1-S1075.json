@@ -4,7 +4,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\ActorPathBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorPathBenchmarks.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  36,

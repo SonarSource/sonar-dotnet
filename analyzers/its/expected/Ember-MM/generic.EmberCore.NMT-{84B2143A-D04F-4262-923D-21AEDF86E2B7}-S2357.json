@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'Loaded' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  12,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'CanBuild' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  12,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  16,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'Description' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  16,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'Author' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  16,
@@ -69,7 +69,7 @@
 "id":  "S2357",
 "message":  "Make 'Version' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  16,
@@ -82,7 +82,7 @@
 "id":  "S2357",
 "message":  "Make 'DesignVersion' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  16,
@@ -95,7 +95,7 @@
 "id":  "S2357",
 "message":  "Make 'WhatsNew' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  16,
@@ -108,7 +108,7 @@
 "id":  "S2357",
 "message":  "Make 'Files' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  16,
@@ -121,7 +121,7 @@
 "id":  "S2357",
 "message":  "Make 'Params' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  16,
@@ -134,7 +134,7 @@
 "id":  "S2357",
 "message":  "Make 'Properties' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  16,
@@ -147,7 +147,7 @@
 "id":  "S2357",
 "message":  "Make 'ImageProcessing' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L200",
 "region":  {
 "startLine":  200,
 "startColumn":  16,
@@ -160,7 +160,7 @@
 "id":  "S2357",
 "message":  "Make 'ReadMe' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  16,
@@ -173,7 +173,7 @@
 "id":  "S2357",
 "message":  "Make 'TemplatePath' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  16,
@@ -186,7 +186,7 @@
 "id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  20,
@@ -199,7 +199,7 @@
 "id":  "S2357",
 "message":  "Make 'DestPath' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  20,
@@ -212,7 +212,7 @@
 "id":  "S2357",
 "message":  "Make 'Process' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  20,
@@ -225,7 +225,7 @@
 "id":  "S2357",
 "message":  "Make 'Type' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  20,
@@ -238,7 +238,7 @@
 "id":  "S2357",
 "message":  "Make 'name' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  20,
@@ -251,7 +251,7 @@
 "id":  "S2357",
 "message":  "Make 'type' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  20,
@@ -264,7 +264,7 @@
 "id":  "S2357",
 "message":  "Make 'value' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  20,
@@ -277,7 +277,7 @@
 "id":  "S2357",
 "message":  "Make 'access' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  20,
@@ -290,7 +290,7 @@
 "id":  "S2357",
 "message":  "Make 'description' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  20,
@@ -303,7 +303,7 @@
 "id":  "S2357",
 "message":  "Make 'label' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  20,
@@ -316,7 +316,7 @@
 "id":  "S2357",
 "message":  "Make 'name' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  20,
@@ -329,7 +329,7 @@
 "id":  "S2357",
 "message":  "Make 'description' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  20,
@@ -342,7 +342,7 @@
 "id":  "S2357",
 "message":  "Make 'group' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  20,
@@ -355,7 +355,7 @@
 "id":  "S2357",
 "message":  "Make 'type' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  20,
@@ -368,7 +368,7 @@
 "id":  "S2357",
 "message":  "Make 'value' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  20,
@@ -381,7 +381,7 @@
 "id":  "S2357",
 "message":  "Make 'values' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  20,
@@ -394,7 +394,7 @@
 "id":  "S2357",
 "message":  "Make 'value' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  20,
@@ -407,7 +407,7 @@
 "id":  "S2357",
 "message":  "Make 'label' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  20,
@@ -420,7 +420,7 @@
 "id":  "S2357",
 "message":  "Make '_type' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  20,
@@ -433,7 +433,7 @@
 "id":  "S2357",
 "message":  "Make 'Commands' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  20,
@@ -446,7 +446,7 @@
 "id":  "S2357",
 "message":  "Make 'execute' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  20,
@@ -459,7 +459,7 @@
 "id":  "S2357",
 "message":  "Make 'params' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  20,
@@ -472,7 +472,7 @@
 "id":  "S2357",
 "message":  "Make 'prefix' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  20,
@@ -485,7 +485,7 @@
 "id":  "S2357",
 "message":  "Make 'sufix' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  20,

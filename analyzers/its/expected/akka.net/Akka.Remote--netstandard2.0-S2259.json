@@ -4,7 +4,7 @@
 "id":  "S2259",
 "message":  "'e' is null on at least one execution path.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L567",
 "region":  {
 "startLine":  567,
 "startColumn":  33,

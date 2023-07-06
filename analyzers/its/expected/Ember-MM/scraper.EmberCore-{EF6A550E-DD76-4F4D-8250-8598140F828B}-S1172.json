@@ -4,7 +4,7 @@
 "id":  "S1172",
 "message":  "Remove this unused procedure parameter 'doProgress'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  62,
@@ -17,7 +17,7 @@
 "id":  "S1172",
 "message":  "Remove this unused procedure parameter 'iProgress'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  73,

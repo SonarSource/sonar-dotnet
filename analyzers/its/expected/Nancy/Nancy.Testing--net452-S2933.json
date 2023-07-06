@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make 'source' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AndConnector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AndConnector.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  25,

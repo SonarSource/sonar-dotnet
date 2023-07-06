@@ -4,7 +4,7 @@
 "id":  "S3906",
 "message":  "Change the signature of that event handler to match the specified signature.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterBase.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  22,

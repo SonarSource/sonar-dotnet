@@ -5,7 +5,7 @@
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  32,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  32,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  17,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  17,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  17,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  17,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  17,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  17,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  17,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  17,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  17,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  17,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  17,

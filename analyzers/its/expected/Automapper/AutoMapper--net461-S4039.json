@@ -4,7 +4,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.ProjectionBuilder'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  49,
@@ -17,7 +17,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.ServiceCtor'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  49,
@@ -30,7 +30,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.EnableNullPropagationForQueryMapping'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  35,
@@ -43,7 +43,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.MaxExecutionPlanDepth'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  34,
@@ -56,7 +56,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.Profiles'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  43,
@@ -69,7 +69,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.RecursiveQueriesMaxDepth'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  34,
@@ -82,7 +82,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.Features'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  56,
@@ -95,7 +95,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.GetExecutionPlan'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  91,
@@ -108,7 +108,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.ResolveAssociatedTypeMap'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  38,
@@ -121,7 +121,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.GetAllTypeMaps'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  59,
@@ -134,7 +134,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.FindTypeMapFor'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  38,
@@ -147,7 +147,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.FindTypeMapFor'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  38,
@@ -160,7 +160,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.FindTypeMapFor'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  38,
@@ -173,7 +173,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.ResolveTypeMap'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  38,
@@ -186,7 +186,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.ResolveTypeMap'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  38,
@@ -199,7 +199,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.GetMappers'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L325",
 "region":  {
 "startLine":  325,
 "startColumn":  57,
@@ -212,7 +212,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.GetIncludedTypeMaps'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  40,
@@ -225,7 +225,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.GetIncludedTypeMap'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  38,
@@ -238,7 +238,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.GetIncludedTypeMap'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  38,
@@ -251,7 +251,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.FindMapper'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L457",
 "region":  {
 "startLine":  457,
 "startColumn":  44,
@@ -264,7 +264,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfiguration' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfiguration.RegisterTypeMap'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L469",
 "region":  {
 "startLine":  469,
 "startColumn":  35,
@@ -277,7 +277,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfigurationExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfigurationExpression.Validator'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  45,
@@ -290,7 +290,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfigurationExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfigurationExpression.AllowAdditiveTypeMapCreation'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  45,
@@ -303,7 +303,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfigurationExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfigurationExpression.MaxExecutionPlanDepth'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  44,
@@ -316,7 +316,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfigurationExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfigurationExpression.GetValidators'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  52,
@@ -329,7 +329,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfigurationExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfigurationExpression.ProjectionMappers'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  64,
@@ -342,7 +342,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfigurationExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfigurationExpression.RecursiveQueriesMaxDepth'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  44,
@@ -355,7 +355,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfigurationExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfigurationExpression.Profiles'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  83,
@@ -368,7 +368,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfigurationExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfigurationExpression.ServiceCtor'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  59,
@@ -381,7 +381,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfigurationExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfigurationExpression.Mappers'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  60,
@@ -394,7 +394,7 @@
 "id":  "S4039",
 "message":  "Make 'MapperConfigurationExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGlobalConfigurationExpression.Features'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  65,
@@ -407,7 +407,7 @@
 "id":  "S4039",
 "message":  "Make 'MappingExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProjectionExpressionBase<TSource, TDestination, IProjectionExpression<TSource, TDestination>>.MaxDepth'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpression.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  149,
@@ -420,7 +420,7 @@
 "id":  "S4039",
 "message":  "Make 'MappingExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProjectionExpressionBase<TSource, TDestination, IProjectionExpression<TSource, TDestination>>.ValidateMemberList'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpression.cs#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  149,
@@ -433,7 +433,7 @@
 "id":  "S4039",
 "message":  "Make 'MappingExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProjectionExpressionBase<TSource, TDestination, IProjectionExpression<TSource, TDestination>>.ConstructUsing'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpression.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  149,
@@ -446,7 +446,7 @@
 "id":  "S4039",
 "message":  "Make 'MappingExpression' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProjectionExpressionBase<TSource, TDestination, IProjectionExpression<TSource, TDestination>>.ForCtorParam'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpression.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  149,
@@ -457,113 +457,9 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileExpressionInternal.DefaultMemberConfig'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
-"region":  {
-"startLine":  92,
-"startColumn":  57,
-"endLine":  92,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.ConstructorMappingEnabled'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  37,
-"endLine":  93,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileExpressionInternal.MethodMappingEnabled'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
-"region":  {
-"startLine":  94,
-"startColumn":  42,
-"endLine":  94,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.MethodMappingEnabled'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
-"region":  {
-"startLine":  95,
-"startColumn":  37,
-"endLine":  95,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileExpressionInternal.FieldMappingEnabled'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
-"region":  {
-"startLine":  96,
-"startColumn":  42,
-"endLine":  96,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.FieldMappingEnabled'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
-"region":  {
-"startLine":  97,
-"startColumn":  37,
-"endLine":  97,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.EnableNullPropagationForQueryMapping'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
-"region":  {
-"startLine":  98,
-"startColumn":  37,
-"endLine":  98,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.AllPropertyMapActions'.",
-"location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
-"region":  {
-"startLine":  99,
-"startColumn":  104,
-"endLine":  99,
-"endColumn":  125
-}
-}
-},
-{
-"id":  "S4039",
 "message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.AllTypeMapActions'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  88,
@@ -576,7 +472,7 @@
 "id":  "S4039",
 "message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.GlobalIgnores'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  59,
@@ -589,7 +485,7 @@
 "id":  "S4039",
 "message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.MemberConfigurations'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  73,
@@ -602,7 +498,7 @@
 "id":  "S4039",
 "message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.SourceExtensionMethods'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  63,
@@ -615,7 +511,7 @@
 "id":  "S4039",
 "message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.TypeMapConfigs'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  74,
@@ -628,7 +524,7 @@
 "id":  "S4039",
 "message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.OpenTypeMapConfigs'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  74,
@@ -641,7 +537,7 @@
 "id":  "S4039",
 "message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileExpressionInternal.EnableNullPropagationForQueryMapping'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  42,
@@ -654,7 +550,7 @@
 "id":  "S4039",
 "message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileExpressionInternal.ForAllMaps'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  41,
@@ -667,7 +563,7 @@
 "id":  "S4039",
 "message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileExpressionInternal.ForAllPropertyMaps'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  41,
@@ -680,7 +576,7 @@
 "id":  "S4039",
 "message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileExpressionInternal.AddMemberConfiguration'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Profile.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  57,
@@ -691,9 +587,113 @@
 },
 {
 "id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileExpressionInternal.DefaultMemberConfig'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  57,
+"endLine":  92,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.ConstructorMappingEnabled'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  37,
+"endLine":  93,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileExpressionInternal.MethodMappingEnabled'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  42,
+"endLine":  94,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.MethodMappingEnabled'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  37,
+"endLine":  95,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileExpressionInternal.FieldMappingEnabled'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  42,
+"endLine":  96,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.FieldMappingEnabled'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  37,
+"endLine":  97,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.EnableNullPropagationForQueryMapping'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  37,
+"endLine":  98,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.AllPropertyMapActions'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  104,
+"endLine":  99,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S4039",
 "message":  "Make 'Mapper' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalRuntimeMapper.DefaultContext'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mapper.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  50,
@@ -706,7 +706,7 @@
 "id":  "S4039",
 "message":  "Make 'ResolutionContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalRuntimeMapper.DefaultContext'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ResolutionContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ResolutionContext.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  50,
@@ -719,7 +719,7 @@
 "id":  "S4039",
 "message":  "Make 'ResolutionContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMapperBase.Map'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ResolutionContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ResolutionContext.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  34,
@@ -732,7 +732,7 @@
 "id":  "S4039",
 "message":  "Make 'ResolutionContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMapperBase.Map'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ResolutionContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ResolutionContext.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  34,
@@ -745,7 +745,7 @@
 "id":  "S4039",
 "message":  "Make 'ResolutionContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMapperBase.Map'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ResolutionContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ResolutionContext.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  34,
@@ -758,7 +758,7 @@
 "id":  "S4039",
 "message":  "Make 'ResolutionContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMapperBase.Map'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ResolutionContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ResolutionContext.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  28,
@@ -771,7 +771,7 @@
 "id":  "S4039",
 "message":  "Make 'ResolutionContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMapperBase.Map'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ResolutionContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ResolutionContext.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  28,
@@ -784,7 +784,7 @@
 "id":  "S4039",
 "message":  "Make 'ResolutionContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalRuntimeMapper.Map'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ResolutionContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ResolutionContext.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  45,

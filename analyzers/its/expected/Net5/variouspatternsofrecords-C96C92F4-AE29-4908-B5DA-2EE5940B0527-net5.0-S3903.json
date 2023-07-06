@@ -4,7 +4,7 @@
 "id":  "S3903",
 "message":  "Move 'One' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfRecords/Program.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  15,
@@ -17,7 +17,7 @@
 "id":  "S3903",
 "message":  "Move 'OneEquivalent' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfRecords/Program.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  15,
@@ -30,7 +30,7 @@
 "id":  "S3903",
 "message":  "Move 'Two' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfRecords/Program.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  15,
@@ -43,7 +43,7 @@
 "id":  "S3903",
 "message":  "Move 'Three' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfRecords/Program.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  15,
@@ -56,7 +56,7 @@
 "id":  "S3903",
 "message":  "Move 'Four' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfRecords/Program.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  15,

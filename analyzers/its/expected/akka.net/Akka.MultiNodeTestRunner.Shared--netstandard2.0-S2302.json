@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'data' with 'nameof(data)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\JsonPersistentTestRunStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/JsonPersistentTestRunStore.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  63,
@@ -17,7 +17,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'filePath' with 'nameof(filePath)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\JsonPersistentTestRunStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/JsonPersistentTestRunStore.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  77,
@@ -30,7 +30,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'filePath' with 'nameof(filePath)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\JsonPersistentTestRunStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/JsonPersistentTestRunStore.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  77,

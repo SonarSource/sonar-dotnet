@@ -4,7 +4,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1419",
 "region":  {
 "startLine":  1419,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1428",
 "region":  {
 "startLine":  1428,
 "startColumn":  25,

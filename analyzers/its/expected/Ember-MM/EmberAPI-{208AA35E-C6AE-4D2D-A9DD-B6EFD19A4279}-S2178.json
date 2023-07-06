@@ -4,7 +4,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L836",
 "region":  {
 "startLine":  836,
 "startColumn":  45,
@@ -30,7 +30,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L863",
 "region":  {
 "startLine":  863,
 "startColumn":  45,
@@ -43,7 +43,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1151",
 "region":  {
 "startLine":  1151,
 "startColumn":  58,
@@ -56,7 +56,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1157",
 "region":  {
 "startLine":  1157,
 "startColumn":  51,
@@ -69,7 +69,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1170",
 "region":  {
 "startLine":  1170,
 "startColumn":  54,
@@ -82,7 +82,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1176",
 "region":  {
 "startLine":  1176,
 "startColumn":  49,
@@ -95,7 +95,20 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L1014",
+"region":  {
+"startLine":  1014,
+"startColumn":  34,
+"endLine":  1014,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L749",
 "region":  {
 "startLine":  749,
 "startColumn":  38,
@@ -108,7 +121,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L781",
 "region":  {
 "startLine":  781,
 "startColumn":  38,
@@ -121,7 +134,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L817",
 "region":  {
 "startLine":  817,
 "startColumn":  42,
@@ -134,7 +147,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L844",
 "region":  {
 "startLine":  844,
 "startColumn":  42,
@@ -147,24 +160,11 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L960",
 "region":  {
 "startLine":  960,
 "startColumn":  34,
 "endLine":  960,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S2178",
-"message":  "Correct this 'And' to 'AndAlso'.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  1014,
-"startColumn":  34,
-"endLine":  1014,
 "endColumn":  37
 }
 }

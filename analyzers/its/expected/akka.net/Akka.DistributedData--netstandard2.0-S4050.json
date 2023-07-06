@@ -4,7 +4,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'Object.GetHashCode'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  27,

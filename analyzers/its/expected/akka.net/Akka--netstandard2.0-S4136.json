@@ -5,7 +5,7 @@
 "message":  "All 'Equals' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L487",
 "region":  {
 "startLine":  487,
 "startColumn":  30,
@@ -29,7 +29,7 @@
 "message":  "All 'ToStringWithAddress' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L519",
 "region":  {
 "startLine":  519,
 "startColumn":  23,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  23,
@@ -53,7 +53,7 @@
 "message":  "All 'Equals' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  30,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L346",
 "region":  {
 "startLine":  346,
 "startColumn":  21,
@@ -77,7 +77,7 @@
 "message":  "All 'CompareTo' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  20,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L356",
 "region":  {
 "startLine":  356,
 "startColumn":  20,
@@ -101,7 +101,7 @@
 "message":  "All 'Cancel' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\ICancelable.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cancellation/ICancelable.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  14,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\ICancelable.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cancellation/ICancelable.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  14,
@@ -125,7 +125,7 @@
 "message":  "All 'GetExtension' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L348",
 "region":  {
 "startLine":  348,
 "startColumn":  32,
@@ -134,7 +134,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  27,
@@ -149,7 +149,7 @@
 "message":  "All 'Equals' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  21,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  30,
@@ -173,7 +173,7 @@
 "message":  "All 'Create' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L352",
 "region":  {
 "startLine":  352,
 "startColumn":  29,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  29,
@@ -197,7 +197,7 @@
 "message":  "All 'Take' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  23,
@@ -206,7 +206,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  21,
@@ -221,7 +221,7 @@
 "message":  "All 'Matches' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  21,
@@ -230,7 +230,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  21,
@@ -245,7 +245,7 @@
 "message":  "All 'Info' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Event\LoggingAdapterBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingAdapterBase.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  29,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Event\LoggingAdapterBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingAdapterBase.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  29,
@@ -269,7 +269,7 @@
 "message":  "All 'Equals' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\NotUsed.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/NotUsed.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  30,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\NotUsed.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/NotUsed.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  21,
@@ -293,7 +293,7 @@
 "message":  "All 'WithTransport' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  25,
@@ -302,7 +302,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  25,
@@ -317,7 +317,7 @@
 "message":  "All 'Equals' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  30,
@@ -326,7 +326,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L547",
 "region":  {
 "startLine":  547,
 "startColumn":  21,
@@ -341,7 +341,7 @@
 "message":  "All 'Remove' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\Index.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Index.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  21,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\Index.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Index.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  36,
@@ -365,7 +365,7 @@
 "message":  "All 'CopyAndAdd' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/ImmutabilityUtils.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  34,
@@ -374,7 +374,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/ImmutabilityUtils.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  54,
@@ -389,7 +389,7 @@
 "message":  "All 'CopyAndRemove' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/ImmutabilityUtils.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  34,
@@ -398,7 +398,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/ImmutabilityUtils.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  54,
@@ -413,7 +413,7 @@
 "message":  "All 'SwitchOff' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\Switch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Switch.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  21,
@@ -422,7 +422,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\Switch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Switch.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  21,
@@ -437,7 +437,7 @@
 "message":  "All 'SwitchOn' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\Switch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Switch.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  21,
@@ -446,7 +446,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\Switch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Switch.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  21,

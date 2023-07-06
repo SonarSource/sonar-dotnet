@@ -4,137 +4,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  572,
-"startColumn":  10,
-"endLine":  572,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  583,
-"startColumn":  10,
-"endLine":  583,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  592,
-"startColumn":  10,
-"endLine":  592,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  686,
-"startColumn":  10,
-"endLine":  686,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  697,
-"startColumn":  10,
-"endLine":  697,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  705,
-"startColumn":  10,
-"endLine":  705,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  748,
-"startColumn":  10,
-"endLine":  748,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  760,
-"startColumn":  10,
-"endLine":  760,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  782,
-"startColumn":  10,
-"endLine":  782,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  794,
-"startColumn":  10,
-"endLine":  794,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1543",
 "region":  {
 "startLine":  1543,
 "startColumn":  10,
@@ -147,7 +17,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1554",
 "region":  {
 "startLine":  1554,
 "startColumn":  10,
@@ -160,12 +30,142 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1562",
 "region":  {
 "startLine":  1562,
 "startColumn":  10,
 "endLine":  1562,
 "endColumn":  96
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L572",
+"region":  {
+"startLine":  572,
+"startColumn":  10,
+"endLine":  572,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L583",
+"region":  {
+"startLine":  583,
+"startColumn":  10,
+"endLine":  583,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L592",
+"region":  {
+"startLine":  592,
+"startColumn":  10,
+"endLine":  592,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L686",
+"region":  {
+"startLine":  686,
+"startColumn":  10,
+"endLine":  686,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L697",
+"region":  {
+"startLine":  697,
+"startColumn":  10,
+"endLine":  697,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L705",
+"region":  {
+"startLine":  705,
+"startColumn":  10,
+"endLine":  705,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L748",
+"region":  {
+"startLine":  748,
+"startColumn":  10,
+"endLine":  748,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L760",
+"region":  {
+"startLine":  760,
+"startColumn":  10,
+"endLine":  760,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L782",
+"region":  {
+"startLine":  782,
+"startColumn":  10,
+"endLine":  782,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L794",
+"region":  {
+"startLine":  794,
+"startColumn":  10,
+"endLine":  794,
+"endColumn":  90
 }
 }
 }

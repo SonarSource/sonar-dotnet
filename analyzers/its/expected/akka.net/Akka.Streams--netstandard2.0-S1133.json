@@ -4,7 +4,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L366",
 "region":  {
 "startLine":  366,
 "startColumn":  10,
@@ -17,7 +17,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L383",
 "region":  {
 "startLine":  383,
 "startColumn":  10,
@@ -30,33 +30,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  83,
-"startColumn":  10,
-"endLine":  83,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
-"region":  {
-"startLine":  473,
-"startColumn":  10,
-"endLine":  473,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1252",
 "region":  {
 "startLine":  1252,
 "startColumn":  10,
@@ -69,24 +43,11 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L473",
 "region":  {
-"startLine":  106,
+"startLine":  473,
 "startColumn":  10,
-"endLine":  106,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
-"region":  {
-"startLine":  475,
-"startColumn":  10,
-"endLine":  475,
+"endLine":  473,
 "endColumn":  82
 }
 }
@@ -95,46 +56,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  81,
-"startColumn":  10,
-"endLine":  81,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  447,
-"startColumn":  10,
-"endLine":  447,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
-"region":  {
-"startLine":  1171,
-"startColumn":  10,
-"endLine":  1171,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  10,
@@ -147,7 +69,72 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  10,
+"endLine":  106,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L475",
+"region":  {
+"startLine":  475,
+"startColumn":  10,
+"endLine":  475,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1171",
+"region":  {
+"startLine":  1171,
+"startColumn":  10,
+"endLine":  1171,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L447",
+"region":  {
+"startLine":  447,
+"startColumn":  10,
+"endLine":  447,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  10,
+"endLine":  81,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1179",
 "region":  {
 "startLine":  1179,
 "startColumn":  10,
@@ -160,7 +147,20 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  10,
+"endLine":  83,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L542",
 "region":  {
 "startLine":  542,
 "startColumn":  10,
@@ -173,7 +173,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L383",
 "region":  {
 "startLine":  383,
 "startColumn":  6,
@@ -186,7 +186,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L522",
 "region":  {
 "startLine":  522,
 "startColumn":  6,
@@ -199,46 +199,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
-"region":  {
-"startLine":  34,
-"startColumn":  6,
-"endLine":  34,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
-"region":  {
-"startLine":  91,
-"startColumn":  6,
-"endLine":  91,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
-"region":  {
-"startLine":  99,
-"startColumn":  6,
-"endLine":  99,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  6,
@@ -251,11 +212,50 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  6,
 "endLine":  244,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  6,
+"endLine":  34,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  6,
+"endLine":  91,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  6,
+"endLine":  99,
 "endColumn":  56
 }
 }

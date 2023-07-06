@@ -4,7 +4,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSystem.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DateTimeNowTimeProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/DateTimeNowTimeProvider.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  50,
@@ -30,7 +30,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  54,
@@ -43,7 +43,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  70,
@@ -56,7 +56,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  38,
@@ -69,7 +69,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  40,
@@ -82,7 +82,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  60,
@@ -95,7 +95,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  56,
@@ -108,7 +108,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LogEvent.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  25,
@@ -121,7 +121,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SimpleDnsCache.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  26,
@@ -134,7 +134,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SimpleDnsCache.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  23,
@@ -147,7 +147,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreakerState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/CircuitBreakerState.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  30,
@@ -160,7 +160,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreakerState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/CircuitBreakerState.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  23,
@@ -173,20 +173,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
-"region":  {
-"startLine":  87,
-"startColumn":  28,
-"endLine":  87,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  22,
@@ -199,7 +186,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  28,
@@ -212,7 +199,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  22,
@@ -225,7 +212,20 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\TokenBucket.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  28,
+"endLine":  87,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/TokenBucket.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  45,

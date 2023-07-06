@@ -4,7 +4,7 @@
 "id":  "S3218",
 "message":  "Rename this method to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L372",
 "region":  {
 "startLine":  372,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S3218",
 "message":  "Rename this method to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  34,

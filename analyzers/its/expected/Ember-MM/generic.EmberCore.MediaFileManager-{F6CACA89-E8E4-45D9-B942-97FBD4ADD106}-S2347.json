@@ -4,7 +4,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\dlgCopyFiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/dlgCopyFiles.vb#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\dlgCopyFiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/dlgCopyFiles.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  17,

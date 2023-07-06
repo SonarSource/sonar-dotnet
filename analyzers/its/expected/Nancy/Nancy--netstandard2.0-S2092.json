@@ -4,7 +4,7 @@
 "id":  "S2092",
 "message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2092",
 "message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S2092",
 "message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L213-L216",
 "region":  {
 "startLine":  213,
 "startColumn":  26,
@@ -43,7 +43,7 @@
 "id":  "S2092",
 "message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L425",
 "region":  {
 "startLine":  425,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S2092",
 "message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  41,
@@ -69,7 +69,7 @@
 "id":  "S2092",
 "message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L45-L48",
 "region":  {
 "startLine":  45,
 "startColumn":  54,
@@ -82,7 +82,7 @@
 "id":  "S2092",
 "message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  50,
@@ -95,7 +95,7 @@
 "id":  "S2092",
 "message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Session\CookieBasedSessions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/CookieBasedSessions.cs#L149-L153",
 "region":  {
 "startLine":  149,
 "startColumn":  26,

@@ -4,7 +4,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\PluginSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/PluginSpec.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentPersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentPersistenceIdsSpec.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  27,
@@ -82,7 +82,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByPersistenceIdSpec.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -95,7 +95,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -108,7 +108,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  27,
@@ -121,7 +121,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  27,
@@ -134,7 +134,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -147,7 +147,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  27,

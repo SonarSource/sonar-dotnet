@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'XComs' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  12,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'hostid' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  12,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'XComs' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  12,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'XComs' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L575",
 "region":  {
 "startLine":  575,
 "startColumn":  16,

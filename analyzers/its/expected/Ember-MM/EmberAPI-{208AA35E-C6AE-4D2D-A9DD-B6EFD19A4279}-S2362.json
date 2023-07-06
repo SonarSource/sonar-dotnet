@@ -4,7 +4,7 @@
 "id":  "S2362",
 "message":  "Rename 'ifo_CellInfoSize' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S2362",
 "message":  "Rename 'ifo_SECTOR_SIZE' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  19,

@@ -4,7 +4,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 18 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1318",
 "region":  {
 "startLine":  1318,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 7 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  3,

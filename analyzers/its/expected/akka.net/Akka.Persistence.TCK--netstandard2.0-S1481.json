@@ -4,46 +4,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'pref'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
-"region":  {
-"startLine":  44,
-"startColumn":  17,
-"endLine":  44,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'pref'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
-"region":  {
-"startLine":  60,
-"startColumn":  17,
-"endLine":  60,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'probe'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
-"region":  {
-"startLine":  62,
-"startColumn":  17,
-"endLine":  62,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'pref'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  17,
@@ -56,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'pref'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  17,
@@ -69,7 +30,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'pref'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  17,
@@ -82,7 +43,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'pref'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  17,
@@ -93,9 +54,48 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'pref'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  17,
+"endLine":  44,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'pref'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  17,
+"endLine":  60,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'probe'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  17,
+"endLine":  62,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'tp'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\TestSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/TestSerializer.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  34,

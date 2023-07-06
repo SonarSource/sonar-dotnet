@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Reflection.IReflect' instead of 'System.Type'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  54,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ActorSystem' instead of 'Akka.Actor.ExtendedActorSystem'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\MessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/MessageSerializer.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  62,
@@ -30,7 +30,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.IEquatable<Akka.Actor.IActorRef>' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  50,
@@ -43,7 +43,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.IEquatable<Akka.Actor.IActorRef>' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  69,
@@ -56,7 +56,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ActorSystem' instead of 'Akka.Actor.ExtendedActorSystem'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  65,
@@ -69,7 +69,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Routing.Pool' instead of 'Akka.Routing.FromConfig'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  53,
@@ -82,7 +82,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Routing.Pool' instead of 'Akka.Routing.RoundRobinPool'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  61,
@@ -95,7 +95,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Routing.Pool' instead of 'Akka.Routing.BroadcastPool'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L357",
 "region":  {
 "startLine":  357,
 "startColumn":  59,
@@ -108,7 +108,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Routing.Pool' instead of 'Akka.Routing.RandomPool'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  53,
@@ -121,7 +121,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Routing.Pool' instead of 'Akka.Routing.ConsistentHashingPool'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L478",
 "region":  {
 "startLine":  478,
 "startColumn":  75,
@@ -134,7 +134,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Exception' instead of 'DotNetty.Transport.Channels.ConnectException'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\TcpTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  97,

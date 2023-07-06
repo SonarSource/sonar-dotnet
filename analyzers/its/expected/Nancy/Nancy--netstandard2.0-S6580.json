@@ -4,7 +4,7 @@
 "id":  "S6580",
 "message":  "Use a format provider when parsing date and time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L288",
 "region":  {
 "startLine":  288,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S6580",
 "message":  "Use a format provider when parsing date and time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L588",
 "region":  {
 "startLine":  588,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S6580",
 "message":  "Use a format provider when parsing date and time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\DateTimeRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/DateTimeRouteSegmentConstraint.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  20,

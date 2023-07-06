@@ -2,61 +2,9 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove the unused private constructor 'DiPerRequestActor'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
-"region":  {
-"startLine":  34,
-"startColumn":  20,
-"endLine":  34,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'DiSingletonActor'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  20,
-"endLine":  47,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'DiParentActor'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
-"region":  {
-"startLine":  62,
-"startColumn":  20,
-"endLine":  62,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'DisposableActor'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
-"region":  {
-"startLine":  82,
-"startColumn":  20,
-"endLine":  82,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private constructor 'UnboundedStashActor'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  20,
@@ -69,12 +17,64 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'BoundedStashActor'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  20,
 "endLine":  182,
 "endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'DiPerRequestActor'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  20,
+"endLine":  34,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'DiSingletonActor'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  20,
+"endLine":  47,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'DiParentActor'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  20,
+"endLine":  62,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'DisposableActor'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  20,
+"endLine":  82,
+"endColumn":  35
 }
 }
 }

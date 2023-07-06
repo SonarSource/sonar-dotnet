@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'y'.",
 "location":  {
-"uri":  "sources\Net5\Net5\CovariantReturn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/CovariantReturn.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'ptr1'.",
 "location":  {
-"uri":  "sources\Net5\Net5\FunctionPointers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/FunctionPointers.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'explicitTypes2'.",
 "location":  {
-"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  36,
@@ -43,7 +43,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'explicitTypes3'.",
 "location":  {
-"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  42,
@@ -56,7 +56,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'assem'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  10,
@@ -69,7 +69,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'fs0'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  5,
@@ -82,7 +82,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'l1'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  8,
@@ -95,7 +95,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'l2'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  8,
@@ -108,7 +108,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'l3'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  8,
@@ -121,7 +121,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'l4'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  8,
@@ -134,7 +134,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'isNull'.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  17,
@@ -147,20 +147,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'x'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1144.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  17,
-"endLine":  7,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'x'.",
-"location":  {
-"uri":  "sources\Net5\Net5\S1144.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1144.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  17,
@@ -171,9 +158,22 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'x'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1144.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  17,
+"endLine":  7,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'command'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2077.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2077.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  27,
@@ -186,7 +186,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'fruits'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2330.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2330.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  21,
@@ -199,7 +199,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'vegetable'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3247.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3247.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  21,
@@ -212,7 +212,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'fruit'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3247.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3247.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  21,
@@ -225,7 +225,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'vegetableY'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3247.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3247.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  21,
@@ -238,7 +238,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'fruitX'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3247.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3247.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  21,
@@ -251,7 +251,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'foo'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3353.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3353.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  18,
@@ -264,7 +264,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'appleInside'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4201.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  23,
@@ -277,7 +277,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'i'.",
 "location":  {
-"uri":  "sources\Net5\Net5\SkipLocalsInit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/SkipLocalsInit.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  17,

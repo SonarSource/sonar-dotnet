@@ -4,7 +4,7 @@
 "id":  "S4787",
 "message":  "Make sure that encrypting data is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Cryptography\AesEncryptionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/AesEncryptionProvider.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  36,
@@ -17,7 +17,7 @@
 "id":  "S4787",
 "message":  "Make sure that encrypting data is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Cryptography\AesEncryptionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/AesEncryptionProvider.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  40,

@@ -4,20 +4,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
-"region":  {
-"startLine":  88,
-"startColumn":  20,
-"endLine":  88,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  20,
@@ -30,7 +17,20 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  20,
+"endLine":  88,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  20,
@@ -56,7 +56,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultRuntimeEnvironmentInformation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultRuntimeEnvironmentInformation.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultSerializerFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultSerializerFactory.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultSerializerFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultSerializerFactory.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DependencyContextAssemblyCatalog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DependencyContextAssemblyCatalog.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  20,
@@ -108,7 +108,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L445",
 "region":  {
 "startLine":  445,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L267",
 "region":  {
 "startLine":  267,
 "startColumn":  20,
@@ -147,7 +147,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  20,
@@ -160,7 +160,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  20,
@@ -173,7 +173,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/DefaultJsonSerializer.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  24,
@@ -186,7 +186,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/DefaultXmlSerializer.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  20,
@@ -199,7 +199,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  20,
@@ -238,7 +238,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewResolver.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  13,

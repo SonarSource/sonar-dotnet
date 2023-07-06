@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'no'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\Offset.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Query/Offset.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  35,

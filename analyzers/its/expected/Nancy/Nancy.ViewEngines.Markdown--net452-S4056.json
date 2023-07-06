@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown\MarkdownViewEngineHost.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Markdown/MarkdownViewEngineHost.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  17,

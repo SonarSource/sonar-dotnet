@@ -4,7 +4,7 @@
 "id":  "S3927",
 "message":  "Serialization attributes on local functions are not considered.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3927.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3927.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  14,

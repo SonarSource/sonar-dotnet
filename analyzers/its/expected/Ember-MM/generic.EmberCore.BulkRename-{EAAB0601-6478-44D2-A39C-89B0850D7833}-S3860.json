@@ -4,631 +4,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  62,
-"startColumn":  43,
-"endLine":  62,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  62,
-"startColumn":  66,
-"endLine":  62,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  68,
-"startColumn":  37,
-"endLine":  68,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  76,
-"startColumn":  44,
-"endLine":  76,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  76,
-"startColumn":  67,
-"endLine":  76,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  241,
-"startColumn":  75,
-"endLine":  241,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  241,
-"startColumn":  106,
-"endLine":  241,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  241,
-"startColumn":  135,
-"endLine":  241,
-"endColumn":  140
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  241,
-"startColumn":  163,
-"endLine":  241,
-"endColumn":  168
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  241,
-"startColumn":  187,
-"endLine":  241,
-"endColumn":  192
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  358,
-"startColumn":  39,
-"endLine":  358,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  394,
-"startColumn":  25,
-"endLine":  394,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  398,
-"startColumn":  34,
-"endLine":  398,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  579,
-"startColumn":  30,
-"endLine":  579,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  579,
-"startColumn":  61,
-"endLine":  579,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  579,
-"startColumn":  99,
-"endLine":  579,
-"endColumn":  104
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  618,
-"startColumn":  28,
-"endLine":  618,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  618,
-"startColumn":  50,
-"endLine":  618,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  618,
-"startColumn":  76,
-"endLine":  618,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  624,
-"startColumn":  42,
-"endLine":  624,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  624,
-"startColumn":  67,
-"endLine":  624,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  624,
-"startColumn":  89,
-"endLine":  624,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  662,
-"startColumn":  39,
-"endLine":  662,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  662,
-"startColumn":  105,
-"endLine":  662,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  662,
-"startColumn":  133,
-"endLine":  662,
-"endColumn":  138
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  662,
-"startColumn":  157,
-"endLine":  662,
-"endColumn":  162
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  778,
-"startColumn":  73,
-"endLine":  778,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  778,
-"startColumn":  98,
-"endLine":  778,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  778,
-"startColumn":  123,
-"endLine":  778,
-"endColumn":  128
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  833,
-"startColumn":  17,
-"endLine":  833,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  842,
-"startColumn":  17,
-"endLine":  842,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  851,
-"startColumn":  17,
-"endLine":  851,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  860,
-"startColumn":  17,
-"endLine":  860,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  869,
-"startColumn":  17,
-"endLine":  869,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  878,
-"startColumn":  17,
-"endLine":  878,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  887,
-"startColumn":  17,
-"endLine":  887,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  896,
-"startColumn":  17,
-"endLine":  896,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  905,
-"startColumn":  17,
-"endLine":  905,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  914,
-"startColumn":  17,
-"endLine":  914,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  923,
-"startColumn":  17,
-"endLine":  923,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  932,
-"startColumn":  17,
-"endLine":  932,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  941,
-"startColumn":  17,
-"endLine":  941,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  950,
-"startColumn":  17,
-"endLine":  950,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  959,
-"startColumn":  17,
-"endLine":  959,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  968,
-"startColumn":  17,
-"endLine":  968,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  977,
-"startColumn":  17,
-"endLine":  977,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  986,
-"startColumn":  17,
-"endLine":  986,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  995,
-"startColumn":  17,
-"endLine":  995,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L1004",
 "region":  {
 "startLine":  1004,
 "startColumn":  17,
@@ -641,7 +17,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L1013",
 "region":  {
 "startLine":  1013,
 "startColumn":  17,
@@ -654,7 +30,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L1022",
 "region":  {
 "startLine":  1022,
 "startColumn":  17,
@@ -667,7 +43,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L1031",
 "region":  {
 "startLine":  1031,
 "startColumn":  17,
@@ -680,7 +56,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L1040",
 "region":  {
 "startLine":  1040,
 "startColumn":  17,
@@ -693,7 +69,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L1049",
 "region":  {
 "startLine":  1049,
 "startColumn":  17,
@@ -706,7 +82,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L1058",
 "region":  {
 "startLine":  1058,
 "startColumn":  17,
@@ -719,7 +95,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L1067",
 "region":  {
 "startLine":  1067,
 "startColumn":  17,
@@ -732,7 +108,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L1076",
 "region":  {
 "startLine":  1076,
 "startColumn":  17,
@@ -745,12 +121,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L241",
 "region":  {
-"startLine":  53,
-"startColumn":  33,
-"endLine":  53,
-"endColumn":  38
+"startLine":  241,
+"startColumn":  75,
+"endLine":  241,
+"endColumn":  80
 }
 }
 },
@@ -758,12 +134,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L241",
 "region":  {
-"startLine":  53,
-"startColumn":  64,
-"endLine":  53,
-"endColumn":  69
+"startLine":  241,
+"startColumn":  106,
+"endLine":  241,
+"endColumn":  111
 }
 }
 },
@@ -771,12 +147,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L241",
 "region":  {
-"startLine":  61,
-"startColumn":  49,
-"endLine":  61,
-"endColumn":  54
+"startLine":  241,
+"startColumn":  135,
+"endLine":  241,
+"endColumn":  140
 }
 }
 },
@@ -784,11 +160,310 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L241",
 "region":  {
-"startLine":  61,
+"startLine":  241,
+"startColumn":  163,
+"endLine":  241,
+"endColumn":  168
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  187,
+"endLine":  241,
+"endColumn":  192
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L358",
+"region":  {
+"startLine":  358,
+"startColumn":  39,
+"endLine":  358,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L394",
+"region":  {
+"startLine":  394,
+"startColumn":  25,
+"endLine":  394,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L398",
+"region":  {
+"startLine":  398,
+"startColumn":  34,
+"endLine":  398,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L579",
+"region":  {
+"startLine":  579,
+"startColumn":  30,
+"endLine":  579,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L579",
+"region":  {
+"startLine":  579,
+"startColumn":  61,
+"endLine":  579,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L579",
+"region":  {
+"startLine":  579,
+"startColumn":  99,
+"endLine":  579,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L618",
+"region":  {
+"startLine":  618,
+"startColumn":  28,
+"endLine":  618,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L618",
+"region":  {
+"startLine":  618,
+"startColumn":  50,
+"endLine":  618,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L618",
+"region":  {
+"startLine":  618,
+"startColumn":  76,
+"endLine":  618,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  43,
+"endLine":  62,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  66,
+"endLine":  62,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L624",
+"region":  {
+"startLine":  624,
+"startColumn":  42,
+"endLine":  624,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L624",
+"region":  {
+"startLine":  624,
+"startColumn":  67,
+"endLine":  624,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L624",
+"region":  {
+"startLine":  624,
+"startColumn":  89,
+"endLine":  624,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L662",
+"region":  {
+"startLine":  662,
+"startColumn":  39,
+"endLine":  662,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L662",
+"region":  {
+"startLine":  662,
+"startColumn":  105,
+"endLine":  662,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L662",
+"region":  {
+"startLine":  662,
+"startColumn":  133,
+"endLine":  662,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L662",
+"region":  {
+"startLine":  662,
+"startColumn":  157,
+"endLine":  662,
+"endColumn":  162
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  37,
+"endLine":  68,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  44,
+"endLine":  76,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  67,
+"endLine":  76,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L778",
+"region":  {
+"startLine":  778,
 "startColumn":  73,
-"endLine":  61,
+"endLine":  778,
 "endColumn":  78
 }
 }
@@ -797,12 +472,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L778",
 "region":  {
-"startLine":  67,
-"startColumn":  35,
-"endLine":  67,
-"endColumn":  40
+"startLine":  778,
+"startColumn":  98,
+"endLine":  778,
+"endColumn":  103
 }
 }
 },
@@ -810,12 +485,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L778",
 "region":  {
-"startLine":  67,
-"startColumn":  66,
-"endLine":  67,
-"endColumn":  71
+"startLine":  778,
+"startColumn":  123,
+"endLine":  778,
+"endColumn":  128
 }
 }
 },
@@ -823,12 +498,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L833",
 "region":  {
-"startLine":  71,
-"startColumn":  44,
-"endLine":  71,
-"endColumn":  49
+"startLine":  833,
+"startColumn":  17,
+"endLine":  833,
+"endColumn":  22
 }
 }
 },
@@ -836,12 +511,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L842",
 "region":  {
-"startLine":  71,
-"startColumn":  68,
-"endLine":  71,
-"endColumn":  73
+"startLine":  842,
+"startColumn":  17,
+"endLine":  842,
+"endColumn":  22
 }
 }
 },
@@ -849,12 +524,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L851",
 "region":  {
-"startLine":  76,
-"startColumn":  35,
-"endLine":  76,
-"endColumn":  40
+"startLine":  851,
+"startColumn":  17,
+"endLine":  851,
+"endColumn":  22
 }
 }
 },
@@ -862,12 +537,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L860",
 "region":  {
-"startLine":  76,
-"startColumn":  66,
-"endLine":  76,
-"endColumn":  71
+"startLine":  860,
+"startColumn":  17,
+"endLine":  860,
+"endColumn":  22
 }
 }
 },
@@ -875,7 +550,202 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L869",
+"region":  {
+"startLine":  869,
+"startColumn":  17,
+"endLine":  869,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L878",
+"region":  {
+"startLine":  878,
+"startColumn":  17,
+"endLine":  878,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L887",
+"region":  {
+"startLine":  887,
+"startColumn":  17,
+"endLine":  887,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L896",
+"region":  {
+"startLine":  896,
+"startColumn":  17,
+"endLine":  896,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L905",
+"region":  {
+"startLine":  905,
+"startColumn":  17,
+"endLine":  905,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L914",
+"region":  {
+"startLine":  914,
+"startColumn":  17,
+"endLine":  914,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L923",
+"region":  {
+"startLine":  923,
+"startColumn":  17,
+"endLine":  923,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L932",
+"region":  {
+"startLine":  932,
+"startColumn":  17,
+"endLine":  932,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L941",
+"region":  {
+"startLine":  941,
+"startColumn":  17,
+"endLine":  941,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L950",
+"region":  {
+"startLine":  950,
+"startColumn":  17,
+"endLine":  950,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L959",
+"region":  {
+"startLine":  959,
+"startColumn":  17,
+"endLine":  959,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L968",
+"region":  {
+"startLine":  968,
+"startColumn":  17,
+"endLine":  968,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L977",
+"region":  {
+"startLine":  977,
+"startColumn":  17,
+"endLine":  977,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L986",
+"region":  {
+"startLine":  986,
+"startColumn":  17,
+"endLine":  986,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L995",
+"region":  {
+"startLine":  995,
+"startColumn":  17,
+"endLine":  995,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  44,
@@ -888,7 +758,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  68,
@@ -901,7 +771,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  47,
@@ -914,7 +784,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  71,
@@ -927,7 +797,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  47,
@@ -940,7 +810,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  78,
@@ -953,7 +823,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  36,
@@ -966,7 +836,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  67,
@@ -979,7 +849,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L266",
 "region":  {
 "startLine":  266,
 "startColumn":  38,
@@ -992,7 +862,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L266",
 "region":  {
 "startLine":  266,
 "startColumn":  69,
@@ -1005,7 +875,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  44,
@@ -1018,7 +888,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  68,
@@ -1031,7 +901,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  54,
@@ -1044,7 +914,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  78,
@@ -1057,7 +927,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  50,
@@ -1070,7 +940,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  74,
@@ -1083,7 +953,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  43,
@@ -1096,7 +966,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  67,
@@ -1109,7 +979,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  36,
@@ -1122,7 +992,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  67,
@@ -1135,7 +1005,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  37,
@@ -1148,7 +1018,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  61,
@@ -1161,7 +1031,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L410",
 "region":  {
 "startLine":  410,
 "startColumn":  37,
@@ -1174,7 +1044,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L410",
 "region":  {
 "startLine":  410,
 "startColumn":  68,
@@ -1187,7 +1057,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  17,
@@ -1200,7 +1070,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  20,
@@ -1213,7 +1083,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  41,
@@ -1226,7 +1096,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  62,
@@ -1239,7 +1109,33 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  33,
+"endLine":  53,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  64,
+"endLine":  53,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L541",
 "region":  {
 "startLine":  541,
 "startColumn":  31,
@@ -1252,7 +1148,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L541",
 "region":  {
 "startLine":  541,
 "startColumn":  62,
@@ -1265,7 +1161,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L554",
 "region":  {
 "startLine":  554,
 "startColumn":  34,
@@ -1278,7 +1174,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L554",
 "region":  {
 "startLine":  554,
 "startColumn":  65,
@@ -1291,7 +1187,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L558",
 "region":  {
 "startLine":  558,
 "startColumn":  36,
@@ -1304,7 +1200,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L558",
 "region":  {
 "startLine":  558,
 "startColumn":  67,
@@ -1317,7 +1213,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L562",
 "region":  {
 "startLine":  562,
 "startColumn":  36,
@@ -1330,7 +1226,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L562",
 "region":  {
 "startLine":  562,
 "startColumn":  67,
@@ -1343,7 +1239,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L566",
 "region":  {
 "startLine":  566,
 "startColumn":  38,
@@ -1356,7 +1252,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L566",
 "region":  {
 "startLine":  566,
 "startColumn":  69,
@@ -1369,7 +1265,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L570",
 "region":  {
 "startLine":  570,
 "startColumn":  37,
@@ -1382,7 +1278,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L570",
 "region":  {
 "startLine":  570,
 "startColumn":  68,
@@ -1395,7 +1291,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L579",
 "region":  {
 "startLine":  579,
 "startColumn":  48,
@@ -1408,7 +1304,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L579",
 "region":  {
 "startLine":  579,
 "startColumn":  79,
@@ -1421,7 +1317,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L588",
 "region":  {
 "startLine":  588,
 "startColumn":  39,
@@ -1434,7 +1330,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L588",
 "region":  {
 "startLine":  588,
 "startColumn":  70,
@@ -1447,479 +1343,11 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L61",
 "region":  {
-"startLine":  612,
-"startColumn":  31,
-"endLine":  612,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
-"region":  {
-"startLine":  612,
-"startColumn":  62,
-"endLine":  612,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
-"region":  {
-"startLine":  615,
-"startColumn":  31,
-"endLine":  615,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
-"region":  {
-"startLine":  615,
-"startColumn":  62,
-"endLine":  615,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
-"region":  {
-"startLine":  619,
-"startColumn":  31,
-"endLine":  619,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
-"region":  {
-"startLine":  619,
-"startColumn":  62,
-"endLine":  619,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgHelpTips.vb",
-"region":  {
-"startLine":  5,
-"startColumn":  33,
-"endLine":  5,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgHelpTips.vb",
-"region":  {
-"startLine":  5,
-"startColumn":  64,
-"endLine":  5,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgHelpTips.vb",
-"region":  {
-"startLine":  10,
-"startColumn":  37,
-"endLine":  10,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgHelpTips.vb",
-"region":  {
-"startLine":  10,
-"startColumn":  68,
-"endLine":  10,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  34,
-"startColumn":  33,
-"endLine":  34,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  34,
-"startColumn":  64,
-"endLine":  34,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  38,
-"startColumn":  45,
-"endLine":  38,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  38,
-"startColumn":  69,
-"endLine":  38,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  44,
-"startColumn":  37,
-"endLine":  44,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  44,
-"startColumn":  68,
-"endLine":  44,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  49,
-"startColumn":  38,
-"endLine":  49,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  49,
-"startColumn":  69,
-"endLine":  49,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  65,
-"startColumn":  33,
-"endLine":  65,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  65,
-"startColumn":  64,
-"endLine":  65,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  88,
-"startColumn":  37,
-"endLine":  88,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  88,
-"startColumn":  68,
-"endLine":  88,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  96,
-"startColumn":  39,
-"endLine":  96,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
-"region":  {
-"startLine":  96,
-"startColumn":  70,
-"endLine":  96,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgTVBulkRename.vb",
-"region":  {
-"startLine":  6,
-"startColumn":  33,
-"endLine":  6,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgTVBulkRename.vb",
-"region":  {
-"startLine":  6,
-"startColumn":  64,
-"endLine":  6,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgTVBulkRename.vb",
-"region":  {
-"startLine":  11,
-"startColumn":  37,
-"endLine":  11,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgTVBulkRename.vb",
-"region":  {
-"startLine":  11,
-"startColumn":  68,
-"endLine":  11,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgTVBulkRename.vb",
-"region":  {
-"startLine":  16,
-"startColumn":  38,
-"endLine":  16,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgTVBulkRename.vb",
-"region":  {
-"startLine":  16,
-"startColumn":  69,
-"endLine":  16,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
-"region":  {
-"startLine":  27,
-"startColumn":  39,
-"endLine":  27,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
-"region":  {
-"startLine":  27,
-"startColumn":  63,
-"endLine":  27,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
-"region":  {
-"startLine":  35,
-"startColumn":  46,
-"endLine":  35,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
-"region":  {
-"startLine":  35,
-"startColumn":  77,
-"endLine":  35,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
-"region":  {
-"startLine":  39,
-"startColumn":  43,
-"endLine":  39,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
-"region":  {
-"startLine":  39,
-"startColumn":  74,
-"endLine":  39,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
-"region":  {
-"startLine":  43,
+"startLine":  61,
 "startColumn":  49,
-"endLine":  43,
+"endLine":  61,
 "endColumn":  54
 }
 }
@@ -1928,12 +1356,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L61",
 "region":  {
-"startLine":  43,
-"startColumn":  80,
-"endLine":  43,
-"endColumn":  85
+"startLine":  61,
+"startColumn":  73,
+"endLine":  61,
+"endColumn":  78
 }
 }
 },
@@ -1941,12 +1369,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L612",
 "region":  {
-"startLine":  47,
-"startColumn":  43,
-"endLine":  47,
-"endColumn":  48
+"startLine":  612,
+"startColumn":  31,
+"endLine":  612,
+"endColumn":  36
 }
 }
 },
@@ -1954,12 +1382,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L612",
 "region":  {
-"startLine":  47,
-"startColumn":  74,
-"endLine":  47,
-"endColumn":  79
+"startLine":  612,
+"startColumn":  62,
+"endLine":  612,
+"endColumn":  67
 }
 }
 },
@@ -1967,12 +1395,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L615",
 "region":  {
-"startLine":  51,
-"startColumn":  47,
-"endLine":  51,
-"endColumn":  52
+"startLine":  615,
+"startColumn":  31,
+"endLine":  615,
+"endColumn":  36
 }
 }
 },
@@ -1980,12 +1408,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L615",
 "region":  {
-"startLine":  51,
-"startColumn":  78,
-"endLine":  51,
-"endColumn":  83
+"startLine":  615,
+"startColumn":  62,
+"endLine":  615,
+"endColumn":  67
 }
 }
 },
@@ -1993,12 +1421,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L619",
 "region":  {
-"startLine":  55,
-"startColumn":  48,
-"endLine":  55,
-"endColumn":  53
+"startLine":  619,
+"startColumn":  31,
+"endLine":  619,
+"endColumn":  36
 }
 }
 },
@@ -2006,12 +1434,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L619",
 "region":  {
-"startLine":  55,
-"startColumn":  79,
-"endLine":  55,
-"endColumn":  84
+"startLine":  619,
+"startColumn":  62,
+"endLine":  619,
+"endColumn":  67
 }
 }
 },
@@ -2019,7 +1447,33 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  35,
+"endLine":  67,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  66,
+"endLine":  67,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  44,
@@ -2032,7 +1486,553 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  68,
+"endLine":  71,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  35,
+"endLine":  76,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  66,
+"endLine":  76,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgHelpTips.vb#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  37,
+"endLine":  10,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgHelpTips.vb#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  68,
+"endLine":  10,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgHelpTips.vb#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  33,
+"endLine":  5,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgHelpTips.vb#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  64,
+"endLine":  5,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  33,
+"endLine":  34,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  64,
+"endLine":  34,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  45,
+"endLine":  38,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  69,
+"endLine":  38,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  37,
+"endLine":  44,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  68,
+"endLine":  44,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  38,
+"endLine":  49,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  69,
+"endLine":  49,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  33,
+"endLine":  65,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  64,
+"endLine":  65,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  37,
+"endLine":  88,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  68,
+"endLine":  88,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  39,
+"endLine":  96,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  70,
+"endLine":  96,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgTVBulkRename.vb#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  37,
+"endLine":  11,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgTVBulkRename.vb#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  68,
+"endLine":  11,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgTVBulkRename.vb#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  38,
+"endLine":  16,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgTVBulkRename.vb#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  69,
+"endLine":  16,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgTVBulkRename.vb#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  33,
+"endLine":  6,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgTVBulkRename.vb#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  64,
+"endLine":  6,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  39,
+"endLine":  27,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  63,
+"endLine":  27,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  46,
+"endLine":  35,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  77,
+"endLine":  35,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  43,
+"endLine":  39,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  74,
+"endLine":  39,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  49,
+"endLine":  43,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  80,
+"endLine":  43,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  43,
+"endLine":  47,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  74,
+"endLine":  47,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  47,
+"endLine":  51,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  78,
+"endLine":  51,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  48,
+"endLine":  55,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  79,
+"endLine":  55,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  44,
+"endLine":  71,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  75,
@@ -2045,7 +2045,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  46,
@@ -2058,7 +2058,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  77,
@@ -2071,7 +2071,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  40,
@@ -2084,7 +2084,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  71,
@@ -2097,7 +2097,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  35,
@@ -2110,7 +2110,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  66,
@@ -2123,85 +2123,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
-"region":  {
-"startLine":  43,
-"startColumn":  31,
-"endLine":  43,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
-"region":  {
-"startLine":  45,
-"startColumn":  39,
-"endLine":  45,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
-"region":  {
-"startLine":  45,
-"startColumn":  61,
-"endLine":  45,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
-"region":  {
-"startLine":  45,
-"startColumn":  85,
-"endLine":  45,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
-"region":  {
-"startLine":  63,
-"startColumn":  13,
-"endLine":  63,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
-"region":  {
-"startLine":  91,
-"startColumn":  32,
-"endLine":  91,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  45,
@@ -2214,7 +2136,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  76,
@@ -2227,7 +2149,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  47,
@@ -2240,7 +2162,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  78,
@@ -2253,7 +2175,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  37,
@@ -2266,7 +2188,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  61,
@@ -2279,7 +2201,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  14,
@@ -2292,7 +2214,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  45,
@@ -2305,7 +2227,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  34,
@@ -2318,7 +2240,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  65,
@@ -2331,12 +2253,90 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  33,
 "endLine":  244,
 "endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  31,
+"endLine":  43,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  39,
+"endLine":  45,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  61,
+"endLine":  45,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  85,
+"endLine":  45,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  13,
+"endLine":  63,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  32,
+"endLine":  91,
+"endColumn":  37
 }
 }
 }

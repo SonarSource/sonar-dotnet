@@ -4,7 +4,7 @@
 "id":  "S4581",
 "message":  "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this GUID instantiation.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L495",
 "region":  {
 "startLine":  495,
 "startColumn":  24,

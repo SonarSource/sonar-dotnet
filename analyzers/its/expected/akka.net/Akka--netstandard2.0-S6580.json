@@ -4,7 +4,7 @@
 "id":  "S6580",
 "message":  "Use a format provider when parsing date and time.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\OpenCircuitException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/OpenCircuitException.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  33,

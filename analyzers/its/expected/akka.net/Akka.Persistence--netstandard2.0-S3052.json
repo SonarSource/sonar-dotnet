@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_asyncTaskRunning', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  40,
@@ -17,7 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_pendingStashingPersistInvocations', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  57,
@@ -30,7 +30,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_delivered', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteJournal.cs#L437",
 "region":  {
 "startLine":  437,
 "startColumn":  37,

@@ -4,7 +4,7 @@
 "id":  "S2259",
 "message":  "'obj' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\GeneratedCode.VB\NotIgnored.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/NotIgnored.vb#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  31,
@@ -17,7 +17,7 @@
 "id":  "S2259",
 "message":  "'obj' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\GeneratedCode.VB\Region.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/Region.vb#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  27,

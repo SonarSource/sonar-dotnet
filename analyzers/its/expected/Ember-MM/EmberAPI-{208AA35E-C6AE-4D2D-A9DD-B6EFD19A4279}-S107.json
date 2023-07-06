@@ -4,7 +4,7 @@
 "id":  "S107",
 "message":  "Function has 8 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  34,
@@ -17,7 +17,7 @@
 "id":  "S107",
 "message":  "Function has 10 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  32,
@@ -30,7 +30,7 @@
 "id":  "S107",
 "message":  "Function has 8 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  31,
@@ -43,7 +43,7 @@
 "id":  "S107",
 "message":  "Function has 8 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S107",
 "message":  "Function has 8 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  36,
@@ -69,7 +69,7 @@
 "id":  "S107",
 "message":  "Function has 8 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L495",
 "region":  {
 "startLine":  495,
 "startColumn":  33,
@@ -82,7 +82,7 @@
 "id":  "S107",
 "message":  "Function has 9 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L519",
 "region":  {
 "startLine":  519,
 "startColumn":  38,

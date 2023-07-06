@@ -4,7 +4,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultNancyAspNetBootstrapper.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/DefaultNancyAspNetBootstrapper.cs#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NancyHttpRequestHandler.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHttpRequestHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/NancyHttpRequestHandler.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  1,

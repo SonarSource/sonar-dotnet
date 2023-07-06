@@ -4,7 +4,7 @@
 "id":  "S2365",
 "message":  "Refactor 'OperationsSerialization' into a method, properties should not copy collections.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L759",
 "region":  {
 "startLine":  759,
 "startColumn":  91,

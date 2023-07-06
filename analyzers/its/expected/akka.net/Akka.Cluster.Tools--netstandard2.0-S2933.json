@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make '_log' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make '_checkDeadlinesTask' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S2933",
 "message":  "Make '_registry' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  46,

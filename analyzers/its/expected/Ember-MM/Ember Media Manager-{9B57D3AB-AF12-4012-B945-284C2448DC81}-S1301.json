@@ -4,7 +4,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  37,
@@ -17,7 +17,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgErrorViewer.vb#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2111",
 "region":  {
 "startLine":  2111,
 "startColumn":  9,
@@ -43,20 +43,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  184,
-"startColumn":  17,
-"endLine":  184,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1302",
 "region":  {
 "startLine":  1302,
 "startColumn":  21,
@@ -69,7 +56,20 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L184",
+"region":  {
+"startLine":  184,
+"startColumn":  17,
+"endLine":  184,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1927",
 "region":  {
 "startLine":  1927,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1996",
 "region":  {
 "startLine":  1996,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2513",
 "region":  {
 "startLine":  2513,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3304",
 "region":  {
 "startLine":  3304,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3437",
 "region":  {
 "startLine":  3437,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3899",
 "region":  {
 "startLine":  3899,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4026",
 "region":  {
 "startLine":  4026,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5787",
 "region":  {
 "startLine":  5787,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5792",
 "region":  {
 "startLine":  5792,
 "startColumn":  17,
@@ -186,7 +186,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6618",
 "region":  {
 "startLine":  6618,
 "startColumn":  9,
@@ -199,7 +199,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7448",
 "region":  {
 "startLine":  7448,
 "startColumn":  17,
@@ -212,7 +212,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8418",
 "region":  {
 "startLine":  8418,
 "startColumn":  9,
@@ -225,7 +225,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8790",
 "region":  {
 "startLine":  8790,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8799",
 "region":  {
 "startLine":  8799,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8834",
 "region":  {
 "startLine":  8834,
 "startColumn":  17,

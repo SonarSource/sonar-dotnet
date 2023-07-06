@@ -4,7 +4,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field 'viewEngineStartupContext' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\LiquidNancyFileSystem.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  51,

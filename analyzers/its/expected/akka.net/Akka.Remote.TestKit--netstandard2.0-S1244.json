@@ -4,7 +4,7 @@
 "id":  "S1244",
 "message":  "Do not check floating point equality with exact values, use a range instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L487",
 "region":  {
 "startLine":  487,
 "startColumn":  55,

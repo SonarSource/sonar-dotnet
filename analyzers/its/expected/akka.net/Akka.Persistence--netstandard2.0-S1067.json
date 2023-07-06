@@ -4,7 +4,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L643-L647",
 "region":  {
 "startLine":  643,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L170-L175",
 "region":  {
 "startLine":  170,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L382-L388",
 "region":  {
 "startLine":  382,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L400-L406",
 "region":  {
 "startLine":  400,
 "startColumn":  20,
@@ -56,7 +56,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L30-L31",
 "region":  {
 "startLine":  30,
 "startColumn":  43,
@@ -69,7 +69,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L83-L85",
 "region":  {
 "startLine":  83,
 "startColumn":  26,

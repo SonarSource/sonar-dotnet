@@ -4,7 +4,7 @@
 "id":  "S2275",
 "message":  "Invalid string format, opening curly brace can only be followed by a digit or an opening curly brace.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  53,

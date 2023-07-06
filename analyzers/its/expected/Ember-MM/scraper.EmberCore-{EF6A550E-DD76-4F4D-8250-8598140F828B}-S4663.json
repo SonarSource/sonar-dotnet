@@ -4,7 +4,7 @@
 "id":  "S4663",
 "message":  "Remove this empty comment",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  104,

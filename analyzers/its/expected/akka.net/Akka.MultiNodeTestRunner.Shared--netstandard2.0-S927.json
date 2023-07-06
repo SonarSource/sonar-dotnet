@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'log' to 'specLog' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  74,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'beginNewSpec' to 'newSpec' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TeamCityMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TeamCityMessageSinkActor.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  60,
@@ -30,7 +30,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'logMessage' to 'logMessageFragment' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TestCoordinatorEnabledMessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TestCoordinatorEnabledMessageSink.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  85,

@@ -4,7 +4,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'Empty' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'TimestampNotSpecified' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  32,

@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'path' to 'actorPath' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  53,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'path' to 'actorPath' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L262",
 "region":  {
 "startLine":  262,
 "startColumn":  56,
@@ -30,7 +30,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'systemMessage' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L513",
 "region":  {
 "startLine":  513,
 "startColumn":  54,
@@ -43,7 +43,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'path' to 'actorPath' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  52,
@@ -56,7 +56,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'childRestartStats' to 'stats' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildrenContainerBase.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  72,
@@ -69,7 +69,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'childRestartStats' to 'stats' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\EmptyChildrenContainer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/EmptyChildrenContainer.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  72,
@@ -82,7 +82,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'actorRef' to 'target' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L477",
 "region":  {
 "startLine":  477,
 "startColumn":  36,
@@ -95,7 +95,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'systemMessage' to 'message' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RootGuardianSupervisor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RootGuardianSupervisor.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  63,
@@ -108,7 +108,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'msg' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/ActorState.cs#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  72,
@@ -121,7 +121,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'msg' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/ActorState.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  72,
@@ -134,7 +134,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'strings' to 'defaultPaths' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/CachingConfig.cs#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  75,
@@ -147,7 +147,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'buffers' to 'buf' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L202",
 "region":  {
 "startLine":  202,
 "startColumn":  53,
@@ -160,7 +160,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'buffers' to 'buf' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DisabledBufferPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DisabledBufferPool.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  53,
@@ -173,7 +173,7 @@
 "id":  "S927",
 "message":  "Rename parameter 's' to 'ds' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L481",
 "region":  {
 "startLine":  481,
 "startColumn":  64,
@@ -186,7 +186,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'sys' to 'system' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoundRobin.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  58,
@@ -199,7 +199,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'envelope' to 'message' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RoutedActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoutedActorCell.cs#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  51,
@@ -212,7 +212,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterActor.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  54,
@@ -225,7 +225,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'sys' to 'system' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L526",
 "region":  {
 "startLine":  526,
 "startColumn":  58,
@@ -238,33 +238,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  56,
-"startColumn":  30,
-"endLine":  56,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S927",
-"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
-"region":  {
-"startLine":  82,
-"startColumn":  30,
-"endLine":  82,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S927",
-"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  30,
@@ -277,7 +251,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  30,
@@ -290,7 +264,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  30,
@@ -303,7 +277,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  30,
@@ -316,7 +290,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L257",
 "region":  {
 "startLine":  257,
 "startColumn":  30,
@@ -329,7 +303,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  30,
@@ -342,7 +316,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L348",
 "region":  {
 "startLine":  348,
 "startColumn":  30,
@@ -355,7 +329,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  30,
@@ -368,7 +342,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  30,
@@ -381,7 +355,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  30,
@@ -394,7 +368,20 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  30,
+"endLine":  56,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L566",
 "region":  {
 "startLine":  566,
 "startColumn":  30,
@@ -407,7 +394,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L628",
 "region":  {
 "startLine":  628,
 "startColumn":  30,
@@ -420,7 +407,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L693",
 "region":  {
 "startLine":  693,
 "startColumn":  30,
@@ -433,11 +420,24 @@
 "id":  "S927",
 "message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L761",
 "region":  {
 "startLine":  761,
 "startColumn":  30,
 "endLine":  761,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'value' to 'message' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  30,
+"endLine":  82,
 "endColumn":  35
 }
 }

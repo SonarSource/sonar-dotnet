@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'ActorOfAsTestFSMRef' to match pascal case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  53,
@@ -17,7 +17,7 @@
 "id":  "S100",
 "message":  "Rename method 'ActorOfAsTestFSMRef' to match pascal case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  53,
@@ -30,7 +30,7 @@
 "id":  "S100",
 "message":  "Rename method 'ActorOfAsTestFSMRef' to match pascal case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  53,
@@ -43,7 +43,7 @@
 "id":  "S100",
 "message":  "Rename method 'ActorOfAsTestFSMRef' to match pascal case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  53,
@@ -56,7 +56,7 @@
 "id":  "S100",
 "message":  "Rename method 'ActorOfAsTestFSMRef' to match pascal case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  53,
@@ -69,7 +69,7 @@
 "id":  "S100",
 "message":  "Rename method 'ActorOfAsTestFSMRef' to match pascal case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  53,

@@ -4,7 +4,7 @@
 "id":  "S1199",
 "message":  "Extract this nested code block into a separate method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/DaemonMsgCreateSerializer.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  13,

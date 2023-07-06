@@ -4,7 +4,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AkkaProtocolSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AkkaProtocolSettings.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  124,
@@ -17,7 +17,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AkkaProtocolSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AkkaProtocolSettings.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  107,
@@ -30,7 +30,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AkkaProtocolSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AkkaProtocolSettings.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  103,
@@ -43,7 +43,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AkkaProtocolSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AkkaProtocolSettings.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  103,
@@ -56,7 +56,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/DeadlineFailureDetector.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  68,
@@ -69,7 +69,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/DeadlineFailureDetector.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  60,
@@ -80,22 +80,9 @@
 },
 {
 "id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'handleOption'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
-"startLine":  821,
-"startColumn":  51,
-"endLine":  821,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'reliableDeliverySupervisor'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L1164",
 "region":  {
 "startLine":  1164,
 "startColumn":  29,
@@ -106,9 +93,22 @@
 },
 {
 "id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'handleOption'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L821",
+"region":  {
+"startLine":  821,
+"startColumn":  51,
+"endLine":  821,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  63,
@@ -121,7 +121,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  72,
@@ -134,7 +134,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  90,
@@ -147,7 +147,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  80,
@@ -160,7 +160,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteDeployer.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  60,
@@ -173,7 +173,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'def'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  113,
@@ -186,7 +186,20 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L255",
+"region":  {
+"startLine":  255,
+"startColumn":  70,
+"endLine":  255,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  81,
@@ -199,7 +212,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  74,
@@ -212,7 +225,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  74,
@@ -225,7 +238,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  77,
@@ -238,7 +251,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  73,
@@ -251,7 +264,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  82,
@@ -264,7 +277,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  82,
@@ -277,7 +290,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  80,
@@ -290,7 +303,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  94,
@@ -303,7 +316,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  88,
@@ -316,7 +329,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  82,
@@ -329,7 +342,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  72,
@@ -342,7 +355,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  118,
@@ -355,7 +368,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  104,
@@ -368,7 +381,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  103,
@@ -381,7 +394,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  98,
@@ -394,7 +407,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  80,
@@ -407,7 +420,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  87,
@@ -420,7 +433,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  116,
@@ -433,7 +446,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  99,
@@ -446,7 +459,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  122,
@@ -459,7 +472,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  117,
@@ -470,22 +483,9 @@
 },
 {
 "id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
-"region":  {
-"startLine":  255,
-"startColumn":  70,
-"endLine":  255,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'repeat'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L873",
 "region":  {
 "startLine":  873,
 "startColumn":  76,
@@ -496,139 +496,9 @@
 },
 {
 "id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
-"region":  {
-"startLine":  63,
-"startColumn":  53,
-"endLine":  63,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
-"region":  {
-"startLine":  65,
-"startColumn":  66,
-"endLine":  65,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  59,
-"endLine":  66,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
-"region":  {
-"startLine":  81,
-"startColumn":  60,
-"endLine":  81,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'def'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
-"region":  {
-"startLine":  89,
-"startColumn":  86,
-"endLine":  89,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
-"region":  {
-"startLine":  91,
-"startColumn":  63,
-"endLine":  91,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
-"region":  {
-"startLine":  96,
-"startColumn":  99,
-"endLine":  96,
-"endColumn":  104
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'def'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
-"region":  {
-"startLine":  97,
-"startColumn":  92,
-"endLine":  97,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'def'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
-"region":  {
-"startLine":  98,
-"startColumn":  86,
-"endLine":  98,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'def'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
-"region":  {
-"startLine":  99,
-"startColumn":  108,
-"endLine":  99,
-"endColumn":  112
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'def'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  106,
@@ -641,7 +511,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  104,
@@ -654,7 +524,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  101,
@@ -667,7 +537,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  55,
@@ -680,7 +550,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  57,
@@ -693,7 +563,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  74,
@@ -706,7 +576,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  83,
@@ -719,7 +589,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  64,
@@ -732,7 +602,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  91,
@@ -745,7 +615,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L302",
 "region":  {
 "startLine":  302,
 "startColumn":  66,
@@ -758,7 +628,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L311",
 "region":  {
 "startLine":  311,
 "startColumn":  75,
@@ -771,7 +641,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L312",
 "region":  {
 "startLine":  312,
 "startColumn":  83,
@@ -784,7 +654,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L314",
 "region":  {
 "startLine":  314,
 "startColumn":  82,
@@ -797,7 +667,137 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  53,
+"endLine":  63,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  66,
+"endLine":  65,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  59,
+"endLine":  66,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  60,
+"endLine":  81,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'def'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  86,
+"endLine":  89,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  63,
+"endLine":  91,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  99,
+"endLine":  96,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'def'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  92,
+"endLine":  97,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'def'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  86,
+"endLine":  98,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'def'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  108,
+"endLine":  99,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  107,
@@ -808,22 +808,9 @@
 },
 {
 "id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'def'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
-"region":  {
-"startLine":  72,
-"startColumn":  59,
-"endLine":  72,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  46,
@@ -834,9 +821,22 @@
 },
 {
 "id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'def'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  59,
+"endLine":  72,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'repeat'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1319",
 "region":  {
 "startLine":  1319,
 "startColumn":  66,

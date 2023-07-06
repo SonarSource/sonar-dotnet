@@ -4,7 +4,7 @@
 "id":  "S2326",
 "message":  "'T' is not used in the interface.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Key.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Key.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  27,

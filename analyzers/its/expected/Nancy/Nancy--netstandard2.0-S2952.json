@@ -4,7 +4,7 @@
 "id":  "S2952",
 "message":  "Move this 'Dispose' call into this class' own 'Dispose' method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L487",
 "region":  {
 "startLine":  487,
 "startColumn":  29,

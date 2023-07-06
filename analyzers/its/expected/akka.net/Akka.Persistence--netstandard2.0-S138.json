@@ -2,22 +2,9 @@
 "issues":  [
 {
 "id":  "S138",
-"message":  "This method 'RecoveryStarted' has 92 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
-"region":  {
-"startLine":  64,
-"startColumn":  35,
-"endLine":  64,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S138",
 "message":  "This method 'Recovering' has 93 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  35,
@@ -28,9 +15,22 @@
 },
 {
 "id":  "S138",
+"message":  "This method 'RecoveryStarted' has 92 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  35,
+"endLine":  64,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S138",
 "message":  "This method 'Receive' has 114 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S138",
 "message":  "This method 'ReceiveSnapshotStore' has 138 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  22,

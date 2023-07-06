@@ -4,7 +4,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIErrorLog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIErrorLog.vb#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  63,

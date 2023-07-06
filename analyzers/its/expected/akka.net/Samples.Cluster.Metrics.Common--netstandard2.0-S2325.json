@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'Factorial' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Cluster\Metrics\Samples.Cluster.Metrics.Common\FactorialBackend.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/Metrics/Samples.Cluster.Metrics.Common/FactorialBackend.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  47,

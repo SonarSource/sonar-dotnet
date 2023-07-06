@@ -4,7 +4,7 @@
 "id":  "S1645",
 "message":  "Switch this use of the '+' operator to the '&'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  63,
@@ -17,7 +17,7 @@
 "id":  "S1645",
 "message":  "Switch this use of the '+' operator to the '&'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  86,

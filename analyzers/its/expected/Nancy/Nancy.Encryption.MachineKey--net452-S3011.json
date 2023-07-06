@@ -4,7 +4,7 @@
 "id":  "S3011",
 "message":  "Make sure that this accessibility bypass is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Encryption.MachineKey\MachineKeyHmacProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Encryption.MachineKey/MachineKeyHmacProvider.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  69,

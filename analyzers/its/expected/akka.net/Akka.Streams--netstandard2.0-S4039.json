@@ -4,7 +4,7 @@
 "id":  "S4039",
 "message":  "Make 'ActorSubscriptionWithCursor' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ISubscriptionWithCursor<TIn>.Subscriber'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorPublisher.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  55,

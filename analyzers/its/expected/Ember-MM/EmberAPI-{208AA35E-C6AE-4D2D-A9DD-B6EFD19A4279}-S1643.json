@@ -4,7 +4,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L1084",
 "region":  {
 "startLine":  1084,
 "startColumn":  21,

@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'NoSender', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  51,
@@ -17,7 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_runningClrHook', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  47,
@@ -30,7 +30,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_generation', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L1002",
 "region":  {
 "startLine":  1002,
 "startColumn":  34,
@@ -43,7 +43,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_inboxNr', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  37,
@@ -56,7 +56,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'Aborting', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  41,
@@ -69,7 +69,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'None', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  43,
@@ -82,7 +82,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_startTime', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  33,
@@ -95,7 +95,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_threadRunning', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  44,
@@ -108,7 +108,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_readers', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  30,
@@ -121,7 +121,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_shuttingDown', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  36,
@@ -134,7 +134,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_actor', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  43,
@@ -147,7 +147,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_systemQueueDoNotCallMeDirectly', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  72,
@@ -160,7 +160,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_mailboxSizeWarningIssued', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  48,
@@ -173,7 +173,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_mailboxNonZeroPushTimeoutWarningIssued', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  62,
@@ -186,7 +186,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_parallelWorkers', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  47,
@@ -199,7 +199,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_totalSizeInBytes', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L964",
 "region":  {
 "startLine":  964,
 "startColumn":  43,
@@ -212,7 +212,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_readingSuspended', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  40,
@@ -225,7 +225,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_pendingSend', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  53,
@@ -238,7 +238,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'UsePoolDispatcher', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  56,
@@ -251,33 +251,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_created', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\FastLazy.cs",
-"region":  {
-"startLine":  27,
-"startColumn":  31,
-"endLine":  27,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_creating', the compiler will do that for you.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\FastLazy.cs",
-"region":  {
-"startLine":  28,
-"startColumn":  32,
-"endLine":  28,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_created', the compiler will do that for you.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\FastLazy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/FastLazy.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  31,
@@ -290,11 +264,37 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_creating', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\FastLazy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/FastLazy.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  32,
 "endLine":  101,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_created', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/FastLazy.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  31,
+"endLine":  27,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_creating', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/FastLazy.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  32,
+"endLine":  28,
 "endColumn":  35
 }
 }

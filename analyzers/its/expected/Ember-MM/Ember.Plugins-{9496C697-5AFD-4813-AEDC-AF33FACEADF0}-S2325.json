@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'PreMovieInfoScraperAction' a static method.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Dummy\DummyPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  47,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'PostMovieInfoScraperAction' a static method.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Dummy\DummyPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  36,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'PreMovieImageScraperAction' a static method.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Dummy\DummyPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  48,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'PostMovieImageScraperAction' a static method.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Dummy\DummyPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  36,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'Settings' a static property.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  36,

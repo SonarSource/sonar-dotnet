@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'GetDisplayAttribute' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorAdapter.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  34,

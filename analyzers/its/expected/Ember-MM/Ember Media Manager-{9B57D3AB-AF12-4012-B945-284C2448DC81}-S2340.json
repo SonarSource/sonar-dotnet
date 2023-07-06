@@ -4,7 +4,7 @@
 "id":  "S2340",
 "message":  "Use a structured loop instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  25,

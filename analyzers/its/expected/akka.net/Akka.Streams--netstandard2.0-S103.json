@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 203 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L499",
 "region":  {
 "startLine":  499,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 216 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 212 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S103",
 "message":  "Split this 240 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S103",
 "message":  "Split this 268 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S103",
 "message":  "Split this 296 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S103",
 "message":  "Split this 228 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1466",
 "region":  {
 "startLine":  1466,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S103",
 "message":  "Split this 204 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L508",
 "region":  {
 "startLine":  508,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S103",
 "message":  "Split this 201 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S103",
 "message":  "Split this 255 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S103",
 "message":  "Split this 252 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  1,
@@ -186,85 +186,7 @@
 "id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
-"region":  {
-"startLine":  35,
-"startColumn":  1,
-"endLine":  35,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  1,
-"endLine":  52,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
-"region":  {
-"startLine":  53,
-"startColumn":  1,
-"endLine":  53,
-"endColumn":  223
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
-"region":  {
-"startLine":  69,
-"startColumn":  1,
-"endLine":  69,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
-"region":  {
-"startLine":  85,
-"startColumn":  1,
-"endLine":  85,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
-"region":  {
-"startLine":  86,
-"startColumn":  1,
-"endLine":  86,
-"endColumn":  223
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  1,
@@ -277,7 +199,7 @@
 "id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  1,
@@ -290,7 +212,7 @@
 "id":  "S103",
 "message":  "Split this 222 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  1,
@@ -303,7 +225,7 @@
 "id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L275",
 "region":  {
 "startLine":  275,
 "startColumn":  1,
@@ -316,7 +238,7 @@
 "id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  1,
@@ -329,7 +251,7 @@
 "id":  "S103",
 "message":  "Split this 222 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  1,
@@ -342,7 +264,7 @@
 "id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  1,
@@ -355,7 +277,7 @@
 "id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  1,
@@ -368,7 +290,7 @@
 "id":  "S103",
 "message":  "Split this 222 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  1,
@@ -381,7 +303,7 @@
 "id":  "S103",
 "message":  "Split this 206 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  1,
@@ -392,9 +314,87 @@
 },
 {
 "id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  1,
+"endLine":  52,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  223
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  1,
+"endLine":  69,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  1,
+"endLine":  86,
+"endColumn":  223
+}
+}
+},
+{
+"id":  "S103",
 "message":  "Split this 211 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Retry.cs#L288",
 "region":  {
 "startLine":  288,
 "startColumn":  1,
@@ -407,7 +407,7 @@
 "id":  "S103",
 "message":  "Split this 222 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  1,
@@ -420,7 +420,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  1,
@@ -433,7 +433,7 @@
 "id":  "S103",
 "message":  "Split this 208 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L375",
 "region":  {
 "startLine":  375,
 "startColumn":  1,
@@ -446,7 +446,7 @@
 "id":  "S103",
 "message":  "Split this 215 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L759",
 "region":  {
 "startLine":  759,
 "startColumn":  1,
@@ -459,7 +459,7 @@
 "id":  "S103",
 "message":  "Split this 262 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L784",
 "region":  {
 "startLine":  784,
 "startColumn":  1,
@@ -470,22 +470,9 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
-"region":  {
-"startLine":  83,
-"startColumn":  1,
-"endLine":  83,
-"endColumn":  216
-}
-}
-},
-{
-"id":  "S103",
 "message":  "Split this 202 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  1,
@@ -496,9 +483,22 @@
 },
 {
 "id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  1,
+"endLine":  83,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
 "message":  "Split this 264 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2075",
 "region":  {
 "startLine":  2075,
 "startColumn":  1,
@@ -511,7 +511,7 @@
 "id":  "S103",
 "message":  "Split this 265 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2087",
 "region":  {
 "startLine":  2087,
 "startColumn":  1,
@@ -522,22 +522,9 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  1,
-"endLine":  93,
-"endColumn":  206
-}
-}
-},
-{
-"id":  "S103",
 "message":  "Split this 209 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1398",
 "region":  {
 "startLine":  1398,
 "startColumn":  1,
@@ -550,7 +537,7 @@
 "id":  "S103",
 "message":  "Split this 212 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1479",
 "region":  {
 "startLine":  1479,
 "startColumn":  1,
@@ -563,7 +550,7 @@
 "id":  "S103",
 "message":  "Split this 215 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1760",
 "region":  {
 "startLine":  1760,
 "startColumn":  1,
@@ -576,7 +563,20 @@
 "id":  "S103",
 "message":  "Split this 205 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Timed.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  1,
+"endLine":  93,
+"endColumn":  206
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Extra/Timed.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  1,
@@ -589,7 +589,7 @@
 "id":  "S103",
 "message":  "Split this 201 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  1,
@@ -602,7 +602,7 @@
 "id":  "S103",
 "message":  "Split this 229 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L258",
 "region":  {
 "startLine":  258,
 "startColumn":  1,
@@ -615,7 +615,7 @@
 "id":  "S103",
 "message":  "Split this 212 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L467",
 "region":  {
 "startLine":  467,
 "startColumn":  1,
@@ -628,7 +628,7 @@
 "id":  "S103",
 "message":  "Split this 214 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L519",
 "region":  {
 "startLine":  519,
 "startColumn":  1,
@@ -641,7 +641,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  1,
@@ -654,7 +654,7 @@
 "id":  "S103",
 "message":  "Split this 217 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L691",
 "region":  {
 "startLine":  691,
 "startColumn":  1,
@@ -667,7 +667,7 @@
 "id":  "S103",
 "message":  "Split this 217 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L701",
 "region":  {
 "startLine":  701,
 "startColumn":  1,
@@ -680,7 +680,7 @@
 "id":  "S103",
 "message":  "Split this 258 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L613",
 "region":  {
 "startLine":  613,
 "startColumn":  1,
@@ -693,7 +693,7 @@
 "id":  "S103",
 "message":  "Split this 253 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L266",
 "region":  {
 "startLine":  266,
 "startColumn":  1,
@@ -706,7 +706,7 @@
 "id":  "S103",
 "message":  "Split this 213 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L523",
 "region":  {
 "startLine":  523,
 "startColumn":  1,
@@ -717,27 +717,27 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  1,
-"endLine":  70,
-"endColumn":  232
-}
-}
-},
-{
-"id":  "S103",
 "message":  "Split this 211 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  1,
 "endLine":  116,
 "endColumn":  212
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  1,
+"endLine":  70,
+"endColumn":  232
 }
 }
 }

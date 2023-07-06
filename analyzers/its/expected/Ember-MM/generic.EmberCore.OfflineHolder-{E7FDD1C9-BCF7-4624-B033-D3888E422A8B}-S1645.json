@@ -4,7 +4,7 @@
 "id":  "S1645",
 "message":  "Switch this use of the '+' operator to the '&'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L468",
 "region":  {
 "startLine":  468,
 "startColumn":  21,

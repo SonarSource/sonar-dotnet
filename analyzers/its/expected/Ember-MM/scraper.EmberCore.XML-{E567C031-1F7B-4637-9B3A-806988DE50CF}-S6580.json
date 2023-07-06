@@ -4,7 +4,7 @@
 "id":  "S6580",
 "message":  "Use a format provider when parsing date and time.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  43,

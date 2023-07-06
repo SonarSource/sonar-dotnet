@@ -4,7 +4,7 @@
 "id":  "S6562",
 "message":  "Provide the "DateTimeKind" when creating this object.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/TimelineItemFactory.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  73,
@@ -17,7 +17,7 @@
 "id":  "S6562",
 "message":  "Provide the "DateTimeKind" when creating this object.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/TimelineItemFactory.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  84,
@@ -30,7 +30,7 @@
 "id":  "S6562",
 "message":  "Provide the "DateTimeKind" when creating this object.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/VisualizerRuntimeTemplate.Tree.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  38,
@@ -43,7 +43,7 @@
 "id":  "S6562",
 "message":  "Provide the "DateTimeKind" when creating this object.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/VisualizerRuntimeTemplate.Tree.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  38,
@@ -56,33 +56,7 @@
 "id":  "S6562",
 "message":  "Provide the "DateTimeKind" when creating this object.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
-"region":  {
-"startLine":  61,
-"startColumn":  45,
-"endLine":  61,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S6562",
-"message":  "Provide the "DateTimeKind" when creating this object.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
-"region":  {
-"startLine":  61,
-"startColumn":  94,
-"endLine":  61,
-"endColumn":  117
-}
-}
-},
-{
-"id":  "S6562",
-"message":  "Provide the "DateTimeKind" when creating this object.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  45,
@@ -95,7 +69,7 @@
 "id":  "S6562",
 "message":  "Provide the "DateTimeKind" when creating this object.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  94,
@@ -108,7 +82,7 @@
 "id":  "S6562",
 "message":  "Provide the "DateTimeKind" when creating this object.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  45,
@@ -121,11 +95,37 @@
 "id":  "S6562",
 "message":  "Provide the "DateTimeKind" when creating this object.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  94,
 "endLine":  350,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  45,
+"endLine":  61,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  94,
+"endLine":  61,
 "endColumn":  117
 }
 }

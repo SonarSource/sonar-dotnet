@@ -4,7 +4,7 @@
 "id":  "S2092",
 "message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S2092",
 "message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  26,

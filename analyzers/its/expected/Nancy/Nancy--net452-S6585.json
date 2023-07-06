@@ -4,7 +4,7 @@
 "id":  "S6585",
 "message":  "Do not hardcode the format specifier.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Cookies\NancyCookie.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cookies/NancyCookie.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  68,

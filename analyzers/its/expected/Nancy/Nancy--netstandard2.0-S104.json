@@ -4,7 +4,7 @@
 "id":  "S104",
 "message":  "This file has 2139 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

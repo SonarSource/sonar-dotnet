@@ -4,46 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'node' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
-"region":  {
-"startLine":  71,
-"startColumn":  38,
-"endLine":  71,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'query' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
-"region":  {
-"startLine":  83,
-"startColumn":  34,
-"endLine":  83,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'node' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
-"region":  {
-"startLine":  96,
-"startColumn":  40,
-"endLine":  96,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'node' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  26,
@@ -56,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'node' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  34,
@@ -69,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'query' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  34,
@@ -82,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'query' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  34,
@@ -93,9 +54,48 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'node' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  38,
+"endLine":  71,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'query' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  34,
+"endLine":  83,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'node' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  40,
+"endLine":  96,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actual' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  37,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'bootstrapper' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  13,
@@ -119,74 +119,9 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'multipartFormData' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  44,
-"startColumn":  34,
-"endLine":  44,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'browserContext' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  58,
-"startColumn":  56,
-"endLine":  58,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'browserContext' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  67,
-"startColumn":  13,
-"endLine":  67,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'browserContext' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  80,
-"startColumn":  55,
-"endLine":  80,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'browserContext' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  89,
-"startColumn":  13,
-"endLine":  89,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'browserContext' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  13,
@@ -199,7 +134,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cookies' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  36,
@@ -212,7 +147,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'browserContext' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  13,
@@ -225,7 +160,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'formsAuthenticationConfiguration' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  31,
@@ -238,7 +173,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'browserContext' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  13,
@@ -249,9 +184,74 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'multipartFormData' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  34,
+"endLine":  44,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'browserContext' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  56,
+"endLine":  58,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'browserContext' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  13,
+"endLine":  67,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'browserContext' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  55,
+"endLine":  80,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'browserContext' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  13,
+"endLine":  89,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextMultipartFormData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextMultipartFormData.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'response' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapper.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  32,
@@ -277,7 +277,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'bodyWrapper' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  61,
@@ -290,7 +290,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'bodyDeserializer' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  28,
@@ -303,7 +303,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'bodyWrapper' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  57,
@@ -316,7 +316,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'response' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseExtensions.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  17,
@@ -327,178 +327,9 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'container' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  170,
-"startColumn":  13,
-"endLine":  170,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'container' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  337,
-"startColumn":  17,
-"endLine":  337,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'container' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  363,
-"startColumn":  20,
-"endLine":  363,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'container' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  418,
-"startColumn":  13,
-"endLine":  418,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'applicationContainer' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  452,
-"startColumn":  13,
-"endLine":  452,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'moduleRegistrationTypes' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  540,
-"startColumn":  52,
-"endLine":  540,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'container' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  542,
-"startColumn":  17,
-"endLine":  542,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'container' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  566,
-"startColumn":  13,
-"endLine":  566,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'defaultConfigurationProviders' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  737,
-"startColumn":  62,
-"endLine":  737,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'instance' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  786,
-"startColumn":  64,
-"endLine":  786,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'dependencies' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  809,
-"startColumn":  44,
-"endLine":  809,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'dependencies' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  826,
-"startColumn":  44,
-"endLine":  826,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'dependencies' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  842,
-"startColumn":  44,
-"endLine":  842,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'routeMetadataProviders' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1428",
 "region":  {
 "startLine":  1428,
 "startColumn":  55,
@@ -509,9 +340,22 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L170",
+"region":  {
+"startLine":  170,
+"startColumn":  13,
+"endLine":  170,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'applicationStartupTypes' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1977",
 "region":  {
 "startLine":  1977,
 "startColumn":  38,
@@ -524,7 +368,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'requestStartupTypes' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L2006",
 "region":  {
 "startLine":  2006,
 "startColumn":  38,
@@ -537,7 +381,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'moduleType' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L2106",
 "region":  {
 "startLine":  2106,
 "startColumn":  57,
@@ -550,7 +394,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'module' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L2115",
 "region":  {
 "startLine":  2115,
 "startColumn":  42,
@@ -561,9 +405,165 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L337",
+"region":  {
+"startLine":  337,
+"startColumn":  17,
+"endLine":  337,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L363",
+"region":  {
+"startLine":  363,
+"startColumn":  20,
+"endLine":  363,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L418",
+"region":  {
+"startLine":  418,
+"startColumn":  13,
+"endLine":  418,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'applicationContainer' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L452",
+"region":  {
+"startLine":  452,
+"startColumn":  13,
+"endLine":  452,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'moduleRegistrationTypes' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L540",
+"region":  {
+"startLine":  540,
+"startColumn":  52,
+"endLine":  540,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L542",
+"region":  {
+"startLine":  542,
+"startColumn":  17,
+"endLine":  542,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L566",
+"region":  {
+"startLine":  566,
+"startColumn":  13,
+"endLine":  566,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'defaultConfigurationProviders' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L737",
+"region":  {
+"startLine":  737,
+"startColumn":  62,
+"endLine":  737,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'instance' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L786",
+"region":  {
+"startLine":  786,
+"startColumn":  64,
+"endLine":  786,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dependencies' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L809",
+"region":  {
+"startLine":  809,
+"startColumn":  44,
+"endLine":  809,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dependencies' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L826",
+"region":  {
+"startLine":  826,
+"startColumn":  44,
+"endLine":  826,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dependencies' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L842",
+"region":  {
+"startLine":  842,
+"startColumn":  44,
+"endLine":  842,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'closure' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -576,7 +576,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'closure' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\StaticConfigurationContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/StaticConfigurationContext.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  13,
@@ -589,7 +589,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'response' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\TestingViewBrowserResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/TestingViewBrowserResponseExtensions.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  27,
@@ -602,7 +602,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'viewLocationContext' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\TestingViewFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/TestingViewFactory.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,

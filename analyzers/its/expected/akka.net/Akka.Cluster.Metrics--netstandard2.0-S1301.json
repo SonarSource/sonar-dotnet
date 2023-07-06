@@ -4,7 +4,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\ClusterMetricsSupervisor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsSupervisor.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  13,

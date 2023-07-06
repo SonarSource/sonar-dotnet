@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/DefaultNancyAspNetBootstrapper.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  132,

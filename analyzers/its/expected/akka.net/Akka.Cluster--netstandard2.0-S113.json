@@ -4,7 +4,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'Reachability.cs'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L528",
 "region":  {
 "startLine":  528,
 "startColumn":  1,

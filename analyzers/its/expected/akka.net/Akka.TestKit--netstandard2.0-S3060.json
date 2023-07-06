@@ -4,7 +4,7 @@
 "id":  "S3060",
 "message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S3060",
 "message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  24,

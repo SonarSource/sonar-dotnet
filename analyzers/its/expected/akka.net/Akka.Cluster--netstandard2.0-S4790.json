@@ -4,7 +4,7 @@
 "id":  "S4790",
 "message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  33,

@@ -5,7 +5,7 @@
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  24,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  24,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  57,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  57,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  57,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  57,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  83,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  87,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  72,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  40,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  83,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  75,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  39,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  57,

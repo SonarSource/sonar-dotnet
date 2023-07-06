@@ -4,7 +4,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_totalBufferSize' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\PerGroupingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/PerGroupingBuffer.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  21,

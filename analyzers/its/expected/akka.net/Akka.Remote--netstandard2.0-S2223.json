@@ -4,7 +4,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'Empty' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteWatcher.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'UniqueId' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  37,

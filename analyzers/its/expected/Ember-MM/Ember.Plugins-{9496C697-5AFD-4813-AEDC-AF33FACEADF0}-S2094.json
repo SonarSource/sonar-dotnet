@@ -4,7 +4,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginActionContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginActionContext.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  18,

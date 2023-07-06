@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Cluster.Sharding.Shard.StateChange' instead of 'Akka.Cluster.Sharding.Shard.EntityStarted'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  89,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Cluster.Sharding.Shard.StateChange' instead of 'Akka.Cluster.Sharding.Shard.EntityStopped'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  89,
@@ -30,7 +30,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Cluster.Sharding.Shard.StateChange' instead of 'Akka.Cluster.Sharding.Shard.EntityStopped'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L850",
 "region":  {
 "startLine":  850,
 "startColumn":  94,
@@ -43,7 +43,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Cluster.Sharding.Shard.StateChange' instead of 'Akka.Cluster.Sharding.Shard.EntityStarted'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L857",
 "region":  {
 "startLine":  857,
 "startColumn":  93,
@@ -56,7 +56,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<string>' instead of 'System.Collections.Immutable.IImmutableSet<string>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L506",
 "region":  {
 "startLine":  506,
 "startColumn":  115,
@@ -69,7 +69,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<string>' instead of 'System.Collections.Immutable.IImmutableSet<string>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L532",
 "region":  {
 "startLine":  532,
 "startColumn":  142,
@@ -82,7 +82,20 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1132",
+"region":  {
+"startLine":  1132,
+"startColumn":  72,
+"endLine":  1132,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L926",
 "region":  {
 "startLine":  926,
 "startColumn":  56,
@@ -95,25 +108,12 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L941",
 "region":  {
 "startLine":  941,
 "startColumn":  56,
 "endLine":  941,
 "endColumn":  62
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
-"region":  {
-"startLine":  1132,
-"startColumn":  72,
-"endLine":  1132,
-"endColumn":  80
 }
 }
 }

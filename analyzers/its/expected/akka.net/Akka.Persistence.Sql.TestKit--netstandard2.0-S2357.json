@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'ToSequenceNr' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\TestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.TestKit/TestActor.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  34,

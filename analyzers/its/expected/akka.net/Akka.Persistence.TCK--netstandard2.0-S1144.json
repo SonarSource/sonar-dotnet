@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused internal class 'MyPayload2Serializer'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused internal class 'MyWriteAdapter'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  22,

@@ -4,7 +4,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_resetEvent'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_resetEvent'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'EventBlock'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'ResetEvent'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\ReceiveOnlyBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/ReceiveOnlyBenchmark.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  18,
@@ -56,7 +56,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'cancel', 'clientSocket', 'resetEvent', and 'stream'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpInboundOnlySpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  18,
@@ -69,7 +69,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'resetEvent'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpSingleConnectionSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  18,

@@ -5,7 +5,7 @@
 "message":  "Change either the name of property 'AttributeList' or the name of method 'GetAttributeList' to make them distinguishable.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  40,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L346",
 "region":  {
 "startLine":  346,
 "startColumn":  35,
@@ -29,7 +29,7 @@
 "message":  "Change either the name of property 'StageActor' or the name of method 'GetStageActor' to make them distinguishable.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L867",
 "region":  {
 "startLine":  867,
 "startColumn":  27,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1622",
 "region":  {
 "startLine":  1622,
 "startColumn":  30,

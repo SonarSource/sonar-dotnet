@@ -4,7 +4,7 @@
 "id":  "S1659",
 "message":  "Declare 'h' in a separate statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  16,

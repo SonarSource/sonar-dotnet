@@ -4,7 +4,7 @@
 "id":  "S3928",
 "message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L775",
 "region":  {
 "startLine":  775,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S3928",
 "message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L676",
 "region":  {
 "startLine":  676,
 "startColumn":  38,
@@ -30,7 +30,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'Can't deserialize key/value pair in ORDictionary delta - too many pairs on the wire' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1015-L1016",
 "region":  {
 "startLine":  1015,
 "startColumn":  39,
@@ -43,7 +43,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'Can't deserialize key/value pair in ORDictionary delta - too many pairs on the wire' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1030-L1031",
 "region":  {
 "startLine":  1030,
 "startColumn":  39,
@@ -56,7 +56,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'Timeouts must fit in a 32-bit unsigned int' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L374",
 "region":  {
 "startLine":  374,
 "startColumn":  23,

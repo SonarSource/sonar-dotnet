@@ -4,7 +4,7 @@
 "id":  "S1821",
 "message":  "Refactor the code to eliminate this nested 'Select Case'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5787",
 "region":  {
 "startLine":  5787,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1821",
 "message":  "Refactor the code to eliminate this nested 'Select Case'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5792",
 "region":  {
 "startLine":  5792,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1821",
 "message":  "Refactor the code to eliminate this nested 'Select Case'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8790",
 "region":  {
 "startLine":  8790,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1821",
 "message":  "Refactor the code to eliminate this nested 'Select Case'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8799",
 "region":  {
 "startLine":  8799,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S1821",
 "message":  "Refactor the code to eliminate this nested 'Select Case'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8834",
 "region":  {
 "startLine":  8834,
 "startColumn":  17,

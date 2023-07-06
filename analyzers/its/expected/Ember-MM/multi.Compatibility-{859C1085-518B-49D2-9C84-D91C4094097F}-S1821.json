@@ -4,7 +4,7 @@
 "id":  "S1821",
 "message":  "Refactor the code to eliminate this nested 'Select Case'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  8,

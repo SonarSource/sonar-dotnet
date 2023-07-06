@@ -4,7 +4,7 @@
 "id":  "S3330",
 "message":  "Make sure creating this cookie without the "HttpOnly" flag is safe.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3330.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3330.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  30,

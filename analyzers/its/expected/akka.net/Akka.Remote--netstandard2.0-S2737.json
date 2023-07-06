@@ -4,7 +4,7 @@
 "id":  "S2737",
 "message":  "Add logic to this catch clause or eliminate it and rethrow the exception automatically.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1964-L1967",
 "region":  {
 "startLine":  1964,
 "startColumn":  29,

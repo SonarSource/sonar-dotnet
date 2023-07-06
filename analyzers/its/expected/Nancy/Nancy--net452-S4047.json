@@ -5,7 +5,7 @@
 "message":  "Make this method generic and replace the 'object' parameter with a type parameter.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  22,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  78,

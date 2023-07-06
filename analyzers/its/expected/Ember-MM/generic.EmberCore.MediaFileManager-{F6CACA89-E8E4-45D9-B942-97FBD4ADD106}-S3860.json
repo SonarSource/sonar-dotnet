@@ -4,7 +4,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\dlgCopyFiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/dlgCopyFiles.vb#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  37,
@@ -17,7 +17,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\dlgCopyFiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/dlgCopyFiles.vb#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  68,
@@ -30,7 +30,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\dlgCopyFiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/dlgCopyFiles.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\dlgCopyFiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/dlgCopyFiles.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  64,
@@ -56,176 +56,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  33,
-"startColumn":  39,
-"endLine":  33,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  41,
-"startColumn":  34,
-"endLine":  41,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  41,
-"startColumn":  65,
-"endLine":  41,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  50,
-"startColumn":  33,
-"endLine":  50,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  50,
-"startColumn":  64,
-"endLine":  50,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  61,
-"startColumn":  36,
-"endLine":  61,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  61,
-"startColumn":  67,
-"endLine":  61,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  70,
-"startColumn":  31,
-"endLine":  70,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  70,
-"startColumn":  62,
-"endLine":  70,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  76,
-"startColumn":  42,
-"endLine":  76,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  76,
-"startColumn":  73,
-"endLine":  76,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  88,
-"startColumn":  48,
-"endLine":  88,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
-"region":  {
-"startLine":  88,
-"startColumn":  79,
-"endLine":  88,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  38,
@@ -238,7 +69,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  69,
@@ -251,7 +82,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  38,
@@ -264,7 +95,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  69,
@@ -277,7 +108,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  35,
@@ -290,7 +121,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  66,
@@ -303,24 +134,11 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L33",
 "region":  {
-"startLine":  52,
-"startColumn":  31,
-"endLine":  52,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
-"region":  {
-"startLine":  54,
+"startLine":  33,
 "startColumn":  39,
-"endLine":  54,
+"endLine":  33,
 "endColumn":  44
 }
 }
@@ -329,12 +147,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L41",
 "region":  {
-"startLine":  54,
-"startColumn":  61,
-"endLine":  54,
-"endColumn":  66
+"startLine":  41,
+"startColumn":  34,
+"endLine":  41,
+"endColumn":  39
 }
 }
 },
@@ -342,12 +160,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L41",
 "region":  {
-"startLine":  54,
-"startColumn":  85,
-"endLine":  54,
-"endColumn":  90
+"startLine":  41,
+"startColumn":  65,
+"endLine":  41,
+"endColumn":  70
 }
 }
 },
@@ -355,12 +173,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L50",
 "region":  {
-"startLine":  72,
-"startColumn":  13,
-"endLine":  72,
-"endColumn":  18
+"startLine":  50,
+"startColumn":  33,
+"endLine":  50,
+"endColumn":  38
 }
 }
 },
@@ -368,12 +186,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L50",
 "region":  {
-"startLine":  99,
-"startColumn":  47,
-"endLine":  99,
-"endColumn":  52
+"startLine":  50,
+"startColumn":  64,
+"endLine":  50,
+"endColumn":  69
 }
 }
 },
@@ -381,12 +199,12 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L61",
 "region":  {
-"startLine":  99,
-"startColumn":  74,
-"endLine":  99,
-"endColumn":  79
+"startLine":  61,
+"startColumn":  36,
+"endLine":  61,
+"endColumn":  41
 }
 }
 },
@@ -394,7 +212,98 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  67,
+"endLine":  61,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  31,
+"endLine":  70,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  62,
+"endLine":  70,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  42,
+"endLine":  76,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  73,
+"endLine":  76,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  48,
+"endLine":  88,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  79,
+"endLine":  88,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  32,
@@ -407,7 +316,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  40,
@@ -420,7 +329,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  64,
@@ -433,7 +342,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  23,
@@ -446,7 +355,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  44,
@@ -459,7 +368,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  74,
@@ -472,7 +381,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  23,
@@ -485,7 +394,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  44,
@@ -498,7 +407,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  74,
@@ -511,7 +420,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  41,
@@ -524,7 +433,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  72,
@@ -537,7 +446,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  45,
@@ -550,7 +459,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L261",
 "region":  {
 "startLine":  261,
 "startColumn":  11,
@@ -563,7 +472,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L261",
 "region":  {
 "startLine":  261,
 "startColumn":  42,
@@ -576,7 +485,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  43,
@@ -589,7 +498,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  74,
@@ -602,7 +511,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  43,
@@ -615,7 +524,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  74,
@@ -628,7 +537,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  25,
@@ -641,7 +550,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L319",
 "region":  {
 "startLine":  319,
 "startColumn":  26,
@@ -654,7 +563,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  32,
@@ -667,7 +576,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  63,
@@ -680,7 +589,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  92,
@@ -693,12 +602,103 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L415",
 "region":  {
 "startLine":  415,
 "startColumn":  17,
 "endLine":  415,
 "endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  31,
+"endLine":  52,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  39,
+"endLine":  54,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  61,
+"endLine":  54,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  85,
+"endLine":  54,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  13,
+"endLine":  72,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  47,
+"endLine":  99,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  74,
+"endLine":  99,
+"endColumn":  79
 }
 }
 }

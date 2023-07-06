@@ -5,7 +5,7 @@
 "message":  "Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  50,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L251-L253",
 "region":  {
 "startLine":  251,
 "startColumn":  17,

@@ -4,20 +4,7 @@
 "id":  "S3267",
 "message":  "Loop should be simplified by calling Select(entry => entry.ShardIds))",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
-"region":  {
-"startLine":  75,
-"startColumn":  39,
-"endLine":  75,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S3267",
-"message":  "Loop should be simplified by calling Select(entry => entry.ShardIds))",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/LeastShardAllocationStrategy.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  43,
@@ -28,9 +15,22 @@
 },
 {
 "id":  "S3267",
+"message":  "Loop should be simplified by calling Select(entry => entry.ShardIds))",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/LeastShardAllocationStrategy.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  39,
+"endLine":  75,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3267",
 "message":  "Loop should be simplified by calling Select(entry => entry.Key))",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  35,

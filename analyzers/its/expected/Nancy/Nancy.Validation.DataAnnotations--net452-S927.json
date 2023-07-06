@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'context1' to 'context' to match the interface declaration.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DefaultValidatableObjectAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DefaultValidatableObjectAdapter.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  89,

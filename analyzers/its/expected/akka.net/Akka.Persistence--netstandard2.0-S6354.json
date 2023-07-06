@@ -4,7 +4,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  81,
@@ -30,7 +30,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L437",
 "region":  {
 "startLine":  437,
 "startColumn":  28,
@@ -43,7 +43,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L501",
 "region":  {
 "startLine":  501,
 "startColumn":  23,
@@ -56,7 +56,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  124,

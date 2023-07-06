@@ -4,7 +4,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  24,

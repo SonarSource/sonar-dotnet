@@ -4,7 +4,7 @@
 "id":  "S6640",
 "message":  "Make sure that using "unsafe" is safe here.",
 "location":  {
-"uri":  "sources\Net5\Net5\FunctionPointers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/FunctionPointers.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  12,
@@ -17,7 +17,7 @@
 "id":  "S6640",
 "message":  "Make sure that using "unsafe" is safe here.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4000.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4000.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  12,

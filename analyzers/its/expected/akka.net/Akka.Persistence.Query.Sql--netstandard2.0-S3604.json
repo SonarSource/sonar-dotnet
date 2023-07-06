@@ -4,7 +4,7 @@
 "id":  "S3604",
 "message":  "Remove the member initializer, all constructors set an initial value for the member.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/SqlReadJournal.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  39,

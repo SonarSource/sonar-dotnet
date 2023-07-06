@@ -4,7 +4,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 29 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 52 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1323",
 "region":  {
 "startLine":  1323,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 9 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditSeason.vb#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 33 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L767",
 "region":  {
 "startLine":  767,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 6 statements that use 'i.SubItems' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 6 statements that use 'i.SubItems' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 12 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  9,
@@ -95,7 +95,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  9,
@@ -108,7 +108,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 9 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  9,
@@ -121,7 +121,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 7 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewVersion.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgNewVersion.vb#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  9,
@@ -134,7 +134,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 9 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSetsManager.vb#L500",
 "region":  {
 "startLine":  500,
 "startColumn":  9,
@@ -145,22 +145,9 @@
 },
 {
 "id":  "S2375",
-"message":  "Wrap this and the following 11 statements that use 'Me.SettingsPanels' in a 'With' statement.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  155,
-"startColumn":  9,
-"endLine":  155,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2375",
 "message":  "Wrap this and the following 6 statements that use 'Me.chkNoFilterEpisode' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1503",
 "region":  {
 "startLine":  1503,
 "startColumn":  9,
@@ -171,9 +158,22 @@
 },
 {
 "id":  "S2375",
+"message":  "Wrap this and the following 11 statements that use 'Me.SettingsPanels' in a 'With' statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  9,
+"endLine":  155,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2375",
 "message":  "Wrap this and the following 23 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2175",
 "region":  {
 "startLine":  2175,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 12 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2213",
 "region":  {
 "startLine":  2213,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 51 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2241",
 "region":  {
 "startLine":  2241,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 20 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2352",
 "region":  {
 "startLine":  2352,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 6 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2378",
 "region":  {
 "startLine":  2378,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 20 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2403",
 "region":  {
 "startLine":  2403,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 13 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2430",
 "region":  {
 "startLine":  2430,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2448",
 "region":  {
 "startLine":  2448,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 39 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2455",
 "region":  {
 "startLine":  2455,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 38 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2515",
 "region":  {
 "startLine":  2515,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 16 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3254",
 "region":  {
 "startLine":  3254,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 15 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3272",
 "region":  {
 "startLine":  3272,
 "startColumn":  17,
@@ -329,7 +329,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 8 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3289",
 "region":  {
 "startLine":  3289,
 "startColumn":  13,
@@ -342,7 +342,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 13 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3304",
 "region":  {
 "startLine":  3304,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 79 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3333",
 "region":  {
 "startLine":  3333,
 "startColumn":  13,
@@ -368,7 +368,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 8 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3430",
 "region":  {
 "startLine":  3430,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3444",
 "region":  {
 "startLine":  3444,
 "startColumn":  13,
@@ -394,7 +394,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 6 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3464",
 "region":  {
 "startLine":  3464,
 "startColumn":  13,
@@ -407,7 +407,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 21 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3496",
 "region":  {
 "startLine":  3496,
 "startColumn":  13,
@@ -420,7 +420,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 19 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3530",
 "region":  {
 "startLine":  3530,
 "startColumn":  13,
@@ -433,7 +433,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 38 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3556",
 "region":  {
 "startLine":  3556,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 38 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3628",
 "region":  {
 "startLine":  3628,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 8 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3705",
 "region":  {
 "startLine":  3705,
 "startColumn":  9,
@@ -472,7 +472,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 7 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3715",
 "region":  {
 "startLine":  3715,
 "startColumn":  9,
@@ -485,7 +485,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 17 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3726",
 "region":  {
 "startLine":  3726,
 "startColumn":  9,
@@ -498,7 +498,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 11 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3745",
 "region":  {
 "startLine":  3745,
 "startColumn":  9,
@@ -511,7 +511,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3760",
 "region":  {
 "startLine":  3760,
 "startColumn":  9,
@@ -524,7 +524,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 24 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3775",
 "region":  {
 "startLine":  3775,
 "startColumn":  9,
@@ -537,7 +537,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 15 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3813",
 "region":  {
 "startLine":  3813,
 "startColumn":  9,
@@ -550,7 +550,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 51 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3834",
 "region":  {
 "startLine":  3834,
 "startColumn":  9,
@@ -563,7 +563,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 14 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3889",
 "region":  {
 "startLine":  3889,
 "startColumn":  9,
@@ -576,7 +576,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 10 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3915",
 "region":  {
 "startLine":  3915,
 "startColumn":  9,
@@ -589,7 +589,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 11 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3940",
 "region":  {
 "startLine":  3940,
 "startColumn":  9,
@@ -602,7 +602,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 28 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3995",
 "region":  {
 "startLine":  3995,
 "startColumn":  9,
@@ -615,7 +615,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 10 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4025",
 "region":  {
 "startLine":  4025,
 "startColumn":  9,
@@ -628,7 +628,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 20 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4046",
 "region":  {
 "startLine":  4046,
 "startColumn":  9,
@@ -641,7 +641,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 6 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSortFiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSortFiles.vb#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  9,
@@ -654,7 +654,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  9,
@@ -667,7 +667,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 15 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  13,
@@ -680,7 +680,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 39 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  9,
@@ -693,7 +693,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 42 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  3,
@@ -706,7 +706,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 42 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  3,
@@ -719,7 +719,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 11 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  3,
@@ -732,7 +732,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 24 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L399",
 "region":  {
 "startLine":  399,
 "startColumn":  3,
@@ -745,7 +745,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'Master.currShow' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4496",
 "region":  {
 "startLine":  4496,
 "startColumn":  13,
@@ -758,7 +758,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'Master.currMovie' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4748",
 "region":  {
 "startLine":  4748,
 "startColumn":  13,
@@ -771,7 +771,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 6 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5260",
 "region":  {
 "startLine":  5260,
 "startColumn":  17,
@@ -784,7 +784,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 7 statements that use 'ModulesManager.Instance.RuntimeObjects' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5355",
 "region":  {
 "startLine":  5355,
 "startColumn":  13,
@@ -797,7 +797,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 9 statements that use 'Master.currMovie' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5602",
 "region":  {
 "startLine":  5602,
 "startColumn":  45,
@@ -810,7 +810,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'Master.eSettings' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7942",
 "region":  {
 "startLine":  7942,
 "startColumn":  17,
@@ -823,7 +823,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'Me.dgvMediaList' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7942",
 "region":  {
 "startLine":  7942,
 "startColumn":  17,

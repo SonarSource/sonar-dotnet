@@ -4,7 +4,7 @@
 "id":  "S2259",
 "message":  "'_ComplexAdvancedSettings.FirstOrDefault(Function(f) f.Name = key AndAlso f.Section = Assembly)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S2259",
 "message":  "'_AdvancedSettings.FirstOrDefault(Function(f) f.Name = ii.@Name AndAlso f.Section = ii.@Section)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S2259",
 "message":  "'cs' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S2259",
 "message":  "'_AdvancedSettings.FirstOrDefault(Function(f) f.Name = key AndAlso f.Section = Assembly)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S2259",
 "message":  "'_AdvancedSettings.FirstOrDefault(Function(f) f.Name = key AndAlso f.Section = Assembly)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S2259",
 "message":  "'_mediaDBConn' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  61,
@@ -82,7 +82,7 @@
 "id":  "S2259",
 "message":  "'movieName' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  55,
@@ -95,7 +95,7 @@
 "id":  "S2259",
 "message":  "'movieName' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  60,
@@ -108,7 +108,7 @@
 "id":  "S2259",
 "message":  "'movieName' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  20,
@@ -121,7 +121,7 @@
 "id":  "S2259",
 "message":  "'movieName' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  20,
@@ -134,7 +134,7 @@
 "id":  "S2259",
 "message":  "'TVEpName' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  20,
@@ -147,7 +147,7 @@
 "id":  "S2259",
 "message":  "'TVShowName' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  20,

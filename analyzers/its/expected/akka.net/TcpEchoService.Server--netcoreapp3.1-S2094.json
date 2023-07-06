@@ -4,7 +4,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\akka.net\src\examples\TcpEchoService.Server\Actors.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Actors.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  22,

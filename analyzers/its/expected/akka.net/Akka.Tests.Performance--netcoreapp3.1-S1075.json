@@ -4,7 +4,20 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  39,
+"endLine":  102,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  29,
@@ -17,7 +30,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  29,
@@ -30,7 +43,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  32,
@@ -43,7 +56,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  32,
@@ -56,25 +69,12 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  39,
 "endLine":  89,
 "endColumn":  60
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
-"region":  {
-"startLine":  102,
-"startColumn":  39,
-"endLine":  102,
-"endColumn":  78
 }
 }
 }

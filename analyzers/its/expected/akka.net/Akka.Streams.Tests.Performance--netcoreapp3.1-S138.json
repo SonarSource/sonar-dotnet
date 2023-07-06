@@ -4,7 +4,7 @@
 "id":  "S138",
 "message":  "This method 'Setup' has 84 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\FusedGraphsBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FusedGraphsBenchmark.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  21,

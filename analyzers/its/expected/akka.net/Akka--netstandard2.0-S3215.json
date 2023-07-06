@@ -4,7 +4,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  49,
@@ -30,7 +30,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  43,
@@ -43,7 +43,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  35,
@@ -56,7 +56,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L334",
 "region":  {
 "startLine":  334,
 "startColumn":  64,
@@ -82,7 +82,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L517",
 "region":  {
 "startLine":  517,
 "startColumn":  49,
@@ -95,7 +95,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildrenContainerBase.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  31,
@@ -108,7 +108,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildrenContainerBase.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  37,
@@ -121,7 +121,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L515",
 "region":  {
 "startLine":  515,
 "startColumn":  26,
@@ -134,7 +134,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  29,
@@ -147,7 +147,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L538",
 "region":  {
 "startLine":  538,
 "startColumn":  31,
@@ -160,7 +160,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\LocalActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/LocalActorRef.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  44,
@@ -173,7 +173,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  33,
@@ -186,7 +186,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  35,
@@ -199,7 +199,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L576",
 "region":  {
 "startLine":  576,
 "startColumn":  51,
@@ -212,7 +212,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RootGuardianSupervisor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RootGuardianSupervisor.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  26,
@@ -225,7 +225,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RootGuardianSupervisor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RootGuardianSupervisor.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  29,
@@ -238,7 +238,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RootGuardianSupervisor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RootGuardianSupervisor.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  42,
@@ -251,7 +251,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\Internal\AbstractStash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/Internal/AbstractStash.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  29,
@@ -264,12 +264,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L104",
 "region":  {
-"startLine":  55,
-"startColumn":  29,
-"endLine":  55,
-"endColumn":  53
+"startLine":  104,
+"startColumn":  21,
+"endLine":  104,
+"endColumn":  39
 }
 }
 },
@@ -277,12 +277,12 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L55",
 "region":  {
-"startLine":  104,
-"startColumn":  21,
-"endLine":  104,
-"endColumn":  39
+"startLine":  55,
+"startColumn":  29,
+"endLine":  55,
+"endColumn":  53
 }
 }
 }

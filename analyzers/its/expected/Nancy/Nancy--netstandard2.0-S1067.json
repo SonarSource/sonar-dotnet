@@ -4,7 +4,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L570-L572",
 "region":  {
 "startLine":  570,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L578-L580",
 "region":  {
 "startLine":  578,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L595-L599",
 "region":  {
 "startLine":  595,
 "startColumn":  20,
@@ -56,7 +56,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L635-L638",
 "region":  {
 "startLine":  635,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L403",
 "region":  {
 "startLine":  403,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3289",
 "region":  {
 "startLine":  3289,
 "startColumn":  36,
@@ -95,7 +95,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/Extensions.cs#L35-L39",
 "region":  {
 "startLine":  35,
 "startColumn":  20,

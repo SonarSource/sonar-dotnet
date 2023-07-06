@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  31,
@@ -17,46 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
-"region":  {
-"startLine":  49,
-"startColumn":  43,
-"endLine":  49,
-"endColumn":  150
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
-"region":  {
-"startLine":  60,
-"startColumn":  43,
-"endLine":  60,
-"endColumn":  143
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
-"region":  {
-"startLine":  68,
-"startColumn":  43,
-"endLine":  68,
-"endColumn":  143
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  43,
@@ -69,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L138-L140",
 "region":  {
 "startLine":  138,
 "startColumn":  21,
@@ -82,7 +43,46 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  43,
+"endLine":  49,
+"endColumn":  150
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  43,
+"endLine":  60,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  43,
+"endLine":  68,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L257",
 "region":  {
 "startLine":  257,
 "startColumn":  100,
@@ -95,7 +95,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L129-L133",
 "region":  {
 "startLine":  129,
 "startColumn":  39,
@@ -108,7 +108,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L175-L179",
 "region":  {
 "startLine":  175,
 "startColumn":  40,
@@ -121,7 +121,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  53,
@@ -134,7 +134,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  31,
@@ -147,7 +147,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  26,
@@ -160,7 +160,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  34,
@@ -173,20 +173,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextMultipartFormData.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  31,
-"endLine":  50,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextMultipartFormData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextMultipartFormData.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  17,
@@ -199,7 +186,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextMultipartFormData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextMultipartFormData.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  21,
@@ -212,7 +199,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextMultipartFormData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextMultipartFormData.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  17,
@@ -225,7 +212,20 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextMultipartFormData.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  31,
+"endLine":  50,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseExtensions.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  21,
@@ -238,7 +238,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseExtensions.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  43,
@@ -251,7 +251,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\PathHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/PathHelper.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  33,

@@ -5,7 +5,7 @@
 "message":  "Define a constant instead of using this literal 'hello' 5 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  20,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  113,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  113,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  20,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  114,
@@ -56,7 +56,7 @@
 "message":  "Define a constant instead of using this literal 'world' 5 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  20,
@@ -65,7 +65,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  113,
@@ -74,7 +74,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  113,
@@ -83,7 +83,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  20,
@@ -92,7 +92,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  125,
@@ -104,42 +104,96 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'a black car-done' 4 times.",
+"message":  "Define a constant instead of using this literal 'a green apple' 10 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L48",
 "region":  {
-"startLine":  51,
-"startColumn":  23,
-"endLine":  51,
-"endColumn":  41
+"startLine":  48,
+"startColumn":  20,
+"endLine":  48,
+"endColumn":  35
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L62",
 "region":  {
-"startLine":  92,
-"startColumn":  23,
-"endLine":  92,
-"endColumn":  41
+"startLine":  62,
+"startColumn":  113,
+"endLine":  62,
+"endColumn":  128
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L78",
 "region":  {
-"startLine":  138,
-"startColumn":  23,
-"endLine":  138,
-"endColumn":  41
+"startLine":  78,
+"startColumn":  114,
+"endLine":  78,
+"endColumn":  129
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L89",
 "region":  {
-"startLine":  197,
-"startColumn":  23,
-"endLine":  197,
-"endColumn":  41
+"startLine":  89,
+"startColumn":  20,
+"endLine":  89,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  113,
+"endLine":  111,
+"endColumn":  128
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  20,
+"endLine":  135,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  114,
+"endLine":  151,
+"endColumn":  129
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L171",
+"region":  {
+"startLine":  171,
+"startColumn":  24,
+"endLine":  171,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L181",
+"region":  {
+"startLine":  181,
+"startColumn":  89,
+"endLine":  181,
+"endColumn":  104
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  20,
+"endLine":  194,
+"endColumn":  35
 }
 }
 ]
@@ -149,7 +203,7 @@
 "message":  "Define a constant instead of using this literal 'a green apple-done' 5 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  23,
@@ -158,7 +212,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  23,
@@ -167,7 +221,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  23,
@@ -176,7 +230,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  27,
@@ -185,7 +239,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  23,
@@ -200,7 +254,7 @@
 "message":  "Define a constant instead of using this literal 'a black car' 5 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  20,
@@ -209,7 +263,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  114,
@@ -218,7 +272,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  20,
@@ -227,7 +281,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  20,
@@ -236,7 +290,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  20,
@@ -248,51 +302,42 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'a green leaf' 5 times.",
+"message":  "Define a constant instead of using this literal 'a black car-done' 4 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L51",
 "region":  {
-"startLine":  56,
-"startColumn":  20,
-"endLine":  56,
-"endColumn":  34
+"startLine":  51,
+"startColumn":  23,
+"endLine":  51,
+"endColumn":  41
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L92",
 "region":  {
-"startLine":  66,
-"startColumn":  113,
-"endLine":  66,
-"endColumn":  127
+"startLine":  92,
+"startColumn":  23,
+"endLine":  92,
+"endColumn":  41
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L138",
 "region":  {
-"startLine":  120,
-"startColumn":  113,
-"endLine":  120,
-"endColumn":  127
+"startLine":  138,
+"startColumn":  23,
+"endLine":  138,
+"endColumn":  41
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L197",
 "region":  {
-"startLine":  143,
-"startColumn":  20,
-"endLine":  143,
-"endColumn":  34
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  159,
-"startColumn":  114,
-"endLine":  159,
-"endColumn":  128
+"startLine":  197,
+"startColumn":  23,
+"endLine":  197,
+"endColumn":  41
 }
 }
 ]
@@ -302,7 +347,7 @@
 "message":  "Define a constant instead of using this literal 'a green banana' 6 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  20,
@@ -311,7 +356,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  113,
@@ -320,7 +365,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  113,
@@ -329,7 +374,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  20,
@@ -338,7 +383,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  125,
@@ -347,7 +392,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  20,
@@ -359,10 +404,61 @@
 },
 {
 "id":  "S1192",
+"message":  "Define a constant instead of using this literal 'a green leaf' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  20,
+"endLine":  56,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  113,
+"endLine":  66,
+"endColumn":  127
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  113,
+"endLine":  120,
+"endColumn":  127
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  20,
+"endLine":  143,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  114,
+"endLine":  159,
+"endColumn":  128
+}
+}
+]
+},
+{
+"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'green' 6 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  55,
@@ -371,7 +467,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  55,
@@ -380,7 +476,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  56,
@@ -389,7 +485,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  55,
@@ -398,7 +494,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  55,
@@ -407,108 +503,12 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  55,
 "endLine":  201,
 "endColumn":  62
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'a green apple' 10 times.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  48,
-"startColumn":  20,
-"endLine":  48,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  62,
-"startColumn":  113,
-"endLine":  62,
-"endColumn":  128
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  78,
-"startColumn":  114,
-"endLine":  78,
-"endColumn":  129
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  89,
-"startColumn":  20,
-"endLine":  89,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  111,
-"startColumn":  113,
-"endLine":  111,
-"endColumn":  128
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  135,
-"startColumn":  20,
-"endLine":  135,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  151,
-"startColumn":  114,
-"endLine":  151,
-"endColumn":  129
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  171,
-"startColumn":  24,
-"endLine":  171,
-"endColumn":  39
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  181,
-"startColumn":  89,
-"endLine":  181,
-"endColumn":  104
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
-"region":  {
-"startLine":  194,
-"startColumn":  20,
-"endLine":  194,
-"endColumn":  35
 }
 }
 ]

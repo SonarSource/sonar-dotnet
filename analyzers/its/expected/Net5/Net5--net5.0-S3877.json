@@ -4,7 +4,7 @@
 "id":  "S3877",
 "message":  "Remove this 'throw' statement.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3877.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3877.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3877",
 "message":  "Remove this 'throw' expression.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3877.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3877.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  38,

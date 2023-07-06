@@ -4,7 +4,7 @@
 "id":  "S4818",
 "message":  "Make sure that sockets are used safely here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Inet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S4818",
 "message":  "Make sure that sockets are used safely here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpListener.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S4818",
 "message":  "Make sure that sockets are used safely here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpOutgoingConnection.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  26,
@@ -43,7 +43,7 @@
 "id":  "S4818",
 "message":  "Make sure that sockets are used safely here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpOutgoingConnection.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  26,
@@ -56,7 +56,7 @@
 "id":  "S4818",
 "message":  "Make sure that sockets are used safely here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S4818",
 "message":  "Make sure that sockets are used safely here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpSender.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpSender.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  30,

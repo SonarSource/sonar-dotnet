@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  16,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  9,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  9,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  9,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  3,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  3,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  3,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  9,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  9,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  9,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  9,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  9,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  13,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  17,
@@ -131,7 +131,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  55,
@@ -140,7 +140,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  78,
@@ -149,7 +149,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  17,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  13,
@@ -167,7 +167,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  9,
@@ -176,7 +176,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  9,
@@ -185,7 +185,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  9,
@@ -194,7 +194,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  13,
@@ -203,7 +203,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  13,
@@ -224,10 +224,553 @@
 },
 {
 "id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 93 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  21,
+"endLine":  21,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  9,
+"endLine":  22,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  13,
+"endLine":  42,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  13,
+"endLine":  47,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  38,
+"endLine":  47,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  17,
+"endLine":  49,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  21,
+"endLine":  51,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  13,
+"endLine":  60,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  17,
+"endLine":  62,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  17,
+"endLine":  66,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  13,
+"endLine":  69,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  13,
+"endLine":  73,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  17,
+"endLine":  75,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  13,
+"endLine":  82,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  17,
+"endLine":  84,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  21,
+"endLine":  87,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  13,
+"endLine":  95,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  17,
+"endLine":  97,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  13,
+"endLine":  107,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  17,
+"endLine":  109,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  32,
+"endLine":  109,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  17,
+"endLine":  110,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  21,
+"endLine":  111,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  21,
+"endLine":  117,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  17,
+"endLine":  128,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  21,
+"endLine":  130,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  25,
+"endLine":  131,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  66,
+"endLine":  135,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  33,
+"endLine":  143,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L147",
+"region":  {
+"startLine":  147,
+"startColumn":  33,
+"endLine":  147,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  33,
+"endLine":  149,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  33,
+"endLine":  151,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L200",
+"region":  {
+"startLine":  200,
+"startColumn":  33,
+"endLine":  200,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  41,
+"endLine":  204,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L205",
+"region":  {
+"startLine":  205,
+"startColumn":  45,
+"endLine":  205,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  41,
+"endLine":  216,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L235",
+"region":  {
+"startLine":  235,
+"startColumn":  9,
+"endLine":  235,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L319",
+"region":  {
+"startLine":  319,
+"startColumn":  22,
+"endLine":  319,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L326",
+"region":  {
+"startLine":  326,
+"startColumn":  13,
+"endLine":  326,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L328",
+"region":  {
+"startLine":  328,
+"startColumn":  13,
+"endLine":  328,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L330",
+"region":  {
+"startLine":  330,
+"startColumn":  17,
+"endLine":  330,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L332",
+"region":  {
+"startLine":  332,
+"startColumn":  17,
+"endLine":  332,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L338",
+"region":  {
+"startLine":  338,
+"startColumn":  13,
+"endLine":  338,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L340",
+"region":  {
+"startLine":  340,
+"startColumn":  13,
+"endLine":  340,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L342",
+"region":  {
+"startLine":  342,
+"startColumn":  17,
+"endLine":  342,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L344",
+"region":  {
+"startLine":  344,
+"startColumn":  17,
+"endLine":  344,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L350",
+"region":  {
+"startLine":  350,
+"startColumn":  13,
+"endLine":  350,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L352",
+"region":  {
+"startLine":  352,
+"startColumn":  13,
+"endLine":  352,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L354",
+"region":  {
+"startLine":  354,
+"startColumn":  17,
+"endLine":  354,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L356",
+"region":  {
+"startLine":  356,
+"startColumn":  17,
+"endLine":  356,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L362",
+"region":  {
+"startLine":  362,
+"startColumn":  13,
+"endLine":  362,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L364",
+"region":  {
+"startLine":  364,
+"startColumn":  13,
+"endLine":  364,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L366",
+"region":  {
+"startLine":  366,
+"startColumn":  17,
+"endLine":  366,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L368",
+"region":  {
+"startLine":  368,
+"startColumn":  17,
+"endLine":  368,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L374",
+"region":  {
+"startLine":  374,
+"startColumn":  13,
+"endLine":  374,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L376",
+"region":  {
+"startLine":  376,
+"startColumn":  13,
+"endLine":  376,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L378",
+"region":  {
+"startLine":  378,
+"startColumn":  17,
+"endLine":  378,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L380",
+"region":  {
+"startLine":  380,
+"startColumn":  17,
+"endLine":  380,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L385",
+"region":  {
+"startLine":  385,
+"startColumn":  9,
+"endLine":  385,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
 "message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L391",
 "region":  {
 "startLine":  391,
 "startColumn":  14,
@@ -236,7 +779,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  9,
@@ -245,7 +788,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  81,
@@ -254,7 +797,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  17,
@@ -263,7 +806,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  34,
@@ -272,7 +815,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  17,
@@ -281,7 +824,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  21,
@@ -290,7 +833,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L409",
 "region":  {
 "startLine":  409,
 "startColumn":  17,
@@ -299,7 +842,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  21,
@@ -308,7 +851,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L414",
 "region":  {
 "startLine":  414,
 "startColumn":  17,
@@ -317,7 +860,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  21,
@@ -326,7 +869,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L421",
 "region":  {
 "startLine":  421,
 "startColumn":  17,
@@ -335,7 +878,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L424",
 "region":  {
 "startLine":  424,
 "startColumn":  13,
@@ -350,7 +893,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L429",
 "region":  {
 "startLine":  429,
 "startColumn":  22,
@@ -359,7 +902,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L435",
 "region":  {
 "startLine":  435,
 "startColumn":  17,
@@ -368,7 +911,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L437",
 "region":  {
 "startLine":  437,
 "startColumn":  21,
@@ -377,7 +920,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L438",
 "region":  {
 "startLine":  438,
 "startColumn":  21,
@@ -386,7 +929,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  21,
@@ -395,7 +938,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  21,
@@ -404,7 +947,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L441",
 "region":  {
 "startLine":  441,
 "startColumn":  21,
@@ -413,7 +956,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L442",
 "region":  {
 "startLine":  442,
 "startColumn":  21,
@@ -422,7 +965,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  21,
@@ -431,7 +974,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L444",
 "region":  {
 "startLine":  444,
 "startColumn":  21,
@@ -440,7 +983,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  17,
@@ -449,7 +992,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L456",
 "region":  {
 "startLine":  456,
 "startColumn":  21,
@@ -458,7 +1001,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L457",
 "region":  {
 "startLine":  457,
 "startColumn":  21,
@@ -467,7 +1010,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L458",
 "region":  {
 "startLine":  458,
 "startColumn":  21,
@@ -476,7 +1019,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L459",
 "region":  {
 "startLine":  459,
 "startColumn":  21,
@@ -485,7 +1028,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L468",
 "region":  {
 "startLine":  468,
 "startColumn":  17,
@@ -494,7 +1037,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L470",
 "region":  {
 "startLine":  470,
 "startColumn":  21,
@@ -503,7 +1046,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L471",
 "region":  {
 "startLine":  471,
 "startColumn":  21,
@@ -512,7 +1055,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L472",
 "region":  {
 "startLine":  472,
 "startColumn":  21,
@@ -521,555 +1064,12 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L473",
 "region":  {
 "startLine":  473,
 "startColumn":  21,
 "endLine":  473,
 "endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  319,
-"startColumn":  22,
-"endLine":  319,
-"endColumn":  33
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  326,
-"startColumn":  13,
-"endLine":  326,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  328,
-"startColumn":  13,
-"endLine":  328,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  330,
-"startColumn":  17,
-"endLine":  330,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  332,
-"startColumn":  17,
-"endLine":  332,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  338,
-"startColumn":  13,
-"endLine":  338,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  340,
-"startColumn":  13,
-"endLine":  340,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  342,
-"startColumn":  17,
-"endLine":  342,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  344,
-"startColumn":  17,
-"endLine":  344,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  350,
-"startColumn":  13,
-"endLine":  350,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  352,
-"startColumn":  13,
-"endLine":  352,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  354,
-"startColumn":  17,
-"endLine":  354,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  356,
-"startColumn":  17,
-"endLine":  356,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  362,
-"startColumn":  13,
-"endLine":  362,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  364,
-"startColumn":  13,
-"endLine":  364,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  366,
-"startColumn":  17,
-"endLine":  366,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  368,
-"startColumn":  17,
-"endLine":  368,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  374,
-"startColumn":  13,
-"endLine":  374,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  376,
-"startColumn":  13,
-"endLine":  376,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  378,
-"startColumn":  17,
-"endLine":  378,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  380,
-"startColumn":  17,
-"endLine":  380,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  385,
-"startColumn":  9,
-"endLine":  385,
-"endColumn":  14
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 93 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  21,
-"startColumn":  21,
-"endLine":  21,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  22,
-"startColumn":  9,
-"endLine":  22,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  42,
-"startColumn":  13,
-"endLine":  42,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  47,
-"startColumn":  13,
-"endLine":  47,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  47,
-"startColumn":  38,
-"endLine":  47,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  49,
-"startColumn":  17,
-"endLine":  49,
-"endColumn":  22
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  51,
-"startColumn":  21,
-"endLine":  51,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  60,
-"startColumn":  13,
-"endLine":  60,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  62,
-"startColumn":  17,
-"endLine":  62,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  66,
-"startColumn":  17,
-"endLine":  66,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  69,
-"startColumn":  13,
-"endLine":  69,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  73,
-"startColumn":  13,
-"endLine":  73,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  75,
-"startColumn":  17,
-"endLine":  75,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  82,
-"startColumn":  13,
-"endLine":  82,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  84,
-"startColumn":  17,
-"endLine":  84,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  87,
-"startColumn":  21,
-"endLine":  87,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  95,
-"startColumn":  13,
-"endLine":  95,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  97,
-"startColumn":  17,
-"endLine":  97,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  107,
-"startColumn":  13,
-"endLine":  107,
-"endColumn":  16
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  109,
-"startColumn":  17,
-"endLine":  109,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  109,
-"startColumn":  32,
-"endLine":  109,
-"endColumn":  39
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  110,
-"startColumn":  17,
-"endLine":  110,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  111,
-"startColumn":  21,
-"endLine":  111,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  117,
-"startColumn":  21,
-"endLine":  117,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  128,
-"startColumn":  17,
-"endLine":  128,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  130,
-"startColumn":  21,
-"endLine":  130,
-"endColumn":  24
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  131,
-"startColumn":  25,
-"endLine":  131,
-"endColumn":  31
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  135,
-"startColumn":  66,
-"endLine":  135,
-"endColumn":  68
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  143,
-"startColumn":  33,
-"endLine":  143,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  147,
-"startColumn":  33,
-"endLine":  147,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  149,
-"startColumn":  33,
-"endLine":  149,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  151,
-"startColumn":  33,
-"endLine":  151,
-"endColumn":  37
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  200,
-"startColumn":  33,
-"endLine":  200,
-"endColumn":  39
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  204,
-"startColumn":  41,
-"endLine":  204,
-"endColumn":  43
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  205,
-"startColumn":  45,
-"endLine":  205,
-"endColumn":  47
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  216,
-"startColumn":  41,
-"endLine":  216,
-"endColumn":  43
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  235,
-"startColumn":  9,
-"endLine":  235,
-"endColumn":  14
 }
 }
 ]

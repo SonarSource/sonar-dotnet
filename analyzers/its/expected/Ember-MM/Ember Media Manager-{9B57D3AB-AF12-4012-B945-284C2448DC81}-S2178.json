@@ -4,7 +4,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3169",
 "region":  {
 "startLine":  3169,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3491",
 "region":  {
 "startLine":  3491,
 "startColumn":  46,
@@ -30,7 +30,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3776",
 "region":  {
 "startLine":  3776,
 "startColumn":  46,
@@ -43,7 +43,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4043",
 "region":  {
 "startLine":  4043,
 "startColumn":  46,

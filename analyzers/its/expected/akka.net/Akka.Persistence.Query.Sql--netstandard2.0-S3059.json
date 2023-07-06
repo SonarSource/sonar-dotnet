@@ -5,7 +5,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllEventsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllEventsPublisher.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllEventsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllEventsPublisher.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  9,
@@ -29,7 +29,49 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllEventsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllEventsPublisher.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  27,
+"endLine":  18,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllEventsPublisher.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  9,
+"endLine":  21,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllEventsPublisher.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  13,
+"endLine":  23,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllEventsPublisher.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  9,
+"endLine":  28,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllEventsPublisher.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  27,
@@ -38,7 +80,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllEventsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllEventsPublisher.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  9,
@@ -53,49 +95,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllEventsPublisher.cs",
-"region":  {
-"startLine":  18,
-"startColumn":  27,
-"endLine":  18,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllEventsPublisher.cs",
-"region":  {
-"startLine":  21,
-"startColumn":  9,
-"endLine":  21,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllEventsPublisher.cs",
-"region":  {
-"startLine":  23,
-"startColumn":  13,
-"endLine":  23,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllEventsPublisher.cs",
-"region":  {
-"startLine":  28,
-"startColumn":  9,
-"endLine":  28,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllPersistenceIdsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllPersistenceIdsPublisher.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  27,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllPersistenceIdsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllPersistenceIdsPublisher.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  9,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllPersistenceIdsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllPersistenceIdsPublisher.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  9,
@@ -128,7 +128,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllPersistenceIdsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllPersistenceIdsPublisher.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  27,
@@ -137,7 +137,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllPersistenceIdsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllPersistenceIdsPublisher.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  13,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllPersistenceIdsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllPersistenceIdsPublisher.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  9,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllPersistenceIdsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllPersistenceIdsPublisher.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  9,
@@ -170,7 +170,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\DeliveryBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/DeliveryBuffer.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  20,
@@ -179,7 +179,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\DeliveryBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/DeliveryBuffer.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  9,
@@ -188,7 +188,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\DeliveryBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/DeliveryBuffer.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  9,
@@ -197,7 +197,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\DeliveryBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/DeliveryBuffer.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  9,
@@ -206,7 +206,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\DeliveryBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/DeliveryBuffer.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  9,
@@ -215,7 +215,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\DeliveryBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/DeliveryBuffer.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  9,
@@ -224,7 +224,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\DeliveryBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/DeliveryBuffer.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  9,
@@ -233,7 +233,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\DeliveryBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/DeliveryBuffer.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  9,
@@ -248,7 +248,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByPersistenceIdPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByPersistenceIdPublisher.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  27,
@@ -257,7 +257,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByPersistenceIdPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByPersistenceIdPublisher.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  9,
@@ -272,7 +272,49 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByPersistenceIdPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByPersistenceIdPublisher.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  27,
+"endLine":  16,
+"endColumn":  57
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByPersistenceIdPublisher.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  9,
+"endLine":  19,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByPersistenceIdPublisher.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  13,
+"endLine":  21,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByPersistenceIdPublisher.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  9,
+"endLine":  28,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByPersistenceIdPublisher.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  27,
@@ -281,7 +323,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByPersistenceIdPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByPersistenceIdPublisher.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  9,
@@ -296,49 +338,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByPersistenceIdPublisher.cs",
-"region":  {
-"startLine":  16,
-"startColumn":  27,
-"endLine":  16,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByPersistenceIdPublisher.cs",
-"region":  {
-"startLine":  19,
-"startColumn":  9,
-"endLine":  19,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByPersistenceIdPublisher.cs",
-"region":  {
-"startLine":  21,
-"startColumn":  13,
-"endLine":  21,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByPersistenceIdPublisher.cs",
-"region":  {
-"startLine":  28,
-"startColumn":  9,
-"endLine":  28,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByTagPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByTagPublisher.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  27,
@@ -347,7 +347,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByTagPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByTagPublisher.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  9,
@@ -362,20 +362,38 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByTagPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByTagPublisher.cs#L16",
 "region":  {
-"startLine":  168,
+"startLine":  16,
 "startColumn":  27,
-"endLine":  168,
-"endColumn":  54
+"endLine":  16,
+"endColumn":  47
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByTagPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByTagPublisher.cs#L19",
 "region":  {
-"startLine":  170,
+"startLine":  19,
 "startColumn":  9,
-"endLine":  170,
+"endLine":  19,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByTagPublisher.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  13,
+"endLine":  21,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByTagPublisher.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  9,
+"endLine":  28,
 "endColumn":  15
 }
 }
@@ -386,38 +404,20 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByTagPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByTagPublisher.cs#L168",
 "region":  {
-"startLine":  16,
+"startLine":  168,
 "startColumn":  27,
-"endLine":  16,
-"endColumn":  47
+"endLine":  168,
+"endColumn":  54
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByTagPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByTagPublisher.cs#L170",
 "region":  {
-"startLine":  19,
+"startLine":  170,
 "startColumn":  9,
-"endLine":  19,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByTagPublisher.cs",
-"region":  {
-"startLine":  21,
-"startColumn":  13,
-"endLine":  21,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByTagPublisher.cs",
-"region":  {
-"startLine":  28,
-"startColumn":  9,
-"endLine":  28,
+"endLine":  170,
 "endColumn":  15
 }
 }

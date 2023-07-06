@@ -2,191 +2,9 @@
 "issues":  [
 {
 "id":  "S2259",
-"message":  "'r.values.FirstOrDefault(Function(y) y.value = v)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  166,
-"startColumn":  97,
-"endLine":  166,
-"endColumn":  145
-}
-}
-},
-{
-"id":  "S2259",
 "message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movieindex")' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  298,
-"startColumn":  61,
-"endLine":  298,
-"endColumn":  146
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movie")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  299,
-"startColumn":  68,
-"endLine":  299,
-"endColumn":  148
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movieindex")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  339,
-"startColumn":  64,
-"endLine":  339,
-"endColumn":  149
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movie")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  341,
-"startColumn":  85,
-"endLine":  341,
-"endColumn":  165
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvindex")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  380,
-"startColumn":  61,
-"endLine":  380,
-"endColumn":  143
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvshow")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  381,
-"startColumn":  72,
-"endLine":  381,
-"endColumn":  153
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvseason")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  382,
-"startColumn":  74,
-"endLine":  382,
-"endColumn":  157
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvepisode")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  383,
-"startColumn":  70,
-"endLine":  383,
-"endColumn":  154
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvindex")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  413,
-"startColumn":  64,
-"endLine":  413,
-"endColumn":  146
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvshow")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  427,
-"startColumn":  79,
-"endLine":  427,
-"endColumn":  160
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'mediaPath' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  523,
-"startColumn":  25,
-"endLine":  523,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'p' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  998,
-"startColumn":  13,
-"endLine":  998,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'p.values.FirstOrDefault(Function(y) y.label = s)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  998,
-"startColumn":  23,
-"endLine":  998,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movieindex")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
 "region":  {
 "startLine":  1498,
 "startColumn":  71,
@@ -199,7 +17,7 @@
 "id":  "S2259",
 "message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movieindex")' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
 "region":  {
 "startLine":  1498,
 "startColumn":  168,
@@ -212,7 +30,7 @@
 "id":  "S2259",
 "message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvindex")' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
 "region":  {
 "startLine":  1561,
 "startColumn":  71,
@@ -225,7 +43,7 @@
 "id":  "S2259",
 "message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvindex")' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
 "region":  {
 "startLine":  1561,
 "startColumn":  165,
@@ -236,9 +54,22 @@
 },
 {
 "id":  "S2259",
+"message":  "'r.values.FirstOrDefault(Function(y) y.value = v)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  97,
+"endLine":  166,
+"endColumn":  145
+}
+}
+},
+{
+"id":  "S2259",
 "message":  "'conf.Params.FirstOrDefault(Function(y) y.name = dgvSettings.Rows(e.RowIndex).Cells(0).Value.ToString)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1695",
 "region":  {
 "startLine":  1695,
 "startColumn":  29,
@@ -251,12 +82,181 @@
 "id":  "S2259",
 "message":  "'conf.Properties.FirstOrDefault(Function(y) y.name = dgvProperties.Rows(e.RowIndex).Tag.ToString)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1706",
 "region":  {
 "startLine":  1706,
 "startColumn":  29,
 "endLine":  1706,
 "endColumn":  125
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movieindex")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L298",
+"region":  {
+"startLine":  298,
+"startColumn":  61,
+"endLine":  298,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movie")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L299",
+"region":  {
+"startLine":  299,
+"startColumn":  68,
+"endLine":  299,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movieindex")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L339",
+"region":  {
+"startLine":  339,
+"startColumn":  64,
+"endLine":  339,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movie")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L341",
+"region":  {
+"startLine":  341,
+"startColumn":  85,
+"endLine":  341,
+"endColumn":  165
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvindex")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L380",
+"region":  {
+"startLine":  380,
+"startColumn":  61,
+"endLine":  380,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvshow")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  72,
+"endLine":  381,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvseason")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L382",
+"region":  {
+"startLine":  382,
+"startColumn":  74,
+"endLine":  382,
+"endColumn":  157
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvepisode")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L383",
+"region":  {
+"startLine":  383,
+"startColumn":  70,
+"endLine":  383,
+"endColumn":  154
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvindex")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L413",
+"region":  {
+"startLine":  413,
+"startColumn":  64,
+"endLine":  413,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvshow")' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L427",
+"region":  {
+"startLine":  427,
+"startColumn":  79,
+"endLine":  427,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'mediaPath' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L523",
+"region":  {
+"startLine":  523,
+"startColumn":  25,
+"endLine":  523,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'p' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L998",
+"region":  {
+"startLine":  998,
+"startColumn":  13,
+"endLine":  998,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'p.values.FirstOrDefault(Function(y) y.label = s)' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L998",
+"region":  {
+"startLine":  998,
+"startColumn":  23,
+"endLine":  998,
+"endColumn":  71
 }
 }
 }

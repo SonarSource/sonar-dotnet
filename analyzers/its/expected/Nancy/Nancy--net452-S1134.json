@@ -4,7 +4,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L606",
 "region":  {
 "startLine":  606,
 "startColumn":  19,

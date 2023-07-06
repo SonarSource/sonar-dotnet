@@ -4,7 +4,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'bytes'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'acc'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L319",
 "region":  {
 "startLine":  319,
 "startColumn":  13,

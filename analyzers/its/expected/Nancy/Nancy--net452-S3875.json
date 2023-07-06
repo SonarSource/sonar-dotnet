@@ -4,7 +4,7 @@
 "id":  "S3875",
 "message":  "Remove this overload of 'operator =='.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  37,

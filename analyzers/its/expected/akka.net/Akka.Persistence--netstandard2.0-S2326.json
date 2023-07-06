@@ -4,7 +4,7 @@
 "id":  "S2326",
 "message":  "'T' is not used in the class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  32,

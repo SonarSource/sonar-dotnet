@@ -4,7 +4,7 @@
 "id":  "S2245",
 "message":  "Make sure that using this pseudorandom number generator is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L450",
 "region":  {
 "startLine":  450,
 "startColumn":  50,

@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidViewEngine.cs#L103-L105",
 "region":  {
 "startLine":  103,
 "startColumn":  36,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidViewEngine.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidViewEngine.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  36,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidViewEngine.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  102,

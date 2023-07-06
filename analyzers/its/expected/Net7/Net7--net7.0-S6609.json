@@ -4,7 +4,7 @@
 "id":  "S6609",
 "message":  ""Min" property of Set type should be used instead of the "Min()" extension method.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\SetPropertiesInsteadOfLinqMethods.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/SetPropertiesInsteadOfLinqMethods.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  24,

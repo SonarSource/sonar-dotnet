@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Immutable.IImmutableSet<Akka.Cluster.UniqueAddress>' instead of 'System.Collections.Immutable.ImmutableHashSet<Akka.Cluster.UniqueAddress>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  77,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Immutable.IImmutableSet<string>' instead of 'System.Collections.Immutable.ImmutableHashSet<string>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L673",
 "region":  {
 "startLine":  673,
 "startColumn":  61,
@@ -30,7 +30,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.IEquatable<Akka.Actor.Address>' instead of 'Akka.Actor.Address'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  44,
@@ -43,7 +43,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Immutable.IImmutableSet<Akka.Cluster.UniqueAddress>' instead of 'System.Collections.Immutable.ImmutableHashSet<Akka.Cluster.UniqueAddress>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L501",
 "region":  {
 "startLine":  501,
 "startColumn":  45,
@@ -56,7 +56,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IList<Akka.Cluster.UniqueAddress>' instead of 'System.Collections.Generic.List<Akka.Cluster.UniqueAddress>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  142,
@@ -69,7 +69,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IDictionary<T, int>' instead of 'System.Collections.Generic.Dictionary<T, int>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  70,
@@ -82,7 +82,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Akka.Cluster.Member>' instead of 'System.Collections.Immutable.ImmutableSortedSet<Akka.Cluster.Member>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  87,
@@ -95,7 +95,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Akka.Cluster.Member>' instead of 'System.Collections.Immutable.ImmutableSortedSet<Akka.Cluster.Member>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  87,

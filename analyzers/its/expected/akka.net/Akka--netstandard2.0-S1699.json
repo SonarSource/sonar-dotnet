@@ -4,7 +4,7 @@
 "id":  "S1699",
 "message":  "Remove this call from a constructor to the overridable 'NewActorCell' method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\LocalActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/LocalActorRef.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  21,

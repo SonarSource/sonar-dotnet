@@ -4,7 +4,7 @@
 "id":  "S3963",
 "message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LogEvent.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S3963",
 "message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  16,

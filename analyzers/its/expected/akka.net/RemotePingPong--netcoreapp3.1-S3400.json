@@ -4,7 +4,7 @@
 "id":  "S3400",
 "message":  "Remove this method and declare a constant for this value.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  28,

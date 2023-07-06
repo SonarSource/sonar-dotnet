@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\InternalApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/InternalApi.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  1,

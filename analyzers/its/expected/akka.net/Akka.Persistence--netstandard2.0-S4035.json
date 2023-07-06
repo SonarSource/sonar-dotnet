@@ -4,7 +4,7 @@
 "id":  "S4035",
 "message":  "Seal class 'PersistentFSMSnapshot' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S4035",
 "message":  "Seal class 'EventSequence' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Persistent' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  18,

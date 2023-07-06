@@ -4,7 +4,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\EWMA.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  41,
@@ -43,7 +43,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\NodeMetrics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/NodeMetrics.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  33,

@@ -4,7 +4,7 @@
 "id":  "S1210",
 "message":  "When implementing IComparable<T>, you should also override Equals, ==, !=, <, <=, >, and >=.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.Query\Offset.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Query/Offset.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  27,

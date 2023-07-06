@@ -4,7 +4,7 @@
 "id":  "S3168",
 "message":  "Return 'Task' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  30,

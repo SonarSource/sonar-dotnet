@@ -4,7 +4,7 @@
 "id":  "S3923",
 "message":  "Remove this conditional structure or edit its code blocks so that they're not all the same.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  17,

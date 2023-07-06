@@ -4,7 +4,7 @@
 "id":  "S3253",
 "message":  "Remove this redundant constructor.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L28-L30",
 "region":  {
 "startLine":  28,
 "startColumn":  9,

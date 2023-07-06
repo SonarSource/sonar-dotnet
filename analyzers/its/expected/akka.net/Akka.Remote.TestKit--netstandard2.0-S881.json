@@ -4,7 +4,7 @@
 "id":  "S881",
 "message":  "Extract this increment operation into a dedicated statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  97,

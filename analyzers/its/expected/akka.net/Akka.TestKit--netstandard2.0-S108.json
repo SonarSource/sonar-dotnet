@@ -4,7 +4,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L133-L134",
 "region":  {
 "startLine":  133,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S101",
 "message":  "Rename class 'SSLProxy' to match pascal case naming rules, consider using 'SslProxy'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\SSLProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/SSLProxy.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  25,

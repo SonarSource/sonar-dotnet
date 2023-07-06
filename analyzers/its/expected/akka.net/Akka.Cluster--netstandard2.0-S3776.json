@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  32,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  13,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  17,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  13,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  17,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  21,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  21,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  21,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  21,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L200",
 "region":  {
 "startLine":  200,
 "startColumn":  17,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  13,
@@ -116,296 +116,194 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2076,
-"startColumn":  21,
-"endLine":  2076,
-"endColumn":  31
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2078,
-"startColumn":  13,
-"endLine":  2078,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2084,
-"startColumn":  17,
-"endLine":  2084,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2089,
-"startColumn":  25,
-"endLine":  2089,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2091,
-"startColumn":  17,
-"endLine":  2091,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2096,
-"startColumn":  17,
-"endLine":  2096,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2102,
-"startColumn":  17,
-"endLine":  2102,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2111,
-"startColumn":  21,
-"endLine":  2111,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2113,
-"startColumn":  25,
-"endLine":  2113,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2114,
-"startColumn":  25,
-"endLine":  2114,
-"endColumn":  29
-}
-}
-]
-},
-{
-"id":  "S3776",
 "message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1344",
 "region":  {
-"startLine":  2425,
-"startColumn":  21,
-"endLine":  2425,
-"endColumn":  43
+"startLine":  1344,
+"startColumn":  22,
+"endLine":  1344,
+"endColumn":  33
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1346",
 "region":  {
-"startLine":  2427,
+"startLine":  1346,
 "startColumn":  13,
-"endLine":  2427,
+"endLine":  1346,
 "endColumn":  15
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1349",
 "region":  {
-"startLine":  2437,
-"startColumn":  72,
-"endLine":  2437,
-"endColumn":  74
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2443,
-"startColumn":  72,
-"endLine":  2443,
-"endColumn":  74
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2446,
+"startLine":  1349,
 "startColumn":  17,
-"endLine":  2446,
+"endLine":  1349,
 "endColumn":  19
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1352",
 "region":  {
-"startLine":  2446,
-"startColumn":  62,
-"endLine":  2446,
-"endColumn":  64
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2456,
-"startColumn":  21,
-"endLine":  2456,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2467,
-"startColumn":  25,
-"endLine":  2467,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2471,
-"startColumn":  25,
-"endLine":  2471,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2475,
-"startColumn":  25,
-"endLine":  2475,
-"endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2150,
-"startColumn":  21,
-"endLine":  2150,
-"endColumn":  34
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2152,
+"startLine":  1352,
 "startColumn":  13,
-"endLine":  2152,
-"endColumn":  15
+"endLine":  1352,
+"endColumn":  17
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1356",
 "region":  {
-"startLine":  2155,
-"startColumn":  17,
-"endLine":  2155,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2162,
-"startColumn":  17,
-"endLine":  2162,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2164,
-"startColumn":  21,
-"endLine":  2164,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2169,
-"startColumn":  17,
-"endLine":  2169,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2173,
-"startColumn":  21,
-"endLine":  2173,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2173,
-"startColumn":  64,
-"endLine":  2173,
-"endColumn":  66
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2176,
-"startColumn":  21,
-"endLine":  2176,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2176,
-"startColumn":  61,
-"endLine":  2176,
-"endColumn":  63
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2189,
+"startLine":  1356,
 "startColumn":  13,
-"endLine":  2189,
+"endLine":  1356,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1360",
+"region":  {
+"startLine":  1360,
+"startColumn":  13,
+"endLine":  1360,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1364",
+"region":  {
+"startLine":  1364,
+"startColumn":  13,
+"endLine":  1364,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1368",
+"region":  {
+"startLine":  1368,
+"startColumn":  13,
+"endLine":  1368,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1372",
+"region":  {
+"startLine":  1372,
+"startColumn":  13,
+"endLine":  1372,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1376",
+"region":  {
+"startLine":  1376,
+"startColumn":  13,
+"endLine":  1376,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1381",
+"region":  {
+"startLine":  1381,
+"startColumn":  13,
+"endLine":  1381,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1385",
+"region":  {
+"startLine":  1385,
+"startColumn":  13,
+"endLine":  1385,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1389",
+"region":  {
+"startLine":  1389,
+"startColumn":  13,
+"endLine":  1389,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1393",
+"region":  {
+"startLine":  1393,
+"startColumn":  13,
+"endLine":  1393,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1397",
+"region":  {
+"startLine":  1397,
+"startColumn":  13,
+"endLine":  1397,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1401",
+"region":  {
+"startLine":  1401,
+"startColumn":  13,
+"endLine":  1401,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1405",
+"region":  {
+"startLine":  1405,
+"startColumn":  13,
+"endLine":  1405,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1409",
+"region":  {
+"startLine":  1409,
+"startColumn":  13,
+"endLine":  1409,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1414",
+"region":  {
+"startLine":  1414,
+"startColumn":  13,
+"endLine":  1414,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1418",
+"region":  {
+"startLine":  1418,
+"startColumn":  13,
+"endLine":  1418,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1419",
+"region":  {
+"startLine":  1419,
+"startColumn":  13,
+"endLine":  1419,
 "endColumn":  17
 }
 }
@@ -416,7 +314,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1570",
 "region":  {
 "startLine":  1570,
 "startColumn":  21,
@@ -425,7 +323,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1573",
 "region":  {
 "startLine":  1573,
 "startColumn":  13,
@@ -434,7 +332,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1578",
 "region":  {
 "startLine":  1578,
 "startColumn":  13,
@@ -443,7 +341,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1583",
 "region":  {
 "startLine":  1583,
 "startColumn":  13,
@@ -452,7 +350,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1588",
 "region":  {
 "startLine":  1588,
 "startColumn":  13,
@@ -461,7 +359,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1595",
 "region":  {
 "startLine":  1595,
 "startColumn":  17,
@@ -470,7 +368,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1595",
 "region":  {
 "startLine":  1595,
 "startColumn":  41,
@@ -479,7 +377,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1599",
 "region":  {
 "startLine":  1599,
 "startColumn":  21,
@@ -488,7 +386,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1604",
 "region":  {
 "startLine":  1604,
 "startColumn":  17,
@@ -497,7 +395,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1611",
 "region":  {
 "startLine":  1611,
 "startColumn":  21,
@@ -506,7 +404,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1622",
 "region":  {
 "startLine":  1622,
 "startColumn":  17,
@@ -515,7 +413,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1638",
 "region":  {
 "startLine":  1638,
 "startColumn":  21,
@@ -524,7 +422,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1642",
 "region":  {
 "startLine":  1642,
 "startColumn":  25,
@@ -533,7 +431,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1648",
 "region":  {
 "startLine":  1648,
 "startColumn":  21,
@@ -545,10 +443,451 @@
 },
 {
 "id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1853",
+"region":  {
+"startLine":  1853,
+"startColumn":  34,
+"endLine":  1853,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1859",
+"region":  {
+"startLine":  1859,
+"startColumn":  13,
+"endLine":  1859,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1865",
+"region":  {
+"startLine":  1865,
+"startColumn":  13,
+"endLine":  1865,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1871",
+"region":  {
+"startLine":  1871,
+"startColumn":  13,
+"endLine":  1871,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1876",
+"region":  {
+"startLine":  1876,
+"startColumn":  13,
+"endLine":  1876,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1881",
+"region":  {
+"startLine":  1881,
+"startColumn":  13,
+"endLine":  1881,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1893",
+"region":  {
+"startLine":  1893,
+"startColumn":  13,
+"endLine":  1893,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1897",
+"region":  {
+"startLine":  1897,
+"startColumn":  57,
+"endLine":  1897,
+"endColumn":  59
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1910",
+"region":  {
+"startLine":  1910,
+"startColumn":  57,
+"endLine":  1910,
+"endColumn":  59
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1921",
+"region":  {
+"startLine":  1921,
+"startColumn":  25,
+"endLine":  1921,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1921",
+"region":  {
+"startLine":  1921,
+"startColumn":  82,
+"endLine":  1921,
+"endColumn":  84
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1931",
+"region":  {
+"startLine":  1931,
+"startColumn":  25,
+"endLine":  1931,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1931",
+"region":  {
+"startLine":  1931,
+"startColumn":  82,
+"endLine":  1931,
+"endColumn":  84
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1949",
+"region":  {
+"startLine":  1949,
+"startColumn":  13,
+"endLine":  1949,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1953",
+"region":  {
+"startLine":  1953,
+"startColumn":  13,
+"endLine":  1953,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1961",
+"region":  {
+"startLine":  1961,
+"startColumn":  13,
+"endLine":  1961,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1963",
+"region":  {
+"startLine":  1963,
+"startColumn":  17,
+"endLine":  1963,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1972",
+"region":  {
+"startLine":  1972,
+"startColumn":  13,
+"endLine":  1972,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1978",
+"region":  {
+"startLine":  1978,
+"startColumn":  13,
+"endLine":  1978,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1980",
+"region":  {
+"startLine":  1980,
+"startColumn":  17,
+"endLine":  1980,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2000",
+"region":  {
+"startLine":  2000,
+"startColumn":  13,
+"endLine":  2000,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2000",
+"region":  {
+"startLine":  2000,
+"startColumn":  52,
+"endLine":  2000,
+"endColumn":  54
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2005",
+"region":  {
+"startLine":  2005,
+"startColumn":  17,
+"endLine":  2005,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2011",
+"region":  {
+"startLine":  2011,
+"startColumn":  13,
+"endLine":  2011,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2011",
+"region":  {
+"startLine":  2011,
+"startColumn":  49,
+"endLine":  2011,
+"endColumn":  51
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2017",
+"region":  {
+"startLine":  2017,
+"startColumn":  13,
+"endLine":  2017,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2076",
+"region":  {
+"startLine":  2076,
+"startColumn":  21,
+"endLine":  2076,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2078",
+"region":  {
+"startLine":  2078,
+"startColumn":  13,
+"endLine":  2078,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2084",
+"region":  {
+"startLine":  2084,
+"startColumn":  17,
+"endLine":  2084,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2089",
+"region":  {
+"startLine":  2089,
+"startColumn":  25,
+"endLine":  2089,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2091",
+"region":  {
+"startLine":  2091,
+"startColumn":  17,
+"endLine":  2091,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2096",
+"region":  {
+"startLine":  2096,
+"startColumn":  17,
+"endLine":  2096,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2102",
+"region":  {
+"startLine":  2102,
+"startColumn":  17,
+"endLine":  2102,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2111",
+"region":  {
+"startLine":  2111,
+"startColumn":  21,
+"endLine":  2111,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2113",
+"region":  {
+"startLine":  2113,
+"startColumn":  25,
+"endLine":  2113,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2114",
+"region":  {
+"startLine":  2114,
+"startColumn":  25,
+"endLine":  2114,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2150",
+"region":  {
+"startLine":  2150,
+"startColumn":  21,
+"endLine":  2150,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2152",
+"region":  {
+"startLine":  2152,
+"startColumn":  13,
+"endLine":  2152,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2155",
+"region":  {
+"startLine":  2155,
+"startColumn":  17,
+"endLine":  2155,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2162",
+"region":  {
+"startLine":  2162,
+"startColumn":  17,
+"endLine":  2162,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2164",
+"region":  {
+"startLine":  2164,
+"startColumn":  21,
+"endLine":  2164,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2169",
+"region":  {
+"startLine":  2169,
+"startColumn":  17,
+"endLine":  2169,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2173",
+"region":  {
+"startLine":  2173,
+"startColumn":  21,
+"endLine":  2173,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2173",
+"region":  {
+"startLine":  2173,
+"startColumn":  64,
+"endLine":  2173,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2176",
+"region":  {
+"startLine":  2176,
+"startColumn":  21,
+"endLine":  2176,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2176",
+"region":  {
+"startLine":  2176,
+"startColumn":  61,
+"endLine":  2176,
+"endColumn":  63
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2189",
+"region":  {
+"startLine":  2189,
+"startColumn":  13,
+"endLine":  2189,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3776",
 "message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2287",
 "region":  {
 "startLine":  2287,
 "startColumn":  21,
@@ -557,7 +896,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2295",
 "region":  {
 "startLine":  2295,
 "startColumn":  115,
@@ -566,7 +905,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2295",
 "region":  {
 "startLine":  2295,
 "startColumn":  77,
@@ -575,7 +914,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2309",
 "region":  {
 "startLine":  2309,
 "startColumn":  17,
@@ -584,7 +923,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2313",
 "region":  {
 "startLine":  2313,
 "startColumn":  21,
@@ -593,7 +932,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2318",
 "region":  {
 "startLine":  2318,
 "startColumn":  75,
@@ -602,7 +941,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2320",
 "region":  {
 "startLine":  2320,
 "startColumn":  21,
@@ -611,7 +950,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2327",
 "region":  {
 "startLine":  2327,
 "startColumn":  17,
@@ -620,7 +959,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2337",
 "region":  {
 "startLine":  2337,
 "startColumn":  13,
@@ -629,7 +968,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2337",
 "region":  {
 "startLine":  2337,
 "startColumn":  45,
@@ -638,7 +977,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2366",
 "region":  {
 "startLine":  2366,
 "startColumn":  17,
@@ -647,7 +986,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2366",
 "region":  {
 "startLine":  2366,
 "startColumn":  46,
@@ -656,7 +995,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2373",
 "region":  {
 "startLine":  2373,
 "startColumn":  21,
@@ -665,7 +1004,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2383",
 "region":  {
 "startLine":  2383,
 "startColumn":  17,
@@ -674,7 +1013,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2387",
 "region":  {
 "startLine":  2387,
 "startColumn":  17,
@@ -683,7 +1022,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2389",
 "region":  {
 "startLine":  2389,
 "startColumn":  67,
@@ -692,7 +1031,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2393",
 "region":  {
 "startLine":  2393,
 "startColumn":  17,
@@ -707,432 +1046,93 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2425",
 "region":  {
-"startLine":  1344,
-"startColumn":  22,
-"endLine":  1344,
-"endColumn":  33
+"startLine":  2425,
+"startColumn":  21,
+"endLine":  2425,
+"endColumn":  43
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2427",
 "region":  {
-"startLine":  1346,
+"startLine":  2427,
 "startColumn":  13,
-"endLine":  1346,
+"endLine":  2427,
 "endColumn":  15
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2437",
 "region":  {
-"startLine":  1349,
+"startLine":  2437,
+"startColumn":  72,
+"endLine":  2437,
+"endColumn":  74
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2443",
+"region":  {
+"startLine":  2443,
+"startColumn":  72,
+"endLine":  2443,
+"endColumn":  74
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2446",
+"region":  {
+"startLine":  2446,
 "startColumn":  17,
-"endLine":  1349,
+"endLine":  2446,
 "endColumn":  19
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2446",
 "region":  {
-"startLine":  1352,
-"startColumn":  13,
-"endLine":  1352,
-"endColumn":  17
+"startLine":  2446,
+"startColumn":  62,
+"endLine":  2446,
+"endColumn":  64
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2456",
 "region":  {
-"startLine":  1356,
-"startColumn":  13,
-"endLine":  1356,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1360,
-"startColumn":  13,
-"endLine":  1360,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1364,
-"startColumn":  13,
-"endLine":  1364,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1368,
-"startColumn":  13,
-"endLine":  1368,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1372,
-"startColumn":  13,
-"endLine":  1372,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1376,
-"startColumn":  13,
-"endLine":  1376,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1381,
-"startColumn":  13,
-"endLine":  1381,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1385,
-"startColumn":  13,
-"endLine":  1385,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1389,
-"startColumn":  13,
-"endLine":  1389,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1393,
-"startColumn":  13,
-"endLine":  1393,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1397,
-"startColumn":  13,
-"endLine":  1397,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1401,
-"startColumn":  13,
-"endLine":  1401,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1405,
-"startColumn":  13,
-"endLine":  1405,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1409,
-"startColumn":  13,
-"endLine":  1409,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1414,
-"startColumn":  13,
-"endLine":  1414,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1418,
-"startColumn":  13,
-"endLine":  1418,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1419,
-"startColumn":  13,
-"endLine":  1419,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1853,
-"startColumn":  34,
-"endLine":  1853,
-"endColumn":  47
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1859,
-"startColumn":  13,
-"endLine":  1859,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1865,
-"startColumn":  13,
-"endLine":  1865,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1871,
-"startColumn":  13,
-"endLine":  1871,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1876,
-"startColumn":  13,
-"endLine":  1876,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1881,
-"startColumn":  13,
-"endLine":  1881,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1893,
-"startColumn":  13,
-"endLine":  1893,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1897,
-"startColumn":  57,
-"endLine":  1897,
-"endColumn":  59
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1910,
-"startColumn":  57,
-"endLine":  1910,
-"endColumn":  59
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1921,
-"startColumn":  25,
-"endLine":  1921,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1921,
-"startColumn":  82,
-"endLine":  1921,
-"endColumn":  84
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1931,
-"startColumn":  25,
-"endLine":  1931,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1931,
-"startColumn":  82,
-"endLine":  1931,
-"endColumn":  84
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1949,
-"startColumn":  13,
-"endLine":  1949,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1953,
-"startColumn":  13,
-"endLine":  1953,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1961,
-"startColumn":  13,
-"endLine":  1961,
-"endColumn":  20
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1963,
-"startColumn":  17,
-"endLine":  1963,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1972,
-"startColumn":  13,
-"endLine":  1972,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1978,
-"startColumn":  13,
-"endLine":  1978,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1980,
-"startColumn":  17,
-"endLine":  1980,
+"startLine":  2456,
+"startColumn":  21,
+"endLine":  2456,
 "endColumn":  23
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2467",
 "region":  {
-"startLine":  2000,
-"startColumn":  13,
-"endLine":  2000,
-"endColumn":  15
+"startLine":  2467,
+"startColumn":  25,
+"endLine":  2467,
+"endColumn":  27
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2471",
 "region":  {
-"startLine":  2000,
-"startColumn":  52,
-"endLine":  2000,
-"endColumn":  54
+"startLine":  2471,
+"startColumn":  25,
+"endLine":  2471,
+"endColumn":  27
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2475",
 "region":  {
-"startLine":  2005,
-"startColumn":  17,
-"endLine":  2005,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2011,
-"startColumn":  13,
-"endLine":  2011,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2011,
-"startColumn":  49,
-"endLine":  2011,
-"endColumn":  51
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  2017,
-"startColumn":  13,
-"endLine":  2017,
-"endColumn":  15
+"startLine":  2475,
+"startColumn":  25,
+"endLine":  2475,
+"endColumn":  27
 }
 }
 ]
@@ -1142,7 +1142,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L646",
 "region":  {
 "startLine":  646,
 "startColumn":  45,
@@ -1151,7 +1151,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L648",
 "region":  {
 "startLine":  648,
 "startColumn":  13,
@@ -1160,7 +1160,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L652",
 "region":  {
 "startLine":  652,
 "startColumn":  13,
@@ -1169,7 +1169,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L661",
 "region":  {
 "startLine":  661,
 "startColumn":  21,
@@ -1178,7 +1178,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L663",
 "region":  {
 "startLine":  663,
 "startColumn":  25,
@@ -1187,7 +1187,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L663",
 "region":  {
 "startLine":  663,
 "startColumn":  54,
@@ -1196,7 +1196,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L668",
 "region":  {
 "startLine":  668,
 "startColumn":  25,
@@ -1205,7 +1205,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L672",
 "region":  {
 "startLine":  672,
 "startColumn":  29,
@@ -1214,7 +1214,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L672",
 "region":  {
 "startLine":  672,
 "startColumn":  47,
@@ -1223,7 +1223,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L675",
 "region":  {
 "startLine":  675,
 "startColumn":  29,
@@ -1232,7 +1232,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L679",
 "region":  {
 "startLine":  679,
 "startColumn":  29,
@@ -1241,7 +1241,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L691",
 "region":  {
 "startLine":  691,
 "startColumn":  21,
@@ -1256,7 +1256,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  29,
@@ -1265,7 +1265,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  13,
@@ -1274,7 +1274,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  17,
@@ -1283,7 +1283,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  35,
@@ -1292,7 +1292,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  68,
@@ -1301,7 +1301,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  21,
@@ -1310,7 +1310,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  17,
@@ -1319,7 +1319,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  35,
@@ -1328,7 +1328,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  21,
@@ -1337,7 +1337,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  25,
@@ -1346,7 +1346,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  17,
@@ -1355,7 +1355,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  35,
@@ -1364,7 +1364,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  21,
@@ -1373,7 +1373,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  25,
@@ -1382,7 +1382,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  17,
@@ -1394,79 +1394,10 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
-"region":  {
-"startLine":  386,
-"startColumn":  24,
-"endLine":  386,
-"endColumn":  39
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
-"region":  {
-"startLine":  390,
-"startColumn":  17,
-"endLine":  390,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
-"region":  {
-"startLine":  397,
-"startColumn":  25,
-"endLine":  397,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
-"region":  {
-"startLine":  401,
-"startColumn":  29,
-"endLine":  401,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
-"region":  {
-"startLine":  408,
-"startColumn":  37,
-"endLine":  408,
-"endColumn":  39
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
-"region":  {
-"startLine":  411,
-"startColumn":  37,
-"endLine":  411,
-"endColumn":  41
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
-"region":  {
-"startLine":  417,
-"startColumn":  25,
-"endLine":  417,
-"endColumn":  29
-}
-}
-]
-},
-{
-"id":  "S3776",
 "message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  22,
@@ -1475,7 +1406,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L296",
 "region":  {
 "startLine":  296,
 "startColumn":  13,
@@ -1484,7 +1415,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  17,
@@ -1493,7 +1424,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  48,
@@ -1502,7 +1433,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L311",
 "region":  {
 "startLine":  311,
 "startColumn":  17,
@@ -1511,7 +1442,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L311",
 "region":  {
 "startLine":  311,
 "startColumn":  54,
@@ -1520,7 +1451,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L320",
 "region":  {
 "startLine":  320,
 "startColumn":  13,
@@ -1529,7 +1460,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L320",
 "region":  {
 "startLine":  320,
 "startColumn":  31,
@@ -1538,7 +1469,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L321",
 "region":  {
 "startLine":  321,
 "startColumn":  17,
@@ -1547,7 +1478,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L325",
 "region":  {
 "startLine":  325,
 "startColumn":  25,
@@ -1556,7 +1487,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L328",
 "region":  {
 "startLine":  328,
 "startColumn":  33,
@@ -1565,7 +1496,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  33,
@@ -1574,7 +1505,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  37,
@@ -1583,7 +1514,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  37,
@@ -1592,7 +1523,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  13,
@@ -1601,7 +1532,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L367",
 "region":  {
 "startLine":  367,
 "startColumn":  21,
@@ -1613,118 +1544,28 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 38 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
-"region":  {
-"startLine":  376,
-"startColumn":  33,
-"endLine":  376,
-"endColumn":  40
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
-"region":  {
-"startLine":  381,
-"startColumn":  17,
-"endLine":  381,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
-"region":  {
-"startLine":  381,
-"startColumn":  58,
-"endLine":  381,
-"endColumn":  60
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
-"region":  {
-"startLine":  382,
-"startColumn":  17,
-"endLine":  382,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
-"region":  {
-"startLine":  382,
-"startColumn":  46,
-"endLine":  382,
-"endColumn":  48
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
-"region":  {
-"startLine":  384,
-"startColumn":  17,
-"endLine":  384,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
-"region":  {
-"startLine":  384,
-"startColumn":  85,
-"endLine":  384,
-"endColumn":  86
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L386",
 "region":  {
 "startLine":  386,
-"startColumn":  17,
+"startColumn":  24,
 "endLine":  386,
-"endColumn":  19
+"endColumn":  39
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L390",
 "region":  {
-"startLine":  386,
-"startColumn":  86,
-"endLine":  386,
-"endColumn":  87
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
-"region":  {
-"startLine":  389,
+"startLine":  390,
 "startColumn":  17,
-"endLine":  389,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
-"region":  {
-"startLine":  393,
-"startColumn":  21,
-"endLine":  393,
+"endLine":  390,
 "endColumn":  23
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
-"region":  {
-"startLine":  394,
-"startColumn":  21,
-"endLine":  394,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  25,
@@ -1733,7 +1574,166 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L401",
+"region":  {
+"startLine":  401,
+"startColumn":  29,
+"endLine":  401,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L408",
+"region":  {
+"startLine":  408,
+"startColumn":  37,
+"endLine":  408,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L411",
+"region":  {
+"startLine":  411,
+"startColumn":  37,
+"endLine":  411,
+"endColumn":  41
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L417",
+"region":  {
+"startLine":  417,
+"startColumn":  25,
+"endLine":  417,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 38 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L376",
+"region":  {
+"startLine":  376,
+"startColumn":  33,
+"endLine":  376,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  17,
+"endLine":  381,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  58,
+"endLine":  381,
+"endColumn":  60
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L382",
+"region":  {
+"startLine":  382,
+"startColumn":  17,
+"endLine":  382,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L382",
+"region":  {
+"startLine":  382,
+"startColumn":  46,
+"endLine":  382,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L384",
+"region":  {
+"startLine":  384,
+"startColumn":  17,
+"endLine":  384,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L384",
+"region":  {
+"startLine":  384,
+"startColumn":  85,
+"endLine":  384,
+"endColumn":  86
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L386",
+"region":  {
+"startLine":  386,
+"startColumn":  17,
+"endLine":  386,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L386",
+"region":  {
+"startLine":  386,
+"startColumn":  86,
+"endLine":  386,
+"endColumn":  87
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L389",
+"region":  {
+"startLine":  389,
+"startColumn":  17,
+"endLine":  389,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L393",
+"region":  {
+"startLine":  393,
+"startColumn":  21,
+"endLine":  393,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L394",
+"region":  {
+"startLine":  394,
+"startColumn":  21,
+"endLine":  394,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L397",
+"region":  {
+"startLine":  397,
+"startColumn":  25,
+"endLine":  397,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  21,
@@ -1742,7 +1742,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  17,
@@ -1751,7 +1751,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  21,
@@ -1760,7 +1760,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L413",
 "region":  {
 "startLine":  413,
 "startColumn":  17,

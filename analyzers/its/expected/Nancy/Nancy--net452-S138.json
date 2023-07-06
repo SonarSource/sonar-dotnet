@@ -4,7 +4,7 @@
 "id":  "S138",
 "message":  "This constructor 'InteractiveModule' has 81 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InteractiveModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InteractiveModule.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S138",
 "message":  "This method 'HtmlDecode' has 133 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  32,
@@ -30,7 +30,7 @@
 "id":  "S138",
 "message":  "This method 'InitEntities' has 253 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L683",
 "region":  {
 "startLine":  683,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S138",
 "message":  "This constructor 'MimeTypes' has 541 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  16,
@@ -56,7 +56,7 @@
 "id":  "S138",
 "message":  "This method 'Bind' has 104 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  23,
@@ -69,7 +69,7 @@
 "id":  "S138",
 "message":  "This method 'GetWeightedValues' has 88 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  53,
@@ -82,7 +82,7 @@
 "id":  "S138",
 "message":  "This method 'ResolveInternal' has 82 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3584",
 "region":  {
 "startLine":  3584,
 "startColumn":  24,

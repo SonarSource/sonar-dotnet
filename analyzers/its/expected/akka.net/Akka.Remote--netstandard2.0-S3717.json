@@ -4,7 +4,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S4041",
 "message":  "Change the name of type 'Timers' to be different from an existing framework namespace.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  25,

@@ -4,20 +4,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
-"region":  {
-"startLine":  85,
-"startColumn":  30,
-"endLine":  85,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  34,
@@ -30,7 +17,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  23,
@@ -43,7 +30,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  30,
@@ -56,12 +43,12 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L85",
 "region":  {
 "startLine":  85,
-"startColumn":  42,
+"startColumn":  30,
 "endLine":  85,
-"endColumn":  50
+"endColumn":  38
 }
 }
 },
@@ -69,20 +56,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
-"region":  {
-"startLine":  85,
-"startColumn":  59,
-"endLine":  85,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  23,
@@ -95,7 +69,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  25,
@@ -108,7 +82,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  27,
@@ -121,7 +95,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L556",
 "region":  {
 "startLine":  556,
 "startColumn":  23,
@@ -134,12 +108,38 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L732",
 "region":  {
 "startLine":  732,
 "startColumn":  27,
 "endLine":  732,
 "endColumn":  35
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  42,
+"endLine":  85,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  59,
+"endLine":  85,
+"endColumn":  67
 }
 }
 }

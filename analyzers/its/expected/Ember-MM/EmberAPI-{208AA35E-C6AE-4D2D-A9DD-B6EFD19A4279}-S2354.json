@@ -4,7 +4,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  16,
@@ -17,85 +17,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
-"region":  {
-"startLine":  33,
-"startColumn":  30,
-"endLine":  33,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
-"region":  {
-"startLine":  38,
-"startColumn":  32,
-"endLine":  38,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
-"region":  {
-"startLine":  39,
-"startColumn":  35,
-"endLine":  39,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
-"region":  {
-"startLine":  69,
-"startColumn":  37,
-"endLine":  69,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
-"region":  {
-"startLine":  71,
-"startColumn":  33,
-"endLine":  71,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
-"region":  {
-"startLine":  73,
-"startColumn":  32,
-"endLine":  73,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  48,
@@ -108,7 +30,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  48,
@@ -121,12 +43,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L33",
 "region":  {
-"startLine":  246,
-"startColumn":  54,
-"endLine":  246,
-"endColumn":  55
+"startLine":  33,
+"startColumn":  30,
+"endLine":  33,
+"endColumn":  31
 }
 }
 },
@@ -134,12 +56,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L38",
 "region":  {
-"startLine":  247,
-"startColumn":  56,
-"endLine":  247,
-"endColumn":  57
+"startLine":  38,
+"startColumn":  32,
+"endLine":  38,
+"endColumn":  33
 }
 }
 },
@@ -147,12 +69,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L39",
 "region":  {
-"startLine":  273,
-"startColumn":  54,
-"endLine":  273,
-"endColumn":  55
+"startLine":  39,
+"startColumn":  35,
+"endLine":  39,
+"endColumn":  36
 }
 }
 },
@@ -160,12 +82,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L69",
 "region":  {
-"startLine":  274,
-"startColumn":  56,
-"endLine":  274,
-"endColumn":  57
+"startLine":  69,
+"startColumn":  37,
+"endLine":  69,
+"endColumn":  38
 }
 }
 },
@@ -173,12 +95,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L71",
 "region":  {
-"startLine":  633,
-"startColumn":  146,
-"endLine":  633,
-"endColumn":  147
+"startLine":  71,
+"startColumn":  33,
+"endLine":  71,
+"endColumn":  34
 }
 }
 },
@@ -186,12 +108,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L73",
 "region":  {
-"startLine":  835,
-"startColumn":  143,
-"endLine":  835,
-"endColumn":  144
+"startLine":  73,
+"startColumn":  32,
+"endLine":  73,
+"endColumn":  33
 }
 }
 },
@@ -199,7 +121,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1011",
 "region":  {
 "startLine":  1011,
 "startColumn":  147,
@@ -212,7 +134,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1093",
 "region":  {
 "startLine":  1093,
 "startColumn":  95,
@@ -225,7 +147,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1094",
 "region":  {
 "startLine":  1094,
 "startColumn":  148,
@@ -238,7 +160,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1095",
 "region":  {
 "startLine":  1095,
 "startColumn":  152,
@@ -251,7 +173,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1096",
 "region":  {
 "startLine":  1096,
 "startColumn":  107,
@@ -264,7 +186,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1097",
 "region":  {
 "startLine":  1097,
 "startColumn":  163,
@@ -277,7 +199,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1100",
 "region":  {
 "startLine":  1100,
 "startColumn":  95,
@@ -290,7 +212,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1101",
 "region":  {
 "startLine":  1101,
 "startColumn":  152,
@@ -303,7 +225,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1102",
 "region":  {
 "startLine":  1102,
 "startColumn":  152,
@@ -316,7 +238,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1103",
 "region":  {
 "startLine":  1103,
 "startColumn":  107,
@@ -329,7 +251,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1104",
 "region":  {
 "startLine":  1104,
 "startColumn":  163,
@@ -342,7 +264,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1271",
 "region":  {
 "startLine":  1271,
 "startColumn":  121,
@@ -355,7 +277,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1272",
 "region":  {
 "startLine":  1272,
 "startColumn":  109,
@@ -368,7 +290,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1273",
 "region":  {
 "startLine":  1273,
 "startColumn":  114,
@@ -381,7 +303,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1303",
 "region":  {
 "startLine":  1303,
 "startColumn":  121,
@@ -394,7 +316,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1304",
 "region":  {
 "startLine":  1304,
 "startColumn":  118,
@@ -407,7 +329,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1326",
 "region":  {
 "startLine":  1326,
 "startColumn":  113,
@@ -420,7 +342,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1327",
 "region":  {
 "startLine":  1327,
 "startColumn":  110,
@@ -433,7 +355,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1351",
 "region":  {
 "startLine":  1351,
 "startColumn":  123,
@@ -446,7 +368,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1352",
 "region":  {
 "startLine":  1352,
 "startColumn":  57,
@@ -459,7 +381,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1368",
 "region":  {
 "startLine":  1368,
 "startColumn":  121,
@@ -472,7 +394,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1369",
 "region":  {
 "startLine":  1369,
 "startColumn":  68,
@@ -485,7 +407,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1383",
 "region":  {
 "startLine":  1383,
 "startColumn":  101,
@@ -498,7 +420,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1384",
 "region":  {
 "startLine":  1384,
 "startColumn":  45,
@@ -511,7 +433,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1396",
 "region":  {
 "startLine":  1396,
 "startColumn":  113,
@@ -524,7 +446,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1397",
 "region":  {
 "startLine":  1397,
 "startColumn":  62,
@@ -537,7 +459,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1455",
 "region":  {
 "startLine":  1455,
 "startColumn":  100,
@@ -550,7 +472,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1469",
 "region":  {
 "startLine":  1469,
 "startColumn":  94,
@@ -563,7 +485,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1470",
 "region":  {
 "startLine":  1470,
 "startColumn":  129,
@@ -576,7 +498,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1471",
 "region":  {
 "startLine":  1471,
 "startColumn":  120,
@@ -589,7 +511,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1474",
 "region":  {
 "startLine":  1474,
 "startColumn":  94,
@@ -602,7 +524,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1475",
 "region":  {
 "startLine":  1475,
 "startColumn":  133,
@@ -615,7 +537,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1476",
 "region":  {
 "startLine":  1476,
 "startColumn":  120,
@@ -628,7 +550,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1582",
 "region":  {
 "startLine":  1582,
 "startColumn":  113,
@@ -641,7 +563,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1583",
 "region":  {
 "startLine":  1583,
 "startColumn":  108,
@@ -654,7 +576,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1584",
 "region":  {
 "startLine":  1584,
 "startColumn":  114,
@@ -667,7 +589,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1614",
 "region":  {
 "startLine":  1614,
 "startColumn":  113,
@@ -680,7 +602,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1615",
 "region":  {
 "startLine":  1615,
 "startColumn":  118,
@@ -693,7 +615,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1637",
 "region":  {
 "startLine":  1637,
 "startColumn":  105,
@@ -706,7 +628,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1638",
 "region":  {
 "startLine":  1638,
 "startColumn":  87,
@@ -719,7 +641,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1668",
 "region":  {
 "startLine":  1668,
 "startColumn":  126,
@@ -732,7 +654,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1669",
 "region":  {
 "startLine":  1669,
 "startColumn":  116,
@@ -745,7 +667,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1711",
 "region":  {
 "startLine":  1711,
 "startColumn":  96,
@@ -758,7 +680,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1712",
 "region":  {
 "startLine":  1712,
 "startColumn":  108,
@@ -771,7 +693,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1713",
 "region":  {
 "startLine":  1713,
 "startColumn":  151,
@@ -784,7 +706,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1716",
 "region":  {
 "startLine":  1716,
 "startColumn":  96,
@@ -797,7 +719,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1717",
 "region":  {
 "startLine":  1717,
 "startColumn":  112,
@@ -810,7 +732,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1718",
 "region":  {
 "startLine":  1718,
 "startColumn":  151,
@@ -823,7 +745,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1897",
 "region":  {
 "startLine":  1897,
 "startColumn":  54,
@@ -836,7 +758,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1898",
 "region":  {
 "startLine":  1898,
 "startColumn":  56,
@@ -849,7 +771,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1963",
 "region":  {
 "startLine":  1963,
 "startColumn":  91,
@@ -862,7 +784,85 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L246",
+"region":  {
+"startLine":  246,
+"startColumn":  54,
+"endLine":  246,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  56,
+"endLine":  247,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  54,
+"endLine":  273,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L274",
+"region":  {
+"startLine":  274,
+"startColumn":  56,
+"endLine":  274,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L633",
+"region":  {
+"startLine":  633,
+"startColumn":  146,
+"endLine":  633,
+"endColumn":  147
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L835",
+"region":  {
+"startLine":  835,
+"startColumn":  143,
+"endLine":  835,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L266",
 "region":  {
 "startLine":  266,
 "startColumn":  148,
@@ -875,7 +875,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L267",
 "region":  {
 "startLine":  267,
 "startColumn":  156,
@@ -888,7 +888,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  154,
@@ -901,7 +901,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  154,
@@ -914,7 +914,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  156,
@@ -927,7 +927,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  156,
@@ -940,7 +940,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  101,
@@ -953,7 +953,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  112,
@@ -966,7 +966,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  109,
@@ -979,7 +979,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  108,
@@ -992,7 +992,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  123,
@@ -1005,7 +1005,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  120,
@@ -1018,7 +1018,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L307",
 "region":  {
 "startLine":  307,
 "startColumn":  101,
@@ -1031,7 +1031,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  116,
@@ -1044,7 +1044,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L309",
 "region":  {
 "startLine":  309,
 "startColumn":  113,
@@ -1057,7 +1057,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L321",
 "region":  {
 "startLine":  321,
 "startColumn":  108,
@@ -1070,7 +1070,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  123,
@@ -1083,7 +1083,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  120,
@@ -1096,7 +1096,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  101,
@@ -1109,7 +1109,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  116,
@@ -1122,7 +1122,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  113,
@@ -1135,7 +1135,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  95,
@@ -1148,98 +1148,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  26,
-"startColumn":  18,
-"endLine":  26,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  34,
-"startColumn":  23,
-"endLine":  34,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  405,
-"startColumn":  132,
-"endLine":  405,
-"endColumn":  133
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  406,
-"startColumn":  147,
-"endLine":  406,
-"endColumn":  148
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  413,
-"startColumn":  132,
-"endLine":  413,
-"endColumn":  133
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  414,
-"startColumn":  125,
-"endLine":  414,
-"endColumn":  126
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
-"region":  {
-"startLine":  415,
-"startColumn":  210,
-"endLine":  415,
-"endColumn":  211
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1086",
 "region":  {
 "startLine":  1086,
 "startColumn":  134,
@@ -1252,12 +1161,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L26",
 "region":  {
-"startLine":  46,
-"startColumn":  80,
-"endLine":  46,
-"endColumn":  81
+"startLine":  26,
+"startColumn":  18,
+"endLine":  26,
+"endColumn":  19
 }
 }
 },
@@ -1265,12 +1174,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L34",
 "region":  {
-"startLine":  47,
-"startColumn":  51,
-"endLine":  47,
-"endColumn":  52
+"startLine":  34,
+"startColumn":  23,
+"endLine":  34,
+"endColumn":  24
 }
 }
 },
@@ -1278,12 +1187,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L405",
 "region":  {
-"startLine":  48,
-"startColumn":  49,
-"endLine":  48,
-"endColumn":  50
+"startLine":  405,
+"startColumn":  132,
+"endLine":  405,
+"endColumn":  133
 }
 }
 },
@@ -1291,12 +1200,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L406",
 "region":  {
-"startLine":  49,
-"startColumn":  49,
-"endLine":  49,
-"endColumn":  50
+"startLine":  406,
+"startColumn":  147,
+"endLine":  406,
+"endColumn":  148
 }
 }
 },
@@ -1304,12 +1213,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L413",
 "region":  {
-"startLine":  50,
-"startColumn":  43,
-"endLine":  50,
-"endColumn":  44
+"startLine":  413,
+"startColumn":  132,
+"endLine":  413,
+"endColumn":  133
 }
 }
 },
@@ -1317,12 +1226,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L414",
 "region":  {
-"startLine":  62,
-"startColumn":  40,
-"endLine":  62,
-"endColumn":  41
+"startLine":  414,
+"startColumn":  125,
+"endLine":  414,
+"endColumn":  126
 }
 }
 },
@@ -1330,12 +1239,12 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L415",
 "region":  {
-"startLine":  63,
-"startColumn":  44,
-"endLine":  63,
-"endColumn":  45
+"startLine":  415,
+"startColumn":  210,
+"endLine":  415,
+"endColumn":  211
 }
 }
 },
@@ -1343,72 +1252,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
-"region":  {
-"startLine":  64,
-"startColumn":  59,
-"endLine":  64,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
-"region":  {
-"startLine":  65,
-"startColumn":  75,
-"endLine":  65,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
-"region":  {
-"startLine":  66,
-"startColumn":  59,
-"endLine":  66,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
-"region":  {
-"startLine":  94,
-"startColumn":  47,
-"endLine":  94,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
-"region":  {
-"startLine":  95,
-"startColumn":  66,
-"endLine":  95,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  72,
@@ -1421,7 +1265,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  75,
@@ -1434,7 +1278,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  43,
@@ -1447,7 +1291,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  62,
@@ -1460,7 +1304,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  50,
@@ -1473,7 +1317,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  35,
@@ -1486,7 +1330,163 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  80,
+"endLine":  46,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  51,
+"endLine":  47,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  49,
+"endLine":  48,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  49,
+"endLine":  49,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  43,
+"endLine":  50,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  40,
+"endLine":  62,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  44,
+"endLine":  63,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  59,
+"endLine":  64,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  75,
+"endLine":  65,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  59,
+"endLine":  66,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  47,
+"endLine":  94,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  66,
+"endLine":  95,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  106,
@@ -1499,7 +1499,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  155,
@@ -1512,1372 +1512,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  25,
-"startColumn":  33,
-"endLine":  25,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  58,
-"startColumn":  31,
-"endLine":  58,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  68,
-"startColumn":  23,
-"endLine":  68,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  75,
-"startColumn":  33,
-"endLine":  75,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  85,
-"startColumn":  23,
-"endLine":  85,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  92,
-"startColumn":  31,
-"endLine":  92,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  102,
-"startColumn":  23,
-"endLine":  102,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  109,
-"startColumn":  32,
-"endLine":  109,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  119,
-"startColumn":  23,
-"endLine":  119,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  126,
-"startColumn":  32,
-"endLine":  126,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  136,
-"startColumn":  23,
-"endLine":  136,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  143,
-"startColumn":  33,
-"endLine":  143,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  153,
-"startColumn":  23,
-"endLine":  153,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  160,
-"startColumn":  30,
-"endLine":  160,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  170,
-"startColumn":  23,
-"endLine":  170,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  177,
-"startColumn":  33,
-"endLine":  177,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  187,
-"startColumn":  23,
-"endLine":  187,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  194,
-"startColumn":  34,
-"endLine":  194,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  204,
-"startColumn":  23,
-"endLine":  204,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  211,
-"startColumn":  31,
-"endLine":  211,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  221,
-"startColumn":  21,
-"endLine":  221,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  228,
-"startColumn":  34,
-"endLine":  228,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  238,
-"startColumn":  21,
-"endLine":  238,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  241,
-"startColumn":  70,
-"endLine":  241,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  242,
-"startColumn":  67,
-"endLine":  242,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  251,
-"startColumn":  23,
-"endLine":  251,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  261,
-"startColumn":  23,
-"endLine":  261,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  271,
-"startColumn":  23,
-"endLine":  271,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  281,
-"startColumn":  23,
-"endLine":  281,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  336,
-"startColumn":  31,
-"endLine":  336,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  346,
-"startColumn":  31,
-"endLine":  346,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  369,
-"startColumn":  24,
-"endLine":  369,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  424,
-"startColumn":  28,
-"endLine":  424,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  427,
-"startColumn":  31,
-"endLine":  427,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  437,
-"startColumn":  23,
-"endLine":  437,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  444,
-"startColumn":  39,
-"endLine":  444,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  454,
-"startColumn":  23,
-"endLine":  454,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  461,
-"startColumn":  35,
-"endLine":  461,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  471,
-"startColumn":  23,
-"endLine":  471,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  478,
-"startColumn":  23,
-"endLine":  478,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  487,
-"startColumn":  23,
-"endLine":  487,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  497,
-"startColumn":  23,
-"endLine":  497,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  507,
-"startColumn":  30,
-"endLine":  507,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  517,
-"startColumn":  23,
-"endLine":  517,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  524,
-"startColumn":  37,
-"endLine":  524,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  534,
-"startColumn":  23,
-"endLine":  534,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  541,
-"startColumn":  32,
-"endLine":  541,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  551,
-"startColumn":  23,
-"endLine":  551,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  558,
-"startColumn":  33,
-"endLine":  558,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  572,
-"startColumn":  82,
-"endLine":  572,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  573,
-"startColumn":  23,
-"endLine":  573,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  583,
-"startColumn":  92,
-"endLine":  583,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  584,
-"startColumn":  23,
-"endLine":  584,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  592,
-"startColumn":  100,
-"endLine":  592,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  593,
-"startColumn":  23,
-"endLine":  593,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  604,
-"startColumn":  32,
-"endLine":  604,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  614,
-"startColumn":  23,
-"endLine":  614,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  621,
-"startColumn":  31,
-"endLine":  621,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  631,
-"startColumn":  23,
-"endLine":  631,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  638,
-"startColumn":  30,
-"endLine":  638,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  648,
-"startColumn":  23,
-"endLine":  648,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  655,
-"startColumn":  39,
-"endLine":  655,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  665,
-"startColumn":  23,
-"endLine":  665,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  672,
-"startColumn":  31,
-"endLine":  672,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  686,
-"startColumn":  85,
-"endLine":  686,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  687,
-"startColumn":  23,
-"endLine":  687,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  697,
-"startColumn":  91,
-"endLine":  697,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  698,
-"startColumn":  23,
-"endLine":  698,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  705,
-"startColumn":  97,
-"endLine":  705,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  706,
-"startColumn":  23,
-"endLine":  706,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  717,
-"startColumn":  32,
-"endLine":  717,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  727,
-"startColumn":  23,
-"endLine":  727,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  734,
-"startColumn":  34,
-"endLine":  734,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  748,
-"startColumn":  100,
-"endLine":  748,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  749,
-"startColumn":  23,
-"endLine":  749,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  760,
-"startColumn":  94,
-"endLine":  760,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  761,
-"startColumn":  23,
-"endLine":  761,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  768,
-"startColumn":  33,
-"endLine":  768,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  782,
-"startColumn":  97,
-"endLine":  782,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  783,
-"startColumn":  23,
-"endLine":  783,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  794,
-"startColumn":  92,
-"endLine":  794,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  795,
-"startColumn":  23,
-"endLine":  795,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  802,
-"startColumn":  33,
-"endLine":  802,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  812,
-"startColumn":  23,
-"endLine":  812,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  819,
-"startColumn":  33,
-"endLine":  819,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  829,
-"startColumn":  23,
-"endLine":  829,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  836,
-"startColumn":  30,
-"endLine":  836,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  846,
-"startColumn":  23,
-"endLine":  846,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  853,
-"startColumn":  33,
-"endLine":  853,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  863,
-"startColumn":  23,
-"endLine":  863,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  870,
-"startColumn":  33,
-"endLine":  870,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  880,
-"startColumn":  23,
-"endLine":  880,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  887,
-"startColumn":  35,
-"endLine":  887,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  897,
-"startColumn":  23,
-"endLine":  897,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  904,
-"startColumn":  33,
-"endLine":  904,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  914,
-"startColumn":  23,
-"endLine":  914,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  921,
-"startColumn":  31,
-"endLine":  921,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  931,
-"startColumn":  23,
-"endLine":  931,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  938,
-"startColumn":  31,
-"endLine":  938,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  948,
-"startColumn":  23,
-"endLine":  948,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  955,
-"startColumn":  32,
-"endLine":  955,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  965,
-"startColumn":  23,
-"endLine":  965,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  972,
-"startColumn":  23,
-"endLine":  972,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  986,
-"startColumn":  29,
-"endLine":  986,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
-"region":  {
-"startLine":  996,
-"startColumn":  23,
-"endLine":  996,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1003",
 "region":  {
 "startLine":  1003,
 "startColumn":  30,
@@ -2890,7 +1525,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1013",
 "region":  {
 "startLine":  1013,
 "startColumn":  23,
@@ -2903,7 +1538,20 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  23,
+"endLine":  102,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1020",
 "region":  {
 "startLine":  1020,
 "startColumn":  34,
@@ -2916,7 +1564,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1030",
 "region":  {
 "startLine":  1030,
 "startColumn":  23,
@@ -2929,7 +1577,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1033",
 "region":  {
 "startLine":  1033,
 "startColumn":  75,
@@ -2942,7 +1590,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1034",
 "region":  {
 "startLine":  1034,
 "startColumn":  67,
@@ -2955,7 +1603,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1043",
 "region":  {
 "startLine":  1043,
 "startColumn":  23,
@@ -2968,7 +1616,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1053",
 "region":  {
 "startLine":  1053,
 "startColumn":  37,
@@ -2981,7 +1629,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1063",
 "region":  {
 "startLine":  1063,
 "startColumn":  23,
@@ -2994,7 +1642,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1080",
 "region":  {
 "startLine":  1080,
 "startColumn":  25,
@@ -3007,7 +1655,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1089",
 "region":  {
 "startLine":  1089,
 "startColumn":  27,
@@ -3020,7 +1668,20 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  32,
+"endLine":  109,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1095",
 "region":  {
 "startLine":  1095,
 "startColumn":  39,
@@ -3033,7 +1694,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1104",
 "region":  {
 "startLine":  1104,
 "startColumn":  27,
@@ -3046,7 +1707,33 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  23,
+"endLine":  119,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  32,
+"endLine":  126,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1285",
 "region":  {
 "startLine":  1285,
 "startColumn":  30,
@@ -3059,7 +1746,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1295",
 "region":  {
 "startLine":  1295,
 "startColumn":  30,
@@ -3072,7 +1759,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1305",
 "region":  {
 "startLine":  1305,
 "startColumn":  31,
@@ -3085,7 +1772,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1351",
 "region":  {
 "startLine":  1351,
 "startColumn":  29,
@@ -3098,7 +1785,20 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  23,
+"endLine":  136,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1361",
 "region":  {
 "startLine":  1361,
 "startColumn":  23,
@@ -3111,7 +1811,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1391",
 "region":  {
 "startLine":  1391,
 "startColumn":  35,
@@ -3124,7 +1824,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1401",
 "region":  {
 "startLine":  1401,
 "startColumn":  21,
@@ -3137,7 +1837,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1415",
 "region":  {
 "startLine":  1415,
 "startColumn":  25,
@@ -3150,7 +1850,20 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  33,
+"endLine":  143,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1444",
 "region":  {
 "startLine":  1444,
 "startColumn":  31,
@@ -3163,7 +1876,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1454",
 "region":  {
 "startLine":  1454,
 "startColumn":  23,
@@ -3176,7 +1889,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1461",
 "region":  {
 "startLine":  1461,
 "startColumn":  28,
@@ -3189,7 +1902,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1471",
 "region":  {
 "startLine":  1471,
 "startColumn":  23,
@@ -3202,7 +1915,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1478",
 "region":  {
 "startLine":  1478,
 "startColumn":  35,
@@ -3215,7 +1928,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1488",
 "region":  {
 "startLine":  1488,
 "startColumn":  23,
@@ -3228,7 +1941,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1495",
 "region":  {
 "startLine":  1495,
 "startColumn":  41,
@@ -3241,7 +1954,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1505",
 "region":  {
 "startLine":  1505,
 "startColumn":  23,
@@ -3254,7 +1967,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1512",
 "region":  {
 "startLine":  1512,
 "startColumn":  32,
@@ -3267,7 +1980,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1522",
 "region":  {
 "startLine":  1522,
 "startColumn":  23,
@@ -3280,7 +1993,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1529",
 "region":  {
 "startLine":  1529,
 "startColumn":  31,
@@ -3293,7 +2006,20 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  23,
+"endLine":  153,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1543",
 "region":  {
 "startLine":  1543,
 "startColumn":  86,
@@ -3306,7 +2032,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1544",
 "region":  {
 "startLine":  1544,
 "startColumn":  23,
@@ -3319,7 +2045,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1554",
 "region":  {
 "startLine":  1554,
 "startColumn":  92,
@@ -3332,7 +2058,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1555",
 "region":  {
 "startLine":  1555,
 "startColumn":  23,
@@ -3345,7 +2071,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1562",
 "region":  {
 "startLine":  1562,
 "startColumn":  98,
@@ -3358,7 +2084,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1563",
 "region":  {
 "startLine":  1563,
 "startColumn":  23,
@@ -3371,7 +2097,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1574",
 "region":  {
 "startLine":  1574,
 "startColumn":  30,
@@ -3384,7 +2110,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1584",
 "region":  {
 "startLine":  1584,
 "startColumn":  23,
@@ -3397,7 +2123,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1591",
 "region":  {
 "startLine":  1591,
 "startColumn":  35,
@@ -3410,7 +2136,20 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L160",
+"region":  {
+"startLine":  160,
+"startColumn":  30,
+"endLine":  160,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1601",
 "region":  {
 "startLine":  1601,
 "startColumn":  23,
@@ -3423,7 +2162,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1608",
 "region":  {
 "startLine":  1608,
 "startColumn":  32,
@@ -3436,7 +2175,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1618",
 "region":  {
 "startLine":  1618,
 "startColumn":  23,
@@ -3449,7 +2188,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1625",
 "region":  {
 "startLine":  1625,
 "startColumn":  30,
@@ -3462,7 +2201,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1635",
 "region":  {
 "startLine":  1635,
 "startColumn":  23,
@@ -3475,7 +2214,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1642",
 "region":  {
 "startLine":  1642,
 "startColumn":  31,
@@ -3488,7 +2227,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1652",
 "region":  {
 "startLine":  1652,
 "startColumn":  23,
@@ -3501,7 +2240,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1659",
 "region":  {
 "startLine":  1659,
 "startColumn":  23,
@@ -3514,7 +2253,20 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L170",
+"region":  {
+"startLine":  170,
+"startColumn":  23,
+"endLine":  170,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1769",
 "region":  {
 "startLine":  1769,
 "startColumn":  33,
@@ -3527,7 +2279,20 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L177",
+"region":  {
+"startLine":  177,
+"startColumn":  33,
+"endLine":  177,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1779",
 "region":  {
 "startLine":  1779,
 "startColumn":  23,
@@ -3540,7 +2305,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1786",
 "region":  {
 "startLine":  1786,
 "startColumn":  23,
@@ -3553,7 +2318,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1793",
 "region":  {
 "startLine":  1793,
 "startColumn":  21,
@@ -3566,11 +2331,518 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L187",
 "region":  {
-"startLine":  82,
+"startLine":  187,
+"startColumn":  23,
+"endLine":  187,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  34,
+"endLine":  194,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  23,
+"endLine":  204,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L211",
+"region":  {
+"startLine":  211,
+"startColumn":  31,
+"endLine":  211,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  21,
+"endLine":  221,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L228",
+"region":  {
+"startLine":  228,
+"startColumn":  34,
+"endLine":  228,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  21,
+"endLine":  238,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  70,
+"endLine":  241,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L242",
+"region":  {
+"startLine":  242,
+"startColumn":  67,
+"endLine":  242,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  33,
+"endLine":  25,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L251",
+"region":  {
+"startLine":  251,
+"startColumn":  23,
+"endLine":  251,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L261",
+"region":  {
+"startLine":  261,
+"startColumn":  23,
+"endLine":  261,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L271",
+"region":  {
+"startLine":  271,
+"startColumn":  23,
+"endLine":  271,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L281",
+"region":  {
+"startLine":  281,
+"startColumn":  23,
+"endLine":  281,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L336",
+"region":  {
+"startLine":  336,
+"startColumn":  31,
+"endLine":  336,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L346",
+"region":  {
+"startLine":  346,
+"startColumn":  31,
+"endLine":  346,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L369",
+"region":  {
+"startLine":  369,
+"startColumn":  24,
+"endLine":  369,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L424",
+"region":  {
+"startLine":  424,
+"startColumn":  28,
+"endLine":  424,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L427",
+"region":  {
+"startLine":  427,
+"startColumn":  31,
+"endLine":  427,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L437",
+"region":  {
+"startLine":  437,
+"startColumn":  23,
+"endLine":  437,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L444",
+"region":  {
+"startLine":  444,
+"startColumn":  39,
+"endLine":  444,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L454",
+"region":  {
+"startLine":  454,
+"startColumn":  23,
+"endLine":  454,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L461",
+"region":  {
+"startLine":  461,
+"startColumn":  35,
+"endLine":  461,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L471",
+"region":  {
+"startLine":  471,
+"startColumn":  23,
+"endLine":  471,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L478",
+"region":  {
+"startLine":  478,
+"startColumn":  23,
+"endLine":  478,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L487",
+"region":  {
+"startLine":  487,
+"startColumn":  23,
+"endLine":  487,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L497",
+"region":  {
+"startLine":  497,
+"startColumn":  23,
+"endLine":  497,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L507",
+"region":  {
+"startLine":  507,
+"startColumn":  30,
+"endLine":  507,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L517",
+"region":  {
+"startLine":  517,
+"startColumn":  23,
+"endLine":  517,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L524",
+"region":  {
+"startLine":  524,
+"startColumn":  37,
+"endLine":  524,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L534",
+"region":  {
+"startLine":  534,
+"startColumn":  23,
+"endLine":  534,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L541",
+"region":  {
+"startLine":  541,
+"startColumn":  32,
+"endLine":  541,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L551",
+"region":  {
+"startLine":  551,
+"startColumn":  23,
+"endLine":  551,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L558",
+"region":  {
+"startLine":  558,
+"startColumn":  33,
+"endLine":  558,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L572",
+"region":  {
+"startLine":  572,
+"startColumn":  82,
+"endLine":  572,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L573",
+"region":  {
+"startLine":  573,
+"startColumn":  23,
+"endLine":  573,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  31,
+"endLine":  58,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L583",
+"region":  {
+"startLine":  583,
+"startColumn":  92,
+"endLine":  583,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L584",
+"region":  {
+"startLine":  584,
+"startColumn":  23,
+"endLine":  584,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L592",
+"region":  {
+"startLine":  592,
 "startColumn":  100,
-"endLine":  82,
+"endLine":  592,
 "endColumn":  101
 }
 }
@@ -3579,7 +2851,722 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L593",
+"region":  {
+"startLine":  593,
+"startColumn":  23,
+"endLine":  593,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L604",
+"region":  {
+"startLine":  604,
+"startColumn":  32,
+"endLine":  604,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L614",
+"region":  {
+"startLine":  614,
+"startColumn":  23,
+"endLine":  614,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L621",
+"region":  {
+"startLine":  621,
+"startColumn":  31,
+"endLine":  621,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L631",
+"region":  {
+"startLine":  631,
+"startColumn":  23,
+"endLine":  631,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L638",
+"region":  {
+"startLine":  638,
+"startColumn":  30,
+"endLine":  638,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L648",
+"region":  {
+"startLine":  648,
+"startColumn":  23,
+"endLine":  648,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L655",
+"region":  {
+"startLine":  655,
+"startColumn":  39,
+"endLine":  655,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L665",
+"region":  {
+"startLine":  665,
+"startColumn":  23,
+"endLine":  665,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L672",
+"region":  {
+"startLine":  672,
+"startColumn":  31,
+"endLine":  672,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  23,
+"endLine":  68,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L686",
+"region":  {
+"startLine":  686,
+"startColumn":  85,
+"endLine":  686,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L687",
+"region":  {
+"startLine":  687,
+"startColumn":  23,
+"endLine":  687,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L697",
+"region":  {
+"startLine":  697,
+"startColumn":  91,
+"endLine":  697,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L698",
+"region":  {
+"startLine":  698,
+"startColumn":  23,
+"endLine":  698,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L705",
+"region":  {
+"startLine":  705,
+"startColumn":  97,
+"endLine":  705,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L706",
+"region":  {
+"startLine":  706,
+"startColumn":  23,
+"endLine":  706,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L717",
+"region":  {
+"startLine":  717,
+"startColumn":  32,
+"endLine":  717,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L727",
+"region":  {
+"startLine":  727,
+"startColumn":  23,
+"endLine":  727,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L734",
+"region":  {
+"startLine":  734,
+"startColumn":  34,
+"endLine":  734,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L748",
+"region":  {
+"startLine":  748,
+"startColumn":  100,
+"endLine":  748,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L749",
+"region":  {
+"startLine":  749,
+"startColumn":  23,
+"endLine":  749,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  33,
+"endLine":  75,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L760",
+"region":  {
+"startLine":  760,
+"startColumn":  94,
+"endLine":  760,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L761",
+"region":  {
+"startLine":  761,
+"startColumn":  23,
+"endLine":  761,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L768",
+"region":  {
+"startLine":  768,
+"startColumn":  33,
+"endLine":  768,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L782",
+"region":  {
+"startLine":  782,
+"startColumn":  97,
+"endLine":  782,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L783",
+"region":  {
+"startLine":  783,
+"startColumn":  23,
+"endLine":  783,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L794",
+"region":  {
+"startLine":  794,
+"startColumn":  92,
+"endLine":  794,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L795",
+"region":  {
+"startLine":  795,
+"startColumn":  23,
+"endLine":  795,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L802",
+"region":  {
+"startLine":  802,
+"startColumn":  33,
+"endLine":  802,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L812",
+"region":  {
+"startLine":  812,
+"startColumn":  23,
+"endLine":  812,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L819",
+"region":  {
+"startLine":  819,
+"startColumn":  33,
+"endLine":  819,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L829",
+"region":  {
+"startLine":  829,
+"startColumn":  23,
+"endLine":  829,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L836",
+"region":  {
+"startLine":  836,
+"startColumn":  30,
+"endLine":  836,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L846",
+"region":  {
+"startLine":  846,
+"startColumn":  23,
+"endLine":  846,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  23,
+"endLine":  85,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L853",
+"region":  {
+"startLine":  853,
+"startColumn":  33,
+"endLine":  853,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L863",
+"region":  {
+"startLine":  863,
+"startColumn":  23,
+"endLine":  863,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L870",
+"region":  {
+"startLine":  870,
+"startColumn":  33,
+"endLine":  870,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L880",
+"region":  {
+"startLine":  880,
+"startColumn":  23,
+"endLine":  880,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L887",
+"region":  {
+"startLine":  887,
+"startColumn":  35,
+"endLine":  887,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L897",
+"region":  {
+"startLine":  897,
+"startColumn":  23,
+"endLine":  897,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L904",
+"region":  {
+"startLine":  904,
+"startColumn":  33,
+"endLine":  904,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L914",
+"region":  {
+"startLine":  914,
+"startColumn":  23,
+"endLine":  914,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  31,
+"endLine":  92,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L921",
+"region":  {
+"startLine":  921,
+"startColumn":  31,
+"endLine":  921,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L931",
+"region":  {
+"startLine":  931,
+"startColumn":  23,
+"endLine":  931,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L938",
+"region":  {
+"startLine":  938,
+"startColumn":  31,
+"endLine":  938,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L948",
+"region":  {
+"startLine":  948,
+"startColumn":  23,
+"endLine":  948,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L955",
+"region":  {
+"startLine":  955,
+"startColumn":  32,
+"endLine":  955,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L965",
+"region":  {
+"startLine":  965,
+"startColumn":  23,
+"endLine":  965,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L972",
+"region":  {
+"startLine":  972,
+"startColumn":  23,
+"endLine":  972,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L986",
+"region":  {
+"startLine":  986,
+"startColumn":  29,
+"endLine":  986,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L996",
+"region":  {
+"startLine":  996,
+"startColumn":  23,
+"endLine":  996,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  100,
@@ -3592,7 +3579,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  152,
@@ -3605,7 +3592,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  38,
@@ -3618,7 +3605,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  38,
@@ -3631,7 +3618,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L307",
 "region":  {
 "startLine":  307,
 "startColumn":  38,
@@ -3644,7 +3631,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L311",
 "region":  {
 "startLine":  311,
 "startColumn":  38,
@@ -3657,7 +3644,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  38,
@@ -3670,7 +3657,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L319",
 "region":  {
 "startLine":  319,
 "startColumn":  38,
@@ -3683,7 +3670,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  38,
@@ -3696,7 +3683,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  38,
@@ -3709,7 +3696,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L469",
 "region":  {
 "startLine":  469,
 "startColumn":  152,
@@ -3722,7 +3709,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L576",
 "region":  {
 "startLine":  576,
 "startColumn":  34,
@@ -3735,7 +3722,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L586",
 "region":  {
 "startLine":  586,
 "startColumn":  21,
@@ -3748,7 +3735,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L593",
 "region":  {
 "startLine":  593,
 "startColumn":  31,
@@ -3761,7 +3748,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L603",
 "region":  {
 "startLine":  603,
 "startColumn":  21,
@@ -3774,7 +3761,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L610",
 "region":  {
 "startLine":  610,
 "startColumn":  21,
@@ -3787,7 +3774,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L620",
 "region":  {
 "startLine":  620,
 "startColumn":  34,
@@ -3800,7 +3787,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L630",
 "region":  {
 "startLine":  630,
 "startColumn":  21,
@@ -3813,7 +3800,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L637",
 "region":  {
 "startLine":  637,
 "startColumn":  38,
@@ -3826,7 +3813,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L647",
 "region":  {
 "startLine":  647,
 "startColumn":  21,
@@ -3839,7 +3826,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L658",
 "region":  {
 "startLine":  658,
 "startColumn":  27,
@@ -3852,7 +3839,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L669",
 "region":  {
 "startLine":  669,
 "startColumn":  21,
@@ -3865,7 +3852,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L672",
 "region":  {
 "startLine":  672,
 "startColumn":  108,
@@ -3878,7 +3865,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L673",
 "region":  {
 "startLine":  673,
 "startColumn":  101,
@@ -3891,7 +3878,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L678",
 "region":  {
 "startLine":  678,
 "startColumn":  39,
@@ -3904,7 +3891,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L692",
 "region":  {
 "startLine":  692,
 "startColumn":  29,
@@ -3917,7 +3904,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L705",
 "region":  {
 "startLine":  705,
 "startColumn":  31,
@@ -3930,7 +3917,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L715",
 "region":  {
 "startLine":  715,
 "startColumn":  21,
@@ -3943,7 +3930,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L722",
 "region":  {
 "startLine":  722,
 "startColumn":  34,
@@ -3956,7 +3943,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L732",
 "region":  {
 "startLine":  732,
 "startColumn":  21,
@@ -3969,7 +3956,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L739",
 "region":  {
 "startLine":  739,
 "startColumn":  31,
@@ -3982,7 +3969,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L749",
 "region":  {
 "startLine":  749,
 "startColumn":  21,
@@ -3995,7 +3982,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L773",
 "region":  {
 "startLine":  773,
 "startColumn":  34,
@@ -4008,7 +3995,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L783",
 "region":  {
 "startLine":  783,
 "startColumn":  21,
@@ -4021,7 +4008,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L790",
 "region":  {
 "startLine":  790,
 "startColumn":  38,
@@ -4034,7 +4021,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L800",
 "region":  {
 "startLine":  800,
 "startColumn":  21,
@@ -4047,7 +4034,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L807",
 "region":  {
 "startLine":  807,
 "startColumn":  21,
@@ -4060,7 +4047,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L817",
 "region":  {
 "startLine":  817,
 "startColumn":  21,
@@ -4073,7 +4060,20 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  100,
+"endLine":  82,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L849",
 "region":  {
 "startLine":  849,
 "startColumn":  32,
@@ -4086,7 +4086,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L859",
 "region":  {
 "startLine":  859,
 "startColumn":  21,
@@ -4099,7 +4099,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L866",
 "region":  {
 "startLine":  866,
 "startColumn":  31,
@@ -4112,7 +4112,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L876",
 "region":  {
 "startLine":  876,
 "startColumn":  21,
@@ -4125,7 +4125,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L883",
 "region":  {
 "startLine":  883,
 "startColumn":  43,
@@ -4138,7 +4138,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L893",
 "region":  {
 "startLine":  893,
 "startColumn":  23,
@@ -4151,7 +4151,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L900",
 "region":  {
 "startLine":  900,
 "startColumn":  32,
@@ -4164,7 +4164,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L910",
 "region":  {
 "startLine":  910,
 "startColumn":  21,
@@ -4177,7 +4177,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L917",
 "region":  {
 "startLine":  917,
 "startColumn":  34,
@@ -4190,7 +4190,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L927",
 "region":  {
 "startLine":  927,
 "startColumn":  21,
@@ -4203,7 +4203,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L934",
 "region":  {
 "startLine":  934,
 "startColumn":  38,
@@ -4216,7 +4216,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L944",
 "region":  {
 "startLine":  944,
 "startColumn":  21,
@@ -4229,7 +4229,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L951",
 "region":  {
 "startLine":  951,
 "startColumn":  34,
@@ -4242,7 +4242,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L961",
 "region":  {
 "startLine":  961,
 "startColumn":  21,
@@ -4255,7 +4255,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L968",
 "region":  {
 "startLine":  968,
 "startColumn":  31,
@@ -4268,7 +4268,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L978",
 "region":  {
 "startLine":  978,
 "startColumn":  21,
@@ -4281,7 +4281,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L537",
 "region":  {
 "startLine":  537,
 "startColumn":  110,
@@ -4294,7 +4294,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L538",
 "region":  {
 "startLine":  538,
 "startColumn":  82,
@@ -4307,7 +4307,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L542",
 "region":  {
 "startLine":  542,
 "startColumn":  103,
@@ -4320,7 +4320,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L543",
 "region":  {
 "startLine":  543,
 "startColumn":  75,
@@ -4333,7 +4333,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L547",
 "region":  {
 "startLine":  547,
 "startColumn":  112,
@@ -4346,7 +4346,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L548",
 "region":  {
 "startLine":  548,
 "startColumn":  84,
@@ -4359,7 +4359,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L817",
 "region":  {
 "startLine":  817,
 "startColumn":  30,
@@ -4372,7 +4372,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  136,
@@ -4385,7 +4385,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  109,
@@ -4398,7 +4398,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  141,
@@ -4411,7 +4411,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  140,
@@ -4424,7 +4424,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  215,
@@ -4437,7 +4437,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  218,
@@ -4450,7 +4450,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L282",
 "region":  {
 "startLine":  282,
 "startColumn":  123,
@@ -4463,7 +4463,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  153,
@@ -4476,7 +4476,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  135,
@@ -4489,7 +4489,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  129,
@@ -4502,7 +4502,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  127,
@@ -4515,7 +4515,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L296",
 "region":  {
 "startLine":  296,
 "startColumn":  129,
@@ -4528,7 +4528,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  130,
@@ -4541,7 +4541,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  109,
@@ -4554,7 +4554,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  128,
@@ -4567,7 +4567,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  134,
@@ -4580,7 +4580,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  152,
@@ -4593,7 +4593,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L302",
 "region":  {
 "startLine":  302,
 "startColumn":  109,
@@ -4606,7 +4606,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  125,
@@ -4619,7 +4619,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  131,
@@ -4632,7 +4632,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  151,
@@ -4645,7 +4645,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L306",
 "region":  {
 "startLine":  306,
 "startColumn":  123,
@@ -4658,7 +4658,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L307",
 "region":  {
 "startLine":  307,
 "startColumn":  144,
@@ -4671,7 +4671,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  143,
@@ -4684,7 +4684,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L309",
 "region":  {
 "startLine":  309,
 "startColumn":  150,
@@ -4697,7 +4697,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L310",
 "region":  {
 "startLine":  310,
 "startColumn":  143,
@@ -4710,7 +4710,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L311",
 "region":  {
 "startLine":  311,
 "startColumn":  167,
@@ -4723,7 +4723,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L320",
 "region":  {
 "startLine":  320,
 "startColumn":  134,
@@ -4736,7 +4736,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L321",
 "region":  {
 "startLine":  321,
 "startColumn":  119,
@@ -4749,7 +4749,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  139,
@@ -4762,7 +4762,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  132,
@@ -4775,7 +4775,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  139,
@@ -4788,7 +4788,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  243,
@@ -4801,7 +4801,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  106,
@@ -4814,7 +4814,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  109,
@@ -4827,7 +4827,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L429",
 "region":  {
 "startLine":  429,
 "startColumn":  114,
@@ -4840,7 +4840,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L430",
 "region":  {
 "startLine":  430,
 "startColumn":  109,
@@ -4853,7 +4853,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L431",
 "region":  {
 "startLine":  431,
 "startColumn":  126,
@@ -4866,7 +4866,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  115,
@@ -4879,7 +4879,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L640",
 "region":  {
 "startLine":  640,
 "startColumn":  72,
@@ -4892,7 +4892,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L831",
 "region":  {
 "startLine":  831,
 "startColumn":  155,
@@ -4905,7 +4905,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L832",
 "region":  {
 "startLine":  832,
 "startColumn":  165,
@@ -4918,7 +4918,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L882",
 "region":  {
 "startLine":  882,
 "startColumn":  187,
@@ -4931,7 +4931,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L883",
 "region":  {
 "startLine":  883,
 "startColumn":  110,
@@ -4944,7 +4944,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L951",
 "region":  {
 "startLine":  951,
 "startColumn":  114,
@@ -4957,7 +4957,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L952",
 "region":  {
 "startLine":  952,
 "startColumn":  151,
@@ -4970,7 +4970,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  18,
@@ -4983,7 +4983,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L740",
 "region":  {
 "startLine":  740,
 "startColumn":  32,
@@ -4996,7 +4996,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L741",
 "region":  {
 "startLine":  741,
 "startColumn":  30,
@@ -5009,7 +5009,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  103,
@@ -5022,7 +5022,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L410",
 "region":  {
 "startLine":  410,
 "startColumn":  47,
@@ -5035,7 +5035,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L411",
 "region":  {
 "startLine":  411,
 "startColumn":  55,

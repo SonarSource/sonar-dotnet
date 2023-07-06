@@ -2,58 +2,10 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'StartProxy' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
-"region":  {
-"startLine":  956,
-"startColumn":  26,
-"endLine":  956,
-"endColumn":  36
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
-"region":  {
-"startLine":  1033,
-"startColumn":  26,
-"endLine":  1033,
-"endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'StartProxyAsync' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
-"region":  {
-"startLine":  997,
-"startColumn":  38,
-"endLine":  997,
-"endColumn":  53
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
-"region":  {
-"startLine":  1060,
-"startColumn":  32,
-"endLine":  1060,
-"endColumn":  47
-}
-}
-]
-},
-{
-"id":  "S4136",
 "message":  "All 'Start' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L314",
 "region":  {
 "startLine":  314,
 "startColumn":  26,
@@ -62,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L442",
 "region":  {
 "startLine":  442,
 "startColumn":  26,
@@ -71,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  26,
@@ -80,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L569",
 "region":  {
 "startLine":  569,
 "startColumn":  26,
@@ -89,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L641",
 "region":  {
 "startLine":  641,
 "startColumn":  26,
@@ -98,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L769",
 "region":  {
 "startLine":  769,
 "startColumn":  26,
@@ -107,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L837",
 "region":  {
 "startLine":  837,
 "startColumn":  26,
@@ -116,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L896",
 "region":  {
 "startLine":  896,
 "startColumn":  26,
@@ -131,7 +83,7 @@
 "message":  "All 'StartAsync' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L382",
 "region":  {
 "startLine":  382,
 "startColumn":  38,
@@ -140,7 +92,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L476",
 "region":  {
 "startLine":  476,
 "startColumn":  32,
@@ -149,7 +101,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L542",
 "region":  {
 "startLine":  542,
 "startColumn":  32,
@@ -158,7 +110,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L598",
 "region":  {
 "startLine":  598,
 "startColumn":  32,
@@ -167,7 +119,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L709",
 "region":  {
 "startLine":  709,
 "startColumn":  38,
@@ -176,7 +128,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L803",
 "region":  {
 "startLine":  803,
 "startColumn":  32,
@@ -185,7 +137,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L869",
 "region":  {
 "startLine":  869,
 "startColumn":  32,
@@ -194,12 +146,60 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L925",
 "region":  {
 "startLine":  925,
 "startColumn":  32,
 "endLine":  925,
 "endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'StartProxy' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L956",
+"region":  {
+"startLine":  956,
+"startColumn":  26,
+"endLine":  956,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1033",
+"region":  {
+"startLine":  1033,
+"startColumn":  26,
+"endLine":  1033,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'StartProxyAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L997",
+"region":  {
+"startLine":  997,
+"startColumn":  38,
+"endLine":  997,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1060",
+"region":  {
+"startLine":  1060,
+"startColumn":  32,
+"endLine":  1060,
+"endColumn":  47
 }
 }
 ]

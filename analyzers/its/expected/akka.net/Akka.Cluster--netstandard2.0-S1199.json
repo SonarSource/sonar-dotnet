@@ -4,7 +4,7 @@
 "id":  "S1199",
 "message":  "Extract this nested code block into a separate method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  13,

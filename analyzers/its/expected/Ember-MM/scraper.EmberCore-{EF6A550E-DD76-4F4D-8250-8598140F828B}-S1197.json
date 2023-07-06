@@ -4,7 +4,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L885",
 "region":  {
 "startLine":  885,
 "startColumn":  11,
@@ -17,7 +17,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L896",
 "region":  {
 "startLine":  896,
 "startColumn":  11,
@@ -30,7 +30,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L925",
 "region":  {
 "startLine":  925,
 "startColumn":  7,
@@ -43,7 +43,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  13,

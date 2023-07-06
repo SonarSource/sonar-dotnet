@@ -4,7 +4,7 @@
 "id":  "S1871",
 "message":  "Either merge this branch with the identical one on line 92 or change one of the implementations.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L102-L110",
 "region":  {
 "startLine":  102,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S1871",
 "message":  "Either merge this case with the identical one on line 182 or change one of the implementations.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L185-L186",
 "region":  {
 "startLine":  185,
 "startColumn":  33,

@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SingleDisposable%20(of%20T).cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SingleDisposable%20(of%20T).cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SingleDisposable%20(of%20T).cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SingleDisposable%20(of%20T).cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  27,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SingleDisposable%20(of%20T).cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SingleDisposable%20(of%20T).cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  21,

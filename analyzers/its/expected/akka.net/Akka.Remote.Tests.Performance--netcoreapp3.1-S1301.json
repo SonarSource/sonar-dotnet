@@ -4,7 +4,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  17,

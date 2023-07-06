@@ -4,7 +4,7 @@
 "id":  "S1121",
 "message":  "Extract the assignment of 'graphStageModule' from this expression.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L906",
 "region":  {
 "startLine":  906,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S1121",
 "message":  "Extract the assignment of 'stageType' from this expression.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L907",
 "region":  {
 "startLine":  907,
 "startColumn":  31,

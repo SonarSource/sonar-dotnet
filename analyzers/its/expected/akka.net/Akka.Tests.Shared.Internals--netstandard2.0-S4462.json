@@ -4,7 +4,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AskExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AskExtensions.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  13,
@@ -15,9 +15,22 @@
 },
 {
 "id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SynchronousTaskExtensions.cs.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  17,
+"endLine":  116,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4462",
 "message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SynchronousTaskExtensions.cs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SynchronousTaskExtensions.cs.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  13,
@@ -30,7 +43,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SynchronousTaskExtensions.cs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SynchronousTaskExtensions.cs.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  17,
@@ -43,7 +56,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SynchronousTaskExtensions.cs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SynchronousTaskExtensions.cs.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  20,
@@ -56,7 +69,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SynchronousTaskExtensions.cs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SynchronousTaskExtensions.cs.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  17,
@@ -69,24 +82,11 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SynchronousTaskExtensions.cs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SynchronousTaskExtensions.cs.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  17,
 "endLine":  97,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\SynchronousTaskExtensions.cs.cs",
-"region":  {
-"startLine":  116,
-"startColumn":  17,
-"endLine":  116,
 "endColumn":  26
 }
 }

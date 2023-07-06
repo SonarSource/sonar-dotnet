@@ -4,7 +4,7 @@
 "id":  "S1944",
 "message":  "Review this cast; in this project there's no type that implements both 'IPlugin' and 'IDisposable'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  51,

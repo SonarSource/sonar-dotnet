@@ -4,12 +4,12 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1034",
 "region":  {
-"startLine":  804,
-"startColumn":  31,
-"endLine":  804,
-"endColumn":  111
+"startLine":  1034,
+"startColumn":  35,
+"endLine":  1034,
+"endColumn":  105
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L804",
 "region":  {
-"startLine":  1034,
-"startColumn":  35,
-"endLine":  1034,
-"endColumn":  105
+"startLine":  804,
+"startColumn":  31,
+"endLine":  804,
+"endColumn":  111
 }
 }
 }

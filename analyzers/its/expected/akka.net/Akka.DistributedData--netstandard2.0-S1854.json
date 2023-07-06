@@ -4,7 +4,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'seed'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  28,

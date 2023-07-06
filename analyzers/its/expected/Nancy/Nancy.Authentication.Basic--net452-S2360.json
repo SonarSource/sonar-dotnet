@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthenticationConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthenticationConfiguration.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  133,

@@ -4,7 +4,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  24,
@@ -18,7 +18,7 @@
 "message":  "Return an empty collection instead of null.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  24,
@@ -27,7 +27,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  24,
@@ -36,7 +36,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  24,
@@ -50,7 +50,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  24,
@@ -63,7 +63,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  24,
@@ -76,7 +76,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  24,
@@ -89,7 +89,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L452",
 "region":  {
 "startLine":  452,
 "startColumn":  24,
@@ -102,7 +102,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L464",
 "region":  {
 "startLine":  464,
 "startColumn":  24,
@@ -115,7 +115,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L475",
 "region":  {
 "startLine":  475,
 "startColumn":  24,
@@ -128,7 +128,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L494",
 "region":  {
 "startLine":  494,
 "startColumn":  24,
@@ -141,7 +141,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  24,
@@ -154,7 +154,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Owin\NancyContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Owin/NancyContextExtensions.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  20,
@@ -167,7 +167,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngineRegistrations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngineRegistrations.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  26,
@@ -180,7 +180,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngineRegistrations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngineRegistrations.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  26,

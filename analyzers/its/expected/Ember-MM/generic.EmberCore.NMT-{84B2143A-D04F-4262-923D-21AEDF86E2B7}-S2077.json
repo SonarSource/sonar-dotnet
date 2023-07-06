@@ -4,7 +4,7 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L816",
 "region":  {
 "startLine":  816,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L835",
 "region":  {
 "startLine":  835,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L849",
 "region":  {
 "startLine":  849,
 "startColumn":  13,

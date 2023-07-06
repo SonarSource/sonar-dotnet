@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'bootstrapper' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Self/NancyHost.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'source' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\UriExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Self/UriExtensions.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'value' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\UriExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Self/UriExtensions.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'appBaseUri' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\UriExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Self/UriExtensions.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  39,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'fullUri' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\UriExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Self/UriExtensions.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  67,

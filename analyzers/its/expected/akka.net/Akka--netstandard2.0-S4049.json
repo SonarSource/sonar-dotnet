@@ -4,7 +4,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetCurrentSelfOrNoSender' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L498",
 "region":  {
 "startLine":  498,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetCurrentSenderOrNoSender' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L508",
 "region":  {
 "startLine":  508,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetExtension' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSystem.cs#L302",
 "region":  {
 "startLine":  302,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetChildren' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cell.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  40,
@@ -56,7 +56,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetChildren' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\IActorContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/IActorContext.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  32,
@@ -69,7 +69,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetBoolean' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetString' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  23,
@@ -95,7 +95,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetDecimal' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  24,
@@ -108,7 +108,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetFloat' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  22,
@@ -121,7 +121,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetDouble' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  23,
@@ -134,7 +134,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetLong' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetInt' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  20,
@@ -160,7 +160,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetByte' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  21,
@@ -173,7 +173,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetByteList' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  28,
@@ -186,7 +186,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetIntList' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  27,
@@ -199,7 +199,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetLongList' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  28,
@@ -212,7 +212,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetBooleanList' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  28,
@@ -225,7 +225,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetFloatList' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  29,
@@ -238,7 +238,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetDoubleList' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  30,
@@ -251,7 +251,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetDecimalList' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L331",
 "region":  {
 "startLine":  331,
 "startColumn":  31,
@@ -264,7 +264,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetStringList' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L340",
 "region":  {
 "startLine":  340,
 "startColumn":  30,
@@ -277,7 +277,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetArray' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  34,
@@ -290,7 +290,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetByteSize' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L474",
 "region":  {
 "startLine":  474,
 "startColumn":  22,
@@ -303,7 +303,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetObject' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\IHoconElement.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/IHoconElement.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  21,
@@ -316,7 +316,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetString' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\IHoconElement.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/IHoconElement.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  16,
@@ -329,7 +329,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetArray' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\IHoconElement.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/IHoconElement.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  27,
@@ -342,7 +342,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetResolver' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Dns.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  26,
@@ -355,7 +355,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetCurrentTransportInformation' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  35,
@@ -368,7 +368,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetAndDecrement' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicCounter.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  20,
@@ -381,7 +381,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetAndIncrement' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\IAtomicCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/IAtomicCounter.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  11,

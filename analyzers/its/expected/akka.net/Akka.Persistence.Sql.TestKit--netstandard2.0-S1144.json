@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'State'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlJournalConnectionFailureSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.TestKit/SqlJournalConnectionFailureSpec.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  13,

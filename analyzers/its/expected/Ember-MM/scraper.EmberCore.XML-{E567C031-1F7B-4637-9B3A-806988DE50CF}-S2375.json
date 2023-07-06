@@ -4,7 +4,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 8 statements that use 'chkImage(iIndex)' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 8 statements that use 'lblImage(iIndex)' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 8 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L802",
 "region":  {
 "startLine":  802,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 8 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 8 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  9,
@@ -69,7 +69,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 34 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  9,
@@ -82,7 +82,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'RegExps(RegExps.Count - 1)' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'RegExps(RegExps.Count - 1)' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 5 statements that use 'Me._scraperLookups' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  17,

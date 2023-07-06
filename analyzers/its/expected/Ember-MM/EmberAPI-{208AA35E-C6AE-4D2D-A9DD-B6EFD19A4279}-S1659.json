@@ -4,7 +4,7 @@
 "id":  "S1659",
 "message":  "Declare 'streamsize' in a separate statement.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHashing.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHashing.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  36,

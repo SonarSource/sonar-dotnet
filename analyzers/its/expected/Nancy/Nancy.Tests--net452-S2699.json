@@ -4,7 +4,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\Nancy\test\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/test/Nancy.Tests/Unit/ModelBinding/DefaultBinderFixture.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\Nancy\test\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/test/Nancy.Tests/Unit/NancyEngineFixture.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\Nancy\test\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/test/Nancy.Tests/Unit/NancyEngineFixture.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  27,

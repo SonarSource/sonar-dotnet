@@ -4,7 +4,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Util.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Util.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Util.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Util.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  38,
@@ -30,7 +30,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Util.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Util.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  38,

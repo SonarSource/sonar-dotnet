@@ -4,7 +4,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  29,

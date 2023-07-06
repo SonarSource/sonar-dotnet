@@ -4,7 +4,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AfterPipeline.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/BeforePipeline.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorPipeline.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  18,

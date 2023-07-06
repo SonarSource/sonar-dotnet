@@ -4,7 +4,7 @@
 "id":  "S1123",
 "message":  "Add an explanation.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L472",
 "region":  {
 "startLine":  472,
 "startColumn":  10,

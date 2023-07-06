@@ -4,7 +4,7 @@
 "id":  "S1116",
 "message":  "Remove this empty statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  60,

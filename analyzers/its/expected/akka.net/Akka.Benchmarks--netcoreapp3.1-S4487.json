@@ -4,7 +4,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_echo' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\ActorSelectionBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorSelectionBenchmark.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_nodes' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  42,
@@ -30,7 +30,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_server' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  27,

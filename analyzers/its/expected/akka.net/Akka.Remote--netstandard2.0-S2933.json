@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make '_codec' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L449",
 "region":  {
 "startLine":  449,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make '_transportSupervisor' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S2933",
 "message":  "Make '_exceptionSupport' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  34,
@@ -43,7 +43,7 @@
 "id":  "S2933",
 "message":  "Make '_log' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L200",
 "region":  {
 "startLine":  200,
 "startColumn":  33,
@@ -56,7 +56,7 @@
 "id":  "S2933",
 "message":  "Make '_shouldDebugLog' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  22,
@@ -69,7 +69,7 @@
 "id":  "S2933",
 "message":  "Make '_throttlingModes' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  89,
@@ -82,7 +82,7 @@
 "id":  "S2933",
 "message":  "Make '_handleTable' 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L344",
 "region":  {
 "startLine":  344,
 "startColumn":  50,

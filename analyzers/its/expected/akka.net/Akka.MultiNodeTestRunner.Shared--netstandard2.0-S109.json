@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/TimelineItemFactory.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  63,

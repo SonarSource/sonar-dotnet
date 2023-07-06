@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\RecordsAndNullability\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordsAndNullability/Program.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  1,

@@ -5,7 +5,7 @@
 "message":  "Remove this assignment of 'rootPathProvider' or initialize it statically.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  13,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  42,
@@ -29,7 +29,7 @@
 "message":  "Remove this assignment of 'traceConfiguration' or initialize it statically.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  43,
@@ -53,7 +53,7 @@
 "message":  "Remove this assignment of 'rootPathProvider' or initialize it statically.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\StaticContent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContent.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  13,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\StaticContent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContent.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  42,
@@ -77,7 +77,7 @@
 "message":  "Remove this assignment of 'conventions' or initialize it statically.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\StaticContent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContent.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  13,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\StaticContent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContent.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  50,

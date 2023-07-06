@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_firstNode' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_lastNode' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_middleNode' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  22,

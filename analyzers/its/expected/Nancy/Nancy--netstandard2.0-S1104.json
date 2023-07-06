@@ -4,7 +4,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L21-L40",
 "region":  {
 "startLine":  21,
 "startColumn":  57,
@@ -17,7 +17,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Response.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Response.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  38,
@@ -43,7 +43,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ProcessorMatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/ProcessorMatch.cs#L11-L15",
 "region":  {
 "startLine":  11,
 "startColumn":  38,

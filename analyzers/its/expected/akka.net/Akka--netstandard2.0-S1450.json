@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_worker' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_root' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconParser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_ext' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SimpleDnsManager.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_serializerDetails' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  62,

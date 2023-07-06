@@ -4,7 +4,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L367",
 "region":  {
 "startLine":  367,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  23,

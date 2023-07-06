@@ -4,7 +4,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\INamingConvention.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/INamingConvention.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  78,
@@ -17,7 +17,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\INamingConvention.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/INamingConvention.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  64,

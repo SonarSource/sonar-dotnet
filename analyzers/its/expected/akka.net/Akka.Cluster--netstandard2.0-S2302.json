@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'selfAddress' with 'nameof(selfAddress)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L597",
 "region":  {
 "startLine":  597,
 "startColumn":  81,
@@ -17,7 +17,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'status' with 'nameof(status)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  55,
@@ -30,7 +30,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  51,

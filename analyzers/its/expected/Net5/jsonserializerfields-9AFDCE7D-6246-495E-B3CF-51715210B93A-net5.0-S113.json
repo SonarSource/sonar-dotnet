@@ -4,7 +4,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'Program.cs'.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  1,

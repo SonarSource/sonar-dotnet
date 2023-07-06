@@ -2,35 +2,9 @@
 "issues":  [
 {
 "id":  "S4058",
-"message":  "Change this call to 'requestedPath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
-"region":  {
-"startLine":  36,
-"startColumn":  18,
-"endLine":  36,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'contentPath.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
-"region":  {
-"startLine":  65,
-"startColumn":  21,
-"endLine":  65,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S4058",
 "message":  "Change this call to 'contentPath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  18,
@@ -43,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'pathWithoutFileName.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  21,
@@ -56,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'contentPath.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  18,
@@ -69,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'requestedPath.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  17,
@@ -82,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  24,
@@ -95,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  64,
@@ -106,9 +80,35 @@
 },
 {
 "id":  "S4058",
+"message":  "Change this call to 'requestedPath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  18,
+"endLine":  36,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'contentPath.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  21,
+"endLine":  65,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4058",
 "message":  "Change this call to 'dependency.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DependencyContextAssemblyCatalog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DependencyContextAssemblyCatalog.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  59,
@@ -121,7 +121,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'path.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsConfiguration.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  22,
@@ -134,7 +134,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'context.Request.Url.BasePath.TrimEnd('/').EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'asmName.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  68,
@@ -160,7 +160,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'asmName.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  68,
@@ -171,22 +171,9 @@
 },
 {
 "id":  "S4058",
-"message":  "Change this call to 'path.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
-"region":  {
-"startLine":  46,
-"startColumn":  18,
-"endLine":  46,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4058",
 "message":  "Change this call to 'uri.Scheme.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  21,
@@ -199,7 +186,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'url.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  29,
@@ -212,7 +199,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'url.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  53,
@@ -223,9 +210,22 @@
 },
 {
 "id":  "S4058",
+"message":  "Change this call to 'path.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  18,
+"endLine":  46,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4058",
 "message":  "Change this call to 'userHostAddress.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\RequestExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/RequestExtensions.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  21,
@@ -238,7 +238,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'userHostAddress.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\RequestExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/RequestExtensions.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  21,
@@ -251,7 +251,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'uri.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpLink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  27,
@@ -264,7 +264,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'parsedRelation.AbsolutePath.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  24,
@@ -277,7 +277,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'resourceName.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/ResourceBasedTextResource.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  23,
@@ -290,7 +290,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'contentType.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/MediaRange.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'match.Value.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/CaptureNodeWithMultipleParameters.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  20,
@@ -316,7 +316,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'match.Value.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/CaptureNodeWithMultipleParameters.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  51,
@@ -329,7 +329,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'segment.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/TrieNodeFactory.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'segment.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/TrieNodeFactory.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  46,
@@ -355,7 +355,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'segment.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/TrieNodeFactory.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  71,
@@ -368,7 +368,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'segment.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/TrieNodeFactory.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  17,
@@ -381,7 +381,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'segment.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/TrieNodeFactory.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  17,
@@ -394,7 +394,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'path.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Url.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Url.cs#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  51,
@@ -407,7 +407,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'resourceFileName.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ResourceViewLocationProvider.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  24,
@@ -420,7 +420,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'properties.Last().StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L306",
 "region":  {
 "startLine":  306,
 "startColumn":  54,

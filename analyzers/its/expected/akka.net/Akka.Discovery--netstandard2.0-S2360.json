@@ -4,33 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Discovery\ServiceDiscovery.cs",
-"region":  {
-"startLine":  78,
-"startColumn":  58,
-"endLine":  78,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Discovery\ServiceDiscovery.cs",
-"region":  {
-"startLine":  78,
-"startColumn":  84,
-"endLine":  78,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Discovery\ServiceDiscovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  59,
@@ -43,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Discovery\ServiceDiscovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  83,
@@ -56,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Discovery\ServiceDiscovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  47,
@@ -69,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Discovery\ServiceDiscovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  71,
@@ -82,12 +56,38 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Discovery\ServiceDiscovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  95,
 "endLine":  243,
 "endColumn":  101
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  58,
+"endLine":  78,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  84,
+"endLine":  78,
+"endColumn":  90
 }
 }
 }

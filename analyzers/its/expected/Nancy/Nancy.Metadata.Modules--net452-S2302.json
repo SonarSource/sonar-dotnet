@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'conventions' with 'nameof(conventions)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\DefaultMetadataModuleResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleResolver.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  53,
@@ -17,7 +17,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'metadataModules' with 'nameof(metadataModules)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\DefaultMetadataModuleResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleResolver.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  53,

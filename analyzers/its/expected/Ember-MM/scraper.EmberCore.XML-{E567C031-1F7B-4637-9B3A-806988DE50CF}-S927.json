@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'mMovie' to 'DBMovie' to match the interface declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L762",
 "region":  {
 "startLine":  762,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  62,
@@ -30,7 +30,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L254",
 "region":  {
 "startLine":  254,
 "startColumn":  62,
@@ -43,7 +43,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  62,
@@ -56,7 +56,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MusicVideoTag.vb#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  62,
@@ -69,7 +69,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  62,
@@ -82,7 +82,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'element' to 'xUrl' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Thumbnail.vb#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  62,
@@ -95,7 +95,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  62,
@@ -108,7 +108,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  62,
@@ -121,7 +121,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'xExpression' to 'xNodeInfo' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  62,
@@ -134,7 +134,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'xFunctionElement' to 'xNodeInfo' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  62,
@@ -147,7 +147,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'xRegExp' to 'xNodeInfo' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  62,

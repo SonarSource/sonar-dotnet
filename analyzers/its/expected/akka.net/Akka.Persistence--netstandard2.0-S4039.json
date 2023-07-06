@@ -4,7 +4,7 @@
 "id":  "S4039",
 "message":  "Make 'ReceivePersistentActor' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInitializableActor.Init'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L348",
 "region":  {
 "startLine":  348,
 "startColumn":  34,

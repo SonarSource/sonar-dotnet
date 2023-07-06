@@ -4,7 +4,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L945",
 "region":  {
 "startLine":  945,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L961",
 "region":  {
 "startLine":  961,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L261",
 "region":  {
 "startLine":  261,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Dns.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  40,
@@ -56,7 +56,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  51,
@@ -69,7 +69,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  48,
@@ -82,7 +82,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  65,
@@ -95,7 +95,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  25,

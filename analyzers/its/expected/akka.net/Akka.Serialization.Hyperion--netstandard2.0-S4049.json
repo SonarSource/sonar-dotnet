@@ -4,7 +4,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetKnownTypes' a property.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\IKnownTypesProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/IKnownTypesProvider.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  27,

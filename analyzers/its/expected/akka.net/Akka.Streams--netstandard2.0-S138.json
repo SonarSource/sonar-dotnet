@@ -2,22 +2,9 @@
 "issues":  [
 {
 "id":  "S138",
-"message":  "This constructor 'UnzipWithStageLogic' has 86 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
-"region":  {
-"startLine":  927,
-"startColumn":  20,
-"endLine":  927,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S138",
 "message":  "This constructor 'UnzipWithStageLogic' has 100 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1159",
 "region":  {
 "startLine":  1159,
 "startColumn":  20,
@@ -28,9 +15,22 @@
 },
 {
 "id":  "S138",
+"message":  "This constructor 'UnzipWithStageLogic' has 86 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L927",
+"region":  {
+"startLine":  927,
+"startColumn":  20,
+"endLine":  927,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S138",
 "message":  "This constructor 'Logic' has 95 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Retry.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S138",
 "message":  "This method 'FuseGroup' has 116 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  36,
@@ -56,7 +56,7 @@
 "id":  "S138",
 "message":  "This method 'Descend' has 139 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  82,
@@ -69,7 +69,7 @@
 "id":  "S138",
 "message":  "This method 'Validate' has 99 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  28,

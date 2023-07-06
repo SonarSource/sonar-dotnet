@@ -4,7 +4,20 @@
 "id":  "S2353",
 "message":  "Rename this property to 'Item'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  30,
+"endLine":  149,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2353",
+"message":  "Rename this property to 'Item'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  30,
@@ -17,25 +30,12 @@
 "id":  "S2353",
 "message":  "Rename this property to 'Item'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  30,
 "endLine":  90,
 "endColumn":  42
-}
-}
-},
-{
-"id":  "S2353",
-"message":  "Rename this property to 'Item'.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
-"region":  {
-"startLine":  149,
-"startColumn":  30,
-"endLine":  149,
-"endColumn":  57
 }
 }
 }

@@ -4,7 +4,7 @@
 "id":  "S2376",
 "message":  "Provide a getter for 'isEdit' or replace the property with a 'SetisEdit' method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S2376",
 "message":  "Provide a getter for 'Movie' or replace the property with a 'SetMovie' method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  35,
@@ -30,7 +30,7 @@
 "id":  "S2376",
 "message":  "Provide a getter for 'ThumbCount' or replace the property with a 'SetThumbCount' method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  35,

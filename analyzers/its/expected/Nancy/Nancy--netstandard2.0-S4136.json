@@ -5,7 +5,7 @@
 "message":  "All 'Register' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/Registrations.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/Registrations.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  21,
@@ -29,7 +29,7 @@
 "message":  "All 'UrlDecode' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  30,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  30,
@@ -47,7 +47,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  30,
@@ -62,7 +62,7 @@
 "message":  "All 'BindTo' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  30,
@@ -71,7 +71,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  30,
@@ -86,7 +86,7 @@
 "message":  "All 'BindToAndValidate' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  30,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  30,
@@ -110,7 +110,7 @@
 "message":  "All 'Bind' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  31,
@@ -119,7 +119,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  30,
@@ -134,7 +134,7 @@
 "message":  "All 'BindAndValidate' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  30,
@@ -143,7 +143,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModuleExtensions.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  30,
@@ -158,7 +158,7 @@
 "message":  "All 'WithStatusCode' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NegotiatorExtensions.cs#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  34,
@@ -167,7 +167,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NegotiatorExtensions.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  34,
@@ -182,7 +182,7 @@
 "message":  "All 'GetViewsWithSupportedExtensions' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultFileSystemReader.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  63,
@@ -191,7 +191,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultFileSystemReader.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  63,
@@ -206,7 +206,7 @@
 "message":  "All 'GetFilenames' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultFileSystemReader.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  44,
@@ -215,7 +215,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultFileSystemReader.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  44,
@@ -230,7 +230,7 @@
 "message":  "All 'GetViewsWithSupportedExtensions' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IFileSystemReader.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IFileSystemReader.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  56,
@@ -239,7 +239,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IFileSystemReader.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IFileSystemReader.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  56,

@@ -4,20 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
-"region":  {
-"startLine":  94,
-"startColumn":  135,
-"endLine":  94,
-"endColumn":  161
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  141,
@@ -30,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  141,
@@ -43,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  154,
@@ -56,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  157,
@@ -69,7 +56,20 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertExtensions.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  135,
+"endLine":  94,
+"endColumn":  161
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  105,
@@ -82,7 +82,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  101,
@@ -95,7 +95,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  98,
@@ -108,98 +108,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
-"region":  {
-"startLine":  31,
-"startColumn":  134,
-"endLine":  31,
-"endColumn":  140
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
-"region":  {
-"startLine":  41,
-"startColumn":  89,
-"endLine":  41,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
-"region":  {
-"startLine":  55,
-"startColumn":  96,
-"endLine":  55,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  92,
-"endLine":  66,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
-"region":  {
-"startLine":  77,
-"startColumn":  93,
-"endLine":  77,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
-"region":  {
-"startLine":  88,
-"startColumn":  89,
-"endLine":  88,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
-"region":  {
-"startLine":  99,
-"startColumn":  94,
-"endLine":  99,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  90,
@@ -212,7 +121,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  97,
@@ -225,7 +134,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  93,
@@ -238,7 +147,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  95,
@@ -251,7 +160,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  91,
@@ -264,7 +173,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  94,
@@ -277,7 +186,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  90,
@@ -290,7 +199,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  93,
@@ -303,7 +212,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  89,
@@ -316,7 +225,98 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  134,
+"endLine":  31,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  89,
+"endLine":  41,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  96,
+"endLine":  55,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  92,
+"endLine":  66,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  93,
+"endLine":  77,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  89,
+"endLine":  88,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  94,
+"endLine":  99,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  58,
@@ -329,7 +329,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  118,
@@ -342,7 +342,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  117,
@@ -355,7 +355,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseExtensions.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  131,
@@ -368,33 +368,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
-"region":  {
-"startLine":  90,
-"startColumn":  111,
-"endLine":  90,
-"endColumn":  117
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
-"region":  {
-"startLine":  90,
-"startColumn":  131,
-"endLine":  90,
-"endColumn":  137
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  154,
@@ -407,7 +381,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  174,
@@ -420,7 +394,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  152,
@@ -433,7 +407,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  172,
@@ -446,7 +420,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  160,
@@ -459,7 +433,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  180,
@@ -472,7 +446,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  158,
@@ -485,7 +459,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  178,
@@ -498,7 +472,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  179,
@@ -511,7 +485,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  199,
@@ -524,7 +498,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  177,
@@ -537,7 +511,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  197,
@@ -550,7 +524,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  108,
@@ -563,7 +537,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  128,
@@ -576,7 +550,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  151,
@@ -589,7 +563,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  171,
@@ -602,7 +576,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  149,
@@ -615,7 +589,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  169,
@@ -628,7 +602,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  157,
@@ -641,7 +615,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  177,
@@ -654,7 +628,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  155,
@@ -667,7 +641,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  175,
@@ -680,7 +654,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  176,
@@ -693,7 +667,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  196,
@@ -706,7 +680,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  174,
@@ -719,7 +693,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  194,
@@ -732,7 +706,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  109,
@@ -745,7 +719,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  129,
@@ -758,7 +732,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  152,
@@ -771,7 +745,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  172,
@@ -784,7 +758,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  150,
@@ -797,7 +771,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  170,
@@ -810,7 +784,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  158,
@@ -823,7 +797,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  178,
@@ -836,7 +810,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  156,
@@ -849,7 +823,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  176,
@@ -862,7 +836,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  177,
@@ -875,7 +849,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  197,
@@ -888,7 +862,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  175,
@@ -901,7 +875,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  195,
@@ -914,7 +888,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L373",
 "region":  {
 "startLine":  373,
 "startColumn":  112,
@@ -927,7 +901,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L373",
 "region":  {
 "startLine":  373,
 "startColumn":  132,
@@ -940,7 +914,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  155,
@@ -953,7 +927,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  175,
@@ -966,7 +940,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L399",
 "region":  {
 "startLine":  399,
 "startColumn":  153,
@@ -979,7 +953,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L399",
 "region":  {
 "startLine":  399,
 "startColumn":  173,
@@ -992,7 +966,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  161,
@@ -1005,7 +979,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  181,
@@ -1018,7 +992,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  159,
@@ -1031,7 +1005,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  179,
@@ -1044,7 +1018,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  180,
@@ -1057,7 +1031,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  200,
@@ -1070,7 +1044,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  178,
@@ -1083,7 +1057,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  198,
@@ -1096,7 +1070,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L467",
 "region":  {
 "startLine":  467,
 "startColumn":  110,
@@ -1109,7 +1083,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L467",
 "region":  {
 "startLine":  467,
 "startColumn":  130,
@@ -1122,7 +1096,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L479",
 "region":  {
 "startLine":  479,
 "startColumn":  153,
@@ -1135,7 +1109,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L479",
 "region":  {
 "startLine":  479,
 "startColumn":  173,
@@ -1148,7 +1122,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L493",
 "region":  {
 "startLine":  493,
 "startColumn":  151,
@@ -1161,7 +1135,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L493",
 "region":  {
 "startLine":  493,
 "startColumn":  171,
@@ -1174,7 +1148,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L506",
 "region":  {
 "startLine":  506,
 "startColumn":  159,
@@ -1187,7 +1161,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L506",
 "region":  {
 "startLine":  506,
 "startColumn":  179,
@@ -1200,7 +1174,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  157,
@@ -1213,7 +1187,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  177,
@@ -1226,7 +1200,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L533",
 "region":  {
 "startLine":  533,
 "startColumn":  178,
@@ -1239,7 +1213,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L533",
 "region":  {
 "startLine":  533,
 "startColumn":  198,
@@ -1252,7 +1226,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L547",
 "region":  {
 "startLine":  547,
 "startColumn":  176,
@@ -1265,7 +1239,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L547",
 "region":  {
 "startLine":  547,
 "startColumn":  196,
@@ -1278,7 +1252,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L561",
 "region":  {
 "startLine":  561,
 "startColumn":  109,
@@ -1291,7 +1265,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L561",
 "region":  {
 "startLine":  561,
 "startColumn":  129,
@@ -1304,7 +1278,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L573",
 "region":  {
 "startLine":  573,
 "startColumn":  152,
@@ -1317,7 +1291,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L573",
 "region":  {
 "startLine":  573,
 "startColumn":  172,
@@ -1330,7 +1304,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L587",
 "region":  {
 "startLine":  587,
 "startColumn":  150,
@@ -1343,7 +1317,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L587",
 "region":  {
 "startLine":  587,
 "startColumn":  170,
@@ -1356,7 +1330,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L600",
 "region":  {
 "startLine":  600,
 "startColumn":  158,
@@ -1369,7 +1343,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L600",
 "region":  {
 "startLine":  600,
 "startColumn":  178,
@@ -1382,7 +1356,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L614",
 "region":  {
 "startLine":  614,
 "startColumn":  156,
@@ -1395,7 +1369,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L614",
 "region":  {
 "startLine":  614,
 "startColumn":  176,
@@ -1408,7 +1382,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L627",
 "region":  {
 "startLine":  627,
 "startColumn":  177,
@@ -1421,7 +1395,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L627",
 "region":  {
 "startLine":  627,
 "startColumn":  197,
@@ -1434,7 +1408,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L641",
 "region":  {
 "startLine":  641,
 "startColumn":  175,
@@ -1447,7 +1421,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L641",
 "region":  {
 "startLine":  641,
 "startColumn":  195,
@@ -1460,7 +1434,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L655",
 "region":  {
 "startLine":  655,
 "startColumn":  108,
@@ -1473,7 +1447,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L655",
 "region":  {
 "startLine":  655,
 "startColumn":  128,
@@ -1486,7 +1460,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L667",
 "region":  {
 "startLine":  667,
 "startColumn":  151,
@@ -1499,7 +1473,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L667",
 "region":  {
 "startLine":  667,
 "startColumn":  171,
@@ -1512,7 +1486,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L681",
 "region":  {
 "startLine":  681,
 "startColumn":  149,
@@ -1525,7 +1499,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L681",
 "region":  {
 "startLine":  681,
 "startColumn":  169,
@@ -1538,7 +1512,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L694",
 "region":  {
 "startLine":  694,
 "startColumn":  157,
@@ -1551,7 +1525,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L694",
 "region":  {
 "startLine":  694,
 "startColumn":  177,
@@ -1564,7 +1538,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L708",
 "region":  {
 "startLine":  708,
 "startColumn":  155,
@@ -1577,7 +1551,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L708",
 "region":  {
 "startLine":  708,
 "startColumn":  175,
@@ -1590,7 +1564,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L721",
 "region":  {
 "startLine":  721,
 "startColumn":  176,
@@ -1603,7 +1577,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L721",
 "region":  {
 "startLine":  721,
 "startColumn":  196,
@@ -1616,7 +1590,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L735",
 "region":  {
 "startLine":  735,
 "startColumn":  174,
@@ -1629,12 +1603,38 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L735",
 "region":  {
 "startLine":  735,
 "startColumn":  194,
 "endLine":  735,
 "endColumn":  200
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  111,
+"endLine":  90,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  131,
+"endLine":  90,
+"endColumn":  137
 }
 }
 }

@@ -4,7 +4,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_collection'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\BlockingQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/BlockingQueue.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_barrier'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBarrier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestBarrier.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_latch'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestLatch.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  18,

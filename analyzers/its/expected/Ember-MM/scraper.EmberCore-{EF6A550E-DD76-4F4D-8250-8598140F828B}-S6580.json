@@ -4,7 +4,7 @@
 "id":  "S6580",
 "message":  "Use a format provider when parsing date and time.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  28,

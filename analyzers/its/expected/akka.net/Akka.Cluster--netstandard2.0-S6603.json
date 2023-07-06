@@ -4,7 +4,7 @@
 "id":  "S6603",
 "message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S6603",
 "message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2241",
 "region":  {
 "startLine":  2241,
 "startColumn":  84,

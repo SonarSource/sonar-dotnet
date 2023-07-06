@@ -4,20 +4,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
-"region":  {
-"startLine":  99,
-"startColumn":  41,
-"endLine":  99,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4069",
-"message":  "Implement alternative method 'Add' for the operator '+'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Deadline.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  41,
@@ -30,7 +17,20 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Deadline.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  41,
+"endLine":  99,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Add' for the operator '+'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L355",
 "region":  {
 "startLine":  355,
 "startColumn":  49,

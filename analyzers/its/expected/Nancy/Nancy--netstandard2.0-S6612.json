@@ -4,7 +4,7 @@
 "id":  "S6612",
 "message":  "Use the lambda parameter instead of capturing the argument 'type'",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultTypeCatalog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultTypeCatalog.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  46,

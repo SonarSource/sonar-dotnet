@@ -4,7 +4,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'interruption'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L403",
 "region":  {
 "startLine":  403,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'bindFlags'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\IPExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/IPExtensions.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  26,

@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_counter', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'SupportsSerialization', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\PluginSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/PluginSpec.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  63,

@@ -4,7 +4,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  13,

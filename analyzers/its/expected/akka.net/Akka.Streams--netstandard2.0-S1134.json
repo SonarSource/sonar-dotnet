@@ -4,7 +4,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  15,
@@ -17,7 +17,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  16,
@@ -43,7 +43,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  16,
@@ -56,7 +56,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1205",
 "region":  {
 "startLine":  1205,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\IOSources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/IOSources.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  16,
@@ -82,7 +82,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  20,

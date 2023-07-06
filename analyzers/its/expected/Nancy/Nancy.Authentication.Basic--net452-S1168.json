@@ -5,7 +5,7 @@
 "message":  "Return an empty collection instead of null.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  24,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  24,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  62,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  24,

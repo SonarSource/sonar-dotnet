@@ -4,7 +4,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  44,
@@ -17,7 +17,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L505",
 "region":  {
 "startLine":  505,
 "startColumn":  42,
@@ -30,7 +30,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L526",
 "region":  {
 "startLine":  526,
 "startColumn":  67,

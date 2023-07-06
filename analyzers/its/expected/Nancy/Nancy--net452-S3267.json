@@ -5,7 +5,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperLocator.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  52,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperLocator.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  21,
@@ -28,7 +28,7 @@
 "id":  "S3267",
 "message":  "Loop should be simplified by calling Select(moduleRegistrationType => moduleRegistrationType.ModuleType))",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  52,
@@ -42,7 +42,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\AssemblyExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/AssemblyExtensions.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  52,
@@ -51,7 +51,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\AssemblyExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/AssemblyExtensions.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  21,
@@ -66,7 +66,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/CollectionExtensions.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  41,
@@ -75,7 +75,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/CollectionExtensions.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  21,
@@ -90,7 +90,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  36,
@@ -99,7 +99,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  25,
@@ -114,7 +114,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultModelBinderLocator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultModelBinderLocator.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  41,
@@ -123,7 +123,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultModelBinderLocator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultModelBinderLocator.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  21,
@@ -137,7 +137,7 @@
 "id":  "S3267",
 "message":  "Loop should be simplified by calling Select(header => header.Item1))",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  36,
@@ -150,7 +150,7 @@
 "id":  "S3267",
 "message":  "Loop should be simplified by calling Select(prioritizedProcessor => prioritizedProcessor.Item1))",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  54,
@@ -164,7 +164,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/RouteResolverTrie.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  36,
@@ -173,7 +173,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/RouteResolverTrie.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  21,
@@ -188,7 +188,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3365",
 "region":  {
 "startLine":  3365,
 "startColumn":  35,
@@ -197,7 +197,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3367",
 "region":  {
 "startLine":  3367,
 "startColumn":  21,
@@ -212,7 +212,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3393",
 "region":  {
 "startLine":  3393,
 "startColumn":  35,
@@ -221,7 +221,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3395",
 "region":  {
 "startLine":  3395,
 "startColumn":  21,
@@ -236,7 +236,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3825",
 "region":  {
 "startLine":  3825,
 "startColumn":  34,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3827",
 "region":  {
 "startLine":  3827,
 "startColumn":  21,

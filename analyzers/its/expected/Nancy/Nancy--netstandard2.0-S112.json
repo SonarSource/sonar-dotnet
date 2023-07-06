@@ -4,20 +4,7 @@
 "id":  "S112",
 "message":  "'System.NullReferenceException' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
-"region":  {
-"startLine":  92,
-"startColumn":  23,
-"endLine":  92,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.NullReferenceException' should not be thrown by user code.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L539",
 "region":  {
 "startLine":  539,
 "startColumn":  23,
@@ -30,7 +17,7 @@
 "id":  "S112",
 "message":  "'System.NullReferenceException' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L580",
 "region":  {
 "startLine":  580,
 "startColumn":  23,
@@ -41,9 +28,22 @@
 },
 {
 "id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  23,
+"endLine":  92,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  23,
@@ -56,7 +56,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  23,

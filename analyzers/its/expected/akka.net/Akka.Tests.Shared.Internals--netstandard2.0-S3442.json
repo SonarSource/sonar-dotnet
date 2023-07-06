@@ -4,7 +4,7 @@
 "id":  "S3442",
 "message":  "Change the visibility of this constructor to 'protected'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S3442",
 "message":  "Change the visibility of this constructor to 'protected'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S3442",
 "message":  "Change the visibility of this constructor to 'protected'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S3442",
 "message":  "Change the visibility of this constructor to 'protected'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "id":  "S3442",
 "message":  "Change the visibility of this constructor to 'protected'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  9,

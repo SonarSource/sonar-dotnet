@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_config' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Configuration\ClusterMetricsSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Configuration/ClusterMetricsSettings.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  33,

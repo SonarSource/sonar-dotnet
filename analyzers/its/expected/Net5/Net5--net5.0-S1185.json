@@ -4,7 +4,7 @@
 "id":  "S1185",
 "message":  "Remove this property 'MyProperty1' to simply inherit its behavior.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1185.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1185.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  13,

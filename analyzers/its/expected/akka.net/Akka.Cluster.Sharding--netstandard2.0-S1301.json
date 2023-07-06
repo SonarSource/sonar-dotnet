@@ -4,20 +4,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
-"region":  {
-"startLine":  91,
-"startColumn":  13,
-"endLine":  91,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  13,
@@ -30,7 +17,20 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  13,
+"endLine":  91,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1317",
 "region":  {
 "startLine":  1317,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1414",
 "region":  {
 "startLine":  1414,
 "startColumn":  13,
@@ -56,33 +56,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
-"region":  {
-"startLine":  671,
-"startColumn":  13,
-"endLine":  671,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
-"region":  {
-"startLine":  684,
-"startColumn":  13,
-"endLine":  684,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L1054",
 "region":  {
 "startLine":  1054,
 "startColumn":  13,
@@ -95,7 +69,33 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L671",
+"region":  {
+"startLine":  671,
+"startColumn":  13,
+"endLine":  671,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L684",
+"region":  {
+"startLine":  684,
+"startColumn":  13,
+"endLine":  684,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  13,

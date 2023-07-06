@@ -5,7 +5,7 @@
 "message":  "The Cyclomatic Complexity of this accessor is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  13,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  13,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  17,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  38,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  21,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  25,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  31,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  17,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  21,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  29,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  25,
@@ -119,7 +119,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  25,
@@ -128,7 +128,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  25,
@@ -137,7 +137,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L414",
 "region":  {
 "startLine":  414,
 "startColumn":  13,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L414",
 "region":  {
 "startLine":  414,
 "startColumn":  31,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L423",
 "region":  {
 "startLine":  423,
 "startColumn":  90,
@@ -164,7 +164,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L424",
 "region":  {
 "startLine":  424,
 "startColumn":  90,
@@ -173,7 +173,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L430",
 "region":  {
 "startLine":  430,
 "startColumn":  17,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L430",
 "region":  {
 "startLine":  430,
 "startColumn":  37,
@@ -191,7 +191,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  101,
@@ -200,7 +200,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  21,
@@ -209,7 +209,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  17,
@@ -218,7 +218,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  26,
@@ -233,7 +233,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  21,
@@ -242,7 +242,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  21,
@@ -251,7 +251,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  13,
@@ -260,7 +260,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  13,
@@ -269,7 +269,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  13,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  48,
@@ -287,7 +287,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  13,
@@ -296,7 +296,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  17,
@@ -305,7 +305,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  13,
@@ -314,7 +314,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  13,
@@ -323,7 +323,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  13,
@@ -332,7 +332,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  22,
@@ -341,7 +341,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  13,
@@ -356,7 +356,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  34,
@@ -365,7 +365,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  34,
@@ -374,7 +374,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  13,
@@ -383,7 +383,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  34,
@@ -392,7 +392,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L333",
 "region":  {
 "startLine":  333,
 "startColumn":  160,
@@ -401,7 +401,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L333",
 "region":  {
 "startLine":  333,
 "startColumn":  93,
@@ -410,7 +410,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L333",
 "region":  {
 "startLine":  333,
 "startColumn":  55,
@@ -419,7 +419,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  66,
@@ -428,7 +428,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  45,
@@ -437,7 +437,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L340",
 "region":  {
 "startLine":  340,
 "startColumn":  38,
@@ -446,7 +446,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L344",
 "region":  {
 "startLine":  344,
 "startColumn":  17,
@@ -455,7 +455,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L348",
 "region":  {
 "startLine":  348,
 "startColumn":  27,
@@ -470,7 +470,7 @@
 "message":  "The Cyclomatic Complexity of this method is 16 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  34,
@@ -479,7 +479,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  34,
@@ -488,7 +488,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  13,
@@ -497,7 +497,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  40,
@@ -506,7 +506,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  50,
@@ -515,7 +515,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  36,
@@ -524,7 +524,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  17,
@@ -533,7 +533,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  17,
@@ -542,7 +542,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  21,
@@ -551,7 +551,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  25,
@@ -560,7 +560,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  17,
@@ -569,7 +569,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  86,
@@ -578,7 +578,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  35,
@@ -587,7 +587,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  104,
@@ -596,7 +596,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  84,
@@ -605,7 +605,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  17,
@@ -614,7 +614,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  38,
@@ -629,7 +629,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  28,
@@ -638,7 +638,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  28,
@@ -647,7 +647,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  13,
@@ -656,7 +656,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  13,
@@ -665,7 +665,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  88,
@@ -674,7 +674,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  13,
@@ -683,7 +683,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  17,
@@ -692,7 +692,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  21,
@@ -701,7 +701,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  46,
@@ -710,7 +710,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  13,
@@ -719,7 +719,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  17,
@@ -728,7 +728,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  13,
@@ -737,7 +737,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  13,
@@ -749,133 +749,10 @@
 },
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  384,
-"startColumn":  28,
-"endLine":  384,
-"endColumn":  50
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  384,
-"startColumn":  28,
-"endLine":  384,
-"endColumn":  50
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  390,
-"startColumn":  47,
-"endLine":  390,
-"endColumn":  49
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  391,
-"startColumn":  46,
-"endLine":  391,
-"endColumn":  48
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  392,
-"startColumn":  66,
-"endLine":  392,
-"endColumn":  68
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  393,
-"startColumn":  67,
-"endLine":  393,
-"endColumn":  69
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  394,
-"startColumn":  52,
-"endLine":  394,
-"endColumn":  54
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  395,
-"startColumn":  19,
-"endLine":  395,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  397,
-"startColumn":  13,
-"endLine":  397,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  401,
-"startColumn":  18,
-"endLine":  401,
-"endColumn":  20
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  404,
-"startColumn":  17,
-"endLine":  404,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  404,
-"startColumn":  62,
-"endLine":  404,
-"endColumn":  64
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
-"region":  {
-"startLine":  404,
-"startColumn":  42,
-"endLine":  404,
-"endColumn":  44
-}
-}
-]
-},
-{
-"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  28,
@@ -884,7 +761,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  28,
@@ -893,7 +770,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  13,
@@ -902,7 +779,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  71,
@@ -911,7 +788,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  56,
@@ -920,7 +797,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  13,
@@ -929,7 +806,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  18,
@@ -938,7 +815,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L328",
 "region":  {
 "startLine":  328,
 "startColumn":  13,
@@ -947,7 +824,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  17,
@@ -956,7 +833,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  64,
@@ -965,7 +842,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  106,
@@ -974,7 +851,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  22,
@@ -983,7 +860,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  50,
@@ -992,7 +869,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L371",
 "region":  {
 "startLine":  371,
 "startColumn":  17,
@@ -1004,10 +881,133 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L384",
+"region":  {
+"startLine":  384,
+"startColumn":  28,
+"endLine":  384,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L384",
+"region":  {
+"startLine":  384,
+"startColumn":  28,
+"endLine":  384,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L390",
+"region":  {
+"startLine":  390,
+"startColumn":  47,
+"endLine":  390,
+"endColumn":  49
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L391",
+"region":  {
+"startLine":  391,
+"startColumn":  46,
+"endLine":  391,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L392",
+"region":  {
+"startLine":  392,
+"startColumn":  66,
+"endLine":  392,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L393",
+"region":  {
+"startLine":  393,
+"startColumn":  67,
+"endLine":  393,
+"endColumn":  69
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L394",
+"region":  {
+"startLine":  394,
+"startColumn":  52,
+"endLine":  394,
+"endColumn":  54
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L395",
+"region":  {
+"startLine":  395,
+"startColumn":  19,
+"endLine":  395,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L397",
+"region":  {
+"startLine":  397,
+"startColumn":  13,
+"endLine":  397,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L401",
+"region":  {
+"startLine":  401,
+"startColumn":  18,
+"endLine":  401,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L404",
+"region":  {
+"startLine":  404,
+"startColumn":  17,
+"endLine":  404,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L404",
+"region":  {
+"startLine":  404,
+"startColumn":  62,
+"endLine":  404,
+"endColumn":  64
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L404",
+"region":  {
+"startLine":  404,
+"startColumn":  42,
+"endLine":  404,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this method is 16 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  29,
@@ -1016,7 +1016,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  29,
@@ -1025,7 +1025,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  13,
@@ -1034,7 +1034,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  13,
@@ -1043,7 +1043,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  17,
@@ -1052,7 +1052,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  43,
@@ -1061,7 +1061,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  17,
@@ -1070,7 +1070,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  39,
@@ -1079,7 +1079,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  17,
@@ -1088,7 +1088,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  54,
@@ -1097,7 +1097,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  17,
@@ -1106,7 +1106,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  21,
@@ -1115,7 +1115,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  25,
@@ -1124,7 +1124,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  21,
@@ -1133,7 +1133,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  17,
@@ -1142,7 +1142,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  17,
@@ -1151,7 +1151,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  17,
@@ -1166,7 +1166,7 @@
 "message":  "The Cyclomatic Complexity of this method is 22 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  27,
@@ -1175,7 +1175,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  27,
@@ -1184,7 +1184,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  13,
@@ -1193,7 +1193,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  13,
@@ -1202,7 +1202,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -1211,7 +1211,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  78,
@@ -1220,7 +1220,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -1229,7 +1229,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  58,
@@ -1238,7 +1238,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  70,
@@ -1247,7 +1247,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  109,
@@ -1256,7 +1256,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  83,
@@ -1265,7 +1265,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  58,
@@ -1274,7 +1274,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  17,
@@ -1283,7 +1283,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  43,
@@ -1292,7 +1292,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  17,
@@ -1301,7 +1301,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  97,
@@ -1310,7 +1310,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  71,
@@ -1319,7 +1319,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  21,
@@ -1328,7 +1328,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  25,
@@ -1337,7 +1337,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  73,
@@ -1346,7 +1346,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  21,
@@ -1355,7 +1355,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  21,
@@ -1364,7 +1364,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  21,
@@ -1379,7 +1379,7 @@
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  31,
@@ -1388,7 +1388,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  31,
@@ -1397,7 +1397,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  30,
@@ -1406,7 +1406,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  13,
@@ -1415,7 +1415,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  17,
@@ -1424,7 +1424,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  17,
@@ -1433,7 +1433,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  13,
@@ -1442,7 +1442,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  17,
@@ -1451,7 +1451,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  17,
@@ -1460,7 +1460,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  17,
@@ -1469,7 +1469,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  21,
@@ -1478,7 +1478,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  21,
@@ -1487,7 +1487,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  25,
@@ -1496,7 +1496,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  29,
@@ -1511,7 +1511,7 @@
 "message":  "The Cyclomatic Complexity of this constructor is 45 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  16,
@@ -1520,7 +1520,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  16,
@@ -1529,7 +1529,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  65,
@@ -1538,7 +1538,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  104,
@@ -1547,7 +1547,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  81,
@@ -1556,7 +1556,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  77,
@@ -1565,7 +1565,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  122,
@@ -1574,7 +1574,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  93,
@@ -1583,7 +1583,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  97,
@@ -1592,7 +1592,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  152,
@@ -1601,7 +1601,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  113,
@@ -1610,7 +1610,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  75,
@@ -1619,7 +1619,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  119,
@@ -1628,7 +1628,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  91,
@@ -1637,7 +1637,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  65,
@@ -1646,7 +1646,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  104,
@@ -1655,7 +1655,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  81,
@@ -1664,7 +1664,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  63,
@@ -1673,7 +1673,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  101,
@@ -1682,7 +1682,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  79,
@@ -1691,7 +1691,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  53,
@@ -1700,7 +1700,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  86,
@@ -1709,7 +1709,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  69,
@@ -1718,7 +1718,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  59,
@@ -1727,7 +1727,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  95,
@@ -1736,7 +1736,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  75,
@@ -1745,7 +1745,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  55,
@@ -1754,7 +1754,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  89,
@@ -1763,7 +1763,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  71,
@@ -1772,7 +1772,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  65,
@@ -1781,7 +1781,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  104,
@@ -1790,7 +1790,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  81,
@@ -1799,7 +1799,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  79,
@@ -1808,7 +1808,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  86,
@@ -1817,7 +1817,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  13,
@@ -1826,7 +1826,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  101,
@@ -1835,7 +1835,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  111,
@@ -1844,7 +1844,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  71,
@@ -1853,7 +1853,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  89,
@@ -1862,7 +1862,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  87,
@@ -1871,7 +1871,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  79,
@@ -1880,7 +1880,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  81,
@@ -1889,7 +1889,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  17,
@@ -1898,7 +1898,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  21,
@@ -1907,7 +1907,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  17,
@@ -1916,7 +1916,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  21,
@@ -1931,7 +1931,7 @@
 "message":  "The Cyclomatic Complexity of this accessor is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -1940,7 +1940,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -1949,7 +1949,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  32,
@@ -1958,7 +1958,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  52,
@@ -1967,7 +1967,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  37,
@@ -1976,7 +1976,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  51,
@@ -1985,7 +1985,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  36,
@@ -1994,7 +1994,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  47,
@@ -2003,7 +2003,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  34,
@@ -2012,7 +2012,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  49,
@@ -2021,7 +2021,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  36,
@@ -2030,7 +2030,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  44,
@@ -2045,7 +2045,7 @@
 "message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  21,
@@ -2054,7 +2054,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  21,
@@ -2063,7 +2063,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  13,
@@ -2072,7 +2072,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  13,
@@ -2081,7 +2081,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  17,
@@ -2090,7 +2090,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  17,
@@ -2099,7 +2099,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  22,
@@ -2108,7 +2108,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  23,
@@ -2117,7 +2117,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  23,
@@ -2126,7 +2126,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  26,
@@ -2135,7 +2135,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  28,
@@ -2144,7 +2144,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  26,
@@ -2153,7 +2153,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  33,
@@ -2162,7 +2162,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  31,
@@ -2171,7 +2171,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  13,
@@ -2180,7 +2180,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/PropertyMap.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  42,
@@ -2195,7 +2195,7 @@
 "message":  "The Cyclomatic Complexity of this method is 34 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  28,
@@ -2204,7 +2204,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  28,
@@ -2213,7 +2213,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  13,
@@ -2222,7 +2222,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  13,
@@ -2231,7 +2231,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  17,
@@ -2240,7 +2240,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  45,
@@ -2249,7 +2249,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  17,
@@ -2258,7 +2258,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  97,
@@ -2267,7 +2267,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  21,
@@ -2276,7 +2276,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  55,
@@ -2285,7 +2285,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  66,
@@ -2294,7 +2294,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  49,
@@ -2303,7 +2303,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  21,
@@ -2312,7 +2312,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  53,
@@ -2321,7 +2321,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  53,
@@ -2330,7 +2330,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  68,
@@ -2339,7 +2339,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  79,
@@ -2348,7 +2348,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  77,
@@ -2357,7 +2357,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  31,
@@ -2366,7 +2366,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  25,
@@ -2375,7 +2375,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  29,
@@ -2384,7 +2384,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  86,
@@ -2393,7 +2393,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  55,
@@ -2402,7 +2402,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  29,
@@ -2411,7 +2411,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  121,
@@ -2420,7 +2420,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  83,
@@ -2429,7 +2429,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  162,
@@ -2438,7 +2438,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  29,
@@ -2447,7 +2447,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  69,
@@ -2456,7 +2456,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  25,
@@ -2465,7 +2465,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  29,
@@ -2474,7 +2474,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  75,
@@ -2483,7 +2483,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  73,
@@ -2492,7 +2492,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  108,
@@ -2501,7 +2501,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  19,
@@ -2516,7 +2516,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  25,
@@ -2525,7 +2525,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  25,
@@ -2534,7 +2534,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  13,
@@ -2543,7 +2543,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  17,
@@ -2552,7 +2552,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  74,
@@ -2561,7 +2561,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  47,
@@ -2570,7 +2570,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  64,
@@ -2579,7 +2579,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  50,
@@ -2588,7 +2588,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  17,
@@ -2597,7 +2597,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  21,
@@ -2606,7 +2606,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  45,
@@ -2615,7 +2615,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  38,
@@ -2627,10 +2627,169 @@
 },
 {
 "id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 16 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L262",
+"region":  {
+"startLine":  262,
+"startColumn":  21,
+"endLine":  262,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L262",
+"region":  {
+"startLine":  262,
+"startColumn":  21,
+"endLine":  262,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L264",
+"region":  {
+"startLine":  264,
+"startColumn":  13,
+"endLine":  264,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L269",
+"region":  {
+"startLine":  269,
+"startColumn":  13,
+"endLine":  269,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L271",
+"region":  {
+"startLine":  271,
+"startColumn":  17,
+"endLine":  271,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  21,
+"endLine":  273,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  50,
+"endLine":  275,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L280",
+"region":  {
+"startLine":  280,
+"startColumn":  13,
+"endLine":  280,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L282",
+"region":  {
+"startLine":  282,
+"startColumn":  17,
+"endLine":  282,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L288",
+"region":  {
+"startLine":  288,
+"startColumn":  13,
+"endLine":  288,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L290",
+"region":  {
+"startLine":  290,
+"startColumn":  17,
+"endLine":  290,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L295",
+"region":  {
+"startLine":  295,
+"startColumn":  13,
+"endLine":  295,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  17,
+"endLine":  297,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L304",
+"region":  {
+"startLine":  304,
+"startColumn":  22,
+"endLine":  304,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L310",
+"region":  {
+"startLine":  310,
+"startColumn":  17,
+"endLine":  310,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L314",
+"region":  {
+"startLine":  314,
+"startColumn":  17,
+"endLine":  314,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L316",
+"region":  {
+"startLine":  316,
+"startColumn":  21,
+"endLine":  316,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  22,
@@ -2639,7 +2798,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  22,
@@ -2648,7 +2807,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  46,
@@ -2657,7 +2816,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  13,
@@ -2666,7 +2825,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  48,
@@ -2675,7 +2834,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L362",
 "region":  {
 "startLine":  362,
 "startColumn":  13,
@@ -2684,7 +2843,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  17,
@@ -2693,7 +2852,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L371",
 "region":  {
 "startLine":  371,
 "startColumn":  13,
@@ -2702,7 +2861,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  17,
@@ -2711,7 +2870,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  39,
@@ -2720,7 +2879,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L383",
 "region":  {
 "startLine":  383,
 "startColumn":  17,
@@ -2729,7 +2888,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  38,
@@ -2744,166 +2903,7 @@
 "message":  "The Cyclomatic Complexity of this method is 16 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  262,
-"startColumn":  21,
-"endLine":  262,
-"endColumn":  25
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  262,
-"startColumn":  21,
-"endLine":  262,
-"endColumn":  25
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  264,
-"startColumn":  13,
-"endLine":  264,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  269,
-"startColumn":  13,
-"endLine":  269,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  271,
-"startColumn":  17,
-"endLine":  271,
-"endColumn":  24
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  273,
-"startColumn":  21,
-"endLine":  273,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  275,
-"startColumn":  50,
-"endLine":  275,
-"endColumn":  53
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  280,
-"startColumn":  13,
-"endLine":  280,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  282,
-"startColumn":  17,
-"endLine":  282,
-"endColumn":  24
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  288,
-"startColumn":  13,
-"endLine":  288,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  290,
-"startColumn":  17,
-"endLine":  290,
-"endColumn":  24
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  295,
-"startColumn":  13,
-"endLine":  295,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  297,
-"startColumn":  17,
-"endLine":  297,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  304,
-"startColumn":  22,
-"endLine":  304,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  310,
-"startColumn":  17,
-"endLine":  310,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  314,
-"startColumn":  17,
-"endLine":  314,
-"endColumn":  24
-}
-},
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
-"region":  {
-"startLine":  316,
-"startColumn":  21,
-"endLine":  316,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this method is 16 which is greater than 10 authorized.",
-"location":  [
-{
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L390",
 "region":  {
 "startLine":  390,
 "startColumn":  22,
@@ -2912,7 +2912,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L390",
 "region":  {
 "startLine":  390,
 "startColumn":  22,
@@ -2921,7 +2921,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  13,
@@ -2930,7 +2930,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  13,
@@ -2939,7 +2939,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L402",
 "region":  {
 "startLine":  402,
 "startColumn":  13,
@@ -2948,7 +2948,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  13,
@@ -2957,7 +2957,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  42,
@@ -2966,7 +2966,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L414",
 "region":  {
 "startLine":  414,
 "startColumn":  17,
@@ -2975,7 +2975,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  21,
@@ -2984,7 +2984,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L421",
 "region":  {
 "startLine":  421,
 "startColumn":  21,
@@ -2993,7 +2993,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  17,
@@ -3002,7 +3002,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L435",
 "region":  {
 "startLine":  435,
 "startColumn":  39,
@@ -3011,7 +3011,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L438",
 "region":  {
 "startLine":  438,
 "startColumn":  17,
@@ -3020,7 +3020,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  38,
@@ -3029,7 +3029,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L446",
 "region":  {
 "startLine":  446,
 "startColumn":  38,
@@ -3038,7 +3038,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L447",
 "region":  {
 "startLine":  447,
 "startColumn":  17,
@@ -3047,7 +3047,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L449",
 "region":  {
 "startLine":  449,
 "startColumn":  21,

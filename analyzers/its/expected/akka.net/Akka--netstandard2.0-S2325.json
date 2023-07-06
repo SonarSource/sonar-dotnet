@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'Sender' a static property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Become' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'BecomeStacked' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'UnbecomeStacked' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L258",
 "region":  {
 "startLine":  258,
 "startColumn":  24,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'SetReceiveTimeout' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'NewUid' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  22,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'SetActorFields' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L477",
 "region":  {
 "startLine":  477,
 "startColumn":  24,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'HandleSupervise' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  22,
@@ -108,7 +108,7 @@
 "id":  "S2325",
 "message":  "Make 'Kill' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L525",
 "region":  {
 "startLine":  525,
 "startColumn":  22,
@@ -121,7 +121,7 @@
 "id":  "S2325",
 "message":  "Make 'HandleNonFatalOrInterruptedException' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  22,
@@ -134,7 +134,7 @@
 "id":  "S2325",
 "message":  "Make 'ChildStatsAppender' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildrenContainerBase.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  24,
@@ -147,7 +147,7 @@
 "id":  "S2325",
 "message":  "Make 'GetSourceString' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L1198",
 "region":  {
 "startLine":  1198,
 "startColumn":  24,
@@ -160,7 +160,7 @@
 "id":  "S2325",
 "message":  "Make 'BuildNewReceiveHandler' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  39,
@@ -173,7 +173,7 @@
 "id":  "S2325",
 "message":  "Make 'RestartChild' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  24,
@@ -186,7 +186,7 @@
 "id":  "S2325",
 "message":  "Make 'ResumeChild' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  24,
@@ -199,7 +199,7 @@
 "id":  "S2325",
 "message":  "Make 'Publish' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  22,
@@ -212,7 +212,7 @@
 "id":  "S2325",
 "message":  "Make 'RunTask' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\UntypedActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/UntypedActor.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  24,
@@ -225,7 +225,7 @@
 "id":  "S2325",
 "message":  "Make 'RunTask' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\UntypedActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/UntypedActor.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  24,
@@ -238,7 +238,7 @@
 "id":  "S2325",
 "message":  "Make 'Become' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\UntypedActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/UntypedActor.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  24,
@@ -251,7 +251,7 @@
 "id":  "S2325",
 "message":  "Make 'BecomeStacked' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\UntypedActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/UntypedActor.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  24,
@@ -264,7 +264,7 @@
 "id":  "S2325",
 "message":  "Make 'QuoteIfNeeded' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconObject.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconObject.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  24,
@@ -277,7 +277,7 @@
 "id":  "S2325",
 "message":  "Make 'QuoteIfNeeded' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L541",
 "region":  {
 "startLine":  541,
 "startColumn":  24,
@@ -290,7 +290,7 @@
 "id":  "S2325",
 "message":  "Make 'CreateMailbox' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L635",
 "region":  {
 "startLine":  635,
 "startColumn":  26,
@@ -303,7 +303,7 @@
 "id":  "S2325",
 "message":  "Make 'IdConfig' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L514",
 "region":  {
 "startLine":  514,
 "startColumn":  24,
@@ -314,22 +314,9 @@
 },
 {
 "id":  "S2325",
-"message":  "Make 'HasRequiredType' a static method.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
-"region":  {
-"startLine":  85,
-"startColumn":  21,
-"endLine":  85,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2325",
 "message":  "Make 'ProducesMessageQueue' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  21,
@@ -342,7 +329,7 @@
 "id":  "S2325",
 "message":  "Make 'GetRequiredType' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  21,
@@ -355,7 +342,7 @@
 "id":  "S2325",
 "message":  "Make 'GetProducedMessageQueueType' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  22,
@@ -368,7 +355,7 @@
 "id":  "S2325",
 "message":  "Make 'GetMailboxRequirement' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  22,
@@ -379,9 +366,22 @@
 },
 {
 "id":  "S2325",
+"message":  "Make 'HasRequiredType' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  21,
+"endLine":  85,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
 "message":  "Make 'IsReal' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  22,
@@ -394,7 +394,7 @@
 "id":  "S2325",
 "message":  "Make 'IsWrappedSuppressed' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  22,
@@ -407,7 +407,7 @@
 "id":  "S2325",
 "message":  "Make 'SimpleName' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventBus.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventBus.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  26,
@@ -420,7 +420,7 @@
 "id":  "S2325",
 "message":  "Make 'RentOfSize' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DisabledBufferPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DisabledBufferPool.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  28,
@@ -433,7 +433,7 @@
 "id":  "S2325",
 "message":  "Make 'CreateBufferPool' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L1079",
 "region":  {
 "startLine":  1079,
 "startColumn":  29,
@@ -446,7 +446,7 @@
 "id":  "S2325",
 "message":  "Make 'ReleaseSocketEventArgs' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L688",
 "region":  {
 "startLine":  688,
 "startColumn":  24,
@@ -459,7 +459,7 @@
 "id":  "S2325",
 "message":  "Make 'CreateBufferPool' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L533",
 "region":  {
 "startLine":  533,
 "startColumn":  29,
@@ -472,7 +472,7 @@
 "id":  "S2325",
 "message":  "Make 'CreateBufferPool' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L410",
 "region":  {
 "startLine":  410,
 "startColumn":  29,
@@ -485,7 +485,7 @@
 "id":  "S2325",
 "message":  "Make 'ResizerCell' a static property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ResizablePoolActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ResizablePoolActor.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  37,
@@ -498,7 +498,7 @@
 "id":  "S2325",
 "message":  "Make 'UnWrap' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Router.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  24,
@@ -511,7 +511,7 @@
 "id":  "S2325",
 "message":  "Make 'RouteeFor' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  25,
@@ -524,7 +524,7 @@
 "id":  "S2325",
 "message":  "Make 'Props' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  22,
@@ -537,7 +537,7 @@
 "id":  "S2325",
 "message":  "Make 'TryGetActorCell' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\SmallestMailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/SmallestMailbox.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  23,
@@ -550,7 +550,7 @@
 "id":  "S2325",
 "message":  "Make 'GetString' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializer.cs#L373",
 "region":  {
 "startLine":  373,
 "startColumn":  28,
@@ -563,7 +563,7 @@
 "id":  "S2325",
 "message":  "Make 'IsCompleted' a static property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\SynchronizationContextManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/SynchronizationContextManager.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  21,
@@ -576,7 +576,7 @@
 "id":  "S2325",
 "message":  "Make 'ListsEqual' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchBuilderSignature.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  22,

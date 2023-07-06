@@ -4,7 +4,7 @@
 "id":  "S3253",
 "message":  "Remove this redundant 'base()' call.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  48,
@@ -17,7 +17,7 @@
 "id":  "S3253",
 "message":  "Remove this redundant constructor.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ProxyGenerator.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  9,

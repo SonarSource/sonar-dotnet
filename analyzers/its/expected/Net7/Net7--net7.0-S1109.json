@@ -4,7 +4,7 @@
 "id":  "S1109",
 "message":  "Move this closing curly brace to the next line.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  14,

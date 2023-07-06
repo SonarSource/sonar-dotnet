@@ -4,46 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
-"region":  {
-"startLine":  60,
-"startColumn":  47,
-"endLine":  60,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
-"region":  {
-"startLine":  87,
-"startColumn":  35,
-"endLine":  87,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  35,
-"endLine":  93,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  35,
@@ -56,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  35,
@@ -69,12 +30,51 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  35,
 "endLine":  118,
 "endColumn":  45
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  47,
+"endLine":  60,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  35,
+"endLine":  87,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  35,
+"endLine":  93,
+"endColumn":  47
 }
 }
 }

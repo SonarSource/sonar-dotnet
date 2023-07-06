@@ -4,7 +4,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'AsyncNamedPipelineBase.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AsyncNamedPipelineBase.cs#L344",
 "region":  {
 "startLine":  344,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'CollectionTypeRegistration.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\CollectionTypeRegistration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/CollectionTypeRegistration.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IApplicationStartup.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\IApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/IApplicationStartup.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'INancyBootstrapper.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\INancyBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/INancyBootstrapper.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'InstanceRegistration.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\InstanceRegistration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/InstanceRegistration.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IPipelines.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\IPipelines.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/IPipelines.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRegistrations.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\IRegistrations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/IRegistrations.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRequestStartup.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\IRequestStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/IRequestStartup.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'Lifetime.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Lifetime.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/Lifetime.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ModuleRegistrationType.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\ModuleRegistrationType.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/ModuleRegistrationType.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NancyBootstrapperWithRequestContainerBase.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperWithRequestContainerBase.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'Pipelines.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Pipelines.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/Pipelines.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'TypeRegistration.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\TypeRegistration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/TypeRegistration.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultNancyEnvironment.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironment.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/DefaultNancyEnvironment.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultNancyEnvironmentConfigurator.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironmentConfigurator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/DefaultNancyEnvironmentConfigurator.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultNancyEnvironmentFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironmentFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/DefaultNancyEnvironmentFactory.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  1,
@@ -212,7 +212,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'INancyDefaultConfigurationProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\INancyDefaultConfigurationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/INancyDefaultConfigurationProvider.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  1,
@@ -225,7 +225,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'INancyEnvironment.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironment.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/INancyEnvironment.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  1,
@@ -238,7 +238,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'INancyEnvironmentConfigurator.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentConfigurator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/INancyEnvironmentConfigurator.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -251,7 +251,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'INancyEnvironmentExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/INancyEnvironmentExtensions.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  1,
@@ -264,7 +264,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'INancyEnvironmentFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/INancyEnvironmentFactory.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  1,
@@ -277,7 +277,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NancyDefaultConfigurationProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\NancyDefaultConfigurationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/NancyDefaultConfigurationProvider.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  1,
@@ -290,7 +290,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'AcceptHeaderCoercionConventions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\AcceptHeaderCoercionConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/AcceptHeaderCoercionConventions.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  1,
@@ -303,7 +303,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'BuiltInAcceptHeaderCoercions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInAcceptHeaderCoercions.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  1,
@@ -316,7 +316,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultStaticContentsConventions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultStaticContentsConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultStaticContentsConventions.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  1,
@@ -329,7 +329,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultViewLocationConventions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  1,
@@ -342,7 +342,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IConvention.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\IConvention.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/IConvention.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  1,
@@ -355,7 +355,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NancyConventions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\NancyConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/NancyConventions.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  1,
@@ -368,7 +368,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'StaticContentsConventions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentsConventions.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  1,
@@ -381,7 +381,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'StaticContentsConventionsExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentsConventionsExtensions.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  1,
@@ -394,7 +394,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ViewLocationConventions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\ViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/ViewLocationConventions.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  1,
@@ -407,7 +407,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'INancyCookie.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Cookies\INancyCookie.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cookies/INancyCookie.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  1,
@@ -420,7 +420,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NancyCookie.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Cookies\NancyCookie.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cookies/NancyCookie.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  1,
@@ -433,7 +433,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'Base64Helpers.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Cryptography\Base64Helpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/Base64Helpers.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  1,
@@ -446,7 +446,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'CryptographyConfiguration.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Cryptography\CryptographyConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/CryptographyConfiguration.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  1,
@@ -459,7 +459,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'HmacComparer.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Cryptography\HmacComparer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/HmacComparer.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  1,
@@ -472,7 +472,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IEncryptionProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Cryptography\IEncryptionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/IEncryptionProvider.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  1,
@@ -485,7 +485,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IHmacProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Cryptography\IHmacProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/IHmacProvider.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  1,
@@ -498,7 +498,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NoEncryptionProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Cryptography\NoEncryptionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/NoEncryptionProvider.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  1,
@@ -511,7 +511,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultResponseFormatter.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultResponseFormatter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultResponseFormatter.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  1,
@@ -524,7 +524,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultResponseFormatterFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultResponseFormatterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultResponseFormatterFactory.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  1,
@@ -537,7 +537,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultRouteConfigurationProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultRouteConfigurationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultRouteConfigurationProvider.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  1,
@@ -550,7 +550,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultStaticContentConfigurationProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultStaticContentConfigurationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultStaticContentConfigurationProvider.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  1,
@@ -563,7 +563,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ConcurrentLimitedCollection.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\ConcurrentLimitedCollection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/ConcurrentLimitedCollection.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  1,
@@ -576,7 +576,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultDiagnostics.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultDiagnostics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DefaultDiagnostics.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  1,
@@ -589,7 +589,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultDiagnosticsConfigurationProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultDiagnosticsConfigurationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DefaultDiagnosticsConfigurationProvider.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  1,
@@ -602,7 +602,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultRequestTrace.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTrace.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DefaultRequestTrace.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  1,
@@ -615,7 +615,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultRequestTraceFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTraceFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DefaultRequestTraceFactory.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  1,
@@ -628,7 +628,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultRequestTracing.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTracing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DefaultRequestTracing.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  1,
@@ -641,7 +641,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultTraceLog.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultTraceLog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DefaultTraceLog.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  1,
@@ -654,7 +654,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DescriptionAttribute.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DescriptionAttribute.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DescriptionAttribute.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  1,
@@ -667,7 +667,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DiagnosticsModuleBuilder.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleBuilder.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  1,
@@ -680,7 +680,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DiagnosticsSession.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSession.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsSession.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  1,
@@ -693,7 +693,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DisabledDiagnostics.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DisabledDiagnostics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DisabledDiagnostics.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  1,
@@ -706,7 +706,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IDiagnostics.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\IDiagnostics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/IDiagnostics.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  1,
@@ -719,7 +719,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IDiagnosticsProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\IDiagnosticsProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/IDiagnosticsProvider.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  1,
@@ -732,7 +732,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IInteractiveDiagnostics.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\IInteractiveDiagnostics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/IInteractiveDiagnostics.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  1,
@@ -745,7 +745,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'InteractiveDiagnostic.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostic.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  1,
@@ -758,7 +758,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'InteractiveDiagnosticMethod.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnosticMethod.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnosticMethod.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  1,
@@ -771,7 +771,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'InteractiveDiagnostics.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  1,
@@ -784,7 +784,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRequestTrace.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\IRequestTrace.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/IRequestTrace.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  1,
@@ -797,7 +797,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRequestTraceFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\IRequestTraceFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/IRequestTraceFactory.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  1,
@@ -810,7 +810,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRequestTracing.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\IRequestTracing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/IRequestTracing.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  1,
@@ -823,7 +823,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ITraceLog.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\ITraceLog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/ITraceLog.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  1,
@@ -836,7 +836,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'InfoModule.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  1,
@@ -849,7 +849,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'SettingsModule.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/SettingsModule.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  1,
@@ -862,7 +862,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NullLog.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\NullLog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/NullLog.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  1,
@@ -875,7 +875,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RequestData.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\RequestData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/RequestData.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  1,
@@ -888,7 +888,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RequestTraceSession.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\RequestTraceSession.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/RequestTraceSession.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  1,
@@ -901,7 +901,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ResponseData.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\ResponseData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/ResponseData.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  1,
@@ -914,7 +914,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'TemplateAttribute.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\TemplateAttribute.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TemplateAttribute.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  1,
@@ -927,7 +927,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'TestingDiagnosticProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  1,
@@ -940,7 +940,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DisabledStaticContentProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DisabledStaticContentProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DisabledStaticContentProvider.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  1,
@@ -953,7 +953,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DynamicDictionary.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  1,
@@ -966,7 +966,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DynamicDictionaryValue.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L970",
 "region":  {
 "startLine":  970,
 "startColumn":  1,
@@ -979,7 +979,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RouteExecutionEarlyExitException.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorHandling/RouteExecutionEarlyExitException.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  1,
@@ -992,7 +992,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ErrorPipeline.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorPipeline.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  1,
@@ -1005,7 +1005,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'CollectionExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/CollectionExtensions.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  1,
@@ -1018,7 +1018,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ContextExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  1,
@@ -1031,7 +1031,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ObjectExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\ObjectExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ObjectExtensions.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  1,
@@ -1044,7 +1044,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'GlobalizationConfigurationExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\GlobalizationConfigurationExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/GlobalizationConfigurationExtensions.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  1,
@@ -1057,7 +1057,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'HeadResponse.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HeadResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HeadResponse.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  1,
@@ -1070,7 +1070,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ExceptionExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\ExceptionExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ExceptionExtensions.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  1,
@@ -1083,7 +1083,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'TaskHelpers.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\TaskHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/TaskHelpers.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  1,
@@ -1096,7 +1096,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'HttpFile.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpFile.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpFile.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  1,
@@ -1109,7 +1109,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'HttpMultipart.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipart.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  1,
@@ -1122,7 +1122,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'HttpMultipartBoundary.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartBoundary.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  1,
@@ -1135,7 +1135,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'HttpMultipartBuffer.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipartBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartBuffer.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  1,
@@ -1148,7 +1148,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'HttpMultipartSubStream.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipartSubStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  1,
@@ -1161,7 +1161,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'INancyContextFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\INancyContextFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/INancyContextFactory.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  1,
@@ -1174,7 +1174,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'INancyEngine.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\INancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/INancyEngine.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  1,
@@ -1187,7 +1187,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'INancyModule.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\INancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/INancyModule.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  1,
@@ -1200,7 +1200,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'INancyModuleCatalog.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\INancyModuleCatalog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/INancyModuleCatalog.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  1,
@@ -1213,7 +1213,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IncludeInNancyAssemblyScanningAttribute.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IncludeInNancyAssemblyScanningAttribute.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IncludeInNancyAssemblyScanningAttribute.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -1226,7 +1226,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'UnclosableStreamWrapper.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  1,
@@ -1239,7 +1239,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IObjectSerializer.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IObjectSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IObjectSerializer.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  1,
@@ -1252,7 +1252,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IObjectSerializerSelector.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IObjectSerializerSelector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IObjectSerializerSelector.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  1,
@@ -1265,7 +1265,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IResourceAssemblyProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IResourceAssemblyProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IResourceAssemblyProvider.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -1278,7 +1278,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IResponseFormatter.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IResponseFormatter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IResponseFormatter.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  1,
@@ -1291,7 +1291,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IResponseFormatterFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IResponseFormatterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IResponseFormatterFactory.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  1,
@@ -1304,7 +1304,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRootPathProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IRootPathProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IRootPathProvider.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  1,
@@ -1317,7 +1317,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ISerializer.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ISerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ISerializer.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  1,
@@ -1330,7 +1330,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ISerializerFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ISerializerFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ISerializerFactory.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -1343,7 +1343,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IStaticContentProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IStaticContentProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IStaticContentProvider.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  1,
@@ -1356,7 +1356,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'TimeSpanConverter.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Converters/TimeSpanConverter.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  1,
@@ -1369,7 +1369,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'TupleConverter.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Converters/TupleConverter.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  1,
@@ -1382,7 +1382,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultJsonConfigurationProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\DefaultJsonConfigurationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/DefaultJsonConfigurationProvider.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  1,
@@ -1395,7 +1395,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'JavaScriptConverter.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptConverter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JavaScriptConverter.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  1,
@@ -1408,7 +1408,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'JsonConfigurationExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JsonConfigurationExtensions.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  1,
@@ -1421,7 +1421,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ScriptIgnoreAttribute.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\ScriptIgnoreAttribute.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/ScriptIgnoreAttribute.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  1,
@@ -1434,7 +1434,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ITextResource.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Localization\ITextResource.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/ITextResource.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  1,
@@ -1447,7 +1447,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'BindingConfig.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingConfig.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  1,
@@ -1460,7 +1460,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'BindingContext.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingContext.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  1,
@@ -1473,7 +1473,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'CollectionConverter.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultConverters/CollectionConverter.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  1,
@@ -1486,7 +1486,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'FallbackConverter.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\FallbackConverter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultConverters/FallbackConverter.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  1,
@@ -1499,7 +1499,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DynamicModelBinderAdapter.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DynamicModelBinderAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  1,
@@ -1512,7 +1512,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ExpressionExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ExpressionExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ExpressionExtensions.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  1,
@@ -1525,7 +1525,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IBinder.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\IBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/IBinder.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  1,
@@ -1538,7 +1538,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IBodyDeserializer.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\IBodyDeserializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/IBodyDeserializer.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  1,
@@ -1551,7 +1551,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IFieldNameConverter.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\IFieldNameConverter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/IFieldNameConverter.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  1,
@@ -1564,7 +1564,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IModelBinder.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\IModelBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/IModelBinder.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -1577,7 +1577,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IModelBinderLocator.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\IModelBinderLocator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/IModelBinderLocator.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  1,
@@ -1590,7 +1590,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ITypeConverter.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ITypeConverter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ITypeConverter.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  1,
@@ -1603,7 +1603,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ModelBindingException.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModelBindingException.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  1,
@@ -1616,7 +1616,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'PropertyBindingException.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/PropertyBindingException.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  1,
@@ -1629,7 +1629,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NamedPipelineBase.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NamedPipelineBase.cs#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  1,
@@ -1642,7 +1642,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NancyEngineExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyEngineExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngineExtensions.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  1,
@@ -1655,7 +1655,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NotFoundResponse.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NotFoundResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NotFoundResponse.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  1,
@@ -1668,7 +1668,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NancyContextExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Owin\NancyContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Owin/NancyContextExtensions.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  1,
@@ -1681,7 +1681,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NancyOptions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Owin\NancyOptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Owin/NancyOptions.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  1,
@@ -1694,7 +1694,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NancyOptionsExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Owin\NancyOptionsExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Owin/NancyOptionsExtensions.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  1,
@@ -1707,7 +1707,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'PipelineItem.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\PipelineItem.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/PipelineItem.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  1,
@@ -1720,7 +1720,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RequestExecutionException.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\RequestExecutionException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestExecutionException.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  1,
@@ -1733,7 +1733,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultXmlSerializer.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/DefaultXmlSerializer.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  1,
@@ -1746,7 +1746,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'EmbeddedFileResponse.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/EmbeddedFileResponse.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  1,
@@ -1759,7 +1759,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'HtmlResponse.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\HtmlResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/HtmlResponse.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  1,
@@ -1772,7 +1772,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'MaterialisingResponse.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\MaterialisingResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/MaterialisingResponse.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  1,
@@ -1785,7 +1785,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NegotiatedResponse.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\NegotiatedResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/NegotiatedResponse.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  1,
@@ -1798,7 +1798,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IResponseNegotiator.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\IResponseNegotiator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/IResponseNegotiator.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  1,
@@ -1811,7 +1811,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IResponseProcessor.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\IResponseProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/IResponseProcessor.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  1,
@@ -1824,7 +1824,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'JsonProcessor.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\JsonProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/JsonProcessor.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  1,
@@ -1837,7 +1837,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'MatchResult.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MatchResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/MatchResult.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  1,
@@ -1850,7 +1850,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'MediaType.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaType.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/MediaType.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  1,
@@ -1863,7 +1863,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'Negotiator.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\Negotiator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/Negotiator.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  1,
@@ -1876,7 +1876,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ProcessorMatch.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ProcessorMatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/ProcessorMatch.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  1,
@@ -1889,7 +1889,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ResponseProcessor.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ResponseProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/ResponseProcessor.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  1,
@@ -1902,7 +1902,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ViewProcessor.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ViewProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/ViewProcessor.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  1,
@@ -1915,7 +1915,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NotAcceptableResponse.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\NotAcceptableResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/NotAcceptableResponse.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  1,
@@ -1928,7 +1928,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RedirectResponse.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\RedirectResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/RedirectResponse.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  1,
@@ -1941,7 +1941,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'TextResponse.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/TextResponse.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  1,
@@ -1954,7 +1954,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RouteConfigurationExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\RouteConfigurationExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RouteConfigurationExtensions.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  1,
@@ -1967,7 +1967,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'AlphaRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\AlphaRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/AlphaRouteSegmentConstraint.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  1,
@@ -1980,7 +1980,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'BoolRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\BoolRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/BoolRouteSegmentConstraint.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  1,
@@ -1993,7 +1993,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'CustomDateTimeRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\CustomDateTimeRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/CustomDateTimeRouteSegmentConstraint.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  1,
@@ -2006,7 +2006,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DateTimeRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\DateTimeRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/DateTimeRouteSegmentConstraint.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  1,
@@ -2019,7 +2019,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DecimalRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\DecimalRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/DecimalRouteSegmentConstraint.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  1,
@@ -2032,7 +2032,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'GuidRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\GuidRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/GuidRouteSegmentConstraint.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  1,
@@ -2045,7 +2045,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IntRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\IntRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/IntRouteSegmentConstraint.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  1,
@@ -2058,7 +2058,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\IRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/IRouteSegmentConstraint.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  1,
@@ -2071,7 +2071,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'LengthRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\LengthRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/LengthRouteSegmentConstraint.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  1,
@@ -2084,7 +2084,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'LongRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\LongRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/LongRouteSegmentConstraint.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  1,
@@ -2097,7 +2097,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'MaxLengthRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MaxLengthRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/MaxLengthRouteSegmentConstraint.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  1,
@@ -2110,7 +2110,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'MaxRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MaxRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/MaxRouteSegmentConstraint.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  1,
@@ -2123,7 +2123,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'MinLengthRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MinLengthRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/MinLengthRouteSegmentConstraint.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  1,
@@ -2136,7 +2136,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'MinRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MinRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/MinRouteSegmentConstraint.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  1,
@@ -2149,7 +2149,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ParameterizedRouteSegmentConstraintBase.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/ParameterizedRouteSegmentConstraintBase.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  1,
@@ -2162,7 +2162,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RangeRouteSegmentConstraint.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\RangeRouteSegmentConstraint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/RangeRouteSegmentConstraint.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  1,
@@ -2175,7 +2175,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultNancyModuleBuilder.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\DefaultNancyModuleBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultNancyModuleBuilder.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  1,
@@ -2188,7 +2188,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultRouteDescriptionProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteDescriptionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultRouteDescriptionProvider.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  1,
@@ -2201,7 +2201,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultRouteSegmentExtractor.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteSegmentExtractor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultRouteSegmentExtractor.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  1,
@@ -2214,7 +2214,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'INancyModuleBuilder.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\INancyModuleBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/INancyModuleBuilder.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  1,
@@ -2227,7 +2227,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRequestDispatcher.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\IRequestDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/IRequestDispatcher.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  1,
@@ -2240,7 +2240,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRouteDescriptionProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\IRouteDescriptionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/IRouteDescriptionProvider.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  1,
@@ -2253,7 +2253,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRouteInvoker.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\IRouteInvoker.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/IRouteInvoker.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  1,
@@ -2266,7 +2266,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRouteMetadataProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\IRouteMetadataProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/IRouteMetadataProvider.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  1,
@@ -2279,7 +2279,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRouteSegmentExtractor.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\IRouteSegmentExtractor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/IRouteSegmentExtractor.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -2292,7 +2292,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'MethodNotAllowedRoute.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\MethodNotAllowedRoute.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/MethodNotAllowedRoute.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  1,
@@ -2305,7 +2305,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NotFoundRoute.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\NotFoundRoute.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/NotFoundRoute.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  1,
@@ -2318,7 +2318,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'OptionsRoute.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\OptionsRoute.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/OptionsRoute.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  1,
@@ -2331,7 +2331,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ParameterSegmentInformation.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\ParameterSegmentInformation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/ParameterSegmentInformation.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  1,
@@ -2344,7 +2344,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ResolveResult.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\ResolveResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/ResolveResult.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  1,
@@ -2357,7 +2357,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RouteCacheExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\RouteCacheExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteCacheExtensions.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  1,
@@ -2370,7 +2370,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RouteDescription.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\RouteDescription.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteDescription.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  1,
@@ -2383,7 +2383,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RouteMetadataProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\RouteMetadataProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteMetadataProvider.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  1,
@@ -2396,7 +2396,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRouteResolverTrie.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\IRouteResolverTrie.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/IRouteResolverTrie.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  1,
@@ -2409,7 +2409,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ITrieNodeFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\ITrieNodeFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/ITrieNodeFactory.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  1,
@@ -2422,7 +2422,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'MatchResult.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/MatchResult.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  1,
@@ -2435,7 +2435,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NodeData.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\NodeData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/NodeData.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  1,
@@ -2448,7 +2448,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NodeDataExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\NodeDataExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/NodeDataExtensions.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  1,
@@ -2461,7 +2461,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'CaptureNode.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/CaptureNode.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  1,
@@ -2474,7 +2474,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'CaptureNodeWithDefaultValue.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithDefaultValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/CaptureNodeWithDefaultValue.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  1,
@@ -2487,7 +2487,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'CaptureNodeWithMultipleParameters.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/CaptureNodeWithMultipleParameters.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  1,
@@ -2500,7 +2500,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'GreedyCaptureNode.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyCaptureNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/GreedyCaptureNode.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  1,
@@ -2513,7 +2513,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'GreedyRegExCaptureNode.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyRegExCaptureNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/GreedyRegExCaptureNode.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  1,
@@ -2526,7 +2526,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'LiteralNode.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\LiteralNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/LiteralNode.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  1,
@@ -2539,7 +2539,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'OptionalCaptureNode.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\OptionalCaptureNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/OptionalCaptureNode.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  1,
@@ -2552,7 +2552,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RegExNode.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RegExNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/RegExNode.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  1,
@@ -2565,7 +2565,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RootNode.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RootNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/RootNode.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  1,
@@ -2578,7 +2578,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'TrieNode.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  1,
@@ -2591,7 +2591,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'SegmentMatch.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\SegmentMatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/SegmentMatch.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  1,
@@ -2604,7 +2604,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ClaimsPrincipalExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  1,
@@ -2617,7 +2617,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'CsrfToken.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  1,
@@ -2630,7 +2630,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'CsrfTokenExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfTokenExtensions.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  1,
@@ -2643,7 +2643,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'CsrfTokenValidationResult.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenValidationResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfTokenValidationResult.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  1,
@@ -2656,7 +2656,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'CsrfValidationException.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfValidationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfValidationException.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  1,
@@ -2669,7 +2669,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultCsrfTokenValidator.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\DefaultCsrfTokenValidator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/DefaultCsrfTokenValidator.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  1,
@@ -2682,7 +2682,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ICsrfTokenValidator.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ICsrfTokenValidator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ICsrfTokenValidator.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  1,
@@ -2695,7 +2695,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ISession.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Session\ISession.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/ISession.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  1,
@@ -2708,7 +2708,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NullSessionProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Session\NullSessionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/NullSessionProvider.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  1,
@@ -2721,7 +2721,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'StaticContent.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\StaticContent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContent.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  1,
@@ -2734,7 +2734,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'StaticContentConfiguration.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\StaticContentConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContentConfiguration.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  1,
@@ -2747,7 +2747,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultValidatorLocator.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\DefaultValidatorLocator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/DefaultValidatorLocator.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  1,
@@ -2760,7 +2760,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IModelValidator.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\IModelValidator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/IModelValidator.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  1,
@@ -2773,7 +2773,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IModelValidatorFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\IModelValidatorFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/IModelValidatorFactory.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -2786,7 +2786,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IModelValidatorLocator.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\IModelValidatorLocator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/IModelValidatorLocator.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -2799,7 +2799,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ModelValidationError.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationError.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/ModelValidationError.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  1,
@@ -2812,7 +2812,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ModelValidationException.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/ModelValidationException.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  1,
@@ -2825,7 +2825,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ModelValidationRule.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationRule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/ModelValidationRule.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  1,
@@ -2838,7 +2838,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ModuleExtensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\ModuleExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/ModuleExtensions.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  1,
@@ -2851,7 +2851,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ComparisonOperator.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\Rules\ComparisonOperator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/Rules/ComparisonOperator.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  1,
@@ -2864,7 +2864,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ComparisonValidationRule.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\Rules\ComparisonValidationRule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/Rules/ComparisonValidationRule.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  1,
@@ -2877,7 +2877,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NotEmptyValidationRule.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\Rules\NotEmptyValidationRule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/Rules/NotEmptyValidationRule.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  1,
@@ -2890,7 +2890,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NotNullValidationRule.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\Rules\NotNullValidationRule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/Rules/NotNullValidationRule.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  1,
@@ -2903,7 +2903,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'RegexValidationRule.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Validation\Rules\RegexValidationRule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/Rules/RegexValidationRule.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  1,
@@ -2916,7 +2916,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'AmbiguousViewsException.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/AmbiguousViewsException.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  1,
@@ -2929,7 +2929,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultFileSystemReader.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultFileSystemReader.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  1,
@@ -2942,7 +2942,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultRenderContext.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultRenderContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultRenderContext.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  1,
@@ -2955,7 +2955,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultRenderContextFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultRenderContextFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultRenderContextFactory.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  1,
@@ -2968,7 +2968,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultResourceReader.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultResourceReader.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultResourceReader.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  1,
@@ -2981,7 +2981,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultViewFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  1,
@@ -2994,7 +2994,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultViewResolver.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewResolver.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  1,
@@ -3007,7 +3007,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'Extensions.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/Extensions.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  1,
@@ -3020,7 +3020,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'FileSystemViewLocationProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\FileSystemViewLocationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/FileSystemViewLocationProvider.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  1,
@@ -3033,7 +3033,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'FileSystemViewLocationResult.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\FileSystemViewLocationResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/FileSystemViewLocationResult.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  1,
@@ -3046,7 +3046,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IFileSystemReader.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IFileSystemReader.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IFileSystemReader.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  1,
@@ -3059,7 +3059,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRenderContext.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IRenderContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IRenderContext.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  1,
@@ -3072,7 +3072,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IRenderContextFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IRenderContextFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IRenderContextFactory.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  1,
@@ -3085,7 +3085,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IResourceReader.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IResourceReader.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IResourceReader.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  1,
@@ -3098,7 +3098,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IViewCache.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IViewCache.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  1,
@@ -3111,7 +3111,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IViewEngine.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IViewEngine.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  1,
@@ -3124,7 +3124,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IViewFactory.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IViewFactory.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -3137,7 +3137,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IViewLocationProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewLocationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IViewLocationProvider.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  1,
@@ -3150,7 +3150,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IViewResolver.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IViewResolver.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -3163,7 +3163,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ResourceViewLocationProvider.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ResourceViewLocationProvider.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  1,
@@ -3176,7 +3176,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ISuperSimpleViewEngineMatcher.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\ISuperSimpleViewEngineMatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/ISuperSimpleViewEngineMatcher.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -3189,7 +3189,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IViewEngineHost.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\IViewEngineHost.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/IViewEngineHost.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  1,
@@ -3202,7 +3202,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'NancyViewEngineHost.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/NancyViewEngineHost.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  1,
@@ -3215,7 +3215,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'SuperSimpleViewEngineRegistrations.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngineRegistrations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngineRegistrations.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  1,
@@ -3228,7 +3228,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'SuperSimpleViewEngineWrapper.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngineWrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngineWrapper.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  1,
@@ -3241,7 +3241,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ViewEngineApplicationStartup.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewEngineApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewEngineApplicationStartup.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  1,
@@ -3254,7 +3254,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ViewEngineStartupContext.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewEngineStartupContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewEngineStartupContext.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  1,
@@ -3267,7 +3267,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ViewLocationContext.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationContext.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  1,
@@ -3280,7 +3280,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ViewLocationResult.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  1,
@@ -3293,7 +3293,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ViewNotFoundException.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewNotFoundException.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  1,
@@ -3306,7 +3306,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ViewRenderException.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewRenderException.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  1,
@@ -3319,7 +3319,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'ViewRenderer.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewRenderer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewRenderer.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  1,

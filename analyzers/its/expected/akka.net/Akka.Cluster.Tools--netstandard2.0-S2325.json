@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'SelectRandomNode' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L603",
 "region":  {
 "startLine":  603,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'ForwardMessages' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\PerGroupingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/PerGroupingBuffer.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'StatusToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'StatusFrom' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  33,

@@ -4,7 +4,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/SBR/SplitBrainResolverSpec.cs#L1890",
 "region":  {
 "startLine":  1890,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/SBR/SplitBrainResolverSpec.cs#L1897",
 "region":  {
 "startLine":  1897,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/SBR/SplitBrainResolverSpec.cs#L1904",
 "region":  {
 "startLine":  1904,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/SBR/SplitBrainResolverSpec.cs#L1926",
 "region":  {
 "startLine":  1926,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/SBR/SplitBrainResolverSpec.cs#L1935",
 "region":  {
 "startLine":  1935,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/SBR/SplitBrainResolverSpec.cs#L1943",
 "region":  {
 "startLine":  1943,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/SBR/SplitBrainResolverSpec.cs#L1953",
 "region":  {
 "startLine":  1953,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/SBR/SplitBrainResolverSpec.cs#L1975",
 "region":  {
 "startLine":  1975,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/SBR/SplitBrainResolverSpec.cs#L1983",
 "region":  {
 "startLine":  1983,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/SBR/SplitBrainResolverSpec.cs#L1988",
 "region":  {
 "startLine":  1988,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\SBR\SplitBrainResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/SBR/SplitBrainResolverSpec.cs#L1992",
 "region":  {
 "startLine":  1992,
 "startColumn":  13,

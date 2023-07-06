@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_cluster' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2799",
 "region":  {
 "startLine":  2799,
 "startColumn":  34,

@@ -4,7 +4,7 @@
 "id":  "S4000",
 "message":  "Make 'p1' 'private' or 'protected readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4000.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4000.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S4000",
 "message":  "Make 'p2' 'private' or 'protected readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4000.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4000.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S4000",
 "message":  "Make 'f1' 'private' or 'protected readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4000.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4000.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  53,

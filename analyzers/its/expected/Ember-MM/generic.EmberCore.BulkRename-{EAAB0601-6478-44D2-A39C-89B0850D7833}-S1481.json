@@ -2,22 +2,9 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'mePath'.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  38,
-"startColumn":  13,
-"endLine":  38,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1481",
 "message":  "Remove the unused local variable 'tPath'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  13,
@@ -28,9 +15,22 @@
 },
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'mePath'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  13,
+"endLine":  38,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'tmpList'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L458",
 "region":  {
 "startLine":  458,
 "startColumn":  37,
@@ -43,7 +43,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'frmToolTip'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgTVBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgTVBulkRename.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  13,

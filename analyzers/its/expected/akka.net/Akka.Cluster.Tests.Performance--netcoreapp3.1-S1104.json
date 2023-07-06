@@ -4,7 +4,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  43,

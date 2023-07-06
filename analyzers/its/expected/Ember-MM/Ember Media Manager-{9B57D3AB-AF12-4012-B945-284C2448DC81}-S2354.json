@@ -4,7 +4,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  86,
@@ -17,7 +17,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L743",
 "region":  {
 "startLine":  743,
 "startColumn":  91,
@@ -30,319 +30,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  63,
-"startColumn":  42,
-"endLine":  63,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  64,
-"startColumn":  81,
-"endLine":  64,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  65,
-"startColumn":  64,
-"endLine":  65,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  66,
-"startColumn":  88,
-"endLine":  66,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  67,
-"startColumn":  89,
-"endLine":  67,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  71,
-"startColumn":  42,
-"endLine":  71,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  72,
-"startColumn":  79,
-"endLine":  72,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  73,
-"startColumn":  62,
-"endLine":  73,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  74,
-"startColumn":  88,
-"endLine":  74,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  75,
-"startColumn":  89,
-"endLine":  75,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  79,
-"startColumn":  42,
-"endLine":  79,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  80,
-"startColumn":  82,
-"endLine":  80,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  81,
-"startColumn":  64,
-"endLine":  81,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  82,
-"startColumn":  88,
-"endLine":  82,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  83,
-"startColumn":  89,
-"endLine":  83,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  87,
-"startColumn":  42,
-"endLine":  87,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  88,
-"startColumn":  81,
-"endLine":  88,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  89,
-"startColumn":  64,
-"endLine":  89,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  90,
-"startColumn":  88,
-"endLine":  90,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  91,
-"startColumn":  89,
-"endLine":  91,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  96,
-"startColumn":  42,
-"endLine":  96,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  97,
-"startColumn":  79,
-"endLine":  97,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  98,
-"startColumn":  62,
-"endLine":  98,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
-"region":  {
-"startLine":  99,
-"startColumn":  80,
-"endLine":  99,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  81,
@@ -355,7 +43,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  118,
@@ -368,7 +56,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  124,
@@ -381,7 +69,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  67,
@@ -394,7 +82,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  44,
@@ -407,7 +95,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  70,
@@ -420,7 +108,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  40,
@@ -433,7 +121,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  69,
@@ -446,7 +134,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  46,
@@ -459,7 +147,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  67,
@@ -472,7 +160,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  45,
@@ -485,7 +173,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  81,
@@ -498,7 +186,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  40,
@@ -511,7 +199,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  69,
@@ -524,7 +212,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  47,
@@ -537,7 +225,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  67,
@@ -550,7 +238,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  47,
@@ -563,7 +251,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  79,
@@ -576,7 +264,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  40,
@@ -589,7 +277,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  69,
@@ -602,7 +290,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  47,
@@ -615,7 +303,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  67,
@@ -628,7 +316,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  48,
@@ -641,7 +329,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  92,
@@ -654,7 +342,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  40,
@@ -667,7 +355,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  69,
@@ -680,7 +368,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  46,
@@ -693,7 +381,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  67,
@@ -706,7 +394,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  43,
@@ -719,7 +407,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  70,
@@ -732,7 +420,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  40,
@@ -745,7 +433,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  72,
@@ -758,7 +446,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  45,
@@ -771,7 +459,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  67,
@@ -784,7 +472,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  47,
@@ -797,7 +485,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  81,
@@ -810,7 +498,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  40,
@@ -823,7 +511,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  72,
@@ -836,7 +524,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  49,
@@ -849,7 +537,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  67,
@@ -862,7 +550,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L200",
 "region":  {
 "startLine":  200,
 "startColumn":  44,
@@ -875,7 +563,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  79,
@@ -888,7 +576,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L202",
 "region":  {
 "startLine":  202,
 "startColumn":  40,
@@ -901,7 +589,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  72,
@@ -914,7 +602,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  49,
@@ -927,7 +615,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  67,
@@ -940,7 +628,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  45,
@@ -953,7 +641,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  81,
@@ -966,7 +654,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  40,
@@ -979,7 +667,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  72,
@@ -992,7 +680,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  48,
@@ -1005,7 +693,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  67,
@@ -1018,7 +706,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  45,
@@ -1031,7 +719,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  70,
@@ -1044,7 +732,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  40,
@@ -1057,7 +745,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  71,
@@ -1070,7 +758,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  47,
@@ -1083,7 +771,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  67,
@@ -1096,7 +784,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  48,
@@ -1109,7 +797,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  75,
@@ -1122,7 +810,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  40,
@@ -1135,7 +823,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  71,
@@ -1148,7 +836,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  50,
@@ -1161,7 +849,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  67,
@@ -1174,7 +862,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  45,
@@ -1187,7 +875,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  74,
@@ -1200,7 +888,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  40,
@@ -1213,7 +901,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  71,
@@ -1226,7 +914,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  47,
@@ -1239,7 +927,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4595",
 "region":  {
 "startLine":  4595,
 "startColumn":  82,
@@ -1252,7 +940,319 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  42,
+"endLine":  63,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  81,
+"endLine":  64,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  64,
+"endLine":  65,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  88,
+"endLine":  66,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  89,
+"endLine":  67,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  42,
+"endLine":  71,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  79,
+"endLine":  72,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  62,
+"endLine":  73,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  88,
+"endLine":  74,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  89,
+"endLine":  75,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  42,
+"endLine":  79,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  82,
+"endLine":  80,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  64,
+"endLine":  81,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  88,
+"endLine":  82,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  89,
+"endLine":  83,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  42,
+"endLine":  87,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  81,
+"endLine":  88,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  64,
+"endLine":  89,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  88,
+"endLine":  90,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  89,
+"endLine":  91,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  42,
+"endLine":  96,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  79,
+"endLine":  97,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  62,
+"endLine":  98,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  80,
+"endLine":  99,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  113,
@@ -1265,7 +1265,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  134,
@@ -1278,7 +1278,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  118,
@@ -1291,7 +1291,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  114,
@@ -1304,20 +1304,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  218,
-"startColumn":  108,
-"endLine":  218,
-"endColumn":  109
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1159",
 "region":  {
 "startLine":  1159,
 "startColumn":  96,
@@ -1330,7 +1317,20 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  108,
+"endLine":  218,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3129",
 "region":  {
 "startLine":  3129,
 "startColumn":  103,
@@ -1343,7 +1343,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3130",
 "region":  {
 "startLine":  3130,
 "startColumn":  106,
@@ -1356,7 +1356,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4502",
 "region":  {
 "startLine":  4502,
 "startColumn":  106,
@@ -1369,7 +1369,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4503",
 "region":  {
 "startLine":  4503,
 "startColumn":  136,
@@ -1382,7 +1382,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5242",
 "region":  {
 "startLine":  5242,
 "startColumn":  95,
@@ -1395,7 +1395,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5243",
 "region":  {
 "startLine":  5243,
 "startColumn":  109,
@@ -1408,7 +1408,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5244",
 "region":  {
 "startLine":  5244,
 "startColumn":  102,
@@ -1421,7 +1421,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5324",
 "region":  {
 "startLine":  5324,
 "startColumn":  115,
@@ -1434,7 +1434,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6513",
 "region":  {
 "startLine":  6513,
 "startColumn":  185,
@@ -1447,7 +1447,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6514",
 "region":  {
 "startLine":  6514,
 "startColumn":  185,
@@ -1460,7 +1460,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6515",
 "region":  {
 "startLine":  6515,
 "startColumn":  157,
@@ -1473,7 +1473,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6516",
 "region":  {
 "startLine":  6516,
 "startColumn":  188,
@@ -1486,7 +1486,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6774",
 "region":  {
 "startLine":  6774,
 "startColumn":  169,
@@ -1499,7 +1499,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6775",
 "region":  {
 "startLine":  6775,
 "startColumn":  157,
@@ -1512,7 +1512,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6798",
 "region":  {
 "startLine":  6798,
 "startColumn":  169,
@@ -1525,7 +1525,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6799",
 "region":  {
 "startLine":  6799,
 "startColumn":  157,
@@ -1538,7 +1538,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7330",
 "region":  {
 "startLine":  7330,
 "startColumn":  76,
@@ -1551,7 +1551,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7331",
 "region":  {
 "startLine":  7331,
 "startColumn":  62,
@@ -1564,7 +1564,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7332",
 "region":  {
 "startLine":  7332,
 "startColumn":  62,
@@ -1577,7 +1577,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7333",
 "region":  {
 "startLine":  7333,
 "startColumn":  60,
@@ -1590,7 +1590,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7334",
 "region":  {
 "startLine":  7334,
 "startColumn":  63,
@@ -1603,7 +1603,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7335",
 "region":  {
 "startLine":  7335,
 "startColumn":  59,
@@ -1616,7 +1616,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7336",
 "region":  {
 "startLine":  7336,
 "startColumn":  61,
@@ -1629,7 +1629,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7347",
 "region":  {
 "startLine":  7347,
 "startColumn":  72,
@@ -1642,7 +1642,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7348",
 "region":  {
 "startLine":  7348,
 "startColumn":  61,
@@ -1655,7 +1655,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7349",
 "region":  {
 "startLine":  7349,
 "startColumn":  61,
@@ -1668,7 +1668,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7350",
 "region":  {
 "startLine":  7350,
 "startColumn":  58,
@@ -1681,7 +1681,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7355",
 "region":  {
 "startLine":  7355,
 "startColumn":  76,
@@ -1694,7 +1694,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7356",
 "region":  {
 "startLine":  7356,
 "startColumn":  63,
@@ -1707,7 +1707,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7357",
 "region":  {
 "startLine":  7357,
 "startColumn":  63,
@@ -1720,7 +1720,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7362",
 "region":  {
 "startLine":  7362,
 "startColumn":  83,
@@ -1733,7 +1733,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7363",
 "region":  {
 "startLine":  7363,
 "startColumn":  64,
@@ -1746,7 +1746,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7364",
 "region":  {
 "startLine":  7364,
 "startColumn":  64,
@@ -1759,7 +1759,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7365",
 "region":  {
 "startLine":  7365,
 "startColumn":  61,
@@ -1772,7 +1772,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7564",
 "region":  {
 "startLine":  7564,
 "startColumn":  138,
@@ -1785,7 +1785,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7565",
 "region":  {
 "startLine":  7565,
 "startColumn":  141,
@@ -1798,7 +1798,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7646",
 "region":  {
 "startLine":  7646,
 "startColumn":  145,
@@ -1811,7 +1811,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7647",
 "region":  {
 "startLine":  7647,
 "startColumn":  106,
@@ -1824,7 +1824,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7648",
 "region":  {
 "startLine":  7648,
 "startColumn":  131,
@@ -1837,7 +1837,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7724",
 "region":  {
 "startLine":  7724,
 "startColumn":  149,
@@ -1850,7 +1850,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7725",
 "region":  {
 "startLine":  7725,
 "startColumn":  110,
@@ -1863,7 +1863,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7726",
 "region":  {
 "startLine":  7726,
 "startColumn":  135,

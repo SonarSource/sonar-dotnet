@@ -2,22 +2,9 @@
 "issues":  [
 {
 "id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
-"region":  {
-"startLine":  75,
-"startColumn":  5,
-"endLine":  75,
-"endColumn":  136
-}
-}
-},
-{
-"id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 38 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  5,
@@ -30,7 +17,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  5,
@@ -43,7 +30,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 23 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L597",
 "region":  {
 "startLine":  597,
 "startColumn":  5,
@@ -56,12 +43,25 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 13 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L668",
 "region":  {
 "startLine":  668,
 "startColumn":  5,
 "endLine":  668,
 "endColumn":  54
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  5,
+"endLine":  75,
+"endColumn":  136
 }
 }
 }

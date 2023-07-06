@@ -4,7 +4,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L462",
 "region":  {
 "startLine":  462,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L463",
 "region":  {
 "startLine":  463,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L464",
 "region":  {
 "startLine":  464,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteJournal.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  79,

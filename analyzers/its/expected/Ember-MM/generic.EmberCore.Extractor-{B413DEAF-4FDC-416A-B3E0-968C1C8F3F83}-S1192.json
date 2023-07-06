@@ -5,7 +5,7 @@
 "message":  "Define a constant instead of using this literal 'extrathumbs' 4 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  63,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  127,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  157,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  97,
@@ -47,7 +47,7 @@
 "message":  "Define a constant instead of using this literal 'thumb' 4 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  82,
@@ -56,7 +56,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  205,
@@ -65,7 +65,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  92,
@@ -74,7 +74,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  154,
@@ -86,61 +86,10 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Error' 5 times.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
-"region":  {
-"startLine":  61,
-"startColumn":  59,
-"endLine":  61,
-"endColumn":  66
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
-"region":  {
-"startLine":  85,
-"startColumn":  59,
-"endLine":  85,
-"endColumn":  66
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
-"region":  {
-"startLine":  133,
-"startColumn":  59,
-"endLine":  133,
-"endColumn":  66
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
-"region":  {
-"startLine":  161,
-"startColumn":  59,
-"endLine":  161,
-"endColumn":  66
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
-"region":  {
-"startLine":  183,
-"startColumn":  59,
-"endLine":  183,
-"endColumn":  66
-}
-}
-]
-},
-{
-"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'frame.jpg' 7 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  189,
@@ -149,7 +98,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  77,
@@ -158,7 +107,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  68,
@@ -167,7 +116,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  163,
@@ -176,7 +125,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  49,
@@ -185,7 +134,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  81,
@@ -194,7 +143,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  59,
@@ -206,10 +155,61 @@
 },
 {
 "id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  59,
+"endLine":  61,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  59,
+"endLine":  85,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  59,
+"endLine":  133,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  59,
+"endLine":  161,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L183",
+"region":  {
+"startLine":  183,
+"startColumn":  59,
+"endLine":  183,
+"endColumn":  66
+}
+}
+]
+},
+{
+"id":  "S1192",
 "message":  "Define a constant instead of using this literal 'frame.jpg' 6 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  200,
@@ -218,7 +218,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  86,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  80,
@@ -236,7 +236,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  171,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  58,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  93,

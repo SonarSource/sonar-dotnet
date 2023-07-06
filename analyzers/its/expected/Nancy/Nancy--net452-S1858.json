@@ -4,7 +4,7 @@
 "id":  "S1858",
 "message":  "There's no need to call 'ToString()', the compiler will do it for you.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  115,

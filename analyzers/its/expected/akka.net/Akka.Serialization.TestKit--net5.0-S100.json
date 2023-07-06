@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'CanSerializeActorRefWithUID' to match pascal case naming rules, consider using 'CanSerializeActorRefWithUid'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  21,

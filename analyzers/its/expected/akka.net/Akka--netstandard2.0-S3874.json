@@ -4,7 +4,7 @@
 "id":  "S3874",
 "message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  40,
@@ -17,7 +17,7 @@
 "id":  "S3874",
 "message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BlockingMessageQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/BlockingMessageQueue.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  50,
@@ -30,7 +30,7 @@
 "id":  "S3874",
 "message":  "Consider refactoring this method in order to remove the need for this 'ref' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\InterlockedSpin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/InterlockedSpin.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S3874",
 "message":  "Consider refactoring this method in order to remove the need for this 'ref' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\InterlockedSpin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/InterlockedSpin.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  61,

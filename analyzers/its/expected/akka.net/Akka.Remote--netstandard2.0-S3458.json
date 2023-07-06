@@ -4,7 +4,7 @@
 "id":  "S3458",
 "message":  "Remove this empty 'case' clause.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L2051",
 "region":  {
 "startLine":  2051,
 "startColumn":  17,

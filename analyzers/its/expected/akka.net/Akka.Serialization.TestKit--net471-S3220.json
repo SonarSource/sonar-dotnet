@@ -4,7 +4,7 @@
 "id":  "S3220",
 "message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'RoundRobinGroup.RoundRobinGroup(Config config)'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S3220",
 "message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'RandomGroup.RandomGroup(Config config)'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  27,

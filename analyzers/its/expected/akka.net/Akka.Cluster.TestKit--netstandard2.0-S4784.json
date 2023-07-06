@@ -4,7 +4,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  34,

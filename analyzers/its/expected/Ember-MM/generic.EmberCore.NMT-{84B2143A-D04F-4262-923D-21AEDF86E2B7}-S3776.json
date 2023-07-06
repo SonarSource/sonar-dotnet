@@ -2,1795 +2,10 @@
 "issues":  [
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1278,
-"startColumn":  14,
-"endLine":  1278,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1280,
-"startColumn":  9,
-"endLine":  1280,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1280,
-"startColumn":  81,
-"endLine":  1280,
-"endColumn":  87
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1287,
-"startColumn":  17,
-"endLine":  1287,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1287,
-"startColumn":  34,
-"endLine":  1287,
-"endColumn":  40
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1291,
-"startColumn":  17,
-"endLine":  1291,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1294,
-"startColumn":  21,
-"endLine":  1294,
-"endColumn":  26
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1296,
-"startColumn":  17,
-"endLine":  1296,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1299,
-"startColumn":  21,
-"endLine":  1299,
-"endColumn":  26
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1301,
-"startColumn":  17,
-"endLine":  1301,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1304,
-"startColumn":  21,
-"endLine":  1304,
-"endColumn":  26
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1308,
-"startColumn":  17,
-"endLine":  1308,
-"endColumn":  20
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1311,
-"startColumn":  13,
-"endLine":  1311,
-"endColumn":  18
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this constructor to reduce its Cognitive Complexity from 17 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  75,
-"startColumn":  12,
-"endLine":  75,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  104,
-"startColumn":  13,
-"endLine":  104,
-"endColumn":  16
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  105,
-"startColumn":  17,
-"endLine":  105,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  105,
-"startColumn":  38,
-"endLine":  105,
-"endColumn":  41
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  108,
-"startColumn":  21,
-"endLine":  108,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  108,
-"startColumn":  60,
-"endLine":  108,
-"endColumn":  67
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  112,
-"startColumn":  21,
-"endLine":  112,
-"endColumn":  25
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  117,
-"startColumn":  13,
-"endLine":  117,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  119,
-"startColumn":  17,
-"endLine":  119,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  121,
-"startColumn":  17,
-"endLine":  121,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  126,
-"startColumn":  13,
-"endLine":  126,
-"endColumn":  16
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  132,
-"startColumn":  13,
-"endLine":  132,
-"endColumn":  16
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  138,
-"startColumn":  13,
-"endLine":  138,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  146,
-"startColumn":  9,
-"endLine":  146,
-"endColumn":  14
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 34 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1456,
-"startColumn":  17,
-"endLine":  1456,
-"endColumn":  31
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1459,
-"startColumn":  13,
-"endLine":  1459,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1460,
-"startColumn":  17,
-"endLine":  1460,
-"endColumn":  20
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1463,
-"startColumn":  21,
-"endLine":  1463,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1469,
-"startColumn":  21,
-"endLine":  1469,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1471,
-"startColumn":  17,
-"endLine":  1471,
-"endColumn":  20
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1474,
-"startColumn":  21,
-"endLine":  1474,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1475,
-"startColumn":  21,
-"endLine":  1475,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1477,
-"startColumn":  21,
-"endLine":  1477,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1479,
-"startColumn":  17,
-"endLine":  1479,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1485,
-"startColumn":  17,
-"endLine":  1485,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1486,
-"startColumn":  17,
-"endLine":  1486,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1490,
-"startColumn":  17,
-"endLine":  1490,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1491,
-"startColumn":  17,
-"endLine":  1491,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1495,
-"startColumn":  17,
-"endLine":  1495,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1499,
-"startColumn":  13,
-"endLine":  1499,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1511,
-"startColumn":  9,
-"endLine":  1511,
-"endColumn":  14
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  901,
-"startColumn":  17,
-"endLine":  901,
-"endColumn":  31
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  902,
-"startColumn":  9,
-"endLine":  902,
-"endColumn":  12
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  904,
-"startColumn":  13,
-"endLine":  904,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  907,
-"startColumn":  13,
-"endLine":  907,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  914,
-"startColumn":  9,
-"endLine":  914,
-"endColumn":  12
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  917,
-"startColumn":  13,
-"endLine":  917,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  917,
-"startColumn":  34,
-"endLine":  917,
-"endColumn":  41
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  923,
-"startColumn":  13,
-"endLine":  923,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  927,
-"startColumn":  17,
-"endLine":  927,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  929,
-"startColumn":  17,
-"endLine":  929,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  933,
-"startColumn":  17,
-"endLine":  933,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  937,
-"startColumn":  13,
-"endLine":  937,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  945,
-"startColumn":  9,
-"endLine":  945,
-"endColumn":  12
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  950,
-"startColumn":  13,
-"endLine":  950,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  951,
-"startColumn":  17,
-"endLine":  951,
-"endColumn":  20
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  961,
-"startColumn":  28,
-"endLine":  961,
-"endColumn":  30
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  963,
-"startColumn":  17,
-"endLine":  963,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1213,
-"startColumn":  22,
-"endLine":  1213,
-"endColumn":  33
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1214,
-"startColumn":  9,
-"endLine":  1214,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1221,
-"startColumn":  17,
-"endLine":  1221,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1223,
-"startColumn":  17,
-"endLine":  1223,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1225,
-"startColumn":  21,
-"endLine":  1225,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1232,
-"startColumn":  17,
-"endLine":  1232,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1234,
-"startColumn":  17,
-"endLine":  1234,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1236,
-"startColumn":  21,
-"endLine":  1236,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1242,
-"startColumn":  17,
-"endLine":  1242,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1244,
-"startColumn":  17,
-"endLine":  1244,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1246,
-"startColumn":  21,
-"endLine":  1246,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1252,
-"startColumn":  17,
-"endLine":  1252,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1254,
-"startColumn":  17,
-"endLine":  1254,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1256,
-"startColumn":  21,
-"endLine":  1256,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1262,
-"startColumn":  17,
-"endLine":  1262,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1264,
-"startColumn":  17,
-"endLine":  1264,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1266,
-"startColumn":  21,
-"endLine":  1266,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1271,
-"startColumn":  13,
-"endLine":  1271,
-"endColumn":  18
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1349,
-"startColumn":  16,
-"endLine":  1349,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1351,
-"startColumn":  29,
-"endLine":  1351,
-"endColumn":  31
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1352,
-"startColumn":  31,
-"endLine":  1352,
-"endColumn":  33
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1353,
-"startColumn":  27,
-"endLine":  1353,
-"endColumn":  29
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1364,
-"startColumn":  9,
-"endLine":  1364,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1364,
-"startColumn":  74,
-"endLine":  1364,
-"endColumn":  76
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1364,
-"startColumn":  123,
-"endLine":  1364,
-"endColumn":  125
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1365,
-"startColumn":  9,
-"endLine":  1365,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1377,
-"startColumn":  24,
-"endLine":  1377,
-"endColumn":  26
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1379,
-"startColumn":  13,
-"endLine":  1379,
-"endColumn":  18
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1380,
-"startColumn":  17,
-"endLine":  1380,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1384,
-"startColumn":  21,
-"endLine":  1384,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1389,
-"startColumn":  21,
-"endLine":  1389,
-"endColumn":  26
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1395,
-"startColumn":  17,
-"endLine":  1395,
-"endColumn":  20
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1396,
-"startColumn":  21,
-"endLine":  1396,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1399,
-"startColumn":  25,
-"endLine":  1399,
-"endColumn":  30
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1408,
-"startColumn":  17,
-"endLine":  1408,
-"endColumn":  22
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1415,
-"startColumn":  9,
-"endLine":  1415,
-"endColumn":  14
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 44 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1516,
-"startColumn":  17,
-"endLine":  1516,
-"endColumn":  28
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1519,
-"startColumn":  13,
-"endLine":  1519,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1520,
-"startColumn":  17,
-"endLine":  1520,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1521,
-"startColumn":  21,
-"endLine":  1521,
-"endColumn":  24
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1524,
-"startColumn":  25,
-"endLine":  1524,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1530,
-"startColumn":  25,
-"endLine":  1530,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1532,
-"startColumn":  21,
-"endLine":  1532,
-"endColumn":  24
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1535,
-"startColumn":  25,
-"endLine":  1535,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1536,
-"startColumn":  25,
-"endLine":  1536,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1538,
-"startColumn":  25,
-"endLine":  1538,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1540,
-"startColumn":  21,
-"endLine":  1540,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1548,
-"startColumn":  17,
-"endLine":  1548,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1549,
-"startColumn":  17,
-"endLine":  1549,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1553,
-"startColumn":  17,
-"endLine":  1553,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1554,
-"startColumn":  17,
-"endLine":  1554,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1558,
-"startColumn":  17,
-"endLine":  1558,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1562,
-"startColumn":  13,
-"endLine":  1562,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1575,
-"startColumn":  9,
-"endLine":  1575,
-"endColumn":  14
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1601,
-"startColumn":  17,
-"endLine":  1601,
-"endColumn":  38
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1612,
-"startColumn":  9,
-"endLine":  1612,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1616,
-"startColumn":  9,
-"endLine":  1616,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1619,
-"startColumn":  9,
-"endLine":  1619,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1620,
-"startColumn":  13,
-"endLine":  1620,
-"endColumn":  16
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1622,
-"startColumn":  17,
-"endLine":  1622,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1624,
-"startColumn":  46,
-"endLine":  1624,
-"endColumn":  48
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1625,
-"startColumn":  25,
-"endLine":  1625,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1625,
-"startColumn":  78,
-"endLine":  1625,
-"endColumn":  85
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1628,
-"startColumn":  25,
-"endLine":  1628,
-"endColumn":  29
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1630,
-"startColumn":  29,
-"endLine":  1630,
-"endColumn":  31
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1631,
-"startColumn":  29,
-"endLine":  1631,
-"endColumn":  31
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1633,
-"startColumn":  21,
-"endLine":  1633,
-"endColumn":  26
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1641,
-"startColumn":  9,
-"endLine":  1641,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1641,
-"startColumn":  39,
-"endLine":  1641,
-"endColumn":  46
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1644,
-"startColumn":  9,
-"endLine":  1644,
-"endColumn":  13
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1649,
-"startColumn":  9,
-"endLine":  1649,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1651,
-"startColumn":  9,
-"endLine":  1651,
-"endColumn":  13
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  204,
-"startColumn":  24,
-"endLine":  204,
-"endColumn":  37
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  210,
-"startColumn":  9,
-"endLine":  210,
-"endColumn":  11
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  213,
-"startColumn":  13,
-"endLine":  213,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  218,
-"startColumn":  13,
-"endLine":  218,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  218,
-"startColumn":  27,
-"endLine":  218,
-"endColumn":  34
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  223,
-"startColumn":  13,
-"endLine":  223,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  229,
-"startColumn":  13,
-"endLine":  229,
-"endColumn":  16
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  230,
-"startColumn":  17,
-"endLine":  230,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  230,
-"startColumn":  93,
-"endLine":  230,
-"endColumn":  99
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  230,
-"startColumn":  42,
-"endLine":  230,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  231,
-"startColumn":  17,
-"endLine":  231,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  233,
-"startColumn":  17,
-"endLine":  233,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  237,
-"startColumn":  21,
-"endLine":  237,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  245,
-"startColumn":  13,
-"endLine":  245,
-"endColumn":  16
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  246,
-"startColumn":  17,
-"endLine":  246,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  246,
-"startColumn":  39,
-"endLine":  246,
-"endColumn":  42
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  250,
-"startColumn":  9,
-"endLine":  250,
-"endColumn":  13
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  204,
-"startColumn":  24,
-"endLine":  204,
-"endColumn":  37
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  539,
-"startColumn":  14,
-"endLine":  539,
-"endColumn":  30
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  548,
-"startColumn":  37,
-"endLine":  548,
-"endColumn":  39
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  559,
-"startColumn":  13,
-"endLine":  559,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  561,
-"startColumn":  13,
-"endLine":  561,
-"endColumn":  17
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  583,
-"startColumn":  13,
-"endLine":  583,
-"endColumn":  16
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  584,
-"startColumn":  17,
-"endLine":  584,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  587,
-"startColumn":  13,
-"endLine":  587,
-"endColumn":  16
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  588,
-"startColumn":  17,
-"endLine":  588,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  591,
-"startColumn":  13,
-"endLine":  591,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  592,
-"startColumn":  17,
-"endLine":  592,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  596,
-"startColumn":  17,
-"endLine":  596,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  602,
-"startColumn":  13,
-"endLine":  602,
-"endColumn":  15
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  602,
-"startColumn":  41,
-"endLine":  602,
-"endColumn":  47
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  605,
-"startColumn":  17,
-"endLine":  605,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  605,
-"startColumn":  45,
-"endLine":  605,
-"endColumn":  51
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  607,
-"startColumn":  21,
-"endLine":  607,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  608,
-"startColumn":  25,
-"endLine":  608,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  618,
-"startColumn":  17,
-"endLine":  618,
-"endColumn":  19
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  620,
-"startColumn":  21,
-"endLine":  620,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  628,
-"startColumn":  9,
-"endLine":  628,
-"endColumn":  14
-}
-}
-]
-},
-{
-"id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.",
-"location":  [
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  813,
-"startColumn":  22,
-"endLine":  813,
-"endColumn":  38
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  819,
-"startColumn":  17,
-"endLine":  819,
-"endColumn":  22
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  821,
-"startColumn":  21,
-"endLine":  821,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  822,
-"startColumn":  21,
-"endLine":  822,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  823,
-"startColumn":  21,
-"endLine":  823,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  824,
-"startColumn":  21,
-"endLine":  824,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  825,
-"startColumn":  21,
-"endLine":  825,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  826,
-"startColumn":  21,
-"endLine":  826,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  827,
-"startColumn":  21,
-"endLine":  827,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  828,
-"startColumn":  21,
-"endLine":  828,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  838,
-"startColumn":  17,
-"endLine":  838,
-"endColumn":  22
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  840,
-"startColumn":  21,
-"endLine":  840,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  841,
-"startColumn":  21,
-"endLine":  841,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  842,
-"startColumn":  21,
-"endLine":  842,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  843,
-"startColumn":  21,
-"endLine":  843,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  852,
-"startColumn":  17,
-"endLine":  852,
-"endColumn":  22
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  854,
-"startColumn":  21,
-"endLine":  854,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  855,
-"startColumn":  21,
-"endLine":  855,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  856,
-"startColumn":  21,
-"endLine":  856,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  857,
-"startColumn":  21,
-"endLine":  857,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S3776",
 "message":  "Refactor this method to reduce its Cognitive Complexity from 67 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1022",
 "region":  {
 "startLine":  1022,
 "startColumn":  17,
@@ -1799,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1027",
 "region":  {
 "startLine":  1027,
 "startColumn":  13,
@@ -1808,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1028",
 "region":  {
 "startLine":  1028,
 "startColumn":  17,
@@ -1817,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1032",
 "region":  {
 "startLine":  1032,
 "startColumn":  21,
@@ -1826,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1032",
 "region":  {
 "startLine":  1032,
 "startColumn":  74,
@@ -1835,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1033",
 "region":  {
 "startLine":  1033,
 "startColumn":  25,
@@ -1844,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1034",
 "region":  {
 "startLine":  1034,
 "startColumn":  29,
@@ -1853,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1035",
 "region":  {
 "startLine":  1035,
 "startColumn":  33,
@@ -1862,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1044",
 "region":  {
 "startLine":  1044,
 "startColumn":  41,
@@ -1871,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1045",
 "region":  {
 "startLine":  1045,
 "startColumn":  45,
@@ -1880,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1054",
 "region":  {
 "startLine":  1054,
 "startColumn":  25,
@@ -1889,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1056",
 "region":  {
 "startLine":  1056,
 "startColumn":  29,
@@ -1898,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1061",
 "region":  {
 "startLine":  1061,
 "startColumn":  29,
@@ -1907,7 +122,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1065",
 "region":  {
 "startLine":  1065,
 "startColumn":  25,
@@ -1916,7 +131,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1066",
 "region":  {
 "startLine":  1066,
 "startColumn":  29,
@@ -1925,7 +140,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1067",
 "region":  {
 "startLine":  1067,
 "startColumn":  33,
@@ -1934,7 +149,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1076",
 "region":  {
 "startLine":  1076,
 "startColumn":  41,
@@ -1943,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1077",
 "region":  {
 "startLine":  1077,
 "startColumn":  45,
@@ -1952,7 +167,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1088",
 "region":  {
 "startLine":  1088,
 "startColumn":  17,
@@ -1961,7 +176,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1091",
 "region":  {
 "startLine":  1091,
 "startColumn":  17,
@@ -1970,7 +185,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1096",
 "region":  {
 "startLine":  1096,
 "startColumn":  9,
@@ -1985,7 +200,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 67 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1101",
 "region":  {
 "startLine":  1101,
 "startColumn":  17,
@@ -1994,7 +209,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1106",
 "region":  {
 "startLine":  1106,
 "startColumn":  13,
@@ -2003,7 +218,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1107",
 "region":  {
 "startLine":  1107,
 "startColumn":  17,
@@ -2012,7 +227,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1111",
 "region":  {
 "startLine":  1111,
 "startColumn":  21,
@@ -2021,7 +236,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1111",
 "region":  {
 "startLine":  1111,
 "startColumn":  75,
@@ -2030,7 +245,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1112",
 "region":  {
 "startLine":  1112,
 "startColumn":  25,
@@ -2039,7 +254,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1113",
 "region":  {
 "startLine":  1113,
 "startColumn":  29,
@@ -2048,7 +263,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1114",
 "region":  {
 "startLine":  1114,
 "startColumn":  33,
@@ -2057,7 +272,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1123",
 "region":  {
 "startLine":  1123,
 "startColumn":  41,
@@ -2066,7 +281,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1124",
 "region":  {
 "startLine":  1124,
 "startColumn":  45,
@@ -2075,7 +290,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1133",
 "region":  {
 "startLine":  1133,
 "startColumn":  25,
@@ -2084,7 +299,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1135",
 "region":  {
 "startLine":  1135,
 "startColumn":  29,
@@ -2093,7 +308,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1140",
 "region":  {
 "startLine":  1140,
 "startColumn":  29,
@@ -2102,7 +317,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1144",
 "region":  {
 "startLine":  1144,
 "startColumn":  25,
@@ -2111,7 +326,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1145",
 "region":  {
 "startLine":  1145,
 "startColumn":  29,
@@ -2120,7 +335,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1146",
 "region":  {
 "startLine":  1146,
 "startColumn":  33,
@@ -2129,7 +344,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1155",
 "region":  {
 "startLine":  1155,
 "startColumn":  41,
@@ -2138,7 +353,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1156",
 "region":  {
 "startLine":  1156,
 "startColumn":  45,
@@ -2147,7 +362,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1167",
 "region":  {
 "startLine":  1167,
 "startColumn":  17,
@@ -2156,7 +371,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1170",
 "region":  {
 "startLine":  1170,
 "startColumn":  17,
@@ -2165,7 +380,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1175",
 "region":  {
 "startLine":  1175,
 "startColumn":  9,
@@ -2177,10 +392,1132 @@
 },
 {
 "id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1213",
+"region":  {
+"startLine":  1213,
+"startColumn":  22,
+"endLine":  1213,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1214",
+"region":  {
+"startLine":  1214,
+"startColumn":  9,
+"endLine":  1214,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1221",
+"region":  {
+"startLine":  1221,
+"startColumn":  17,
+"endLine":  1221,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1223",
+"region":  {
+"startLine":  1223,
+"startColumn":  17,
+"endLine":  1223,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1225",
+"region":  {
+"startLine":  1225,
+"startColumn":  21,
+"endLine":  1225,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1232",
+"region":  {
+"startLine":  1232,
+"startColumn":  17,
+"endLine":  1232,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1234",
+"region":  {
+"startLine":  1234,
+"startColumn":  17,
+"endLine":  1234,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1236",
+"region":  {
+"startLine":  1236,
+"startColumn":  21,
+"endLine":  1236,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1242",
+"region":  {
+"startLine":  1242,
+"startColumn":  17,
+"endLine":  1242,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1244",
+"region":  {
+"startLine":  1244,
+"startColumn":  17,
+"endLine":  1244,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1246",
+"region":  {
+"startLine":  1246,
+"startColumn":  21,
+"endLine":  1246,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1252",
+"region":  {
+"startLine":  1252,
+"startColumn":  17,
+"endLine":  1252,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1254",
+"region":  {
+"startLine":  1254,
+"startColumn":  17,
+"endLine":  1254,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1256",
+"region":  {
+"startLine":  1256,
+"startColumn":  21,
+"endLine":  1256,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1262",
+"region":  {
+"startLine":  1262,
+"startColumn":  17,
+"endLine":  1262,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1264",
+"region":  {
+"startLine":  1264,
+"startColumn":  17,
+"endLine":  1264,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1266",
+"region":  {
+"startLine":  1266,
+"startColumn":  21,
+"endLine":  1266,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1271",
+"region":  {
+"startLine":  1271,
+"startColumn":  13,
+"endLine":  1271,
+"endColumn":  18
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1278",
+"region":  {
+"startLine":  1278,
+"startColumn":  14,
+"endLine":  1278,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1280",
+"region":  {
+"startLine":  1280,
+"startColumn":  9,
+"endLine":  1280,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1280",
+"region":  {
+"startLine":  1280,
+"startColumn":  81,
+"endLine":  1280,
+"endColumn":  87
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1287",
+"region":  {
+"startLine":  1287,
+"startColumn":  17,
+"endLine":  1287,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1287",
+"region":  {
+"startLine":  1287,
+"startColumn":  34,
+"endLine":  1287,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1291",
+"region":  {
+"startLine":  1291,
+"startColumn":  17,
+"endLine":  1291,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1294",
+"region":  {
+"startLine":  1294,
+"startColumn":  21,
+"endLine":  1294,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1296",
+"region":  {
+"startLine":  1296,
+"startColumn":  17,
+"endLine":  1296,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1299",
+"region":  {
+"startLine":  1299,
+"startColumn":  21,
+"endLine":  1299,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1301",
+"region":  {
+"startLine":  1301,
+"startColumn":  17,
+"endLine":  1301,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1304",
+"region":  {
+"startLine":  1304,
+"startColumn":  21,
+"endLine":  1304,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1308",
+"region":  {
+"startLine":  1308,
+"startColumn":  17,
+"endLine":  1308,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1311",
+"region":  {
+"startLine":  1311,
+"startColumn":  13,
+"endLine":  1311,
+"endColumn":  18
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1349",
+"region":  {
+"startLine":  1349,
+"startColumn":  16,
+"endLine":  1349,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1351",
+"region":  {
+"startLine":  1351,
+"startColumn":  29,
+"endLine":  1351,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1352",
+"region":  {
+"startLine":  1352,
+"startColumn":  31,
+"endLine":  1352,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1353",
+"region":  {
+"startLine":  1353,
+"startColumn":  27,
+"endLine":  1353,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1364",
+"region":  {
+"startLine":  1364,
+"startColumn":  9,
+"endLine":  1364,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1364",
+"region":  {
+"startLine":  1364,
+"startColumn":  74,
+"endLine":  1364,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1364",
+"region":  {
+"startLine":  1364,
+"startColumn":  123,
+"endLine":  1364,
+"endColumn":  125
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1365",
+"region":  {
+"startLine":  1365,
+"startColumn":  9,
+"endLine":  1365,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1377",
+"region":  {
+"startLine":  1377,
+"startColumn":  24,
+"endLine":  1377,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1379",
+"region":  {
+"startLine":  1379,
+"startColumn":  13,
+"endLine":  1379,
+"endColumn":  18
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1380",
+"region":  {
+"startLine":  1380,
+"startColumn":  17,
+"endLine":  1380,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1384",
+"region":  {
+"startLine":  1384,
+"startColumn":  21,
+"endLine":  1384,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1389",
+"region":  {
+"startLine":  1389,
+"startColumn":  21,
+"endLine":  1389,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1395",
+"region":  {
+"startLine":  1395,
+"startColumn":  17,
+"endLine":  1395,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1396",
+"region":  {
+"startLine":  1396,
+"startColumn":  21,
+"endLine":  1396,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1399",
+"region":  {
+"startLine":  1399,
+"startColumn":  25,
+"endLine":  1399,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1408",
+"region":  {
+"startLine":  1408,
+"startColumn":  17,
+"endLine":  1408,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1415",
+"region":  {
+"startLine":  1415,
+"startColumn":  9,
+"endLine":  1415,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 34 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1456",
+"region":  {
+"startLine":  1456,
+"startColumn":  17,
+"endLine":  1456,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1459",
+"region":  {
+"startLine":  1459,
+"startColumn":  13,
+"endLine":  1459,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1460",
+"region":  {
+"startLine":  1460,
+"startColumn":  17,
+"endLine":  1460,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1463",
+"region":  {
+"startLine":  1463,
+"startColumn":  21,
+"endLine":  1463,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1469",
+"region":  {
+"startLine":  1469,
+"startColumn":  21,
+"endLine":  1469,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1471",
+"region":  {
+"startLine":  1471,
+"startColumn":  17,
+"endLine":  1471,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1474",
+"region":  {
+"startLine":  1474,
+"startColumn":  21,
+"endLine":  1474,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1475",
+"region":  {
+"startLine":  1475,
+"startColumn":  21,
+"endLine":  1475,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1477",
+"region":  {
+"startLine":  1477,
+"startColumn":  21,
+"endLine":  1477,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1479",
+"region":  {
+"startLine":  1479,
+"startColumn":  17,
+"endLine":  1479,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1485",
+"region":  {
+"startLine":  1485,
+"startColumn":  17,
+"endLine":  1485,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1486",
+"region":  {
+"startLine":  1486,
+"startColumn":  17,
+"endLine":  1486,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1490",
+"region":  {
+"startLine":  1490,
+"startColumn":  17,
+"endLine":  1490,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1491",
+"region":  {
+"startLine":  1491,
+"startColumn":  17,
+"endLine":  1491,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1495",
+"region":  {
+"startLine":  1495,
+"startColumn":  17,
+"endLine":  1495,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1499",
+"region":  {
+"startLine":  1499,
+"startColumn":  13,
+"endLine":  1499,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1511",
+"region":  {
+"startLine":  1511,
+"startColumn":  9,
+"endLine":  1511,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 44 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1516",
+"region":  {
+"startLine":  1516,
+"startColumn":  17,
+"endLine":  1516,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1519",
+"region":  {
+"startLine":  1519,
+"startColumn":  13,
+"endLine":  1519,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1520",
+"region":  {
+"startLine":  1520,
+"startColumn":  17,
+"endLine":  1520,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1521",
+"region":  {
+"startLine":  1521,
+"startColumn":  21,
+"endLine":  1521,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1524",
+"region":  {
+"startLine":  1524,
+"startColumn":  25,
+"endLine":  1524,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1530",
+"region":  {
+"startLine":  1530,
+"startColumn":  25,
+"endLine":  1530,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1532",
+"region":  {
+"startLine":  1532,
+"startColumn":  21,
+"endLine":  1532,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1535",
+"region":  {
+"startLine":  1535,
+"startColumn":  25,
+"endLine":  1535,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1536",
+"region":  {
+"startLine":  1536,
+"startColumn":  25,
+"endLine":  1536,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1538",
+"region":  {
+"startLine":  1538,
+"startColumn":  25,
+"endLine":  1538,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1540",
+"region":  {
+"startLine":  1540,
+"startColumn":  21,
+"endLine":  1540,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1548",
+"region":  {
+"startLine":  1548,
+"startColumn":  17,
+"endLine":  1548,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1549",
+"region":  {
+"startLine":  1549,
+"startColumn":  17,
+"endLine":  1549,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1553",
+"region":  {
+"startLine":  1553,
+"startColumn":  17,
+"endLine":  1553,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1554",
+"region":  {
+"startLine":  1554,
+"startColumn":  17,
+"endLine":  1554,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1558",
+"region":  {
+"startLine":  1558,
+"startColumn":  17,
+"endLine":  1558,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1562",
+"region":  {
+"startLine":  1562,
+"startColumn":  13,
+"endLine":  1562,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1575",
+"region":  {
+"startLine":  1575,
+"startColumn":  9,
+"endLine":  1575,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1601",
+"region":  {
+"startLine":  1601,
+"startColumn":  17,
+"endLine":  1601,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1612",
+"region":  {
+"startLine":  1612,
+"startColumn":  9,
+"endLine":  1612,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1616",
+"region":  {
+"startLine":  1616,
+"startColumn":  9,
+"endLine":  1616,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1619",
+"region":  {
+"startLine":  1619,
+"startColumn":  9,
+"endLine":  1619,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1620",
+"region":  {
+"startLine":  1620,
+"startColumn":  13,
+"endLine":  1620,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1622",
+"region":  {
+"startLine":  1622,
+"startColumn":  17,
+"endLine":  1622,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1624",
+"region":  {
+"startLine":  1624,
+"startColumn":  46,
+"endLine":  1624,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1625",
+"region":  {
+"startLine":  1625,
+"startColumn":  25,
+"endLine":  1625,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1625",
+"region":  {
+"startLine":  1625,
+"startColumn":  78,
+"endLine":  1625,
+"endColumn":  85
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1628",
+"region":  {
+"startLine":  1628,
+"startColumn":  25,
+"endLine":  1628,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1630",
+"region":  {
+"startLine":  1630,
+"startColumn":  29,
+"endLine":  1630,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1631",
+"region":  {
+"startLine":  1631,
+"startColumn":  29,
+"endLine":  1631,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1633",
+"region":  {
+"startLine":  1633,
+"startColumn":  21,
+"endLine":  1633,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1641",
+"region":  {
+"startLine":  1641,
+"startColumn":  9,
+"endLine":  1641,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1641",
+"region":  {
+"startLine":  1641,
+"startColumn":  39,
+"endLine":  1641,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1644",
+"region":  {
+"startLine":  1644,
+"startColumn":  9,
+"endLine":  1644,
+"endColumn":  13
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1649",
+"region":  {
+"startLine":  1649,
+"startColumn":  9,
+"endLine":  1649,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1651",
+"region":  {
+"startLine":  1651,
+"startColumn":  9,
+"endLine":  1651,
+"endColumn":  13
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  24,
+"endLine":  204,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L210",
+"region":  {
+"startLine":  210,
+"startColumn":  9,
+"endLine":  210,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  13,
+"endLine":  213,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  13,
+"endLine":  218,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  27,
+"endLine":  218,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L223",
+"region":  {
+"startLine":  223,
+"startColumn":  13,
+"endLine":  223,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L229",
+"region":  {
+"startLine":  229,
+"startColumn":  13,
+"endLine":  229,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  17,
+"endLine":  230,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  93,
+"endLine":  230,
+"endColumn":  99
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  42,
+"endLine":  230,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L231",
+"region":  {
+"startLine":  231,
+"startColumn":  17,
+"endLine":  231,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L233",
+"region":  {
+"startLine":  233,
+"startColumn":  17,
+"endLine":  233,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L237",
+"region":  {
+"startLine":  237,
+"startColumn":  21,
+"endLine":  237,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L245",
+"region":  {
+"startLine":  245,
+"startColumn":  13,
+"endLine":  245,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L246",
+"region":  {
+"startLine":  246,
+"startColumn":  17,
+"endLine":  246,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L246",
+"region":  {
+"startLine":  246,
+"startColumn":  39,
+"endLine":  246,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L250",
+"region":  {
+"startLine":  250,
+"startColumn":  9,
+"endLine":  250,
+"endColumn":  13
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  24,
+"endLine":  204,
+"endColumn":  37
+}
+}
+]
+},
+{
+"id":  "S3776",
 "message":  "Refactor this method to reduce its Cognitive Complexity from 47 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L374",
 "region":  {
 "startLine":  374,
 "startColumn":  17,
@@ -2189,7 +1526,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  13,
@@ -2198,7 +1535,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  13,
@@ -2207,7 +1544,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L395",
 "region":  {
 "startLine":  395,
 "startColumn":  13,
@@ -2216,7 +1553,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L403",
 "region":  {
 "startLine":  403,
 "startColumn":  13,
@@ -2225,7 +1562,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  17,
@@ -2234,7 +1571,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  17,
@@ -2243,7 +1580,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  83,
@@ -2252,7 +1589,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  17,
@@ -2261,7 +1598,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  17,
@@ -2270,7 +1607,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  21,
@@ -2279,7 +1616,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  21,
@@ -2288,7 +1625,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L442",
 "region":  {
 "startLine":  442,
 "startColumn":  21,
@@ -2297,7 +1634,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  21,
@@ -2306,7 +1643,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  25,
@@ -2315,7 +1652,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  25,
@@ -2324,7 +1661,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L459",
 "region":  {
 "startLine":  459,
 "startColumn":  25,
@@ -2333,7 +1670,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L463",
 "region":  {
 "startLine":  463,
 "startColumn":  25,
@@ -2342,7 +1679,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L471",
 "region":  {
 "startLine":  471,
 "startColumn":  21,
@@ -2351,7 +1688,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L479",
 "region":  {
 "startLine":  479,
 "startColumn":  17,
@@ -2360,7 +1697,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L491",
 "region":  {
 "startLine":  491,
 "startColumn":  9,
@@ -2372,10 +1709,673 @@
 },
 {
 "id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L539",
+"region":  {
+"startLine":  539,
+"startColumn":  14,
+"endLine":  539,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L548",
+"region":  {
+"startLine":  548,
+"startColumn":  37,
+"endLine":  548,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L559",
+"region":  {
+"startLine":  559,
+"startColumn":  13,
+"endLine":  559,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L561",
+"region":  {
+"startLine":  561,
+"startColumn":  13,
+"endLine":  561,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L583",
+"region":  {
+"startLine":  583,
+"startColumn":  13,
+"endLine":  583,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L584",
+"region":  {
+"startLine":  584,
+"startColumn":  17,
+"endLine":  584,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L587",
+"region":  {
+"startLine":  587,
+"startColumn":  13,
+"endLine":  587,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L588",
+"region":  {
+"startLine":  588,
+"startColumn":  17,
+"endLine":  588,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L591",
+"region":  {
+"startLine":  591,
+"startColumn":  13,
+"endLine":  591,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L592",
+"region":  {
+"startLine":  592,
+"startColumn":  17,
+"endLine":  592,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L596",
+"region":  {
+"startLine":  596,
+"startColumn":  17,
+"endLine":  596,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L602",
+"region":  {
+"startLine":  602,
+"startColumn":  13,
+"endLine":  602,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L602",
+"region":  {
+"startLine":  602,
+"startColumn":  41,
+"endLine":  602,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L605",
+"region":  {
+"startLine":  605,
+"startColumn":  17,
+"endLine":  605,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L605",
+"region":  {
+"startLine":  605,
+"startColumn":  45,
+"endLine":  605,
+"endColumn":  51
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L607",
+"region":  {
+"startLine":  607,
+"startColumn":  21,
+"endLine":  607,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L608",
+"region":  {
+"startLine":  608,
+"startColumn":  25,
+"endLine":  608,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L618",
+"region":  {
+"startLine":  618,
+"startColumn":  17,
+"endLine":  618,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L620",
+"region":  {
+"startLine":  620,
+"startColumn":  21,
+"endLine":  620,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L628",
+"region":  {
+"startLine":  628,
+"startColumn":  9,
+"endLine":  628,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this constructor to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  12,
+"endLine":  75,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  13,
+"endLine":  104,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  17,
+"endLine":  105,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  38,
+"endLine":  105,
+"endColumn":  41
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  21,
+"endLine":  108,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  60,
+"endLine":  108,
+"endColumn":  67
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  21,
+"endLine":  112,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  13,
+"endLine":  117,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  17,
+"endLine":  119,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  17,
+"endLine":  121,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  13,
+"endLine":  126,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  13,
+"endLine":  132,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  13,
+"endLine":  138,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L146",
+"region":  {
+"startLine":  146,
+"startColumn":  9,
+"endLine":  146,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L813",
+"region":  {
+"startLine":  813,
+"startColumn":  22,
+"endLine":  813,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L819",
+"region":  {
+"startLine":  819,
+"startColumn":  17,
+"endLine":  819,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L821",
+"region":  {
+"startLine":  821,
+"startColumn":  21,
+"endLine":  821,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L822",
+"region":  {
+"startLine":  822,
+"startColumn":  21,
+"endLine":  822,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L823",
+"region":  {
+"startLine":  823,
+"startColumn":  21,
+"endLine":  823,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L824",
+"region":  {
+"startLine":  824,
+"startColumn":  21,
+"endLine":  824,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L825",
+"region":  {
+"startLine":  825,
+"startColumn":  21,
+"endLine":  825,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L826",
+"region":  {
+"startLine":  826,
+"startColumn":  21,
+"endLine":  826,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L827",
+"region":  {
+"startLine":  827,
+"startColumn":  21,
+"endLine":  827,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L828",
+"region":  {
+"startLine":  828,
+"startColumn":  21,
+"endLine":  828,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L838",
+"region":  {
+"startLine":  838,
+"startColumn":  17,
+"endLine":  838,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L840",
+"region":  {
+"startLine":  840,
+"startColumn":  21,
+"endLine":  840,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L841",
+"region":  {
+"startLine":  841,
+"startColumn":  21,
+"endLine":  841,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L842",
+"region":  {
+"startLine":  842,
+"startColumn":  21,
+"endLine":  842,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L843",
+"region":  {
+"startLine":  843,
+"startColumn":  21,
+"endLine":  843,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L852",
+"region":  {
+"startLine":  852,
+"startColumn":  17,
+"endLine":  852,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L854",
+"region":  {
+"startLine":  854,
+"startColumn":  21,
+"endLine":  854,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L855",
+"region":  {
+"startLine":  855,
+"startColumn":  21,
+"endLine":  855,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L856",
+"region":  {
+"startLine":  856,
+"startColumn":  21,
+"endLine":  856,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L857",
+"region":  {
+"startLine":  857,
+"startColumn":  21,
+"endLine":  857,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L901",
+"region":  {
+"startLine":  901,
+"startColumn":  17,
+"endLine":  901,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L902",
+"region":  {
+"startLine":  902,
+"startColumn":  9,
+"endLine":  902,
+"endColumn":  12
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L904",
+"region":  {
+"startLine":  904,
+"startColumn":  13,
+"endLine":  904,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L907",
+"region":  {
+"startLine":  907,
+"startColumn":  13,
+"endLine":  907,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L914",
+"region":  {
+"startLine":  914,
+"startColumn":  9,
+"endLine":  914,
+"endColumn":  12
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L917",
+"region":  {
+"startLine":  917,
+"startColumn":  13,
+"endLine":  917,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L917",
+"region":  {
+"startLine":  917,
+"startColumn":  34,
+"endLine":  917,
+"endColumn":  41
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L923",
+"region":  {
+"startLine":  923,
+"startColumn":  13,
+"endLine":  923,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L927",
+"region":  {
+"startLine":  927,
+"startColumn":  17,
+"endLine":  927,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L929",
+"region":  {
+"startLine":  929,
+"startColumn":  17,
+"endLine":  929,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L933",
+"region":  {
+"startLine":  933,
+"startColumn":  17,
+"endLine":  933,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L937",
+"region":  {
+"startLine":  937,
+"startColumn":  13,
+"endLine":  937,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L945",
+"region":  {
+"startLine":  945,
+"startColumn":  9,
+"endLine":  945,
+"endColumn":  12
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L950",
+"region":  {
+"startLine":  950,
+"startColumn":  13,
+"endLine":  950,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L951",
+"region":  {
+"startLine":  951,
+"startColumn":  17,
+"endLine":  951,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L961",
+"region":  {
+"startLine":  961,
+"startColumn":  28,
+"endLine":  961,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L963",
+"region":  {
+"startLine":  963,
+"startColumn":  17,
+"endLine":  963,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S3776",
 "message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  9,
@@ -2384,7 +2384,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  9,
@@ -2393,7 +2393,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  13,
@@ -2402,7 +2402,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  34,
@@ -2411,7 +2411,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  17,
@@ -2420,7 +2420,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  40,
@@ -2429,7 +2429,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  25,
@@ -2438,7 +2438,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  25,
@@ -2447,7 +2447,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  21,
@@ -2456,7 +2456,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  9,
@@ -2465,7 +2465,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  13,
@@ -2474,7 +2474,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  17,
@@ -2483,7 +2483,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  21,

@@ -4,7 +4,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  40,

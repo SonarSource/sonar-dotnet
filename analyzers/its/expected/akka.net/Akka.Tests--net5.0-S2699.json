@@ -4,33 +4,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
-"region":  {
-"startLine":  74,
-"startColumn":  21,
-"endLine":  74,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
-"region":  {
-"startLine":  97,
-"startColumn":  21,
-"endLine":  97,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ActorRefSpec.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  21,
@@ -43,7 +17,33 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ActorRefSpec.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  21,
+"endLine":  74,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ActorRefSpec.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  21,
+"endLine":  97,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ActorSystemSpec.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\AlreadyCancelledCancelableTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Cancellation/AlreadyCancelledCancelableTests.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\AlreadyCancelledCancelableTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Cancellation/AlreadyCancelledCancelableTests.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\AlreadyCancelledCancelableTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Cancellation/AlreadyCancelledCancelableTests.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\AlreadyCancelledCancelableTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Cancellation/AlreadyCancelledCancelableTests.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\AlreadyCancelledCancelableTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Cancellation/AlreadyCancelledCancelableTests.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\CoordinatedShutdownSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/CoordinatedShutdownSpec.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Dispatch\ActorModelSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Dispatch/ActorModelSpec.cs#L644",
 "region":  {
 "startLine":  644,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\InboxSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/InboxSpec.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PropsCreationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/PropsCreationSpec.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  21,
@@ -173,7 +173,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PropsCreationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/PropsCreationSpec.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  21,
@@ -186,7 +186,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PropsCreationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/PropsCreationSpec.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  21,
@@ -199,7 +199,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PropsCreationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/PropsCreationSpec.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  21,
@@ -212,7 +212,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PropsCreationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/PropsCreationSpec.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  21,
@@ -225,7 +225,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PropsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/PropsSpec.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  21,
@@ -238,7 +238,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ReceiveTimeoutSpec.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  21,
@@ -251,7 +251,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ReceiveTimeoutSpec.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  21,
@@ -264,7 +264,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ReceiveTimeoutSpec.cs#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  21,
@@ -277,7 +277,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ReceiveTimeoutSpec.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  21,
@@ -290,7 +290,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ReceiveTimeoutSpec.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  21,
@@ -303,7 +303,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ReceiveTimeoutSpec.cs#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  21,
@@ -316,7 +316,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ReceiveTimeoutSpec.cs#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  21,
@@ -329,7 +329,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RemotePathParsingSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/RemotePathParsingSpec.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  25,
@@ -342,7 +342,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RemotePathParsingSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/RemotePathParsingSpec.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  25,
@@ -355,33 +355,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
-"region":  {
-"startLine":  53,
-"startColumn":  21,
-"endLine":  53,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
-"region":  {
-"startLine":  90,
-"startColumn":  21,
-"endLine":  90,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Stash/ActorWithStashSpec.cs#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  21,
@@ -394,7 +368,33 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\ConfigurationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Stash/ActorWithStashSpec.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  21,
+"endLine":  53,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Stash/ActorWithStashSpec.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  21,
+"endLine":  90,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Configuration/ConfigurationSpec.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  21,
@@ -407,7 +407,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\ConfigurationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Configuration/ConfigurationSpec.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  21,
@@ -420,20 +420,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
-"region":  {
-"startLine":  87,
-"startColumn":  21,
-"endLine":  87,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Dispatch/DispatchersSpec.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  21,
@@ -446,7 +433,20 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Dispatch/DispatchersSpec.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  21,
+"endLine":  87,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Event/EventBusSpec.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  21,
@@ -459,7 +459,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Event/EventBusSpec.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  21,
@@ -472,7 +472,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/MatchHandler/MatchHandlerBuilderTests.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  21,
@@ -485,7 +485,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/MatchHandler/MatchHandlerBuilderTests.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  21,
@@ -498,7 +498,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ConfiguredLocalRoutingSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Routing/ConfiguredLocalRoutingSpec.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  21,
@@ -511,7 +511,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RandomSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Routing/RandomSpec.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  21,
@@ -524,7 +524,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoundRobinSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Routing/RoundRobinSpec.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  21,
@@ -537,7 +537,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoundRobinSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Routing/RoundRobinSpec.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  21,
@@ -550,7 +550,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoundRobinSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Routing/RoundRobinSpec.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  21,
@@ -563,7 +563,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Routing/RoutingSpec.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  21,
@@ -576,7 +576,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\SmallestMailboxSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Routing/SmallestMailboxSpec.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  21,
@@ -589,7 +589,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Util\PatternSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Util/PatternSpec.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  21,
@@ -602,7 +602,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Util\StableListPriorityQueueSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Util/StableListPriorityQueueSpec.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  25,

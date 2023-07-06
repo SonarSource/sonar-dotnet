@@ -4,7 +4,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L817-L819",
 "region":  {
 "startLine":  817,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (12) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L825-L828",
 "region":  {
 "startLine":  825,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L147-L148",
 "region":  {
 "startLine":  147,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  40,
@@ -56,7 +56,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (8) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L673-L675",
 "region":  {
 "startLine":  673,
 "startColumn":  28,
@@ -69,33 +69,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
-"region":  {
-"startLine":  338,
-"startColumn":  44,
-"endLine":  340,
-"endColumn":  178
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
-"region":  {
-"startLine":  343,
-"startColumn":  95,
-"endLine":  343,
-"endColumn":  388
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1125",
 "region":  {
 "startLine":  1125,
 "startColumn":  88,
@@ -108,7 +82,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1135",
 "region":  {
 "startLine":  1135,
 "startColumn":  99,
@@ -121,7 +95,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1193-L1195",
 "region":  {
 "startLine":  1193,
 "startColumn":  32,
@@ -132,9 +106,35 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L338-L340",
+"region":  {
+"startLine":  338,
+"startColumn":  44,
+"endLine":  340,
+"endColumn":  178
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L343",
+"region":  {
+"startLine":  343,
+"startColumn":  95,
+"endLine":  343,
+"endColumn":  388
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  28,

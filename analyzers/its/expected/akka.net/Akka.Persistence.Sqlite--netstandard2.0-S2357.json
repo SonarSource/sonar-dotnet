@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'DefaultJournalConfig' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Extension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Extension.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'DefaultSnapshotConfig' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Extension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Extension.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  32,

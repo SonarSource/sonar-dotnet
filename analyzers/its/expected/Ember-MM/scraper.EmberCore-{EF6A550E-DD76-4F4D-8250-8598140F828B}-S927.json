@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'studio' to 'sStudio' to match the interface declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  72,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'mMovie' to 'DBMovie' to match the interface declaration.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L640",
 "region":  {
 "startLine":  640,
 "startColumn":  38,

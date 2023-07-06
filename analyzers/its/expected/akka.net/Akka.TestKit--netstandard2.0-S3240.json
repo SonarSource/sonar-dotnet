@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L482",
 "region":  {
 "startLine":  482,
 "startColumn":  13,

@@ -4,7 +4,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2991",
 "region":  {
 "startLine":  2991,
 "startColumn":  44,
@@ -17,7 +17,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Subtract' for the operator '-'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3006",
 "region":  {
 "startLine":  3006,
 "startColumn":  44,
@@ -30,7 +30,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L723",
 "region":  {
 "startLine":  723,
 "startColumn":  50,
@@ -43,7 +43,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Subtract' for the operator '-'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L734",
 "region":  {
 "startLine":  734,
 "startColumn":  50,

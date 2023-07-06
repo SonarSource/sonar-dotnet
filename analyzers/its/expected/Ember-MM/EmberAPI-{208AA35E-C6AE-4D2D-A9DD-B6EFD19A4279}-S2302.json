@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'source' with 'NameOf(source)'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L933",
 "region":  {
 "startLine":  933,
 "startColumn":  67,
@@ -17,7 +17,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'separator' with 'NameOf(separator)'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L934",
 "region":  {
 "startLine":  934,
 "startColumn":  77,

@@ -4,7 +4,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  25,

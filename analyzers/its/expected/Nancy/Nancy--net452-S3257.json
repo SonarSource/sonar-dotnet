@@ -4,7 +4,7 @@
 "id":  "S3257",
 "message":  "Remove the array type; it is redundant.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  51,
@@ -17,7 +17,7 @@
 "id":  "S3257",
 "message":  "Remove the array type; it is redundant.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Response.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Response.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  47,
@@ -30,7 +30,7 @@
 "id":  "S3257",
 "message":  "Remove the array type; it is redundant.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3731",
 "region":  {
 "startLine":  3731,
 "startColumn":  94,
@@ -43,7 +43,7 @@
 "id":  "S3257",
 "message":  "Remove the array type; it is redundant.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3735",
 "region":  {
 "startLine":  3735,
 "startColumn":  63,
@@ -56,7 +56,7 @@
 "id":  "S3257",
 "message":  "Remove the array type; it is redundant.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3758",
 "region":  {
 "startLine":  3758,
 "startColumn":  94,

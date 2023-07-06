@@ -4,7 +4,7 @@
 "id":  "S4433",
 "message":  "Set the 'AuthenticationType' property of this DirectoryEntry to 'AuthenticationTypes.Secure'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4433.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4433.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  40,

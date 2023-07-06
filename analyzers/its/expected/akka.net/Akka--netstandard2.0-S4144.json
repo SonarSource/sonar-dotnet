@@ -5,7 +5,7 @@
 "message":  "Update this method so that its implementation is not identical to 'Become'.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/ActorState.cs#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  28,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/ActorState.cs#L344",
 "region":  {
 "startLine":  344,
 "startColumn":  28,

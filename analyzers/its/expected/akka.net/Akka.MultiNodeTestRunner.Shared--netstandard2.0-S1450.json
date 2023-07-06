@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_teamCityWriter' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TeamCityMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TeamCityMessageSinkActor.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  42,

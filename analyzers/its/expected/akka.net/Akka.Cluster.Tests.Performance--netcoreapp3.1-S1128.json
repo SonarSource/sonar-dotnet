@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Properties\AssemblyInfo.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Properties/AssemblyInfo.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Properties\AssemblyInfo.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Properties/AssemblyInfo.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
@@ -30,12 +30,12 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L10",
 "region":  {
-"startLine":  9,
+"startLine":  10,
 "startColumn":  1,
-"endLine":  9,
-"endColumn":  34
+"endLine":  10,
+"endColumn":  19
 }
 }
 },
@@ -43,12 +43,12 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L9",
 "region":  {
-"startLine":  10,
+"startLine":  9,
 "startColumn":  1,
-"endLine":  10,
-"endColumn":  19
+"endLine":  9,
+"endColumn":  34
 }
 }
 }

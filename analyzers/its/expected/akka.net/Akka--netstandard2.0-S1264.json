@@ -4,7 +4,7 @@
 "id":  "S1264",
 "message":  "Replace this 'for' loop with a 'while' loop.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1264",
 "message":  "Replace this 'for' loop with a 'while' loop.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1264",
 "message":  "Replace this 'for' loop with a 'while' loop.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1264",
 "message":  "Replace this 'for' loop with a 'while' loop.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L585",
 "region":  {
 "startLine":  585,
 "startColumn":  17,

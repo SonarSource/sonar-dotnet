@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 233 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  1,
@@ -15,269 +15,9 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 271 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  341,
-"startColumn":  1,
-"endLine":  341,
-"endColumn":  272
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  342,
-"startColumn":  1,
-"endLine":  342,
-"endColumn":  216
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 273 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  427,
-"startColumn":  1,
-"endLine":  427,
-"endColumn":  274
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 232 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  437,
-"startColumn":  1,
-"endLine":  437,
-"endColumn":  233
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 264 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  438,
-"startColumn":  1,
-"endLine":  438,
-"endColumn":  265
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 263 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  443,
-"startColumn":  1,
-"endLine":  443,
-"endColumn":  264
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 276 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  456,
-"startColumn":  1,
-"endLine":  456,
-"endColumn":  277
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 281 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  460,
-"startColumn":  1,
-"endLine":  460,
-"endColumn":  282
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 294 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  461,
-"startColumn":  1,
-"endLine":  461,
-"endColumn":  295
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 280 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  464,
-"startColumn":  1,
-"endLine":  464,
-"endColumn":  281
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 286 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  465,
-"startColumn":  1,
-"endLine":  465,
-"endColumn":  287
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 256 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  612,
-"startColumn":  1,
-"endLine":  612,
-"endColumn":  257
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 272 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  622,
-"startColumn":  1,
-"endLine":  622,
-"endColumn":  273
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 207 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  634,
-"startColumn":  1,
-"endLine":  634,
-"endColumn":  208
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 267 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  686,
-"startColumn":  1,
-"endLine":  686,
-"endColumn":  268
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 249 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  704,
-"startColumn":  1,
-"endLine":  704,
-"endColumn":  250
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 264 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  718,
-"startColumn":  1,
-"endLine":  718,
-"endColumn":  265
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 302 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  728,
-"startColumn":  1,
-"endLine":  728,
-"endColumn":  303
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 241 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  773,
-"startColumn":  1,
-"endLine":  773,
-"endColumn":  242
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  783,
-"startColumn":  1,
-"endLine":  783,
-"endColumn":  263
-}
-}
-},
-{
-"id":  "S103",
 "message":  "Split this 258 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
 "region":  {
 "startLine":  1498,
 "startColumn":  1,
@@ -290,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 252 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
 "region":  {
 "startLine":  1561,
 "startColumn":  1,
@@ -303,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 364 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1594",
 "region":  {
 "startLine":  1594,
 "startColumn":  1,
@@ -314,9 +54,269 @@
 },
 {
 "id":  "S103",
+"message":  "Split this 271 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L341",
+"region":  {
+"startLine":  341,
+"startColumn":  1,
+"endLine":  341,
+"endColumn":  272
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L342",
+"region":  {
+"startLine":  342,
+"startColumn":  1,
+"endLine":  342,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 273 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L427",
+"region":  {
+"startLine":  427,
+"startColumn":  1,
+"endLine":  427,
+"endColumn":  274
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 232 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L437",
+"region":  {
+"startLine":  437,
+"startColumn":  1,
+"endLine":  437,
+"endColumn":  233
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 264 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L438",
+"region":  {
+"startLine":  438,
+"startColumn":  1,
+"endLine":  438,
+"endColumn":  265
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 263 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L443",
+"region":  {
+"startLine":  443,
+"startColumn":  1,
+"endLine":  443,
+"endColumn":  264
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 276 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L456",
+"region":  {
+"startLine":  456,
+"startColumn":  1,
+"endLine":  456,
+"endColumn":  277
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 281 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L460",
+"region":  {
+"startLine":  460,
+"startColumn":  1,
+"endLine":  460,
+"endColumn":  282
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 294 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L461",
+"region":  {
+"startLine":  461,
+"startColumn":  1,
+"endLine":  461,
+"endColumn":  295
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 280 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L464",
+"region":  {
+"startLine":  464,
+"startColumn":  1,
+"endLine":  464,
+"endColumn":  281
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 286 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L465",
+"region":  {
+"startLine":  465,
+"startColumn":  1,
+"endLine":  465,
+"endColumn":  287
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 256 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L612",
+"region":  {
+"startLine":  612,
+"startColumn":  1,
+"endLine":  612,
+"endColumn":  257
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 272 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L622",
+"region":  {
+"startLine":  622,
+"startColumn":  1,
+"endLine":  622,
+"endColumn":  273
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 207 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L634",
+"region":  {
+"startLine":  634,
+"startColumn":  1,
+"endLine":  634,
+"endColumn":  208
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 267 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L686",
+"region":  {
+"startLine":  686,
+"startColumn":  1,
+"endLine":  686,
+"endColumn":  268
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 249 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L704",
+"region":  {
+"startLine":  704,
+"startColumn":  1,
+"endLine":  704,
+"endColumn":  250
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 264 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L718",
+"region":  {
+"startLine":  718,
+"startColumn":  1,
+"endLine":  718,
+"endColumn":  265
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 302 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L728",
+"region":  {
+"startLine":  728,
+"startColumn":  1,
+"endLine":  728,
+"endColumn":  303
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 241 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L773",
+"region":  {
+"startLine":  773,
+"startColumn":  1,
+"endLine":  773,
+"endColumn":  242
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L783",
+"region":  {
+"startLine":  783,
+"startColumn":  1,
+"endLine":  783,
+"endColumn":  263
+}
+}
+},
+{
+"id":  "S103",
 "message":  "Split this 209 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  1,

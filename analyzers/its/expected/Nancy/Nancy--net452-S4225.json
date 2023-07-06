@@ -4,7 +4,7 @@
 "id":  "S4225",
 "message":  "Refactor this extension to extend a more concrete type.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\ObjectExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ObjectExtensions.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  31,
@@ -17,7 +17,7 @@
 "id":  "S4225",
 "message":  "Refactor this extension to extend a more concrete type.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/Extensions.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  28,

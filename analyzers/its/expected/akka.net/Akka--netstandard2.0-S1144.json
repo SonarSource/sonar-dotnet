@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private class 'FactoryConsumer'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L683",
 "region":  {
 "startLine":  683,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'FactoryConsumer'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L687",
 "region":  {
 "startLine":  687,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_stopped'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RootGuardianSupervisor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RootGuardianSupervisor.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'ExecuteRunnableWithState'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L596",
 "region":  {
 "startLine":  596,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'CurrentSynchronizationContextExecutorConfig'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L522-L523",
 "region":  {
 "startLine":  522,
 "startColumn":  9,
@@ -69,7 +69,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_mailboxNonZeroPushTimeoutWarningIssued'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  9,
@@ -82,7 +82,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'HasTimeLeft'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'TimeLeft'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  29,
@@ -108,7 +108,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'm_padding1'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L567",
 "region":  {
 "startLine":  567,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'm_padding2'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L569",
 "region":  {
 "startLine":  569,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'TotalBufferSize'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'UpdatePendingWriteAndThen'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L892",
 "region":  {
 "startLine":  892,
 "startColumn":  20,
@@ -160,7 +160,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'WriteFileFailed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L903",
 "region":  {
 "startLine":  903,
 "startColumn":  20,
@@ -173,7 +173,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'acceptLimit'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpListener.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  9,
@@ -186,7 +186,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'SendAsync'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  22,
@@ -199,7 +199,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_objectArrayType'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialActionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialActionBuilder.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  9,
@@ -212,7 +212,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'RotateLeft64'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  30,
@@ -225,7 +225,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'paramNameDictionary'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L36-L38",
 "region":  {
 "startLine":  36,
 "startColumn":  9,

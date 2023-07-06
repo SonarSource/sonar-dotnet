@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipartSubStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  13,

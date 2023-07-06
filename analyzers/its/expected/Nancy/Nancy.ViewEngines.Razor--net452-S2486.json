@@ -4,7 +4,7 @@
 "id":  "S2486",
 "message":  "Handle the exception or explain in a comment why it can be ignored.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorAssemblyProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/RazorAssemblyProvider.cs#L69-L71",
 "region":  {
 "startLine":  69,
 "startColumn":  17,

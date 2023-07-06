@@ -4,7 +4,7 @@
 "id":  "S107",
 "message":  "Constructor has 12 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L411-L423",
 "region":  {
 "startLine":  411,
 "startColumn":  41,
@@ -17,7 +17,7 @@
 "id":  "S107",
 "message":  "Method has 12 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L452-L464",
 "region":  {
 "startLine":  452,
 "startColumn":  47,
@@ -30,7 +30,7 @@
 "id":  "S107",
 "message":  "Constructor has 8 new parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L590",
 "region":  {
 "startLine":  590,
 "startColumn":  26,
@@ -43,7 +43,7 @@
 "id":  "S107",
 "message":  "Constructor has 9 new parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L691",
 "region":  {
 "startLine":  691,
 "startColumn":  26,
@@ -56,7 +56,7 @@
 "id":  "S107",
 "message":  "Constructor has 8 new parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L504",
 "region":  {
 "startLine":  504,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S107",
 "message":  "Constructor has 9 new parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L604",
 "region":  {
 "startLine":  604,
 "startColumn":  27,
@@ -82,7 +82,7 @@
 "id":  "S107",
 "message":  "Constructor has 8 new parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Restart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L447-L456",
 "region":  {
 "startLine":  447,
 "startColumn":  42,
@@ -95,7 +95,7 @@
 "id":  "S107",
 "message":  "Method has 8 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L219-L220",
 "region":  {
 "startLine":  219,
 "startColumn":  53,
@@ -108,7 +108,7 @@
 "id":  "S107",
 "message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L438-L446",
 "region":  {
 "startLine":  438,
 "startColumn":  32,
@@ -121,7 +121,7 @@
 "id":  "S107",
 "message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1239-L1247",
 "region":  {
 "startLine":  1239,
 "startColumn":  36,

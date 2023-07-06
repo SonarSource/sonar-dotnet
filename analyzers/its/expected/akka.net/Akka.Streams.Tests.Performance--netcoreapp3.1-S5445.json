@@ -4,7 +4,7 @@
 "id":  "S5445",
 "message":  "'Path.GetTempFileName()' is insecure. Use 'Path.GetRandomFileName()' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\IO\FileSourcesBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  37,

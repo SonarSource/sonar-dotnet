@@ -4,7 +4,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L743-L744",
 "region":  {
 "startLine":  743,
 "startColumn":  28,
@@ -17,7 +17,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L135-L137",
 "region":  {
 "startLine":  135,
 "startColumn":  16,
@@ -30,7 +30,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  30,
@@ -43,7 +43,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (22) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L69-L73",
 "region":  {
 "startLine":  69,
 "startColumn":  16,
@@ -56,7 +56,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  16,
@@ -67,22 +67,9 @@
 },
 {
 "id":  "S1067",
-"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  218,
-"startColumn":  23,
-"endLine":  219,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1438",
 "region":  {
 "startLine":  1438,
 "startColumn":  19,
@@ -93,9 +80,22 @@
 },
 {
 "id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L218-L219",
+"region":  {
+"startLine":  218,
+"startColumn":  23,
+"endLine":  219,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2944",
 "region":  {
 "startLine":  2944,
 "startColumn":  16,
@@ -108,7 +108,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3002",
 "region":  {
 "startLine":  3002,
 "startColumn":  12,
@@ -121,7 +121,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3129-L3131",
 "region":  {
 "startLine":  3129,
 "startColumn":  20,
@@ -134,7 +134,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3296",
 "region":  {
 "startLine":  3296,
 "startColumn":  16,
@@ -147,7 +147,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3429",
 "region":  {
 "startLine":  3429,
 "startColumn":  20,
@@ -160,7 +160,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3627",
 "region":  {
 "startLine":  3627,
 "startColumn":  16,
@@ -173,7 +173,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3753",
 "region":  {
 "startLine":  3753,
 "startColumn":  20,
@@ -186,7 +186,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3890",
 "region":  {
 "startLine":  3890,
 "startColumn":  16,
@@ -199,7 +199,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4017",
 "region":  {
 "startLine":  4017,
 "startColumn":  20,
@@ -212,7 +212,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (10) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5242-L5245",
 "region":  {
 "startLine":  5242,
 "startColumn":  19,
@@ -225,7 +225,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (19) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6513-L6517",
 "region":  {
 "startLine":  6513,
 "startColumn":  28,
@@ -238,7 +238,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (10) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6774-L6776",
 "region":  {
 "startLine":  6774,
 "startColumn":  12,
@@ -251,7 +251,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (10) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6798-L6800",
 "region":  {
 "startLine":  6798,
 "startColumn":  12,
@@ -264,7 +264,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (8) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7480",
 "region":  {
 "startLine":  7480,
 "startColumn":  20,
@@ -277,7 +277,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (9) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7549",
 "region":  {
 "startLine":  7549,
 "startColumn":  20,
@@ -290,7 +290,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7564-L7566",
 "region":  {
 "startLine":  7564,
 "startColumn":  16,
@@ -303,7 +303,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7573",
 "region":  {
 "startLine":  7573,
 "startColumn":  20,
@@ -316,7 +316,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7600",
 "region":  {
 "startLine":  7600,
 "startColumn":  20,
@@ -329,7 +329,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7638",
 "region":  {
 "startLine":  7638,
 "startColumn":  33,
@@ -342,7 +342,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (16) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7646-L7649",
 "region":  {
 "startLine":  7646,
 "startColumn":  16,
@@ -355,7 +355,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (16) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7724-L7727",
 "region":  {
 "startLine":  7724,
 "startColumn":  20,
@@ -368,7 +368,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7993",
 "region":  {
 "startLine":  7993,
 "startColumn":  20,

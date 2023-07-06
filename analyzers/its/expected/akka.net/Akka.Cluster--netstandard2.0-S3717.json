@@ -4,7 +4,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L438",
 "region":  {
 "startLine":  438,
 "startColumn":  13,

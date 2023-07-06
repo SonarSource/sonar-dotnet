@@ -5,7 +5,7 @@
 "message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  49,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  42,
@@ -38,7 +38,7 @@
 "message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  27,
@@ -47,7 +47,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  49,
@@ -56,7 +56,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  42,
@@ -71,7 +71,7 @@
 "message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  27,
@@ -80,7 +80,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  49,
@@ -89,7 +89,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  42,
@@ -104,7 +104,7 @@
 "message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  27,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  49,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  42,
@@ -137,7 +137,7 @@
 "message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  27,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  49,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  42,

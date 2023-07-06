@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_serialization' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData.LightningDB\LmdbDurableStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  59,

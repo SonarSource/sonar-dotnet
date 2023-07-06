@@ -4,7 +4,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'Identifier' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/SqlReadJournal.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  30,

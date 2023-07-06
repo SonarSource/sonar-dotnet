@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'disposed', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  31,
@@ -17,7 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'disposed', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  31,

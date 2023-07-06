@@ -4,7 +4,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_codec' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L449",
 "region":  {
 "startLine":  449,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_transportSupervisor' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_payloadSupport' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  48,
@@ -43,7 +43,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_allMode' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  39,

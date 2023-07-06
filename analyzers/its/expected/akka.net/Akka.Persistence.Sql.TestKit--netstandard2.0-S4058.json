@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'str.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlJournalConnectionFailureSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.TestKit/SqlJournalConnectionFailureSpec.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  40,

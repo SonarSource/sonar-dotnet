@@ -4,7 +4,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\StringExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/StringExtensions.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  55,

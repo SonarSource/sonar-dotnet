@@ -4,7 +4,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 36 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 47 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 43 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  26,
@@ -43,7 +43,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 46 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 35 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 37 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L668",
 "region":  {
 "startLine":  668,
 "startColumn":  27,
@@ -82,7 +82,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 48 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  18,
@@ -95,7 +95,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 31 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  18,
@@ -108,7 +108,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 61 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  29,
@@ -121,7 +121,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 34 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  20,

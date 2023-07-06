@@ -4,7 +4,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  24,

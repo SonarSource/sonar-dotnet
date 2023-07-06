@@ -4,7 +4,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  13,

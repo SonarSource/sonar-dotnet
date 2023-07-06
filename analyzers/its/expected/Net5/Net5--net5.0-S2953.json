@@ -5,7 +5,7 @@
 "message":  "Either implement 'IDisposable.Dispose', or totally rename this method to prevent confusion.",
 "location":  [
 {
-"uri":  "sources\Net5\Net5\S2953.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2953.Part1.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  29,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5\S2953.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2953.Part2.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  29,

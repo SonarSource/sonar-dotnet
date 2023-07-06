@@ -4,7 +4,7 @@
 "id":  "S2327",
 "message":  "Combine this 'try' with the one starting on line 96.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L103-L109",
 "region":  {
 "startLine":  103,
 "startColumn":  17,

@@ -5,7 +5,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  20,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  9,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  9,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  9,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  20,
@@ -65,7 +65,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L459",
 "region":  {
 "startLine":  459,
 "startColumn":  9,
@@ -74,7 +74,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L474",
 "region":  {
 "startLine":  474,
 "startColumn":  9,
@@ -83,7 +83,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L476",
 "region":  {
 "startLine":  476,
 "startColumn":  9,
@@ -92,7 +92,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L488",
 "region":  {
 "startLine":  488,
 "startColumn":  9,
@@ -107,7 +107,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Internal\CollectionsExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Internal/CollectionsExtensions.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  27,
@@ -116,7 +116,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Internal\CollectionsExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Internal/CollectionsExtensions.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  9,
@@ -125,7 +125,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Internal\CollectionsExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Internal/CollectionsExtensions.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  9,
@@ -140,7 +140,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L437",
 "region":  {
 "startLine":  437,
 "startColumn":  20,
@@ -149,7 +149,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L449",
 "region":  {
 "startLine":  449,
 "startColumn":  9,
@@ -164,7 +164,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  20,
@@ -173,7 +173,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  9,
@@ -188,7 +188,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  20,
@@ -197,7 +197,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  9,
@@ -212,7 +212,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  20,
@@ -221,7 +221,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  9,
@@ -236,7 +236,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  20,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  9,
@@ -260,7 +260,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  21,
@@ -269,7 +269,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  9,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  9,
@@ -287,7 +287,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  9,
@@ -296,7 +296,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  9,
@@ -311,7 +311,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  27,
@@ -320,7 +320,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  9,
@@ -335,7 +335,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  27,
@@ -344,7 +344,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  9,
@@ -359,7 +359,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  27,
@@ -368,7 +368,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  9,
@@ -383,7 +383,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  27,
@@ -392,7 +392,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  9,
@@ -407,7 +407,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  20,
@@ -416,7 +416,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  9,
@@ -425,7 +425,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  9,
@@ -434,7 +434,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  9,

@@ -4,7 +4,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net6\Net6\AllowAsyncMethodBuilderAttributeOnMethods.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AllowAsyncMethodBuilderAttributeOnMethods.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net6\Net6\GenericAttributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GenericAttributes.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  21,

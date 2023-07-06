@@ -4,7 +4,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1486",
 "region":  {
 "startLine":  1486,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 14 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FileSubscriber.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  17,

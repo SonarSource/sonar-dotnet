@@ -4,7 +4,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'bindFlags'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'bufferSizeLogKey', and replace 'var' with 'string'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  17,

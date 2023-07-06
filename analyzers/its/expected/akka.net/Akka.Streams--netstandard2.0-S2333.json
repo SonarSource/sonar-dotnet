@@ -4,7 +4,7 @@
 "id":  "S2333",
 "message":  "'unchecked' is redundant in this context.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S2333",
 "message":  "'unchecked' is redundant in this context.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L330",
 "region":  {
 "startLine":  330,
 "startColumn":  33,

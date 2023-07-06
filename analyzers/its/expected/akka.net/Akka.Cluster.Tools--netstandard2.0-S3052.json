@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'deltaCount', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_version', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L636",
 "region":  {
 "startLine":  636,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'PruneDeadline', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/Topics.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  42,
@@ -43,7 +43,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_totalBufferSize', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\PerGroupingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/PerGroupingBuffer.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_identityCounter', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonProxy.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  38,
@@ -69,7 +69,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_singleton', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonProxy.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  38,
@@ -82,7 +82,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_identityTimer', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonProxy.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  44,

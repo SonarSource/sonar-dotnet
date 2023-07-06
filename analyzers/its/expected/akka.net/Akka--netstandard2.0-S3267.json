@@ -4,7 +4,7 @@
 "id":  "S3267",
 "message":  "Loop should be simplified by calling Select(stats => stats.Child))",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  39,
@@ -17,7 +17,7 @@
 "id":  "S3267",
 "message":  "Loop should be simplified by calling Select(stats => stats.Child))",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  39,
@@ -30,7 +30,7 @@
 "id":  "S3267",
 "message":  "Loop should be simplified by calling Select(stats => stats.Child))",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  35,
@@ -44,7 +44,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  36,
@@ -53,7 +53,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  21,
@@ -67,7 +67,7 @@
 "id":  "S3267",
 "message":  "Loop should be simplified by calling Select(crs => crs.Child))",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L635",
 "region":  {
 "startLine":  635,
 "startColumn":  41,
@@ -81,7 +81,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L965",
 "region":  {
 "startLine":  965,
 "startColumn":  37,
@@ -90,7 +90,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L968",
 "region":  {
 "startLine":  968,
 "startColumn":  25,

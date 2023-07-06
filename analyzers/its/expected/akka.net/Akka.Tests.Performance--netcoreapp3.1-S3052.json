@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  43,
@@ -17,33 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
-"region":  {
-"startLine":  26,
-"startColumn":  43,
-"endLine":  26,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
-"region":  {
-"startLine":  71,
-"startColumn":  43,
-"endLine":  71,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  43,
@@ -56,7 +30,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  43,
@@ -67,9 +41,35 @@
 },
 {
 "id":  "S3052",
+"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  43,
+"endLine":  26,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  43,
+"endLine":  71,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
 "message":  "Remove this initialization to 'nameCounter', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\Internal\ChildrenContainerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  33,
@@ -82,7 +82,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_messagesSeen', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  36,
@@ -95,7 +95,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'i', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpInboundOnlySpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  27,

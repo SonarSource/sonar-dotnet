@@ -4,7 +4,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 34 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 16 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 6 statements that use 'Master.tmpMovie' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 11 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  9,
@@ -54,22 +54,9 @@
 },
 {
 "id":  "S2375",
-"message":  "Wrap this and the following 8 statements that use 'Me.chkImage(iIndex)' in a 'With' statement.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
-"region":  {
-"startLine":  144,
-"startColumn":  17,
-"endLine":  144,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2375",
 "message":  "Wrap this and the following 7 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1137",
 "region":  {
 "startLine":  1137,
 "startColumn":  13,
@@ -80,9 +67,22 @@
 },
 {
 "id":  "S2375",
+"message":  "Wrap this and the following 8 statements that use 'Me.chkImage(iIndex)' in a 'With' statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L144",
+"region":  {
+"startLine":  144,
+"startColumn":  17,
+"endLine":  144,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2375",
 "message":  "Wrap this and the following 9 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgTrailer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  9,
@@ -95,7 +95,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 6 statements that use 'Master.currMovie' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L596",
 "region":  {
 "startLine":  596,
 "startColumn":  29,
@@ -108,7 +108,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 7 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  9,

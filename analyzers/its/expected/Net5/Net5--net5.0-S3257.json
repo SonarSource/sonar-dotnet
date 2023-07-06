@@ -4,7 +4,7 @@
 "id":  "S3257",
 "message":  "Remove the type specification; it is redundant.",
 "location":  {
-"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  54,
@@ -17,7 +17,7 @@
 "id":  "S3257",
 "message":  "Remove the type specification; it is redundant.",
 "location":  {
-"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  61,
@@ -30,7 +30,7 @@
 "id":  "S3257",
 "message":  "Remove the type specification; it is redundant.",
 "location":  {
-"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  60,
@@ -43,7 +43,7 @@
 "id":  "S3257",
 "message":  "Remove the type specification; it is redundant.",
 "location":  {
-"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  67,
@@ -56,7 +56,7 @@
 "id":  "S3257",
 "message":  "Remove the type specification; it is redundant.",
 "location":  {
-"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  77,
@@ -69,7 +69,7 @@
 "id":  "S3257",
 "message":  "Remove the explicit delegate creation; it is redundant.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3257.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3257.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  32,
@@ -82,7 +82,7 @@
 "id":  "S3257",
 "message":  "'a' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3257.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3257.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  38,
@@ -95,7 +95,7 @@
 "id":  "S3257",
 "message":  "'b' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3257.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3257.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  41,
@@ -108,7 +108,7 @@
 "id":  "S3257",
 "message":  "'sender' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4830.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4830.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  72,
@@ -121,7 +121,7 @@
 "id":  "S3257",
 "message":  "'chain' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4830.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4830.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  80,
@@ -134,7 +134,7 @@
 "id":  "S3257",
 "message":  "'certificate' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4830.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4830.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  87,
@@ -147,7 +147,7 @@
 "id":  "S3257",
 "message":  "'SslPolicyErrors' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4830.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4830.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  100,

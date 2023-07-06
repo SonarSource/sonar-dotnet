@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'Date' private.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'TemperatureC' private.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  16,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'TemperatureF' private.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  16,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'Summary' private.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  19,

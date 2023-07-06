@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_receivedCount', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  40,

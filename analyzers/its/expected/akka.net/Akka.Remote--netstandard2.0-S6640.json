@@ -4,7 +4,7 @@
 "id":  "S6640",
 "message":  "Make sure that using "unsafe" is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  13,

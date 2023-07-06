@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DependencyInjection/ServiceProvider.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  25,

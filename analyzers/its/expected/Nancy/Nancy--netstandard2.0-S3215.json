@@ -4,7 +4,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInCultureConventions.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  31,

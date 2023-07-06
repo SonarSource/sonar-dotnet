@@ -4,7 +4,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  70,
@@ -17,20 +17,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
-"region":  {
-"startLine":  80,
-"startColumn":  55,
-"endLine":  80,
-"endColumn":  222
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L414",
 "region":  {
 "startLine":  414,
 "startColumn":  25,
@@ -43,12 +30,25 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  65,
 "endLine":  416,
 "endColumn":  90
+}
+}
+},
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  55,
+"endLine":  80,
+"endColumn":  222
 }
 }
 }

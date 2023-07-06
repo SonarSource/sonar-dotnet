@@ -4,12 +4,12 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "Replaced-Temporary-Path\.NETFramework,Version=v4.5.2.AssemblyAttributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/AssemblyInfo.cs#L4",
 "region":  {
-"startLine":  3,
+"startLine":  4,
 "startColumn":  1,
-"endLine":  3,
-"endColumn":  25
+"endLine":  4,
+"endColumn":  39
 }
 }
 },
@@ -17,12 +17,12 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\GeneratedCode.CS\AssemblyInfo.cs",
+"uri":  "Replaced-Temporary-Path\.NETFramework,Version=v4.5.2.AssemblyAttributes.cs#L3",
 "region":  {
-"startLine":  4,
+"startLine":  3,
 "startColumn":  1,
-"endLine":  4,
-"endColumn":  39
+"endLine":  3,
+"endColumn":  25
 }
 }
 }

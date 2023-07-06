@@ -4,7 +4,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_dedicatedThreadPool'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_queue'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BoundedMessageQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/BoundedMessageQueue.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'm_semaphore'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L528",
 "region":  {
 "startLine":  528,
 "startColumn":  30,
@@ -43,7 +43,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_socket'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpListener.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  19,
@@ -56,7 +56,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_socket'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  20,

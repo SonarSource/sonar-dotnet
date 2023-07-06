@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'rule' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\AdapterBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/AdapterBase.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validator' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\EmailAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/EmailAdapter.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  35,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validator' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\EqualAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/EqualAdapter.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  34,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validator' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\ExactLengthAdapater.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/ExactLengthAdapater.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  40,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validator' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\ExclusiveBetweenAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/ExclusiveBetweenAdapter.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  45,
@@ -69,7 +69,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validator' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\GreaterThanAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/GreaterThanAdapter.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  40,
@@ -82,7 +82,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validator' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\GreaterThanOrEqualAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/GreaterThanOrEqualAdapter.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  47,
@@ -95,7 +95,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validator' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\InclusiveBetweenAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/InclusiveBetweenAdapter.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  45,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validator' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\LengthAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/LengthAdapter.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  36,
@@ -121,7 +121,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validator' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\LessThanAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/LessThanAdapter.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  37,
@@ -134,7 +134,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validator' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\LessThanOrEqualAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/LessThanOrEqualAdapter.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  44,
@@ -147,7 +147,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validator' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\NotEqualAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/NotEqualAdapter.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  37,
@@ -160,7 +160,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validator' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\RegularExpressionAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.FluentValidation/RegularExpressionAdapter.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  47,

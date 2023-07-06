@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'builder' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Owin\AppBuilderExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Owin/AppBuilderExtensions.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  20,

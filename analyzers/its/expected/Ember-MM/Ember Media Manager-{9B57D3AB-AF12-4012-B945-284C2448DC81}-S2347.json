@@ -4,7 +4,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'pbFFMPEG_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'pbIMDB_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'pbIMPA_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'pbMPDB_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'pbTMDB_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'pbXBMC_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAddEditActor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAddEditActor.vb#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAddEditActor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAddEditActor.vb#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  17,
@@ -106,22 +106,9 @@
 },
 {
 "id":  "S2347",
-"message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
-"region":  {
-"startLine":  81,
-"startColumn":  17,
-"endLine":  81,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  17,
@@ -134,7 +121,20 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  17,
+"endLine":  81,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2347",
+"message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L904",
 "region":  {
 "startLine":  904,
 "startColumn":  17,
@@ -186,7 +186,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditSeason.vb#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  17,
@@ -199,7 +199,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditSeason.vb#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  17,
@@ -212,7 +212,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'llblURL_LinkClicked' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgErrorViewer.vb#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgErrorViewer.vb#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  17,
@@ -264,7 +264,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  17,
@@ -277,7 +277,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  17,
@@ -301,35 +301,9 @@
 },
 {
 "id":  "S2347",
-"message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgManual.vb",
-"region":  {
-"startLine":  62,
-"startColumn":  17,
-"endLine":  62,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgManual.vb",
-"region":  {
-"startLine":  86,
-"startColumn":  17,
-"endLine":  86,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2347",
 "message":  "Rename event handler 'txtURL_TextChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgManual.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgImgManual.vb#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  17,
@@ -342,11 +316,11 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgImgManual.vb#L62",
 "region":  {
-"startLine":  65,
+"startLine":  62,
 "startColumn":  17,
-"endLine":  65,
+"endLine":  62,
 "endColumn":  36
 }
 }
@@ -355,7 +329,20 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgImgManual.vb#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  17,
+"endLine":  86,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2347",
+"message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  17,
@@ -368,7 +355,20 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewSet.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  17,
+"endLine":  65,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2347",
+"message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgNewSet.vb#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  17,
@@ -381,7 +381,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewSet.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgNewSet.vb#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  17,
@@ -392,22 +392,9 @@
 },
 {
 "id":  "S2347",
-"message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgRestart.vb",
-"region":  {
-"startLine":  6,
-"startColumn":  17,
-"endLine":  6,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgRestart.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgRestart.vb#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  17,
@@ -420,7 +407,20 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgRestart.vb#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  17,
+"endLine":  6,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2347",
+"message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSetsManager.vb#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  17,
@@ -433,7 +433,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkAutoDetectVTS_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1012",
 "region":  {
 "startLine":  1012,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkCleanDotFanartJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1077",
 "region":  {
 "startLine":  1077,
 "startColumn":  17,
@@ -459,7 +459,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkCleanFanartJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1085",
 "region":  {
 "startLine":  1085,
 "startColumn":  17,
@@ -472,7 +472,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkCleanFolderJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1089",
 "region":  {
 "startLine":  1089,
 "startColumn":  17,
@@ -485,7 +485,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkCleanMovieFanartJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1093",
 "region":  {
 "startLine":  1093,
 "startColumn":  17,
@@ -498,7 +498,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkCleanMovieJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1097",
 "region":  {
 "startLine":  1097,
 "startColumn":  17,
@@ -511,7 +511,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkCleanMovieNameJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1101",
 "region":  {
 "startLine":  1101,
 "startColumn":  17,
@@ -524,7 +524,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkCleanMovieNFO_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1109",
 "region":  {
 "startLine":  1109,
 "startColumn":  17,
@@ -537,7 +537,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkCleanMovieTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1117",
 "region":  {
 "startLine":  1117,
 "startColumn":  17,
@@ -550,7 +550,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkCleanPosterJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1121",
 "region":  {
 "startLine":  1121,
 "startColumn":  17,
@@ -563,7 +563,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkCleanPosterTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1125",
 "region":  {
 "startLine":  1125,
 "startColumn":  17,
@@ -576,7 +576,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkEpisodeJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1217",
 "region":  {
 "startLine":  1217,
 "startColumn":  17,
@@ -589,7 +589,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkEpisodeDashThumbJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1221",
 "region":  {
 "startLine":  1221,
 "startColumn":  17,
@@ -602,7 +602,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkEpisodeTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1233",
 "region":  {
 "startLine":  1233,
 "startColumn":  17,
@@ -615,7 +615,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkFanartJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1258",
 "region":  {
 "startLine":  1258,
 "startColumn":  17,
@@ -628,7 +628,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkFolderJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1270",
 "region":  {
 "startLine":  1270,
 "startColumn":  17,
@@ -641,7 +641,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkIFOScan_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1310",
 "region":  {
 "startLine":  1310,
 "startColumn":  17,
@@ -654,7 +654,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkMissingNFO_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1378",
 "region":  {
 "startLine":  1378,
 "startColumn":  17,
@@ -667,7 +667,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkMovieJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1406",
 "region":  {
 "startLine":  1406,
 "startColumn":  17,
@@ -680,7 +680,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkMovieNameDotFanartJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1410",
 "region":  {
 "startLine":  1410,
 "startColumn":  17,
@@ -693,7 +693,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkMovieNameFanartJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1414",
 "region":  {
 "startLine":  1414,
 "startColumn":  17,
@@ -706,7 +706,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkMovieNameJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1418",
 "region":  {
 "startLine":  1418,
 "startColumn":  17,
@@ -719,7 +719,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkMovieNameDashPosterJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1422",
 "region":  {
 "startLine":  1422,
 "startColumn":  17,
@@ -732,7 +732,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkMovieNameNFO_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1430",
 "region":  {
 "startLine":  1430,
 "startColumn":  17,
@@ -745,7 +745,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkMovieNameTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1434",
 "region":  {
 "startLine":  1434,
 "startColumn":  17,
@@ -758,7 +758,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkMovieNFO_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1438",
 "region":  {
 "startLine":  1438,
 "startColumn":  17,
@@ -771,7 +771,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkMovieTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1450",
 "region":  {
 "startLine":  1450,
 "startColumn":  17,
@@ -784,7 +784,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkMPAA_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1458",
 "region":  {
 "startLine":  1458,
 "startColumn":  17,
@@ -797,7 +797,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkPosterJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1587",
 "region":  {
 "startLine":  1587,
 "startColumn":  17,
@@ -810,7 +810,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkPosterTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1591",
 "region":  {
 "startLine":  1591,
 "startColumn":  17,
@@ -823,7 +823,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkScraperShowEGU_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1748",
 "region":  {
 "startLine":  1748,
 "startColumn":  17,
@@ -836,7 +836,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkScraperShowMPAA_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1756",
 "region":  {
 "startLine":  1756,
 "startColumn":  17,
@@ -849,7 +849,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonAllJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1812",
 "region":  {
 "startLine":  1812,
 "startColumn":  17,
@@ -862,7 +862,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonAllTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1816",
 "region":  {
 "startLine":  1816,
 "startColumn":  17,
@@ -875,7 +875,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonAllPosterJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1820",
 "region":  {
 "startLine":  1820,
 "startColumn":  17,
@@ -888,7 +888,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonXXDashFanartJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1828",
 "region":  {
 "startLine":  1828,
 "startColumn":  17,
@@ -901,7 +901,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonFanartJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1840",
 "region":  {
 "startLine":  1840,
 "startColumn":  17,
@@ -914,7 +914,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonFolderJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1844",
 "region":  {
 "startLine":  1844,
 "startColumn":  17,
@@ -927,7 +927,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonNameJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1848",
 "region":  {
 "startLine":  1848,
 "startColumn":  17,
@@ -940,7 +940,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonNameTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1852",
 "region":  {
 "startLine":  1852,
 "startColumn":  17,
@@ -953,7 +953,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonPosterJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1860",
 "region":  {
 "startLine":  1860,
 "startColumn":  17,
@@ -966,7 +966,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonPosterTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1864",
 "region":  {
 "startLine":  1864,
 "startColumn":  17,
@@ -979,7 +979,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonXTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1868",
 "region":  {
 "startLine":  1868,
 "startColumn":  17,
@@ -992,7 +992,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonXXTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1872",
 "region":  {
 "startLine":  1872,
 "startColumn":  17,
@@ -1005,7 +1005,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonXXDashPosterJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1876",
 "region":  {
 "startLine":  1876,
 "startColumn":  17,
@@ -1018,7 +1018,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkShowFanartJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1896",
 "region":  {
 "startLine":  1896,
 "startColumn":  17,
@@ -1031,7 +1031,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkShowFolderJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1900",
 "region":  {
 "startLine":  1900,
 "startColumn":  17,
@@ -1044,7 +1044,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkShowJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1908",
 "region":  {
 "startLine":  1908,
 "startColumn":  17,
@@ -1057,7 +1057,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkShowPosterJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1940",
 "region":  {
 "startLine":  1940,
 "startColumn":  17,
@@ -1070,7 +1070,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkShowBannerJPG_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1944",
 "region":  {
 "startLine":  1944,
 "startColumn":  17,
@@ -1083,7 +1083,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkShowPosterTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1948",
 "region":  {
 "startLine":  1948,
 "startColumn":  17,
@@ -1096,7 +1096,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkShowTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1957",
 "region":  {
 "startLine":  1957,
 "startColumn":  17,
@@ -1109,7 +1109,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkStudio_CheckedChanged_1' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1977",
 "region":  {
 "startLine":  1977,
 "startColumn":  17,
@@ -1122,7 +1122,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkUseCertForMPAA_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2031",
 "region":  {
 "startLine":  2031,
 "startColumn":  17,
@@ -1135,7 +1135,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkYAMJCompatibleSets_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2079",
 "region":  {
 "startLine":  2079,
 "startColumn":  17,
@@ -1148,7 +1148,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'txtAPIKey_TextChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4346",
 "region":  {
 "startLine":  4346,
 "startColumn":  17,
@@ -1161,7 +1161,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'txtTVDBMirror_TextChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4564",
 "region":  {
 "startLine":  4564,
 "startColumn":  17,
@@ -1174,7 +1174,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSortFiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSortFiles.vb#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  17,
@@ -1187,7 +1187,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgStudioSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgStudioSelect.vb#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  17,
@@ -1200,7 +1200,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgStudioSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgStudioSelect.vb#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  17,
@@ -1211,22 +1211,9 @@
 },
 {
 "id":  "S2347",
-"message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
-"region":  {
-"startLine":  9,
-"startColumn":  17,
-"endLine":  9,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVRegExProfiles.vb#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  17,
@@ -1237,14 +1224,14 @@
 },
 {
 "id":  "S2347",
-"message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVRegExProfiles.vb#L9",
 "region":  {
-"startLine":  60,
+"startLine":  9,
 "startColumn":  17,
-"endLine":  60,
-"endColumn":  36
+"endLine":  9,
+"endColumn":  32
 }
 }
 },
@@ -1252,7 +1239,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  17,
@@ -1263,9 +1250,22 @@
 },
 {
 "id":  "S2347",
+"message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  17,
+"endLine":  60,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2347",
 "message":  "Rename event handler 'chkMPAA_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  17,
@@ -1278,7 +1278,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkNFOMod_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  17,
@@ -1291,7 +1291,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  17,
@@ -1304,7 +1304,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'rbUpdateModifier_All_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  17,
@@ -1317,7 +1317,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'rbUpdateModifier_Marked_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L307",
 "region":  {
 "startLine":  307,
 "startColumn":  17,
@@ -1330,7 +1330,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'rbUpdateModifier_Missing_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  17,
@@ -1343,7 +1343,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'rbUpdateModifier_New_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L330",
 "region":  {
 "startLine":  330,
 "startColumn":  17,
@@ -1356,7 +1356,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'rbUpdate_Ask_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L338",
 "region":  {
 "startLine":  338,
 "startColumn":  17,
@@ -1369,7 +1369,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'rbUpdate_Auto_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L351",
 "region":  {
 "startLine":  351,
 "startColumn":  17,
@@ -1382,7 +1382,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Update_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L411",
 "region":  {
 "startLine":  411,
 "startColumn":  17,
@@ -1395,7 +1395,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  14,
@@ -1408,7 +1408,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  14,
@@ -1421,7 +1421,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkSeasonAllTBN_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L499",
 "region":  {
 "startLine":  499,
 "startColumn":  14,
@@ -1434,7 +1434,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'btnIMDBRating_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L561",
 "region":  {
 "startLine":  561,
 "startColumn":  17,
@@ -1447,7 +1447,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'SelectPosterÃskToolStripMenuItem_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7537",
 "region":  {
 "startLine":  7537,
 "startColumn":  17,
@@ -1460,7 +1460,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'lblIMDBHeader_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8935",
 "region":  {
 "startLine":  8935,
 "startColumn":  17,
@@ -1473,7 +1473,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'lblIMDBHeader_MouseEnter' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8949",
 "region":  {
 "startLine":  8949,
 "startColumn":  17,
@@ -1486,7 +1486,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'lblIMDBHeader_MouseLeave' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8957",
 "region":  {
 "startLine":  8957,
 "startColumn":  17,

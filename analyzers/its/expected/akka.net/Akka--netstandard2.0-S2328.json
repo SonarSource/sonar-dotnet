@@ -5,7 +5,7 @@
 "message":  "Refactor 'GetHashCode' to not reference mutable fields.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  29,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  48,
@@ -29,7 +29,7 @@
 "message":  "Refactor 'GetHashCode' to not reference mutable fields.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L266",
 "region":  {
 "startLine":  266,
 "startColumn":  29,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  43,
@@ -47,7 +47,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  43,

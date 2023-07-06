@@ -4,7 +4,7 @@
 "id":  "S2365",
 "message":  "Refactor 'CoordinatorSelection' into a method, properties should not copy collections.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L504-L505",
 "region":  {
 "startLine":  504,
 "startColumn":  24,

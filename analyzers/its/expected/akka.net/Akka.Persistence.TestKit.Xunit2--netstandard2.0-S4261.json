@@ -4,7 +4,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  27,
@@ -82,7 +82,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  27,
@@ -95,7 +95,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  21,

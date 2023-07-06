@@ -4,7 +4,7 @@
 "id":  "S4823",
 "message":  "Make sure that command line arguments are used safely here.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  35,

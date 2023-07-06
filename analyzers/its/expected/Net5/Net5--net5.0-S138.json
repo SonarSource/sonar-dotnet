@@ -4,7 +4,7 @@
 "id":  "S138",
 "message":  "This local function has 81 lines, which is greater than the 80 lines authorized.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  6,

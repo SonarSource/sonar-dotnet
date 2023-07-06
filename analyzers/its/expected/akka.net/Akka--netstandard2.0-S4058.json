@@ -2,22 +2,9 @@
 "issues":  [
 {
 "id":  "S4058",
-"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
-"region":  {
-"startLine":  77,
-"startColumn":  24,
-"endLine":  77,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S4058",
 "message":  "Change this call to 's.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  21,
@@ -30,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'uri.Fragment.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  17,
@@ -41,9 +28,22 @@
 },
 {
 "id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  24,
+"endLine":  77,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4058",
 "message":  "Change this call to 'pathString.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L618",
 "region":  {
 "startLine":  618,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L414",
 "region":  {
 "startLine":  414,
 "startColumn":  20,
@@ -69,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  60,
@@ -82,7 +82,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  42,
@@ -95,7 +95,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  77,
@@ -108,7 +108,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  116,
@@ -121,7 +121,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'addr.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L374",
 "region":  {
 "startLine":  374,
 "startColumn":  22,
@@ -134,7 +134,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deploy.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deploy.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  20,
@@ -160,7 +160,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deploy.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  20,
@@ -173,7 +173,7 @@
 "id":  "S4058",
 "message":  "Change this call to '_config.Root.ToString().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deploy.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  21,
@@ -186,7 +186,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'd.Key.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deployer.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  30,
@@ -199,7 +199,7 @@
 "id":  "S4058",
 "message":  "Change this call to '_text.LastIndexOf' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  24,
@@ -212,7 +212,7 @@
 "id":  "S4058",
 "message":  "Change this call to '_text.IndexOf' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  22,
@@ -225,7 +225,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'id.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  21,
@@ -238,7 +238,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'id.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  26,
@@ -251,7 +251,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'mailboxRequirement.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  50,
@@ -264,7 +264,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'deploy.Mailbox.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  18,
@@ -277,7 +277,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'deploy.Dispatcher.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  18,
@@ -290,7 +290,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  86,

@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'DefaultShardAllocationStrategy' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1113",
 "region":  {
 "startLine":  1113,
 "startColumn":  41,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'GetReplicatorSettings' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  36,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'MostSuitableRegion' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\AbstractLeastShardAllocationStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  70,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'ActorRefMessageToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L387",
 "region":  {
 "startLine":  387,
 "startColumn":  33,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'ShardIdMessageToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  42,

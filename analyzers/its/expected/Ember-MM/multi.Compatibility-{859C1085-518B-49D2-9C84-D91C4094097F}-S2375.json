@@ -4,7 +4,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 11 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\frmYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/frmYAMJ.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  3,
@@ -17,7 +17,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 8 statements that use 'movie.Movie' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L612",
 "region":  {
 "startLine":  612,
 "startColumn":  4,
@@ -28,27 +28,27 @@
 },
 {
 "id":  "S2375",
-"message":  "Wrap this and the following 10 statements that use 'Me.fYAMJ' in a 'With' statement.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
-"region":  {
-"startLine":  70,
-"startColumn":  3,
-"endLine":  70,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S2375",
 "message":  "Wrap this and the following 9 statements that use 'Me.fYAMJ' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  3,
 "endLine":  105,
 "endColumn":  43
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 10 statements that use 'Me.fYAMJ' in a 'With' statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  3,
+"endLine":  70,
+"endColumn":  44
 }
 }
 }

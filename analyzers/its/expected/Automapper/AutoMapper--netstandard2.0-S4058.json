@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'str.TrimStart().StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\AutoMapperMappingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/AutoMapperMappingException.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  44,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'genericTypeDef.FullName.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\QueryMapperVisitor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  21,

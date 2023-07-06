@@ -5,7 +5,7 @@
 "message":  "Refactor 'GetHashCode' to not reference mutable fields.",
 "location":  [
 {
-"uri":  "sources\Net5\Net5\Records.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  29,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5\Records.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  38,

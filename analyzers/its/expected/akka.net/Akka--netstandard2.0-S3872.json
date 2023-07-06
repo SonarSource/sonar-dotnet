@@ -5,7 +5,7 @@
 "message":  "Rename the parameter 'key' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconToken.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconToken.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  40,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconToken.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconToken.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  29,
@@ -29,7 +29,7 @@
 "message":  "Rename the parameter 'format' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Event\DefaultLogMessageFormatter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DefaultLogMessageFormatter.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  37,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Event\DefaultLogMessageFormatter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DefaultLogMessageFormatter.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  23,
@@ -53,7 +53,7 @@
 "message":  "Rename the parameter 'format' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILogMessageFormatter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILogMessageFormatter.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  30,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILogMessageFormatter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILogMessageFormatter.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  16,

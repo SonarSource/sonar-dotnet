@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_cluster'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_sharding'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  9,

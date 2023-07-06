@@ -4,7 +4,7 @@
 "id":  "S2245",
 "message":  "Make sure that using this pseudorandom number generator is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpInboundOnlySpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S2245",
 "message":  "Make sure that using this pseudorandom number generator is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpSingleConnectionSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  26,

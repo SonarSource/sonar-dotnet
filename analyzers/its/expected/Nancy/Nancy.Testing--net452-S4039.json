@@ -4,7 +4,7 @@
 "id":  "S4039",
 "message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.Body'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S4039",
 "message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.Protocol'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  38,
@@ -30,7 +30,7 @@
 "id":  "S4039",
 "message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.QueryString'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  38,
@@ -43,7 +43,7 @@
 "id":  "S4039",
 "message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.HostName'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S4039",
 "message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.UserHostAddress'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  38,
@@ -69,7 +69,7 @@
 "id":  "S4039",
 "message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.ClientCertificate'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  48,
@@ -82,7 +82,7 @@
 "id":  "S4039",
 "message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.BodyString'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  38,
@@ -95,7 +95,7 @@
 "id":  "S4039",
 "message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.FormValues'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  38,
@@ -108,7 +108,7 @@
 "id":  "S4039",
 "message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.Headers'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  72,

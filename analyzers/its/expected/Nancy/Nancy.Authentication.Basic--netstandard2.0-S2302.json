@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'pipelines' with 'nameof(pipelines)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  49,
@@ -17,7 +17,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  49,
@@ -30,7 +30,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'module' with 'nameof(module)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  49,
@@ -43,7 +43,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  49,
@@ -56,7 +56,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  49,
@@ -69,7 +69,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'userValidator' with 'nameof(userValidator)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthenticationConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthenticationConfiguration.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  49,
@@ -82,7 +82,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'realm' with 'nameof(realm)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthenticationConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthenticationConfiguration.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  45,

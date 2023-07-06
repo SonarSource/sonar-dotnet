@@ -4,7 +4,7 @@
 "id":  "S2365",
 "message":  "Refactor 'Commands' into a method, properties should not copy collections.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  48,

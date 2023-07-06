@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Program.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Program.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  21,
