@@ -20,10 +20,11 @@
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
+    [Obsolete("This rule is superseded by S119.")]
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class TypeParameterName : TypeParameterNameBase
+    public sealed class TypeParameterNameObsolete : TypeParameterNameBase
     {
-        private const string DiagnosticId = "S119";
+        private const string DiagnosticId = "S2373";
 
         protected override DiagnosticDescriptor Rule =>
             DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
