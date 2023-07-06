@@ -4,17 +4,20 @@ de/serialization.</p>
 <p>A method is designated a serialization event handler by applying one of the following serialization event attributes:</p>
 <ul>
   <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.onserializingattribute"><code>System.Runtime.Serialization.OnSerializingAttribute</code></a> </li>
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.onserializingattribute"><code>OnSerializingAttribute</code></a>
+  </li>
   <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.onserializedattribute"><code>System.Runtime.Serialization.OnSerializedAttribute</code></a> </li>
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.onserializedattribute"><code>OnSerializedAttribute</code></a> </li>
   <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.ondeserializingattribute"><code>System.Runtime.Serialization.OnDeserializingAttribute</code></a> </li>
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.ondeserializingattribute"><code>OnDeserializingAttribute</code></a>
+  </li>
   <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.ondeserializedattribute"><code>System.Runtime.Serialization.OnDeserializedAttribute</code></a> </li>
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.ondeserializedattribute"><code>OnDeserializedAttribute</code></a>
+  </li>
 </ul>
 <p>Serialization event handlers take a single parameter of type <a
-href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.streamingcontext"><code>System.Runtime.Serialization.StreamingContext</code></a>,
-return <code>void`</code>, and have <code>private</code> visibility.</p>
+href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.streamingcontext"><code>StreamingContext</code></a>, return
+<code>void</code>, and have <code>private</code> visibility.</p>
 <p>This rule raises an issue when any of these constraints are not respected.</p>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
@@ -23,23 +26,23 @@ return <code>void`</code>, and have <code>private</code> visibility.</p>
 &lt;Serializable&gt;
 Public Class Foo
     &lt;OnSerializing&gt;
-    Public Sub OnSerializing(ByVal context As StreamingContext) ' Noncompliant should be private
+    Public Sub OnSerializing(ByVal context As StreamingContext) ' Noncompliant: should be private
     End Sub
 
     &lt;OnSerialized&gt;
-    Private Function OnSerialized(ByVal context As StreamingContext) As Integer '  Noncompliant should return void
+    Private Function OnSerialized(ByVal context As StreamingContext) As Integer '  Noncompliant: should return void
     End Function
 
     &lt;OnDeserializing&gt;
-    Private Sub OnDeserializing() ' Noncompliant should have a single parameter of type StreamingContext
+    Private Sub OnDeserializing() ' Noncompliant: should have a single parameter of type StreamingContext
     End Sub
 
     &lt;OnSerializing&gt;
-    Public Sub OnSerializing2(Of T)(ByVal context As StreamingContext) ' Noncompliant should have no type parameters
+    Public Sub OnSerializing2(Of T)(ByVal context As StreamingContext) ' Noncompliant: should have no type parameters
     End Sub
 
     &lt;OnDeserialized&gt;
-    Private Sub OnDeserialized(ByVal context As StreamingContext, ByVal str As String) ' Noncompliant should have a single parameter of type StreamingContext
+    Private Sub OnDeserialized(ByVal context As StreamingContext, ByVal str As String) ' Noncompliant: should have a single parameter of type StreamingContext
     End Sub
 End Class
 </pre>

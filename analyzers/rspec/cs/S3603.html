@@ -11,7 +11,7 @@ class Person
 {
   private int age;
 
-  [Pure] // Noncompliant. The method makes a state change
+  [Pure] // Noncompliant: The method makes a state change
   void ConfigureAge(int age) =&gt;
     this.age = age;
 }

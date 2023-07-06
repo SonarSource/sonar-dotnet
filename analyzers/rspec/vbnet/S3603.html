@@ -3,12 +3,14 @@
 attribute indicates that the method doesn’t make any visible state changes. Therefore, a <code>Pure</code> method should return a result otherwise it
 indicates a no-operation call.</p>
 <p>Using <code>Pure</code> on a <code>void</code> method is either by mistake or the method is not doing a meaningful task.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Class Person
     Private age As Integer
 
-    &lt;Pure&gt; ' Noncompliant. The method makes a state change
+    &lt;Pure&gt; ' Noncompliant: The method makes a state change
     Private Sub ConfigureAge(ByVal age As Integer)
         Me.age = age
     End Sub
@@ -20,8 +22,8 @@ Class Person
 
 End Class
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 Class Person
     Private age As Integer
 
