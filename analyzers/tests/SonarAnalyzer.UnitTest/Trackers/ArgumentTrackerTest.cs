@@ -367,6 +367,44 @@ public class ArgumentTrackerTest
     }
 
     [DataTestMethod]
+    // learn.microsoft.com/en-us/dotnet/api/system.string.format
+    [DataRow("""string.Format("format", $$0)""", "arg0")]
+    [DataRow("""string.Format("format", 0, $$1)""", "arg1")]
+    [DataRow("""string.Format("format", 0, 1, $$2)""", "arg2")]
+    [DataRow("""string.Format("format", 0, 1, 2, $$3)""", "args")]
+    [DataRow("""string.Format("format", arg2: 2, arg1: 1, $$arg0:0)""", "arg0")]
+    [DataRow("""string.Format("format", $$new object[0])""", "args")]
+    public void Method_ParamsArray(string invocation, string parameterName)
+    {
+        var snippet = $$"""
+                _ = {{invocation}};
+            """;
+        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_String, "Format", parameterName, i => i >= 1);
+        new CSharpArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    // learn.microsoft.com/en-us/dotnet/api/system.string.format
+    [DataRow("""String.Format("format", $$0)""", "arg0")]
+    [DataRow("""String.Format("format", 0, $$1)""", "arg1")]
+    [DataRow("""String.Format("format", 0, 1, $$2)""", "arg2")]
+    [DataRow("""String.Format("format", 0, 1, 2, $$3)""", "args")]
+    [DataRow("""String.Format("format", arg2:=2, arg1:=1, $$arg0:=0)""", "arg0")]
+    [DataRow("""String.Format("format", $$New Object(){ })""", "args")]
+    public void Method_ParamsArray_VB(string invocation, string parameterName)
+    {
+        var snippet = $$"""
+                Dim a = {{invocation}}
+            """;
+        var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_String, "Format", parameterName, i => i >= 1);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new SyntaxBaseContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
     [DataRow("""ProcessStartInfo($$"fileName")""", "fileName", 0, true)]
     [DataRow("""ProcessStartInfo($$"fileName")""", "arguments", 1, false)]
     [DataRow("""ProcessStartInfo("fileName", $$"arguments")""", "arguments", 1, true)]
