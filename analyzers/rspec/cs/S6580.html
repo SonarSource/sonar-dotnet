@@ -1,6 +1,9 @@
-<p>When converting a string representation of a date and time to a <code>DateTime</code> object with one of the available system parsing methods, you
-should always provide an <code>IFormatProvider</code> parameter. If not provided, the method will use the machine’s <code>CultureInfo</code>; if the
-given string does not follow it, you’ll have an object that does not match the string representation or an unexpected runtime error.</p>
+<p>When converting a string representation of a date and time to a <code>DateTime</code> object or any other temporal type with one of the available
+system parsing methods, you should always provide an <code>IFormatProvider</code> parameter.</p>
+<h2>Why is this an issue?</h2>
+<p>If you try to parse a string representation of a date or time without a format provider, the method will use the machine’s
+<code>CultureInfo</code>; if the given string does not follow it, you’ll have an object that does not match the string representation or an unexpected
+runtime error.</p>
 <p>This rule raises an issue for the following date and time string representation parsing methods:</p>
 <ul>
   <li> <code>Parse</code> </li>
@@ -16,9 +19,6 @@ given string does not follow it, you’ll have an object that does not match the
   <li> <code>System.TimeOnly</code> </li>
   <li> <code>System.TimeSpan</code> </li>
 </ul>
-<h2>Why is this an issue?</h2>
-<p>If you try to parse a string representation of date and time that does not have the expected format based on the machine’s culture you’ll get
-<code>DateTime</code> or <code>DateTimeOffset</code> object that does not match the input or a runtime error.</p>
 <h2>How to fix it</h2>
 <p>Alway use an overload of the parse method, where you can provide an <code>IFormatProvider</code> parameter.</p>
 <h3>Code examples</h3>
