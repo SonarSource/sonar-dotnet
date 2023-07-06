@@ -14,15 +14,35 @@ $thrd.CurrentUICulture = $thrd.CurrentCulture
 $jsonserial= New-Object -TypeName System.Web.Script.Serialization.JavaScriptSerializer
 $jsonserial.MaxJsonLength = 100000000
 
-function Restore-UriDeclaration($files, $pathPrefix) {
+function Create-FullUriForIssue([string]$filePath, [int]$startLine, [int]$endLine) {
+    $pathWithForwardSlash = $filePath -replace '\\', '/'
+    $subPath = "/analyzers/its/"
+    
+    if ($pathWithForwardSlash.StartsWith("https://") -or !$pathWithForwardSlash.Contains($subPath)) {
+        return $filePath;
+    }
+
+    $subPath = "/analyzers/its/"
+    $index = $pathWithForwardSlash.IndexOf($subPath)
+    $remainingPath = $pathWithForwardSlash.Substring($index + $subPath.Length)
+
+    $lineNumberSuffix = ""
+    if ($startLine -gt 0) {
+        if ($startLine -eq $endLine) {
+            $lineNumberSuffix = "#L${startLine}"
+        } else {
+            $lineNumberSuffix = "#L${startLine}-L${endLine}"
+        }
+    }
+    $fullUri = "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/${remainingPath}${lineNumberSuffix}"
+    return $fullUri
+}
+
+function Restore-UriDeclaration($files) {
     $files | Foreach-Object {
         if ($_.uri) {
-            # Remove the URI prefix
-            $_.uri = $_.uri -replace "file:///", ""
-            # Remove the common absolute path prefix
-            $_.uri = ([System.IO.FileInfo]$_.uri).FullName
-            $_.uri = $_.uri -replace $pathPrefix, ""
-            $_.uri = $_.uri -replace "/", "\"
+            # Remove the URI prefix           
+            $_.uri = Create-FullUriForIssue $_.uri $_.region.startLine $_.region.endLine
         }
     }
 }
@@ -87,19 +107,19 @@ function GetActualIssues([string]$sarifReportPath){
             }
         }
 
-        Restore-UriDeclaration $allIssues.locations.analysisTarget $pathPrefix
+        Restore-UriDeclaration $allIssues.locations.analysisTarget
         $allIssues = $allIssues | Foreach-Object { Get-Issue($_) }
     }
     elseif ($json.runLogs) { # sarif v0.4
         $allIssues = $json.runLogs | Foreach-Object { $_.results }
-        Restore-UriDeclaration $allIssues.locations.analysisTarget $pathPrefix
+        Restore-UriDeclaration $allIssues.locations.analysisTarget
         $allIssues = $allIssues | Foreach-Object { Get-Issue($_) }
     }
     elseif ($json.runs) { # sarif v1.0.0
 
         $allIssues = $json.runs | Foreach-Object { $_.results }
-        Restore-UriDeclaration $allIssues.locations.resultFile $pathPrefix
-        Restore-UriDeclaration $allIssues.relatedLocations.physicalLocation $pathPrefix
+        Restore-UriDeclaration $allIssues.locations.resultFile
+        Restore-UriDeclaration $allIssues.relatedLocations.physicalLocation
 
         $allIssues = $allIssues | Foreach-Object { Get-IssueV3($_) }
     }
@@ -114,20 +134,6 @@ function GetActualIssues([string]$sarifReportPath){
         if ($_.uri) {
             $_.uri = $_.uri.replace(' ', '%20')
             $_.uri = [System.Text.RegularExpressions.Regex]::Replace($_.uri, $tempFileNameRegex, 'Replaced-Temporary-Path\.$1,Version=')
-
-            if ($_.region.startLine) {
-                $startLine = $_.region.startLine
-                $endLine = $_.region.endLine
-                if ($startLine -eq $endLine) {
-                    $lineNumberSuffix = "#L${startLine}"
-                } else {
-                    $lineNumberSuffix = "#L${startLine}-L${endLine}"
-                }
-            }
-            $uri = $_.uri -replace "\\", "/"
-            $_.uri = $uri
-
-            $_.fullUri = "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/${uri}${lineNumberSuffix}"
         }
     }
 
@@ -174,7 +180,7 @@ function New-IssueReports([string]$sarifReportPath) {
                 (ConvertTo-Json $object -Depth 42 |
                     ForEach-Object { [System.Text.RegularExpressions.Regex]::Unescape($_) }  # Unescape powershell to json automatic escape
                 ) -split "`r`n"                                                              # Convert JSON to String and split lines
-            )
+            ) | Foreach-Object { $_.TrimStart() }                                            # Remove leading spaces
 
         $content = $lines -join "`n"        # Use unix-like EOL to avoid "git diff" warnings
         Set-Content $path "$content`n" -NoNewLine
