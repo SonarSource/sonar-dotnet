@@ -8,6 +8,8 @@ Public Class Program
     Private ReadOnly EpochOff As DateTimeOffset = New DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero) ' Noncompliant {{Use "DateTimeOffset.UnixEpoch" instead of creating DateTimeOffset instances that point to the unix epoch time}}
     '                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    Private Const EpochTicks As Long = 621355968000000000
+
     Private Sub BasicCases(ByVal dateTime As Date)
         Dim timeSpan = dateTime - New DateTime(1970, 1, 1) ' Noncompliant
 
@@ -42,6 +44,8 @@ Public Class Program
         Dim ctor1_0 = New DateTime(1970) ' Compliant
         Dim ctor1_1 = New DateTime(ticks) ' Compliant
         Dim ctor1_2 = New DateTime(ticks:=ticks) ' Compliant
+        Dim ctor1_3 = New DateTime(621355968000000000) ' Noncompliant
+        Dim ctor1_3 = New DateTime(EpochTicks) ' Noncompliant: const variables are tracked
 
         ' year, month, and day
         Dim ctor2_0 = New DateTime(1970, 1, 1) ' Noncompliant

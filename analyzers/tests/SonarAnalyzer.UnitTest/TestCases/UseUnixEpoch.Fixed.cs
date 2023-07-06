@@ -8,6 +8,8 @@ public class Program
 
     private readonly DateTimeOffset EpochOff = DateTimeOffset.UnixEpoch; // Fixed
 
+    private const long EpochTicks = 621355968000000000;
+
     void BasicCases(DateTime dateTime)
     {
         var timeSpan = dateTime - DateTime.UnixEpoch; // Fixed
@@ -46,6 +48,8 @@ public class Program
         var ctor1_0 = new DateTime(1970); // Compliant
         var ctor1_1 = new DateTime(ticks); // Compliant
         var ctor1_2 = new DateTime(ticks: ticks); // Compliant
+        var ctor1_3 = DateTime.UnixEpoch; // Fixed
+        var ctor1_4 = DateTime.UnixEpoch; // Fixed
 
         // year, month, and day
         var ctor2_0 = DateTime.UnixEpoch; // Fixed

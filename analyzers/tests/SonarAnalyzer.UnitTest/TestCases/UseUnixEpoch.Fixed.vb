@@ -6,6 +6,8 @@ Public Class Program
 
     Private ReadOnly EpochOff As DateTimeOffset = DateTimeOffset.UnixEpoch ' Fixed
 
+    Private Const EpochTicks As Long = 621355968000000000
+
     Private Sub BasicCases(ByVal dateTime As Date)
         Dim timeSpan = dateTime - DateTime.UnixEpoch ' Fixed
 
@@ -40,6 +42,8 @@ Public Class Program
         Dim ctor1_0 = New DateTime(1970) ' Compliant
         Dim ctor1_1 = New DateTime(ticks) ' Compliant
         Dim ctor1_2 = New DateTime(ticks:=ticks) ' Compliant
+        Dim ctor1_3 = DateTime.UnixEpoch ' Fixed
+        Dim ctor1_4 = DateTime.UnixEpoch ' Fixed
 
         ' year, month, and day
         Dim ctor2_0 = DateTime.UnixEpoch ' Fixed

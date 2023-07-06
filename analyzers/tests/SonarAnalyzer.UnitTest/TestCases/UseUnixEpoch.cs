@@ -10,6 +10,8 @@ public class Program
     private readonly DateTimeOffset EpochOff = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero); // Noncompliant {{Use "DateTimeOffset.UnixEpoch" instead of creating DateTimeOffset instances that point to the unix epoch time}}
     //                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    private const long EpochTicks = 621355968000000000;
+
     void BasicCases(DateTime dateTime)
     {
         var timeSpan = dateTime - new DateTime(1970, 1, 1); // Noncompliant
@@ -48,6 +50,8 @@ public class Program
         var ctor1_0 = new DateTime(1970); // Compliant
         var ctor1_1 = new DateTime(ticks); // Compliant
         var ctor1_2 = new DateTime(ticks: ticks); // Compliant
+        var ctor1_3 = new DateTime(621355968000000000); // Noncompliant
+        var ctor1_4 = new DateTime(EpochTicks); // Noncompliant: const variables are tracked
 
         // year, month, and day
         var ctor2_0 = new DateTime(1970, 1, 1); // Noncompliant
