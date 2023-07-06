@@ -45,7 +45,7 @@ Public Class Program
         Dim ctor1_1 = New DateTime(ticks) ' Compliant
         Dim ctor1_2 = New DateTime(ticks:=ticks) ' Compliant
         Dim ctor1_3 = New DateTime(621355968000000000) ' Noncompliant
-        Dim ctor1_3 = New DateTime(EpochTicks) ' Noncompliant: const variables are tracked
+        Dim ctor1_4 = New DateTime(EpochTicks) ' Noncompliant: const variables are tracked
 
         ' year, month, and day
         Dim ctor2_0 = New DateTime(1970, 1, 1) ' Noncompliant
