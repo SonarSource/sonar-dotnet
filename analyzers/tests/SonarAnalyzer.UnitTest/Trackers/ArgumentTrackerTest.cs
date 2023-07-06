@@ -1063,6 +1063,10 @@ public class ArgumentTrackerTest
         Func<string, MetadataReference[], (SyntaxTree Tree, SemanticModel Model)> compile, params Type[] argumentNodeTypes)
     {
         var pos = snippet.IndexOf("$$");
+        if (pos == -1)
+        {
+            throw new InvalidOperationException("The $$ maker was not found");
+        }
         snippet = snippet.Replace("$$", string.Empty);
         var (tree, model) = compile(snippet, MetadataReferenceFacade.SystemCollections.Concat(MetadataReferenceFacade.SystemDiagnosticsProcess).ToArray());
         var node = tree.GetRoot().FindNode(new(pos, 0)).AncestorsAndSelf().First(x => argumentNodeTypes.Any(t => t.IsAssignableFrom(x.GetType())));
