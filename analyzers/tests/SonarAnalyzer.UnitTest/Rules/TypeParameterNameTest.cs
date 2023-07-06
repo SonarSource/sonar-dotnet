@@ -26,7 +26,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class TypeParameterNameTest
     {
         [TestMethod]
-        public void TypeParameterName() =>
+        public void TypeParameterName_S119() =>
             new VerifierBuilder<TypeParameterName>().AddPaths("TypeParameterName.vb").Verify();
+
+        [TestMethod]
+        public void TypeParameterName_S2373() =>
+            new VerifierBuilder<TypeParameterNameObsolete>().AddPaths("TypeParameterName.vb").Verify();
     }
 }
