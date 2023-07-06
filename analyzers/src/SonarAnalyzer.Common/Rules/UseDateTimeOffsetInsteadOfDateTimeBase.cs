@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class UseDateTimeOffsetInsteadOfDateTimeBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6566";
@@ -37,7 +37,7 @@ public abstract class UseDateTimeInsteadOfDateTimeOffsetBase<TSyntaxKind> : Sona
 
     protected abstract string[] ValidNames { get; }
 
-    protected UseDateTimeInsteadOfDateTimeOffsetBase() : base(DiagnosticId) { }
+    protected UseDateTimeOffsetInsteadOfDateTimeBase() : base(DiagnosticId) { }
 
     protected sealed override void Initialize(SonarAnalysisContext context)
     {

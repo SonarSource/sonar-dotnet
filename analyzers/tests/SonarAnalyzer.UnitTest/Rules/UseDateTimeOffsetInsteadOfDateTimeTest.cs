@@ -24,28 +24,28 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
-public class UseDateTimeInsteadOfDateTimeOffsetTest
+public class UseDateTimeOffsetInsteadOfDateTimeTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseDateTimeInsteadOfDateTimeOffset>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseDateTimeInsteadOfDateTimeOffset>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UseDateTimeOffsetInsteadOfDateTime>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UseDateTimeOffsetInsteadOfDateTime>();
 
     [TestMethod]
     public void UseDateTimeInsteadOfDateTimeOffset_CS() =>
-        builderCS.AddPaths("UseDateTimeInsteadOfDateTimeOffset.cs").Verify();
+        builderCS.AddPaths("UseDateTimeOffsetInsteadOfDateTime.cs").Verify();
 
 #if NET
 
     [TestMethod]
     public void UseDateTimeInsteadOfDateTimeOffset_CSharp9() =>
-        builderCS.AddPaths("UseDateTimeInsteadOfDateTimeOffset.CSharp9.cs").WithTopLevelStatements().Verify();
+        builderCS.AddPaths("UseDateTimeOffsetInsteadOfDateTime.CSharp9.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
     public void UseDateTimeInsteadOfDateTimeOffset_VB_Net() =>
-        builderVB.AddPaths("UseDateTimeInsteadOfDateTimeOffset.Net.vb").Verify();
+        builderVB.AddPaths("UseDateTimeOffsetInsteadOfDateTime.Net.vb").Verify();
 
 #endif
 
     [TestMethod]
     public void UseDateTimeInsteadOfDateTimeOffset_VB() =>
-        builderVB.AddPaths("UseDateTimeInsteadOfDateTimeOffset.vb").Verify();
+        builderVB.AddPaths("UseDateTimeOffsetInsteadOfDateTime.vb").Verify();
 }
