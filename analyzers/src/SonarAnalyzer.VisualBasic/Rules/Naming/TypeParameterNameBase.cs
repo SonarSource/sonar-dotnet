@@ -21,7 +21,6 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     // This base class is only there to avoid duplication between the implementation of S119 and S2373
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public abstract class TypeParameterNameBase : ParametrizedDiagnosticAnalyzer
     {
         protected const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
