@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class UseDateTimeInsteadOfDateTimeOffset : UseDateTimeInsteadOfDateTimeOffsetBase<SyntaxKind>
+public sealed class UseDateTimeOffsetInsteadOfDateTime : UseDateTimeOffsetInsteadOfDateTimeBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
