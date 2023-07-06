@@ -96,7 +96,7 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
         {
             SyntaxKind.ThisKeyword => initializerSyntax is { Parent: ConstructorDeclarationSyntax { Identifier.ValueText: { } typeName } } ? typeName : null,
             SyntaxKind.BaseKeyword => initializerSyntax is { Parent: ConstructorDeclarationSyntax { Parent: BaseTypeDeclarationSyntax { BaseList.Types: { Count: > 0 } baseListTypes } } }
-                ? baseListTypes[0].GetName() // Get the class name of the called constructor from the base types list of the type declaration
+                ? baseListTypes.First().GetName() // Get the class name of the called constructor from the base types list of the type declaration
                 : null,
             _ => null,
         };
