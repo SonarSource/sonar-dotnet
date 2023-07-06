@@ -19,7 +19,6 @@
  */
 
 using System.CodeDom.Compiler;
-using System.Diagnostics.CodeAnalysis;
 
 namespace SonarAnalyzer.Extensions;
 
@@ -237,6 +236,8 @@ public partial class ExpressionSyntaxExtensions
         return nameEquals.IsParentKind(SyntaxKind.AttributeArgument);
     }
 
+    // Copy of
+    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L194
     public static bool IsInRefContext(this ExpressionSyntax expression)
         => IsInRefContext(expression, out _);
 

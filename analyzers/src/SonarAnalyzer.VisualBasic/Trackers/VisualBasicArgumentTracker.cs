@@ -27,11 +27,9 @@ public class VisualBasicArgumentTracker : ArgumentTracker<SyntaxKind>
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override IReadOnlyCollection<SyntaxNode> ArgumentList(SyntaxNode argumentNode) =>
-        argumentNode switch
-        {
-            ArgumentSyntax { Parent: ArgumentListSyntax { Arguments: { } list } } => list,
-            _ => null,
-        };
+        argumentNode is ArgumentSyntax { Parent: ArgumentListSyntax { Arguments: { } list } }
+            ? list
+            : null;
 
     protected override int? Position(SyntaxNode argumentNode) =>
         argumentNode is ArgumentSyntax { IsNamed: true }
@@ -70,5 +68,6 @@ public class VisualBasicArgumentTracker : ArgumentTracker<SyntaxKind>
             var x => x,
         };
 
-    protected override ArgumentContext CreateContext(SonarSyntaxNodeReportingContext context) => new(context);
+    protected override ArgumentContext CreateContext(SonarSyntaxNodeReportingContext context) =>
+        new(context);
 }

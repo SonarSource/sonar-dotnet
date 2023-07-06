@@ -321,17 +321,6 @@ namespace SonarAnalyzer.Extensions
             }
         }
 
-        public static bool IsParentKind<T>(this SyntaxNode node, SyntaxKind kind, out T result) where T : SyntaxNode
-        {
-            if (node?.Parent?.IsKind(kind) is true && node.Parent is T t)
-            {
-                result = t;
-                return true;
-            }
-            result = null;
-            return false;
-        }
-
         /// <summary>
         /// Returns the left hand side of a conditional access expression. Returns c in case like a?.b?[0].c?.d.e?.f if d is passed.
         /// </summary>
@@ -447,6 +436,19 @@ namespace SonarAnalyzer.Extensions
         // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L43C1-L45C1
         public static bool IsParentKind(this SyntaxNode node, SyntaxKind kind)
             => Microsoft.CodeAnalysis.CSharpExtensions.IsKind(node?.Parent, kind);
+
+        // Copy of
+        // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L46
+        public static bool IsParentKind<T>(this SyntaxNode node, SyntaxKind kind, out T result) where T : SyntaxNode
+        {
+            if (node?.Parent?.IsKind(kind) is true && node.Parent is T t)
+            {
+                result = t;
+                return true;
+            }
+            result = null;
+            return false;
+        }
 
         // Copy of
         // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L351

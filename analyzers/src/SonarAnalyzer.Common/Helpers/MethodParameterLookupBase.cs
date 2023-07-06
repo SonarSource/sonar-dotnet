@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Reflection.Metadata;
-using SonarAnalyzer.Rules;
-
 namespace SonarAnalyzer.Helpers;
 
 public interface IMethodParameterLookup
@@ -78,16 +75,14 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
             return parameter != null;
         }
 
-        if (GetNameEqualsArgumentIdentifier(arg) is { } nameEqualsArgumentIdentifier)
+        if (GetNameEqualsArgumentIdentifier(arg) is { } nameEqualsArgumentIdentifier
+            && methodSymbol.ContainingType.GetMembers(nameEqualsArgumentIdentifier.ValueText) is { Length: 1 } properties
+            && properties[0] is IPropertySymbol { SetMethod: { } setter } property
+            && property.Name == nameEqualsArgumentIdentifier.ValueText
+            && setter.Parameters is { Length: 1 } parameters)
         {
-            if (methodSymbol.ContainingType.GetMembers(nameEqualsArgumentIdentifier.ValueText) is { Length: 1 } properties
-                && properties[0] is IPropertySymbol { SetMethod: { } setter } property
-                && property.Name == nameEqualsArgumentIdentifier.ValueText
-                && setter.Parameters is { Length: 1 } parameters)
-            {
-                parameter = parameters[0];
-                return parameter != null;
-            }
+            parameter = parameters[0];
+            return parameter != null;
         }
 
         var index = argumentList.IndexOf(arg);

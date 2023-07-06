@@ -133,13 +133,6 @@ public class ArgumentDescriptor
             p => p.Name == parameterName,
             (_, i) => i is null || i.Value == argumentPosition);
 
-    public static ArgumentDescriptor AttributeProperty(string attributeName, string propertyName) =>
-        AttributeArgument(
-            attributeConstructorConstraint: x => x is { MethodKind: MethodKind.PropertySet, AssociatedSymbol.Name: { } name } && name == propertyName,
-            attributeNameConstraint: (s, c) => AttributeClassNameConstraint(attributeName, s, c),
-            parameterConstraint: p => true,
-            argumentListConstraint: (l, i) => true);
-
     public static ArgumentDescriptor AttributeArgument(Func<IMethodSymbol, bool> attributeConstructorConstraint, Func<string, StringComparison, bool> attributeNameConstraint,
         Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint) =>
         new(InvokedMemberKind.Attribute,
@@ -148,6 +141,13 @@ public class ArgumentDescriptor
             argumentListConstraint: argumentListConstraint,
             parameterConstraint: parameterConstraint,
             refKind: null);
+
+    public static ArgumentDescriptor AttributeProperty(string attributeName, string propertyName) =>
+        AttributeArgument(
+            attributeConstructorConstraint: x => x is { MethodKind: MethodKind.PropertySet, AssociatedSymbol.Name: { } name } && name == propertyName,
+            attributeNameConstraint: (s, c) => AttributeClassNameConstraint(attributeName, s, c),
+            parameterConstraint: p => true,
+            argumentListConstraint: (_, _) => true);
 
     private static bool AttributeClassNameConstraint(string expectedAttributeName, string nodeClassName, StringComparison c) =>
         nodeClassName.Equals(expectedAttributeName, c) || nodeClassName.Equals($"{expectedAttributeName}Attribute");

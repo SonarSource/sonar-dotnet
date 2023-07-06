@@ -36,5 +36,4 @@ internal class VisualBasicAttributeParameterLookup : MethodParameterLookupBase<A
         argument is SimpleArgumentSyntax { NameColonEquals.Name.Identifier: var identifier }
             ? identifier
             : null;
-
 }

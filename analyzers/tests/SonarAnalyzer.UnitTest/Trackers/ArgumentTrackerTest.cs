@@ -1059,7 +1059,8 @@ public class ArgumentTrackerTest
         End Class
         """;
 
-    private static (SyntaxNode Node, SemanticModel Model) ArgumentAndModel(string snippet, Func<string, MetadataReference[], (SyntaxTree, SemanticModel)> compile, params Type[] argumentNodeTypes)
+    private static (SyntaxNode Node, SemanticModel Model) ArgumentAndModel(string snippet,
+        Func<string, MetadataReference[], (SyntaxTree Tree, SemanticModel Model)> compile, params Type[] argumentNodeTypes)
     {
         var pos = snippet.IndexOf("$$");
         snippet = snippet.Replace("$$", string.Empty);
