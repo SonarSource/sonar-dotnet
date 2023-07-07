@@ -34,7 +34,7 @@ Class Program
         '                                                                ^^^^^^^^^^^^^                                @-1
 
         ' All IQuery members
-        database.Exists(Of Entity)(query & param)                                                                   ' Noncompliant
+        database.Exists(Of Entity)(query & param)                                                                   ' Noncompliant  (Parameter "sqlCondition")
         database.Fetch(Of Entity, Entity)(query & param)                                                            ' Noncompliant
         database.First(Of Entity)(query & param)                                                                    ' Noncompliant
         database.FirstOrDefault(Of Entity)(query & param)                                                           ' Noncompliant

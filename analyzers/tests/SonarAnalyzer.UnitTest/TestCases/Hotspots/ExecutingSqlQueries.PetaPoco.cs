@@ -40,7 +40,7 @@ class Program
         //                                                        ^^^^^^^^^^^^^                               @-1
 
         // All IQuery members
-        database.Exists<Entity>(query + param);                                                            // Noncompliant
+        database.Exists<Entity>(query + param);                                                            // Noncompliant (Parameter "sqlCondition")
         database.Fetch<Entity, Entity>(query + param);                                                     // Noncompliant
         database.First<Entity>(query + param);                                                             // Noncompliant
         database.FirstOrDefault<Entity>(query + param);                                                    // Noncompliant
