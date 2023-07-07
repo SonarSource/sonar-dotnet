@@ -61,7 +61,7 @@ public class ArgumentTrackerTest
     [DataRow("""M(  , $$ , 1)""", "j", true)]
     [DataRow("""M(  ,  , $$1)""", "k", true)]
     [DataRow("""M(  ,  , $$1)""", "i", false)]
-    public void Method_CommittedArgument_VB(string invocation, string parameterName, bool expected)
+    public void Method_OmittedArgument_VB(string invocation, string parameterName, bool expected)
     {
         var snippet = $$"""
             Public Class C
