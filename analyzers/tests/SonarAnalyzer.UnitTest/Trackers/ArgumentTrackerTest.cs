@@ -35,7 +35,7 @@ public class ArgumentTrackerTest
             System.IFormatProvider provider = null;
             1.ToString($$provider);
             """;
-        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", 0);
         new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
@@ -91,7 +91,7 @@ public class ArgumentTrackerTest
             System.IFormatProvider provider = null;
             {{invocation}}
             """;
-        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", position);
         new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
@@ -128,7 +128,7 @@ public class ArgumentTrackerTest
             System.IFormatProvider provider = null;
             {{invocation}}
             """;
-        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true, RefKind.Out);
         new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
@@ -161,7 +161,7 @@ public class ArgumentTrackerTest
             System.IFormatProvider provider = null;
             {{invocation}}
             """;
-        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true, refKind);
         new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeFalse();
@@ -176,7 +176,7 @@ public class ArgumentTrackerTest
             System.IFormatProvider provider = null;
             {{invocation}}
             """;
-        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true);
         new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
@@ -292,7 +292,7 @@ public class ArgumentTrackerTest
             public class MyComparer<T> : Comparer<T>
             {
                 public MyComparer() { }
-                public override int Compare(T a, T b) => 1;
+                public override int Compare(T a, T b) => 1; // The original definition uses x and y: int Compare(T? x, T? y)
             }
             public class Test
             {
@@ -322,7 +322,7 @@ public class ArgumentTrackerTest
                 Public Sub New()
                 End Sub
 
-                Public Overrides Function Compare(ByVal a As T, ByVal b As T) As Integer
+                Public Overrides Function Compare(ByVal a As T, ByVal b As T) As Integer ' The original definition uses x and y
                     Return 1
                 End Function
             End Class
@@ -400,7 +400,7 @@ public class ArgumentTrackerTest
         var snippet = $$"""
                 _ = {{invocation}};
             """;
-        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_String, "Format", parameterName, i => i >= 1);
         new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
@@ -461,7 +461,7 @@ public class ArgumentTrackerTest
         var snippet = $$"""
             System.Diagnostics.ProcessStartInfo psi = new{{constructor}};
             """;
-        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Diagnostics_ProcessStartInfo, parameterName, argumentPosition);
         new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
@@ -725,7 +725,7 @@ public class ArgumentTrackerTest
             var list = new System.Collections.Generic.List<int>();
             _ = list[$$1];
             """;
-        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T, "list",
             p => p is { Name: "index", Type.SpecialType: SpecialType.System_Int32, ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertyGet } }, 0);
@@ -757,7 +757,7 @@ public class ArgumentTrackerTest
             var list = new System.Collections.Generic.List<int>();
             {{writeExpression}};
             """;
-        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T,
             p => p is { Name: "index", ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertySet } }, 0);
@@ -789,7 +789,7 @@ public class ArgumentTrackerTest
         var snippet = $$"""
             _ = {{environmentVariableAccess}};
             """;
-        var (node, model) = ArgumentAndModelCS(WrapInMethod(snippet));
+        var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "IDictionary",
             (n, c) => n.Equals("GetEnvironmentVariables", c), p => p.Name == "key", (_, p) => p is null or 0);
@@ -1058,7 +1058,7 @@ public class ArgumentTrackerTest
         new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
     }
 
-    private static string WrapInMethod(string snippet) =>
+    private static string WrapInMethodCS(string snippet) =>
         $$"""
         using System;
         class C
