@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Helpers.Trackers;
-
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
@@ -53,6 +53,27 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", 0);
         new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""M( $$ ,  , 1)""", "i", true)]
+    [DataRow("""M( $$ ,  , 1)""", "j", false)]
+    [DataRow("""M(  , $$ , 1)""", "j", true)]
+    [DataRow("""M(  ,  , $$1)""", "k", true)]
+    [DataRow("""M(  ,  , $$1)""", "i", false)]
+    public void Method_CommittedArgument_VB(string invocation, string parameterName, bool expected)
+    {
+        var snippet = $$"""
+            Public Class C
+                Public Sub M(Optional i As Integer = 0, Optional j As Integer = 0, Optional k As Integer = 0)
+                    {{invocation}}
+                End Sub
+            End Class
+            """;
+        var (node, model) = ArgumentAndModelVB(snippet);
+
+        var argument = ArgumentDescriptor.MethodInvocation(m => m.Name == "M", (s, c) => s.Equals("M", c), p => p.Name == parameterName, _ => true, null);
+        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -1069,7 +1090,7 @@ public class ArgumentTrackerTest
         }
         snippet = snippet.Replace("$$", string.Empty);
         var (tree, model) = compile(snippet, MetadataReferenceFacade.SystemCollections.Concat(MetadataReferenceFacade.SystemDiagnosticsProcess).ToArray());
-        var node = tree.GetRoot().FindNode(new(pos, 0)).AncestorsAndSelf().First(x => argumentNodeTypes.Any(t => t.IsAssignableFrom(x.GetType())));
+        var node = tree.GetRoot().DescendantNodesAndSelf(new TextSpan(pos, 1)).Reverse().First(x => argumentNodeTypes.Any(t => t.IsInstanceOfType(x))); // root.Find does not work with OmittedArgument
         return (node, model);
     }
 
