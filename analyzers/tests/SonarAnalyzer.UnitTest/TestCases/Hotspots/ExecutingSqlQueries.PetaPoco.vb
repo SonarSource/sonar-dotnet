@@ -33,18 +33,22 @@ Class Program
         database.Page(Of Entity)(0, 0, query & param, New Object(-1) {}, query & param, New Object(-1) {})
         '                              ^^^^^^^^^^^^^
         '                                                                ^^^^^^^^^^^^^                                @-1
+
+        ' All IQuery members
         database.Exists(Of Entity)(query & param)                                                                   ' Noncompliant
         database.Fetch(Of Entity, Entity)(query & param)                                                            ' Noncompliant
         database.First(Of Entity)(query & param)                                                                    ' Noncompliant
         database.FirstOrDefault(Of Entity)(query & param)                                                           ' Noncompliant
-        database.Page(Of Entity)(0, 0, query & param)                                                               ' Noncompliant
-        database.Page(Of Entity)(0, 0, query & param, Array.Empty(Of Object)(), "", Array.Empty(Of Object)())       ' Noncompliant
-        database.Page(Of Entity)(0, 0, "", Array.Empty(Of Object)(), query & param, Array.Empty(Of Object)())       ' Noncompliant
+        database.Page(Of Entity)(0, 0, query & param)                                                               ' Noncompliant (Parameter "sql")
+        database.Page(Of Entity)(0, 0, query & param, Array.Empty(Of Object)(), "", Array.Empty(Of Object)())       ' Noncompliant (Parameter "sqlCount")
+        database.Page(Of Entity)(0, 0, "", Array.Empty(Of Object)(), query & param, Array.Empty(Of Object)())       ' Noncompliant (Parameter "sqlPage")
         database.Query(Of Entity, Entity)(query & param)                                                            ' Noncompliant
         database.QueryMultiple(query & param)                                                                       ' Noncompliant
         database.SkipTake(Of Entity)(0, 0, query & param)                                                           ' Noncompliant
         database.Single(Of Entity)(query & param)                                                                   ' Noncompliant
         database.SingleOrDefault(Of Entity)(query & param)                                                          ' Noncompliant
+
+        ' All IQueryAsync members
         database.ExistsAsync(Of Entity)(query & param)                                                              ' Noncompliant
         database.FetchAsync(Of Entity)(query & param)                                                               ' Noncompliant
         database.FirstAsync(Of Entity)(query & param)                                                               ' Noncompliant
@@ -56,10 +60,14 @@ Class Program
         database.SkipTakeAsync(Of Entity)(0, 0, query & param)                                                      ' Noncompliant
         database.SingleAsync(Of Entity)(query & param)                                                              ' Noncompliant
         database.SingleOrDefaultAsync(Of Entity)(query & param)                                                     ' Noncompliant
+
+        ' All IExecute and IExecuteAsync
         database.Execute(query & param)                                                                             ' Noncompliant
         database.ExecuteAsync(CancellationToken.None, query & param)                                                ' Noncompliant
         database.ExecuteScalar(Of Entity)(query & param)                                                            ' Noncompliant
         database.ExecuteScalarAsync(Of Entity)(CancellationToken.None, query & param)                               ' Noncompliant
+
+        ' All IAlterPoco and IAlterPocoAsync
         database.Update(Of Entity)(query & param)                                                                   ' Noncompliant
         database.Delete(Of Entity)(query & param)                                                                   ' Noncompliant
         database.UpdateAsync(Of Entity)(query & param)                                                              ' Noncompliant
