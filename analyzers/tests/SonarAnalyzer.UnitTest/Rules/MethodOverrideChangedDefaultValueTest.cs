@@ -59,11 +59,21 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         [TestMethod]
-        public void MethodOverrideChangedDefaultValue_CodeFix() =>
+        public void MethodOverrideChangedDefaultValue_CodeFix_Synchronize() =>
             builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
                 .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
-                .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.Fixed.cs", "MethodOverrideChangedDefaultValue.Fixed.Batch.cs")
+                .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.Synchronize.Fixed.cs", "MethodOverrideChangedDefaultValue.Synchronize.Fixed.Batch.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithCodeFixTitle(MethodOverrideChangedDefaultValueCodeFix.TitleGeneral)
+                .VerifyCodeFix();
+
+        [TestMethod]
+        public void MethodOverrideChangedDefaultValue_CodeFix_Remove() =>
+            builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
+                .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
+                .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.Remove.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithCodeFixTitle(MethodOverrideChangedDefaultValueCodeFix.TitleExplicitInterface)
                 .VerifyCodeFix();
     }
 }

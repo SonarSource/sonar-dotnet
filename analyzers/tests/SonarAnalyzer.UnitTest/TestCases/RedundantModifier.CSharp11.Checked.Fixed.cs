@@ -20,9 +20,9 @@ public class Foo
 
 // file-scoped types cannot use accessibility modifiers and cannot be nested.
 
-file class PartialFoo { } // Fixed
+file partial class PartialFoo { } // Fixed
 
-file class PartialFooBar { } // Fixed
+file partial class PartialFooBar { } // Fixed
 
 file partial class PartialFileClass { }
 file partial class PartialFileClass { }
@@ -33,12 +33,12 @@ file unsafe class UnsafeClass
     int* pointer;
 }
 
-file class UnsafeClass2 // Fixed
+file unsafe class UnsafeClass2 // Fixed
 {
     int num;
 }
 
 file unsafe interface MyInterface
 {
-    int* Method(); // Fixed
+    unsafe int* Method(); // Fixed
 }

@@ -6,14 +6,14 @@ namespace Tests.Diagnostics
     {
         public virtual void MyNotOverriddenMethod() { }
     }
-    internal class Partial1Part //Fixed
+    internal partial class Partial1Part //Fixed
     {
         void Method() { }
     }
-    struct PartialStruct //Fixed
+    partial struct PartialStruct //Fixed
     {
     }
-    interface PartialInterface //Fixed
+    partial interface PartialInterface //Fixed
     {
     }
 
@@ -54,16 +54,16 @@ namespace Tests.Diagnostics
 
     sealed class SealedClass : Partial2Part
     {
-        public override void MyOverriddenMethod() { } // Fixed
-        public override int Prop { get; set; } // Fixed
+        public override sealed void MyOverriddenMethod() { } // Fixed
+        public override sealed int Prop { get; set; } // Fixed
 
-        public override int this[int counter] // Fixed
+        public override sealed int this[int counter] // Fixed
         {
             get { return 0; }
         }
 
-        protected override event EventHandler<EventArgs> MyEvent; // Fixed
-        protected override event EventHandler<EventArgs> MyEvent2 // Fixed
+        protected override sealed event EventHandler<EventArgs> MyEvent; // Fixed
+        protected override sealed event EventHandler<EventArgs> MyEvent2 // Fixed
         {
             add { }
             remove { }
@@ -128,13 +128,13 @@ namespace Tests.Diagnostics
         int* pointer;
     }
 
-    class UnsafeClass2 // Fixed
+    unsafe class UnsafeClass2 // Fixed
     {
         int num;
     }
-    class UnsafeClass3 // Fixed
+    unsafe class UnsafeClass3 // Fixed
     {
-        void M() // Fixed
+        unsafe void M() // Fixed
         {
 
         }
@@ -150,15 +150,15 @@ namespace Tests.Diagnostics
     {
         unsafe interface MyInterface
         {
-            int* Method(); // Fixed
+            unsafe int* Method(); // Fixed
         }
 
         private unsafe delegate void MyDelegate(int* p);
-        private delegate void MyDelegate2(int i); // Fixed
+        private unsafe delegate void MyDelegate2(int i); // Fixed
 
-        class Inner { } // Fixed
+        unsafe class Inner { } // Fixed
 
-        event MyDelegate MyEvent; // Fixed
+        unsafe event MyDelegate MyEvent; // Fixed
         unsafe event MyDelegate MyEvent2
         {
             add
@@ -168,7 +168,7 @@ namespace Tests.Diagnostics
             remove { }
         }
 
-        ~Class4() // Fixed
+        unsafe ~Class4() // Fixed
         {
         }
         void M()
@@ -184,8 +184,14 @@ namespace Tests.Diagnostics
 
             unsafe
             {
-                var i = 1;
-                int* p = &i;
+                unsafe // Fixed
+                {
+                    unsafe // Fixed
+                    {
+                        var i = 1;
+                        int* p = &i;
+                    }
+                }
             }
         }
     }
@@ -194,7 +200,7 @@ namespace Tests.Diagnostics
     {
         public class Bar
         {
-            public class Baz // Fixed
+            public unsafe class Baz // Fixed
             {
             }
         }
@@ -202,11 +208,11 @@ namespace Tests.Diagnostics
 
     public unsafe class Foo2
     {
-        public class Bar // Fixed
+        public unsafe class Bar // Fixed
         {
             private int* p;
 
-            public class Baz // Fixed
+            public unsafe class Baz // Fixed
             {
                 private int* p2;
             }
@@ -336,7 +342,7 @@ namespace Tests.Diagnostics
             Method();
         }
 
-        public void WithUndefinedInvocation()    // Fixed
+        public unsafe void WithUndefinedInvocation()    // Fixed
         {
             Undefined();        // Error [CS0103]: The name 'Undefined' does not exist in the current context
         }
@@ -362,6 +368,9 @@ namespace Tests.Diagnostics
     {
         public UnsafeCtor()
         {
+            unsafe // Fixed
+            {
+            }
         }
     }
 }
