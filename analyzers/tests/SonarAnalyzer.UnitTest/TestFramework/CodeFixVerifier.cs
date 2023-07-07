@@ -18,7 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
@@ -71,13 +74,28 @@ internal class CodeFixVerifier
         state.Diagnostics.Should().NotBeEmpty();
 
         var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(state.Diagnostics);
-        var fixAllContext = new FixAllContext(state.Document, codeFix, FixAllScope.Document, codeFixTitle, codeFix.FixableDiagnosticIds, fixAllDiagnosticProvider, default);
+
+            var codeActionEquivalenceKey = codeFixTitle ?? RetrieveCodeFixTitle(codeFix, state);    // We need to find the title of the single action to use
+            var fixAllContext = new FixAllContext(state.Document, codeFix, FixAllScope.Document, codeActionEquivalenceKey, codeFix.FixableDiagnosticIds, fixAllDiagnosticProvider, default);
         var codeActionToExecute = fixAllProvider.GetFixAsync(fixAllContext).Result;
         codeActionToExecute.Should().NotBeNull();
 
         new State(analyzer, ApplyCodeFix(state.Document, codeActionToExecute), parseOptions)
             .AssertExpected(pathToExpected, $"{nameof(VerifyFixAllProvider)} runs {fixAllProvider.GetType().Name} once");
     }
+
+        private string RetrieveCodeFixTitle(CodeFixProvider codeFix, State state)
+        {
+            foreach (var diagnostic in state.Diagnostics)
+            {
+                var actions = ActionToApply(codeFix, state.Document, diagnostic);
+                if (actions.Any())
+                {
+                    return actions.First().Title;
+                }
+            }
+            return null;
+        }
 
     private static Document ApplyCodeFix(Document document, CodeAction codeAction)
     {

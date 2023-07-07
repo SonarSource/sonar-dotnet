@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
@@ -63,9 +63,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         {
             public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(TestDuplicateLocationRule.DiagnosticId);
 
-            protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+            protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
             {
-                context.RegisterCodeFix(CodeAction.Create("TestTitle", c => Task.FromResult(context.Document)), context.Diagnostics);
+                context.RegisterCodeFix("TestTitle", c => Task.FromResult(context.Document), context.Diagnostics);
                 return Task.CompletedTask;
             }
         }
