@@ -640,7 +640,7 @@ public class Sample
                 else
                 {
                     var function = (LocalFunctionStatementSyntaxWrapper)method.DescendantNodes()
-                        .Single(x => x.Kind() == SyntaxKindEx.LocalFunctionStatement && ((LocalFunctionStatementSyntaxWrapper)x).Identifier.Text == localFunctionName);
+                        .Single(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement) && ((LocalFunctionStatementSyntaxWrapper)x).Identifier.Text == localFunctionName);
                     symbol = model.GetDeclaredSymbol(function) as IMethodSymbol;
                     body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
                 }
