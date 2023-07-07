@@ -30,7 +30,7 @@ public enum InvokedMemberKind
 
 public class ArgumentDescriptor
 {
-    private ArgumentDescriptor(InvokedMemberKind memberKind, Func<ISymbol, bool> invokedMemberConstraint, Func<string, StringComparison, bool> invokedMemberNameConstraint,
+    private ArgumentDescriptor(InvokedMemberKind memberKind, Func<IMethodSymbol, bool> invokedMemberConstraint, Func<string, StringComparison, bool> invokedMemberNameConstraint,
         Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, Func<IParameterSymbol, bool> parameterConstraint, RefKind? refKind)
     {
         MemberKind = memberKind;
@@ -68,7 +68,7 @@ public class ArgumentDescriptor
     public static ArgumentDescriptor MethodInvocation(Func<IMethodSymbol, bool> invokedMethodSymbol, Func<string, StringComparison, bool> invokedMemberNameConstraint,
         Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, RefKind? refKind) =>
         new(InvokedMemberKind.Method,
-            invokedMemberConstraint: x => invokedMethodSymbol(x as IMethodSymbol),
+            invokedMemberConstraint: invokedMethodSymbol,
             invokedMemberNameConstraint: invokedMemberNameConstraint,
             argumentListConstraint: argumentListConstraint,
             parameterConstraint: parameterConstraint,
@@ -85,7 +85,7 @@ public class ArgumentDescriptor
     public static ArgumentDescriptor ConstructorInvocation(Func<IMethodSymbol, bool> invokedMethodSymbol, Func<string, StringComparison, bool> invokedMemberNameConstraint,
         Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, RefKind? refKind) =>
         new(InvokedMemberKind.Constructor,
-            invokedMemberConstraint: x => invokedMethodSymbol(x as IMethodSymbol),
+            invokedMemberConstraint: invokedMethodSymbol,
             invokedMemberNameConstraint: invokedMemberNameConstraint,
             argumentListConstraint: argumentListConstraint,
             parameterConstraint: parameterConstraint,
@@ -120,7 +120,7 @@ public class ArgumentDescriptor
     public static ArgumentDescriptor ElementAccess(Func<IMethodSymbol, bool> invokedIndexerPropertyMethod, Func<string, StringComparison, bool> invokedIndexerExpression,
         Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint) =>
         new(InvokedMemberKind.Indexer,
-            invokedMemberConstraint: x => invokedIndexerPropertyMethod(x as IMethodSymbol),
+            invokedMemberConstraint: invokedIndexerPropertyMethod,
             invokedMemberNameConstraint: invokedIndexerExpression,
             argumentListConstraint: argumentListConstraint,
             parameterConstraint: parameterConstraint,
@@ -136,7 +136,7 @@ public class ArgumentDescriptor
     public static ArgumentDescriptor AttributeArgument(Func<IMethodSymbol, bool> attributeConstructorConstraint, Func<string, StringComparison, bool> attributeNameConstraint,
         Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint) =>
         new(InvokedMemberKind.Attribute,
-            invokedMemberConstraint: x => attributeConstructorConstraint(x as IMethodSymbol),
+            invokedMemberConstraint: attributeConstructorConstraint,
             invokedMemberNameConstraint: attributeNameConstraint,
             argumentListConstraint: argumentListConstraint,
             parameterConstraint: parameterConstraint,
@@ -157,5 +157,5 @@ public class ArgumentDescriptor
     public RefKind? RefKind { get; }
     public Func<IParameterSymbol, bool> ParameterConstraint { get; }
     public Func<string, StringComparison, bool> InvokedMemberNameConstraint { get; }
-    public Func<ISymbol, bool> InvokedMemberConstraint { get; }
+    public Func<IMethodSymbol, bool> InvokedMemberConstraint { get; }
 }

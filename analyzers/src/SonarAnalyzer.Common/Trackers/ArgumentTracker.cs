@@ -33,17 +33,15 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
     public Condition MatchArgument(ArgumentDescriptor descriptor) =>
         context =>
         {
-            var argumentNode = context.Node;
-            if (SyntacticChecks(context.SemanticModel, descriptor, argumentNode))
+            if (context.Node is { } argumentNode
+                && SyntacticChecks(context.SemanticModel, descriptor, argumentNode)
+                && InvokedExpression(argumentNode) is { } invoked
+                && MethodSymbol(context.SemanticModel, invoked) is { } methodSymbol
+                && Language.MethodParameterLookup(invoked, methodSymbol).TryGetSymbol(argumentNode, out var parameter)
+                && ParameterFits(parameter, descriptor.ParameterConstraint, descriptor.InvokedMemberConstraint))
             {
-                var invoked = InvokedExpression(argumentNode);
-                var methodSymbol = MethodSymbol(context.SemanticModel, invoked);
-                if (Language.MethodParameterLookup(invoked, methodSymbol).TryGetSymbol(argumentNode, out var parameter)
-                    && ParameterFits(parameter, descriptor.ParameterConstraint, descriptor.InvokedMemberConstraint))
-                {
-                    context.Parameter = parameter;
-                    return true;
-                }
+                context.Parameter = parameter;
+                return true;
             }
             return false;
         };
@@ -66,7 +64,7 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
         && (descriptor.InvokedMemberNameConstraint == null
             || InvokedMemberFits(model, argumentNode, descriptor.MemberKind, x => descriptor.InvokedMemberNameConstraint(x, Language.NameComparison)));
 
-    private static bool ParameterFits(IParameterSymbol parameter, Func<IParameterSymbol, bool> parameterConstraint, Func<ISymbol, bool> invokedMemberConstraint)
+    private static bool ParameterFits(IParameterSymbol parameter, Func<IParameterSymbol, bool> parameterConstraint, Func<IMethodSymbol, bool> invokedMemberConstraint)
     {
         if ((parameter.ContainingSymbol is IMethodSymbol method)
             && method.Parameters.IndexOf(parameter) is >= 0 and int position)
