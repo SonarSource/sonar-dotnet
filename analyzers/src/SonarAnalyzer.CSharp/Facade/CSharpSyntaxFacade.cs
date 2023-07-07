@@ -108,6 +108,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         node switch
         {
             ArrowExpressionClauseSyntax x => x.Expression,
+            ArgumentSyntax x => x.Expression,
             AttributeArgumentSyntax x => x.Expression,
             InterpolationSyntax x => x.Expression,
             InvocationExpressionSyntax x => x.Expression,

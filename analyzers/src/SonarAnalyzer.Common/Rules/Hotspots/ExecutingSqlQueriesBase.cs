@@ -193,6 +193,16 @@ namespace SonarAnalyzer.Rules
                 c => IsTracked(GetSetValue(c), c),
                 pa.ExceptWhen(pa.AssignedValueIsConstant()));
 
+            var arg = Language.Tracker.Argument;
+            arg.Track(input, arg.MatchArgument(ArgumentDescriptor.MethodInvocation(
+                KnownType.PetaPoco_IExecute, (s, c) => s.Equals("Execute", c) || s.Equals("ExecuteScalar", c), p => p.Name == "sql" && p.IsType(KnownType.System_String), pos => pos == 0, null)),
+                ArgumentIsTracked());
+
+            arg.Track(input, arg.MatchArgument(ArgumentDescriptor.MethodInvocation(
+                KnownType.PetaPoco_IQuery, (s, c) => s.Equals("Query", c) || s.Equals("Fetch", c) || s.Equals("Page", c) || s.Equals("SkipTake", c) || s.Equals("Exists", c) || s.Equals("Single", c) || s.Equals("SingleOrDefault", c) || s.Equals("First", c) || s.Equals("FirstOrDefault", c) || s.Equals("QueryMultiple", c),
+                p => p.Name is "sql" or "sqlCondition" or "sqlPage" && p.IsType(KnownType.System_String), pos => true, null)),
+                ArgumentIsTracked());
+
             TrackObjectCreation(input, constructorsForFirstArgument, FirstArgumentIndex);
             TrackObjectCreation(input, constructorsForSecondArgument, SecondArgumentIndex);
         }
@@ -251,5 +261,8 @@ namespace SonarAnalyzer.Rules
 
         private TrackerBase<TSyntaxKind, InvocationContext>.Condition ArgumentAtIndexIsTracked(int index) =>
             context => IsTracked(GetArgumentAtIndex(context, index), context);
+
+        private TrackerBase<TSyntaxKind, ArgumentContext>.Condition ArgumentIsTracked() =>
+            c => Language.Syntax.NodeExpression(c.Node) is TExpressionSyntax expression && IsTracked(expression, c);
     }
 }

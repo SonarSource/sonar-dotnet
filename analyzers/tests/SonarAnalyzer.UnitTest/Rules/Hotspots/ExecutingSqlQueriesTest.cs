@@ -147,6 +147,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
+        public void ExecutingSqlQueries_PetaPoco_CS() =>
+            builderCS
+                .AddPaths(@"ExecutingSqlQueries.PetaPoco.cs")
+                .AddReferences(NuGetMetadataReference.PetaPocoCompiled(Constants.NuGetLatestVersion))
+                .Verify();
+
+        [TestMethod]
         public void ExecutingSqlQueries_CS_EF6() =>
             builderCS.AddPaths("ExecutingSqlQueries.EF6.cs")
                 .AddReferences(NuGetMetadataReference.EntityFramework())
