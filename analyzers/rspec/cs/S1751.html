@@ -1,34 +1,70 @@
 <h2>Why is this an issue?</h2>
-<p>A loop with at most one iteration is equivalent to the use of an <code>if</code> statement to conditionally execute one piece of code. If the
-initial intention of the author was really to conditionally execute one piece of code, an <code>if</code> statement should be used instead. If that
-was not the initial intention of the author, the body of the loop should be fixed to use the nested <code>return</code>, <code>break</code> or
-<code>throw</code> statements in a more appropriate way.</p>
-<h3>Noncompliant code example</h3>
+<p>A <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements">loop statement</a> with at most one
+iteration is equivalent to an <code>if</code> statement; the following block is executed only once.</p>
+<p>If the initial intention was to conditionally execute the block only once, an <code>if</code> statement should be used instead. If that was not the
+initial intention, the block of the loop should be fixed so the block is executed multiple times.</p>
+<p>A loop statement with at most one iteration can happen when a statement unconditionally transfers control, such as a <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements">jump statement</a> or a <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements#the-throw-statement">throw
+statement</a>, is misplaced inside the loop block.</p>
+<p>This rule raises when the following statements are misplaced:</p>
+<ul>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-break-statement"><code>break</code></a>
+  </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-continue-statement"><code>continue</code></a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-return-statement"><code>return</code></a>
+  </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements#the-throw-statement"><code>throw</code></a> </li>
+</ul>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <pre>
-for (int i = 0; i &lt; 10; i++)
+public object Method(IEnumerable&lt;object&gt; items)
 {
-    Console.WriteLine(i);
-    break;  // Noncompliant, loop only executes once
+    for (int i = 0; i &lt; 10; i++)
+    {
+        Console.WriteLine(i);
+        break; // Noncompliant: loop only executes once
+    }
+
+    foreach (object item in items)
+    {
+        return item; // Noncompliant: loop only executes once
+    }
+    return null;
 }
-...
-foreach (var item in items)
-{
-    return item;  // Noncompliant, loop only executes once
-}
-...
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <pre>
-for (int i = 0; i &lt; 10; i++)
+public object Method(IEnumerable&lt;object&gt; items)
 {
-    Console.WriteLine(i);
+    for (int i = 0; i &lt; 10; i++)
+    {
+        Console.WriteLine(i);
+    }
+
+    var item = items.FirstOrDefault();
+    if (item != null)
+    {
+        return item;
+    }
+    return null;
 }
-...
-var item = items.FirstOrDefault();
-if (item != null)
-{
-    return item;
-}
-...
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements">Iteration
+  statements - <code>for</code>, <code>foreach</code>, <code>do</code>, and <code>while</code></a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements">Jump statements -
+  <code>break</code>, <code>continue</code>, <code>return</code>, and <code>goto</code></a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements#the-throw-statement">The
+  <code>throw</code> statement</a> </li>
+</ul>
 
