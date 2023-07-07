@@ -24,7 +24,7 @@ import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -37,8 +37,8 @@ public class AnalysisWarningsTest {
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
-  public void init() {
+  @BeforeClass
+  public static void init() {
     TestUtils.reset(ORCHESTRATOR);
   }
 

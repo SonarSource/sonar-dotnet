@@ -22,6 +22,7 @@ package com.sonar.it.csharp;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,7 +32,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.stream.Collectors;
 import java.util.List;
-import org.junit.Before;
+
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -43,25 +45,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class IncrementalAnalysisTest {
-  private static final String PROJECT = "IncrementalPRAnalysis";
+  private static final String PROJECT_DIR = "IncrementalPRAnalysis";
   private static final String PULL_REQUEST_KEY = "42";
 
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
-  public void init() {
+  @BeforeClass
+  public static void init() {
     TestUtils.reset(ORCHESTRATOR);
   }
 
   @Test
   public void incrementalPrAnalysis_NoCache_FullAnalysisDone() throws IOException {
-    Tests.analyzeProject(temp, PROJECT, null, "sonar.branch.name", "base-branch", "sonar.analysisCache.enabled", "false");
-    Path projectDir = Tests.projectDir(temp, PROJECT);
-    File withChangesPath = projectDir.resolve("IncrementalPRAnalysis\\WithChanges.cs").toFile();
+    var projectKey = PROJECT_DIR + "_noCache_fullAnalysis";
+    Tests.analyzeProject(PROJECT_DIR, temp, projectKey, null, "sonar.branch.name", "base-branch", "sonar.analysisCache.enabled", "false");
+    Path projectDir = Tests.projectDir(temp, PROJECT_DIR);
+    File withChangesPath = projectDir.resolve(PROJECT_DIR + "\\WithChanges.cs").toFile();
     addIssue(withChangesPath);
 
-    BeginAndEndStepResults results = executeAnalysisForPRBranch(PROJECT, projectDir, "");
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectKey, projectDir, "");
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
@@ -69,103 +72,106 @@ public class IncrementalAnalysisTest {
     assertThat(beginStepResults.getLogs()).contains("Processing analysis cache");
     assertThat(beginStepResults.getLogs()).contains("Cache data is empty. A full analysis will be performed.");
     assertAllFilesWereAnalysed(endStepResults, projectDir);
-    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, PULL_REQUEST_KEY);
+    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, projectKey, PULL_REQUEST_KEY);
     assertThat(allIssues).hasSize(1);
     assertThat(allIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
   }
 
   @Test
   public void incrementalPrAnalysis_cacheAvailableNoChanges_nothingReported() throws IOException {
-    Tests.analyzeProject(temp, PROJECT, null, "sonar.branch.name", "base-branch");
-    Path projectDir = Tests.projectDir(temp, PROJECT);
+    var projectKey = PROJECT_DIR + "cacheAvailable_noChanges";
+    Tests.analyzeProject(PROJECT_DIR, temp, projectKey, null, "sonar.branch.name", "base-branch");
+    Path projectDir = Tests.projectDir(temp, PROJECT_DIR);
 
-    BeginAndEndStepResults results = executeAnalysisForPRBranch(PROJECT, projectDir, "");
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectKey, projectDir, "");
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
     assertTrue(endStepResults.isSuccess());
-    assertCacheIsUsed(beginStepResults, PROJECT);
+    assertCacheIsUsed(beginStepResults, projectKey);
     assertThat(endStepResults.getLogs()).doesNotContain("Adding normal issue S1134");
-    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, PROJECT, PULL_REQUEST_KEY);
+    List<Issues.Issue> allIssues = TestUtils.getIssues(ORCHESTRATOR, projectKey, PULL_REQUEST_KEY);
     assertThat(allIssues).isEmpty();
   }
 
   @Test
   public void incrementalPrAnalysis_cacheAvailableChangesDone_issuesReportedForChangedFiles() throws IOException {
-    Tests.analyzeProject(temp, PROJECT, null, "sonar.branch.name", "base-branch");
-    Path projectDir = Tests.projectDir(temp, PROJECT);
-    File unchanged1Path = projectDir.resolve("IncrementalPRAnalysis\\Unchanged1.cs").toFile();
-    File unchanged2Path = projectDir.resolve("IncrementalPRAnalysis\\Unchanged2.cs").toFile();
-    File withChangesPath = projectDir.resolve("IncrementalPRAnalysis\\WithChanges.cs").toFile();
+    var projectKey = PROJECT_DIR + "cacheAvailable_withChanges";
+    Tests.analyzeProject(PROJECT_DIR, temp, projectKey, null, "sonar.branch.name", "base-branch");
+    Path projectDir = Tests.projectDir(temp, PROJECT_DIR);
+    File unchanged1Path = projectDir.resolve(PROJECT_DIR + "\\Unchanged1.cs").toFile();
+    File unchanged2Path = projectDir.resolve(PROJECT_DIR + "\\Unchanged2.cs").toFile();
+    File withChangesPath = projectDir.resolve(PROJECT_DIR + "\\WithChanges.cs").toFile();
     addIssue(withChangesPath);
-    File fileToBeAddedPath = projectDir.resolve("IncrementalPRAnalysis\\AddedFile.cs").toFile();
+    File fileToBeAddedPath = projectDir.resolve(PROJECT_DIR + "\\AddedFile.cs").toFile();
     createFileWithIssue(fileToBeAddedPath);
 
-    BeginAndEndStepResults results = executeAnalysisForPRBranch(PROJECT, projectDir, "");
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectKey, projectDir, "");
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
     assertTrue(endStepResults.isSuccess());
-    assertCacheIsUsed(beginStepResults, PROJECT);
+    assertCacheIsUsed(beginStepResults, projectKey);
     assertThat(endStepResults.getLogs()).doesNotContain("Adding normal issue S1134: " + unchanged1Path);
     assertThat(endStepResults.getLogs()).doesNotContain("Adding normal issue S1134: " + unchanged2Path);
     assertThat(endStepResults.getLogs()).contains("Adding normal issue S1134: " + withChangesPath);
     assertThat(endStepResults.getLogs()).contains("Adding normal issue S1134: " + fileToBeAddedPath);
     List<Issues.Issue> fixMeIssues = TestUtils
-        .getIssues(ORCHESTRATOR, PROJECT, PULL_REQUEST_KEY)
-        .stream()
-        .filter(x -> x.getRule().equals("csharpsquid:S1134"))
-        .collect(Collectors.toList());
+      .getIssues(ORCHESTRATOR, projectKey, PULL_REQUEST_KEY)
+      .stream()
+      .filter(x -> x.getRule().equals("csharpsquid:S1134"))
+      .collect(Collectors.toList());
     assertThat(fixMeIssues).hasSize(2);
     assertThat(fixMeIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(fixMeIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:IncrementalPRAnalysis/AddedFile.cs");
+    assertThat(fixMeIssues.get(0).getComponent()).isEqualTo(projectKey + ":" + PROJECT_DIR + "/AddedFile.cs");
     assertThat(fixMeIssues.get(1).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(fixMeIssues.get(1).getComponent()).isEqualTo("IncrementalPRAnalysis:IncrementalPRAnalysis/WithChanges.cs");
+    assertThat(fixMeIssues.get(1).getComponent()).isEqualTo(projectKey + ":" + PROJECT_DIR + "/WithChanges.cs");
   }
 
   @Test
   public void incrementalPrAnalysis_cacheAvailableProjectBaseDirChanged_everythingIsReanalyzed() throws IOException {
-    Tests.analyzeProject(temp, PROJECT, null, "sonar.branch.name", "base-branch");
-    Path projectDir = Tests.projectDir(temp, PROJECT);
-    File withChangesPath = projectDir.resolve("IncrementalPRAnalysis\\WithChanges.cs").toFile();
+    var projectKey = PROJECT_DIR + "cacheAvailable_baseDirChanged";
+    Tests.analyzeProject(PROJECT_DIR, temp, projectKey, null, "sonar.branch.name", "base-branch");
+    Path projectDir = Tests.projectDir(temp, PROJECT_DIR);
+    File withChangesPath = projectDir.resolve(PROJECT_DIR + "\\WithChanges.cs").toFile();
     addIssue(withChangesPath);
 
-    BeginAndEndStepResults results = executeAnalysisForPRBranch(PROJECT, projectDir, PROJECT);
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectKey, projectDir, PROJECT_DIR);
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
     assertTrue(endStepResults.isSuccess());
-    assertCacheIsUsed(beginStepResults, PROJECT);
+    assertCacheIsUsed(beginStepResults, projectKey);
     assertAllFilesWereAnalysed(endStepResults, projectDir);
     List<Issues.Issue> fixMeIssues = TestUtils
-      .getIssues(ORCHESTRATOR, PROJECT, PULL_REQUEST_KEY)
+      .getIssues(ORCHESTRATOR, projectKey, PULL_REQUEST_KEY)
       .stream()
       .filter(x -> x.getRule().equals("csharpsquid:S1134"))
       .collect(Collectors.toList());
     assertThat(fixMeIssues).hasSize(3);
     assertThat(fixMeIssues.get(0).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(fixMeIssues.get(0).getComponent()).isEqualTo("IncrementalPRAnalysis:Unchanged1.cs");
+    assertThat(fixMeIssues.get(0).getComponent()).isEqualTo(projectKey + ":Unchanged1.cs");
     assertThat(fixMeIssues.get(1).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(fixMeIssues.get(1).getComponent()).isEqualTo("IncrementalPRAnalysis:Unchanged2.cs");
+    assertThat(fixMeIssues.get(1).getComponent()).isEqualTo(projectKey + ":Unchanged2.cs");
     assertThat(fixMeIssues.get(2).getRule()).isEqualTo("csharpsquid:S1134");
-    assertThat(fixMeIssues.get(2).getComponent()).isEqualTo("IncrementalPRAnalysis:WithChanges.cs");
+    assertThat(fixMeIssues.get(2).getComponent()).isEqualTo(projectKey + ":WithChanges.cs");
   }
 
   @Test
   public void incrementalPrAnalysis_cacheAvailableDuplicationIntroduced_duplicationReportedForChangedFile() throws IOException {
-    String projectName = "IncrementalPRAnalysisDuplication";
-    Tests.analyzeProject(temp, projectName, null, "sonar.branch.name", "base-branch");
-    Path projectDir = Tests.projectDir(temp, projectName);
+    String projectKey = "IncrementalPRAnalysisDuplication";
+    Tests.analyzeProject(temp, projectKey, null, "sonar.branch.name", "base-branch");
+    Path projectDir = Tests.projectDir(temp, projectKey);
     File originalFile = projectDir.resolve("IncrementalPRAnalysisDuplication\\OriginalClass.cs").toFile();
     File duplicatedFile = projectDir.resolve("IncrementalPRAnalysisDuplication\\CopyClass.cs").toFile();
     createDuplicate(originalFile, duplicatedFile);
 
-    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectName, projectDir, "");
+    BeginAndEndStepResults results = executeAnalysisForPRBranch(projectKey, projectDir, "");
     BuildResult beginStepResults = results.getBeginStepResult();
     BuildResult endStepResults = results.getEndStepResult();
 
     assertTrue(endStepResults.isSuccess());
-    assertCacheIsUsed(beginStepResults, projectName);
+    assertCacheIsUsed(beginStepResults, projectKey);
     List<Duplications.Duplication> duplications = TestUtils.getDuplication(
         ORCHESTRATOR,
         "IncrementalPRAnalysisDuplication:IncrementalPRAnalysisDuplication/CopyClass.cs",
