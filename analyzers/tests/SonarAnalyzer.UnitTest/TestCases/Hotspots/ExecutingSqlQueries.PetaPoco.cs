@@ -33,7 +33,6 @@ class Program
 
         database.Fetch<Entity>(query);                                                                     // Compliant
         database.Fetch<Entity>(query + param);                                                             // Noncompliant
-        database.Fetch<Entity>(query + param);                                                             // Noncompliant
         database.Fetch<Entity>(2, 10, query + param);                                                      // Noncompliant
         database.Fetch<Entity>(param + otherParam, 10, query);                                             // Compliant
         database.Page<Entity>(0, 0, query + param, new object[0], query + param, new object[0]);

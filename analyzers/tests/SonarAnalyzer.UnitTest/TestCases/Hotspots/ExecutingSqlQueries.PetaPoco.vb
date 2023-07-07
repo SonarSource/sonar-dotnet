@@ -27,7 +27,6 @@ Class Program
 
         database.Fetch(Of Entity)(query)                                                                            ' Compliant
         database.Fetch(Of Entity)(query & param)                                                                    ' Noncompliant
-        database.Fetch(Of Entity)(query & param)                                                                    ' Noncompliant
         database.Fetch(Of Entity)(2, 10, query & param)                                                             ' Noncompliant
         database.Fetch(Of Entity)(param + otherParam, 10, query)                                                    ' Compliant
         database.Page(Of Entity)(0, 0, query & param, New Object(-1) {}, query & param, New Object(-1) {})
