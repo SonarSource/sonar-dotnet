@@ -59,7 +59,7 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
                 c =>
                 {
                     var arguments = Language.Syntax.ArgumentExpressions(c.Node);
-                    var literalsArguments = arguments?.OfType<TLiteralExpression>();
+                    var literalsArguments = arguments.OfType<TLiteralExpression>();
 
                     if (literalsArguments.Any(x => IsValueEqualTo(x, EpochYear)
                         && literalsArguments.Count(x => IsValueEqualTo(x, EpochMonth)) == 2)
