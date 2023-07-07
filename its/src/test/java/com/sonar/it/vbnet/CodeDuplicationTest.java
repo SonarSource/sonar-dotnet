@@ -20,7 +20,6 @@
 package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.build.BuildResult;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -36,18 +35,16 @@ public class CodeDuplicationTest {
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
   private static final String PROJECT = "VbCodeDuplicationTest";
 
-  private static BuildResult buildResult;
-
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(ORCHESTRATOR);
-    buildResult = Tests.analyzeProject(temp, PROJECT, null);
+    Tests.analyzeProject(temp, PROJECT, null);
   }
 
   @Test
   public void codeDuplicationResultsAreImportedForMainCode() throws Exception {
     List<Duplications.Duplication> duplications = TestUtils.getDuplication(ORCHESTRATOR, "VbCodeDuplicationTest:VbCodeDuplicationMainProj/DuplicatedMainClass1.vb").getDuplicationsList();
-    assertThat(duplications.size()).isEqualTo(1);
+    assertThat(duplications).hasSize(1);
     Duplications.Duplication duplication = duplications.get(0);
     assertThat(duplication.getBlocksCount()).isEqualTo(2);
     Duplications.Block firstBlock = duplication.getBlocks(0);

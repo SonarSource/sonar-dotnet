@@ -242,18 +242,6 @@ public class TestUtils {
       orchestrator.start();
       deleteLocalCache();
     }
-
-    // The expected format is yyyy-MM-ddTHH:mm:ss+HHmm. e.g. 2017-10-19T13:00:00+0200
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-    String currentDateTime = formatter.format(new Date());
-
-    LOG.info("TEST SETUP: deleting projects analyzed before: " + currentDateTime);
-    orchestrator.getServer()
-      .newHttpCall("/api/projects/bulk_delete")
-      .setAdminCredentials()
-      .setMethod(HttpMethod.POST)
-      .setParams("analyzedBefore", currentDateTime)
-      .execute();
   }
 
   private static WsClient newWsClient(Orchestrator orch) {
