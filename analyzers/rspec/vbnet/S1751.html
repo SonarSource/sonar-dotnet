@@ -1,37 +1,67 @@
 <h2>Why is this an issue?</h2>
-<p>A loop with at most one iteration is equivalent to the use of an <code>if</code> statement to conditionally execute one piece of code. No developer
-expects to find such a use of a loop statement. If the initial intention of the author was really to conditionally execute one piece of code, an
-<code>if</code> statement should be used instead.</p>
-<p>At worst that was not the initial intention of the author and so the body of the loop should be fixed to use the nested <code>return</code>,
-<code>break</code> or <code>throw</code> statements in a more appropriate way.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-For i As Integer = 0 To 10   'noncompliant, loop only executes once
-  foo(i)
-  Exit For
-Next
-...
-For i As Integer = 0 To 10   'noncompliant, loop only executes once
-  If i = Something
-    Exit For
-  Else
-    foo(i)
-    Return
-  End If
-Next
+<p>A <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/control-flow/loop-structures">loop</a>
+statement with at most one iteration is equivalent to an <code>If</code> statement; the following block is executed only once.</p>
+<p>If the initial intention was to conditionally execute the block only once, an <code>If</code> statement should be used instead. If that was not the
+initial intention, the block of the loop should be fixed so the block is executed multiple times.</p>
+<p>A loop statement with at most one iteration can happen when a statement unconditionally transfers control, such as a jump statement or a throw
+statement, is misplaced inside the loop block.</p>
+<p>This rule raises when the following statements are misplaced:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/exit-statement"><code>Exit</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/continue-statement"><code>Continue</code></a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/return-statement"><code>Return</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/throw-statement"><code>Throw</code></a> </li>
+</ul>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Public Function Method(items As IEnumerable(Of Object)) As Object
+    For i As Integer = 0 To 9
+        Console.WriteLine(i)
+        Exit For ' Noncompliant: loop only executes once
+    Next
+
+    For Each item As Object In items
+        Return item ' Noncompliant: loop only executes once
+    Next
+    Return Nothing
+End Function
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-For i As Integer = 0 To 10
-  foo(i)
-Next
-...
-For i As Integer = 0 To 10
-  If i = Something
-    Exit For
-  Else
-    foo(i)
-  End If
-Next
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+Public Function Method(items As IEnumerable(Of Object)) As Object
+    For i As Integer = 0 To 9
+        Console.WriteLine(i)
+    Next
+
+    Dim item = items.FirstOrDefault()
+    If item IsNot Nothing Then
+        Return item
+    End If
+    Return Nothing
+End Function
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/control-flow/loop-structures">Loop Structures
+  (Visual Basic)</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/exit-statement"><code>Exit</code> Statement (Visual
+  Basic)</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/continue-statement"><code>Continue</code> Statement
+  (Visual Basic)</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/return-statement"><code>Return</code> Statement (Visual
+  Basic)</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/throw-statement"><code>Throw</code> Statement (Visual
+  Basic)</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/throw-statement">Throw Statement
+  (Visual Basic)</a> </li>
+</ul>
 
