@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Editing;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(GetHashCodeMutable.DiagnosticId);
 
-        protected  override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected  override async Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
 
@@ -55,9 +55,8 @@ namespace SonarAnalyzer.Rules.CSharp
             allFieldDeclarations = allFieldDeclarations.WhereNotNull().ToArray();
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    token => AddReadonlyToFieldDeclarationsAsync(context.Document, token, allFieldDeclarations)),
+                Title,
+                token => AddReadonlyToFieldDeclarationsAsync(context.Document, token, allFieldDeclarations),
                 context.Diagnostics);
         }
 
@@ -97,4 +96,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

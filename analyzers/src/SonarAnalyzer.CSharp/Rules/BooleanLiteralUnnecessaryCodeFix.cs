@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(BooleanLiteralUnnecessary.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -87,72 +87,66 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
-        private static void RegisterForStatementConditionRemoval(CodeFixContext context, SyntaxNode root, ForStatementSyntax forStatement) =>
+        private static void RegisterForStatementConditionRemoval(SonarCodeFixContext context, SyntaxNode root, ForStatementSyntax forStatement) =>
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var newRoot = root.ReplaceNode(
-                            forStatement,
-                            forStatement.WithCondition(null).WithAdditionalAnnotations(Formatter.Annotation));
+                Title,
+                c =>
+                {
+                    var newRoot = root.ReplaceNode(
+                        forStatement,
+                        forStatement.WithCondition(null).WithAdditionalAnnotations(Formatter.Annotation));
 
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
 
-        private static void RegisterBinaryExpressionRemoval(CodeFixContext context, SyntaxNode root, LiteralExpressionSyntax literal, BinaryExpressionSyntax binaryParent)
+        private static void RegisterBinaryExpressionRemoval(SonarCodeFixContext context, SyntaxNode root, LiteralExpressionSyntax literal, BinaryExpressionSyntax binaryParent)
         {
             var otherNode = binaryParent.Left.RemoveParentheses().Equals(literal)
                 ? binaryParent.Right
                 : binaryParent.Left;
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var newExpression = GetNegatedExpression(otherNode);
-                        var newRoot = root.ReplaceNode(binaryParent, newExpression
-                            .WithAdditionalAnnotations(Formatter.Annotation));
+                Title,
+                c =>
+                {
+                    var newExpression = GetNegatedExpression(otherNode);
+                    var newRoot = root.ReplaceNode(binaryParent, newExpression
+                        .WithAdditionalAnnotations(Formatter.Annotation));
 
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
         }
 
-        private static void RegisterConditionalExpressionRewrite(CodeFixContext context, SyntaxNode root, LiteralExpressionSyntax literal, ConditionalExpressionSyntax conditionalParent) =>
+        private static void RegisterConditionalExpressionRewrite(SonarCodeFixContext context, SyntaxNode root, LiteralExpressionSyntax literal, ConditionalExpressionSyntax conditionalParent) =>
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c => Task.FromResult(RewriteConditional(context.Document, root, literal, conditionalParent))),
+                Title,
+                c => Task.FromResult(RewriteConditional(context.Document, root, literal, conditionalParent)),
                 context.Diagnostics);
 
-        private static void RegisterBooleanInversion(CodeFixContext context, SyntaxNode root, LiteralExpressionSyntax literal) =>
+        private static void RegisterBooleanInversion(SonarCodeFixContext context, SyntaxNode root, LiteralExpressionSyntax literal) =>
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c => Task.FromResult(RemovePrefixUnary(context.Document, root, literal))),
+                Title,
+                c => Task.FromResult(RemovePrefixUnary(context.Document, root, literal)),
                 context.Diagnostics);
 
-        private static void RegisterConditionalExpressionRemoval(CodeFixContext context, SyntaxNode root, ConditionalExpressionSyntax conditional) =>
+        private static void RegisterConditionalExpressionRemoval(SonarCodeFixContext context, SyntaxNode root, ConditionalExpressionSyntax conditional) =>
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c => Task.FromResult(RemoveConditional(context.Document, root, conditional))),
+                Title,
+                c => Task.FromResult(RemoveConditional(context.Document, root, conditional)),
                 context.Diagnostics);
 
-        private static void RegisterBinaryExpressionReplacement(CodeFixContext context, SyntaxNode root, SyntaxNode syntaxNode, BinaryExpressionSyntax binary) =>
+        private static void RegisterBinaryExpressionReplacement(SonarCodeFixContext context, SyntaxNode root, SyntaxNode syntaxNode, BinaryExpressionSyntax binary) =>
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var keepThisNode = FindNodeToKeep(binary);
-                        var newRoot = root.ReplaceNode(syntaxNode, keepThisNode
-                            .WithAdditionalAnnotations(Formatter.Annotation));
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                Title,
+                c =>
+                {
+                    var keepThisNode = FindNodeToKeep(binary);
+                    var newRoot = root.ReplaceNode(syntaxNode, keepThisNode
+                        .WithAdditionalAnnotations(Formatter.Annotation));
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
 
         private static SyntaxNode FindNodeToKeep(BinaryExpressionSyntax binary)

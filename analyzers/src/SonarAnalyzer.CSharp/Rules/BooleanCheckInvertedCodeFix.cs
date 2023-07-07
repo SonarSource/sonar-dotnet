@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -47,25 +47,24 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
+                Title,
+                c =>
+                {
+                    var expression = syntaxNode.Operand.RemoveParentheses();
+                    var newBinary = ChangeOperator((BinaryExpressionSyntax)expression);
+
+                    if (syntaxNode.Parent is ExpressionSyntax &&
+                        !(syntaxNode.Parent is AssignmentExpressionSyntax))
                     {
-                        var expression = syntaxNode.Operand.RemoveParentheses();
-                        var newBinary = ChangeOperator((BinaryExpressionSyntax)expression);
+                        newBinary = SyntaxFactory.ParenthesizedExpression(newBinary);
+                    }
 
-                        if (syntaxNode.Parent is ExpressionSyntax &&
-                            !(syntaxNode.Parent is AssignmentExpressionSyntax))
-                        {
-                            newBinary = SyntaxFactory.ParenthesizedExpression(newBinary);
-                        }
+                    var newRoot = root.ReplaceNode(
+                        syntaxNode,
+                        newBinary.WithAdditionalAnnotations(Formatter.Annotation));
 
-                        var newRoot = root.ReplaceNode(
-                            syntaxNode,
-                            newBinary.WithAdditionalAnnotations(Formatter.Annotation));
-
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
 
             return Task.CompletedTask;

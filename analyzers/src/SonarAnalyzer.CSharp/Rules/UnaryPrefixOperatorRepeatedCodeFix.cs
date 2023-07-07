@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -28,15 +28,9 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class UnaryPrefixOperatorRepeatedCodeFix : SonarCodeFix
     {
         internal const string Title = "Remove repeated prefix operator(s)";
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(UnaryPrefixOperatorRepeated.DiagnosticId);
-            }
-        }
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(UnaryPrefixOperatorRepeated.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -47,23 +41,22 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
+                Title,
+                c =>
+                {
+                    GetExpression(prefix, out var expression, out var count);
+
+                    if (count%2 == 1)
                     {
-                        GetExpression(prefix, out var expression, out var count);
+                        expression = SyntaxFactory.PrefixUnaryExpression(
+                            prefix.Kind(),
+                            expression);
+                    }
 
-                        if (count%2 == 1)
-                        {
-                            expression = SyntaxFactory.PrefixUnaryExpression(
-                                prefix.Kind(),
-                                expression);
-                        }
-
-                        var newRoot = root.ReplaceNode(prefix, expression
-                            .WithAdditionalAnnotations(Formatter.Annotation));
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                    var newRoot = root.ReplaceNode(prefix, expression
+                        .WithAdditionalAnnotations(Formatter.Annotation));
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
 
             return Task.CompletedTask;

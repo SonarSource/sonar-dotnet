@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(MemberInitializedToDefault.DiagnosticId, MemberInitializerRedundant.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -43,33 +43,32 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
+                Title,
+                c =>
+                {
+                    var parent = initializer.Parent;
+
+                    SyntaxNode newParent;
+
+                    if (!(parent is PropertyDeclarationSyntax propDecl))
                     {
-                        var parent = initializer.Parent;
+                        newParent = parent.RemoveNode(initializer, SyntaxRemoveOptions.KeepNoTrivia);
+                    }
+                    else
+                    {
+                        var newPropDecl = propDecl
+                            .WithInitializer(null)
+                            .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.None))
+                            .WithTriviaFrom(propDecl);
 
-                        SyntaxNode newParent;
+                        newParent = newPropDecl;
+                    }
 
-                        if (!(parent is PropertyDeclarationSyntax propDecl))
-                        {
-                            newParent = parent.RemoveNode(initializer, SyntaxRemoveOptions.KeepNoTrivia);
-                        }
-                        else
-                        {
-                            var newPropDecl = propDecl
-                                .WithInitializer(null)
-                                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.None))
-                                .WithTriviaFrom(propDecl);
-
-                            newParent = newPropDecl;
-                        }
-
-                        var newRoot = root.ReplaceNode(
-                            parent,
-                            newParent.WithAdditionalAnnotations(Formatter.Annotation));
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                    var newRoot = root.ReplaceNode(
+                        parent,
+                        newParent.WithAdditionalAnnotations(Formatter.Annotation));
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
 
             return Task.CompletedTask;

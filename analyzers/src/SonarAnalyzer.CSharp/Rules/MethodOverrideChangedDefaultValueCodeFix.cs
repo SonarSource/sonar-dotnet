@@ -18,22 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class MethodOverrideChangedDefaultValueCodeFix : SonarCodeFix
     {
-        private const string TitleGeneral = "Synchronize default parameter value";
-        private const string TitleExplicitInterface = "Remove default parameter value from explicit interface implementation";
+        internal const string TitleGeneral = "Synchronize default parameter value";
+        internal const string TitleExplicitInterface = "Remove default parameter value from explicit interface implementation";
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(MethodOverrideChangedDefaultValue.DiagnosticId);
 
-        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -81,21 +81,17 @@ namespace SonarAnalyzer.Rules.CSharp
             RegisterCodeFix(context, root, parameter, newParameter, title);
         }
 
-        private static void RegisterCodeFix(CodeFixContext context, SyntaxNode root, ParameterSyntax parameter,
-            ParameterSyntax newParameter, string codeFixTitle)
-        {
+        private static void RegisterCodeFix(SonarCodeFixContext context, SyntaxNode root, ParameterSyntax parameter, ParameterSyntax newParameter, string codeFixTitle) =>
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    codeFixTitle,
-                    c =>
-                    {
-                        var newRoot = root.ReplaceNode(
-                            parameter,
-                            newParameter.WithTriviaFrom(parameter));
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                codeFixTitle,
+                c =>
+                {
+                    var newRoot = root.ReplaceNode(
+                        parameter,
+                        newParameter.WithTriviaFrom(parameter));
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
-        }
 
         private static bool TryGetNewParameterSyntax(ParameterSyntax parameter, IParameterSymbol overriddenParameter, out ParameterSyntax newParameterSyntax)
         {

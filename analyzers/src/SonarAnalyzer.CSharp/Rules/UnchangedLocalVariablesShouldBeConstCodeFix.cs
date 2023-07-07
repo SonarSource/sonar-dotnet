@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using SonarAnalyzer.CodeFixContext;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace SonarAnalyzer.Rules.CSharp;
@@ -32,7 +32,7 @@ public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
     public override ImmutableArray<string> FixableDiagnosticIds =>
         ImmutableArray.Create(UnchangedLocalVariablesShouldBeConst.DiagnosticId);
 
-    protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+    protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
     {
         if (VariableDeclaration(root, context) is
             {
@@ -41,9 +41,8 @@ public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
             } variable)
         {
             context.RegisterCodeFix(
-                CodeAction.Create(
                 Title,
-                cancel => ChangeDocument(context.Document, root, variable, oldNode, cancel)),
+                cancel => ChangeDocument(context.Document, root, variable, oldNode, cancel),
                 context.Diagnostics);
         }
 
@@ -66,7 +65,7 @@ public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
         return document.WithSyntaxRoot(newNode);
     }
 
-    private static VariableDeclarationSyntax VariableDeclaration(SyntaxNode root, CodeFixContext context) =>
+    private static VariableDeclarationSyntax VariableDeclaration(SyntaxNode root, SonarCodeFixContext context) =>
         root.FindNode(context.Diagnostics.First().Location.SourceSpan)?.Parent as VariableDeclarationSyntax;
 
     private static LocalDeclarationStatementSyntax ConstantDeclaration(VariableDeclarationSyntax declaration)

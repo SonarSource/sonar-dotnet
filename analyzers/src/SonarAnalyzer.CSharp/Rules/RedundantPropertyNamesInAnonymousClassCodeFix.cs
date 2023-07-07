@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string Title = "Remove redundant explicit property names";
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantPropertyNamesInAnonymousClass.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -40,21 +40,20 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var newInitializersWithSeparators = anonymousObjectCreation.Initializers.GetWithSeparators()
-                            .Select(item => GetNewSyntaxListItem(item));
-                        var newAnonymousObjectCreation = anonymousObjectCreation
-                            .WithInitializers(SyntaxFactory.SeparatedList<AnonymousObjectMemberDeclaratorSyntax>(newInitializersWithSeparators))
-                            .WithTriviaFrom(anonymousObjectCreation);
+                Title,
+                c =>
+                {
+                    var newInitializersWithSeparators = anonymousObjectCreation.Initializers.GetWithSeparators()
+                        .Select(item => GetNewSyntaxListItem(item));
+                    var newAnonymousObjectCreation = anonymousObjectCreation
+                        .WithInitializers(SyntaxFactory.SeparatedList<AnonymousObjectMemberDeclaratorSyntax>(newInitializersWithSeparators))
+                        .WithTriviaFrom(anonymousObjectCreation);
 
-                        var newRoot = root.ReplaceNode(
-                            anonymousObjectCreation,
-                            newAnonymousObjectCreation);
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                    var newRoot = root.ReplaceNode(
+                        anonymousObjectCreation,
+                        newAnonymousObjectCreation);
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
 
             return Task.CompletedTask;

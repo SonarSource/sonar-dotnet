@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(EmptyMethod.DiagnosticId);
 
-        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -53,31 +53,29 @@ namespace SonarAnalyzer.Rules.CSharp
             await RegisterCodeFixesForMethodsAsync(context, root, methodBody).ConfigureAwait(false);
         }
 
-        private static async Task RegisterCodeFixesForMethodsAsync(CodeFixContext context, SyntaxNode root, BlockSyntax methodBody)
+        private static async Task RegisterCodeFixesForMethodsAsync(SonarCodeFixContext context, SyntaxNode root, BlockSyntax methodBody)
         {
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    TitleComment,
-                    c =>
-                    {
-                        var newMethodBody = methodBody;
-                        newMethodBody = newMethodBody
-                            .WithOpenBraceToken(newMethodBody.OpenBraceToken
-                                .WithTrailingTrivia(SyntaxFactory.TriviaList()
-                                    .Add(SyntaxFactory.EndOfLine(Environment.NewLine))));
+                TitleComment,
+                c =>
+                {
+                    var newMethodBody = methodBody;
+                    newMethodBody = newMethodBody
+                        .WithOpenBraceToken(newMethodBody.OpenBraceToken
+                            .WithTrailingTrivia(SyntaxFactory.TriviaList()
+                                .Add(SyntaxFactory.EndOfLine(Environment.NewLine))));
 
-                        newMethodBody = newMethodBody
-                            .WithCloseBraceToken(newMethodBody.CloseBraceToken
-                                .WithLeadingTrivia(SyntaxFactory.TriviaList()
-                                    .Add(SyntaxFactory.Comment("// Method intentionally left empty."))
-                                    .Add(SyntaxFactory.EndOfLine(Environment.NewLine))));
+                    newMethodBody = newMethodBody
+                        .WithCloseBraceToken(newMethodBody.CloseBraceToken
+                            .WithLeadingTrivia(SyntaxFactory.TriviaList()
+                                .Add(SyntaxFactory.Comment("// Method intentionally left empty."))
+                                .Add(SyntaxFactory.EndOfLine(Environment.NewLine))));
 
-                        var newRoot = root.ReplaceNode(
-                            methodBody,
-                            newMethodBody.WithTriviaFrom(methodBody).WithAdditionalAnnotations(Formatter.Annotation));
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    },
-                    TitleComment),
+                    var newRoot = root.ReplaceNode(
+                        methodBody,
+                        newMethodBody.WithTriviaFrom(methodBody).WithAdditionalAnnotations(Formatter.Annotation));
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
 
             var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
@@ -91,26 +89,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 : SyntaxFactory.IdentifierName(LiteralNotSupportedException);
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    TitleThrow,
-                    c =>
-                    {
-                        var newRoot = root.ReplaceNode(methodBody,
-                            methodBody.WithStatements(
-                                SyntaxFactory.List(
-                                    new StatementSyntax[]
-                                    {
-                                        SyntaxFactory.ThrowStatement(
-                                            SyntaxFactory.ObjectCreationExpression(
-                                                memberAccessRoot,
-                                                SyntaxFactory.ArgumentList(),
-                                                null))
-                                    }))
-                                    .WithTriviaFrom(methodBody)
-                                    .WithAdditionalAnnotations(Formatter.Annotation));
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    },
-                    TitleThrow),
+                TitleThrow,
+                c =>
+                {
+                    var newRoot = root.ReplaceNode(methodBody,
+                        methodBody.WithStatements(
+                            SyntaxFactory.List(
+                                new StatementSyntax[]
+                                {
+                                    SyntaxFactory.ThrowStatement(
+                                        SyntaxFactory.ObjectCreationExpression(
+                                            memberAccessRoot,
+                                            SyntaxFactory.ArgumentList(),
+                                            null))
+                                }))
+                                .WithTriviaFrom(methodBody)
+                                .WithAdditionalAnnotations(Formatter.Annotation));
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
         }
 

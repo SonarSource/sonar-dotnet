@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -27,24 +27,17 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class OrderByRepeatedCodeFix : SonarCodeFix
     {
         internal const string Title = "Change 'OrderBy' to 'ThenBy'";
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(OrderByRepeated.DiagnosticId);
-            }
-        }
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(OrderByRepeated.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var syntaxNode = root.FindNode(diagnosticSpan);
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c => ChangeToThenByAsync(context.Document, syntaxNode, c)),
+                Title,
+                c => ChangeToThenByAsync(context.Document, syntaxNode, c),
                 context.Diagnostics);
 
             return Task.CompletedTask;

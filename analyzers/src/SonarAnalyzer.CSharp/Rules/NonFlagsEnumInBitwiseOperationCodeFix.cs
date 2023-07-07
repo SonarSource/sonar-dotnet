@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(NonFlagsEnumInBitwiseOperation.DiagnosticId);
 
-        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -64,25 +64,24 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    async c =>
-                    {
-                        var enumDeclarationRoot = await currentSolution.GetDocument(documentId).GetSyntaxRootAsync(c).ConfigureAwait(false);
+                Title,
+                async c =>
+                {
+                    var enumDeclarationRoot = await currentSolution.GetDocument(documentId).GetSyntaxRootAsync(c).ConfigureAwait(false);
 
-                        var flagsAttributeName = flagsAttributeType.ToMinimalDisplayString(semanticModel, enumDeclaration.SpanStart);
-                        flagsAttributeName = flagsAttributeName.Remove(flagsAttributeName.IndexOf("Attribute", System.StringComparison.Ordinal));
+                    var flagsAttributeName = flagsAttributeType.ToMinimalDisplayString(semanticModel, enumDeclaration.SpanStart);
+                    flagsAttributeName = flagsAttributeName.Remove(flagsAttributeName.IndexOf("Attribute", System.StringComparison.Ordinal));
 
-                        var attributes = enumDeclaration.AttributeLists.Add(
-                            SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList(new[] {
-                                SyntaxFactory.Attribute(SyntaxFactory.ParseName(flagsAttributeName)) })));
+                    var attributes = enumDeclaration.AttributeLists.Add(
+                        SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList(new[] {
+                            SyntaxFactory.Attribute(SyntaxFactory.ParseName(flagsAttributeName)) })));
 
-                        var newDeclaration = enumDeclaration.WithAttributeLists(attributes);
-                        var newRoot = enumDeclarationRoot.ReplaceNode(
-                            enumDeclaration,
-                            newDeclaration);
-                        return currentSolution.WithDocumentSyntaxRoot(documentId, newRoot);
-                    }),
+                    var newDeclaration = enumDeclaration.WithAttributeLists(attributes);
+                    var newRoot = enumDeclarationRoot.ReplaceNode(
+                        enumDeclaration,
+                        newDeclaration);
+                    return currentSolution.WithDocumentSyntaxRoot(documentId, newRoot);
+                },
                 context.Diagnostics);
         }
     }

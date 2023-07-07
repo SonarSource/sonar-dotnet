@@ -18,13 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeFixes;
+using SonarAnalyzer.CodeFixContext;
+using RoslynCodeFixes = Microsoft.CodeAnalysis.CodeFixes;
 
 namespace SonarAnalyzer.Helpers;
 
-public abstract class SonarCodeFix : CodeFixProvider
+public abstract class SonarCodeFix : RoslynCodeFixes.CodeFixProvider
 {
-    public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
+    public sealed override async Task RegisterCodeFixesAsync(RoslynCodeFixes.CodeFixContext context)
     {
         if (!context.Document.SupportsSyntaxTree)
         {
@@ -42,12 +43,12 @@ public abstract class SonarCodeFix : CodeFixProvider
         /// this problem: https://github.com/dotnet/roslyn/issues/4030
         if (SonarAnalysisContext.LegacyIsRegisteredActionEnabled(Enumerable.Empty<DiagnosticDescriptor>(), syntaxRoot.SyntaxTree))
         {
-            await RegisterCodeFixesAsync(syntaxRoot, context).ConfigureAwait(false);
+            await RegisterCodeFixesAsync(syntaxRoot, new(context)).ConfigureAwait(false);
         }
     }
 
-    public override FixAllProvider GetFixAllProvider() =>
+    public override RoslynCodeFixes.FixAllProvider GetFixAllProvider() =>
         DocumentBasedFixAllProvider.Instance;
 
-    protected abstract Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context);
+    protected abstract Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context);
 }

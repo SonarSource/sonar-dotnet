@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(MethodOverrideAddsParams.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -43,20 +43,19 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var node = paramsToken.Parent;
-                        var newNode = node.ReplaceToken(
-                            paramsToken,
-                            SyntaxFactory.Token(SyntaxKind.None));
+                Title,
+                c =>
+                {
+                    var node = paramsToken.Parent;
+                    var newNode = node.ReplaceToken(
+                        paramsToken,
+                        SyntaxFactory.Token(SyntaxKind.None));
 
-                        newNode = newNode.WithTriviaFrom(node);
+                    newNode = newNode.WithTriviaFrom(node);
 
-                        var newRoot = root.ReplaceNode(node, newNode);
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                    var newRoot = root.ReplaceNode(node, newNode);
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
 
             return Task.CompletedTask;

@@ -36,9 +36,9 @@ namespace SonarAnalyzer.Common
 
         #endregion Singleton implementation
 
-        private const string titleSolutionPattern = "Fix all '{0}' in Solution";
-        private const string titleScopePattern = "Fix all '{0}' in '{1}'";
-        private const string titleFixAll = "Fix all '{0}'";
+        private const string TitleSolutionPattern = "Fix all '{0}' in Solution";
+        private const string TitleScopePattern = "Fix all '{0}' in '{1}'";
+        private const string TitleFixAll = "Fix all '{0}'";
 
         private static string GetFixAllTitle(FixAllContext fixAllContext)
         {
@@ -48,16 +48,16 @@ namespace SonarAnalyzer.Common
             switch (fixAllContext.Scope)
             {
                 case FixAllScope.Document:
-                    return string.Format(titleScopePattern, diagnosticId, fixAllContext.Document.Name);
+                    return string.Format(TitleScopePattern, diagnosticId, fixAllContext.Document.Name);
 
                 case FixAllScope.Project:
-                    return string.Format(titleScopePattern, diagnosticId, fixAllContext.Project.Name);
+                    return string.Format(TitleScopePattern, diagnosticId, fixAllContext.Project.Name);
 
                 case FixAllScope.Solution:
-                    return string.Format(titleSolutionPattern, diagnosticId);
+                    return string.Format(TitleSolutionPattern, diagnosticId);
 
                 default:
-                    return titleFixAll;
+                    return TitleFixAll;
             }
         }
 
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Common
             var currentDocument = document.WithSyntaxRoot(root);
             var annotatedElements = root.GetAnnotatedNodesAndTokens(annotationKind).ToList();
 
-            while(annotatedElements.Any())
+            while (annotatedElements.Any())
             {
                 var element = annotatedElements.First();
                 var annotation = element.GetAnnotations(annotationKind).First();
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.Common
                 var location = root.GetAnnotatedNodesAndTokens(annotation).FirstOrDefault().GetLocation();
                 if (location == null)
                 {
-                    //annotation is already removed from the tree
+                    // annotation is already removed from the tree
                     continue;
                 }
 
@@ -147,7 +147,7 @@ namespace SonarAnalyzer.Common
                     diagnostic.Properties);
 
                 var fixes = new List<CodeAction>();
-                var context = new CodeFixContext(currentDocument, newDiagnostic, (a, d) =>
+                var context = new Microsoft.CodeAnalysis.CodeFixes.CodeFixContext(currentDocument, newDiagnostic, (a, d) =>
                 {
                     lock (fixes)
                     {
@@ -184,7 +184,7 @@ namespace SonarAnalyzer.Common
         private static SyntaxNode RemoveAnnotationIfExists(SyntaxNode root, SyntaxAnnotation annotation)
         {
             var element = root.GetAnnotatedNodesAndTokens(annotation).FirstOrDefault();
-            if (element == default(SyntaxNodeOrToken))
+            if (element == default)
             {
                 return root;
             }

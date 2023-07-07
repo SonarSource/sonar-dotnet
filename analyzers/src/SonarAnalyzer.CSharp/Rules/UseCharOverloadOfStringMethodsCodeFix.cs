@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using SonarAnalyzer.CodeFixContext;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace SonarAnalyzer.Rules.CSharp;
@@ -30,16 +30,15 @@ public sealed class UseCharOverloadOfStringMethodsCodeFix : SonarCodeFix
     private const string Title = "Convert to char.";
     public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(UseCharOverloadOfStringMethods.DiagnosticId);
 
-    protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+    protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
     {
         var diagnostic = context.Diagnostics.First();
         if (root.FindNode(diagnostic.Location.SourceSpan) is { Parent: { Parent: InvocationExpressionSyntax invocation } }
             && invocation.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax node)
         {
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c => Task.FromResult(context.Document.WithSyntaxRoot(root.ReplaceNode(node, Convert(node))))),
+                Title,
+                c => Task.FromResult(context.Document.WithSyntaxRoot(root.ReplaceNode(node, Convert(node)))),
                 context.Diagnostics);
         }
         return Task.CompletedTask;

@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
+using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private readonly CSharpFacade language = CSharpFacade.Instance;
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             if (root.FindNode(context.Diagnostics.First().Location.SourceSpan)?.FirstAncestorOrSelf<BinaryExpressionSyntax>() is { } binary)
             {
@@ -52,12 +52,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
-        public static void Simplify(SyntaxNode root, ExpressionSyntax expression, ExpressionSyntax countExpression, CountComparisonResult comparisonResult, CodeFixContext context) =>
+        public static void Simplify(SyntaxNode root, ExpressionSyntax expression, ExpressionSyntax countExpression, CountComparisonResult comparisonResult, SonarCodeFixContext context) =>
             context.RegisterCodeFix(
-                CodeAction.Create(Title, c => Replacement(root, expression, (InvocationExpressionSyntax)countExpression, comparisonResult, context)),
+                Title,
+                c => Replacement(root, expression, (InvocationExpressionSyntax)countExpression, comparisonResult, context),
                 context.Diagnostics);
 
-        private static Task<Document> Replacement(SyntaxNode root, ExpressionSyntax expression, InvocationExpressionSyntax count, CountComparisonResult comparison, CodeFixContext context)
+        private static Task<Document> Replacement(SyntaxNode root, ExpressionSyntax expression, InvocationExpressionSyntax count, CountComparisonResult comparison, SonarCodeFixContext context)
         {
             var any = IsExtension(count)
                 ? AnyFromExtension(count)
