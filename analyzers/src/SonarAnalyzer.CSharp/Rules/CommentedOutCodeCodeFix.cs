@@ -109,7 +109,7 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
         }
 
         private bool KeepTrailing(SyntaxTrivia trivia) =>
-            !ShareLine(trivia, Comment) ^ trivia.IsKind(SyntaxKind.EndOfLineTrivia);
+             trivia.IsKind(SyntaxKind.EndOfLineTrivia) || !ShareLine(trivia, Comment);
 
         private SyntaxToken NewLeading() =>
             Token
