@@ -7,20 +7,20 @@ class Program
 {
     public void IExecuteMethods(IExecute execute, string query, string param)
     {
-        execute.Execute(query);         // Compliant
-        execute.Execute(query + param); // Noncompliant
+        execute.Execute(query);                                                                            // Compliant
+        execute.Execute(query + param);                                                                    // Noncompliant
 
-        execute.ExecuteScalar<Entity>(query);         // Compliant
-        execute.ExecuteScalar<Entity>(query + param); // Noncompliant
+        execute.ExecuteScalar<Entity>(query);                                                              // Compliant
+        execute.ExecuteScalar<Entity>(query + param);                                                      // Noncompliant
     }
 
     public void IDatabaseMethods(IDatabase database, string query, int param, int otherParam)
     {
-        database.Execute(query);         // Compliant
-        database.Execute(query + param); // Noncompliant
+        database.Execute(query);                                                                           // Compliant
+        database.Execute(query + param);                                                                   // Noncompliant
 
-        database.ExecuteScalar<Entity>(query);         // Compliant
-        database.ExecuteScalar<Entity>(query + param); // Noncompliant
+        database.ExecuteScalar<Entity>(query);                                                             // Compliant
+        database.ExecuteScalar<Entity>(query + param);                                                     // Noncompliant
 
         database.Query<Entity>(query);                                                                     // Compliant
         database.Query<Entity>(query + param);                                                             // Noncompliant
