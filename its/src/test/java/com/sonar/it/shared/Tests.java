@@ -63,6 +63,10 @@ public class Tests {
     return tmpProjectDir;
   }
 
+  static BuildResult analyzeProject(TemporaryFolder temp, String projectName) throws IOException {
+    return analyzeProject(temp,projectName, null);
+  }
+
   static BuildResult analyzeProject(TemporaryFolder temp, String projectName, @Nullable String profileKey, String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, projectName);
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectDir)

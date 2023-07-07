@@ -46,8 +46,8 @@ public class TestProjectTest {
 
   @BeforeClass
   public static void init() throws Exception {
-    TestUtils.reset(ORCHESTRATOR);
-    buildResult = Tests.analyzeProject(temp, CSHARP_ONLY_TEST_PROJECT, null);
+    TestUtils.initLocal(ORCHESTRATOR);
+    buildResult = Tests.analyzeProject(temp, CSHARP_ONLY_TEST_PROJECT);
   }
 
   @Test
@@ -64,8 +64,7 @@ public class TestProjectTest {
         "Only TEST-code related results will be imported to your SonarQube/SonarCloud project. " +
         "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects",
-      "Found 1 MSBuild C# project: 1 TEST project."
-    );
+      "Found 1 MSBuild C# project: 1 TEST project.");
     TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
   }
 

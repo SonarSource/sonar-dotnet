@@ -21,12 +21,10 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import java.io.IOException;
-import java.util.List;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
@@ -36,20 +34,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CasingAppTest {
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  private static final String PROJECT = "CasingApp";
 
-  @Before
-  public void init() {
-    TestUtils.reset(ORCHESTRATOR);
+  @ClassRule
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
+
+  @BeforeClass
+  public static void init() throws IOException {
+    TestUtils.initLocal(ORCHESTRATOR);
+    Tests.analyzeProject(temp, PROJECT);
   }
 
   @Test
-  public void class1_should_have_metrics_and_issues() throws IOException {
-    String projectKey = "CasingApp";
+  public void class1_should_have_metrics_and_issues() {
     String componentKey = "CasingApp:CasingApp/SRC/Class1.cs";
-
-    Tests.analyzeProject(temp, projectKey, null);
 
     assertThat(getComponent(componentKey)).isNotNull();
     assertThat(getMeasureAsInt(componentKey, "files")).isEqualTo(1);

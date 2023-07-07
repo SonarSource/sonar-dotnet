@@ -20,9 +20,10 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import java.io.IOException;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
@@ -37,28 +38,24 @@ public class RuleParameterCustomizationTest {
   private static final String PROFILE_NAME = "custom_parameters";
   private static final String CustomParametersProjectName = "DefaultRuleParametersCanBeCustomized";
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @ClassRule
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
-  public void init() {
-    TestUtils.reset(ORCHESTRATOR);
-
+  @BeforeClass
+  public static void init() throws IOException {
+    TestUtils.initLocal(ORCHESTRATOR);
     provisionProject();
+    Tests.analyzeProject(temp, CustomParametersProjectName);
   }
 
   @Test
-  public void doNotHardcodeCredentials_defaultParameters_canBeCustomized() throws Exception {
-    Tests.analyzeProject(temp, CustomParametersProjectName, null);
+  public void doNotHardcodeCredentials_defaultParameters_canBeCustomized() {
 
     final String componentKey = "DefaultRuleParametersCanBeCustomized:DefaultRuleParametersCanBeCustomized/DefaultRuleParametersCanBeCustomized.cs";
-
     assertThat(getComponent(componentKey)).isNotNull();
 
     List<Hotspot> hotspots = getHotspots(CustomParametersProjectName);
-
     assertThat(hotspots.size()).isEqualTo(1);
-
     assertHotspot(hotspots.get(0), 7, "\"senha\" detected here, make sure this is not a hard-coded credential.");
   }
 
@@ -67,7 +64,7 @@ public class RuleParameterCustomizationTest {
     assertThat(hotspot.getMessage()).isEqualTo(message);
   }
 
-  private void provisionProject() {
+  private static void provisionProject() {
     ORCHESTRATOR.getServer().provisionProject(CustomParametersProjectName, CustomParametersProjectName);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(CustomParametersProjectName, LANGUAGE_KEY, PROFILE_NAME);
   }

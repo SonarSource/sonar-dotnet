@@ -19,7 +19,7 @@
  */
 package com.sonar.it.shared;
 
-import org.junit.Rule;
+import org.junit.ClassRule;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
 import org.sonarqube.ws.Issues;
@@ -31,8 +31,8 @@ public class WebConfigBase {
   static final String HOTSPOT_CONTENT_LIMIT_ERROR_MESSAGE = "Make sure the content length limit is safe here.";
   static final String ISSUE_ERROR_MESSAGE = "Use a secure password when connecting to this database.";
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @ClassRule
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   protected void assertRequestValidationHotspot(Hotspot hotspot, int line, String fileName){
     assertHotspot(hotspot, line, fileName, HOTSPOT_REQUEST_VALIDATION_ERROR_MESSAGE);
