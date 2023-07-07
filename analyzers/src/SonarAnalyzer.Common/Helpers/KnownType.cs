@@ -160,8 +160,12 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         public static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
         public static readonly KnownType PetaPoco_IExecute = new("PetaPoco.IExecute");
-        public static readonly KnownType PetaPoco_IDatabase = new("PetaPoco.IDatabase");
+        public static readonly KnownType PetaPoco_IExecuteAsync = new("PetaPoco.IExecuteAsync");
         public static readonly KnownType PetaPoco_IQuery = new("PetaPoco.IQuery");
+        public static readonly KnownType PetaPoco_IQueryAsync = new("PetaPoco.IQueryAsync");
+        public static readonly KnownType PetaPoco_IAlterPoco = new("PetaPoco.IAlterPoco");
+        public static readonly KnownType PetaPoco_IAlterPocoAsync = new("PetaPoco.IAlterPocoAsync");
+        public static readonly KnownType PetaPoco_Sql = new("PetaPoco.Sql");
         public static readonly KnownType Serilog_LoggerConfiguration = new("Serilog.LoggerConfiguration");
         public static readonly KnownType ServiceStack_OrmLite_OrmLiteReadApi = new("ServiceStack.OrmLite.OrmLiteReadApi");
         public static readonly KnownType ServiceStack_OrmLite_OrmLiteReadApiAsync = new("ServiceStack.OrmLite.OrmLiteReadApiAsync");

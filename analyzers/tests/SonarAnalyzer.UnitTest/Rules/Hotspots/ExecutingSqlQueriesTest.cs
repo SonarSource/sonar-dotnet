@@ -150,7 +150,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExecutingSqlQueries_PetaPoco_CS() =>
             builderCS
                 .AddPaths(@"ExecutingSqlQueries.PetaPoco.cs")
+                .AddReferences(MetadataReferenceFacade.SystemData)
                 .AddReferences(NuGetMetadataReference.PetaPocoCompiled(Constants.NuGetLatestVersion))
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
         [TestMethod]

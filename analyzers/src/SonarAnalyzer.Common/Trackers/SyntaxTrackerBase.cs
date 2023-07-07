@@ -31,10 +31,17 @@ namespace SonarAnalyzer.Helpers
             Track(input, Array.Empty<object>(), conditions);
 
         public void Track(TrackerInput input, object[] diagnosticMessageArgs, params Condition[] conditions)
+            => Track(input, static _ => true, diagnosticMessageArgs, conditions);
+
+        public void Track(TrackerInput input, Func<SonarCompilationStartAnalysisContext, bool> compilationStartCondition, params Condition[] conditions)
+            => Track(input, compilationStartCondition, Array.Empty<object>(), conditions);
+
+        public void Track(TrackerInput input, Func<SonarCompilationStartAnalysisContext, bool> compilationStartCondition, object[] diagnosticMessageArgs, params Condition[] conditions)
         {
             input.Context.RegisterCompilationStartAction(c =>
               {
-                  if (input.IsEnabled(c.Options))
+                  if (input.IsEnabled(c.Options)
+                    && compilationStartCondition(c))
                   {
                       c.RegisterNodeAction(
                           Language.GeneratedCodeRecognizer,
