@@ -58,7 +58,7 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
 
     private bool SyntacticChecks(SemanticModel model, ArgumentDescriptor descriptor, SyntaxNode argumentNode) =>
         InvocationFitsMemberKind(argumentNode, descriptor.MemberKind)
-        && (descriptor.RefKind is null || (ArgumentRefKind(argumentNode) is { } refKind ? refKind == descriptor.RefKind.Value : true))
+        && (descriptor.RefKind is not { } expectedRefKind || (ArgumentRefKind(argumentNode) is not { } actualRefKind) || actualRefKind == expectedRefKind)
         && (descriptor.ArgumentListConstraint == null
             || (ArgumentList(argumentNode) is { } argList && descriptor.ArgumentListConstraint(argList, Position(argumentNode))))
         && (descriptor.InvokedMemberNameConstraint == null
