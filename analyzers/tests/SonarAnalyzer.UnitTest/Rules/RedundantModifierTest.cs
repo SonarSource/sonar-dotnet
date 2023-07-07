@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("RedundantModifier.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
                 .WithCodeFixedPaths("RedundantModifier.Sealed.Fixed.cs")
-                .WithCodeFixTitle(RedundantModifierCodeFix.TitleSealed )
+                .WithCodeFixTitle(RedundantModifierCodeFix.TitleSealed)
                 .VerifyCodeFix();
 
 #if NET
