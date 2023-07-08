@@ -13,19 +13,18 @@ $thrd.CurrentUICulture = $thrd.CurrentCulture
 [void][System.Reflection.Assembly]::LoadWithPartialName("System.Web.Extensions")
 $jsonserial= New-Object -TypeName System.Web.Script.Serialization.JavaScriptSerializer
 $jsonserial.MaxJsonLength = 100000000
-$tempFileNameRegex = '^.*\.(NETFramework|NETCoreApp),Version='
+$temporaryPathPattern = '^.*\.(NETFramework|NETCoreApp),Version='
 
 function Create-FullUriForIssue([string]$filePath, [int]$startLine, [int]$endLine) {
     $pathWithForwardSlash = $filePath -replace '\\', '/'
     $subPath = "/analyzers/its/"
-    
-    if ($pathWithForwardSlash.StartsWith("https://") -or !$pathWithForwardSlash.Contains($subPath) -or [System.Text.RegularExpressions.Regex]::IsMatch($pathWithForwardSlash, $tempFileNameRegex)) {
+
+    if ($pathWithForwardSlash.StartsWith("https://") -or !$pathWithForwardSlash.Contains($subPath) -or [System.Text.RegularExpressions.Regex]::IsMatch($pathWithForwardSlash, $temporaryPathPattern)) {
         return $filePath;
     }
 
-    $subPath = "/analyzers/its/"
-    $index = $pathWithForwardSlash.IndexOf($subPath)
-    $remainingPath = $pathWithForwardSlash.Substring($index + $subPath.Length)
+    $subPathStart  = $pathWithForwardSlash.IndexOf($subPath)
+    $remainingPath = $pathWithForwardSlash.Substring($subPathStart + $subPath.Length)
 
     $lineNumberSuffix = ""
     if ($startLine -gt 0) {
@@ -42,7 +41,7 @@ function Create-FullUriForIssue([string]$filePath, [int]$startLine, [int]$endLin
 function Restore-UriDeclaration($files) {
     $files | Foreach-Object {
         if ($_.uri) {
-            # Remove the URI prefix           
+            # Remove the URI prefix
             $_.uri = Create-FullUriForIssue $_.uri $_.region.startLine $_.region.endLine
         }
     }
@@ -133,7 +132,7 @@ function GetActualIssues([string]$sarifReportPath){
     $allIssues.location | Foreach-Object {
         if ($_.uri) {
             $_.uri = $_.uri.replace(' ', '%20')
-            $_.uri = [System.Text.RegularExpressions.Regex]::Replace($_.uri, $tempFileNameRegex, 'Replaced-Temporary-Path/.$1,Version=')
+            $_.uri = [System.Text.RegularExpressions.Regex]::Replace($_.uri, $temporaryPathPattern, 'Replaced-Temporary-Path/.$1,Version=')
         }
     }
 
