@@ -25,7 +25,6 @@ import org.junit.Test;
 public class EnsureAllTestsRunTest extends EnsureAllTestsRunBase {
 
   private static final String PACKAGE_NAME = "com.sonar.it.csharp";
-
   private static final String TEST_SUITE_CLASS = PACKAGE_NAME + ".Tests";
 
   /**

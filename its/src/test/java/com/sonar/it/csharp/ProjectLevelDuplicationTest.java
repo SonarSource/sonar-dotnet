@@ -21,10 +21,11 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
@@ -36,18 +37,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProjectLevelDuplicationTest {
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @ClassRule
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
-  public void init() {
+  @BeforeClass
+  public void init() throws IOException {
     TestUtils.initLocal(ORCHESTRATOR);
+    Tests.analyzeProject(temp, "ProjectLevelDuplication");
   }
 
   @Test
-  public void containsOnlyOneProjectLevelIssue() throws Exception {
-    BuildResult buildResult = Tests.analyzeProject(temp, "ProjectLevelDuplication", null);
-
+  public void containsOnlyOneProjectLevelIssue() {
     assertThat(getComponent("ProjectLevelDuplication")).isNotNull();
 
     List<Issues.Issue> projectLevelIssues = getIssues("ProjectLevelDuplication")

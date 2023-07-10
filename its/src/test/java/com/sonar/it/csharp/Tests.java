@@ -103,12 +103,12 @@ public class Tests {
     return analyzeProject(projectDir, temp, projectDir, profileKey, keyValues);
   }
 
-  static BuildResult analyzeProject(TemporaryFolder temp, String projectName) throws IOException {
-    return analyzeProject(projectName, temp, projectName, null);
+  static BuildResult analyzeProject(TemporaryFolder temp, String projectDir) throws IOException {
+    return analyzeProject(projectDir, temp, projectDir, null);
   }
 
-  static BuildResult analyzeProject(String projectDir, TemporaryFolder temp, String projectName) throws IOException {
-    return analyzeProject(projectName, temp, projectName, null);
+  static BuildResult analyzeProject(String projectName, TemporaryFolder temp, String projectDir) throws IOException {
+    return analyzeProject(projectName, temp, projectDir, null);
   }
 
   static BuildResult analyzeProject(String projectName, TemporaryFolder temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {

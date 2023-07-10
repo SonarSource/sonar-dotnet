@@ -62,5 +62,4 @@ public class NoSonarTest {
   public void logsContainInfo() {
     assertThat(buildResult.getLogs()).contains("Found 1 MSBuild VB.NET project: 1 MAIN project.");
   }
-
 }

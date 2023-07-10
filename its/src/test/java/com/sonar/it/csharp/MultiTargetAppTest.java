@@ -21,8 +21,9 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
-import org.junit.Before;
-import org.junit.Rule;
+import java.io.IOException;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
@@ -32,20 +33,21 @@ import static com.sonar.it.csharp.Tests.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MultiTargetAppTest {
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
-  public void init() {
+  private static BuildResult buildResult;
+
+  @ClassRule
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
+
+  @BeforeClass
+  public static void init() throws IOException {
     TestUtils.initLocal(ORCHESTRATOR);
+    buildResult = Tests.analyzeProject(temp, "MultiTargetConsoleApp");
   }
 
   @Test
-  public void should_analyze_multitarget_project() throws Exception {
+  public void should_analyze_multitarget_project() {
     String componentKey = "MultiTargetConsoleApp:MultiTargetConsoleApp/Program.cs";
-
-    BuildResult buildResult = Tests.analyzeProject(temp, "MultiTargetConsoleApp", null);
-
     assertThat(buildResult.getLogs()).contains("Found 1 MSBuild C# project: 1 MAIN project.");
     assertThat(getComponent(componentKey)).isNotNull();
     assertThat(getIssues(componentKey).stream().filter(x -> x.getRule().startsWith("csharpsquid:")).collect(Collectors.toList())).hasSize(4);

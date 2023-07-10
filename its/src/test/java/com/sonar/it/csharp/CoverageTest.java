@@ -23,7 +23,7 @@ import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import java.io.File;
 import java.io.IOException;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -39,8 +39,8 @@ public class CoverageTest {
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
-  public void init() {
+  @BeforeClass
+  public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }
 

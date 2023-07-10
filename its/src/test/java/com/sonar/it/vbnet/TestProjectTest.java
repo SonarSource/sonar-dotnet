@@ -40,7 +40,7 @@ public class TestProjectTest {
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.initLocal(ORCHESTRATOR);
-    buildResult = Tests.analyzeProject(temp, "VbTestOnlyProjectTest", null);
+    buildResult = Tests.analyzeProject(temp, "VbTestOnlyProjectTest");
   }
 
   @Test

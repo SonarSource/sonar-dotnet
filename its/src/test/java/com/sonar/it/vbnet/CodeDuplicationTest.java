@@ -38,7 +38,7 @@ public class CodeDuplicationTest {
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.initLocal(ORCHESTRATOR);
-    Tests.analyzeProject(temp, PROJECT, null);
+    Tests.analyzeProject(temp, PROJECT);
   }
 
   @Test

@@ -20,7 +20,6 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.build.BuildResult;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -36,12 +35,10 @@ public class CodeDuplicationTest {
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
   private static final String PROJECT = "CodeDuplicationTest";
 
-  private static BuildResult buildResult;
-
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.initLocal(ORCHESTRATOR);
-    buildResult = Tests.analyzeProject(temp, PROJECT, null);
+    Tests.analyzeProject(temp, PROJECT);
   }
 
   @Test

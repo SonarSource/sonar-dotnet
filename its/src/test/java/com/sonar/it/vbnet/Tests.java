@@ -77,6 +77,10 @@ public class Tests {
     TestUtils.deleteLocalCache();
   }
 
+  static BuildResult analyzeProject(TemporaryFolder temp, String projectName) throws IOException {
+    return analyzeProject(temp, projectName, null);
+  }
+
   static BuildResult analyzeProject(TemporaryFolder temp, String projectName, @Nullable String profileKey, String... keyValues) throws IOException {
     Path projectDir = com.sonar.it.csharp.Tests.projectDir(temp, projectName);
 

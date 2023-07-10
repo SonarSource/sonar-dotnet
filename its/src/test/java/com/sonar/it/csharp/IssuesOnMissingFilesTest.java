@@ -26,29 +26,28 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
-
 import java.util.List;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class IssuesOnMissingFilesTest {
-  @ClassRule
-  public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
   private static final String PROJECT = "ProjectWithIssuesOnMissingFiles";
   private static BuildResult buildResult;
 
+  @ClassRule
+  public static final TemporaryFolder temp = TestUtils.createTempFolder();
+
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.initLocal(ORCHESTRATOR);
-    buildResult = Tests.analyzeProject(temp, PROJECT, null);
+    buildResult = Tests.analyzeProject(temp, PROJECT);
   }
 
   @Test
   public void givenAProjectWithIssuesOnMissingFiles_issuesOnMissingFilesAreNotImported() {
     List<Issues.Issue> issues = TestUtils.getIssues(ORCHESTRATOR, PROJECT);
-
     // There are two issues raised on this project, both on generated code which is not emitted on disk.
     // These issues should not be imported.
     assertThat(issues).isEmpty();

@@ -21,7 +21,8 @@ package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.it.shared.WebConfigBase;
-import org.junit.Before;
+import java.io.IOException;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonarqube.ws.Hotspots;
 
@@ -32,17 +33,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WebConfigTest extends WebConfigBase {
 
-  @Before
-  public void init() {
+  private static final String PROJECT = "WebConfig.VB";
+
+  @BeforeClass
+  public static void init() throws IOException {
     TestUtils.initLocal(ORCHESTRATOR);
+    Tests.analyzeProject(temp, PROJECT);
   }
 
   @Test
-  public void should_raise_hotspot_on_web_config() throws Exception {
-    final String projectName = "WebConfig.VB";
-
-    Tests.analyzeProject(temp, projectName, null);
-    List<Hotspots.SearchWsResponse.Hotspot> hotspots = Tests.getHotspots(projectName);
+  public void should_raise_hotspot_on_web_config() {
+    List<Hotspots.SearchWsResponse.Hotspot> hotspots = Tests.getHotspots(PROJECT);
     // One from project directory, one from PathOutsideProjectRoot added with Directory.Build.props
     assertThat(hotspots.size()).isEqualTo(2);
     assertRequestValidationHotspot(hotspots.get(0), 6, "PathOutsideProjectRoot/Web.config");
