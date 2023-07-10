@@ -1,7 +1,4 @@
-﻿extern alias csharp;
-
-using csharp::SonarAnalyzer.Rules.CSharp;
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -40,6 +37,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TypeParameterName_S2373() =>
             builder.WithOnlyDiagnostics(TypeParameterName.S2373)
                    .AddPaths("TypeParameterName.vb")
+                   .Verify();
+
+        [TestMethod]
+        public void TypeParameterName_S119_CustomRegex() =>
+            new VerifierBuilder().AddAnalyzer(() => new TypeParameterName { Pattern = "^[A-Z]{2}\\d{2}$" })
+                   .WithOnlyDiagnostics(TypeParameterName.S119)
+                   .AddPaths("TypeParameterName_CustomRegex.vb")
                    .Verify();
     }
 }

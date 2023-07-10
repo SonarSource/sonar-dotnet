@@ -46,8 +46,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var typeParameter = (TypeParameterSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(typeParameter.Identifier.ValueText, Pattern))
                     {
-                        c.ReportIssue(Diagnostic.Create(S119, typeParameter.Identifier.GetLocation(), typeParameter.Identifier.ValueText, Pattern));
-                        c.ReportIssue(Diagnostic.Create(S2373, typeParameter.Identifier.GetLocation(), typeParameter.Identifier.ValueText, Pattern));
+                        var location = typeParameter.Identifier.GetLocation();
+                        c.ReportIssue(Diagnostic.Create(S119, location, typeParameter.Identifier.ValueText, Pattern));
+                        c.ReportIssue(Diagnostic.Create(S2373, location, typeParameter.Identifier.ValueText, Pattern));
                     }
                 },
                 SyntaxKind.TypeParameter);
