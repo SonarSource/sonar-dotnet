@@ -1,7 +1,6 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 
-public class Program
+public class Sample
 {
     public void Conditional(int arg, string password, byte[] passwordBytes)
     {
@@ -13,5 +12,14 @@ public class Program
             2 => new PasswordDeriveBytes(passwordBytes, salt),  // FIXME Non-compliant
             _ => null
         };
+    }
+}
+
+public interface InterfaceWithMethodImplementation
+{
+    public void Method()
+    {
+        var salt = new byte[16];
+        new Rfc2898DeriveBytes(password, salt),                 // FIXME Non-compliant
     }
 }

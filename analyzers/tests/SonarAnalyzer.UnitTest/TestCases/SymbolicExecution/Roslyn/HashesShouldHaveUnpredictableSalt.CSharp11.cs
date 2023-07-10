@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 public class Sample
@@ -17,7 +16,7 @@ public class Sample
         using var pdb1 = new PasswordDeriveBytes(passwordBytes, shortSalt); // FN
         using var pdb2 = new PasswordDeriveBytes(passwordBytes, safeSalt);
 
-        new Rfc2898DeriveBytes(passwordString, shortSalt); // FN
+        new Rfc2898DeriveBytes(passwordString, shortSalt);                  // FN
         new Rfc2898DeriveBytes(passwordString, safeSalt);
     }
 }
