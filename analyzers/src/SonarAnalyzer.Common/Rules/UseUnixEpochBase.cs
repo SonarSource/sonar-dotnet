@@ -33,8 +33,8 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
     where TLiteralExpression : SyntaxNode
     where TMemberAccessExpression : SyntaxNode
 {
-    private const long EpochTicks = 621355968000000000;
-    private const int EpochYear = 1970;
+    private const long EpochTicks = 0x89F7FF5F7B58000;
+    private const int EpochYear = 1970; // 621_355_968_000_000_000
     private const int EpochMonth = 1;
     private const int EpochDay = 1;
 
@@ -63,7 +63,7 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
 
                     if (literalsArguments.Any(x => IsValueEqualTo(x, EpochYear)
                         && literalsArguments.Count(x => IsValueEqualTo(x, EpochMonth)) == 2)
-                        && CheckAndGetTypeName(c.Node, c.SemanticModel, out var name)
+                        && CheckAndGetTypeName(c.Node, c.SemanticModel) is { } name
                         && IsEpochCtor(c.Node, c.SemanticModel))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), name));
@@ -71,9 +71,9 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
                     else if (arguments.Count() == 1
                         && ((literalsArguments.Count() == 1  && IsValueEqualTo(literalsArguments.First(), EpochTicks))
                             || (Language.FindConstantValue(c.SemanticModel, arguments.First()) is long ticks && ticks == EpochTicks))
-                        && CheckAndGetTypeName(c.Node, c.SemanticModel, out var nameTics))
+                        && CheckAndGetTypeName(c.Node, c.SemanticModel) is { } typeName)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), nameTics));
+                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), typeName));
                     }
                 },
                 Language.SyntaxKind.ObjectCreationExpressions);
@@ -109,16 +109,8 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
     private static bool IsLiteralAndEqualTo(SyntaxNode node, int value) =>
         node is TLiteralExpression literal && IsValueEqualTo(literal, value);
 
-    private static bool CheckAndGetTypeName(SyntaxNode node, SemanticModel model, out string name)
-    {
-        name = string.Empty;
-        if (model.GetTypeInfo(node).Type is var type && type.IsAny(TypesWithUnixEpochField))
-        {
-            name = type.Name;
-            return true;
-        }
-        return false;
-    }
+    private static string CheckAndGetTypeName(SyntaxNode node, SemanticModel model) =>
+        model.GetTypeInfo(node).Type is var type && type.IsAny(TypesWithUnixEpochField) ? type.Name : null;
 
     private bool IsDateTimeKindNonExistingOrUtc(IMethodParameterLookup lookup) =>
         !lookup.TryGetSyntax("kind", out var expressions)
