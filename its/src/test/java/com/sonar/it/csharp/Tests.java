@@ -99,22 +99,22 @@ public class Tests {
     TestUtils.deleteLocalCache();
   }
 
+  static BuildResult analyzeProject(TemporaryFolder temp, String projectDir) throws IOException {
+    return analyzeProject(projectDir, temp, projectDir);
+  }
+
+  static BuildResult analyzeProject(String projectKey, TemporaryFolder temp, String projectDir) throws IOException {
+    return analyzeProject(projectKey, temp, projectDir, null);
+  }
+
   static BuildResult analyzeProject(TemporaryFolder temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     return analyzeProject(projectDir, temp, projectDir, profileKey, keyValues);
   }
 
-  static BuildResult analyzeProject(TemporaryFolder temp, String projectDir) throws IOException {
-    return analyzeProject(projectDir, temp, projectDir, null);
-  }
-
-  static BuildResult analyzeProject(String projectName, TemporaryFolder temp, String projectDir) throws IOException {
-    return analyzeProject(projectName, temp, projectDir, null);
-  }
-
-  static BuildResult analyzeProject(String projectName, TemporaryFolder temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+  static BuildResult analyzeProject(String projectKey, TemporaryFolder temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     Path projectFullPath = Tests.projectDir(temp, projectDir);
 
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectFullPath)
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectKey, projectFullPath)
       .setProfile(profileKey)
       .setProperties(keyValues);
 

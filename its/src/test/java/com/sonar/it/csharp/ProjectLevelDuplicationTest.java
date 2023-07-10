@@ -41,7 +41,7 @@ public class ProjectLevelDuplicationTest {
   public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   @BeforeClass
-  public void init() throws IOException {
+  public static void init() throws IOException {
     TestUtils.initLocal(ORCHESTRATOR);
     Tests.analyzeProject(temp, "ProjectLevelDuplication");
   }
