@@ -10,6 +10,12 @@ public class Program
     private readonly DateTimeOffset EpochOff = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero); // Noncompliant {{Use "DateTimeOffset.UnixEpoch" instead of creating DateTimeOffset instances that point to the unix epoch time}}
     //                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    private const long EpochTicks = 621355968000000000;
+    private const long EpochTicksUnderscores = 621_355_968_000_000_000;
+    private const long EpochTicksBinary = 0b100010011111011111111111010111110111101101011000000000000000;
+    private const long EpochTicksHex = 0x89F7FF5F7B58000;
+    private const long SomeLongConst = 6213;
+
     void BasicCases(DateTime dateTime)
     {
         var timeSpan = dateTime - new DateTime(1970, 1, 1); // Noncompliant
@@ -48,6 +54,12 @@ public class Program
         var ctor1_0 = new DateTime(1970); // Compliant
         var ctor1_1 = new DateTime(ticks); // Compliant
         var ctor1_2 = new DateTime(ticks: ticks); // Compliant
+        var ctor1_3 = new DateTime(621355968000000000); // Noncompliant
+        var ctor1_4 = new DateTime(EpochTicks); // Noncompliant: const variables are tracked
+        var ctor1_5 = new DateTime(EpochTicksUnderscores); // Noncompliant: const variables are tracked
+        var ctor1_6 = new DateTime(EpochTicksBinary); // Noncompliant: const variables are tracked
+        var ctor1_7 = new DateTime(EpochTicksHex); // Noncompliant: const variables are tracked
+        var ctor1_8 = new DateTime(SomeLongConst); // Compliant
 
         // year, month, and day
         var ctor2_0 = new DateTime(1970, 1, 1); // Noncompliant
@@ -204,10 +216,15 @@ public class Program
 
 public class FakeDateTime
 {
-    void MyMethod() => new DateTime(1970, 1, 1); // Compliant
+    void MyMethod()
+    {
+        _ = new DateTime(1970, 1, 1); // Compliant
+        _ = new DateTime("hello"); // Compliant
+    }
 
     public class DateTime
     {
         public DateTime(int year, int month, int day) { }
+        public DateTime(string ticks) { }
     }
 }
