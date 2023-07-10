@@ -64,7 +64,8 @@ public class HashesShouldHaveUnpredictableSaltTest
 
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Sonar_DoesNotRaiseIssuesForTestProject() =>
-        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+        sonar
+            .AddPaths("HashesShouldHaveUnpredictableSalt.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .AddTestReference()
             .VerifyNoIssueReported();
