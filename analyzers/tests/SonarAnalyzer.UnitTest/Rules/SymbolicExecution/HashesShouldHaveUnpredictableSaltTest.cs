@@ -42,16 +42,23 @@ public class HashesShouldHaveUnpredictableSaltTest
         .WithOnlyDiagnostics(ChecksCS.HashesShouldHaveUnpredictableSalt.S2053)
         .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
 
+    [Ignore] // TODO: remove after S2053 is implemented with the new SE engine
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp() =>
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.cs").Verify();
+
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp8() =>
-        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+        sonar
+            .AddPaths("HashesShouldHaveUnpredictableSalt.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
     [Ignore] // TODO: remove after S2053 is implemented with the new SE engine
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp8() =>
-        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+        roslynCS
+            .AddPaths("HashesShouldHaveUnpredictableSalt.CSharp8.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
