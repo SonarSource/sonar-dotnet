@@ -443,7 +443,6 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Action_T, methodName: string.Empty, "obj", 0);
-        Action<int> a;
         new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
     }
 
