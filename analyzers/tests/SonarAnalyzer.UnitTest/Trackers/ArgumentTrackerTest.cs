@@ -38,7 +38,10 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, context) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
+        context.Parameter.Name.Should().Be("provider");
+        context.Parameter.Type.Name.Should().Be("IFormatProvider");
     }
 
     [TestMethod]
@@ -52,7 +55,10 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", 0);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, context) = MatchArgumentVB(model, node, argument);
+        result.Should().BeTrue();
+        context.Parameter.Name.Should().Be("provider");
+        context.Parameter.Type.Name.Should().Be("IFormatProvider");
     }
 
     [DataTestMethod]
@@ -73,7 +79,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(m => m.Name == "M", (s, c) => s.Equals("M", c), p => p.Name == parameterName, _ => true, null);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -94,7 +101,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", position);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -116,7 +124,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "ToString", "provider", position);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -131,7 +140,9 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true, RefKind.Out);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, context) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
+        context.Parameter.RefKind.Should().Be(RefKind.Out);
     }
 
     [DataTestMethod]
@@ -147,7 +158,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true, RefKind.Out);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -164,7 +176,9 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true, refKind);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeFalse();
+        var (result, context) = MatchArgumentCS(model, node, argument);
+        result.Should().BeFalse();
+        context.Parameter.Should().BeNull();
     }
 
     [DataTestMethod]
@@ -179,7 +193,9 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Int32, "TryParse", "result", x => true);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, context) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
+        context.Parameter.RefKind.Should().Be(RefKind.Out);
     }
 
     [DataTestMethod]
@@ -221,7 +237,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(m => true, (m, c) => m.Equals("M", c), p => p.Name == "parameter", x => true, null);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -279,7 +296,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(m => true, (m, c) => m.Equals("M", c), p => p.Name == "parameter", x => true, null);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -305,7 +323,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Collections_Generic_Comparer_T, "Compare", "x", 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -336,7 +355,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Collections_Generic_Comparer_T, "Compare", "x", 0);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -359,7 +379,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Collections_CollectionBase, "OnInsert", "index", 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -384,7 +405,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Collections_CollectionBase, "OnInsert", "index", 0);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -403,7 +425,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_String, "Format", parameterName, i => i >= 1);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -422,7 +445,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_String, "Format", parameterName, i => i >= 1);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [TestMethod]
@@ -443,7 +467,39 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Action_T, methodName: string.Empty, "obj", 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, context) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
+        context.Parameter.Name.Should().Be("obj");
+        context.Parameter.ContainingSymbol.Name.Should().Be("Invoke");
+        context.Parameter.ContainingType.Name.Should().Be("Action");
+    }
+
+    [DataTestMethod]
+    [DataRow("""ProcessStartInfo($$"fileName")""", "fileName", 0, true)]
+    [DataRow("""ProcessStartInfo($$"fileName")""", "arguments", 1, false)]
+    [DataRow("""ProcessStartInfo("fileName", $$"arguments")""", "arguments", 1, true)]
+    [DataRow("""ProcessStartInfo("fileName", $$"arguments")""", "arguments", 0, false)]
+    [DataRow("""ProcessStartInfo($$"fileName", "arguments")""", "arguments", 1, false)]
+    [DataRow("""ProcessStartInfo(arguments: $$"arguments", fileName: "fileName")""", "arguments", 1, true)]
+    [DataRow("""ProcessStartInfo(arguments: $$"arguments", fileName: "fileName")""", "fileName", 0, false)]
+    [DataRow("""ProcessStartInfo(arguments: "arguments", $$fileName: "fileName")""", "fileName", 0, true)]
+    [DataRow("""ProcessStartInfo(arguments: "arguments", $$fileName: "fileName")""", "arguments", 1, false)]
+    public void Constructor_SimpleArgument(string constructor, string parameterName, int argumentPosition, bool expected)
+    {
+        var snippet = $$"""
+            _ = new System.Diagnostics.{{constructor}};
+            """;
+        var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
+
+        var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Diagnostics_ProcessStartInfo, parameterName, argumentPosition);
+        var (result, context) = MatchArgumentCS(model, node, argument);
+        result.Should().Be(expected);
+        if (expected)
+        {
+            context.Parameter.Name.Should().Be(parameterName);
+            context.Parameter.ContainingSymbol.Name.Should().Be(".ctor");
+            context.Parameter.ContainingType.Name.Should().Be("ProcessStartInfo");
+        }
     }
 
     [DataTestMethod]
@@ -456,7 +512,7 @@ public class ArgumentTrackerTest
     [DataRow("""ProcessStartInfo(arguments:= $$"arguments", fileName:= "fileName")""", "fileName", 0, false)]
     [DataRow("""ProcessStartInfo(arguments:= "arguments", $$fileName:= "fileName")""", "fileName", 0, true)]
     [DataRow("""ProcessStartInfo(arguments:= "arguments", $$fileName:= "fileName")""", "arguments", 1, false)]
-    public void Constructor_SimpleArgument(string constructor, string parameterName, int argumentPosition, bool expected)
+    public void Constructor_SimpleArgument_VB(string constructor, string parameterName, int argumentPosition, bool expected)
     {
         var snippet = $$"""
             Dim a = New System.Diagnostics.{{constructor}}
@@ -464,7 +520,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Diagnostics_ProcessStartInfo, parameterName, argumentPosition);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -485,7 +542,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Diagnostics_ProcessStartInfo, parameterName, argumentPosition);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -509,7 +567,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_Dictionary_TKey_TValue, parameterName, argumentPosition);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -532,7 +591,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_Dictionary_TKey_TValue, parameterName, argumentPosition);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().Be(expected);
     }
 
     [TestMethod]
@@ -557,7 +617,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_List_T, "capacity", 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeFalse();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeFalse();
     }
 
     [TestMethod]
@@ -583,7 +644,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_List_T, "capacity", 0);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeFalse();
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().BeFalse();
     }
 
     [DataTestMethod]
@@ -604,7 +666,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_List_T, parameterName, argumentPosition);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().Be(expected);
     }
 
     [TestMethod]
@@ -622,7 +685,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Collections_Generic_List_T, "capacity", 0);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeFalse("FN. Syntactic check does not respect aliases.");
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().BeFalse("FN. Syntactic check does not respect aliases.");
     }
 
     [DataTestMethod]
@@ -655,7 +719,8 @@ public class ArgumentTrackerTest
                                                                 parameterConstraint: p => p.Name is "i" or "j",
                                                                 argumentListConstraint: (n, i) => i is null or 0 or 1 && n.Count > 1,
                                                                 refKind: null);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().Be(expected);
     }
 
     [TestMethod]
@@ -675,7 +740,8 @@ public class ArgumentTrackerTest
                                                                 parameterConstraint: p => p.Name is "i",
                                                                 argumentListConstraint: (_, _) => true,
                                                                 refKind: null);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [TestMethod]
@@ -698,7 +764,8 @@ public class ArgumentTrackerTest
                                                                 parameterConstraint: p => p.Name is "i",
                                                                 argumentListConstraint: (_, _) => true,
                                                                 refKind: null);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [TestMethod]
@@ -716,7 +783,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Exception, "message", 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [TestMethod]
@@ -736,7 +804,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(snippet);
 
         var argument = ArgumentDescriptor.ConstructorInvocation(KnownType.System_Exception, "message", 0);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeFalse("FN. MyBase.New and Me.New are not supported.");
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().BeFalse("FN. MyBase.New and Me.New are not supported.");
     }
 
     [TestMethod]
@@ -750,7 +819,12 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T, "list",
             p => p is { Name: "index", Type.SpecialType: SpecialType.System_Int32, ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertyGet } }, 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, context) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
+        context.Parameter.Name.Should().Be("index");
+        var associatedSymbol = context.Parameter.ContainingSymbol.Should().BeAssignableTo<IMethodSymbol>().Which.AssociatedSymbol.Should().BeAssignableTo<IPropertySymbol>().Which;
+        associatedSymbol.IsIndexer.Should().BeTrue();
+        associatedSymbol.Name.Should().Be("this[]");
     }
 
     [TestMethod]
@@ -764,7 +838,12 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T, "list",
             p => p is { Name: "index", Type.SpecialType: SpecialType.System_Int32, ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertyGet } }, 0);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, context) = MatchArgumentVB(model, node, argument);
+        result.Should().BeTrue();
+        context.Parameter.Name.Should().Be("index");
+        var associatedSymbol = context.Parameter.ContainingSymbol.Should().BeAssignableTo<IMethodSymbol>().Which.AssociatedSymbol.Should().BeAssignableTo<IPropertySymbol>().Which;
+        associatedSymbol.IsIndexer.Should().BeTrue();
+        associatedSymbol.Name.Should().Be("Item");
     }
 
     [DataTestMethod]
@@ -782,7 +861,9 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T,
             p => p is { Name: "index", ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertySet } }, 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, context) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
+        context.Parameter.ContainingSymbol.Should().BeAssignableTo<IMethodSymbol>().Which.MethodKind.Should().Be(MethodKind.PropertySet);
     }
 
     [DataTestMethod]
@@ -799,7 +880,9 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T,
             p => p is { Name: "index", ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertySet } }, 0);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, context) = MatchArgumentVB(model, node, argument);
+        result.Should().BeTrue();
+        context.Parameter.ContainingSymbol.Should().BeAssignableTo<IMethodSymbol>().Which.MethodKind.Should().Be(MethodKind.PropertySet);
     }
 
     [DataTestMethod]
@@ -814,7 +897,8 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "IDictionary",
             (n, c) => n.Equals("GetEnvironmentVariables", c), p => p.Name == "key", (_, p) => p is null or 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [TestMethod]
@@ -827,7 +911,8 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "IDictionary",
             (n, c) => n.Equals("GetEnvironmentVariables", c), p => p.Name == "key", (_, p) => p is null or 0);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -860,7 +945,8 @@ public class ArgumentTrackerTest
             m => m is { MethodKind: var kind, ContainingType: { } type } && type.Name == "C" && (isGetter ? kind == MethodKind.PropertyGet : kind == MethodKind.PropertySet),
             (n, c) => true,
             p => p.Name == parameterName, (_, _) => true);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -895,7 +981,8 @@ public class ArgumentTrackerTest
             m => m is { MethodKind: var kind, ContainingType: { } type } && type.Name == "C" && (isGetter ? kind == MethodKind.PropertyGet : kind == MethodKind.PropertySet),
             (n, c) => true,
             p => p.Name == parameterName, (_, _) => true);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -920,7 +1007,8 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "ProcessModuleCollection",
             (n, c) => n.Equals("Modules", c), p => p.Name == "index", (_, p) => p is null or 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -944,7 +1032,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Environment", p => p.Name == "key", 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
     }
 
 #if NET5_0_OR_GREATER
@@ -966,7 +1055,8 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.AttributeArgument(x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: "ObsoleteAttribute" },
             (s, c) => s.StartsWith("Obsolete", c), p => p.Name == "message", (_, i) => i is 0);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [TestMethod]
@@ -985,7 +1075,8 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.AttributeArgument(x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: "ObsoleteAttribute" },
             (s, c) => s.StartsWith("Obsolete", c), p => p.Name == "message", (_, i) => i is 0);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().BeTrue();
     }
 
 #endif
@@ -1014,7 +1105,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.AttributeArgument("Designer", parameterName, argumentPosition);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -1034,7 +1126,8 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(snippet);
 
         var argument = ArgumentDescriptor.AttributeArgument("Designer", parameterName, argumentPosition);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+        var (result, _) = MatchArgumentVB(model, node, argument);
+        result.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -1055,7 +1148,16 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.AttributeProperty("AttributeUsage", propertyName);
-        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, context) = MatchArgumentCS(model, node, argument);
+        result.Should().Be(expected);
+        if (result)
+        {
+            // The mapped parameter is the "value" parameter of the property set method.
+            context.Parameter.Name.Should().Be("value");
+            var method = context.Parameter.ContainingSymbol.Should().BeAssignableTo<IMethodSymbol>().Which;
+            method.MethodKind.Should().Be(MethodKind.PropertySet);
+            method.AssociatedSymbol.Should().BeAssignableTo<IPropertySymbol>().Which.Name.Should().Be(propertyName);
+        }
     }
 
     [DataTestMethod]
@@ -1076,7 +1178,16 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(snippet);
 
         var argument = ArgumentDescriptor.AttributeProperty("AttributeUsage", propertyName);
-        new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().Be(expected);
+        var (result, context) = MatchArgumentVB(model, node, argument);
+        result.Should().Be(expected);
+        if (result)
+        {
+            // The mapped parameter is the "value" parameter of the property set method.
+            context.Parameter.Name.Should().Be("value");
+            var method = context.Parameter.ContainingSymbol.Should().BeAssignableTo<IMethodSymbol>().Which;
+            method.MethodKind.Should().Be(MethodKind.PropertySet);
+            method.AssociatedSymbol.Should().BeAssignableTo<IPropertySymbol>().Which.Name.Should().Be(propertyName);
+        }
     }
 
     private static string WrapInMethodCS(string snippet) =>
@@ -1120,4 +1231,19 @@ public class ArgumentTrackerTest
 
     private static (SyntaxNode Node, SemanticModel Model) ArgumentAndModelVB(string snippet) =>
         ArgumentAndModel(snippet, TestHelper.CompileVB, typeof(VB.ArgumentSyntax));
+
+    private static (bool Match, ArgumentContext Context) MatchArgumentCS(SemanticModel model, SyntaxNode node, ArgumentDescriptor descriptor) =>
+        MatchArgument<CSharpArgumentTracker, Microsoft.CodeAnalysis.CSharp.SyntaxKind>(model, node, descriptor);
+
+    private static (bool Match, ArgumentContext Context) MatchArgumentVB(SemanticModel model, SyntaxNode node, ArgumentDescriptor descriptor) =>
+        MatchArgument<VisualBasicArgumentTracker, Microsoft.CodeAnalysis.VisualBasic.SyntaxKind>(model, node, descriptor);
+
+    private static (bool Match, ArgumentContext Context) MatchArgument<TTracker, TSyntaxKind>(SemanticModel model, SyntaxNode node, ArgumentDescriptor descriptor)
+        where TTracker : ArgumentTracker<TSyntaxKind>, new()
+        where TSyntaxKind : struct
+    {
+        var context = new ArgumentContext(node, model);
+        var result = new TTracker().MatchArgument(descriptor)(context);
+        return (result, context);
+    }
 }
