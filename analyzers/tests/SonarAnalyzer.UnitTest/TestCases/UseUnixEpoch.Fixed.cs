@@ -214,10 +214,15 @@ public class Program
 
 public class FakeDateTime
 {
-    void MyMethod() => new DateTime(1970, 1, 1); // Compliant
+    void MyMethod()
+    {
+        _ = new DateTime(1970, 1, 1); // Compliant
+        _ = new DateTime("hello"); // Compliant
+    }
 
     public class DateTime
     {
         public DateTime(int year, int month, int day) { }
+        public DateTime(string ticks) { }
     }
 }
