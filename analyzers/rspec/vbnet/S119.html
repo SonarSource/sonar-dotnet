@@ -14,18 +14,18 @@ follow a consistent naming convention by checking them against a provided regula
 <h4>Noncompliant code example</h4>
 <p>With the default parameter value <code>^T(([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)?$</code>:</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-Public Class Foo(Of t) ' Noncompliant
+Public Class Foo(Of tkey) ' Noncompliant
 End Class
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-Public Class Foo(Of T) ' Compliant
+Public Class Foo(Of TKey) ' Compliant
 End Class
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/generic-type-parameters">Gemeroc Type
+  <li> Microsoft Learn - <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/generic-type-parameters">Generic Type
   Parameters (C# reference)</a> </li>
 </ul>
 
