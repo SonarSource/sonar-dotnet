@@ -20,70 +20,115 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
+
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class HashesShouldHaveUnpredictableSaltTest
 {
-    [TestClass]
-    public class HashesShouldHaveUnpredictableSaltTest
-    {
-        private readonly VerifierBuilder sonar = new VerifierBuilder<SymbolicExecutionRunner>().WithBasePath(@"SymbolicExecution\Sonar")
-            .WithOnlyDiagnostics(HashesShouldHaveUnpredictableSalt.S2053)
-            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
+    private readonly VerifierBuilder sonar = new VerifierBuilder()
+        .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
+        .WithBasePath(@"SymbolicExecution\Sonar")
+        .WithOnlyDiagnostics(HashesShouldHaveUnpredictableSalt.S2053)
+        .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
 
-        [TestMethod]
-        public void HashesShouldHaveUnpredictableSalt_CSharp8() =>
-            sonar.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+    private readonly VerifierBuilder roslynCS = new VerifierBuilder()
+        .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
+        .WithBasePath(@"SymbolicExecution\Roslyn")
+        .WithOnlyDiagnostics(ChecksCS.HashesShouldHaveUnpredictableSalt.S2053)
+        .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
 
-        [TestMethod]
-        public void HashesShouldHaveUnpredictableSalt_DoesNotRaiseIssuesForTestProject() =>
-            sonar.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddTestReference()
-                .VerifyNoIssueReported();
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp8() =>
+        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
+
+    [Ignore] // TODO: remove after S2053 is implemented with the new SE engine
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp8() =>
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
+
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Sonar_DoesNotRaiseIssuesForTestProject() =>
+        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .AddTestReference()
+            .VerifyNoIssueReported();
+
+    [Ignore] // TODO: remove after S2053 is implemented with the new SE engine
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Roslyn_DoesNotRaiseIssuesForTestProject() =>
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .AddTestReference()
+            .VerifyNoIssueReported();
 
 #if NET
 
-        [TestMethod]
-        public void HashesShouldHaveUnpredictableSalt_CSharp9() =>
-            sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp9() =>
+        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp9.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
-        [TestMethod]
-        public void HashesShouldHaveUnpredictableSalt_CSharp10() =>
-            sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [Ignore] // TODO: remove after S2053 is implemented with the new SE engine
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp9() =>
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp9.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
-        [TestMethod]
-        public void HashesShouldHaveUnpredictableSalt_CSharp11() =>
-            sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp10() =>
+        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
+
+    [Ignore] // TODO: remove after S2053 is implemented with the new SE engine
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp10() =>
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
+
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp11() =>
+        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
+
+    [Ignore] // TODO: remove after S2053 is implemented with the new SE engine
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp11() =>
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
 #endif
 
-        [TestMethod]
-        public void HashesShouldHaveUnpredictableSalt_LocationContext_Equals()
-        {
-            var tree = SyntaxFactory.ParseSyntaxTree("public class Test {}");
-            var location = Location.Create(tree, TextSpan.FromBounds(0, 6));
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Sonar_LocationContext_Equals()
+    {
+        var tree = SyntaxFactory.ParseSyntaxTree("public class Test {}");
+        var location = Location.Create(tree, TextSpan.FromBounds(0, 6));
 
-            var context1 = new HashesShouldHaveUnpredictableSalt.LocationContext(location, "message");
-            var context2 = new HashesShouldHaveUnpredictableSalt.LocationContext(location, "2nd message");
-            var context3 = new HashesShouldHaveUnpredictableSalt.LocationContext(null, "message");
-            var context4 = new HashesShouldHaveUnpredictableSalt.LocationContext(location, "message");
+        var context1 = new HashesShouldHaveUnpredictableSalt.LocationContext(location, "message");
+        var context2 = new HashesShouldHaveUnpredictableSalt.LocationContext(location, "2nd message");
+        var context3 = new HashesShouldHaveUnpredictableSalt.LocationContext(null, "message");
+        var context4 = new HashesShouldHaveUnpredictableSalt.LocationContext(location, "message");
 
-            context1.Equals(null).Should().BeFalse();
-            context1.Equals(new object()).Should().BeFalse();
-            context1.Equals(context2).Should().BeFalse();
-            context1.Equals(context3).Should().BeFalse();
-            context1.Equals(context1).Should().BeTrue();
-            context1.Equals(context4).Should().BeTrue();
-        }
+        context1.Equals(null).Should().BeFalse();
+        context1.Equals(new object()).Should().BeFalse();
+        context1.Equals(context2).Should().BeFalse();
+        context1.Equals(context3).Should().BeFalse();
+        context1.Equals(context1).Should().BeTrue();
+        context1.Equals(context4).Should().BeTrue();
     }
 }
