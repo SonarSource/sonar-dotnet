@@ -211,19 +211,19 @@ namespace SonarAnalyzer.Rules
             arg.Track(input, c => c.Compilation.GetTypeByMetadataName(KnownType.PetaPoco_IExecute) is not null,
                 arg.MatchArgument(ArgumentDescriptor.MethodInvocation(m => m.ContainingType.IsAny(KnownType.PetaPoco_IExecute, KnownType.PetaPoco_IExecuteAsync),
                     (s, c) => s.Equals("Execute", c) || s.Equals("ExecuteScalar", c) || s.Equals("ExecuteAsync", c) || s.Equals("ExecuteScalarAsync", c),
-                    p => p.Name == "sql" && p.IsType(KnownType.System_String), pos => pos is 0 or 1, RefKind.None)),
+                    p => p.Name == "sql" && p.Type.SpecialType == SpecialType.System_String, pos => pos is 0 or 1, RefKind.None)),
                 ArgumentIsTracked());
 
             arg.Track(input, c => c.Compilation.GetTypeByMetadataName(KnownType.PetaPoco_IQuery) is not null,
                 arg.MatchArgument(ArgumentDescriptor.MethodInvocation(m => m.ContainingType.IsAny(KnownType.PetaPoco_IQuery, KnownType.PetaPoco_IQueryAsync),
                     (s, c) => Array.Exists(petaPocoQueryMethodNames, x => s.Equals(x, c) || s.Equals($"{x}Async", c)),
-                    p => p.Name is "sql" or "sqlCondition" or "sqlPage" or "sqlCount" && p.IsType(KnownType.System_String), pos => true, RefKind.None)),
+                    p => p.Name is "sql" or "sqlCondition" or "sqlPage" or "sqlCount" && p.Type.SpecialType == SpecialType.System_String, pos => true, RefKind.None)),
                 ArgumentIsTracked());
 
             arg.Track(input, c => c.Compilation.GetTypeByMetadataName(KnownType.PetaPoco_IAlterPoco) is not null,
                 arg.MatchArgument(ArgumentDescriptor.MethodInvocation(m => m.ContainingType.IsAny(KnownType.PetaPoco_IAlterPoco, KnownType.PetaPoco_IAlterPocoAsync),
                     (s, c) => s.Equals("Update", c) || s.Equals("UpdateAsync", c) || s.Equals("Delete", c) || s.Equals("DeleteAsync", c),
-                    p => p.Name == "sql" && p.IsType(KnownType.System_String), pos => pos is 0 or 1, RefKind.None)),
+                    p => p.Name == "sql" && p.Type.SpecialType == SpecialType.System_String, pos => pos is 0 or 1, RefKind.None)),
                 ArgumentIsTracked());
 
             arg.Track(input, c => c.Compilation.GetTypeByMetadataName(KnownType.PetaPoco_Sql) is not null,
