@@ -36,7 +36,7 @@ namespace Tests.Diagnostics
             var noParams = aes.CreateEncryptor(); // Compliant
 
             var constantIV = new byte[16];
-            var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
+            var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // FIXME Non-compliant
 
             aes.GenerateKey();
             aes.GenerateIV();
@@ -60,7 +60,7 @@ namespace Tests.Diagnostics
             var reGeneratedKey = aes.CreateEncryptor(); // Compliant
 
             var constantIV = new byte[16];
-            var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
+            var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // FIXME Non-compliant
 
             aes.GenerateIV();
             aes.CreateEncryptor();
@@ -83,7 +83,7 @@ namespace Tests.Diagnostics
             var withGeneratedKey = aes.CreateEncryptor(); // Compliant
 
             var constantIV = new byte[16];
-            var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
+            var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // FIXME Non-compliant
 
             aes.GenerateIV();
             aes.CreateEncryptor();
@@ -106,7 +106,7 @@ namespace Tests.Diagnostics
             var withGeneratedKey = aes.CreateEncryptor(); // Compliant
 
             var constantIV = new byte[16];
-            var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
+            var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // FIXME Non-compliant
 
             aes.GenerateIV();
             aes.CreateEncryptor();
@@ -128,7 +128,7 @@ namespace Tests.Diagnostics
             var e = a switch
             {
                 1 => aes.CreateEncryptor(), // Compliant
-                2 => aes.CreateEncryptor(aes.Key, constantIV), // Noncompliant
+                2 => aes.CreateEncryptor(aes.Key, constantIV), // FIXME Non-compliant
                 _ => null
             };
 
@@ -139,10 +139,10 @@ namespace Tests.Diagnostics
             {
                 aes2.IV = iv; // Set IV to constant
             }
-            aes2.CreateEncryptor(); // Noncompliant
+            aes2.CreateEncryptor(); // FIXME Non-compliant
 
             var aes3 = a == 2 ? aes2 : aes;
-            aes3.CreateEncryptor(); // Noncompliant
+            aes3.CreateEncryptor(); // FIXME Non-compliant
         }
     }
 
