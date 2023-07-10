@@ -1,4 +1,7 @@
-﻿/*
+﻿extern alias csharp;
+
+using csharp::SonarAnalyzer.Rules.CSharp;
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,12 +28,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TypeParameterNameTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<TypeParameterName>();
+
         [TestMethod]
         public void TypeParameterName_S119() =>
-            new VerifierBuilder<TypeParameterName>().AddPaths("TypeParameterName.vb").Verify();
+            builder.WithOnlyDiagnostics(TypeParameterName.S119)
+                   .AddPaths("TypeParameterName.vb")
+                   .Verify();
 
         [TestMethod]
         public void TypeParameterName_S2373() =>
-            new VerifierBuilder<TypeParameterNameObsolete>().AddPaths("TypeParameterName.vb").Verify();
+            builder.WithOnlyDiagnostics(TypeParameterName.S2373)
+                   .AddPaths("TypeParameterName.vb")
+                   .Verify();
     }
 }
