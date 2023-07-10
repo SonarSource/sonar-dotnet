@@ -33,8 +33,8 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
     where TLiteralExpression : SyntaxNode
     where TMemberAccessExpression : SyntaxNode
 {
-    private const long EpochTicks = 0x89F7FF5F7B58000;
-    private const int EpochYear = 1970; // 621_355_968_000_000_000
+    private const long EpochTicks = 621_355_968_000_000_000;
+    private const int EpochYear = 1970;
     private const int EpochMonth = 1;
     private const int EpochDay = 1;
 
