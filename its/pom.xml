@@ -71,6 +71,10 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <configuration>
+            <parallel>classes</parallel>
+            <useUnlimitedThreads>true</useUnlimitedThreads>
+<!--            <threadCount>16</threadCount>-->
+<!--            <perCoreThreadCount>false</perCoreThreadCount>-->
             <includes>
               <include>com/sonar/it/csharp/Tests.java</include>
               <include>com/sonar/it/vbnet/Tests.java</include>

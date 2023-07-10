@@ -85,6 +85,16 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/custom_complexity.xml"))
     .build();
 
+  @ClassRule
+  public static final TemporaryFolder temp = TestUtils.createTempFolder();
+
+  @BeforeClass
+  public static void init() throws IOException {
+    TestUtils.deleteLocalCache();
+    // Analyze a project to avoid race conditions
+    analyzeProject(temp, "Empty");
+  }
+
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {
     Path projectDir = Paths.get("projects").resolve(projectName);
     FileUtils.deleteDirectory(new File(temp.getRoot(), projectName));
@@ -92,11 +102,6 @@ public class Tests {
     Path tmpProjectDir = Paths.get(newFolder.getCanonicalPath());
     FileUtils.copyDirectory(projectDir.toFile(), tmpProjectDir.toFile());
     return tmpProjectDir;
-  }
-
-  @BeforeClass
-  public static void deleteLocalCache() {
-    TestUtils.deleteLocalCache();
   }
 
   static BuildResult analyzeProject(TemporaryFolder temp, String projectDir) throws IOException {

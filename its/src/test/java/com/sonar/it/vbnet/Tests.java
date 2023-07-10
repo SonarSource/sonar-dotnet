@@ -40,7 +40,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.sonarqube.ws.Components;
 import org.sonarqube.ws.Hotspots;
-import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.Measures;
 
 @RunWith(Suite.class)
@@ -63,6 +62,16 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_class_name.xml"))
     .build();
+
+  @ClassRule
+  public static final TemporaryFolder temp = TestUtils.createTempFolder();
+
+  @BeforeClass
+  public static void init() throws IOException {
+    TestUtils.deleteLocalCache();
+    // Analyze a project to avoid race conditions
+    analyzeProject(temp, "Empty");
+  }
 
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {
     Path projectDir = Paths.get("projects").resolve(projectName);
@@ -107,10 +116,6 @@ public class Tests {
   @CheckForNull
   static Measures.Measure getMeasure(String componentKey, String metricKey) {
     return TestUtils.getMeasure(ORCHESTRATOR, componentKey, metricKey);
-  }
-
-  static List<Issues.Issue> getIssues(String componentKey) {
-    return TestUtils.getIssues(ORCHESTRATOR, componentKey);
   }
 
   static List<Hotspots.SearchWsResponse.Hotspot> getHotspots(String projectKey) {

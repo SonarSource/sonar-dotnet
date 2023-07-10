@@ -30,6 +30,7 @@ import java.nio.file.Paths;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
@@ -53,6 +54,16 @@ public class Tests {
     // ScannerCliTest: Fixed version for the HTML plugin as we don't want to have failures in case of changes there.
     .addPlugin(MavenLocation.of("org.sonarsource.html", "sonar-html-plugin", "3.2.0.2082"))
     .build();
+
+  @ClassRule
+  public static final TemporaryFolder temp = TestUtils.createTempFolder();
+
+  @BeforeClass
+  public static void init() throws IOException {
+    TestUtils.deleteLocalCache();
+    // Analyze a project to avoid race conditions
+    analyzeProject(temp, "Empty");
+  }
 
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {
     Path projectDir = Paths.get("projects").resolve(projectName);
