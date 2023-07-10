@@ -44,7 +44,7 @@ public class ReadMeTest
 
     private void HasCorrectRuleCount(AnalyzerLanguage language, string name)
     {
-        var rules = RuleFinder.GetAnalyzerTypes(language).Count();
+        var rules = RuleFinder.CreateAnalyzers(language, false).SelectMany(x => x.SupportedDiagnostics).Distinct().Count();
         var match = Regex.Match(readMe, $@"\[(?<count>\d+)\+ {name} rules\]");
         match.Success.Should().BeTrue();
 
