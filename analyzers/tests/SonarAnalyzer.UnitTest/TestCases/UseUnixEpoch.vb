@@ -9,6 +9,10 @@ Public Class Program
     '                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     Private Const EpochTicks As Long = 621355968000000000
+    Private Const EpochTicksUnderscores As Long = 621_355_968_000_000_000
+    Private Const EpochTicksBinary As Long = &B100010011111011111111111010111110111101101011000000000000000
+    Private Const EpochTicksHex As Long = &H89F7FF5F7B58000
+    Private Const SomeLongConst As Long = 6213
 
     Private Sub BasicCases(ByVal dateTime As Date)
         Dim timeSpan = dateTime - New DateTime(1970, 1, 1) ' Noncompliant
@@ -46,6 +50,10 @@ Public Class Program
         Dim ctor1_2 = New DateTime(ticks:=ticks) ' Compliant
         Dim ctor1_3 = New DateTime(621355968000000000) ' Noncompliant
         Dim ctor1_4 = New DateTime(EpochTicks) ' Noncompliant: const variables are tracked
+        Dim ctor1_5 = New DateTime(EpochTicksUnderscores) ' Noncompliant: const variables are tracked
+        Dim ctor1_6 = New DateTime(EpochTicksBinary) ' Noncompliant: const variables are tracked
+        Dim ctor1_7 = New DateTime(EpochTicksHex) ' Noncompliant: const variables are tracked
+        Dim ctor1_8 = New DateTime(SomeLongConst) ' Compliant
 
         ' year, month, and day
         Dim ctor2_0 = New DateTime(1970, 1, 1) ' Noncompliant
