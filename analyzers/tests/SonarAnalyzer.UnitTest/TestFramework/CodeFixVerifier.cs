@@ -18,10 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
@@ -84,18 +81,8 @@ internal class CodeFixVerifier
             .AssertExpected(pathToExpected, $"{nameof(VerifyFixAllProvider)} runs {fixAllProvider.GetType().Name} once");
     }
 
-        private string RetrieveCodeFixTitle(CodeFixProvider codeFix, State state)
-        {
-            foreach (var diagnostic in state.Diagnostics)
-            {
-                var actions = ActionToApply(codeFix, state.Document, diagnostic);
-                if (actions.Any())
-                {
-                    return actions.First().Title;
-                }
-            }
-            return null;
-        }
+        private string RetrieveCodeFixTitle(CodeFixProvider codeFix, State state) =>
+            state.Diagnostics.SelectMany(diagnostic => ActionToApply(codeFix, state.Document, diagnostic)).FirstOrDefault()?.Title;
 
     private static Document ApplyCodeFix(Document document, CodeAction codeAction)
     {

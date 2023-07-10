@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
-using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {

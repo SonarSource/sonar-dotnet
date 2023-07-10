@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {

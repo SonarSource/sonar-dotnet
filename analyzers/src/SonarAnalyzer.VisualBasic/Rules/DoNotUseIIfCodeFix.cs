@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis.CodeFixes;
-using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {

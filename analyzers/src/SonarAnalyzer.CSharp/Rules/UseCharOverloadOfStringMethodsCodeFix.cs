@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis.CodeFixes;
-using SonarAnalyzer.CodeFixContext;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace SonarAnalyzer.Rules.CSharp;

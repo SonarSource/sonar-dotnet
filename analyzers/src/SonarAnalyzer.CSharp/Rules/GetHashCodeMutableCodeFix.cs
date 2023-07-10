@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Editing;
-using SonarAnalyzer.CodeFixContext;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -56,11 +55,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             context.RegisterCodeFix(
                 Title,
-                token => AddReadonlyToFieldDeclarationsAsync(context.Document, token, allFieldDeclarations),
+                c => AddReadonlyToFieldDeclarationsAsync(context.Document, c, allFieldDeclarations),
                 context.Diagnostics);
         }
 
-        private async Task<FieldDeclarationSyntax> GetFieldDeclarationSyntaxAsync(SemanticModel semanticModel, IdentifierNameSyntax identifierName, CancellationToken cancel)
+        private static async Task<FieldDeclarationSyntax> GetFieldDeclarationSyntaxAsync(SemanticModel semanticModel, IdentifierNameSyntax identifierName, CancellationToken cancel)
         {
             if (!(semanticModel.GetSymbolInfo(identifierName).Symbol is IFieldSymbol fieldSymbol) ||
                 !fieldSymbol.DeclaringSyntaxReferences.Any())

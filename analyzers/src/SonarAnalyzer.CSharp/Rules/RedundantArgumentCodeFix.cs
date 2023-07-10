@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.CodeFixContext;
 using NodeAndSymbol = SonarAnalyzer.Common.NodeAndSymbol<Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax, Microsoft.CodeAnalysis.IParameterSymbol>;
 
 namespace SonarAnalyzer.Rules.CSharp

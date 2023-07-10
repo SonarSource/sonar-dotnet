@@ -19,7 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CodeFixes;
-using SonarAnalyzer.CodeFixContext;
+using SonarAnalyzer.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 

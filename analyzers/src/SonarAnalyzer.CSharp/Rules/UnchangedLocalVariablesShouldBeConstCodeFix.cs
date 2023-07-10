@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis.CodeFixes;
-using SonarAnalyzer.CodeFixContext;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace SonarAnalyzer.Rules.CSharp;
@@ -42,7 +41,7 @@ public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix
         {
             context.RegisterCodeFix(
                 Title,
-                cancel => ChangeDocument(context.Document, root, variable, oldNode, cancel),
+                c => ChangeDocument(context.Document, root, variable, oldNode, c),
                 context.Diagnostics);
         }
 
