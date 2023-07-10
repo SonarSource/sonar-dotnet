@@ -425,6 +425,28 @@ public class ArgumentTrackerTest
         new VisualBasicArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
     }
 
+    [TestMethod]
+    public void Method_NamelessMethod()
+    {
+        var snippet = $$"""
+                using System;
+                class C
+                {
+                    Action<int> ActionReturning() => null;
+
+                    void M()
+                    {
+                        ActionReturning()($$1);
+                    }
+                }
+            """;
+        var (node, model) = ArgumentAndModelCS(snippet);
+
+        var argument = ArgumentDescriptor.MethodInvocation(KnownType.System_Action_T, methodName: string.Empty, "obj", 0);
+        Action<int> a;
+        new CSharpArgumentTracker().MatchArgument(argument)(new ArgumentContext(node, model)).Should().BeTrue();
+    }
+
     [DataTestMethod]
     [DataRow("""ProcessStartInfo($$"fileName")""", "fileName", 0, true)]
     [DataRow("""ProcessStartInfo($$"fileName")""", "arguments", 1, false)]
