@@ -51,14 +51,14 @@ public class ExternalIssuesTest {
 
   @Before
   public void init() {
-    TestUtils.reset(ORCHESTRATOR);
+    TestUtils.initLocal(ORCHESTRATOR);
   }
 
   @Test
   public void external_issues_imported_by_default_as_code_smells() throws Exception {
     var projectKey = MAIN_PROJECT_DIR + "_imported";
     var componentId = projectKey + PROGRAM_COMPONENT_ID;
-    Tests.analyzeProject(MAIN_PROJECT_DIR, temp, projectKey, null);
+    Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR);
 
     assertThat(getComponent(componentId)).isNotNull();
     List<Issues.Issue> allIssues = getIssues(componentId);
@@ -71,14 +71,13 @@ public class ExternalIssuesTest {
         tuple(0, ROSLYN_RULES_PREFIX + "SA1633"),
         tuple(1, ROSLYN_RULES_PREFIX + "SA1200"),
         tuple(5, ROSLYN_RULES_PREFIX + "SA1400"),
-        tuple(7, ROSLYN_RULES_PREFIX + "SA1400")
-      );
+        tuple(7, ROSLYN_RULES_PREFIX + "SA1400"));
   }
 
   @Test
   public void external_issues_imported_by_default_for_test_project() throws Exception {
     var projectKey = TEST_PROJECT_DIR + "_imported";
-    Tests.analyzeProject(TEST_PROJECT_DIR, temp, projectKey, null);
+    Tests.analyzeProject(projectKey, temp, TEST_PROJECT_DIR);
 
     List<Issues.Issue> allIssues = getIssues(projectKey);
     assertThat(allIssues).hasSize(2);
@@ -90,7 +89,7 @@ public class ExternalIssuesTest {
   public void external_issues_are_ignored() throws Exception {
     var projectKey = MAIN_PROJECT_DIR + "_ignored";
     var componentId = projectKey + PROGRAM_COMPONENT_ID;
-    Tests.analyzeProject(MAIN_PROJECT_DIR, temp, projectKey, null,
+    Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR, null,
       "sonar.cs.roslyn.ignoreIssues", "true");
 
     assertThat(getComponent(componentId)).isNotNull();
@@ -105,7 +104,7 @@ public class ExternalIssuesTest {
   public void external_issues_categories_multiple_categories_mapped() throws Exception {
     var projectKey = MAIN_PROJECT_DIR + "_categories_mapped";
     var componentId = projectKey + PROGRAM_COMPONENT_ID;
-    Tests.analyzeProject(MAIN_PROJECT_DIR,temp, projectKey, null,
+    Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR, null,
       // notice that bugCategories has a list of 2 external categories
       "sonar.cs.roslyn.bugCategories", "StyleCop.CSharp.DocumentationRules,StyleCop.CSharp.MaintainabilityRules",
       "sonar.cs.roslyn.vulnerabilityCategories", "StyleCop.CSharp.OrderingRules");
@@ -122,20 +121,18 @@ public class ExternalIssuesTest {
       .containsExactlyInAnyOrder(
         tuple(0, ROSLYN_RULES_PREFIX + "SA1633"),
         tuple(5, ROSLYN_RULES_PREFIX + "SA1400"),
-        tuple(7, ROSLYN_RULES_PREFIX + "SA1400")
-      );
+        tuple(7, ROSLYN_RULES_PREFIX + "SA1400"));
     assertThat(filter(allIssues, ROSLYN_RULES_PREFIX, RuleType.VULNERABILITY))
       .extracting(Issues.Issue::getLine, Issues.Issue::getRule)
       .containsExactlyInAnyOrder(
-        tuple(1, ROSLYN_RULES_PREFIX + "SA1200")
-      );
+        tuple(1, ROSLYN_RULES_PREFIX + "SA1200"));
   }
 
   @Test
   public void external_issues_all_three_properties() throws Exception {
     var projectKey = MAIN_PROJECT_DIR + "_three_properties";
     var componentId = projectKey + PROGRAM_COMPONENT_ID;
-    Tests.analyzeProject(MAIN_PROJECT_DIR, temp, projectKey, null,
+    Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR, null,
       "sonar.cs.roslyn.codeSmellCategories", "StyleCop.CSharp.DocumentationRules",
       "sonar.cs.roslyn.bugCategories", "StyleCop.CSharp.MaintainabilityRules",
       "sonar.cs.roslyn.vulnerabilityCategories", "StyleCop.CSharp.OrderingRules");
@@ -149,19 +146,16 @@ public class ExternalIssuesTest {
     assertThat(filter(allIssues, ROSLYN_RULES_PREFIX, RuleType.CODE_SMELL))
       .extracting(Issues.Issue::getLine, Issues.Issue::getRule)
       .containsExactlyInAnyOrder(
-        tuple(0, ROSLYN_RULES_PREFIX + "SA1633")
-      );
+        tuple(0, ROSLYN_RULES_PREFIX + "SA1633"));
     assertThat(filter(allIssues, ROSLYN_RULES_PREFIX, RuleType.BUG))
       .extracting(Issues.Issue::getLine, Issues.Issue::getRule)
       .containsExactlyInAnyOrder(
         tuple(5, ROSLYN_RULES_PREFIX + "SA1400"),
-        tuple(7, ROSLYN_RULES_PREFIX + "SA1400")
-      );
+        tuple(7, ROSLYN_RULES_PREFIX + "SA1400"));
     assertThat(filter(allIssues, ROSLYN_RULES_PREFIX, RuleType.VULNERABILITY))
       .extracting(Issues.Issue::getLine, Issues.Issue::getRule)
       .containsExactlyInAnyOrder(
-        tuple(1, ROSLYN_RULES_PREFIX + "SA1200")
-      );
+        tuple(1, ROSLYN_RULES_PREFIX + "SA1200"));
   }
 
   private List<Issues.Issue> filter(List<Issues.Issue> issues, String ruleIdPrefix) {

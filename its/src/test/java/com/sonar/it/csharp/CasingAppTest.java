@@ -21,12 +21,10 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import java.io.IOException;
-import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
@@ -41,7 +39,7 @@ public class CasingAppTest {
 
   @Before
   public void init() {
-    TestUtils.reset(ORCHESTRATOR);
+    TestUtils.initLocal(ORCHESTRATOR);
   }
 
   @Test

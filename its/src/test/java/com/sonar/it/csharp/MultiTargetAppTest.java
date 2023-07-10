@@ -37,7 +37,7 @@ public class MultiTargetAppTest {
 
   @Before
   public void init() {
-    TestUtils.reset(ORCHESTRATOR);
+    TestUtils.initLocal(ORCHESTRATOR);
   }
 
   @Test

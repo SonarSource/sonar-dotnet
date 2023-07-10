@@ -41,7 +41,7 @@ public class UnitTestResultsTest {
 
   @Before
   public void init() {
-    TestUtils.reset(ORCHESTRATOR);
+    TestUtils.initLocal(ORCHESTRATOR);
   }
 
   @Test

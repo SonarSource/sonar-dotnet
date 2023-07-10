@@ -142,7 +142,7 @@ public class MetricsIncludeHeaderCommentTest {
       .around(new ExternalResource() {
         @Override
         protected void before() throws Throwable {
-          TestUtils.reset(ORCHESTRATOR);
+          TestUtils.initLocal(ORCHESTRATOR);
 
           Path projectDir = Tests.projectDir(temp, "MetricsTest");
 

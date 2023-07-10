@@ -34,7 +34,7 @@ public class WebConfigTest extends WebConfigBase {
 
   @Before
   public void init() {
-    TestUtils.reset(ORCHESTRATOR);
+    TestUtils.initLocal(ORCHESTRATOR);
   }
 
   @Test

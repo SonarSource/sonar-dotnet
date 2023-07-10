@@ -99,7 +99,19 @@ public class Tests {
     TestUtils.deleteLocalCache();
   }
 
-  static BuildResult analyzeProject(String projectDir, TemporaryFolder temp, String projectName, @Nullable String profileKey, String... keyValues) throws IOException {
+  static BuildResult analyzeProject(TemporaryFolder temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+    return analyzeProject(projectDir, temp, projectDir, profileKey, keyValues);
+  }
+
+  static BuildResult analyzeProject(TemporaryFolder temp, String projectName) throws IOException {
+    return analyzeProject(projectName, temp, projectName, null);
+  }
+
+  static BuildResult analyzeProject(String projectDir, TemporaryFolder temp, String projectName) throws IOException {
+    return analyzeProject(projectName, temp, projectName, null);
+  }
+
+  static BuildResult analyzeProject(String projectName, TemporaryFolder temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     Path projectFullPath = Tests.projectDir(temp, projectDir);
 
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectFullPath)
@@ -109,10 +121,6 @@ public class Tests {
     ORCHESTRATOR.executeBuild(beginStep);
     TestUtils.runMSBuild(ORCHESTRATOR, projectFullPath, "/t:Restore,Rebuild");
     return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectFullPath));
-  }
-
-  static BuildResult analyzeProject(TemporaryFolder temp, String projectName, @Nullable String profileKey, String... keyValues) throws IOException {
-    return analyzeProject(projectName, temp, projectName, profileKey, keyValues);
   }
 
   static Components.Component getComponent(String componentKey) {

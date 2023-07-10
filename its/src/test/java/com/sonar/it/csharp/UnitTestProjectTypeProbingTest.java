@@ -46,7 +46,7 @@ public class UnitTestProjectTypeProbingTest {
   @Before
   public void init() throws IOException {
     if (!isProjectAnalyzed) {
-      TestUtils.reset(ORCHESTRATOR);
+      TestUtils.initLocal(ORCHESTRATOR);
       buildResult = Tests.analyzeProject(temp, PROJECT, null);
 
       isProjectAnalyzed = true;

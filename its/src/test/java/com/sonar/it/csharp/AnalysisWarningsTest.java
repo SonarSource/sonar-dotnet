@@ -39,7 +39,7 @@ public class AnalysisWarningsTest {
 
   @BeforeClass
   public static void init() {
-    TestUtils.reset(ORCHESTRATOR);
+    TestUtils.initLocal(ORCHESTRATOR);
   }
 
   @Test
