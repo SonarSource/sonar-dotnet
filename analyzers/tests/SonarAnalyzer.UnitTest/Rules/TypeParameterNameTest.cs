@@ -25,8 +25,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TypeParameterNameTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<TypeParameterName>();
+
         [TestMethod]
-        public void TypeParameterName() =>
-            new VerifierBuilder<TypeParameterName>().AddPaths("TypeParameterName.vb").Verify();
+        public void TypeParameterName_S119() =>
+            builder.WithOnlyDiagnostics(TypeParameterName.S119)
+                   .AddPaths("TypeParameterName.vb")
+                   .Verify();
+
+        [TestMethod]
+        public void TypeParameterName_S2373() =>
+            builder.WithOnlyDiagnostics(TypeParameterName.S2373)
+                   .AddPaths("TypeParameterName.vb")
+                   .Verify();
+
+        [TestMethod]
+        public void TypeParameterName_S119_CustomRegex() =>
+            new VerifierBuilder().AddAnalyzer(() => new TypeParameterName { Pattern = "^[A-Z]{2}\\d{2}$" })
+                   .WithOnlyDiagnostics(TypeParameterName.S119)
+                   .AddPaths("TypeParameterName_CustomRegex.vb")
+                   .Verify();
     }
 }

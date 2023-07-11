@@ -1,15 +1,17 @@
 {
   "title": "Generic type parameter names should comply with a naming convention",
   "type": "CODE_SMELL",
-  "status": "deprecated",
+  "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
-  "tags": [],
+  "tags": [
+    "convention"
+  ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-2373",
-  "sqKey": "S2373",
+  "ruleSpecification": "RSPEC-119",
+  "sqKey": "S119",
   "scope": "Main",
-  "quickfix": "unknown"
+  "quickfix": "infeasible"
 }
