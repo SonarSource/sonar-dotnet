@@ -78,6 +78,15 @@ public class TestUtils {
       .activateLicense();
   }
 
+  public static Path projectDir(Path temp, String projectName) throws IOException {
+    Path projectDir = Paths.get("projects").resolve(projectName);
+    Path newFolder = temp.resolve(projectName);
+    FileUtils.deleteDirectory(newFolder.toFile());  // FIXME: Files instead? Recursive?
+    Files.createDirectory(newFolder);
+    FileUtils.copyDirectory(projectDir.toFile(), newFolder.toFile());
+    return newFolder.toRealPath();
+  }
+
   // Ensure no AnalysisWarning is raised inside the SQ GUI
   public static void verifyNoGuiWarnings(Orchestrator orchestrator, BuildResult buildResult) {
     Ce.Task task = TestUtils.getAnalysisWarningsTask(orchestrator, buildResult);

@@ -21,10 +21,10 @@ package com.sonar.it.shared;
 
 import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
+import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 
 import static com.sonar.it.shared.Tests.ORCHESTRATOR;
 import static com.sonar.it.shared.Tests.getMeasureAsInt;
@@ -35,8 +35,8 @@ public class CoverageTest {
   private final String programComponentIdCs = "CSharpVBNetCoverage:CSharpConsoleApp/Program.cs";
   private final String programComponentIdVb = "CSharpVBNetCoverage:VBNetConsoleApp/Module1.vb";
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
   @BeforeAll
   public static void init() {
