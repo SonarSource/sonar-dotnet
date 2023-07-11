@@ -249,6 +249,7 @@ public class TestUtils {
   }
 
   // This method has been taken from SonarSource/sonar-scanner-msbuild
+  // ToDo: This should not be needed after jUnit5 migration
   public static TemporaryFolder createTempFolder() {
     LOG.info("TEST SETUP: creating temporary folder...");
 
