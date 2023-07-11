@@ -44,28 +44,25 @@ public class HashesShouldHaveUnpredictableSaltTest
 
     [Ignore] // TODO: remove after S2053 is implemented with the new SE engine
     [TestMethod]
-    public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp() =>
+    public void HashesShouldHaveUnpredictableSalt_Roslyn_CS() =>
         roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.cs").Verify();
 
     [TestMethod]
-    public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp8() =>
-        sonar
-            .AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+    public void HashesShouldHaveUnpredictableSalt_Sonar_CS() =>
+        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
     [Ignore] // TODO: remove after S2053 is implemented with the new SE engine
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp8() =>
-        roslynCS
-            .AddPaths("HashesShouldHaveUnpredictableSalt.CSharp8.cs")
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp8.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Sonar_DoesNotRaiseIssuesForTestProject() =>
-        sonar
-            .AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .AddTestReference()
             .VerifyNoIssueReported();
@@ -73,8 +70,7 @@ public class HashesShouldHaveUnpredictableSaltTest
     [Ignore] // TODO: remove after S2053 is implemented with the new SE engine
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Roslyn_DoesNotRaiseIssuesForTestProject() =>
-        roslynCS
-            .AddPaths("HashesShouldHaveUnpredictableSalt.cs")
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .AddTestReference()
             .VerifyNoIssueReported();
@@ -83,8 +79,7 @@ public class HashesShouldHaveUnpredictableSaltTest
 
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp9() =>
-        sonar
-            .AddPaths("HashesShouldHaveUnpredictableSalt.CSharp9.cs")
+        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp9.cs")
             .WithTopLevelStatements()
             .Verify();
 
@@ -98,31 +93,27 @@ public class HashesShouldHaveUnpredictableSaltTest
 
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp10() =>
-        sonar
-            .AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
+        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp10)
             .Verify();
 
     [Ignore] // TODO: remove after S2053 is implemented with the new SE engine
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp10() =>
-        roslynCS
-            .AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp10)
             .Verify();
 
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp11() =>
-        sonar
-            .AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
+        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp11)
             .Verify();
 
     [Ignore] // TODO: remove after S2053 is implemented with the new SE engine
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp11() =>
-        roslynCS
-            .AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp11)
             .Verify();
 
