@@ -21,7 +21,6 @@ package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
 import java.nio.file.Path;
-import org.apache.commons.lang.SystemUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -44,7 +43,6 @@ public class MetricsTest {
 
   @BeforeAll
   public static void beforeAll() throws Exception {
-    assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
     TestUtils.initLocal(ORCHESTRATOR);
     // Without setting the testProjectPattern, the VbMetricsTest project is considered as a Test project :)
     Tests.analyzeProject(temp, PROJECT, "vbnet_no_rule", "sonar.msbuild.testProjectPattern", "noTests");
