@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
+
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using CS = SonarAnalyzer.Rules.CSharp;
 
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             .WithOnlyDiagnostics(ChecksCS.InitializationVectorShouldBeRandom.S3329);
 
         [TestMethod]
-        public void InitializationVectorShouldBeRandom_Sonar_CSharp8() =>
+        public void InitializationVectorShouldBeRandom_Sonar_CS() =>
             sonar.AddPaths("InitializationVectorShouldBeRandom.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
