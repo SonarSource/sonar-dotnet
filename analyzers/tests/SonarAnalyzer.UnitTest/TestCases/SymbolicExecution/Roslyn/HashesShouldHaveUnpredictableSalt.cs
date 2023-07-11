@@ -257,15 +257,3 @@ public class FieldsAndConstants
         new PasswordDeriveBytes(passwordBytes, safeSalt);               // Compliant
     }
 }
-
-// https://github.com/SonarSource/sonar-dotnet/issues/7355
-public class AD0001_Repro
-{
-    // This reproduces scenario when S1944 check is not active as a rule, but still present in the exploded graph as an engine check.
-    // It must be part of another rule to reproduce the original problem
-    public void InvalidCastToInterfaceSymbolicExecution_Repro()
-    {
-        int? i = null;
-        int j = (int)i;                                                 // Compliant in this rule, would raise S1944 in the old SE
-    }
-}
