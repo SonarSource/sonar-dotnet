@@ -26,7 +26,6 @@ import com.sonar.orchestrator.build.ScannerForMSBuild;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -94,15 +93,6 @@ public class Tests {
     return tmpProjectDir;
   }
 
-  public static Path projectDir(Path temp, String projectName) throws IOException {
-    Path projectDir = Paths.get("projects").resolve(projectName);
-    Path newFolder = temp.resolve(projectName);
-    FileUtils.deleteDirectory(newFolder.toFile());  // FIXME: Files instead? Recursive?
-    Files.createDirectory(newFolder);
-    FileUtils.copyDirectory(projectDir.toFile(), newFolder.toFile());
-    return newFolder.toRealPath();
-  }
-
   @BeforeAll
   public static void deleteLocalCache() {
     TestUtils.deleteLocalCache();
@@ -141,7 +131,7 @@ public class Tests {
   }
 
   static BuildResult analyzeProject(String projectKey, Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
-    Path projectFullPath = Tests.projectDir(temp, projectDir);
+    Path projectFullPath = TestUtils.projectDir(temp, projectDir);
 
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectKey, projectFullPath)
       .setProfile(profileKey)

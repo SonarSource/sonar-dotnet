@@ -24,23 +24,18 @@ import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import com.sonar.orchestrator.locator.FileLocation;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.apache.commons.io.FileUtils;
 import org.junit.ClassRule;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.sonarqube.ws.Components;
 import org.sonarqube.ws.Hotspots;
-import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.Measures;
 
 @RunWith(Suite.class)
@@ -64,27 +59,9 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_class_name.xml"))
     .build();
 
-  public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {
-    Path projectDir = Paths.get("projects").resolve(projectName);
-    FileUtils.deleteDirectory(new File(temp.getRoot(), projectName)); // FIXME: What is this for anyway?
-    Path tmpProjectDir = temp.newFolder(projectName).toPath();
-    FileUtils.copyDirectory(projectDir.toFile(), tmpProjectDir.toFile());
-    return tmpProjectDir;
-  }
-
   @BeforeAll
   public static void deleteLocalCache() {
     TestUtils.deleteLocalCache();
-  }
-
-  // ToDo: This should not be needed after jUnit5 migration
-  static BuildResult analyzeProject(TemporaryFolder temp, String projectName) throws IOException {
-    return analyzeProject(temp, projectName, null);
-  }
-
-  // ToDo: This should not be needed after jUnit5 migration
-  static BuildResult analyzeProject(TemporaryFolder temp, String projectName, @Nullable String profileKey, String... keyValues) throws IOException {
-    return analyzeProject(temp.getRoot().toPath(), projectName, profileKey, keyValues);
   }
 
   static BuildResult analyzeProject(Path temp, String projectName) throws IOException {
@@ -92,7 +69,7 @@ public class Tests {
   }
 
   static BuildResult analyzeProject(Path temp, String projectName, @Nullable String profileKey, String... keyValues) throws IOException {
-    Path projectDir = com.sonar.it.csharp.Tests.projectDir(temp, projectName);
+    Path projectDir = TestUtils.projectDir(temp, projectName);
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectDir)
       .setProfile(profileKey)
       .setProperties(keyValues);
@@ -114,10 +91,6 @@ public class Tests {
   @CheckForNull
   static Measures.Measure getMeasure(String componentKey, String metricKey) {
     return TestUtils.getMeasure(ORCHESTRATOR, componentKey, metricKey);
-  }
-
-  static List<Issues.Issue> getIssues(String componentKey) {
-    return TestUtils.getIssues(ORCHESTRATOR, componentKey);
   }
 
   static List<Hotspots.SearchWsResponse.Hotspot> getHotspots(String projectKey) {

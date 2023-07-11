@@ -19,13 +19,12 @@
  */
 package com.sonar.it.shared;
 
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
+import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.ClassRule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.shared.Tests.ORCHESTRATOR;
@@ -34,11 +33,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class VbMainCodeCsTestCodeTest {
 
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
-  @ClassRule
-  public static final TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
   private static final String SONAR_RULES_PREFIX = "vbnet:";
   private static final String PROJECT = "VbMainCsTest";
@@ -46,7 +42,7 @@ public class VbMainCodeCsTestCodeTest {
 
   @BeforeAll
   public static void init() throws Exception {
-    TestUtils.initLocal(orchestrator);
+    TestUtils.initLocal(ORCHESTRATOR);
     buildResult = Tests.analyzeProject(temp, PROJECT);
   }
 
