@@ -43,7 +43,7 @@ public class RestrictDeserializedTypesTest
 #if NETFRAMEWORK // These serializers are available only when targeting .Net Framework
 
     [TestMethod]
-    public void RestrictDeserializedTypesFormatters_Sonar_CSharp8()
+    public void RestrictDeserializedTypesFormatters_Sonar()
     {
         using var _ = new AssertIgnoreScope(); // EnsureStackState fails an assertion in this test file
         sonar.AddPaths("RestrictDeserializedTypes.cs")
@@ -53,16 +53,19 @@ public class RestrictDeserializedTypesTest
 
     [Ignore] // ToDo: Remove after implementation
     [TestMethod]
-    public void RestrictDeserializedTypesFormatters_Roslyn_CSharp8()
-    {
-        using var _ = new AssertIgnoreScope(); // EnsureStackState fails an assertion in this test file
+    public void RestrictDeserializedTypesFormatters_Roslyn_CS() =>
+        roslynCS.AddPaths("RestrictDeserializedTypes.cs")
+            .Verify();
+
+    [Ignore] // ToDo: Remove after implementation
+    [TestMethod]
+    public void RestrictDeserializedTypesFormatters_Roslyn_CSharp8() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
-    }
 
     [TestMethod]
-    public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject_Sonar_CSharp8() =>
+    public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject_Sonar() =>
         sonar.AddPaths("RestrictDeserializedTypes.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .AddTestReference()
@@ -70,36 +73,33 @@ public class RestrictDeserializedTypesTest
 
     [Ignore] // ToDo: Remove after implementation
     [TestMethod]
-    public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject_Roslyn_CSharp8() =>
+    public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject_Roslyn_CS() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
             .AddTestReference()
             .VerifyNoIssueReported();
 
     [TestMethod]
-    public void RestrictDeserializedTypesJavaScriptSerializer_Sonar_CSharp8() =>
+    public void RestrictDeserializedTypesJavaScriptSerializer_Sonar() =>
         sonar.AddPaths("RestrictDeserializedTypes.JavaScriptSerializer.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
     [Ignore] // ToDo: Remove after implementation
     [TestMethod]
-    public void RestrictDeserializedTypesJavaScriptSerializer_Roslyn_CSharp8() =>
+    public void RestrictDeserializedTypesJavaScriptSerializer_Roslyn_CS() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.JavaScriptSerializer.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
     [TestMethod]
-    public void RestrictDeserializedTypesLosFormatter_Sonar_CSharp8() =>
+    public void RestrictDeserializedTypesLosFormatter_Sonar() =>
         sonar.AddPaths("RestrictDeserializedTypes.LosFormatter.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
     [Ignore] // ToDo: Remove after implementation
     [TestMethod]
-    public void RestrictDeserializedTypesLosFormatter_Roslyn_CSharp8() =>
+    public void RestrictDeserializedTypesLosFormatter_Roslyn_CS() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.LosFormatter.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
     private static IEnumerable<MetadataReference> AdditionalReferences() =>

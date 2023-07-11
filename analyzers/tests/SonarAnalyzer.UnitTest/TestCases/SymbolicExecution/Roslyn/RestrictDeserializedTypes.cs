@@ -12,7 +12,7 @@ internal class Serializer
     internal void BinaryFormatterDeserialize(MemoryStream memoryStream)
     {
         new BinaryFormatter().Deserialize(memoryStream);                    // FIXME Non-compliant {{Restrict types of objects allowed to be deserialized.}}
-        new BinaryFormatter {TypeFormat = FormatterTypeStyle.TypesWhenNeeded};
+        new BinaryFormatter { TypeFormat = FormatterTypeStyle.TypesWhenNeeded };
     }
 
     internal void NetDataContractSerializerDeserialize()
@@ -62,7 +62,7 @@ internal class Serializer
         formatter6.Binder = new UnsafeBinder();
         formatter6.Deserialize(stream);                                     // FIXME Non-compliant [unsafeBinder2]: the last binder set is unsafe
 
-        var formatter7 = new BinaryFormatter {Binder = new SafeBinderExpressionWithNull()};
+        var formatter7 = new BinaryFormatter { Binder = new SafeBinderExpressionWithNull() };
         formatter7.Binder = new UnsafeBinder();
         formatter7.Deserialize(stream);                                     // FIXME Non-compliant [unsafeBinder3]: the last binder set is unsafe
 
@@ -71,31 +71,13 @@ internal class Serializer
         formatter8.Binder = new SafeBinderExpressionWithNull();
         formatter8.Deserialize(stream);                                     // Compliant: the last binder set is safe
 
-        var formatter9 = new BinaryFormatter {Binder = new UnsafeBinder()};
+        var formatter9 = new BinaryFormatter { Binder = new UnsafeBinder() };
         formatter9.Binder = new SafeBinderExpressionWithNull();
         formatter9.Deserialize(stream);                                     // Compliant: the last binder set is safe
 
-        var formatter10 = new BinaryFormatter {Binder = new UnsafeBinder()};
+        var formatter10 = new BinaryFormatter { Binder = new UnsafeBinder() };
         formatter10.Deserialize(stream);                                    // FIXME Non-compliant [unsafeBinder4]: the safe binder was set after deserialize call
         formatter10.Binder = new SafeBinderExpressionWithNull();
-
-        var formatter11 = new BinaryFormatter();
-        formatter11.Binder ??= new SafeBinderExpressionWithNull();
-        formatter11.Deserialize(stream);                                    // Compliant: safe binder using null coalescence
-
-        var formatter12 = new BinaryFormatter();
-        formatter12.Binder ??= new UnsafeBinder();
-        formatter12.Deserialize(stream);                                    // FIXME Non-compliant [unsafeBinder5]: unsafe binder
-
-        BinaryFormatter formatter13 = null;
-        formatter13 ??= new BinaryFormatter();
-        formatter13.Binder = new SafeBinderExpressionWithNull();
-        formatter13.Deserialize(stream);                                    // Compliant: safe binder
-
-        BinaryFormatter formatter14 = null;
-        formatter14 ??= new BinaryFormatter();
-        formatter14.Binder = new UnsafeBinder();
-        formatter14.Deserialize(stream);                                    // FIXME Non-compliant [unsafeBinder6]: unsafe binder
 
         var formatter15 = new BinaryFormatter();
         var formatter16 = new BinaryFormatter();
@@ -105,21 +87,21 @@ internal class Serializer
             formatter15.Deserialize(stream);                                // Compliant: safe binder
 
             formatter16.Binder = new UnsafeBinder();
-            formatter16.Deserialize(stream);                                // FIXME Non-compliant [unsafeBinder7]: unsafe binder
+            formatter16.Deserialize(stream);                                // FIXME Non-compliant [unsafeBinder5]: unsafe binder
         }
         catch
         {
             formatter15.Deserialize(stream);                                // Compliant: safe binder
-            formatter16.Deserialize(stream);                                // FIXME Non-compliant [unsafeBinder8]: unsafe binder
+            formatter16.Deserialize(stream);                                // FIXME Non-compliant [unsafeBinder6]: unsafe binder
         }
 
         while (true)
         {
-            var formatter17 = new BinaryFormatter {Binder = new SafeBinderExpressionWithNull()};
+            var formatter17 = new BinaryFormatter { Binder = new SafeBinderExpressionWithNull() };
             formatter17.Deserialize(stream);                                // Compliant: safe binder
 
-            var formatter18 = new BinaryFormatter {Binder = new UnsafeBinder()};
-            formatter18.Deserialize(stream);                                // FIXME Non-compliant [unsafeBinder9]: unsafe binder
+            var formatter18 = new BinaryFormatter { Binder = new UnsafeBinder() };
+            formatter18.Deserialize(stream);                                // FIXME Non-compliant [unsafeBinder7]: unsafe binder
         }
     }
 
@@ -127,25 +109,19 @@ internal class Serializer
     {
         void LocalFunction()
         {
-            new BinaryFormatter {Binder = new SafeBinderExpressionWithNull()}.Deserialize(stream);          // Compliant: safe binder
+            new BinaryFormatter { Binder = new SafeBinderExpressionWithNull() }.Deserialize(stream);            // Compliant: safe binder
 
-            new BinaryFormatter {Binder = new UnsafeBinder()}.Deserialize(stream);                          // FIXME Non-compliant [unsafeBinderLocalFunction]: unsafe binder used
+            new BinaryFormatter { Binder = new UnsafeBinder() }.Deserialize(stream);                            // FIXME Non-compliant [unsafeBinder8]: unsafe binder used
         }
 
         Func<UnsafeBinder> binderFactoryUnsafe = () => new UnsafeBinder();
-        new BinaryFormatter {Binder = binderFactoryUnsafe()}.Deserialize(stream);                           // FIXME Non-compliant [unsafeBinder10]: unsafe binder used
+        new BinaryFormatter { Binder = binderFactoryUnsafe() }.Deserialize(stream);                             // FIXME Non-compliant [unsafeBinder9]: unsafe binder used
 
         Func<SafeBinderExpressionWithNull> binderFactorySafe = () => new SafeBinderExpressionWithNull();
-        new BinaryFormatter {Binder = binderFactorySafe()}.Deserialize(stream);                             // Compliant: safe binder used
+        new BinaryFormatter { Binder = binderFactorySafe() }.Deserialize(stream);                               // Compliant: safe binder used
 
-        static UnsafeBinder LocalBinderFactoryUnsafe() => new UnsafeBinder();
-        new BinaryFormatter {Binder = LocalBinderFactoryUnsafe()}.Deserialize(stream);                      // FIXME Non-compliant [unsafeBinder11]: unsafe binder used
-
-        static SafeBinderExpressionWithNull LocalBinderFactorySafe() => new SafeBinderExpressionWithNull();
-        new BinaryFormatter {Binder = LocalBinderFactorySafe()}.Deserialize(stream);                        // Compliant: safe binder used
-
-        new BinaryFormatter {Binder = BinderFactoryUnsafe()}.Deserialize(stream);                           // FIXME Non-compliant [unsafeBinder12]: unsafe binder used
-        new BinaryFormatter {Binder = BinderFactorySafe()}.Deserialize(stream);                             // Compliant: safe binder used
+        new BinaryFormatter { Binder = BinderFactoryUnsafe() }.Deserialize(stream);                             // FIXME Non-compliant [unsafeBinder10]: unsafe binder used
+        new BinaryFormatter { Binder = BinderFactorySafe() }.Deserialize(stream);                               // Compliant: safe binder used
     }
 
     private static UnsafeBinder BinderFactoryUnsafe() => new UnsafeBinder();
@@ -153,16 +129,15 @@ internal class Serializer
 
     internal void DeserializeOnExpression(MemoryStream memoryStream, bool condition)
     {
-        new BinaryFormatter().Deserialize(memoryStream);                                                    // FIXME Non-compliant - Unsafe by default
-        new BinaryFormatter {Binder = null}.Deserialize(memoryStream);                                      // FIXME Non-compliant - Unsafe when the binder is null
-        (condition ? new BinaryFormatter() : null).Deserialize(memoryStream);                               // FIXME Non-compliant - Unsafe in ternary operator
+        new BinaryFormatter().Deserialize(memoryStream);                                                        // FIXME Non-compliant - Unsafe by default
+        new BinaryFormatter { Binder = null }.Deserialize(memoryStream);                                        // FIXME Non-compliant - Unsafe when the binder is null
+        (condition ? new BinaryFormatter() : null).Deserialize(memoryStream);                                   // FIXME Non-compliant - Unsafe in ternary operator
         BinaryFormatter bin = null;
-        (bin ??= new BinaryFormatter()).Deserialize(memoryStream);                                          // FIXME Non-compliant - unsafe in null coalescence
-        new BinaryFormatter {Binder = new SafeBinderStatementWithReturnNull()}.Deserialize(memoryStream);   // safe binder set in initializer
-        new BinaryFormatter {Binder = new UnsafeBinder()}.Deserialize(memoryStream);                        // FIXME Non-compliant [unsafeBinder13]: unsafe binder set in initializer
+        new BinaryFormatter { Binder = new SafeBinderStatementWithReturnNull() }.Deserialize(memoryStream);     // safe binder set in initializer
+        new BinaryFormatter { Binder = new UnsafeBinder() }.Deserialize(memoryStream);                          // FIXME Non-compliant [unsafeBinder11]: unsafe binder set in initializer
         (condition
-            ? new BinaryFormatter {Binder = new SafeBinderStatementWithReturnNull()}
-            : new BinaryFormatter {Binder = new SafeBinderWithThrowStatement()}).Deserialize(memoryStream); // Safe in ternary operator
+            ? new BinaryFormatter { Binder = new SafeBinderStatementWithReturnNull() }
+            : new BinaryFormatter { Binder = new SafeBinderWithThrowStatement() }).Deserialize(memoryStream);   // Safe in ternary operator
     }
 
     internal void WithInitializeInsideIf(Stream stream)
@@ -176,18 +151,6 @@ internal class Serializer
 
     internal void Switch(Stream stream, bool condition, int number)
     {
-        var formatter1 = new BinaryFormatter();
-        formatter1.Binder = condition switch {true => new UnsafeBinder(), false => null};
-        formatter1.Deserialize(stream);                                         // FIXME Non-compliant [unsafeBinder14]: binder can be null or unsafe
-
-        var formatter2 = new BinaryFormatter();
-        formatter2.Binder = condition switch {true => new UnsafeBinder(), false => new UnsafeBinderExpressionBody()};
-        formatter2.Deserialize(stream);                                         // FIXME Non-compliant: common type is SerializationBinder for which we don't know if it's safe or not.
-
-        var formatter3 = new BinaryFormatter();
-        formatter3.Binder = condition switch {true => new SafeBinderStatementWithReturnNull(), false => new SafeBinderStatementWithReturnNull()};
-        formatter3.Deserialize(stream);                                         // Compliant: binder is safe on all branches
-
         var formatter4 = new BinaryFormatter();
         switch (number)
         {
@@ -200,7 +163,7 @@ internal class Serializer
                 break;
             case 3:
                 formatter4.Binder = new UnsafeBinder();
-                formatter4.Deserialize(stream);                                 // FIXME Non-compliant [unsafeBinder15]: unsafe binder
+                formatter4.Deserialize(stream);                                 // FIXME Non-compliant [unsafeBinder12]: unsafe binder
                 break;
             default:
                 formatter4.Binder = new SafeBinderExpressionWithNull();
@@ -226,7 +189,7 @@ internal class Serializer
         formatter.Deserialize(memoryStream);                                    // Compliant: a safe binder was used
 
         formatter.Binder = new UnsafeBinder();
-        formatter.Deserialize(memoryStream);                                    // FIXME Non-compliant [unsafeBinder16]: the used binder does not validate the deserialized types
+        formatter.Deserialize(memoryStream);                                    // FIXME Non-compliant [unsafeBinder13]: the used binder does not validate the deserialized types
 
         formatter.Binder = new UnsafeBinderExpressionBody();
         formatter.Deserialize(memoryStream);                                    // FIXME Non-compliant: the used binder does not validate the deserialized types
@@ -240,9 +203,9 @@ internal class Serializer
 
     internal void UnknownBindersAreSafe(SerializationBinder binder, bool condition)
     {
-        new BinaryFormatter {Binder = binder}.Deserialize(new MemoryStream());  // Compliant: Unknown binders are considered safe
+        new BinaryFormatter { Binder = binder }.Deserialize(new MemoryStream());// Compliant: Unknown binders are considered safe
 
-        var formatter = new BinaryFormatter {Binder = binder};
+        var formatter = new BinaryFormatter { Binder = binder };
         formatter.Deserialize(new MemoryStream());                              // Compliant: Unknown binders are considered safe
 
         new BinaryFormatter()
@@ -251,11 +214,49 @@ internal class Serializer
         }.Deserialize(new MemoryStream());                                      // Compliant - FN: common type is SerializationBinder
     }
 
+    internal BinaryFormatter UnknownBinaryFormattersAreSafeByDefault(BinaryFormatter formatter)
+    {
+        formatter.Deserialize(new MemoryStream());                              // Compliant
+        formatter.Binder = new UnsafeBinder();
+        formatter.Deserialize(new MemoryStream());                              // FN
+
+        formatter = UnknownBinaryFormattersAreSafeByDefault(null);
+        formatter.Deserialize(new MemoryStream());                              // Compliant
+        formatter.Binder = new UnsafeBinder();
+        formatter.Deserialize(new MemoryStream());                              // FN
+
+        BinaryFormatterField.Deserialize(new MemoryStream());                   // Compliant
+        BinaryFormatterField.Binder = new UnsafeBinder();
+        BinaryFormatterField.Deserialize(new MemoryStream());                   // FN
+
+        return null;
+    }
+
     internal void UnknownFormattersAreSafeByDefault(IFormatter formatter)
     {
         formatter.Binder = new UnsafeBinder();
-        formatter.Deserialize(new MemoryStream());
+        formatter.Deserialize(new MemoryStream());                              // Compliant
     }
+
+    BinaryFormatter BinaryFormatterField;
+}
+
+namespace Aliases
+{
+    using AliasedBinaryFormatter = System.Runtime.Serialization.Formatters.Binary.BinaryFormatter;
+
+    class BinaryFormatter
+    {
+        SerializationBinder Binder { get; set; }
+        object Deserialize(Stream serializationStream) => null;
+
+        void Test()
+        {
+            new AliasedBinaryFormatter().Deserialize(new MemoryStream());       // FN
+            new BinaryFormatter().Deserialize(new MemoryStream());              // Compliant
+        }
+    }
+
 }
 
 internal sealed class SafeBinderStatementWithReturnNull : SerializationBinder
@@ -301,7 +302,7 @@ internal sealed class SafeBinderWithThrowExpression : SerializationBinder
 internal sealed class UnsafeBinder : SerializationBinder
 {
     public override Type BindToType(string assemblyName, string typeName)
-//                       ~~~~~~~~~~ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder12, unsafeBinder13, unsafeBinder14, unsafeBinder15, unsafeBinder16, unsafeBinderLocalFunction]
+//                       ~~~~~~~~~~ FIXME Se-condary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder12, unsafeBinder13]
     {
         return Assembly.Load(assemblyName).GetType(typeName);
     }
@@ -310,7 +311,7 @@ internal sealed class UnsafeBinder : SerializationBinder
 internal sealed class UnsafeBinderExpressionBody : SerializationBinder
 {
     public override Type BindToType(string assemblyName, string typeName) =>
-//                       ~~~~~~~~~~ Secondary
+//                       ~~~~~~~~~~ FIXME Se-condary
         Assembly.Load(assemblyName).GetType(typeName);
 }
 
@@ -330,7 +331,7 @@ internal sealed class UnsafeBinderWithOtherMethods : SerializationBinder
         throw new SerializationException("Not implemented.");
 
     public override Type BindToType(string assemblyName, string typeName) =>
-//                       ~~~~~~~~~~ Secondary
+//                       ~~~~~~~~~~ FIXME Se-condary
         Assembly.Load(assemblyName).GetType(typeName);
 }
 

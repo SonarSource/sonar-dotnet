@@ -82,7 +82,7 @@ public partial class Partial
 
         var formatter = new BinaryFormatter();
         formatter.Binder = new SafeBinderPartial();
-        formatter.Deserialize(ms);                                                  // FIXME Non-compliant FP: safe binder was used
+        formatter.Deserialize(ms);
     }
 }
 
@@ -100,7 +100,7 @@ internal sealed class SafeBinderWithPatternMatching : SerializationBinder
 
 internal sealed partial class SafeBinderPartial : SerializationBinder
 {
-    public override partial Type BindToType(string assemblyName, string typeName);  // Secondary FP
+    public override partial Type BindToType(string assemblyName, string typeName);
 }
 
 internal sealed partial class SafeBinderPartial : SerializationBinder
