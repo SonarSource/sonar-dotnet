@@ -23,8 +23,8 @@ import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
 import org.junit.Rule;
-import org.junit.Test;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
@@ -39,7 +39,7 @@ public class UnitTestResultsTest {
 
   private static final String PROJECT = "UnitTestResultsTest";
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }

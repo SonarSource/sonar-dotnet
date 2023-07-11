@@ -22,9 +22,9 @@ package com.sonar.it.vbnet;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
@@ -36,7 +36,7 @@ public class CoverageTest {
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
+  @BeforeEach
   public void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }

@@ -21,9 +21,9 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import java.io.IOException;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
@@ -39,7 +39,7 @@ public class CasingAppTest {
   @ClassRule
   public static TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @BeforeClass
+  @BeforeAll
   public static void init() throws IOException {
     TestUtils.initLocal(ORCHESTRATOR);
     Tests.analyzeProject(temp, PROJECT);

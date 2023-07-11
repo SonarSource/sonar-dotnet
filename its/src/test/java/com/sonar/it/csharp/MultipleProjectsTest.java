@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.commons.lang.SystemUtils;
 import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.ExternalResource;
 import org.junit.rules.RuleChain;
 import org.junit.rules.TemporaryFolder;

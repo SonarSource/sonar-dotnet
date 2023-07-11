@@ -22,9 +22,9 @@ package com.sonar.it.csharp;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import java.util.List;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
 
@@ -39,7 +39,7 @@ public class NoSourcesTest {
   private static final String PROJECT = "ProjectWithNoSources";
   private static BuildResult buildResult;
 
-  @BeforeClass
+  @BeforeAll
   public static void init() throws Exception {
     TestUtils.initLocal(ORCHESTRATOR);
     buildResult = Tests.analyzeProject(temp, PROJECT);

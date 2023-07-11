@@ -22,9 +22,9 @@ package com.sonar.it.csharp;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import java.util.List;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues.Issue;
 
@@ -38,7 +38,7 @@ public class SharedFilesTest {
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
+  @BeforeEach
   public void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }

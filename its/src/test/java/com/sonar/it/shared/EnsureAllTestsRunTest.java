@@ -19,7 +19,7 @@
  */
 package com.sonar.it.shared;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class EnsureAllTestsRunTest extends EnsureAllTestsRunBase {
 

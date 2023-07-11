@@ -34,7 +34,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.ClassRule;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
@@ -94,7 +94,7 @@ public class Tests {
     return tmpProjectDir;
   }
 
-  @BeforeClass
+  @BeforeAll
   public static void deleteLocalCache() {
     TestUtils.deleteLocalCache();
   }

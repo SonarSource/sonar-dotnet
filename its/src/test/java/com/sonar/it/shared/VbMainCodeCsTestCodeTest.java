@@ -22,9 +22,9 @@ package com.sonar.it.shared;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import java.util.List;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
 
@@ -44,7 +44,7 @@ public class VbMainCodeCsTestCodeTest {
   private static final String PROJECT = "VbMainCsTest";
   private static BuildResult buildResult;
 
-  @BeforeClass
+  @BeforeAll
   public static void init() throws Exception {
     TestUtils.initLocal(orchestrator);
     buildResult = Tests.analyzeProject(temp, PROJECT);
