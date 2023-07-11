@@ -16,16 +16,17 @@ class Program
         var shortAndConstantSalt = new byte[15];
         var pdb1 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt);                                                    // FIXME Non-compliant {{Make this salt unpredictable.}}
         //                                                ^^^^^^^^^^^^^^^^^^^^
-        var pdb2 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt);                                                   // FIXME Non-compliant {{Make this salt unpredictable.}}
-        var pdb3 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, cspParams);                                         // FIXME Non-compliant {{Make this salt unpredictable.}}
-        var pdb4 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, cspParams);                                        // FIXME Non-compliant {{Make this salt unpredictable.}}
-        var pdb5 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000);               // FIXME Non-compliant {{Make this salt unpredictable.}}
-        //                                                ^^^^^^^^^^^^^^^^^^^^
-        var pdb6 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000);              // FIXME Non-compliant {{Make this salt unpredictable.}}
-        var pdb7 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);    // FIXME Non-compliant {{Make this salt unpredictable.}}
-        var pdb8 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);   // FIXME Non-compliant {{Make this salt unpredictable.}}
+        var pdb2 = new PasswordDeriveBytes(salt: shortAndConstantSalt, password: passwordBytes);                                    // FIXME Non-compliant
+        //                                       ^^^^^^^^^^^^^^^^^^^^
+        var pdb3 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt);                                                   // FIXME Non-compliant
+        var pdb4 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, cspParams);                                         // FIXME Non-compliant
+        var pdb5 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, cspParams);                                        // FIXME Non-compliant
+        var pdb6 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000);               // FIXME Non-compliant
+        var pdb7 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000);              // FIXME Non-compliant
+        var pdb8 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);    // FIXME Non-compliant
+        var pdb9 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);   // FIXME Non-compliant
 
-        var pbkdf2a = new Rfc2898DeriveBytes(passwordString, shortAndConstantSalt);                                                 // FIXME Non-compliant
+        var pbkdf2a = new Rfc2898DeriveBytes(passwordString, shortAndConstantSalt);                                                 // FIXME Non-compliant {{Make this salt unpredictable.}}
         var pbkdf2b = new Rfc2898DeriveBytes(passwordString, shortAndConstantSalt, 1000);                                           // FIXME Non-compliant
         var pbkdf2c = new Rfc2898DeriveBytes(passwordBytes, shortAndConstantSalt, 1000);                                            // FIXME Non-compliant
         var pbkdf2d = new Rfc2898DeriveBytes(passwordString, shortAndConstantSalt, 1000, HashAlgorithmName.SHA512);                 // FIXME Non-compliant
@@ -256,7 +257,6 @@ public class FieldsAndConstants
         new PasswordDeriveBytes(passwordBytes, safeSalt);               // Compliant
     }
 }
-}
 
 // https://github.com/SonarSource/sonar-dotnet/issues/7355
 public class AD0001_Repro
@@ -268,3 +268,4 @@ public class AD0001_Repro
         int? i = null;
         int j = (int)i;                                                 // Compliant in this rule, would raise S1944 in the old SE
     }
+}
