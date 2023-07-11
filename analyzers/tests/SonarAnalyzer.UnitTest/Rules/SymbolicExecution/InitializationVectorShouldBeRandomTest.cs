@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
-        public void InitializationVectorShouldBeRandom_Sonar_DoesNotRaiseIssuesForTestProject() =>
+        public void InitializationVectorShouldBeRandom_DoesNotRaiseIssuesForTestProject_Sonar() =>
             sonar.AddPaths("InitializationVectorShouldBeRandom.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddTestReference()
