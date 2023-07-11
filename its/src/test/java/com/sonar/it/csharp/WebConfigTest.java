@@ -43,7 +43,6 @@ public class WebConfigTest extends WebConfigBase {
 
   @Test
   public void should_raise_hotspot_on_web_config() {
-
     List<Hotspot> hotspots = Tests.getHotspots(PROJECT);
     // One from project directory, one from PathOutsideProjectRoot added with Directory.Build.props
     assertThat(hotspots.size()).isEqualTo(6);
