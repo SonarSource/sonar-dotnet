@@ -20,12 +20,11 @@
 package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
+import java.nio.file.Path;
 import org.apache.commons.lang.SystemUtils;
-import org.junit.ClassRule;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExternalResource;
-import org.junit.rules.RuleChain;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Measures.Measure;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
@@ -34,20 +33,22 @@ import static com.sonar.it.vbnet.Tests.getMeasure;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Note: this class runs the analysis once in {@link MetricsTest#getRuleChain()}, before the tests.
- */
 public class MetricsTest {
 
   private static final String PROJECT = "VbMetricsTest";
   private static final String DIRECTORY = "VbMetricsTest:foo";
   private static final String FILE = "VbMetricsTest:foo/Module1.vb";
 
-  public static TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
-  // This is where the analysis is done.
-  @ClassRule
-  public static RuleChain chain = getRuleChain(); // FIXME: WTF?
+  @BeforeAll
+  public static void beforeAll() throws Exception {
+    assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
+    TestUtils.initLocal(ORCHESTRATOR);
+    // Without setting the testProjectPattern, the VbMetricsTest project is considered as a Test project :)
+    Tests.analyzeProject(temp, PROJECT, "vbnet_no_rule", "sonar.msbuild.testProjectPattern", "noTests");
+  }
 
   @Test
   public void projectIsAnalyzed() {
@@ -226,7 +227,6 @@ public class MetricsTest {
   @Test
   public void linesOfCodeByLine() {
     String value = getFileMeasure("ncloc_data").getValue();
-
     assertThat(value)
       .contains("1=1")
       .contains("5=1")
@@ -248,9 +248,7 @@ public class MetricsTest {
 
   @Test
   public void executableLines() {
-
     String value = getFileMeasure("executable_lines_data").getValue();
-
     assertThat(value)
       .contains("19=1")
       .contains("20=1")
@@ -261,21 +259,5 @@ public class MetricsTest {
 
   private Measure getFileMeasure(String metricKey) {
     return getMeasure(FILE, metricKey);
-  }
-
-  private static RuleChain getRuleChain() {
-    assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
-
-    return RuleChain
-      .outerRule(ORCHESTRATOR)
-      .around(temp)
-      .around(new ExternalResource() {
-        @Override
-        protected void before() throws Throwable {
-          TestUtils.initLocal(ORCHESTRATOR);
-          // Without setting the testProjectPattern, the VbMetricsTest project is considered as a Test project :)
-          Tests.analyzeProject(temp, PROJECT, "vbnet_no_rule", "sonar.msbuild.testProjectPattern", "noTests");
-        }
-      });
   }
 }
