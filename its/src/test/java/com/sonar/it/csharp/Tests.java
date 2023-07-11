@@ -108,19 +108,39 @@ public class Tests {
     TestUtils.deleteLocalCache();
   }
 
+  // ToDo: This should not be needed after jUnit5 migration
   static BuildResult analyzeProject(TemporaryFolder temp, String projectDir) throws IOException {
     return analyzeProject(projectDir, temp, projectDir);
   }
 
+  // ToDo: This should not be needed after jUnit5 migration
   static BuildResult analyzeProject(String projectKey, TemporaryFolder temp, String projectDir) throws IOException {
     return analyzeProject(projectKey, temp, projectDir, null);
   }
 
+  // ToDo: This should not be needed after jUnit5 migration
   static BuildResult analyzeProject(TemporaryFolder temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     return analyzeProject(projectDir, temp, projectDir, profileKey, keyValues);
   }
 
+  // ToDo: This should not be needed after jUnit5 migration
   static BuildResult analyzeProject(String projectKey, TemporaryFolder temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+    return analyzeProject(projectKey, temp.getRoot().toPath(), projectDir, profileKey, keyValues);
+  }
+
+  static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
+    return analyzeProject(projectDir, temp, projectDir);
+  }
+
+  static BuildResult analyzeProject(String projectKey, Path temp, String projectDir) throws IOException {
+    return analyzeProject(projectKey, temp, projectDir, null);
+  }
+
+  static BuildResult analyzeProject(Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+    return analyzeProject(projectDir, temp, projectDir, profileKey, keyValues);
+  }
+
+  static BuildResult analyzeProject(String projectKey, Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     Path projectFullPath = Tests.projectDir(temp, projectDir);
 
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectKey, projectFullPath)
