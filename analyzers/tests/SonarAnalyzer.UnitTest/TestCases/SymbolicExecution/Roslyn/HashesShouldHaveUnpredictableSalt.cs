@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using AliasedPasswordDeriveBytes = System.Security.Cryptography.PasswordDeriveBytes;
 
 class Program
 {
@@ -14,12 +15,12 @@ class Program
     {
         var shortAndConstantSalt = new byte[15];
         var pdb1 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt);                                                    // FIXME Non-compliant {{Make this salt unpredictable.}}
-                                                                                                                                    //                                                ^^^^^^^^^^^^^^^^^^^^
+        //                                                ^^^^^^^^^^^^^^^^^^^^
         var pdb2 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt);                                                   // FIXME Non-compliant {{Make this salt unpredictable.}}
         var pdb3 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, cspParams);                                         // FIXME Non-compliant {{Make this salt unpredictable.}}
         var pdb4 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, cspParams);                                        // FIXME Non-compliant {{Make this salt unpredictable.}}
         var pdb5 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000);               // FIXME Non-compliant {{Make this salt unpredictable.}}
-                                                                                                                                    //                                                ^^^^^^^^^^^^^^^^^^^^
+        //                                                ^^^^^^^^^^^^^^^^^^^^
         var pdb6 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000);              // FIXME Non-compliant {{Make this salt unpredictable.}}
         var pdb7 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);    // FIXME Non-compliant {{Make this salt unpredictable.}}
         var pdb8 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);   // FIXME Non-compliant {{Make this salt unpredictable.}}
@@ -171,6 +172,12 @@ class Program
             var shortSalt = new byte[15];
             new PasswordDeriveBytes(passwordBytes, shortSalt);                                      // FIXME Non-compliant
         };
+    }
+
+    public void AliasedType()
+    {
+        var shortAndConstantSalt = new byte[15];
+        var pdb = new AliasedPasswordDeriveBytes(passwordBytes, shortAndConstantSalt);              // FIXME Non-compliant
     }
 
     public void InnerMethod()
