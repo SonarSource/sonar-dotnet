@@ -66,7 +66,7 @@ public class Tests {
 
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {
     Path projectDir = Paths.get("projects").resolve(projectName);
-    FileUtils.deleteDirectory(new File(temp.getRoot(), projectName));
+    FileUtils.deleteDirectory(new File(temp.getRoot(), projectName)); // FIXME: What is this for anyway?
     Path tmpProjectDir = temp.newFolder(projectName).toPath();
     FileUtils.copyDirectory(projectDir.toFile(), tmpProjectDir.toFile());
     return tmpProjectDir;
@@ -85,6 +85,10 @@ public class Tests {
   // ToDo: This should not be needed after jUnit5 migration
   static BuildResult analyzeProject(TemporaryFolder temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     return analyzeProject(temp.getRoot().toPath(), projectDir, profileKey, keyValues);
+  }
+
+  static BuildResult analyzeProject(Path temp, String projectName) throws IOException {
+    return analyzeProject(temp, projectName, null);
   }
 
   static BuildResult analyzeProject(Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {

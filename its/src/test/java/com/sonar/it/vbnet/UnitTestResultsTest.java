@@ -21,10 +21,10 @@ package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
 import java.io.IOException;
+import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasure;
@@ -33,13 +33,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UnitTestResultsTest {
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
   private static final String PROJECT = "VbUnitTestResultsTest";
 
   @BeforeAll
-  public static void init(){
+  public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }
 
