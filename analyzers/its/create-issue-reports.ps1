@@ -41,7 +41,6 @@ function Create-FullUriForIssue([string]$filePath, [int]$startLine, [int]$endLin
 function Restore-UriDeclaration($files) {
     $files | Foreach-Object {
         if ($_.uri) {
-            # Remove the URI prefix
             $_.uri = Create-FullUriForIssue $_.uri $_.region.startLine $_.region.endLine
         }
     }
