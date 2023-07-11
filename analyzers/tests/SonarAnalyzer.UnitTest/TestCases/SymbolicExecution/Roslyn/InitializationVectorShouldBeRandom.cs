@@ -15,7 +15,7 @@ class InitializationVectorShouldBeRandom
 
             sa.GenerateKey();
             var generateIVNotCalled = sa.CreateEncryptor(sa.Key, sa.IV);
-            var constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant); // // FIXME Non-compliant  {{Use a dynamically-generated, random IV.}}
+            var constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant); // FIXME Non-compliant  {{Use a dynamically-generated, random IV.}}
 //                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
             sa.GenerateIV();
