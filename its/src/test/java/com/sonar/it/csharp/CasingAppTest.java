@@ -21,10 +21,10 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import java.io.IOException;
+import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.ClassRule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
@@ -36,8 +36,8 @@ public class CasingAppTest {
 
   private static final String PROJECT = "CasingApp";
 
-  @ClassRule
-  public static TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
   @BeforeAll
   public static void init() throws IOException {
