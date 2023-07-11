@@ -31,8 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class EnsureAllTestsRunBase {
 
-  protected void assertAllTestClassesAreReferencedInTestSuite(String packageName, String testSuiteClassName)
-  {
+  protected void assertAllTestClassesAreReferencedInTestSuite(String packageName, String testSuiteClassName) {
     try (ScanResult scanResult = new ClassGraph()
       .enableAllInfo()
       .acceptPackages(packageName)
@@ -45,31 +44,27 @@ public class EnsureAllTestsRunBase {
     }
   }
 
-  private List<String> getClassNamesMentionedInSuiteClasses(ScanResult scanResult, String testSuiteClassName)
-  {
+  private List<String> getClassNamesMentionedInSuiteClasses(ScanResult scanResult, String testSuiteClassName) {
     Object[] suiteAnnotationParams = (Object[]) scanResult.getClassInfo(testSuiteClassName)
       .getAnnotationInfo("org.junit.runners.Suite$SuiteClasses")
       .getParameterValues()
       .getValue("value");
 
     List<String> classNamesInTestsSuite = new ArrayList<>();
-    for (Object annotation : suiteAnnotationParams)
-    {
-      classNamesInTestsSuite.add(((AnnotationClassRef)annotation).getName());
+    for (Object annotation : suiteAnnotationParams) {
+      classNamesInTestsSuite.add(((AnnotationClassRef) annotation).getName());
     }
 
     return classNamesInTestsSuite;
   }
 
-  private List<String> getTestClassesInThisPackage(ScanResult scanResult, String packageName, String testSuiteClassName)
-  {
+  private List<String> getTestClassesInThisPackage(ScanResult scanResult, String packageName, String testSuiteClassName) {
     Map<String, ClassInfo> allClasses = scanResult.getAllClassesAsMap();
     List<String> testClassesInPackage = new ArrayList<>();
-    for (String name : allClasses.keySet())
-    {
+    for (String name : allClasses.keySet()) {
       if (name.startsWith(packageName)
         && !name.equals(testSuiteClassName)
-        && allClasses.get(name).getMethodAnnotations().getNames().contains("org.junit.Test")) {
+        && allClasses.get(name).getMethodAnnotations().getNames().contains("org.junit.jupiter.api.Test")) {
         testClassesInPackage.add(allClasses.get(name).getName());
       }
     }
