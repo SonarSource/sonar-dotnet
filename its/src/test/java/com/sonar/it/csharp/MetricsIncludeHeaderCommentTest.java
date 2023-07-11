@@ -59,7 +59,7 @@ public class MetricsIncludeHeaderCommentTest {
 
   // This is where the analysis is done.
   @ClassRule
-  public static RuleChain chain = getRuleChain();
+  public static RuleChain chain = getRuleChain(); // FIXME: WTF?
 
   @Test
   public void projectIsAnalyzed() {

@@ -22,10 +22,10 @@ package com.sonar.it.csharp;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
+import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.ClassRule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
@@ -39,13 +39,13 @@ public class UnitTestProjectTypeProbingTest {
 
   private static BuildResult buildResult;
 
-  @ClassRule
-  public static TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
   @BeforeAll
   public static void init() throws IOException {
-      TestUtils.initLocal(ORCHESTRATOR);
-      buildResult = Tests.analyzeProject(temp, PROJECT);
+    TestUtils.initLocal(ORCHESTRATOR);
+    buildResult = Tests.analyzeProject(temp, PROJECT);
   }
 
   @Test

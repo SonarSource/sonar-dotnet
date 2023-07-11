@@ -21,11 +21,11 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.ClassRule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
@@ -38,8 +38,8 @@ public class RuleParameterCustomizationTest {
   private static final String PROFILE_NAME = "custom_parameters";
   private static final String CustomParametersProjectName = "DefaultRuleParametersCanBeCustomized";
 
-  @ClassRule
-  public static TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
   @BeforeAll
   public static void init() {
@@ -59,7 +59,7 @@ public class RuleParameterCustomizationTest {
     assertHotspot(hotspots.get(0), 7, "\"senha\" detected here, make sure this is not a hard-coded credential.");
   }
 
-  private void assertHotspot(Hotspot hotspot, int line, String message){
+  private void assertHotspot(Hotspot hotspot, int line, String message) {
     assertThat(hotspot.getLine()).isEqualTo(line);
     assertThat(hotspot.getMessage()).isEqualTo(message);
   }

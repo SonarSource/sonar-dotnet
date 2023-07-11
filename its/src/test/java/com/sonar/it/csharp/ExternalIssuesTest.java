@@ -20,12 +20,12 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
@@ -37,8 +37,8 @@ import static org.sonarqube.ws.Common.RuleType;
 
 public class ExternalIssuesTest {
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
   private static final String MAIN_PROJECT_DIR = "ExternalIssues";
   private static final String TEST_PROJECT_DIR = "ExternalIssues.TestProject.CS";

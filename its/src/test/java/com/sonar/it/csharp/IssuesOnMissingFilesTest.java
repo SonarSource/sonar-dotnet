@@ -20,13 +20,12 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.build.BuildResult;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.ClassRule;
-import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
-import org.sonarqube.ws.Issues;
+import java.nio.file.Path;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,15 +33,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IssuesOnMissingFilesTest {
 
   private static final String PROJECT = "ProjectWithIssuesOnMissingFiles";
-  private static BuildResult buildResult;
 
-  @ClassRule
-  public static final TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
   @BeforeAll
   public static void init() throws Exception {
     TestUtils.initLocal(ORCHESTRATOR);
-    buildResult = Tests.analyzeProject(temp, PROJECT);
+    Tests.analyzeProject(temp, PROJECT);
   }
 
   @Test

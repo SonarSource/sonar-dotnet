@@ -21,12 +21,12 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.ClassRule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
@@ -36,8 +36,10 @@ import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestProjectTest {
-  @ClassRule
-  public static final TemporaryFolder temp = TestUtils.createTempFolder();
+
+  @TempDir
+  private static Path temp;
+
   private static final String CSHARP_ONLY_TEST_PROJECT = "TestOnlyProject";
   // the below is explicitly marked as test with <SonarQubeTestProject> MSBuild property
   private static final String EXPLICITLY_MARKED_AS_TEST = "HtmlCSharpExplicitlyMarkedAsTest";
