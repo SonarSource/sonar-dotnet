@@ -32,8 +32,8 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.ClassRule;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -77,21 +77,24 @@ public class Tests {
     TestUtils.deleteLocalCache();
   }
 
+  // ToDo: This should not be needed after jUnit5 migration
   static BuildResult analyzeProject(TemporaryFolder temp, String projectDir) throws IOException {
     return analyzeProject(temp, projectDir, null);
   }
 
+  // ToDo: This should not be needed after jUnit5 migration
   static BuildResult analyzeProject(TemporaryFolder temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
-    Path projectFullPath = com.sonar.it.csharp.Tests.projectDir(temp, projectDir);
+    return analyzeProject(temp.getRoot().toPath(), projectDir, profileKey, keyValues);
+  }
 
+  static BuildResult analyzeProject(Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+    Path projectFullPath = com.sonar.it.csharp.Tests.projectDir(temp, projectDir);
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectDir, projectFullPath)
       .setProfile(profileKey)
       .setProperties(keyValues);
 
     ORCHESTRATOR.executeBuild(beginStep);
-
     TestUtils.runMSBuild(ORCHESTRATOR, projectFullPath, "/t:Restore,Rebuild");
-
     return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectFullPath));
   }
 

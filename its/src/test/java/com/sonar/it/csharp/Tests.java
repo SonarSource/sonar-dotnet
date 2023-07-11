@@ -24,18 +24,17 @@ import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import com.sonar.orchestrator.locator.FileLocation;
-
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.ClassRule;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -85,6 +84,7 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/custom_complexity.xml"))
     .build();
 
+  // Todo: This should not be needed after jUnit5 migration
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {
     Path projectDir = Paths.get("projects").resolve(projectName);
     FileUtils.deleteDirectory(new File(temp.getRoot(), projectName));
@@ -92,6 +92,15 @@ public class Tests {
     Path tmpProjectDir = Paths.get(newFolder.getCanonicalPath());
     FileUtils.copyDirectory(projectDir.toFile(), tmpProjectDir.toFile());
     return tmpProjectDir;
+  }
+
+  public static Path projectDir(Path temp, String projectName) throws IOException {
+    Path projectDir = Paths.get("projects").resolve(projectName);
+    Path newFolder = temp.resolve(projectName);
+    FileUtils.deleteDirectory(newFolder.toFile());  // FIXME: Files instead? Recursive?
+    Files.createDirectory(newFolder);
+    FileUtils.copyDirectory(projectDir.toFile(), newFolder.toFile());
+    return newFolder.toRealPath();
   }
 
   @BeforeAll
