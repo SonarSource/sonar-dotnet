@@ -25,9 +25,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
@@ -38,7 +38,7 @@ public class QualityProfileExportTest {
   @ClassRule
   public static TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }

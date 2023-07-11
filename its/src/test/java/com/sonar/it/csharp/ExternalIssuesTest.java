@@ -22,9 +22,9 @@ package com.sonar.it.csharp;
 import com.sonar.it.shared.TestUtils;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
 
@@ -47,7 +47,7 @@ public class ExternalIssuesTest {
   // note that in the UI the prefix will be 'roslyn:'
   private static final String ROSLYN_RULES_PREFIX = "external_roslyn:";
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }

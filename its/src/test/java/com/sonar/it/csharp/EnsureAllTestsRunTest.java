@@ -20,7 +20,7 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.EnsureAllTestsRunBase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class EnsureAllTestsRunTest extends EnsureAllTestsRunBase {
 

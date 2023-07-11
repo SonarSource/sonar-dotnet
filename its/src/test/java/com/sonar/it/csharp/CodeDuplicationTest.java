@@ -21,9 +21,9 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import java.util.List;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Duplications;
 
@@ -35,7 +35,7 @@ public class CodeDuplicationTest {
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
   private static final String PROJECT = "CodeDuplicationTest";
 
-  @BeforeClass
+  @BeforeAll
   public static void init() throws Exception {
     TestUtils.initLocal(ORCHESTRATOR);
     Tests.analyzeProject(temp, PROJECT);

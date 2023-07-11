@@ -31,9 +31,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.stream.Collectors;
 import java.util.List;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Duplications;
 import org.sonarqube.ws.Issues;
@@ -49,7 +49,7 @@ public class IncrementalAnalysisTest {
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }
