@@ -20,9 +20,10 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import java.io.IOException;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
@@ -37,19 +38,18 @@ public class CognitiveComplexityTest {
   private static final String PROFILE_NAME = "custom_complexity";
   private static final String PROJECT_NAME = "CognitiveComplexity.CS";
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @ClassRule
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
-  public void init() {
-    TestUtils.reset(ORCHESTRATOR);
-
+  @BeforeClass
+  public static void init() throws IOException {
+    TestUtils.initLocal(ORCHESTRATOR);
     provisionProject();
+    Tests.analyzeProject(temp, PROJECT_NAME);
   }
 
   @Test
-  public void cognitiveComplexity_hasSecondaryLocations() throws Exception {
-    Tests.analyzeProject(temp, PROJECT_NAME, null);
+  public void cognitiveComplexity_hasSecondaryLocations() {
 
     final String componentKey = "CognitiveComplexity.CS:CognitiveComplexity.cs";
 
@@ -63,7 +63,7 @@ public class CognitiveComplexityTest {
     assertThat(issues.get(0).getFlows(2).getLocations(0).getTextRange().getStartLine()).isEqualTo(11);
   }
 
-  private void provisionProject() {
+  private static void provisionProject() {
     ORCHESTRATOR.getServer().provisionProject(PROJECT_NAME, PROJECT_NAME);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_NAME, LANGUAGE_KEY, PROFILE_NAME);
   }

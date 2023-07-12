@@ -44,7 +44,7 @@ public class NoSonarTest {
 
   @BeforeClass
   public static void init() throws Exception {
-    TestUtils.reset(orchestrator);
+    TestUtils.initLocal(orchestrator);
     buildResult = Tests.analyzeProject(temp, PROJECT, "vbnet_class_name");
   }
 
@@ -62,5 +62,4 @@ public class NoSonarTest {
   public void logsContainInfo() {
     assertThat(buildResult.getLogs()).contains("Found 1 MSBuild VB.NET project: 1 MAIN project.");
   }
-
 }

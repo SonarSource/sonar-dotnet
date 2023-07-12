@@ -22,8 +22,8 @@ package com.sonar.it.csharp;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
@@ -36,21 +36,16 @@ public class UnitTestProjectTypeProbingTest {
   private static final String PROJECT = "UTProjectProbing";
   private static final String MAIN_RULE_ID = "csharpsquid:S1048";
   private static final String MAIN_AND_TEST_RULE_ID = "csharpsquid:S101";
-  private static Boolean isProjectAnalyzed = false;
 
   private static BuildResult buildResult;
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @ClassRule
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
-  public void init() throws IOException {
-    if (!isProjectAnalyzed) {
-      TestUtils.reset(ORCHESTRATOR);
-      buildResult = Tests.analyzeProject(temp, PROJECT, null);
-
-      isProjectAnalyzed = true;
-    }
+  @BeforeClass
+  public static void init() throws IOException {
+      TestUtils.initLocal(ORCHESTRATOR);
+      buildResult = Tests.analyzeProject(temp, PROJECT);
   }
 
   @Test

@@ -290,7 +290,7 @@ public class MetricsTest {
       .around(new ExternalResource() {
         @Override
         protected void before() throws Throwable {
-          TestUtils.reset(ORCHESTRATOR);
+          TestUtils.initLocal(ORCHESTRATOR);
           // Without setting the testProjectPattern, the MetricsTest project is considered as a Test project :)
           Tests.analyzeProject(temp, PROJECT, "no_rule", "sonar.msbuild.testProjectPattern", "noTests");
         }
