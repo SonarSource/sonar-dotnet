@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
 public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
@@ -26,4 +29,59 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     protected const string MessageFormat = "{0}";
     private const string RestrictTypesMessage = "Restrict types of objects allowed to be deserialized.";
     private const string VerifyMacMessage = "Serialized data signature (MAC) should be verified.";
+
+    protected override ProgramState PostProcessSimple(SymbolicContext context)
+    {
+        var operation = context.Operation.Instance;
+        if (operation.Kind == OperationKindEx.ObjectCreation
+            && operation.Type.IsAny(KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter))
+        {
+            return context.State.SetOperationConstraint(context.Operation, SerializationConstraint.Unsafe);
+        }
+        else if (operation.AsAssignment() is { } assignment
+            && assignment.Target.AsPropertyReference() is { Property.Name: "Binder" } propertyReference
+            && propertyReference.Instance.Type.IsAny(KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter))
+        {
+            if (context.State[assignment.Value]?.HasConstraint(ObjectConstraint.Null) is not true
+                && SemanticModel.GetTypeInfo(assignment.Value.Syntax) is { Type: { } binderType }
+                && binderType.DeclaringSyntaxReferences
+                    .SelectMany(x => x.GetSyntax().DescendantNodes())
+                    .OfType<MethodDeclarationSyntax>()
+                    .FirstOrDefault(IsBindToType) is var binderDeclaration
+                && (binderDeclaration is null || ThrowsOrReturnsNull(binderDeclaration)))
+            {
+                var state = context.State.SetOperationConstraint(propertyReference.Instance, SerializationConstraint.Safe);
+                if (propertyReference.Instance.TrackedSymbol() is { } targetSymbol)
+                {
+                    return state.SetSymbolConstraint(targetSymbol, SerializationConstraint.Safe);
+                }
+                return state;
+            }
+            else
+            {
+                var state = context.State.SetOperationConstraint(propertyReference.Instance, SerializationConstraint.Unsafe);
+                if (propertyReference.Instance.TrackedSymbol() is { } targetSymbol)
+                {
+                    return state.SetSymbolConstraint(targetSymbol, SerializationConstraint.Unsafe);
+                }
+                return state;
+            }
+        }
+        else if (operation.AsInvocation() is { } invocation
+            && invocation.TargetMethod.Name == "Deserialize"
+            && invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter)
+            && (context.State[invocation.Instance]?.HasConstraint(SerializationConstraint.Unsafe) ?? false))
+        {
+            ReportIssue(operation, RestrictTypesMessage);
+        }
+        return context.State;
+    }
+
+    private bool IsBindToType(MethodDeclarationSyntax methodDeclaration) =>
+        methodDeclaration.Identifier.Text == "BindToType"
+        && methodDeclaration.ParameterList.Parameters.Count == 2
+        && methodDeclaration.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, SemanticModel)
+        && methodDeclaration.ParameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, SemanticModel);
+
+    protected abstract bool ThrowsOrReturnsNull(MethodDeclarationSyntax methodDeclaration);
 }

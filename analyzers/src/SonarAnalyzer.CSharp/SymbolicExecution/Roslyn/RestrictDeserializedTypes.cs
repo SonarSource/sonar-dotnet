@@ -26,5 +26,6 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
 
     protected override DiagnosticDescriptor Rule => S5773;
 
-    public override bool ShouldExecute() => false;
+    public override bool ShouldExecute() => true;
+    protected override bool ThrowsOrReturnsNull(MethodDeclarationSyntax methodDeclaration) => methodDeclaration.ThrowsOrReturnsNull();
 }
