@@ -11,7 +11,6 @@
     <!-- Store output of Source Generators in obj\debug\net46\generated for easier debugging -->
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>$(IntermediateOutputPath)generated</CompilerGeneratedFilesOutputPath>
-    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\.sonarlint\sonaranalyzer-dotnetCSharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\.sonarlint\sonaranalyzer-dotnet\CSharp\SonarLint.xml" Link="Properties\SonarLint.xml" />
     <Compile Include="$(MSBuildThisFileDirectory)\src\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
   </ItemGroup>
 </Project>
