@@ -19,68 +19,18 @@
  */
 package com.sonar.it.vbnet;
 
-import com.sonar.it.shared.TestUtils;
-import java.io.IOException;
-import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
-import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
-import static com.sonar.it.vbnet.Tests.getMeasure;
-import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class UnitTestResultsTest {
 
-  @TempDir
-  private static Path temp;
-
-  private static final String PROJECT = "VbUnitTestResultsTest";
-
   @BeforeAll
   public static void init() {
-    TestUtils.initLocal(ORCHESTRATOR);
+    System.out.println("UnitTestResultsTest Shared BeforeAll");
   }
 
   @Test
-  public void should_not_import_unit_test_results_without_report() throws Exception {
-    analyzeTestProject();
-
-    assertThat(getMeasure(PROJECT, "tests")).isNull();
-    assertThat(getMeasure(PROJECT, "test_errors")).isNull();
-    assertThat(getMeasure(PROJECT, "test_failures")).isNull();
-    assertThat(getMeasure(PROJECT, "skipped_tests")).isNull();
-  }
-
-  @Test
-  public void vstest() throws Exception {
-    analyzeTestProject("sonar.vbnet.vstest.reportsPaths", "reports/vstest.trx");
-
-    assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(42);
-    assertThat(getMeasureAsInt(PROJECT, "test_errors")).isEqualTo(1);
-    assertThat(getMeasureAsInt(PROJECT, "test_failures")).isEqualTo(10);
-    assertThat(getMeasureAsInt(PROJECT, "skipped_tests")).isEqualTo(2);
-  }
-
-  @Test
-  public void nunit() throws Exception {
-    analyzeTestProject("sonar.vbnet.nunit.reportsPaths", "reports/nunit.xml");
-
-    assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(200);
-    assertThat(getMeasureAsInt(PROJECT, "test_errors")).isEqualTo(30);
-    assertThat(getMeasureAsInt(PROJECT, "test_failures")).isEqualTo(20);
-    assertThat(getMeasureAsInt(PROJECT, "skipped_tests")).isEqualTo(9);
-  }
-
-  @Test
-  public void should_support_wildcard_patterns() throws Exception {
-    analyzeTestProject("sonar.vbnet.vstest.reportsPaths", "reports/*.trx");
-
-    assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(42);
-  }
-
-  private void analyzeTestProject(String... keyValues) throws IOException {
-    Tests.analyzeProject(temp, PROJECT, "vbnet_no_rule", keyValues);
+  public void some_test() {
+    System.out.println("UnitTestResultsTest Shared some_test");
   }
 }

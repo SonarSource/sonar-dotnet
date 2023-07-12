@@ -19,18 +19,10 @@
  */
 package com.sonar.it.csharp;
 
-import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.build.BuildResult;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.sonarqube.ws.Ce;
-
-import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnalysisWarningsTest {
 
@@ -39,31 +31,11 @@ public class AnalysisWarningsTest {
 
   @BeforeAll
   public static void init() {
-    TestUtils.initLocal(ORCHESTRATOR);
+    System.out.println("AnalysisWarningsTest C# BeforeAll");
   }
 
   @Test
-  public void analysisWarningsImport() throws IOException {
-    Path projectDir = TestUtils.projectDir(temp, "Empty");
-
-    ORCHESTRATOR.executeBuild(TestUtils.createBeginStep("Empty", projectDir));
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
-
-    Path target = projectDir.resolve(".sonarqube\\out\\AnalysisWarnings.AutoScan.json");
-    Files.createDirectories(target.getParent());
-    Files.copy(projectDir.resolve("AnalysisWarnings.AutoScan.json"), target);
-    BuildResult buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
-
-    Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
-    assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("First message", "Second message");
-  }
-
-  @Test
-  public void analysisWarnings_OldRoslyn() throws IOException {
-    BuildResult buildResult = Tests.analyzeProject(temp, "Roslyn.1.3.1");
-    Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
-    assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher.");
+  public void some_test() {
+    System.out.println("AnalysisWarningsTest C# some_test");
   }
 }

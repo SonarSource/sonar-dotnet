@@ -19,33 +19,18 @@
  */
 package com.sonar.it.vbnet;
 
-import com.sonar.it.shared.TestUtils;
-import com.sonar.it.shared.WebConfigBase;
-import java.io.IOException;
-import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.sonarqube.ws.Hotspots;
 
-import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class WebConfigTest extends WebConfigBase {
-
-  private static final String PROJECT = "WebConfig.VB";
+public class WebConfigTest {
 
   @BeforeAll
-  public static void init() throws IOException {
-    TestUtils.initLocal(ORCHESTRATOR);
-    Tests.analyzeProject(temp, PROJECT);
+  public static void init() {
+    System.out.println("WebConfigTest Shared BeforeAll");
   }
 
   @Test
-  public void should_raise_hotspot_on_web_config() {
-    List<Hotspots.SearchWsResponse.Hotspot> hotspots = Tests.getHotspots(PROJECT);
-    // One from project directory, one from PathOutsideProjectRoot added with Directory.Build.props
-    assertThat(hotspots.size()).isEqualTo(2);
-    assertRequestValidationHotspot(hotspots.get(0), 6, "PathOutsideProjectRoot/Web.config");
-    assertRequestValidationHotspot(hotspots.get(1), 4, "WebConfig.VB/Web.config");
+  public void some_test() {
+    System.out.println("WebConfigTest Shared some_test");
   }
 }

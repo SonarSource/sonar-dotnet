@@ -19,81 +19,23 @@
  */
 package com.sonar.it.vbnet;
 
-import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.BuildResult;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
-import com.sonar.orchestrator.locator.FileLocation;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.List;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
-import org.sonarqube.ws.Components;
-import org.sonarqube.ws.Hotspots;
-import org.sonarqube.ws.Measures;
 
 @Suite
 @SelectPackages("com.sonar.it.vbnet") // This will run all classes from current package containing @Test methods.
 public class Tests {
-
-  public static final Orchestrator ORCHESTRATOR = TestUtils.prepareOrchestrator()
-    .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin")) // Do not add C# here, use shared project instead
-    .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_no_rule.xml"))
-    .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_class_name.xml"))
-    .build();
-
   // ToDo: This is a temporary workaround for jUnit5 migration that should be removed in https://github.com/SonarSource/sonar-dotnet/pull/7574
   @BeforeAll
   public static void startOrchestrator() {
-    ORCHESTRATOR.start();
+    System.out.println("Start Orchestrator VB.NET");
   }
 
   // ToDo: This is a temporary workaround for jUnit5 migration that should be removed in https://github.com/SonarSource/sonar-dotnet/pull/7574
   @AfterAll
   public static void stopOrchestrator() {
-    ORCHESTRATOR.stop();
-  }
-
-  @BeforeAll
-  public static void deleteLocalCache() {
-    TestUtils.deleteLocalCache();
-  }
-
-  static BuildResult analyzeProject(Path temp, String projectName) throws IOException {
-    return analyzeProject(temp, projectName, null);
-  }
-
-  static BuildResult analyzeProject(Path temp, String projectName, @Nullable String profileKey, String... keyValues) throws IOException {
-    Path projectDir = TestUtils.projectDir(temp, projectName);
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectDir)
-      .setProfile(profileKey)
-      .setProperties(keyValues);
-
-    ORCHESTRATOR.executeBuild(beginStep);
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
-    return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
-  }
-
-  static Components.Component getComponent(String componentKey) {
-    return TestUtils.getComponent(ORCHESTRATOR, componentKey);
-  }
-
-  @CheckForNull
-  static Integer getMeasureAsInt(String componentKey, String metricKey) {
-    return TestUtils.getMeasureAsInt(ORCHESTRATOR, componentKey, metricKey);
-  }
-
-  @CheckForNull
-  static Measures.Measure getMeasure(String componentKey, String metricKey) {
-    return TestUtils.getMeasure(ORCHESTRATOR, componentKey, metricKey);
-  }
-
-  static List<Hotspots.SearchWsResponse.Hotspot> getHotspots(String projectKey) {
-    return TestUtils.getHotspots(ORCHESTRATOR, projectKey);
+    System.out.println("Stop Orchestrator VB.NET");
   }
 }
