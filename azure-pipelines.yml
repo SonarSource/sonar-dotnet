@@ -123,7 +123,7 @@ stages:
         displayName: 'Publish SonarAnalyzer.CFG.CSharp NuGet on repox'
         inputs:
           command: 'push'
-          artifactoryService: 'Repox artifactory'
+          artifactoryService: 'Repox artifactory (BUILD-3005) 1'
           targetDeployRepo: '$(ARTIFACTORY_NUGET_REPO)'
           pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.CSharp.*.nupkg'
 
