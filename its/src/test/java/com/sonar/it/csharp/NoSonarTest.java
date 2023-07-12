@@ -41,7 +41,7 @@ public class NoSonarTest {
 
   @BeforeClass
   public static void init() throws Exception {
-    TestUtils.reset(ORCHESTRATOR);
+    TestUtils.initLocal(ORCHESTRATOR);
     buildResult = Tests.analyzeProject(temp, PROJECT, "class_name");
   }
 

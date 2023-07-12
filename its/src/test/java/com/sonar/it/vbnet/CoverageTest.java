@@ -33,15 +33,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
 
-  private final String programComponentIdCs = "CSharpVBNetCoverage:CSharpConsoleApp/Program.cs";
-  private final String programComponentIdVb = "CSharpVBNetCoverage:VBNetConsoleApp/Module1.vb";
-
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
   public void init() {
-    TestUtils.reset(ORCHESTRATOR);
+    TestUtils.initLocal(ORCHESTRATOR);
   }
 
   @Test

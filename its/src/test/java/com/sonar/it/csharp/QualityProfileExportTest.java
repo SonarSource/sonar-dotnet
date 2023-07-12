@@ -25,7 +25,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -38,9 +38,9 @@ public class QualityProfileExportTest {
   @ClassRule
   public static TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
-  public void init() {
-    TestUtils.reset(ORCHESTRATOR);
+  @BeforeClass
+  public static void init() {
+    TestUtils.initLocal(ORCHESTRATOR);
   }
 
   @Test

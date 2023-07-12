@@ -22,7 +22,7 @@ package com.sonar.it.shared;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
 import java.io.File;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static com.sonar.it.shared.Tests.ORCHESTRATOR;
@@ -40,9 +40,9 @@ public class ScannerCliTest {
   // Note: setting the `sonar.projectBaseDir` only enables Incremental PR Analysis when used with the Scanner for .NET.
   private static final String INCREMENTAL_PR_ANALYSIS_WARNING = "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.";
 
-  @Before
-  public void init() {
-    TestUtils.reset(ORCHESTRATOR);
+  @BeforeClass
+  public static void init() {
+    TestUtils.initLocal(ORCHESTRATOR);
   }
 
   @Test

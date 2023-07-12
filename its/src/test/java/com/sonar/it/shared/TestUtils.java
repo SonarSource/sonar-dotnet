@@ -25,7 +25,6 @@ import com.sonar.orchestrator.build.Build;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import com.sonar.orchestrator.container.Edition;
-import com.sonar.orchestrator.http.HttpMethod;
 import com.sonar.orchestrator.locator.FileLocation;
 import com.sonar.orchestrator.locator.Location;
 import com.sonar.orchestrator.locator.MavenLocation;
@@ -36,11 +35,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
@@ -234,7 +231,7 @@ public class TestUtils {
     return newWsClient(orch).hotspots().search(new org.sonarqube.ws.client.hotspots.SearchRequest().setProjectKey(projectKey)).getHotspotsList();
   }
 
-  public static void reset(Orchestrator orchestrator) {
+  public static void initLocal(Orchestrator orchestrator) {
     // Only for local debugging:
     if (orchestrator.getServer() == null) {
       // Tests.ORCHESTRATOR is a jUnit rule that is automagically started in it's beforeAll() action for all tests.
@@ -242,18 +239,6 @@ public class TestUtils {
       orchestrator.start();
       deleteLocalCache();
     }
-
-    // The expected format is yyyy-MM-ddTHH:mm:ss+HHmm. e.g. 2017-10-19T13:00:00+0200
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-    String currentDateTime = formatter.format(new Date());
-
-    LOG.info("TEST SETUP: deleting projects analyzed before: " + currentDateTime);
-    orchestrator.getServer()
-      .newHttpCall("/api/projects/bulk_delete")
-      .setAdminCredentials()
-      .setMethod(HttpMethod.POST)
-      .setParams("analyzedBefore", currentDateTime)
-      .execute();
   }
 
   private static WsClient newWsClient(Orchestrator orch) {

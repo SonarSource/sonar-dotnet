@@ -20,12 +20,8 @@
 package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
 import java.io.IOException;
-import java.nio.file.Path;
-import org.junit.Before;
-import org.junit.ClassRule;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -42,9 +38,9 @@ public class UnitTestResultsTest {
 
   private static final String PROJECT = "VbUnitTestResultsTest";
 
-  @Before
-  public void init(){
-    TestUtils.reset(ORCHESTRATOR);
+  @BeforeClass
+  public static void init(){
+    TestUtils.initLocal(ORCHESTRATOR);
   }
 
   @Test

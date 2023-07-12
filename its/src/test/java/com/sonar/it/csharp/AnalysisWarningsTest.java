@@ -24,7 +24,7 @@ import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -34,12 +34,13 @@ import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnalysisWarningsTest {
+
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
-  public void init() {
-    TestUtils.reset(ORCHESTRATOR);
+  @BeforeClass
+  public static void init() {
+    TestUtils.initLocal(ORCHESTRATOR);
   }
 
   @Test
@@ -61,8 +62,7 @@ public class AnalysisWarningsTest {
 
   @Test
   public void analysisWarnings_OldRoslyn() throws IOException {
-    BuildResult buildResult = Tests.analyzeProject(temp, "Roslyn.1.3.1", null);
-
+    BuildResult buildResult = Tests.analyzeProject(temp, "Roslyn.1.3.1");
     Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
     assertThat(task.getWarningsList()).containsExactly("Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher.");
