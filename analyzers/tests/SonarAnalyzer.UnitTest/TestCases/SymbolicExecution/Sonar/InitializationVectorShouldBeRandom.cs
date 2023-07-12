@@ -37,6 +37,15 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void InputItNull()
+        {
+
+            using (SymmetricAlgorithm sa = SymmetricAlgorithm.Create("AES"))
+            {
+                sa.CreateEncryptor(null, null); // this is throwing null expection at runtime.
+            }
+        }
+
         public void RandomIsNotCompliant()
         {
             var initializationVectorWeakBytes = new byte[16];

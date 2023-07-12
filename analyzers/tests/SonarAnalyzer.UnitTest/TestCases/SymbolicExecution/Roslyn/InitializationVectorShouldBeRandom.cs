@@ -15,8 +15,8 @@ class InitializationVectorShouldBeRandom
 
             sa.GenerateKey();
             var generateIVNotCalled = sa.CreateEncryptor(sa.Key, sa.IV);
-            var constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant); // FIXME Non-compliant  {{Use a dynamically-generated, random IV.}}
-//                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            var constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant); // Noncompliant  {{Use a dynamically-generated, random IV.}}
+//                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             sa.GenerateIV();
             var defaultConstructor = sa.CreateEncryptor(); // Compliant
@@ -30,8 +30,52 @@ class InitializationVectorShouldBeRandom
             sa.IV = initializationVectorConstant;
             sa.GenerateKey();
 
-            var ivReplacedDefaultConstructor = sa.CreateEncryptor(); // FIXME Non-compliant
-            var ivReplaced = sa.CreateEncryptor(sa.Key, sa.IV); // FIXME Non-compliant
+            var ivReplacedDefaultConstructor = sa.CreateEncryptor(); // Noncompliant
+            var ivReplaced = sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant
+
+            sa.IV = new byte[16];
+            sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant
+        }
+    }
+
+    public void CallEncryptorAgainWithoutInput()
+    {
+        var initializationVectorConstant = new byte[16];
+
+        using (SymmetricAlgorithm sa = SymmetricAlgorithm.Create("AES"))
+        {
+            sa.CreateEncryptor(sa.Key, initializationVectorConstant); // Noncompliant
+            sa.CreateEncryptor(); // Compliant - CreateEncryptor will generate an IV internally with GenerateIV method
+        }
+    }
+
+    public void CallEncryptorWithIVProperty(bool condition)
+    {
+        var initializationVectorConstant = new byte[16];
+
+        SymmetricAlgorithm sa = SymmetricAlgorithm.Create("AES");
+        SymmetricAlgorithm sa2 = SymmetricAlgorithm.Create("AES");
+
+        sa2.IV = new byte[16];
+        sa.CreateEncryptor(sa.Key, sa2.IV); // Noncompliant
+
+        var x = sa2.IV;
+        var y = x;
+        sa.CreateEncryptor(sa.Key, x); // Noncompliant
+        sa.CreateEncryptor(sa.Key, y); // Noncompliant
+
+        sa.CreateEncryptor(sa.Key, (condition ? sa2 : sa2).IV);  // Noncompliant
+
+    }
+
+    public void InstanceFromExpression(bool condition)
+    {
+        var initializationVectorConstant = new byte[16];
+
+        using (SymmetricAlgorithm sa = SymmetricAlgorithm.Create("AES"))
+        {
+            (condition ? sa : sa).IV = initializationVectorConstant;
+            sa.CreateEncryptor(); // Noncompliant
         }
     }
 
@@ -41,7 +85,7 @@ class InitializationVectorShouldBeRandom
         new Random().NextBytes(initializationVectorWeakBytes);
 
         var sa = SymmetricAlgorithm.Create("AES");
-        var encryptor = sa.CreateEncryptor(sa.Key, initializationVectorWeakBytes); // FIXME Non-compliant
+        var encryptor = sa.CreateEncryptor(sa.Key, initializationVectorWeakBytes); // Noncompliant
     }
 
     public void CustomGenerationNotCompliant()
@@ -55,19 +99,22 @@ class InitializationVectorShouldBeRandom
         }
 
         var sa = SymmetricAlgorithm.Create("AES");
-        sa.CreateEncryptor(sa.Key, initializationVectorWeakFor); // FIXME Non-compliant
+        sa.CreateEncryptor(sa.Key, initializationVectorWeakFor); // Noncompliant
     }
 
-    public void UsingRNGCryptoServiceProviderIsCompliant()
+    public void UsingRNGCryptoServiceProviderIsCompliant(bool condition)
     {
         var initializationVectorConstant = new byte[16];
         var initializationVectorRng = new byte[16];
         var initializationVectorRngNonZero = new byte[16];
+        var initializationVectorInExpression = new byte[16];
 
         using (var rng = new RNGCryptoServiceProvider())
         {
             rng.GetBytes(initializationVectorRng);
             rng.GetNonZeroBytes(initializationVectorRngNonZero);
+
+            rng.GetBytes((condition ? initializationVectorInExpression : initializationVectorInExpression));
         }
 
         using (var sa = SymmetricAlgorithm.Create("AES"))
@@ -76,6 +123,7 @@ class InitializationVectorShouldBeRandom
             sa.GenerateKey();
             var fromRng = sa.CreateEncryptor(sa.Key, initializationVectorRng);
             var fromRngNonZero = sa.CreateEncryptor(sa.Key, initializationVectorRngNonZero);
+            var fromRandomGeneratorWithExpression = sa.CreateEncryptor(sa.Key, initializationVectorInExpression);
 
             sa.GenerateIV();
             var fromGenerateIV = sa.CreateEncryptor(sa.Key, sa.IV);
@@ -91,8 +139,8 @@ class InitializationVectorShouldBeRandom
         byte[] initializationVector = { Rnd(), Rnd(), Rnd() };
         using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
         {
-            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants); // FIXME Non-compliant
-            encryptor = aes.CreateEncryptor(aes.Key, initializationVector);
+            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants); // Noncompliant
+            encryptor = aes.CreateEncryptor(aes.Key, initializationVector); // Noncompliant FP
         }
     }
 
@@ -102,8 +150,8 @@ class InitializationVectorShouldBeRandom
         var initializationVector = new byte[] { Rnd() };
         using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
         {
-            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants); // FIXME Non-compliant
-            encryptor = aes.CreateEncryptor(aes.Key, initializationVector);
+            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants); // Noncompliant
+            encryptor = aes.CreateEncryptor(aes.Key, initializationVector); // Noncompliant FP
         }
     }
 
@@ -114,7 +162,7 @@ class InitializationVectorShouldBeRandom
         Buffer.BlockCopy(intArray, 0, byteArray, 0, byteArray.Length);
         using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
         {
-            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, byteArray); // FIXME Non-compliant
+            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, byteArray); // Noncompliant
         }
     }
 
@@ -124,8 +172,8 @@ class InitializationVectorShouldBeRandom
         List<byte> list = new List<byte> { Rnd() };
         using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
         {
-            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, listWithConstant.ToArray()); // FIXME Non-compliant
-            encryptor = aes.CreateEncryptor(aes.Key, list.ToArray()); // FIXME Non-compliant
+            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, listWithConstant.ToArray()); // FN
+            encryptor = aes.CreateEncryptor(aes.Key, list.ToArray()); // FN
         }
     }
 

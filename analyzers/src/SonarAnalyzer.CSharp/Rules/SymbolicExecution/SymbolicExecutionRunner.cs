@@ -37,8 +37,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
     private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
         new SonarRules.ConditionEvaluatesToConstant(),
-        new SonarRules.RestrictDeserializedTypes(),
-        new SonarRules.InitializationVectorShouldBeRandom());
+        new SonarRules.RestrictDeserializedTypes());
 
     public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
@@ -48,7 +47,8 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(InvalidCastToInterface.S1944, CreateFactory<EmptyRuleCheck, SonarRules.InvalidCastToInterfaceSymbolicExecution>()) // This old SE rule is part of S3655.
         .Add(HashesShouldHaveUnpredictableSalt.S2053, CreateFactory<HashesShouldHaveUnpredictableSalt, SonarRules.HashesShouldHaveUnpredictableSalt>())
         .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
-        .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
+        .Add(InitializationVectorShouldBeRandom.S3329, CreateFactory<InitializationVectorShouldBeRandom, SonarRules.InitializationVectorShouldBeRandom>())
+        .Add(InitializationVectorShouldBeRandom.S3329, CreateFactory<InitializationVectorShouldBeRandom, SonarRules.InitializationVectorShouldBeRandom>())
         .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess, SonarRules.EmptyNullableValueAccess>())
         .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull, SonarRules.PublicMethodArgumentsShouldBeCheckedForNull>())
         .Add(CalculationsShouldNotOverflow.S3949, CreateFactory<CalculationsShouldNotOverflow>())
