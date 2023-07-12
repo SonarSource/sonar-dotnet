@@ -42,14 +42,14 @@ public class RuleParameterCustomizationTest {
   public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   @BeforeClass
-  public static void init() throws IOException {
+  public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
-    provisionProject();
-    Tests.analyzeProject(temp, CustomParametersProjectName);
   }
 
   @Test
-  public void doNotHardcodeCredentials_defaultParameters_canBeCustomized() {
+  public void doNotHardcodeCredentials_defaultParameters_canBeCustomized() throws IOException {
+    provisionProject();
+    Tests.analyzeProject(temp, CustomParametersProjectName);
 
     final String componentKey = "DefaultRuleParametersCanBeCustomized:DefaultRuleParametersCanBeCustomized/DefaultRuleParametersCanBeCustomized.cs";
     assertThat(getComponent(componentKey)).isNotNull();

@@ -34,20 +34,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MultiTargetAppTest {
 
-  private static BuildResult buildResult;
-
   @ClassRule
   public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   @BeforeClass
-  public static void init() throws IOException {
+  public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
-    buildResult = Tests.analyzeProject(temp, "MultiTargetConsoleApp");
   }
 
   @Test
-  public void should_analyze_multitarget_project() {
+  public void should_analyze_multitarget_project() throws IOException {
     String componentKey = "MultiTargetConsoleApp:MultiTargetConsoleApp/Program.cs";
+    var buildResult = Tests.analyzeProject(temp, "MultiTargetConsoleApp");
     assertThat(buildResult.getLogs()).contains("Found 1 MSBuild C# project: 1 MAIN project.");
     assertThat(getComponent(componentKey)).isNotNull();
     assertThat(getIssues(componentKey).stream().filter(x -> x.getRule().startsWith("csharpsquid:")).collect(Collectors.toList())).hasSize(4);

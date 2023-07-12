@@ -63,18 +63,18 @@ public class Tests {
     return tmpProjectDir;
   }
 
-  static BuildResult analyzeProject(TemporaryFolder temp, String projectName) throws IOException {
-    return analyzeProject(temp,projectName, null);
+  static BuildResult analyzeProject(TemporaryFolder temp, String projectDir) throws IOException {
+    return analyzeProject(temp, projectDir, null);
   }
 
-  static BuildResult analyzeProject(TemporaryFolder temp, String projectName, @Nullable String profileKey, String... keyValues) throws IOException {
-    Path projectDir = Tests.projectDir(temp, projectName);
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectDir)
+  static BuildResult analyzeProject(TemporaryFolder temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+    Path projectFullPath = Tests.projectDir(temp, projectDir);
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectDir, projectFullPath)
       .setProfile(profileKey)
       .setProperties(keyValues);
     ORCHESTRATOR.executeBuild(beginStep);
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
-    return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+    TestUtils.runMSBuild(ORCHESTRATOR, projectFullPath, "/t:Restore,Rebuild");
+    return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectFullPath));
   }
 
   @CheckForNull

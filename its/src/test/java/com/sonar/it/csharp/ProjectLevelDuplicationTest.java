@@ -41,15 +41,15 @@ public class ProjectLevelDuplicationTest {
   public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   @BeforeClass
-  public static void init() throws IOException {
+  public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
-    Tests.analyzeProject(temp, "ProjectLevelDuplication");
   }
 
   @Test
-  public void containsOnlyOneProjectLevelIssue() {
-    assertThat(getComponent("ProjectLevelDuplication")).isNotNull();
+  public void containsOnlyOneProjectLevelIssue() throws IOException {
+    Tests.analyzeProject(temp, "ProjectLevelDuplication");
 
+    assertThat(getComponent("ProjectLevelDuplication")).isNotNull();
     List<Issues.Issue> projectLevelIssues = getIssues("ProjectLevelDuplication")
       .stream()
       .filter(x -> x.getRule().equals("csharpsquid:S3904"))
