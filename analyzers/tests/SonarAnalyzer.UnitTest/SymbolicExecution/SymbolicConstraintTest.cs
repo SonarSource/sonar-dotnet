@@ -50,8 +50,7 @@ public class SymbolicConstraintTest
     [TestMethod]
     public void ByteCollectionConstraint_Opposite()
     {
-        ByteCollectionConstraint.CryptographicallyStrong.Opposite.Should().Be(ByteCollectionConstraint.CryptographicallyWeak);
-        ByteCollectionConstraint.CryptographicallyWeak.Opposite.Should().Be(ByteCollectionConstraint.CryptographicallyStrong);
+        ByteCollectionConstraint.CryptographicallyStrong.Opposite.Should().Be(null);
     }
 
     [TestMethod]

@@ -25,8 +25,7 @@ internal class ByteCollectionConstraint : SymbolicConstraint
     public static readonly ByteCollectionConstraint CryptographicallyStrong = new(ConstraintKind.CryptographicallyStrong);
     public static readonly ByteCollectionConstraint CryptographicallyWeak = new(ConstraintKind.CryptographicallyWeak);
 
-    public override SymbolicConstraint Opposite =>
-        this == CryptographicallyStrong ? CryptographicallyWeak : CryptographicallyStrong;
+    public override SymbolicConstraint Opposite => null;
 
     private ByteCollectionConstraint(ConstraintKind kind) : base(kind) { }
 }
