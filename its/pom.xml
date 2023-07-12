@@ -48,6 +48,7 @@
       <version>1.2.0.107</version>
     </dependency>
     <dependency>
+      <!-- FIXME: Is this needed? Engine could already have pulled it -->
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>${junit.version}</version>
@@ -59,12 +60,7 @@
     </dependency>
     <dependency>
       <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-suite-api</artifactId>
-      <version>1.9.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-suite-engine</artifactId>
+      <artifactId>junit-platform-suite</artifactId>
       <version>1.9.2</version>
     </dependency>
     <dependency>
@@ -85,11 +81,11 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.1.2</version>
           <configuration>
             <includes>
-              <include>com/sonar/it/csharp/Tests.java</include>
-              <include>com/sonar/it/vbnet/Tests.java</include>
-              <include>com/sonar/it/shared/Tests.java</include>
+              <!-- When run without a test filter, execute just the test suites -->
+              <include>Tests.java</include>
             </includes>
             <systemProperties>
               <scannerMsbuild.version>${scannerMsbuild.version}</scannerMsbuild.version>
