@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.Checks;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
@@ -83,7 +84,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                 && IsSymmetricAlgorithmIVMemberAccess(memberAccess)
                 && GetSymbolicValue(memberAccess.Expression, programState) is { } leftSymbolicValue
                 && GetSymbolicValue(assignment.Right, programState) is { } rightSymbolicValue
-                && programState.HasConstraint(rightSymbolicValue, ByteArrayConstraint.Constant)
+                && programState.HasConstraint(rightSymbolicValue, ByteCollectionConstraint.CryptographicallyWeak)
                     ? programState.SetConstraint(leftSymbolicValue, InitializationVectorConstraint.NotInitialized)
                     : programState;
 
@@ -115,7 +116,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                                                                  && programState.GetSymbolValue(semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol) is { } symbolicValue
                                                                  && HasNotInitializedIVConstraint(symbolicValue, programState),
                     IdentifierNameSyntax identifier => programState.GetSymbolValue(semanticModel.GetSymbolInfo(identifier).Symbol) is { } symbolicValue
-                                                       && programState.HasConstraint(symbolicValue, ByteArrayConstraint.Constant),
+                                                       && programState.HasConstraint(symbolicValue, ByteCollectionConstraint.CryptographicallyWeak),
                     ArrayCreationExpressionSyntax _ => true,
                     _ => false
                 };

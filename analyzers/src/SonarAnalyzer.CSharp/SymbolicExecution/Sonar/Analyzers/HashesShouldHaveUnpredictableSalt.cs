@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.Checks;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
@@ -116,7 +117,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                     // but we should always have a symbolic value for it.
                     && programState.ExpressionStack.Skip(objectCreation.ArgumentList.Arguments.Count - SaltParameterIndex).FirstOrDefault() is { } symbolicValue)
                 {
-                    if (programState.HasConstraint(symbolicValue, ByteArrayConstraint.Constant))
+                    if (programState.HasConstraint(symbolicValue, ByteCollectionConstraint.CryptographicallyWeak))
                     {
                         context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeSaltUnpredictableMessage));
                     }

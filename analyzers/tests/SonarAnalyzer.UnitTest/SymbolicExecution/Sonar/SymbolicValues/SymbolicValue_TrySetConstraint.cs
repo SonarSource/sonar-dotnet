@@ -521,19 +521,19 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
             },
         };
 
-        private static IEnumerable<object[]> ByteArrayConstraintData { get; } = new[]
+        private static IEnumerable<object[]> ByteCollectionConstraintData { get; } = new[]
         {
             new object[]
             {
-                ByteArrayConstraint.Constant, // constraint to set
-                ConstraintList(ByteArrayConstraint.Modified), // existing
-                ProgramStateList(ConstraintList(ByteArrayConstraint.Constant)) // Expected
+                ByteCollectionConstraint.CryptographicallyWeak, // constraint to set
+                ConstraintList(ByteCollectionConstraint.CryptographicallyStrong), // existing
+                ProgramStateList(ConstraintList(ByteCollectionConstraint.CryptographicallyWeak)) // Expected
             },
             new object[]
             {
-                ByteArrayConstraint.Modified, // constraint to set
-                ConstraintList(ByteArrayConstraint.Constant), // existing
-                ProgramStateList(ConstraintList(ByteArrayConstraint.Modified)) // Expected
+                ByteCollectionConstraint.CryptographicallyStrong, // constraint to set
+                ConstraintList(ByteCollectionConstraint.CryptographicallyWeak), // existing
+                ProgramStateList(ConstraintList(ByteCollectionConstraint.CryptographicallyStrong)) // Expected
             }
         };
 
@@ -582,7 +582,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
         [DynamicData(nameof(WhiteSpaceStringConstraintData))]
         [DynamicData(nameof(FullNotWhiteSpaceStringConstraintData))]
         [DynamicData(nameof(NotWhiteSpaceStringConstraintData))]
-        [DynamicData(nameof(ByteArrayConstraintData))]
+        [DynamicData(nameof(ByteCollectionConstraintData))]
         [DynamicData(nameof(InitializationVectorConstraintData))]
         [DynamicData(nameof(SaltSizeConstraintData))]
         public void TrySetConstraint(SymbolicConstraint constraint,
