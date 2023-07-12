@@ -73,6 +73,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
+        public void InitializationVectorShouldBeRandom_Roslyn_CSharp8() =>
+            roslynCS.AddPaths("InitializationVectorShouldBeRandom.CSharp8.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
+
+        [TestMethod]
         public void InitializationVectorShouldBeRandom_Sonar_CSharp9() =>
             sonar.AddPaths("InitializationVectorShouldBeRandom.CSharp9.cs")
                 .WithTopLevelStatements()
