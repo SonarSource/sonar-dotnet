@@ -36,8 +36,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 {
     // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
     private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
-        new SonarRules.ConditionEvaluatesToConstant(),
-        new SonarRules.RestrictDeserializedTypes());
+        new SonarRules.ConditionEvaluatesToConstant());
 
     public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
@@ -53,7 +52,8 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull, SonarRules.PublicMethodArgumentsShouldBeCheckedForNull>())
         .Add(CalculationsShouldNotOverflow.S3949, CreateFactory<CalculationsShouldNotOverflow>())
         .Add(ObjectsShouldNotBeDisposedMoreThanOnce.S3966, CreateFactory<ObjectsShouldNotBeDisposedMoreThanOnce, SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce>())
-        .Add(EmptyCollectionsShouldNotBeEnumerated.S4158, CreateFactory<EmptyCollectionsShouldNotBeEnumerated, SonarRules.EmptyCollectionsShouldNotBeEnumerated>());
+        .Add(EmptyCollectionsShouldNotBeEnumerated.S4158, CreateFactory<EmptyCollectionsShouldNotBeEnumerated, SonarRules.EmptyCollectionsShouldNotBeEnumerated>())
+        .Add(RestrictDeserializedTypes.S5773, CreateFactory<RestrictDeserializedTypes, SonarRules.RestrictDeserializedTypes>());
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
 

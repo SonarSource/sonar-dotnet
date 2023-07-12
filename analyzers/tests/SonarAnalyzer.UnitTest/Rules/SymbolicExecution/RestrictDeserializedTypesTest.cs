@@ -51,13 +51,11 @@ public class RestrictDeserializedTypesTest
             .Verify();
     }
 
-    [Ignore] // ToDo: Remove after implementation
     [TestMethod]
     public void RestrictDeserializedTypesFormatters_Roslyn_CS() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.cs")
             .Verify();
 
-    [Ignore] // ToDo: Remove after implementation
     [TestMethod]
     public void RestrictDeserializedTypesFormatters_Roslyn_CSharp8() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.cs")
@@ -71,7 +69,6 @@ public class RestrictDeserializedTypesTest
             .AddTestReference()
             .VerifyNoIssueReported();
 
-    [Ignore] // ToDo: Remove after implementation
     [TestMethod]
     public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject_Roslyn_CS() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.cs")
@@ -84,7 +81,6 @@ public class RestrictDeserializedTypesTest
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
-    [Ignore] // ToDo: Remove after implementation
     [TestMethod]
     public void RestrictDeserializedTypesJavaScriptSerializer_Roslyn_CS() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.JavaScriptSerializer.cs")
@@ -96,7 +92,6 @@ public class RestrictDeserializedTypesTest
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
-    [Ignore] // ToDo: Remove after implementation
     [TestMethod]
     public void RestrictDeserializedTypesLosFormatter_Roslyn_CS() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.LosFormatter.cs")
@@ -118,7 +113,6 @@ public class RestrictDeserializedTypesTest
             .WithTopLevelStatements()
             .Verify();
 
-    [Ignore] // ToDo: Remove after implementation
     [TestMethod]
     public void RestrictDeserializedTypesFormatters_Roslyn_CSharp9() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.CSharp9.cs")
