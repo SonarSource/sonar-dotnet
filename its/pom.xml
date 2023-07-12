@@ -53,6 +53,21 @@
       <version>${junit.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite-api</artifactId>
+      <version>1.9.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite-engine</artifactId>
+      <version>1.9.2</version>
+    </dependency>
+    <dependency>
       <!-- ToDo: This is only needed during migration to jUnit5 and can be removed later -->
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>

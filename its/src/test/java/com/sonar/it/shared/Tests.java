@@ -27,28 +27,33 @@ import java.io.IOException;
 import java.nio.file.Path;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.junit.ClassRule;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.platform.suite.api.SelectPackages;
+import org.junit.platform.suite.api.Suite;
 
-@RunWith(Suite.class)
-@SuiteClasses({
-  CoverageTest.class,
-  EnsureAllTestsRunTest.class,
-  ScannerCliTest.class,
-  VbMainCodeCsTestCodeTest.class
-})
-
+@Suite
+@SelectPackages("com.sonar.it.shared") // This will run all classes from current package containing @Test methods.
 public class Tests {
 
-  @ClassRule
   public static final Orchestrator ORCHESTRATOR = TestUtils.prepareOrchestrator()
     .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
     .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin"))
     // ScannerCliTest: Fixed version for the HTML plugin as we don't want to have failures in case of changes there.
     .addPlugin(MavenLocation.of("org.sonarsource.html", "sonar-html-plugin", "3.2.0.2082"))
     .build();
+
+  // ToDo: This is a temporary workaround for jUnit5 migration that should be removed in https://github.com/SonarSource/sonar-dotnet/pull/7574
+  @BeforeAll
+  public static void startOrchestrator() {
+    ORCHESTRATOR.start();
+  }
+
+  // ToDo: This is a temporary workaround for jUnit5 migration that should be removed in https://github.com/SonarSource/sonar-dotnet/pull/7574
+  @AfterAll
+  public static void stopOrchestrator() {
+    ORCHESTRATOR.stop();
+  }
 
   static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
     return analyzeProject(temp, projectDir, null);
