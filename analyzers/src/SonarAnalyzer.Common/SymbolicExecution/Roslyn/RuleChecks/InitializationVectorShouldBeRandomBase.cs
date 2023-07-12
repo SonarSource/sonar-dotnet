@@ -45,9 +45,8 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
                    ?? state;
         }
         else if (operation.AsPropertyReference() is { } property
-                 && property.Instance is { } propertyInstance
-                 && state.ResolveCaptureAndUnwrapConversion(propertyInstance).TrackedSymbol() is { } propertyInstanceSymbol
-                 && IsIVProperty(property, propertyInstanceSymbol)
+                 && state.ResolveCaptureAndUnwrapConversion(property.Instance).TrackedSymbol() is { } propertyInstance
+                 && IsIVProperty(property, propertyInstance)
                  && state[property.Instance]?.Constraint<ByteCollectionConstraint>() is { } constraint)
         {
             return state.SetOperationConstraint(property, constraint);
@@ -56,7 +55,7 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
         {
             return ProcessStrongRandomGeneratorMethodInvocation(state, invocation)
                    ?? ProcessGenerateIV(state, invocation)
-                   ?? ProcessCreateEncryptorMethodInvocation(state, invocation)
+                   ?? ProcessCreateEncryptorMethodInvocation(state,, invocation)
                    ?? state;
         }
         else
@@ -67,11 +66,10 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
 
     private static ProgramState ProcessAssignmentToIVProperty(ProgramState state, IAssignmentOperationWrapper assignment) =>
         assignment.Target?.AsPropertyReference() is { } property
-        && property.Instance is { } propertyInstance
-        && state.ResolveCaptureAndUnwrapConversion(propertyInstance).TrackedSymbol() is { } propertyInstanceSymbol
-        && IsIVProperty(property, propertyInstanceSymbol)
+        && state.ResolveCaptureAndUnwrapConversion(property.Instance).TrackedSymbol() is { } propertyInstance
+        && IsIVProperty(property, propertyInstance)
         && state[assignment.Value].HasConstraint(ByteCollectionConstraint.CryptographicallyWeak)
-            ? state.SetSymbolConstraint(propertyInstanceSymbol, ByteCollectionConstraint.CryptographicallyWeak)
+            ? state.SetSymbolConstraint(propertyInstance, ByteCollectionConstraint.CryptographicallyWeak)
             : null;
 
     private static ProgramState ProcessStrongRandomGeneratorMethodInvocation(ProgramState state, IInvocationOperationWrapper invocation)
@@ -90,7 +88,7 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
     private static ProgramState ProcessGenerateIV(ProgramState state, IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.Name.Equals(nameof(SymmetricAlgorithm.GenerateIV))
         && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm)
-            ? state.SetSymbolConstraint(state.ResolveCaptureAndUnwrapConversion(invocation.Instance).TrackedSymbol(), ByteCollectionConstraint.CryptographicallyStrong)
+            ? state.SetSymbolConstraint(invocation.Instance.TrackedSymbol(), ByteCollectionConstraint.CryptographicallyStrong)
             : null;
 
     private ProgramState ProcessCreateEncryptorMethodInvocation(ProgramState state, IInvocationOperationWrapper invocation)
