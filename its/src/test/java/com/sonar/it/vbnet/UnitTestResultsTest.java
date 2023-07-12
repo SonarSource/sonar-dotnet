@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class UnitTestResultsTest {
 
+//  @RegisterExtension
+//  public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
+
   @BeforeAll
   public static void init() {
     System.out.println("UnitTestResultsTest Shared BeforeAll");
