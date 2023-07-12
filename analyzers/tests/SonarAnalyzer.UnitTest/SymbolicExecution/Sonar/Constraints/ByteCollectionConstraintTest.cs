@@ -18,27 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
 {
     [TestClass]
-    public class ByteArrayConstraintTest
+    public class ByteCollectionConstraintTest
     {
         [TestMethod]
-        public void GivenByteArrayIsInitialized_OppositeShouldBe_NotInitialized() =>
-            ByteArrayConstraint.Constant.Opposite.Should().Be(ByteArrayConstraint.Modified);
+        public void GivenByteCollectionIsInitialized_OppositeShouldBe_NotInitialized() =>
+            ByteCollectionConstraint.CryptographicallyStrong.Opposite.Should().Be(ByteCollectionConstraint.CryptographicallyWeak);
 
         [TestMethod]
-        public void GivenByteArrayIsNotInitialized_OppositeShouldBe_Initialized() =>
-            ByteArrayConstraint.Modified.Opposite.Should().Be(ByteArrayConstraint.Constant);
+        public void GivenByteCollectionIsNotInitialized_OppositeShouldBe_Initialized() =>
+            ByteCollectionConstraint.CryptographicallyWeak.Opposite.Should().Be(ByteCollectionConstraint.CryptographicallyStrong);
 
         [TestMethod]
-        public void GivenByteArrayIsInitialized_ToStringShouldBe_Initialized() =>
-            ByteArrayConstraint.Constant.ToString().Should().Be("ByteArrayConstant");
+        public void GivenByteCollectionIsInitialized_ToStringShouldBe_Initialized() =>
+            ByteCollectionConstraint.CryptographicallyStrong.ToString().Should().Be("CryptographicallyStrong");
 
         [TestMethod]
-        public void GivenByteArrayIsNotInitialized_ToStringShouldBe_NotInitialized() =>
-            ByteArrayConstraint.Modified.ToString().Should().Be("ByteArrayModified");
+        public void GivenByteCollectionIsNotInitialized_ToStringShouldBe_NotInitialized() =>
+            ByteCollectionConstraint.CryptographicallyWeak.ToString().Should().Be("CryptographicallyWeak");
     }
 }

@@ -28,10 +28,10 @@ public enum ConstraintKind
     Null,
     NotNull,
     // Everything else
-    ByteArrayConstant,
-    ByteArrayModified,
     CollectionEmpty,
     CollectionNotEmpty,
+    CryptographicallyStrong,
+    CryptographicallyWeak,
     DisposableDisposed,
     InitializationVectorInitialized,
     InitializationVectorNotInitialized,

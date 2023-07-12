@@ -18,18 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.SymbolicExecution.Constraints;
+namespace SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
+internal class ByteCollectionConstraint : SymbolicConstraint
 {
-    internal class ByteArrayConstraint : SymbolicConstraint
-    {
-        public static readonly ByteArrayConstraint Constant = new(ConstraintKind.ByteArrayConstant);
-        public static readonly ByteArrayConstraint Modified = new(ConstraintKind.ByteArrayModified);
+    public static readonly ByteCollectionConstraint CryptographicallyStrong = new(ConstraintKind.CryptographicallyStrong);
+    public static readonly ByteCollectionConstraint CryptographicallyWeak = new(ConstraintKind.CryptographicallyWeak);
 
-        public override SymbolicConstraint Opposite =>
-            this == Modified ? Constant : Modified;
+    public override SymbolicConstraint Opposite =>
+        this == CryptographicallyStrong ? CryptographicallyWeak : CryptographicallyStrong;
 
-        private ByteArrayConstraint(ConstraintKind kind) : base(kind) { }
-    }
+    private ByteCollectionConstraint(ConstraintKind kind) : base(kind) { }
 }

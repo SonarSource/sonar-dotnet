@@ -41,10 +41,17 @@ public class SymbolicConstraintTest
     }
 
     [TestMethod]
-    public void ByteArrayConstraint_ToString()
+    public void ByteCollectionConstraint_ToString()
     {
-        ByteArrayConstraint.Constant.ToString().Should().Be("ByteArrayConstant");
-        ByteArrayConstraint.Modified.ToString().Should().Be("ByteArrayModified");
+        ByteCollectionConstraint.CryptographicallyStrong.ToString().Should().Be("CryptographicallyStrong");
+        ByteCollectionConstraint.CryptographicallyWeak.ToString().Should().Be("CryptographicallyWeak");
+    }
+
+    [TestMethod]
+    public void ByteCollectionConstraint_Opposite()
+    {
+        ByteCollectionConstraint.CryptographicallyStrong.Opposite.Should().Be(ByteCollectionConstraint.CryptographicallyWeak);
+        ByteCollectionConstraint.CryptographicallyWeak.Opposite.Should().Be(ByteCollectionConstraint.CryptographicallyStrong);
     }
 
     [TestMethod]
