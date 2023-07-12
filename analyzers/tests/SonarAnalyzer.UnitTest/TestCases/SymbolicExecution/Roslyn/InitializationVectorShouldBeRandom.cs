@@ -17,8 +17,8 @@ namespace Tests.Diagnostics
 
                 sa.GenerateKey();
                 var generateIVNotCalled = sa.CreateEncryptor(sa.Key, sa.IV);
-                var constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant); // // FIXME Non-compliant  {{Use a dynamically-generated, random IV.}}
-//                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                var constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant); // FIXME Non-compliant  {{Use a dynamically-generated, random IV.}}
+//                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                 sa.GenerateIV();
                 var defaultConstructor = sa.CreateEncryptor(); // Compliant
@@ -131,18 +131,18 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void InsideObjectInitializer()
-        {
-            var anonymous = new
-            {
-                IV = new byte[] { 0x00 },
-                Key = new byte[] { 0x00 }
-            };
-            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
-            {
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, anonymous.IV); // FIXME Non-compliant https://github.com/SonarSource/sonar-dotnet/issues/4555
-            }
-        }
+        //public void InsideObjectInitializer()
+        //{
+        //    var anonymous = new
+        //    {
+        //        IV = new byte[] { 0x00 },
+        //        Key = new byte[] { 0x00 }
+        //    };
+        //    using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+        //    {
+        //        ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, anonymous.IV); // FIXME Non-compliant https://github.com/SonarSource/sonar-dotnet/issues/4555
+        //    }
+        //}
 
         public void DifferentCases()
         {

@@ -25,5 +25,5 @@ public sealed class InitializationVectorShouldBeRandom : InitializationVectorSho
     public static readonly DiagnosticDescriptor S3329 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
     protected override DiagnosticDescriptor Rule => S3329;
 
-    public override bool ShouldExecute() => false;
+    public override bool ShouldExecute() => true;
 }
