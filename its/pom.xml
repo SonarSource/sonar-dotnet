@@ -85,7 +85,8 @@
           <configuration>
             <includes>
               <!-- When run without a test filter, execute just the test suites -->
-              <include>Tests.java</include>
+              <!--              <include>Tests.java</include>-->
+              <include>vbnet/*</include>
             </includes>
             <systemProperties>
               <scannerMsbuild.version>${scannerMsbuild.version}</scannerMsbuild.version>

@@ -19,58 +19,10 @@
  */
 package com.sonar.it.vbnet;
 
-import com.sonar.orchestrator.container.Edition;
-import com.sonar.orchestrator.junit5.OrchestratorExtension;
-import com.sonar.orchestrator.junit5.OrchestratorExtensionBuilder;
-import com.sonar.orchestrator.locator.FileLocation;
-import com.sonar.orchestrator.locator.Location;
-import java.io.File;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.platform.suite.api.SelectPackages;
-import org.junit.platform.suite.api.Suite;
-
-@Suite
-@SelectPackages("com.sonar.it.vbnet") // This will run all classes from current package containing @Test methods.
-public class Tests {
-
-  public static final OrchestratorExtension ORCHESTRATOR = prepareOrchestrator()
-    .addPlugin(getPluginLocation("sonar-csharp-plugin")) // Do not add VB.NET here, use shared project instead
-    .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
-    .restoreProfileAtStartup(FileLocation.of("profiles/class_name.xml"))
-    .restoreProfileAtStartup(FileLocation.of("profiles/template_rule.xml"))
-    .restoreProfileAtStartup(FileLocation.of("profiles/custom_parameters.xml"))
-    .restoreProfileAtStartup(FileLocation.of("profiles/custom_complexity.xml"))
-    .build();
-
-  public static OrchestratorExtensionBuilder prepareOrchestrator() {
-    System.out.println("prepareOrchestrator");
-
-    return OrchestratorExtension.builderEnv()
-      .useDefaultAdminCredentialsForBuilds(true)
-      // See https://github.com/SonarSource/orchestrator#version-aliases
-      .setSonarVersion(System.getProperty("sonar.runtimeVersion", "DEV"))
-      .setEdition(Edition.DEVELOPER)
-      .activateLicense();
-  }
-
-  public static Location getPluginLocation(String pluginName) {
-    Location pluginLocation;
-
-    String version = System.getProperty("csharpVersion"); // C# and VB.Net versions are the same
-    return FileLocation.byWildcardMavenFilename(new File("../" + pluginName + "/target"), pluginName + "-*.jar");
-  }
-
-
-  // ToDo: This is a temporary workaround for jUnit5 migration that should be removed in https://github.com/SonarSource/sonar-dotnet/pull/7574
-  @BeforeAll
-  public static void startOrchestrator() {
-    System.out.println("Start Orchestrator VB.NET");
-  }
-
-  // ToDo: This is a temporary workaround for jUnit5 migration that should be removed in https://github.com/SonarSource/sonar-dotnet/pull/7574
-  @AfterAll
-  public static void stopOrchestrator() {
-    System.out.println("Stop Orchestrator VB.NET");
-  }
-}
+//@Suite
+//@SelectPackages("com.sonar.it.vbnet") // This will run all classes from current package containing @Test methods.
+//public class Tests {
+//  // Once jUnit5 adds support for @BeforeAll and @AfterAll, we could revert this to the original state with Orchestrator instance in this suite.
+//  // Effectively removing OrchestratorStarter and all @ExtendWith annotations.
+//  // https://github.com/junit-team/junit5/issues/456#issuecomment-1024244047
+//}

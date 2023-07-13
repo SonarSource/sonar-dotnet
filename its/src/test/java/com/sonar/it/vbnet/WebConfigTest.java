@@ -21,7 +21,9 @@ package com.sonar.it.vbnet;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@ExtendWith(OrchestratorStarter.class)
 public class WebConfigTest {
 
 //  @RegisterExtension
@@ -33,7 +35,16 @@ public class WebConfigTest {
   }
 
   @Test
-  public void some_test() {
-    System.out.println("WebConfigTest Shared some_test");
+  public void some_test() throws InterruptedException {
+    System.out.println("WebConfigTest Shared some_test starting " + Thread.currentThread().getName());
+    Thread.sleep(1000);
+    System.out.println("WebConfigTest Shared some_test finished " + Thread.currentThread().getName());
+  }
+
+  @Test
+  public void another_test() throws InterruptedException {
+    System.out.println("WebConfigTest Shared another_test starting " + Thread.currentThread().getName());
+    Thread.sleep(1000);
+    System.out.println("WebConfigTest Shared another_test finished " + Thread.currentThread().getName());
   }
 }

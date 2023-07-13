@@ -21,7 +21,9 @@ package com.sonar.it.vbnet;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@ExtendWith(OrchestratorStarter.class)
 public class UnitTestResultsTest {
 
 //  @RegisterExtension
@@ -33,7 +35,9 @@ public class UnitTestResultsTest {
   }
 
   @Test
-  public void some_test() {
-    System.out.println("UnitTestResultsTest Shared some_test");
+  public void some_test() throws InterruptedException {
+    System.out.println("UnitTestResultsTest Shared some_test starting " + Thread.currentThread().getName());
+    Thread.sleep(1000);
+    System.out.println("UnitTestResultsTest Shared some_test finished " + Thread.currentThread().getName());
   }
 }
