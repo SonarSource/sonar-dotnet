@@ -32,16 +32,12 @@ import javax.annotation.Nullable;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.platform.suite.api.SelectPackages;
-import org.junit.platform.suite.api.Suite;
 import org.sonarqube.ws.Components;
 import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.Measures;
 
 import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
 
-@Suite
-@SelectPackages("com.sonar.it.csharp") // This will run all classes from current package containing @Test methods.
 public class Tests implements BeforeAllCallback, AfterAllCallback {
 
   public static final Orchestrator ORCHESTRATOR = TestUtils.prepareOrchestrator()
@@ -63,7 +59,7 @@ public class Tests implements BeforeAllCallback, AfterAllCallback {
   public void afterAll(ExtensionContext extensionContext) throws Exception {
     ORCHESTRATOR.stop();
   }
-  
+
   public static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
     return analyzeProject(projectDir, temp, projectDir);
   }
