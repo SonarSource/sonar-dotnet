@@ -990,3 +990,33 @@ public class ReproAD0001
         list.Clear(); // This forces ShouldExecute to become true
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/7582
+public class Repro_7582
+{
+    private static void Demo(IEnumerable<int> input)
+    {
+        var list = new List<int>();
+        var flag = false;
+
+        foreach (var item in input)
+        {
+            if (item > 10)
+            {
+                flag = true;
+                continue;
+            }
+
+            list.Add(item);
+        }
+
+        if (flag)
+        {
+            foreach (var item in list)   // Noncompliant FP
+            {
+                // do something with items that were <= 10
+                // only when items > 10 were found.
+            }
+        }
+    }
+}
