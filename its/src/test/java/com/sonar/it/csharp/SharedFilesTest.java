@@ -21,11 +21,11 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
+import java.nio.file.Path;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues.Issue;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
@@ -35,10 +35,11 @@ import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SharedFilesTest {
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
+  @TempDir
+  private static Path temp;
+
+  @BeforeEach
   public void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }

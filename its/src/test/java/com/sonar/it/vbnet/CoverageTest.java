@@ -22,10 +22,10 @@ package com.sonar.it.vbnet;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import java.nio.file.Path;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
@@ -33,10 +33,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
-  @Before
+  @BeforeEach
   public void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }

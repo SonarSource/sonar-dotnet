@@ -20,22 +20,22 @@
 package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
+import java.nio.file.Path;
 import java.util.List;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Duplications;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CodeDuplicationTest {
-  @ClassRule
-  public static final TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
   private static final String PROJECT = "VbCodeDuplicationTest";
 
-  @BeforeClass
+  @BeforeAll
   public static void init() throws Exception {
     TestUtils.initLocal(ORCHESTRATOR);
     Tests.analyzeProject(temp, PROJECT);

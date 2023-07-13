@@ -25,20 +25,20 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import java.nio.file.Path;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class QualityProfileExportTest {
 
-  @ClassRule
-  public static TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }
@@ -54,7 +54,7 @@ public class QualityProfileExportTest {
       .setParam("language", "cs")
       .setParam("qualityProfile", "Sonar way")
       .setParam("organization", "default-organization")
-      .downloadToDirectory(temp.getRoot());
+      .downloadToDirectory(temp.toFile());
 
     assertThat(file).exists();
     BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));

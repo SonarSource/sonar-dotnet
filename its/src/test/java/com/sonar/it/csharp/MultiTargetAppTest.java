@@ -22,22 +22,23 @@ package com.sonar.it.csharp;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-
+import java.nio.file.Path;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
-import static com.sonar.it.csharp.Tests.*;
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
+import static com.sonar.it.csharp.Tests.getComponent;
+import static com.sonar.it.csharp.Tests.getIssues;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MultiTargetAppTest {
 
-  @ClassRule
-  public static TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }

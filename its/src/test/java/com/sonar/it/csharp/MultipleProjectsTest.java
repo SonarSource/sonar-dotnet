@@ -27,12 +27,9 @@ import com.sonar.orchestrator.util.CommandExecutor;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.apache.commons.lang.SystemUtils;
-import org.junit.ClassRule;
-import org.junit.Test;
-import org.junit.rules.ExternalResource;
-import org.junit.rules.RuleChain;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.Measures.Measure;
 
@@ -43,12 +40,10 @@ import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Note: this class runs the analysis once in {@link MultipleProjectsTest#getRuleChain()}, before the tests.
- */
 public class MultipleProjectsTest {
 
-  public static TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
   private static final String PROJECT = "MultipleProjects";
 
@@ -60,14 +55,19 @@ public class MultipleProjectsTest {
   private static final String SECOND_PROJECT_DIRECTORY = "MultipleProjects:SecondProject";
   private static final String SECOND_PROJECT_FIRST_CLASS_FILE = "MultipleProjects:SecondProject/FirstClass.cs";
 
-  /**
-   * populated in {@link #getRuleChain()}
-   */
   private static BuildResult buildResult;
 
-  // This is where the analysis is done.
-  @ClassRule
-  public static RuleChain chain = getRuleChain();
+  @BeforeAll
+  public static void beforeAll() throws Exception {
+    TestUtils.initLocal(ORCHESTRATOR);
+    Path projectDir = TestUtils.projectDir(temp, PROJECT);
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir);
+
+    CommandExecutor.create().execute(Command.create("nuget").addArguments("restore").setDirectory(projectDir.toFile()), 10 * 60 * 1000);
+    ORCHESTRATOR.executeBuild(beginStep);
+    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
+    buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+  }
 
   @Test
   public void projectTypesInfoIsLogged() {
@@ -393,34 +393,5 @@ public class MultipleProjectsTest {
 
   private Integer getFileMeasureAsInt(String file, String metricKey) {
     return getMeasureAsInt(file, metricKey);
-  }
-
-  private static RuleChain getRuleChain() {
-    assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
-
-    return RuleChain
-      .outerRule(ORCHESTRATOR)
-      .around(temp)
-      .around(new ExternalResource() {
-        @Override
-        protected void before() throws Throwable {
-          TestUtils.initLocal(ORCHESTRATOR);
-
-          Path projectDir = Tests.projectDir(temp, PROJECT);
-
-          ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir);
-
-          CommandExecutor.create().execute(Command.create("nuget")
-              .addArguments("restore")
-              .setDirectory(projectDir.toFile()),
-            10 * 60 * 1000);
-
-          ORCHESTRATOR.executeBuild(beginStep);
-
-          TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
-
-          buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
-        }
-      });
   }
 }
