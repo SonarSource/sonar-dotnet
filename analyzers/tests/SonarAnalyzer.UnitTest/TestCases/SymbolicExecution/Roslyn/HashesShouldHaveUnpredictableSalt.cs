@@ -143,6 +143,7 @@ class Program
 
         var noncompliantSalt = new byte[16];
         var compliantSalt = new byte[16];
+        rng.GetBytes(compliantSalt);
         var salt3 = arg == 2 ? compliantSalt : noncompliantSalt;
         new PasswordDeriveBytes(passwordBytes, salt3);              // Noncompliant
     }
