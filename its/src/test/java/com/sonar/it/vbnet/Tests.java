@@ -29,7 +29,9 @@ import java.nio.file.Path;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.AfterAllCallback;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 import org.sonarqube.ws.Components;
@@ -38,7 +40,7 @@ import org.sonarqube.ws.Measures;
 
 @Suite
 @SelectPackages("com.sonar.it.vbnet") // This will run all classes from current package containing @Test methods.
-public class Tests {
+public class Tests implements BeforeAllCallback, AfterAllCallback {
 
   public static final Orchestrator ORCHESTRATOR = TestUtils.prepareOrchestrator()
     .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin")) // Do not add C# here, use shared project instead
@@ -46,9 +48,15 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_class_name.xml"))
     .build();
 
-  @BeforeAll
-  public static void deleteLocalCache() {
+  @Override
+  public void beforeAll(ExtensionContext extensionContext) throws Exception {
+    ORCHESTRATOR.start();
     TestUtils.deleteLocalCache();
+  }
+
+  @Override
+  public void afterAll(ExtensionContext extensionContext) throws Exception {
+    ORCHESTRATOR.stop();
   }
 
   static BuildResult analyzeProject(Path temp, String projectName) throws IOException {

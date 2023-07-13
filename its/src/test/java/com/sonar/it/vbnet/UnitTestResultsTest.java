@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
@@ -31,6 +32,7 @@ import static com.sonar.it.vbnet.Tests.getMeasure;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(Tests.class)
 public class UnitTestResultsTest {
 
   @TempDir

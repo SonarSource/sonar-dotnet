@@ -25,11 +25,13 @@ import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.sonarqube.ws.Hotspots;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(Tests.class)
 public class WebConfigTest extends WebConfigBase {
 
   private static final String PROJECT = "WebConfig.VB";

@@ -24,12 +24,14 @@ import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Duplications;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(Tests.class)
 public class CodeDuplicationTest {
   @TempDir
   private static Path temp;

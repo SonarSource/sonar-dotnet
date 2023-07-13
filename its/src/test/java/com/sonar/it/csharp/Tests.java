@@ -29,7 +29,9 @@ import java.nio.file.Path;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.AfterAllCallback;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 import org.sonarqube.ws.Components;
@@ -40,7 +42,7 @@ import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
 
 @Suite
 @SelectPackages("com.sonar.it.csharp") // This will run all classes from current package containing @Test methods.
-public class Tests {
+public class Tests implements BeforeAllCallback, AfterAllCallback {
 
   public static final Orchestrator ORCHESTRATOR = TestUtils.prepareOrchestrator()
     .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin")) // Do not add VB.NET here, use shared project instead
@@ -51,24 +53,30 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/custom_complexity.xml"))
     .build();
 
-  @BeforeAll
-  public static void deleteLocalCache() {
+  @Override
+  public void beforeAll(ExtensionContext extensionContext) throws Exception {
+    ORCHESTRATOR.start();
     TestUtils.deleteLocalCache();
   }
 
-  static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
+  @Override
+  public void afterAll(ExtensionContext extensionContext) throws Exception {
+    ORCHESTRATOR.stop();
+  }
+  
+  public static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
     return analyzeProject(projectDir, temp, projectDir);
   }
 
-  static BuildResult analyzeProject(String projectKey, Path temp, String projectDir) throws IOException {
+  public static BuildResult analyzeProject(String projectKey, Path temp, String projectDir) throws IOException {
     return analyzeProject(projectKey, temp, projectDir, null);
   }
 
-  static BuildResult analyzeProject(Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+  public static BuildResult analyzeProject(Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     return analyzeProject(projectDir, temp, projectDir, profileKey, keyValues);
   }
 
-  static BuildResult analyzeProject(String projectKey, Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+  public static BuildResult analyzeProject(String projectKey, Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     Path projectFullPath = TestUtils.projectDir(temp, projectDir);
 
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectKey, projectFullPath)
@@ -80,25 +88,25 @@ public class Tests {
     return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectFullPath));
   }
 
-  static Components.Component getComponent(String componentKey) {
+  public static Components.Component getComponent(String componentKey) {
     return TestUtils.getComponent(ORCHESTRATOR, componentKey);
   }
 
   @CheckForNull
-  static Integer getMeasureAsInt(String componentKey, String metricKey) {
+  public static Integer getMeasureAsInt(String componentKey, String metricKey) {
     return TestUtils.getMeasureAsInt(ORCHESTRATOR, componentKey, metricKey);
   }
 
   @CheckForNull
-  static Measures.Measure getMeasure(String componentKey, String metricKey) {
+  public static Measures.Measure getMeasure(String componentKey, String metricKey) {
     return TestUtils.getMeasure(ORCHESTRATOR, componentKey, metricKey);
   }
 
-  static List<Issues.Issue> getIssues(String componentKey) {
+  public static List<Issues.Issue> getIssues(String componentKey) {
     return TestUtils.getIssues(ORCHESTRATOR, componentKey);
   }
 
-  static List<Hotspot> getHotspots(String projectKey) {
+  public static List<Hotspot> getHotspots(String projectKey) {
     return TestUtils.getHotspots(ORCHESTRATOR, projectKey);
   }
 }

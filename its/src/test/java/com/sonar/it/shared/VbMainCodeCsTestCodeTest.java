@@ -24,6 +24,7 @@ import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues;
 
@@ -31,6 +32,7 @@ import static com.sonar.it.shared.Tests.ORCHESTRATOR;
 import static com.sonar.it.shared.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(Tests.class)
 public class VbMainCodeCsTestCodeTest {
 
   @TempDir
