@@ -14,40 +14,40 @@ class Program
     public void ShortAndConstantSaltIsNotCompliant()
     {
         var shortAndConstantSalt = new byte[15];
-        var pdb1 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt);                                                    // FIXME Non-compliant {{Make this salt unpredictable.}}
+        var pdb1 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt);                                                    // Noncompliant {{Make this salt unpredictable.}}
         //                                                ^^^^^^^^^^^^^^^^^^^^
-        var pdb2 = new PasswordDeriveBytes(salt: shortAndConstantSalt, password: passwordBytes);                                    // FIXME Non-compliant
-        //                                       ^^^^^^^^^^^^^^^^^^^^
-        var pdb3 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt);                                                   // FIXME Non-compliant
-        var pdb4 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, cspParams);                                         // FIXME Non-compliant
-        var pdb5 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, cspParams);                                        // FIXME Non-compliant
-        var pdb6 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000);               // FIXME Non-compliant
-        var pdb7 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000);              // FIXME Non-compliant
-        var pdb8 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);    // FIXME Non-compliant
-        var pdb9 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);   // FIXME Non-compliant
+        var pdb2 = new PasswordDeriveBytes(salt: shortAndConstantSalt, password: passwordBytes);                                    // Noncompliant
+        //                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        var pdb3 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt);                                                   // Noncompliant
+        var pdb4 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, cspParams);                                         // Noncompliant
+        var pdb5 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, cspParams);                                        // Noncompliant
+        var pdb6 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000);               // Noncompliant
+        var pdb7 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000);              // Noncompliant
+        var pdb8 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);    // Noncompliant
+        var pdb9 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);   // Noncompliant
 
-        var pbkdf2a = new Rfc2898DeriveBytes(passwordString, shortAndConstantSalt);                                                 // FIXME Non-compliant {{Make this salt unpredictable.}}
-        var pbkdf2b = new Rfc2898DeriveBytes(passwordString, shortAndConstantSalt, 1000);                                           // FIXME Non-compliant
-        var pbkdf2c = new Rfc2898DeriveBytes(passwordBytes, shortAndConstantSalt, 1000);                                            // FIXME Non-compliant
-        var pbkdf2d = new Rfc2898DeriveBytes(passwordString, shortAndConstantSalt, 1000, HashAlgorithmName.SHA512);                 // FIXME Non-compliant
+        var pbkdf2a = new Rfc2898DeriveBytes(passwordString, shortAndConstantSalt);                                                 // Noncompliant {{Make this salt unpredictable.}}
+        var pbkdf2b = new Rfc2898DeriveBytes(passwordString, shortAndConstantSalt, 1000);                                           // Noncompliant
+        var pbkdf2c = new Rfc2898DeriveBytes(passwordBytes, shortAndConstantSalt, 1000);                                            // Noncompliant
+        var pbkdf2d = new Rfc2898DeriveBytes(passwordString, shortAndConstantSalt, 1000, HashAlgorithmName.SHA512);                 // Noncompliant
     }
 
     public void ConstantHashIsNotCompliant()
     {
         var constantSalt = new byte[16];
-        var pdb1 = new PasswordDeriveBytes(passwordBytes, constantSalt);                                                    // FIXME Non-compliant {{Make this salt unpredictable.}}
-        var pdb2 = new PasswordDeriveBytes(passwordString, constantSalt);                                                   // FIXME Non-compliant
-        var pdb3 = new PasswordDeriveBytes(passwordBytes, constantSalt, cspParams);                                         // FIXME Non-compliant
-        var pdb4 = new PasswordDeriveBytes(passwordString, constantSalt, cspParams);                                        // FIXME Non-compliant
-        var pdb5 = new PasswordDeriveBytes(passwordBytes, constantSalt, HashAlgorithmName.SHA512.Name, 1000);               // FIXME Non-compliant
-        var pdb6 = new PasswordDeriveBytes(passwordString, constantSalt, HashAlgorithmName.SHA512.Name, 1000);              // FIXME Non-compliant
-        var pdb7 = new PasswordDeriveBytes(passwordBytes, constantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);    // FIXME Non-compliant
-        var pdb8 = new PasswordDeriveBytes(passwordString, constantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);   // FIXME Non-compliant
+        var pdb1 = new PasswordDeriveBytes(passwordBytes, constantSalt);                                                    // Noncompliant {{Make this salt unpredictable.}}
+        var pdb2 = new PasswordDeriveBytes(passwordString, constantSalt);                                                   // Noncompliant
+        var pdb3 = new PasswordDeriveBytes(passwordBytes, constantSalt, cspParams);                                         // Noncompliant
+        var pdb4 = new PasswordDeriveBytes(passwordString, constantSalt, cspParams);                                        // Noncompliant
+        var pdb5 = new PasswordDeriveBytes(passwordBytes, constantSalt, HashAlgorithmName.SHA512.Name, 1000);               // Noncompliant
+        var pdb6 = new PasswordDeriveBytes(passwordString, constantSalt, HashAlgorithmName.SHA512.Name, 1000);              // Noncompliant
+        var pdb7 = new PasswordDeriveBytes(passwordBytes, constantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);    // Noncompliant
+        var pdb8 = new PasswordDeriveBytes(passwordString, constantSalt, HashAlgorithmName.SHA512.Name, 1000, cspParams);   // Noncompliant
 
-        var pbkdf2a = new Rfc2898DeriveBytes(passwordString, constantSalt);                                                 // FIXME Non-compliant {{Make this salt unpredictable.}}
-        var pbkdf2b = new Rfc2898DeriveBytes(passwordString, constantSalt, 1000);                                           // FIXME Non-compliant
-        var pbkdf2c = new Rfc2898DeriveBytes(passwordBytes, constantSalt, 1000);                                            // FIXME Non-compliant
-        var pbkdf2d = new Rfc2898DeriveBytes(passwordString, constantSalt, 1000, HashAlgorithmName.SHA512);                 // FIXME Non-compliant
+        var pbkdf2a = new Rfc2898DeriveBytes(passwordString, constantSalt);                                                 // Noncompliant {{Make this salt unpredictable.}}
+        var pbkdf2b = new Rfc2898DeriveBytes(passwordString, constantSalt, 1000);                                           // Noncompliant
+        var pbkdf2c = new Rfc2898DeriveBytes(passwordBytes, constantSalt, 1000);                                            // Noncompliant
+        var pbkdf2d = new Rfc2898DeriveBytes(passwordString, constantSalt, 1000, HashAlgorithmName.SHA512);                 // Noncompliant
     }
 
     public void RNGCryptoServiceProviderIsCompliant()
@@ -67,8 +67,8 @@ class Program
 
             var shortSalt = new byte[15];
             rng.GetBytes(shortSalt);
-            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortSalt);   // FIXME Non-compliant {{Make this salt at least 16 bytes.}}
-            var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortSalt); // FIXME Non-compliant
+            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortSalt);   // Noncompliant {{Make this salt at least 16 bytes.}}
+            var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortSalt); // Noncompliant
         }
     }
 
@@ -89,8 +89,8 @@ class Program
 
             var shortSalt = new byte[15];
             rng.GetBytes(shortSalt);
-            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortSalt);   // FIXME Non-compliant {{Make this salt at least 16 bytes.}}
-            var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortSalt); // FIXME Non-compliant
+            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortSalt);   // Noncompliant {{Make this salt at least 16 bytes.}}
+            var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortSalt); // Noncompliant
         }
     }
 
@@ -103,7 +103,7 @@ class Program
         {
             saltCustom[i] = (byte)rnd.Next(255);
         }
-        new PasswordDeriveBytes(passwordBytes, saltCustom);         // FIXME Non-compliant
+        new PasswordDeriveBytes(passwordBytes, saltCustom);         // Noncompliant
     }
 
     public void SaltAsParameter(byte[] salt)
@@ -139,31 +139,17 @@ class Program
             rng.GetBytes(salt);
             new PasswordDeriveBytes(passwordBytes, salt);           // Compliant
         }
-        new PasswordDeriveBytes(passwordBytes, salt);               // FIXME Non-compliant {{Make this salt unpredictable.}}
+        new PasswordDeriveBytes(passwordBytes, salt);               // Noncompliant {{Make this salt unpredictable.}}
 
         var noncompliantSalt = new byte[16];
         var compliantSalt = new byte[16];
         var salt3 = arg == 2 ? compliantSalt : noncompliantSalt;
-        new PasswordDeriveBytes(passwordBytes, salt3);              // FIXME Non-compliant
+        new PasswordDeriveBytes(passwordBytes, salt3);              // Noncompliant
     }
 
     public void AssignedToAnotherVariable()
     {
-        var noncompliantSalt = new byte[16];
-        var compliantSalt = new byte[16];
-        var rng = RandomNumberGenerator.Create();
-        rng.GetBytes(compliantSalt);
-
-        var salt1 = compliantSalt;
-        new PasswordDeriveBytes(passwordBytes, salt1);
-
-        var salt2 = noncompliantSalt;
-        new PasswordDeriveBytes(passwordBytes, salt2);                                              // FIXME Non-compliant
-
-        noncompliantSalt = compliantSalt;
-        new PasswordDeriveBytes(passwordBytes, noncompliantSalt);
-
-        new PasswordDeriveBytes(passwordBytes, new byte[16]);                                       // FIXME Non-compliant
+        new PasswordDeriveBytes(passwordBytes, new byte[16]);                                       // Noncompliant
     }
 
     public void Lambda()
@@ -171,14 +157,15 @@ class Program
         Action<byte[]> a = (byte[] passwordBytes) =>
         {
             var shortSalt = new byte[15];
-            new PasswordDeriveBytes(passwordBytes, shortSalt);                                      // FIXME Non-compliant
+            new PasswordDeriveBytes(passwordBytes, shortSalt);                                      // Noncompliant
         };
     }
 
-    public void AliasedType()
+    public void AliasedTypeAndFullName()
     {
         var shortAndConstantSalt = new byte[15];
-        var pdb = new AliasedPasswordDeriveBytes(passwordBytes, shortAndConstantSalt);              // FIXME Non-compliant
+        new AliasedPasswordDeriveBytes(passwordBytes, shortAndConstantSalt);                        // Noncompliant
+        new System.Security.Cryptography.PasswordDeriveBytes(passwordBytes, shortAndConstantSalt);  // Noncompliant
     }
 
     public void InnerMethod()
@@ -188,7 +175,7 @@ class Program
         void Inner()
         {
             var shortSalt = new byte[15];
-            new PasswordDeriveBytes(passwordBytes, shortSalt);                                      // FIXME Non-compliant
+            new PasswordDeriveBytes(passwordBytes, shortSalt);                                      // Noncompliant
         }
     }
 
@@ -202,7 +189,7 @@ class Program
 
         var shortArray = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
         rng.GetBytes(shortArray);
-        new PasswordDeriveBytes(passwordBytes, shortArray);                                         // FIXME Non-compliant
+        new PasswordDeriveBytes(passwordBytes, shortArray);                                         // Noncompliant
 
         var longEnoughArray = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
         rng.GetBytes(longEnoughArray);
@@ -225,7 +212,7 @@ public class FieldsAndConstants
 
     public void SaltStoredInField(byte[] passwordBytes)
     {
-        new PasswordDeriveBytes(passwordBytes, saltField);              // Compliant
+        new PasswordDeriveBytes(passwordBytes, saltField);              // FN
         new Rfc2898DeriveBytes(passwordBytes, saltField, 16);           // Compliant
 
         saltField = new byte[16];
@@ -234,11 +221,11 @@ public class FieldsAndConstants
         new PasswordDeriveBytes(passwordBytes, saltField);              // Compliant
 
         saltField = new byte[15];
-        new PasswordDeriveBytes(passwordBytes, saltField);              // FIXME Non-compliant
+        new PasswordDeriveBytes(passwordBytes, saltField);              // Noncompliant
 
         var unsafeSalt = new byte[UnsafeSaltSize];
         rng.GetBytes(unsafeSalt);
-        new PasswordDeriveBytes(passwordBytes, unsafeSalt);             // FIXME Non-compliant
+        new PasswordDeriveBytes(passwordBytes, unsafeSalt);             // Noncompliant
 
         var safeSalt = new byte[SafeSaltSize];
         rng.GetBytes(safeSalt);
@@ -250,7 +237,7 @@ public class FieldsAndConstants
         var unsafeSalt = new byte[UnsafeSaltSize];
         var rng = RandomNumberGenerator.Create();
         rng.GetBytes(unsafeSalt);
-        new PasswordDeriveBytes(passwordBytes, unsafeSalt);             // FIXME Non-compliant
+        new PasswordDeriveBytes(passwordBytes, unsafeSalt);             // Noncompliant
 
         var safeSalt = new byte[SafeSaltSize];
         rng.GetBytes(safeSalt);

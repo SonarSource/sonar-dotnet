@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 
 const string passwordString = "Secret";
@@ -9,10 +10,10 @@ var shortSalt = new byte[15];
 var safeSalt = new byte[16];
 RandomNumberGenerator.Create().GetNonZeroBytes(safeSalt);
 
-using var pdb1 = new PasswordDeriveBytes(passwordBytes, shortSalt);     // FN
+using var pdb1 = new PasswordDeriveBytes(passwordBytes, shortSalt);     // Noncompliant
 using var pdb2 = new PasswordDeriveBytes(passwordBytes, safeSalt);
 
-new Rfc2898DeriveBytes(passwordString, shortSalt);                      // FN
+new Rfc2898DeriveBytes(passwordString, shortSalt);                      // Noncompliant
 new Rfc2898DeriveBytes(passwordString, safeSalt);
 
 void TopLevelLocalFunction()
@@ -26,7 +27,7 @@ public class Sample
     public void TargetTypedNew(byte[] passwordBytes)
     {
         var shortSalt = new byte[15];
-        PasswordDeriveBytes aes = new(passwordBytes, shortSalt);        // FN
+        PasswordDeriveBytes aes = new(passwordBytes, shortSalt);        // Noncompliant
 
         var safeSalt = new byte[16];
         RandomNumberGenerator.Create().GetNonZeroBytes(safeSalt);
@@ -38,7 +39,7 @@ public class Sample
         Action<byte[]> a = static (byte[] passwordBytes) =>
         {
             var shortSalt = new byte[15];
-            new PasswordDeriveBytes(passwordBytes, shortSalt);          // FIXME Non-compliant
+            new PasswordDeriveBytes(passwordBytes, shortSalt);          // Noncompliant
 
             var safeSalt = new byte[16];
             RandomNumberGenerator.Create().GetNonZeroBytes(safeSalt);
@@ -51,7 +52,7 @@ public class Sample
         get => new byte[0];
         init
         {
-            new PasswordDeriveBytes(value, new byte[15]);               // FIXME Non-compliant
+            new PasswordDeriveBytes(value, new byte[15]);               // Noncompliant
 
             var safeSalt = new byte[16];
             RandomNumberGenerator.Create().GetNonZeroBytes(safeSalt);
@@ -64,7 +65,7 @@ public record Record
 {
     public void Method(byte[] passwordBytes)
     {
-        new PasswordDeriveBytes(passwordBytes, new byte[15]);           // FIXME Non-compliant
+        new PasswordDeriveBytes(passwordBytes, new byte[15]);           // Noncompliant
 
         var safeSalt = new byte[16];
         RandomNumberGenerator.Create().GetNonZeroBytes(safeSalt);
@@ -81,7 +82,7 @@ public partial class Partial
 {
     public partial void Method(byte[] passwordBytes)
     {
-        new PasswordDeriveBytes(passwordBytes, new byte[15]);           // FIXME Non-compliant
+        new PasswordDeriveBytes(passwordBytes, new byte[15]);           // Noncompliant
 
         var safeSalt = new byte[16];
         RandomNumberGenerator.Create().GetNonZeroBytes(safeSalt);
