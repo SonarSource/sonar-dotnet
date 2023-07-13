@@ -52,7 +52,10 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         {
             return ProcessArrayCreation(arrayCreation, state);
         }
-        return state;
+        else
+        {
+            return state;
+        }
     }
 
     private ProgramState ProcessObjectCreation(IObjectCreationOperationWrapper objectCreation, ProgramState state)
@@ -74,9 +77,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
 
     private static ProgramState ProcessInvocation(IInvocationOperationWrapper invocation, ProgramState state)
     {
-        if (CryptographicallyStrongRandomNumberGenerators.Any(x =>
-                invocation.TargetMethod.Name == x.Name
-                && invocation.TargetMethod.ContainingType.DerivesFrom(x.ContainingType))
+        if (CryptographicallyStrongRandomNumberGenerators.Any(x => IsInvocationToRandomNumberGenerator(x, invocation))
             && invocation.ArgumentValue("data") is { } dataArgument
             && dataArgument.TrackedSymbol() is { } trackedSymbol)
         {
@@ -87,17 +88,19 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
 
     private static ProgramState ProcessArrayCreation(IArrayCreationOperationWrapper arrayCreation, ProgramState state)
     {
-        if (arrayCreation.Type.Is(KnownType.System_Byte_Array)
-            && arrayCreation.DimensionSizes.Length == 1)
+        if (arrayCreation.Type.Is(KnownType.System_Byte_Array) && arrayCreation.DimensionSizes.Length == 1)
         {
             state = state.SetOperationConstraint(arrayCreation.WrappedOperation, ByteCollectionConstraint.CryptographicallyWeak);
 
-            if (arrayCreation.DimensionSizes.Single().ConstantValue.Value is int arraySize
-                && arraySize < SafeSaltSize)
+            if (arrayCreation.DimensionSizes.Single().ConstantValue.Value is int arraySize && arraySize < SafeSaltSize)
             {
                 state = state.SetOperationConstraint(arrayCreation.WrappedOperation, SaltSizeConstraint.Short);
             }
         }
         return state;
     }
+
+    private static bool IsInvocationToRandomNumberGenerator(MemberDescriptor rngMember, IInvocationOperationWrapper invocation) =>
+        invocation.TargetMethod.Name == rngMember.Name
+        && invocation.TargetMethod.ContainingType.DerivesFrom(rngMember.ContainingType);
 }

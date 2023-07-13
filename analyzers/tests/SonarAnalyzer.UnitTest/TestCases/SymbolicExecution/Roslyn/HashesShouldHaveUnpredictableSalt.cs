@@ -195,6 +195,10 @@ class Program
         rng.GetBytes(longEnoughArray);
         new PasswordDeriveBytes(passwordBytes, longEnoughArray);                                    // Compliant
 
+        var evenLongerArray = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+        rng.GetBytes(evenLongerArray);
+        new PasswordDeriveBytes(passwordBytes, evenLongerArray);                                    // Compliant
+
         new PasswordDeriveBytes(passwordBytes, GetSalt());                                          // Compliant
 
         var returnedByMethod = GetSalt();
