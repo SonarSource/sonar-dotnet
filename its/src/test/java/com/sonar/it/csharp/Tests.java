@@ -29,7 +29,6 @@ import java.nio.file.Path;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
@@ -51,18 +50,6 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/custom_parameters.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/custom_complexity.xml"))
     .build();
-
-  // ToDo: This is a temporary workaround for jUnit5 migration that should be removed in https://github.com/SonarSource/sonar-dotnet/pull/7574
-  @BeforeAll
-  public static void startOrchestrator() {
-    ORCHESTRATOR.start();
-  }
-
-  // ToDo: This is a temporary workaround for jUnit5 migration that should be removed in https://github.com/SonarSource/sonar-dotnet/pull/7574
-  @AfterAll
-  public static void stopOrchestrator() {
-    ORCHESTRATOR.stop();
-  }
 
   @BeforeAll
   public static void deleteLocalCache() {
