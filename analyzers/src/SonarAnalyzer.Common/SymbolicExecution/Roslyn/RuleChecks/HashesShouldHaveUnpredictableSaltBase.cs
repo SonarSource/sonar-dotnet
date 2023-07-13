@@ -100,7 +100,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         return state;
     }
 
-    private static bool IsInvocationToRandomNumberGenerator(MemberDescriptor rngMember, IInvocationOperationWrapper invocation) =>
-        invocation.TargetMethod.Name == rngMember.Name
-        && invocation.TargetMethod.ContainingType.DerivesFrom(rngMember.ContainingType);
+    private static bool IsInvocationToRandomNumberGenerator(MemberDescriptor methodDescriptor, IInvocationOperationWrapper invocation) =>
+        invocation.TargetMethod.Name == methodDescriptor.Name
+        && invocation.TargetMethod.ContainingType.DerivesFrom(methodDescriptor.ContainingType);
 }
