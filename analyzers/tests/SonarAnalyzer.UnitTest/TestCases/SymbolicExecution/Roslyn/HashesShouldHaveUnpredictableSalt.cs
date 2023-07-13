@@ -222,20 +222,12 @@ public class FieldsAndConstants
 
         saltField = new byte[15];
         new PasswordDeriveBytes(passwordBytes, saltField);              // Noncompliant
-
-        var unsafeSalt = new byte[UnsafeSaltSize];
-        rng.GetBytes(unsafeSalt);
-        new PasswordDeriveBytes(passwordBytes, unsafeSalt);             // Noncompliant
-
-        var safeSalt = new byte[SafeSaltSize];
-        rng.GetBytes(safeSalt);
-        new PasswordDeriveBytes(passwordBytes, safeSalt);               // Compliant
     }
 
     public void SaltSizeFromConstantField(byte[] passwordBytes)
     {
-        var unsafeSalt = new byte[UnsafeSaltSize];
         var rng = RandomNumberGenerator.Create();
+        var unsafeSalt = new byte[UnsafeSaltSize];
         rng.GetBytes(unsafeSalt);
         new PasswordDeriveBytes(passwordBytes, unsafeSalt);             // Noncompliant
 
