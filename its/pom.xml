@@ -48,8 +48,14 @@
       <version>1.2.0.107</version>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.version}</version>
+    </dependency>
+    <dependency>
+      <!-- ToDo: This is only needed during migration to jUnit5 and can be removed later -->
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
       <version>${junit.version}</version>
     </dependency>
     <dependency>
@@ -70,11 +76,11 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.1.2</version>
           <configuration>
             <includes>
-              <include>com/sonar/it/csharp/Tests.java</include>
-              <include>com/sonar/it/vbnet/Tests.java</include>
-              <include>com/sonar/it/shared/Tests.java</include>
+              <!-- When run without a test filter, execute just the test suites -->
+              <include>Tests.java</include>
             </includes>
             <systemProperties>
               <scannerMsbuild.version>${scannerMsbuild.version}</scannerMsbuild.version>
