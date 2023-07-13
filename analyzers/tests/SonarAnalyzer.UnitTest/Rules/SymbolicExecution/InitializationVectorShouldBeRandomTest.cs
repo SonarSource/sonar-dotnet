@@ -21,7 +21,9 @@
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -40,6 +42,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
             .WithOnlyDiagnostics(ChecksCS.InitializationVectorShouldBeRandom.S3329);
 
+        private readonly VerifierBuilder roslynVB = new VerifierBuilder<VB.SymbolicExecutionRunner>()
+            .WithBasePath(@"SymbolicExecution\Roslyn")
+            .WithOnlyDiagnostics(ChecksVB.InitializationVectorShouldBeRandom.S3329)
+            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
+
         [TestMethod]
         public void InitializationVectorShouldBeRandom_Sonar_CS() =>
             sonar.AddPaths("InitializationVectorShouldBeRandom.cs")
@@ -48,8 +55,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_Roslyn_CS() =>
-            roslynCS.AddPaths("InitializationVectorShouldBeRandom.cs")
-            .Verify();
+            roslynCS.AddPaths("InitializationVectorShouldBeRandom.cs").Verify();
+
+        [Ignore] // ToDo: Remove after S3329 implementation
+        [TestMethod]
+        public void InitializationVectorShouldBeRandom_Roslyn_VB() =>
+            roslynVB.AddPaths("InitializationVectorShouldBeRandom.vb").Verify();
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_DoesNotRaiseIssuesForTestProject_Sonar() =>
