@@ -19,7 +19,6 @@
  */
 package com.sonar.it.csharp;
 
-import com.sonar.it.shared.TestUtils;
 import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Measures.Measure;
 
-import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
@@ -45,7 +43,6 @@ public class MetricsTest {
 
   @BeforeAll
   public static void beforeAll() throws Exception {
-    TestUtils.initLocal(ORCHESTRATOR);
     // Without setting the testProjectPattern, the MetricsTest project is considered as a Test project :)
     Tests.analyzeProject(temp, PROJECT, "no_rule", "sonar.msbuild.testProjectPattern", "noTests");
   }

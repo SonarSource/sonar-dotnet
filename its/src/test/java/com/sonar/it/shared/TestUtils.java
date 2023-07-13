@@ -239,16 +239,6 @@ public class TestUtils {
     return newWsClient(orch).hotspots().search(new org.sonarqube.ws.client.hotspots.SearchRequest().setProjectKey(projectKey)).getHotspotsList();
   }
 
-  public static void initLocal(Orchestrator orchestrator) {
-    // Only for local debugging:
-    if (orchestrator.getServer() == null) {
-      // Tests.ORCHESTRATOR is a jUnit rule that is automagically started in it's beforeAll() action for all tests.
-      // Running individual test doesn't execute the @ClassRule annotation on ORCHESTRATOR in Tests class.
-      orchestrator.start();
-      deleteLocalCache();
-    }
-  }
-
   private static WsClient newWsClient(Orchestrator orch) {
     return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
       .url(orch.getServer().getUrl())

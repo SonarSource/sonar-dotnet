@@ -44,7 +44,6 @@ public class VbMainCodeCsTestCodeTest {
 
   @BeforeAll
   public static void init() throws Exception {
-    TestUtils.initLocal(ORCHESTRATOR);
     buildResult = Tests.analyzeProject(temp, PROJECT);
   }
 

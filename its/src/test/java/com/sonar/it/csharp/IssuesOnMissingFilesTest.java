@@ -20,9 +20,9 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
@@ -39,14 +39,9 @@ public class IssuesOnMissingFilesTest {
   @TempDir
   private static Path temp;
 
-  @BeforeAll
-  public static void init() throws Exception {
-    TestUtils.initLocal(ORCHESTRATOR);
-    Tests.analyzeProject(temp, PROJECT);
-  }
-
   @Test
-  public void givenAProjectWithIssuesOnMissingFiles_issuesOnMissingFilesAreNotImported() {
+  public void givenAProjectWithIssuesOnMissingFiles_issuesOnMissingFilesAreNotImported() throws IOException {
+    Tests.analyzeProject(temp, PROJECT);
     List<Issues.Issue> issues = TestUtils.getIssues(ORCHESTRATOR, PROJECT);
     // There are two issues raised on this project, both on generated code which is not emitted on disk.
     // These issues should not be imported.
