@@ -1977,7 +1977,7 @@ internal static class RuleTypeMappingVB
         // ["S2050"],
         // ["S2051"],
         // ["S2052"],
-        // ["S2053"],
+        ["S2053"] = "VULNERABILITY",
         // ["S2054"],
         // ["S2055"],
         // ["S2056"],
