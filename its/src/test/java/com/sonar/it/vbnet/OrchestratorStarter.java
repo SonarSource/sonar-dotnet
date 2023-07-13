@@ -44,15 +44,15 @@ public class OrchestratorStarter implements BeforeAllCallback, AfterAllCallback 
 
   @Override
   public void beforeAll(ExtensionContext extensionContext) throws Exception {
-    System.out.println("beforeAll delegated");
-    // ORCHESTRATOR.beforeAll(extensionContext);
-
+    System.out.println("beforeAll delegated " + Thread.currentThread().getName());
+//
     synchronized (OrchestratorStarter.class) {
+      //ORCHESTRATOR.beforeAll(extensionContext.getParent().orElse(extensionContext));
       if (usageCount == 0) {
         // this will register "this.close()" method to be called when GLOBAL context is shutdown
         //extensionContext.getRoot().getStore(GLOBAL).put(OrchestratorStarter.class, this);
-        System.out.println("ORCHESTRATOR.start()");
-        //ORCHESTRATOR.start();
+        System.out.println("ORCHESTRATOR.start() " + Thread.currentThread().getName());
+        ORCHESTRATOR.start();
 
         // to avoid a race condition in scanner file cache mechanism we analyze single project before any test to populate the cache
         // testProject();
@@ -63,15 +63,15 @@ public class OrchestratorStarter implements BeforeAllCallback, AfterAllCallback 
 
   @Override
   public void afterAll(ExtensionContext extensionContext) throws Exception {
-    System.out.println("afterAll delegated");
-    //ORCHESTRATOR.afterAll(extensionContext);
+    System.out.println("afterAll delegated " + Thread.currentThread().getName());
 
     synchronized (OrchestratorStarter.class) {
+      //ORCHESTRATOR.afterAll(extensionContext.getParent().orElse(extensionContext));
       System.out.println("The usageCount was " + usageCount);
       usageCount -= 1;
       if (usageCount == 0) {
         System.out.println("ORCHESTRATOR.end()");
-        //ORCHESTRATOR.stop();
+        ORCHESTRATOR.stop();
       }
     }
   }
