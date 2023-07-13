@@ -61,7 +61,6 @@ public class MultipleProjectsTest {
 
   @BeforeAll
   public static void beforeAll() throws Exception {
-    TestUtils.initLocal(ORCHESTRATOR);
     Path projectDir = TestUtils.projectDir(temp, PROJECT);
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir);
 

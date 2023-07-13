@@ -50,7 +50,6 @@ public class TestProjectTest {
 
   @BeforeAll
   public static void init() throws Exception {
-    TestUtils.initLocal(ORCHESTRATOR);
     buildResult = Tests.analyzeProject(temp, CSHARP_ONLY_TEST_PROJECT);
   }
 

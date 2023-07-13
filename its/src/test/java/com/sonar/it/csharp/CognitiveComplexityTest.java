@@ -19,7 +19,6 @@
  */
 package com.sonar.it.csharp;
 
-import com.sonar.it.shared.TestUtils;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
@@ -45,7 +44,6 @@ public class CognitiveComplexityTest {
 
   @BeforeAll
   public static void init() throws IOException {
-    TestUtils.initLocal(ORCHESTRATOR);
     provisionProject();
     Tests.analyzeProject(temp, PROJECT_NAME);
   }

@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
@@ -49,11 +48,6 @@ public class IncrementalAnalysisTest {
 
   @TempDir
   private static Path temp;
-
-  @BeforeAll
-  public static void init() {
-    TestUtils.initLocal(ORCHESTRATOR);
-  }
 
   @Test
   public void incrementalPrAnalysis_NoCache_FullAnalysisDone() throws IOException {

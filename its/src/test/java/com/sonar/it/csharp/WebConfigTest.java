@@ -19,17 +19,14 @@
  */
 package com.sonar.it.csharp;
 
-import com.sonar.it.shared.TestUtils;
 import com.sonar.it.shared.WebConfigBase;
 import java.io.IOException;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
 import org.sonarqube.ws.Issues;
 
-import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(Tests.class)
@@ -37,14 +34,9 @@ public class WebConfigTest extends WebConfigBase {
 
   static final String PROJECT = "WebConfig.CSharp";
 
-  @BeforeAll
-  public static void init() throws IOException {
-    TestUtils.initLocal(ORCHESTRATOR);
-    Tests.analyzeProject(temp, PROJECT);
-  }
-
   @Test
-  public void should_raise_hotspot_on_web_config() {
+  public void should_raise_hotspot_on_web_config() throws IOException {
+    Tests.analyzeProject(temp, PROJECT);
     List<Hotspot> hotspots = Tests.getHotspots(PROJECT);
     // One from project directory, one from PathOutsideProjectRoot added with Directory.Build.props
     assertThat(hotspots.size()).isEqualTo(6);

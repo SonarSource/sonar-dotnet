@@ -41,13 +41,11 @@ public class TestProjectTest {
 
   @BeforeAll
   public static void init() throws Exception {
-    TestUtils.initLocal(ORCHESTRATOR);
     buildResult = Tests.analyzeProject(temp, "VbTestOnlyProjectTest");
   }
 
   @Test
   public void with_vbnet_only_test_should_not_populate_metrics() throws Exception {
-
     assertThat(Tests.getComponent("VbTestOnlyProjectTest:MyLib.Tests/UnitTest1.vb")).isNotNull();
     assertThat(getMeasureAsInt("VbTestOnlyProjectTest", "files")).isNull();
     assertThat(getMeasureAsInt("VbTestOnlyProjectTest", "lines")).isNull();
