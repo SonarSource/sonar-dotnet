@@ -56,19 +56,19 @@ public class Tests {
     TestUtils.deleteLocalCache();
   }
 
-  static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
+  public static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
     return analyzeProject(projectDir, temp, projectDir);
   }
 
-  static BuildResult analyzeProject(String projectKey, Path temp, String projectDir) throws IOException {
+  public static BuildResult analyzeProject(String projectKey, Path temp, String projectDir) throws IOException {
     return analyzeProject(projectKey, temp, projectDir, null);
   }
 
-  static BuildResult analyzeProject(Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+  public static BuildResult analyzeProject(Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     return analyzeProject(projectDir, temp, projectDir, profileKey, keyValues);
   }
 
-  static BuildResult analyzeProject(String projectKey, Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+  public static BuildResult analyzeProject(String projectKey, Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     Path projectFullPath = TestUtils.projectDir(temp, projectDir);
 
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectKey, projectFullPath)
@@ -80,25 +80,25 @@ public class Tests {
     return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectFullPath));
   }
 
-  static Components.Component getComponent(String componentKey) {
+  public static Components.Component getComponent(String componentKey) {
     return TestUtils.getComponent(ORCHESTRATOR, componentKey);
   }
 
   @CheckForNull
-  static Integer getMeasureAsInt(String componentKey, String metricKey) {
+  public static Integer getMeasureAsInt(String componentKey, String metricKey) {
     return TestUtils.getMeasureAsInt(ORCHESTRATOR, componentKey, metricKey);
   }
 
   @CheckForNull
-  static Measures.Measure getMeasure(String componentKey, String metricKey) {
+  public static Measures.Measure getMeasure(String componentKey, String metricKey) {
     return TestUtils.getMeasure(ORCHESTRATOR, componentKey, metricKey);
   }
 
-  static List<Issues.Issue> getIssues(String componentKey) {
+  public static List<Issues.Issue> getIssues(String componentKey) {
     return TestUtils.getIssues(ORCHESTRATOR, componentKey);
   }
 
-  static List<Hotspot> getHotspots(String projectKey) {
+  public static List<Hotspot> getHotspots(String projectKey) {
     return TestUtils.getHotspots(ORCHESTRATOR, projectKey);
   }
 }

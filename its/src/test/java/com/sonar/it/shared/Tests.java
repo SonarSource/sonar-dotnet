@@ -41,11 +41,11 @@ public class Tests {
     .addPlugin(MavenLocation.of("org.sonarsource.html", "sonar-html-plugin", "3.2.0.2082"))
     .build();
 
-  static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
+  public static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
     return analyzeProject(temp, projectDir, null);
   }
 
-  static BuildResult analyzeProject(Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+  public static BuildResult analyzeProject(Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     Path projectFullPath = TestUtils.projectDir(temp, projectDir);
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectDir, projectFullPath)
       .setProfile(profileKey)
@@ -56,7 +56,7 @@ public class Tests {
   }
 
   @CheckForNull
-  static Integer getMeasureAsInt(String componentKey, String metricKey) {
+  public static Integer getMeasureAsInt(String componentKey, String metricKey) {
     return TestUtils.getMeasureAsInt(ORCHESTRATOR, componentKey, metricKey);
   }
 }
