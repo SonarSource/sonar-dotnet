@@ -31,8 +31,8 @@ namespace SonarAnalyzer.Common
         {
         }
 
-        private static readonly Lazy<DocumentBasedFixAllProvider> lazy = new Lazy<DocumentBasedFixAllProvider>(() => new DocumentBasedFixAllProvider());
-        public static DocumentBasedFixAllProvider Instance => lazy.Value;
+        private static readonly Lazy<DocumentBasedFixAllProvider> Lazy = new(() => new DocumentBasedFixAllProvider());
+        public static DocumentBasedFixAllProvider Instance => Lazy.Value;
 
         #endregion Singleton implementation
 
@@ -147,7 +147,7 @@ namespace SonarAnalyzer.Common
                     diagnostic.Properties);
 
                 var fixes = new List<CodeAction>();
-                var context = new Microsoft.CodeAnalysis.CodeFixes.CodeFixContext(currentDocument, newDiagnostic, (a, d) =>
+                var context = new CodeFixContext(currentDocument, newDiagnostic, (a, d) =>
                 {
                     lock (fixes)
                     {
