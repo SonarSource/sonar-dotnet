@@ -209,7 +209,30 @@ class Program
         new PasswordDeriveBytes(passwordBytes, returnedByMethod);                                   // Compliant
     }
 
+    public void UsingCustomPasswordDeriveClass()
+    {
+        var salt = new byte[16];
+        var pdb1 = new CustomPasswordDeriveClass("somepassword", salt);                                 // Noncompliant
+
+        var rng = RandomNumberGenerator.Create();
+        rng.GetBytes(salt);
+        var pdb2 = new CustomPasswordDeriveClass("somepassword", salt);                                 // Compliant
+    }
+
     private byte[] GetSalt() => null;
+
+    private class CustomPasswordDeriveClass : DeriveBytes
+    {
+        public CustomPasswordDeriveClass(string password, byte[] salt)
+        {
+        }
+
+        public override byte[] GetBytes(int cb) => null;
+
+        public override void Reset()
+        {
+        }
+    }
 }
 
 public class FieldsAndConstants
