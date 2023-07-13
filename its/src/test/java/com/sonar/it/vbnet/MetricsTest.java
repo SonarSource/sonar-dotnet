@@ -23,6 +23,7 @@ import com.sonar.it.shared.TestUtils;
 import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Measures.Measure;
 
@@ -32,6 +33,7 @@ import static com.sonar.it.vbnet.Tests.getMeasure;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(Tests.class)
 public class MetricsTest {
 
   private static final String PROJECT = "VbMetricsTest";

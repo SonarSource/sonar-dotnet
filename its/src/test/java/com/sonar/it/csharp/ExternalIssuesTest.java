@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues;
 
@@ -35,6 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.sonarqube.ws.Common.RuleType;
 
+@ExtendWith(Tests.class)
 public class ExternalIssuesTest {
 
   @TempDir

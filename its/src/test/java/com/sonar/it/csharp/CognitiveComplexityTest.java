@@ -25,6 +25,7 @@ import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues;
 
@@ -33,6 +34,7 @@ import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getIssues;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(Tests.class)
 public class CognitiveComplexityTest {
   private static final String LANGUAGE_KEY = "cs";
   private static final String PROFILE_NAME = "custom_complexity";

@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.Measures.Measure;
@@ -40,6 +41,7 @@ import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(Tests.class)
 public class MultipleProjectsTest {
 
   @TempDir
