@@ -30,11 +30,7 @@ import javax.annotation.Nullable;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.platform.suite.api.SelectPackages;
-import org.junit.platform.suite.api.Suite;
 
-@Suite
-@SelectPackages("com.sonar.it.shared") // This will run all classes from current package containing @Test methods.
 public class Tests implements BeforeAllCallback, AfterAllCallback {
 
   public static final Orchestrator ORCHESTRATOR = TestUtils.prepareOrchestrator()

@@ -49,23 +49,8 @@
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
+      <artifactId>junit-jupiter</artifactId>
       <version>${junit.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-suite-api</artifactId>
-      <version>1.9.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-suite-engine</artifactId>
-      <version>1.9.2</version>
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
@@ -87,10 +72,6 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.1.2</version>
           <configuration>
-            <includes>
-              <!-- When run without a test filter, execute just the test suites -->
-              <include>Tests.java</include>
-            </includes>
             <systemProperties>
               <scannerMsbuild.version>${scannerMsbuild.version}</scannerMsbuild.version>
             </systemProperties>
