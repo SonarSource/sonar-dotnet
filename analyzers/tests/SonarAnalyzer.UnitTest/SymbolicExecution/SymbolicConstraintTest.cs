@@ -114,8 +114,13 @@ public class SymbolicConstraintTest
     [TestMethod]
     public void SaltSizeConstraint_ToString()
     {
-        SaltSizeConstraint.Safe.ToString().Should().Be("SaltSizeSafe");
         SaltSizeConstraint.Short.ToString().Should().Be("SaltSizeShort");
+    }
+
+    [TestMethod]
+    public void SaltSizeConstraint_Opposite()
+    {
+        SaltSizeConstraint.Short.Opposite.Should().Be(null);
     }
 
     [TestMethod]
