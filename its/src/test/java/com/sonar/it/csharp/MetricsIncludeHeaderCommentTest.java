@@ -49,13 +49,14 @@ public class MetricsIncludeHeaderCommentTest {
   private static final String PROJECT_KEY = "MetricsTestIncludeHeaderComment";
   private static final String DIRECTORY = "MetricsTestIncludeHeaderComment:foo";
   private static final String FILE = "MetricsTestIncludeHeaderComment:foo/Class1.cs";
+
   private static final int NUMBER_OF_HEADER_COMMENT_LINES = 2;
 
   @BeforeAll
   public static void beforeAll() throws Exception {
     TestUtils.initLocal(ORCHESTRATOR);
     Path projectDir = TestUtils.projectDir(temp, "MetricsTest");
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("MetricsTest", projectDir)
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT_KEY, projectDir)
       .setProfile("no_rule")
       // Without that, the MetricsTest project is considered as a Test project :)
       .setProperty("sonar.msbuild.testProjectPattern", "noTests");
