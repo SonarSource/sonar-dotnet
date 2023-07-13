@@ -19,14 +19,12 @@
  */
 package com.sonar.it.csharp;
 
-import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.http.HttpMethod;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
@@ -39,11 +37,6 @@ public class QualityProfileExportTest {
 
   @TempDir
   private static Path temp;
-
-  @BeforeAll
-  public static void init() {
-    TestUtils.initLocal(ORCHESTRATOR);
-  }
 
   @Test
   public void sonarLintRuleSet_can_be_downloaded_from_SonarQube_UI() throws Exception {

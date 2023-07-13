@@ -40,7 +40,6 @@ public class CodeDuplicationTest {
 
   @BeforeAll
   public static void init() throws Exception {
-    TestUtils.initLocal(ORCHESTRATOR);
     Tests.analyzeProject(temp, PROJECT);
   }
 

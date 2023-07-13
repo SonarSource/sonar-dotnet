@@ -19,11 +19,9 @@
  */
 package com.sonar.it.csharp;
 
-import com.sonar.it.shared.TestUtils;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
@@ -42,11 +40,6 @@ public class RuleParameterCustomizationTest {
 
   @TempDir
   private static Path temp;
-
-  @BeforeAll
-  public static void init() {
-    TestUtils.initLocal(ORCHESTRATOR);
-  }
 
   @Test
   public void doNotHardcodeCredentials_defaultParameters_canBeCustomized() throws IOException {

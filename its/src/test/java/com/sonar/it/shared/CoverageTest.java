@@ -22,12 +22,10 @@ package com.sonar.it.shared;
 import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
 import java.nio.file.Path;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 
-import static com.sonar.it.shared.Tests.ORCHESTRATOR;
 import static com.sonar.it.shared.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,11 +37,6 @@ public class CoverageTest {
 
   @TempDir
   private static Path temp;
-
-  @BeforeAll
-  public static void init() {
-    TestUtils.initLocal(ORCHESTRATOR);
-  }
 
   @Test
   public void mix_vscoverage() throws IOException {

@@ -19,7 +19,6 @@
  */
 package com.sonar.it.csharp;
 
-import com.sonar.it.shared.TestUtils;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,7 +26,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 
-import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getIssues;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
@@ -43,7 +41,6 @@ public class CasingAppTest {
 
   @BeforeAll
   public static void init() throws IOException {
-    TestUtils.initLocal(ORCHESTRATOR);
     Tests.analyzeProject(temp, PROJECT);
   }
 

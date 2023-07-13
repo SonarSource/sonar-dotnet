@@ -19,17 +19,14 @@
  */
 package com.sonar.it.csharp;
 
-import com.sonar.it.shared.TestUtils;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues;
 
-import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getIssues;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,11 +45,6 @@ public class ExternalIssuesTest {
   private static final String SONAR_RULES_PREFIX = "csharpsquid:";
   // note that in the UI the prefix will be 'roslyn:'
   private static final String ROSLYN_RULES_PREFIX = "external_roslyn:";
-
-  @BeforeAll
-  public static void init() {
-    TestUtils.initLocal(ORCHESTRATOR);
-  }
 
   @Test
   public void external_issues_imported_by_default_as_code_smells() throws Exception {

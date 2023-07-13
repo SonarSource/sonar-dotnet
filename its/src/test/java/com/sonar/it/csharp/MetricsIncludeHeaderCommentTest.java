@@ -56,7 +56,6 @@ public class MetricsIncludeHeaderCommentTest {
 
   @BeforeAll
   public static void beforeAll() throws Exception {
-    TestUtils.initLocal(ORCHESTRATOR);
     Path projectDir = TestUtils.projectDir(temp, "MetricsTest");
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT_KEY, projectDir)
       .setProfile("no_rule")

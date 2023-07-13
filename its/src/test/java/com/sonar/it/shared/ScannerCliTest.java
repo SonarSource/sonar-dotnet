@@ -22,7 +22,6 @@ package com.sonar.it.shared;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
 import java.io.File;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -41,11 +40,6 @@ public class ScannerCliTest {
 
   // Note: setting the `sonar.projectBaseDir` only enables Incremental PR Analysis when used with the Scanner for .NET.
   private static final String INCREMENTAL_PR_ANALYSIS_WARNING = "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.";
-
-  @BeforeAll
-  public static void init() {
-    TestUtils.initLocal(ORCHESTRATOR);
-  }
 
   @Test
   public void givenRazorPagesMainCode_whenScannerForCliIsUsed_logsCSharpWarning() {
