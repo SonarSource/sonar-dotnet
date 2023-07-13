@@ -87,10 +87,6 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.1.2</version>
           <configuration>
-            <includes>
-              <!-- When run without a test filter, execute just the test suites -->
-              <include>Tests.java</include>
-            </includes>
             <systemProperties>
               <scannerMsbuild.version>${scannerMsbuild.version}</scannerMsbuild.version>
             </systemProperties>

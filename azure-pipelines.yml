@@ -460,9 +460,9 @@ stages:
       strategy:
         matrix:
           CSharp:
-            testClasses: 'com.sonar.it.csharp.Tests'
+            testPattern: 'csharp/*'
           Others:
-            testClasses: 'com.sonar.it.vbnet.Tests,com.sonar.it.shared.Tests'
+            testPattern: 'vbnet/*,shared/*'
       steps:
       - task: DownloadSecureFile@1
         displayName: 'Download Maven settings'
@@ -506,7 +506,7 @@ stages:
         inputs:
           mavenPomFile: its/pom.xml
           goals: 'verify'
-          options: -Dtest=$(testClasses) -B --settings $(mavenSettings.secureFilePath)
+          options: -Dtest=$(testPattern) -B --settings $(mavenSettings.secureFilePath)
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
           testRunTitle: '$(Agent.JobName)'
