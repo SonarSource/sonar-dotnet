@@ -26,5 +26,5 @@ public sealed class HashesShouldHaveUnpredictableSalt : HashesShouldHaveUnpredic
 
     protected override DiagnosticDescriptor Rule => S2053;
 
-    public override bool ShouldExecute() => false;
+    public override bool ShouldExecute() => true;
 }
