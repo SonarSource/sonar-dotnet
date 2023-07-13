@@ -30,6 +30,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private readonly string fileExtension;
 
         public SolutionBuilder Solution => solution.Value;
+        public Project Project => project;
 
         private ProjectBuilder(Project project)
         {
