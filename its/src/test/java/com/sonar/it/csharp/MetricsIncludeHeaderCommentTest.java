@@ -48,16 +48,17 @@ public class MetricsIncludeHeaderCommentTest {
   @TempDir
   private static Path temp;
 
-  private static final String PROJECT = "MetricsTest";
-  private static final String DIRECTORY = "MetricsTest:foo";
-  private static final String FILE = "MetricsTest:foo/Class1.cs";
+  private static final String PROJECT_KEY = "MetricsTestIncludeHeaderComment";
+  private static final String DIRECTORY = "MetricsTestIncludeHeaderComment:foo";
+  private static final String FILE = "MetricsTestIncludeHeaderComment:foo/Class1.cs";
+
   private static final int NUMBER_OF_HEADER_COMMENT_LINES = 2;
 
   @BeforeAll
   public static void beforeAll() throws Exception {
     TestUtils.initLocal(ORCHESTRATOR);
     Path projectDir = TestUtils.projectDir(temp, "MetricsTest");
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("MetricsTest", projectDir)
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT_KEY, projectDir)
       .setProfile("no_rule")
       // Without that, the MetricsTest project is considered as a Test project :)
       .setProperty("sonar.msbuild.testProjectPattern", "noTests");
@@ -70,7 +71,7 @@ public class MetricsIncludeHeaderCommentTest {
 
   @Test
   public void projectIsAnalyzed() {
-    assertThat(getComponent(PROJECT).getName()).isEqualTo("MetricsTest");
+    assertThat(getComponent(PROJECT_KEY).getName()).isEqualTo("MetricsTestIncludeHeaderComment");
     assertThat(getComponent(DIRECTORY).getName()).isEqualTo("foo");
     assertThat(getComponent(FILE).getName()).isEqualTo("Class1.cs");
   }
@@ -129,7 +130,7 @@ public class MetricsIncludeHeaderCommentTest {
   /* Helper methods */
 
   private Integer getProjectMeasureAsInt(String metricKey) {
-    return getMeasureAsInt(PROJECT, metricKey);
+    return getMeasureAsInt(PROJECT_KEY, metricKey);
   }
 
   private Integer getDirectoryMeasureAsInt(String metricKey) {
