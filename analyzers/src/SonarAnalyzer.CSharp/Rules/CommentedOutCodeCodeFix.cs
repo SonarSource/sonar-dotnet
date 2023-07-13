@@ -31,17 +31,17 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
 
     public override FixAllProvider GetFixAllProvider() => null;
 
-    protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+    protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
     {
         var diagnostic = context.Diagnostics.First();
         var comment = root.FindTrivia(diagnostic.Location.SourceSpan.Start, findInsideTrivia: true);
 
         if (comment.IsKind(SyntaxKind.SingleLineCommentTrivia) || IsCode(comment))
         {
-            context.RegisterCodeFix(CodeAction.Create(
+            context.RegisterCodeFix(
                 CommentedOutCode.MessageFormat,
-                c => new Context(comment).ChangeDocument(context.Document, root)),
-                diagnostic);
+                c => new Context(comment).ChangeDocument(context.Document, root),
+                context.Diagnostics);
         }
         return Task.CompletedTask;
     }
