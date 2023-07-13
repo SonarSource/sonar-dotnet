@@ -39,7 +39,7 @@ import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(Tests.class)
 public class IncrementalAnalysisTest {
