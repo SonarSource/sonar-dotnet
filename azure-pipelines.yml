@@ -506,7 +506,7 @@ stages:
         inputs:
           mavenPomFile: its/pom.xml
           goals: 'verify'
-          options: -Dinclude=$(testClasses) -B --settings $(mavenSettings.secureFilePath)
+          options: -Dtest=$(testClasses) -B --settings $(mavenSettings.secureFilePath)
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
           testRunTitle: '$(Agent.JobName)'
