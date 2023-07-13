@@ -22,7 +22,7 @@ package com.sonar.it.vbnet;
 //@Suite
 //@SelectPackages("com.sonar.it.vbnet") // This will run all classes from current package containing @Test methods.
 //public class Tests {
-//  // Once jUnit5 adds support for @BeforeAll and @AfterAll, we could revert this to the original state with Orchestrator instance in this suite.
+//  // Once jUnit5 adds support for @BeforeSuite and @AfterSuite, we could revert this to the original state with Orchestrator instance in this suite.
 //  // Effectively removing OrchestratorStarter and all @ExtendWith annotations.
 //  // https://github.com/junit-team/junit5/issues/456#issuecomment-1024244047
 //}
